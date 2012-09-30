@@ -50,7 +50,9 @@ class ccContent extends Content
 				, c.user_id
 				, cm.media_id
 				, m.title AS media_title
-				, m.filename AS media_filename
+				, m.type AS media_type
+				, m.description AS media_description
+				, m.guid AS media_guid
 			FROM
 				content AS c
 			LEFT JOIN
@@ -74,7 +76,8 @@ class ccContent extends Content
 			$this->setRow($row['id'], 'user_id', $row['user_id']);			
 			if ($row['media_id']) {
 				$this->result[$row['id']]['media'][$row['media_id']]['title'] = $row['media_title'];
-				$this->result[$row['id']]['media'][$row['media_id']]['filename'] = $row['media_filename'];
+				$this->result[$row['id']]['media'][$row['media_id']]['description'] = $row['media_description'];
+				$this->result[$row['id']]['media'][$row['media_id']]['guid'] = $row['media_guid'];
 			}
 		}				
 		

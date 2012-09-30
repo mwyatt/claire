@@ -27,6 +27,11 @@
 			
 		</form>
 
+<!-- work on this !! -->
+
+		<?php// while ($posts->nextRow('media')) : ?>
+
+
 <?php
 echo '<pre>';
 print_r ($posts->getRow('media'));

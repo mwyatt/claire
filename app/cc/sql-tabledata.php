@@ -89,10 +89,10 @@ try {
 	// media
 	$DBH->query("
 		INSERT INTO media
-			(title, title_slug, description, filename, type, media_tree_id)
+			(title, title_slug, description, type, media_tree_id)
 		VALUES
-			('Example Media 1', 'example_media_1', 'This Description should be very Descriptive for Search Engine Optimisation', 'example-media-1', 'jpg', '1')
-			, ('Example Media 2', 'example_media_2', 'This Description should be very Descriptive for Search Engine Optimisation', 'example-media-1', 'jpg', '1')
+			('Example Media 1', '600x400', 'This Description should be very Descriptive for Search Engine Optimisation', 'gif', '1')
+			, ('Example Media 2', 'example_media_2', 'This Description should be very Descriptive for Search Engine Optimisation', 'jpg', '1')
 	");
 	echo 'Data \'media\' Inserted' . '<br>';
 	
