@@ -79,6 +79,8 @@ class Model extends Config
 	 * Option to get Specific Key
 	 */
 	public function getRow($key = false) {
+		if ($key == 'id')
+			return key($this->resultRow);
 		if ($key) {
 			if (array_key_exists($key, $this->resultRow)) {
 				return $this->resultRow[$key];

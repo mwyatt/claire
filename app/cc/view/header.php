@@ -7,9 +7,9 @@
 	<!-- Basic Page Title and Metas
 	================================================== -->	
 	<meta charset="utf-8">
-	<title><?php echo $options->get('siteTitle'); ?></title>	
-	<meta name="description" content="<?php echo $options->get('siteDescription'); ?>">
-	<meta name="keywords" content="<?php echo $options->get('siteKeywords'); ?>">
+	<title><?php echo $options->get('site_title'); ?></title>	
+	<meta name="description" content="<?php echo $options->get('site_description'); ?>">
+	<meta name="keywords" content="<?php echo $options->get('site_keywords'); ?>">
 	
 	<!-- Mobile Specific Metas
 	================================================== -->
@@ -28,7 +28,7 @@
 	<link rel="apple-touch-icon" href="<?php echo $view->urlHome(); ?>media/i/fav/apple-touch-icon.png">
 	<link rel="apple-touch-icon" sizes="72x72" href="<?php echo $view->urlHome(); ?>media/i/fav/apple-touch-icon-72x72.png">
 	<link rel="apple-touch-icon" sizes="114x114" href="<?php echo $view->urlHome(); ?>vi/fav/apple-touch-icon-114x114.png">	
-		
+
 </head>
 <body class="cc">
 
@@ -38,7 +38,7 @@
 		<header class="base">
 		
 			<div class="profile">
-				<a style="background: url('<?php echo $view->urlHome(); ?>media/i/cc/16.gif') 0% 50% no-repeat;" href="<?php echo $view->urlHome(); ?>" title="Open Homepage"><?php echo $options->get('siteTitle'); ?></a>
+				<a style="background: url('<?php echo $view->urlHome(); ?>media/i/cc/16.gif') 0% 50% no-repeat;" href="<?php echo $view->urlHome(); ?>" title="Open Homepage"><?php echo $options->get('site_title'); ?></a>
 			</div>
 		
 			<div class="user">

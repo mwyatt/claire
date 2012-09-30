@@ -11,6 +11,11 @@
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
 
+// CC Models
+// -----------------------------------------------------------------------------
+require_once('app/cc/model/cccontent.php');
+
+
 $user = new User($DBH);
 
 $menu = new Menu($DBH, $config->getUrlBase(), $config->getUrl());

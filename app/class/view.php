@@ -12,6 +12,7 @@
  */
 class View extends Config {
 
+	public $feedback;
 	
 	public function __construct($urlBase, $url) {
 		$this->urlBase = $urlBase;
@@ -49,14 +50,14 @@ class View extends Config {
 	public function feedback() {
 
 		if (array_key_exists('feedback', $_SESSION)) {
-			$feedback = $_SESSION['feedback'];
+			$this->feedback = $_SESSION['feedback'];
 			$_SESSION['feedback'] = false;
 			return $feedback;
 		} else {
 			return false;
 		}
 	}
-
+	
 
 	public function latestTweet($user) {
 
@@ -72,9 +73,8 @@ class View extends Config {
 	*/
 	public function urlCurrent($ext = null) { 
 		$url = $this->getUrl();
-		$base = $url['base'];
-		unset($url['base']);
-		$url = '/'.implode('/', $url).'/';
+		$base = $this->getUrlBase();
+		$url = implode('/', $url).'/';
 		return ($ext == null ? $base.$url : $base.$url.$ext);
 	}
 

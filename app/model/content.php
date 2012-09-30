@@ -25,7 +25,6 @@ class Content extends Model
 	/**
 	 * Core Select Method
 	 * type, limit, date, media, user
-	 * @todo add left join
 	 */
 	public function select($limit = false)
 	{	
@@ -69,17 +68,18 @@ class Content extends Model
 		
 		// Process Result Rows
 		while ($row = $STH->fetch(PDO::FETCH_ASSOC)) {
-			if ($row['media_id']) {
-				$this->result[$row['id']]['media'][$row['media_id']]['title'] = $row['media_title'];
-				$this->result[$row['id']]['media'][$row['media_id']]['filename'] = $row['media_filename'];
-			}
+			$this->setRow($row['id'], $row['id'], $row['id']);
 			$this->setRow($row['id'], 'title', $row['title']);
 			$this->setRow($row['id'], 'html', $row['html']);		
 			$this->setRow($row['id'], 'type', $row['type']);		
 			$this->setRow($row['id'], 'date_published', $row['date_published']);		
 			$this->setRow($row['id'], 'guid', $row['guid']);		
 			$this->setRow($row['id'], 'status', $row['status']);		
-			$this->setRow($row['id'], 'user_id', $row['user_id']);
+			$this->setRow($row['id'], 'user_id', $row['user_id']);			
+			if ($row['media_id']) {
+				$this->result[$row['id']]['media'][$row['media_id']]['title'] = $row['media_title'];
+				$this->result[$row['id']]['media'][$row['media_id']]['filename'] = $row['media_filename'];
+			}
 		}				
 		
 		return $this;
@@ -172,7 +172,16 @@ class Content extends Model
 	{	
 		$SQL = "
 			SELECT
-				`id`				,`title`				,`title_slug`				,`html`				,`type`				,`date_published`				,`guid`				,`status`				,`tags`				,`attached`
+				`id`
+				,`title`
+				,`title_slug`
+				,`html`
+				,`type`
+				,`date_published`
+				,`guid`
+				,`status`
+				,`tags`
+				,`attached`
 			"
 			. " FROM content"
 			. " WHERE title_slug = '$titleSlug'"

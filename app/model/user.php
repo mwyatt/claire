@@ -89,14 +89,9 @@ class User extends Model
 		
 		// Process Result Rows
 		while ($row = $STH->fetch(PDO::FETCH_ASSOC)) {	
-		
 			$this->setRow($row['id'], 'email', $row['email']);
 			$this->setRow($row['id'], 'level', $row['level']);
 			$this->setRow($row['id'], $row['name'], $row['value']);
-		
-			/*$this->result[$row['id']]['email'] = $row['email'];
-			$this->result[$row['id']]['level'] = $row['level'];
-			$this->result[$row['id']][$row['name']] = $row['value'];	*/		
 		}		
 	}	
 
@@ -156,7 +151,7 @@ class User extends Model
 		}		
 				
 		$_SESSION['feedback'] = 'Incorrect Username and / or Password';
-		
+
 		return $this->getResult();
 	}
 	
@@ -192,12 +187,5 @@ class User extends Model
 	{	
 		return $_SESSION['user'][$key];
 	}
-	
-	
-	/*public function getUser()
-	{	
-		return ($_SESSION['user'] ? $_SESSION['user'] : false);
-	}*/
-
 	
 }

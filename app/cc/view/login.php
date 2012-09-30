@@ -71,8 +71,6 @@
 			<input type="text" name="username" placeholder="Username" autofocus="autofocus">					
 			<input type="password" name="password" placeholder="Password">
 			
-			<p><?php echo $view->feedback(); ?></p>
-			
 			<br><input class="" type="submit">
 			
 		</form>

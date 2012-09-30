@@ -9,15 +9,13 @@
 		</form>		
 	
 	</div>
-	
+
+	<?php if ($posts->getResult()) : ?>	
 	<ul class="results">
-	
-	<?php if ($posts->getResult()) : foreach ($posts->getResult() as $post) : extract($post); ?>
-	
-		<?php require('app/cc/view/resultRow-post.php') ?>
-		
-	<?php endforeach; endif; ?>
-	
+		<?php while ($posts->nextRow()) : ?>
+			<?php require('app/cc/view/row-post.php') ?>
+		<?php endwhile; ?>
 	</ul>
+	<?php endif; ?>	
 
 <?php require_once('app/cc/view/footer.php'); ?>

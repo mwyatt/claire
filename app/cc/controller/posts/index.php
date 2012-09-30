@@ -11,6 +11,11 @@
 // Models 
 require_once('app/model/content.php');
 
+// Edit Post
+if (array_key_exists('edit', $_GET)) {
+	require_once('app/cc/controller/posts/edit.php');
+	exit;
+}
 
 // Sub Page
 if ($config->getUrl(3)) {
@@ -31,10 +36,10 @@ if ($config->getUrl(3)) {
 
 
 // Objects
-$posts = new Content($DBH);
+$posts = new Content($DBH, 'post');
 
 // Actions
-$posts->selectType('post', 0);
+$posts->select();
 
 // View: posts
 require_once('app/cc/view/posts.php');
