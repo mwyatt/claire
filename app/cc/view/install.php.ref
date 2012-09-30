@@ -1,0 +1,135 @@
+<?php
+$view = new View(
+	$config->getUrlBase(),
+	$config->getUrl()
+);	
+?>
+<?php require_once('app/view/doctype.php'); ?>
+<!--[if lt IE 7 ]> <html class="ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class=""> <!--<![endif]-->
+<head>
+
+	<!-- Basic Page Title and Metas -->	
+	<title>Installing</title>	
+	
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="robots" content="noindex,nofollow">	
+	
+	<!-- CSS -->
+	<link rel="stylesheet" href="<?php echo $view->urlMedia('css/skeleton.css'); ?>">
+	<link rel="stylesheet" href="<?php echo $view->urlMedia('css/layout.css'); ?>">
+	<link rel="stylesheet" href="<?php echo $view->urlMedia('css/cc-base.css'); ?>">
+	
+	<style type="text/css" media="all">
+	
+		.container {
+			padding: 120px 0 0;
+			margin: auto;
+		}
+		
+		.logo {
+			text-align: center;
+			margin: 0 0 40px 0;
+		}
+			.logo a {
+				margin: 0 auto;
+			}
+		
+		form {
+			text-align: center;
+		}
+		
+			form input {
+				margin: 0 20px 30px;
+			}
+		
+			form input.error {
+				border-color: red;
+			}
+		
+	</style>	
+	
+</head>
+<body>
+
+<div class="container">
+
+	<h2>Installing Website</h2>
+
+	<form class="install" method="post">
+
+		<input type="hidden" name="form_install" value="true">
+	
+		<div>
+			<input type="text" name="database_name" placeholder="Database Name" autofocus="autofocus">					
+		</div>
+		
+		<div>
+			<input type="text" name="email_address" placeholder="example@example.com">
+		</div>
+		
+		<div>
+			<input type="password" name="password" placeholder="Password">
+		</div>
+		
+		<p><?php echo $view->feedback(); ?></p>
+		
+		<div>
+			<input class="" type="submit">
+		</div>
+	</form>
+
+</div> <!-- / .container -->
+
+	<!-- Grab Google CDN's jQuery, with a protocol relative URL -->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+	<!-- Script
+	================================================== -->	
+	<script type="text/javascript">
+	
+		console.log("login.php Initiated");
+				
+		/**
+		  * form#login
+		  */
+		$("form.login").submit(function() {
+			
+			// Variable(s)
+			var form = $("form.login");
+			var fieldName;
+			var field;
+			var valid = true;
+			
+			// Function checkField
+			function checkField(fieldName) {
+			
+				// Set Field
+				field = $("input[name='"+fieldName+"']", form);
+				
+				// Check Field
+				if (field.val() == "") {  
+					$(field)
+						.toggleClass("error")
+						.focus();
+					valid = false;
+				}				
+			}
+			
+			// Removes any Errors
+			$(".error").toggleClass("error");
+			
+			checkField("password");
+			checkField("username");
+			
+			return valid;			
+		});			
+	</script>
+	
+</body>
+</html>

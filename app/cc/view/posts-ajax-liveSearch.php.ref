@@ -1,0 +1,21 @@
+<?php if ($content->getResult()) : foreach ($content->getResult() as $content) : extract($content); ?>
+
+	<li class="row" data-id="<?php echo $id; ?>" data-type="<?php echo $type; ?>" title="Edit <?php echo $title; ?>">
+	
+		<div class="cell title"><?php echo $title; ?></div>
+		
+		<div class="cell date"><?php echo date("dS M Y", strtotime($date_published)); ?></div>
+		
+		<div class="actions">
+		
+			<a class="delete js-delete" title="Permanently Delete <?php echo $title; ?>"></a>
+			<a class="attached js-attached" title="<?php echo $attached; ?>"></a>
+			<a class="tags js-tags" title="<?php echo $tags; ?>"></a>
+			<a class="love"><span>24</span></a>
+			<a class="permalink js-permalink"></a>
+		
+		</div>
+		
+	</li>
+	
+<?php endforeach; endif; ?>
