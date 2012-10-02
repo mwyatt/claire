@@ -110,8 +110,22 @@ class View extends Config {
 
 	// Returns body class
 	public function bodyClass() { 
-		$val = ($this->getUrl(1) ? $this->getUrl(1) : 'home');
-		return ' class="'.$val.'"';
+
+		$i = 1;
+		$class = '';
+
+		while ($this->getUrl($i)) {
+			$class .= $this->getUrl($i) . ' ';
+			$i ++;
+		}
+
+		return trim($class);
+
+
+		if (!$this->getUrl(1))
+			return 'home';
+//		$val = ( ? $this->getUrl(1) : );
+//		return ' class="'.$val.'"';
 	}
 	
 } 

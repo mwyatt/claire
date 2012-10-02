@@ -18,9 +18,13 @@
 			</div>
 			
 			<div>
-				<textarea cols="50" name="html" rows="10" autofocus="autofocus">
-					<?php echo $posts->getRow('html'); ?>
+
+				<!-- Gets replaced with TinyMCE, remember HTML in a textarea should be encoded -->
+				<textarea id="elm1" name="html" rows="10" cols="50" autofocus="autofocus">
+			<?php echo $posts->getRow('html'); ?>
 				</textarea>
+				<input type="reset" name="reset" value="Reset" />
+
 			</div>
 			
 			<br><input class="" type="submit">
@@ -29,14 +33,11 @@
 
 <!-- work on this !! -->
 
-		<?php// while ($posts->nextRow('media')) : ?>
-
 
 <?php
 echo '<pre>';
 print_r ($posts->getRow('media'));
 echo '</pre>';
-exit;
 ?>
 
 		<?php endwhile; ?>

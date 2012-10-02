@@ -30,7 +30,7 @@
 	<link rel="apple-touch-icon" sizes="114x114" href="<?php echo $view->urlHome(); ?>vi/fav/apple-touch-icon-114x114.png">	
 
 </head>
-<body class="cc">
+<body class="<?php echo $view->bodyClass(); ?>">
 
 <div class="line-bottom">
 	<div class="container">
@@ -38,7 +38,7 @@
 		<header class="base">
 		
 			<div class="profile">
-				<a style="background: url('<?php echo $view->urlHome(); ?>media/i/cc/16.gif') 0% 50% no-repeat;" href="<?php echo $view->urlHome(); ?>" title="Open Homepage"><?php echo $options->get('site_title'); ?></a>
+				<a style="background: url('<?php echo $view->urlHome(); ?>media/i/cc/16.gif') 0% 50% no-repeat;" href="<?php echo $view->urlHome(); ?>" target="_blank" title="Open Homepage"><?php echo $options->get('site_title'); ?></a>
 			</div>
 		
 			<div class="user">
