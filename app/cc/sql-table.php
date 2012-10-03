@@ -103,7 +103,6 @@ try {
 				, guid VARCHAR(255) NOT NULL	
 				, date_published TIMESTAMP DEFAULT NOW()	
 				, description VARCHAR(255) NOT NULL
-				, filename VARCHAR(255) NOT NULL
 				, type VARCHAR(50) NOT NULL
 				, media_tree_id INT UNSIGNED
 				, PRIMARY KEY (id)

@@ -92,7 +92,7 @@ try {
 			(title, title_slug, description, type, media_tree_id)
 		VALUES
 			('Example Media 1', '600x400', 'This Description should be very Descriptive for Search Engine Optimisation', 'gif', '1')
-			, ('Example Media 2', 'example_media_2', 'This Description should be very Descriptive for Search Engine Optimisation', 'jpg', '1')
+			, ('Example Media 2', 'example-media-2', 'This Description should be very Descriptive for Search Engine Optimisation', 'jpg', '1')
 	");
 	echo 'Data \'media\' Inserted' . '<br>';
 	
