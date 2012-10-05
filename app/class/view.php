@@ -20,8 +20,20 @@ class View extends Config {
 	}	
 	
 	
-	public function urlMedia($ext = null) { 
-		$base = $this->getUrlBase().'media/';
+	/**
+	 * pull /asset/
+	 */
+	public function asset($ext = null) { 
+		$base = $this->getUrlBase().'asset/';
+		return ($ext == null ? $base : $base.$ext);
+	}
+	
+	
+	/**
+	 * pull /image/
+	 */
+	public function image($ext = null) { 
+		$base = $this->getUrlBase().'image/';
 		return ($ext == null ? $base : $base.$ext);
 	}
 	
@@ -79,15 +91,15 @@ class View extends Config {
 	}
 
 
-	public function urlHome($ext = null) { 
+	public function home($ext = null) { 
 		return ($ext == null ? $this->getUrlBase() : $this->getUrlBase().$ext);
 	}
 
 
-	public function ccMediaUrl($ext = null) { 
+	/*public function ccMediaUrl($ext = null) { 
 		$base = $this->getUrlBase().'cc/view/assets/';
 		return ($ext == null ? $base : $base.$ext);
-	}
+	}*/
 
 
 	public function urlTag($ext = null) { 

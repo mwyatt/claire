@@ -127,11 +127,7 @@ class User extends Model
 		// Query
 		$STH = $this->DBH->query("	
 			SELECT
-				id
-				, email
-				, level
-				, name
-				, value
+				id, email, level, name, value
 			FROM
 				user				
 			LEFT JOIN
@@ -149,10 +145,11 @@ class User extends Model
 			$this->setRow($row['id'], 'email', $row['email']);
 			$this->setRow($row['id'], 'level', $row['level']);
 			$this->setRow($row['id'], $row['name'], $row['value']);
-		}		
-				
-		$_SESSION['feedback'] = 'Incorrect Username and / or Password';
-
+		}
+		
+		if (!$this->getResult())
+			$_SESSION['feedback'] = 'Incorrect Username and / or Password';
+	
 		return $this->getResult();
 	}
 	

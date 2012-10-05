@@ -187,16 +187,4 @@ class Config
 		}
 	}
 	
-	
-	/**
-	 * Find File
-	 *
-	 * @param string $value The file path to find
-	 * @return true|false The file exists else false
-	 */	
-	public function findFile($value)
-	{		
-		return is_file($value) ? $value : false;
-	}	
-	
 }

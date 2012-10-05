@@ -1,4 +1,4 @@
-<?
+<?php
 
 /**
  * AutoLoader
@@ -22,6 +22,7 @@ class AutoLoader {
 	public static $controller = '/app/controller/';
 	public static $model = '/app/model/';
 	public static $view = '/app/view/';
+	public static $admin = '/app/admin/';
 
 	
 	/**
@@ -85,27 +86,41 @@ class AutoLoader {
 	}
 	
 	
-	public static function loadView($view) {
-	
-		// construct require path
-		$path = BASE_PATH
-			. self::$view
-			. str_replace(self::$delimit, self::$sep, $view);
-			
-		// convert path to lowercase and append ext	
-		$path = strtolower($path) . self::$ext;
-		
-		// check file exists
-		if (is_file($path)) {
-			include($path);
-			return;
-		}	
-	
-	}
-	
-	
 	public static function loadError($class) {
 		return;
 	}
 
+	
+	/**
+	 * Search for Controllers / Files
+	 *
+	 * @param string $path The file path to find
+	 * @return true|false The file exists else false
+	 */	
+	public function file($path)
+	{		
+		$path = BASE_PATH . self::$sep . strtolower($path) . self::$ext;
+		
+		if (is_file($path))
+			return $path;
+	}	
+
+	
+	public function controller($path)
+	{		
+		$path = BASE_PATH . self::$controller .  strtolower($path) . self::$ext;
+		
+		if (is_file($path))
+			return $path;
+	}	
+
+	
+	public function view($path)
+	{		
+		$path = BASE_PATH . self::$view .  strtolower($path) . self::$ext;
+		
+		if (is_file($path))
+			return $path;
+	}			
+	
 }

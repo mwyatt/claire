@@ -11,14 +11,6 @@
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
 
- 	/*
-require_once('app/model/content.php');
-require_once('app/model/media.php');
-require_once('app/model/menu.php');
-require_once('app/model/pagination.php');
-require_once('app/model/attachments.php');
-require_once('app/model/ads.php');*/
- 
  
 // Options
 // =============================================================================
@@ -26,6 +18,33 @@ require_once('app/model/ads.php');*/
 $options = new Options($DBH);
 $options->select();
 
+
+// View
+// =============================================================================
+
+$view = new View(
+	$config->getUrlBase(),
+	$config->getUrl()
+);
+
+
+// Menu
+// =============================================================================
+
+$menu = new Menu(
+	$DBH,
+	$config->getUrlBase(),
+	$config->getUrl()	
+);
+
+
+// Admin Area
+// =============================================================================
+
+if ('admin' == $config->getUrl(1)) {
+	require_once(BASE_PATH . '/app/admin.php');
+	exit;
+}
 
 // Controller
 // =============================================================================
@@ -75,6 +94,10 @@ if ($config->getUrl(1)) {
 
 // Homepage
 // =============================================================================
+
+ob_start();
+echo 'hello';
+
 
 $ads = new Ads($DBH);
 $ads

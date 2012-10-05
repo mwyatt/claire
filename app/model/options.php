@@ -21,12 +21,8 @@ class Options extends Model
 	 */
 	public function get($key)
 	{	
-		if ($this->result) {
-			if ($key) {
-				if (array_key_exists($key, $this->result)) {
-					return $this->result[$key];
-				}
-			}
+		if (array_key_exists($key, $this->result)) {
+			return $this->result[$key];
 		}
 		return false;
 	}
@@ -41,8 +37,7 @@ class Options extends Model
 		// Query
 		$STH = $this->DBH->query("	
 			SELECT
-				name
-				, value
+				name, value
 			FROM
 				options
 		");

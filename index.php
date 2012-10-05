@@ -20,12 +20,12 @@ define('BASE_PATH', realpath('.'));
 // =============================================================================
 
 require_once(BASE_PATH . '/app/autoloader.php');
+$load = new AutoLoader();
 
 // register loading methods
 spl_autoload_register(array('AutoLoader', 'loadClass'));
 spl_autoload_register(array('AutoLoader', 'loadController'));
 spl_autoload_register(array('AutoLoader', 'loadModel'));
-spl_autoload_register(array('AutoLoader', 'loadView'));
 spl_autoload_register(array('AutoLoader', 'loadError'));
 
 		
@@ -40,8 +40,8 @@ $error = new Error($debug = 'yes');
 
 require_once(BASE_PATH . '/app/database.php');
 require_once(BASE_PATH . '/app/session.php');
-	
-	
+
+
 // Config, Controller & Route
 // =============================================================================
 
@@ -85,18 +85,8 @@ if (array_key_exists('flush', $_GET)) {
 }
 
 
-// Control Centre
+// App
 // =============================================================================
 
-if ('cc' == $config->getUrl(1)) {
-	require_once(BASE_PATH . 'app/cc/index.php');
-	exit;
-}
-
-
-// Initiate App
-// =============================================================================
-
-require_once(BASE_PATH . 'app/index.php');
-
-exit();
+require_once(BASE_PATH . '/app/index.php');
+exit;
