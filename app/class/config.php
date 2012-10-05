@@ -196,7 +196,7 @@ class Config
 	 */	
 	public function findFile($value)
 	{		
-		return file_exists($value) ? $value : false;
+		return is_file($value) ? $value : false;
 	}	
 	
 }

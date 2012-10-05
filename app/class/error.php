@@ -19,22 +19,8 @@ class Error
     public function __construct($debug = 'no')
     {
         $this->debug = $debug;
-        set_error_handler(array($this, 'handle'));
-        register_shutdown_function(array($this, 'shutdown'));
+		set_error_handler(array($this, 'handle'));
     }
-
-	
-    public function shutdown()
-    {
-		//print_r(error_get_last());
-        /*$error = error_get_last();
-        if($error !== NULL){
-            $info = "[SHUTDOWN] file:".$error['file']." | ln:".$error['line']." | msg:".$error['message'] .PHP_EOL;
-        }
-        else{
-            echo 'why here?';
-        }	*/
-	}
 	
 	
     public function handle($errorType, $errorString, $errorFile, $errorLine)
@@ -46,10 +32,11 @@ class Error
 				exit;		
 			case 'yes':
 				// build array
-				$error[] = $errorType;
-				$error[] = $errorString;
-				$error[] = $errorFile;
-				$error[] = $errorLine;
+				$error['Line: ' . $errorLine]['Type'] = $errorType;
+				$error['Line: ' . $errorLine]['Message'] = $errorString;
+				$error['Line: ' . $errorLine]['File'] = $errorFile;
+				
+				echo '<pre>';
 				switch ($errorType) {
 					case 2:
 						print_r ($error);
@@ -70,14 +57,11 @@ class Error
 						print_r ($error);
 						break;	
 				}
+				echo '</pre>';
 				break;
 		}	
     }
 }
-//$error = new Error($debug = 'yes');
-
-
-
 
 
 /*

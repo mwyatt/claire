@@ -11,24 +11,21 @@
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
 
+
 try {	
 
 	$user = new User($DBH);
 
-	$user->setEmail('martin.wyatt@gmail.com');
-	$user->setPassword('123');
+	$user
+		->setEmail('martin.wyatt@gmail.com')
+		->setPassword('123');
 
-	// Install Tables
-	require_once('app/cc/sql-table.php');
-
-	// Add Test Data
-	require_once('app/cc/sql-tabledata.php');	
-
-	// Create installed.txt
-	if ($fileHandle = fopen('installed.txt', 'w')) {
-		$route->home();
-	}
-
+	require_once(BASE_PATH . '/install-table.php');
+	require_once(BASE_PATH . '/install-tabledata.php');
+	
+	// create installed.txt
+	$file = fopen(BASE_PATH . 'installed.txt', 'w');
+		
 } catch (PDOException $e) { 
 
 	// Handle Exception

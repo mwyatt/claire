@@ -1,6 +1,9 @@
 <?php
 
 try {	
+
+	echo '<h1>Installing Database</h1>';
+
 		
 	// user
 	$DBH->query("
@@ -14,7 +17,7 @@ try {
 				, PRIMARY KEY (id)
 			)
 	");
-	echo 'Table \'user\' Installed';
+	echo 'Table \'user\' Installed' . '<br>';
 	
 	// user_meta
 	$DBH->query("
@@ -28,7 +31,7 @@ try {
 				, FOREIGN KEY (user_id) REFERENCES user(id)
 			)
 	");
-	echo 'Table \'user_meta\' Installed';
+	echo 'Table \'user_meta\' Installed' . '<br>';
 	
 	
 	// content
@@ -48,7 +51,7 @@ try {
 				, FOREIGN KEY (user_id) REFERENCES user(id)					
 			)
 	");
-	echo 'Table \'content\' Installed';
+	echo 'Table \'content\' Installed' . '<br>';
 	
 	
 	// content_meta
@@ -63,7 +66,7 @@ try {
 				, FOREIGN KEY (content_id) REFERENCES content(id)
 			)
 	");
-	echo 'Table \'content_meta\' Installed';
+	echo 'Table \'content_meta\' Installed' . '<br>';
 	
 	
 	// options
@@ -76,7 +79,7 @@ try {
 				, PRIMARY KEY (id)
 			)
 	");	
-	echo 'Table \'options\' Installed';
+	echo 'Table \'options\' Installed' . '<br>';
 	
 	
 	// media_tree
@@ -90,7 +93,7 @@ try {
 				, PRIMARY KEY (id)
 			)		
 	");
-	echo 'Table \'media_tree\' Installed';
+	echo 'Table \'media_tree\' Installed' . '<br>';
 	
 	
 	// media
@@ -109,7 +112,7 @@ try {
 				, FOREIGN KEY (media_tree_id) REFERENCES media_tree(id)	
 			)		
 	");
-	echo 'Table \'media\' Installed';
+	echo 'Table \'media\' Installed' . '<br>';
 	
 	
 	// content_media
@@ -125,7 +128,7 @@ try {
 				, FOREIGN KEY (media_id) REFERENCES media(id)
 			)
 	");	
-	echo 'Table \'content_media\' Installed';
+	echo 'Table \'content_media\' Installed' . '<br>';
 	
 	
 	// ads
@@ -144,7 +147,7 @@ try {
 				, FOREIGN KEY (media_id) REFERENCES media(id)					
 			)
 	");	
-	echo 'Table \'ads\' Installed';
+	echo 'Table \'ads\' Installed' . '<br>';
 	
 	
 	

@@ -4,7 +4,7 @@ try {
 
 	// user
 	$user->insert(10);
-	echo 'Data \'user\' Inserted' . '<br>';
+	echo '<br>' . 'Data \'user\' Inserted' . '<br>';
 	
 	// user_meta
 	$DBH->query("
@@ -14,7 +14,7 @@ try {
 			('1', 'first_name', 'Steve')
 			, ('1', 'last_name', 'Smith')
 	");	
-	echo 'Data \'user_meta\' Inserted' . '<br>';
+	echo  'Data \'user_meta\' Inserted' . '<br>';
 	
 	// content
 	$DBH->query("

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Boop!
+ * Initiate Application
  * 
  * @package	~unknown~
  * @author 	Martin Wyatt <martin.wyatt@gmail.com> 
@@ -9,60 +9,94 @@
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */ 
  
- //require_once( dirname(__FILE__) . '/what.php' );
- 
-// Base Classes
-// -----------------------------------------------------------------------------
-require_once('credentials.php');
-require_once('app/connect.php');
-require_once('app/session.php');
-require_once('app/class/config.php');
-require_once('app/class/error.php');
-require_once('app/class/route.php');
-require_once('app/class/controller.php');
-require_once('app/class/model.php');
-require_once('app/class/view.php');
-require_once('app/model/options.php');
-require_once('app/model/user.php');
+
+// Base Path
+// =============================================================================
+
+define('BASE_PATH', realpath('.'));
 
 
-// Initiate Core Objects
-// -----------------------------------------------------------------------------
+// AutoLoader
+// =============================================================================
+
+require_once(BASE_PATH . '/app/autoloader.php');
+
+// register loading methods
+spl_autoload_register(array('AutoLoader', 'loadClass'));
+spl_autoload_register(array('AutoLoader', 'loadController'));
+spl_autoload_register(array('AutoLoader', 'loadModel'));
+spl_autoload_register(array('AutoLoader', 'loadView'));
+spl_autoload_register(array('AutoLoader', 'loadError'));
+
+		
+// Error Handling
+// =============================================================================
+
+$error = new Error($debug = 'yes');
+
+	
+// Database / Session
+// =============================================================================
+
+require_once(BASE_PATH . '/app/database.php');
+require_once(BASE_PATH . '/app/session.php');
+	
+	
+// Config, Controller & Route
+// =============================================================================
+
 $config = new Config();
+
 $config
 	->setUrl()
 	->setUrlBase();
-$controller = new Controller();
-$route = new Route($config->getUrlBase(), $config->getUrl());
-	
 
-// Flush Database
-// -----------------------------------------------------------------------------
-if (array_key_exists('flush', $_GET)) {	
-	unlink('installed.txt');
-	$DBH->query("DROP DATABASE mvc_002"); 
-	$DBH->query("CREATE DATABASE mvc_002");
-	echo '<a href="http://localhost/mvc/">OK THANKS</a><br><br>';
-	exit('database flushed');
+$route = new Route($config->getUrlBase(), $config->getUrl());	
+	
+			
+// Install
+// =============================================================================
+
+if (array_key_exists('flush', $_GET)) {
+
+	// look for installed.txt
+	if (is_file(BASE_PATH . 'installed.txt')) {
+	
+		// delete installed.txt
+		unlink(BASE_PATH . 'installed.txt');
+		
+		// refresh database
+		$DBH->query("DROP DATABASE mvc_002"); 
+		$DBH->query("CREATE DATABASE mvc_002");
+		
+		// redirect
+		$route->home('?flush');
+	
+	} else {
+	
+		// install database
+		require_once(BASE_PATH . '/app/database.php');
+		require_once(BASE_PATH . '/install.php');
+		
+		// redirect
+		$route->home();
+	}
+	
 }
 
 
-// Install Database
-// -----------------------------------------------------------------------------
-if ($file = $config->findFile('installed.txt')) {}
-else {
+// Control Centre
+// =============================================================================
 
-	// Begin Installation
-	require_once('app/cc/install.php');
+if ('cc' == $config->getUrl(1)) {
+	require_once(BASE_PATH . 'app/cc/index.php');
 	exit;
 }
 
 
-// Master Controller
-// -----------------------------------------------------------------------------
-require_once('app/index.php');
+// Initiate App
+// =============================================================================
 
+require_once(BASE_PATH . 'app/index.php');
 
-// Exit.
-// -----------------------------------------------------------------------------
-exit;
+exit();

@@ -24,6 +24,7 @@ class User extends Model
 	
 	public function setEmail($value) {
 		$this->email = mysql_real_escape_string($value);
+		return $this;
 	}
 	
 
