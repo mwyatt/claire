@@ -10,12 +10,17 @@
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */ 
-class Model extends Config
+abstract class Model extends Config
 {
 
 	protected $DBH;
 	public $result;
 	public $resultRow;
+
+	
+	public function __construct($DBH) {
+		$this->DBH = $DBH;
+	}
 	
 	
 	/**

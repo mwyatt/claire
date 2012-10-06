@@ -9,6 +9,15 @@
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */ 
  
+/*
+<?php
+echo '<pre>';
+print_r ($);
+echo '</pre>';
+exit;
+?>
+*/ 
+ 
 
 // Base Path
 // =============================================================================
@@ -20,13 +29,9 @@ define('BASE_PATH', realpath('.'));
 // =============================================================================
 
 require_once(BASE_PATH . '/app/autoloader.php');
-$load = new AutoLoader();
 
-// register loading methods
-spl_autoload_register(array('AutoLoader', 'loadClass'));
-spl_autoload_register(array('AutoLoader', 'loadController'));
-spl_autoload_register(array('AutoLoader', 'loadModel'));
-spl_autoload_register(array('AutoLoader', 'loadError'));
+// register
+spl_autoload_register(array('AutoLoader', 'load'));
 
 		
 // Error Handling
@@ -34,30 +39,35 @@ spl_autoload_register(array('AutoLoader', 'loadError'));
 
 $error = new Error($debug = 'yes');
 
-	
-// Database / Session
+
+// Database
 // =============================================================================
 
-require_once(BASE_PATH . '/app/database.php');
-require_once(BASE_PATH . '/app/session.php');
+$database = new Database();
 
 
-// Config, Controller & Route
+// Session
+// =============================================================================
+
+$session = new Session();
+
+
+// Config, Route
 // =============================================================================
 
 $config = new Config();
-
-$config
-	->setUrl()
-	->setUrlBase();
-
-$route = new Route($config->getUrlBase(), $config->getUrl());	
+$route = new Config();	
+	
+echo '<pre>';
+print_r ($route);
+echo '</pre>';
+exit;	
 	
 			
 // Install
 // =============================================================================
 
-if (array_key_exists('flush', $_GET)) {
+if (array_key_exists('install', $_GET)) {
 
 	// look for installed.txt
 	if (is_file(BASE_PATH . 'installed.txt')) {
@@ -66,11 +76,11 @@ if (array_key_exists('flush', $_GET)) {
 		unlink(BASE_PATH . 'installed.txt');
 		
 		// refresh database
-		$DBH->query("DROP DATABASE mvc_002"); 
-		$DBH->query("CREATE DATABASE mvc_002");
+		$database->dbh->query("DROP DATABASE mvc_002"); 
+		$database->dbh->query("CREATE DATABASE mvc_002");
 		
 		// redirect
-		$route->home('?flush');
+		$route->home('?install');
 	
 	} else {
 	

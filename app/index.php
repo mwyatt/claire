@@ -11,21 +11,17 @@
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
 
- 
-// Options
-// =============================================================================
-
-$options = new Options($DBH);
-$options->select();
-
 
 // View
 // =============================================================================
 
-$view = new View(
+/*$view = new View(
 	$config->getUrlBase(),
 	$config->getUrl()
-);
+);*/
+
+
+$view = new View($DBH);
 
 
 // Menu
@@ -53,11 +49,6 @@ if ($config->getUrl(1)) {
 	require_once($file);
 	exit;
 }
-
-echo '<pre>';
-print_r ($options);
-echo '</pre>';
-exit;
 
 
 // Content Page
@@ -94,24 +85,34 @@ if ($config->getUrl(1)) {
 
 // Homepage
 // =============================================================================
-
-ob_start();
-echo 'hello';
-
-
-$ads = new Ads($DBH);
-$ads
-	->select('cover')
-	->shuffle();
-
-$posts = new Content($DBH, 'post');
-$posts
-	->select(5);	
-
-$projects = new Content($DBH, 'project');	
-$projects
-	->select(2);	
 	
-// View
-require_once('app/view/home.php');
-exit;
+$view->loadCached('home');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

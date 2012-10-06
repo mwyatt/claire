@@ -51,7 +51,7 @@ class Content extends Model
 				, c.user_id
 				, cm.media_id
 				, m.title AS media_title
-				, m.filename AS media_filename
+				, m.title_slug AS media_filename
 			FROM
 				content AS c
 			LEFT JOIN

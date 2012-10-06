@@ -19,6 +19,12 @@ class Config
 	public $options;
 	
 	
+	public function __construct() {
+		$this->setUrl();
+		$this->setUrlBase();
+	}
+
+	
 	/**
 	 * Get options array value
 	 *
@@ -186,5 +192,19 @@ class Config
 			return false;
 		}
 	}
+	
+	
+	public function home($ext = false)
+	{		
+		header("Location: " . $this->getUrlBase() . $ext);
+		exit;
+	}
+	
+	public function homeAdmin($ext = false)
+	{		
+		header("Location: " . $this->getUrlBase() . "admin/" . $ext);
+		exit;
+	}	
+	
 	
 }

@@ -9,11 +9,10 @@
 class Route extends Config
 {
 
-	public function __construct($urlBase, $url) {
-		$this->urlBase = $urlBase;	
-		$this->url = $url;
+	public function __construct() {
+		parent::__construct();
 	}
-
+	
 	
 	public function home($ext = false)
 	{		

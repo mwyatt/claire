@@ -14,10 +14,10 @@
 
 class AutoLoader {
 
-
 	public static $delimit = '_';
 	public static $sep = '/';
 	public static $ext = '.php';
+	public static $cache = '/app/cache/';
 	public static $class = '/app/class/';
 	public static $controller = '/app/controller/';
 	public static $model = '/app/model/';
@@ -26,16 +26,16 @@ class AutoLoader {
 
 	
 	/**
-	 * Loads classes dynamically
-	 * @param $class is used to require the correct file
+	 * Load classes dynamically
+	 * @param $className is seperated via _ for folders /moddel/class.php
 	 */
-	public static function loadClass($class) {
+	public static function load($className) {
 		
 		// construct require path
-		$path = BASE_PATH
-			. self::$class
-			. str_replace(self::$delimit, self::$sep, $class);
-			
+		$path = BASE_PATH . self::$class . str_replace(
+			self::$delimit, self::$sep, $className
+		);
+		
 		// convert path to lowercase and append ext	
 		$path = strtolower($path) . self::$ext;
 		
@@ -47,7 +47,7 @@ class AutoLoader {
 
 	}
 	
-	
+	/*
 	public static function loadController($controller) {
 	
 		// construct require path
@@ -89,7 +89,7 @@ class AutoLoader {
 	public static function loadError($class) {
 		return;
 	}
-
+*/
 	
 	/**
 	 * Search for Controllers / Files
@@ -112,15 +112,6 @@ class AutoLoader {
 		
 		if (is_file($path))
 			return $path;
-	}	
-
-	
-	public function view($path)
-	{		
-		$path = BASE_PATH . self::$view .  strtolower($path) . self::$ext;
-		
-		if (is_file($path))
-			return $path;
-	}			
+	}				
 	
 }

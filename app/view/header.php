@@ -6,19 +6,6 @@
 <!--[if (gt IE 9)|!(IE)]><!--> <html class=""> <!--<![endif]-->
 <head>
 
-	<?php
-		$menu = new Menu(
-			$DBH,
-			$config->getUrlBase(),
-			$config->getUrl()	
-		);
-				
-		$view = new View(
-			$config->getUrlBase(),
-			$config->getUrl()
-		);	
-	?>
-
 	<!-- Basic Page Title and Metas
 	================================================== -->	
 	<meta charset="utf-8">
