@@ -9,15 +9,6 @@
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */ 
  
-/*
-<?php
-echo '<pre>';
-print_r ($);
-echo '</pre>';
-exit;
-?>
-*/ 
- 
 
 // Base Path
 // =============================================================================
@@ -56,14 +47,8 @@ $session = new Session();
 // =============================================================================
 
 $config = new Config();
-
-echo '<pre>';
-print_r ($config);
-echo '</pre>';
-exit;
-
 $route = new Config();		
-	
+
 			
 // Install
 // =============================================================================

@@ -1,24 +1,30 @@
 <?php
 
 /**
+ * Menu Crafter
+ *
+ * PHP version 5
+ * 
  * @package	~unknown~
- * @author 	Martin Wyatt <martin.wyatt@gmail.com> 
+ * @author Martin Wyatt <martin.wyatt@gmail.com> 
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
- */ 
+ */
 class Menu extends Model
 {
 
-
-	// variables
 	public $type;
 	public $html;
 	
 	
-	public function __construct($DBH, $urlBase, $url) {
-		$this->DBH = $DBH;
-		$this->urlBase = $urlBase;	
-		$this->url = $url;
+	/**
+	 * returns class title
+	 */
+	public function getClassTitle()
+	{		
+	
+		return __CLASS__;
+		
 	}
 	
 	

@@ -13,15 +13,13 @@
 class Config
 {
 
-	public static $url;
-	public static $urlBase;
+	public $url;
+	public $urlBase;
 	
 	
 	public function __construct() {
-		$this
-			->setUrl()
-			->setUrlBase();
-			
+		$this->setUrl();
+		$this->setUrlBase();
 	}
 
 	
@@ -56,9 +54,7 @@ class Config
 		$url = array_values($url);
 		
 		// Set property url
-		Config::$url = $url;
-		
-		return $this;
+		$this->url = $url;
 		
 	}
 	
@@ -89,9 +85,7 @@ class Config
 		}
 		
 		// Set property urlBase
-		self::$urlBase = $base_url;
-		
-		return $this;
+		$this->urlBase = $base_url;
 		
 	}	
 	
@@ -103,8 +97,8 @@ class Config
 	 */		
 	public function getUrlBase()
 	{	
-		if (self::$urlBase) {
-			return self::$urlBase;
+		if ($this->urlBase) {
+			return $this->urlBase;
 		} else {
 			return false;	
 		}
@@ -125,13 +119,13 @@ class Config
 			$key--;	
 
 			// Find array key
-			if (array_key_exists($key, self::$url)) {
-				return self::$url[$key];
+			if (array_key_exists($key, $this->url)) {
+				return $this->url[$key];
 			} else {
 				return false;
 			}	
 		} else {
-			return self::$url;	
+			return $this->url;	
 		}
 	}
 	

@@ -12,19 +12,8 @@
  */ 
 class AutoLoader {
 
-	/*public static $delimit = '_';
-	public static $sep = '/';
-	public static $ext = '.php';
-	public static $cache = '/app/cache/';
-	public static $app = '/app/';
-	public static $class = '/app/class/';
-	public static $controller = '/app/controller/';
-	public static $model = '/app/model/';
-	public static $view = '/app/view/';
-	public static $admin = '/app/admin/';*/
-	
-	public static
-		$className, $classType;
+	public static $className;
+	public static $classType;
 
 	
 	/**
@@ -59,51 +48,6 @@ class AutoLoader {
 		AutoLoader::load();
 	}
 	
-
-	
-	/*
-	public static function loadController($controller) {
-	
-		// construct require path
-		$path = BASE_PATH
-			. self::$controller
-			. str_replace(self::$delimit, self::$sep, $controller);
-			
-		// convert path to lowercase and append ext	
-		$path = strtolower($path) . self::$ext;
-		
-		// check file exists
-		if (is_file($path)) {
-			include($path);
-			return;
-		}	
-	
-	}
-	
-	
-	public static function loadModel($model) {
-	
-		// construct require path
-		$path = BASE_PATH
-			. self::$model
-			. str_replace(self::$delimit, self::$sep, $model);
-			
-		// convert path to lowercase and append ext	
-		$path = strtolower($path) . self::$ext;
-		
-		// check file exists
-		if (is_file($path)) {
-			include($path);
-			return;
-		}		
-	
-	}
-	
-	
-	public static function loadError($class) {
-		return;
-	}
-*/
 	
 	/**
 	 * Search for Controllers / Files

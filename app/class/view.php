@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Various public functions
+ * Teleporting Data since 07.10.12
  *
  * PHP version 5
  * 
@@ -10,28 +10,24 @@
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class View extends Model {
+class View extends Model
+{
 
-	protected $dbh;
-	public $feedback;
-	public $objects = array();
-	
-	
-	public function __construct($dbh) {
-	
-		$this->dbh = $dbh;
-		
-	}
-	
+	public $template;
+
 	
 	/**
 	 * register new objects here and add to the collection
 	 */	
 	public function registerObjects($objects) {
 	
-		foreach ($objects as $object)	
-			$this->objects[] = $object;
+		foreach ($objects as $object) :
+		
+			$classTitle = strtolower($object->getClassTitle());
+			$this->data[$classTitle] = $object;
 			
+		endforeach;
+		
 		return $this;
 		
 	}
@@ -40,17 +36,20 @@ class View extends Model {
 	/**
 	 * prepare all core objects here and register
 	 */	
-	public function prepareHeader() {
+	public function header() {
 	
-		$menuMain = new Menu($this->DBH, $config->getUrlBase());
-
-		$options = new Options($DBH);
-		$options->select();		
+		$menuMain = new Menu(
+			$this->database, $this->config, $this->config->getUrl()
+		);
 		
+		$options = new Options(
+			$this->database, $this->config
+		);
+			$options->select();		
+					
+		// register new objects
 		$this->registerObjects(array($options, $menuMain));
-		
-		return $this;
-		
+				
 	}
 
 	
@@ -61,16 +60,25 @@ class View extends Model {
 	{			
 	
 		$path = BASE_PATH . 'app/' . 'view/' . $templateTitle . '.php';
+		$path = strtolower($path);
+		$this->template = $path;
 
 		// prepare common models
-		$this->prepareHeader();
+		$this->header();
+	
+		// push objects to method scope
+		foreach ($this->data as $title => $object) :
+		
+			$$title = $object;
+		
+		endforeach;
 	
 		// start buffer
 		ob_start();	
 
 		// include template
 		require_once($path);
-		
+
 		// create cache $templateTitle.html
 		file_put_contents(
 			BASE_PATH . 'app/' . 'cache/' . $templateTitle . '.html', ob_get_contents()
@@ -96,6 +104,44 @@ class View extends Model {
 		exit;
 		
 	}
+	
+	
+	/**
+	 * return feedback and unset session variable
+	 */
+	public function getFeedback() {
+
+		if (array_key_exists('feedback', $_SESSION)) {
+		
+			$feedback = $_SESSION['feedback'];
+			$_SESSION['feedback'] = false;
+			
+			return $feedback;
+			
+		} else {
+		
+			return false;
+		
+		}
+		
+	}	
+	
+	
+	/**
+	 * return base url
+	 */	
+	public function urlHome() { 
+		return $this->config->getUrlBase();
+	}	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 
@@ -140,16 +186,7 @@ class View extends Model {
 	}
 	 
 	 
-	public function feedback() {
 
-		if (array_key_exists('feedback', $_SESSION)) {
-			$this->feedback = $_SESSION['feedback'];
-			$_SESSION['feedback'] = false;
-			return $feedback;
-		} else {
-			return false;
-		}
-	}
 	
 
 	public function latestTweet($user) {
@@ -172,9 +209,7 @@ class View extends Model {
 	}
 
 
-	public function urlHome($ext = null) { 
-		return ($ext == null ? $this->getUrlBase() : $this->getUrlBase().$ext);
-	}
+
 
 
 	/*public function ccMediaUrl($ext = null) { 

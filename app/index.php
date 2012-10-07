@@ -15,24 +15,19 @@
 // View
 // =============================================================================
 
-$view = new View($database->dbh);
+$view = new View($database, $config);
 
-
-// Admin Area
-// =============================================================================
-
-if ('admin' == $config->getUrl(1)) {
-	require_once(BASE_PATH . '/app/admin.php');
-	exit;
-}
 
 // Controller
 // =============================================================================
 
 if ($config->getUrl(1)) {
-	//$autoloader->loadController($config->getUrl(1));
-	require_once($file);
-	exit;
+
+	$path = BASE_PATH . 'app/controller/' . $config->getUrl(1) . '.php';
+
+	if (is_file($path))
+		require_once($path);
+				
 }
 
 
@@ -40,7 +35,7 @@ if ($config->getUrl(1)) {
 // =============================================================================
 
 if ($config->getUrl(1) && !$config->getUrl(2)) {
-
+/*
 	// Objects
 	$content = new Content($database->dbh);	
 	
@@ -52,7 +47,7 @@ if ($config->getUrl(1) && !$config->getUrl(2)) {
 		// View: page
 		require_once('app/view/page.php');
 		exit;		
-	}
+	}*/
 }
 
 
@@ -73,7 +68,7 @@ if ($config->getUrl(1)) {
 	
 $view->loadCached('home');
 	
-$posts = new Content($database->dbh, 'post');
+$posts = new Content($database, $config, 'post');
 $posts->select(5);	
 
 //$ads = new Ads($database->dbh);

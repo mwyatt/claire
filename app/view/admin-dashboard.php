@@ -1,5 +1,9 @@
-<?php require_once('app/cc/view/header.php'); ?>
+<?php require_once('admin-header.php'); ?>
 
-<h2>dashboard.php</h2>
+<div class="container">
+	
+	<h2>dashboard.php</h2>
 
-<?php require_once('app/cc/view/footer.php'); ?>
+</div>
+
+<?php require_once('admin-footer.php'); ?>

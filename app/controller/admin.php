@@ -11,9 +11,8 @@
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
 
-$user = new User($DBH);
-
-$menu = new Menu($DBH, $config->getUrlBase(), $config->getUrl());
+ 
+$user = new User($database, $config);
 
 
 // Log Out
@@ -51,35 +50,43 @@ if ($user->isLogged()) {
 	// sub page
 	if ($config->getUrl(2)) {
 	
-		// controller
-		if ($file = $load->controller($config->getUrl(2)))
-			require_once($file);
+		$path = BASE_PATH . 'app/controller/' . $config->getUrl(1) . '-' . $config->getUrl(2) . '.php';
+
+		if (is_file($path))
+			require_once($path);
 		else
 			$route->home('admin/');
-		
+			
 	} else {
 	
-		if ($file = $load->view('admin-dashboard'))
-			require_once($file);	
+		$view->loadTemplate('admin-dashboard');
 		
 	}
 	
 	exit;
 	
-} 
+}
 
 
 // Invalid Url
 // =============================================================================
 
-if ($config->getUrl(2)) $route->home('admin/');
+if ($config->getUrl(2))
+	$route->home('admin/');
 
 
-// View: login.php
+// View: admin-login.php
 // =============================================================================
 
-if ($file = $load->view('admin-login'))
-	require_once($file);
+$view->loadTemplate('admin-login');
+	
+/*
+$view
+	->registerObjects(array(
+		$user
+	))
+	->loadTemplate('admin-login');
+	*/
 
 	
 	
