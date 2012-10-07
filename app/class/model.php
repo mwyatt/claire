@@ -10,12 +10,21 @@
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */ 
-class Model extends Config
+abstract class Model
 {
 
-	protected $DBH;
-	public $result;
+	public $database;
+	public $config;
+	public $data;
 	public $resultRow;
+
+	
+	public function __construct($database, $config) {
+	
+		$this->database = $database;
+		$this->config = $config;
+		
+	}
 	
 	
 	/**
@@ -23,18 +32,22 @@ class Model extends Config
 	 */
 	public function setResult($value)
 	{		
-		$this->result = $value;
+	
+		$this->data = $value;
+		
 	}
 	
 	
 	/**
-	 * Set Single Result Row (Apply Processing)
+	 * Set Single Result Row
 	 */
 	public function setRow($id = false, $key, $value) {
+	
 		if ($id)
-			$this->result[$id][$key] = $value;
+			$this->data[$id][$key] = $value;
 		else
-			$this->result[$key] = $value;
+			$this->data[$key] = $value;
+			
 	}	
 	
 
@@ -44,13 +57,13 @@ class Model extends Config
 	public function getResult($key = false)
 	{		
 		if ($key) {
-			if (array_key_exists($key, $this->result)) {
-				return $this->result[$key];
+			if (array_key_exists($key, $this->data)) {
+				return $this->data[$key];
 			} else {
 				return false;
 			}
 		}
-		return $this->result;
+		return $this->data;
 	}
 	
 	
@@ -59,13 +72,13 @@ class Model extends Config
 	 */
 	public function nextRow()
 	{		
-		if ($this->result) {
-			if ($this->resultRow = current($this->result)) {
-				next($this->result);
+		if ($this->data) {
+			if ($this->dataRow = current($this->data)) {
+				next($this->data);
 				return true;
 			} else {
-				unset($this->resultRow);
-				reset($this->result);
+				unset($this->dataRow);
+				reset($this->data);
 				return false;
 			}
 		} else {
@@ -80,30 +93,15 @@ class Model extends Config
 	 */
 	public function getRow($key = false) {
 		if ($key == 'id')
-			return key($this->resultRow);
+			return key($this->dataRow);
 		if ($key) {
-			if (array_key_exists($key, $this->resultRow)) {
-				return $this->resultRow[$key];
+			if (array_key_exists($key, $this->dataRow)) {
+				return $this->dataRow[$key];
 			} else {
 				return false;
 			}
 		}
-		return $this->resultRow;		
+		return $this->dataRow;		
 	}	
 	
 }
-
-/*
-Example Iterator Usage
-
-
-/*
-$user = new User($DBH);
-$user->getUser();
-
-while ($user->nextRow()) {
-	echo $user->getRow('email');
-}
-
-exit;
-*/

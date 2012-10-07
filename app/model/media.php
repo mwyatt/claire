@@ -6,7 +6,10 @@
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */ 
-
+ /*
+ id, title, filename, guid, date_published, description, type, media_tree_id
+ 1, My Little Pony, $pathUpload . filename, The Pony is so Beautiful!, gif, 0
+ */
 /*
 		CREATE NEW IMAGE THUMBS ON UPLOAD
 
@@ -20,12 +23,21 @@
 class Media extends Model
 {
 	
-	
-	// variable(s)
 	protected $tick = 0;
-	public $dir = 'media/upload/';
+	public $pathUpload = BASE_PATH . '/image/upload/';
 	public $upload;
 	public $error;
+	public $thumb = array(
+		'small' => array(
+			'width' => 250, 'height' => 250
+		),
+		'medium' => array(
+			'width' => 450, 'height' => 450
+		),
+		'large' => array(
+			'width' => 650, 'height' => 650
+		)
+	);
 	
 	
 	/**
@@ -106,6 +118,14 @@ class Media extends Model
 	
 	public function upload($files)
 	{	
+	
+echo '<pre>';
+print_r ($files);
+echo '</pre>';
+exit;	
+	
+	
+	
 		$files = rearrange($files); // tidy array	
 	
 		foreach ($files as $file) {

@@ -16,12 +16,6 @@ class Content extends Model
 	public $type;
 	
 	
-	public function __construct($DBH, $type) {
-		$this->DBH = $DBH;
-		$this->type = $type;
-	}
-	
-	
 	/**
 	 * Core Select Method
 	 * type, limit, date, media, user
@@ -51,7 +45,7 @@ class Content extends Model
 				, c.user_id
 				, cm.media_id
 				, m.title AS media_title
-				, m.filename AS media_filename
+				, m.title_slug AS media_filename
 			FROM
 				content AS c
 			LEFT JOIN

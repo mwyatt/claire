@@ -15,15 +15,11 @@ class User extends Model
 
 	public $email;
 	protected $password;
-	
-
-	public function __construct($DBH) {
-		$this->DBH = $DBH;
-	}
-	
+		
 	
 	public function setEmail($value) {
 		$this->email = mysql_real_escape_string($value);
+		return $this;
 	}
 	
 
@@ -45,20 +41,20 @@ class User extends Model
 	  */
 	public function insertMeta($user_id)
 	{	
-		$STH = $this->DBH->prepare("
+		$sth = $this->database->dbh->prepare("
 			INSERT INTO user_meta
 				(user_id, name, value)
 			values
 				('$user_id', :name, :value)
 		");
 		
-		$STH->execute(
+		$sth->execute(
 			array(
 				':name' => 'first_name'
 				, ':value' => 'Steve'
 			)
 		);
-		$STH->execute(
+		$sth->execute(
 			array(
 				':name' => 'last_name'
 				, ':value' => 'Smith'
@@ -72,7 +68,8 @@ class User extends Model
 	 */
 	public function getUser()
 	{	
-		$STH = $this->DBH->query("
+
+		$sth = $this->database->dbh->query("
 			SELECT
 				id
 				, email
@@ -88,7 +85,7 @@ class User extends Model
 		");
 		
 		// Process Result Rows
-		while ($row = $STH->fetch(PDO::FETCH_ASSOC)) {	
+		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {	
 			$this->setRow($row['id'], 'email', $row['email']);
 			$this->setRow($row['id'], 'level', $row['level']);
 			$this->setRow($row['id'], $row['name'], $row['value']);
@@ -101,14 +98,14 @@ class User extends Model
 	  */
 	public function insert($level = 1)
 	{	
-		$STH = $this->DBH->prepare("
+		$sth = $this->database->dbh->prepare("
 			INSERT INTO user
 				(email, password, level)
 			values
 				(:email, :password, '$level')
 		");
 		
-		$STH->execute(
+		$sth->execute(
 			array(
 				':email' => $this->getEmail()
 				, ':password' => $this->getPassword()
@@ -119,49 +116,62 @@ class User extends Model
 	
 	public function login()
 	{	
+	
 		// Set Email & Password
 		$this->setEmail($_POST['username']);
 		$this->setPassword($_POST['password']);
 		
 		// Query
-		$STH = $this->DBH->query("	
+		$sth = $this->database->dbh->query("	
 			SELECT
 				id
 				, email
 				, level
-				, name
-				, value
+				, meta.name as meta_name
+				, meta.value as meta_value
 			FROM
 				user				
 			LEFT JOIN
-				user_meta
+				user_meta as meta
 			ON
-				user.id = user_meta.user_id		
+				user.id = meta.user_id		
 			WHERE 
 				email = '{$this->getEmail()}'
 			AND
 				password = '{$this->getPassword()}'					
 		");
-		
+
 		// Process Result Rows
-		while ($row = $STH->fetch(PDO::FETCH_ASSOC)) {	
+		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {	
 			$this->setRow($row['id'], 'email', $row['email']);
 			$this->setRow($row['id'], 'level', $row['level']);
 			$this->setRow($row['id'], $row['name'], $row['value']);
-		}		
-				
-		$_SESSION['feedback'] = 'Incorrect Username and / or Password';
-
-		return $this->getResult();
+		}
+		
+		if ($this->getResult()) {
+		
+			return $this->getResult();
+			
+		} else {
+		
+			$_SESSION['feedback'] = 'Incorrect Username or Password, or both!';
+		
+		}
+		
 	}
 	
 	
+	/**
+	 * check the session variable for logged in user
+	 */
 	public function isLogged()
 	{	
-		if (array_key_exists('user', $_SESSION)) {
+	
+		if (array_key_exists('user', $_SESSION))
 			return true;
-		}
-		return false;
+		else
+			return false;
+			
 	}
 	
 	

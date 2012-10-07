@@ -1,25 +1,51 @@
 <?php
 
 /**
+ * Menu Crafter
+ *
+ * PHP version 5
+ * 
  * @package	~unknown~
- * @author 	Martin Wyatt <martin.wyatt@gmail.com> 
+ * @author Martin Wyatt <martin.wyatt@gmail.com> 
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
- */ 
+ */
 class Menu extends Model
 {
 
-
-	// variables
 	public $type;
 	public $html;
 	
 	
-	public function __construct($DBH, $urlBase, $url) {
-		$this->DBH = $DBH;
-		$this->urlBase = $urlBase;	
-		$this->url = $url;
-	}
+	/**
+	  *	Gets a full menu tree
+	  *	@method		get
+	  *	@param		string type
+	  *	@returns	assoc array if successful, empty array otherwise
+	  */
+	private function select($type, $parent)
+	{		
+	
+		$SQL = "
+			SELECT
+				id
+				, title
+				, guid
+				, parent_id
+				, position
+				, type
+			FROM
+				menu
+			WHERE
+				type = '$type'
+			ORDER BY
+				position ASC
+		";
+		$STH = $this->DBH->query($SQL); // execute	
+
+		return $this->setResult($STH->fetchAll(PDO::FETCH_ASSOC));
+		
+	}	
 	
 	
 	/**
@@ -29,18 +55,15 @@ class Menu extends Model
 	 */	
 	public function create($type, $parent = 0)
 	{
-		// Set type
+	
 		$this->type = $type;
-		
-		// Select Menu
 		$this->select($type, $parent);
 		
-		// Build Menu
-		if ($this->getResult()) {
+		if ($this->getResult())
 			return '<nav id="'.$this->type.'">'.$this->build($this->result).'</nav>';
-		} else {
+		else
 			return false;
-		}
+			
 	}	
 	
 	
@@ -97,37 +120,6 @@ class Menu extends Model
 		}
 		return false;
 	}	
-	
-	
-	/**
-	  *	Gets a full menu tree
-	  *	@method		get
-	  *	@param		string type
-	  *	@returns	assoc array if successful, empty array otherwise
-	  */
-	private function select($type, $parent)
-	{		
-		if ($type == null) { return false; } // check for false 
-	
-		$SQL = "
-			SELECT
-				id
-				, title
-				, guid
-				, parent_id
-				, position
-				, type
-			FROM
-				menu
-			WHERE
-				type = '$type'
-			ORDER BY
-				position ASC
-		";
-		$STH = $this->DBH->query($SQL); // execute	
-
-		return $this->setResult($STH->fetchAll(PDO::FETCH_ASSOC));
-	}
 	
 	
 	/**

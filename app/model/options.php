@@ -9,24 +9,26 @@
 class Options extends Model
 {	
 
-	public function __construct($DBH) {
-		$this->DBH = $DBH;
+
+	/**
+	 * returns class title
+	 */
+	public function getClassTitle()
+	{		
+	
+		return __CLASS__;
+		
 	}
 	
-	
 	/**
-	 * Searches $this->result for key match
-	 * @return value from $this->result
+	 * Searches $this->data for key match
+	 * @return value from $this->data
 	 * @usage $options->get('site_title')
 	 */
 	public function get($key)
 	{	
-		if ($this->result) {
-			if ($key) {
-				if (array_key_exists($key, $this->result)) {
-					return $this->result[$key];
-				}
-			}
+		if (array_key_exists($key, $this->data)) {
+			return $this->data[$key];
 		}
 		return false;
 	}
@@ -39,10 +41,9 @@ class Options extends Model
 	{		
 	
 		// Query
-		$STH = $this->DBH->query("	
+		$STH = $this->database->dbh->query("	
 			SELECT
-				name
-				, value
+				name, value
 			FROM
 				options
 		");

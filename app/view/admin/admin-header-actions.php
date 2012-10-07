@@ -8,4 +8,4 @@
 	$view = new View(
 		$config->getUrlBase(),
 		$config->getUrl()
-	);	
+	);
