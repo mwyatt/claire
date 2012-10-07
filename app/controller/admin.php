@@ -59,7 +59,7 @@ if ($user->isLogged()) {
 			
 	} else {
 	
-		$view->loadTemplate('admin-dashboard');
+		$view->loadTemplate('admin/dashboard');
 		
 	}
 	
@@ -78,7 +78,7 @@ if ($config->getUrl(2))
 // View: admin-login.php
 // =============================================================================
 
-$view->loadTemplate('admin-login');
+$view->loadTemplate('admin/login');
 	
 /*
 $view

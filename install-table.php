@@ -6,7 +6,7 @@ try {
 
 		
 	// user
-	$DBH->query("
+	$database->dbh->query("
 		CREATE TABLE IF NOT EXISTS user
 			(
 				id INT UNSIGNED NOT NULL AUTO_INCREMENT
@@ -20,14 +20,14 @@ try {
 	echo 'Table \'user\' Installed' . '<br>';
 	
 	// user_meta
-	$DBH->query("
+	$database->dbh->query("
 		CREATE TABLE IF NOT EXISTS user_meta
 			(
-				meta_id INT UNSIGNED NOT NULL AUTO_INCREMENT
+				id INT UNSIGNED NOT NULL AUTO_INCREMENT
 				, user_id INT UNSIGNED
 				, name VARCHAR(255) NOT NULL
 				, value VARCHAR(255) NOT NULL
-				, PRIMARY KEY (meta_id)
+				, PRIMARY KEY (id)
 				, FOREIGN KEY (user_id) REFERENCES user(id)
 			)
 	");
@@ -35,7 +35,7 @@ try {
 	
 	
 	// content
-	$DBH->query("
+	$database->dbh->query("
 		CREATE TABLE IF NOT EXISTS content
 			(
 				id INT UNSIGNED NOT NULL AUTO_INCREMENT
@@ -55,7 +55,7 @@ try {
 	
 	
 	// content_meta
-	$DBH->query("
+	$database->dbh->query("
 		CREATE TABLE IF NOT EXISTS content_meta
 			(
 				id INT UNSIGNED NOT NULL AUTO_INCREMENT
@@ -70,7 +70,7 @@ try {
 	
 	
 	// options
-	$DBH->query("
+	$database->dbh->query("
 		CREATE TABLE IF NOT EXISTS options
 			(
 				id INT UNSIGNED NOT NULL AUTO_INCREMENT
@@ -83,7 +83,7 @@ try {
 	
 	
 	// media_tree
-	$DBH->query("
+	$database->dbh->query("
 		CREATE TABLE IF NOT EXISTS media_tree
 			(
 				id INT UNSIGNED NOT NULL AUTO_INCREMENT
@@ -97,7 +97,7 @@ try {
 	
 	
 	// media
-	$DBH->query("
+	$database->dbh->query("
 		CREATE TABLE IF NOT EXISTS media
 			(
 				id INT UNSIGNED NOT NULL AUTO_INCREMENT
@@ -116,7 +116,7 @@ try {
 	
 	
 	// content_media
-	$DBH->query("
+	$database->dbh->query("
 		CREATE TABLE IF NOT EXISTS content_media
 			(
 				id INT UNSIGNED NOT NULL AUTO_INCREMENT
@@ -132,7 +132,7 @@ try {
 	
 	
 	// ads
-	$DBH->query("
+	$database->dbh->query("
 		CREATE TABLE IF NOT EXISTS ads
 			(
 				id INT UNSIGNED NOT NULL AUTO_INCREMENT
@@ -150,34 +150,22 @@ try {
 	echo 'Table \'ads\' Installed' . '<br>';
 	
 	
-	
-	
-	/*
 	// menu
-	$DBH->query("
-		CREATE TABLE IF NOT EXISTS
-			menu
-				(
-					id INT UNSIGNED NOT NULL AUTO_INCREMENT
-					, title VARCHAR(255) NOT NULL
-					, guid VARCHAR(255) NOT NULL
-					, PRIMARY KEY (id)
-				)		
-		`menu`
-		(
-			`id` INT(11) NOT NULL AUTO_INCREMENT,
-			`title` VARCHAR(75) DEFAULT NULL,
-			`guid` VARCHAR(100) DEFAULT NULL,
-			`content_id` INT(11) DEFAULT NULL,
-			`parent_id` INT(11) DEFAULT NULL,
-			`position` INT(11) DEFAULT NULL,
-			`type` VARCHAR(20) DEFAULT NULL,
-			PRIMARY KEY (`id`)
-		)
+	$database->dbh->query("
+		CREATE TABLE IF NOT EXISTS menu
+			(
+				id INT UNSIGNED NOT NULL AUTO_INCREMENT
+				, title VARCHAR(255) NOT NULL
+				, parent_id INT UNSIGNED									
+				, guid VARCHAR(255) NOT NULL
+				, position INT UNSIGNED									
+				, type VARCHAR(20) DEFAULT 'main'
+				, PRIMARY KEY (id)
+				, FOREIGN KEY (content_id) REFERENCES content(id)				
+			)		
 	");
-	*/
-
-
+	echo 'Table \'menu\' Installed' . '<br>';
+	
 	
 } catch (PDOException $e) { 
 

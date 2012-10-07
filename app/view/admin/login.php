@@ -1,4 +1,5 @@
-<!doctype html><!--[if lt IE 7 ]> <html class="ie6"> <![endif]-->
+<!doctype html>
+<!--[if lt IE 7 ]> <html class="ie6"> <![endif]-->
 <!--[if IE 7 ]>    <html class="ie7"> <![endif]-->
 <!--[if IE 8 ]>    <html class="ie8"> <![endif]-->
 <!--[if IE 9 ]>    <html class="ie9"> <![endif]-->
@@ -11,7 +12,7 @@
 	<!-- Page Title
 	======================================================================== -->
 	
-	<title>Login to Martin Wyatt</title>	
+	<title>Login to <?php echo $options->get('site_title'); ?></title>	
 		
 		
 	<!-- Meta
@@ -25,9 +26,9 @@
 	<!-- Styles
 	======================================================================== -->
 	
-	<link rel="stylesheet" href="http://localhost/mvc/asset/style/skeleton.css">
-	<link rel="stylesheet" href="http://localhost/mvc/asset/style/layout.css">
-	<link rel="stylesheet" href="http://localhost/mvc/asset/style/admin-base.css">
+	<link rel="stylesheet" href="<?php echo $this->urlHome(); ?>asset/style/skeleton.css">
+	<link rel="stylesheet" href="<?php echo $this->urlHome(); ?>asset/style/layout.css">
+	<link rel="stylesheet" href="<?php echo $this->urlHome(); ?>asset/style/admin-base.css">
 	
 	<style type="text/css" media="all">
 	
@@ -65,9 +66,9 @@
 
 	<div id="login">
 
-		<div class="logo"><a href="http://localhost/mvc/" title="Open Homepage"><img src="http://localhost/mvc/image/logo.png" alt="Martin Wyatt Logo"></a></div>
+		<div class="logo"><a href="<?php echo $this->urlHome(); ?>" title="Open Homepage"><img src="<?php echo $this->urlHome(); ?>image/logo.png" alt="<?php echo $options->get('site_title'); ?> Logo"></a></div>
 		
-		<div class="feedback"><p></p></div>
+		<div class="feedback"><p><?php echo $this->getFeedback(); ?></p></div>
 
 		<form class="login" method="post">
 
@@ -90,8 +91,8 @@
 <!-- Script
 ======================================================================== -->
 
-<script src="http://localhost/mvc/asset/script/vendor/jquery-1.8.0.min.js"></script>
-<script src="http://localhost/mvc/asset/script/vendor/modernizr-2.6.1.min.js"></script>
+<script src="<?php echo $this->urlHome(); ?>asset/script/vendor/jquery-1.8.0.min.js"></script>
+<script src="<?php echo $this->urlHome(); ?>asset/script/vendor/modernizr-2.6.1.min.js"></script>
 
 <script type="text/javascript">
 

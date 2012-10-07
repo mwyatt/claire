@@ -55,28 +55,7 @@ $route = new Config();
 
 if (array_key_exists('install', $_GET)) {
 
-	// look for installed.txt
-	if (is_file(BASE_PATH . 'installed.txt')) {
-	
-		// delete installed.txt
-		unlink(BASE_PATH . 'installed.txt');
-		
-		// refresh database
-		$database->dbh->query("DROP DATABASE mvc_002"); 
-		$database->dbh->query("CREATE DATABASE mvc_002");
-		
-		// redirect
-		$route->home('?install');
-	
-	} else {
-	
-		// install database
-		require_once(BASE_PATH . 'app/database.php');
-		require_once(BASE_PATH . 'install.php');
-		
-		// redirect
-		$route->home();
-	}
+	require_once(BASE_PATH . 'install.php');
 	
 }
 

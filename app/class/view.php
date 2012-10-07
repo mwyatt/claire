@@ -23,7 +23,10 @@ class View extends Model
 	
 		foreach ($objects as $object) :
 		
-			$classTitle = strtolower($object->getClassTitle());
+			// get class title in lowercase
+			$classTitle = strtolower(get_class($object));
+			
+			// store object
 			$this->data[$classTitle] = $object;
 			
 		endforeach;
@@ -38,17 +41,17 @@ class View extends Model
 	 */	
 	public function header() {
 	
-		$menuMain = new Menu(
-			$this->database, $this->config, $this->config->getUrl()
-		);
+		// initiate main menu
+		$menu = new Menu($this->database, $this->config,
+		$this->config->getUrl());
 		
-		$options = new Options(
-			$this->database, $this->config
-		);
-			$options->select();		
+		//$menu->create('main');
+		
+		$options = new Options($this->database, $this->config);
+		$options->select();		
 					
 		// register new objects
-		$this->registerObjects(array($options, $menuMain));
+		$this->registerObjects(array($options, $menu));
 				
 	}
 

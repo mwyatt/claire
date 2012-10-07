@@ -16,12 +16,6 @@ class Content extends Model
 	public $type;
 	
 	
-	public function __construct($DBH, $type) {
-		$this->DBH = $DBH;
-		$this->type = $type;
-	}
-	
-	
 	/**
 	 * Core Select Method
 	 * type, limit, date, media, user

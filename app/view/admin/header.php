@@ -1,4 +1,4 @@
-<?php require_once('app/view/doctype.php'); ?>
+<!doctype html>
 <html>
 <head>
 	
