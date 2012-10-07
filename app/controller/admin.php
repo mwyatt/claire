@@ -50,7 +50,7 @@ if ($user->isLogged()) {
 	// sub page
 	if ($config->getUrl(2)) {
 	
-		$path = BASE_PATH . 'app/controller/' . $config->getUrl(1) . '-' . $config->getUrl(2) . '.php';
+		$path = BASE_PATH . 'app/controller/' . $config->getUrl(1) . '/' . $config->getUrl(2) . '.php';
 
 		if (is_file($path))
 			require_once($path);
@@ -59,8 +59,11 @@ if ($user->isLogged()) {
 			
 	} else {
 	
-		$view->loadTemplate('admin/dashboard');
-		
+		// view/admin/dashboard.php
+		$view
+			->registerObjects(array($user))
+			->loadTemplate('admin/dashboard');	
+	
 	}
 	
 	exit;
@@ -75,7 +78,7 @@ if ($config->getUrl(2))
 	$route->home('admin/');
 
 
-// View: admin-login.php
+// View: admin/login.php
 // =============================================================================
 
 $view->loadTemplate('admin/login');

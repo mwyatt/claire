@@ -37,6 +37,50 @@ abstract class Model
 		
 	}
 	
+	/**
+	 * use sth to parse rows combining meta data and store in $data
+	 */
+	public function parseRows($sth) {
+	
+		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {	
+		
+			foreach ($row as $key => $value) {
+			
+				$this->data[$row['id']][$key] = $value;
+				
+			}
+		
+			if (array_key_exists('meta_name', $row))
+				$this->data[$row['id']][$row['meta_name']] = $row['meta_value'];
+		
+			if (array_key_exists($name = 'meta_name', $this->data[$row['id']]))
+				unset($this->data[$row['id']][$name]);
+				
+			if (array_key_exists($name = 'meta_value', $this->data[$row['id']]))
+				unset($this->data[$row['id']][$name]);
+			
+		}
+		
+		if (count($this->data) == 1)
+			$this->data = $this->data[key($this->data)];
+		
+	}	
+	
+	
+	/**
+	 * Searches $this->data for key match
+	 * @return value from $this->data
+	 * @usage $options->get('site_title')
+	 */
+	public function get($key)
+	{	
+		if (array_key_exists($key, $this->data)) {
+			return $this->data[$key];
+		}
+		return false;
+	}	
+	
+
 	
 	/**
 	 * Set Single Result Row

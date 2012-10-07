@@ -30,6 +30,7 @@ class User extends Model
 
 	public function setPassword($value) {
 		$this->password = hash('sha512', $value);
+		return $this;		
 	}
 	
 	protected function getPassword() {
@@ -114,18 +115,20 @@ class User extends Model
 	}
 	
 	
+	/**
+	 * login user based on post data
+	 */
 	public function login()
 	{	
 	
-		// Set Email & Password
 		$this->setEmail($_POST['username']);
 		$this->setPassword($_POST['password']);
 		
-		// Query
 		$sth = $this->database->dbh->query("	
 			SELECT
-				id
+				user.id
 				, email
+				, date_registered
 				, level
 				, meta.name as meta_name
 				, meta.value as meta_value
@@ -140,21 +143,18 @@ class User extends Model
 			AND
 				password = '{$this->getPassword()}'					
 		");
-
-		// Process Result Rows
-		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {	
-			$this->setRow($row['id'], 'email', $row['email']);
-			$this->setRow($row['id'], 'level', $row['level']);
-			$this->setRow($row['id'], $row['name'], $row['value']);
-		}
+		
+		$this->parseRows($sth);
 		
 		if ($this->getResult()) {
-		
-			return $this->getResult();
+			
+			$this->setSession();
+			return true;
 			
 		} else {
 		
 			$_SESSION['feedback'] = 'Incorrect Username or Password, or both!';
+			return false;
 		
 		}
 		
@@ -169,31 +169,35 @@ class User extends Model
 	
 		if (array_key_exists('user', $_SESSION))
 			return true;
-		else
-			return false;
+		/*else
+			return false;*/
 			
 	}
 	
 	
 	public function logout()
 	{	
-		if (array_key_exists('user', $_SESSION)) {
+	
+		if (array_key_exists('user', $_SESSION))
 			unset($_SESSION['user']);
-		}
-		return true;
+			
 	}
 	
 	
 	public function setSession()
 	{	
-		$_SESSION['user']['id'] = $this->result['id'];
-		$_SESSION['user']['email'] = $this->result['email'];
-		$_SESSION['user']['date_registered'] = $this->result['date_registered'];
-		$_SESSION['user']['level'] = $this->result['level'];
-		return true;
+	
+		unset($_SESSION['user']);
+	
+		foreach ($this->getResult() as $key => $value) {
+		
+			$_SESSION['user'][$key] = $value;
+		
+		}
+		
 	}
 	
-	public function get($key = 'username')
+	public function get($key)
 	{	
 		return $_SESSION['user'][$key];
 	}

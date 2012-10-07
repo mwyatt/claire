@@ -31,10 +31,6 @@ if (is_file(BASE_PATH . 'installed.txt')) {
 
 		$user = new User($database, $config);
 
-		$user
-			->setEmail('martin.wyatt@gmail.com')
-			->setPassword('123');
-
 		require_once(BASE_PATH . '/install-table.php');
 		require_once(BASE_PATH . '/install-tabledata.php');
 		

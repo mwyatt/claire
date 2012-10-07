@@ -161,11 +161,10 @@ try {
 				, position INT UNSIGNED									
 				, type VARCHAR(20) DEFAULT 'main'
 				, PRIMARY KEY (id)
-				, FOREIGN KEY (content_id) REFERENCES content(id)				
 			)		
 	");
 	echo 'Table \'menu\' Installed' . '<br>';
-	
+
 	
 } catch (PDOException $e) { 
 

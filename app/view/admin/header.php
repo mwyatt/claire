@@ -48,7 +48,7 @@
 			</div>
 		
 			<div class="user">
-				<a class="name">Admin</a>
+				<a class="name"><?php echo $user->get('first_name'); ?></a>
 				<div class="drop">
 					<ul>
 						<li><a href="<?php echo $this->urlHome(); ?>cc/profile/">Profile</a></li>
@@ -65,6 +65,8 @@
 	</div>
 </div>
 
-<nav class="base row">
-	<?php //echo $menu->ccBuild(); ?>
-</nav>
+<div class="container">
+	<nav class="base row">
+		<?php echo $menu->adminBuild(); ?>
+	</nav>
+</div>

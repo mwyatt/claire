@@ -41,18 +41,21 @@ class View extends Model
 	 */	
 	public function header() {
 	
+		$user = new User($this->database, $this->config);
+	
 		// initiate main menu
-		$menu = new Menu($this->database, $this->config,
-		$this->config->getUrl());
+		$menu = new Menu($this->database, $this->config);
 		
-		//$menu->create('main');
+		//$menu->adminBuild();
 		
 		$options = new Options($this->database, $this->config);
 		$options->select();		
 					
 		// register new objects
 		$this->registerObjects(array($options, $menu));
-				
+		
+
+		
 	}
 
 	
@@ -83,9 +86,9 @@ class View extends Model
 		require_once($path);
 
 		// create cache $templateTitle.html
-		file_put_contents(
+		/*file_put_contents(
 			BASE_PATH . 'app/' . 'cache/' . $templateTitle . '.html', ob_get_contents()
-		);
+		);*/
 		
 		// end buffer and send
 		ob_end_flush();	
@@ -93,21 +96,7 @@ class View extends Model
 		exit;
 		
 	}		
-	
-	
-	public function loadCached($templateTitle) {
-	
-		$path = BASE_PATH . 'app/' . 'cache/' . $templateTitle . '.html';
-		
-		if (is_file($path))
-			require_once($path);
-		else
-			return;
-			
-		exit;
-		
-	}
-	
+
 	
 	/**
 	 * return feedback and unset session variable

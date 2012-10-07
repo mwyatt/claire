@@ -1,4 +1,4 @@
-<?php require_once('app/cc/view/header.php'); ?>
+<?php require_once('header.php'); ?>
 
 	<h2>Posts</h2>
 		
@@ -8,13 +8,13 @@
 		</form>		
 	</div>
 
-<?php if ($posts->getResult()) : ?>	
+<?php if ($content->getResult()) : ?>	
 
 	<ul class="results">
 
-	<?php while ($posts->nextRow()) : ?>
+	<?php while ($content->nextRow()) : ?>
 
-		<?php require('app/cc/view/row-post.php') ?>
+		<?php require_once('row-post.php'); ?>
 
 	<?php endwhile; ?>
 
@@ -22,4 +22,4 @@
 	
 <?php endif; ?>	
 
-<?php require_once('app/cc/view/footer.php'); ?>
+<?php require_once('footer.php'); ?>

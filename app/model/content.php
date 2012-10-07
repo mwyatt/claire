@@ -16,6 +16,14 @@ class Content extends Model
 	public $type;
 	
 	
+	public function __construct($database, $config, $type) {
+	
+		parent::__construct($database, $config);
+		$this->type = $type;
+		
+	}
+	
+	
 	/**
 	 * Core Select Method
 	 * type, limit, date, media, user
@@ -32,7 +40,7 @@ class Content extends Model
 			$limit = " LIMIT $limit";
 		
 		// Query
-		$STH = $this->DBH->query("
+		$STH = $this->database->dbh->query("
 			SELECT
 				c.id
 				, c.title
@@ -71,8 +79,8 @@ class Content extends Model
 			$this->setRow($row['id'], 'status', $row['status']);		
 			$this->setRow($row['id'], 'user_id', $row['user_id']);			
 			if ($row['media_id']) {
-				$this->result[$row['id']]['media'][$row['media_id']]['title'] = $row['media_title'];
-				$this->result[$row['id']]['media'][$row['media_id']]['filename'] = $row['media_filename'];
+				$this->data[$row['id']]['media'][$row['media_id']]['title'] = $row['media_title'];
+				$this->data[$row['id']]['media'][$row['media_id']]['filename'] = $row['media_filename'];
 			}
 		}				
 		
@@ -85,7 +93,7 @@ class Content extends Model
 	  *//*
 	public function selectJoin()
 	{	
-		$STH = $this->DBH->query("
+		$STH = $this->database->dbh->query("
 			SELECT
 				id
 				, title
@@ -114,7 +122,7 @@ class Content extends Model
 	  */
 	public function delete($id)
 	{	
-		$STH = $this->DBH->query("
+		$STH = $this->database->dbh->query("
 			DELETE FROM
 				content
 			WHERE
@@ -132,7 +140,7 @@ class Content extends Model
 	 *
 	 * @param string $key The array key to return
 	 * @return string|false The array value or false if it does not exist
-	 */	
+	 *//*	
 	public function countRows($type = false)
 	{
 		if ($type) {
@@ -159,9 +167,9 @@ class Content extends Model
 			return $count;
 		}
 		return false;
-	}	
+	}	*/
 	
-	
+	/*
 	public function selectTitle($titleSlug, $limit = 0)
 	{	
 		$SQL = "
@@ -186,7 +194,7 @@ class Content extends Model
 		$SQL .= ($limit != false ? " LIMIT $limit" : "");
 		
 		// Execute
-		$STH = $this->DBH->query($SQL);
+		$STH = $this->database->dbh->query($SQL);
 		
 		// Set Result
 		$this->setResult(
@@ -194,9 +202,9 @@ class Content extends Model
 		);
 		
 		return $this;
-	}
+	}*/
 	
-
+/*
 	public function setResultRows($STH)
 	{
 		// Rows Found
@@ -209,7 +217,7 @@ class Content extends Model
 		} else {
 			return false;
 		}
-	}
+	}*/
 	
 	
 	/**
@@ -264,7 +272,7 @@ class Content extends Model
 	/**
 	 * Explode @param val and reset array keys
 	 * @return @param val or false
-	 */
+	 *//*
 	public function explodeComma($val)
 	{	
 		if ($val) {
@@ -282,12 +290,12 @@ class Content extends Model
 				
 		// Return
 		return $val;
-	}	
+	}	*/
 	
 	
 	/**
 	  *	@return result or false
-	  */
+	  *//*
 	public function getDate($year = null, $month = null, $type = null, $title = null, $limit = null)
 	{		
 		if (!is_numeric($year) && ($year !== null)) { return false; }
@@ -328,12 +336,12 @@ class Content extends Model
 			return false;
 		}		
 		return $this->result;			
-	}	
+	}	*/
 	
 	/**
 	  *	@param null
 	  *	@return result or false
-	  */
+	  *//*
 	public function getTag($title = null)
 	{
 		$pdo = Database::getInstance(); // instance db
@@ -370,11 +378,11 @@ class Content extends Model
 			return false;
 		}		
 		return $this->result;
-	}
+	}*/
 
 	/**
 	  * check for tag match
-	  */
+	  *//*
 	public function hasTag($title, $str)
 	{		
 		$slices = explode(', ', $str); // split via ', '
@@ -384,12 +392,12 @@ class Content extends Model
 			}
 		}	
 		return false;
-	}
+	}*/
 
 	
 	/**
 	  * builds a name, url tag array and returns
-	  */
+	  *//*
 	public function setTags($str, $exclude = null)
 	{		
 		$slices = explode(', ', $str); // split via ', '
@@ -406,13 +414,13 @@ class Content extends Model
 			}
 		}			
 		return ($tags ? $tags : false);
-	}	
+	}	*/
 	
 	
 	/**
 	  * Interfaces with the 'attachments' model to grab the attachments required
 	  * @param attachments is used to inject attachments into $this->result
-	  */
+	  *//*
 	public function setAttached($thumb = null, $results = false)
 	{
 		
@@ -433,7 +441,7 @@ class Content extends Model
 		$this->setResult($results);
 		
 		return $this->getResult();
-	}
+	}*/
 	
 	
 }

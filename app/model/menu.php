@@ -25,6 +25,8 @@ class Menu extends Model
 	  */
 	private function select($type, $parent)
 	{		
+		if ($parent)
+			$parent = " AND parent_id = '{$parent}' ";
 	
 		$SQL = "
 			SELECT
@@ -37,13 +39,14 @@ class Menu extends Model
 			FROM
 				menu
 			WHERE
-				type = '$type'
+				type = '{$type}'
+			{$parent}
 			ORDER BY
 				position ASC
 		";
-		$STH = $this->DBH->query($SQL); // execute	
+		$sth = $this->database->dbh->query($SQL); // execute	
 
-		return $this->setResult($STH->fetchAll(PDO::FETCH_ASSOC));
+		return $this->setResult($sth->fetchAll(PDO::FETCH_ASSOC));
 		
 	}	
 	
@@ -53,14 +56,14 @@ class Menu extends Model
 	 * @param string type
 	 * @returns	true if successful, false otherwise
 	 */	
-	public function create($type, $parent = 0)
+	public function create($type, $parent = false)
 	{
-	
+		
 		$this->type = $type;
 		$this->select($type, $parent);
 		
 		if ($this->getResult())
-			return '<nav id="'.$this->type.'">'.$this->build($this->result).'</nav>';
+			return '<nav id="'.$this->type.'">'.$this->build($this->getResult()).'</nav>';
 		else
 			return false;
 			
@@ -84,7 +87,7 @@ class Menu extends Model
 				$class = '';
 				$class .= 'class="';
 				$class .= 'id_'.$result['id'].' ';
-				$class .= ($this->getUrl(1) == $result['title'] ? ' current' : false);
+				$class .= ($this->config->getUrl(1) == $result['title'] ? ' current' : false);
 				$class .= '"';
 				
 				// Append List Item
@@ -127,31 +130,33 @@ class Menu extends Model
 	  *	@param		string type
 	  *	@returns	assoc array if successful, empty array otherwise
 	  */
-	public function ccBuild($parent = 0)
+	public function adminBuild($parent = 0)
     {
+	
 		$i = 0;
-		$dir = 'app/cc/controller/'; // set dir
+		
+		$dir = 'app/controller/' . $this->config->getUrl(1). '/'; // set dir
 		
 		if ($dirHandle = opendir($dir)) { // find controllers
 		
 			$html = '<ol class="ccMenu">';
 			
-			$url = $this->getUrlBase().'cc/';
-			$current = ($this->getUrl(2) ? false : ' class="current"');
+			$url = $this->config->getUrlBase() . $this->config->getUrl(1). '/';
+			$current = ($this->config->getUrl(2) ? false : ' class="current"');
 			
 			$html .= '<li'.$current.'><div><a href="'.$url.'">Dashboard</a></div></li>';
 					
-					
-			// loop		
 			while (($file = readdir($dirHandle)) !== false) {
 			
 				if ($file != "." && $file != ".." && $file != ".htaccess" && $file != "index.php") { // filter
 				
-					$title = $file;
-					$url = $this->getUrlBase().'cc/'.$title.'/';
+					$title = str_replace ('.php', '', $file);
+					
+					$url = $this->config->getUrlBase() . $this->config->getUrl(1) . '/' . $title . '/';
+					
 					//$icon = (file_exists($dir.'/'.$file.'/assets/img/cms_icon.png') ? $dir.'/'.$file.'/cms_icon.png' : 'assets/img/32x32.gif'); // needs work
 					
-					$current = ($this->getUrl(2) == $file ? ' class="current"' : false);
+					$current = ($this->config->getUrl(2) == $file ? ' class="current"' : false);
 					
 					$html .= '<li'.$current.'><div><a href="'.$url.'">'.$title.'</a></div></li>';
 		
@@ -188,7 +193,7 @@ class Menu extends Model
 								$this->items[$rootKey]['subNav'][$i]['path'] = $dir.$file;
 								$file = preg_replace('/[.$](php)+/', '', $file); // remove .php
 								$this->items[$rootKey]['subNav'][$i]['name'] = $file;
-								if ($this->getUrl(3) == $file) {
+								if ($this->config->getUrl(3) == $file) {
 									$this->items[$rootKey]['subNav'][$i]['current'] = true;
 								}								
 								$i++;

@@ -3,7 +3,14 @@
 try {	
 
 	// user
-	$user->insert(10);
+	$user
+		->setEmail('martin.wyatt@gmail.com')
+		->setPassword('123')
+		->insert(10);
+	$user
+		->setEmail('mike.turner@gmail.com')
+		->setPassword('223')
+		->insert(1);
 	echo '<br>' . 'Data \'user\' Inserted' . '<br>';
 	
 	// user_meta
@@ -11,8 +18,11 @@ try {
 		INSERT INTO user_meta
 			(user_id, name, value)
 		VALUES
-			('1', 'first_name', 'Steve')
-			, ('1', 'last_name', 'Smith')
+			('1', 'first_name', 'Martin')
+			, ('1', 'last_name', 'Wyatt')
+			, ('1', 'age', '24')
+			, ('2', 'first_name', 'Mike')
+			, ('2', 'last_name', 'Turner')
 	");	
 	echo  'Data \'user_meta\' Inserted' . '<br>';
 	
@@ -123,14 +133,24 @@ try {
 	// menu
 	$database->dbh->query("
 		INSERT INTO menu
-			(type, title, guid, parent_id, position)
+			(title, guid, parent_id, position, type)
 		VALUES
-			('main', 'Home', 'http://localhost/mvc/', '0', '1')
-			, ('main', 'Posts', 'http://localhost/mvc/posts/', '0' '2')
-			, ('main', 'Contact', 'http://localhost/mvc/contact-me/', '0' '3')
+			('Home', 'http://localhost/mvc/', '0', '1', 'main')
+			, ('Posts', 'http://localhost/mvc/posts/', '0', '2', 'main')
+			, ('Contact', 'http://localhost/mvc/contact-me/', '0', '3', 'main')
 	");	
 	echo 'Data \'menu\' Inserted' . '<br>';
 
+	/*
+					id INT UNSIGNED NOT NULL AUTO_INCREMENT
+				, title VARCHAR(255) NOT NULL
+				, parent_id INT UNSIGNED									
+				, guid VARCHAR(255) NOT NULL
+				, position INT UNSIGNED									
+				, type VARCHAR(20) DEFAULT 'main'
+				, PRIMARY KEY (id)
+			)	
+	*/
 
 } catch (PDOException $e) { 
 

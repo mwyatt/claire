@@ -14,33 +14,41 @@ class Database
 {
 
 	public $dbh;
-	private $credentials = array(
-		'host' => 'localhost',
-		'port' => '80',
-		'basename' => 'mvc_002',
-		'username' => 'root',
-		'password' => '',
-	);
 	
-	
+
 	public function __construct() {
 		$this->connect();
 	}
 	
 	
+	public function getCredentials() {
+	
+		return $credentials = array(
+			'host' => 'localhost',
+			'port' => '80',
+			'basename' => 'mvc_002',
+			'username' => 'root',
+			'password' => '',
+		);
+		
+	}
+	
+	
 	public function connect() {
+	
+		$credentials = $this->getCredentials();
 	
 		try {
 		
 			// Set Data Source Name
-			$dataSourceName = 'mysql:host='.$this->credentials['host']
-				.';dbname='.$this->credentials['basename'];
+			$dataSourceName = 'mysql:host='.$credentials['host']
+				.';dbname='.$credentials['basename'];
 			
 			// Connect
 			$this->dbh = new PDO(
 				$dataSourceName,
-				$this->credentials['username'],
-				$this->credentials['password']
+				$credentials['username'],
+				$credentials['password']
 			);	
 		
 			// Set Error Mode
