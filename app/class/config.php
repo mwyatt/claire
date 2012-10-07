@@ -13,48 +13,15 @@
 class Config
 {
 
-	public $url;
-	public $urlBase;
-	private $_urlIterator = -1;
-	public $options;
+	public static $url;
+	public static $urlBase;
 	
 	
 	public function __construct() {
-		$this->setUrl();
-		$this->setUrlBase();
-	}
-
-	
-	/**
-	 * Get options array value
-	 *
-	 * @param string $key The array key to return
-	 * @return string|false The array value or false if it does not exist
-	 */	
-	public function getOption($key)
-	{
-		if (array_key_exists($key, $this->options)) {
-			return $this->options[$key];
-		} else {
-			return false;
-		}
-	}
-
-	
-	/**
-	 * Writes new key for options
-	 *
-	 * @param string $key The array key to set
-	 * @param string $value The array value to set
-	 * @return true|false If the array key and value is successfully set
-	 */	
-	public function setOption($key, $value)
-	{
-		if ($this->options[$key] = $value) {
-			return true;
-		} else {
-			return false;
-		}
+		$this
+			->setUrl()
+			->setUrlBase();
+			
 	}
 
 	
@@ -89,9 +56,10 @@ class Config
 		$url = array_values($url);
 		
 		// Set property url
-		$this->url = $url;
+		Config::$url = $url;
 		
 		return $this;
+		
 	}
 	
 	
@@ -102,6 +70,7 @@ class Config
 	 */		 
 	public function setUrlBase()
 	{
+	
 		// Split script via '/'
 		$script = explode('/', strtolower($_SERVER['SCRIPT_NAME']));
 		
@@ -120,9 +89,10 @@ class Config
 		}
 		
 		// Set property urlBase
-		$this->urlBase = $base_url;
+		self::$urlBase = $base_url;
 		
 		return $this;
+		
 	}	
 	
 	
@@ -133,8 +103,8 @@ class Config
 	 */		
 	public function getUrlBase()
 	{	
-		if ($this->urlBase) {
-			return $this->urlBase;
+		if (self::$urlBase) {
+			return self::$urlBase;
 		} else {
 			return false;	
 		}
@@ -155,41 +125,13 @@ class Config
 			$key--;	
 
 			// Find array key
-			if (array_key_exists($key, $this->url)) {
-				return $this->url[$key];
+			if (array_key_exists($key, self::$url)) {
+				return self::$url[$key];
 			} else {
 				return false;
 			}	
 		} else {
-			return $this->url;	
-		}
-	}
-	
-	/**
-	 * Get next url value based on property $_urlIterator
-	 *
-	 * @todo make it so that it returns each segments then false once cyle is complete	 
-	 * @return string|false The array value or false if it does not exist
-	 */		
-	public function getNextUrl()
-	{
-	
-		// Increments url pointer by 1
-		$this->_urlIterator++;
-		
-		/*
-		if ($this->_urlIterator < 1) {
-			$this->_urlIterator = 0;
-		} else {
-			$this->_urlIterator++;
-		}*/
-		
-		// Find array key
-		if (array_key_exists($this->_urlIterator, $this->url)) {
-			return $this->url[$this->_urlIterator];
-		} else {
-			$this->_urlIterator = -1;
-			return false;
+			return self::$url;	
 		}
 	}
 	

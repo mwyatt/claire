@@ -10,89 +10,95 @@
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class View extends AutoLoader {
+class View extends Model {
 
+	protected $dbh;
 	public $feedback;
-	protected $DBH;
-	public $options;
+	public $objects = array();
 	
 	
-	public function __construct($DBH) {
-		$this->DBH = $DBH;
+	public function __construct($dbh) {
+	
+		$this->dbh = $dbh;
+		
 	}
 	
 	
+	/**
+	 * register new objects here and add to the collection
+	 */	
+	public function registerObjects($objects) {
 	
-	public function init() {
-		//$this-setoptions
+		foreach ($objects as $object)	
+			$this->objects[] = $object;
+			
+		return $this;
+		
+	}
+	
+	
+	/**
+	 * prepare all core objects here and register
+	 */	
+	public function prepareHeader() {
+	
+		$menuMain = new Menu($this->DBH, $config->getUrlBase());
+
 		$options = new Options($DBH);
-		$options->select();
-		return $options;
+		$options->select();		
+		
+		$this->registerObjects(array($options, $menuMain));
+		
+		return $this;
+		
 	}
-	
-	
-	public function home($templateTitle) {
 
-			$menu = new Menu($this->DBH, $config->getUrlBase(),
-			$config->getUrl()	)
 	
-		$posts = new Content($this->DBH, 'post');
-		$posts->select(5);	
+	/**
+	 * load template file and prepare all object results for output
+	 */	
+	public function loadTemplate($templateTitle)
+	{			
+	
+		$path = BASE_PATH . 'app/' . 'view/' . $templateTitle . '.php';
 
-		//$ads = new Ads($DBH);
-		//$ads->select('cover')->shuffle();
-	
-		//$projects = new Content($DBH, 'project');	
-		//$projects->select(2);
-		
-		$this->load($templateTitle);
-		
-echo '<pre>';
-print_r ($posts);
-echo '</pre>';
-exit;
-		
-			
-	
-	}
-	
-	
-	public function loadCached($templateTitle) {
-	
-		if (is_file($cacheFile = BASE_PATH . self::$cache
-		. strtolower($templateTitle) . '.html'))
-			require_once($cacheFile);
-		else
-			$this->$templateTitle($templateTitle);
-			
-			
-		
-	}
-	
-	
-	public function load($templateTitle, $objects)
-	{		
-		
-		// check template file exists
-		if (!($template = BASE_PATH . self::$view .  strtolower($templateTitle) 
-		. self::$ext) && (is_file($template)))
-			return false;
+		// prepare common models
+		$this->prepareHeader();
 	
 		// start buffer
 		ob_start();	
 
 		// include template
-		require_once($template);
+		require_once($path);
 		
-		// create cache
-		file_put_contents(BASE_PATH . self::$cache . $templateTitle . '.html', ob_get_contents());
+		// create cache $templateTitle.html
+		file_put_contents(
+			BASE_PATH . 'app/' . 'cache/' . $templateTitle . '.html', ob_get_contents()
+		);
 		
 		// end buffer and send
 		ob_end_flush();	
 
 		exit;
 		
-	}	
+	}		
+	
+	
+	public function loadCached($templateTitle) {
+	
+		$path = BASE_PATH . 'app/' . 'cache/' . $templateTitle . '.html';
+		
+		if (is_file($path))
+			require_once($path);
+		else
+			return;
+			
+		exit;
+		
+	}
+	
+	
+
 	
 	
 	/**

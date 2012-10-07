@@ -15,23 +15,7 @@
 // View
 // =============================================================================
 
-/*$view = new View(
-	$config->getUrlBase(),
-	$config->getUrl()
-);*/
-
-
-$view = new View($DBH);
-
-
-// Menu
-// =============================================================================
-
-$menu = new Menu(
-	$DBH,
-	$config->getUrlBase(),
-	$config->getUrl()	
-);
+$view = new View($database->dbh);
 
 
 // Admin Area
@@ -46,6 +30,7 @@ if ('admin' == $config->getUrl(1)) {
 // =============================================================================
 
 if ($config->getUrl(1)) {
+	//$autoloader->loadController($config->getUrl(1));
 	require_once($file);
 	exit;
 }
@@ -57,7 +42,7 @@ if ($config->getUrl(1)) {
 if ($config->getUrl(1) && !$config->getUrl(2)) {
 
 	// Objects
-	$content = new Content($DBH);	
+	$content = new Content($database->dbh);	
 	
 	// Objects Methods
 	if ($content->selectTitle($config->getUrl(1), 1)) {
@@ -87,6 +72,18 @@ if ($config->getUrl(1)) {
 // =============================================================================
 	
 $view->loadCached('home');
+	
+$posts = new Content($database->dbh, 'post');
+$posts->select(5);	
+
+//$ads = new Ads($database->dbh);
+//$ads->select('cover')->shuffle();
+
+//$projects = new Content($database->dbh, 'project');	
+//$projects->select(2);
+
+$view->registerObjects(array($posts))
+	->loadTemplate('home');
 
 
 

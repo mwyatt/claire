@@ -22,16 +22,16 @@ exit;
 // Base Path
 // =============================================================================
 
-define('BASE_PATH', realpath('.'));
+define('BASE_PATH', (string) (__DIR__ . '/'));
 
 
 // AutoLoader
 // =============================================================================
 
-require_once(BASE_PATH . '/app/autoloader.php');
+require_once(BASE_PATH . 'app/autoloader.php');
 
-// register
-spl_autoload_register(array('AutoLoader', 'load'));
+spl_autoload_register(array('AutoLoader', 'loadClass'));
+spl_autoload_register(array('AutoLoader', 'loadModel'));
 
 		
 // Error Handling
@@ -56,12 +56,13 @@ $session = new Session();
 // =============================================================================
 
 $config = new Config();
-$route = new Config();	
-	
+
 echo '<pre>';
-print_r ($route);
+print_r ($config);
 echo '</pre>';
-exit;	
+exit;
+
+$route = new Config();		
 	
 			
 // Install
@@ -85,8 +86,8 @@ if (array_key_exists('install', $_GET)) {
 	} else {
 	
 		// install database
-		require_once(BASE_PATH . '/app/database.php');
-		require_once(BASE_PATH . '/install.php');
+		require_once(BASE_PATH . 'app/database.php');
+		require_once(BASE_PATH . 'install.php');
 		
 		// redirect
 		$route->home();
