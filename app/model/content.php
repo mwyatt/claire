@@ -13,16 +13,16 @@
 class Content extends Model
 {	
 	
-	public $type;
+	//public $type;
 	
 	
-	public function __construct($database, $config, $type) {
+	/*public function __construct($database, $config, $type) {
 	
 		parent::__construct($database, $config);
 		$this->type = $type;
 		
 	}
-	
+	*/
 	
 	/**
 	 * Core Select Method

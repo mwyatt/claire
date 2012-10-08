@@ -41,9 +41,9 @@ if ($config->getUrl(3))
 // View: admin/posts.php
 // =============================================================================
 		
-$posts = new Content($database, $config, 'post');
-$posts->select();
+$post = new Post($database, $config);
+$post->select();
 
 $view
-	->registerObjects(array($user, $posts))
+	->registerObjects(array($user, $post))
 	->loadTemplate('admin/posts');

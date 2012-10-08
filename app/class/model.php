@@ -37,6 +37,7 @@ abstract class Model
 		
 	}
 	
+	
 	/**
 	 * use sth to parse rows combining meta data and store in $data
 	 */
@@ -58,6 +59,7 @@ abstract class Model
 				
 			if (array_key_exists($name = 'meta_value', $this->data[$row['id']]))
 				unset($this->data[$row['id']][$name]);
+				
 			
 		}
 		

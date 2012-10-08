@@ -4,6 +4,6 @@
 	
 	<h2>dashboard.php</h2>
 
-</div>
+</div> <!-- .container -->
 
 <?php require_once('footer.php'); ?>

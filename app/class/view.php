@@ -26,6 +26,9 @@ class View extends Model
 			// get class title in lowercase
 			$classTitle = strtolower(get_class($object));
 			
+			/*if ($classTitle == 'content')	
+				$classTitle = $object->getType()*/
+			
 			// store object
 			$this->data[$classTitle] = $object;
 			
@@ -127,6 +130,15 @@ class View extends Model
 	}	
 	
 	
+	/**
+	 * return current url
+	 */
+	public function urlCurrent($ext = null) { 
+		$url = $this->getUrl();
+		$base = $this->getUrlBase();
+		$url = implode('/', $url).'/';
+		return ($ext == null ? $base.$url : $base.$url.$ext);
+	}	
 	
 	
 	
@@ -189,16 +201,7 @@ class View extends Model
 	}
 
 
-	/**
-		@desc output install path
-		@param $ext allows you to extend the base url for absolute urls
-	*/
-	public function urlCurrent($ext = null) { 
-		$url = $this->getUrl();
-		$base = $this->getUrlBase();
-		$url = implode('/', $url).'/';
-		return ($ext == null ? $base.$url : $base.$url.$ext);
-	}
+
 
 
 
