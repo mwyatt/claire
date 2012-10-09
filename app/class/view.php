@@ -133,11 +133,9 @@ class View extends Model
 	/**
 	 * return current url
 	 */
-	public function urlCurrent($ext = null) { 
-		$url = $this->getUrl();
-		$base = $this->getUrlBase();
-		$url = implode('/', $url).'/';
-		return ($ext == null ? $base.$url : $base.$url.$ext);
+	public function urlCurrent($ext = null) {
+		$url = implode('/', $this->config->getUrl()).'/';
+		return $this->config->getUrlBase() . $url;
 	}	
 	
 	

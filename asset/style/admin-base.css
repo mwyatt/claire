@@ -268,7 +268,7 @@
 				margin: 0 20px 20px 0;
 				padding: 0;
 				float: left;
-				background: url('../i/cc/cog.png') 8px 50% no-repeat;
+				background: url('../../img/cc/cog.png') 8px 50% no-repeat;
 			}
 			
 				nav.base ol li a {
@@ -360,19 +360,19 @@
 				}
 		
 				.results .row .actions .permalink {
-					background: url('../i/cc/action-permalink.png') 50% 50% no-repeat;
+					background: url('../../img/cc/action-permalink.png') 50% 50% no-repeat;
 				}
 	
 				.results .row .actions .tags {
-					background: url('../i/cc/action-tags.png') 50% 50% no-repeat;
+					background: url('../../img/cc/action-tags.png') 50% 50% no-repeat;
 				}
 	
 				.results .row .actions .attached {
-					background: url('../i/cc/action-attached.png') 50% 50% no-repeat;
+					background: url('../../img/cc/action-attached.png') 50% 50% no-repeat;
 				}
 	
 				.results .row .actions .delete {
-					background: url('../i/cc/action-delete.png') 50% 50% no-repeat;
+					background: url('../../img/cc/action-delete.png') 50% 50% no-repeat;
 				}	
 				
 				.results .row .actions .visibility {
@@ -838,7 +838,7 @@ cursor: default;
 	*/			
 	
 		.btn.search {
-			background: #20afe4 url('../i/search.png') 50% 50% no-repeat;
+			background: #20afe4 url('../../img/search.png') 50% 50% no-repeat;
 			display: block;
 			width: 48px;
 			height: 48px;
@@ -847,7 +847,7 @@ cursor: default;
 		}
 
 			.btn.search.close {
-				background: #20afe4 url('../i/close.png') 50% 50% no-repeat;
+				background: #20afe4 url('../../img/close.png') 50% 50% no-repeat;
 			}	
 
 	

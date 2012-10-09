@@ -14,7 +14,7 @@ class Post extends Content
 {
 	
 	/**
-	 * 
+	 * select all rows match
 	 */
 	public function select($limit = false)
 	{	
@@ -22,7 +22,7 @@ class Post extends Content
 		$type = strtolower(__CLASS__);	
 				
 		$sth = $this->database->dbh->query("
-			SELECT
+			select
 				c.id
 				, c.title
 				, c.title_slug
@@ -33,45 +33,62 @@ class Post extends Content
 				, c.status
 				, c.user_id
 				, cm.media_id
-				, m.title AS media_title
-				, m.title_slug AS media_filename
-			FROM
-				content AS c
-			LEFT JOIN
-				content_media AS cm ON c.id = cm.content_id				
-			LEFT JOIN
-				media AS m ON cm.media_id = m.id				
-			WHERE	
+				, m.title as media_title
+				, m.title_slug as media_filename
+			from
+				content as c
+			left join
+				content_media as cm on c.id = cm.content_id				
+			left join
+				media as m on cm.media_id = m.id				
+			where	
 				c.status = 'visible'
-			AND
-				c.type = '{$type}'
-			ORDER BY
-				c.date_published DESC		
+			and
+				c.type = 'post'
+			order by
+				c.date_published desc, cm.position
 		");		
 		
 		$this->parseRows($sth);
-	
-
-
-		
-		/*
-		// Process Result Rows
-		while ($row = $STH->fetch(PDO::FETCH_ASSOC)) {
-			$this->setRow($row['id'], $row['id'], $row['id']);
-			$this->setRow($row['id'], 'title', $row['title']);
-			$this->setRow($row['id'], 'html', $row['html']);		
-			$this->setRow($row['id'], 'type', $row['type']);		
-			$this->setRow($row['id'], 'date_published', $row['date_published']);		
-			$this->setRow($row['id'], 'guid', $row['guid']);		
-			$this->setRow($row['id'], 'status', $row['status']);		
-			$this->setRow($row['id'], 'user_id', $row['user_id']);			
-			if ($row['media_id']) {
-				$this->data[$row['id']]['media'][$row['media_id']]['title'] = $row['media_title'];
-				$this->data[$row['id']]['media'][$row['media_id']]['filename'] = $row['media_filename'];
-			}
-		}	*/			
 		
 		return $this;
+		
 	}
+	
+	
+	/**
+	 * custom parse
+	 */
+	public function parseRows($sth) {
+	
+		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {	
+		
+			foreach ($row as $key => $val) {
+				
+				$this->data[$row['id']][$key] = $val;
+			
+			}
+			
+			if (array_key_exists('media_id', $row)) {
+			
+				if ($row['media_id']) {
+			
+					$this->data[$row['id']]['media'][$row['media_id']]['title'] = $row['media_title'];
+					
+					$this->data[$row['id']]['media'][$row['media_id']]['filename'] = $row['media_filename'];
+					
+				}
+				
+			}			
+		
+			unset($this->data[$row['id']]['media_id']);
+			unset($this->data[$row['id']]['media_title']);
+			unset($this->data[$row['id']]['media_filename']);
+		
+		}
+		
+		$this->singletonRow();
+		
+	}		
 				
 }

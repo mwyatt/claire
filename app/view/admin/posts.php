@@ -16,7 +16,7 @@
 
 	<?php while ($post->nextRow()) : ?>
 
-		<?php require_once('row-post.php'); ?>
+		<?php include('row-post.php'); ?>
 
 	<?php endwhile; ?>
 

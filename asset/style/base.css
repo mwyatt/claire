@@ -84,7 +84,7 @@
 	}
 	
 		footer.base .profile {
-background: url("../i/me.png") 0% 0% no-repeat;
+background: url("../../img/me.png") 0% 0% no-repeat;
 height: 94px;
 			padding: 11px 0 0 115px;
 		}
@@ -122,7 +122,7 @@ width: 18px;
 height: 36px;
 top: 50%;
 left: -38px;
-background: url("../i/tip.png") 50% 50% no-repeat;
+background: url("../../img/tip.png") 50% 50% no-repeat;
 			}	
 			
 			footer.base .tweet p {
@@ -399,7 +399,7 @@ nav#main {
 			}		
 	
 		.btn.search {
-			background: #20afe4 url("../i/search.png") 50% 50% no-repeat;
+			background: #20afe4 url("../../img/search.png") 50% 50% no-repeat;
 			display: block;
 			width: 48px;
 			height: 48px;
@@ -408,7 +408,7 @@ nav#main {
 		}
 
 			.btn.search.close {
-				background: #20afe4 url("../i/close.png") 50% 50% no-repeat;
+				background: #20afe4 url("../../img/close.png") 50% 50% no-repeat;
 			}	
 
 			
@@ -470,7 +470,7 @@ nav#main {
 				}	
 				
 					body.home #posts ul li a {
-										background: url("../i/ico-note.png") 100% 50% no-repeat;	
+										background: url("../../img/ico-note.png") 100% 50% no-repeat;	
 					display: block;				
 					font-size: 1.625em;
 					font-weight: 400;

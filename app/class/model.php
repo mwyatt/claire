@@ -39,6 +39,17 @@ abstract class Model
 	
 	
 	/**
+	 * convert only one result to singleton pattern
+	 */
+	public function singletonRow() {
+	
+		if (count($this->data) == 1)
+			$this->data = $this->data[key($this->data)];
+			
+	}
+	
+	
+	/**
 	 * use sth to parse rows combining meta data and store in $data
 	 */
 	public function parseRows($sth) {
@@ -118,18 +129,23 @@ abstract class Model
 	 */
 	public function nextRow()
 	{		
-		if ($this->data) {
-			if ($this->dataRow = current($this->data)) {
-				next($this->data);
-				return true;
-			} else {
-				unset($this->dataRow);
-				reset($this->data);
-				return false;
-			}
+
+		if ($this->dataRow = current($this->data)) {
+		
+			next($this->data);
+			
+			return true;
+			
 		} else {
+		
+			unset($this->dataRow);
+			
+			reset($this->data);
+			
 			return false;
+			
 		}
+				
 	}
 	
 	
@@ -138,16 +154,18 @@ abstract class Model
 	 * Option to get Specific Key
 	 */
 	public function getRow($key = false) {
-		if ($key == 'id')
-			return key($this->dataRow);
+	
 		if ($key) {
-			if (array_key_exists($key, $this->dataRow)) {
+		
+			if (array_key_exists($key, $this->dataRow))			
 				return $this->dataRow[$key];
-			} else {
+			else
 				return false;
-			}
+				
 		}
-		return $this->dataRow;		
+		
+		return $this->dataRow;
+		
 	}	
 	
 }
