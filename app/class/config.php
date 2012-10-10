@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Core Configuration Options
+ * Config
  *
  * PHP version 5
  * 
@@ -10,85 +10,98 @@
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
+ 
 class Config
 {
 
 	public $url;
 	public $urlBase;
-	
+
 	
 	public function __construct() {
-		$this->setUrl();
-		$this->setUrlBase();
+	
+		$this
+			->setUrl()
+			->setUrlBase();
+			
 	}
 
 	
+	// Set
+	// =========================================================================
+	
 	/**
-	 * Sets up the url property
-	 *
-	 * @todo when ? is used inside url it breaks!	 
-	 * @return object $this
+	 * sets url array
+	 * scheme, host, path, query
+	 * returns $this
 	 */	
 	public function setUrl()
 	{
 	
-		// Removes GET Variable(s)
-		$url = strtok($_SERVER['REQUEST_URI'], '?'); 
+		$url = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+		$url = parse_url($url);
 		
-		// Split via '/'
-		$url = explode('/', strtolower($url));
+		if (array_key_exists($key = 'path', $url)) {
 		
-		// Split script via '/'
-		$script = explode('/', strtolower($_SERVER['SCRIPT_NAME']));
+			$url[$key] = split('[/]', $url[$key]);
+			$url[$key] = array_filter($url[$key]);
+			$url[$key] = array_values($url[$key]);
+			
+		}		
+			
+		if (array_key_exists($key = 'query', $url))
+			$url[$key] = split('[;&]', $url[$key]);
 		
-		// strip all preceding '/'
-		for($i = 0; $i < count($script); $i++) {
-			if ($url[$i] == $script[$i]) {
-				unset($url[$i]);
-			}
-		}
-		// Remove empty '/'
-		$url = array_filter($url);
-		
-		// Reset keys
-		$url = array_values($url);
-		
-		// Set property url
 		$this->url = $url;
+		
+		return $this;
 		
 	}
 	
 	
 	/**
-	 * Sets up the urlBase property
-	 *
-	 * @return object $this
-	 */		 
+	 * sets clean, base url
+	 * returns $this
+	 */	
 	public function setUrlBase()
 	{
 	
-		// Split script via '/'
-		$script = explode('/', strtolower($_SERVER['SCRIPT_NAME']));
+echo '<pre>';
+print_r ($_SERVER	);
+echo '</pre>';
+exit;
+
+	
+		if ($this->getUrl()) {
+/*
+			if (array_key_exists($key = 'path', $this->url)) {
+			
+				first($this->url[$key]) = split('[/]', $this->url[$key]);
+				$this->url[$key] = array_filter($this->url[$key]);
+				$this->url[$key] = array_values($this->url[$key]);
+				
+			}	
 		
-		// Pop element off end of array
-		array_pop($script); 
+	*/	
 		
-		// Remove empty '/'
-		$script	= array_filter($script); 
+			$url = explode('/', strtolower($_SERVER['SCRIPT_NAME']));
+			array_pop($url); 
+			$url = array_filter($url); 
+			$url = array_values($url);
+			$url = 'http://'.$_SERVER['HTTP_HOST'].'/';
+			for($i = 0; $i < count($url); $i++) {
+				$url .= $url[$i].'/';
+			}
+
+			$this->urlBase = $url;
 		
-		// Reset keys
-		$script = array_values($script);
-		
-		$base_url = 'http://'.$_SERVER['HTTP_HOST'].'/';
-		for($i = 0; $i < count($script); $i++) {
-			$base_url .= $script[$i].'/';
 		}
-		
-		// Set property urlBase
-		$this->urlBase = $base_url;
-		
+
 	}	
 	
+	
+	// Get
+	// =========================================================================
 	
 	/**
 	 * Get urlBase value
@@ -135,6 +148,7 @@ class Config
 		header("Location: " . $this->getUrlBase() . $ext);
 		exit;
 	}
+	
 	
 	public function homeAdmin($ext = false)
 	{		

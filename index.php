@@ -49,6 +49,12 @@ $session = new Session();
 $config = new Config();
 $route = new Config();		
 
+echo '<pre>';
+print_r ($config);
+echo '</pre>';
+exit;
+
+
 			
 // Install
 // =============================================================================
