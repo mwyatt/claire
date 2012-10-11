@@ -14,46 +14,98 @@
 class Config
 {
 
+
+	public $objects;
 	public $url;
 	public $urlBase;
 
 	
-	public function __construct() {
+	/**
+	 * returns an object if it has been registered
+	 */	
+	public function getObject($objectTitle)
+	{
 	
-		$this
-			->setUrl()
-			->setUrlBase();
+		if (array_key_exists($objectTitle, $this->objects))
+			return $this->objects[$objectTitle];
+		else
+			return false;
+	
+	}
+	
+	
+	/**
+	 * intention is to build the object with submitted objects
+	 * takes the __CLASS__ name of objects and sets them within array
+	 */	
+	public function setObjects($objects = array())
+	{
+	
+		foreach ($objects as $object) :
+		
+			$classTitle = strtolower(get_class($object));
+			
+			$this->objects[$classTitle] = $object;
+			
+		endforeach;
+	
+		return $this;
 			
 	}
-
 	
-	// Set
-	// =========================================================================
+	
+	/**
+	 * returns url array key
+	 */		
+	public function getUrl($key = false)
+	{	
+	
+		if ($key) {
+		
+			if (array_key_exists($key, $this->url))
+				return $this->url[$key];
+			else
+				return false;
+				
+		} else {
+		
+			return $this->url;
+			
+		}
+	}
+	
 	
 	/**
 	 * sets url array
 	 * scheme, host, path, query
+	 * use scheme + host for urlBase
+	 * use scheme + host + path implode for urlCurrent
 	 * returns $this
 	 */	
 	public function setUrl()
 	{
 	
-		$url = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-		$url = parse_url($url);
-		
-		if (array_key_exists($key = 'path', $url)) {
-		
-			$url[$key] = split('[/]', $url[$key]);
-			$url[$key] = array_filter($url[$key]);
-			$url[$key] = array_values($url[$key]);
+		if ($_SERVER) {
+	
+			$url = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 			
-		}		
+			$url = parse_url($url);
 			
-		if (array_key_exists($key = 'query', $url))
-			$url[$key] = split('[;&]', $url[$key]);
-		
-		$this->url = $url;
-		
+			if (array_key_exists($key = 'path', $url)) {
+			
+				$url[$key] = split('[/]', $url[$key]);
+				$url[$key] = array_filter($url[$key]);
+				$url[$key] = array_values($url[$key]);
+				
+			}		
+				
+			if (array_key_exists($key = 'query', $url))
+				$url[$key] = split('[;&]', $url[$key]);
+			
+			$this->url = $url;
+			
+		}
+	
 		return $this;
 		
 	}
@@ -66,43 +118,15 @@ class Config
 	public function setUrlBase()
 	{
 	
-echo '<pre>';
-print_r ($_SERVER	);
-echo '</pre>';
-exit;
-
-	
 		if ($this->getUrl()) {
-/*
-			if (array_key_exists($key = 'path', $this->url)) {
-			
-				first($this->url[$key]) = split('[/]', $this->url[$key]);
-				$this->url[$key] = array_filter($this->url[$key]);
-				$this->url[$key] = array_values($this->url[$key]);
-				
-			}	
 		
-	*/	
-		
-			$url = explode('/', strtolower($_SERVER['SCRIPT_NAME']));
-			array_pop($url); 
-			$url = array_filter($url); 
-			$url = array_values($url);
-			$url = 'http://'.$_SERVER['HTTP_HOST'].'/';
-			for($i = 0; $i < count($url); $i++) {
-				$url .= $url[$i].'/';
-			}
-
-			$this->urlBase = $url;
+			$this->urlBase = $this->getUrl('scheme') . '://' . $this->getUrl('host') . '/';
 		
 		}
 
 	}	
 	
-	
-	// Get
-	// =========================================================================
-	
+
 	/**
 	 * Get urlBase value
 	 *
@@ -110,51 +134,15 @@ exit;
 	 */		
 	public function getUrlBase()
 	{	
-		if ($this->urlBase) {
-			return $this->urlBase;
-		} else {
-			return false;	
-		}
-	}
-	
-	
-	/**
-	 * Get url array value
-	 *
-	 * @param integer $key The array key to return
-	 * @return string|array The array value or array if it does not exist
-	 */		
-	public function getUrl($key = false)
-	{	
-		if ($key) {
 		
-			// Reduce integer $key by 1
-			$key--;	
+		return $this->urlBase;
+		
+	}
 
-			// Find array key
-			if (array_key_exists($key, $this->url)) {
-				return $this->url[$key];
-			} else {
-				return false;
-			}	
-		} else {
-			return $this->url;	
-		}
-	}
-	
-	
-	public function home($ext = false)
-	{		
-		header("Location: " . $this->getUrlBase() . $ext);
-		exit;
-	}
-	
-	
-	public function homeAdmin($ext = false)
-	{		
-		header("Location: " . $this->getUrlBase() . "admin/" . $ext);
-		exit;
-	}	
 	
 	
 }
+
+
+// current url	
+// 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']

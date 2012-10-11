@@ -8,8 +8,8 @@
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */ 
- 
 
+ 
 // Base Path
 // =============================================================================
 
@@ -47,13 +47,19 @@ $session = new Session();
 // =============================================================================
 
 $config = new Config();
-$route = new Config();		
+$config
+	->setUrl()
+	->setUrlBase();
 
+$route = new Config();
+$route
+	->setObjects(array($config));
+
+	
 echo '<pre>';
-print_r ($config);
+print_r ($route	);
 echo '</pre>';
 exit;
-
 
 			
 // Install

@@ -7,32 +7,32 @@
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
 class Route extends Config
-{
-
-	public function __construct() {
-		parent::__construct();
-	}
+{	
 	
-	
-	public function home($ext = false)
+	public function home($path = false)
 	{		
-		header("Location: " . $this->getUrlBase() . $ext);
+		header("Location: " . $this->getUrlBase() . $path);
 		exit;
 	}
 	
-	public function homeAdmin($ext = false)
+	public function homeAdmin($path = false)
 	{		
-		header("Location: " . $this->getUrlBase() . "admin/" . $ext);
+		header("Location: " . $this->getUrlBase() . "admin/" . $path);
 		exit;
 	}
 	
-	/*
-	public function _404()
+	
+	public function home($path = false)
 	{		
-		header('HTTP/1.0 404 Not Found');
-		require_once('app/view/404.php');
+		header("Location: " . $this->getUrlBase() . $path);
 		exit;
 	}
-	*/
+	
+	
+	public function homeAdmin($path = false)
+	{		
+		header("Location: " . $this->getUrlBase() . "admin/" . $path);
+		exit;
+	}		
 	
 }
