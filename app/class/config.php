@@ -16,8 +16,8 @@ class Config
 
 
 	public $objects;
+	
 	public $url;
-	public $urlBase;
 
 	
 	/**
@@ -27,8 +27,11 @@ class Config
 	{
 	
 		if (array_key_exists($objectTitle, $this->objects))
+		
 			return $this->objects[$objectTitle];
+			
 		else
+		
 			return false;
 	
 	}
@@ -38,16 +41,16 @@ class Config
 	 * intention is to build the object with submitted objects
 	 * takes the __CLASS__ name of objects and sets them within array
 	 */	
-	public function setObjects($objects = array())
+	public function setObject($objects = array())
 	{
 	
-		foreach ($objects as $object) :
+		foreach ($objects as $object) {
 		
 			$classTitle = strtolower(get_class($object));
 			
 			$this->objects[$classTitle] = $object;
 			
-		endforeach;
+		}
 	
 		return $this;
 			
@@ -55,23 +58,39 @@ class Config
 	
 	
 	/**
-	 * returns url array key
+	 * returns url key or path segment
 	 */		
 	public function getUrl($key = false)
 	{	
 	
-		if ($key) {
+		if (gettype($key) == 'integer') {
+		
+			if (array_key_exists('path', $this->url)) {
+			
+				if (array_key_exists($key, $this->url['path'])) {
+				
+					return $this->url['path'][$key];
+				
+				}
+			
+			}
+			
+			return false;
+				
+		}
+	
+		if (gettype($key) == 'string') {
 		
 			if (array_key_exists($key, $this->url))
-				return $this->url[$key];
-			else
-				return false;
-				
-		} else {
-		
-			return $this->url;
 			
-		}
+				return $this->url[$key];
+				
+			return false;				
+		
+		}		
+		
+		return $this->url;
+			
 	}
 	
 	
@@ -86,7 +105,9 @@ class Config
 	{
 	
 		if ($_SERVER) {
-	
+
+			// Array
+			
 			$url = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 			
 			$url = parse_url($url);
@@ -104,45 +125,33 @@ class Config
 			
 			$this->url = $url;
 			
+			// Base
+			
+			$scriptName = explode('/', strtolower($_SERVER['SCRIPT_NAME']));
+			array_pop($scriptName); 
+			$scriptName = array_filter($scriptName); 
+			$scriptName = array_values($scriptName);
+
+			$url = 
+				$this->getUrl('scheme') . '://' . $this->getUrl('host') . '/';
+			
+			foreach ($scriptName as $section) {
+			
+				$url .= $section . '/';
+			
+			}
+
+			$this->url['base'] = $url;
+			
+			// Current
+			
+			$this->url['current'] =
+				'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+			
 		}
 	
 		return $this;
 		
-	}
-	
-	
-	/**
-	 * sets clean, base url
-	 * returns $this
-	 */	
-	public function setUrlBase()
-	{
-	
-		if ($this->getUrl()) {
-		
-			$this->urlBase = $this->getUrl('scheme') . '://' . $this->getUrl('host') . '/';
-		
-		}
-
 	}	
 	
-
-	/**
-	 * Get urlBase value
-	 *
-	 * @return string|false The value or false if it does not exist
-	 */		
-	public function getUrlBase()
-	{	
-		
-		return $this->urlBase;
-		
-	}
-
-	
-	
 }
-
-
-// current url	
-// 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']

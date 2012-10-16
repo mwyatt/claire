@@ -15,19 +15,6 @@ class Route extends Config
 		exit;
 	}
 	
-	public function homeAdmin($path = false)
-	{		
-		header("Location: " . $this->getUrlBase() . "admin/" . $path);
-		exit;
-	}
-	
-	
-	public function home($path = false)
-	{		
-		header("Location: " . $this->getUrlBase() . $path);
-		exit;
-	}
-	
 	
 	public function homeAdmin($path = false)
 	{		

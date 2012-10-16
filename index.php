@@ -48,16 +48,15 @@ $session = new Session();
 
 $config = new Config();
 $config
-	->setUrl()
-	->setUrlBase();
+	->setUrl();
 
-$route = new Config();
+$route = new Route();
 $route
-	->setObjects(array($config));
+	->setObject(array($config));
 
 	
 echo '<pre>';
-print_r ($route	);
+print_r ($config->getUrl(0)	);
 echo '</pre>';
 exit;
 

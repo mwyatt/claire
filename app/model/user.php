@@ -78,11 +78,11 @@ class User extends Model
 				, name
 				, value
 			FROM
-				user
+				main_user
 			LEFT JOIN
-				user_meta
+				main_user_meta
 			ON
-				user.id = user_meta.user_id
+				user.id = main_user_meta.user_id
 		");
 		
 		// Process Result Rows
@@ -100,7 +100,7 @@ class User extends Model
 	public function insert($level = 1)
 	{	
 		$sth = $this->database->dbh->prepare("
-			INSERT INTO user
+			INSERT INTO main_user
 				(email, password, level)
 			values
 				(:email, :password, '$level')
@@ -126,18 +126,18 @@ class User extends Model
 		
 		$sth = $this->database->dbh->query("	
 			SELECT
-				user.id
+				main_user.id
 				, email
 				, date_registered
 				, level
 				, meta.name as meta_name
 				, meta.value as meta_value
 			FROM
-				user				
+				main_user				
 			LEFT JOIN
-				user_meta as meta
+				main_user_meta as meta
 			ON
-				user.id = meta.user_id		
+				main_user.id = meta.user_id		
 			WHERE 
 				email = '{$this->getEmail()}'
 			AND

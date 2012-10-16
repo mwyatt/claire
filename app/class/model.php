@@ -22,6 +22,7 @@ abstract class Model
 	public function __construct($database, $config) {
 	
 		$this->database = $database;
+		
 		$this->config = $config;
 		
 	}

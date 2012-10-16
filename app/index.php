@@ -66,7 +66,7 @@ if ($config->getUrl(1)) {
 // Homepage
 // =============================================================================
 	
-$view->loadCached('home');
+//$view->loadCached('home');
 	
 $posts = new Content($database, $config, 'post');
 $posts->select(5);	
