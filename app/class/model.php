@@ -10,7 +10,7 @@
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */ 
-abstract class Model
+abstract class Model extends Config
 {
 
 	public $database;
@@ -29,25 +29,31 @@ abstract class Model
 	
 	
 	/**
-	 * Get Data
+	 * Get data array or by key
 	 */
 	public function getData($key = false)
 	{		
 		if ($key) {
-			if (array_key_exists($key, $this->data)) {
+		
+			if (array_key_exists($key, $this->data))
+			
 				return $this->data[$key];
-			} else {
+				
+			else
+			
 				return false;
-			}
+			
 		}
+		
 		return $this->data;
+		
 	}	
 	
 	
 	/**
-	 * Set Result Array
+	 * Set data array
 	 */
-	public function setResult($value)
+	public function setData($value)
 	{		
 	
 		$this->data = $value;
@@ -61,6 +67,7 @@ abstract class Model
 	public function singletonRow() {
 	
 		if (count($this->data) == 1)
+		
 			$this->data = $this->data[key($this->data)];
 			
 	}
@@ -109,40 +116,7 @@ abstract class Model
 		}
 		return false;
 	}	
-	
 
-	
-	/**
-	 * Set Single Result Row
-	 */
-	public function setRow($id = false, $key, $value) {
-	
-		if ($id)
-			$this->data[$id][$key] = $value;
-		else
-			$this->data[$key] = $value;
-			
-	}	
-	
-
-
-	
-	
-	/**
-	 * Get Result Array
-	 */
-	public function getResult($key = false)
-	{		
-		if ($key) {
-			if (array_key_exists($key, $this->data)) {
-				return $this->data[$key];
-			} else {
-				return false;
-			}
-		}
-		return $this->data;
-	}
-	
 	
 	/**
 	 * Sets next result row or returns false if last result is returned
@@ -177,9 +151,12 @@ abstract class Model
 	
 		if ($key) {
 		
-			if (array_key_exists($key, $this->dataRow))			
+			if (array_key_exists($key, $this->dataRow))	
+			
 				return $this->dataRow[$key];
+				
 			else
+			
 				return false;
 				
 		}

@@ -26,9 +26,6 @@ class View extends Model
 			// get class title in lowercase
 			$classTitle = strtolower(get_class($object));
 			
-			/*if ($classTitle == 'content')	
-				$classTitle = $object->getType()*/
-			
 			// store object
 			$this->data[$classTitle] = $object;
 			
@@ -51,7 +48,7 @@ class View extends Model
 		
 		//$menu->adminBuild();
 		
-		$options = new Options($this->database, $this->config);
+		$options = new mainOption($this->database, $this->config);
 		$options->select();		
 					
 		// register new objects
@@ -139,16 +136,6 @@ class View extends Model
 	}	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-
-	
-	
 	/**
 	 * pull /asset/
 	 */
@@ -184,12 +171,10 @@ class View extends Model
 		$value = preg_replace ($find, $repl, $value);
 		
 		//return the friendly str
-		return $value; 		
+		return $value; 	
+		
 	}
 	 
-	 
-
-	
 
 	public function latestTweet($user) {
 
@@ -199,25 +184,12 @@ class View extends Model
 	}
 
 
-
-
-
-
-
-
-	/*public function ccMediaUrl($ext = null) { 
-		$base = $this->getUrlBase().'cc/view/assets/';
-		return ($ext == null ? $base : $base.$ext);
-	}*/
-
-
 	public function urlTag($ext = null) { 
 		$base = $this->getUrlBase().$this->getUrl(1).'/tags/';
 		return ($ext == null ? $base : $base.$ext);
 	}
 
 
-	// Echo Logo
 	public function logoMvc() {
 
 		// logic here to add or remove a class and title="Open Homepage"

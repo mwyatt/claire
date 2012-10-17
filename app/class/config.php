@@ -105,25 +105,40 @@ class Config
 	{
 	
 		if ($_SERVER) {
-
+		
 			// Array
 			
 			$url = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 			
 			$url = parse_url($url);
-			
-			if (array_key_exists($key = 'path', $url)) {
-			
-				$url[$key] = split('[/]', $url[$key]);
-				$url[$key] = array_filter($url[$key]);
-				$url[$key] = array_values($url[$key]);
+						
+			if (array_key_exists('path', $url)) {
+
+				$scriptName = explode('/', strtolower($_SERVER['SCRIPT_NAME']));
+				array_pop($scriptName); 
+				$scriptName = array_filter($scriptName); 
+				$scriptName = array_values($scriptName);			
+				
+				$url['path'] = split('[/]', $url['path']);
+				$url['path'] = array_filter($url['path']);
+				$url['path'] = array_values($url['path']);
+				
+				foreach (array_intersect($scriptName, $url['path']) as $key => $value) {
+				
+					unset($url['path'][$key]);
+				
+				}
+				
+				$url['path'] = array_values($url['path']);		
 				
 			}		
 				
-			if (array_key_exists($key = 'query', $url))
-				$url[$key] = split('[;&]', $url[$key]);
+			if (array_key_exists('query', $url))
+				$url['query'] = split('[;&]', $url['query']);
 			
 			$this->url = $url;
+			
+
 			
 			// Base
 			

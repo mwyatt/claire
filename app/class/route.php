@@ -11,14 +11,14 @@ class Route extends Config
 	
 	public function home($path = false)
 	{		
-		header("Location: " . $this->getUrlBase() . $path);
+		header("Location: " . $this->getObject('config')->getUrl('base') . $path);
 		exit;
 	}
 	
 	
 	public function homeAdmin($path = false)
 	{		
-		header("Location: " . $this->getUrlBase() . "admin/" . $path);
+		header("Location: " . $this->getObject('config')->getUrl('base') . "admin/" . $path);
 		exit;
 	}		
 	

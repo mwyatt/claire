@@ -6,7 +6,7 @@
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */ 			
-class Options extends Model
+class MainOption extends Model
 {	
 
 
@@ -22,23 +22,21 @@ class Options extends Model
 	
 
 	/**
-	 * Selects entire Options table
-	 * @return result or false
 	 */	
 	public function select()
 	{		
 	
-		// Query
-		$STH = $this->database->dbh->query("	
+		$sth = $this->database->dbh->query("	
 			SELECT
 				name, value
 			FROM
-				options
+				main_option
 		");
 		
-		// Process Result Rows
-		while ($row = $STH->fetch(PDO::FETCH_ASSOC)) {			
-			$this->setRow(false, $row['name'], $row['value']);
+		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {	
+		
+			$this->data[$row['name']] = $row['value'];
+	
 		}			
 		
 		return $this;

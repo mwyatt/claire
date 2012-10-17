@@ -53,14 +53,7 @@ $config
 $route = new Route();
 $route
 	->setObject(array($config));
-
 	
-$fixture = new Fixture($database, $config);
-echo '<pre>';
-print_r ($fixture->select());
-echo '</pre>';
-exit;
-
 			
 // Install
 // =============================================================================

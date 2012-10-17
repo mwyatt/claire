@@ -68,7 +68,7 @@ if ($config->getUrl(1)) {
 	
 //$view->loadCached('home');
 	
-$posts = new Content($database, $config, 'post');
+$posts = new MainContent($database, $config);
 $posts->select(5);	
 
 //$ads = new Ads($database->dbh);

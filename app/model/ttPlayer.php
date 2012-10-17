@@ -10,124 +10,49 @@
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Fixture extends Model
-{
-
-	public static $matchGrid = array(
-		1 => array(1, 2)
-		, 2 => array(3, 1)
-		, 3 => array(2, 3)
-		, 4 => array(3, 2)
-		, 5 => array(1, 3)
-		, 6 => array(3, 3)
-		, 7 => array(2, 2)
-		, 8 => array(1, 1)
-	);
+class ttPlayer extends Model
+{	
 	
+	/* Create
+	========================================================================= */
 	
 	/**
-	 * generates each fixture seperated by division
-	 * teams must not change division beyond this point
+	 * create a new record
 	 */
-	public function generate() {
+	public function create($_POST) {
 		
-		$sth = $this->database->dbh->query("	
-			SELECT
-				tt_division.id as division_id
-				, tt_team.id as team_id
-			FROM
-				tt_division				
-			LEFT JOIN tt_team ON tt_division.id = tt_team.division_id
-		");
-		
-		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {	
-		
-			$this->data[$row['division_id']][] = $row['team_id'];
-	
-		}						
-				
 		$sth = $this->database->dbh->prepare("
 			INSERT INTO
-				tt_fixture
-				(home_team_id, away_team_id)
+				tt_player
+				(first_name, last_name, rank, team_id)
 			VALUES
-				(:home_team_id, :home_team_id)
+				(:first_name, :last_name, :rank, :team_id)
 		");				
-				
-		// loop to set team vs team fixtures
-		foreach ($this->data as $division) {
 		
-			foreach ($division as $key => $homeTeam) {
-			
-				foreach ($division as $key => $awayTeam) {
+		$sth->execute(array(
+			':first_name' => $firstName
+			, ':last_name' => $lastName
+			, ':rank' => $rank
+			, ':team_id' => $teamId
+		));		
 		
-					if ($homeTeam !== $awayTeam) {
-					
-					echo $homeTeam . ' vs ';
-					echo $awayTeam . '<br>';
-					
-						$sth->execute(array(
-							':home_team_id' => $homeTeam,
-							':away_team_id' => $awayTeam
-						));					
-					
-					}
-		
-				}
-			}
-		
-		}	
+		return $sth->rowCount();
 		
 	}
 	
 	
-	public function fill() {
-		echo self::$matchGrid;
-	}
-
+	/* Read
+	========================================================================= */
 	
-	/**
-	 * 
-	 */
-	public function select()
-	{	
-	
-		$sth = $this->database->dbh->query("	
-			SELECT
-				tt_division.id AS division_id
-				, tt_team.id AS team_id
-				, tt_team.name AS team_name
-				, tt_player.id AS player_id
-				, tt_player.first_name AS player_first_name
-				, tt_player.last_name AS player_last_name
-			FROM
-				tt_division
-			LEFT JOIN tt_team ON tt_team.division_id = tt_division.id
-			LEFT JOIN tt_player ON tt_player.team_id = tt_team.id
-		");
-		
-		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {	
-		
-			$this->data[$row['division_id']][$row['team_name']][$row['player_id']]['full_name'] = $row['player_first_name'] . ' ' . $row['player_last_name'];
-	
-		}	
-		
-echo '<pre>';
-print_r ($this->data);
-echo '</pre>';		
-exit;
-
-
-	}
-	
+	/* Update
+	========================================================================= */
 	
 	public function updateRank($homeRankChange, $awayRankChange) {
 	
 		echo $homeRankChange;
 		echo $awayRankChange;
 	
-	}
-	
+	}	
 	
 	/**
 	 * finds out what ranking bracket the victory falls into and awards points
@@ -363,6 +288,37 @@ exit;
 	}*/
 	
 	
+	}	
+	
+	/* Delete
+	========================================================================= */
+
+	/**
+	 *
+	 */
+	public function delete($id)
+	{	
+	
+		$sth = $this->database->dbh->query("
+			DELETE FROM
+				tt_player
+			WHERE
+				id = '$id'		
+		");
+		
+		return $sth->rowCount();
+		
 	}
+	
+	
+		
+	
+
+	
+	
+
+	
+	
+
 	
 }
