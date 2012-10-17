@@ -55,8 +55,9 @@ $route
 	->setObject(array($config));
 
 	
+$fixture = new Fixture($database, $config);
 echo '<pre>';
-print_r ($config->getUrl(0)	);
+print_r ($fixture->select());
 echo '</pre>';
 exit;
 

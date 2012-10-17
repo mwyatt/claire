@@ -29,6 +29,22 @@ abstract class Model
 	
 	
 	/**
+	 * Get Data
+	 */
+	public function getData($key = false)
+	{		
+		if ($key) {
+			if (array_key_exists($key, $this->data)) {
+				return $this->data[$key];
+			} else {
+				return false;
+			}
+		}
+		return $this->data;
+	}	
+	
+	
+	/**
 	 * Set Result Array
 	 */
 	public function setResult($value)
@@ -109,6 +125,9 @@ abstract class Model
 	}	
 	
 
+
+	
+	
 	/**
 	 * Get Result Array
 	 */
