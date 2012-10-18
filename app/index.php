@@ -21,9 +21,9 @@ $view = new View($database, $config);
 // Controller
 // =============================================================================
 
-if ($config->getUrl(1)) {
+if ($config->getUrl(0)) {
 
-	$path = BASE_PATH . 'app/controller/' . $config->getUrl(1) . '.php';
+	$path = BASE_PATH . 'app/controller/' . $config->getUrl(0) . '.php';
 
 	if (is_file($path))
 		require_once($path);
@@ -34,13 +34,13 @@ if ($config->getUrl(1)) {
 // Content Page
 // =============================================================================
 
-if ($config->getUrl(1) && !$config->getUrl(2)) {
+if ($config->getUrl(0) && !$config->getUrl(1)) {
 /*
 	// Objects
 	$content = new Content($database->dbh);	
 	
 	// Objects Methods
-	if ($content->selectTitle($config->getUrl(1), 1)) {
+	if ($content->selectTitle($config->getUrl(0), 1)) {
 	
 		$content->setAttached('300x160');
 	
@@ -54,7 +54,7 @@ if ($config->getUrl(1) && !$config->getUrl(2)) {
 // 404 Page
 // =============================================================================
 
-if ($config->getUrl(1)) {
+if ($config->getUrl(0)) {
 	
 	// Redirect
 	header('HTTP/1.0 404 Not Found');

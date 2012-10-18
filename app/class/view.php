@@ -14,26 +14,6 @@ class View extends Model
 {
 
 	public $template;
-
-	
-	/**
-	 * register new objects here and add to the collection
-	 */	
-	public function registerObjects($objects) {
-	
-		foreach ($objects as $object) :
-		
-			// get class title in lowercase
-			$classTitle = strtolower(get_class($object));
-			
-			// store object
-			$this->data[$classTitle] = $object;
-			
-		endforeach;
-		
-		return $this;
-		
-	}
 	
 	
 	/**
@@ -41,20 +21,18 @@ class View extends Model
 	 */	
 	public function header() {
 	
-		$user = new User($this->database, $this->config);
+		$user = new MainUser($this->database, $this->config);
 	
-		// initiate main menu
-		$menu = new Menu($this->database, $this->config);
+		// initiate menu
+		$menu = new MainMenu($this->database, $this->config);
 		
 		//$menu->adminBuild();
 		
-		$options = new mainOption($this->database, $this->config);
-		$options->select();		
-					
-		// register new objects
-		$this->registerObjects(array($options, $menu));
+		$option = new MainOption($this->database, $this->config);
+		$option->select();		
 		
-
+		// register new objects
+		$this->setObject(array($option, $menu));
 		
 	}
 
@@ -73,14 +51,18 @@ class View extends Model
 		$this->header();
 	
 		// push objects to method scope
-		foreach ($this->data as $title => $object) :
+		foreach ($this->objects as $title => $object) :
 		
+			echo 'var $' . $title . ' set' . '<br>';
+			
 			$$title = $object;
 		
 		endforeach;
 	
 		// start buffer
 		ob_start();	
+		
+		echo 'requiring template' . $path;
 
 		// include template
 		require_once($path);
@@ -120,10 +102,16 @@ class View extends Model
 	
 	
 	/**
+	 */	
+	public function dirView() { 
+		return BASE_PATH . 'app/view/';
+	}	
+	
+	/**
 	 * return base url
 	 */	
 	public function urlHome() { 
-		return $this->config->getUrlBase();
+		return $this->config->getUrl('base');
 	}	
 	
 	
@@ -132,7 +120,7 @@ class View extends Model
 	 */
 	public function urlCurrent($ext = null) {
 		$url = implode('/', $this->config->getUrl()).'/';
-		return $this->config->getUrlBase() . $url;
+		return $this->config->getUrl('base') . $url;
 	}	
 	
 	
@@ -140,7 +128,7 @@ class View extends Model
 	 * pull /asset/
 	 */
 	public function asset($ext = null) { 
-		$base = $this->getUrlBase().'asset/';
+		$base = $this->getUrl('base').'asset/';
 		return ($ext == null ? $base : $base.$ext);
 	}
 	
@@ -149,7 +137,7 @@ class View extends Model
 	 * pull /image/
 	 */
 	public function image($ext = null) { 
-		$base = $this->getUrlBase().'image/';
+		$base = $this->getUrl('base').'image/';
 		return ($ext == null ? $base : $base.$ext);
 	}
 	
@@ -185,7 +173,7 @@ class View extends Model
 
 
 	public function urlTag($ext = null) { 
-		$base = $this->getUrlBase().$this->getUrl(1).'/tags/';
+		$base = $this->getUrl('base').$this->getUrl(1).'/tags/';
 		return ($ext == null ? $base : $base.$ext);
 	}
 

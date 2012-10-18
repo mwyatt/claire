@@ -10,7 +10,7 @@
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Menu extends Model
+class MainMenu extends Model
 {
 
 	public $type;
@@ -87,7 +87,7 @@ class Menu extends Model
 				$class = '';
 				$class .= 'class="';
 				$class .= 'id_'.$result['id'].' ';
-				$class .= ($this->config->getUrl(1) == $result['title'] ? ' current' : false);
+				$class .= ($this->config->getUrl(0) == $result['title'] ? ' current' : false);
 				$class .= '"';
 				
 				// Append List Item
@@ -135,14 +135,14 @@ class Menu extends Model
 	
 		$i = 0;
 		
-		$dir = 'app/controller/' . $this->config->getUrl(1). '/'; // set dir
+		$dir = 'app/controller/' . $this->config->getUrl(0). '/'; // set dir
 		
 		if ($dirHandle = opendir($dir)) { // find controllers
 		
 			$html = '<ol class="ccMenu">';
 			
-			$url = $this->config->getUrlBase() . $this->config->getUrl(1). '/';
-			$current = ($this->config->getUrl(2) ? false : ' class="current"');
+			$url = $this->config->getUrl('base') . $this->config->getUrl(0). '/';
+			$current = ($this->config->getUrl(1) ? false : ' class="current"');
 			
 			$html .= '<li'.$current.'><div><a href="'.$url.'">Dashboard</a></div></li>';
 					
@@ -152,11 +152,11 @@ class Menu extends Model
 				
 					$title = str_replace ('.php', '', $file);
 					
-					$url = $this->config->getUrlBase() . $this->config->getUrl(1) . '/' . $title . '/';
+					$url = $this->config->getUrl('base') . $this->config->getUrl(0) . '/' . $title . '/';
 					
 					//$icon = (file_exists($dir.'/'.$file.'/assets/img/cms_icon.png') ? $dir.'/'.$file.'/cms_icon.png' : 'assets/img/32x32.gif'); // needs work
 					
-					$current = ($this->config->getUrl(2) == $file ? ' class="current"' : false);
+					$current = ($this->config->getUrl(1) == $file ? ' class="current"' : false);
 					
 					$html .= '<li'.$current.'><div><a href="'.$url.'">'.$title.'</a></div></li>';
 		
@@ -193,7 +193,7 @@ class Menu extends Model
 								$this->items[$rootKey]['subNav'][$i]['path'] = $dir.$file;
 								$file = preg_replace('/[.$](php)+/', '', $file); // remove .php
 								$this->items[$rootKey]['subNav'][$i]['name'] = $file;
-								if ($this->config->getUrl(3) == $file) {
+								if ($this->config->getUrl(2) == $file) {
 									$this->items[$rootKey]['subNav'][$i]['current'] = true;
 								}								
 								$i++;

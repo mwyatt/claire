@@ -10,7 +10,7 @@
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class User extends Model
+class MainUser extends Model
 {
 
 	public $email;
@@ -43,7 +43,7 @@ class User extends Model
 	public function insertMeta($user_id)
 	{	
 		$sth = $this->database->dbh->prepare("
-			INSERT INTO user_meta
+			INSERT INTO main_user_meta
 				(user_id, name, value)
 			values
 				('$user_id', :name, :value)
@@ -146,7 +146,7 @@ class User extends Model
 		
 		$this->parseRows($sth);
 		
-		if ($this->getResult()) {
+		if ($this->getData()) {
 			
 			$this->setSession();
 			return true;
@@ -189,7 +189,7 @@ class User extends Model
 	
 		unset($_SESSION['user']);
 	
-		foreach ($this->getResult() as $key => $value) {
+		foreach ($this->getData() as $key => $value) {
 		
 			$_SESSION['user'][$key] = $value;
 		
@@ -201,5 +201,16 @@ class User extends Model
 	{	
 		return $_SESSION['user'][$key];
 	}
+	
+	public function setFeedback($string)
+	{	
+	
+		$_SESSION['feedback'] = $string;
+		
+		return;
+
+	}
+	
+	
 	
 }

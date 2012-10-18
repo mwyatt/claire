@@ -7,9 +7,9 @@
 	======================================================================== -->
 
 	<meta charset="utf-8">
-	<title><?php echo $options->get('site_title'); ?></title>	
-	<meta name="description" content="<?php echo $options->get('site_description'); ?>">
-	<meta name="keywords" content="<?php echo $options->get('site_keywords'); ?>">
+	<title><?php echo $mainoption->get('site_title'); ?></title>	
+	<meta name="description" content="<?php echo $mainoption->get('site_description'); ?>">
+	<meta name="keywords" content="<?php echo $mainoption->get('site_keywords'); ?>">
 	
 	
 	<!-- Mobile Specific Metas
@@ -44,11 +44,11 @@
 		<header class="base">
 		
 			<div class="profile">
-				<a style="background: url('<?php echo $this->urlHome(); ?>media/i/cc/16.gif') 0% 50% no-repeat;" href="<?php echo $this->urlHome(); ?>" target="_blank" title="Open Homepage"><?php echo $options->get('site_title'); ?></a>
+				<a style="background: url('<?php echo $this->urlHome(); ?>media/i/cc/16.gif') 0% 50% no-repeat;" href="<?php echo $this->urlHome(); ?>" target="_blank" title="Open Homepage"><?php echo $mainoption->get('site_title'); ?></a>
 			</div>
 		
 			<div class="user">
-				<a class="name"><?php echo $user->get('first_name'); ?></a>
+				<a class="name"><?php echo $mainuser->get('first_name'); ?></a>
 				<div class="drop">
 					<ul>
 						<li><a href="<?php echo $this->urlHome(); ?>cc/profile/">Profile</a></li>
@@ -67,6 +67,6 @@
 
 <div class="container">
 	<nav class="base row">
-		<?php echo $menu->adminBuild(); ?>
+		<?php echo $mainmenu->adminBuild(); ?>
 	</nav>
 </div>

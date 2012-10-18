@@ -12,7 +12,10 @@
  */
 
  
-$user = new User($database, $config);
+$user = new MainUser($database, $config);
+
+$view->setObject(array($user));
+
 
 
 // Log Out
@@ -48,10 +51,10 @@ if (array_key_exists('form_login', $_POST)) {
 if ($user->isLogged()) {
 
 	// sub page
-	if ($config->getUrl(2)) {
+	if ($config->getUrl(1)) {
 	
-		$path = BASE_PATH . 'app/controller/' . $config->getUrl(1) . '/' . $config->getUrl(2) . '.php';
-
+		$path = BASE_PATH . 'app/controller/' . $config->getUrl(0) . '/' . $config->getUrl(1) . '.php';
+	
 		if (is_file($path))
 			require_once($path);
 		else
@@ -60,9 +63,7 @@ if ($user->isLogged()) {
 	} else {
 	
 		// view/admin/dashboard.php
-		$view
-			->registerObjects(array($user))
-			->loadTemplate('admin/dashboard');	
+		$view->loadTemplate('admin/dashboard');	
 	
 	}
 	
@@ -74,7 +75,7 @@ if ($user->isLogged()) {
 // Invalid Url
 // =============================================================================
 
-if ($config->getUrl(2))
+if ($config->getUrl(1))
 	$route->home('admin/');
 
 
@@ -82,6 +83,8 @@ if ($config->getUrl(2))
 // =============================================================================
 
 $view->loadTemplate('admin/login');
+
+//$view->loadTemplate('admin/form-new-team');
 	
 /*
 $view

@@ -165,4 +165,23 @@ abstract class Model extends Config
 		
 	}	
 	
+	
+	/**
+	 */
+	public function validatePost($_POST, $keys) {
+	
+		foreach ($keys as $key) {
+	
+			if (array_key_exists($key, $_POST)) {
+				
+				if ($_POST[$key] == false)
+					
+					echo $key;
+				
+			}
+		
+		}
+		
+	}	
+	
 }

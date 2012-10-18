@@ -10,7 +10,7 @@
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class ttPlayer extends Model
+class ttTeam extends Model
 {	
 	
 	/* Create
@@ -19,27 +19,24 @@ class ttPlayer extends Model
 	/**
 	 * create a new record
 	 */
-	public function create($_POST) {	
-		
-		if ($this->validatePost($_POST, array('first_name', 'last_name', 'rank', 'team')) == false)
+	public function create($_POST) {
 	
-			return false;
-		
+	
 		$sth = $this->database->dbh->prepare("
 			INSERT INTO
-				tt_player
-				(first_name, last_name, rank, team_id)
+				tt_team
+				(name, home_night, venue_id, division_id)
 			VALUES
-				(:first_name, :last_name, :rank, :team_id)
+				(:name, :home_night, :venue_id, :division_id)
 		");				
 		
 		$sth->execute(array(
-			':first_name' => $_POST['first_name']
-			, ':last_name' => $_POST['last_name']
-			, ':rank' => $_POST['rank']
-			, ':team_id' => $_POST['team']
+			':first_name' => $firstName
+			, ':last_name' => $lastName
+			, ':rank' => $rank
+			, ':team_id' => $teamId
 		));		
-
+		
 		return $sth->rowCount();
 		
 	}
