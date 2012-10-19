@@ -1,4 +1,4 @@
-<?php require_once($this->dirView() . 'admin/header.php'); ?>
+<?php require_once($this->pathView() . 'admin/header.php'); ?>
 
 	<?php echo $this->getFeedback(); ?>
 
@@ -22,4 +22,4 @@
 		
 	</form>
 
-<?php require_once($this->dirView() . 'admin/footer.php'); ?>
+<?php require_once($this->pathView() . 'admin/footer.php'); ?>

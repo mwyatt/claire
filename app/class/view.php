@@ -78,6 +78,7 @@ class View extends Model
 		exit;
 		
 	}		
+		
 
 	
 	/**
@@ -103,7 +104,7 @@ class View extends Model
 	
 	/**
 	 */	
-	public function dirView() { 
+	public function pathView() { 
 		return BASE_PATH . 'app/view/';
 	}	
 	

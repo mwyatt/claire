@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Fixture
+ * ttPlayer
  *
  * PHP version 5
  * 
@@ -11,10 +11,11 @@
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
 class ttPlayer extends Model
-{	
-	
+{		
+
+
 	/* Create
-	========================================================================= */
+	======================================================================== */
 	
 	/**
 	 * create a new record
@@ -46,10 +47,49 @@ class ttPlayer extends Model
 	
 	
 	/* Read
-	========================================================================= */
+	======================================================================== */
+
+	/**
+	 * must obtain all player information, with team name combined
+	 */
+	public function select()
+	{	
+	
+		$sth = $this->database->dbh->query("	
+			SELECT
+				tt_player.id AS player_id
+				, tt_player.rank AS player_rank
+				, tt_player.first_name AS player_first_name
+				, tt_player.last_name AS player_last_name
+				, tt_team.name AS team_name
+				, tt_division.name AS division_name
+			FROM
+				tt_player
+			LEFT JOIN tt_team ON tt_player.team_id = tt_team.id
+			LEFT JOIN tt_division ON tt_team.division_id = tt_division.id
+			ORDER BY
+				tt_division.id
+				, tt_team.id
+				, tt_player.rank DESC
+		");
+		
+		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {	
+		
+			$this->data[$row['player_id']] = array(
+				'player_id' => $row['player_id']
+				, 'player_name' => $row['player_first_name'] . ' ' . $row['player_last_name']
+				, 'player_rank' => $row['player_rank']
+				, 'team_name' => $row['team_name']
+				, 'division_name' => $row['division_name']
+			);
+	
+		}	
+
+	}	
+
 	
 	/* Update
-	========================================================================= */
+	======================================================================== */
 	
 	public function updateRank($homeRankChange, $awayRankChange) {
 	
@@ -295,7 +335,7 @@ class ttPlayer extends Model
 	}	
 	
 	/* Delete
-	========================================================================= */
+	======================================================================== */
 
 	/**
 	 *
@@ -314,15 +354,5 @@ class ttPlayer extends Model
 		
 	}
 	
-	
-		
-	
 
-	
-	
-
-	
-	
-
-	
 }

@@ -8,17 +8,17 @@
  */ 
 
 // Init
-// =============================================================================
+// ============================================================================
 
-$player = new ttPlayer($database, $config);
+$ttplayer = new ttPlayer($database, $config);
 
 
 // Form Submission
-// =============================================================================
+// ============================================================================
 
 if (array_key_exists('form_player_new', $_POST)) {
 	
-	if ($player->create($_POST))
+	if ($ttplayer->create($_POST))
 	
 		$user->setFeedback('Player Created Successfully');
 	
@@ -32,7 +32,7 @@ if (array_key_exists('form_player_new', $_POST)) {
 
 
 // New
-// =============================================================================
+// ============================================================================
 
 if ($config->getUrl(2) == 'new') {
 
@@ -42,7 +42,7 @@ if ($config->getUrl(2) == 'new') {
 
 
 // Sub Page
-// =============================================================================
+// ============================================================================
 
 if ($config->getUrl(3)) {
 
@@ -56,18 +56,17 @@ if ($config->getUrl(3)) {
 
 
 // Invalid Url
-// =============================================================================
+// ============================================================================
 
 if ($config->getUrl(3))
 	$route->home('admin/' . $config->getUrl(2) . '/');
 
 	
-// View: admin/posts.php
-// =============================================================================
+// View: admin/player/list.php
+// ============================================================================
 		
-$post = new Post($database, $config);
-$post->select();
+$ttplayer->select();
 
 $view
-	->registerObjects(array($user, $post))
-	->loadTemplate('admin/posts');
+	->setObject(array($user, $ttplayer))
+	->loadTemplate('admin/player/list');
