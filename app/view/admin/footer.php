@@ -3,7 +3,7 @@
 		
 		<footer class="base">
 		
-			<p>Hello Footer</p>
+			<p>Footer Since 1988</p>
 		
 		</footer>
 		
@@ -16,7 +16,7 @@
 
 <script src="<?php echo $this->urlHome(); ?>asset/script/vendor/jquery-1.8.0.min.js"></script>
 <script src="<?php echo $this->urlHome(); ?>asset/script/vendor/modernizr-2.6.1.min.js"></script>
-<script src="<?php echo $this->urlHome(); ?>asset/script/admin-script.js"></script>
+<script src="<?php echo $this->urlHome(); ?>asset/script/main.js"></script>
 
 
 <!-- TinyMCE -->

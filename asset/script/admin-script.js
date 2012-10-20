@@ -1,15 +1,3 @@
-
-/**
-  *	Script
-  *	
-  *	@package	mvc
-  *	@desc		core script package for the control centre
-  *	@author 	Martin Wyatt <martin.wyatt@gmail.com> 
-  *	@version	0.1.7
-  *	@license 	http://www.php.net/license/3_01.txt PHP License 3.01
-  */ 
-
-// temp flag
 console.log('cc-script.js');
   
 /**

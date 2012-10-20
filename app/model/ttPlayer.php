@@ -95,7 +95,7 @@ class ttPlayer extends Model
 	 */
 	public function selectMerit($division_id)
 	{	
-	// , SUM(tt_encounter.size) AS overallSize
+
 		$sth = $this->database->dbh->query("	
 			SELECT
 				tt_player.id AS player_id
@@ -103,20 +103,35 @@ class ttPlayer extends Model
 				, tt_player.first_name AS player_first_name
 				, tt_player.last_name AS player_last_name
 				, tt_team.name AS team_name
-, (tt_encounter.home_player_score + tt_encounter.away_player_score) AS total_played
+				, (SUM(tt_encounter.home_player_score) + SUM(tt_encounter.away_player_score)) AS total_played
 			FROM
 				tt_player
-			LEFT JOIN tt_team ON tt_player.team_id = tt_team.id
-			LEFT JOIN tt_division ON tt_team.division_id = tt_division.id
-			LEFT JOIN tt_encounter ON tt_encounter.home_player_id = tt_player.id
-			WHERE tt_division.id = '1'
-			AND tt_encounter.home_player_id = tt_player.id
-			AND tt_encounter.away_player_id = tt_player.id
+			LEFT JOIN
+				tt_team ON tt_player.team_id = tt_team.id
+			LEFT JOIN
+				tt_division ON tt_team.division_id = tt_division.id
+			LEFT JOIN
+				tt_encounter ON tt_encounter.home_player_id = tt_player.id
+				OR tt_encounter.away_player_id = tt_player.id
+			WHERE
+				tt_division.id = '1'
+			AND (
+				SELECT
+					(SUM(tt_encounter.home_player_score) + SUM(tt_encounter.away_player_score)) 
+				FROM
+					student_details 
+				WHERE subject= 'Science'
+				) IS NOT NULL
+
+			GROUP BY
+				tt_player.id
+			ORDER BY
+				total_played DESC
 		");
 		
 		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {	
 		
-
+liam
 
 			// $this->data[$row['player_id']] = array(
 			// 	'player_id' => $row['player_id']

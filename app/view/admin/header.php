@@ -1,10 +1,14 @@
 <!doctype html>
-<html>
+<!--[if lt IE 7 ]> <html class="ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class=""> <!--<![endif]-->
 <head>
 	
 	
 	<!-- Basic Page Title and Metas
-	======================================================================== -->
+	======================================================================= -->
 
 	<meta charset="utf-8">
 	<title><?php echo $mainoption->get('site_title'); ?></title>	
@@ -13,22 +17,20 @@
 	
 	
 	<!-- Mobile Specific Metas
-	======================================================================== -->
+	======================================================================= -->
 
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
 	
 	<!-- CSS
-	======================================================================== -->
+	======================================================================= -->
 
-	<link rel="stylesheet" href="<?php echo $this->urlHome(); ?>asset/style/skeleton.css">
-	<link rel="stylesheet" href="<?php echo $this->urlHome(); ?>asset/style/layout.css">
-	<link rel="stylesheet" href="<?php echo $this->urlHome(); ?>asset/style/admin-base.css">
+	<link rel="stylesheet" href="<?php echo $this->urlHome(); ?>asset/style/main.css">
 	
 	
 	<!-- Favicons
-	======================================================================== -->
+	======================================================================= -->
 
 	<link rel="shortcut icon" href="<?php echo $this->urlHome(); ?>media/i/fav/favicon.ico">
 	<link rel="apple-touch-icon" href="<?php echo $this->urlHome(); ?>media/i/fav/apple-touch-icon.png">
@@ -44,7 +46,7 @@
 		<header class="base">
 		
 			<div class="profile">
-				<a style="background: url('<?php echo $this->urlHome(); ?>media/i/cc/16.gif') 0% 50% no-repeat;" href="<?php echo $this->urlHome(); ?>" target="_blank" title="Open Homepage"><?php echo $mainoption->get('site_title'); ?></a>
+				<a target="_blank" title="Open Homepage"><?php echo $mainoption->get('site_title'); ?></a>
 			</div>
 		
 			<div class="user">

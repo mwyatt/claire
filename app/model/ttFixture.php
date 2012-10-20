@@ -52,9 +52,9 @@ class ttFixture extends Model
 		$sth = $this->database->dbh->prepare("
 			INSERT INTO
 				tt_fixture
-				(home_team_id, away_team_id)
+				(team_left_id, team_right_id)
 			VALUES
-				(:home_team_id, :away_team_id)
+				(:team_left_id, :team_right_id)
 		");				
 				
 		// loop to set team vs team fixtures
@@ -67,8 +67,8 @@ class ttFixture extends Model
 					if ($homeTeam !== $awayTeam) {
 										
 						$sth->execute(array(
-							':home_team_id' => $homeTeam
-							, ':away_team_id' => $awayTeam
+							':team_left_id' => $homeTeam
+							, ':team_right_id' => $awayTeam
 						));					
 					
 					}

@@ -212,12 +212,25 @@ try {
 			tt_fixture
 			(
 				id INT UNSIGNED NOT NULL AUTO_INCREMENT
-				, home_team_id INT UNSIGNED NOT NULL
-				, away_team_id INT UNSIGNED NOT NULL
+				, team_left_id INT UNSIGNED NOT NULL
+				, team_right_id INT UNSIGNED NOT NULL
 				, date_fulfilled TIMESTAMP NULL
 				, PRIMARY KEY (id)
-				, FOREIGN KEY (home_team_id) REFERENCES tt_team(id)
-				, FOREIGN KEY (away_team_id) REFERENCES tt_team(id)
+				, FOREIGN KEY (team_left_id) REFERENCES tt_team(id)
+				, FOREIGN KEY (team_right_id) REFERENCES tt_team(id)
+			)		
+	");	
+	
+	$database->dbh->query("
+		CREATE TABLE IF NOT EXISTS
+			tt_encounter_part
+			(
+				id INT UNSIGNED NOT NULL AUTO_INCREMENT
+				, player_id INT UNSIGNED
+				, player_score TINYINT UNSIGNED
+				, player_rank_change TINYINT
+				, PRIMARY KEY (id)
+				, FOREIGN KEY (player_id) REFERENCES tt_player(id)
 			)		
 	");	
 	
@@ -226,33 +239,18 @@ try {
 			tt_encounter
 			(
 				id INT UNSIGNED NOT NULL AUTO_INCREMENT
-				, home_player_id INT UNSIGNED
-				, away_player_id INT UNSIGNED
-				, home_player_score TINYINT UNSIGNED
-				, away_player_score TINYINT UNSIGNED
-				, home_rank_change TINYINT
-				, away_rank_change TINYINT
+				, part_left_id INT UNSIGNED
+				, part_right_id INT UNSIGNED
 				, fixture_id INT UNSIGNED NOT NULL
 				, PRIMARY KEY (id)
-				, FOREIGN KEY (home_player_id) REFERENCES tt_player(id)
-				, FOREIGN KEY (away_player_id) REFERENCES tt_player(id)
+				, FOREIGN KEY (part_left_id) REFERENCES tt_encounter_part(id)
+				, FOREIGN KEY (part_right_id) REFERENCES tt_encounter_part(id)
 				, FOREIGN KEY (fixture_id) REFERENCES tt_fixture(id)
 			)		
 	");	
-	
 
-	
-	/*$database->dbh->query("
-		CREATE TABLE IF NOT EXISTS
-			tt_week
-			(
-				id INT UNSIGNED NOT NULL AUTO_INCREMENT
-				, beginning TIMESTAMP
-				, PRIMARY KEY (id)
-			)		
-	");	*/
-	
-	
+
+
 	
 } catch (PDOException $e) { 
 
