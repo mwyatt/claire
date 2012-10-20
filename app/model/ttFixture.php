@@ -54,7 +54,7 @@ class ttFixture extends Model
 				tt_fixture
 				(home_team_id, away_team_id)
 			VALUES
-				(:home_team_id, :home_team_id)
+				(:home_team_id, :away_team_id)
 		");				
 				
 		// loop to set team vs team fixtures
@@ -65,13 +65,10 @@ class ttFixture extends Model
 				foreach ($division as $key => $awayTeam) {
 		
 					if ($homeTeam !== $awayTeam) {
-					
-					echo $homeTeam . ' vs ';
-					echo $awayTeam . '<br>';
-					
+										
 						$sth->execute(array(
-							':home_team_id' => $homeTeam,
-							':away_team_id' => $awayTeam
+							':home_team_id' => $homeTeam
+							, ':away_team_id' => $awayTeam
 						));					
 					
 					}
@@ -79,7 +76,9 @@ class ttFixture extends Model
 				}
 			}
 		
-		}	
+		}
+
+		echo 'All Fixtures Generated';
 		
 	}
 	

@@ -2,11 +2,11 @@
 
 try {	
 
-	$user
+	$mainuser
 		->setEmail('martin.wyatt@gmail.com')
 		->setPassword('123')
 		->insert(10);
-	$user
+	$mainuser
 		->setEmail('mike.turner@gmail.com')
 		->setPassword('223')
 		->insert(1);

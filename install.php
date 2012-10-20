@@ -29,7 +29,7 @@ if (is_file(BASE_PATH . 'installed.txt')) {
 	// try installation
 	try {	
 
-		$user = new User($database, $config);
+		$mainuser = new mainUser($database, $config);
 
 		require_once(BASE_PATH . '/install-table.php');
 		require_once(BASE_PATH . '/install-tabledata.php');

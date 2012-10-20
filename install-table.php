@@ -214,7 +214,7 @@ try {
 				id INT UNSIGNED NOT NULL AUTO_INCREMENT
 				, home_team_id INT UNSIGNED NOT NULL
 				, away_team_id INT UNSIGNED NOT NULL
-				, date_fulfilled TIMESTAMP DEFAULT NOW()
+				, date_fulfilled TIMESTAMP NULL
 				, PRIMARY KEY (id)
 				, FOREIGN KEY (home_team_id) REFERENCES tt_team(id)
 				, FOREIGN KEY (away_team_id) REFERENCES tt_team(id)
