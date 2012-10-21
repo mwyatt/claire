@@ -19,15 +19,8 @@ $ttFixture = new ttFixture($database, $config);
 
 if (array_key_exists('form_card_new', $_POST)) {
 	
-	// if ($ttDivision->create($_POST))
-	
-	// 	$user->setFeedback('Player Created Successfully');
-	
-	// else
-	
-	// 	$user->setFeedback('Error Detected, Player has not been Created');
-		
-	// $route->current();
+	$ttFixture
+		->update($_POST);
 	
 }
 

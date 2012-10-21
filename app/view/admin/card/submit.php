@@ -55,22 +55,23 @@
 			</div>
 
 			<div class="score">
-				
+
 				<?php $row = 1; ?>
 
 				<?php foreach ($parts as $part) : ?>
 
+
 				<div class="score-<?php echo $part; ?>">
 
-					<?php $name = 'encounter_' . $row . '_' . $side; ?>
+					<?php $name = 'encounter_' . (($part !== 'doubles') ? $row : $part) . '_' . $side; ?>
 
-					<label for="<?php echo $name ?>" class="">No Player Registered</label>
+					<label for="<?php echo $name ?>" class=""><?php echo (($part !== 'doubles') ? 'No Player' : ucfirst($part)); ?></label>
 
 					<input id="<?php echo $name ?>" name="<?php echo $name ?>" type="text" size="1" maxlength="1">
 
 				</div>
 
-					<?php $row ++; ?>
+					<?php (($part !== 'doubles') ? $row ++ : false); ?>
 
 				<?php endforeach; ?>
 

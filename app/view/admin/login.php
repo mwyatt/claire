@@ -12,7 +12,7 @@
 	<!-- Page Title
 	======================================================================== -->
 	
-	<title>Login to <?php echo $mainoption->get('site_title'); ?></title>	
+	<title>Login to <?php echo $mainOption->get('site_title'); ?></title>	
 		
 		
 	<!-- Meta
@@ -66,7 +66,7 @@
 
 	<div id="login">
 
-		<div class="logo"><a href="<?php echo $this->urlHome(); ?>" title="Open Homepage"><img src="<?php echo $this->urlHome(); ?>image/logo.png" alt="<?php echo $mainoption->get('site_title'); ?> Logo"></a></div>
+		<div class="logo"><a href="<?php echo $this->urlHome(); ?>" title="Open Homepage"><img src="<?php echo $this->urlHome(); ?>image/logo.png" alt="<?php echo $mainOption->get('site_title'); ?> Logo"></a></div>
 		
 		<div class="feedback"><p><?php echo $this->getFeedback(); ?></p></div>
 

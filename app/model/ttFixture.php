@@ -14,8 +14,8 @@ class ttFixture extends Model
 {
 
 	public static $encounterParts = array(
-		'left' => array(1, 3, 2, 3, 1, 2, 3, 2, 1)
-		, 'right' => array(2, 1, 3, 2, 3, 1, 3, 2, 1)
+		'left' => array(1, 3, 2, 3, 1, 'doubles', 2, 3, 2, 1)
+		, 'right' => array(2, 1, 3, 2, 3, 'doubles', 1, 3, 2, 1)
 	);
 
 	
@@ -128,7 +128,41 @@ class ttFixture extends Model
 	/* Update
 	========================================================================= */
 	
-	// update method
+	public function update($_POST) {
+
+		$sth = $this->database->dbh->query("	
+			SELECT
+				tt_fixture.id AS fixture_id
+			FROM
+				tt_fixture
+			WHERE
+				tt_fixture.team_left_id = {$_POST['team_left_id']}
+				AND
+				tt_fixture.team_right_id = {$_POST['team_right_id']}
+		");
+		
+echo '<pre>';
+print_r($sth->fetchAll(PDO::FETCH_ASSOC));
+echo '</pre>';
+exit;
+
+
+		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
+		
+			$this->data[$row['fixture_id']][$row['team_name']][$row['player_id']]['full_name'] = $row['player_first_name'] . ' ' . $row['player_last_name'];
+	
+		}
+
+
+		foreach ($_POST as $key => $value) {
+			
+
+
+		}
+
+		$matchGrid = self::$matchGrid;
+	}	
+
 	
 	/* Delete
 	========================================================================= */

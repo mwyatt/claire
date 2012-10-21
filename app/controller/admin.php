@@ -17,7 +17,6 @@ $user = new MainUser($database, $config);
 $view->setObject(array($user));
 
 
-
 // Log Out
 // =============================================================================
 
@@ -40,7 +39,7 @@ if (array_key_exists('form_login', $_POST)) {
 	if ($user->login())
 		$user->setSession();
 		
-	$route->home('admin/');
+	$Route->home('admin/');
 	
 }
 

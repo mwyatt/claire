@@ -28,6 +28,7 @@ $(document).ready(function() {
 				if (result) {
 
 					fulfill.find('.team').find('select').html(result);
+					fulfill.find('.player').find('select').html('');
 
 				} else {
 
@@ -119,37 +120,75 @@ $(document).ready(function() {
 	// input score click
 	fulfill.find('.score').find('input').click(function() {
 
-		var currentValue;
+		var currentValue, parts, index;
 
- 		currentValue = parseFloat($(this).val());
+ 		currentValue = parseInt($(this).val());
+ 		if (currentValue == NaN)
+ 			currentValue = 0;
 
-		// cursor select current input (usability)
-		$(this).select();
+		parts = $(this).prop('name').split('_');
 
-		if (currentValue)
-			$(this).val(currentValue + 1);
+		if (2 in parts) {
 
-		if (currentValue >= 3)
-			$(this).val(3);
+			if (parts[2] == 'left')
+				$('#encounter_' + parts[1] + '_right').val(3);
+			else
+				$('#encounter_' + parts[1] + '_left').val(3);
+
+		}
 
 		if (!currentValue)
-			$(this).val(1);
+			$(this).val(0);
+
+		if ((currentValue == 0) || (currentValue)) 
+			$(this).val(currentValue + 1);
+
+		if (currentValue == 2)
+			$(this).val(2);
+
+		if (currentValue > 2)
+			$(this).val(0);
+
+		// update the totals
+		updateTotal();
 
 	});
 
 	// input score change
 	fulfill.find('.score').find('input').change(function() {
 
-		var currentValue;
-
- 		currentValue = parseFloat($(this).val());
-
-		$(this).select();
-
-		if (currentValue > 3)
-			$(this).val(3);
+		return;
 
 	});
+
+	function updateTotal() {
+
+		var score, leftTotal = 0, rightTotal = 0;
+
+		fulfill.find('.left').find('.score').find('input').each(function() {
+
+	 		score = parseInt($(this).val());
+	 		if (isNaN(score))
+	 			score = 0;
+
+			leftTotal = leftTotal + score;
+
+		});
+
+		fulfill.find('.right').find('.score').find('input').each(function() {
+
+	 		score = parseInt($(this).val());
+	 		if (isNaN(score))
+	 			score = 0;
+
+			rightTotal = rightTotal + score;
+
+		});
+
+		fulfill.find('.left').find('.total').find('p').html(leftTotal);
+		fulfill.find('.right').find('.total').find('p').html(rightTotal);
+
+	}
 
 
 }); // Document Ready Function
