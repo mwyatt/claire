@@ -13,7 +13,7 @@
 // Base Path
 // ============================================================================
 
-define('BASE_PATH', (string) (__DIR__ . '/'));
+define('BASE_PATH', (string) (__DIR__ . '/../'));
 
 
 // AutoLoader

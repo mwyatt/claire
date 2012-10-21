@@ -1,37 +1,88 @@
 <?php require_once($this->pathView() . 'admin/header.php'); ?>
 
-<div class="score-submit">
+<div class="fulfill">
 	
 	<h2>Submit Scorecard</h2>
 
-	<?php if ($ttdivision->getData()) : ?>	
+	<?php if ($ttDivision->getData()) : ?>	
 
-	<form id="form-add_card" name="form_add" method="post">
+	<form class="main" method="post">
 
-		<select name="division" tabindex="1">
+		<div class="division">
 
-			<option value="0"></option>
+			<select name="division_id" tabindex="1">
 
-			<?php while ($ttdivision->nextRow()) : ?>
-		
-			<option value="<?php echo $ttdivision->getRow('division_id'); ?>"><?php echo $ttdivision->getRow('division_name'); ?></option>
+				<option value="0"></option>
 
-			<?php endwhile; ?>
+				<?php while ($ttDivision->nextRow()) : ?>
+			
+				<option value="<?php echo $ttDivision->getRow('division_id'); ?>"><?php echo $ttDivision->getRow('division_name'); ?></option>
 
-		</select>
+				<?php endwhile; ?>
 
-		<h2>Home Team</h2>
-		<h2>Away Team</h2>
-		<h3>Home Player 1</h3>
-		<h3>Home Player 2</h3>
-		<h3>Home Player 3</h3>
-		<h3>Away Player 1</h3>
-		<h3>Away Player 2</h3>
-		<h3>Away Player 3</h3>
-		<h4>9 Match Rows</h4>
-		<h2>Totals</h2>
+			</select>
 
-		<input class="" name="form_card_new" type="submit">
+		</div>
+
+		<?php foreach ($ttFixture->getEncounterParts() as $side => $parts) : ?>
+    
+		<div class="<?php echo $side; ?>">
+
+			<div class="team">
+
+				<select name="team_<?php echo $side; ?>_id">
+					<option value="0"></option>
+				</select>
+
+			</div>
+
+			<div class="player">
+
+			<?php for ($player_row = 1; $player_row <= 3; $player_row ++) { ?>
+
+				<div class="player-<?php echo $player_row; ?>">
+
+					<img src="" title="Play Up" width="16" height="16">
+
+					<select name="player_<?php echo $side . '_' . $player_row; ?>_id" tabindex="2">
+						<option value="0"></option>
+					</select>
+
+				</div>
+
+			<?php } ?>
+			
+			</div>
+
+			<div class="score">
+				
+				<?php $row = 1; ?>
+
+				<?php foreach ($parts as $part) : ?>
+
+				<div class="score-<?php echo $part; ?>">
+
+					<?php $name = 'encounter_' . $row . '_' . $side; ?>
+
+					<label for="<?php echo $name ?>" class="">No Player Registered</label>
+
+					<input id="<?php echo $name ?>" name="<?php echo $name ?>" type="text" size="1" maxlength="1">
+
+				</div>
+
+					<?php $row ++; ?>
+
+				<?php endforeach; ?>
+
+			</div>
+
+			<div class="total"><p></p></div>
+
+		</div>
+
+		<?php endforeach; ?>
+
+		<input name="form_card_new" type="submit">
 
 	</form>
 

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Fixture
+ * ttFixture
  *
  * PHP version 5
  * 
@@ -13,17 +13,11 @@
 class ttFixture extends Model
 {
 
-	public static $matchGrid = array(
-		1 => array(1, 2)
-		, 2 => array(3, 1)
-		, 3 => array(2, 3)
-		, 4 => array(3, 2)
-		, 5 => array(1, 3)
-		, 6 => array(3, 3)
-		, 7 => array(2, 2)
-		, 8 => array(1, 1)
+	public static $encounterParts = array(
+		'left' => array(1, 3, 2, 3, 1, 2, 3, 2, 1)
+		, 'right' => array(2, 1, 3, 2, 3, 1, 3, 2, 1)
 	);
-	
+
 	
 	/* Create
 	========================================================================= */
@@ -85,6 +79,17 @@ class ttFixture extends Model
 	
 	/* Read
 	========================================================================= */
+
+
+	/**
+	 * return $encounterParts for output on scoresheet
+	 */
+	public function getEncounterParts() {
+
+		return self::$encounterParts;
+
+	}
+
 	
 	/**
 	 * 

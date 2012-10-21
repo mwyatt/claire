@@ -10,7 +10,7 @@
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class MainContent extends Model
+class mainContent extends Model
 {	
 
 	/**
@@ -59,7 +59,11 @@ class MainContent extends Model
 				, main_content.date_published AS content_date_published
 				, main_content.guid AS content_guid
 				, main_content.status AS content_status
-				, main_media.id AS media_id				, main_media.title AS media_title				, main_media.description AS media_description				, main_media.title_slug AS media_title_slug				, main_media.type AS media_type
+				, main_media.id AS media_id
+				, main_media.title AS media_title
+				, main_media.description AS media_description
+				, main_media.title_slug AS media_title_slug
+				, main_media.type AS media_type
 				, main_user_meta.name AS user_meta_name
 				, main_user_meta.value AS user_meta_value
 				, main_content_media.position AS content_media_position

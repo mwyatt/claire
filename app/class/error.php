@@ -36,7 +36,7 @@ class Error
 				$error['Line: ' . $errorLine]['Message'] = $errorString;
 				$error['Line: ' . $errorLine]['File'] = $errorFile;
 				
-				echo '<pre>';
+				// echo '<pre>';
 				switch ($errorType) {
 					case 2:
 						print_r ($error);
@@ -57,7 +57,7 @@ class Error
 						print_r ($error);
 						break;	
 				}
-				echo '</pre>';
+				// echo '</pre>';
 				break;
 		}	
     }

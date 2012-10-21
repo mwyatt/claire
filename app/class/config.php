@@ -46,7 +46,7 @@ class Config
 	
 		foreach ($objects as $object) {
 		
-			$classTitle = strtolower(get_class($object));
+			$classTitle = get_class($object);
 			
 			$this->objects[$classTitle] = $object;
 			

@@ -10,7 +10,8 @@
 // Init
 // ============================================================================
 
-$ttdivision = new ttDivision($database, $config);
+$ttDivision = new ttDivision($database, $config);
+$ttFixture = new ttFixture($database, $config);
 
 
 // Form Submission
@@ -18,7 +19,7 @@ $ttdivision = new ttDivision($database, $config);
 
 if (array_key_exists('form_card_new', $_POST)) {
 	
-	// if ($ttdivision->create($_POST))
+	// if ($ttDivision->create($_POST))
 	
 	// 	$user->setFeedback('Player Created Successfully');
 	
@@ -41,8 +42,8 @@ if ($config->getUrl(3))
 // View: admin/card/submit.php
 // ============================================================================
 		
-$ttdivision->select();
+$ttDivision->select();
 
 $view
-	->setObject(array($user, $ttdivision))
+	->setObject(array($user, $ttDivision, $ttFixture))
 	->loadTemplate('admin/card/submit');

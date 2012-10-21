@@ -93,6 +93,39 @@ class ttPlayer extends Model
 	 * player name, team name, team guid, player rank, sets won, sets played
 	 * must exclude matches which have no opponent
 	 */
+	public function selectByTeam($team_id)
+	{	
+
+		$sth = $this->database->dbh->query("	
+			SELECT
+				tt_player.id AS player_id
+				, concat(tt_player.first_name, ' ', tt_player.last_name) AS player_name
+			FROM
+				tt_player
+			LEFT JOIN
+				tt_team ON tt_player.team_id = tt_team.id
+			WHERE
+				tt_team.id = '$team_id'
+			GROUP BY
+				tt_player.id
+			ORDER BY
+				tt_player.rank DESC
+		");
+		
+		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {	
+		
+			$this->data[$row['player_id']] = $row;
+	
+		}	
+
+	}	
+
+
+	/**
+	 * all data required to display the merit table
+	 * player name, team name, team guid, player rank, sets won, sets played
+	 * must exclude matches which have no opponent
+	 */
 	public function selectMerit($division_id)
 	{	
 
@@ -129,10 +162,8 @@ class ttPlayer extends Model
 				total_played DESC
 		");
 		
-		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {	
+//		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {	
 		
-liam
-
 			// $this->data[$row['player_id']] = array(
 			// 	'player_id' => $row['player_id']
 			// 	, 'player_name' => $row['player_first_name'] . ' ' . $row['player_last_name']
@@ -141,7 +172,7 @@ liam
 			// 	, 'division_name' => $row['division_name']
 			// );
 	
-		}	
+//		}	
 
 	}	
 

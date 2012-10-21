@@ -11,9 +11,9 @@
 	======================================================================= -->
 
 	<meta charset="utf-8">
-	<title><?php echo $mainoption->get('site_title'); ?></title>	
-	<meta name="description" content="<?php echo $mainoption->get('site_description'); ?>">
-	<meta name="keywords" content="<?php echo $mainoption->get('site_keywords'); ?>">
+	<title><?php echo $mainOption->get('site_title'); ?></title>	
+	<meta name="description" content="<?php echo $mainOption->get('site_description'); ?>">
+	<meta name="keywords" content="<?php echo $mainOption->get('site_keywords'); ?>">
 	
 	
 	<!-- Mobile Specific Metas
@@ -46,11 +46,11 @@
 		<header class="base">
 		
 			<div class="profile">
-				<a target="_blank" title="Open Homepage"><?php echo $mainoption->get('site_title'); ?></a>
+				<a target="_blank" title="Open Homepage"><?php echo $mainOption->get('site_title'); ?></a>
 			</div>
 		
 			<div class="user">
-				<a class="name"><?php echo $mainuser->get('first_name'); ?></a>
+				<a class="name"><?php echo $mainUser->get('first_name'); ?></a>
 				<div class="drop">
 					<ul>
 						<li><a href="<?php echo $this->urlHome(); ?>cc/profile/">Profile</a></li>
@@ -69,6 +69,6 @@
 
 <div class="container">
 	<nav class="base row">
-		<?php echo $mainmenu->adminBuild(); ?>
+		<?php echo $mainMenu->adminBuild(); ?>
 	</nav>
 </div>

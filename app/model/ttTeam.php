@@ -46,6 +46,32 @@ class ttTeam extends Model
 	======================================================================== */
 
 	/**
+	 * all teams divided by division
+	 */
+	public function selectByDivision($division_id)
+	{	
+	
+		$sth = $this->database->dbh->query("	
+			SELECT
+				tt_team.id AS team_id
+				, tt_team.name AS team_name
+			FROM
+				tt_team
+			LEFT JOIN tt_division ON tt_team.division_id = tt_division.id
+			WHERE tt_division.id = '$division_id'
+			ORDER BY tt_team.id
+		");
+		
+		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {	
+		
+			$this->data[$row['team_id']] = $row;
+	
+		}	
+
+	}	
+
+	
+	/**
 	 * all team information with player count
 	 */
 	public function select()
@@ -79,7 +105,7 @@ class ttTeam extends Model
 		// 		, 'division_name' => $row['division_name']
 		// 	);
 	
-		}	
+		//}	
 
 	}	
 	
