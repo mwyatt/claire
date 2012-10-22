@@ -128,11 +128,34 @@ class ttFixture extends Model
 	/* Update
 	========================================================================= */
 	
+	/**
+	 * updates a fixture and fills scorecard information
+	 * the objectives are:
+	 * 		fill the encounter parts table with 2 rows
+	 * 		update the encounter table with the 2 ids
+	 * 		update the fixture date filled
+	 *
+	 * need to build some kind of array to store all the results information
+	 * this way the tt_encounter table can be updated with correct id's
+	 *
+	 * build up array so then x vs x can be directly compared, needed for rank
+	 * comparison and other things
+	 *
+	 * possible to have POST sent in as array for the encounter scores?
+	 * 
+	 * @param  array $_POST 
+	 * @return true || false
+	 */
 	public function update($_POST) {
 
-		$sth = $this->database->dbh->query("	
+		if (!$_POST['division_id'] || !$_POST['team_left_id'] || !$_POST['team_right_id'])
+				return false;
+
+		$sthFixture = $this->database->dbh->query("	
 			SELECT
-				tt_fixture.id AS fixture_id
+				tt_fixture.id AS id
+				, tt_fixture.team_left_id AS team_left_id
+				, tt_fixture.team_right_id AS team_right_id
 			FROM
 				tt_fixture
 			WHERE
@@ -140,42 +163,117 @@ class ttFixture extends Model
 				AND
 				tt_fixture.team_right_id = {$_POST['team_right_id']}
 		");
-		
-echo '<pre>';
-print_r($sth->fetchAll(PDO::FETCH_ASSOC));
-echo '</pre>';
-exit;
+
+		$fixtureId = $sthFixture->fetch(PDO::FETCH_ASSOC);
+		$fixtureId = $fixture['id'];
+
+		$sthEncounter = $this->database->dbh->prepare("
+			INSERT INTO
+				tt_encounter
+				(part_left_id, part_right_id, fixture_id)
+			VALUES
+				(:part_left_id, :part_right_id, '$fixtureId')
+		");
+
+		$sthEncounterPart = $this->database->dbh->prepare("
+			INSERT INTO
+				tt_encounter_part
+				(player_id, player_score)
+			VALUES
+				(:player_id, :player_score)
+		");
+
+		foreach ($this->getEncounterParts() as $side => $parts) {
+
+			$encounter = 1;
+
+			foreach ($parts as $part) {
+
+				$playerKey = 'player_' . $side . '_' . $part . '_id';
+				$encounterKey = 'encounter_' . $part . '_' . $side;
 
 
-		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
-		
-			$this->data[$row['fixture_id']][$row['team_name']][$row['player_id']]['full_name'] = $row['player_first_name'] . ' ' . $row['player_last_name'];
-	
+
+				if (array_key_exists($playerKey, $_POST)) {
+
+					if (array_key_exists($encounterKey, $_POST)) {
+
+						$sthEncounterPart->execute(array(
+							':player_id' => $_POST[$playerKey]
+							, ':player_score' => $_POST[$encounterKey]
+						));					
+
+						/**
+						 * must calculate player rank change here
+						 */
+
+						$currentPartId = $this->database->dbh->lastInsertId();
+						
+						$encounters[$side][] = $currentPartId;
+
+						
+
+
+						$encounter ++;
+
+					}
+
+				} elseif ($part == 'doubles') {
+					
+					$playerKey = 0;
+					$encounterKey = 'encounter_' . $part . '_' . $side;
+
+					$sth->execute(array(
+						':player_id' => $playerKey
+						, ':player_score' => $_POST[$encounterKey]
+					));					
+
+					$encounter ++;
+
+				}
+
+			}
+
 		}
 
+		exit;
 
-		foreach ($_POST as $key => $value) {
-			
-
-
-		}
-
-		$matchGrid = self::$matchGrid;
 	}	
+
+
+/*$_POST['player_left_1_id']
+$_POST['player_left_2_id']
+$_POST['player_left_3_id']
+$_POST['player_right_1_id']
+$_POST['player_right_2_id']
+$_POST['player_right_3_id']
+
+$_POST['encounter_1_left']
+$_POST['encounter_2_left']
+$_POST['encounter_3_left']
+$_POST['encounter_4_left']
+$_POST['encounter_5_left']
+$_POST['encounter_doubles_left']
+$_POST['encounter_6_left']
+$_POST['encounter_7_left']
+$_POST['encounter_8_left']
+$_POST['encounter_9_left']
+$_POST['encounter_1_right']
+$_POST['encounter_2_right']
+$_POST['encounter_3_right']
+$_POST['encounter_4_right']
+$_POST['encounter_5_right']
+$_POST['encounter_doubles_right']
+$_POST['encounter_6_right']
+$_POST['encounter_7_right']
+$_POST['encounter_8_right']
+$_POST['encounter_9_right']*/
 
 	
 	/* Delete
 	========================================================================= */
 	
 	// reset method
-	
-	
-	public function fill() {
-		echo self::$matchGrid;
-	}
-
-	
-
 	
 	
 	public function updateRank($homeRankChange, $awayRankChange) {

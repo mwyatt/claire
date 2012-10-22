@@ -230,7 +230,6 @@ try {
 				, player_score TINYINT UNSIGNED
 				, player_rank_change TINYINT
 				, PRIMARY KEY (id)
-				, FOREIGN KEY (player_id) REFERENCES tt_player(id)
 			)		
 	");	
 	

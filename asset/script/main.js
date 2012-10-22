@@ -109,8 +109,13 @@ $(document).ready(function() {
 
 			if (1 in parts)
 				side = parts[1];
+/*
+			console.log(playerName);
 
 			// set labels
+			if (playerName)
+				$('.' + side).find('.score-' + index).find('label').html('playerName');
+			else*/
 			$('.' + side).find('.score-' + index).find('label').html(playerName);
 
 		}

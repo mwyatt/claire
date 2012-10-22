@@ -19,8 +19,7 @@ $ttFixture = new ttFixture($database, $config);
 
 if (array_key_exists('form_card_new', $_POST)) {
 	
-	$ttFixture
-		->update($_POST);
+	$ttFixture->update($_POST);
 	
 }
 
