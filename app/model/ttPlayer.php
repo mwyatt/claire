@@ -95,8 +95,8 @@ class ttPlayer extends Model
 
 		$sql = "	
 			SELECT
-				tt_player.id AS player_id
-				, tt_player.rank AS player_rank
+				tt_player.id
+				, tt_player.rank
 			FROM
 				tt_player
 		";
@@ -244,22 +244,17 @@ class ttPlayer extends Model
 	 * away player rank
 	 * you can obtain all of this via 1 select
 	 */
-	public function rankDifference() {
+	public function rankDifference($rankDifference, $playerLeft, $playerRight) {
 	
-		$rankDifference = 23;
-		
 		switch ($rankDifference) {
 		
 			case $rankDifference <= 24:
 			
-				// whos rank is greatest?
-				// is the win expected or unexpected?
-			
-				/*if ($this->getWinner())
+				if ($this->getWinner())
 					$this->updateRank(+12, -8);
 				else
 					$this->updateRank(+12, -8);
-				break;*/
+				break;
 				
 		}		
 	

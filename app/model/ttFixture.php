@@ -13,7 +13,7 @@
 class ttFixture extends Model
 {
 
-	public static $encounterParts = array(
+	public static $encounterStructure = array(
 		'left' => array(1, 3, 2, 3, 1, 'doubles', 2, 3, 2, 1)
 		, 'right' => array(2, 1, 3, 2, 3, 'doubles', 1, 3, 2, 1)
 	);
@@ -86,7 +86,7 @@ class ttFixture extends Model
 	 */
 	public function getEncounterParts() {
 
-		return self::$encounterParts;
+		return self::$encounterStructure;
 
 	}
 
@@ -155,11 +155,12 @@ class ttFixture extends Model
 
 		// fixture
 
-		$sthFixture = $this->database->dbh->query("	
+		$sth = $this->database->dbh->query("	
 			SELECT
-				tt_fixture.id AS id
-				, tt_fixture.team_left_id AS team_left_id
-				, tt_fixture.team_right_id AS team_right_id
+				tt_fixture.id
+				, tt_fixture.team_left_id
+				, tt_fixture.team_right_id
+				, tt_fixture.date_fulfilled
 			FROM
 				tt_fixture
 			WHERE
@@ -168,128 +169,102 @@ class ttFixture extends Model
 				tt_fixture.team_right_id = {$_POST['team']['right']}
 		");
 
-		if ($fixture = $sthFixture->fetch(PDO::FETCH_ASSOC))
-			$fixtureId = $fixture['id'];
+		// check for matching fixture
+
+		if ($row = $sth->fetch(PDO::FETCH_ASSOC))
+			$fixtureId = $row['id'];
 		else
+			return false;
+
+		// check for unfilled fixture
+
+		if ($row['date_fulfilled'])
 			return false;
 
 		// player
 
 		$playerIds = array_merge($_POST['player']['left'], $_POST['player']['right']);
-
 		$ttPlayer = new ttPlayer($this->database, $this->config);
 		$ttPlayer->selectById($playerIds);
 
-		
+		$encounterStructure = $this->getEncounterParts();
 
-
+		// loop
 
 		echo '<pre>';
-		print_r($playerIds);
-		print_r($_POST);
-		print_r($ttPlayer);
-		echo '</pre>';
-		exit;
-		
 
-/*
-		$sthEncounter = $this->database->dbh->prepare("
-			INSERT INTO
-				tt_encounter
-				(part_left_id, part_right_id, fixture_id)
-			VALUES
-				(:part_left_id, :part_right_id, '$fixtureId')
-		");
+		foreach ($_POST['encounter'] as $key => $score) {
 
-		$sthEncounterPart = $this->database->dbh->prepare("
-			INSERT INTO
-				tt_encounter_part
-				(player_id, player_score)
-			VALUES
-				(:player_id, :player_score)
-		");
+			// set players
 
-		foreach ($this->getEncounterParts() as $side => $parts) {
+			$playerLeft = $ttPlayer->getData($encounterStructure['left'][$key]);
+			$playerRight = $ttPlayer->getData($encounterStructure['right'][$key]);
 
-			$encounter = 1;
+			// who won?
 
-			foreach ($parts as $part) {
+			if ($score['left'] >= 3)
+				$playerLeft['winner'] = true;
+			else
+				$playerRight['winner'] = true;
 
-				$playerKey = 'player_' . $side . '_' . $part . '_id';
-				$encounterKey = 'encounter_' . $part . '_' . $side;
+			// find rank difference
 
+			if ($playerLeft && $playerRight) {
 
-
-				if (array_key_exists($playerKey, $_POST)) {
-
-					if (array_key_exists($encounterKey, $_POST)) {
-
-						$sthEncounterPart->execute(array(
-							':player_id' => $_POST[$playerKey]
-							, ':player_score' => $_POST[$encounterKey]
-						));					
-
-						$currentPartId = $this->database->dbh->lastInsertId();
-						
-						$encounters[$side][] = $currentPartId;
-
-						
-
-
-						$encounter ++;
-
-					}
-
-				} elseif ($part == 'doubles') {
-					
-					$playerKey = 0;
-					$encounterKey = 'encounter_' . $part . '_' . $side;
-
-					$sthEncounterPart->execute(array(
-						':player_id' => $playerKey
-						, ':player_score' => $_POST[$encounterKey]
-					));					
-
-					$encounter ++;
-
-				}
-
+				if ($playerLeft['rank'] > $playerRight['rank'])
+					$rankDifference = $playerLeft['rank'] - $playerRight['rank'];
+				else
+					$rankDifference = $playerRight['rank'] - $playerLeft['rank'];
+				
 			}
+
+			$rankChange = $ttPlayer->rankDifference($rankDifference, $playerLeft, $playerRight);
+
+			// $playerLeft['rank_change'] = $rankChange['left'];
+			// $playerRight['rank_change'] = $rankChange['right'];
+
+			// create encounter parts
+			// 		player id
+			// 		score
+			// 		rank change
+
+			// create encounter
+			// 		last 2 ids
+			// 		fixture id
+			
+
+			// create encounters summary
+
+			echo ' Rank difference: ' . $rankDifference . '<br>';
+
+
+
+			// echo 'key: ' . $key . '<br>';
+
+			// echo 'key: ' . $key . '<br>';
+			// echo ' encounter: ' . print_r($score) . '<br>';
+			echo ' playerLeft: ' . print_r($playerLeft) . '<br>';
+			echo ' playerRight: ' . print_r($playerRight) . '<br>';
+
+				echo '<hr>';
+
+			
+
+			// $ttPlayer->getData($encounterParts['left'][$row]);
+
+			// $encounters[$row][] = $ttPlayer->getData($encounterParts['right'][$row]);
+
+
 
 		}
 
+		// print_r($encounterParts);
+		// print_r($ttPlayer->getResult());
+		// print_r($_POST);
+		echo '</pre>';
 		exit;
-*/
+
 	}	
- 
-
-/*$_POST['player_left_1_id']
-$_POST['player_left_2_id']
-$_POST['player_left_3_id']
-$_POST['player_right_1_id']
-$_POST['player_right_2_id']
-$_POST['player_right_3_id']
-
-$_POST['encounter_1_left']
-$_POST['encounter_2_left']
-$_POST['encounter_3_left']
-$_POST['encounter_4_left']
-$_POST['encounter_5_left']
-$_POST['encounter_doubles_left']
-$_POST['encounter_6_left']
-$_POST['encounter_7_left']
-$_POST['encounter_8_left']
-$_POST['encounter_9_left']
-$_POST['encounter_1_right']
-$_POST['encounter_2_right']
-$_POST['encounter_3_right']
-$_POST['encounter_4_right']
-$_POST['encounter_5_right']
-$_POST['encounter_doubles_right']
-$_POST['encounter_6_right']
-$_POST['encounter_7_right']
-$_POST['encounter_8_right']
-$_POST['encounter_9_right']*/
 
 	
 	/* Delete
@@ -302,243 +277,6 @@ $_POST['encounter_9_right']*/
 	
 		echo $homeRankChange;
 		echo $awayRankChange;
-	
-	}
-	
-	
-	/**
-	 * finds out what ranking bracket the victory falls into and awards points
-	 * the getWinner method returns true for home and false for away
-	 * before you reach this function you must have obtained
-	 * the rank difference
-	 * home player id
-	 * home player rank
-	 * away player id
-	 * away player rank
-	 * you can obtain all of this via 1 select
-	 */
-	public function rankDifference() {
-	
-		$rankDifference = 23;
-		
-		switch ($rankDifference) {
-		
-			case $rankDifference <= 24:
-			
-				// whos rank is greatest?
-				// is the win expected or unexpected?
-			
-				/*if ($this->getWinner())
-					$this->updateRank(+12, -8);
-				else
-					$this->updateRank(+12, -8);
-				break;*/
-				
-		}		
-	
-	/*
-	function ttl_award_points( $rd, $hp_id, $hp, $hpr, $ap_id, $ap, $apr, $win ) {
-		if ( $rd <= 24 ) {
-			if ( $hpr > $apr ) { // compare rank
-				if ( $win == 'home' ) {
-					$hpr += 12; // expected
-					$apr -= 8; // expected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
-				} else {
-					$apr += 12; // unexpected
-					$hpr -= 8; // unexpected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
-				}
-			} else {
-				if ( $win == 'away' ) {
-					$apr += 12; // expected
-					$hpr -= 8; // expected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
-				} else {
-					$hpr += 12; // unexpected
-					$apr -= 8; // unexpected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
-				}
-			}
-		} elseif ( $rd <= 49 ) {
-			if ( $hpr > $apr ) { // compare rank
-				if ( $win == 'home' ) {
-					$hpr += 11; // expected
-					$apr -= 7; // expected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
-				} else {
-					$apr += 14; // unexpected
-					$hpr -= 9; // unexpected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
-				}
-			} else {
-				if ( $win == 'away' ) {
-					$apr += 11; // expected
-					$hpr -= 7; // expected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
-				} else {
-					$hpr += 14; // unexpected
-					$apr -= 9; // unexpected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
-				}
-			}
-		} elseif ( $rd <= 99 ) {
-			if ( $hpr > $apr ) { // compare rank
-				if ( $win == 'home' ) {
-					$hpr += 9; // expected
-					$apr -= 6; // expected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
-				} else {
-					$apr += 17; // unexpected
-					$hpr -= 11; // unexpected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
-				}
-			} else {
-				if ( $win == 'away' ) {
-					$apr += 9; // expected
-					$hpr -= 6; // expected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
-				} else {
-					$hpr += 17; // unexpected
-					$apr -= 11; // unexpected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
-				}
-			}
-		} elseif ( $rd <= 149 ) {
-			if ( $hpr > $apr ) { // compare rank
-				if ( $win == 'home' ) {
-					$hpr += 8; // expected
-					$apr -= 5; // expected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
-				} else {
-					$apr += 21; // unexpected
-					$hpr -= 14; // unexpected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
-				}
-			} else {
-				if ( $win == 'away' ) {
-					$apr += 8; // expected
-					$hpr -= 5; // expected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
-				} else {
-					$hpr += 21; // unexpected
-					$apr -= 14; // unexpected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
-				}
-			}
-		} elseif ( $rd <= 199 ) {
-			if ( $hpr > $apr ) { // compare rank
-				if ( $win == 'home' ) {
-					$hpr += 6; // expected
-					$apr -= 4; // expected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
-				} else {
-					$apr += 26; // unexpected
-					$hpr -= 17; // unexpected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
-				}
-			} else {
-				if ( $win == 'away' ) {
-					$apr += 6; // expected
-					$hpr -= 4; // expected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
-				} else {
-					$hpr += 26; // unexpected
-					$apr -= 17; // unexpected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
-				}
-			}
-		} elseif ( $rd <= 299 ) {
-			if ( $hpr > $apr ) { // compare rank
-				if ( $win == 'home' ) {
-					$hpr += 5; // expected
-					$apr -= 3; // expected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
-				} else {
-					$apr += 33; // unexpected
-					$hpr -= 22; // unexpected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
-				}
-			} else {
-				if ( $win == 'away' ) {
-					$apr += 5; // expected
-					$hpr -= 3; // expected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
-				} else {
-					$hpr += 33; // unexpected
-					$apr -= 22; // unexpected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
-				}
-			}
-		} elseif ( $rd <= 399 ) {
-			if ( $hpr > $apr ) { // compare rank
-				if ( $win == 'home' ) {
-					$hpr += 3; // expected
-					$apr -= 2; // expected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
-				} else {
-					$apr += 45; // unexpected
-					$hpr -= 30; // unexpected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
-				}
-			} else {
-				if ( $win == 'away' ) {
-					$apr += 3; // expected
-					$hpr -= 2; // expected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
-				} else {
-					$hpr += 45; // unexpected
-					$apr -= 30; // unexpected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
-				}
-			}
-		} elseif ( $rd <= 499 ) {
-			if ( $hpr > $apr ) { // compare rank
-				if ( $win == 'home' ) {
-					$hpr += 2; // expected
-					$apr -= 1; // expected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
-				} else {
-					$apr += 60; // unexpected
-					$hpr -= 40; // unexpected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
-				}
-			} else {
-				if ( $win == 'away' ) {
-					$apr += 2; // expected
-					$hpr -= 1; // expected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
-				} else {
-					$hpr += 60; // unexpected
-					$apr -= 40; // unexpected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
-				}
-			}
-		} elseif ( $rd >= 500 ) {
-			if ( $hpr > $apr ) { // compare rank
-				if ( $win == 'home' ) {
-					//$hpr += 0; // expected
-					//$apr -= 0; // expected
-					//ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
-				} else {
-					$apr += 75; // unexpected
-					$hpr -= 50; // unexpected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
-				}
-			} else {
-				if ( $win == 'away' ) {
-					//$apr += 0; // expected
-					//$hpr -= 0; // expected
-					//ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
-				} else {
-					$hpr += 75; // unexpected
-					$apr -= 50; // unexpected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
-				}
-			}
-		}
-	}*/
-	
 	
 	}
 	

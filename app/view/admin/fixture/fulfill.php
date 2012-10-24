@@ -67,7 +67,7 @@
 
 					<label for="<?php echo $name ?>" class=""><?php echo (($part !== 'doubles') ? 'No Player' : ucfirst($part)); ?></label>
 
-					<input id="<?php echo $name ?>" name="encounter[<?php echo ($part !== 'doubles' ? $row : $part); ?>][]" type="text" size="1" maxlength="1">
+					<input id="<?php echo $name ?>" name="encounter[<?php echo $row; ?>][<?php echo $side; ?>]" type="text" size="1" maxlength="1">
 
 				</div>
 
