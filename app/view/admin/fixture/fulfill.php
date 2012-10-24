@@ -30,7 +30,7 @@
 
 			<div class="team">
 
-				<select name="team_<?php echo $side; ?>_id">
+				<select name="team[<?php echo $side; ?>]">
 					<option value="0"></option>
 				</select>
 
@@ -44,7 +44,7 @@
 
 					<img src="" title="Play Up" width="16" height="16">
 
-					<select name="player_<?php echo $side . '_' . $player_row; ?>_id" tabindex="2">
+					<select name="player[<?php echo $side; ?>][<?php echo $player_row; ?>]" tabindex="2">
 						<option value="0"></option>
 					</select>
 
@@ -67,7 +67,7 @@
 
 					<label for="<?php echo $name ?>" class=""><?php echo (($part !== 'doubles') ? 'No Player' : ucfirst($part)); ?></label>
 
-					<input id="<?php echo $name ?>" name="<?php echo $name ?>" type="text" size="1" maxlength="1">
+					<input id="<?php echo $name ?>" name="encounter[<?php echo ($part !== 'doubles' ? $row : $part); ?>][]" type="text" size="1" maxlength="1">
 
 				</div>
 
@@ -83,7 +83,7 @@
 
 		<?php endforeach; ?>
 
-		<input name="form_card_new" type="submit">
+		<input name="form_fixture_fulfill" type="submit">
 
 	</form>
 

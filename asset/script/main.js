@@ -19,7 +19,7 @@ $(document).ready(function() {
 	// select division change
 	fulfill.find('select[name="division_id"]').change(function() {
 
-		$.post('http://localhost/mvc/ajax/admin/card.php',
+		$.post('http://localhost/mvc/ajax/admin/fixture/fulfill.php',
 			{ 
 				division_id: $(this).val()
 			},
@@ -44,13 +44,13 @@ $(document).ready(function() {
 	fulfill.find('.team').find('select').change(function() {
 
 		// calculate side
-		if ($(this).prop('name') == 'team_left_id') {
+		if ($(this).prop('name') == 'team[left]') {
 			var side = 'left';
 		} else {
 			var side = 'right';
 		}
 
-		$.post('http://localhost/mvc/ajax/admin/card.php',
+		$.post('http://localhost/mvc/ajax/admin/fixture/fulfill.php',
 			{ 
 				team_id: $(this).val()
 			},
@@ -66,7 +66,7 @@ $(document).ready(function() {
 
 						playerIndex = index + 1;
 
-						playerOptions = $('select[name="player_' + side + '_' + playerIndex + '_id"]').find('option');
+						playerOptions = $('select[name="player[' + side + '][' + playerIndex + ']"]').find('option');
 
 						playerOptions.each(function(optionIndex) {
 							if ((optionIndex) == (index + 1)) {
@@ -109,13 +109,7 @@ $(document).ready(function() {
 
 			if (1 in parts)
 				side = parts[1];
-/*
-			console.log(playerName);
 
-			// set labels
-			if (playerName)
-				$('.' + side).find('.score-' + index).find('label').html('playerName');
-			else*/
 			$('.' + side).find('.score-' + index).find('label').html(playerName);
 
 		}

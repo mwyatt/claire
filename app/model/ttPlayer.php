@@ -88,12 +88,58 @@ class ttPlayer extends Model
 	}	
 
 
+	public function selectById($id)
+	{	
+
+		// sql baseplate
+
+		$sql = "	
+			SELECT
+				tt_player.id AS player_id
+				, tt_player.rank AS player_rank
+			FROM
+				tt_player
+		";
+
+		// handle possible array
+
+		if (is_array($id)) {
+
+			$first = true;
+
+			foreach ($id as $key) {
+
+				if ($first)
+					$sql .= " WHERE ";
+				else
+					$sql .= " OR ";
+
+				$sql .= " tt_player.id = '$key' ";
+
+				$first = false;
+				
+			}
+
+		} else {
+
+			$sql .= "WHERE tt_player.id = '$id'";
+
+		}
+
+		// query database and get rows into $this->data
+
+		$sth = $this->database->dbh->query($sql);
+		$this->setDataStatement($sth);
+
+	}	
+
+
 	/**
 	 * all data required to display the merit table
 	 * player name, team name, team guid, player rank, sets won, sets played
 	 * must exclude matches which have no opponent
 	 */
-	public function selectByTeam($team_id)
+	public function selectByTeam($teamId)
 	{	
 
 		$sth = $this->database->dbh->query("	
@@ -105,7 +151,7 @@ class ttPlayer extends Model
 			LEFT JOIN
 				tt_team ON tt_player.team_id = tt_team.id
 			WHERE
-				tt_team.id = '$team_id'
+				tt_team.id = '$teamId'
 			GROUP BY
 				tt_player.id
 			ORDER BY

@@ -51,6 +51,22 @@ abstract class Model extends Config
 	
 	
 	/**
+	 * sets one result row at a time
+	 * @param object $sth 
+	 */
+	public function setDataStatement($sth)
+	{		
+	
+		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
+
+			$this->data[] = $row;
+			
+		}
+		
+	}
+	
+	
+	/**
 	 * Set data array
 	 */
 	public function setData($value)

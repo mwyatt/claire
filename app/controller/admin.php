@@ -12,9 +12,9 @@
  */
 
  
-$user = new MainUser($database, $config);
+$mainUser = new MainUser($database, $config);
 
-$view->setObject(array($user));
+$view->setObject(array($mainUser));
 
 
 // Log Out
@@ -23,7 +23,7 @@ $view->setObject(array($user));
 if (array_key_exists('logout', $_GET)) {
 	
 	// Unset user Session
-	$user->logout();
+	$mainUser->logout();
 	
 	// Redirect
 	$route->homeAdmin();
@@ -36,8 +36,8 @@ if (array_key_exists('logout', $_GET)) {
 
 if (array_key_exists('form_login', $_POST)) {
 	
-	if ($user->login())
-		$user->setSession();
+	if ($mainUser->login())
+		$mainUser->setSession();
 		
 	$Route->home('admin/');
 	
@@ -47,7 +47,7 @@ if (array_key_exists('form_login', $_POST)) {
 // Logged In
 // =============================================================================
 
-if ($user->isLogged()) {
+if ($mainUser->isLogged()) {
 
 	// sub page
 	if ($config->getUrl(1)) {
@@ -88,7 +88,7 @@ $view->loadTemplate('admin/login');
 /*
 $view
 	->registerObjects(array(
-		$user
+		$mainUser
 	))
 	->loadTemplate('admin-login');
 	*/

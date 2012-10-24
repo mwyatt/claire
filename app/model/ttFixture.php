@@ -146,10 +146,14 @@ class ttFixture extends Model
 	 * @param  array $_POST 
 	 * @return true || false
 	 */
-	public function update($_POST) {
+	public function fulfill($_POST) {
 
-		if (!$_POST['division_id'] || !$_POST['team_left_id'] || !$_POST['team_right_id'])
+		// generic validation
+
+		if (! $_POST['team'] || ! $_POST['player'] || ! $_POST['encounter'])
 				return false;
+
+		// fixture
 
 		$sthFixture = $this->database->dbh->query("	
 			SELECT
@@ -159,14 +163,36 @@ class ttFixture extends Model
 			FROM
 				tt_fixture
 			WHERE
-				tt_fixture.team_left_id = {$_POST['team_left_id']}
+				tt_fixture.team_left_id = {$_POST['team']['left']}
 				AND
-				tt_fixture.team_right_id = {$_POST['team_right_id']}
+				tt_fixture.team_right_id = {$_POST['team']['right']}
 		");
 
-		$fixtureId = $sthFixture->fetch(PDO::FETCH_ASSOC);
-		$fixtureId = $fixture['id'];
+		if ($fixture = $sthFixture->fetch(PDO::FETCH_ASSOC))
+			$fixtureId = $fixture['id'];
+		else
+			return false;
 
+		// player
+
+		$playerIds = array_merge($_POST['player']['left'], $_POST['player']['right']);
+
+		$ttPlayer = new ttPlayer($this->database, $this->config);
+		$ttPlayer->selectById($playerIds);
+
+		
+
+
+
+		echo '<pre>';
+		print_r($playerIds);
+		print_r($_POST);
+		print_r($ttPlayer);
+		echo '</pre>';
+		exit;
+		
+
+/*
 		$sthEncounter = $this->database->dbh->prepare("
 			INSERT INTO
 				tt_encounter
@@ -203,10 +229,6 @@ class ttFixture extends Model
 							, ':player_score' => $_POST[$encounterKey]
 						));					
 
-						/**
-						 * must calculate player rank change here
-						 */
-
 						$currentPartId = $this->database->dbh->lastInsertId();
 						
 						$encounters[$side][] = $currentPartId;
@@ -223,7 +245,7 @@ class ttFixture extends Model
 					$playerKey = 0;
 					$encounterKey = 'encounter_' . $part . '_' . $side;
 
-					$sth->execute(array(
+					$sthEncounterPart->execute(array(
 						':player_id' => $playerKey
 						, ':player_score' => $_POST[$encounterKey]
 					));					
@@ -237,9 +259,9 @@ class ttFixture extends Model
 		}
 
 		exit;
-
+*/
 	}	
-
+ 
 
 /*$_POST['player_left_1_id']
 $_POST['player_left_2_id']
