@@ -88,6 +88,33 @@ class ttPlayer extends Model
 	}	
 
 
+
+	public function getById($id)
+	{		
+
+		echo 'getting player: ' . $id . ' <br>';
+
+		if ($this->getData()) {
+		
+			foreach ($this->getData() as $player) {
+
+				if (array_key_exists('id', $player)) {
+
+					if ($player['id'] == $id)
+						return $player;
+
+				}
+				
+			}
+
+		}
+
+		return false;
+		
+	}	
+
+
+
 	public function selectById($id)
 	{	
 
@@ -97,6 +124,7 @@ class ttPlayer extends Model
 			SELECT
 				tt_player.id
 				, tt_player.rank
+				, concat(tt_player.first_name, ' ', tt_player.last_name) AS player_name
 			FROM
 				tt_player
 		";
@@ -216,7 +244,7 @@ class ttPlayer extends Model
 			// 	, 'player_rank' => $row['player_rank']
 			// 	, 'team_name' => $row['team_name']
 			// 	, 'division_name' => $row['division_name']
-			// );
+			//);
 	
 //		}	
 
@@ -226,11 +254,61 @@ class ttPlayer extends Model
 	/* Update
 	======================================================================== */
 	
-	public function updateRank($homeRankChange, $awayRankChange) {
-	
-		echo $homeRankChange;
-		echo $awayRankChange;
-	
+	public function updateRank($playerLeft, $playerRight) {
+
+		// add encounter parts
+
+		$sth = $this->database->dbh->prepare("
+			INSERT INTO
+				tt_encounter_part
+				(player_id, player_score, player_rank_change)
+			VALUES
+				(:player_id, :player_score, :player_rank_change)
+		");				
+		
+		$sth->execute(array(
+			':player_id' => $playerLeft['id']
+			, ':player_score' => $playerLeft['score']
+			, ':player_rank_change' => $playerLeft['rank_change']
+		));		
+
+		$encounterParts['left'] = $this->database->dbh->lastInsertId();
+
+		$sth->execute(array(
+			':player_id' => $playerRight['id']
+			, ':player_score' => $playerRight['score']
+			, ':player_rank_change' => $playerRight['rank_change']
+		));
+
+		$encounterParts['right'] = $this->database->dbh->lastInsertId();
+
+		// update player ranks
+
+		$playerLeft['new_rank'] = $playerLeft['rank'] + $playerLeft['rank_change'];
+		$playerRight['new_rank'] = $playerRight['rank'] + $playerRight['rank_change'];
+
+		// set new player ranks
+
+		$sth = $this->database->dbh->query("
+			UPDATE
+				tt_player
+			SET 
+				rank = '{$playerLeft['new_rank']}'
+			WHERE
+				id = '{$playerLeft['id']}'
+		");	
+
+		$sth = $this->database->dbh->query("
+			UPDATE
+				tt_player
+			SET 
+				rank = '{$playerRight['new_rank']}'
+			WHERE
+				id = '{$playerRight['id']}'
+		");	
+
+		return $encounterParts;
+
 	}	
 	
 	/**
@@ -244,222 +322,223 @@ class ttPlayer extends Model
 	 * away player rank
 	 * you can obtain all of this via 1 select
 	 */
-	public function rankDifference($rankDifference, $playerLeft, $playerRight) {
+	public function rankDifference($playerLeft, $playerRight) {
 	
-		switch ($rankDifference) {
-		
-			case $rankDifference <= 24:
-			
-				if ($this->getWinner())
-					$this->updateRank(+12, -8);
-				else
-					$this->updateRank(+12, -8);
-				break;
-				
-		}		
-	
-	/*
-	function ttl_award_points( $rd, $hp_id, $hp, $hpr, $ap_id, $ap, $apr, $win ) {
-		if ( $rd <= 24 ) {
-			if ( $hpr > $apr ) { // compare rank
-				if ( $win == 'home' ) {
-					$hpr += 12; // expected
-					$apr -= 8; // expected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
+		// who won?
+
+		if ($playerLeft['score'] >= 3)
+			$winner = true;
+		else
+			$winner = false;
+
+		// find rank difference
+
+		if ($playerLeft && $playerRight) {
+
+			if ($playerLeft['rank'] > $playerRight['rank'])
+				$rankDifference = $playerLeft['rank'] - $playerRight['rank'];
+			else
+				$rankDifference = $playerRight['rank'] - $playerLeft['rank'];
+
+		}
+
+		// calculate rank change
+
+		$playerLeft['rank_change'] = 0;
+		$playerRight['rank_change'] = 0;
+
+		if ($rankDifference <= 24) {
+			if ($playerLeft['rank'] > $playerRight['rank']) {
+				if ($winner == true) {
+					$playerLeft['rank_change'] += 12; // expected
+					$playerRight['rank_change'] -= 8; // expected
 				} else {
-					$apr += 12; // unexpected
-					$hpr -= 8; // unexpected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
+					$playerRight['rank_change'] += 12; // unexpected
+					$playerLeft['rank_change'] -= 8; // unexpected
 				}
 			} else {
-				if ( $win == 'away' ) {
-					$apr += 12; // expected
-					$hpr -= 8; // expected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
+				if ($winner == false) {
+					$playerRight['rank_change'] += 12; // expected
+					$playerLeft['rank_change'] -= 8; // expected
 				} else {
-					$hpr += 12; // unexpected
-					$apr -= 8; // unexpected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
+					$playerLeft['rank_change'] += 12; // unexpected
+					$playerRight['rank_change'] -= 8; // unexpected
 				}
 			}
-		} elseif ( $rd <= 49 ) {
-			if ( $hpr > $apr ) { // compare rank
-				if ( $win == 'home' ) {
-					$hpr += 11; // expected
-					$apr -= 7; // expected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
+		} elseif ($rankDifference <= 49) {
+			if ($playerLeft['rank'] > $playerRight['rank']) {
+				if ($winner == true) {
+					$playerLeft['rank_change'] += 11; // expected
+					$playerRight['rank_change'] -= 7; // expected
 				} else {
-					$apr += 14; // unexpected
-					$hpr -= 9; // unexpected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
+					$playerRight['rank_change'] += 14; // unexpected
+					$playerLeft['rank_change'] -= 9; // unexpected
 				}
 			} else {
-				if ( $win == 'away' ) {
-					$apr += 11; // expected
-					$hpr -= 7; // expected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
+				if ($winner == false) {
+					$playerRight['rank_change'] += 11; // expected
+					$playerLeft['rank_change'] -= 7; // expected
 				} else {
-					$hpr += 14; // unexpected
-					$apr -= 9; // unexpected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
+					$playerLeft['rank_change'] += 14; // unexpected
+					$playerRight['rank_change'] -= 9; // unexpected
 				}
 			}
-		} elseif ( $rd <= 99 ) {
-			if ( $hpr > $apr ) { // compare rank
-				if ( $win == 'home' ) {
-					$hpr += 9; // expected
-					$apr -= 6; // expected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
+		} elseif ($rankDifference <= 99) {
+			if ($playerLeft['rank'] > $playerRight['rank']) {
+				if ($winner == true) {
+					$playerLeft['rank_change'] += 9; // expected
+					$playerRight['rank_change'] -= 6; // expected
 				} else {
-					$apr += 17; // unexpected
-					$hpr -= 11; // unexpected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
+					$playerRight['rank_change'] += 17; // unexpected
+					$playerLeft['rank_change'] -= 11; // unexpected
 				}
 			} else {
-				if ( $win == 'away' ) {
-					$apr += 9; // expected
-					$hpr -= 6; // expected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
+				if ($winner == false) {
+					$playerRight['rank_change'] += 9; // expected
+					$playerLeft['rank_change'] -= 6; // expected
 				} else {
-					$hpr += 17; // unexpected
-					$apr -= 11; // unexpected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
+					$playerLeft['rank_change'] += 17; // unexpected
+					$playerRight['rank_change'] -= 11; // unexpected
 				}
 			}
-		} elseif ( $rd <= 149 ) {
-			if ( $hpr > $apr ) { // compare rank
-				if ( $win == 'home' ) {
-					$hpr += 8; // expected
-					$apr -= 5; // expected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
+		} elseif ($rankDifference <= 149) {
+			if ($playerLeft['rank'] > $playerRight['rank']) {
+				if ($winner == true) {
+					$playerLeft['rank_change'] += 8; // expected
+					$playerRight['rank_change'] -= 5; // expected
 				} else {
-					$apr += 21; // unexpected
-					$hpr -= 14; // unexpected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
+					$playerRight['rank_change'] += 21; // unexpected
+					$playerLeft['rank_change'] -= 14; // unexpected
 				}
 			} else {
-				if ( $win == 'away' ) {
-					$apr += 8; // expected
-					$hpr -= 5; // expected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
+				if ($winner == false) {
+					$playerRight['rank_change'] += 8; // expected
+					$playerLeft['rank_change'] -= 5; // expected
 				} else {
-					$hpr += 21; // unexpected
-					$apr -= 14; // unexpected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
+					$playerLeft['rank_change'] += 21; // unexpected
+					$playerRight['rank_change'] -= 14; // unexpected
 				}
 			}
-		} elseif ( $rd <= 199 ) {
-			if ( $hpr > $apr ) { // compare rank
-				if ( $win == 'home' ) {
-					$hpr += 6; // expected
-					$apr -= 4; // expected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
+		} elseif ($rankDifference <= 199) {
+			if ($playerLeft['rank'] > $playerRight['rank']) {
+				if ($winner == true) {
+					$playerLeft['rank_change'] += 6; // expected
+					$playerRight['rank_change'] -= 4; // expected
 				} else {
-					$apr += 26; // unexpected
-					$hpr -= 17; // unexpected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
+					$playerRight['rank_change'] += 26; // unexpected
+					$playerLeft['rank_change'] -= 17; // unexpected
 				}
 			} else {
-				if ( $win == 'away' ) {
-					$apr += 6; // expected
-					$hpr -= 4; // expected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
+				if ($winner == false) {
+					$playerRight['rank_change'] += 6; // expected
+					$playerLeft['rank_change'] -= 4; // expected
 				} else {
-					$hpr += 26; // unexpected
-					$apr -= 17; // unexpected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
+					$playerLeft['rank_change'] += 26; // unexpected
+					$playerRight['rank_change'] -= 17; // unexpected
 				}
 			}
-		} elseif ( $rd <= 299 ) {
-			if ( $hpr > $apr ) { // compare rank
-				if ( $win == 'home' ) {
-					$hpr += 5; // expected
-					$apr -= 3; // expected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
+		} elseif ($rankDifference <= 299) {
+			if ($playerLeft['rank'] > $playerRight['rank']) {
+				if ($winner == true) {
+					$playerLeft['rank_change'] += 5; // expected
+					$playerRight['rank_change'] -= 3; // expected
 				} else {
-					$apr += 33; // unexpected
-					$hpr -= 22; // unexpected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
+					$playerRight['rank_change'] += 33; // unexpected
+					$playerLeft['rank_change'] -= 22; // unexpected
 				}
 			} else {
-				if ( $win == 'away' ) {
-					$apr += 5; // expected
-					$hpr -= 3; // expected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
+				if ($winner == false) {
+					$playerRight['rank_change'] += 5; // expected
+					$playerLeft['rank_change'] -= 3; // expected
 				} else {
-					$hpr += 33; // unexpected
-					$apr -= 22; // unexpected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
+					$playerLeft['rank_change'] += 33; // unexpected
+					$playerRight['rank_change'] -= 22; // unexpected
 				}
 			}
-		} elseif ( $rd <= 399 ) {
-			if ( $hpr > $apr ) { // compare rank
-				if ( $win == 'home' ) {
-					$hpr += 3; // expected
-					$apr -= 2; // expected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
+		} elseif ($rankDifference <= 399) {
+			if ($playerLeft['rank'] > $playerRight['rank']) {
+				if ($winner == true) {
+					$playerLeft['rank_change'] += 3; // expected
+					$playerRight['rank_change'] -= 2; // expected
 				} else {
-					$apr += 45; // unexpected
-					$hpr -= 30; // unexpected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
+					$playerRight['rank_change'] += 45; // unexpected
+					$playerLeft['rank_change'] -= 30; // unexpected
 				}
 			} else {
-				if ( $win == 'away' ) {
-					$apr += 3; // expected
-					$hpr -= 2; // expected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
+				if ($winner == false) {
+					$playerRight['rank_change'] += 3; // expected
+					$playerLeft['rank_change'] -= 2; // expected
 				} else {
-					$hpr += 45; // unexpected
-					$apr -= 30; // unexpected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
+					$playerLeft['rank_change'] += 45; // unexpected
+					$playerRight['rank_change'] -= 30; // unexpected
 				}
 			}
-		} elseif ( $rd <= 499 ) {
-			if ( $hpr > $apr ) { // compare rank
-				if ( $win == 'home' ) {
-					$hpr += 2; // expected
-					$apr -= 1; // expected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
+		} elseif ($rankDifference <= 499) {
+			if ($playerLeft['rank'] > $playerRight['rank']) {
+				if ($winner == true) {
+					$playerLeft['rank_change'] += 2; // expected
+					$playerRight['rank_change'] -= 1; // expected
 				} else {
-					$apr += 60; // unexpected
-					$hpr -= 40; // unexpected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
+					$playerRight['rank_change'] += 60; // unexpected
+					$playerLeft['rank_change'] -= 40; // unexpected
 				}
 			} else {
-				if ( $win == 'away' ) {
-					$apr += 2; // expected
-					$hpr -= 1; // expected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
+				if ($winner == false) {
+					$playerRight['rank_change'] += 2; // expected
+					$playerLeft['rank_change'] -= 1; // expected
 				} else {
-					$hpr += 60; // unexpected
-					$apr -= 40; // unexpected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
+					$playerLeft['rank_change'] += 60; // unexpected
+					$playerRight['rank_change'] -= 40; // unexpected
 				}
 			}
-		} elseif ( $rd >= 500 ) {
-			if ( $hpr > $apr ) { // compare rank
-				if ( $win == 'home' ) {
-					//$hpr += 0; // expected
-					//$apr -= 0; // expected
-					//ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
+		} elseif ($rankDifference >= 500) {
+			if ($playerLeft['rank'] > $playerRight['rank']) {
+				if ($winner == true) {
+					//$playerLeft['rank_change'] += 0; // expected
+					//$playerRight['rank_change'] -= 0; // expected
 				} else {
-					$apr += 75; // unexpected
-					$hpr -= 50; // unexpected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
+					$playerRight['rank_change'] += 75; // unexpected
+					$playerLeft['rank_change'] -= 50; // unexpected
 				}
 			} else {
-				if ( $win == 'away' ) {
-					//$apr += 0; // expected
-					//$hpr -= 0; // expected
-					//ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
+				if ($winner == false) {
+					//$playerRight['rank_change'] += 0; // expected
+					//$playerLeft['rank_change'] -= 0; // expected
 				} else {
-					$hpr += 75; // unexpected
-					$apr -= 50; // unexpected
-					ttl_update_rank( $hp_id, $hp, $hpr, $ap_id, $ap, $apr );
+					$playerLeft['rank_change'] += 75; // unexpected
+					$playerRight['rank_change'] -= 50; // unexpected
 				}
 			}
 		}
-	}*/
+
+		// update ranks
+
+		$encounterParts = $this->updateRank($playerLeft, $playerRight);
+
+		return $encounterParts;
+/*
+		switch ($rankDifference) {
+
+			case $rankDifference <= 24:
+				if ($winner)
+					$rankChange = array(+12, -8);
+				else
+					$rankChange = array(-8, +12);
+				break;
+			case $rankDifference <= 24:
+				if ($winner)
+					$rankChange = array(+12, -8);
+				else
+					$rankChange = array(-8, +12);
+				break;
+
+				
+		}		
+*/
+	
+	/*
+	function ttl_award_points($rd, $hp_id, $hp, $playerLeft['rank'], $ap_id, $ap, $playerRight['rank'], $win) {
+*/
 	
 	
 	}	

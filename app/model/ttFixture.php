@@ -195,73 +195,84 @@ class ttFixture extends Model
 
 		foreach ($_POST['encounter'] as $key => $score) {
 
-			// set players
+			$key = $key - 1;
 
-			$playerLeft = $ttPlayer->getData($encounterStructure['left'][$key]);
-			$playerRight = $ttPlayer->getData($encounterStructure['right'][$key]);
+			// doubles?
 
-			// who won?
+			if ($key == 5) {
 
-			if ($score['left'] >= 3)
-				$playerLeft['winner'] = true;
-			else
-				$playerRight['winner'] = true;
+				$doubles = true;
 
-			// find rank difference
+				$playerLeft['name'] = 'doubles';
+				$playerRight['name'] = 'doubles';
 
-			if ($playerLeft && $playerRight) {
+			} else {
 
-				if ($playerLeft['rank'] > $playerRight['rank'])
-					$rankDifference = $playerLeft['rank'] - $playerRight['rank'];
-				else
-					$rankDifference = $playerRight['rank'] - $playerLeft['rank'];
-				
+				$doubles = false;
+
+				$playerLeft = $ttPlayer->getById(
+					$_POST['player']['left'][$encounterStructure['left'][$key]]
+				);
+
+
+				$playerRight = $ttPlayer->getById(
+					$_POST['player']['right'][$encounterStructure['right'][$key]]
+				);
+
+				$playerRight['score'] = $score['right'];
+
 			}
 
-			$rankChange = $ttPlayer->rankDifference($rankDifference, $playerLeft, $playerRight);
+			$playerLeft['fixture_id'] = $fixtureId;
+			$playerRight['fixture_id'] = $fixtureId;
+			$playerLeft['score'] = $score['left'];
+			$playerRight['score'] = $score['right'];
 
-			// $playerLeft['rank_change'] = $rankChange['left'];
-			// $playerRight['rank_change'] = $rankChange['right'];
-
-			// create encounter parts
-			// 		player id
-			// 		score
-			// 		rank change
+			$encounterParts = $ttPlayer->rankDifference($playerLeft, $playerRight);
 
 			// create encounter
-			// 		last 2 ids
-			// 		fixture id
 			
-
-			// create encounters summary
-
-			echo ' Rank difference: ' . $rankDifference . '<br>';
-
-
-
-			// echo 'key: ' . $key . '<br>';
-
-			// echo 'key: ' . $key . '<br>';
-			// echo ' encounter: ' . print_r($score) . '<br>';
-			echo ' playerLeft: ' . print_r($playerLeft) . '<br>';
-			echo ' playerRight: ' . print_r($playerRight) . '<br>';
-
-				echo '<hr>';
-
+			$sth = $this->database->dbh->prepare("
+				INSERT INTO
+					tt_encounter
+					(part_left_id, part_right_id, fixture_id)
+				VALUES
+					(:part_left_id, :part_right_id, :fixture_id)
+			");				
 			
+			$sth->execute(array(
+				':part_left_id' => $encounterParts['left']
+				, ':part_right_id' => $encounterParts['left']
+				, ':fixture_id' => $fixtureId
+			));	
+						
+			// create encounter summary report
 
-			// $ttPlayer->getData($encounterParts['left'][$row]);
+			echo '<pre>';
+			print_r($playerLeft);
+			print_r($playerRight);
+			echo '</pre>';
 
-			// $encounters[$row][] = $ttPlayer->getData($encounterParts['right'][$row]);
-
-
+			echo '<hr>';
 
 		}
 
-		// print_r($encounterParts);
-		// print_r($ttPlayer->getResult());
-		// print_r($_POST);
 		echo '</pre>';
+
+
+		// update fixture
+		
+		$sth = $this->database->dbh->query("
+			UPDATE
+				tt_fixture
+			SET 
+				date_fulfilled = NOW()
+			WHERE
+				id = '$fixtureId'
+		");				
+
+
+
 		exit;
 
 	}	

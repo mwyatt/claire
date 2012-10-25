@@ -125,14 +125,17 @@ $(document).ready(function() {
  		if (currentValue == NaN)
  			currentValue = 0;
 
-		parts = $(this).prop('name').split('_');
+		parts = $(this).prop('id').split('_');
 
 		if (2 in parts) {
 
-			if (parts[2] == 'left')
+			if (parts[2] == 'left') {
 				$('#encounter_' + parts[1] + '_right').val(3);
-			else
+			}
+			else {
+
 				$('#encounter_' + parts[1] + '_left').val(3);
+			}
 
 		}
 

@@ -71,7 +71,7 @@
 
 				</div>
 
-					<?php (($part !== 'doubles') ? $row ++ : false); ?>
+					<?php $row ++; ?>
 
 				<?php endforeach; ?>
 
