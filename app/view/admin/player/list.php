@@ -7,12 +7,12 @@
 	<nav>
 		<ul>
 			<li>
-				<a href="#" title="(Ajax) Open New Panel">New</a>
+				<a href="<?php echo $this->urlCurrent(); ?>new/" title="(Ajax) Open New Panel">New</a>
 			</li>
 		</ul>
 	</nav>
 
-	<?php if ($ttplayer->getData()) : ?>	
+	<?php if ($ttPlayer->getData()) : ?>	
 
 	<table width="100%" cellspacing="0" cellpadding="0">
 
@@ -24,23 +24,23 @@
 			<th>Action</th>
 		</tr>
 
-		<?php while ($ttplayer->nextRow()) : ?>
+		<?php while ($ttPlayer->nextRow()) : ?>
 
-		<tr data-id="<?php echo $ttplayer->getRow('player_id'); ?>">
+		<tr data-id="<?php echo $ttPlayer->getRow('player_id'); ?>">
 
 			<td>
-				<input type="checkbox" name="player_id" value="<?php echo $ttplayer->getRow('player_id'); ?>">
+				<input type="checkbox" name="player_id" value="<?php echo $ttPlayer->getRow('player_id'); ?>">
 			</td>
 
 			<td>
-				<a href="#" title="(Ajax) Open Edit Panel"><?php echo $ttplayer->getRow('player_name'); ?></a>
+				<a href="#" title="(Ajax) Open Edit Panel"><?php echo $ttPlayer->getRow('player_name'); ?></a>
 			</td>
 
-			<td title="(Ajax) Turn in to a input field and OK button"><?php echo $ttplayer->getRow('player_rank'); ?></td>
+			<td title="(Ajax) Turn in to a input field and OK button"><?php echo $ttPlayer->getRow('player_rank'); ?></td>
 
-			<td><?php echo $ttplayer->getRow('team_name'); ?></td>
+			<td><?php echo $ttPlayer->getRow('team_name'); ?></td>
 
-			<td><?php echo $ttplayer->getRow('division_name'); ?></td>
+			<td><?php echo $ttPlayer->getRow('division_name'); ?></td>
 
 			<td><a href="#" title="(Ajax) Delete Player">Delete</a></td>
 

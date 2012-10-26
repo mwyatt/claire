@@ -183,20 +183,27 @@ abstract class Model extends Config
 	
 	
 	/**
+	 * checks through form fields for invalid or null data
+	 * @param  array $_POST 
+	 * @param  array $keys  
+	 * @return bool        if all is valid
 	 */
 	public function validatePost($_POST, $keys) {
 	
+		$validity = true;
+
 		foreach ($keys as $key) {
 	
 			if (array_key_exists($key, $_POST)) {
 				
-				if ($_POST[$key] == false)
-					
-					echo $key;
+				if (! $_POST[$key])
+					$validity = false;
 				
 			}
 		
 		}
+
+		return $validity;
 		
 	}	
 	

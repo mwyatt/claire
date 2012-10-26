@@ -40,16 +40,25 @@ class Config
 	/**
 	 * intention is to build the object with submitted objects
 	 * takes the __CLASS__ name of objects and sets them within array
-	 */	
-	public function setObject($objects = array())
+	 * @param array $objects 
+	 */
+	public function setObject($objects)
 	{
 	
-		foreach ($objects as $object) {
-		
-			$classTitle = get_class($object);
+		if (is_array($objects)) {
+
+			foreach ($objects as $object) {
 			
-			$this->objects[$classTitle] = $object;
+				$classTitle = get_class($object);
+				$this->objects[$classTitle] = $object;
+				
+			}
 			
+		} else {
+
+			$classTitle = get_class($objects);
+			$this->objects[$classTitle] = $objects;
+
 		}
 	
 		return $this;

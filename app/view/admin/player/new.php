@@ -4,19 +4,22 @@
 
 	<form class="main" method="post">
 
-		<input type="text" name="first_name" placeholder="First Name">
-		
-		<input type="text" name="last_name" placeholder="Last Name">
-		
-		<input type="text" name="rank" placeholder="Rank">
-		
+		<div class="row">			
+			<input class="required" type="text" name="first_name" placeholder="First Name" maxlength='75'>
+			<input class="required" type="text" name="last_name" placeholder="Last Name" maxlength='75'>
+		</div>			
+
+		<div class="row">			
+			<input class="required" type="text" name="rank" placeholder="Rank (eg 1800)" maxlength='75'>
+		</div>			
+
 		<select name="team">
-		
 		  <option value="4">Burnley Boys Club</option>
-		  
 		</select>
-		
-		<input type="reset" name="reset" value="Reset">
+
+		<div class="row">			
+			<input type="reset" name="reset" value="Reset">
+		</div>			
 
 		<input class="" name="form_player_new" type="submit">
 		

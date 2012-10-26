@@ -3,6 +3,11 @@
 /**
  * ttPlayer
  *
+ * create
+ * read
+ * update
+ * delete
+ * 
  * PHP version 5
  * 
  * @package	~unknown~
@@ -13,19 +18,25 @@
 class ttPlayer extends Model
 {		
 
+	public function create() {	
 
-	/* Create
-	======================================================================== */
-	
-	/**
-	 * create a new record
-	 */
-	public function create($_POST) {	
-		
-		if ($this->validatePost($_POST, array('first_name', 'last_name', 'rank', 'team')) == false)
-	
+		// validation
+
+		if (! $this->validatePost($_POST, array(
+			'first_name'
+			, 'last_name'
+			, 'rank'
+			, 'team'
+		))) {
+
+			$this->getObject('mainUser')->setFeedback('All required fields must be filled');
+
 			return false;
+			
+		}
 		
+		// prepare
+
 		$sth = $this->database->dbh->prepare("
 			INSERT INTO
 				tt_player
@@ -41,17 +52,26 @@ class ttPlayer extends Model
 			, ':team_id' => $_POST['team']
 		));		
 
-		return $sth->rowCount();
+		// return
+
+		if ($sth->rowCount()) {
+
+			$this->getObject('mainUser')->setFeedback('Success! Player has been created');
+
+			return true;
+			
+		} else {
+
+			$this->getObject('mainUser')->setFeedback('Error Detected, Player has not been Created');
+
+			return false;
+
+		}
+
 		
 	}
 	
-	
-	/* Read
-	======================================================================== */
 
-	/**
-	 * must obtain all player information, with team name combined
-	 */
 	public function select()
 	{	
 	

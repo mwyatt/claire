@@ -46,13 +46,10 @@ class View extends Model
 		$path = BASE_PATH . 'app/' . 'view/' . $templateTitle . '.php';
 		$path = strtolower($path);
 
-		if (!file_exists($path)) {
+		// reject invalid template
 
-			echo 'rejecting template attempt: ' . $path;
-
+		if (!file_exists($path))
 			return false;
-			
-		}
 
 		$this->template = $path;
 
