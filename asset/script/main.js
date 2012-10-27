@@ -19,7 +19,7 @@ $(document).ready(function() {
 	// select division change
 	fulfill.find('select[name="division_id"]').change(function() {
 
-		$.post('http://localhost/mvc/ajax/fulfill/',
+		$.post('http://localhost/mvc/ajax/fixture/',
 			{ 
 				division_id: $(this).val()
 			},
@@ -50,7 +50,7 @@ $(document).ready(function() {
 			var side = 'right';
 		}
 
-		$.post('http://localhost/mvc/ajax/fulfill/',
+		$.post('http://localhost/mvc/ajax/fixture/',
 			{ 
 				team_id: $(this).val()
 			},
