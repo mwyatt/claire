@@ -4,6 +4,8 @@
 	
 	<h2>Submit Scorecard</h2>
 
+	<?php echo $this->getFeedback(); ?>
+
 	<?php if ($ttDivision->getData()) : ?>	
 
 	<form class="main" method="post">

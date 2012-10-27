@@ -10,27 +10,23 @@
 // initialise 
 
 $ttPlayer = new ttPlayer($database, $config);
+$ttDivision = new ttDivision($database, $config);
+
+$ttPlayer->setObject($mainUser);
 
 // delete
 
-if (array_key_exists('form_player_new', $_POST)) {
+if (array_key_exists('delete', $_GET)) {
 	
-	$ttPlayer
-		->setObject($mainUser)
-		->create();
+	$ttPlayer->deleteById($_GET['delete']);
 		
-	$route->current();
-	
 }
 
 // new
 
-
 if (array_key_exists('form_player_new', $_POST)) {
 	
-	$ttPlayer
-		->setObject($mainUser)
-		->create($_POST);
+	$ttPlayer->create($_POST);
 		
 	$route->current();
 	
@@ -38,8 +34,19 @@ if (array_key_exists('form_player_new', $_POST)) {
 
 // next page
 
-if ($config->getUrl(2))
+if ($config->getUrl(2)) {
+
+	if ($config->getUrl(2) == 'new') {
+
+		$ttDivision->select();
+
+		$view->setObject($ttDivision);
+
+	}
+
 	$view->loadTemplate($config->getUrl(0) . '/' . $config->getUrl(1) . '/' . $config->getUrl(2));	
+	
+}
 
 // invalid url
 

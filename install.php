@@ -22,7 +22,7 @@ if (is_file(BASE_PATH . 'installed.txt')) {
 	$database->dbh->query("DROP DATABASE mvc_002"); 
 	$database->dbh->query("CREATE DATABASE mvc_002");
 	
-	$route->home('?install');
+	$route->current('?install');
 
 } else {
 	
@@ -49,6 +49,6 @@ if (is_file(BASE_PATH . 'installed.txt')) {
 		
 	}		
 	
-	$route->home();
+	$route->current();
 	
 }

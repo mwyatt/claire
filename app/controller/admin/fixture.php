@@ -23,13 +23,10 @@ $view->setObject(array($mainUser, $ttDivision, $ttFixture));
 
 if (array_key_exists('form_fixture_fulfill', $_POST)) {
 	
-	if ($ttFixture->fulfill($_POST))
-		
-		$mainUser->setFeedback('Fixture Fulfilled Successfully');
-	
-	else
-	
-		$mainUser->setFeedback('Error Detected, Fixture has not been Fulfilled');
+
+	$ttFixture
+		->setObject($mainUser)
+		->fulfill($_POST);
 		
 	$route->current();		
 	
@@ -59,4 +56,8 @@ if ($config->getUrl(2)) {
 // View: admin/fixture/list.php
 // ============================================================================
 		
-$view->loadTemplate('admin/fixture/list');
+$ttFixture->select();
+
+$view
+	->setObject($ttFixture)
+	->loadTemplate('admin/fixture/list');

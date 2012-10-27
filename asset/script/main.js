@@ -17,7 +17,7 @@ $(document).ready(function() {
 	// ========================================================================
 
 	// select division change
-	fulfill.find('select[name="division_id"]').change(function() {
+	$('select[name="division_id"]').change(function() {
 
 		$.post('http://localhost/mvc/ajax/fixture/',
 			{ 
@@ -27,7 +27,7 @@ $(document).ready(function() {
 
 				if (result) {
 
-					fulfill.find('.team').find('select').html(result);
+					$('.team').find('select').html(result);
 					fulfill.find('.player').find('select').html('');
 
 				} else {

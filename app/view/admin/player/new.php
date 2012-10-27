@@ -13,9 +13,27 @@
 			<input class="required" type="text" name="rank" placeholder="Rank (eg 1800)" maxlength='75'>
 		</div>			
 
-		<select name="team">
-		  <option value="4">Burnley Boys Club</option>
-		</select>
+		<div class="row division">
+
+			<select name="division_id">
+
+				<option value="0"></option>
+
+				<?php while ($ttDivision->nextRow()) : ?>
+			
+				<option value="<?php echo $ttDivision->getRow('division_id'); ?>"><?php echo $ttDivision->getRow('division_name'); ?></option>
+
+				<?php endwhile; ?>
+
+			</select>
+
+		</div>
+
+		<div class="row team">
+			<select name="team_id">
+				<option value="0"></option>
+			</select>
+		</div>
 
 		<div class="row">			
 			<input type="reset" name="reset" value="Reset">

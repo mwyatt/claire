@@ -13,12 +13,6 @@
 class ttTeam extends Model
 {	
 	
-	/* Create
-	======================================================================== */
-	
-	/**
-	 * create a new record
-	 */
 	public function create($_POST) {
 	
 	
@@ -29,26 +23,20 @@ class ttTeam extends Model
 			VALUES
 				(:name, :home_night, :venue_id, :division_id)
 		");				
-		
+		/*
 		$sth->execute(array(
 			':first_name' => $firstName
 			, ':last_name' => $lastName
 			, ':rank' => $rank
 			, ':team_id' => $teamId
-		));		
+		));		*/
 		
 		return $sth->rowCount();
 		
 	}
 	
 	
-	/* Read
-	======================================================================== */
-
-	/**
-	 * all teams divided by division
-	 */
-	public function selectByDivision($division_id)
+	public function selectByDivision($id)
 	{	
 	
 		$sth = $this->database->dbh->query("	
@@ -58,7 +46,7 @@ class ttTeam extends Model
 			FROM
 				tt_team
 			LEFT JOIN tt_division ON tt_team.division_id = tt_division.id
-			WHERE tt_division.id = '$division_id'
+			WHERE tt_division.id = '$id'
 			ORDER BY tt_team.id
 		");
 		

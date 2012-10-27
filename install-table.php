@@ -226,7 +226,7 @@ try {
 			tt_encounter_part
 			(
 				id INT UNSIGNED NOT NULL AUTO_INCREMENT
-				, player_id INT UNSIGNED
+				, player_id VARCHAR(100)
 				, player_score TINYINT UNSIGNED
 				, player_rank_change TINYINT
 				, PRIMARY KEY (id)

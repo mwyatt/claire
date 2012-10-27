@@ -2,7 +2,7 @@
 
 <div class="fixtures">
 	
-	<h2>fixtures</h2>
+	<h2>Fixtures</h2>
 
 	<nav>
 		<ul>

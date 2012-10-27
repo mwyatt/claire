@@ -26,7 +26,7 @@ class ttPlayer extends Model
 			'first_name'
 			, 'last_name'
 			, 'rank'
-			, 'team'
+			, 'team_id'
 		))) {
 
 			$this->getObject('mainUser')->setFeedback('All required fields must be filled');
@@ -49,7 +49,7 @@ class ttPlayer extends Model
 			':first_name' => $_POST['first_name']
 			, ':last_name' => $_POST['last_name']
 			, ':rank' => $_POST['rank']
-			, ':team_id' => $_POST['team']
+			, ':team_id' => $_POST['team_id']
 		));		
 
 		// return
@@ -77,10 +77,9 @@ class ttPlayer extends Model
 	
 		$sth = $this->database->dbh->query("	
 			SELECT
-				tt_player.id AS player_id
-				, tt_player.rank AS player_rank
-				, tt_player.first_name AS player_first_name
-				, tt_player.last_name AS player_last_name
+				tt_player.id
+				, tt_player.rank
+				, concat(tt_player.first_name, ' ', tt_player.last_name) AS full_name
 				, tt_team.name AS team_name
 				, tt_division.name AS division_name
 			FROM
@@ -93,17 +92,7 @@ class ttPlayer extends Model
 				, tt_player.rank DESC
 		");
 		
-		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {	
-		
-			$this->data[$row['player_id']] = array(
-				'player_id' => $row['player_id']
-				, 'player_name' => $row['player_first_name'] . ' ' . $row['player_last_name']
-				, 'player_rank' => $row['player_rank']
-				, 'team_name' => $row['team_name']
-				, 'division_name' => $row['division_name']
-			);
-	
-		}	
+		$this->setDataStatement($sth);
 
 	}	
 
@@ -274,38 +263,20 @@ class ttPlayer extends Model
 	/* Update
 	======================================================================== */
 	
-	public function updateRank($playerLeft, $playerRight) {
 
-		// add encounter parts
-
-		$sth = $this->database->dbh->prepare("
-			INSERT INTO
-				tt_encounter_part
-				(player_id, player_score, player_rank_change)
-			VALUES
-				(:player_id, :player_score, :player_rank_change)
-		");				
-		
-		$sth->execute(array(
-			':player_id' => $playerLeft['id']
-			, ':player_score' => $playerLeft['score']
-			, ':player_rank_change' => $playerLeft['rank_change']
-		));		
-
-		$encounterParts['left'] = $this->database->dbh->lastInsertId();
-
-		$sth->execute(array(
-			':player_id' => $playerRight['id']
-			, ':player_score' => $playerRight['score']
-			, ':player_rank_change' => $playerRight['rank_change']
-		));
-
-		$encounterParts['right'] = $this->database->dbh->lastInsertId();
+	/**
+	 * updates a players rank using arrays provided
+	 * @param  array $playerLeft  
+	 * @param  array $playerRight 
+	 * @param  array $rankChanges left and right rank changes
+	 * @return null              
+	 */
+	public function updateRank($playerLeft, $playerRight, $rankChanges) {
 
 		// update player ranks
 
-		$playerLeft['new_rank'] = $playerLeft['rank'] + $playerLeft['rank_change'];
-		$playerRight['new_rank'] = $playerRight['rank'] + $playerRight['rank_change'];
+		$playerLeft['new_rank'] = $playerLeft['rank'] + $rankChanges['left'];
+		$playerRight['new_rank'] = $playerRight['rank'] + $rankChanges['right'];
 
 		// set new player ranks
 
@@ -327,40 +298,40 @@ class ttPlayer extends Model
 				id = '{$playerRight['id']}'
 		");	
 
-		return $encounterParts;
+		return;
 
 	}	
 	
+
 	/**
-	 * finds out what ranking bracket the victory falls into and awards points
-	 * the getWinner method returns true for home and false for away
-	 * before you reach this function you must have obtained
-	 * the rank difference
-	 * home player id
-	 * home player rank
-	 * away player id
-	 * away player rank
-	 * you can obtain all of this via 1 select
+	 * takes player arrays and calculates player ranking changes, but does not 
+	 * apply them
+	 * @param  array $playerLeft  
+	 * @param  array $playerRight 
+	 * @return array              with player ranking changes
 	 */
 	public function rankDifference($playerLeft, $playerRight) {
 	
+		// find rank difference
+
+		if ($playerLeft['id'] && $playerRight['id']) {
+
+			if ($playerLeft['rank'] > $playerRight['rank'])
+
+				$rankDifference = $playerLeft['rank'] - $playerRight['rank'];
+
+			else
+
+				$rankDifference = $playerRight['rank'] - $playerLeft['rank'];
+
+		}
+
 		// who won?
 
 		if ($playerLeft['score'] >= 3)
 			$winner = true;
 		else
 			$winner = false;
-
-		// find rank difference
-
-		if ($playerLeft && $playerRight) {
-
-			if ($playerLeft['rank'] > $playerRight['rank'])
-				$rankDifference = $playerLeft['rank'] - $playerRight['rank'];
-			else
-				$rankDifference = $playerRight['rank'] - $playerLeft['rank'];
-
-		}
 
 		// calculate rank change
 
@@ -531,35 +502,10 @@ class ttPlayer extends Model
 			}
 		}
 
-		// update ranks
+		$rankChanges['left'] = $playerLeft['rank_change'];
+		$rankChanges['right'] = $playerRight['rank_change'];
 
-		$encounterParts = $this->updateRank($playerLeft, $playerRight);
-
-		return $encounterParts;
-/*
-		switch ($rankDifference) {
-
-			case $rankDifference <= 24:
-				if ($winner)
-					$rankChange = array(+12, -8);
-				else
-					$rankChange = array(-8, +12);
-				break;
-			case $rankDifference <= 24:
-				if ($winner)
-					$rankChange = array(+12, -8);
-				else
-					$rankChange = array(-8, +12);
-				break;
-
-				
-		}		
-*/
-	
-	/*
-	function ttl_award_points($rd, $hp_id, $hp, $playerLeft['rank'], $ap_id, $ap, $playerRight['rank'], $win) {
-*/
-	
+		return $rankChanges;
 	
 	}	
 	
@@ -569,19 +515,100 @@ class ttPlayer extends Model
 	/**
 	 *
 	 */
-	public function delete($id)
+	public function deleteById($id)
 	{	
 	
-		$sth = $this->database->dbh->query("
+		// are you tied to any fixtures?
+
+		$sql = "	
+			SELECT
+				tt_encounter_part.id
+			FROM
+				tt_encounter_part
+			WHERE
+				tt_encounter_part.player_id
+		";
+
+		// handle possible array
+
+		if (is_array($id)) {
+
+			$sql .= " IN ( ";
+
+			foreach ($id as $key) {
+
+				$sql .= " '$id',";
+
+			}
+
+			// trim away last ','
+
+			$sql = substr($sql, 0, -1);
+			$sql .= ")";
+
+		} else {
+
+			$sql .= " = '$id' ";
+
+		}
+
+		$sth = $this->database->dbh->query($sql);
+
+		if ($sth->rowCount()) {
+
+			$this->getObject('mainUser')->setFeedback('Unable to delete player, they are involved with matches');
+
+			return;
+			
+		}
+
+		// sql baseplate
+
+		$sql = "	
 			DELETE FROM
 				tt_player
-			WHERE
-				id = '$id'		
-		");
-		
-		return $sth->rowCount();
-		
+			WHERE tt_player.id
+		";
+
+		// handle possible array
+
+		if (is_array($id)) {
+
+			$sql .= " IN ( ";
+
+			foreach ($id as $key) {
+
+				$sql .= " '$id',";
+
+			}
+
+			// trim away last ','
+
+			$sql = substr($sql, 0, -1);
+			$sql .= ")";
+
+		} else {
+
+			$sql .= " = '$id' ";
+
+		}
+
+		// query database and get rows into $this->data
+
+		$sth = $this->database->dbh->query($sql);
+
+		// feedback & return
+
+		if ($sth->rowCount()) {
+
+			$this->getObject('mainUser')->setFeedback('Player Deleted Successfully');
+
+		} else {
+
+			$this->getObject('mainUser')->setFeedback('Error occurred, player not deleted');
+
+		}
+
 	}
-	
 
 }
