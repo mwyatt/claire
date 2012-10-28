@@ -92,7 +92,8 @@ class ttFixture extends Model
 
 	
 	/**
-	 * 
+	 * selects all fixtures
+	 * @return null 
 	 */
 	public function select()
 	{	
@@ -100,29 +101,20 @@ class ttFixture extends Model
 		$sth = $this->database->dbh->query("	
 			SELECT
 				tt_fixture.id
+				, tt_fixture.date_fulfilled
 				, team_left.name AS team_left
 				, team_right.name AS team_right
 				, SUM(encounter_part_left.player_score) AS left_score
 				, SUM(encounter_part_right.player_score) AS right_score
-			FROM
-				tt_fixture
-
+			FROM tt_fixture
 			LEFT JOIN tt_team AS team_left ON team_left.id = tt_fixture.team_left_id
-
 			LEFT JOIN tt_team AS team_right ON team_right.id = tt_fixture.team_right_id
-
 			LEFT JOIN tt_encounter ON tt_encounter.fixture_id = tt_fixture.id
-
 			LEFT JOIN tt_encounter_part AS encounter_part_left ON encounter_part_left.id = tt_encounter.part_left_id
-
 			LEFT JOIN tt_encounter_part AS encounter_part_right ON encounter_part_right.id = tt_encounter.part_right_id
-
+			GROUP BY tt_fixture.id
 		");
 
-/*	
-			LEFT JOIN tt_team ON tt_team.id = tt_fixture.team_right_id
-			LEFT JOIN tt_encounter ON tt_encounter.id = tt_fixture.team_right_id*/
-		
 		$this->setDataStatement($sth);
 
 		echo '<pre>';

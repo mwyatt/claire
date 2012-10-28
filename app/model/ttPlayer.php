@@ -214,6 +214,30 @@ class ttPlayer extends Model
 
 		$sth = $this->database->dbh->query("	
 			SELECT
+				tt_player.id
+				, concat(tt_player.first_name, ' ', tt_player.last_name) AS full_name
+				, SUM(tt_encounter_part.player_score) AS score_total
+			FROM
+				tt_player
+			LEFT JOIN
+				tt_team ON tt_player.team_id = tt_team.id
+
+			LEFT JOIN tt_encounter_part ON tt_encounter_part.player_id = tt_player.id
+
+			LEFT JOIN tt_encounter ON tt_encounter.part_left_id = tt_encounter_part.id
+
+			WHERE
+				tt_team.division_id = '1'
+			GROUP BY
+				tt_player.id
+			ORDER BY
+				score_total DESC
+		");
+
+		return;
+
+/*
+			SELECT
 				tt_player.id AS player_id
 				, tt_player.rank AS player_rank
 				, tt_player.first_name AS player_first_name
@@ -243,26 +267,11 @@ class ttPlayer extends Model
 				tt_player.id
 			ORDER BY
 				total_played DESC
-		");
-		
-//		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {	
-		
-			// $this->data[$row['player_id']] = array(
-			// 	'player_id' => $row['player_id']
-			// 	, 'player_name' => $row['player_first_name'] . ' ' . $row['player_last_name']
-			// 	, 'player_rank' => $row['player_rank']
-			// 	, 'team_name' => $row['team_name']
-			// 	, 'division_name' => $row['division_name']
-			//);
-	
-//		}	
+ */
+
 
 	}	
 
-	
-	/* Update
-	======================================================================== */
-	
 
 	/**
 	 * updates a players rank using arrays provided
