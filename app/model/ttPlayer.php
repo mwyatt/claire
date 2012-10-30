@@ -213,25 +213,23 @@ class ttPlayer extends Model
 	{	
 
 		$sth = $this->database->dbh->query("	
+
 			SELECT
 				tt_player.id
 				, concat(tt_player.first_name, ' ', tt_player.last_name) AS full_name
-				, SUM(tt_encounter_part.player_score) AS score_total
-			FROM
-				tt_player
-			LEFT JOIN
-				tt_team ON tt_player.team_id = tt_team.id
+				, tt_team.name as team_name
+				, SUM(tt_encounter_part.player_score) AS total_sets_won
 
-			LEFT JOIN tt_encounter_part ON tt_encounter_part.player_id = tt_player.id
+			FROM tt_player
 
-			LEFT JOIN tt_encounter ON tt_encounter.part_left_id = tt_encounter_part.id
+			LEFT JOIN tt_encounter_part ON tt_encounter_part
+			.player_id = tt_player.id
 
-			WHERE
-				tt_team.division_id = '1'
-			GROUP BY
-				tt_player.id
-			ORDER BY
-				score_total DESC
+			LEFT JOIN tt_team ON tt_team.id = tt_player.team_id
+
+			WHERE tt_team.division_id = '1'
+			GROUP BY tt_player.id
+
 		");
 
 		return;
