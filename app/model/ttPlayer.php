@@ -217,8 +217,8 @@ class ttPlayer extends Model
 				p.id
 				, concat(p.first_name, ' ', p.last_name) as full_name
 				, t.name as team
-				, sum(case when ep2.player_id = p.id then ep2.player_score else NULL end) as total_won
-				, sum(ep2.player_score) as total_played
+				, sum(case when ep2.player_id = p.id then ep2.player_score else NULL end) as won
+				, sum(ep2.player_score) as played
 			from tt_player as p
 			left join tt_team as t on t.id = p.team_id
 			left join tt_encounter_part as ep on ep.player_id = p.id
@@ -228,10 +228,39 @@ class ttPlayer extends Model
 			group by p.id
 		");
 
-		return;
+		$this->setDataStatement($sth);
+
+		foreach ($this->getData() as $key => $row) {
+			
+			$this->data[$key]['average'] = $this->calcAverage($this->data[$key]['won'], $this->data[$key]['played']) . '&#37;';
+
+		}
+
+		return $this;
 
 	}	
 
+
+	/**
+	 * calculates the average 0-100
+	 * @param  int $won    
+	 * @param  int $played 
+	 * @return int         percentage value of win / loss ratio
+	 */
+	public function calcAverage($won, $played) {
+		
+		$average = 0;
+
+		if ( $played != 0 ) {
+			$x = 0; $y = 0; $average = 0;			
+			$x = $won / $played;
+			$y = $x * 100;
+			$average = round($y);
+		}
+		
+	    return $average;
+		
+	} 
 
 	/**
 	 * updates a players rank using arrays provided
