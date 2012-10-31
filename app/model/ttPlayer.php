@@ -205,109 +205,30 @@ class ttPlayer extends Model
 
 
 	/**
-	 * all data required to display the merit table
-	 * player name, team name, team guid, player rank, sets won, sets played
-	 * must exclude matches which have no opponent
+	 * read merit data from tt_encounter_part
+	 * @param  int $division_id 
+	 * @return bool              
 	 */
-	public function selectMerit($division_id)
+	public function readMerit($division_id)
 	{	
 
 		$sth = $this->database->dbh->query("	
-
-			SELECT 	p.id,
-					concat(p.first_name, ' ', p.last_name) AS full_name,
-					t.name as team_name,
-					ep1.won,
-					SUM(ep2.player_score) AS score
-
-			FROM tt_player AS p
-
-			LEFT JOIN tt_team AS t ON t.id = p.team_id
-
-			LEFT JOIN (
-				SELECT 		tt_encounter_part.player_id,
-							SUM(tt_encounter_part.player_score) AS won
-				FROM 		tt_encounter_part
-				GROUP BY 	tt_encounter_part.player_id
-			) ep1 ON ep1.player_id = p.id
-
-			LEFT JOIN tt_encounter
-			ON (
-				tt_encounter.part_left_id = ep1.id
-				OR tt_encounter.part_right_id = ep1.id
-			)
-
-			LEFT JOIN tt_encounter_part AS ep2
-			ON (
-				ep2.id = tt_encounter.part_left_id
-				OR ep2.id = tt_encounter.part_right_id
-			)		
-
-			WHERE t.division_id = '1'
-
-			GROUP BY p.id
-
+			select
+				p.id
+				, concat(p.first_name, ' ', p.last_name) as full_name
+				, t.name as team
+				, sum(case when ep2.player_id = p.id then ep2.player_score else NULL end) as total_won
+				, sum(ep2.player_score) as total_played
+			from tt_player as p
+			left join tt_team as t on t.id = p.team_id
+			left join tt_encounter_part as ep on ep.player_id = p.id
+			left join tt_encounter as enc on enc.part_left_id = ep.id or enc.part_right_id = ep.id
+			left join tt_encounter_part as ep2 on ep2.id = enc.part_left_id or ep2.id = enc.part_right_id
+			where t.division_id = '1'
+			group by p.id
 		");
 
 		return;
-/*
-
-			AND parts_played.player_id != '0'
-			AND parts_played.player_id != 'd'
-			AND parts_won.player_id = p.id
-
-
-			tt_encounter_part AS parts_won
-			ON (
-				parts_won.player_id = p.id
-			)
-
-			LEFT JOIN tt_encounter
-			ON (
-				tt_encounter.part_left_id = parts_won.id
-				OR tt_encounter.part_right_id = parts_won.id
-			)
-
-			LEFT JOIN tt_encounter_part AS parts_played
-			ON (
-				parts_played.id = tt_encounter.part_left_id
-				OR parts_played.id = tt_encounter.part_right_id
-			)
-
- */
-/*
-			SELECT
-				tt_player.id AS player_id
-				, tt_player.rank AS player_rank
-				, tt_player.first_name AS player_first_name
-				, tt_player.last_name AS player_last_name
-				, tt_team.name AS team_name
-				, (SUM(tt_encounter.home_player_score) + SUM(tt_encounter.away_player_score)) AS total_played
-			FROM
-				tt_player
-			LEFT JOIN
-				tt_team ON tt_player.team_id = tt_team.id
-			LEFT JOIN
-				tt_division ON tt_team.division_id = tt_division.id
-			LEFT JOIN
-				tt_encounter ON tt_encounter.home_player_id = tt_player.id
-				OR tt_encounter.away_player_id = tt_player.id
-			WHERE
-				tt_division.id = '1'
-			AND (
-				SELECT
-					(SUM(tt_encounter.home_player_score) + SUM(tt_encounter.away_player_score)) 
-				FROM
-					student_details 
-				WHERE subject= 'Science'
-				) IS NOT NULL
-
-			GROUP BY
-				tt_player.id
-			ORDER BY
-				total_played DESC
- */
-
 
 	}	
 
