@@ -214,26 +214,67 @@ class ttPlayer extends Model
 
 		$sth = $this->database->dbh->query("	
 
-			SELECT
-				tt_player.id
-				, concat(tt_player.first_name, ' ', tt_player.last_name) AS full_name
-				, tt_team.name as team_name
-				, SUM(tt_encounter_part.player_score) AS total_sets_won
+			SELECT 	p.id,
+					concat(p.first_name, ' ', p.last_name) AS full_name,
+					t.name as team_name,
+					ep1.won,
+					SUM(ep2.player_score) AS score
 
-			FROM tt_player
+			FROM tt_player AS p
 
-			LEFT JOIN tt_encounter_part ON tt_encounter_part
-			.player_id = tt_player.id
+			LEFT JOIN tt_team AS t ON t.id = p.team_id
 
-			LEFT JOIN tt_team ON tt_team.id = tt_player.team_id
+			LEFT JOIN (
+				SELECT 		tt_encounter_part.player_id,
+							SUM(tt_encounter_part.player_score) AS won
+				FROM 		tt_encounter_part
+				GROUP BY 	tt_encounter_part.player_id
+			) ep1 ON ep1.player_id = p.id
 
-			WHERE tt_team.division_id = '1'
-			GROUP BY tt_player.id
+			LEFT JOIN tt_encounter
+			ON (
+				tt_encounter.part_left_id = ep1.id
+				OR tt_encounter.part_right_id = ep1.id
+			)
+
+			LEFT JOIN tt_encounter_part AS ep2
+			ON (
+				ep2.id = tt_encounter.part_left_id
+				OR ep2.id = tt_encounter.part_right_id
+			)		
+
+			WHERE t.division_id = '1'
+
+			GROUP BY p.id
 
 		");
 
 		return;
+/*
 
+			AND parts_played.player_id != '0'
+			AND parts_played.player_id != 'd'
+			AND parts_won.player_id = p.id
+
+
+			tt_encounter_part AS parts_won
+			ON (
+				parts_won.player_id = p.id
+			)
+
+			LEFT JOIN tt_encounter
+			ON (
+				tt_encounter.part_left_id = parts_won.id
+				OR tt_encounter.part_right_id = parts_won.id
+			)
+
+			LEFT JOIN tt_encounter_part AS parts_played
+			ON (
+				parts_played.id = tt_encounter.part_left_id
+				OR parts_played.id = tt_encounter.part_right_id
+			)
+
+ */
 /*
 			SELECT
 				tt_player.id AS player_id
