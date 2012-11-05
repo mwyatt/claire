@@ -127,13 +127,18 @@ class ttPlayer extends Model
 	public function selectById($id)
 	{	
 
+		if (! $this->validateInt($id))
+			return false;
+
 		// sql baseplate
 
 		$sql = "	
 			SELECT
 				tt_player.id
 				, tt_player.rank
-				, concat(tt_player.first_name, ' ', tt_player.last_name) AS player_name
+				, tt_player.first_name
+				, tt_player.last_name
+				, concat(tt_player.first_name, ' ', tt_player.last_name) AS full_name
 			FROM
 				tt_player
 		";
@@ -168,6 +173,8 @@ class ttPlayer extends Model
 		$sth = $this->database->dbh->query($sql);
 		$this->setDataStatement($sth);
 
+		return true;
+
 	}	
 
 
@@ -182,7 +189,7 @@ class ttPlayer extends Model
 		$sth = $this->database->dbh->query("	
 			SELECT
 				tt_player.id AS player_id
-				, concat(tt_player.first_name, ' ', tt_player.last_name) AS player_name
+				, concat(tt_player.first_name, ' ', tt_player.last_name) AS full_name
 			FROM
 				tt_player
 			LEFT JOIN

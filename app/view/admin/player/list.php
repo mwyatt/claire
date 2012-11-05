@@ -35,7 +35,7 @@
 			</td>
 
 			<td>
-				<a href="#" title="(Ajax) Open Edit Panel"><?php echo $ttPlayer->getRow('full_name'); ?></a>
+				<a href="<?php echo $this->urlCurrent(); ?>?edit=<?php echo $ttPlayer->getRow('id'); ?>" title="(Ajax) Open Edit Panel"><?php echo $ttPlayer->getRow('full_name'); ?></a>
 			</td>
 
 			<td title="(Ajax) Turn in to a input field and OK button"><?php echo $ttPlayer->getRow('rank'); ?></td>

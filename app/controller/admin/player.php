@@ -14,15 +14,19 @@ $ttDivision = new ttDivision($database, $config);
 
 $ttPlayer->setObject($mainUser);
 
-// delete
+// (GET) edit
 
-if (array_key_exists('delete', $_GET)) {
+if (array_key_exists('edit', $_GET)) {
 	
-	$ttPlayer->deleteById($_GET['delete']);
+	$ttPlayer->selectById($_GET['edit']);
+
+	$view	
+		->setObject($ttPlayer)
+		->loadTemplate($config->getUrl(0) . '/' . $config->getUrl(1) . '/new');
 		
 }
 
-// new
+// (POST) new
 
 if (array_key_exists('form_player_new', $_POST)) {
 	
@@ -30,6 +34,14 @@ if (array_key_exists('form_player_new', $_POST)) {
 		
 	$route->current();
 	
+}
+
+// (GET) delete
+
+if (array_key_exists('delete', $_GET)) {
+	
+	$ttPlayer->deleteById($_GET['delete']);
+		
 }
 
 // next page

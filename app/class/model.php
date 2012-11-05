@@ -57,11 +57,25 @@ abstract class Model extends Config
 	public function setDataStatement($sth)
 	{		
 	
+		// singleton row
+
+		if ($sth->rowCount() == 1) {
+
+			$this->data = $sth->fetch(PDO::FETCH_ASSOC);
+
+			return;
+
+		}
+
+		// full row set
+
 		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
 
 			$this->data[] = $row;
 			
 		}
+
+		return;
 		
 	}
 	
@@ -80,13 +94,13 @@ abstract class Model extends Config
 	/**
 	 * convert only one result to singleton pattern
 	 */
-	public function singletonRow() {
+	// public function singletonRow() {
 	
-		if (count($this->data) == 1)
+	// 	if (count($this->data) == 1)
 		
-			$this->data = $this->data[key($this->data)];
+	// 		$this->data = $this->data[key($this->data)];
 			
-	}
+	// }
 	
 	
 	/**
@@ -127,10 +141,15 @@ abstract class Model extends Config
 	 */
 	public function get($key)
 	{	
+
 		if (array_key_exists($key, $this->data)) {
+
 			return $this->data[$key];
+
 		}
+
 		return false;
+
 	}	
 
 	
@@ -164,7 +183,7 @@ abstract class Model extends Config
 	 * Option to get Specific Key
 	 */
 	public function getRow($key = false) {
-	
+
 		if ($key) {
 		
 			if (array_key_exists($key, $this->dataRow))	
@@ -206,5 +225,27 @@ abstract class Model extends Config
 		return $validity;
 		
 	}	
+
+
+	/**
+	 * checks the validity of an integer
+	 * @param  int $value 
+	 * @return bool        
+	 */
+	public function validateInt($value) {
+
+		$value = intval($value);
+
+		if (gettype($value) == 'integer')
+
+			return true;
+
+		else
+
+			return false;
+
+	}
+
+
 	
 }

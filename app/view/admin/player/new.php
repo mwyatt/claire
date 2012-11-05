@@ -1,16 +1,25 @@
 <?php require_once($this->pathView() . 'admin/header.php'); ?>
+<?php
+
+// echo '<pre>';
+// print_r($ttPlayer);
+// echo '</pre>';
+// exit;
+
+
+?>
 
 	<?php echo $this->getFeedback(); ?>
 
 	<form class="main" method="post">
 
 		<div class="row">			
-			<input class="required" type="text" name="first_name" placeholder="First Name" maxlength='75'>
-			<input class="required" type="text" name="last_name" placeholder="Last Name" maxlength='75'>
+			<input class="required" type="text" name="first_name" placeholder="First Name" maxlength="75" value="<?php echo $ttPlayer->get('first_name'); ?>">
+			<input class="required" type="text" name="last_name" placeholder="Last Name" maxlength="75" value="<?php echo $ttPlayer->get('last_name'); ?>">
 		</div>			
 
 		<div class="row">			
-			<input class="required" type="text" name="rank" placeholder="Rank (eg 1800)" maxlength='75'>
+			<input class="required" type="text" name="rank" placeholder="Rank (eg 1800)" maxlength="75" value="<?php echo $ttPlayer->get('rank'); ?>">
 		</div>			
 
 		<div class="row division">
