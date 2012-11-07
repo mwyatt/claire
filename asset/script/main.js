@@ -19,7 +19,7 @@ $(document).ready(function() {
 	// select division change
 	$('select[name="division_id"]').change(function() {
 
-		$.post('http://localhost/mvc/ajax/fixture/',
+		$.post('http://localhost/mvc/ajax/team/',
 			{ 
 				division_id: $(this).val()
 			},
@@ -28,11 +28,13 @@ $(document).ready(function() {
 				if (result) {
 
 					$('.team').find('select').html(result);
+					$('select[name="team_id"]').html(result);
+					
 					fulfill.find('.player').find('select').html('');
 
 				} else {
 
-					alert('Unable to get Team Data');
+					alert('Unable to get Data');
 
 				}
 

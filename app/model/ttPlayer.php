@@ -26,7 +26,6 @@ class ttPlayer extends Model
 			'first_name'
 			, 'last_name'
 			, 'rank'
-			, 'team_id'
 		))) {
 
 			$this->getObject('mainUser')->setFeedback('All required fields must be filled');
@@ -76,20 +75,19 @@ class ttPlayer extends Model
 	{	
 	
 		$sth = $this->database->dbh->query("	
-			SELECT
+			select
 				tt_player.id
 				, tt_player.rank
-				, concat(tt_player.first_name, ' ', tt_player.last_name) AS full_name
-				, tt_team.name AS team_name
-				, tt_division.name AS division_name
-			FROM
+				, concat(tt_player.first_name, ' ', tt_player.last_name) as full_name
+				, tt_team.name as team_name
+				, tt_division.name as division_name
+			from
 				tt_player
-			LEFT JOIN tt_team ON tt_player.team_id = tt_team.id
-			LEFT JOIN tt_division ON tt_team.division_id = tt_division.id
-			ORDER BY
+			left join tt_team on tt_player.team_id = tt_team.id
+			left join tt_division on tt_team.division_id = tt_division.id
+			order by
 				tt_division.id
-				, tt_team.id
-				, tt_player.rank DESC
+				, tt_player.rank desc
 		");
 		
 		$this->setDataStatement($sth);
@@ -640,7 +638,7 @@ class ttPlayer extends Model
 			
 		}
 
-		$sth = $this->database->dbh->query("
+		$sth = $this->database->dbh->prepare("
 			update tt_player
 			set
 				first_name = ?
@@ -657,10 +655,15 @@ class ttPlayer extends Model
 			, $_POST['team_id']
 		));		
 
-		if ($sth->rowCount())
+		if ($sth->rowCount()) {
+
+			$this->getObject('mainUser')->setFeedback('Player Successfully Updated');
+
 			return true;
-		else
-			return false;
+			
+		}
+
+		return false;
 
 	}
 

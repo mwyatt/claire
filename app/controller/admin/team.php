@@ -9,16 +9,16 @@
 
 // initialise 
 
-$ttPlayer = new ttPlayer($database, $config);
+$ttTeam = new ttTeam($database, $config);
 $ttDivision = new ttDivision($database, $config);
 
-$ttPlayer->setObject($mainUser);
+$ttTeam->setObject($mainUser);
 
 // (POST) update
 
-if (array_key_exists('form_player_update', $_POST)) {
+if (array_key_exists('form_team_update', $_POST)) {
 
-	$ttPlayer->update($_POST);
+	$ttTeam->update($_POST);
 		
 	$route->current();
 	
@@ -26,12 +26,12 @@ if (array_key_exists('form_player_update', $_POST)) {
 
 // (POST) new
 
-if (array_key_exists('form_player_new', $_POST)) {
+if (array_key_exists('form_team_new', $_POST)) {
 	
-	$ttPlayer->create($_POST);
+	$ttTeam->create($_POST);
 		
 
-	$route->homeAdmin('player/');
+	$route->homeAdmin('team/');
 	
 }
 
@@ -39,18 +39,18 @@ if (array_key_exists('form_player_new', $_POST)) {
 
 if (array_key_exists('update', $_GET)) {
 
-	if (! $ttPlayer->selectById($_GET['update']))
+	if (! $ttTeam->selectById($_GET['update']))
 		$route->current();
 
 	$ttDivision->select();
 	$ttTeam = new ttTeam($database, $config);
-	$ttTeam->readByDivision($ttPlayer->get('division_id'));
+	$ttTeam->readByDivision($ttTeam->get('division_id'));
 
 	$view	
 		->setObject($ttDivision)
 		->setObject($ttTeam)
-		->setObject($ttPlayer)
-		->loadTemplate('admin/player/update');
+		->setObject($ttTeam)
+		->loadTemplate('admin/team/update');
 		
 }
 
@@ -58,7 +58,7 @@ if (array_key_exists('update', $_GET)) {
 
 if (array_key_exists('delete', $_GET)) {
 	
-	$ttPlayer->deleteById($_GET['delete']);
+	$ttTeam->deleteById($_GET['delete']);
 		
 }
 
@@ -85,8 +85,8 @@ if ($config->getUrl(2))
 
 // view 	
 	
-$ttPlayer->select();
+$ttTeam->select();
 
 $view
-	->setObject(array($mainUser, $ttPlayer))
-	->loadTemplate('admin/player/list');
+	->setObject(array($mainUser, $ttTeam))
+	->loadTemplate('admin/team/list');

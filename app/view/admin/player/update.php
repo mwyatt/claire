@@ -50,11 +50,11 @@
 
 		</select>
 
-		<div class="row">			
-			<input type="reset" name="reset" value="Reset">
-		</div>			
-
-		<input name="form_player_update" type="submit">
+		<div class="row">
+			
+			<input name="form_player_update" type="submit">
+			
+		</div>
 		
 	</form>
 

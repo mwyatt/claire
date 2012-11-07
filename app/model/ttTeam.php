@@ -62,7 +62,7 @@ class ttTeam extends Model
 	/**
 	 * all team information with player count
 	 */
-	public function select()
+	public function read()
 	{	
 	
 		$sth = $this->database->dbh->query("	
