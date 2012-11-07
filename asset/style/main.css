@@ -250,7 +250,7 @@ form.main {}
 		}
 		
 		form.main .row .required {
-			background: url('../image/main/required.png') 276px 17px no-repeat;
+			/*background: url('../image/main/required.png') 276px 17px no-repeat;*/
 		}
 
 /* Feedback */

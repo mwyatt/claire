@@ -27,9 +27,8 @@ if (array_key_exists('form_team_update', $_POST)) {
 // (POST) new
 
 if (array_key_exists('form_team_new', $_POST)) {
-	
+
 	$ttTeam->create($_POST);
-		
 
 	$route->homeAdmin('team/');
 	
@@ -49,7 +48,6 @@ if (array_key_exists('update', $_GET)) {
 	$view	
 		->setObject($ttDivision)
 		->setObject($ttTeam)
-		->setObject($ttTeam)
 		->loadTemplate('admin/team/update');
 		
 }
@@ -66,11 +64,18 @@ if (array_key_exists('delete', $_GET)) {
 
 if ($config->getUrl(2)) {
 
+	// new
+
 	if ($config->getUrl(2) == 'new') {
 
+		$ttVenue = new ttVenue($database, $config);
+		$ttVenue->read();
 		$ttDivision->select();
 
-		$view->setObject($ttDivision);
+		$view
+			->setObject($ttTeam)
+			->setObject($ttDivision)
+			->setObject($ttVenue);
 
 	}
 
@@ -85,8 +90,8 @@ if ($config->getUrl(2))
 
 // view 	
 	
-$ttTeam->select();
+$ttTeam->read();
 
 $view
-	->setObject(array($mainUser, $ttTeam))
+	->setObject($ttTeam)
 	->loadTemplate('admin/team/list');

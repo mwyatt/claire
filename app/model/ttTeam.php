@@ -12,10 +12,34 @@
  */
 class ttTeam extends Model
 {	
-	
-	public function create($_POST) {
-	
-	
+
+	static $weekDays = array(
+		1 => 'Monday'
+		, 2 => 'Tuesday'
+		, 3 => 'Wednesday'
+		, 4 => 'Thursday'
+		, 5 => 'Friday'
+		, 6 => 'Saturday'
+		, 7 => 'Sunday'
+	);
+
+
+	public function create() {	
+
+		// validation
+
+		if (! $this->validatePost($_POST, array(
+			'name'
+		))) {
+
+			$this->getObject('mainUser')->setFeedback('All required fields must be filled');
+
+			return false;
+			
+		}
+		
+		// prepare
+
 		$sth = $this->database->dbh->prepare("
 			INSERT INTO
 				tt_team
@@ -23,19 +47,117 @@ class ttTeam extends Model
 			VALUES
 				(:name, :home_night, :venue_id, :division_id)
 		");				
-		/*
-		$sth->execute(array(
-			':first_name' => $firstName
-			, ':last_name' => $lastName
-			, ':rank' => $rank
-			, ':team_id' => $teamId
-		));		*/
 		
-		return $sth->rowCount();
+		$sth->execute(array(
+			':name' => $_POST['name']
+			, ':home_night' => $_POST['home_night']
+			, ':venue_id' => $_POST['venue_id']
+			, ':division_id' => $_POST['division_id']
+		));		
+
+		// return
+
+		if ($sth->rowCount()) {
+
+			$this->getObject('mainUser')->setFeedback('Success! Team ' . $_POST['name'] . ' has been created');
+
+			return true;
+			
+		} else {
+
+			$this->getObject('mainUser')->setFeedback('Error Detected, Team has not been Created');
+
+			return false;
+
+		}
 		
 	}
+
 	
+	public function getWeekDays() {
+
+		return self::$weekDays;
+
+	}
+
+
+	public function deleteById($id)
+	{	
 	
+		// are you tied to any fixtures?
+
+		$sth = $this->database->dbh->query("	
+			select
+				tt_encounter.id
+			from
+				tt_team
+			left join tt_fixture on tt_fixture.team_left_id = tt_team.id or tt_fixture.team_right_id = tt_team.id
+			where tt_team.id = '$id'
+			group by tt_team.id
+		");
+
+		if ($sth->rowCount() == 1) {
+
+			var_dump($sth->rowCount());
+			exit();
+
+			$this->getObject('mainUser')->setFeedback('Unable to delete player, they are involved with matches');
+
+			return false;
+			
+		}
+
+		// sql baseplate
+
+		$sql = "	
+			DELETE FROM
+				tt_player
+			WHERE tt_player.id
+		";
+
+		// handle possible array
+
+		if (is_array($id)) {
+
+			$sql .= " IN ( ";
+
+			foreach ($id as $key) {
+
+				$sql .= " '$id',";
+
+			}
+
+			// trim away last ','
+
+			$sql = substr($sql, 0, -1);
+			$sql .= ")";
+
+		} else {
+
+			$sql .= " = '$id' ";
+
+		}
+
+		// query database and get rows into $this->data
+
+		$sth = $this->database->dbh->query($sql);
+
+		// feedback & return
+
+		if ($sth->rowCount()) {
+
+			$this->getObject('mainUser')->setFeedback('Player Deleted Successfully');
+
+		} else {
+
+			$this->getObject('mainUser')->setFeedback('Error occurred, player not deleted');
+
+		}
+
+	}
+
+
+
 	public function selectByDivision($id)
 	{	
 	
@@ -59,54 +181,42 @@ class ttTeam extends Model
 	}	
 
 	
-	/**
-	 * all team information with player count
-	 */
 	public function read()
 	{	
 	
 		$sth = $this->database->dbh->query("	
-			SELECT
-				tt_team.id AS team_id
-				, tt_team.name AS team_name
-				, tt_team.home_night AS team_home_night
-				, tt_venue.name AS venue_name
-				, tt_division.name AS division_name
-			FROM
+			select
+				tt_team.id
+				, tt_team.name
+				, tt_team.home_night
+				, count(tt_player.id) as player_count
+				, tt_venue.name as venue_name
+				, tt_division.name as division_name
+			from
 				tt_team
-			LEFT JOIN tt_player ON tt_player.team_id = tt_team.id
-			LEFT JOIN tt_division ON tt_team.division_id = tt_division.id
-			LEFT JOIN tt_venue ON tt_team.venue_id = tt_venue.id
-			ORDER BY
+			left join tt_player on tt_player.team_id = tt_team.id
+			left join tt_division on tt_team.division_id = tt_division.id
+			left join tt_venue on tt_team.venue_id = tt_venue.id
+			group by tt_team.id
+			order by
 				tt_division.id
-				, tt_team.id
-				, tt_player.rank DESC
+				, tt_team.name
 		");
+
+		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {	
 		
-		// while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {	
+			if (array_key_exists('home_night', $row))
+				$row['home_night'] = self::$weekDays[$row['home_night']];
+
+			$this->data[] = $row;
 		
-		// 	$this->data[$row['team_id']] = array(
-		// 		'team_id' => $row['team_id']
-		// 		, 'team_name' => $row['team_name']
-		// 		, 'team_rank' => $row['team_rank']
-		// 		, 'team_name' => $row['team_name']
-		// 		, 'division_name' => $row['division_name']
-		// 	);
-	
-		//}	
+		}
+
+		return $this;
 
 	}	
 	
 
-	/* Update
-	======================================================================== */
-	
-	/* Delete
-	======================================================================== */
-
-	/**
-	 *
-	 */
 	public function delete($id)
 	{	
 	
