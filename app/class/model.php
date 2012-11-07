@@ -57,13 +57,19 @@ abstract class Model extends Config
 	public function setDataStatement($sth)
 	{		
 	
+		// no rows
+
+		if (! $sth->rowCount())
+
+			return false;
+
 		// singleton row
 
 		if ($sth->rowCount() == 1) {
 
 			$this->data = $sth->fetch(PDO::FETCH_ASSOC);
 
-			return;
+			return true;
 
 		}
 
@@ -75,7 +81,7 @@ abstract class Model extends Config
 			
 		}
 
-		return;
+		return true;
 		
 	}
 	

@@ -14,16 +14,14 @@ $ttDivision = new ttDivision($database, $config);
 
 $ttPlayer->setObject($mainUser);
 
-// (GET) edit
+// (POST) update
 
-if (array_key_exists('edit', $_GET)) {
-	
-	$ttPlayer->selectById($_GET['edit']);
+if (array_key_exists('form_player_update', $_POST)) {
 
-	$view	
-		->setObject($ttPlayer)
-		->loadTemplate($config->getUrl(0) . '/' . $config->getUrl(1) . '/new');
+	$ttPlayer->update($_POST);
 		
+	$route->current();
+	
 }
 
 // (POST) new
@@ -34,6 +32,25 @@ if (array_key_exists('form_player_new', $_POST)) {
 		
 	$route->current();
 	
+}
+
+// (GET) update
+
+if (array_key_exists('update', $_GET)) {
+
+	if (! $ttPlayer->selectById($_GET['update']))
+		$route->current();
+
+	$ttDivision->select();
+	$ttTeam = new ttTeam($database, $config);
+	$ttTeam->readByDivision($ttPlayer->get('division_id'));
+
+	$view	
+		->setObject($ttDivision)
+		->setObject($ttTeam)
+		->setObject($ttPlayer)
+		->loadTemplate('admin/player/update');
+		
 }
 
 // (GET) delete

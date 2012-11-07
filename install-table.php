@@ -203,7 +203,6 @@ try {
 				, rank INT UNSIGNED
 				, team_id INT UNSIGNED NOT NULL
 				, PRIMARY KEY (id)
-				, FOREIGN KEY (team_id) REFERENCES tt_team(id)				
 			)		
 	");	
 	

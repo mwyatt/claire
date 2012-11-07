@@ -133,14 +133,18 @@ class ttPlayer extends Model
 		// sql baseplate
 
 		$sql = "	
-			SELECT
+			select
 				tt_player.id
 				, tt_player.rank
 				, tt_player.first_name
 				, tt_player.last_name
-				, concat(tt_player.first_name, ' ', tt_player.last_name) AS full_name
-			FROM
+				, concat(tt_player.first_name, ' ', tt_player.last_name) as full_name
+				, tt_team.id as team_id
+				, tt_division.id as division_id
+			from
 				tt_player
+			left join tt_team on tt_player.team_id = tt_team.id
+			left join tt_division on tt_division.id = tt_team.division_id
 		";
 
 		// handle possible array
@@ -168,12 +172,14 @@ class ttPlayer extends Model
 
 		}
 
-		// query database and get rows into $this->data
+		// handle results
 
 		$sth = $this->database->dbh->query($sql);
-		$this->setDataStatement($sth);
 
-		return true;
+		if ($this->setDataStatement($sth))
+			return true;
+		else
+			return false;
 
 	}	
 
@@ -613,6 +619,48 @@ class ttPlayer extends Model
 			$this->getObject('mainUser')->setFeedback('Error occurred, player not deleted');
 
 		}
+
+	}
+
+
+	public function update($_POST) {
+
+		// validation
+
+		if (! $this->validatePost($_POST, array(
+			'first_name'
+			, 'last_name'
+			, 'rank'
+			, 'team_id'
+		))) {
+
+			$this->getObject('mainUser')->setFeedback('All required fields must be filled');
+
+			return false;
+			
+		}
+
+		$sth = $this->database->dbh->query("
+			update tt_player
+			set
+				first_name = ?
+				, last_name = ?
+				, rank = ?
+				, team_id = ?
+			where id = '{$_GET['update']}'
+		");	
+
+		$sth->execute(array(
+			$_POST['first_name']
+			, $_POST['last_name']
+			, $_POST['rank']
+			, $_POST['team_id']
+		));		
+
+		if ($sth->rowCount())
+			return true;
+		else
+			return false;
 
 	}
 

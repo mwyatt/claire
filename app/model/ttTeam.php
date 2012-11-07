@@ -122,6 +122,30 @@ class ttTeam extends Model
 	}
 	
 
+	/**
+	 * pull team data for a single division
+	 * @param  int $division_id 
+	 * @return object              
+	 */
+	public function readByDivision($division_id) {
+
+		$sth = $this->database->dbh->query("	
+			select
+				t.id
+				, t.name
+			from tt_team as t
+			where t.division_id = '$division_id'
+			group by t.id
+			order by t.name asc
+		");
+
+		$this->setDataStatement($sth);
+
+		return $this;
+
+	}
+
+
 	public function readLeague() {
 
 		$sth = $this->database->dbh->query("	
