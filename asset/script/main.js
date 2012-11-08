@@ -9,17 +9,27 @@
 
 $(document).ready(function() {
 
+	// global
 
-	fulfill = $('.fulfill');
+	var
+		fulfill = $('.fulfill')
+		, selectDivision = $('select[name="division_id"]')
+		, selectTeam = $('select[name="team_id"]')
+		, selectPlayer = $('select[name="team_id"]')
+		;
+
+	// on
+
+	selectDivision.on('change', changeDivision);
 
 
-	// # /admin/card/
-	// ========================================================================
+	/**
+	 * trigger once division select is used
+	 * @return {null} 
+	 */
+	function changeDivision() {
 
-	// select division change
-	$('select[name="division_id"]').change(function() {
-
-		$.post('http://localhost/mvc/ajax/team/',
+		$.post('http://' + window.location.host + '/mvc/ajax/team/',
 			{ 
 				division_id: $(this).val()
 			},
@@ -27,8 +37,7 @@ $(document).ready(function() {
 
 				if (result) {
 
-					$('.team').find('select').html(result);
-					$('select[name="team_id"]').html(result);
+					selectTeam.html(result);
 					
 					fulfill.find('.player').find('select').html('');
 
@@ -40,7 +49,7 @@ $(document).ready(function() {
 
 			}, "html");
 
-	});
+	}
 
 	// select team change
 	fulfill.find('.team').find('select').change(function() {

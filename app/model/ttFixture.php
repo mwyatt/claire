@@ -95,30 +95,30 @@ class ttFixture extends Model
 	 * selects all fixtures
 	 * @return null 
 	 */
-	public function select()
+	public function read()
 	{	
 	
 		$sth = $this->database->dbh->query("	
-			SELECT
+			select
 				tt_fixture.id
 				, tt_fixture.date_fulfilled
-				, team_left.name AS team_left
-				, team_right.name AS team_right
-				, SUM(encounter_part_left.player_score) AS left_score
-				, SUM(encounter_part_right.player_score) AS right_score
-			FROM tt_fixture
-			LEFT JOIN tt_team AS team_left ON team_left.id = tt_fixture.team_left_id
-			LEFT JOIN tt_team AS team_right ON team_right.id = tt_fixture.team_right_id
-			LEFT JOIN tt_encounter ON tt_encounter.fixture_id = tt_fixture.id
-			LEFT JOIN tt_encounter_part AS encounter_part_left ON encounter_part_left.id = tt_encounter.part_left_id
-			LEFT JOIN tt_encounter_part AS encounter_part_right ON encounter_part_right.id = tt_encounter.part_right_id
-			GROUP BY tt_fixture.id
+				, team_left.name as team_left
+				, team_right.name as team_right
+				, sum(encounter_part_left.player_score) as left_score
+				, sum(encounter_part_right.player_score) as right_score
+			from tt_fixture
+			left join tt_team as team_left on team_left.id = tt_fixture.team_left_id
+			left join tt_team as team_right on team_right.id = tt_fixture.team_right_id
+			left join tt_encounter on tt_encounter.fixture_id = tt_fixture.id
+			left join tt_encounter_part as encounter_part_left on encounter_part_left.id = tt_encounter.part_left_id
+			left join tt_encounter_part as encounter_part_right on encounter_part_right.id = tt_encounter.part_right_id
+			group by tt_fixture.id
 		");
 
 		$this->setDataStatement($sth);
 
 		echo '<pre>';
-		print_r ($this->data);
+		print_r ($this);
 		echo '</pre>';		
 		exit;
 

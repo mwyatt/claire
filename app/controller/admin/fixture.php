@@ -13,7 +13,7 @@
 $ttFixture = new ttFixture($database, $config);
 $ttDivision = new ttDivision($database, $config);
 
-$ttDivision->select();
+$ttDivision->read();
 
 $view->setObject(array($mainUser, $ttDivision, $ttFixture));
 
@@ -22,7 +22,6 @@ $view->setObject(array($mainUser, $ttDivision, $ttFixture));
 // ============================================================================
 
 if (array_key_exists('form_fixture_fulfill', $_POST)) {
-	
 
 	$ttFixture
 		->setObject($mainUser)
@@ -56,7 +55,7 @@ if ($config->getUrl(2)) {
 // View: admin/fixture/list.php
 // ============================================================================
 		
-$ttFixture->select();
+$ttFixture->read();
 
 $view
 	->setObject($ttFixture)
