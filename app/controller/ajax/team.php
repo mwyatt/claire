@@ -8,7 +8,7 @@ if (array_key_exists('division_id', $_POST)) {
 
 	$ttTeam = new ttTeam($database, $config);
 
-	$ttTeam->selectByDivision($_POST['division_id']);
+	$ttTeam->readByDivision($_POST['division_id']);
 
 	if ($ttTeam->getData()) {	
 

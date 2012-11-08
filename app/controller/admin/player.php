@@ -39,10 +39,10 @@ if (array_key_exists('form_player_new', $_POST)) {
 
 if (array_key_exists('update', $_GET)) {
 
-	if (! $ttPlayer->selectById($_GET['update']))
+	if (! $ttPlayer->readById($_GET['update']))
 		$route->current();
 
-	$ttDivision->select();
+	$ttDivision->read();
 	$ttTeam = new ttTeam($database, $config);
 	$ttTeam->readByDivision($ttPlayer->get('division_id'));
 
@@ -68,7 +68,7 @@ if ($config->getUrl(2)) {
 
 	if ($config->getUrl(2) == 'new') {
 
-		$ttDivision->select();
+		$ttDivision->read();
 
 		$view->setObject($ttDivision);
 
@@ -85,7 +85,7 @@ if ($config->getUrl(2))
 
 // view 	
 	
-$ttPlayer->select();
+$ttPlayer->read();
 
 $view
 	->setObject(array($mainUser, $ttPlayer))

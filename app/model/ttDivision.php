@@ -22,7 +22,7 @@ class ttDivision extends Model
 	/**
 	 * all divisions
 	 */
-	public function select()
+	public function read()
 	{	
 	
 		$sth = $this->database->dbh->query("	

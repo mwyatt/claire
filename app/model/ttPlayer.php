@@ -71,7 +71,7 @@ class ttPlayer extends Model
 	}
 	
 
-	public function select()
+	public function read()
 	{	
 	
 		$sth = $this->database->dbh->query("	
@@ -121,8 +121,12 @@ class ttPlayer extends Model
 	}	
 
 
-
-	public function selectById($id)
+	/**
+	 * select player by id
+	 * @param  int $id 
+	 * @return bool     
+	 */
+	public function readById($id)
 	{	
 
 		if (! $this->validateInt($id))
@@ -621,6 +625,11 @@ class ttPlayer extends Model
 	}
 
 
+	/**
+	 * update player record using post
+	 * @param  array $_POST 
+	 * @return bool        
+	 */
 	public function update($_POST) {
 
 		// validation

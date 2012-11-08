@@ -81,76 +81,205 @@ class ttTeam extends Model
 	}
 
 
-	public function deleteById($id)
-	{	
-	
-		// are you tied to any fixtures?
+	/**
+	 * update team record using post
+	 * @param  array $_POST 
+	 * @return bool        
+	 */
+	public function update($_POST) {
 
-		$sth = $this->database->dbh->query("	
-			select
-				tt_encounter.id
-			from
-				tt_team
-			left join tt_fixture on tt_fixture.team_left_id = tt_team.id or tt_fixture.team_right_id = tt_team.id
-			where tt_team.id = '$id'
-			group by tt_team.id
-		");
+		// validation
 
-		if ($sth->rowCount() == 1) {
+		if (! $this->validatePost($_POST, array(
+			'name'
+		))) {
 
-			var_dump($sth->rowCount());
-			exit();
-
-			$this->getObject('mainUser')->setFeedback('Unable to delete player, they are involved with matches');
+			$this->getObject('mainUser')->setFeedback('All required fields must be filled');
 
 			return false;
 			
 		}
 
-		// sql baseplate
+		$sth = $this->database->dbh->prepare("
 
-		$sql = "	
-			DELETE FROM
-				tt_player
-			WHERE tt_player.id
-		";
+			update
+				tt_team
+			set
+				name = :name
+				, venue_id = :venue_id
+				, home_night = :home_night
+				, division_id = :division_id
+			where
+				id = :id
 
-		// handle possible array
+		");	
 
-		if (is_array($id)) {
+		$sth->execute(array(
+			':name' => $_POST['name']
+			, ':id' => $_GET['update']
+			, ':venue_id' => $_POST['venue_id']
+			, ':home_night' => $_POST['home_night']
+			, ':division_id' => $_POST['division_id']
+		));		
 
-			$sql .= " IN ( ";
+		if ($sth->rowCount()) {
 
-			foreach ($id as $key) {
+			$this->getObject('mainUser')->setFeedback('Team Successfully Updated');
 
-				$sql .= " '$id',";
-
-			}
-
-			// trim away last ','
-
-			$sql = substr($sql, 0, -1);
-			$sql .= ")";
-
-		} else {
-
-			$sql .= " = '$id' ";
-
+			return true;
+			
 		}
 
-		// query database and get rows into $this->data
+		return false;
 
-		$sth = $this->database->dbh->query($sql);
+	}
+
+
+	/**
+	 * read team by id
+	 * @param  int $id 
+	 * @return bool     
+	 */
+	public function readById($id)
+	{	
+
+		$sth = $this->database->dbh->prepare("
+
+			select
+				tt_team.id
+				, tt_team.name
+				, tt_team.home_night
+				, tt_team.venue_id
+				, tt_team.division_id
+
+			from
+				tt_team
+
+			where
+				tt_team.id = :id
+
+			group by
+				tt_team.id
+
+		");				
+		
+		$sth->execute(array(
+			':id' => $id
+		));
+
+		if ($this->setDataStatement($sth))
+
+			return true;
+
+		else
+
+			return false;
+
+	}	
+
+
+	public function deleteById($id)
+	{	
+	
+		// tied to any fixtures?
+
+		$sth = $this->database->dbh->prepare("
+
+			select
+				count(tt_fixture.id) as count
+
+			from
+				tt_team
+
+			left join
+				tt_fixture on tt_fixture.team_left_id = tt_team.id or tt_fixture.team_right_id = tt_team.id
+
+			where
+				tt_team.id = :id
+
+			group by
+				tt_team.id
+
+		");				
+		
+		$sth->execute(array(
+			':id' => $id
+		));
+
+		if ($row = $sth->fetch(PDO::FETCH_ASSOC)) {	
+		
+			if ($row['count']) {
+
+				$this->getObject('mainUser')->setFeedback('Unable to delete team, fixtures have been generated');
+
+				return false;
+
+			}
+		
+		}
+
+		// tied to any players?
+
+		$sth = $this->database->dbh->prepare("
+
+			select
+				count(tt_player.id) as count
+
+			from
+				tt_team
+
+			left join
+				tt_player on tt_player.team_id = tt_team.id
+
+			where
+				tt_team.id = :id
+
+			group by
+				tt_team.id
+
+		");				
+		
+		$sth->execute(array(
+			':id' => $id
+		));
+
+		if ($row = $sth->fetch(PDO::FETCH_ASSOC)) {	
+		
+			if ($row['count']) {
+
+				$this->getObject('mainUser')->setFeedback('Unable to delete team, players are assigned to it');
+
+				return false;
+
+			}
+		
+		}
+
+		// delete team
+
+		$sth = $this->database->dbh->prepare("
+
+			delete from
+				tt_team
+
+			where
+				tt_team.id = :id
+
+		");				
+		
+		$sth->execute(array(
+			':id' => $id
+		));		
 
 		// feedback & return
 
 		if ($sth->rowCount()) {
 
-			$this->getObject('mainUser')->setFeedback('Player Deleted Successfully');
+			$this->getObject('mainUser')->setFeedback('Team Deleted Successfully');
 
 		} else {
 
-			$this->getObject('mainUser')->setFeedback('Error occurred, player not deleted');
+			$this->getObject('mainUser')->setFeedback('Error occurred, team not deleted');
 
 		}
 
@@ -158,27 +287,27 @@ class ttTeam extends Model
 
 
 
-	public function selectByDivision($id)
-	{	
+	// public function selectByDivision($id)
+	// {	
 	
-		$sth = $this->database->dbh->query("	
-			SELECT
-				tt_team.id AS team_id
-				, tt_team.name AS team_name
-			FROM
-				tt_team
-			LEFT JOIN tt_division ON tt_team.division_id = tt_division.id
-			WHERE tt_division.id = '$id'
-			ORDER BY tt_team.id
-		");
+	// 	$sth = $this->database->dbh->query("	
+	// 		SELECT
+	// 			tt_team.id AS team_id
+	// 			, tt_team.name AS team_name
+	// 		FROM
+	// 			tt_team
+	// 		LEFT JOIN tt_division ON tt_team.division_id = tt_division.id
+	// 		WHERE tt_division.id = '$id'
+	// 		ORDER BY tt_team.id
+	// 	");
 		
-		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {	
+	// 	while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {	
 		
-			$this->data[$row['team_id']] = $row;
+	// 		$this->data[$row['team_id']] = $row;
 	
-		}	
+	// 	}	
 
-	}	
+	// }	
 
 	
 	public function read()

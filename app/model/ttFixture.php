@@ -204,7 +204,7 @@ class ttFixture extends Model
 
 		$playerIdGroup = array_merge($_POST['player']['left'], $_POST['player']['right']);
 		$ttPlayer = new ttPlayer($this->database, $this->config);
-		$ttPlayer->selectById($playerIdGroup);
+		$ttPlayer->readById($playerIdGroup);
 
 		// get encounter structure for use in the loop
 

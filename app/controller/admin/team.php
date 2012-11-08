@@ -38,18 +38,19 @@ if (array_key_exists('form_team_new', $_POST)) {
 
 if (array_key_exists('update', $_GET)) {
 
-	if (! $ttTeam->selectById($_GET['update']))
+	if (! $ttTeam->readById($_GET['update']))
 		$route->current();
 
-	$ttDivision->select();
-	$ttTeam = new ttTeam($database, $config);
-	$ttTeam->readByDivision($ttTeam->get('division_id'));
+	$ttVenue = new ttVenue($database, $config);
+	$ttVenue->read();
+	$ttDivision->read();
 
-	$view	
+	$view
 		->setObject($ttDivision)
+		->setObject($ttVenue)
 		->setObject($ttTeam)
 		->loadTemplate('admin/team/update');
-		
+
 }
 
 // (GET) delete
@@ -70,7 +71,7 @@ if ($config->getUrl(2)) {
 
 		$ttVenue = new ttVenue($database, $config);
 		$ttVenue->read();
-		$ttDivision->select();
+		$ttDivision->read();
 
 		$view
 			->setObject($ttTeam)
