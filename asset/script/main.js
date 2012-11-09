@@ -14,13 +14,18 @@ $(document).ready(function() {
 	var
 		fulfill = $('.fulfill')
 		, selectDivision = $('select[name="division_id"]')
-		, selectTeam = $('select[name="team_id"]')
-		, selectPlayer = $('select[name="team_id"]')
+		, selectTeamGroup = $(fulfill).find('.team').find('select')
+		, selectPlayerGroup = $(fulfill).find('.player').find('select')
+		, inputScore = $(fulfill).find('.score').find('input')
 		;
 
 	// on
 
 	selectDivision.on('change', changeDivision);
+	selectTeamGroup.on('change', changeTeam);
+	selectPlayerGroup.on('change', changePlayer);
+	inputScore.on('keyup', changeInputScore);
+	inputScore.on('click', clickInputScore);
 
 
 	/**
@@ -37,31 +42,40 @@ $(document).ready(function() {
 
 				if (result) {
 
-					selectTeam.html(result);
+					// set options of team group
 					
-					fulfill.find('.player').find('select').html('');
-
-				} else {
-
-					alert('Unable to get Data');
+					$(selectTeamGroup).html(result);
 
 				}
 
-			}, "html");
+			}, "html"
+		);
+
+		// reset player select
+
+		$(selectPlayerGroup).html('');
 
 	}
 
-	// select team change
-	fulfill.find('.team').find('select').change(function() {
+
+	/**
+	 * trigger once team select is used
+	 * @return {null} 
+	 */
+	function changeTeam() {
+
+		var
+			side
+			;
 
 		// calculate side
-		if ($(this).prop('name') == 'team[left]') {
-			var side = 'left';
-		} else {
-			var side = 'right';
-		}
 
-		$.post('http://localhost/mvc/ajax/fixture/',
+		if ($(this).prop('name') == 'team[left]')
+			side = 'left';
+		else
+			side = 'right';
+
+		$.post('http://' + window.location.host + '/mvc/ajax/fixture/',
 			{ 
 				team_id: $(this).val()
 			},
@@ -70,9 +84,11 @@ $(document).ready(function() {
 				if (result) {
 
 					// set results
-					fulfill.find('.' + side).find('.player').find('select').html(result);
+					
+					$(fulfill).find('.' + side).find('.player').find('select').html(result);
 
 					// sets the selected index for each select box
+					
 					for (var index = 0; index < 3; index ++) { 
 
 						playerIndex = index + 1;
@@ -83,9 +99,11 @@ $(document).ready(function() {
 							if ((optionIndex) == (index + 1)) {
 
 								// set index as selected, 1, 2, 3
+								
 								$(this).prop('selected', 'selected');
 
 								// set player labels
+								
 								$('.' + side).find('.score-' + playerIndex).find('label').html($(this).html());
 								
 							}
@@ -93,26 +111,31 @@ $(document).ready(function() {
 
 					}
 
-
-
-				} else {
-
-					alert('Unable to get Player Data');
-
 				}
 
-			}, "html");
+			}, "html"
+		);
+		
+	}
 
-	});
 
-	// select player change
-	fulfill.find('.player').find('select').change(function() {
+	/**
+	 * change player
+	 * @return {null} 
+	 */
+	function changePlayer() {
 
-		var parts, playerName, index, side;
+		var
+			parts
+			, playerName
+			, index
+			, side
+			;
 
 		playerName = $(this).find('option:selected').html();
 
-		parts = $(this).prop('name').split('_');
+		parts = $(this).prop('name').replace(']', '').replace(']', '');
+		parts = parts.split('[');
 
 		if (2 in parts) {
 
@@ -125,12 +148,39 @@ $(document).ready(function() {
 
 		}
 
-	});
+	}
 
-	// input score click
-	fulfill.find('.score').find('input').click(function() {
 
-		var currentValue, parts, index;
+	/**
+	 * input score click
+	 * @return {null} 
+	 */
+	function clickInputScore() {
+
+		$(this).select();
+
+	}
+
+
+	/**
+	 * input score change
+	 * @return {null} 
+	 */
+	function changeInputScore(e) {
+
+		// exclude tab, shift, backspace key
+
+		if ((e.keyCode == 9) || (e.keyCode == 16)|| (e.keyCode == 8))
+			return false;
+
+		// continue...
+
+		var
+			currentValue
+			, parts
+			, index
+			, oppositeScore
+			;
 
  		currentValue = parseInt($(this).val());
  		if (currentValue == NaN)
@@ -140,45 +190,49 @@ $(document).ready(function() {
 
 		if (2 in parts) {
 
-			if (parts[2] == 'left') {
-				$('#encounter_' + parts[1] + '_right').val(3);
-			}
-			else {
+			if ($(this).val() >= 3)
+				oppositeScore = 0;
+			else
+				oppositeScore = 3;
 
-				$('#encounter_' + parts[1] + '_left').val(3);
-			}
+			if (parts[2] == 'left')
+				$('#encounter_' + parts[1] + '_right').val(oppositeScore);
+			else
+				$('#encounter_' + parts[1] + '_left').val(oppositeScore);
 
 		}
 
 		if (!currentValue)
 			$(this).val(0);
 
-		if ((currentValue == 0) || (currentValue)) 
-			$(this).val(currentValue + 1);
+		// if ((currentValue == 0) || (currentValue)) 
+		// 	$(this).val(currentValue + 1);
 
-		if (currentValue == 2)
-			$(this).val(2);
+		// if (currentValue == 2)
+		// 	$(this).val(2);
 
-		if (currentValue > 2)
-			$(this).val(0);
+		if (currentValue > 3)
+			$(this).val(3);
 
 		// update the totals
+		
 		updateTotal();
 
-	});
+	}
 
-	// input score change
-	fulfill.find('.score').find('input').change(function() {
 
-		return;
-
-	});
-
+	/**
+	 * tots up the main totals for the fixture
+	 * @return {[type]} [description]
+	 */
 	function updateTotal() {
 
-		var score, leftTotal = 0, rightTotal = 0;
+		var
+			score
+			, leftTotal = 0
+			, rightTotal = 0;
 
-		fulfill.find('.left').find('.score').find('input').each(function() {
+		$(fulfill).find('.left').find('.score').find('input').each(function() {
 
 	 		score = parseInt($(this).val());
 	 		if (isNaN(score))
@@ -188,7 +242,7 @@ $(document).ready(function() {
 
 		});
 
-		fulfill.find('.right').find('.score').find('input').each(function() {
+		$(fulfill).find('.right').find('.score').find('input').each(function() {
 
 	 		score = parseInt($(this).val());
 	 		if (isNaN(score))
@@ -198,8 +252,12 @@ $(document).ready(function() {
 
 		});
 
-		fulfill.find('.left').find('.total').find('p').html(leftTotal);
-		fulfill.find('.right').find('.total').find('p').html(rightTotal);
+		// set left and right total display and hidden inputs
+
+		$(fulfill).find('.left').find('.total').find('p').html(leftTotal);
+			$(fulfill).find('.left').find('.total').find('input').val(leftTotal);
+		$(fulfill).find('.right').find('.total').find('p').html(rightTotal);
+			$(fulfill).find('.right').find('.total').find('input').val(rightTotal);
 
 	}
 

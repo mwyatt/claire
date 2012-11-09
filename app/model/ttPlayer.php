@@ -99,8 +99,6 @@ class ttPlayer extends Model
 	public function getById($id)
 	{		
 
-		echo 'getting player: ' . $id . ' <br>';
-
 		if ($this->getData()) {
 		
 			foreach ($this->getData() as $player) {
@@ -191,31 +189,44 @@ class ttPlayer extends Model
 	 * player name, team name, team guid, player rank, sets won, sets played
 	 * must exclude matches which have no opponent
 	 */
-	public function selectByTeam($teamId)
+	public function readByTeam($id)
 	{	
 
-		$sth = $this->database->dbh->query("	
-			SELECT
-				tt_player.id AS player_id
-				, concat(tt_player.first_name, ' ', tt_player.last_name) AS full_name
-			FROM
-				tt_player
-			LEFT JOIN
-				tt_team ON tt_player.team_id = tt_team.id
-			WHERE
-				tt_team.id = '$teamId'
-			GROUP BY
-				tt_player.id
-			ORDER BY
-				tt_player.rank DESC
-		");
-		
-		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {	
-		
-			$this->data[$row['player_id']] = $row;
-	
-		}	
+		$sth = $this->database->dbh->prepare("
 
+			select
+				tt_player.id
+				, concat(tt_player.first_name, ' ', tt_player.last_name) as full_name
+
+			from
+				tt_player
+
+			left join
+				tt_team on tt_player.team_id = tt_team.id
+
+			where
+				tt_team.id = :id
+
+			group by
+				tt_player.id
+
+			order by
+				tt_player.rank desc
+
+		");				
+		
+		$sth->execute(array(
+			':id' => $id
+		));
+
+		if ($this->setDataStatement($sth))
+
+			return true;
+
+		else
+
+			return false;
+		
 	}	
 
 

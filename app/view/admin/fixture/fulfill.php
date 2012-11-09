@@ -79,7 +79,13 @@
 
 			</div>
 
-			<div class="total"><p></p></div>
+			<div class="total">
+			
+				<p></p>
+
+				<input type="hidden" name="total[<?php echo $side; ?>]">
+
+			</div>
 
 		</div>
 

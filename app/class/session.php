@@ -14,10 +14,28 @@
 class Session
 {
 
-	//public $dbh;
-	
-	public function __construct() {
+
+	public function __construct()
+	{
+
 		session_start();
+
+	}
+
+
+	public function set($data)
+	{
+
+		if (is_array($data)) {
+
+			$_SESSION[$key] = $string;
+
+			$key = key($data);
+
+		}
+
+		return;
+
 	}
 	
 	

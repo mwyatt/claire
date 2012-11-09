@@ -151,7 +151,10 @@ class ttFixture extends Model
 		// validation
 
 		if (! $this->validatePost($_POST, array(
-			'team', 'player', 'encounter'
+			'team'
+			, 'player'
+			, 'encounter'
+			, 'total'
 		))) {
 
 			$this->getObject('mainUser')->setFeedback('Please fill all required fields');
@@ -162,25 +165,47 @@ class ttFixture extends Model
 
 		// find fixture
 
-		$sth = $this->database->dbh->query("	
-			SELECT
-				tt_fixture.id
-				, tt_fixture.team_left_id
-				, tt_fixture.team_right_id
-				, tt_fixture.date_fulfilled
-			FROM
-				tt_fixture
-			WHERE
-				tt_fixture.team_left_id = {$_POST['team']['left']}
-				AND
-				tt_fixture.team_right_id = {$_POST['team']['right']}
+		$sth = $this->database->dbh->prepare("	
+
+			select
+				f.id
+				, f.team_left_id
+				, f.team_left_score
+				, f.team_right_id
+				, f.team_right_score
+				, f.date_fulfilled
+
+			from
+				tt_fixture as f
+
+			where
+				f.team_left_id = :team_left_id and f.team_right_id = :team_right_id
+
+			group by
+				f.id
+
 		");
 
-		// check for matching fixture
+		$sth->execute(array(
+			':team_left_id' => $_POST['team']['left']
+			, ':team_right_id' => $_POST['team']['right']
+		));
 
-		if ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
+		// obtain fixture id
 
-			$fixtureId = $row['id'];
+		if ($fixture = $sth->fetch(PDO::FETCH_ASSOC)) {
+
+			$fixtureId = $fixture['id'];
+
+			// has it been filled yet?
+
+			if ($fixture['date_fulfilled']) {
+
+				$this->getObject('mainUser')->setFeedback('This fixture has already been filled on ' . $fixture['date_fulfilled']);
+
+				return;
+
+			}
 
 		} else {
 
@@ -190,17 +215,7 @@ class ttFixture extends Model
 
 		}
 
-		// check for already fixture
-
-		if ($row['date_fulfilled']) {
-
-			$this->getObject('mainUser')->setFeedback('This fixture has already been filled on ' . $row['date_fulfilled']);
-
-			return;
-
-		}
-
-		// get player information
+		// get players
 
 		$playerIdGroup = array_merge($_POST['player']['left'], $_POST['player']['right']);
 		$ttPlayer = new ttPlayer($this->database, $this->config);
@@ -236,6 +251,14 @@ class ttFixture extends Model
 				$playerRight = $ttPlayer->getById(
 					$_POST['player']['right'][$encounterStructure['right'][$key]]
 				);
+echo '<pre>';
+print_r($playerLeft);
+echo '</pre>';
+exit;
+
+
+$this->getObject('session')->set('form_fulfill', );
+
 
 				// check for no show
 
@@ -324,13 +347,20 @@ class ttFixture extends Model
 
 		// update fixture
 		
-		$sth = $this->database->dbh->query("
-			UPDATE
+		$sth = $this->database->dbh->prepare("
+
+			update
 				tt_fixture
-			SET 
-				date_fulfilled = NOW()
-			WHERE
-				id = '$fixtureId'
+
+			set 
+				date_fulfilled = now()
+				, tt_fixture.team_left_score = :team_left_score
+				, tt_fixture.team_right_score = :team_right_score
+
+
+			where
+				id = '$fixtureid'
+
 		");				
 
 		$this->getObject('mainUser')->setFeedback('Fixture Fulfilled Successfully');

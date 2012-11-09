@@ -24,7 +24,6 @@ $view->setObject(array($mainUser, $ttDivision, $ttFixture));
 if (array_key_exists('form_fixture_fulfill', $_POST)) {
 
 	$ttFixture
-		->setObject($mainUser)
 		->fulfill($_POST);
 		
 	$route->current();		

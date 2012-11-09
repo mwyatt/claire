@@ -16,7 +16,7 @@ if (array_key_exists('division_id', $_POST)) {
 
 		while ($ttTeam->nextRow()) {
 	
-			$output .= '<option value="' . $ttTeam->getRow('team_id') . '">' . $ttTeam->getRow('team_name') . '</option>';
+			$output .= '<option value="' . $ttTeam->getRow('id') . '">' . $ttTeam->getRow('name') . '</option>';
 
 		}
 
