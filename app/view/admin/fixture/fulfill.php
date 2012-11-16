@@ -53,7 +53,7 @@
 
 				<div class="player-<?php echo $player_row; ?>">
 
-					<img src="" title="Play Up" width="16" height="16">
+					<img class="play-up" src="" title="Play Up" width="16" height="16">
 
 					<select name="player[<?php echo $side; ?>][<?php echo $player_row; ?>]" tabindex="2">
 						<option value="0"></option>
@@ -75,6 +75,8 @@
 				<div class="score-<?php echo $part; ?>">
 
 					<?php $name = 'encounter_' . (($part !== 'doubles') ? $row : $part) . '_' . $side; ?>
+
+					<input type="checkbox" name="disable_row[<?php echo $row; ?>][<?php echo $side; ?>]">
 
 					<label for="<?php echo $name ?>" class=""><?php echo (($part !== 'doubles') ? 'No Player' : ucfirst($part)); ?></label>
 

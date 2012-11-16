@@ -147,6 +147,10 @@ class ttFixture extends Model
 	 * @return true || false
 	 */
 	public function fulfill($_POST) {
+echo '<pre>';
+print_r($_POST);
+echo '</pre>';
+exit;
 
 		// validation
 
@@ -259,12 +263,25 @@ class ttFixture extends Model
 
 		// the loop
 		// builds $encounters
+		
+		$ill = false;
 
 		foreach ($_POST['encounter'] as $key => $score) {
 
 			$doubles = false;
 			$absent = false;
-			$ill = false;
+
+			// illness
+
+			if (array_key_exists('ill', $_POST)) {
+
+				$key = key(end($_POST['ill']));
+				$side = key($_POST['ill'][$key]);
+				$illness = array($key, $side);
+
+				$ill = true;
+
+			}
 
 			// encounter or doubles
 
@@ -299,6 +316,22 @@ class ttFixture extends Model
 
 			if ($absent) {
 				
+				if ($encounters[$key]['left']['player'] == false) {
+					$encounters[$key]['left']['score'] = 0;
+					$encounters[$key]['right']['score'] = 3;
+				} else {
+					$encounters[$key]['left']['score'] = 3;
+					$encounters[$key]['right']['score'] = 0;
+				}
+
+			}
+
+			// helper: ill player score setter
+			
+			if ($ill) {
+				
+				first($illness)
+
 				if ($encounters[$key]['left']['player'] == false) {
 					$encounters[$key]['left']['score'] = 0;
 					$encounters[$key]['right']['score'] = 3;

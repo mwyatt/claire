@@ -17,6 +17,7 @@ $(document).ready(function() {
 		, selectTeamGroup = $(fulfill).find('.team').find('select')
 		, selectPlayerGroup = $(fulfill).find('.player').find('select')
 		, inputScore = $(fulfill).find('.score').find('input')
+		, btnPlayUp = $(fulfill).find('.play-up')
 		;
 
 	// on
@@ -26,6 +27,7 @@ $(document).ready(function() {
 	selectPlayerGroup.on('change', changePlayer);
 	inputScore.on('keyup', changeInputScore);
 	inputScore.on('click', clickInputScore);
+	btnPlayUp.on('click', clickBtnPlayUp);
 
 
 	/**
@@ -258,6 +260,30 @@ $(document).ready(function() {
 			$(fulfill).find('.left').find('.total').find('input').val(leftTotal);
 		$(fulfill).find('.right').find('.total').find('p').html(rightTotal);
 			$(fulfill).find('.right').find('.total').find('input').val(rightTotal);
+
+	}
+
+
+	function clickBtnPlayUp() {
+
+		var btn = $(this);
+		$(this).addClass('active');
+
+		$.post('http://' + window.location.host + '/mvc/ajax/player/',
+			{ 
+				all: true
+			},
+			function(result) {
+
+				if (result) {
+
+					
+					$(btn).siblings('select').html(result);
+
+				}
+
+			}, "html"
+		);
 
 	}
 
