@@ -1,8 +1,17 @@
 <?php require_once($this->pathView() . 'admin/header.php'); ?>
 
-<div class="fulfill">
+<div id="content" class="fulfill">
 	
 	<h2>Submit Scorecard</h2>
+
+	<?php
+	// possible overview once submitted
+	if ($this->getObject('Session')->get('fixture_overview')) :
+	echo '<pre>';
+	print_r($this->getObject('Session')->getUnset('fixture_overview'));
+	echo '</pre>';
+	endif;
+	?>
 
 	<?php echo $this->getFeedback(); ?>
 
@@ -14,7 +23,7 @@
 
 			<select name="division_id" tabindex="1">
 
-				<option value="0"></option>
+				<option value=""></option>
 
 				<?php while ($ttDivision->nextRow()) : ?>
 			
@@ -26,7 +35,7 @@
 
 		</div>
 
-		<?php foreach ($ttFixture->getEncounterParts() as $side => $parts) : ?>
+		<?php foreach ($ttFixture->getEncounterStructure() as $side => $parts) : ?>
     
 		<div class="<?php echo $side; ?>">
 
@@ -58,7 +67,7 @@
 
 			<div class="score">
 
-				<?php $row = 1; ?>
+				<?php $row = 0; ?>
 
 				<?php foreach ($parts as $part) : ?>
 

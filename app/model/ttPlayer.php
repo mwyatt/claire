@@ -177,7 +177,7 @@ class ttPlayer extends Model
 		$sth = $this->database->dbh->query($sql);
 
 		if ($this->setDataStatement($sth))
-			return true;
+			return $this->getData();
 		else
 			return false;
 
@@ -295,34 +295,45 @@ class ttPlayer extends Model
 	 * @param  array $rankChanges left and right rank changes
 	 * @return null              
 	 */
-	public function updateRank($playerLeft, $playerRight, $rankChanges) {
+	public function updateRank($encounters) {
+// echo '<pre>';
+// print_r($encounters);
+// echo '</pre>';
+// exit;
 
-		// update player ranks
 
-		$playerLeft['new_rank'] = $playerLeft['rank'] + $rankChanges['left'];
-		$playerRight['new_rank'] = $playerRight['rank'] + $rankChanges['right'];
 
-		// set new player ranks
+// 		foreach ($encounters as $key => $encounter) {
 
-		$sth = $this->database->dbh->query("
-			UPDATE
-				tt_player
-			SET 
-				rank = '{$playerLeft['new_rank']}'
-			WHERE
-				id = '{$playerLeft['id']}'
-		");	
+// 			if ($key == 5)
+// 				break;
 
-		$sth = $this->database->dbh->query("
-			UPDATE
-				tt_player
-			SET 
-				rank = '{$playerRight['new_rank']}'
-			WHERE
-				id = '{$playerRight['id']}'
-		");	
+// 			if ($encounter['left']['player'])
+// 				$player[$encounter['left']['player']['id']] = $encounter['left']['player']['rank_change']
 
-		return;
+
+// 		}
+
+
+// 		// update player ranks
+
+// 		$playerLeft['new_rank'] = $playerLeft['rank'] + $rankChanges['left'];
+// 		$playerRight['new_rank'] = $playerRight['rank'] + $rankChanges['right'];
+
+// 		// set new player ranks
+
+
+
+// 		$sth = $this->database->dbh->query("
+// 			UPDATE
+// 				tt_player
+// 			SET 
+// 				rank = '{$playerRight['new_rank']}'
+// 			WHERE
+// 				id = '{$playerRight['id']}'
+// 		");	
+
+// 		return;
 
 	}	
 	
@@ -334,202 +345,196 @@ class ttPlayer extends Model
 	 * @param  array $playerRight 
 	 * @return array              with player ranking changes
 	 */
-	public function rankDifference($playerLeft, $playerRight) {
-	
+	public function rankDifference($encounter) {
+
 		// find rank difference
 
-		if ($playerLeft['id'] && $playerRight['id']) {
+		if ($encounter['left']['player']['rank'] > $encounter['right']['player']['rank'])
 
-			if ($playerLeft['rank'] > $playerRight['rank'])
+			$rankDifference = $encounter['left']['player']['rank'] - $encounter['right']['player']['rank'];
 
-				$rankDifference = $playerLeft['rank'] - $playerRight['rank'];
+		else
 
-			else
+			$rankDifference = $encounter['right']['player']['rank'] - $encounter['left']['player']['rank'];
 
-				$rankDifference = $playerRight['rank'] - $playerLeft['rank'];
-
-		}
 
 		// who won?
 
-		if ($playerLeft['score'] >= 3)
+		if ($encounter['left']['score'] >= 3)
 			$winner = true;
 		else
 			$winner = false;
 
 		// calculate rank change
 
-		$playerLeft['rank_change'] = 0;
-		$playerRight['rank_change'] = 0;
+		$encounter['left']['rank_change'] = 0;
+		$encounter['right']['rank_change'] = 0;
 
 		if ($rankDifference <= 24) {
-			if ($playerLeft['rank'] > $playerRight['rank']) {
+			if ($encounter['left']['player']['rank'] > $encounter['right']['player']['rank']) {
 				if ($winner == true) {
-					$playerLeft['rank_change'] += 12; // expected
-					$playerRight['rank_change'] -= 8; // expected
+					$encounter['left']['rank_change'] += 12; // expected
+					$encounter['right']['rank_change'] -= 8; // expected
 				} else {
-					$playerRight['rank_change'] += 12; // unexpected
-					$playerLeft['rank_change'] -= 8; // unexpected
+					$encounter['right']['rank_change'] += 12; // unexpected
+					$encounter['left']['rank_change'] -= 8; // unexpected
 				}
 			} else {
 				if ($winner == false) {
-					$playerRight['rank_change'] += 12; // expected
-					$playerLeft['rank_change'] -= 8; // expected
+					$encounter['right']['rank_change'] += 12; // expected
+					$encounter['left']['rank_change'] -= 8; // expected
 				} else {
-					$playerLeft['rank_change'] += 12; // unexpected
-					$playerRight['rank_change'] -= 8; // unexpected
+					$encounter['left']['rank_change'] += 12; // unexpected
+					$encounter['right']['rank_change'] -= 8; // unexpected
 				}
 			}
 		} elseif ($rankDifference <= 49) {
-			if ($playerLeft['rank'] > $playerRight['rank']) {
+			if ($encounter['left']['player']['rank'] > $encounter['right']['player']['rank']) {
 				if ($winner == true) {
-					$playerLeft['rank_change'] += 11; // expected
-					$playerRight['rank_change'] -= 7; // expected
+					$encounter['left']['rank_change'] += 11; // expected
+					$encounter['right']['rank_change'] -= 7; // expected
 				} else {
-					$playerRight['rank_change'] += 14; // unexpected
-					$playerLeft['rank_change'] -= 9; // unexpected
+					$encounter['right']['rank_change'] += 14; // unexpected
+					$encounter['left']['rank_change'] -= 9; // unexpected
 				}
 			} else {
 				if ($winner == false) {
-					$playerRight['rank_change'] += 11; // expected
-					$playerLeft['rank_change'] -= 7; // expected
+					$encounter['right']['rank_change'] += 11; // expected
+					$encounter['left']['rank_change'] -= 7; // expected
 				} else {
-					$playerLeft['rank_change'] += 14; // unexpected
-					$playerRight['rank_change'] -= 9; // unexpected
+					$encounter['left']['rank_change'] += 14; // unexpected
+					$encounter['right']['rank_change'] -= 9; // unexpected
 				}
 			}
 		} elseif ($rankDifference <= 99) {
-			if ($playerLeft['rank'] > $playerRight['rank']) {
+			if ($encounter['left']['player']['rank'] > $encounter['right']['player']['rank']) {
 				if ($winner == true) {
-					$playerLeft['rank_change'] += 9; // expected
-					$playerRight['rank_change'] -= 6; // expected
+					$encounter['left']['rank_change'] += 9; // expected
+					$encounter['right']['rank_change'] -= 6; // expected
 				} else {
-					$playerRight['rank_change'] += 17; // unexpected
-					$playerLeft['rank_change'] -= 11; // unexpected
+					$encounter['right']['rank_change'] += 17; // unexpected
+					$encounter['left']['rank_change'] -= 11; // unexpected
 				}
 			} else {
 				if ($winner == false) {
-					$playerRight['rank_change'] += 9; // expected
-					$playerLeft['rank_change'] -= 6; // expected
+					$encounter['right']['rank_change'] += 9; // expected
+					$encounter['left']['rank_change'] -= 6; // expected
 				} else {
-					$playerLeft['rank_change'] += 17; // unexpected
-					$playerRight['rank_change'] -= 11; // unexpected
+					$encounter['left']['rank_change'] += 17; // unexpected
+					$encounter['right']['rank_change'] -= 11; // unexpected
 				}
 			}
 		} elseif ($rankDifference <= 149) {
-			if ($playerLeft['rank'] > $playerRight['rank']) {
+			if ($encounter['left']['player']['rank'] > $encounter['right']['player']['rank']) {
 				if ($winner == true) {
-					$playerLeft['rank_change'] += 8; // expected
-					$playerRight['rank_change'] -= 5; // expected
+					$encounter['left']['rank_change'] += 8; // expected
+					$encounter['right']['rank_change'] -= 5; // expected
 				} else {
-					$playerRight['rank_change'] += 21; // unexpected
-					$playerLeft['rank_change'] -= 14; // unexpected
+					$encounter['right']['rank_change'] += 21; // unexpected
+					$encounter['left']['rank_change'] -= 14; // unexpected
 				}
 			} else {
 				if ($winner == false) {
-					$playerRight['rank_change'] += 8; // expected
-					$playerLeft['rank_change'] -= 5; // expected
+					$encounter['right']['rank_change'] += 8; // expected
+					$encounter['left']['rank_change'] -= 5; // expected
 				} else {
-					$playerLeft['rank_change'] += 21; // unexpected
-					$playerRight['rank_change'] -= 14; // unexpected
+					$encounter['left']['rank_change'] += 21; // unexpected
+					$encounter['right']['rank_change'] -= 14; // unexpected
 				}
 			}
 		} elseif ($rankDifference <= 199) {
-			if ($playerLeft['rank'] > $playerRight['rank']) {
+			if ($encounter['left']['player']['rank'] > $encounter['right']['player']['rank']) {
 				if ($winner == true) {
-					$playerLeft['rank_change'] += 6; // expected
-					$playerRight['rank_change'] -= 4; // expected
+					$encounter['left']['rank_change'] += 6; // expected
+					$encounter['right']['rank_change'] -= 4; // expected
 				} else {
-					$playerRight['rank_change'] += 26; // unexpected
-					$playerLeft['rank_change'] -= 17; // unexpected
+					$encounter['right']['rank_change'] += 26; // unexpected
+					$encounter['left']['rank_change'] -= 17; // unexpected
 				}
 			} else {
 				if ($winner == false) {
-					$playerRight['rank_change'] += 6; // expected
-					$playerLeft['rank_change'] -= 4; // expected
+					$encounter['right']['rank_change'] += 6; // expected
+					$encounter['left']['rank_change'] -= 4; // expected
 				} else {
-					$playerLeft['rank_change'] += 26; // unexpected
-					$playerRight['rank_change'] -= 17; // unexpected
+					$encounter['left']['rank_change'] += 26; // unexpected
+					$encounter['right']['rank_change'] -= 17; // unexpected
 				}
 			}
 		} elseif ($rankDifference <= 299) {
-			if ($playerLeft['rank'] > $playerRight['rank']) {
+			if ($encounter['left']['player']['rank'] > $encounter['right']['player']['rank']) {
 				if ($winner == true) {
-					$playerLeft['rank_change'] += 5; // expected
-					$playerRight['rank_change'] -= 3; // expected
+					$encounter['left']['rank_change'] += 5; // expected
+					$encounter['right']['rank_change'] -= 3; // expected
 				} else {
-					$playerRight['rank_change'] += 33; // unexpected
-					$playerLeft['rank_change'] -= 22; // unexpected
+					$encounter['right']['rank_change'] += 33; // unexpected
+					$encounter['left']['rank_change'] -= 22; // unexpected
 				}
 			} else {
 				if ($winner == false) {
-					$playerRight['rank_change'] += 5; // expected
-					$playerLeft['rank_change'] -= 3; // expected
+					$encounter['right']['rank_change'] += 5; // expected
+					$encounter['left']['rank_change'] -= 3; // expected
 				} else {
-					$playerLeft['rank_change'] += 33; // unexpected
-					$playerRight['rank_change'] -= 22; // unexpected
+					$encounter['left']['rank_change'] += 33; // unexpected
+					$encounter['right']['rank_change'] -= 22; // unexpected
 				}
 			}
 		} elseif ($rankDifference <= 399) {
-			if ($playerLeft['rank'] > $playerRight['rank']) {
+			if ($encounter['left']['player']['rank'] > $encounter['right']['player']['rank']) {
 				if ($winner == true) {
-					$playerLeft['rank_change'] += 3; // expected
-					$playerRight['rank_change'] -= 2; // expected
+					$encounter['left']['rank_change'] += 3; // expected
+					$encounter['right']['rank_change'] -= 2; // expected
 				} else {
-					$playerRight['rank_change'] += 45; // unexpected
-					$playerLeft['rank_change'] -= 30; // unexpected
+					$encounter['right']['rank_change'] += 45; // unexpected
+					$encounter['left']['rank_change'] -= 30; // unexpected
 				}
 			} else {
 				if ($winner == false) {
-					$playerRight['rank_change'] += 3; // expected
-					$playerLeft['rank_change'] -= 2; // expected
+					$encounter['right']['rank_change'] += 3; // expected
+					$encounter['left']['rank_change'] -= 2; // expected
 				} else {
-					$playerLeft['rank_change'] += 45; // unexpected
-					$playerRight['rank_change'] -= 30; // unexpected
+					$encounter['left']['rank_change'] += 45; // unexpected
+					$encounter['right']['rank_change'] -= 30; // unexpected
 				}
 			}
 		} elseif ($rankDifference <= 499) {
-			if ($playerLeft['rank'] > $playerRight['rank']) {
+			if ($encounter['left']['player']['rank'] > $encounter['right']['player']['rank']) {
 				if ($winner == true) {
-					$playerLeft['rank_change'] += 2; // expected
-					$playerRight['rank_change'] -= 1; // expected
+					$encounter['left']['rank_change'] += 2; // expected
+					$encounter['right']['rank_change'] -= 1; // expected
 				} else {
-					$playerRight['rank_change'] += 60; // unexpected
-					$playerLeft['rank_change'] -= 40; // unexpected
+					$encounter['right']['rank_change'] += 60; // unexpected
+					$encounter['left']['rank_change'] -= 40; // unexpected
 				}
 			} else {
 				if ($winner == false) {
-					$playerRight['rank_change'] += 2; // expected
-					$playerLeft['rank_change'] -= 1; // expected
+					$encounter['right']['rank_change'] += 2; // expected
+					$encounter['left']['rank_change'] -= 1; // expected
 				} else {
-					$playerLeft['rank_change'] += 60; // unexpected
-					$playerRight['rank_change'] -= 40; // unexpected
+					$encounter['left']['rank_change'] += 60; // unexpected
+					$encounter['right']['rank_change'] -= 40; // unexpected
 				}
 			}
 		} elseif ($rankDifference >= 500) {
-			if ($playerLeft['rank'] > $playerRight['rank']) {
+			if ($encounter['left']['player']['rank'] > $encounter['right']['player']['rank']) {
 				if ($winner == true) {
-					//$playerLeft['rank_change'] += 0; // expected
-					//$playerRight['rank_change'] -= 0; // expected
+					//$encounter['left']['rank_change'] += 0; // expected
+					//$encounter['right']['rank_change'] -= 0; // expected
 				} else {
-					$playerRight['rank_change'] += 75; // unexpected
-					$playerLeft['rank_change'] -= 50; // unexpected
+					$encounter['right']['rank_change'] += 75; // unexpected
+					$encounter['left']['rank_change'] -= 50; // unexpected
 				}
 			} else {
 				if ($winner == false) {
-					//$playerRight['rank_change'] += 0; // expected
-					//$playerLeft['rank_change'] -= 0; // expected
+					//$encounter['right']['rank_change'] += 0; // expected
+					//$encounter['left']['rank_change'] -= 0; // expected
 				} else {
-					$playerLeft['rank_change'] += 75; // unexpected
-					$playerRight['rank_change'] -= 50; // unexpected
+					$encounter['left']['rank_change'] += 75; // unexpected
+					$encounter['right']['rank_change'] -= 50; // unexpected
 				}
 			}
 		}
 
-		$rankChanges['left'] = $playerLeft['rank_change'];
-		$rankChanges['right'] = $playerRight['rank_change'];
-
-		return $rankChanges;
+		return $encounter;
 	
 	}	
 	

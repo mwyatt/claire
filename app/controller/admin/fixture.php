@@ -11,11 +11,15 @@
 // ============================================================================
 
 $ttFixture = new ttFixture($database, $config);
+$ttFixture
+	->setObject($mainUser)
+	->setObject($session);
+
 $ttDivision = new ttDivision($database, $config);
 
 $ttDivision->read();
 
-$view->setObject(array($mainUser, $ttDivision, $ttFixture));
+$view->setObject(array($mainUser, $ttDivision, $ttFixture, $session));
 
 
 // Form Submission

@@ -497,7 +497,16 @@ header.main .brand {
 /* Content Class
 ============================================================================ */				
 
-/* Category */
+/* admin fixture fulfill */
+
+#content.fulfill {}
+
+		#content.fulfill form .left {
+			float: left;
+		}
+
+
+
 
 #content.category {}
 

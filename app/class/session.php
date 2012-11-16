@@ -23,20 +23,54 @@ class Session
 	}
 
 
-	public function set($data)
+	public function get($key)
 	{
 
-		if (is_array($data)) {
-
-			$_SESSION[$key] = $string;
-
-			$key = key($data);
-
-		}
-
-		return;
+		if (array_key_exists($key, $_SESSION))
+			return $_SESSION[$key];
+		else
+			return false;
 
 	}
-	
-	
+
+
+	public function getUnset($key)
+	{
+
+		if (array_key_exists($key, $_SESSION)) {
+
+			$value = $_SESSION[$key];
+
+			unset($_SESSION[$key]);
+
+			return $value;
+			
+		}
+
+		return false;
+
+	}
+
+
+	public function set($key, $value)
+	{
+
+		if ($_SESSION[$key] = $value)
+			return true;
+		else
+			return false;
+
+	}
+
+
+	public function setIncrement($key, $value)
+	{
+
+		if ($_SESSION[$key][] = $value)
+			return true;
+		else
+			return false;
+
+	}
+
 }

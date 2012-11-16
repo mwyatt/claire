@@ -214,8 +214,8 @@ try {
 				, team_left_id INT UNSIGNED NOT NULL
 				, team_left_score TINYINT UNSIGNED
 				, team_right_id INT UNSIGNED NOT NULL
-				, team_right_id_score TINYINT UNSIGNED
-				, date_fulfilled TIMESTAMP NULL
+				, team_right_score TINYINT UNSIGNED
+				, date_fulfilled INT
 				, PRIMARY KEY (id)
 				, FOREIGN KEY (team_left_id) REFERENCES tt_team(id)
 				, FOREIGN KEY (team_right_id) REFERENCES tt_team(id)
