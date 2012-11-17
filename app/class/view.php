@@ -24,6 +24,7 @@ class View extends Model
 		$user = new MainUser($this->database, $this->config);
 	
 		// initiate menu
+
 		$menu = new MainMenu($this->database, $this->config);
 		
 		//$menu->adminBuild();
@@ -32,21 +33,24 @@ class View extends Model
 		$option->select();		
 		
 		// register new objects
+
 		$this->setObject(array($option, $menu));
 		
 	}
 
 	
 	/**
-	 * load template file and prepare all object results for output
-	 */	
+	 * load template file and prepare all objects for output
+	 * @param  string $templateTitle 
+	 * @return bool                
+	 */
 	public function loadTemplate($templateTitle)
 	{			
 	
 		$path = BASE_PATH . 'app/' . 'view/' . $templateTitle . '.php';
 		$path = strtolower($path);
 
-		// reject invalid template
+		// reject unfound template
 
 		if (!file_exists($path))
 			return false;
@@ -59,18 +63,16 @@ class View extends Model
 		// push objects to method scope
 		foreach ($this->objects as $title => $object) :
 		
-			echo 'var $' . $title . ' set' . '<br>';
-			
 			$$title = $object;
 		
 		endforeach;
 	
 		// start buffer
+
 		ob_start();	
 		
-		echo 'requiring template' . $path;
-
 		// include template
+
 		require_once($path);
 
 		// create cache $templateTitle.html
@@ -79,6 +81,7 @@ class View extends Model
 		);*/
 		
 		// end buffer and send
+
 		ob_end_flush();	
 
 		exit;
@@ -92,19 +95,36 @@ class View extends Model
 	 */
 	public function getFeedback() {
 
-		if (array_key_exists('feedback', $_SESSION)) {
-		
-			$feedback = $_SESSION['feedback'];
-			$_SESSION['feedback'] = false;
+		if ($this->getObject('Session')->get('feedback')) {
+
+			$output = '';
+
+			$feedback = $this->getObject('Session')->getUnset('feedback');
 			
-			return $feedback;
+			if (is_array($feedback)) {
+
+				$type = current($feedback);
+				$message = end($feedback);
+
+				$output .= '<div class="feedback hide ' . $type . '">';
+				$output .= '<h2>' . $type . '</h2>';
+				$output .= '<p>' . $message . '</p>';
+				$output .= '</div>';
+
+			} else {
+
+				$output .= '<div class="feedback hide">';
+				$output .= '<p>' . $feedback . '</p>';
+				$output .= '</div>';
+
+			}
+
+			return $output;
 			
-		} else {
-		
-			return false;
-		
 		}
-		
+
+		return false;
+
 	}	
 	
 	

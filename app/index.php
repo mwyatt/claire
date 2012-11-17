@@ -17,6 +17,8 @@
 
 $view = new View($database, $config);
 
+$view
+	->setObject($session);
 
 // Controller
 // ============================================================================

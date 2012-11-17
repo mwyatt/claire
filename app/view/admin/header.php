@@ -1,74 +1,67 @@
-<!doctype html>
-<!--[if lt IE 7 ]> <html class="ie6"> <![endif]-->
-<!--[if IE 7 ]>    <html class="ie7"> <![endif]-->
-<!--[if IE 8 ]>    <html class="ie8"> <![endif]-->
-<!--[if IE 9 ]>    <html class="ie9"> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!--> <html class=""> <!--<![endif]-->
-<head>
-	
-	
-	<!-- Basic Page Title and Metas
-	======================================================================= -->
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title><?php echo $mainOption->get('site_title'); ?></title>	
+        <meta name="description" content="<?php echo $mainOption->get('site_description'); ?>">
+		<meta name="keywords" content="<?php echo $mainOption->get('site_keywords'); ?>">
+        <meta name="viewport" content="width=device-width">
 
-	<meta charset="utf-8">
-	<title><?php echo $mainOption->get('site_title'); ?></title>	
-	<meta name="description" content="<?php echo $mainOption->get('site_description'); ?>">
-	<meta name="keywords" content="<?php echo $mainOption->get('site_keywords'); ?>">
-	
-	
-	<!-- Mobile Specific Metas
-	======================================================================= -->
+        <!-- css -->
 
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <link rel="stylesheet" href="<?php echo $this->urlHome(); ?>css/normalize.css">
+        <link rel="stylesheet" href="<?php echo $this->urlHome(); ?>css/main.css">
 
-	
-	<!-- CSS
-	======================================================================= -->
+        <!-- modenizr -->
 
-	<link rel="stylesheet" href="<?php echo $this->urlHome(); ?>asset/style/main.css">
-	
-	
-	<!-- Favicons
-	======================================================================= -->
+        <script src="<?php echo $this->urlHome(); ?>js/vendor/modernizr-2.6.2.min.js"></script>
 
-	<link rel="shortcut icon" href="<?php echo $this->urlHome(); ?>media/i/fav/favicon.ico">
-	<link rel="apple-touch-icon" href="<?php echo $this->urlHome(); ?>media/i/fav/apple-touch-icon.png">
-	<link rel="apple-touch-icon" sizes="72x72" href="<?php echo $this->urlHome(); ?>media/i/fav/apple-touch-icon-72x72.png">
-	<link rel="apple-touch-icon" sizes="114x114" href="<?php echo $this->urlHome(); ?>vi/fav/apple-touch-icon-114x114.png">	
+        <!-- favicon -->
 
-</head>
-<body>
+        <link rel="icon" type="image/png" href="<?php echo $this->urlHome(); ?>img/main/favicon.png">
 
-<div class="line-bottom">
-	<div class="container">
-		
-		<header class="base">
-		
-			<div class="profile">
-				<a target="_blank" title="Open Homepage"><?php echo $mainOption->get('site_title'); ?></a>
-			</div>
-		
+        <!-- font -->
+
+        <link href="http://fonts.googleapis.com/css?family=Cabin:400,500,600,700" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+    	<!--[if lt IE 7]>
+    	    <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    	<![endif]-->
+
+   	<div class="wrap">
+
+		<header class="main">
+
+		    <div class="title">
+		    	
+		    	<div><img src="" alt="" width="16" height="16"></div>
+
+		    	<a href="<?php echo $this->urlHome(); ?>" target="_blank" title="Open Homepage"><?php echo $mainOption->get('site_title'); ?></a>
+
+		    </div>
+		    
 			<div class="user">
-				<a class="name"><?php echo $mainUser->get('first_name'); ?></a>
-				<div class="drop">
-					<ul>
-						<li><a href="<?php echo $this->urlHome(); ?>cc/profile/">Profile</a></li>
-						<li><a href="?logout=true">Example Longer Menu Item which may Exist</a></li>
-						<li><a href="?logout=true">Logout</a></li>
-					</ul>
-				</div>
-			</div>
-			
-			<div class="clearfix"></div>		
-		
-		</header>
-		
-	</div>
-</div>
 
-<div class="container">
-	<nav class="base row">
-		<?php echo $mainMenu->adminBuild(); ?>
-	</nav>
-</div>
+				<a href="#" class="name"><?php echo $mainUser->get('first_name'); ?></a>
+
+				<ul>
+					<li><a href="<?php echo $this->urlHome(); ?>admin/user/">Profile</a></li>
+					<li><a href="?logout=true">Logout</a></li>
+				</ul>
+
+			</div>
+
+			<?php echo $this->getFeedback(); ?>
+
+			<nav class="main">
+
+				<?php echo $mainMenu->adminBuild(); ?>
+				
+			</nav>
+
+		</header>
