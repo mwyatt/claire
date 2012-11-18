@@ -26,6 +26,8 @@ class View extends Model
 		// initiate menu
 
 		$menu = new MainMenu($this->database, $this->config);
+		$menu
+			->setObject($user);
 		
 		//$menu->adminBuild();
 		
@@ -106,18 +108,19 @@ class View extends Model
 				$type = current($feedback);
 				$message = end($feedback);
 
-				$output .= '<div class="feedback hide ' . $type . '">';
+				$output .= '<div class="feedback hide ' . $type . '" title="Close Message">';
 				$output .= '<h2>' . $type . '</h2>';
 				$output .= '<p>' . $message . '</p>';
-				$output .= '</div>';
 
 			} else {
 
-				$output .= '<div class="feedback hide">';
+				$output .= '<div class="feedback hide" title="Close Message">';
 				$output .= '<p>' . $feedback . '</p>';
-				$output .= '</div>';
 
 			}
+			
+			$output .= '<div class="clearfix"></div>';
+			$output .= '</div>';
 
 			return $output;
 			

@@ -12,7 +12,9 @@
 $ttPlayer = new ttPlayer($database, $config);
 $ttDivision = new ttDivision($database, $config);
 
-$ttPlayer->setObject($mainUser);
+$ttPlayer
+	->setObject($session)
+	->setObject($mainUser);
 
 // (POST) update
 
@@ -64,9 +66,9 @@ if (array_key_exists('delete', $_GET)) {
 
 // next page
 
-if ($config->getUrl(2)) {
+if ($config->getUrl(3)) {
 
-	if ($config->getUrl(2) == 'new') {
+	if ($config->getUrl(3) == 'new') {
 
 		$ttDivision->read();
 
@@ -74,14 +76,14 @@ if ($config->getUrl(2)) {
 
 	}
 
-	$view->loadTemplate($config->getUrl(0) . '/' . $config->getUrl(1) . '/' . $config->getUrl(2));	
+	$view->loadTemplate($config->getUrl(1) . '/' . $config->getUrl(2) . '/' . $config->getUrl(3));	
 	
 }
 
 // invalid url
 
-if ($config->getUrl(2))
-	$route->home('admin/' . $config->getUrl(1) . '/');
+if ($config->getUrl(3))
+	$route->home('admin/' . $config->getUrl(2) . '/');
 
 // view 	
 	

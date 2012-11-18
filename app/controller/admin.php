@@ -11,14 +11,11 @@
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
 
- 
 $mainUser = new MainUser($database, $config);
 
 $view->setObject(array($mainUser));
 
-
-// Log Out
-// =============================================================================
+// log out
 
 if (array_key_exists('logout', $_GET)) {
 	
@@ -30,43 +27,39 @@ if (array_key_exists('logout', $_GET)) {
 	
 }
 
-
-// Login Attempt
-// =============================================================================
+// login attempt
 
 if (array_key_exists('form_login', $_POST)) {
 	
 	if ($mainUser->login())
 		$mainUser->setSession();
 		
-	$Route->home('admin/');
+	$route->home('admin/');
 	
 }
 
-
-// Logged In
-// =============================================================================
+// logged in
 
 if ($mainUser->isLogged()) {
 
 	// sub page
-	if ($config->getUrl(1)) {
 	
+	if ($config->getUrl(1)) {
+
 		$path = BASE_PATH . 'app/controller/' . $config->getUrl(0) . '/' . $config->getUrl(1) . '.php';
 	
-		if (is_file($path))
+		if ($mainUser->checkPermission($path))
 			require_once($path);
 		else
-			$route->home('admin/');
-			
+			$view->loadTemplate('admin/permission');	
+
 	} else {
+
+		// dashboard
 	
-		// view/admin/dashboard.php
 		$view->loadTemplate('admin/dashboard');	
 	
 	}
-	
-	exit;
 	
 }
 
@@ -82,32 +75,3 @@ if ($config->getUrl(1))
 // =============================================================================
 
 $view->loadTemplate('admin/login');
-
-//$view->loadTemplate('admin/form-new-team');
-	
-/*
-$view
-	->registerObjects(array(
-		$mainUser
-	))
-	->loadTemplate('admin-login');
-	*/
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	

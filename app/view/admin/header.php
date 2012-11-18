@@ -56,12 +56,18 @@
 
 			</div>
 
+			<div class="clearfix"></div>
+
+			<!-- feedback -->
+
 			<?php echo $this->getFeedback(); ?>
 
-			<nav class="main">
+			<!-- main -->
 
-				<?php echo $mainMenu->adminBuild(); ?>
-				
-			</nav>
+			<nav class="main"><?php echo $mainMenu->adminBuild(); ?></nav>
+
+			<!-- sub -->
+
+			<?php echo $mainMenu->getAdminSubMenu(); ?>
 
 		</header>

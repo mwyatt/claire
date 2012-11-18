@@ -585,7 +585,7 @@ class ttPlayer extends Model
 
 		if ($sth->rowCount()) {
 
-			$this->getObject('mainUser')->setFeedback('Unable to delete player, they are involved with matches');
+			$this->getObject('Session')->set('feedback', array('error', 'Unable to delete player, they are involved with matches'));
 
 			return;
 			
@@ -630,11 +630,7 @@ class ttPlayer extends Model
 
 		if ($sth->rowCount()) {
 
-			$this->getObject('mainUser')->setFeedback('Player Deleted Successfully');
-
-		} else {
-
-			$this->getObject('mainUser')->setFeedback('Error occurred, player not deleted');
+			$this->getObject('Session')->set('feedback', array('success', 'Player Deleted'));
 
 		}
 

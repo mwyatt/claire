@@ -15,6 +15,7 @@ $(document).ready(function() {
 		, btnPlayUp = $(fulfill).find('.play-up')
 		, feedback = $('header.main').find('.feedback')
 		, websiteTitle = $('header.main').find('.title').find('a')
+		, user = $('header.main').find('.user')
 		;
 
 	// on
@@ -25,6 +26,32 @@ $(document).ready(function() {
 	inputScore.on('keyup', changeInputScore);
 	inputScore.on('click', clickInputScore);
 	btnPlayUp.on('click', clickBtnPlayUp);
+
+	// universal
+
+	// click the document
+	
+	$(document).mouseup(removeModals);	
+
+	// hit a key escape
+	
+	$(document).keyup(function(e) {
+		if (e.keyCode == 27)
+			removeModals();
+	});	
+
+	function removeModals() {
+		$('*').removeClass('active');
+	}
+
+	// user
+
+	user.find('a').on('click', clickUser);
+
+	function clickUser() {
+		user.addClass('active');
+		return false;
+	}
 
 	// website title
 
@@ -55,6 +82,12 @@ $(document).ready(function() {
 
 		function hideFeedback() {
 			feedback.fadeOut(animationSpeed);
+		}
+
+		feedback.on('click', clickFeedback);
+
+		function clickFeedback() {
+			$(this).fadeOut(animationSpeed);
 		}
 
 	}

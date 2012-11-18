@@ -15,8 +15,21 @@ class mainMenu extends Model
 
 	public $type;
 	public $html;
+	public $adminSubMenu;
+
 	
-	
+	public function getAdminSubMenu()
+	{		
+		
+		if ($this->adminSubMenu)
+
+			echo $this->adminSubMenu;
+
+		return false;
+
+	}
+
+
 	/**
 	  *	Gets a full menu tree
 	  *	@method		get
@@ -132,45 +145,103 @@ class mainMenu extends Model
 	  */
 	public function adminBuild($parent = 0)
     {
-	
-		$i = 0;
+
+    	$user = $this->getObject('mainUser')->get();
+
+		$path = 'app/controller/' . $this->config->getUrl(0). '/'; // set dir
 		
-		$dir = 'app/controller/' . $this->config->getUrl(0). '/'; // set dir
+		if ($handle = opendir($path)) {
 		
-		if ($dirHandle = opendir($dir)) { // find controllers
-		
-			$html = '<ol class="ccMenu">';
+			$html = '<ul>';
 			
-			$url = $this->config->getUrl('base') . $this->config->getUrl(0). '/';
-			$current = ($this->config->getUrl(1) ? false : ' class="current"');
+			$adminBaseUrl = $this->config->getUrl('base') . $this->config->getUrl(0). '/';
+
+			$current = (! $this->config->getUrl(1) ? ' class="current"' : false);
 			
-			$html .= '<li'.$current.'><div><a href="'.$url.'">Dashboard</a></div></li>';
+			$html .= '<li' . $current . '><a href="' . $adminBaseUrl . '">Dashboard</a></li>';
 					
-			while (($file = readdir($dirHandle)) !== false) {
+			while (($file = readdir($handle)) !== false) {
 			
-				if ($file != "." && $file != ".." && $file != ".htaccess" && $file != "index.php") { // filter
+				if ($file != "." && $file != ".." && $file != ".htaccess" && $file != "index.php") {
 				
-					$title = str_replace ('.php', '', $file);
-					
-					$url = $this->config->getUrl('base') . $this->config->getUrl(0) . '/' . $title . '/';
-					
-					//$icon = (file_exists($dir.'/'.$file.'/assets/img/cms_icon.png') ? $dir.'/'.$file.'/cms_icon.png' : 'assets/img/32x32.gif'); // needs work
-					
-					$current = ($this->config->getUrl(1) == $file ? ' class="current"' : false);
-					
-					$html .= '<li'.$current.'><div><a href="'.$url.'">'.$title.'</a></div></li>';
+					if (strpos($file, '.php')) {
+
+						$title = str_replace('.php', '', $file);
+						
+						$adminBaseUrl = $this->config->getUrl('base') . $this->config->getUrl(0) . '/' . $title . '/';
+						
+						//$icon = (file_exists($path.'/'.$file.'/assets/img/cms_icon.png') ? $path.'/'.$file.'/cms_icon.png' : 'assets/img/32x32.gif'); // needs work
+						
+						$current = ($this->config->getUrl(1) == $title ? ' class="current"' : false);
+						
+						$html .= '<li'.$current.'><a href="'.$adminBaseUrl.'">'.$title.'</a></li>';
+						
+					} else {
+
+						$folders[] = $file;
+
+					}
 		
 				}
 				
 			}
+
+			$html .= '<div class="clearfix"></div>';						
+			$html .= '</ul>';						
 			
-			$html .= '</ol>';						
-			
-			closedir($dirHandle); // close
+			closedir($handle); // close
+
+			// sub menu
+
+			foreach ($folders as $folder) {
+
+				if ($this->config->getUrl(1) == $folder) {
+
+					$path = 'app/controller/admin/' . $folder . '/';
+
+					if ($handle = opendir($path)) {
+
+						$this->adminSubMenu = '<nav class="sub">';
+						$this->adminSubMenu .= '<ul>';
+						
+						$folderBaseUrl = $this->config->getUrl('base') . $this->config->getUrl(0) . '/league/';
+
+						while (($file = readdir($handle)) !== false) {
+						
+							if ($file != "." && $file != ".." && $file != ".htaccess" && $file != "index.php") {
+							
+								if (strpos($file, '.php')) {
+
+									$title = str_replace('.php', '', $file);
+									
+									$url = $this->config->getUrl('base') . $this->config->getUrl(0) . '/' . $this->config->getUrl(1) . '/' . $title . '/';
+									
+									$current = ($this->config->getUrl(2) == $title ? ' class="current"' : false);
+									
+									$this->adminSubMenu .= '<li' . $current . '><a href="' . $url . '">' . $title . '</a></li>';
+									
+								}
+						
+							}
+							
+						}
+
+						$this->adminSubMenu .= '<div class="clearfix"></div>';
+						$this->adminSubMenu .= '</ul>';
+						$this->adminSubMenu .= '</nav>';
+
+					}
+
+				}
+
+			}
 			
 			return $this->html = $html;
+
 		}
+
 		return false;
+
     }	
 
 	

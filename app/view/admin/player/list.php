@@ -1,28 +1,21 @@
 <?php require_once($this->pathView() . 'admin/header.php'); ?>
 
-<div class="players">
+<div id="content" class="league player">
 	
 	<h2>Players</h2>
 
-	<nav>
-		<ul>
-			<li>
-				<a href="<?php echo $this->urlCurrent(); ?>new/" title="(Ajax) Open New Panel">New</a>
-			</li>
-		</ul>
-	</nav>
+	<a class="new" href="<?php echo $this->urlCurrent(); ?>new/" title="Add a new Player">New</a>
 
-	<?php echo $this->getFeedback(); ?>
+	<?php if ($ttPlayer->getData()) : ?>
 
-	<?php if ($ttPlayer->getData()) : ?>	
-
-	<table width="100%" cellspacing="0" cellpadding="0">
+	<table class="main" width="100%" cellspacing="0" cellpadding="0">
 
 		<tr>
-			<th>Select</th>
-			<th>Name</th>
-			<th>Rank</th>
-			<th>Team</th>
+			<th class="text-left">Select</th>
+			<th class="text-left">Name</th>
+			<th class="text-center">Rank</th>
+			<th class="text-left">Team</th>
+			<th class="text-left">Division</th>
 			<th>Action</th>
 		</tr>
 
@@ -35,16 +28,16 @@
 			</td>
 
 			<td>
-				<a href="<?php echo $this->urlCurrent(); ?>?update=<?php echo $ttPlayer->getRow('id'); ?>" title="(Ajax) Open Edit Panel"><?php echo $ttPlayer->getRow('full_name'); ?></a>
+				<a href="<?php echo $this->urlCurrent(); ?>?update=<?php echo $ttPlayer->getRow('id'); ?>" title="Edit Player <?php echo $ttPlayer->getRow('full_name'); ?>"><?php echo $ttPlayer->getRow('full_name'); ?></a>
 			</td>
 
-			<td title="(Ajax) Turn in to a input field and OK button"><?php echo $ttPlayer->getRow('rank'); ?></td>
+			<td class="text-center"><?php echo $ttPlayer->getRow('rank'); ?></td>
 
 			<td><?php echo $ttPlayer->getRow('team_name'); ?></td>
 
 			<td><?php echo $ttPlayer->getRow('division_name'); ?></td>
 
-			<td><a href="<?php echo $this->urlCurrent(); ?>?delete=<?php echo $ttPlayer->getRow('id'); ?>" title="Delete <?php echo $ttPlayer->getRow('full_name'); ?>">Delete</a></td>
+			<td class="action"><a href="<?php echo $this->urlCurrent(); ?>?delete=<?php echo $ttPlayer->getRow('id'); ?>" title="Delete <?php echo $ttPlayer->getRow('full_name'); ?>">Delete</a></td>
 
 		</tr>		
 

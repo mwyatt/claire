@@ -168,9 +168,8 @@ class mainUser extends Model
 	{	
 	
 		if (array_key_exists('user', $_SESSION))
+
 			return true;
-		/*else
-			return false;*/
 			
 	}
 	
@@ -197,9 +196,19 @@ class mainUser extends Model
 		
 	}
 	
-	public function get($key)
-	{	
-		return $_SESSION['user'][$key];
+	public function get($key = false)
+	{
+
+		if ($key) {
+
+			return $_SESSION['user'][$key];
+
+		} else {
+
+			return $_SESSION['user'];
+
+		}
+
 	}
 	
 	public function setFeedback($string)
@@ -212,5 +221,34 @@ class mainUser extends Model
 	}
 	
 	
+	public function checkPermission($path)
+	{
+
+		if ($file = file_get_contents($path)) {
+
+			if ($position = strpos($file, '@access ')) {
+
+				$requiredLevel = substr($file, $position + 8, 2);
+				$requiredLevel = intval($requiredLevel);
+
+				$user = $this->get();
+
+				if ($user['level'] >= $requiredLevel)
+
+					return true;
+
+				else
+
+					return false;
+
+			} else {
+
+				return true;
+
+			}
+
+		}
+
+	}
 	
 }

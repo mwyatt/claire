@@ -29,7 +29,7 @@ if ($config->getUrl(0)) {
 
 	if (is_file($path))
 		require_once($path);
-				
+
 }
 
 
