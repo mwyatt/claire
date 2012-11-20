@@ -1,7 +1,7 @@
 <?php
 
-try {	
-
+try {
+	
 	$mainuser
 		->setEmail('martin.wyatt@gmail.com')
 		->setPassword('123')

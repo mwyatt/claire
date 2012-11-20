@@ -12,6 +12,7 @@
  */
 
 $mainUser = new MainUser($database, $config);
+$mainUser->setObject($session);
 
 $view->setObject(array($mainUser));
 

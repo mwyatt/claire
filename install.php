@@ -15,13 +15,15 @@
 // look for installed.txt
 if (is_file(BASE_PATH . 'installed.txt')) {
 
-	// delete installed.txt
-	unlink(BASE_PATH . 'installed.txt');
-	
 	// refresh database
-	$database->dbh->query("DROP DATABASE mvc_002"); 
-	$database->dbh->query("CREATE DATABASE mvc_002");
+
+	$database->dbh->query("DROP DATABASE " . Database::$credentials['basename']); 
+	$database->dbh->query("CREATE DATABASE " . Database::$credentials['basename']);
 	
+	// delete installed.txt
+
+	unlink(BASE_PATH . 'installed.txt');
+
 	$route->current('?install');
 
 } else {
@@ -35,8 +37,8 @@ if (is_file(BASE_PATH . 'installed.txt')) {
 		require_once(BASE_PATH . '/install-tabledata.php');
 		
 		// @remove fixture generation
-		$ttfixture = new ttFixture($database, $config);
-		$ttfixture->generateAll();
+		// $ttfixture = new ttFixture($database, $config);
+		// $ttfixture->generateAll();
 
 		// create installed.txt
 		$file = fopen(BASE_PATH . 'installed.txt', 'w');

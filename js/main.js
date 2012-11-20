@@ -50,7 +50,6 @@ $(document).ready(function() {
 
 	function clickUser() {
 		user.addClass('active');
-		return false;
 	}
 
 	// website title

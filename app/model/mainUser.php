@@ -29,10 +29,11 @@ class mainUser extends Model
 	
 
 	public function setPassword($value) {
-		$this->password = hash('sha512', $value);
+		$this->password = crypt($value);
+		// $this->password = hash('sha512', $value);
 		return $this;		
 	}
-	
+
 	protected function getPassword() {
 		return ($this->password ? $this->password : false);
 	}
@@ -103,61 +104,71 @@ class mainUser extends Model
 			INSERT INTO main_user
 				(email, password, level)
 			values
-				(:email, :password, '$level')
+				(:email, :password, :level)
 		");
 		
 		$sth->execute(
 			array(
 				':email' => $this->getEmail()
 				, ':password' => $this->getPassword()
+				, ':level' => $level
 			)
 		);
 	}
 	
 	
 	/**
-	 * login user based on post data
+	 * login user
+	 * @return bool 
 	 */
 	public function login()
 	{	
 	
-		$this->setEmail($_POST['username']);
-		$this->setPassword($_POST['password']);
-		
-		$sth = $this->database->dbh->query("	
-			SELECT
+		$sth = $this->database->dbh->prepare("	
+
+			select
 				main_user.id
 				, email
+				, password
 				, date_registered
 				, level
 				, meta.name as meta_name
 				, meta.value as meta_value
-			FROM
+
+			from
 				main_user				
-			LEFT JOIN
+
+			left join
 				main_user_meta as meta
-			ON
+
+			on
 				main_user.id = meta.user_id		
-			WHERE 
-				email = '{$this->getEmail()}'
-			AND
-				password = '{$this->getPassword()}'					
-		");
+
+			where 
+				email = :email
+
+		");		
 		
-		$this->parseRows($sth);
-		
-		if ($this->getData()) {
-			
-			$this->setSession();
-			return true;
-			
-		} else {
-		
-			$_SESSION['feedback'] = 'Incorrect Username or Password, or both!';
-			return false;
-		
+		$sth->execute(array(
+			':email' => $_POST['email_address']
+		));
+
+		if ($this->setDataStatement($sth)) {
+
+			if (crypt($_POST['password'], parent::get('password')) == parent::get('password')) {
+
+				$this->getObject('Session')->set('feedback', array('success', 'Successfully Logged in as ' . parent::get('first_name') . ' ' . parent::get('last_name')));
+
+				return true;
+
+			}
+
 		}
-		
+
+		$this->getObject('Session')->set('feedback', array('error', 'Email Address or password incorrect'));
+
+		return false;
+
 	}
 	
 	

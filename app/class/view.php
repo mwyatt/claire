@@ -108,13 +108,13 @@ class View extends Model
 				$type = current($feedback);
 				$message = end($feedback);
 
-				$output .= '<div class="feedback hide ' . $type . '" title="Close Message">';
+				$output .= '<div class="feedback hide ' . $type . '" title="Dismiss">';
 				$output .= '<h2>' . $type . '</h2>';
 				$output .= '<p>' . $message . '</p>';
 
 			} else {
 
-				$output .= '<div class="feedback hide" title="Close Message">';
+				$output .= '<div class="feedback hide" title="Dismiss">';
 				$output .= '<p>' . $feedback . '</p>';
 
 			}

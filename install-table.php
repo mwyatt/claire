@@ -24,7 +24,6 @@ try {
 				, name VARCHAR(255) NOT NULL
 				, value VARCHAR(255) NOT NULL
 				, PRIMARY KEY (id)
-				, FOREIGN KEY (user_id) REFERENCES main_user(id)
 			)
 	");
 
@@ -42,7 +41,6 @@ try {
 				, status VARCHAR(50) NOT NULL DEFAULT 'invisible'
 				, user_id INT UNSIGNED				
 				, PRIMARY KEY (id)
-				, FOREIGN KEY (user_id) REFERENCES main_user(id)
 			)
 	");
 
@@ -55,7 +53,6 @@ try {
 				, name VARCHAR(255) NOT NULL
 				, value VARCHAR(255) NOT NULL
 				, PRIMARY KEY (id)
-				, FOREIGN KEY (content_id) REFERENCES main_content(id)
 			)
 	");
 
@@ -95,7 +92,6 @@ try {
 				, type VARCHAR(50) NOT NULL
 				, media_tree_id INT UNSIGNED
 				, PRIMARY KEY (id)
-				, FOREIGN KEY (media_tree_id) REFERENCES main_media_tree(id)	
 			)		
 	");
 
@@ -108,8 +104,6 @@ try {
 				, media_id INT UNSIGNED
 				, position INT UNSIGNED
 				, PRIMARY KEY (id)
-				, FOREIGN KEY (content_id) REFERENCES main_content(id)
-				, FOREIGN KEY (media_id) REFERENCES main_media(id)
 			)
 	");	
 
@@ -126,7 +120,6 @@ try {
 				, position INT UNSIGNED
 				, media_id INT UNSIGNED				
 				, PRIMARY KEY (id)
-				, FOREIGN KEY (media_id) REFERENCES main_media(id)
 			)
 	");	
 
@@ -188,8 +181,6 @@ try {
 				, venue_id INT UNSIGNED NOT NULL
 				, division_id INT UNSIGNED NOT NULL
 				, PRIMARY KEY (id)
-				, FOREIGN KEY (division_id) REFERENCES tt_division(id)
-				, FOREIGN KEY (venue_id) REFERENCES tt_venue(id)
 			)		
 	");	
 	
@@ -217,8 +208,6 @@ try {
 				, team_right_score TINYINT UNSIGNED
 				, date_fulfilled INT
 				, PRIMARY KEY (id)
-				, FOREIGN KEY (team_left_id) REFERENCES tt_team(id)
-				, FOREIGN KEY (team_right_id) REFERENCES tt_team(id)
 			)		
 	");	
 	
@@ -243,9 +232,6 @@ try {
 				, part_right_id INT UNSIGNED
 				, fixture_id INT UNSIGNED NOT NULL
 				, PRIMARY KEY (id)
-				, FOREIGN KEY (part_left_id) REFERENCES tt_encounter_part(id)
-				, FOREIGN KEY (part_right_id) REFERENCES tt_encounter_part(id)
-				, FOREIGN KEY (fixture_id) REFERENCES tt_fixture(id)
 			)		
 	");	
 

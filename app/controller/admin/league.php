@@ -5,7 +5,7 @@
  *
  * PHP version 5
  * 
- * @access 11
+ * @access 9
  * @package	~unknown~
  * @author Martin Wyatt <martin.wyatt@gmail.com> 
  * @version	0.1

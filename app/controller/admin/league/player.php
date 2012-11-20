@@ -31,7 +31,6 @@ if (array_key_exists('form_player_update', $_POST)) {
 if (array_key_exists('form_player_new', $_POST)) {
 	
 	$ttPlayer->create($_POST);
-		
 
 	$route->homeAdmin('player/');
 	

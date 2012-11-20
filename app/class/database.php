@@ -14,7 +14,13 @@ class Database
 {
 
 	public $dbh;
-	
+	public static $credentials = array(
+		'host' => 'localhost',
+		'port' => '80',
+		'basename' => 'mvc_003',
+		'username' => 'root',
+		'password' => '',
+	);
 
 	public function __construct() {
 		$this->connect();
@@ -23,13 +29,7 @@ class Database
 	
 	public function getCredentials() {
 	
-		return $credentials = array(
-			'host' => 'localhost',
-			'port' => '80',
-			'basename' => 'mvc_002',
-			'username' => 'root',
-			'password' => '',
-		);
+		return self::$credentials;
 		
 	}
 	
@@ -56,8 +56,8 @@ class Database
 			
 		} catch (PDOException $error) {
 
-			echo '<h1>Unable to Connect to Database: '
-				. $credentials['basename'] . '</h1>';
+			echo '<h1>Unable to Connect to Database</h1>';
+			
 			exit;
 			
 		}	

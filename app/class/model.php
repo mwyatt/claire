@@ -59,25 +59,40 @@ abstract class Model extends Config
 	
 		// no rows
 
-		if (! $sth->rowCount())
+		if (! $sth->rowCount()) 
 
 			return false;
 
-		// singleton row
-
-		if ($sth->rowCount() == 1) {
-
-			$this->data = $sth->fetch(PDO::FETCH_ASSOC);
-
-			return true;
-
-		}
-
-		// full row set
+		// some rows
 
 		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
 
-			$this->data[] = $row;
+			// handle possible meta_name
+
+			if (array_key_exists('meta_name', $row)) {
+
+				$this->data[$row['id']] = array_merge((array)$this->data[$row['id']], (array)$row);
+				$this->data[$row['id']][$row['meta_name']] = $row['meta_value'];
+				unset($this->data[$row['id']]['meta_name']);
+				unset($this->data[$row['id']]['meta_value']);
+
+			} else {
+
+				$this->data[$row['id']] = $row;
+
+			}
+
+		}
+
+		// correct array keys
+
+		if (count($this->data) > 1) {
+
+			$this->data = array_values($this->data);
+
+		} else {
+
+			$this->data = reset($this->data);
 			
 		}
 

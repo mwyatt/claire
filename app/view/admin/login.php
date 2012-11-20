@@ -74,7 +74,7 @@
 
 			<input type="hidden" name="form_login" value="true">
 			<div>
-				<input type="text" name="username" placeholder="Username" autofocus="autofocus">					
+				<input type="text" name="email_address" placeholder="Email Address" autofocus="autofocus">					
 			</div>
 			<div>
 				<input type="password" name="password" placeholder="Password">
