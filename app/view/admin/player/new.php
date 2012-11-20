@@ -2,6 +2,8 @@
 
 	<?php echo $this->getFeedback(); ?>
 
+	<h1>Add New Player</h1>
+
 	<form class="main" method="post">
 
 		<div class="row">			

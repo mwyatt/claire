@@ -1,15 +1,6 @@
 <?php require_once($this->pathView() . 'admin/header.php'); ?>
-<?php
 
-// echo '<pre>';
-// print_r($ttTeam);
-// echo '</pre>';
-// exit;
-
-
-?>
-
-	<?php echo $this->getFeedback(); ?>
+	<h1>Edit Player <?php echo $ttPlayer->get('full_name'); ?></h1>
 
 	<form class="main" method="post">
 

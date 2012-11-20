@@ -243,7 +243,7 @@ class mainUser extends Model
 				$requiredLevel = intval($requiredLevel);
 
 				$user = $this->get();
-
+				
 				if ($user['level'] >= $requiredLevel)
 
 					return true;

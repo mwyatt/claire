@@ -75,7 +75,7 @@ if ($config->getUrl(3)) {
 
 	}
 
-	$view->loadTemplate($config->getUrl(1) . '/' . $config->getUrl(2) . '/' . $config->getUrl(3));	
+	$view->loadTemplate('admin/player/new');	
 	
 }
 
