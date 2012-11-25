@@ -1,3 +1,5 @@
+
+
 <?php
 
 /**
@@ -6,26 +8,25 @@
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */ 
-  
-  
-/**
- * @see app_cc_model_media
- */ 
-$media = new Media();
-  
-// Upload Attempt
-if (array_key_exists('form_upload', $_POST)) {
 
-	$media->upload($_FILES['media']);
-	$route->home('cc/media/');
+// initialise 
+
+$mainMedia = new mainMedia($database, $config);
+$mainMedia
+	->setObject($session)
+	->setObject($mainUser);
+
+// upload attempt
+
+if (array_key_exists('form_media_upload', $_POST)) {
+
+	$mainMedia->upload($_FILES);
+	$route->home('admin/media/');	
 	
 }
   
-$media->get();
+$mainMedia->read();
 
-
-/**
-  * view: media-index
-  */
-require_once('app/cc/view/media.php');
-exit;
+$view
+	->setObject($mainMedia)
+	->loadTemplate('admin/media/list');

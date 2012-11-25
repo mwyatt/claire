@@ -33,15 +33,8 @@
 	</table>
 
 	<form id="upload" action="" method="post" enctype="multipart/form-data">
-
-		<input type="hidden" name="form_upload" value="true">
-
-		<div>
 			<input type="file" name="media[]" multiple>
-		</div>
-		<div>
-			<input type="submit" value="Upload" />
-		</div>
+			<input type="submit" name="form_media_upload" value="Upload" />
 	</form>
 
 </div> <!-- styling aid -->

@@ -84,13 +84,12 @@ try {
 			main_media
 			(
 				id INT UNSIGNED NOT NULL AUTO_INCREMENT
-				, title VARCHAR(255) NOT NULL
+				, file_name VARCHAR(255) NOT NULL
+				, title VARCHAR(255)
 				, title_slug VARCHAR(255) NOT NULL
-				, guid VARCHAR(255) NOT NULL	
-				, date_published TIMESTAMP DEFAULT NOW()	
-				, description VARCHAR(255) NOT NULL
+				, date_published INT	
 				, type VARCHAR(50) NOT NULL
-				, media_tree_id INT UNSIGNED
+				, tree_id INT UNSIGNED
 				, PRIMARY KEY (id)
 			)		
 	");

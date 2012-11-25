@@ -4,6 +4,29 @@
 
 $(document).ready(function() {
 
+	// class example
+
+	function sword() {
+
+	}
+
+	function person()
+	{
+
+		var name = '';
+		var sword = sword();
+
+		function sword()
+		{
+
+		}
+
+	}
+
+	martin = person();
+
+	// class example
+
 	// global
 
 	var

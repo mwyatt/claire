@@ -24,7 +24,7 @@ class mainMedia extends Model
 {
 	
 	protected $tick = 0;
-	public $pathUpload = BASE_PATH . '/image/upload/';
+	// public $pathUpload = BASE_PATH . '/image/upload/';
 	public $upload;
 	public $error;
 	public $thumb = array(
@@ -40,41 +40,29 @@ class mainMedia extends Model
 	);
 	
 	
-	/**
-	 * Select data based on @param
-	 * @result true if @param result isset false on failure
-	 */ 
-	public function select($id = null)
+	public function read()
 	{	
-		// PDO
-		$PDO = Database::getInstance();
-		$SQL = "	
-			SELECT
+
+		$sth = $this->database->dbh->query("	
+
+			select
 				id
+				, file_name
 				, title
 				, title_slug
-				, date_uploaded
-				, alt
-				, description
-				, media_tree_id
+				, date_published
 				, type
-				, filename
-				, user_id
-			FROM
-				media	
-		";
+				, tree_id
+				
+			from
+				main_media	
 
-		// Append SQL
-		$SQL .= ($id != null ? "WHERE id = '$id'" : ""); // extend
+		");
 		
-		// Execute SQL
-		$STH = $PDO->dbh->query($SQL);
-		
-		// Return
-		return $this->setResult(
-			($STH->rowCount() > 0 ? $STH->fetchAll(PDO::FETCH_ASSOC) : false)
-		);
-	}
+		$this->setDataStatement($sth);
+
+	}	
+
 	
 	
 	public function getExtension($val)

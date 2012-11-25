@@ -81,12 +81,20 @@ try {
 			, ('Temp', 'temp', '1')
 	");	
 
+	$epochTime = time();
+
 	$database->dbh->query("
-		INSERT INTO main_media
-			(title, title_slug, description, type, media_tree_id)
+		INSERT INTO main_media (
+			file_name
+			, title
+			, title_slug
+			, date_published
+			, type
+			, tree_id
+		)
 		VALUES
-			('Example Media 1', '600x400', 'This Description should be very Descriptive for Search Engine Optimisation', 'gif', '1')
-			, ('Example Media 2', 'example-media-2', 'This Description should be very Descriptive for Search Engine Optimisation', 'jpg', '1')
+			('example-media-1.jpg', 'Example Media 1', 'example-media-1', $epochTime, 'jpg', '0')
+			, ('example-media-2.jpg', 'Example Media 2', 'example-media-2', $epochTime, 'jpg', '0')
 	");
 
 	$database->dbh->query("
