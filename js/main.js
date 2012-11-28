@@ -29,17 +29,15 @@ $(document).ready(function() {
 
 	// global
 
-	var
-		fulfill = $('.fulfill')
-		, selectDivision = $('select[name="division_id"]')
-		, selectTeamGroup = $(fulfill).find('.team').find('select')
-		, selectPlayerGroup = $(fulfill).find('.player').find('select')
-		, inputScore = $(fulfill).find('.score').find('input')
-		, btnPlayUp = $(fulfill).find('.play-up')
-		, feedback = $('header.main').find('.feedback')
-		, websiteTitle = $('header.main').find('.title').find('a')
-		, user = $('header.main').find('.user')
-		;
+	var fulfill = $('.fulfill');
+	var selectDivision = $('select[name="division_id"]');
+	var selectTeamGroup = $(fulfill).find('.team').find('select');
+	var selectPlayerGroup = $(fulfill).find('.player').find('select');
+	var inputScore = $(fulfill).find('.score').find('input');
+	var btnPlayUp = $(fulfill).find('.play-up');
+	var feedback = $('header.main').find('.feedback');
+	var websiteTitle = $('header.main').find('.title').find('a');
+	var user = $('header.main').find('.user');
 
 	// on
 

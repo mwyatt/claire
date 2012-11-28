@@ -29,17 +29,21 @@
 
 		</div>
 
-		<select name="team_id">
+		<div class="row team">
 
-			<option value="0"></option>
+			<select name="team_id">
 
-			<?php while ($ttTeam->nextRow()) : ?>
-			
-			<option value="<?php echo $ttTeam->getRow('id'); ?>" <?php echo ($ttTeam->getRow('id') == $ttPlayer->get('team_id') ? 'selected' : false); ?>><?php echo $ttTeam->getRow('name'); ?></option>
+				<option value="0"></option>
 
-			<?php endwhile; ?>
+				<?php while ($ttTeam->nextRow()) : ?>
+				
+				<option value="<?php echo $ttTeam->getRow('id'); ?>" <?php echo ($ttTeam->getRow('id') == $ttPlayer->get('team_id') ? 'selected' : false); ?>><?php echo $ttTeam->getRow('name'); ?></option>
 
-		</select>
+				<?php endwhile; ?>
+
+			</select>
+
+		</div>	
 
 		<div class="row">
 			

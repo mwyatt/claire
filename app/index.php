@@ -68,6 +68,8 @@ if ($config->getUrl(0)) {
 // Homepage
 // ============================================================================
 	
+exit('Front end Under Construction');
+
 //$view->loadCached('home');
 	
 $posts = new mainContent($database, $config);
