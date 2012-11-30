@@ -235,6 +235,9 @@ class mainUser extends Model
 	public function checkPermission($path)
 	{
 
+		if (! is_file($path))
+			return false;
+
 		if ($file = file_get_contents($path)) {
 
 			if ($position = strpos($file, '@access ')) {
@@ -245,11 +248,8 @@ class mainUser extends Model
 				$user = $this->get();
 				
 				if ($user['level'] >= $requiredLevel)
-
 					return true;
-
 				else
-
 					return false;
 
 			} else {

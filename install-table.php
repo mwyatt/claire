@@ -67,17 +67,17 @@ try {
 			)
 	");	
 
-	$database->dbh->query("
-		CREATE TABLE IF NOT EXISTS 
-			main_media_tree
-			(
-				id INT UNSIGNED NOT NULL AUTO_INCREMENT
-				, title VARCHAR(255) NOT NULL
-				, title_slug VARCHAR(255) NOT NULL
-				, parent_id INT UNSIGNED									
-				, PRIMARY KEY (id)
-			)		
-	");
+	// $database->dbh->query("
+	// 	CREATE TABLE IF NOT EXISTS 
+	// 		main_media_tree
+	// 		(
+	// 			id INT UNSIGNED NOT NULL AUTO_INCREMENT
+	// 			, title VARCHAR(255) NOT NULL
+	// 			, title_slug VARCHAR(255) NOT NULL
+	// 			, parent_id INT UNSIGNED									
+	// 			, PRIMARY KEY (id)
+	// 		)		
+	// ");
 
 	$database->dbh->query("
 		CREATE TABLE IF NOT EXISTS 
@@ -86,10 +86,9 @@ try {
 				id INT UNSIGNED NOT NULL AUTO_INCREMENT
 				, file_name VARCHAR(255) NOT NULL
 				, title VARCHAR(255)
-				, title_slug VARCHAR(255) NOT NULL
 				, date_published INT	
 				, type VARCHAR(50) NOT NULL
-				, tree_id INT UNSIGNED
+				, user_id INT UNSIGNED
 				, PRIMARY KEY (id)
 			)		
 	");

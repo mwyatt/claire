@@ -165,11 +165,14 @@ class View extends Model
 	
 	
 	/**
-	 * pull /image/
+	 * builds image url using filename
+	 * @param  string $fileName from mainMedia data results
+	 * @return string           url
 	 */
-	public function image($ext = null) { 
-		$base = $this->getUrl('base').'image/';
-		return ($ext == null ? $base : $base.$ext);
+	public function image($fileName) { 
+
+		return $this->config->getUrl('base') . 'img/upload/' . $fileName;
+
 	}
 	
 	

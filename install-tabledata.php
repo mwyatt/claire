@@ -70,16 +70,16 @@ try {
 			, ('thumb3', '500, 500')
 	");	
 
-	$database->dbh->query("
-		INSERT INTO main_media_tree
-			(title, title_slug, parent_id)
-		VALUES
-			('Root', 'root', '')
-			, ('Artwork', 'artwork', '1')
-				, ('Cover', 'cover', '2')
-			, ('Product', 'product', '1')
-			, ('Temp', 'temp', '1')
-	");	
+	// $database->dbh->query("
+	// 	INSERT INTO main_media_tree
+	// 		(title, title_slug, parent_id)
+	// 	VALUES
+	// 		('Root', 'root', '')
+	// 		, ('Artwork', 'artwork', '1')
+	// 			, ('Cover', 'cover', '2')
+	// 		, ('Product', 'product', '1')
+	// 		, ('Temp', 'temp', '1')
+	// ");	
 
 	$epochTime = time();
 
@@ -90,11 +90,11 @@ try {
 			, title_slug
 			, date_published
 			, type
-			, tree_id
+			, user_id
 		)
 		VALUES
-			('example-media-1.jpg', 'Example Media 1', 'example-media-1', $epochTime, 'jpg', '0')
-			, ('example-media-2.jpg', 'Example Media 2', 'example-media-2', $epochTime, 'jpg', '0')
+			('grandma-and-family.jpg', 'Grandma and Family', 'example-media-1', $epochTime, 'jpg', '1')
+			, ('minutes-081112.pdf', 'Minutes 002', 'minutes-002', $epochTime, 'pdf', '2')
 	");
 
 	$database->dbh->query("

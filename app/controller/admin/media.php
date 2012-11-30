@@ -13,6 +13,7 @@
 
 $mainMedia = new mainMedia($database, $config);
 $mainMedia
+	->setObject($view)
 	->setObject($session)
 	->setObject($mainUser);
 
