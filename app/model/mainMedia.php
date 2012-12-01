@@ -39,6 +39,11 @@ class mainMedia extends Model
 	);
 	
 	
+	/**
+	 * all users are found
+	 * create new setmetadatastaement, this method will pair the meta data with the normal data. grouping by the main id.
+	 * @return null
+	 */
 	public function read()
 	{	
 
@@ -50,7 +55,7 @@ class mainMedia extends Model
 				, main_media.title
 				, main_media.date_published
 				, main_media.type
-				, case when main_user_meta.name = 'first_name' then main_user_meta.value else NULL end as first_name
+				, main_user_meta.name
 
 			from main_media
 
@@ -58,8 +63,16 @@ class mainMedia extends Model
 
 			left join main_user_meta on main_user_meta.user_id = main_user.id
 
+			group by main_media.id
+
 		");
+				// , case when main_user_meta.name = 'first_name' then main_user_meta.value end as user_first_name
+				// , case when main_user_meta.name = 'last_name' then main_user_meta.value end as user_last_name
 		
+
+
+
+
 		$this->setDataStatement($sth);
 
 	}	
