@@ -1,22 +1,4 @@
 <?php require_once($this->pathView() . 'admin/header.php'); ?>
-<?php
-// echo '<pre>';
-// print_r($mainMedia);
-// echo '</pre>';
-
-//     (
-//             [0] => Array
-//                 (
-//                     [id] => 1
-//                     [file_name] => example-media-1.jpg
-//                     [title] => Example Media 1
-//                     [title_slug] => example-media-1
-//                     [date_published] => 1353866981
-//                     [type] => jpg
-//                     [tree_id] => 0
-//                 )
- 
-?>
 
 <div id="content" class="media">
 	
@@ -44,7 +26,7 @@
 			<td><?php echo date('j D M Y', $mainMedia->getRow('date_published')); ?></td>
 			<td><?php echo $mainMedia->getRow('type'); ?></td>
 			<td><?php echo $mainMedia->getRow('user_id'); ?></td>
-			<td><a href="#">Delete</a></td>
+			<td><a href="<?php echo $this->urlCurrent(); ?>?delete=<?php echo $mainMedia->getRow('id'); ?>" title="Delete <?php echo $mainMedia->getRow('file_name'); ?>">Delete</a></td>
 		</tr>	
 
 		<?php endwhile; ?>

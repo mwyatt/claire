@@ -16,7 +16,7 @@ abstract class Model extends Config
 	public $database;
 	public $config;
 	public $data;
-	public $resultRow;
+	public $dataRow;
 
 	
 	public function __construct($database, $config) {
@@ -180,21 +180,39 @@ abstract class Model extends Config
 	public function nextRow()
 	{		
 
-		if ($this->dataRow = current($this->data)) {
-		
-			next($this->data);
-			
-			return true;
-			
-		} else {
-		
-			unset($this->dataRow);
-			
-			reset($this->data);
-			
+		if (current($this->data) === false)
 			return false;
-			
+
+		if (! is_array(current($this->data))) {
+
+			if ($this->dataRow !== $this->data) {
+
+				$this->dataRow = $this->data;
+				return true;
+
+			} else {
+
+				return false;
+
+			}
+
 		}
+
+		if ($this->dataRow = current($this->data)) {
+
+			next($this->data);
+
+			return true;
+
+		} else {
+
+			unset($this->dataRow);
+
+			reset($this->data);
+
+			return false;
+
+		}		
 				
 	}
 	
@@ -267,6 +285,11 @@ abstract class Model extends Config
 
 	}
 
+	public function getUploadDir() {
 
+		return $this->getUrl('base') . 'img/upload/';
+
+	}
+	
 	
 }

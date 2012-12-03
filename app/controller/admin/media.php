@@ -25,6 +25,14 @@ if (array_key_exists('form_media_upload', $_POST)) {
 	$route->home('admin/media/');	
 	
 }
+
+// (GET) delete
+
+if (array_key_exists('delete', $_GET)) {
+	
+	$mainMedia->deleteById($_GET['delete']);
+		
+}
   
 $mainMedia->read();
 

@@ -82,12 +82,17 @@ try {
 	// ");	
 
 	$epochTime = time();
-
-	$database->dbh->query("
+/*				id INT UNSIGNED NOT NULL AUTO_INCREMENT
+				, file_name VARCHAR(255) NOT NULL
+				, title VARCHAR(255)
+				, date_published INT UNSIGNED
+				, type VARCHAR(50) NOT NULL
+				, user_id INT UNSIGNED
+				, PRIMARY KEY (id)*/
+/*	$database->dbh->query("
 		INSERT INTO main_media (
 			file_name
 			, title
-			, title_slug
 			, date_published
 			, type
 			, user_id
@@ -95,7 +100,7 @@ try {
 		VALUES
 			('grandma-and-family.jpg', 'Grandma and Family', 'example-media-1', $epochTime, 'jpg', '1')
 			, ('minutes-081112.pdf', 'Minutes 002', 'minutes-002', $epochTime, 'pdf', '2')
-	");
+	");*/
 
 	$database->dbh->query("
 		INSERT INTO main_ads

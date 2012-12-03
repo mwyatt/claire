@@ -40,6 +40,14 @@ if (is_file(BASE_PATH . 'installed.txt')) {
 		// $ttfixture = new ttFixture($database, $config);
 		// $ttfixture->generateAll();
 
+		// remove uploaded media
+
+		$files = glob(BASE_PATH . 'img/upload/'); // get all file names
+		foreach($files as $file){ // iterate files
+		  if(is_file($file))
+		    unlink($file); // delete file
+		}
+
 		// create installed.txt
 		$file = fopen(BASE_PATH . 'installed.txt', 'w');
 			

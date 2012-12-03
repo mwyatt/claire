@@ -146,65 +146,7 @@ class mainMedia extends Model
 			return false;
 
 		// core files loop
-	/*
-	Array
-	(
-	    [0] => Array
-	        (
-	            [name] => formative essay draft 1.doc
-	            [type] => application/msword
-	            [tmp_name] => C:\xampp\tmp\php9DB.tmp
-	            [error] => 0
-	            [size] => 34304
-	        )
 
-	    [1] => Array
-	        (
-	            [name] => handbook.pdf
-	            [type] => application/pdf
-	            [tmp_name] => C:\xampp\tmp\php9DC.tmp
-	            [error] => 0
-	            [size] => 184531
-	        )
-
-	    [2] => Array
-	        (
-	            [name] => index.html
-	            [type] => text/html
-	            [tmp_name] => C:\xampp\tmp\php9DD.tmp
-	            [error] => 0
-	            [size] => 179
-	        )
-
-	    [3] => Array
-	        (
-	            [name] => index.php
-	            [type] => application/octet-stream
-	            [tmp_name] => C:\xampp\tmp\php9DE.tmp
-	            [error] => 0
-	            [size] => 179
-	        )
-
-	    [4] => Array
-	        (
-	            [name] => LijHgs3_3042723.php
-	            [type] => application/octet-stream
-	            [tmp_name] => C:\xampp\tmp\php9DF.tmp
-	            [error] => 0
-	            [size] => 708
-	        )
-
-	    [5] => Array
-	        (
-	            [name] => wp-config.php
-	            [type] => application/octet-stream
-	            [tmp_name] => C:\xampp\tmp\php9E0.tmp
-	            [error] => 0
-	            [size] => 3453
-	        )
-
-	)
-	 */
 		foreach ($files as $key => $file) {
 				
 			// process filename
@@ -241,20 +183,6 @@ class mainMedia extends Model
 				$filesSuccess[$key]['file_name'] = $fileName;
 				$filesSuccess[$key]['extension'] = $extension;
 				$filesSuccess[$key]['title'] = $title;
-
-/*
-				id INT UNSIGNED NOT NULL AUTO_INCREMENT
-				, file_name VARCHAR(255) NOT NULL
-				, title VARCHAR(255)
-				, date_published INT	
-				, type VARCHAR(50) NOT NULL
-				, user_id INT UNSIGNED*/
-
-				// $this->upload[$key]['file_name'] = $fileName . $extension;
-				// $this->upload[$key]['title'] = $title;
-				// $this->upload[$key]['date_published'] = time();
-				// $this->upload[$key]['type'] = $file['type'];
-				// $this->upload[$key]['user_id'] = $this->getObject('mainUser')->get('id');
 				
 			// Error				
 
@@ -274,19 +202,26 @@ class mainMedia extends Model
 			values (:file_name, :title, $time, :type, $userId)
 
 		");				
-		
-		$sth->execute(array(
-			':first_name' => $_POST['first_name']
-			, ':last_name' => $_POST['last_name']
-			, ':rank' => $_POST['rank']
-			, ':team_id' => $_POST['team_id']
-		));
 
-	echo '<pre>';
-	print_r($filesSuccess);
-	echo '</pre>';
-	exit;
-// (move_uploaded_file($file['tmp_name'], $filePath))
+		$uploadedFileNames = '';
+
+		foreach ($filesSuccess as $key => $value) {
+
+			move_uploaded_file($value['file']['tmp_name'], $filePath);
+			
+			$sth->execute(array(
+				':file_name' => $value['file_name'] . $value['extension']
+				, ':title' => $value['title']
+				, ':type' => $value['file']['type']
+			));
+
+			$uploadedFileNames .= $value['title'] . ', ';
+
+		}
+
+		rtrim($uploadedFileNames);
+
+		$this->getObject('Session')->set('feedback', array('success', 'Uploaded ' . $uploadedFileNames));
 
 	}
 	
@@ -333,24 +268,82 @@ class mainMedia extends Model
 	
 	
 	/**
-	  *	@returns true on success false on failure
-	  */
-	public function delete($id)
+	 * delete media by ID
+	 * @param  int $id 
+	 * @return bool     
+	 */
+	public function deleteById($id)
 	{	
 	
-		$PDO = Database::getInstance(); // instance
-		$SQL = "	
-			DELETE FROM
-				media
-			WHERE
-				id = '$id'		
-		";
-		
-		$STH = $PDO->dbh->query($SQL);
+		// are you tied to any posts?
 
-		return ($STH->rowCount() ? true : false);
+		$sth = $this->database->dbh->prepare("
+
+			select
+				main_content_media.id
+			from
+				main_content_media
+			where
+				main_content_media.media_id = $id
+
+		");				
+
+		$sth->execute();
+
+		if ($sth->rowCount()) {
+
+			$this->getObject('Session')->set('feedback', array('error', 'Unable to delete media, it is attached to posts'));
+
+			return;
 			
-	}	
+		}
+
+		// delete
+
+		$sth = $this->database->dbh->prepare("
+
+			select
+				main_media.id
+				, main_media.file_name
+				, main_media.title
+				, main_media.date_published
+				, main_media.type
+			from
+				main_media
+			where
+				main_media.id = $id
+
+		");				
+
+		$sth->execute();
+
+		if ($row = $sth->fetch()) {
+			
+			$file = BASE_PATH . 'img/upload/' . $row['file_name'] . '/';
+
+			if (is_file($file))
+			  unlink($file);
+
+		}
+
+		$sth = $this->database->dbh->prepare("
+
+			delete from
+				main_media
+			where
+				main_media.id = $id
+
+		");	
+
+		$sth->execute();
+
+		if ($sth->rowCount()) {
+
+			$this->getObject('Session')->set('feedback', array('success', 'Media Deleted'));
+
+		}
+
+	}
 	
 	
 }

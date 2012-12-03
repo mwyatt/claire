@@ -86,7 +86,7 @@ try {
 				id INT UNSIGNED NOT NULL AUTO_INCREMENT
 				, file_name VARCHAR(255) NOT NULL
 				, title VARCHAR(255)
-				, date_published INT	
+				, date_published INT UNSIGNED
 				, type VARCHAR(50) NOT NULL
 				, user_id INT UNSIGNED
 				, PRIMARY KEY (id)
