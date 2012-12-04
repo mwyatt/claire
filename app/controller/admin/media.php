@@ -1,5 +1,3 @@
-
-
 <?php
 
 /**
@@ -16,6 +14,22 @@ $mainMedia
 	->setObject($view)
 	->setObject($session)
 	->setObject($mainUser);
+
+// next page
+
+if ($config->getUrl(2)) {
+
+	$path = BASE_PATH . 'app/controller/admin/media/' . $config->getUrl(2) . '.php';
+
+	if (is_file($path))
+		require_once($path);
+	
+}
+ 
+// invalid url
+
+if ($config->getUrl(2))
+	$route->home('admin/media/');
 
 // upload attempt
 

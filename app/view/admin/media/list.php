@@ -2,7 +2,7 @@
 
 <div id="content" class="media">
 	
-	<h2>Existing Media:</h2>
+	<h2>All Media</h2>
 
 	<?php if ($mainMedia->getData()) : ?>
 
@@ -20,9 +20,9 @@
 		<?php while ($mainMedia->nextRow()) : ?>
 
 		<tr>
-			<td><a href="<?php echo $this->image($mainMedia->getRow('file_name')); ?>"><img src="<?php echo $this->image($mainMedia->getRow('file_name')); ?>" width="150"></a></td>
+			<td><a href="<?php echo $this->media($mainMedia->getRow('file_name')); ?>"><img src="<?php echo $this->media($mainMedia->getRow('file_name')); ?>" width="150"></a></td>
 			<td><a href="#" title="Edit Media Listing"><?php echo $mainMedia->getRow('title'); ?></a></td>
-			<td><a href="<?php echo $this->image($mainMedia->getRow('file_name')); ?>">Direct Link</a></td>
+			<td><a href="<?php echo $this->media($mainMedia->getRow('file_name')); ?>">Direct Link</a></td>
 			<td><?php echo date('j D M Y', $mainMedia->getRow('date_published')); ?></td>
 			<td><?php echo $mainMedia->getRow('type'); ?></td>
 			<td><?php echo $mainMedia->getRow('user_id'); ?></td>

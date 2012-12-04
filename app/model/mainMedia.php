@@ -136,6 +136,8 @@ class mainMedia extends Model
 	public function upload($files)
 	{	
 
+		$uploadPath = BASE_PATH . 'img/upload/';
+
 		// tidy array for readability
 
 		$files = $this->rearrange($files['media']);
@@ -154,39 +156,46 @@ class mainMedia extends Model
 			$fileName = $this->getFilename($file['name']);
 			$extension = $this->getExtension($file['name']);
 			$title = $this->getTitle($file['name']);
-			
-			// file path
 
-			$filePath = BASE_PATH . 'img/upload/' . $fileName . $extension;
+			// check type
+			if (($file['type'] !== 'image/gif')
+				&& ($file['type'] !== 'image/png')
+				&& ($file['type'] !== 'image/jpeg')
+				&& ($file['type'] !== 'image/pjpeg')
+				&& ($file['type'] !== 'image/jpeg')
+				&& ($file['type'] !== 'image/pjpeg')
+				) {
+
+				$this->getObject('Session')->set('feedback', array('error', 'Unable to upload file "' . $file['name'] . '" because it is an unacceptable type'));
+
+				return false;	
+
+			}
 																
 			// Duplicate
 
-			if (file_exists($filePath)) {
+			if (file_exists($uploadPath . $fileName . $extension)) {
 			
 				$this->getObject('Session')->set('feedback', array('error', 'Unable to upload file "' . $file['name'] . '" because it already exists'));
 
 				return false;
 
+			}
+
 			// Too Big (2mb)
 
-			} elseif ($file['size'] > 2000000) {
+			if ($file['size'] > 2000000) {
 
 				$this->getObject('Session')->set('feedback', array('error', 'Unable to upload file "' . $file['name'] . '" because it is too big'));
 
 				return false;
 			
-			// Success
-
-			} else {
-
-				$filesSuccess[$key]['file'] = $file;
-				$filesSuccess[$key]['file_name'] = $fileName;
-				$filesSuccess[$key]['extension'] = $extension;
-				$filesSuccess[$key]['title'] = $title;
-				
-			// Error				
-
 			}
+
+			$filesSuccess[$key]['file'] = $file;
+			$filesSuccess[$key]['file_name'] = $fileName;
+			$filesSuccess[$key]['extension'] = $extension;
+			$filesSuccess[$key]['title'] = $title;
 		
 		}
 
@@ -205,21 +214,21 @@ class mainMedia extends Model
 
 		$uploadedFileNames = '';
 
-		foreach ($filesSuccess as $key => $value) {
+		foreach ($filesSuccess as $key => $file) {
 
-			move_uploaded_file($value['file']['tmp_name'], $filePath);
+			move_uploaded_file($file['file']['tmp_name'], $uploadPath . $file['file_name'] . $file['extension']);
 			
 			$sth->execute(array(
-				':file_name' => $value['file_name'] . $value['extension']
-				, ':title' => $value['title']
-				, ':type' => $value['file']['type']
+				':file_name' => $file['file_name'] . $file['extension']
+				, ':title' => $file['title']
+				, ':type' => $file['file']['type']
 			));
 
-			$uploadedFileNames .= $value['title'] . ', ';
+			$uploadedFileNames .= $file['title'] . ', ';
 
 		}
 
-		rtrim($uploadedFileNames);
+		$uploadedFileNames = rtrim($uploadedFileNames, ', ');
 
 		$this->getObject('Session')->set('feedback', array('success', 'Uploaded ' . $uploadedFileNames));
 
@@ -319,7 +328,7 @@ class mainMedia extends Model
 
 		if ($row = $sth->fetch()) {
 			
-			$file = BASE_PATH . 'img/upload/' . $row['file_name'] . '/';
+			$file = BASE_PATH . 'img/upload/' . $row['file_name'];
 
 			if (is_file($file))
 			  unlink($file);
@@ -339,7 +348,7 @@ class mainMedia extends Model
 
 		if ($sth->rowCount()) {
 
-			$this->getObject('Session')->set('feedback', array('success', 'Media Deleted'));
+			$this->getObject('Session')->set('feedback', array('success', '"' . $row['title'] .'" Deleted'));
 
 		}
 
