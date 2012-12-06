@@ -1,49 +1,33 @@
 <?php
 
 /**
+ * Posts
+ *
+ * PHP version 5
+ * 
+ * @access 9
  * @package	~unknown~
- * @author 	Martin Wyatt <martin.wyatt@gmail.com> 
+ * @author Martin Wyatt <martin.wyatt@gmail.com> 
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
- */ 
-  
-  
-// New / Edit Post
-// =============================================================================
+ */
 
-if (array_key_exists('edit', $_GET)) {
-	require_once('app/cc/controller/posts/edit.php');
-	exit;
-}
+// next page
 
+if ($config->getUrl(2)) {
 
-// Sub Page
-// =============================================================================
+	$path = BASE_PATH . 'app/controller/admin/posts/' . $config->getUrl(2) . '.php';
 
-if ($config->getUrl(3)) {
-
-	if ($file = $config->findFile('app/cc/controller/'
-		. $config->getUrl(2) . '/' . $config->getUrl(3) . '.php'))
-	{
-		require_once($file);
-		exit;
-	}
-}
-
-
-// Invalid Url
-// =============================================================================
-
-if ($config->getUrl(3))
-	$route->home('admin/' . $config->getUrl(2) . '/');
-
+	if (is_file($path))
+		require_once($path);
 	
-// View: admin/posts.php
-// =============================================================================
-		
-$post = new Post($database, $config);
-$post->select();
+}
+ 
+// invalid url
 
-$view
-	->registerObjects(array($user, $post))
-	->loadTemplate('admin/posts');
+if ($config->getUrl(2))
+	$route->home('admin/posts/');
+
+// default page
+
+$view->loadTemplate('admin/posts');

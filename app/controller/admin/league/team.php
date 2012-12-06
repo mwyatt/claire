@@ -49,7 +49,7 @@ if (array_key_exists('update', $_GET)) {
 		->setObject($ttDivision)
 		->setObject($ttVenue)
 		->setObject($ttTeam)
-		->loadTemplate('admin/team/update');
+		->loadTemplate('admin/league/team/update');
 
 }
 
@@ -95,4 +95,4 @@ $ttTeam->read();
 
 $view
 	->setObject($ttTeam)
-	->loadTemplate('admin/team/list');
+	->loadTemplate('admin/league/team/list');

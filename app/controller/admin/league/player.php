@@ -51,7 +51,7 @@ if (array_key_exists('update', $_GET)) {
 		->setObject($ttDivision)
 		->setObject($ttTeam)
 		->setObject($ttPlayer)
-		->loadTemplate('admin/player/update');
+		->loadTemplate('admin/league/player/update');
 		
 }
 
@@ -75,7 +75,7 @@ if ($config->getUrl(3)) {
 
 	}
 
-	$view->loadTemplate('admin/player/new');	
+	$view->loadTemplate('admin/league/player/new');	
 	
 }
 
@@ -90,4 +90,4 @@ $ttPlayer->read();
 
 $view
 	->setObject(array($mainUser, $ttPlayer))
-	->loadTemplate('admin/player/list');
+	->loadTemplate('admin/league/player/list');

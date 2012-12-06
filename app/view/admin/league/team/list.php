@@ -1,6 +1,6 @@
 <?php require_once($this->pathView() . 'admin/header.php'); ?>
 
-<div class="teams">
+<div id="content" class="league team">
 	
 	<h2>Teams</h2>
 
@@ -16,7 +16,7 @@
 
 	<?php if ($ttTeam->getData()) : ?>	
 
-	<table width="100%" cellspacing="0" cellpadding="0">
+	<table class="main" width="100%" cellspacing="0" cellpadding="0">
 
 		<tr>
 			<th>Checkbox</th>

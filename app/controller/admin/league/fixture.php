@@ -62,4 +62,4 @@ $ttFixture->read();
 
 $view
 	->setObject($ttFixture)
-	->loadTemplate('admin/fixture/list');
+	->loadTemplate('admin/league/fixture/list');

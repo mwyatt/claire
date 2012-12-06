@@ -10,7 +10,7 @@
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Post extends Content
+class Post extends mainContent
 {
 	
 	/**
@@ -23,30 +23,30 @@ class Post extends Content
 				
 		$sth = $this->database->dbh->query("
 			select
-				c.id
-				, c.title
-				, c.title_slug
-				, c.html
-				, c.type
-				, c.date_published
-				, c.guid
-				, c.status
-				, c.user_id
-				, cm.media_id
-				, m.title as media_title
-				, m.title_slug as media_filename
+				content.id
+				, content.title
+				, content.title_slug
+				, content.html
+				, content.type
+				, content.date_published
+				, content.guid
+				, content.status
+				, content.user_id
+				, content_media.media_id
+				, media.title as media_title
+				, media.title_slug as media_filename
 			from
-				content as c
+				content
 			left join
-				content_media as cm on c.id = cm.content_id				
+				content_media on content.id = content_media.content_id				
 			left join
-				media as m on cm.media_id = m.id				
+				media as m on content_media.media_id = media.id				
 			where	
-				c.status = 'visible'
+				content.status = 'visible'
 			and
-				c.type = 'post'
+				content.type = 'post'
 			order by
-				c.date_published desc, cm.position
+				content.date_published desc, content_media.position
 		");		
 		
 		$this->parseRows($sth);

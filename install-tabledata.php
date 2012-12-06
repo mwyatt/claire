@@ -1,6 +1,8 @@
 <?php
 
 try {
+
+	$epochTime = time();
 	
 	$mainuser
 		->setEmail('martin.wyatt@gmail.com')
@@ -24,13 +26,13 @@ try {
 
 	$database->dbh->query("
 		INSERT INTO main_content
-			(title, title_slug, html, type, guid, status, user_id)
+			(title, title_slug, html, type, guid, status, user_id, date_published)
 		VALUES
-			('Example Post Title 1', 'example_post_title-1', '<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>', 'post', 'http://localhost/posts/1/example-post-title-1/', 'visible', '1')
-			, ('Example Post Title 2', 'example_post_title-2', '<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>', 'post', 'http://localhost/posts/2/example-post-title-2/', 'visible', '1')
-			, ('Example Project Title 1', 'example-project-title-1', '<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>', 'project', 'http://localhost/projects/3/example-project-title-1/', 'visible', '1')
-			, ('Example Project Title 2', 'example-project-title-2', '<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>', 'project', 'http://localhost/projects/4/example-project-title-2/', 'visible', '1')
-			, ('Contact me', 'contact-me', '<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>', 'page', 'http://localhost/mvc/contact-me/', 'visible', '1')
+			('Example Post Title 1', 'example_post_title-1', '<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>', 'press', 'http://localhost/posts/1/example-post-title-1/', 'visible', '1', $epochTime)
+			, ('Example Post Title 2', 'example_post_title-2', '<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>', 'press', 'http://localhost/posts/2/example-post-title-2/', 'visible', '1', $epochTime)
+			, ('Example Project Title 1', 'example-project-title-1', '<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>', 'project', 'http://localhost/projects/3/example-project-title-1/', 'visible', '1', $epochTime)
+			, ('Example Project Title 2', 'example-project-title-2', '<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>', 'project', 'http://localhost/projects/4/example-project-title-2/', 'visible', '1', $epochTime)
+			, ('Contact me', 'contact-me', '<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>', 'page', 'http://localhost/mvc/contact-me/', 'visible', '1', $epochTime)
 	");
 
 	$database->dbh->query("
@@ -81,7 +83,7 @@ try {
 	// 		, ('Temp', 'temp', '1')
 	// ");	
 
-	$epochTime = time();
+	
 /*				id INT UNSIGNED NOT NULL AUTO_INCREMENT
 				, file_name VARCHAR(255) NOT NULL
 				, title VARCHAR(255)

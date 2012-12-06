@@ -169,9 +169,12 @@ class View extends Model
 	 * @param  string $fileName from mainMedia data results
 	 * @return string           url
 	 */
-	public function media($fileName) { 
+	public function media($fileName) {
 
-		return $this->config->getUrl('base') . 'img/upload/' . $fileName;
+		if (is_file(BASE_PATH . 'img/upload/' . $fileName))
+			return $this->config->getUrl('base') . 'img/upload/' . $fileName;
+		else
+			return 'http://placehold.it/200x200/';
 
 	}
 	

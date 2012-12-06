@@ -15,7 +15,7 @@ abstract class Model extends Config
 
 	public $database;
 	public $config;
-	public $data;
+	public $data = array();
 	public $dataRow;
 
 	
@@ -58,21 +58,23 @@ abstract class Model extends Config
 	{		
 	
 		// no rows
-
 		if (! $sth->rowCount()) 
-
 			return false;
 
 		// some rows
-
 		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
 
 			// handle possible meta_name
-
 			if (array_key_exists('meta_name', $row)) {
 
-				$this->data[$row['id']] = array_merge((array)$this->data[$row['id']], (array)$row);
-				$this->data[$row['id']][$row['meta_name']] = $row['meta_value'];
+				// set meta else set full row
+				if (array_key_exists($row['id'], $this->data)) {
+					$this->data[$row['id']][$row['meta_name']] = $row['meta_value'];
+				} else {
+					$this->data[$row['id']] = $row;
+					$this->data[$row['id']][$row['meta_name']] = $row['meta_value'];
+				}
+
 				unset($this->data[$row['id']]['meta_name']);
 				unset($this->data[$row['id']]['meta_value']);
 
@@ -85,15 +87,10 @@ abstract class Model extends Config
 		}
 
 		// correct array keys
-
 		if (count($this->data) > 1) {
-
 			$this->data = array_values($this->data);
-
 		} else {
-
 			$this->data = reset($this->data);
-			
 		}
 
 		return true;
