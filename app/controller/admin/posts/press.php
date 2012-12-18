@@ -13,6 +13,11 @@ $post
 	->setObject($session)
 	->setObject($mainUser);
 
+// next page
+if ($config->getUrl(3)) {
+	$view->loadTemplate('admin/posts/press/new');
+}
+
 // invalid url
 if ($config->getUrl(3))
 	$route->home('admin/' . $config->getUrl(1) . '/');

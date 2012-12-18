@@ -43,8 +43,6 @@ if (array_key_exists('form_login', $_POST)) {
 
 if ($mainUser->isLogged()) {
 
-	// sub page
-	
 	if ($config->getUrl(1)) {
 
 		$path = BASE_PATH . 'app/controller/' . $config->getUrl(0) . '/' . $config->getUrl(1) . '.php';

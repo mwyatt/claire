@@ -4,28 +4,43 @@
 
 $(document).ready(function() {
 
-	// class example
+	$.ajaxSetup ({  
+		cache: false  
+	});
 
-	function sword() {
+	// admin/posts/press/new/
 
-	}
+	if ($('.post.press.new').length) {
 
-	function person()
-	{
+		var title = $('.post.press.new').find('input[name="title"]');
+		var type = $('.post.press.new').find('input[name="type"]');
 
-		var name = '';
-		var sword = sword();
+		title.on('change', e_change_post_title);
 
-		function sword()
-		{
+		function e_change_post_title() {
+
+			if (! title.val()) return false;
+			// if (title.val().length < 3) return false;
+			
+			var slug = $('.slug');
+		
+			$.get('http://' + window.location.host + '/mvc/ajax/post/',
+				{ title: title.val(), type: type.val(), method: 'slug' }, function(result) {
+
+					if (result) {
+
+						var link = slug.find('a')
+						link.html(result)
+						link.attr('href', 'http://' + window.location.host + '/post/' + result);
+
+					}
+					
+				}, 'html'
+			);
 
 		}
-
+		
 	}
-
-	martin = person();
-
-	// class example
 
 	// global
 

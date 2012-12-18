@@ -23,30 +23,30 @@ class Post extends mainContent
 				
 		$sth = $this->database->dbh->query("
 			select
-				content.id
-				, content.title
-				, content.title_slug
-				, content.html
-				, content.type
-				, content.date_published
-				, content.guid
-				, content.status
-				, content.user_id
+				main_content.id
+				, main_content.title
+				, main_content.title_slug
+				, main_content.html
+				, main_content.type
+				, main_content.date_published
+				, main_content.guid
+				, main_content.status
+				, main_content.user_id
 				, content_media.media_id
 				, media.title as media_title
 				, media.title_slug as media_filename
 			from
-				content
+				main_content
 			left join
-				content_media on content.id = content_media.content_id				
+				content_media on main_content.id = content_media.content_id				
 			left join
 				media as m on content_media.media_id = media.id				
 			where	
-				content.status = 'visible'
+				main_content.status = 'visible'
 			and
-				content.type = 'post'
+				main_content.type = 'post'
 			order by
-				content.date_published desc, content_media.position
+				main_content.date_published desc, content_media.position
 		");		
 		
 		$this->parseRows($sth);

@@ -201,6 +201,16 @@ class View extends Model
 	}
 	 
 
+	// performs explode() on a string with the given delimiter and trims all whitespace for the elements
+	function explodeTrim($str, $delimiter = ',') { 
+	    if ( is_string($delimiter) ) { 
+	        $str = trim(preg_replace('|\\s*(?:' . preg_quote($delimiter) . ')\\s*|', $delimiter, $str)); 
+	        return explode($delimiter, $str); 
+	    } 
+	    return $str; 
+	} 
+
+
 	public function latestTweet($user) {
 
 		// XML
