@@ -6,14 +6,18 @@ if (array_key_exists('method', $_GET)) {
 
 	if ($_GET['method'] == 'slug') {
 
+		$view = new View($database, $config);
 		$post = new Post($database, $config);
 		$post->readByType('press');
 
-		echo '<pre>';
-		print_r($post);
-		echo '</pre>';
-		exit;
-		
+		// 
+
+		$title = $view->urlFriendly($_GET['title']);
+		// $titleParts = explode(' ', $_GET['title']);
+
+		if ($post->getData()) {
+
+		}
 
 
 		$output .= $_GET['title'];
