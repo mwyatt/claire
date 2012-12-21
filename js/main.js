@@ -25,7 +25,7 @@ $(document).ready(function() {
 			
 			var slug = $('.slug');
 		
-			$.get('http://' + window.location.host + '/mvc/ajax/post/',
+			$.get('http://' + window.location.host + '/git/mvc/ajax/post/',
 				{ method: 'slug', type: type.val(), title: title.val() },
 				function(result) {
 

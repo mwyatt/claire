@@ -13,27 +13,18 @@
 		<p class="slug"><a href="#"></a></p>
 
 		<div class="row">
-			<textarea rows="4" cols="50"></textarea>
+			<div id="toolbar" style="display: none;">
+				<a data-wysihtml5-command="bold" title="CTRL+B">bold</a> |
+				<a data-wysihtml5-command="italic" title="CTRL+I">italic</a>
+				<a data-wysihtml5-action="change_view">switch to html view</a>
+			</div>
+			<textarea id="textarea" placeholder="Enter text ..."></textarea>
 		</div>
 
 		<div class="row attachments">			
 			<h2>Attachments</h2>
 			<a href="#">Add</a>
 		</div>			
-
-		<div class="row division">
-
-			<select name="division_id">
-				<option value="0">01</option>
-			</select>
-
-		</div>
-
-		<div class="row team">
-			<select name="team_id">
-				<option value="0"></option>
-			</select>
-		</div>
 
 		<input name="form_post_new" type="hidden" value="true">
 		<input name="type" type="hidden" value="<?php echo $this->config->getUrl(2); ?>">
@@ -43,5 +34,15 @@
 	</form>
 
 </div>
+
+<script src="<?php echo $this->urlHome(); ?>js/vendor/wysihtml5/simple.js"></script>
+<script src="<?php echo $this->urlHome(); ?>js/vendor/wysihtml5/wysihtml5-0.4.0pre.js"></script>
+<script>
+  var editor = new wysihtml5.Editor("textarea", {
+    toolbar:        "toolbar",
+    parserRules:    wysihtml5ParserRules,
+    useLineBreaks:  false
+  });
+</script>
 
 <?php require_once($this->pathView() . 'admin/footer.php'); ?>
