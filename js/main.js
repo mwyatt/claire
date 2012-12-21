@@ -12,8 +12,10 @@ $(document).ready(function() {
 
 	if ($('.post.press.new').length) {
 
-		var title = $('.post.press.new').find('input[name="title"]');
-		var type = $('.post.press.new').find('input[name="type"]');
+		var $module = $('.post.press.new');
+		var title = $module.find('input[name="title"]');
+		var type = $module.find('input[name="type"]');
+		var attachments = $module.find('.attachments');
 
 		title.on('change', e_change_post_title);
 		title.on('keyup', e_change_post_title);
@@ -36,6 +38,16 @@ $(document).ready(function() {
 				}
 				, 'html'
 			);
+
+		}
+
+		attachments.find('.add').on('click', e_click_attachments_add);
+
+		function e_click_attachments_add() {
+
+			
+			
+			return false;
 
 		}
 		

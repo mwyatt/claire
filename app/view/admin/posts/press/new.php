@@ -23,7 +23,7 @@
 
 		<div class="row attachments">			
 			<h2>Attachments</h2>
-			<a href="#">Add</a>
+			<a class="add" href="#">Add</a>
 		</div>			
 
 		<input name="form_post_new" type="hidden" value="true">
