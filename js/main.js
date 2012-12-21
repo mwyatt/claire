@@ -16,6 +16,7 @@ $(document).ready(function() {
 		var type = $('.post.press.new').find('input[name="type"]');
 
 		title.on('change', e_change_post_title);
+		title.on('keyup', e_change_post_title);
 
 		function e_change_post_title() {
 
@@ -25,17 +26,15 @@ $(document).ready(function() {
 			var slug = $('.slug');
 		
 			$.get('http://' + window.location.host + '/mvc/ajax/post/',
-				{ title: title.val(), type: type.val(), method: 'slug' }, function(result) {
+				{ method: 'slug', type: type.val(), title: title.val() },
+				function(result) {
 
-					if (result) {
-
-						var link = slug.find('a')
-						link.html(result)
-						link.attr('href', 'http://' + window.location.host + '/post/' + result);
-
-					}
+					var link = slug.find('a');
+					link.html(result);
+					link.attr('href', 'http://' + window.location.host + '/post/' + result);
 					
-				}, 'html'
+				}
+				, 'html'
 			);
 
 		}

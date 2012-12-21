@@ -2,9 +2,9 @@
 
 $output = '';
 
-if (array_key_exists('method', $_GET)) {
+if (array_key_exists('method', $_GET) && array_key_exists('type', $_GET) && array_key_exists('title', $_GET)) {
 
-	if ($_GET['method'] == 'slug') {
+	function checkTitle($post, $title, $index = 1, $success = true) {
 
 		$view = new View($database, $config);
 		$post = new Post($database, $config);
@@ -17,11 +17,37 @@ if (array_key_exists('method', $_GET)) {
 
 		if ($post->getData()) {
 
+			while ($post->nextRow()) {
+
+				if ($title == $post->getRow('title_slug')) {
+
+					$index ++;
+					$title .= '-' . $index;
+					checkTitle($post, $title, $index);
+
+				}
+
+			}
+
 		}
 
+		return $title;
 
-		$output .= $_GET['title'];
+	}
 
+	$post = new Post($database, $config);
+	$tool = new Tool($database, $config);
+
+	$title = $tool->urlFriendly($_GET['title']);
+
+	if ($title) {
+
+		$post->readByType($_GET['type']);
+
+		while (! $newTitle = checkTitle($post, $title)) {}
+
+		$output .= $newTitle;
+		
 	}
 
 }

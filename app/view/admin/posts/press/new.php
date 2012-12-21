@@ -36,7 +36,7 @@
 		</div>
 
 		<input name="form_post_new" type="hidden" value="true">
-		<input name="type" type="hidden" value="post">
+		<input name="type" type="hidden" value="<?php echo $this->config->getUrl(2); ?>">
 
 		<a href="#">Publish</a>
 		
