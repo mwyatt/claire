@@ -36,9 +36,9 @@ if (is_file(BASE_PATH . 'installed.txt')) {
 		require_once(BASE_PATH . '/install-table.php');
 		require_once(BASE_PATH . '/install-tabledata.php');
 		
-		// @remove fixture generation
-		// $ttfixture = new ttFixture($database, $config);
-		// $ttfixture->generateAll();
+		// fixture generation
+		$ttfixture = new ttFixture($database, $config);
+		$ttfixture->generateAll();
 
 		// remove uploaded media
 

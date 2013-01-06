@@ -1,6 +1,7 @@
 <?php
 
 /**
+ * @access 9
  * @package	~unknown~
  * @author 	Martin Wyatt <martin.wyatt@gmail.com> 
  * @version	0.1
@@ -21,15 +22,12 @@ $ttDivision->read();
 
 $view->setObject(array($mainUser, $ttDivision, $ttFixture, $session));
 
-
 // Form Submission
 // ============================================================================
 
 if (array_key_exists('form_fixture_fulfill', $_POST)) {
 
-	$ttFixture
-		->fulfill($_POST);
-		
+	$ttFixture->fulfill($_POST);
 	$route->current();		
 	
 }
@@ -38,20 +36,10 @@ if (array_key_exists('form_fixture_fulfill', $_POST)) {
 // Sub Page
 // ============================================================================
 
-if ($config->getUrl(2)) {
+if ($config->getUrl(3)) {
 
-	$view->loadTemplate($config->getUrl(0) . '/' . $config->getUrl(1) . '/' . $config->getUrl(2));
+	$view->loadTemplate($config->getUrl(0) . '/' . $config->getUrl(1) . '/' . $config->getUrl(2) . '/' . $config->getUrl(3));
 
-}
-
-
-// Invalid URL
-// ============================================================================
-
-if ($config->getUrl(2)) {
-
-	$route->home($config->getUrl(0) . '/' . $config->getUrl(1) . '/');
-	
 }
 
 

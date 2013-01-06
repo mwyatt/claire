@@ -144,25 +144,16 @@ $(document).ready(function() {
 	 */
 	function changeDivision() {
 
-		$.post('http://' + window.location.host + '/mvc/ajax/team/',
-			{ 
-				division_id: $(this).val()
-			},
+		$.get('http://' + window.location.host + '/git/mvc/ajax/team/',
+			{ division_id: $(this).val() },
 			function(result) {
-
 				if (result) {
-
-					// set options of team group
-					
 					$(selectTeamGroup).html(result);
-
 				}
-
 			}, "html"
 		);
 
 		// reset player select
-
 		$(selectPlayerGroup).html('');
 
 	}
@@ -185,7 +176,7 @@ $(document).ready(function() {
 		else
 			side = 'right';
 
-		$.post('http://' + window.location.host + '/mvc/ajax/fixture/',
+		$.get('http://' + window.location.host + '/git/mvc/ajax/fixture/',
 			{ 
 				team_id: $(this).val()
 			},
@@ -377,7 +368,7 @@ $(document).ready(function() {
 		var btn = $(this);
 		$(this).addClass('active');
 
-		$.post('http://' + window.location.host + '/mvc/ajax/player/',
+		$.post('http://' + window.location.host + '/git/mvc/ajax/player/',
 			{ 
 				all: true
 			},

@@ -7,7 +7,7 @@
 	<nav>
 		<ul>
 			<li>
-				<a href="#" title="(Ajax) Open New Panel">New</a>
+				<a class="new" href="<?php echo $this->urlCurrent(); ?>fulfill/" title="Add a new Player">Submit Scorecard</a>
 			</li>
 		</ul>
 	</nav>

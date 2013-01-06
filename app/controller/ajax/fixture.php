@@ -2,11 +2,11 @@
 
 $output = '';
 
-if (array_key_exists('division_id', $_POST)) {
+if (array_key_exists('division_id', $_GET)) {
 
 	$ttTeam = new ttTeam($database, $config);
 
-	$ttTeam->readByDivision($_POST['division_id']);
+	$ttTeam->readByDivision($_GET['division_id']);
 
 	if ($ttTeam->getData()) {	
 
@@ -22,11 +22,11 @@ if (array_key_exists('division_id', $_POST)) {
 
 }
 
-if (array_key_exists('team_id', $_POST)) {
+if (array_key_exists('team_id', $_GET)) {
 
 	$ttPlayer = new ttPlayer($database, $config);
 
-	$ttPlayer->readByTeam($_POST['team_id']);
+	$ttPlayer->readByTeam($_GET['team_id']);
 
 	if ($ttPlayer->getData()) {	
 
@@ -36,7 +36,7 @@ if (array_key_exists('team_id', $_POST)) {
 
 		while ($ttPlayer->nextRow()) {
 	
-			$output .= '<option label="' . $index . '" value="' . $ttPlayer->getRow('id') . '">' . $ttPlayer->getRow('full_name') . '</option>';
+			$output .= '<option value="' . $ttPlayer->getRow('id') . '">' . $ttPlayer->getRow('full_name') . '</option>';
 
 			$index ++;
 

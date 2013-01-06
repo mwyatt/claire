@@ -17,6 +17,12 @@
 
 	<?php if ($ttDivision->getData()) : ?>	
 
+	<?php 
+
+		$tabIndex = 0;
+
+	?>	
+
 	<form class="main" method="post">
 
 		<div class="division">
@@ -76,11 +82,11 @@
 
 					<?php $name = 'encounter_' . (($part !== 'doubles') ? $row : $part) . '_' . $side; ?>
 
-					<input type="checkbox" name="disable_row[<?php echo $row; ?>][<?php echo $side; ?>]">
+					<input type="checkbox" name="disable_row[<?php echo $row; ?>][<?php echo $side; ?>]" tabindex="0">
 
 					<label for="<?php echo $name ?>" class=""><?php echo (($part !== 'doubles') ? 'No Player' : ucfirst($part)); ?></label>
 
-					<input id="<?php echo $name ?>" name="encounter[<?php echo $row; ?>][<?php echo $side; ?>]" type="text" size="1" maxlength="1">
+					<input id="<?php echo $name ?>" name="encounter[<?php echo $row; ?>][<?php echo $side; ?>]" type="text" size="1" maxlength="1" tabindex="<?php echo $tabIndex ++; ?>">
 
 				</div>
 

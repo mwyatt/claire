@@ -117,16 +117,14 @@ class ttFixture extends Model
 
 		$this->setDataStatement($sth);
 
-		echo '<pre>';
-		print_r ($this);
-		echo '</pre>';		
-		exit;
+		// echo '<pre>';
+		// print_r ($this);
+		// echo '</pre>';		
+		// exit;
 
 
 	}	
-	
-	/* Update
-	========================================================================= */
+
 	
 	/**
 	 * updates a fixture and fills scorecard information
@@ -147,10 +145,6 @@ class ttFixture extends Model
 	 * @return true || false
 	 */
 	public function fulfill($_POST) {
-echo '<pre>';
-print_r($_POST);
-echo '</pre>';
-exit;
 
 		// validation
 
@@ -330,7 +324,7 @@ exit;
 			
 			if ($ill) {
 				
-				first($illness)
+				// first($illness)
 
 				if ($encounters[$key]['left']['player'] == false) {
 					$encounters[$key]['left']['score'] = 0;
