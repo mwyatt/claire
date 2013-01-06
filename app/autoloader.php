@@ -12,64 +12,41 @@
  */ 
 class AutoLoader {
 
-	public static $className;
-	public static $classType;
 
-	
 	/**
 	 * Load classes dynamically
-	 * @param $className is seperated via _ for folders /moddel/class.php
+	 * @param  string $className attempted class to load
+	 * @return null            
 	 */
-	public static function load() {
-		
-		// build path
-		$path = BASE_PATH . 'app' . '/' . AutoLoader::$classType . '/' . AutoLoader::$className . '.php';
-								
-		// check file exists
-		if (is_file($path)) {
-		
-			include($path);
+	public static function load($className) {
+
+		$className = strtolower($className);
+
+		$pathClass = BASE_PATH . 'app' . '/' . 'class' . '/' . $className . '.php';
+						
+		$pathModel = BASE_PATH . 'app' . '/' . 'model' . '/' . $className . '.php';
+
+		if (is_file($pathClass)) {
+
+			// echo 'now loading: ' . $pathClass . '<br>';
+			include($pathClass);
 			return;
+
+		} elseif (is_file($pathModel)) {
+
+			// echo 'now loading: ' . $pathModel . '<br>';
+			include($pathModel);
+			return;
+
+		} else {
+
+			echo '<h2>' . 'Class or Model does not exist' . '<h2>';
+
+			echo $pathClass . '<br>';
+			echo $pathModel . '<br>';
+
 		}
 
-	}	
-	
-
-	public static function loadClass($className) {
-		AutoLoader::$className = strtolower($className);
-		AutoLoader::$classType = 'class';
-		AutoLoader::load();
 	}
-	
-	
-	public static function loadModel($className) {
-		AutoLoader::$className = $className;
-		AutoLoader::$classType = 'model';
-		AutoLoader::load();
-	}
-	
-	
-	/**
-	 * Search for Controllers / Files
-	 *
-	 * @param string $path The file path to find
-	 * @return true|false The file exists else false
-	 */	
-	public function file($path)
-	{		
-		$path = BASE_PATH . self::$sep . strtolower($path) . self::$ext;
-		
-		if (is_file($path))
-			return $path;
-	}	
-
-	
-	public function controller($path)
-	{		
-		$path = BASE_PATH . self::$controller .  strtolower($path) . self::$ext;
-		
-		if (is_file($path))
-			return $path;
-	}				
 	
 }

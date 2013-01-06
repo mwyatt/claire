@@ -20,8 +20,7 @@ define('BASE_PATH', (string) (__DIR__ . '/'));
 
 require_once(BASE_PATH . 'app/autoloader.php');
 
-spl_autoload_register(array('AutoLoader', 'loadClass'));
-spl_autoload_register(array('AutoLoader', 'loadModel'));
+spl_autoload_register(array('AutoLoader', 'load'));
 
 		
 // Error Handling

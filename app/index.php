@@ -53,15 +53,11 @@ if ($config->getUrl(0) && !$config->getUrl(1)) {
 }
 
 
-// 404 Page
+// Invalid URL
 // ============================================================================
 
 if ($config->getUrl(0)) {
-	
-	// Redirect
-	header('HTTP/1.0 404 Not Found');
-	require_once('app/view/404.php');
-	exit;
+	$route->home();
 }
 
 

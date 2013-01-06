@@ -11,7 +11,7 @@
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
 
-$mainUser = new MainUser($database, $config);
+$mainUser = new mainUser($database, $config);
 $mainUser->setObject($session);
 
 $view->setObject(array($mainUser));

@@ -21,17 +21,17 @@ class View extends Model
 	 */	
 	public function header() {
 	
-		$user = new MainUser($this->database, $this->config);
+		$user = new mainUser($this->database, $this->config);
 	
 		// initiate menu
 
-		$menu = new MainMenu($this->database, $this->config);
+		$menu = new mainMenu($this->database, $this->config);
 		$menu
 			->setObject($user);
 		
 		//$menu->adminBuild();
 		
-		$option = new MainOption($this->database, $this->config);
+		$option = new mainOption($this->database, $this->config);
 		$option->select();		
 		
 		// register new objects
