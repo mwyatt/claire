@@ -117,11 +117,49 @@ class ttFixture extends Model
 
 		$this->setDataStatement($sth);
 
-		// echo '<pre>';
-		// print_r ($this);
-		// echo '</pre>';		
-		// exit;
+	}	
 
+
+	/**
+	 * selects a single fixture from the database
+	 * @param  integer $fixtureId 
+	 * @return null            
+	 */
+	public function readSingle($fixtureId)
+	{	
+	
+		$database->dbh->prepare("	
+
+			select
+				tt_encounter_row.id
+				, case
+					when tt_player_left.id = null
+					then doubles
+					else concat(tt_player_left.first_name, ' ', tt_player_left.last_name) 
+					end
+					as player_left_full_name
+				, tt_encounter_row.player_left_score
+				, tt_encounter_row.player_left_rank_change
+				
+				, concat(tt_player_right.first_name, ' ', tt_player_right.last_name) as player_right_full_name
+				, tt_encounter_row.player_right_score
+				, tt_encounter_row.player_right_rank_change
+
+			from tt_encounter_row
+
+			left join tt_player as tt_player_left on tt_player_left.id = tt_encounter_row.player_left_id
+			
+			left join tt_player as tt_player_right on tt_player_right.id = tt_encounter_row.player_right_id
+
+			where tt_encounter_row.fixture_id = :fixture_id
+
+		");
+
+		$sth->execute(array(
+			':fixture_id' => $fixtureId
+		));
+
+		$this->setDataStatement($sth);
 
 	}	
 

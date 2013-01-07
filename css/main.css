@@ -491,6 +491,7 @@ header.main {
 			header.main > nav.main ul li.current a {
 				cursor: default;
 				color: #666666;
+				opacity: .6;
 			}
 
 	/* sub nav */
@@ -518,7 +519,7 @@ header.main {
 			header.main > nav.sub ul li a {
 				display: block;
 				font-size: 1.1em;
-				font-weight: 400;
+				font-weight: 700;
 				text-transform: uppercase;
 			}
 			header.main > nav.sub ul li.current a {

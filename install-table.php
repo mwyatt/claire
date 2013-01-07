@@ -234,6 +234,31 @@ try {
 	");	
 
 
+	// view
+	
+	$database->dbh->query("	
+
+		create view tt_encounter_row as
+
+		select
+			tt_encounter.id
+			, tt_encounter_part_left.player_id as player_left_id
+			, tt_encounter_part_left.player_score as player_left_score
+			, tt_encounter_part_left.player_rank_change as player_left_rank_change
+			, tt_encounter_part_right.player_id as player_right_id
+			, tt_encounter_part_right.player_score as player_right_score
+			, tt_encounter_part_right.player_rank_change as player_right_rank_change
+			, tt_encounter.fixture_id
+
+		from tt_encounter
+
+		left join tt_encounter_part as tt_encounter_part_left on tt_encounter_part_left.id = tt_encounter.part_left_id
+
+		left join tt_encounter_part as tt_encounter_part_right on tt_encounter_part_right.id = tt_encounter.part_right_id
+
+		group by tt_encounter.id
+
+	");
 
 	
 } catch (PDOException $e) { 
