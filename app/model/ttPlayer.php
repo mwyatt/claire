@@ -106,6 +106,7 @@ class ttPlayer extends Model
 				if (array_key_exists('id', $player)) {
 
 					if ($player['id'] == $id)
+						
 						return $player;
 
 				}

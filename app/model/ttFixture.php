@@ -232,7 +232,7 @@ class ttFixture extends Model
 
 			if ($fixture['date_fulfilled']) {
 
-				$this->getObject('mainUser')->setFeedback('This fixture has already been filled on ' . date('D jS F Y', $fixture['date_fulfilled']));
+				$this->getObject('mainUser')->setFeedback(array('error', 'This fixture has already been filled on ' . date('D jS F Y', $fixture['date_fulfilled'])));
 
 				return;
 
@@ -240,7 +240,9 @@ class ttFixture extends Model
 
 		} else {
 
-			$this->getObject('mainUser')->setFeedback('This fixture was not found, not good!');
+			// fixture does not exist
+
+			$this->getObject('mainUser')->setFeedback(array('error', 'This fixture does not exist'));
 
 			return;
 
@@ -252,20 +254,16 @@ class ttFixture extends Model
 		$ttPlayer = new ttPlayer($this->database, $this->config);
 		$ttPlayer->readById($playerIds);
 
-		// get encounter structure for use in the loop
-
-		$encounterStructure = $this->getEncounterStructure();
-
 		// prepare statements
 
 		$sthEncounterPart = $this->database->dbh->prepare("
 			
 			insert into
 				tt_encounter_part
-				(player_id, player_score, player_rank_change)
+				(player_id, player_score, player_rank_change, status)
 
 			values
-				(:player_id, :player_score, :player_rank_change)
+				(:player_id, :player_score, :player_rank_change, :status)
 
 		");				
 		
@@ -296,30 +294,19 @@ class ttFixture extends Model
 		// the loop
 		// builds $encounters
 		
-		$ill = false;
+		// get encounter structure
+		$encounterStructure = $this->getEncounterStructure();
 
 		foreach ($_POST['encounter'] as $key => $score) {
 
 			$doubles = false;
-			$absent = false;
-
-			// illness
-
-			if (array_key_exists('ill', $_POST)) {
-
-				$key = key(end($_POST['ill']));
-				$side = key($_POST['ill'][$key]);
-				$illness = array($key, $side);
-
-				$ill = true;
-
-			}
+			$exclude = false;
 
 			// encounter or doubles
 
 			if ($key != 5) {
 
-				// normal encounter with possible absent player
+				// normal with possible absent player
 
 				$encounters[$key]['left']['player'] = $ttPlayer->getById($_POST['player']['left'][$encounterStructure['left'][$key]]);
 				$encounters[$key]['right']['player'] = $ttPlayer->getById($_POST['player']['right'][$encounterStructure['right'][$key]]);
@@ -328,9 +315,11 @@ class ttFixture extends Model
 
 				if (! $encounters[$key]['left']['player'] || ! $encounters[$key]['right']['player'])
 
-					$absent = true;
+					$exclude = true;
 
 			} else {
+
+				// doubles
 
 				$encounters[$key]['left']['player'] = false;
 				$encounters[$key]['right']['player'] = false;
@@ -346,24 +335,8 @@ class ttFixture extends Model
 
 			// helper: absent player score setter
 
-			if ($absent) {
+			if ($exclude) {
 				
-				if ($encounters[$key]['left']['player'] == false) {
-					$encounters[$key]['left']['score'] = 0;
-					$encounters[$key]['right']['score'] = 3;
-				} else {
-					$encounters[$key]['left']['score'] = 3;
-					$encounters[$key]['right']['score'] = 0;
-				}
-
-			}
-
-			// helper: ill player score setter
-			
-			if ($ill) {
-				
-				// first($illness)
-
 				if ($encounters[$key]['left']['player'] == false) {
 					$encounters[$key]['left']['score'] = 0;
 					$encounters[$key]['right']['score'] = 3;
@@ -377,14 +350,15 @@ class ttFixture extends Model
 			// set encounter parts, decide if is absent or doubles
 			// else set rank difference
 
-			if ($absent) {
+			if ($exclude) {
 
 				if (! $encounters[$key]['left']['player'] && $encounters[$key]['right']['player']) {
 
 					$sthEncounterPart->execute(array(
-						':player_id' => 'absent'
+						':player_id' => false
 						, ':player_score' => $encounters[$key]['left']['score']
 						, ':player_rank_change' => '0'
+						, ':status' => 'absent'
 					));
 
 					$encounterPartIds['left'] = $this->database->dbh->lastInsertId();

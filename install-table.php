@@ -201,9 +201,7 @@ try {
 			(
 				id INT UNSIGNED NOT NULL AUTO_INCREMENT
 				, team_left_id INT UNSIGNED NOT NULL
-				, team_left_score TINYINT UNSIGNED
 				, team_right_id INT UNSIGNED NOT NULL
-				, team_right_score TINYINT UNSIGNED
 				, date_fulfilled INT
 				, PRIMARY KEY (id)
 			)		

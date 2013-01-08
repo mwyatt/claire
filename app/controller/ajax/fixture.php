@@ -30,7 +30,7 @@ if (array_key_exists('team_id', $_GET)) {
 
 	if ($ttPlayer->getData()) {	
 
-		$output .= '<option value="0"></option>';
+		$output .= '<option value="0">Absent</option>';
 
 		$index = 1;
 

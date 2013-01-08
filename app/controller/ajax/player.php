@@ -12,7 +12,7 @@ if (array_key_exists('all', $_POST)) {
 
 	if ($ttPlayer->getData()) {	
 
-		$output .= '<option value="0"></option>';
+		$output .= '<option value="0">Absent</option>';
 
 		$index = 1;
 
