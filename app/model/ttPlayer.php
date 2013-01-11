@@ -296,45 +296,42 @@ class ttPlayer extends Model
 	 * @param  array $rankChanges left and right rank changes
 	 * @return null              
 	 */
-	public function updateRank($encounters) {
-// echo '<pre>';
-// print_r($encounters);
-// echo '</pre>';
-// exit;
+	public function updateRank($playerId, $rankChange) {
 
+		// get current rank
 
+		$sth = $this->database->dbh->prepare("	
+			select
+				tt_player.rank
+			from
+				tt_player
+			where
+				id = :id
+		");
 
-// 		foreach ($encounters as $key => $encounter) {
+		$sth->execute(array(':id' => $playerId));
+		
+		if ($row = $sth->fetch(PDO::FETCH_ASSOC)) {	
+			$currentRank = $row['rank'];
+		}						
 
-// 			if ($key == 5)
-// 				break;
+		// update rank
 
-// 			if ($encounter['left']['player'])
-// 				$player[$encounter['left']['player']['id']] = $encounter['left']['player']['rank_change']
+		$sth = $this->database->dbh->prepare("
 
+			update
+				tt_player
+			set 
+				rank = :rank
+			where
+				id = :id
 
-// 		}
+		");	
 
-
-// 		// update player ranks
-
-// 		$playerLeft['new_rank'] = $playerLeft['rank'] + $rankChanges['left'];
-// 		$playerRight['new_rank'] = $playerRight['rank'] + $rankChanges['right'];
-
-// 		// set new player ranks
-
-
-
-// 		$sth = $this->database->dbh->query("
-// 			UPDATE
-// 				tt_player
-// 			SET 
-// 				rank = '{$playerRight['new_rank']}'
-// 			WHERE
-// 				id = '{$playerRight['id']}'
-// 		");	
-
-// 		return;
+		$sth->execute(array(
+			':rank' => $currentRank + $rankChange
+			, ':id' => $playerId
+		));
 
 	}	
 	

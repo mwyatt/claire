@@ -38,9 +38,7 @@ class ttFixture extends Model
 		");
 		
 		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {	
-		
 			$this->data[$row['division_id']][] = $row['team_id'];
-	
 		}						
 				
 		$sth = $this->database->dbh->prepare("
@@ -196,6 +194,15 @@ class ttFixture extends Model
 			
 		}
 
+		foreach ($_POST['encounter'] as $encounter) {
+			foreach ($encounter as $side) {
+				if ($side === false) {
+					$this->getObject('mainUser')->setFeedback('Please fill all scores');
+						return false;
+				}
+			}
+		}
+
 		// find fixture
 
 		$sth = $this->database->dbh->prepare("	
@@ -203,9 +210,7 @@ class ttFixture extends Model
 			select
 				f.id
 				, f.team_left_id
-				, f.team_left_score
 				, f.team_right_id
-				, f.team_right_score
 				, f.date_fulfilled
 
 			from
@@ -278,18 +283,6 @@ class ttFixture extends Model
 
 		");	
 
-		$sthPlayer = $this->database->dbh->prepare("
-
-			update
-				tt_player
-
-			set 
-				rank = :player_new_rank
-
-			where
-				id = :player_id
-
-		");
 
 		// the loop
 		// builds $encounters
@@ -302,11 +295,11 @@ class ttFixture extends Model
 			$doubles = false;
 			$exclude = false;
 
-			// encounter or doubles
+			// encounter || doubles
 
 			if ($key != 5) {
 
-				// normal with possible absent player
+				// fill array with player info or false
 
 				$encounters[$key]['left']['player'] = $ttPlayer->getById($_POST['player']['left'][$encounterStructure['left'][$key]]);
 				$encounters[$key]['right']['player'] = $ttPlayer->getById($_POST['player']['right'][$encounterStructure['right'][$key]]);
@@ -314,7 +307,11 @@ class ttFixture extends Model
 				// find absent player
 
 				if (! $encounters[$key]['left']['player'] || ! $encounters[$key]['right']['player'])
+					$exclude = true;
 
+				// find exclude tick
+
+				if (array_key_exists('exclude', $score))
 					$exclude = true;
 
 			} else {
@@ -323,7 +320,6 @@ class ttFixture extends Model
 
 				$encounters[$key]['left']['player'] = false;
 				$encounters[$key]['right']['player'] = false;
-
 				$doubles = true;
 
 			}
@@ -337,7 +333,7 @@ class ttFixture extends Model
 
 			if ($exclude) {
 				
-				if ($encounters[$key]['left']['player'] == false) {
+				if (! $encounters[$key]['left']['player']) {
 					$encounters[$key]['left']['score'] = 0;
 					$encounters[$key]['right']['score'] = 3;
 				} else {
@@ -352,59 +348,40 @@ class ttFixture extends Model
 
 			if ($exclude) {
 
-				if (! $encounters[$key]['left']['player'] && $encounters[$key]['right']['player']) {
+				$sthEncounterPart->execute(array(
+					':player_id' => $encounters[$key]['left']['player']['id']
+					, ':player_score' => $encounters[$key]['left']['score']
+					, ':player_rank_change' => '0'
+					, ':status' => 'exclude'
+				));
 
-					$sthEncounterPart->execute(array(
-						':player_id' => false
-						, ':player_score' => $encounters[$key]['left']['score']
-						, ':player_rank_change' => '0'
-						, ':status' => 'absent'
-					));
+				$encounterPartIds['left'] = $this->database->dbh->lastInsertId();
 
-					$encounterPartIds['left'] = $this->database->dbh->lastInsertId();
+				$sthEncounterPart->execute(array(
+					':player_id' => $encounters[$key]['right']['player']['id']
+					, ':player_score' => $encounters[$key]['right']['score']
+					, ':player_rank_change' => '0'
+					, ':status' => 'exclude'
+				));		
 
-					$sthEncounterPart->execute(array(
-						':player_id' => $encounters[$key]['right']['player']['id']
-						, ':player_score' => $encounters[$key]['right']['score']
-						, ':player_rank_change' => '0'
-					));		
-
-					$encounterPartIds['right'] = $this->database->dbh->lastInsertId();
-					
-				} else {
-
-					$sthEncounterPart->execute(array(
-						':player_id' => $encounters[$key]['left']['player']['id']
-						, ':player_score' => $encounters[$key]['left']['score']
-						, ':player_rank_change' => '0'
-					));		
-
-					$encounterPartIds['left'] = $this->database->dbh->lastInsertId();
-					
-					$sthEncounterPart->execute(array(
-						':player_id' => 'absent'
-						, ':player_score' => $encounters[$key]['right']['score']
-						, ':player_rank_change' => '0'
-					));	
-					
-					$encounterPartIds['right'] = $this->database->dbh->lastInsertId();
-
-				}
+				$encounterPartIds['right'] = $this->database->dbh->lastInsertId();
 
 			} elseif ($doubles) {
 
 				$sthEncounterPart->execute(array(
-					':player_id' => 'doubles'
+					':player_id' => false
 					, ':player_score' => $encounters[$key]['left']['score']
-					, ':player_rank_change' => '0'
+					, ':player_rank_change' => false
+					, ':status' => 'doubles'
 				));		
 
 				$encounterPartIds['left'] = $this->database->dbh->lastInsertId();
 
 				$sthEncounterPart->execute(array(
-					':player_id' => 'doubles'
+					':player_id' => false
 					, ':player_score' => $encounters[$key]['right']['score']
-					, ':player_rank_change' => '0'
+					, ':player_rank_change' => false
+					, ':status' => 'doubles'
 				));						
 
 				$encounterPartIds['right'] = $this->database->dbh->lastInsertId();
@@ -413,10 +390,17 @@ class ttFixture extends Model
 
 				$encounters[$key] = $ttPlayer->rankDifference($encounters[$key]);
 
+				// update player ranks
+
+				$ttPlayer->updateRank($encounters[$key]['left']['player']['id'], $encounters[$key]['left']['rank_change']);
+				$ttPlayer->updateRank($encounters[$key]['right']['player']['id'], $encounters[$key]['right']['rank_change']);
+
+
 				$sthEncounterPart->execute(array(
 					':player_id' => $encounters[$key]['left']['player']['id']
 					, ':player_score' => $encounters[$key]['left']['score']
 					, ':player_rank_change' => $encounters[$key]['left']['rank_change']
+					, ':status' => false
 				));		
 
 				$encounterPartIds['left'] = $this->database->dbh->lastInsertId();
@@ -425,16 +409,10 @@ class ttFixture extends Model
 					':player_id' => $encounters[$key]['right']['player']['id']
 					, ':player_score' => $encounters[$key]['right']['score']
 					, ':player_rank_change' => $encounters[$key]['right']['rank_change']
+					, ':status' => false
 				));	
 				
 				$encounterPartIds['right'] = $this->database->dbh->lastInsertId();
-
-				// $sthPlayer->execute(array(
-				// 	':player_new_rank' => $encounters[$key]['left']['player']['id']
-				// 	, ':player_id' => $encounters[$key]['right']['score']
-				// 	, ':player_rank_change' => $encounters[$key]['right']['rank_change']
-				// ));	
-
 
 			}
 
@@ -446,11 +424,7 @@ class ttFixture extends Model
 				, ':fixture_id' => $fixture['id']
 			));	
 
-		} // end the loop
-
-		// update player ranks
-
-		// $ttPlayer->updateRank($encounters);
+		}
 
 		// update the fixture
 
@@ -461,8 +435,6 @@ class ttFixture extends Model
 
 			set 
 				date_fulfilled = :date_fulfilled
-				, tt_fixture.team_left_score = :team_left_score
-				, tt_fixture.team_right_score = :team_right_score
 
 			where
 				id = {$fixture['id']}
@@ -471,14 +443,12 @@ class ttFixture extends Model
 
 		$sthFixture->execute(array(
 			':date_fulfilled' => time()
-			, ':team_left_score' => $_POST['total']['left']
-			, ':team_right_score' => $_POST['total']['right']
 		));	
 
 		// feedback
 
 		$this->getObject('Session')->set('fixture_overview', $encounters);
-		$this->getObject('mainUser')->setFeedback('Fixture Fulfilled Successfully');
+		$this->getObject('mainUser')->setFeedback(array('success', 'Fixture Fulfilled Successfully'));
 
 		return;
 

@@ -212,9 +212,10 @@ try {
 			tt_encounter_part
 			(
 				id INT UNSIGNED NOT NULL AUTO_INCREMENT
-				, player_id VARCHAR(100)
+				, player_id INT UNSIGNED
 				, player_score TINYINT UNSIGNED
 				, player_rank_change TINYINT
+				, status VARCHAR(20)
 				, PRIMARY KEY (id)
 			)		
 	");	
