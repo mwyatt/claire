@@ -1,55 +1,38 @@
 <?php require_once('header.php'); ?>
 
-	<div class="sixteen columns">
-	
-		<div class="flexslider">
-		
-			<?php if ($ads->getResult()) : ?>
-			<ul class="slides">
-				<?php while ($ads->nextRow()) : ?>
-				<li style="background: url('http://placehold.it/200x200') 0 50% no-repeat">
-					<a href="<?php echo $ads->getRow('target'); ?>" target="<?php echo $url_target; ?>">
-						<h2><?php echo $ads->getRow('title'); ?></h2>
-					</a>
-				</li>
-				<?php endwhile; ?>
-			</ul>
-			<?php endif; ?>
-			
-		</div>	
-		
-	</div>		
-
-	<div id="projects" class="six columns">
-	
-		<h3>Projects</h3>
-		<?php if ($projects->getResult()) : ?>
-		<ul>
-			<?php while ($projects->nextRow()) : ?>
-			<li>
-				<a href="<?php echo $projects->getRow('guid'); ?>" title="Open Project <?php echo $projects->getRow('title'); ?>" alt="Open Project <?php echo $title; ?>"><img src="http://placehold.it/300x160"></a>
-			</li>
-			<?php endwhile; ?>
-		</ul>
-		<?php endif; ?>
-		
-	</div>	
-	
-	<div id="posts" class="ten columns">
-	
-		<h3>Stream</h3>
-		<?php if ($posts->getResult()) : ?>
-		<ul>
-			<?php while ($posts->nextRow()) : ?>
-			<li>
-				<a href="<?php echo $posts->getRow('guid'); ?>"><?php echo $posts->getRow('title'); ?></a>
-			</li>
-			<?php endwhile; ?>
-		</ul>
-		<?php endif; ?>		
-		
-	</div>	
-	
-	<div class="clearfix"></div>
+	<table class="league" width="100%" cellspacing="0" cellpadding="0">
+		<tr>
+			<th>Team Name</th>
+			<th class="won">Won</th>
+			<th>Draw</th>
+			<th>Loss</th>
+			<th class="define" title="Total Fixtures Played">Played</th>
+			<th class="define" title="Total points collected this season">Points</th>
+		</tr>
+		<tr>
+			<td class="name">Burnley Boys Club</td>
+			<td class="won">9</td>
+			<td class="draw">0</td>
+			<td class="loss">0</td>
+			<td class="played">9</td>
+			<td class="points">253</td>
+		</tr>
+		<tr>
+			<td class="name">Burnley Boys Club</td>
+			<td class="won">9</td>
+			<td class="draw">0</td>
+			<td class="loss">0</td>
+			<td class="played">9</td>
+			<td class="points">253</td>
+		</tr>
+		<tr>
+			<td class="name">Burnley Boys Club</td>
+			<td class="won">9</td>
+			<td class="draw">0</td>
+			<td class="loss">0</td>
+			<td class="played">9</td>
+			<td class="points">253</td>
+		</tr>
+	</table>
 
 <?php require_once('footer.php'); ?>

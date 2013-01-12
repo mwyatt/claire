@@ -55,6 +55,24 @@
 		</div>
 
 		<div class="row">
+
+			<label for="">Secretary</label>
+
+			<select name="secretary_id">
+
+				<option value="0">None</option>
+
+				<?php while ($ttSecretary->nextRow()) : ?>
+			
+				<option value="<?php echo $ttSecretary->getRow('id'); ?>" <?php echo ($ttSecretary->getRow('id') == $ttTeam->get('secretary_id') ? 'selected' : false); ?>><?php echo $ttSecretary->getRow('full_name'); ?></option>
+
+				<?php endwhile; ?>
+
+			</select>
+
+		</div>
+
+		<div class="row">
 			
 			<input name="form_team_update" type="submit">
 			

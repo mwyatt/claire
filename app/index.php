@@ -64,12 +64,12 @@ if ($config->getUrl(0)) {
 // Homepage
 // ============================================================================
 	
-exit('Front end Under Construction');
+// exit('Front end Under Construction');
 
 //$view->loadCached('home');
 	
-$posts = new mainContent($database, $config);
-$posts->select(5);	
+// $posts = new mainContent($database, $config);
+// $posts->select(5);	
 
 //$ads = new Ads($database->dbh);
 //$ads->select('cover')->shuffle();
@@ -77,5 +77,4 @@ $posts->select(5);
 //$projects = new Content($database->dbh, 'project');	
 //$projects->select(2);
 
-$view->registerObjects(array($posts))
-	->loadTemplate('home');
+$view->loadTemplate('home');

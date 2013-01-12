@@ -1,78 +1,28 @@
-<?php require_once('doctype.php'); ?>
-<!--[if lt IE 7 ]> <html class="ie6"> <![endif]-->
-<!--[if IE 7 ]>    <html class="ie7"> <![endif]-->
-<!--[if IE 8 ]>    <html class="ie8"> <![endif]-->
-<!--[if IE 9 ]>    <html class="ie9"> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!--> <html class=""> <!--<![endif]-->
-<head>
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title><?php echo $mainOption->get('site_title'); ?></title>	
+        <meta name="description" content="<?php echo $mainOption->get('site_description'); ?>">
+		<meta name="keywords" content="<?php echo $mainOption->get('site_keywords'); ?>">
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+        <!-- css -->
 
-	<!-- Basic Page Title and Metas
-	======================================================================== -->
-	<meta charset="utf-8">
-	
-	<title><?php echo $options->get('site_title'); ?></title>
-	
-	<meta name="description" content="<?php echo $options->get('site_description'); ?>">
-	<meta name="keywords" content="<?php echo $options->get('site_keywords'); ?>">
+        <link rel="stylesheet" href="<?php echo $this->urlHome(); ?>css/vendor/normalize.css">
+        <link rel="stylesheet" href="<?php echo $this->urlHome(); ?>css/main.css">
 
-	
-	<!-- Mobile Specific Metas
-	======================================================================== -->
+        <script src="<?php echo $this->urlHome(); ?>js/vendor/modernizr-2.6.2.min.js"></script>
 
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    </head>
+    <body>
+    	<!--[if lt IE 7]>
+    	    <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    	<![endif]-->
 
-	
-	<!-- CSS
-	======================================================================== -->
-
-	<link rel="stylesheet" href="<?php echo $view->urlMedia('css/skeleton.css'); ?>">
-	<link rel="stylesheet" href="<?php echo $view->urlMedia('css/layout.css'); ?>">
-	<link rel="stylesheet" href="<?php echo $view->urlMedia('css/flexslider.css'); ?>">
-	<link rel="stylesheet" href="<?php echo $view->urlMedia('css/base.css'); ?>">
-	
-	
-	<!-- Fonts
-	======================================================================== -->
-
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'> <!-- Book 300, Normal 400, Semi-Bold 600, Bold 700 -->
-	
-	
-	<!-- Favicons
-	======================================================================== -->
-
-	<link rel="shortcut icon" href="<?php echo $view->urlMedia('i/fav/favicon.ico'); ?>">
-	<link rel="apple-touch-icon" href="<?php echo $view->urlMedia('i/fav/apple-touch-icon.png'); ?>">
-	<link rel="apple-touch-icon" sizes="72x72" href="<?php echo $view->urlMedia('i/fav/apple-touch-icon-72x72.png'); ?>">
-	<link rel="apple-touch-icon" sizes="114x114" href="<?php echo $view->urlMedia('i/fav/apple-touch-icon-114x114.png'); ?>">
-	
-</head>
-<body<?php echo $view->bodyClass(); ?>>
-
-<div class="container">
-
-	<header class="base">
-	
-		<div class="sixteen columns">
-			<form id="search" class="hide">
-				<input type="text" name="search" placeholder="You never know." spellcheck="false">
-			</form>		
-			<div class="btn search"></div>
-		</div>	
-			
-		<div class="four columns">
-		
-			<?php $view->logoMvc(); ?>
-			
-		</div>
-		
-		<div class="twelve columns">
-						
-			<?php //echo $menu->create('main'); ?>
-			
-		</div>
-		
-		<div class="clearfix"></div>
-		
-	</header>
+    <a href="#"><img src="<?php echo $this->urlHome(); ?>img/main/logo.png" alt=""></a>

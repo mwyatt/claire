@@ -160,6 +160,19 @@ try {
 	
 	$database->dbh->query("
 		CREATE TABLE IF NOT EXISTS
+			tt_secretary
+			(
+				id INT UNSIGNED NOT NULL AUTO_INCREMENT
+				, first_name VARCHAR(75)
+				, last_name VARCHAR(75)
+				, phone_landline VARCHAR(30)
+				, phone_mobile VARCHAR(30)
+				, PRIMARY KEY (id)
+			)		
+	");		
+	
+	$database->dbh->query("
+		CREATE TABLE IF NOT EXISTS
 			tt_venue
 			(
 				id INT UNSIGNED NOT NULL AUTO_INCREMENT
@@ -176,6 +189,7 @@ try {
 				id INT UNSIGNED NOT NULL AUTO_INCREMENT
 				, name VARCHAR(75) NOT NULL
 				, home_night TINYINT(1)
+				, secretary_id INT UNSIGNED
 				, venue_id INT UNSIGNED NOT NULL
 				, division_id INT UNSIGNED NOT NULL
 				, PRIMARY KEY (id)
@@ -233,7 +247,7 @@ try {
 	");	
 
 
-	// view
+	// view: core encounter rows
 	
 	$database->dbh->query("	
 
@@ -248,6 +262,7 @@ try {
 			, tt_encounter_part_right.player_score as player_right_score
 			, tt_encounter_part_right.player_rank_change as player_right_rank_change
 			, tt_encounter.fixture_id
+			, tt_encounter_part_left.status
 
 		from tt_encounter
 
@@ -256,6 +271,35 @@ try {
 		left join tt_encounter_part as tt_encounter_part_right on tt_encounter_part_right.id = tt_encounter.part_right_id
 
 		group by tt_encounter.id
+
+	");
+
+	// view: build on tt_encounter_row to create tt_fixture_result
+	
+	$database->dbh->query("	
+
+		create view tt_fixture_result as
+
+		select
+			tt_fixture.id
+			, team_left.id as team_left_id
+			, sum(tt_encounter_row.player_left_score) as left_score
+			, team_right.id as team_right_id
+			, sum(tt_encounter_row.player_right_score) as right_score
+			, tt_fixture.date_fulfilled
+			, team_left.division_id as division_id
+
+		from tt_fixture
+
+		left join tt_team as team_left on team_left.id = tt_fixture.team_left_id
+
+		left join tt_team as team_right on team_right.id = tt_fixture.team_right_id
+
+		left join tt_encounter_row on tt_encounter_row.fixture_id = tt_fixture.id
+
+		where tt_fixture.date_fulfilled IS NOT NULL
+
+		group by tt_fixture.id
 
 	");
 

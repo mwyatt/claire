@@ -13,8 +13,8 @@
 
         <!-- css -->
 
-        <link rel="stylesheet" href="<?php echo $this->urlHome(); ?>css/normalize.css">
-        <link rel="stylesheet" href="<?php echo $this->urlHome(); ?>css/main.css">
+        <link rel="stylesheet" href="<?php echo $this->urlHome(); ?>css/vendor/normalize.css">
+        <link rel="stylesheet" href="<?php echo $this->urlHome(); ?>css/admin/main.css">
 
         <!-- modenizr -->
 

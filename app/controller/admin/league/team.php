@@ -43,11 +43,14 @@ if (array_key_exists('update', $_GET)) {
 
 	$ttVenue = new ttVenue($database, $config);
 	$ttVenue->read();
+	$ttSecretary = new ttSecretary($database, $config);
+	$ttSecretary->read();
 	$ttDivision->read();
 
 	$view
 		->setObject($ttDivision)
 		->setObject($ttVenue)
+		->setObject($ttSecretary)
 		->setObject($ttTeam)
 		->loadTemplate('admin/league/team/update');
 

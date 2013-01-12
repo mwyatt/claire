@@ -106,6 +106,7 @@ class ttTeam extends Model
 				tt_team
 			set
 				name = :name
+				, secretary_id = :secretary_id
 				, venue_id = :venue_id
 				, home_night = :home_night
 				, division_id = :division_id
@@ -117,6 +118,7 @@ class ttTeam extends Model
 		$sth->execute(array(
 			':name' => $_POST['name']
 			, ':id' => $_GET['update']
+			, ':secretary_id' => $_POST['secretary_id']
 			, ':venue_id' => $_POST['venue_id']
 			, ':home_night' => $_POST['home_night']
 			, ':division_id' => $_POST['division_id']
@@ -149,6 +151,7 @@ class ttTeam extends Model
 				tt_team.id
 				, tt_team.name
 				, tt_team.home_night
+				, tt_team.secretary_id
 				, tt_team.venue_id
 				, tt_team.division_id
 
@@ -385,10 +388,29 @@ class ttTeam extends Model
 	}
 
 
-	public function readLeague() {
+	public function readLeague($division_id) {
 
 		$sth = $this->database->dbh->query("	
 			select
+				tt_team.id
+				, tt_team.name
+				, sum(case when tt_fixture_result.team_left_id = tt_team.id and tt_fixture_result.left_score > tt_fixture_result.right_score or tt_fixture_result.team_right_id = tt_team.id and tt_fixture_result.right_score > tt_fixture_result.left_score then 1 else 0 end) as won
+				, sum(case when tt_fixture_result.team_left_id = tt_team.id and tt_fixture_result.left_score = tt_fixture_result.right_score or tt_fixture_result.team_right_id = tt_team.id and tt_fixture_result.right_score = tt_fixture_result.left_score then 1 else 0 end) as draw
+				, sum(case when tt_fixture_result.team_left_id = tt_team.id and tt_fixture_result.left_score < tt_fixture_result.right_score or tt_fixture_result.team_right_id = tt_team.id and tt_fixture_result.right_score < tt_fixture_result.left_score then 1 else 0 end) as lost
+				, count(tt_fixture_result.id) as played
+				, (sum(case when tt_fixture_result.team_left_id = tt_team.id then tt_fixture_result.left_score else 0 end) + sum(case when tt_fixture_result.team_right_id = tt_team.id then tt_fixture_result.right_score else 0 end)) as total_points
+
+			from tt_team
+
+			left join tt_fixture_result on tt_fixture_result.team_left_id = tt_team.id or  tt_fixture_result.team_right_id = tt_team.id
+
+			where tt_team.division_id = 2
+
+			group by tt_team.id
+		");
+
+
+/*			select
 				t.id
 				, t.name
 				, count(f.id) as played
@@ -398,9 +420,7 @@ class ttTeam extends Model
 			left join tt_encounter as e on e.fixture_id = f.id
 			where t.division_id = '1'
 			and f.date_fulfilled is not null
-			group by t.id
-		");
-
+			group by t.id*/
 /*
 
 			left join tt_encounter_part as ep on ep.id = e.part_left_id or ep.id = e.part_right_id
