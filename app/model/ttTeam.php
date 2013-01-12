@@ -404,43 +404,12 @@ class ttTeam extends Model
 
 			left join tt_fixture_result on tt_fixture_result.team_left_id = tt_team.id or  tt_fixture_result.team_right_id = tt_team.id
 
-			where tt_team.division_id = 2
+			where tt_team.division_id = 1
 
 			group by tt_team.id
+
+			order by total_points desc
 		");
-
-
-/*			select
-				t.id
-				, t.name
-				, count(f.id) as played
-				, count(e.id) as encounters
-			from tt_team as t
-			left join tt_fixture as f on f.team_left_id = t.id or f.team_right_id = t.id
-			left join tt_encounter as e on e.fixture_id = f.id
-			where t.division_id = '1'
-			and f.date_fulfilled is not null
-			group by t.id*/
-/*
-
-			left join tt_encounter_part as ep on ep.id = e.part_left_id or ep.id = e.part_right_id
-
-
-			select
-				p.id
-				, concat(p.first_name, ' ', p.last_name) as full_name
-				, t.name as team
-				, sum(case when ep2.player_id = p.id then ep2.player_score else NULL end) as won
-				, sum(ep2.player_score) as played
-			from tt_player as p
-			left join tt_team as t on t.id = p.team_id
-			left join tt_encounter_part as ep on ep.player_id = p.id
-			left join tt_encounter as enc on enc.part_left_id = ep.id or enc.part_right_id = ep.id
-			left join tt_encounter_part as ep2 on ep2.id = enc.part_left_id or ep2.id = enc.part_right_id
-			where t.division_id = '1'
-			group by p.id
-
- */
 
 		$this->setDataStatement($sth);
 

@@ -245,18 +245,22 @@ class ttPlayer extends Model
 				, concat(tt_player.first_name, ' ', tt_player.last_name) as full_name
 				, tt_team.name as team_name
 				, tt_player.rank
-				
-				, sum(case when tt_encounter_part.status = '' then tt_encounter_part.player_score else 0 end) as won
+
+				, (sum(case when tt_encounter_row.player_left_id = tt_player.id and tt_encounter_row.status = '' then tt_encounter_row.player_left_score else 0 end) + sum(case when tt_encounter_row.player_right_id = tt_player.id and tt_encounter_row.status = '' then tt_encounter_row.player_right_score else 0 end)) as won
+
+				, sum(
+					case
+						when tt_encounter_row.status = '' and tt_encounter_row.player_left_id = tt_player.id or tt_encounter_row.player_right_id = tt_player.id then tt_encounter_row.player_left_score + tt_encounter_row.player_right_score
+					else 0
+				end) as played
 
 			from tt_player
 
 			left join tt_team on tt_team.id = tt_player.team_id
 
-			use this table ----tt_encounter_row
-
 			left join tt_encounter_row on tt_encounter_row.player_left_id = tt_player.id or tt_encounter_row.player_right_id = tt_player.id
 
-			where tt_team.division_id = '2'
+			where tt_team.division_id = '1'
 
 			group by tt_player.id
 		");

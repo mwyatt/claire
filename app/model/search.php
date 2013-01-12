@@ -39,12 +39,3 @@ class Search extends Model
 	}	
 	
 }
-
-
-/*
-				// true | false
-				$match = ( ? true : false);			
-			if ($match == true) {
-				
-			}
-*/
