@@ -246,21 +246,17 @@ try {
 			)		
 	");	
 
-
-	// view: core encounter rows
-	
 	$database->dbh->query("	
-
-		create view tt_encounter_row as
+		create view tt_encounter_result as
 
 		select
-			tt_encounter.id
-			, tt_encounter_part_left.player_id as player_left_id
-			, tt_encounter_part_left.player_score as player_left_score
-			, tt_encounter_part_left.player_rank_change as player_left_rank_change
-			, tt_encounter_part_right.player_id as player_right_id
-			, tt_encounter_part_right.player_score as player_right_score
-			, tt_encounter_part_right.player_rank_change as player_right_rank_change
+			tt_encounter.id as encounter_id
+			, tt_encounter_part_left.player_id as left_id
+			, tt_encounter_part_right.player_id as right_id
+			, tt_encounter_part_left.player_score as left_score
+			, tt_encounter_part_right.player_score as right_score
+			, tt_encounter_part_left.player_rank_change as left_rank_change
+			, tt_encounter_part_right.player_rank_change as right_rank_change
 			, tt_encounter.fixture_id
 			, tt_encounter_part_left.status
 
@@ -271,23 +267,17 @@ try {
 		left join tt_encounter_part as tt_encounter_part_right on tt_encounter_part_right.id = tt_encounter.part_right_id
 
 		group by tt_encounter.id
-
 	");
-
-	// view: build on tt_encounter_row to create tt_fixture_result
 	
 	$database->dbh->query("	
-
 		create view tt_fixture_result as
 
 		select
-			tt_fixture.id
-			, team_left.id as team_left_id
-			, sum(tt_encounter_row.player_left_score) as left_score
-			, team_right.id as team_right_id
-			, sum(tt_encounter_row.player_right_score) as right_score
-			, tt_fixture.date_fulfilled
-			, team_left.division_id as division_id
+			tt_fixture.id as fixture_id
+			, team_left.id as left_id
+			, team_right.id as right_id
+			, sum(tt_encounter_result.left_score) as left_score
+			, sum(tt_encounter_result.right_score) as right_score
 
 		from tt_fixture
 
@@ -295,12 +285,11 @@ try {
 
 		left join tt_team as team_right on team_right.id = tt_fixture.team_right_id
 
-		left join tt_encounter_row on tt_encounter_row.fixture_id = tt_fixture.id
+		left join tt_encounter_result on tt_encounter_result.fixture_id = tt_fixture.id
 
 		where tt_fixture.date_fulfilled IS NOT NULL
 
 		group by tt_fixture.id
-
 	");
 
 	

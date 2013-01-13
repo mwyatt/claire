@@ -394,15 +394,15 @@ class ttTeam extends Model
 			select
 				tt_team.id
 				, tt_team.name
-				, sum(case when tt_fixture_result.team_left_id = tt_team.id and tt_fixture_result.left_score > tt_fixture_result.right_score or tt_fixture_result.team_right_id = tt_team.id and tt_fixture_result.right_score > tt_fixture_result.left_score then 1 else 0 end) as won
-				, sum(case when tt_fixture_result.team_left_id = tt_team.id and tt_fixture_result.left_score = tt_fixture_result.right_score or tt_fixture_result.team_right_id = tt_team.id and tt_fixture_result.right_score = tt_fixture_result.left_score then 1 else 0 end) as draw
-				, sum(case when tt_fixture_result.team_left_id = tt_team.id and tt_fixture_result.left_score < tt_fixture_result.right_score or tt_fixture_result.team_right_id = tt_team.id and tt_fixture_result.right_score < tt_fixture_result.left_score then 1 else 0 end) as lost
-				, count(tt_fixture_result.id) as played
-				, (sum(case when tt_fixture_result.team_left_id = tt_team.id then tt_fixture_result.left_score else 0 end) + sum(case when tt_fixture_result.team_right_id = tt_team.id then tt_fixture_result.right_score else 0 end)) as total_points
+				, sum(case when tt_fixture_result.left_id = tt_team.id and tt_fixture_result.left_score > tt_fixture_result.right_score or tt_fixture_result.right_id = tt_team.id and tt_fixture_result.right_score > tt_fixture_result.left_score then 1 else 0 end) as won
+				, sum(case when tt_fixture_result.left_id = tt_team.id and tt_fixture_result.left_score = tt_fixture_result.right_score or tt_fixture_result.right_id = tt_team.id and tt_fixture_result.right_score = tt_fixture_result.left_score then 1 else 0 end) as draw
+				, sum(case when tt_fixture_result.left_id = tt_team.id and tt_fixture_result.left_score < tt_fixture_result.right_score or tt_fixture_result.right_id = tt_team.id and tt_fixture_result.right_score < tt_fixture_result.left_score then 1 else 0 end) as lost
+				, count(tt_fixture_result.fixture_id) as played
+				, (sum(case when tt_fixture_result.left_id = tt_team.id then tt_fixture_result.left_score else 0 end) + sum(case when tt_fixture_result.right_id = tt_team.id then tt_fixture_result.right_score else 0 end)) as total_points
 
 			from tt_team
 
-			left join tt_fixture_result on tt_fixture_result.team_left_id = tt_team.id or  tt_fixture_result.team_right_id = tt_team.id
+			left join tt_fixture_result on tt_fixture_result.left_id = tt_team.id or tt_fixture_result.right_id = tt_team.id
 
 			where tt_team.division_id = 1
 
