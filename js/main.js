@@ -4,6 +4,8 @@
 
 $(document).ready(function() {
 
+	less.watch();
+
 	$.ajaxSetup ({  
 		cache: false  
 	});

@@ -9,16 +9,12 @@
         <title><?php echo $mainOption->get('site_title'); ?></title>	
         <meta name="description" content="<?php echo $mainOption->get('site_description'); ?>">
 		<meta name="keywords" content="<?php echo $mainOption->get('site_keywords'); ?>">
-        
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-        <!-- css -->
-
         <link rel="stylesheet" href="<?php echo $this->urlHome(); ?>css/vendor/normalize.css">
-        <link rel="stylesheet" href="<?php echo $this->urlHome(); ?>css/main.css">
-
+        <!-- <link rel="stylesheet" href="<?php echo $this->urlHome(); ?>css/main.css"> -->
+        <link rel="stylesheet/less" type="text/css" href="<?php echo $this->urlHome(); ?>css/main.less" />
+        <script src="<?php echo $this->urlHome(); ?>js/vendor/less-1.3.3.min.js"></script>
         <script src="<?php echo $this->urlHome(); ?>js/vendor/modernizr-2.6.2.min.js"></script>
-
     </head>
     <body>
     	<!--[if lt IE 7]>
@@ -27,7 +23,7 @@
 
     <header class="main">
 
-        <a href="#" class="logo"><img src="<?php echo $this->urlHome(); ?>img/main/logo.png" alt=""></a>
+        <a class="logo" href="#">l</a>
 
         <form>
             <input type="text" name="search" type="search" maxlength="999" placeholder="Search">

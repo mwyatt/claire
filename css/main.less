@@ -1,0 +1,298 @@
+// vars
+
+@orange: #ff5512;
+@orange-highlight: #ff8812;
+@brown: #d8851b;
+@gray: #474747;
+@grayie: #474747;
+@blackie: #333333;
+
+// mixins
+
+.gradient (@bottom, @top) {
+	background: @bottom;
+	background-image: -o-linear-gradient(bottom, @bottom 0%, @top 100%);
+	background-image: -moz-linear-gradient(bottom, @bottom 0%, @top 100%);
+	background-image: -webkit-linear-gradient(bottom, @bottom 0%, @top 100%);
+	background-image: -ms-linear-gradient(bottom, @bottom 0%, @top 100%);
+	background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, @bottom), color-stop(1, @top));		
+	background-image: linear-gradient(bottom, @bottom 0%, @top 100%);
+}
+
+/* font */
+
+@font-face {
+    font-family: 'your_iconsregular';
+    src: url('../img/main/collection-webfont.eot');
+    src: url('../img/main/collection-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../img/main/collection-webfont.woff') format('woff'),
+         url('../img/main/collection-webfont.ttf') format('truetype'),
+         url('../img/main/collection-webfont.svg#your_iconsregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@import url(http://fonts.googleapis.com/css?family=Cabin:400,500,600,700);
+
+/* body */
+
+body {
+	background: #fff;
+	color: #333;
+	font-size: 16px;
+	font-family: "Cabin", Arial, sans-serif;
+	line-height: 1em;
+	-webkit-font-smoothing: antialiased;
+	-webkit-text-size-adjust: 100%;
+}
+
+.wrap {
+	margin: 0 auto;
+	padding: 30px 20px;
+	width: 900px;
+}
+
+/* link */
+
+a,
+a:visited {
+	color: #e87208;
+	text-decoration: none;
+}
+
+a:hover,
+a:focus {
+	color: #333;
+	/*color: #ca6000;*/
+}
+
+a:hover {}
+
+a:active {}
+
+a:link {
+	-webkit-tap-highlight-color : rgba(0,0,0,0);
+}
+
+*:focus {
+	outline: none;
+}
+
+/* typography */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	color: #333;
+}
+
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+	font-weight: inherit;
+}
+
+h1 {
+	font-size: 39px;
+	line-height: 50px;
+	margin-bottom: 30px;
+}
+
+h2 {
+	font-size: 35px;
+	line-height: 40px;
+	margin-bottom: 10px;
+}
+
+h3 {
+	font-size: 28px;
+	line-height: 34px;
+	margin-bottom: 8px;
+}
+
+h4 {
+	font-size: 21px;
+	line-height: 30px;
+	margin-bottom: 4px;
+}
+
+h5 {
+	font-size: 17px;
+	line-height: 24px;
+}
+
+h6 {
+	font-size: 14px;
+	line-height: 21px;
+}
+
+p {
+	line-height: 22px;
+	margin: 0 0 15px;
+}
+
+/* utility */
+
+.text-left {
+	text-align: left;
+}
+
+.text-center {
+	text-align: center;
+}
+
+.text-right {
+	text-align: right;
+}
+
+.hide {
+	display: none;
+}
+
+.invisible {
+	visibility: hidden;
+}
+
+.clearfix {
+	clear: both;
+}
+
+.left {
+	float: left;
+}
+
+.right {
+	float: right;
+}
+
+/* selection */
+
+::-webkit-selection { 
+	background: #eee; 
+}
+
+::-moz-selection { 
+	background: #eee; 
+}
+
+::selection { 
+	background: #eee; 
+}
+
+/* header */
+
+header.main {
+	.gradient(@orange, @orange-highlight);
+}
+
+	header.main .logo {
+		font-family: 'your_iconsregular', 'arial';
+		text-decoration: uppercase;
+		font-size: 12em;
+		color: #fff;
+		text-align: center;
+		line-height: 0;
+		display: block;
+		height: 137px;
+		zoom: 1;
+	}
+
+	header.main form {}
+
+		header.main form ul {
+			padding: 0;
+			margin: 0;
+		}
+		
+			header.main form ul li {}
+
+				header.main form ul li a {
+					position: relative;
+					display: block;
+					font-size: 1.3em;
+					font-weight: bold;
+					border-bottom: 1px solid #eee;
+					padding: 15px;
+				}
+				header.main form ul li a:hover {
+					background-color: #ccc;
+				}
+
+					header.main form ul li a span {
+						position: absolute;
+						right: 20px;
+						padding: 7px;
+						border-radius: 5px;
+						text-transform: uppercase;
+						font-size: 16px;
+						color: #fff;
+						top: 8px;
+					}
+					header.main form ul li.player a span {
+						background-color: orange;
+					}
+					header.main form ul li.secretary a span {
+						background-color: green;
+					}
+					header.main form ul li.venue a span {
+						background-color: purple;
+					}
+					header.main form ul li.team a span {
+						background-color: blue;
+					}
+					header.main form ul li.division a span {
+						background-color: black;
+					}
+
+
+		header.main form input[type="text"] {
+			display: block;
+			width: 100%;
+			padding: 10px 10px 10px 10px;
+			margin: 0;
+			line-height: 1em;
+			font-size: 1.3em;
+			font-weight: bold;
+			color: #666;
+			border: none;
+			border-bottom: 1px solid #ccc;
+		}
+
+/* content */
+
+table.league {
+	display: none;
+}
+
+	table.league .won {
+		display: none;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
