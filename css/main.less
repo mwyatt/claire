@@ -9,6 +9,17 @@
 
 // mixins
 
+.transition (@speed) {
+
+}
+
+.text-shadow (@colour) {
+	-0-text-shadow: 1px 1px 0 @colour;
+	-moz-text-shadow: 1px 1px 0 @colour;
+	-webkit-text-shadow: 1px 1px 0 @colour;
+	text-shadow: 1px 1px 0 @colour;
+}
+
 .gradient (@bottom, @top) {
 	background: @bottom;
 	background-image: -o-linear-gradient(bottom, @bottom 0%, @top 100%);
@@ -184,9 +195,9 @@ p {
 
 header.main {
 	.gradient(@orange, @orange-highlight);
-}
 
-	header.main .logo {
+	.logo {
+		.text-shadow(@orange);
 		font-family: 'your_iconsregular', 'arial';
 		text-decoration: uppercase;
 		font-size: 12em;
@@ -196,30 +207,26 @@ header.main {
 		display: block;
 		height: 137px;
 		zoom: 1;
+
+	}
+	.logo:hover {
+		color: #ccc;
 	}
 
-	header.main form {}
-
-		header.main form ul {
+	form {
+		ul {
 			padding: 0;
 			margin: 0;
-		}
-		
-			header.main form ul li {}
-
-				header.main form ul li a {
+			li {
+				a {
 					position: relative;
 					display: block;
 					font-size: 1.3em;
 					font-weight: bold;
-					border-bottom: 1px solid #eee;
+					border-bottom: 1px sod #eee;
 					padding: 15px;
-				}
-				header.main form ul li a:hover {
-					background-color: #ccc;
-				}
 
-					header.main form ul li a span {
+					span {
 						position: absolute;
 						right: 20px;
 						padding: 7px;
@@ -229,24 +236,29 @@ header.main {
 						color: #fff;
 						top: 8px;
 					}
-					header.main form ul li.player a span {
-						background-color: orange;
-					}
-					header.main form ul li.secretary a span {
-						background-color: green;
-					}
-					header.main form ul li.venue a span {
-						background-color: purple;
-					}
-					header.main form ul li.team a span {
-						background-color: blue;
-					}
-					header.main form ul li.division a span {
-						background-color: black;
-					}
+				}
+				a:hover {
+					background-color: #ccc;
+				}
+			}
+			.player a span {
+				background-color: orange;
+			}
+			.secretary a span {
+				background-color: green;
+			}
+			.venue a span {
+				background-color: purple;
+			}
+			.team a span {
+				background-color: blue;
+			}
+			.division a span {
+				background-color: black;
+			}
+		}
 
-
-		header.main form input[type="text"] {
+		input[type="text"] {
 			display: block;
 			width: 100%;
 			padding: 10px 10px 10px 10px;
@@ -258,6 +270,15 @@ header.main {
 			border: none;
 			border-bottom: 1px solid #ccc;
 		}
+
+
+	}
+
+
+
+}
+
+
 
 /* content */
 
