@@ -2,11 +2,35 @@
 
 $(document).ready(function() {
 
+	var $BASEURL = $('body').data('url-base');
+
 	less.watch();
 
 	$.ajaxSetup ({  
 		cache: false  
 	});
+
+	// $(document).resize(function(){ //Update dimensions on resize
+	//   sw = document.documentElement.clientWidth;
+	//   sh = document.documentElement.clientHeight;
+	//   checkMobile();
+	// });
+	  
+	// //Check if Mobile
+	// function checkMobile() {
+	// 	var breakpoint = 200;
+	//   mobile = (sw > breakpoint) ? false : true;
+
+	//   console.log(mobile);
+
+	//   if (!mobile) { //If Not Mobile
+	//     $('[role="tabpanel"],#nav,#search').show(); //Show full navigation and search
+	//   } else { //Hide 
+	//     if(!$('#nav-anchors a').hasClass('active')) {
+	//       $('#nav,#search').hide(); //Hide full navigation and search
+	//     }
+	//   }
+	// }
 
 	var opts = {
 	  lines: 9, // The number of lines to draw
@@ -61,7 +85,7 @@ $(document).ready(function() {
 		if (search.val().length < 3)
 			return false;
 		
-		$.getJSON('http://'+window.location.host+'/git/mvc/ajax/search/?default='+search.val(), function(results) {
+		$.getJSON($BASEURL+'/ajax/search/?default='+search.val(), function(results) {
 			if (results) {
 				var section = search.parent().find('section').html('');
 				$.each(results, function(index, result) {
@@ -140,7 +164,7 @@ $(document).ready(function() {
 				$(parent).addClass('active');
 
 				if ($(parent).hasClass('press')) {
-					$.getJSON('http://'+window.location.host+'/git/mvc/ajax/post/?type=press&limit=3', function(results) {
+					$.getJSON($BASEURL+'/ajax/post/?type=press&limit=3', function(results) {
 						$(parent).spin(opts);
 						if (results) {
 							$.each(results, function(index, result) {
@@ -154,7 +178,7 @@ $(document).ready(function() {
 				}
 
 				if ($(parent).hasClass('player')) {
-					$.getJSON('http://'+window.location.host+'/git/mvc/ajax/player/?team_id='+$(parent).data('team-id'), function(results) {
+					$.getJSON($BASEURL+'/ajax/player/?team_id='+$(parent).data('team-id'), function(results) {
 						$(parent).spin(opts);
 						if (results) {
 							$.each(results, function(index, result) {
@@ -166,7 +190,7 @@ $(document).ready(function() {
 				}
 
 				if ($(parent).hasClass('progress')) {
-					$.getJSON('http://'+window.location.host+'/git/mvc/ajax/encounter-part/?method=row&player_id='+$(parent).data('player-id'), function(results) {
+					$.getJSON($BASEURL+'/ajax/encounter-part/?method=row&player_id='+$(parent).data('player-id'), function(results) {
 						$(parent).spin(opts);
 						if (results) {
 							$.each(results, function(index, result) {
@@ -187,7 +211,7 @@ $(document).ready(function() {
 	$(accordion.h2).on('click', accordion._open);
 
 	if ($('.content.player.single').length) {
-		$.getJSON('http://'+window.location.host+'/git/mvc/ajax/encounter-part/?method=group&player_id='+$('.accordion.progress').data('player-id'), function(result) {
+		$.getJSON($BASEURL+'/ajax/encounter-part/?method=group&player_id='+$('.accordion.progress').data('player-id'), function(result) {
 			if (result)
 				$('.accordion.progress').append('<span>'+result[0].player_rank_change+'</span>');
 				$('.accordion.progress > span').fadeIn(500);
