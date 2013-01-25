@@ -26,22 +26,17 @@ class ttDivision extends Model
 	{	
 	
 		$sth = $this->database->dbh->query("	
-			SELECT
-				tt_division.id AS division_id
-				, tt_division.name AS division_name
-			FROM
+			select
+				tt_division.id
+				, tt_division.name
+			from
 				tt_division
-			ORDER BY
+			order by
 				tt_division.id
 		");
 		
 		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {	
-		
-			$this->data[$row['division_id']] = array(
-				'division_id' => $row['division_id']
-				, 'division_name' => $row['division_name']
-			);
-
+			$this->data[] = $row;
 		}	
 
 	}	

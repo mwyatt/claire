@@ -12,7 +12,31 @@
  */
 class mainContent extends Model
 {	
+/*
+	public function read($limit = false ){
+		public function read()
+		{	
+		
+			$sth = $this->database->dbh->query("	
+				select
+					tt_player.id
+					, tt_player.rank
+					, concat(tt_player.first_name, ' ', tt_player.last_name) as full_name
+					, tt_team.name as team_name
+					, tt_division.name as division_name
+				from
+					tt_player
+				left join tt_team on tt_player.team_id = tt_team.id
+				left join tt_division on tt_team.division_id = tt_division.id
+				order by
+					tt_division.id
+					, tt_player.rank desc
+			");
+			
+			$this->setDataStatement($sth);
 
+		}	
+	}*/
 	public function read()
 	{	
 	
@@ -48,7 +72,7 @@ class mainContent extends Model
 	}	
 
 
-	public function readByType($type)
+	public function readByType($type = 'post', $limit = 9999)
 	{	
 	
 		$sth = $this->database->dbh->prepare("	
@@ -78,10 +102,13 @@ class mainContent extends Model
 			order by
 				main_content.date_published
 
+			limit $limit
+
 		");
 
 		$sth->execute(array(
 			':type' => $type
+			// , ':limit' => $limit
 		));	
 
 		$this->setDataStatement($sth);

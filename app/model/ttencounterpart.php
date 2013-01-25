@@ -1,0 +1,60 @@
+<?php
+
+/**
+ * ttVenue
+ *
+ * PHP version 5
+ * 
+ * @package	~unknown~
+ * @author Martin Wyatt <martin.wyatt@gmail.com> 
+ * @version	0.1
+ * @license http://www.php.net/license/3_01.txt PHP License 3.01
+ */
+class ttEncounterPart extends Model
+{		
+
+	public function readChange($playerId = false)
+	{	
+
+		$sql = "select sum(tt_encounter_part.player_rank_change) as player_rank_change from tt_encounter_part where tt_encounter_part.status = '' ";
+
+		if ($playerId) {
+			$sql .= " and tt_encounter_part.player_id = :playerId ";
+			$sth = $this->database->dbh->prepare($sql);
+			$sth->execute(array(
+				':playerId' => $playerId
+			));	
+		} else {
+			$sth = $this->database->dbh->query($sql);
+		}
+
+		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {	
+			$this->data[] = $row;
+		}
+
+	}	
+
+	public function read($playerId = false, $limit = false)
+	{	
+
+		$sql = "select tt_encounter_part.player_rank_change from tt_encounter_part";
+
+		if ($playerId) {
+			$sql .= " where tt_encounter_part.player_id = :playerId ";
+			$execution[':playerId'] = $playerId;
+		}
+
+		if ($limit) {
+			$sql .= " limit $limit ";
+		}
+
+		$sth = $this->database->dbh->prepare($sql);
+		$sth->execute($execution);	
+
+		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {	
+			$this->data[] = $row;
+		}
+
+	}	
+
+}

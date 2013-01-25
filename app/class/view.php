@@ -51,7 +51,7 @@ class View extends Model
 	
 		$path = BASE_PATH . 'app/' . 'view/' . $templateTitle . '.php';
 		$path = strtolower($path);
-
+		
 		// reject unfound template
 
 		if (!file_exists($path))

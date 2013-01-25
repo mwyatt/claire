@@ -1,5 +1,13 @@
 <?php
 
+if (array_key_exists('type', $_GET) && array_key_exists('limit', $_GET)) {
+	$post = new mainContent($database, $config);
+	$post->readByType($_GET['type'], $_GET['limit']);
+	echo json_encode($post->getData());
+	exit;
+}
+
+
 $output = '';
 
 if (array_key_exists('method', $_GET) && array_key_exists('type', $_GET) && array_key_exists('title', $_GET)) {
@@ -39,27 +47,3 @@ if (array_key_exists('method', $_GET) && array_key_exists('type', $_GET) && arra
 }
 
 echo $output;
-
-
-
-/*	function checkTitle($post, $title, $index = 1, $success = true) {
-
-		if ($post->getData()) {
-
-			while ($post->nextRow()) {
-
-				if ($title == $post->getRow('title_slug')) {
-
-					$index ++;
-					$title .= '-' . $index;
-					checkTitle($post, $title, $index);
-
-				}
-
-			}
-
-		}
-
-		return $title;
-
-	}*/

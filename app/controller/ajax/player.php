@@ -1,5 +1,12 @@
 <?php
 
+if (array_key_exists('team_id', $_GET)) {
+	$player = new ttPlayer($database, $config);
+	$player->readByTeam($_GET['team_id']);
+	echo json_encode($player->getData());
+	exit;
+}
+
 $output = '';
 
 // get teams by division id

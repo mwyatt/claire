@@ -151,13 +151,15 @@ class ttTeam extends Model
 				tt_team.id
 				, tt_team.name
 				, tt_team.home_night
-				, tt_team.secretary_id
-				, tt_team.venue_id
-				, tt_team.division_id
+				, tt_venue.name as venue_name
+				, tt_division.name as division_name
 
 			from
 				tt_team
 
+			left join tt_division on tt_team.division_id = tt_division.id
+			left join tt_venue on tt_team.venue_id = tt_venue.id
+			
 			where
 				tt_team.id = :id
 
@@ -335,10 +337,14 @@ class ttTeam extends Model
 				, tt_team.name
 		");
 
+		$view = new View($this->database, $this->config);
+
 		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {	
 		
 			if (array_key_exists('home_night', $row))
 				$row['home_night'] = self::$weekDays[$row['home_night']];
+
+			$row['guid'] = $this->config->getUrl('base') . 'team/' . $row['id'] . '-' . $view->urlFriendly($row['name']) . '/';
 
 			$this->data[] = $row;
 		

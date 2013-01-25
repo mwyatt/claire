@@ -13,6 +13,12 @@
 class Post extends mainContent
 {
 	
+
+
+
+
+
+
 	/**
 	 * select all rows match
 	 */

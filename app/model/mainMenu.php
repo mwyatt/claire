@@ -14,7 +14,7 @@ class mainMenu extends Model
 {
 
 	public $type;
-	public $html;
+	public $html = '';
 	public $adminSubMenu;
 
 	
@@ -243,6 +243,26 @@ class mainMenu extends Model
 		return false;
 
     }	
+
+
+    public function buildDivision() {
+    	$ttDivision = new ttDivision($this->database, $this->config);
+    	$ttDivision->read();
+		$this->html .= '<nav>';
+    	foreach ($ttDivision->getData() as $division) {
+    		$division['lowername'] = strtolower($division['name']);
+    		$this->html .= '<div>
+                    <a href="' . $this->config->getUrl('base') . 'results/' . $division['lowername'] . '/">' . $division['name'] . '<span>3</span></a>
+                    <div>
+                        <div><a href="' . $this->config->getUrl('base') . 'results/' . $division['lowername'] . '/merit/"">Merit Table</a></div>
+                        <div><a href="' . $this->config->getUrl('base') . 'results/' . $division['lowername'] . '/league/"">League Table</a></div>
+                        <div><a href="' . $this->config->getUrl('base') . 'results/' . $division['lowername'] . '/fixture/"">Fixtures</a></div>
+                    </div>
+                </div>';
+    	}
+		$this->html .= '</nav>';
+    	return $this->html;
+    }
 
 	
 	/**

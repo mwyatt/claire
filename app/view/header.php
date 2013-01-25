@@ -9,7 +9,7 @@
         <title><?php echo $mainOption->get('site_title'); ?></title>	
         <meta name="description" content="<?php echo $mainOption->get('site_description'); ?>">
 		<meta name="keywords" content="<?php echo $mainOption->get('site_keywords'); ?>">
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <link rel="stylesheet" href="<?php echo $this->urlHome(); ?>css/vendor/normalize.css">
         <!-- <link rel="stylesheet" href="<?php echo $this->urlHome(); ?>css/main.css"> -->
         <link rel="stylesheet/less" type="text/css" href="<?php echo $this->urlHome(); ?>css/main.less" />
@@ -22,12 +22,32 @@
     	<![endif]-->
 
     <header class="main">
-
-        <a class="logo" href="#">l</a>
-
-        <form>
-            <input type="text" name="search" type="search" maxlength="999" placeholder="Search">
-            <ul></ul>
-        </form> 
-        
+        <a class="logo" href="<?php echo $this->urlHome(); ?>">4</a>
+        <div class="button menu">
+            <span>2</span>
+            <nav>
+                <div><a href="#">Home</a></div>
+                <div>
+                    <a href="<?php echo $this->urlHome(); ?>">The League <span>3</span></a>
+                    <div>
+                        <div><a href="#">Handbook</a></div>
+                        <div><a href="#">Handbook</a></div>
+                        <div><a href="#">Handbook</a></div>
+                    </div>
+                </div>
+                <div><a href="#">Contact us</a></div>
+            </nav>
+        </div>
+        <div class="button results">
+            <span>9</span>
+            <?php echo $mainMenu->buildDivision(); ?>
+        </div>
+        <div class="button search">
+            <span>1</span>
+            <form>
+                <input type="text" name="search" type="search" maxlength="999" placeholder="Search">
+                <section></section>
+            </form> 
+        </div>
+        <div class="clearfix"></div>
     </header>
