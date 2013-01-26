@@ -288,5 +288,26 @@ abstract class Model extends Config
 
 	}
 	
+
+	public function urlFriendly($value = null)
+	{
+	
+		// everything to lower and no spaces begin or end
+		$value = strtolower(trim($value));
+		
+		// adding - for spaces and union characters
+		$find = array(' ', '&', '\r\n', '\n', '+',',');
+		$value = str_replace ($find, '-', $value);
+		
+		//delete and replace rest of special chars
+		$find = array('/[^a-z0-9\-<>]/', '/[\-]+/', '/<[^>]*>/');
+		$repl = array('', '-', '');
+		$value = preg_replace ($find, $repl, $value);
+		
+		//return the friendly str
+		return $value; 	
+		
+	}
+
 	
 }

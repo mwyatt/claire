@@ -24,12 +24,8 @@ $view
 // ============================================================================
 
 if ($config->getUrl(0)) {
-
 	$path = BASE_PATH . 'app/controller/' . $config->getUrl(0) . '.php';
-
-	if (is_file($path))
-		require_once($path);
-
+	if (is_file($path)) require_once($path);
 }
 
 

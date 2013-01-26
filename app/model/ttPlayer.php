@@ -90,14 +90,10 @@ class ttPlayer extends Model
 				, tt_player.rank desc
 		");
 		
-		$view = new View($this->database, $this->config);
-
 		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {	
-		
 			$row['name'] = $row['full_name'];
-			$row['guid'] = $this->config->getUrl('base') . 'player/' . $row['id'] . '-' . $view->urlFriendly($row['full_name']) . '/';
+			$row['guid'] = $this->getGuid($row);
 			$this->data[] = $row;
-		
 		}
 
 		// $this->setDataStatement($sth);
@@ -277,10 +273,10 @@ class ttPlayer extends Model
 	 * @param  int $division_id 
 	 * @return bool              
 	 */
-	public function readMerit($division_id)
+	public function readMerit($divisionId)
 	{	
 
-		$sth = $this->database->dbh->query("	
+		$sth = $this->database->dbh->prepare("	
 			select
 				tt_player.id
 				, concat(tt_player.first_name, ' ', tt_player.last_name) as full_name
@@ -301,29 +297,20 @@ class ttPlayer extends Model
 
 			left join tt_encounter_result on tt_encounter_result.left_id = tt_player.id or tt_encounter_result.right_id = tt_player.id
 
-			where tt_team.division_id = '1'
+			where tt_team.division_id = :division_id
 
 			group by tt_player.id
 		");
-
-		$this->setDataStatement($sth);
-
-		foreach ($this->getData() as $key => $row) {
-			
-			// single average
-			$average = $this->calcAverage($this->data[$key]['won'], $this->data[$key]['played']);
-
-			// store average
-			$this->data[$key]['average'] = $this->calcAverage($this->data[$key]['won'], $this->data[$key]['played']) . '&#37;';
-			$averageGroup[$key] = $average;
-
+		$sth->execute(array(':division_id' => $divisionId));
+		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {	
+			$average = $this->calcAverage($row['won'], $row['played']);
+			$averages[$row['id']] = $average;
+			$row['guid'] = $this->getGuid($row);
+			$row['average'] = $average . '&#37;';
+			$this->data[$row['id']] = $row;
 		}
-
-		// sort by average
-		array_multisort($average, SORT_DESC, $this->data);
-
+		array_multisort($averages, SORT_DESC, $this->data);
 		return $this;
-
 	}	
 
 
@@ -743,6 +730,10 @@ class ttPlayer extends Model
 
 		return false;
 
+	}
+
+	public function getGuid($row) {
+		return $this->config->getUrl('base') . 'player/' . $row['id'] . '-' . $this->urlFriendly($row['full_name']) . '/';
 	}
 
 }

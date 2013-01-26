@@ -180,25 +180,25 @@ class View extends Model
 	
 	
 	// Convert String to a URL Friendly Version
-	public function urlFriendly($value = null)
-	{
+	// public function urlFriendly($value = null)
+	// {
 	
-		// everything to lower and no spaces begin or end
-		$value = strtolower(trim($value));
+	// 	// everything to lower and no spaces begin or end
+	// 	$value = strtolower(trim($value));
 		
-		// adding - for spaces and union characters
-		$find = array(' ', '&', '\r\n', '\n', '+',',');
-		$value = str_replace ($find, '-', $value);
+	// 	// adding - for spaces and union characters
+	// 	$find = array(' ', '&', '\r\n', '\n', '+',',');
+	// 	$value = str_replace ($find, '-', $value);
 		
-		//delete and replace rest of special chars
-		$find = array('/[^a-z0-9\-<>]/', '/[\-]+/', '/<[^>]*>/');
-		$repl = array('', '-', '');
-		$value = preg_replace ($find, $repl, $value);
+	// 	//delete and replace rest of special chars
+	// 	$find = array('/[^a-z0-9\-<>]/', '/[\-]+/', '/<[^>]*>/');
+	// 	$repl = array('', '-', '');
+	// 	$value = preg_replace ($find, $repl, $value);
 		
-		//return the friendly str
-		return $value; 	
+	// 	//return the friendly str
+	// 	return $value; 	
 		
-	}
+	// }
 	 
 
 	// performs explode() on a string with the given delimiter and trims all whitespace for the elements

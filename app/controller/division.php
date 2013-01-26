@@ -11,14 +11,16 @@
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
 
-$ttDivision = new ttDivision($database, $config);
 $ttPlayer = new ttPlayer($database, $config);
 
-if ($config->getUrl(1)) {
-	if ($config->getUrl(1) == 'merit-table')
+if ($config->getUrl(2)) {
+	if ($config->getUrl(2) == 'merit') {
+		$ttPlayer->readMerit($division['id']);
 		$view
+			->setObject($ttDivision)
 			->setObject($ttPlayer)
-			->loadTemplate('player-single');
+			->loadTemplate('merit');
+	}
 }
  
 $ttPlayer->read();

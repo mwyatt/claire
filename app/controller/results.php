@@ -17,7 +17,7 @@ $ttDivision->read();
 if ($config->getUrl(1)) {
 	foreach ($ttDivision->getData() as $division) {
 		if ($config->getUrl(1) == strtolower($division['name']))
-			$view->loadTemplate('division');
+			require_once(BASE_PATH . 'app/controller/division.php');
 	}
 }
 $route->home();
