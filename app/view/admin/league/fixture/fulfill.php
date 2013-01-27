@@ -27,7 +27,7 @@
 
 				<?php while ($ttDivision->nextRow()) : ?>
 			
-				<option value="<?php echo $ttDivision->getRow('division_id'); ?>"><?php echo $ttDivision->getRow('division_name'); ?></option>
+				<option value="<?php echo $ttDivision->getRow('id'); ?>"><?php echo $ttDivision->getRow('name'); ?></option>
 
 				<?php endwhile; ?>
 

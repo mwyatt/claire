@@ -11,19 +11,15 @@
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
 
-$ttTeam = new ttTeam($database, $config);
+$ttFixture = new ttFixture($database, $config);
 
 if ($config->getUrl(1)) {
 	$id = end(explode('-', $config->getUrl(1)));
-	if (! $ttTeam->readById($id))
+	if (! $ttFixture->readSingleResult($id))
 		return false;
 	$view
-		->setObject($ttTeam)
-		->loadTemplate('team-single');
+		->setObject($ttFixture)
+		->loadTemplate('fixture-single');
 }
  
-$ttTeam->read();
-
-$view
-	->setObject($ttTeam)
-	->loadTemplate('team');
+$route->home();

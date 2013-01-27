@@ -12,14 +12,31 @@
  */
 
 $ttPlayer = new ttPlayer($database, $config);
+$ttTeam = new ttTeam($database, $config);
+$ttFixture = new ttFixture($database, $config);
+$ttDivision->setData($division);
+
+$view
+	->setObject($ttDivision);
 
 if ($config->getUrl(2)) {
 	if ($config->getUrl(2) == 'merit') {
-		$ttPlayer->readMerit($division['id']);
+		$ttPlayer->readMerit($ttDivision->get('id'));
 		$view
-			->setObject($ttDivision)
 			->setObject($ttPlayer)
 			->loadTemplate('merit');
+	}
+	if ($config->getUrl(2) == 'league') {
+		$ttTeam->readLeague($ttDivision->get('id'));
+		$view
+			->setObject($ttTeam)
+			->loadTemplate('league');
+	}
+	if ($config->getUrl(2) == 'fixture') {
+		$ttFixture->readResult($ttDivision->get('id'));
+		$view
+			->setObject($ttFixture)
+			->loadTemplate('fixture');
 	}
 }
  

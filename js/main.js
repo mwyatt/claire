@@ -89,7 +89,7 @@ $(document).ready(function() {
 			if (results) {
 				var section = search.parent().find('section').html('');
 				$.each(results, function(index, result) {
-					$(section).append('<a class="'+result.type.toLowerCase()+'" href="#">'+result.name+'<span>'+result.type+'</span></a>');
+					$(section).append('<a class="'+result.type.toLowerCase()+'" href="'+result.guid+'">'+result.name+'<span>'+result.type+'</span></a>');
 				});
 			}
 		});

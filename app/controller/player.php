@@ -14,7 +14,7 @@
 $ttPlayer = new ttPlayer($database, $config);
 
 if ($config->getUrl(1)) {
-	$id = current(explode('-', $config->getUrl(1)));
+	$id = end(explode('-', $config->getUrl(1)));
 	if (! $ttPlayer->readById($id))
 		return false;
 	$view

@@ -309,5 +309,8 @@ abstract class Model extends Config
 		
 	}
 
+	public function getGuid($type, $name, $id) {
+		return $this->config->getUrl('base') . $type . '/' . $this->urlFriendly($name) . '-' . $id . '/';
+	}
 	
 }

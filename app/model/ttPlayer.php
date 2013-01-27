@@ -92,7 +92,7 @@ class ttPlayer extends Model
 		
 		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {	
 			$row['name'] = $row['full_name'];
-			$row['guid'] = $this->getGuid($row);
+			$row['guid'] = $this->getGuid($row['full_name'], $row['id']);
 			$this->data[] = $row;
 		}
 
@@ -305,7 +305,7 @@ class ttPlayer extends Model
 		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {	
 			$average = $this->calcAverage($row['won'], $row['played']);
 			$averages[$row['id']] = $average;
-			$row['guid'] = $this->getGuid($row);
+			$row['guid'] = $this->getGuid($row['full_name'], $row['id']);
 			$row['average'] = $average . '&#37;';
 			$this->data[$row['id']] = $row;
 		}
@@ -732,8 +732,8 @@ class ttPlayer extends Model
 
 	}
 
-	public function getGuid($row) {
-		return $this->config->getUrl('base') . 'player/' . $row['id'] . '-' . $this->urlFriendly($row['full_name']) . '/';
+	public function getGuid($fullName, $id) {
+		return $this->config->getUrl('base') . 'player/' . $this->urlFriendly($fullName) . '-' . $id . '/';
 	}
 
 }

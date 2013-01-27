@@ -132,6 +132,7 @@ class Search extends Model
 			else {
 				$data[$key]['score'] = $score;
 				$scores[$key] = $data[$key]['score'];
+				$data[$key]['guid'] = $this->getGuid($data[$key]['type'], $data[$key]['name'], $data[$key]['id']);
 			}
 		}
 		array_multisort($scores, SORT_DESC, $data);

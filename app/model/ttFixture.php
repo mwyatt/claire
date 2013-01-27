@@ -93,8 +93,7 @@ class ttFixture extends Model
 	 * selects all fixtures
 	 * @return null 
 	 */
-	public function read()
-	{	
+	public function read() {	
 	
 		$sth = $this->database->dbh->query("	
 			select
@@ -467,5 +466,111 @@ class ttFixture extends Model
 		echo $awayRankChange;
 	
 	}
+
+
+	public function readSingleResult($fixtureId) {
+
+		$sth = $this->database->dbh->prepare("	
+			select
+				concat(player_left.first_name, ' ', player_left.last_name) as player_left_full_name
+				, concat(player_right.first_name, ' ', player_right.last_name) as player_right_full_name
+				, tt_encounter_result.left_id as player_left_id
+				, tt_encounter_result.right_id as player_right_id
+				, tt_encounter_result.left_rank_change
+				, tt_encounter_result.right_rank_change
+				, tt_encounter_result.left_score as player_left_score
+				, tt_encounter_result.right_score as player_right_score
+				, team_left.id as team_left_id
+				, team_right.id as team_right_id
+				, team_left.name as team_left_name
+				, team_right.name as team_right_name
+				, tt_fixture_result.left_score as team_left_score
+				, tt_fixture_result.right_score as team_right_score
+				, tt_encounter_result.status
+				, tt_fixture.date_fulfilled		
+
+			from tt_encounter_result
+
+			left join tt_player as player_left on player_left.id = tt_encounter_result.left_id
+
+			left join tt_player as player_right on player_right.id = tt_encounter_result.right_id
+
+			left join tt_fixture on tt_fixture.id = tt_encounter_result.fixture_id
+
+			left join tt_fixture_result on tt_fixture_result.fixture_id = tt_encounter_result.fixture_id
+
+			left join tt_team as team_left on team_left.id = tt_fixture.team_left_id
+
+			left join tt_team as team_right on team_right.id = tt_fixture.team_right_id
+
+			where tt_encounter_result.fixture_id = :fixtureId
+
+			group by tt_encounter_result.encounter_id
+
+			order by tt_encounter_result.encounter_id
+		");
+
+		$sth->execute(array(':fixtureId' => $fixtureId));
+		if (!$sth->rowCount()) return false;
+
+		$ttPlayer = new ttPlayer($this->database, $this->config);
+		$ttTeam = new ttTeam($this->database, $this->config);
+
+		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {	
+			$row['player_left_guid'] = $ttPlayer->getGuid($row['player_left_full_name'], $row['player_left_id']);
+			$row['player_right_guid'] = $ttPlayer->getGuid($row['player_right_full_name'], $row['player_right_id']);
+			$row['team_left_guid'] = $ttTeam->getGuid($row['team_left_name'], $row['team_left_id']);
+			$row['team_right_guid'] = $ttTeam->getGuid($row['team_right_name'], $row['team_right_id']);
+			$this->data[] = $row;
+		}
+
+		return true;
+
+	}
+
+	public function readResult($divisionId) {
+
+		$sth = $this->database->dbh->prepare("	
+			select
+				tt_fixture_result.fixture_id as id
+				, team_left.name as team_left_name
+				, tt_fixture_result.left_score
+				, team_right.name as team_right_name
+				, tt_fixture_result.right_score
+				, tt_fixture.date_fulfilled
+
+			from tt_fixture_result
+
+			left join tt_team as team_left on team_left.id = tt_fixture_result.left_id
+
+			left join tt_team as team_right on team_right.id = tt_fixture_result.right_id
+
+			left join tt_division on team_left.division_id = tt_division.id
+
+			left join tt_fixture on tt_fixture.id = tt_fixture_result.fixture_id
+
+			where team_left.division_id = 1
+
+			group by tt_fixture_result.fixture_id
+
+			order by tt_fixture.date_fulfilled desc
+		");
+
+		$sth->execute(array(':division_id' => $divisionId));
+
+		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {	
+			$row['guid'] = $this->getGuid($row);
+			$this->data[] = $row;
+		}
+
+		return $this;
+
+	}
+
+	public function getGuid($row) {
+		return $this->config->getUrl('base') . 'fixture/' . $this->urlFriendly($row['team_left_name']) . '-vs-' . $this->urlFriendly($row['team_right_name']) . '-' . $row['id'] . '/';
+	}
+
+
 	
 }

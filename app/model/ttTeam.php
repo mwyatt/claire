@@ -344,7 +344,7 @@ class ttTeam extends Model
 			if (array_key_exists('home_night', $row))
 				$row['home_night'] = self::$weekDays[$row['home_night']];
 
-			$row['guid'] = $this->config->getUrl('base') . 'team/' . $row['id'] . '-' . $view->urlFriendly($row['name']) . '/';
+			$row['guid'] = $this->getGuid($row['name'], $row['id']);
 
 			$this->data[] = $row;
 		
@@ -394,9 +394,9 @@ class ttTeam extends Model
 	}
 
 
-	public function readLeague($division_id) {
+	public function readLeague($divisionId) {
 
-		$sth = $this->database->dbh->query("	
+		$sth = $this->database->dbh->prepare("	
 			select
 				tt_team.id
 				, tt_team.name
@@ -404,29 +404,33 @@ class ttTeam extends Model
 				, sum(case when tt_fixture_result.left_id = tt_team.id and tt_fixture_result.left_score = tt_fixture_result.right_score or tt_fixture_result.right_id = tt_team.id and tt_fixture_result.right_score = tt_fixture_result.left_score then 1 else 0 end) as draw
 				, sum(case when tt_fixture_result.left_id = tt_team.id and tt_fixture_result.left_score < tt_fixture_result.right_score or tt_fixture_result.right_id = tt_team.id and tt_fixture_result.right_score < tt_fixture_result.left_score then 1 else 0 end) as lost
 				, count(tt_fixture_result.fixture_id) as played
-				, (sum(case when tt_fixture_result.left_id = tt_team.id then tt_fixture_result.left_score else 0 end) + sum(case when tt_fixture_result.right_id = tt_team.id then tt_fixture_result.right_score else 0 end)) as total_points
+				, (sum(case when tt_fixture_result.left_id = tt_team.id then tt_fixture_result.left_score else 0 end) + sum(case when tt_fixture_result.right_id = tt_team.id then tt_fixture_result.right_score else 0 end)) as points
 
 			from tt_team
 
 			left join tt_fixture_result on tt_fixture_result.left_id = tt_team.id or tt_fixture_result.right_id = tt_team.id
 
-			where tt_team.division_id = 1
+			where tt_team.division_id = :division_id
 
 			group by tt_team.id
 
-			order by total_points desc
+			order by points desc
 		");
 
-		$this->setDataStatement($sth);
+		$sth->execute(array(':division_id' => $divisionId));
+
+		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {	
+			$row['guid'] = $this->getGuid($row['name'], $row['id']);
+			$this->data[] = $row;
+		}
 
 		return $this;
 
 	}
 		
-	
-
-	
-	
+	public function getGuid($name, $id) {
+		return $this->config->getUrl('base') . 'team/' . $this->urlFriendly($name) . '-' . $id . '/';
+	}
 
 	
 	

@@ -2,7 +2,7 @@
 
 <div class="content merit">
 	
-	<h1>[division] Merit Table</h1>
+	<h1><?php echo $ttDivision->get('name') ?> Divsion Merit</h1>
 
 	<?php if ($ttPlayer->getData()) : ?>	
 
