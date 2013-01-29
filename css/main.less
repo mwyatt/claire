@@ -11,6 +11,12 @@
 @purple: #a800ff;
 @purple-highlight: #c600ff;
 
+@mq-mobile-portrait: 320px;
+@mq-mobile-landscape: 480px;
+@mq-tablet-portrait: 768px;
+@mq-tablet-landscape: 1024px;
+@mq-desktop: 1382px;
+
 // mixins
 
 .border-box () {
@@ -429,6 +435,10 @@ table.league {
 div.content {
 	padding: 15px 0;
 
+	a {
+		line-height: 1.1em;
+	}
+
 	h1 {
 		color: @blackie;
 		text-align: center;
@@ -656,7 +666,7 @@ div.content.merit {
 		tr {
 			border-bottom: 1px dotted @orange-gray;
 			
-			.team, .won, .played, .rank {
+			.team, .won, .rank, .played {
 				display: none;
 			}
 
@@ -698,4 +708,158 @@ div.content.league {
 		}
 
 	}
+}
+div.content.fixture.single {
+
+	h1 {
+		text-align: center;
+		line-height: 1.1em;
+	}
+
+	> span {
+		padding: 13px 10px;
+		.gradient(@purple, @purple-highlight);
+		font-size: 1.1em;
+		font-weight: 700;
+		color: white;
+		margin: 15px 0 10px;
+		display: block;
+		text-align: center;
+	}
+
+	table {
+
+		tr {
+			border-bottom: 1px dotted @orange-gray;
+			
+			.draw, .won, .played, .loss {
+				display: none;
+			}
+
+			th {
+				text-align: left;
+				color: @orange-gray;
+			}
+			td, th {
+				padding: 20px 15px;
+				font-size: .8em;
+				font-weight: bold;
+				line-height: 1.2em;
+				text-align: center;
+			}
+
+		}
+		tr.exclude {
+			opacity: .5;
+			text-decoration: line-through;
+		}
+		tr.doubles, tr.total {
+			th, td {
+				color: @gray;
+			}
+		}
+
+	}
+}
+div.content.post {
+
+	article {
+		border-bottom: 1px dotted @orange-gray;
+		padding: 15px;
+
+		header {
+			text-align: right;
+
+			h2 {
+				text-align: left;
+				font-size: 1.5em;
+				margin: 0 0 10px;
+				line-height: 1em;
+			}
+		}
+
+		p {
+			line-height: 1.2em;
+			font-size: 1.1em;
+		}
+
+		footer {
+			text-align: right;
+
+			time {
+				color: @orange-gray;
+				float: left;
+			}
+
+			a {
+				font-weight: 700;
+			}
+
+		}
+
+	}
+}
+div.content.post.single {
+
+	article {
+		border-bottom: none;
+		padding-top: 0;
+
+		header {
+			text-align: right;
+			margin-bottom: 15px;
+
+			h1 {
+				// font-size: 1.5em;
+				// margin: 0 0 10px;
+				// padding: 0;
+				// line-height: 1em;
+			}
+			time {
+				color: @orange-gray;
+				float: none;
+			}
+		}
+
+		p {
+			line-height: 1.2em;
+			font-size: 1.1em;
+		}
+
+		footer {
+			text-align: right;
+
+
+			a {
+				font-weight: 700;
+			}
+
+		}
+
+	}
+}
+
+@media screen and (min-width : @mq-mobile-landscape) {
+
+
+	body {
+		background-color: red;
+	}
+
+	div.content.merit {
+
+		table {
+
+			tr {
+				
+				.played, .won {
+					display: table-cell;
+				}
+
+			}
+
+		}
+	}
+
+
 }

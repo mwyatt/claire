@@ -258,11 +258,9 @@ class ttPlayer extends Model
 		$view = new View($this->database, $this->config);
 
 		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {	
-		
 			$row['name'] = $row['full_name'];
-			$row['guid'] = $this->config->getUrl('base') . 'player/' . $row['id'] . '-' . $view->urlFriendly($row['full_name']) . '/';
+			$row['guid'] = $this->getGuid($row['full_name'], $row['id']);
 			$this->data[] = $row;
-		
 		}
 
 	}	

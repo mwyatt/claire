@@ -36,7 +36,7 @@ try {
 				, title_slug VARCHAR(255) NOT NULL
 				, html VARCHAR(8000)
 				, type VARCHAR(50) NOT NULL
-				, date_published INT UNSIGNED
+				, date_published INT
 				, guid VARCHAR(255) NOT NULL
 				, status VARCHAR(50) NOT NULL DEFAULT 'invisible'
 				, user_id INT UNSIGNED				

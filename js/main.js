@@ -2,7 +2,7 @@
 
 $(document).ready(function() {
 
-	var $BASEURL = $('body').data('url-base');
+	var $BASEURL = $('html').data('url-base');
 
 	less.watch();
 
@@ -137,9 +137,14 @@ $(document).ready(function() {
 		this.open = function() {
 			var sub_menus = $('header.main').find('nav > div');
 			var sub_menu = $(this).parent();
-			$(sub_menus).removeClass('active');
-			$(sub_menu).addClass('active');
-			return false;
+			if ($(sub_menu).hasClass('active')) {
+				$(sub_menus).removeClass('active');
+			} else {
+				$(sub_menus).removeClass('active');
+				$(sub_menu).addClass('active');
+				return false;
+			}
+			
 		}
 	}
 

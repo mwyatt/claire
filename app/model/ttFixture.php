@@ -549,7 +549,7 @@ class ttFixture extends Model
 
 			left join tt_fixture on tt_fixture.id = tt_fixture_result.fixture_id
 
-			where team_left.division_id = 1
+			where team_left.division_id = :division_id
 
 			group by tt_fixture_result.fixture_id
 
