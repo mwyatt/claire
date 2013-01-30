@@ -9,7 +9,7 @@
 
 	<div class="accordion press">
 		<h2>Press Releases <span>8</span></h2>
-		<section></section>
+		<section>&nbsp;</section>
 	</div>
 
 	<div class="accordion">
