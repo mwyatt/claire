@@ -25,7 +25,7 @@
 			</td>
 			<td class="won"><?php echo $ttTeam->getRow('won'); ?></td>
 			<td class="draw"><?php echo $ttTeam->getRow('draw'); ?></td>
-			<td class="loss"><?php echo $ttTeam->getRow('loss'); ?></td>
+			<td class="loss"><?php echo $ttTeam->getRow('simplexml_load_string(data)'); ?></td>
 			<td class="played"><?php echo $ttTeam->getRow('played'); ?></td>
 			<td class="points"><?php echo $ttTeam->getRow('points'); ?></td>
 		</tr>		

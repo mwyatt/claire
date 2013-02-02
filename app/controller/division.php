@@ -14,6 +14,7 @@
 $ttPlayer = new ttPlayer($database, $config);
 $ttTeam = new ttTeam($database, $config);
 $ttFixture = new ttFixture($database, $config);
+$ttEncounterPart = new ttEncounterPart($database, $config);
 $ttDivision->setData($division);
 
 $view

@@ -8,6 +8,41 @@ $(document).ready(function() {
 		cache: false  
 	});
 
+	// admin/ (login)
+
+	$("form.login").submit(function() {
+		
+		// Variable(s)
+		var form = $("form.login");
+		var fieldName;
+		var field;
+		var valid = true;
+		
+		// Function checkField
+		function checkField(fieldName) {
+		
+			// Set Field
+			field = $("input[name='"+fieldName+"']", form);
+			
+			// Check Field
+			if (field.val() == "") {  
+				$(field)
+					.toggleClass("error")
+					.focus();
+				valid = false;
+			}				
+		}
+		
+		// Removes any Errors
+		$(".error").toggleClass("error");
+		
+		checkField("password");
+		checkField("username");
+		
+		return valid;			
+	});	
+
+
 	// admin/posts/press/new/
 
 	if ($('.post.press.new').length) {
@@ -61,7 +96,7 @@ $(document).ready(function() {
 	var selectPlayerGroup = $(fulfill).find('.player').find('select');
 	var inputScore = $(fulfill).find('.score').find('input');
 	var btnPlayUp = $(fulfill).find('.play-up');
-	var feedback = $('header.main').find('.feedback');
+	var feedback = $('.feedback');
 	var websiteTitle = $('header.main').find('.title').find('a');
 	var user = $('header.main').find('.user');
 
@@ -127,7 +162,7 @@ $(document).ready(function() {
 		}
 
 		function hideFeedback() {
-			feedback.fadeOut(animationSpeed);
+			// feedback.fadeOut(animationSpeed);
 		}
 
 		feedback.on('click', clickFeedback);

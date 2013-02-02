@@ -1,134 +1,65 @@
-<!doctype html>
-<!--[if lt IE 7 ]> <html class="ie6"> <![endif]-->
-<!--[if IE 7 ]>    <html class="ie7"> <![endif]-->
-<!--[if IE 8 ]>    <html class="ie8"> <![endif]-->
-<!--[if IE 9 ]>    <html class="ie9"> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!--> <html class=""> <!--<![endif]-->
-<head>
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title><?php echo $mainOption->get('site_title'); ?></title>	
+        <meta name="description" content="<?php echo $mainOption->get('site_description'); ?>">
+		<meta name="keywords" content="<?php echo $mainOption->get('site_keywords'); ?>">
+        <meta name="viewport" content="width=device-width">
 
-	<meta charset="utf-8">
+        <!-- css -->
 
-	
-	<!-- Page Title
-	======================================================================== -->
-	
-	<title>Login to <?php echo $mainOption->get('site_title'); ?></title>	
-		
-		
-	<!-- Meta
-	======================================================================== -->
-	
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<meta name="robots" content="noindex,nofollow">
+        <link rel="stylesheet" href="<?php echo $this->urlHome(); ?>css/vendor/normalize.css">
+        <link rel="stylesheet" href="<?php echo $this->urlHome(); ?>css/admin/main.css">
 
-	
-	<!-- Styles
-	======================================================================== -->
-	
-	<link rel="stylesheet" href="<?php echo $this->urlHome(); ?>asset/style/skeleton.css">
-	<link rel="stylesheet" href="<?php echo $this->urlHome(); ?>asset/style/layout.css">
-	<link rel="stylesheet" href="<?php echo $this->urlHome(); ?>asset/style/admin-base.css">
-	
-	<style type="text/css" media="all">
-	
-		#login {
-			padding: 120px 0 0;
-			margin: auto;
-		}
-		
-		#login .logo {
-			text-align: center;
-			margin: 0 0 40px 0;
-		}
-			#login .logo a {
-				margin: 0 auto;
-			}
-		
-		#login form {
-			text-align: center;
-		}
-		
-			#login form input {
-				margin: 0 20px 30px;
-			}
-		
-			#login form input.error {
-				border-color: red;
-			}
-		
-	</style>	
-	
-</head>
-<body>
+        <!-- modenizr -->
 
-<div class="container">
+        <script src="<?php echo $this->urlHome(); ?>js/vendor/modernizr-2.6.2.min.js"></script>
 
-	<div id="login">
+        <!-- favicon -->
 
-		<div class="logo"><a href="<?php echo $this->urlHome(); ?>" title="Open Homepage"><img src="<?php echo $this->urlHome(); ?>image/logo.png" alt="<?php echo $mainOption->get('site_title'); ?> Logo"></a></div>
-		
-		<div class="feedback"><p><?php echo $this->getFeedback(); ?></p></div>
+        <link rel="icon" type="image/png" href="<?php echo $this->urlHome(); ?>img/main/favicon.png">
 
-		<form class="login" method="post">
+        <!-- font -->
 
-			<input type="hidden" name="form_login" value="true">
-			<div>
-				<input type="text" name="email_address" placeholder="Email Address" autofocus="autofocus">					
-			</div>
-			<div>
-				<input type="password" name="password" placeholder="Password">
-			</div>
-			<input class="" type="submit" value="Login">
-			
-		</form>
+        <link href="http://fonts.googleapis.com/css?family=Cabin:400,500,600,700" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+    	<!--[if lt IE 7]>
+    	    <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    	<![endif]-->
 
-	</div> <!-- / #login -->
+   	<div class="wrap">
 
-</div> <!-- / .container -->
+		<div class="content login">
 
 
-<!-- Script
-======================================================================== -->
+			<a class="logo" href="<?php echo $this->urlHome(); ?>" title="Open Homepage"><span>4</span></a>
 
-<script src="<?php echo $this->urlHome(); ?>asset/script/vendor/jquery-1.8.0.min.js"></script>
-<script src="<?php echo $this->urlHome(); ?>asset/script/vendor/modernizr-2.6.1.min.js"></script>
+			<form method="post">
+				<input type="hidden" name="form_login" value="true">
+				<?php echo $this->getFeedback(); ?>
+				<div>
+					<input type="text" name="email_address" placeholder="Email Address" autofocus="autofocus">					
+				</div>
+				<div>
+					<input type="password" name="password" placeholder="Password">
+				</div>
+				<input class="" type="submit" value="Login">
+			</form>
 
-<script type="text/javascript">
+		</div> <!-- .container -->
 
-	$("form.login").submit(function() {
-		
-		// Variable(s)
-		var form = $("form.login");
-		var fieldName;
-		var field;
-		var valid = true;
-		
-		// Function checkField
-		function checkField(fieldName) {
-		
-			// Set Field
-			field = $("input[name='"+fieldName+"']", form);
-			
-			// Check Field
-			if (field.val() == "") {  
-				$(field)
-					.toggleClass("error")
-					.focus();
-				valid = false;
-			}				
-		}
-		
-		// Removes any Errors
-		$(".error").toggleClass("error");
-		
-		checkField("password");
-		checkField("username");
-		
-		return valid;			
-	});	
-	
-</script>
-	
-</body>
+		<!-- js -->
+
+        <script src="<?php echo $this->urlHome(); ?>js/vendor/jquery-1.8.2.min.js"></script>
+        <script src="<?php echo $this->urlHome(); ?>js/admin/main.js"></script>
+
+	</div> <!-- .wrap -->
+
+    </body>
 </html>

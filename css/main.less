@@ -543,6 +543,20 @@ div.content {
 		}
 	}
 
+	table {
+		tr {
+			border-bottom: 1px dotted @orange-gray;
+			th {
+				text-align: left;
+				color: @orange-gray;
+			}
+			td, th {
+				padding: 20px 15px;
+				font-size: 1.3em;
+				font-weight: bold;
+			}
+		}
+	}
 
 }
 div.content.single {
@@ -667,6 +681,31 @@ div.content.merit {
 			border-bottom: 1px dotted @orange-gray;
 			
 			.team, .won, .rank, .played {
+				display: none;
+			}
+
+			th {
+				text-align: left;
+				color: @orange-gray;
+			}
+			td, th {
+				padding: 20px 15px;
+				font-size: 1.3em;
+				font-weight: bold;
+			}
+
+		}
+
+	}
+}
+div.content.performance {
+
+	table {
+
+		tr {
+			border-bottom: 1px dotted @orange-gray;
+			
+			.team_name {
 				display: none;
 			}
 
@@ -840,6 +879,7 @@ div.content.post.single {
 }
 
 @media screen and (min-width : @mq-mobile-landscape) {
+
 	div.content.merit {
 		table {
 			tr {
@@ -849,186 +889,196 @@ div.content.post.single {
 			}
 		}
 	}
+
+	div.content.league {
+		table {
+			tr {
+				.played {
+					display: table-cell;
+				}
+			}
+		}
+	}
+
 }
 
 @media screen and (min-width : @mq-tablet-portrait) {
 
-header.main {
-	.gradient(@orange, @orange-highlight);
-	clear: both;
-	position: relative;
+	header.main {
+		.gradient(@orange, @orange-highlight);
+		clear: both;
+		position: relative;
 
-	a.logo {
-		font-size: 8em;
-		height: 65px;
-	}
+		a.logo {
+			font-size: 8em;
+			height: 65px;
+		}
 
-	div.button {
+		div.button {
 
-		nav {
-			border-bottom: 5px solid;
-			display: none;
-			position: absolute;
-			z-index: 1;
-			top: 50px;
-			width: 100%;
-			// .box-shadow(0 0 5px rgba(0, 0, 0, 0.3));
-
-			> div > a span {
-				font-family: 'icons';
-				font-size: .7em;
-				float: right;
-			}
-
-			> div a {
-				.text-shadow(none);
-				background: @grayie;
-				display: block;
-				padding: 16px 15px 20px;
-				border-bottom: 1px solid @orange-gray;
-				color: white;
-				font-size: 1.3em;
-				font-weight: 700;
-			}
-			> div:last-child a {
-				border: none;
-			}
-			> div div a {
-				color: @orange-gray;
-				padding-left: 40px;
-				background-color: @blackie;
-			}
-
-			> div > div {
+			nav {
+				border-bottom: 5px solid;
 				display: none;
-			}
-		}
+				position: absolute;
+				z-index: 1;
+				top: 50px;
+				width: 100%;
+				// .box-shadow(0 0 5px rgba(0, 0, 0, 0.3));
 
-		> span {
-			.text-shadow(1px 1px 0 @orange);
-			border-left: 1px solid @orange;
-			font-family: 'icons';
-			float: right;
-			color: white;
-			padding: 25px 22px;
-			line-height: .3em;
-			font-size: 1.3em;
-			height: 10px;
-		}
+				> div > a span {
+					font-family: 'icons';
+					font-size: .7em;
+					float: right;
+				}
 
-	}
-	div.button.results {
-		> span {
-			font-size: 2em;
-			padding: 18px 10px 24px;
-		}
-	}
-	div.button.results.active {
-		> span {
-			font-size: 18px;
-			padding: 21px 17px;
-		}
-	}
-	div.button.search {
-
-		form {
-			position: absolute;
-			top: 50px;
-			width: 100%;
-			display: none;
-			border-bottom: 5px solid;
-			z-index: 1;
-
-			section {
-				padding: 0;
-				margin: 0;
-				background: white;
-
-				a {
-					position: relative;
-					display: block;
-					font-size: 1.3em;
-					padding: 15px;
+				> div a {
+					.text-shadow(none);
 					background: @grayie;
-					border-bottom: 1px solid @orange-gray/1.5;
+					display: block;
+					padding: 16px 15px 20px;
+					border-bottom: 1px solid @orange-gray;
 					color: white;
 					font-size: 1.3em;
 					font-weight: 700;
-
-					span {
-						background: white;
-						position: absolute;
-						right: 0;
-						padding: 7px 20px 8px 8px;
-						.border-radius(3px 0 0 3px);
-						text-transform: uppercase;
-						font-size: 16px;
-						color: @blackie;
-						top: 8px;
-					}
-
+				}
+				> div:last-child a {
+					border: none;
+				}
+				> div div a {
+					color: @orange-gray;
+					padding-left: 40px;
+					background-color: @blackie;
 				}
 
-				// a.player span {
-				// 	background-color: orange;
-				// }
-				// a.secretary span {
-				// 	background-color: green;
-				// }
-				// a.venue span {
-				// 	background-color: purple;
-				// }
-				// a.team span {
-				// 	background-color: blue;
-				// }
-				// a.division span {
-				// 	background-color: black;
-				// }
+				> div > div {
+					display: none;
+				}
 			}
 
-			input[type="text"] {
-				.border-box();
-				.box-shadow(0 0 5px rgba(0, 0, 0, 0.3));
-				display: block;
-				width: 100%;
-				padding: 10px 10px 10px 10px;
-				margin: 0;
-				line-height: 1em;
+			> span {
+				.text-shadow(1px 1px 0 @orange);
+				border-left: 1px solid @orange;
+				font-family: 'icons';
+				float: right;
+				color: white;
+				padding: 25px 22px;
+				line-height: .3em;
 				font-size: 1.3em;
-				font-weight: bold;
-				color: #666;
-				border: none;
-				border-bottom: 1px solid #ccc;
+				height: 10px;
 			}
 
 		}
-	}
-	div.button.active {
-
-		> span {
-			background: @grayie;
-			.text-shadow(none);
+		div.button.results {
+			> span {
+				font-size: 2em;
+				padding: 18px 10px 24px;
+			}
 		}
+		div.button.results.active {
+			> span {
+				font-size: 18px;
+				padding: 21px 17px;
+			}
+		}
+		div.button.search {
 
-		nav {
-			display: block;
+			form {
+				position: absolute;
+				top: 50px;
+				width: 100%;
+				display: none;
+				border-bottom: 5px solid;
+				z-index: 1;
 
-			div.active > a span {
-				.rotate(180deg);
+				section {
+					padding: 0;
+					margin: 0;
+					background: white;
+
+					a {
+						position: relative;
+						display: block;
+						font-size: 1.3em;
+						padding: 15px;
+						background: @grayie;
+						border-bottom: 1px solid @orange-gray/1.5;
+						color: white;
+						font-size: 1.3em;
+						font-weight: 700;
+
+						span {
+							background: white;
+							position: absolute;
+							right: 0;
+							padding: 7px 20px 8px 8px;
+							.border-radius(3px 0 0 3px);
+							text-transform: uppercase;
+							font-size: 16px;
+							color: @blackie;
+							top: 8px;
+						}
+
+					}
+
+					// a.player span {
+					// 	background-color: orange;
+					// }
+					// a.secretary span {
+					// 	background-color: green;
+					// }
+					// a.venue span {
+					// 	background-color: purple;
+					// }
+					// a.team span {
+					// 	background-color: blue;
+					// }
+					// a.division span {
+					// 	background-color: black;
+					// }
+				}
+
+				input[type="text"] {
+					.border-box();
+					.box-shadow(0 0 5px rgba(0, 0, 0, 0.3));
+					display: block;
+					width: 100%;
+					padding: 10px 10px 10px 10px;
+					margin: 0;
+					line-height: 1em;
+					font-size: 1.3em;
+					font-weight: bold;
+					color: #666;
+					border: none;
+					border-bottom: 1px solid #ccc;
+				}
+
+			}
+		}
+		div.button.active {
+
+			> span {
+				background: @grayie;
+				.text-shadow(none);
 			}
 
-			div.active > div {
+			nav {
+				display: block;
+
+				div.active > a span {
+					.rotate(180deg);
+				}
+
+				div.active > div {
+					display: block;
+				}
+			}
+
+			form {
 				display: block;
 			}
-		}
 
-		form {
-			display: block;
 		}
-
 	}
-}
-
 
 	div.content.merit {
 		table {
@@ -1039,6 +1089,21 @@ header.main {
 			}
 		}
 	}
+
+	div.content.league {
+		table {
+			tr {
+				.won, .loss {
+					display: table-cell;
+				}
+			}
+		}
+	}
+
+	div.content.performance table tr .team_name {
+		display: table-cell;
+	}
+
 }
 
 @media screen and (min-width : @mq-tablet-landscape) {

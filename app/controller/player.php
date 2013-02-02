@@ -13,6 +13,14 @@
 
 $ttPlayer = new ttPlayer($database, $config);
 
+if ($config->getUrl(1) == 'performance') {
+	$ttEncounterPart = new ttEncounterPart($database, $config);
+	$ttEncounterPart->readPerformance();
+	$view
+		->setObject($ttEncounterPart)
+		->loadTemplate('performance');
+}
+
 if ($config->getUrl(1)) {
 	$id = end(explode('-', $config->getUrl(1)));
 	if (! $ttPlayer->readById($id))

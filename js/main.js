@@ -67,7 +67,6 @@ $(document).ready(function() {
 	};
 
 	var search = $('input[name="search"]');
-	console.log(search.val());
 
 	search.on('change', change_search);
 	search.on('keyup', change_search);
