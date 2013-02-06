@@ -11,18 +11,22 @@
 		<meta name="keywords" content="<?php echo $mainOption->get('site_keywords'); ?>">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <link rel="stylesheet" href="<?php echo $this->urlHome(); ?>css/vendor/normalize.css">
-        <!-- <link rel="stylesheet" href="<?php echo $this->urlHome(); ?>css/main.css"> -->
-        <link rel="stylesheet/less" type="text/css" href="<?php echo $this->urlHome(); ?>css/main.less" />
+        <link rel="stylesheet" href="<?php echo $this->urlHome(); ?>css/main.css">
+        <!-- <link rel="stylesheet/less" type="text/css" href="<?php echo $this->urlHome(); ?>css/main.less" /> -->
         <script src="<?php echo $this->urlHome(); ?>js/vendor/less-1.3.3.min.js"></script>
         <script src="<?php echo $this->urlHome(); ?>js/vendor/modernizr-2.6.2.min.js"></script>
     </head>
     <body>
-    	<!--[if lt IE 7]>
-    	    <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
-    	<![endif]-->
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+    <div class="art">
 
     <header class="main">
+
         <a class="logo" href="<?php echo $this->urlHome(); ?>">4</a>
+
         <div class="button menu">
             <span>2</span>
             <nav>

@@ -13,7 +13,7 @@
 
 @mq-mobile-portrait: 320px;
 @mq-mobile-landscape: 480px;
-@mq-tablet-portrait: 768px;
+@mq-tablet-portrait: 600px;
 @mq-tablet-landscape: 1024px;
 @mq-desktop: 1382px;
 
@@ -243,7 +243,7 @@ header.main {
 		.text-shadow(1px 1px 0 @orange);
 		font-family: 'icons';
 		font-size: 7em;
-		color: white;
+		color: #fff;
 		text-align: left;
 		display: block;
 		float: left;
@@ -251,7 +251,6 @@ header.main {
 		height: 55px;
 		overflow: hidden;
 		line-height: 0;
-		// background: red;
 		margin: -24px 0 0 0;
 		padding: 10px 10px 10px 5px;
 	}
@@ -879,6 +878,11 @@ div.content.post.single {
 }
 
 @media screen and (min-width : @mq-mobile-landscape) {
+	html:before {
+		content: 'at least 480px';
+		color: red;
+	}
+
 
 	div.content.merit {
 		table {
@@ -903,6 +907,12 @@ div.content.post.single {
 }
 
 @media screen and (min-width : @mq-tablet-portrait) {
+	html:before {
+		content: 'at least 600px';
+		color: red;
+	}
+
+	div.content { background: blue;}
 
 	header.main {
 		.gradient(@orange, @orange-highlight);
@@ -1107,7 +1117,85 @@ div.content.post.single {
 }
 
 @media screen and (min-width : @mq-tablet-landscape) {
+	html:before {
+		content: 'at least 1024px';
+		color: red;
+	}
+
+	body {
+		background: black;
+		text-align: center;
+	}
+
+	header.main,
+	footer.main,
 	div.content {
+		text-align: left;
+		width: 960px;
+		margin: 0 auto;		
+	}
+
+	header.main {
+
+		a.logo {
+			font-size: 10em;
+			height: 88px;
+			width: 158px;
+			padding: 6px 7px;
+		}
+
+
+
+	}
+
+	div.content {
+		background: red;
 		font-size: 120%;
 	}
+	// div.content.merit td {
+	// 	display: table-cell;
+	// }
+}
+
+html.lt-ie9 {
+
+	html:before {
+		content: 'at least 1024px';
+		color: red;
+	}
+
+	body {
+		background: black;
+		text-align: center;
+	}
+
+	header.main,
+	footer.main,
+	div.content {
+		text-align: left;
+		width: 960px;
+		margin: 0 auto;		
+	}
+
+	header.main {
+
+		a.logo {
+			font-size: 10em;
+			height: 88px;
+			width: 158px;
+			padding: 6px 7px;
+		}
+
+
+
+	}
+
+	div.content {
+		background: red;
+		font-size: 120%;
+	}
+	// div.content.merit td {
+	// 	display: table-cell;
+	// }
+
 }

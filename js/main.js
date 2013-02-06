@@ -10,11 +10,39 @@ $(document).ready(function() {
 		cache: false  
 	});
 
-	// $(document).resize(function(){ //Update dimensions on resize
-	//   sw = document.documentElement.clientWidth;
-	//   sh = document.documentElement.clientHeight;
-	//   checkMobile();
-	// });
+	function resize() {
+		var documentWidth;
+		var scale_mobile_portrait = 320;
+		var scale_mobile_landscape = 480;
+		var scale_tablet_portrait = 600;
+		var scale_tablet_landscape = 1024;
+		var scale_desktop = 1382;
+
+		this.poll;
+		this.timer;
+
+		this.poll = function() {
+			documentWidth = document.documentElement.clientWidth;
+			if (documentWidth > scale_tablet_portrait) {
+				_scale_tablet_portrait();
+			}
+		}
+
+	}
+
+	function _scale_tablet_portrait() {
+		$('body').append('<div>hello world</div>');
+	}
+
+	var resize = new resize;
+	resize.poll();
+
+	resize.timer;
+	$(document).resize(function() {
+		clearTimeout(resize.timer);
+		resize.timer = setTimeout(resize.poll, 100);
+		clearTimeout(resize.timer);
+	});
 	  
 	// //Check if Mobile
 	// function checkMobile() {
