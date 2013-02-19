@@ -2,7 +2,7 @@
 
 $(document).ready(function() {
 
-	var $BASEURL = $('html').data('url-base');
+	var $BASEURL = $('body').data('url-base');
 
 	less.watch();
 
@@ -198,14 +198,14 @@ $(document).ready(function() {
 				if ($(parent).hasClass('press')) {
 					$.getJSON($BASEURL+'/ajax/post/?type=press&limit=3', function(results) {
 						$(parent).spin(opts);
-						if (results) {
-							$.each(results, function(index, result) {
-								var d = new Date(0);
-								d.setUTCSeconds(result.date_published);
-								$(section).append('<a href="'+result.title_slug+'">'+result.title+'<span>'+d.getUTCDate()+'/'+d.getUTCMonth()+'/'+d.getUTCFullYear()+'</span></a>');
-							});
-						}
-						$(parent).spin(false);
+						// if (results) {
+						// 	$.each(results, function(index, result) {
+						// 		var d = new Date(0);
+						// 		d.setUTCSeconds(result.date_published);
+						// 		$(section).append('<a href="'+result.title_slug+'">'+result.title+'<span>'+d.getUTCDate()+'/'+d.getUTCMonth()+'/'+d.getUTCFullYear()+'</span></a>');
+						// 	});
+						// }
+						// $(parent).spin(false);
 					});
 				}
 

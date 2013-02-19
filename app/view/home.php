@@ -3,8 +3,8 @@
 <div class="content home">
 
 	<a href="#" class="cover">
-		<h1>The Big Day</h1>
-		<p>How can I Enter?</p>
+		<h1>Welcome</h1>
+		<p>View the Tables and Results</p>
 	</a>
 
 	<div class="accordion press">
