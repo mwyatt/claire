@@ -51,9 +51,9 @@ try {
 		INSERT INTO main_option
 			(name, value)
 		VALUES
-			('site_title', 'Martin Wyatt')			
-			, ('site_keywords', 'Martin Wyatt, Portfolio, Blog, Notes, Web Design, Table Tennis')			
-			, ('site_description', 'Martin Wyatts Blog and Portfolio')			
+			('site_title', 'East Lancashire Table Tennis League')			
+			, ('site_keywords', 'table tennis, east lancashire, lancashire, ping pong, league, elttl, east lancashire table tennis league')
+			, ('site_description', 'Martin Wyatts Blog and Portfolio')
 			, ('site_email', 'martin.wyatt@gmail.com')			
 			, ('site_social_twitter', 'http://twitter.com/mawyatt')		
 			, ('site_social_facebook', '')		
@@ -68,7 +68,6 @@ try {
 			, ('site_telephone', '')		
 			, ('site_mobile', '')		
 			, ('site_fax', '')	
-			
 			, ('thumb1', '50, 50')		
 			, ('thumb2', '200, 200')		
 			, ('thumb3', '500, 500')

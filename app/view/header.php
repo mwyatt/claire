@@ -23,42 +23,52 @@
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
 
-    <div class="art">
+        <div class="art">
 
-    <header class="main">
+            <header class="main">
 
-        <a class="logo" href="<?php echo $this->urlHome(); ?>">4</a>
+                <a class="logo" href="<?php echo $this->urlHome(); ?>"><?php echo $mainOption->get('site_title'); ?></a>
 
-        <nav>
-
-        </nav>
-
-        <div class="button menu">
-            <span>2</span>
-            <nav>
-                <div><a href="<?php echo $this->urlHome(); ?>">Home</a></div>
-                <div>
-                    <a href="<?php echo $this->urlHome(); ?>">The League <span>3</span></a>
-                    <div>
-                        <div><a href="#">Handbook</a></div>
-                        <div><a href="#">Handbook</a></div>
-                        <div><a href="#">Handbook</a></div>
-                    </div>
+                <div class="search">
+                    <form>
+                        <input type="text" name="search" type="search" maxlength="999" placeholder="Search">
+                        <section></section>
+                    </form> 
                 </div>
-                <div><a href="<?php echo $this->urlHome(); ?>post/">Press Releases</a></div>
-                <div><a href="#">Contact us</a></div>
-            </nav>
-        </div>
-        <div class="button results">
-            <span>9</span>
-            <?php echo $mainMenu->buildDivision(); ?>
-        </div>
-        <div class="button search">
-            <span>1</span>
-            <form>
-                <input type="text" name="search" type="search" maxlength="999" placeholder="Search">
-                <section></section>
-            </form> 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+
+                <nav class="sub">
+                    <ul>
+                        <li><a href="<?php echo $this->urlHome(); ?>coaching/">Coaching</a></li>
+                        <li><a href="<?php echo $this->urlHome(); ?>schools/">Schools</a></li>
+                        <li><a href="<?php echo $this->urlHome(); ?>town-teams/">Town Teams</a></li>
+                        <li><a href="<?php echo $this->urlHome(); ?>summer-league/">Summer League</a></li>
+                        <li><a href="<?php echo $this->urlHome(); ?>local-clubs/">Local Clubs</a></li>
+                    </ul>
+                </nav>   
+
+                <nav class="main">
+                    <ul>
+                        <li><a href="<?php echo $this->urlHome(); ?>">Home</a></li>
+                        <li>
+                            <div>
+                                <a href="#">Tables and Results</a>
+                                <?php echo $mainMenu->buildDivision(); ?>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <a href="#">The League</a>
+                                <ul>
+                                    <li><a href="#">Handbook</a></li>
+                                    <li><a href="#">Handbook</a></li>
+                                    <li><a href="#">Handbook</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li><a href="<?php echo $this->urlHome(); ?>post/">Press Releases</a></li>
+                        <li><a href="<?php echo $this->urlHome(); ?>post/">Competitions</a></li>
+                        <li><a href="#">Contact us</a></li>
+                    </ul>
+                </nav>             
+                <div class="clearfix"></div>
+            </header>

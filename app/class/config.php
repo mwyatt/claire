@@ -14,9 +14,7 @@
 class Config
 {
 
-
 	public $objects;
-	
 	public $url;
 
 	
@@ -179,12 +177,5 @@ class Config
 		return $this;
 		
 	}	
-
-	// public function loadController($path) {
-	// 	$path = BASE_PATH . 'app/' . 'view/' . $templateTitle . '.php';
-	// 	$path = strtolower($path);
-	// 	if (!file_exists($path))
-	// 	return false;
-	// }
 	
 }

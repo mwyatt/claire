@@ -248,19 +248,23 @@ class mainMenu extends Model
     public function buildDivision() {
     	$ttDivision = new ttDivision($this->database, $this->config);
     	$ttDivision->read();
-		$this->html .= '<nav>';
+		$this->html .= '<ul>';
     	foreach ($ttDivision->getData() as $division) {
     		$division['lowername'] = strtolower($division['name']);
-    		$this->html .= '<div>
-                    <a href="' . $this->config->getUrl('base') . 'result/' . $division['lowername'] . '/">' . $division['name'] . '<span>3</span></a>
-                    <div>
-                        <div><a href="' . $this->config->getUrl('base') . 'result/' . $division['lowername'] . '/merit/"">Merit Table</a></div>
-                        <div><a href="' . $this->config->getUrl('base') . 'result/' . $division['lowername'] . '/league/"">League Table</a></div>
-                        <div><a href="' . $this->config->getUrl('base') . 'result/' . $division['lowername'] . '/fixture/"">Fixtures</a></div>
-                    </div>
-                </div>';
+    		$this->html .= '
+    			<li>
+    				<div>
+	                    <a href="' . $this->config->getUrl('base') . 'result/' . $division['lowername'] . '/">' . $division['name'] . '<span>3</span></a>
+	                    <ul>
+	                        <li><a href="' . $this->config->getUrl('base') . 'result/' . $division['lowername'] . '/merit/"">Merit Table</a></li>
+	                        <li><a href="' . $this->config->getUrl('base') . 'result/' . $division['lowername'] . '/league/"">League Table</a></li>
+	                        <li><a href="' . $this->config->getUrl('base') . 'result/' . $division['lowername'] . '/fixture/"">Fixtures</a></li>
+	                        <li><a href="' . $this->config->getUrl('base') . 'result/' . $division['lowername'] . '/performance/"">Performance</a></li>
+	                    </ul>
+    				</div>
+                </li>';
     	}
-		$this->html .= '</nav>';
+		$this->html .= '</ul>';
     	return $this->html;
     }
 
