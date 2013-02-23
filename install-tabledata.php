@@ -45,17 +45,20 @@ try {
 			, ('1', 'price', '200')
 			, ('1', 'attached', '1, 3, 2')
 			, ('1', 'tags', 'Photoshop, HTML, ')
+			, ('7', 'meta_title', 'Contact Me')
+			, ('7', 'meta_keywords', 'contact, me, eastlancs')
 	");	
 
 	$database->dbh->query("
 		INSERT INTO main_option
 			(name, value)
 		VALUES
-			('site_title', 'East Lancashire Table Tennis League')			
-			, ('site_keywords', 'table tennis, east lancashire, lancashire, ping pong, league, elttl, east lancashire table tennis league')
-			, ('site_description', 'Martin Wyatts Blog and Portfolio')
+			('meta_title', 'East Lancashire Table Tennis League')			
+			, ('meta_keywords', 'table tennis, east lancashire, lancashire, ping pong, league, elttl, east lancashire table tennis league')
+			, ('meta_description', 'Martin Wyatts Blog and Portfolio')
+			, ('site_title', 'East Lancashire Table Tennis League')
 			, ('site_email', 'martin.wyatt@gmail.com')			
-			, ('site_social_twitter', 'http://twitter.com/mawyatt')		
+			, ('site_social_twitter', 'http://twitter.com/mawyatt')
 			, ('site_social_facebook', '')		
 			, ('site_social_youtube', '')		
 			, ('site_social_google', '')		

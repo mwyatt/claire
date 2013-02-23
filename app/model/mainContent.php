@@ -143,5 +143,51 @@ class mainContent extends Model
 
 		return $sth->rowCount();
 	}
-	
+
+	public function readByTitleSlug($titleSlug) {
+		$sth = $this->database->dbh->prepare("	
+			select
+				main_content.id
+				, main_content.title
+				, main_content.title_slug
+				, main_content.html
+				, main_content.date_published
+				, main_content.guid
+				, main_content.status
+				, main_content.type
+				, main_content_meta.name as meta_name
+				, main_content_meta.value as meta_value
+
+			from main_content
+
+			left join
+				main_content_meta on main_content_meta.content_id = main_content.id
+
+			left join
+				main_user on main_user.id = main_content.user_id
+
+			where
+				main_content.title_slug = :title_slug
+				and
+				main_content.type = 'page'
+		");
+
+		$sth->execute(array(
+			':title_slug' => $titleSlug
+		));	
+
+		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
+			if (! array_key_exists($row['id'], $this->data)) {
+				$this->data[$row['id']] = $row;
+			}
+			if (array_key_exists('meta_name', $row)) {
+				$this->data[$row['id']][$row['meta_name']] = $row['meta_value'];
+				unset($this->data[$row['id']]['meta_name']);
+				unset($this->data[$row['id']]['meta_value']);
+			}
+		}
+		$this->data = current($this->data);
+		return $sth->rowCount();
+	}
+
 }

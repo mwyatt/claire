@@ -1,34 +1,20 @@
-<?php require_once('header.php'); ?>
+<?php require_once($this->pathView() . 'header.php'); ?>
 
-	<div class="sixteen columns">
+<div class="content page">
 	
-<?php if ($content->getResult()) : foreach ($content->getResult() as $content) : extract($content); ?>
+	<h1><?php echo $mainContent->get('title'); ?></h1>
 
-		<article class="<?php echo $title_slug; ?>">
+	<article>
+		<header>
+			<h2><a href="<?php echo $mainContent->get('guid'); ?>" title="Open article"><?php echo $mainContent->get('title'); ?></a></h2>
+		</header>
 		
-			<header>
+		<p><?php echo $mainContent->get('html'); ?></p>
+		<footer>
+			<time><?php echo date('d/m/Y', $mainContent->get('date_fulfilled')); ?></time>
+		</footer>
+	</article>
 
-				<h1><?php echo $title; ?></h1>
-				
-			</header>
-			
-			<section class="page_content clearfix">
+</div>
 
-				<?php echo $html; ?>
-				
-			</header>
-
-			<footer>
-
-				<p class="date"><?php echo $date_published; ?></p>
-				<p class="tags"><?php echo $tags; ?></p>
-				
-			</footer>
-			
-		</article>
-			
-<?php endforeach; endif; ?>
-
-	</div> <!-- / .sixteen.columns -->
-	
-<?php require_once('footer.php'); ?>
+<?php require_once($this->pathView() . 'footer.php'); ?>

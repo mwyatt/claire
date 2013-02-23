@@ -32,20 +32,18 @@ if ($config->getUrl(0)) {
 // Content Page
 // ============================================================================
 
-if ($config->getUrl(0) && !$config->getUrl(1)) {
-/*
-	// Objects
-	$content = new Content($database->dbh);	
-	
-	// Objects Methods
-	if ($content->selectTitle($config->getUrl(0), 1)) {
-	
-		$content->setAttached('300x160');
-	
-		// View: page
-		require_once('app/view/page.php');
-		exit;		
-	}*/
+if ($config->getUrl(0) == 'page') {
+	$mainContent = new mainContent($database, $config);	
+	if ($mainContent->readByTitleSlug($config->getUrl(1))) {
+		$view
+			->setObject($mainContent)
+			->setMeta(array(
+				'title' => $mainContent->get('meta_title'),
+				'keywords' => $mainContent->get('meta_keywords'),
+				'description' => $mainContent->get('meta_description')
+			))
+			->loadTemplate('page');
+	}
 }
 
 

@@ -254,12 +254,13 @@ class mainMenu extends Model
     		$this->html .= '
     			<li>
     				<div>
-	                    <a href="' . $this->config->getUrl('base') . 'result/' . $division['lowername'] . '/">' . $division['name'] . '<span>3</span></a>
+    					<span></span>
+	                    <a href="#">' . $division['name'] . '</a>
 	                    <ul>
+	                        <li><a href="' . $this->config->getUrl('base') . 'result/' . $division['lowername'] . '/">Overview</a></li>
 	                        <li><a href="' . $this->config->getUrl('base') . 'result/' . $division['lowername'] . '/merit/"">Merit Table</a></li>
 	                        <li><a href="' . $this->config->getUrl('base') . 'result/' . $division['lowername'] . '/league/"">League Table</a></li>
 	                        <li><a href="' . $this->config->getUrl('base') . 'result/' . $division['lowername'] . '/fixture/"">Fixtures</a></li>
-	                        <li><a href="' . $this->config->getUrl('base') . 'result/' . $division['lowername'] . '/performance/"">Performance</a></li>
 	                    </ul>
     				</div>
                 </li>';

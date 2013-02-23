@@ -281,50 +281,76 @@ header.main {
 	}
 
 	nav.main.active {
+		span {
+			background: url(../img/main/sprite-100.png) 0 0 no-repeat;
+		}
+		div {
+			span {
+				background-position: -424px -25px;
+				width: 50px;
+				height: 50px;
+				float: right;
+			}
+			a {
+				color: @orange-gray;
+				padding-left: 40px;
+			}
+			ul {
+				display: none;
+			}
+		}
+		div.active {
+			> span {
+				background-position: -624px -25px;
+			}
+			> a {
+				background-color: @blackie;
+			}
+			> ul {
+				display: block;
+				li {
+					background-color: @blackie;
+					div {
+						li {
+							background-color: black;
+						}
+						
+					}
+				}
+			}
+		}
 		ul {
 			display: block;
 			margin: 0;
 			padding: 0;
 			width: 100%;
 			li {
-				div > a {
-					background: red;
+				background: @grayie;
+				a {
+					.text-shadow(none);
+					display: block;
+					padding: 16px 15px 20px;
+					border-bottom: 1px solid @orange-gray;
+					color: white;
+					font-size: 1.3em;
+					font-weight: 700;
+				}
+				div {
+					span {
+
+					}
 				}
 			}
+			li:last-child a {
+				border: none;
+			}
 		}
-
 		> ul {
 			border-bottom: 5px solid;
 			position: absolute;
 			z-index: 1;
 			top: 55px;
 			left: 0;
-			> li a {
-				.text-shadow(none);
-				background: @grayie;
-				display: block;
-				padding: 16px 15px 20px;
-				border-bottom: 1px solid @orange-gray;
-				color: white;
-				font-size: 1.3em;
-				font-weight: 700;
-			}
-			> li:last-child a {
-				border: none;
-			}
-			> li ul a {
-				color: @orange-gray;
-				padding-left: 40px;
-				background-color: @blackie;
-			}
-
-			> li > div > ul {
-				display: none;
-			}
-
-			> li > div.active > ul {
-				display: block;
-			}
 		}
 	}
 
@@ -411,9 +437,9 @@ div.content {
 	}
 	
 	div.accordion {
-		cursor: pointer;	
+		cursor: pointer;
+		background-color: @orange-light-gray;
 		border-bottom: 1px solid @orange;	
-
 		h2 {
 			position: relative;
 			font-size: 1.5em;
@@ -422,28 +448,21 @@ div.content {
 			margin: 0;
 			line-height: 1em;
 			padding: 15px 12px;
-
 			span {
-				font-family: 'icons';
+				background: url(../img/main/sprite-100.png) -241px -42px no-repeat;
 				display: block;
 				width: 18px;
-				height: 9px;
-				font-size: .8em;
-				line-height: 0;
-				padding: 9px 0 0;
+				height: 17px;
 				float: right;
 				position: absolute;
-				top: 16px;
-				right: 17px;
+				right: 16px;
+				top: 18px;
 			}
-
 		}
-
 		a {
 			display: block;
 			padding: 15px 12px;
 			font-size: 1.2em;
-
 			span {
 				color: #666;
 				float: right;
@@ -477,13 +496,11 @@ div.content {
 
 	}
 	div.accordion.active {
-		
 		h2 {
 			color: @orange-gray;
 			border-bottom: 1px solid @orange-light-gray;
-
 			span {
-				.rotate(45deg);
+				background-position: -542px -42px;
 			}
 		}
 	}

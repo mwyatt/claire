@@ -8,8 +8,8 @@
 	</a>
 
 	<div class="accordion press">
-		<h2>Press Releases <span>8</span></h2>
-		<section>&nbsp;</section>
+		<h2><span></span>Press Releases</h2>
+		<section></section>
 	</div>
 
 	<a href="#" class="handbook">Download the Handbook <span>123456</span></a>

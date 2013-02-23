@@ -14,6 +14,7 @@ class View extends Model
 {
 
 	public $template;
+	public $meta = array();
 	
 	
 	/**
@@ -31,12 +32,18 @@ class View extends Model
 		
 		//$menu->adminBuild();
 		
-		$option = new mainOption($this->database, $this->config);
-		$option->select();		
+		$mainOption = new mainOption($this->database, $this->config);
+		$mainOption->select();		
+
+		$this->setMeta(array(
+			'title' => $mainOption->get('meta_title'),
+			'keywords' => $mainOption->get('meta_keywords'),
+			'description' => $mainOption->get('meta_description')
+		));
 		
 		// register new objects
 
-		$this->setObject(array($option, $menu));
+		$this->setObject(array($mainOption, $menu));
 		
 	}
 
@@ -254,6 +261,35 @@ class View extends Model
 			return 'home';
 //		$val = ( ? $this->getUrl(1) : );
 //		return ' class="'.$val.'"';
+	}
+
+
+	/**
+	 * [setMeta description]
+	 * @param array $meta filled with jucy meta information
+	 */
+	public function setMeta($metas) {
+		foreach ($metas as $key => $meta) {
+			if (array_key_exists($key, $this->meta)) {
+				if (! $this->meta[$key])
+					$this->meta[$key] = $metas[$key];
+			} else {
+				$this->meta[$key] = $metas[$key];
+			}
+		}
+		return $this;
+	}
+
+
+	/**
+	 * returns requested meta key
+	 * @param  string $key meta key
+	 * @return bool or string
+	 */
+	public function getMeta($key) {
+		if (array_key_exists($key, $this->meta))
+			return $this->meta[$key];
+		return false;
 	}
 	
 } 

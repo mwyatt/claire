@@ -6,9 +6,9 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title><?php echo $mainOption->get('site_title'); ?></title>	
-        <meta name="description" content="<?php echo $mainOption->get('site_description'); ?>">
-		<meta name="keywords" content="<?php echo $mainOption->get('site_keywords'); ?>">
+        <title><?php echo $this->getMeta('title'); ?></title>	
+		<meta name="keywords" content="<?php echo $this->getMeta('keywords'); ?>">
+        <meta name="description" content="<?php echo $this->getMeta('description'); ?>">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <link rel="stylesheet" href="<?php echo $this->urlHome(); ?>css/vendor/normalize.css">
         <script src="<?php echo $this->urlHome(); ?>js/vendor/less-1.3.3.min.js"></script>
@@ -51,12 +51,14 @@
                         <li><a href="<?php echo $this->urlHome(); ?>">Home</a></li>
                         <li>
                             <div>
+                                <span></span>
                                 <a href="#">Tables and Results</a>
                                 <?php echo $mainMenu->buildDivision(); ?>
                             </div>
                         </li>
                         <li>
                             <div>
+                                <span></span>
                                 <a href="#">The League</a>
                                 <ul>
                                     <li><a href="#">Handbook</a></li>
@@ -65,8 +67,9 @@
                                 </ul>
                             </div>
                         </li>
+                        <li><a href="<?php echo $this->urlHome(); ?>player/performance/">Player Performance</a></li>
                         <li><a href="<?php echo $this->urlHome(); ?>post/">Press Releases</a></li>
-                        <li><a href="<?php echo $this->urlHome(); ?>post/">Competitions</a></li>
+                        <li><a href="<?php echo $this->urlHome(); ?>page/10/competitions/">Competitions</a></li>
                         <li><a href="#">Contact us</a></li>
                     </ul>
                 </nav>             

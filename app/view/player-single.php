@@ -26,7 +26,7 @@
 	</table>
 
 	<div class="accordion progress" data-player-id="<?php echo $ttPlayer->get('id'); ?>">
-		<h2>Progress <span>8</span></h2>
+		<h2><span></span>Progress</h2>
 		<section></section>
 	</div>
 
