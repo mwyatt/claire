@@ -14,8 +14,6 @@
         <script src="<?php echo $this->urlHome(); ?>js/vendor/less-1.3.3.min.js"></script>
         <link rel="stylesheet/less" type="text/css" href="<?php echo $this->urlHome(); ?>css/main.less" />
         <link rel="stylesheet" href="<?php echo $this->urlHome(); ?>css/main.css">
-        <!--<script src="<?php echo $this->urlHome(); ?>js/vendor/respond.min.js"></script>-->
-        <!--<script src="<?php echo $this->urlHome(); ?>js/vendor/modernizr-2.6.2.min.js"></script>-->
         <script src="<?php echo $this->urlHome(); ?>js/vendor/modernizr.custom.73218.js"></script>
     </head>
     <body data-url-base="<?php echo $this->urlHome(); ?>">

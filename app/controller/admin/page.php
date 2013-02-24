@@ -12,12 +12,14 @@
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
 
+$page = new Page($database, $config);
+$page
+	->setObject($session)
+	->setObject($mainUser);
+
 if (array_key_exists('form_page_new', $_POST)) {
-	echo '<pre>';
-	print_r($_POST);
-	echo '</pre>';
-	exit;
-	
+	$page->create();
+	$route->current();
 }
 
 if ($config->getUrl(2) == 'new') {

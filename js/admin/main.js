@@ -8,6 +8,17 @@ $(document).ready(function() {
 		cache: false  
 	});
 
+	if ($('.content.page.new').length) {
+
+		var editor = new wysihtml5.Editor("textarea", {
+		  toolbar:        "toolbar",
+		  parserRules:    wysihtml5ParserRules,
+		  useLineBreaks:  false
+		});
+		
+	}
+
+
 	// admin/ (login)
 
 	$("form.login").submit(function() {

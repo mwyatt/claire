@@ -32,18 +32,18 @@ $(document).ready(function() {
 		this.poll = function() {
 
 			documentWidth = document.documentElement.clientWidth;
-			$('header').find('.active').removeClass('active');
 			$('header').find('nav.main').off();
 			$('header').find('div.search').off();
 			$('header').find('nav.main').find('div').off();
 
-			if (documentWidth < scale_mobile_landscape) {
+			if (documentWidth < scale_mobile_landscape+1) {
 				$('header').find('nav.main').on('click', menu.activateIcon);
 				$('header').find('div.search').on('click', menu.activateIcon);
 				$('header').find('nav.main').find('div').on('click', menu.activateSub);
 			}
 
 			if (documentWidth > scale_tablet_portrait) {
+				$('header').find('.active').removeClass('active');
 				$('body').append('<div>scale_tablet_portrait</div>');
 			}
 
@@ -62,6 +62,8 @@ $(document).ready(function() {
 			$('header').find('nav.main').removeClass('active');
 			$('header').find('div.search').removeClass('active');
 			$(this).addClass('active');
+			if ($(this).hasClass('search'))
+				$(this).find('input[type="text"]').focus();
 		}
 		this.activateSub = function() {
 			if ($(this).hasClass('active'))
