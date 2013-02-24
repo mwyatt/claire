@@ -67,7 +67,7 @@ class Search extends Model
 		foreach ($data1 as $key => $data)
 			$data1[$key]['type'] = 'player';
 
-		$sth = $this->database->dbh->query("	
+/*		$sth = $this->database->dbh->query("	
 			select
 				tt_secretary.id
 				, concat(tt_secretary.first_name, ' ', tt_secretary.last_name) as name
@@ -76,7 +76,7 @@ class Search extends Model
 
 		$data2 = $sth->fetchAll(PDO::FETCH_ASSOC);
 		foreach ($data2 as $key => $data)
-			$data2[$key]['type'] = 'secretary';
+			$data2[$key]['type'] = 'secretary';*/
 
 		$sth = $this->database->dbh->query("	
 			select
@@ -100,7 +100,7 @@ class Search extends Model
 		foreach ($data4 as $key => $data)
 			$data4[$key]['type'] = 'team';
 
-		$sth = $this->database->dbh->query("	
+/*		$sth = $this->database->dbh->query("	
 			select
 				tt_venue.id
 				, tt_venue.name
@@ -110,8 +110,8 @@ class Search extends Model
 		$data5 = $sth->fetchAll(PDO::FETCH_ASSOC);
 		foreach ($data5 as $key => $data)
 			$data5[$key]['type'] = 'venue';
-
-		$data = array_merge($data1, $data2, $data3, $data4, $data5);
+*/
+		$data = array_merge($data1, /*$data2, */$data3, $data4/*, $data5*/);
 		$scores = array();
 
 		foreach ($data as $key => $file) {
