@@ -44,11 +44,7 @@ $(document).ready(function() {
 
 			if (documentWidth > scale_tablet_portrait) {
 				$('header').find('.active').removeClass('active');
-				$('body').append('<div>scale_tablet_portrait</div>');
 			}
-
-			console.log('documentWidth ~'+documentWidth);
-			console.log('scale_tablet_portrait ~'+scale_tablet_portrait);
 
 		}
 	}
