@@ -243,15 +243,15 @@ abstract class Model extends Config
 	 * @param  array $keys  
 	 * @return bool        if all is valid
 	 */
-	public function validatePost($_POST, $keys) {
+	public function validatePost($post, $keys) {
 	
 		$validity = true;
 
 		foreach ($keys as $key) {
 	
-			if (array_key_exists($key, $_POST)) {
+			if (array_key_exists($key, $post)) {
 				
-				if (! $_POST[$key])
+				if (! $post[$key])
 					$validity = false;
 				
 			}

@@ -25,7 +25,7 @@ spl_autoload_register(array('AutoLoader', 'load'));
 // Error Handling
 // ============================================================================
 
-$error = new Error($debug = 'yes');
+$error = new Error('yes');
 
 
 // Database

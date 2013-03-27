@@ -83,14 +83,14 @@ class ttTeam extends Model
 
 	/**
 	 * update team record using post
-	 * @param  array $_POST 
+	 * @param  array $post 
 	 * @return bool        
 	 */
-	public function update($_POST) {
+	public function update($post) {
 
 		// validation
 
-		if (! $this->validatePost($_POST, array(
+		if (! $this->validatePost($post, array(
 			'name'
 		))) {
 
@@ -116,12 +116,12 @@ class ttTeam extends Model
 		");	
 
 		$sth->execute(array(
-			':name' => $_POST['name']
+			':name' => $post['name']
 			, ':id' => $_GET['update']
-			, ':secretary_id' => $_POST['secretary_id']
-			, ':venue_id' => $_POST['venue_id']
-			, ':home_night' => $_POST['home_night']
-			, ':division_id' => $_POST['division_id']
+			, ':secretary_id' => $post['secretary_id']
+			, ':venue_id' => $post['venue_id']
+			, ':home_night' => $post['home_night']
+			, ':division_id' => $post['division_id']
 		));		
 
 		if ($sth->rowCount()) {

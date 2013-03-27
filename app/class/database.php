@@ -17,9 +17,9 @@ class Database
 	public static $credentials = array(
 		'host' => 'localhost',
 		'port' => '80',
-		'basename' => 'mvc_003',
+		'basename' => 'mvc_01',
 		'username' => 'root',
-		'password' => '',
+		'password' => 'root'
 	);
 
 	public function __construct() {

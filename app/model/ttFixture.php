@@ -176,14 +176,14 @@ class ttFixture extends Model
 	 *
 	 * possible to have POST sent in as array for the encounter scores?
 	 * 
-	 * @param  array $_POST 
+	 * @param  array $post 
 	 * @return true || false
 	 */
-	public function fulfill($_POST) {
+	public function fulfill($post) {
 
 		// validation
 
-		if (! $this->validatePost($_POST, array(
+		if (! $this->validatePost($post, array(
 			'division_id'
 		))) {
 
@@ -193,7 +193,7 @@ class ttFixture extends Model
 			
 		}
 
-		foreach ($_POST['encounter'] as $encounter) {
+		foreach ($post['encounter'] as $encounter) {
 			foreach ($encounter as $side) {
 				if ($side === false) {
 					$this->getObject('mainUser')->setFeedback('Please fill all scores');
@@ -224,8 +224,8 @@ class ttFixture extends Model
 		");
 
 		$sth->execute(array(
-			':team_left_id' => $_POST['team']['left']
-			, ':team_right_id' => $_POST['team']['right']
+			':team_left_id' => $post['team']['left']
+			, ':team_right_id' => $post['team']['right']
 		));
 
 		// obtain fixture id
@@ -254,7 +254,7 @@ class ttFixture extends Model
 
 		// get 6 players
 
-		$playerIds = array_merge($_POST['player']['left'], $_POST['player']['right']);
+		$playerIds = array_merge($post['player']['left'], $post['player']['right']);
 		$ttPlayer = new ttPlayer($this->database, $this->config);
 		$ttPlayer->readById($playerIds);
 
@@ -289,7 +289,7 @@ class ttFixture extends Model
 		// get encounter structure
 		$encounterStructure = $this->getEncounterStructure();
 
-		foreach ($_POST['encounter'] as $key => $score) {
+		foreach ($post['encounter'] as $key => $score) {
 
 			$doubles = false;
 			$exclude = false;
@@ -300,8 +300,8 @@ class ttFixture extends Model
 
 				// fill array with player info or false
 
-				$encounters[$key]['left']['player'] = $ttPlayer->getById($_POST['player']['left'][$encounterStructure['left'][$key]]);
-				$encounters[$key]['right']['player'] = $ttPlayer->getById($_POST['player']['right'][$encounterStructure['right'][$key]]);
+				$encounters[$key]['left']['player'] = $ttPlayer->getById($post['player']['left'][$encounterStructure['left'][$key]]);
+				$encounters[$key]['right']['player'] = $ttPlayer->getById($post['player']['right'][$encounterStructure['right'][$key]]);
 
 				// find absent player
 

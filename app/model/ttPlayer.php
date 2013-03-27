@@ -681,14 +681,14 @@ class ttPlayer extends Model
 
 	/**
 	 * update player record using post
-	 * @param  array $_POST 
+	 * @param  array $post 
 	 * @return bool        
 	 */
-	public function update($_POST) {
+	public function update($post) {
 
 		// validation
 
-		if (! $this->validatePost($_POST, array(
+		if (! $this->validatePost($post, array(
 			'first_name'
 			, 'last_name'
 			, 'rank'
@@ -712,10 +712,10 @@ class ttPlayer extends Model
 		");	
 
 		$sth->execute(array(
-			$_POST['first_name']
-			, $_POST['last_name']
-			, $_POST['rank']
-			, $_POST['team_id']
+			$post['first_name']
+			, $post['last_name']
+			, $post['rank']
+			, $post['team_id']
 		));		
 
 		if ($sth->rowCount()) {

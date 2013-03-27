@@ -27,14 +27,14 @@ if (is_file(BASE_PATH . 'installed.txt')) {
 	$route->current('?install');
 
 } else {
-	
+
 	// try installation
 	try {	
 
 		$mainuser = new mainUser($database, $config);
 
-		require_once(BASE_PATH . '/install-table.php');
-		require_once(BASE_PATH . '/install-tabledata.php');
+		require_once(BASE_PATH . 'install-table.php');
+		require_once(BASE_PATH . 'install-tabledata.php');
 		
 		// fixture generation
 		$ttfixture = new ttFixture($database, $config);

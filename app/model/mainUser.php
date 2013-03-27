@@ -18,7 +18,8 @@ class mainUser extends Model
 		
 	
 	public function setEmail($value) {
-		$this->email = mysql_real_escape_string($value);
+		// $this->email = mysql_real_escape_string($value);
+		$this->email = $value;
 		return $this;
 	}
 	

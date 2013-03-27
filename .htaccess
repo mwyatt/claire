@@ -1,7 +1,7 @@
-Options +FollowSymLinks
-IndexIgnore */*
 # Turn on the RewriteEngine
+Options +FollowSymLinks
 RewriteEngine On
+IndexIgnore */*
 #  Rules
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
