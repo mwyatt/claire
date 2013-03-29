@@ -16,59 +16,66 @@
 // ============================================================================
 
 $view = new View($database, $config);
-
 $view
 	->setObject($session);
+
+$config
+	->setObject($view);
+
+$controller = new Controller($config);
+
 
 // Controller
 // ============================================================================
 
-if ($config->getUrl(0)) {
-	$path = BASE_PATH . 'app/controller/' . $config->getUrl(0) . '.php';
-	if (is_file($path)) require_once($path);
-}
+$controller->load();
+
+// if ($config->getUrl(0)) {
+// 	$path = BASE_PATH . 'app/controller/' . $config->getUrl(0) . '.php';
+// 	if (is_file($path)) require_once($path);
+// }
 
 
-// Content Page
-// ============================================================================
+// // Content Page
+// // ============================================================================
 
-if ($config->getUrl(0) == 'page') {
-	$mainContent = new mainContent($database, $config);	
-	if ($mainContent->readByTitleSlug($config->getUrl(1))) {
-		$view
-			->setObject($mainContent)
-			->setMeta(array(
-				'title' => $mainContent->get('meta_title'),
-				'keywords' => $mainContent->get('meta_keywords'),
-				'description' => $mainContent->get('meta_description')
-			))
-			->loadTemplate('page');
-	}
-}
-
-
-// Invalid URL
-// ============================================================================
-
-if ($config->getUrl(0)) {
-	$route->home();
-}
+// if ($config->getUrl(0) == 'page') {
+// 	$mainContent = new mainContent($database, $config);	
+// 	if ($mainContent->readByTitleSlug($config->getUrl(1))) {
+// 		$view
+// 			->setObject($mainContent)
+// 			->setMeta(array(
+// 				'title' => $mainContent->get('meta_title'),
+// 				'keywords' => $mainContent->get('meta_keywords'),
+// 				'description' => $mainContent->get('meta_description')
+// 			))
+// 			->loadTemplate('page');
+// 	}
+// }
 
 
-// Homepage
-// ============================================================================
+// // Invalid URL
+// // ============================================================================
+
+// if ($config->getUrl(0)) {
+// 	$route->home();
+// }
+
+
+// // Homepage
+// // ============================================================================
 	
-// exit('Front end Under Construction');
+// // exit('Front end Under Construction');
 
-//$view->loadCached('home');
+// //$view->loadCached('home');
 	
-// $posts = new mainContent($database, $config);
-// $posts->select(5);	
+// // $posts = new mainContent($database, $config);
+// // $posts->select(5);	
 
-//$ads = new Ads($database->dbh);
-//$ads->select('cover')->shuffle();
+// //$ads = new Ads($database->dbh);
+// //$ads->select('cover')->shuffle();
 
-//$projects = new Content($database->dbh, 'project');	
-//$projects->select(2);
+// //$projects = new Content($database->dbh, 'project');	
+// //$projects->select(2);
 
-$view->loadTemplate('home');
+// $view->loadTemplate('home');

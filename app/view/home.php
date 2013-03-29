@@ -3,8 +3,8 @@
 <div class="content home">
 
 	<a href="#" class="cover">
-		<h1>Welcome</h1>
-		<p>View the Tables and Results</p>
+		<h1>Cover Example</h1>
+		<p>Example Content</p>
 	</a>
 
 	<div class="accordion press">

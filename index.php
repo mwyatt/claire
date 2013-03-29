@@ -49,9 +49,17 @@ $config
 
 $route = new Route();
 $route
-	->setObject(array($config));
-	
-			
+	->setObject($config);
+
+$config
+	->setObject(array(
+		$error
+		, $database
+		, $session
+		, $route
+	));
+
+
 // Install
 // ============================================================================
 
