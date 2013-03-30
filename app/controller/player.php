@@ -1,7 +1,7 @@
 <?php
 
 /**
- * League
+ * player
  *
  * PHP version 5
  * 
@@ -11,27 +11,37 @@
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
 
-$ttPlayer = new ttPlayer($database, $config);
+class Controller_Player extends Controller
+{
 
-if ($config->getUrl(1) == 'performance') {
-	$ttEncounterPart = new ttEncounterPart($database, $config);
-	$ttEncounterPart->readPerformance();
-	$view
-		->setObject($ttEncounterPart)
-		->loadTemplate('performance');
+	public function root($method) {
+		$ttPlayer = new Model_ttPlayer($this->config->getObject('Database'), $this->config);
+		if ($method) {
+			$id = end(explode('-', $method));
+			if (! $ttPlayer->readById($id)) 
+				return false;
+			$this->config->getObject('View')
+				->setObject($ttPlayer)
+				->loadTemplate('player-single');
+		}
+		$ttPlayer->read();
+		$this->config->getObject('View')
+			->setObject($ttPlayer)
+			->loadTemplate('player');
+	}
+
+	public function performance() {
+		echo '<pre>';
+		print_r('perofmance');
+		echo '</pre>';
+		exit;
+		
+		$ttPlayer = new Model_ttPlayer($this->config->getObject('Database'), $this->config);
+		$ttEncounterPart = new Model_ttEncounterPart($this->config->getObject('Database'), $this->config);
+		$ttEncounterPart->readPerformance();
+		$this->config->getObject('View')
+			->setObject($ttEncounterPart)
+			->loadTemplate('performance');
+	}
+	
 }
-
-if ($config->getUrl(1)) {
-	$id = end(explode('-', $config->getUrl(1)));
-	if (! $ttPlayer->readById($id))
-		return false;
-	$view
-		->setObject($ttPlayer)
-		->loadTemplate('player-single');
-}
- 
-$ttPlayer->read();
-
-$view
-	->setObject($ttPlayer)
-	->loadTemplate('player');

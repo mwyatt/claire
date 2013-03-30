@@ -15,38 +15,48 @@ class AutoLoader {
 
 	/**
 	 * Load classes dynamically
-	 * @param  string $className attempted class to load
+	 * @param  string $title attempted class to load
 	 * @return null            
 	 */
-	public static function load($className) {
+	public static function load($title) {
 
-		$className = strtolower($className);
+		echo '<pre>';
+		print_r($title);
+		echo '</pre>';
 
-		$pathClass = BASE_PATH . 'app' . '/' . 'class' . '/' . $className . '.php';
+		$title = strtolower($title);
+		$path = BASE_PATH . 'app' . '/' . 'class' . '/' . $title . '.php';
 						
-		$pathModel = BASE_PATH . 'app' . '/' . 'model' . '/' . $className . '.php';
-
-		if (is_file($pathClass)) {
-
-			// echo 'now loading: ' . $pathClass . '<br>';
-			include($pathClass);
+		if (is_file($path)) {
+			include($path);
 			return;
-
-		} elseif (is_file($pathModel)) {
-
-			// echo 'now loading: ' . $pathModel . '<br>';
-			include($pathModel);
-			return;
-
-		} else {
-
-			echo '<h2>' . 'Class or Model does not exist' . '<h2>';
-
-			echo $pathClass . '<br>';
-			echo $pathModel . '<br>';
-
 		}
 
+		if ($explodedPath = explode('_', $title)) {
+			if (current($explodedPath) == 'controller') {
+				$path = BASE_PATH . 'app/' . current($explodedPath) . '/' . next($explodedPath) . '.php';
+				if (is_file($path)) {
+					include($path);
+					return;
+				}
+			}
+			if (current($explodedPath) == 'model') {
+				$path = BASE_PATH . 'app/' . current($explodedPath) . '/' . next($explodedPath) . '.php';
+				if (is_file($path)) {
+					include($path);
+					return;
+				}
+			}
+		}
+
+		echo '<h2>' . 'Class or Model does not exist' . '<h2>';
+		echo '<pre>';
+		echo $title . '<br>';
+		print_r($explodedPath);
+		echo '</pre>';
+
+		exit;
+		
 	}
 	
 }

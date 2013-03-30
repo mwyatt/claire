@@ -19,7 +19,7 @@ class Database
 		'port' => '80',
 		'basename' => 'mvc_01',
 		'username' => 'root',
-		'password' => ''
+		'password' => 'root'
 	);
 
 	public function __construct() {

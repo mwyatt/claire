@@ -28,54 +28,15 @@ $controller = new Controller($config);
 // Controller
 // ============================================================================
 
-$controller->load();
-
-// if ($config->getUrl(0)) {
-// 	$path = BASE_PATH . 'app/controller/' . $config->getUrl(0) . '.php';
-// 	if (is_file($path)) require_once($path);
-// }
-
-
-// // Content Page
-// // ============================================================================
-
-// if ($config->getUrl(0) == 'page') {
-// 	$mainContent = new mainContent($database, $config);	
-// 	if ($mainContent->readByTitleSlug($config->getUrl(1))) {
-// 		$view
-// 			->setObject($mainContent)
-// 			->setMeta(array(
-// 				'title' => $mainContent->get('meta_title'),
-// 				'keywords' => $mainContent->get('meta_keywords'),
-// 				'description' => $mainContent->get('meta_description')
-// 			))
-// 			->loadTemplate('page');
-// 	}
-// }
-
-
-// // Invalid URL
-// // ============================================================================
-
-// if ($config->getUrl(0)) {
-// 	$route->home();
-// }
-
-
-// // Homepage
-// // ============================================================================
-	
-// // exit('Front end Under Construction');
-
-// //$view->loadCached('home');
-	
-// // $posts = new mainContent($database, $config);
-// // $posts->select(5);	
-
-// //$ads = new Ads($database->dbh);
-// //$ads->select('cover')->shuffle();
-
-// //$projects = new Content($database->dbh, 'project');	
-// //$projects->select(2);
-
-// $view->loadTemplate('home');
+if ($controller->load()) {
+	exit;
+} else {
+	// $view->loadCached('home');
+	$posts = new mainContent($database, $config);
+	$posts->select(5);	
+	$ads = new Ads($database->dbh);
+	$ads->select('cover')->shuffle();
+	$projects = new Content($database->dbh, 'project');	
+	$projects->select(2);
+	$view->loadTemplate('home');
+}

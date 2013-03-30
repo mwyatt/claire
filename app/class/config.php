@@ -116,7 +116,9 @@ class Config
 			// Array
 			
 			$url = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-			
+
+			$url = strtolower($url); // did this break anyhting?
+
 			$url = parse_url($url);
 						
 			if (array_key_exists('path', $url)) {
