@@ -22,17 +22,17 @@ class View extends Model
 	 */	
 	public function header() {
 	
-		$user = new mainUser($this->database, $this->config);
+		$user = new Model_mainUser($this->database, $this->config);
 	
 		// initiate menu
 
-		$menu = new mainMenu($this->database, $this->config);
+		$menu = new Model_mainMenu($this->database, $this->config);
 		$menu
 			->setObject($user);
 		
 		//$menu->adminBuild();
 		
-		$mainOption = new mainOption($this->database, $this->config);
+		$mainOption = new Model_mainOption($this->database, $this->config);
 		$mainOption->select();		
 
 		$this->setMeta(array(
@@ -56,13 +56,11 @@ class View extends Model
 	public function loadTemplate($templateTitle)
 	{			
 	
-		$path = BASE_PATH . 'app/' . 'view/' . $templateTitle . '.php';
-		$path = strtolower($path);
+		$path = BASE_PATH . 'app/view/' . strtolower($templateTitle) . '.php';
 		
-		// reject unfound template
-
-		if (!file_exists($path))
+		if (!file_exists($path)) {
 			return false;
+		}
 
 		$this->template = $path;
 
@@ -70,18 +68,21 @@ class View extends Model
 		$this->header();
 	
 		// push objects to method scope
-		foreach ($this->objects as $title => $object) :
-		
+		foreach ($this->objects as $title => $object) {
+			$words = explode('_', $title);
+			$title = '';
+			foreach ($words as $key => $word) {
+				$title .= ucfirst($word);
+			}
+			$title = lcfirst($title);
 			$$title = $object;
-		
-		endforeach;
+			$scopedVariables[$title] = $object;
+		}
 	
 		// start buffer
-
 		ob_start();	
 		
 		// include template
-
 		require_once($path);
 
 		// create cache $templateTitle.html

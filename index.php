@@ -54,7 +54,6 @@ $route
 $config
 	->setObject(array(
 		$error
-		, $database
 		, $session
 		, $route
 	));

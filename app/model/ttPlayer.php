@@ -15,7 +15,7 @@
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Model_ttPlayer extends Model
+class Model_Ttplayer extends Model
 {		
 
 	public function create() {	

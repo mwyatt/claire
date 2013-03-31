@@ -11,22 +11,27 @@
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
  
-class Controller
+class Controller extends Model
 {
 
-	public $config;
-	
+	/**
+	 * view object which will allow the controller to move onto the view stage
+	 * @var object
+	 */
+	public $view;
 
-	public function __construct($config) {
-		$this->config = $config;
-	}
 
-	public function loadMethod($method) {
-		if (method_exists($this, $method)) {
-			$this->$method();
+	/**
+	 * loads up controller method, otherwise use default method 'index'
+	 * @param  string $action 
+	 * @return null         
+	 */
+	public function loadMethod($action) {
+		if (method_exists($this, $action)) {
+			$this->$action();
 			return;			
 		} else {
-			$this->root($method);
+			$this->index($action);
 		}
 	}
 
@@ -36,13 +41,27 @@ class Controller
 	 * @param  string $path
 	 * @return null
 	 */
-	public function load()	{
+	public function load($segments)	{
 
-		$path = BASE_PATH . 'app/controller/' . $this->config->getUrl(0) . '.php';
+		$path = BASE_PATH . 'app/controller/';
+
+		if (is_array($segments)) {
+			foreach ($segments as $key => $segment) {
+				$path .= $segment . '/';
+			}
+			$path = substr_replace($path, '', -1);
+		} else {
+			$path .= $segments;
+		}
+
+		$path .= '.php';
 
 		if (is_file($path)) {
 			$controllerName = 'Controller' . '_' . ucfirst($this->config->getUrl(0));
-			$controller = new $controllerName($this->config);
+			$controller = new $controllerName($this->database, $this->config);
+			$view = new View($this->database, $this->config);
+			$view->setObject($this->config->getObject('Session'));
+			$controller->view = $view;
 			$controller->loadMethod($this->config->getUrl(1));
 			return true;
 		}

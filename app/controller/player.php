@@ -14,18 +14,18 @@
 class Controller_Player extends Controller
 {
 
-	public function root($method) {
-		$ttPlayer = new Model_ttPlayer($this->config->getObject('Database'), $this->config);
-		if ($method) {
-			$id = end(explode('-', $method));
+	public function index($action) {
+		$ttPlayer = new Model_Ttplayer($this->database, $this->config);
+		if ($action) {
+			$id = end(explode('-', $action));
 			if (! $ttPlayer->readById($id)) 
 				return false;
-			$this->config->getObject('View')
+			$this->view
 				->setObject($ttPlayer)
 				->loadTemplate('player-single');
 		}
 		$ttPlayer->read();
-		$this->config->getObject('View')
+		$this->view
 			->setObject($ttPlayer)
 			->loadTemplate('player');
 	}
@@ -36,10 +36,10 @@ class Controller_Player extends Controller
 		echo '</pre>';
 		exit;
 		
-		$ttPlayer = new Model_ttPlayer($this->config->getObject('Database'), $this->config);
-		$ttEncounterPart = new Model_ttEncounterPart($this->config->getObject('Database'), $this->config);
+		$ttPlayer = new Model_Ttplayer($this->database, $this->config);
+		$ttEncounterPart = new Model_ttEncounterPart($this->database, $this->config);
 		$ttEncounterPart->readPerformance();
-		$this->config->getObject('View')
+		$this->view
 			->setObject($ttEncounterPart)
 			->loadTemplate('performance');
 	}

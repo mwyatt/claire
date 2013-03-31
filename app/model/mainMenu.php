@@ -10,7 +10,7 @@
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class mainMenu extends Model
+class Model_mainMenu extends Model
 {
 
 	public $type;
@@ -246,7 +246,7 @@ class mainMenu extends Model
 
 
     public function buildDivision() {
-    	$ttDivision = new ttDivision($this->database, $this->config);
+    	$ttDivision = new Model_Ttdivision($this->database, $this->config);
     	$ttDivision->read();
 		$this->html .= '<ul>';
     	foreach ($ttDivision->getData() as $division) {

@@ -12,23 +12,12 @@
  */
 
 
-// View
-// ============================================================================
-$hi = 'hello';
-$view = new View($database, $config);
-$view
-	->setObject($session);
-
-$config
-	->setObject($view);
-
-$controller = new Controller($config);
-
-
 // Controller
 // ============================================================================
 
-if ($controller->load()) {
+$controller = new Controller($database, $config);
+
+if ($controller->load($config->getUrl(0))) {
 	exit;
 } else {
 	// $view->loadCached('home');

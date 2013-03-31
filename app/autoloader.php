@@ -20,10 +20,6 @@ class AutoLoader {
 	 */
 	public static function load($title) {
 
-		echo '<pre>';
-		print_r($title);
-		echo '</pre>';
-
 		$title = strtolower($title);
 		$path = BASE_PATH . 'app' . '/' . 'class' . '/' . $title . '.php';
 						

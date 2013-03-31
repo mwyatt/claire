@@ -4,7 +4,7 @@
 	
 	<h1>All Players</h1>
 
-	<?php if ($ttPlayer->getData()) : ?>	
+	<?php if ($modelTtplayer->getData()) : ?>	
 
 	<table width="100%" cellspacing="0" cellpadding="0">
 
@@ -15,15 +15,15 @@
 			<th class="division">Division</th>
 		</tr>
 
-		<?php while ($ttPlayer->nextRow()) : ?>
+		<?php while ($modelTtplayer->nextRow()) : ?>
 
 		<tr>
 			<td class="full_name">
-				<a href="<?php echo $ttPlayer->getRow('guid'); ?>" title="View Player <?php echo $ttPlayer->getRow('full_name'); ?>"><?php echo $ttPlayer->getRow('full_name'); ?></a>
+				<a href="<?php echo $modelTtplayer->getRow('guid'); ?>" title="View Player <?php echo $modelTtplayer->getRow('full_name'); ?>"><?php echo $modelTtplayer->getRow('full_name'); ?></a>
 			</td>
-			<td class="rank"><?php echo $ttPlayer->getRow('rank'); ?></td>
-			<td class="team"><?php echo $ttPlayer->getRow('team_name'); ?></td>
-			<td class="division"><?php echo $ttPlayer->getRow('division_name'); ?></td>
+			<td class="rank"><?php echo $modelTtplayer->getRow('rank'); ?></td>
+			<td class="team"><?php echo $modelTtplayer->getRow('team_name'); ?></td>
+			<td class="division"><?php echo $modelTtplayer->getRow('division_name'); ?></td>
 		</tr>		
 
 		<?php endwhile; ?>

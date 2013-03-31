@@ -25,7 +25,7 @@
 
             <header class="main">
 
-                <a class="logo" href="<?php echo $this->urlHome(); ?>"><?php echo $mainOption->get('site_title'); ?></a>
+                <a class="logo" href="<?php echo $this->urlHome(); ?>"><?php echo $modelMainOption->get('site_title'); ?></a>
 
                 <div class="search">
                     <form>
@@ -51,7 +51,7 @@
                             <div>
                                 <span></span>
                                 <a href="#">Tables and Results</a>
-                                <?php echo $mainMenu->buildDivision(); ?>
+                                <?php echo $modelMainMenu->buildDivision(); ?>
                             </div>
                         </li>
                         <li>
