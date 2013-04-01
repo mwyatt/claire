@@ -20,7 +20,7 @@
 */
 
  
-class mainMedia extends Model
+class Model_Mainmedia extends Model
 {
 	
 	protected $tick = 0;

@@ -10,7 +10,7 @@
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Ads extends Model
+class Model_Ads extends Model
 {	
 
 	public function __construct($DBH) {

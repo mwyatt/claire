@@ -6,7 +6,7 @@
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */ 			
-class Attachments extends Media
+class Model_Attachments extends Model_Media
 {
 	
 	public $thumbPath = 'media/upload/thumb/';
@@ -119,7 +119,7 @@ class Attachments extends Media
 			$fileName = explode('.', $row['filename']);
 			
 			// Create -(class).ext
-			$class = '-('.$name.').'.end($fileName); 
+			$class Model_= '-('.$name.').'.end($fileName); 
 			
 			// Remove .ext from Array
 			array_pop($fileName);

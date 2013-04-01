@@ -14,6 +14,7 @@
 class Controller extends Model
 {
 
+
 	/**
 	 * view object which will allow the controller to move onto the view stage
 	 * @var object
@@ -22,11 +23,32 @@ class Controller extends Model
 
 
 	/**
+	 * database
+	 * @var object
+	 */
+	public $database;
+
+
+	/**
+	 * config
+	 * @var object
+	 */
+	public $config;
+
+
+	/**
 	 * loads up controller method, otherwise use default method 'index'
 	 * @param  string $action 
 	 * @return null         
 	 */
 	public function loadMethod($action) {
+		$words = explode('-', $action);
+		$action = '';
+		foreach ($words as $word) {
+			$action .= ucfirst($word);
+		}
+		$action = lcfirst($action);
+		
 		if (method_exists($this, $action)) {
 			$this->$action($this->config->getUrl(2));
 			return;			
@@ -35,6 +57,7 @@ class Controller extends Model
 		}
 	}
 
+
 	/**
 	 * attempts to load controller based on segment(s) given
 	 * if file found then it is included and config is passed through
@@ -42,9 +65,7 @@ class Controller extends Model
 	 * @return null
 	 */
 	public function load($segments)	{
-
 		$path = BASE_PATH . 'app/controller/';
-
 		if (is_array($segments)) {
 			foreach ($segments as $key => $segment) {
 				$path .= $segment . '/';
@@ -53,9 +74,7 @@ class Controller extends Model
 		} else {
 			$path .= $segments;
 		}
-
 		$path .= '.php';
-
 		if (is_file($path)) {
 			$controllerName = 'Controller' . '_' . ucfirst($this->config->getUrl(0));
 			$controller = new $controllerName($this->database, $this->config);
@@ -65,7 +84,8 @@ class Controller extends Model
 			$controller->loadMethod($this->config->getUrl(1));
 			return true;
 		}
-
 		return false;
 	}
+
+
 }
