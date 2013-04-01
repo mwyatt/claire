@@ -28,7 +28,7 @@ class Controller extends Model
 	 */
 	public function loadMethod($action) {
 		if (method_exists($this, $action)) {
-			$this->$action();
+			$this->$action($this->config->getUrl(2));
 			return;			
 		} else {
 			$this->index($action);

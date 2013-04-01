@@ -1,25 +1,57 @@
 <?php
 
 /**
+ * ajax
+ *
+ * PHP version 5
+ * 
  * @package	~unknown~
  * @author Martin Wyatt <martin.wyatt@gmail.com> 
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
 
-if ($config->getUrl(1)) {
+class Controller_Ajax extends Controller
+{
 
-	$path = BASE_PATH . 'app/controller/' . $config->getUrl(0) . '/' . $config->getUrl(1) . '.php';
+	public function index($action) {
+		$this->config->getObject('Route')->home();
+	}
 
-	if (is_file($path))
-		require_once($path);
-	else
-		$route->home();	
-		
-} else {
+	public function division($action) {
+		$output = '';
 
-	$route->home();
+		// get teams by division id
 
+		if (array_key_exists('id', $_POST)) {
+
+			$ttTeam = new ttTeam($database, $config);
+
+			$ttTeam->readByDivision($_POST['division_id']);
+
+			if ($ttTeam->getData()) {	
+
+				$output .= '<option value="0"></option>';
+
+				while ($ttTeam->nextRow()) {
+			
+					$output .= '<option value="' . $ttTeam->getRow('team_id') . '">' . $ttTeam->getRow('team_name') . '</option>';
+
+				}
+
+			}
+
+		}
+
+		echo $output;
+	}
+
+	public function search($action) {
+		if (array_key_exists('default', $_GET)) {
+			$search = new Search($database, $config);
+			if ($search->read($_GET['default']))
+				echo $search->getData();
+		}
+	}
+	
 }
-
-exit;
