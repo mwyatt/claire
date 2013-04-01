@@ -21,30 +21,18 @@ class Controller_Ajax extends Controller
 
 	public function division($action) {
 		$output = '';
-
 		// get teams by division id
-
 		if (array_key_exists('id', $_POST)) {
-
 			$ttTeam = new ttTeam($database, $config);
-
 			$ttTeam->readByDivision($_POST['division_id']);
-
 			if ($ttTeam->getData()) {	
-
 				$output .= '<option value="0"></option>';
-
 				while ($ttTeam->nextRow()) {
-			
 					$output .= '<option value="' . $ttTeam->getRow('team_id') . '">' . $ttTeam->getRow('team_name') . '</option>';
-
 				}
-
 			}
-
 		}
-
-		echo $output;
+		$this->out($ttTeam->getData);
 	}
 
 	public function search($action) {
@@ -53,6 +41,17 @@ class Controller_Ajax extends Controller
 			if ($search->read($_GET['default']))
 				echo $search->getData();
 		}
+	}
+
+
+	/**
+	 * outputs the requested data as json code
+	 * @param  array $data 
+	 * @return null       echos out the json data
+	 */
+	public function out($data) {
+		echo json_encode($data);
+		exit;
 	}
 	
 }
