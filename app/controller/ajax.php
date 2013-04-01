@@ -18,6 +18,7 @@ class Controller_Ajax extends Controller
 		$this->config->getObject('Route')->home();
 	}
 
+
 	public function division($action) {
 		$output = '';
 
