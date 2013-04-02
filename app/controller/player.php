@@ -17,9 +17,10 @@ class Controller_Player extends Controller
 	public function index($action) {
 		$ttPlayer = new Model_Ttplayer($this->database, $this->config);
 		if ($action) {
-			$id = end(explode('-', $action));
-			if (! $ttPlayer->readById($id)) 
-				return false;
+			$id = end(explode('-', $this->config->getUrl(1)));
+			if (! $ttPlayer->readById($id)) {
+				return;
+			}
 			$this->view
 				->setObject($ttPlayer)
 				->loadTemplate('player-single');

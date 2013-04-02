@@ -15,6 +15,9 @@ class View extends Model
 
 	public $template;
 	public $meta = array();
+	public $cache = array(
+		'player' => true
+	);
 	
 	
 	/**
@@ -76,7 +79,7 @@ class View extends Model
 			}
 			$title = lcfirst($title);
 			$$title = $object;
-			$scopedVariables[$title] = $object;
+			$variables[$title] = $object;
 		}
 	
 		// start buffer
@@ -86,9 +89,18 @@ class View extends Model
 		require_once($path);
 
 		// create cache $templateTitle.html
-		/*file_put_contents(
-			BASE_PATH . 'app/' . 'cache/' . $templateTitle . '.html', ob_get_contents()
-		);*/
+		
+/**
+ * use the cached file if it exists!!!! involve with require ^^
+ */
+
+
+		if ($this->isCached($templateTitle)) {
+			$path = BASE_PATH . 'app/cache/' . $templateTitle . '.html';
+			if (! file_exists($path)) {
+				file_put_contents($path, ob_get_contents());
+			}
+		}
 		
 		// end buffer and send
 
@@ -290,6 +302,21 @@ class View extends Model
 	public function getMeta($key) {
 		if (array_key_exists($key, $this->meta))
 			return $this->meta[$key];
+		return false;
+	}
+
+
+	/**
+	 * check to see if the template is cached
+	 * @param  string  $templateTitle 
+	 * @return boolean                
+	 */
+	public function isCached($templateTitle) {
+		if (array_key_exists($templateTitle, $this->cache)) {
+			if ($this->cache[$templateTitle]) {
+				return true;
+			}
+		}
 		return false;
 	}
 	
