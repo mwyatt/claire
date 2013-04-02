@@ -58,7 +58,8 @@ class View extends Model
 	 */
 	public function loadTemplate($templateTitle)
 	{			
-	
+
+		$cache = new Cache($this->database, $this->config)	;
 		$path = BASE_PATH . 'app/view/' . strtolower($templateTitle) . '.php';
 		
 		if (!file_exists($path)) {
@@ -82,30 +83,32 @@ class View extends Model
 			$variables[$title] = $object;
 		}
 	
-		// start buffer
+		// start
 		ob_start();	
 		
-		// include template
-		require_once($path);
-
-		// create cache $templateTitle.html
-		
-/**
- * use the cached file if it exists!!!! involve with require ^^
- */
-
-
-		if ($this->isCached($templateTitle)) {
-			$path = BASE_PATH . 'app/cache/' . $templateTitle . '.html';
-			if (! file_exists($path)) {
-				file_put_contents($path, ob_get_contents());
+		/**
+		 * use or create cache file
+		 * @todo find way to integrate into 'Cache' class
+		 */
+		if ($cache->check($templateTitle)) {
+			$pathCache = BASE_PATH . 'app/cache/' . $templateTitle . '.html';
+			if (file_exists($pathCache)) {
+				require_once($pathCache);
+				ob_end_flush();	
+				exit;
+			} else {
+				require_once($path);
+				file_put_contents($pathCache, ob_get_contents());
+				ob_end_flush();	
+				exit;
 			}
 		}
-		
-		// end buffer and send
 
+		require_once($path);
+
+		// end
 		ob_end_flush();	
-
+		
 		exit;
 		
 	}		
@@ -302,21 +305,6 @@ class View extends Model
 	public function getMeta($key) {
 		if (array_key_exists($key, $this->meta))
 			return $this->meta[$key];
-		return false;
-	}
-
-
-	/**
-	 * check to see if the template is cached
-	 * @param  string  $templateTitle 
-	 * @return boolean                
-	 */
-	public function isCached($templateTitle) {
-		if (array_key_exists($templateTitle, $this->cache)) {
-			if ($this->cache[$templateTitle]) {
-				return true;
-			}
-		}
 		return false;
 	}
 	
