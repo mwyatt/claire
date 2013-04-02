@@ -4,7 +4,7 @@
 	
 	<h1>Player Performance</h1>
 
-	<?php if ($ttEncounterPart->getData()) : ?>	
+	<?php if ($modelTtencounterpart->getData()) : ?>	
 
 	<table width="100%" cellspacing="0" cellpadding="0">
 
@@ -14,23 +14,28 @@
 			<th class="player_rank_change">Performance</th>
 		</tr>
 
-		<?php while ($ttEncounterPart->nextRow()) : ?>
+		<?php while ($modelTtencounterpart->nextRow()) : ?>
 
 		<tr>
 			<td class="player_name">
-				<a href="<?php echo $ttEncounterPart->getRow('player_guid'); ?>" title="View Player <?php echo $ttEncounterPart->getRow('player_name'); ?>"><?php echo $ttEncounterPart->getRow('player_name'); ?></a>
+				<a href="<?php echo $modelTtencounterpart->getRow('player_guid'); ?>" title="View Player <?php echo $modelTtencounterpart->getRow('player_name'); ?>"><?php echo $modelTtencounterpart->getRow('player_name'); ?></a>
 			</td>
 			<td class="team_name">
-				<a href="<?php echo $ttEncounterPart->getRow('team_guid'); ?>" title="View Team <?php echo $ttEncounterPart->getRow('team_name'); ?>"><?php echo $ttEncounterPart->getRow('team_name'); ?></a>
+				<a href="<?php echo $modelTtencounterpart->getRow('team_guid'); ?>" title="View Team <?php echo $modelTtencounterpart->getRow('team_name'); ?>"><?php echo $modelTtencounterpart->getRow('team_name'); ?></a>
 			</td>
-			<td class="player_rank_change"><?php echo $ttEncounterPart->getRow('player_rank_change'); ?></td>
+			<td class="player_rank_change"><?php echo $modelTtencounterpart->getRow('player_rank_change'); ?></td>
 		</tr>		
 
 		<?php endwhile; ?>
 
 	</table>
 	
+	<?php else : ?>	
+
+	<p>Players have yet to perform!</p>
+
 	<?php endif; ?>	
+
 
 </div> <!-- styling aid -->
 

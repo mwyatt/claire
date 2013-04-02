@@ -21,11 +21,11 @@ if ($controller->load($config->getUrl(0))) {
 	exit;
 } else {
 	// $view->loadCached('home');
-	$posts = new mainContent($database, $config);
-	$posts->select(5);	
-	$ads = new Ads($database->dbh);
+	$posts = new Model_Maincontent($database, $config);
+	$posts->read(5);
+	$ads = new Model_Ads($database->dbh);
 	$ads->select('cover')->shuffle();
-	$projects = new Content($database->dbh, 'project');	
+	$projects = new Model_Content($database->dbh, 'project');	
 	$projects->select(2);
 	$view->loadTemplate('home');
 }

@@ -14,35 +14,44 @@
 class Controller_Player extends Controller
 {
 
+
+	/**
+	 * /player/ full player directory
+	 * /player/full-name-1/ single player
+	 * @param  string $action after the index?
+	 */
 	public function index($action) {
-		$ttPlayer = new Model_Ttplayer($this->database, $this->config);
+		$this->cache->load('player');
+		$player = new Model_Ttplayer($this->database, $this->config);
 		if ($action) {
 			$id = end(explode('-', $this->config->getUrl(1)));
-			if (! $ttPlayer->readById($id)) {
+			if (! $player->readById($id)) {
 				return;
 			}
 			$this->view
-				->setObject($ttPlayer)
+				->setObject($player)
 				->loadTemplate('player-single');
 		}
-		$ttPlayer->read();
+		$player->read();
 		$this->view
-			->setObject($ttPlayer)
+			->setObject($player)
 			->loadTemplate('player');
 	}
 
+
+	/**
+	 * full table of player performance ordered by the one who is performing
+	 * the best
+	 */
 	public function performance() {
-		echo '<pre>';
-		print_r('perofmance');
-		echo '</pre>';
-		exit;
-		
-		$ttPlayer = new Model_Ttplayer($this->database, $this->config);
-		$ttEncounterPart = new Model_ttEncounterPart($this->database, $this->config);
-		$ttEncounterPart->readPerformance();
+		$this->cache->load('performance');
+		$player = new Model_Ttplayer($this->database, $this->config);
+		$encounterPart = new Model_ttEncounterPart($this->database, $this->config);
+		$encounterPart->readPerformance();
 		$this->view
-			->setObject($ttEncounterPart)
+			->setObject($encounterPart)
 			->loadTemplate('performance');
 	}
+
 	
 }

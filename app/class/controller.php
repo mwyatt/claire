@@ -16,6 +16,14 @@ class Controller extends Model
 
 
 	/**
+	 * cache object which will allow the controller to push out cached files
+	 * speeding up some model intensive pages
+	 * @var object
+	 */
+	public $cache;
+
+
+	/**
 	 * view object which will allow the controller to move onto the view stage
 	 * @var object
 	 */
@@ -78,9 +86,9 @@ class Controller extends Model
 		if (is_file($path)) {
 			$controllerName = 'Controller' . '_' . ucfirst($this->config->getUrl(0));
 			$controller = new $controllerName($this->database, $this->config);
-			$view = new View($this->database, $this->config);
-			$view->setObject($this->config->getObject('Session'));
-			$controller->view = $view;
+			$controller->view = new View($this->database, $this->config);
+			$controller->cache = new Cache(false);
+			$controller->view->setObject($this->config->getObject('Session'));
 			$controller->loadMethod($this->config->getUrl(1));
 			return true;
 		}

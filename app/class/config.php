@@ -23,15 +23,12 @@ class Config
 	 */	
 	public function getObject($objectTitle)
 	{
-	
-		if (array_key_exists($objectTitle, $this->objects))
-		
+		$objectTitle = strtolower($objectTitle);
+		if (array_key_exists($objectTitle, $this->objects)) {
 			return $this->objects[$objectTitle];
-			
-		else
-		
+		} else {
 			return false;
-	
+		}
 	}
 	
 	
@@ -42,25 +39,16 @@ class Config
 	 */
 	public function setObject($objects)
 	{
-	
 		if (is_array($objects)) {
-
 			foreach ($objects as $object) {
-			
 				$classTitle = get_class($object);
-				$this->objects[$classTitle] = $object;
-				
+				$this->objects[strtolower($classTitle)] = $object;
 			}
-			
 		} else {
-
 			$classTitle = get_class($objects);
-			$this->objects[$classTitle] = $objects;
-
+			$this->objects[strtolower($classTitle)] = $objects;
 		}
-	
 		return $this;
-			
 	}
 	
 	

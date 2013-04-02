@@ -82,33 +82,12 @@ class View extends Model
 			$$title = $object;
 			$variables[$title] = $object;
 		}
-	
-		// start
+
+		// template boot!
 		ob_start();	
-		
-		/**
-		 * use or create cache file
-		 * @todo find way to integrate into 'Cache' class
-		 */
-		if ($cache->check($templateTitle)) {
-			$pathCache = BASE_PATH . 'app/cache/' . $templateTitle . '.html';
-			if (file_exists($pathCache)) {
-				require_once($pathCache);
-				ob_end_flush();	
-				exit;
-			} else {
-				require_once($path);
-				file_put_contents($pathCache, ob_get_contents());
-				ob_end_flush();	
-				exit;
-			}
-		}
-
 		require_once($path);
-
-		// end
+		$cache->create($templateTitle, ob_get_contents());
 		ob_end_flush();	
-		
 		exit;
 		
 	}		

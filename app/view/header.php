@@ -25,7 +25,7 @@
 
             <header class="main">
 
-                <a class="logo" href="<?php echo $this->urlHome(); ?>"><?php echo $modelMainOption->get('site_title'); ?></a>
+                <a class="logo" href="<?php echo $this->urlHome(); ?>"><?php echo $modelMainoption->get('site_title'); ?></a>
 
                 <div class="search">
                     <form>

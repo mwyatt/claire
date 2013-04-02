@@ -28,13 +28,13 @@
 		    	
 		    	<div><img src="" alt="" width="16" height="16"></div>
 
-		    	<a href="<?php echo $this->urlHome(); ?>" target="_blank" title="Open Homepage"><?php echo $mainOption->get('site_title'); ?></a>
+		    	<a href="<?php echo $this->urlHome(); ?>" target="_blank" title="Open Homepage"><?php echo $modelMainoption->get('site_title'); ?></a>
 
 		    </div>
 		    
 			<div class="user">
 
-				<a href="#" class="name"><?php echo $mainUser->get('first_name'); ?></a>
+				<a href="#" class="name"><?php echo $modelMainuser->get('first_name'); ?></a>
 
 				<ul>
 					<li><a href="<?php echo $this->urlHome(); ?>admin/user/">Profile</a></li>
@@ -51,10 +51,10 @@
 
 			<!-- main -->
 
-			<nav class="main"><?php echo $mainMenu->adminBuild(); ?></nav>
+			<nav class="main"><?php echo $modelMainmenu->adminBuild(); ?></nav>
 
 			<!-- sub -->
 
-			<?php echo $mainMenu->getAdminSubMenu(); ?>
+			<?php echo $modelMainmenu->getAdminSubMenu(); ?>
 
 		</header>
