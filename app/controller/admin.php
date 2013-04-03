@@ -14,24 +14,27 @@
 class Controller_Admin extends Controller
 {
 
-	public function initialise() {
-	}
 
-
+	/**
+	 * dashboard of admin area, displays login until logged in, then dashboard
+	 */
 	public function index() {
 		$user = new Model_Mainuser($this->database, $this->config);
+		$user->setObject($this->config->getObject('session'));
 		
 		if (array_key_exists('logout', $_GET)) {
 			$user->logout();
-			$route->homeAdmin();
+			$this->config->getObject('route')->homeAdmin();
 		}
 
 		if (array_key_exists('form_login', $_POST)) {
 			if ($user->login()) {
 				$user->setSession();
 			}
-			$route->home('admin/');
+			$this->config->getObject('route')->home('admin/');
 		}
+
+			// upto here ...
 
 		if ($user->isLogged()) {
 			if ($config->getUrl(1)) {
@@ -57,14 +60,14 @@ class Controller_Admin extends Controller
 
 		if (array_key_exists('form_page_new', $_POST)) {
 			$page->create();
-			$route->current();
+			$this->config->getObject('route')->current();
 		}
 
 		if ($config->getUrl(2) == 'new') {
 			$this->view->loadTemplate('admin/page/new');
 		}
 		 
-		if ($config->getUrl(2))	$route->home('admin/page/');
+		if ($config->getUrl(2))	$this->config->getObject('route')->home('admin/page/');
 
 		$mainContent = new Model_Maincontent($this->database, $this->config);
 		$mainContent->readByType('page');
@@ -97,14 +100,14 @@ class Controller_Admin extends Controller
 		// invalid url
 
 		if ($config->getUrl(2))
-			$route->home('admin/media/');
+			$this->config->getObject('route')->home('admin/media/');
 
 		// upload attempt
 
 		if (array_key_exists('form_media_upload', $_POST)) {
 
 			$mainMedia->upload($_FILES);
-			$route->home('admin/media/');	
+			$this->config->getObject('route')->home('admin/media/');	
 			
 		}
 
@@ -139,7 +142,7 @@ class Controller_Admin extends Controller
 		// invalid url
 
 		if ($config->getUrl(2))
-			$route->home('admin/posts/');
+			$this->config->getObject('route')->home('admin/posts/');
 
 		// default page
 
@@ -162,7 +165,7 @@ class Controller_Admin extends Controller
 		// invalid url
 
 		if ($config->getUrl(2))
-			$route->home('admin/league/');
+			$this->config->getObject('route')->home('admin/league/');
 
 		// default page
 

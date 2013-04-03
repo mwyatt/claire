@@ -31,13 +31,13 @@ if (is_file(BASE_PATH . 'installed.txt')) {
 	// try installation
 	try {	
 
-		$mainuser = new mainUser($database, $config);
+		$mainuser = new Model_Mainuser($database, $config);
 
 		require_once(BASE_PATH . 'install-table.php');
 		require_once(BASE_PATH . 'install-tabledata.php');
 		
 		// fixture generation
-		$ttfixture = new ttFixture($database, $config);
+		$ttfixture = new Model_Ttfixture($database, $config);
 		$ttfixture->generateAll();
 
 		// remove uploaded media
@@ -50,7 +50,7 @@ if (is_file(BASE_PATH . 'installed.txt')) {
 
 		// create installed.txt
 		$file = fopen(BASE_PATH . 'installed.txt', 'w');
-			
+
 	} catch (PDOException $e) { 
 
 		// Handle Exception

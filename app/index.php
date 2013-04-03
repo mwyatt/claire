@@ -20,12 +20,13 @@ $controller = new Controller($database, $config);
 if ($controller->load($config->getUrl(0))) {
 	exit;
 } else {
+	echo 'home';
 	// $view->loadCached('home');
-	$posts = new Model_Maincontent($database, $config);
-	$posts->read(5);
-	$ads = new Model_Ads($database->dbh);
-	$ads->select('cover')->shuffle();
-	$projects = new Model_Content($database->dbh, 'project');	
-	$projects->select(2);
-	$view->loadTemplate('home');
+	// $posts = new Model_Maincontent($database, $config);
+	// $posts->read(5);
+	// $ads = new Model_Ads($database->dbh);
+	// $ads->select('cover')->shuffle();
+	// $projects = new Model_Content($database->dbh, 'project');	
+	// $projects->select(2);
+	// $view->loadTemplate('home');
 }

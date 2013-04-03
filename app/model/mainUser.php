@@ -18,7 +18,6 @@ class Model_Mainuser extends Model
 		
 	
 	public function setEmail($value) {
-		// $this->email = mysql_real_escape_string($value);
 		$this->email = $value;
 		return $this;
 	}
@@ -31,19 +30,18 @@ class Model_Mainuser extends Model
 
 	public function setPassword($value) {
 		$this->password = crypt($value);
-		// $this->password = hash('sha512', $value);
 		return $this;		
 	}
 
 	protected function getPassword() {
-		return ($this->password ? $this->password : false);
+		return $this->password;
 	}
 	
+
 	/**
 	  * Insert 1 Row into Database | Set Level
 	  */
-	public function insertMeta($user_id)
-	{	
+	public function insertMeta($user_id) {	
 		$sth = $this->database->dbh->prepare("
 			INSERT INTO main_user_meta
 				(user_id, name, value)
@@ -69,8 +67,7 @@ class Model_Mainuser extends Model
 	/**
 	 * Get all Users and pair with Meta Data
 	 */
-	public function getUser()
-	{	
+	public function getUser() {	
 
 		$sth = $this->database->dbh->query("
 			SELECT
@@ -99,8 +96,7 @@ class Model_Mainuser extends Model
 	/**
 	  * Insert 1 Row into Database | Set Level
 	  */
-	public function insert($level = 1)
-	{	
+	public function insert($level = 1) {	
 		$sth = $this->database->dbh->prepare("
 			INSERT INTO main_user
 				(email, password, level)
@@ -122,8 +118,7 @@ class Model_Mainuser extends Model
 	 * login user
 	 * @return bool 
 	 */
-	public function login()
-	{	
+	public function login() {	
 	
 		$sth = $this->database->dbh->prepare("	
 
@@ -176,18 +171,14 @@ class Model_Mainuser extends Model
 	/**
 	 * check the session variable for logged in user
 	 */
-	public function isLogged()
-	{	
-	
-		if (array_key_exists('user', $_SESSION))
-
+	public function isLogged() {	
+		if (array_key_exists('user', $_SESSION)) {
 			return true;
-			
+		}
 	}
 	
 	
-	public function logout()
-	{	
+	public function logout() {	
 	
 		if (array_key_exists('user', $_SESSION))
 			unset($_SESSION['user']);
@@ -195,8 +186,7 @@ class Model_Mainuser extends Model
 	}
 	
 	
-	public function setSession()
-	{	
+	public function setSession() {	
 	
 		unset($_SESSION['user']);
 	
@@ -208,8 +198,7 @@ class Model_Mainuser extends Model
 		
 	}
 	
-	public function get($key = false)
-	{
+	public function get($key = false) {
 
 		if ($key) {
 
@@ -223,8 +212,7 @@ class Model_Mainuser extends Model
 
 	}
 	
-	public function setFeedback($string)
-	{	
+	public function setFeedback($string) {	
 	
 		$_SESSION['feedback'] = $string;
 		
@@ -233,8 +221,7 @@ class Model_Mainuser extends Model
 	}
 	
 	
-	public function checkPermission($path)
-	{
+	public function checkPermission($path) {
 
 		if (! is_file($path))
 			return false;

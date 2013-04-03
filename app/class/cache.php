@@ -14,6 +14,26 @@ class Cache
 {
 
 
+	/**
+	 * list of allowed templates which should be cached
+	 * @var array
+	 */
+	public $templates = array('player', 'team');
+
+
+	/**
+	 * check to see if the template should be cached
+	 * @param  string  $templateTitle 
+	 * @return boolean                
+	 */
+	public function check($templateTitle) {
+		if (in_array($templateTitle, $this->templates)) {
+			return true;
+		}
+		return false;
+	}
+
+
 	public $active;
 
 
@@ -23,6 +43,9 @@ class Cache
 
 
 	public function load($templateTitle) {
+		if (! $this->check($templateTitle)) {
+			return false;
+		}
 		if (file_exists($this->getPath($templateTitle)) && $this->isActive()) {
 			require_once($this->getPath($templateTitle));
 			exit;
@@ -31,6 +54,9 @@ class Cache
 
 
 	public function create($templateTitle, $fileContents) {
+		if (! $this->check($templateTitle)) {
+			return false;
+		}
 		if (! file_exists($this->getPath($templateTitle))) {
 			file_put_contents($this->getPath($templateTitle), $fileContents);
 		}
@@ -52,21 +78,3 @@ class Cache
 
 
 
-/**
- * list of allowed templates which should be cached
- * @var array
- */
-// public $templates = array('player', 'team', 'performance');
-
-
-/**
- * check to see if the template is cached
- * @param  string  $templateTitle 
- * @return boolean                
- */
-// public function check($templateTitle) {
-// 	if (in_array($templateTitle, $this->templates)) {
-// 		return true;
-// 	}
-// 	return false;
-// }

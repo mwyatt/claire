@@ -51,7 +51,7 @@
                             <div>
                                 <span></span>
                                 <a href="#">Tables and Results</a>
-                                <?php echo $modelMainMenu->buildDivision(); ?>
+                                <?php echo $modelMainmenu->buildDivision(); ?>
                             </div>
                         </li>
                         <li>
