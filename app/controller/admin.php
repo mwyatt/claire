@@ -43,6 +43,10 @@ class Controller_Admin extends Controller
 		$this->view->loadTemplate('admin/login');
 	}
 
+
+	/**
+	 * general page mangement, complete crud
+	 */
 	public function page() {
 		$user = new Model_Mainuser($this->database, $this->config);
 		if (! $user->checkPermission($path)) {
@@ -82,17 +86,7 @@ class Controller_Admin extends Controller
 			->setObject($session)
 			->setObject($mainUser);
 
-		// next page
-
-		if ($this->config->getUrl(2)) {
-
-			$path = BASE_PATH . 'app/controller/admin/media/' . $this->config->getUrl(2) . '.php';
-
-			if (is_file($path))
-				require_once($path);
-			
-		}
-		 
+ 
 		// invalid url
 
 		if ($this->config->getUrl(2))
@@ -124,16 +118,7 @@ class Controller_Admin extends Controller
 	}
 
 	public function posts() {
-		// next page
-
-		if ($this->config->getUrl(2)) {
-
-			$path = BASE_PATH . 'app/controller/admin/posts/' . $this->config->getUrl(2) . '.php';
-
-			if (is_file($path))
-				require_once($path);
-			
-		}
+		
 		 
 		// invalid url
 
@@ -146,25 +131,12 @@ class Controller_Admin extends Controller
 	}
 
 	public function league() {
-
-		// next page
-
-		if ($this->config->getUrl(2)) {
-
-			$path = BASE_PATH . 'app/controller/admin/league/' . $this->config->getUrl(2) . '.php';
-
-			if (is_file($path))
-				require_once($path);
-			
+		$user = new Model_Mainuser($this->database, $this->config);
+		$user->setObject($this->config->getObject('session'));
+		$this->view->setObject($user);
+		if (array_key_exists('page', $_GET)) {
+			$this->view->loadTemplate('admin/league/' . $_GET['page']);
 		}
-		 
-		// invalid url
-
-		if ($this->config->getUrl(2))
-			$this->config->getObject('route')->home('admin/league/');
-
-		// default page
-
 		$this->view->loadTemplate('admin/league');
 	}
 

@@ -23,14 +23,17 @@ class Session
 	}
 
 
-	public function get($key)
+	public function get($key, $subKey = '')
 	{
-
-		if (array_key_exists($key, $_SESSION))
-			return $_SESSION[$key];
-		else
-			return false;
-
+		if (array_key_exists($key, $_SESSION)) {
+			if (array_key_exists($subKey, $_SESSION[$key])) {
+				$value = $_SESSION[$key][$subKey];
+				return $value;
+			}
+			$value = $_SESSION[$key];
+			return $value;
+		}
+		return false;
 	}
 
 
@@ -40,7 +43,7 @@ class Session
 	 * @param  boolean $subKey will be string when used
 	 * @return anything          
 	 */
-	public function getUnset($key, $subKey = false)
+	public function getUnset($key, $subKey = '')
 	{
 		if (array_key_exists($key, $_SESSION)) {
 			if (array_key_exists($subKey, $_SESSION[$key])) {
