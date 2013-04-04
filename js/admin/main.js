@@ -165,16 +165,16 @@ $(document).ready(function() {
 		var
 			animationSpeed = 'fast';
 
-		setTimeout(showFeedback, 1000);
+		// setTimeout(showFeedback, 1000);
 
-		function showFeedback() {
-			feedback.fadeIn(animationSpeed);
-			setTimeout(hideFeedback, 10000);
-		}
+		// function showFeedback() {
+		// 	feedback.fadeIn(animationSpeed);
+		// 	setTimeout(hideFeedback, 10000);
+		// }
 
-		function hideFeedback() {
-			// feedback.fadeOut(animationSpeed);
-		}
+		// function hideFeedback() {
+		// 	// feedback.fadeOut(animationSpeed);
+		// }
 
 		feedback.on('click', clickFeedback);
 

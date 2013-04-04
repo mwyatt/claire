@@ -149,11 +149,13 @@ class Model_Mainuser extends Model
 			':email' => $_POST['email_address']
 		));
 
+		$this->getObject('session')->set('form_field', array('email' => $_POST['email_address']));
+
 		if ($this->setDataStatement($sth)) {
 
 			if (crypt($_POST['password'], parent::get('password')) == parent::get('password')) {
 
-				$this->getObject('Session')->set('feedback', array('success', 'Successfully Logged in as ' . parent::get('first_name') . ' ' . parent::get('last_name')));
+				$this->getObject('session')->set('feedback', array('success', 'Successfully Logged in as ' . parent::get('first_name') . ' ' . parent::get('last_name')));
 
 				return true;
 
@@ -161,7 +163,7 @@ class Model_Mainuser extends Model
 
 		}
 
-		$this->getObject('Session')->set('feedback', array('error', 'Email Address or password incorrect'));
+		$this->getObject('session')->set('feedback', array('error', 'Email Address or password incorrect'));
 
 		return false;
 

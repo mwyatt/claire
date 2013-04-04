@@ -34,21 +34,25 @@ class Session
 	}
 
 
-	public function getUnset($key)
+	/**
+	 * gets array or sub array, returns and destroys session data
+	 * @param  string  $key    
+	 * @param  boolean $subKey will be string when used
+	 * @return anything          
+	 */
+	public function getUnset($key, $subKey = false)
 	{
-
 		if (array_key_exists($key, $_SESSION)) {
-
+			if (array_key_exists($subKey, $_SESSION[$key])) {
+				$value = $_SESSION[$key][$subKey];
+				unset($_SESSION[$key][$subKey]);
+				return $value;
+			}
 			$value = $_SESSION[$key];
-
 			unset($_SESSION[$key]);
-
 			return $value;
-			
 		}
-
 		return false;
-
 	}
 
 

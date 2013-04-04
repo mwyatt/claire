@@ -145,8 +145,7 @@ class Model_mainMenu extends Model
 	  */
 	public function adminBuild($parent = 0)
     {
-
-    	$user = $this->getObject('mainUser')->get();
+    	$user = $this->getObject('model_mainuser')->get();
 
 		$path = 'app/controller/' . $this->config->getUrl(0). '/'; // set dir
 		

@@ -42,15 +42,16 @@
 
 			<form method="post">
 				<input type="hidden" name="form_login" value="true">
-				<?php echo $this->getFeedback(); ?>
-				<div>
-					<input type="text" name="email_address" placeholder="Email Address" autofocus="autofocus">					
-				</div>
-				<div>
-					<input type="password" name="password" placeholder="Password">
-				</div>
-				<input class="" type="submit" value="Login">
-			</form>
+                <?php echo $this->getFeedback(); ?>
+                <div>
+                    <input type="text" name="email_address" placeholder="Email Address" autofocus="autofocus"<?php echo ($this->getObject('session')->getUnset('form_field', 'email') ? ' value="' . $this->getObject('session')->getUnset('form_field', 'email') . '"' : ''); ?>>
+                </div>
+                <div>
+                    <input type="password" name="password" placeholder="Password">
+                </div>
+                <input class="" type="submit" value="Login">
+            </form>
+				
 
 		</div> <!-- .container -->
 

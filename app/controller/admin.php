@@ -34,25 +34,21 @@ class Controller_Admin extends Controller
 			$this->config->getObject('route')->home('admin/');
 		}
 
-			// upto here ...
+		$this->view->setObject($user);
 
 		if ($user->isLogged()) {
-			if ($config->getUrl(1)) {
-				$path = BASE_PATH . 'app/controller/' . $config->getUrl(0) . '/' . $config->getUrl(1) . '.php';
-				if ($user->checkPermission($path)) {
-					require_once($path);
-				} else {
-					$this->view->loadTemplate('admin/permission');	
-				}
-			} else {
-				$this->view->loadTemplate('admin/dashboard');	
-			}	
+			$this->view->loadTemplate('admin/dashboard');		
 		}
 
 		$this->view->loadTemplate('admin/login');
 	}
 
 	public function page() {
+		$user = new Model_Mainuser($this->database, $this->config);
+		if (! $user->checkPermission($path)) {
+			$this->view->loadTemplate('admin/permission');	
+		}
+
 		$page = new Model_Page($this->database, $this->config);
 		$page
 			->setObject($session)
@@ -63,11 +59,11 @@ class Controller_Admin extends Controller
 			$this->config->getObject('route')->current();
 		}
 
-		if ($config->getUrl(2) == 'new') {
+		if ($this->config->getUrl(2) == 'new') {
 			$this->view->loadTemplate('admin/page/new');
 		}
 		 
-		if ($config->getUrl(2))	$this->config->getObject('route')->home('admin/page/');
+		if ($this->config->getUrl(2))	$this->config->getObject('route')->home('admin/page/');
 
 		$mainContent = new Model_Maincontent($this->database, $this->config);
 		$mainContent->readByType('page');
@@ -88,9 +84,9 @@ class Controller_Admin extends Controller
 
 		// next page
 
-		if ($config->getUrl(2)) {
+		if ($this->config->getUrl(2)) {
 
-			$path = BASE_PATH . 'app/controller/admin/media/' . $config->getUrl(2) . '.php';
+			$path = BASE_PATH . 'app/controller/admin/media/' . $this->config->getUrl(2) . '.php';
 
 			if (is_file($path))
 				require_once($path);
@@ -99,7 +95,7 @@ class Controller_Admin extends Controller
 		 
 		// invalid url
 
-		if ($config->getUrl(2))
+		if ($this->config->getUrl(2))
 			$this->config->getObject('route')->home('admin/media/');
 
 		// upload attempt
@@ -130,9 +126,9 @@ class Controller_Admin extends Controller
 	public function posts() {
 		// next page
 
-		if ($config->getUrl(2)) {
+		if ($this->config->getUrl(2)) {
 
-			$path = BASE_PATH . 'app/controller/admin/posts/' . $config->getUrl(2) . '.php';
+			$path = BASE_PATH . 'app/controller/admin/posts/' . $this->config->getUrl(2) . '.php';
 
 			if (is_file($path))
 				require_once($path);
@@ -141,7 +137,7 @@ class Controller_Admin extends Controller
 		 
 		// invalid url
 
-		if ($config->getUrl(2))
+		if ($this->config->getUrl(2))
 			$this->config->getObject('route')->home('admin/posts/');
 
 		// default page
@@ -153,9 +149,9 @@ class Controller_Admin extends Controller
 
 		// next page
 
-		if ($config->getUrl(2)) {
+		if ($this->config->getUrl(2)) {
 
-			$path = BASE_PATH . 'app/controller/admin/league/' . $config->getUrl(2) . '.php';
+			$path = BASE_PATH . 'app/controller/admin/league/' . $this->config->getUrl(2) . '.php';
 
 			if (is_file($path))
 				require_once($path);
@@ -164,7 +160,7 @@ class Controller_Admin extends Controller
 		 
 		// invalid url
 
-		if ($config->getUrl(2))
+		if ($this->config->getUrl(2))
 			$this->config->getObject('route')->home('admin/league/');
 
 		// default page
