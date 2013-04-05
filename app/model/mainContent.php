@@ -23,11 +23,13 @@ class Model_Maincontent extends Model
 	 * @return null        data property will be set
 	 */
 	public function read($type = '', $limit = 0) {	
+		$sthType = '';
+		$sthLimit = '';
 		if ($type) {
 			$sthType = ' where main_content.type = :type ';
 		}
 		if ($limit) {
-			$sthLimit = ' limit :limit ';
+			$sthLimit = ' limit 0, :limit ';
 		}
 		$sth = $this->database->dbh->prepare("	
 			select
@@ -44,6 +46,7 @@ class Model_Maincontent extends Model
 			left join main_content_meta on main_content_meta.content_id = main_content.id
 			left join main_user on main_user.id = main_content.user_id
 			$sthType
+			group by main_content.id
 			order by main_content.date_published
 			$sthLimit
 		");
@@ -51,7 +54,7 @@ class Model_Maincontent extends Model
 			$sth->bindValue(':type', $type, PDO::PARAM_STR);
 		}
 		if ($limit) {
-			$sth->bindValue(':limit', $limit, PDO::PARAM_INT);	
+			$sth->bindValue(':limit', (int) $limit, PDO::PARAM_INT);	
 		}
 		$sth->execute();	
 		$this->setDataStatement($sth);
@@ -59,6 +62,7 @@ class Model_Maincontent extends Model
 		print_r($this->data);
 		echo '</pre>';
 		exit;
+		
 	}	
 
 
