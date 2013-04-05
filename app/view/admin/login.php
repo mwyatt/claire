@@ -6,27 +6,13 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title><?php echo $this->getMeta('title'); ?></title>	
+        <title><?php echo $this->getMeta('title'); ?></title>   
         <meta name="keywords" content="<?php echo $this->getMeta('keywords'); ?>">
         <meta name="description" content="<?php echo $this->getMeta('description'); ?>">
         <meta name="viewport" content="width=device-width">
-
-        <!-- css -->
-
-        <link rel="stylesheet" href="<?php echo $this->urlHome(); ?>css/vendor/normalize.css">
-        <link rel="stylesheet" href="<?php echo $this->urlHome(); ?>css/admin/main.css">
-
-        <!-- modenizr -->
-
-        <script src="<?php echo $this->urlHome(); ?>js/vendor/modernizr-2.6.2.min.js"></script>
-
-        <!-- favicon -->
-
-        <link rel="icon" type="image/png" href="<?php echo $this->urlHome(); ?>img/main/favicon.png">
-
-        <!-- font -->
-
-        <link href="http://fonts.googleapis.com/css?family=Cabin:400,500,600,700" rel="stylesheet" type="text/css">
+        <link rel="stylesheet/less" type="text/css" href="<?php echo $this->urlHome(); ?>css/admin/main.less">
+        <script src="<?php echo $this->urlHome(); ?>js/vendor/less-1.3.3.min.js"></script>
+        <script src="<?php echo $this->urlHome(); ?>js/vendor/modernizr.custom.73218.js"></script>
     </head>
     <body>
     	<!--[if lt IE 7]>

@@ -33,12 +33,10 @@ try {
 			(
 				id INT UNSIGNED NOT NULL AUTO_INCREMENT
 				, title VARCHAR(255) NOT NULL
-				, title_slug VARCHAR(255) NOT NULL
 				, html VARCHAR(8000)
 				, type VARCHAR(50) NOT NULL
 				, date_published INT UNSIGNED
-				, guid VARCHAR(255) NOT NULL
-				, status VARCHAR(50) NOT NULL DEFAULT 'invisible'
+				, status VARCHAR(50) NOT NULL DEFAULT 'hidden'
 				, user_id INT UNSIGNED				
 				, PRIMARY KEY (id)
 			)
@@ -93,33 +91,21 @@ try {
 			)		
 	");
 
-	$database->dbh->query("
-		CREATE TABLE IF NOT EXISTS 
-			main_content_media
-			(
-				id INT UNSIGNED NOT NULL AUTO_INCREMENT
-				, content_id INT UNSIGNED
-				, media_id INT UNSIGNED
-				, position INT UNSIGNED
-				, PRIMARY KEY (id)
-			)
-	");	
-
-	$database->dbh->query("
-		CREATE TABLE IF NOT EXISTS 
-			main_ads
-			(
-				id INT UNSIGNED NOT NULL AUTO_INCREMENT
-				, title VARCHAR(255) NOT NULL
-				, html VARCHAR(8000)
-				, target VARCHAR(255)
-				, type VARCHAR(50) NOT NULL
-				, status VARCHAR(50) NOT NULL DEFAULT 'invisible'
-				, position INT UNSIGNED
-				, media_id INT UNSIGNED				
-				, PRIMARY KEY (id)
-			)
-	");	
+	// $database->dbh->query("
+	// 	CREATE TABLE IF NOT EXISTS 
+	// 		main_ads
+	// 		(
+	// 			id INT UNSIGNED NOT NULL AUTO_INCREMENT
+	// 			, title VARCHAR(255) NOT NULL
+	// 			, html VARCHAR(8000)
+	// 			, target VARCHAR(255)
+	// 			, type VARCHAR(50) NOT NULL
+	// 			, status VARCHAR(50) NOT NULL DEFAULT 'invisible'
+	// 			, position INT UNSIGNED
+	// 			, media_id INT UNSIGNED				
+	// 			, PRIMARY KEY (id)
+	// 		)
+	// ");	
 
 	$database->dbh->query("
 		CREATE TABLE IF NOT EXISTS 

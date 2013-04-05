@@ -64,9 +64,9 @@ class Controller_Ajax extends Controller
 	
 	public function mainContent() {
 		if (array_key_exists('type', $_GET)) {
-			$post = new Model_Maincontent($this->database, $this->config);
-			$post->readByType($_GET['type'], $_GET['limit']);
-			$this->out($post->getData());
+			$mainContent = new Model_Maincontent($this->database, $this->config);
+			$mainContent->read($_GET['type'], (array_key_exists('limit', $_GET) ? $_GET['limit'] : ''));
+			$this->out($mainContent->getData());
 		}
 	}
 

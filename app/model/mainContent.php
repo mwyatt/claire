@@ -13,38 +13,52 @@
 class Model_Maincontent extends Model
 {	
 
-	public function read()
-	{	
-	
-		$sth = $this->database->dbh->query("	
 
+	/**
+	 * reads any and all content stored in this table
+	 * a number of custom parameters can be used to
+	 * bring in differing result sets
+	 * @param  string $type  the type of content
+	 * @param  string $limit the amount of content required
+	 * @return null        data property will be set
+	 */
+	public function read($type = '', $limit = 0) {	
+		if ($type) {
+			$sthType = ' where main_content.type = :type ';
+		}
+		if ($limit) {
+			$sthLimit = ' limit :limit ';
+		}
+		$sth = $this->database->dbh->prepare("	
 			select
 				main_content.id
 				, main_content.title
-				, main_content.title_slug
 				, main_content.html
 				, main_content.type
 				, main_content.date_published
-				, main_content.guid
 				, main_content.status
+				, main_content.user_id
 				, main_content_meta.name as meta_name
 				, main_content_meta.value as meta_value
-
 			from main_content
-
-			left join
-				main_content_meta on main_content_meta.content_id = main_content.id
-
-			left join
-				main_user on main_user.id = main_content.user_id
-
-			order by
-				main_content.date_published
-
+			left join main_content_meta on main_content_meta.content_id = main_content.id
+			left join main_user on main_user.id = main_content.user_id
+			$sthType
+			order by main_content.date_published
+			$sthLimit
 		");
-
+		if ($type) {
+			$sth->bindValue(':type', $type, PDO::PARAM_STR);
+		}
+		if ($limit) {
+			$sth->bindValue(':limit', $limit, PDO::PARAM_INT);	
+		}
+		$sth->execute();	
 		$this->setDataStatement($sth);
-
+		echo '<pre>';
+		print_r($this->data);
+		echo '</pre>';
+		exit;
 	}	
 
 

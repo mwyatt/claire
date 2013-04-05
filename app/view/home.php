@@ -9,7 +9,7 @@
 
 	<div class="accordion press">
 		<h2><span></span>Press Releases</h2>
-		<section></section>
+		<div></div>
 	</div>
 
 	<a href="#" class="handbook">Download the Handbook <span>123456</span></a>
