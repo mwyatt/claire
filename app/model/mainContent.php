@@ -23,14 +23,6 @@ class Model_Maincontent extends Model
 	 * @return null        data property will be set
 	 */
 	public function read($type = '', $limit = 0) {	
-		$sthType = '';
-		$sthLimit = '';
-		if ($type) {
-			$sthType = ' where main_content.type = :type ';
-		}
-		if ($limit) {
-			$sthLimit = ' limit 0, :limit ';
-		}
 		$sth = $this->database->dbh->prepare("	
 			select
 				main_content.id
@@ -45,10 +37,10 @@ class Model_Maincontent extends Model
 			from main_content
 			left join main_content_meta on main_content_meta.content_id = main_content.id
 			left join main_user on main_user.id = main_content.user_id
-			$sthType
+			" . ($type ? ' where main_content.type = :type ' : '') . "
 			group by main_content.id
 			order by main_content.date_published
-			$sthLimit
+			" . ($limit ? ' limit 0, :limit ' : '') . "
 		");
 		if ($type) {
 			$sth->bindValue(':type', $type, PDO::PARAM_STR);
@@ -57,12 +49,9 @@ class Model_Maincontent extends Model
 			$sth->bindValue(':limit', (int) $limit, PDO::PARAM_INT);	
 		}
 		$sth->execute();	
-		$this->setDataStatement($sth);
-		echo '<pre>';
-		print_r($this->data);
-		echo '</pre>';
-		exit;
-		
+		$this->setData($sth->fetchAll(PDO::FETCH_ASSOC));
+		$this->getGuid($type, $name, $id);
+		return $sth->rowCount();		
 	}	
 
 
@@ -206,6 +195,54 @@ class Model_Maincontent extends Model
 		}
 		$this->data = current($this->data);
 		return $sth->rowCount();
+	}
+
+
+	/**
+	 * sets one result row at a time
+	 * @param object $sth 
+	 */
+	public function setData($results)
+	{		
+echo '<pre>';
+print_r($results);
+echo '</pre>';
+exit;
+		foreach ($results as $key => $result) {
+
+			if (array_key_exists('title', $result)) {
+				$result['slug'] = $this->urlFriendly($result['title']);
+				if (array_key_exists('type', $result)) {
+					$result['guid'] = $this->getGuid($result['type'], $result['title'], $result['id']);
+				}
+			}
+
+			if (array_key_exists('meta_name', $result)) {
+				if (array_key_exists($result['id'], $this->data)) {
+					$this->data[$result['id']][$result['meta_name']] = $result['meta_value'];
+				} else {
+					$this->data[$result['id']] = $result;
+					$this->data[$result['id']][$result['meta_name']] = $result['meta_value'];
+				}
+				unset($this->data[$result['id']]['meta_name']);
+				unset($this->data[$result['id']]['meta_value']);
+			} else {
+				$this->data[$result['id']] = $result;
+			}
+		}
+
+		if (count($this->data) > 1) {
+			$this->data = array_values($this->data);
+		} else {
+			$this->data = reset($this->data);
+		}
+echo '<pre>';
+print_r($this->data);
+echo '</pre>';
+exit;
+
+		return true;
+		
 	}
 
 }

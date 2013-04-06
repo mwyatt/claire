@@ -231,7 +231,7 @@ $(document).ready(function() {
 				$(parent).addClass('active');
 
 				if ($(parent).hasClass('press')) {
-					$.getJSON($BASEURL+'/ajax/post/?type=press&limit=3', function(results) {
+					$.getJSON($BASEURL+'/ajax/main-content/?type=press&limit=3', function(results) {
 						$(parent).spin(opts);
 						if (results) {
 							$.each(results, function(index, result) {
