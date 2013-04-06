@@ -96,15 +96,15 @@ $(document).ready(function() {
 	// }
 
 	var opts = {
-	  lines: 9, // The number of lines to draw
-	  length: 0, // The length of each line
-	  width: 4, // The line thickness
+	  lines: 7, // The number of lines to draw
+	  length: 2, // The length of each line
+	  width: 2, // The line thickness
 	  radius: 8, // The radius of the inner circle
-	  corners: 1, // Corner roundness (0..1)
+	  corners: 0, // Corner roundness (0..1)
 	  rotate: 0, // The rotation offset
-	  color: '#000', // #rgb or #rrggbb
+	  color: '#fff', // #rgb or #rrggbb
 	  speed: 1.5, // Rounds per second
-	  trail: 70, // Afterglow percentage
+	  trail: 50, // Afterglow percentage
 	  shadow: false, // Whether to render a shadow
 	  hwaccel: false, // Whether to use hardware acceleration
 	  className: 'spinner', // The CSS class to assign to the spinner
@@ -128,6 +128,8 @@ $(document).ready(function() {
 	  });
 	  return this;
 	};
+
+	$('header').spin(opts);
 
 	var search = $('input[name="search"]');
 
@@ -220,8 +222,8 @@ $(document).ready(function() {
 		this._close_all;
 		this._open = function() {
 			var parent = $(this).parent();
-			var sections = $(accordions).find('section');
-			var section = $(parent).find('section').html('');
+			var sections = $(accordions).find('div');
+			var section = $(parent).find('div').html('');
 			if ($(parent).hasClass('active')) {
 				$(parent).removeClass('active');
 				$(sections).html('');
@@ -229,10 +231,10 @@ $(document).ready(function() {
 				$(sections).html('');
 				$(accordions).removeClass('active');
 				$(parent).addClass('active');
+				$(parent).spin(opts);
 
 				if ($(parent).hasClass('press')) {
-					$.getJSON($BASEURL+'/ajax/main-content/?type=press&limit=3', function(results) {
-						$(parent).spin(opts);
+					$.getJSON($BASEURL+'/ajax/main-content?type=press&limit=3', function(results) {
 						if (results) {
 							$.each(results, function(index, result) {
 								var d = new Date(0);

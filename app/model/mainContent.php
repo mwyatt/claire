@@ -46,11 +46,10 @@ class Model_Maincontent extends Model
 			$sth->bindValue(':type', $type, PDO::PARAM_STR);
 		}
 		if ($limit) {
-			$sth->bindValue(':limit', (int) $limit, PDO::PARAM_INT);	
+			$sth->bindValue(':limit', (int) $limit, PDO::PARAM_INT);
 		}
 		$sth->execute();	
 		$this->setData($sth->fetchAll(PDO::FETCH_ASSOC));
-		$this->getGuid($type, $name, $id);
 		return $sth->rowCount();		
 	}	
 
@@ -204,42 +203,31 @@ class Model_Maincontent extends Model
 	 */
 	public function setData($results)
 	{		
-echo '<pre>';
-print_r($results);
-echo '</pre>';
-exit;
 		foreach ($results as $key => $result) {
-
 			if (array_key_exists('title', $result)) {
 				$result['slug'] = $this->urlFriendly($result['title']);
 				if (array_key_exists('type', $result)) {
 					$result['guid'] = $this->getGuid($result['type'], $result['title'], $result['id']);
 				}
 			}
-
 			if (array_key_exists('meta_name', $result)) {
 				if (array_key_exists($result['id'], $this->data)) {
-					$this->data[$result['id']][$result['meta_name']] = $result['meta_value'];
+					$results[$result['id']][$result['meta_name']] = $result['meta_value'];
 				} else {
-					$this->data[$result['id']] = $result;
-					$this->data[$result['id']][$result['meta_name']] = $result['meta_value'];
+					$results[$result['id']] = $result;
+					$results[$result['id']][$result['meta_name']] = $result['meta_value'];
 				}
-				unset($this->data[$result['id']]['meta_name']);
-				unset($this->data[$result['id']]['meta_value']);
+				unset($results[$result['id']]['meta_name']);
+				unset($results[$result['id']]['meta_value']);
 			} else {
-				$this->data[$result['id']] = $result;
+				$results[$result['id']] = $result;
 			}
 		}
-
-		if (count($this->data) > 1) {
-			$this->data = array_values($this->data);
-		} else {
-			$this->data = reset($this->data);
-		}
-echo '<pre>';
-print_r($this->data);
-echo '</pre>';
-exit;
+		// if (count($this->data) > 1) {
+		// } else {
+		// }
+		$this->data = array_filter($results);
+		// $this->data = reset($results);
 
 		return true;
 		
