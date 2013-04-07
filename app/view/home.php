@@ -12,7 +12,7 @@
 		<div></div>
 	</div>
 
-	<a href="#" class="handbook">Download the Handbook <span>123456</span></a>
+	<a href="#" class="handbook">Download the Handbook</a>
 
 </div>
 
