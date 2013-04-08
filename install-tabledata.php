@@ -107,13 +107,13 @@ try {
 			, ('minutes-081112.pdf', 'Minutes 002', 'minutes-002', $epochTime, 'pdf', '2')
 	");*/
 
-	$database->dbh->query("
-		INSERT INTO main_ads
-			(title, html, target, type, status, position, media_id)
-		VALUES
-			('Example Advertisement 1', '<p>Example HTML Code</p>', 'http://localhost/mvc/example-link/', 'cover', 'visible', '1', '1')
-			, ('Example Advertisement 2', '<p>Example HTML Code</p>', 'http://localhost/mvc/example-link/', 'cover', 'visible', '1', '1')
-	");
+	// $database->dbh->query("
+	// 	INSERT INTO main_ads
+	// 		(title, html, target, type, status, position, media_id)
+	// 	VALUES
+	// 		('Example Advertisement 1', '<p>Example HTML Code</p>', 'http://localhost/mvc/example-link/', 'cover', 'visible', '1', '1')
+	// 		, ('Example Advertisement 2', '<p>Example HTML Code</p>', 'http://localhost/mvc/example-link/', 'cover', 'visible', '1', '1')
+	// ");
 
 	$database->dbh->query("
 		INSERT INTO main_menu
