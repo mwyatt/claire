@@ -129,8 +129,6 @@ $(document).ready(function() {
 	  return this;
 	};
 
-	$('header').spin(opts);
-
 	var search = $('input[name="search"]');
 
 	search.on('change', change_search);
