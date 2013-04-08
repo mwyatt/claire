@@ -2,9 +2,9 @@
 
 <div class="content merit">
 	
-	<h1><?php echo $ttDivision->get('name') ?> Divsion Merit</h1>
+	<h1><?php echo $modelTtdivision->get('name') ?> Divsion Merit</h1>
 
-	<?php if ($ttPlayer->getData()) : ?>	
+	<?php if ($modelTtplayer->getData()) : ?>	
 
 	<table width="100%" cellspacing="0" cellpadding="0">
 
@@ -17,17 +17,17 @@
 			<th class="average">Average</th>
 		</tr>
 
-		<?php while ($ttPlayer->nextRow()) : ?>
+		<?php while ($modelTtplayer->nextRow()) : ?>
 
 		<tr>
 			<td class="full_name">
-				<a href="<?php echo $ttPlayer->getRow('guid'); ?>" title="View Player <?php echo $ttPlayer->getRow('full_name'); ?>"><?php echo $ttPlayer->getRow('full_name'); ?></a>
+				<a href="<?php echo $modelTtplayer->getRow('guid'); ?>" title="View Player <?php echo $modelTtplayer->getRow('full_name'); ?>"><?php echo $modelTtplayer->getRow('full_name'); ?></a>
 			</td>
-			<td class="team"><?php echo $ttPlayer->getRow('team_name'); ?></td>
-			<td class="rank"><?php echo $ttPlayer->getRow('rank'); ?></td>
-			<td class="won"><?php echo $ttPlayer->getRow('won'); ?></td>
-			<td class="played"><?php echo $ttPlayer->getRow('played'); ?></td>
-			<td class="average"><?php echo $ttPlayer->getRow('average'); ?></td>
+			<td class="team"><?php echo $modelTtplayer->getRow('team_name'); ?></td>
+			<td class="rank"><?php echo $modelTtplayer->getRow('rank'); ?></td>
+			<td class="won"><?php echo $modelTtplayer->getRow('won'); ?></td>
+			<td class="played"><?php echo $modelTtplayer->getRow('played'); ?></td>
+			<td class="average"><?php echo $modelTtplayer->getRow('average'); ?></td>
 		</tr>		
 
 		<?php endwhile; ?>

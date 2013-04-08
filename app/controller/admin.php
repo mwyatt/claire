@@ -131,8 +131,19 @@ class Controller_Admin extends Controller
 	}
 
 	public function league() {
+		echo '<pre>';
+		print_r(get_class_methods('Controller_Admin'));
+		echo '</pre>';
+		exit;
+		
+
+// must now look up the league controllers and dig out the functionality
+
+		$ttdivision = new Model_Ttdivision($this->database, $this->config);
+		$ttdivision->read();
 		$user = new Model_Mainuser($this->database, $this->config);
 		$user->setObject($this->config->getObject('session'));
+		$this->view->setObject($ttdivision);
 		$this->view->setObject($user);
 		if (array_key_exists('page', $_GET)) {
 			$this->view->loadTemplate('admin/league/' . $_GET['page']);

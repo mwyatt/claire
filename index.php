@@ -38,6 +38,7 @@ $database = new Database();
 // ============================================================================
 
 $session = new Session();
+$session->start();
 
 
 // Config, Route

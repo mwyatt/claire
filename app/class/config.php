@@ -152,8 +152,6 @@ class Config
 			}
 
 			$this->url['base'] = $url;
-			
-			// Current
 
 			// removes $_GET
 		
@@ -161,6 +159,9 @@ class Config
 
 			$this->url['current'] =
 				'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+
+			$session = new Session();
+			$this->url['history'] = $session->getPreviousUrl($this->url['current']);
 			
 		}
 	

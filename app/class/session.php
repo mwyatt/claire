@@ -15,16 +15,12 @@ class Session
 {
 
 
-	public function __construct()
-	{
-
+	public function start() {
 		session_start();
-
 	}
 
 
-	public function get($key, $subKey = '')
-	{
+	public function get($key, $subKey = '') {
 		if (array_key_exists($key, $_SESSION)) {
 			if (array_key_exists($subKey, $_SESSION[$key])) {
 				$value = $_SESSION[$key][$subKey];
@@ -43,8 +39,7 @@ class Session
 	 * @param  boolean $subKey will be string when used
 	 * @return anything          
 	 */
-	public function getUnset($key, $subKey = '')
-	{
+	public function getUnset($key, $subKey = '') {
 		if (array_key_exists($key, $_SESSION)) {
 			if (array_key_exists($subKey, $_SESSION[$key])) {
 				$value = $_SESSION[$key][$subKey];
@@ -59,8 +54,7 @@ class Session
 	}
 
 
-	public function set($key, $value)
-	{
+	public function set($key, $value) {
 
 		if ($_SESSION[$key] = $value)
 			return true;
@@ -70,8 +64,7 @@ class Session
 	}
 
 
-	public function setIncrement($key, $value)
-	{
+	public function setIncrement($key, $value) {
 
 		if ($_SESSION[$key][] = $value)
 			return true;
@@ -79,5 +72,25 @@ class Session
 			return false;
 
 	}
+
+
+	public function getPreviousUrl($current) {
+		if (! array_key_exists('history', $_SESSION)) {
+			$_SESSION['history'][0] = $current;
+			$_SESSION['history'][1] = false;
+			return;
+		} else {
+			if ($_SESSION['history'][0]) {
+				$_SESSION['history'][1] = $_SESSION['history'][0];
+			}
+			$_SESSION['history'][0] = $current;
+			if ($_SESSION['history'][1]) {
+				return $_SESSION['history'][1];
+			} else {
+				return;
+			}
+		}
+	}
+
 
 }

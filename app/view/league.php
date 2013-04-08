@@ -2,9 +2,9 @@
 
 <div class="content league">
 	
-	<h1><?php echo $ttDivision->get('name') ?> Divsion League</h1>
+	<h1><?php echo $modelTtdivision->get('name') ?> Divsion League</h1>
 
-	<?php if ($ttTeam->getData()) : ?>	
+	<?php if ($modelTtteam->getData()) : ?>	
 
 	<table width="100%" cellspacing="0" cellpadding="0">
 
@@ -17,17 +17,17 @@
 			<th class="points">Points</th>
 		</tr>
 
-		<?php while ($ttTeam->nextRow()) : ?>
+		<?php while ($modelTtteam->nextRow()) : ?>
 
 		<tr>
 			<td class="name">
-				<a href="<?php echo $ttTeam->getRow('guid'); ?>" title="View <?php echo $ttTeam->getRow('name'); ?>"><?php echo $ttTeam->getRow('name'); ?></a>
+				<a href="<?php echo $modelTtteam->getRow('guid'); ?>" title="View <?php echo $modelTtteam->getRow('name'); ?>"><?php echo $modelTtteam->getRow('name'); ?></a>
 			</td>
-			<td class="won"><?php echo $ttTeam->getRow('won'); ?></td>
-			<td class="draw"><?php echo $ttTeam->getRow('draw'); ?></td>
-			<td class="loss"><?php echo $ttTeam->getRow('simplexml_load_string(data)'); ?></td>
-			<td class="played"><?php echo $ttTeam->getRow('played'); ?></td>
-			<td class="points"><?php echo $ttTeam->getRow('points'); ?></td>
+			<td class="won"><?php echo $modelTtteam->getRow('won'); ?></td>
+			<td class="draw"><?php echo $modelTtteam->getRow('draw'); ?></td>
+			<td class="loss"><?php echo $modelTtteam->getRow('lost'); ?></td>
+			<td class="played"><?php echo $modelTtteam->getRow('played'); ?></td>
+			<td class="points"><?php echo $modelTtteam->getRow('points'); ?></td>
 		</tr>		
 
 		<?php endwhile; ?>

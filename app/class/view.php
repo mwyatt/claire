@@ -59,26 +59,6 @@ class View extends Model
 	public function loadTemplate($templateTitle)
 	{			
 
-		/**
-		 * @todo convert to class or method, where?
-		 */
-		if (! array_key_exists('history', $_SESSION)) {
-			$_SESSION['history'][0] = false;
-			$_SESSION['history'][1] = false;
-		} else {
-			if ($_SESSION['history'][0]) {
-				$_SESSION['history'][1] = $_SESSION['history'][0];
-			}
-			$_SESSION['history'][0] = $this->config->getUrl('current');
-		}
-
-		echo '<pre>';
-		print_r($_SESSION['history']);
-		echo '</pre>';
-		exit;
-		
-		
-
 		$cache = new Cache($this->database, $this->config)	;
 		$path = BASE_PATH . 'app/view/' . strtolower($templateTitle) . '.php';
 		
@@ -171,9 +151,12 @@ class View extends Model
 	 * return current url
 	 */
 	public function urlCurrent() {
-		
 		return $this->config->getUrl('current');
-
+	}	
+	
+	
+	public function urlPrevious() {
+		return $this->config->getUrl('history');
 	}	
 	
 	

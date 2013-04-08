@@ -13,7 +13,7 @@
 	endif;
 	?>
 
-	<?php if ($ttDivision->getData()) : ?>	
+	<?php if ($modelTtdivision->getData()) : ?>	
 
 		<?php $tabIndex = 0; ?>	
 
@@ -25,9 +25,9 @@
 
 				<option value=""></option>
 
-				<?php while ($ttDivision->nextRow()) : ?>
+				<?php while ($modelTtdivision->nextRow()) : ?>
 			
-				<option value="<?php echo $ttDivision->getRow('id'); ?>"><?php echo $ttDivision->getRow('name'); ?></option>
+				<option value="<?php echo $modelTtdivision->getRow('id'); ?>"><?php echo $modelTtdivision->getRow('name'); ?></option>
 
 				<?php endwhile; ?>
 
@@ -35,7 +35,7 @@
 
 		</div>
 
-		<?php foreach ($ttFixture->getEncounterStructure() as $side => $parts) : ?>
+		<?php foreach ($modelTtfixture->getEncounterStructure() as $side => $parts) : ?>
     
 		<div class="<?php echo $side; ?>">
 
