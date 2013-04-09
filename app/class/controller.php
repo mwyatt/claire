@@ -84,7 +84,7 @@ class Controller extends Model
 		}
 		$path .= '.php';
 		if (is_file($path)) {
-			$controllerName = 'Controller' . '_' . ucfirst($this->config->getUrl(0));
+			$controllerName = 'Controller_' . ucfirst($this->config->getUrl(0));
 			$controller = new $controllerName($this->database, $this->config);
 			$controller->view = new View($this->database, $this->config);
 			$controller->cache = new Cache(false);

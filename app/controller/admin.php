@@ -131,8 +131,17 @@ class Controller_Admin extends Controller
 	}
 
 	public function league() {
+		foreach (get_class_methods('Controller_Admin') as $method) {
+			if ($method == 'loadMethod') {
+				break;
+			}
+			if ($method != 'index') {
+				$pages[] = $method;
+			}
+		}
+
 		echo '<pre>';
-		print_r(get_class_methods('Controller_Admin'));
+		print_r($pages);
 		echo '</pre>';
 		exit;
 		
@@ -145,9 +154,11 @@ class Controller_Admin extends Controller
 		$user->setObject($this->config->getObject('session'));
 		$this->view->setObject($ttdivision);
 		$this->view->setObject($user);
+
 		if (array_key_exists('page', $_GET)) {
 			$this->view->loadTemplate('admin/league/' . $_GET['page']);
 		}
+
 		$this->view->loadTemplate('admin/league');
 	}
 
