@@ -44,10 +44,13 @@ class Controller extends Config
 	public $config;
 
 
-
 	public function __construct($database, $config) {
 		$this->database = $database;
 		$this->config = $config;
+		$this->view = new View($this->database, $this->config);
+		$this->cache = new Cache(false);
+		$this->view->setObject($this->config->getObject('Session'));
+
 		if (method_exists($this, 'initialise')) {
 			$this->initialise();
 		}
@@ -96,13 +99,22 @@ class Controller extends Config
 		if (is_file($path)) {
 			$controllerName = 'Controller_' . ucfirst($this->config->getUrl(0));
 			$controller = new $controllerName($this->database, $this->config);
-			$controller->view = new View($this->database, $this->config);
-			$controller->cache = new Cache(false);
-			$controller->view->setObject($this->config->getObject('Session'));
 			$controller->loadMethod($this->config->getUrl(1));
 			return true;
 		}
 		return false;
+	}
+
+
+	/**
+	 * moves the script to another url, possibly replaces class 'Route'
+	 * @param  string  $action see class 'Config'
+	 * @param  string $path   extension of the base action
+	 * @return null          
+	 */
+	public function route($action, $path = false) {		
+		header("Location: " . $this->config->getUrl($action) . $path);
+		exit;
 	}
 
 
