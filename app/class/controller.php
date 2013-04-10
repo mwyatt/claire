@@ -11,7 +11,7 @@
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
  
-class Controller extends Model
+class Controller extends Config
 {
 
 
@@ -42,6 +42,16 @@ class Controller extends Model
 	 * @var object
 	 */
 	public $config;
+
+
+
+	public function __construct($database, $config) {
+		$this->database = $database;
+		$this->config = $config;
+		if (method_exists($this, 'initialise')) {
+			$this->initialise();
+		}
+	}
 
 
 	/**

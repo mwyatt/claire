@@ -15,13 +15,10 @@ class Controller_Admin extends Controller
 {
 
 
-	/**
-	 * dashboard of admin area, displays login until logged in, then dashboard
-	 */
-	public function index() {
+	public function initialise() {
 		$user = new Model_Mainuser($this->database, $this->config);
-		$user->setObject($this->config->getObject('session'));
-		
+		$this->setObject($user);
+
 		if (array_key_exists('logout', $_GET)) {
 			$user->logout();
 			$this->config->getObject('route')->homeAdmin();
@@ -31,16 +28,29 @@ class Controller_Admin extends Controller
 			if ($user->login()) {
 				$user->setSession();
 			}
-			$this->config->getObject('route')->home('admin/');
+			$this->config->getObject('route')->homeAdmin();
 		}
 
-		$this->view->setObject($user);
-
-		if ($user->isLogged()) {
+		if ($this->getObject('model_mainuser')->isLogged()) {
 			$this->view->loadTemplate('admin/dashboard');		
+		} else {
+			$this->view->loadTemplate('admin/login');
+		}
+	}
+
+
+	/**
+	 * dashboard of admin area, displays login until logged in, then dashboard
+	 */
+	public function index() {
+		$this->view->setObject($this->getObject('model_mainuser'));
+
+		if ($this->getObject('model_mainuser')->isLogged()) {
+			$this->view->loadTemplate('admin/dashboard');		
+		} else {
+			$this->view->loadTemplate('admin/login');
 		}
 
-		$this->view->loadTemplate('admin/login');
 	}
 
 
@@ -49,6 +59,7 @@ class Controller_Admin extends Controller
 	 */
 	public function page() {
 		$user = new Model_Mainuser($this->database, $this->config);
+
 		if (! $user->checkPermission($path)) {
 			$this->view->loadTemplate('admin/permission');	
 		}
@@ -118,7 +129,11 @@ class Controller_Admin extends Controller
 	}
 
 	public function posts() {
-		
+	echo '<pre>';
+		print_r('variable');
+		echo '</pre>';
+		exit;
+			
 		 
 		// invalid url
 
@@ -164,3 +179,4 @@ class Controller_Admin extends Controller
 
 	
 }
+	
