@@ -4,7 +4,8 @@
  * Error handling
  *
  * PHP version 5
- * 
+ *
+ * @todo build a log file if required and add lines of errors
  * @package	~unknown~
  * @author Martin Wyatt <martin.wyatt@gmail.com> 
  * @version	0.1

@@ -1,4 +1,6 @@
-/* main.js */
+function clickprevent(e) {
+	e.stopPropagation(); // prevent item from being selected also
+}
 
 $(document).ready(function() {
 
@@ -12,10 +14,6 @@ $(document).ready(function() {
 
 	$('header').find('div.search').find('form').on('click', clickprevent);
 	$('header').find('nav.main').find('ul').on('click', clickprevent);
-
-	function clickprevent(e) {
-		e.stopPropagation(); // prevent item from being selected also
-	}
 
 	function resize() {
 		var documentWidth;

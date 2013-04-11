@@ -167,6 +167,13 @@ class Model_mainMenu extends Model
 
 		$html .= '<div class="clearfix"></div>';						
 		$html .= '</ul>';						
+
+
+		/**
+		 * @todo check for the existence of a controller using url partitions
+		 * url(2) then build the submenu, this can then be accessed using 
+		 * another method
+		 */
 			
 			/*// sub menu
 
