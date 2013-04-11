@@ -116,7 +116,7 @@ class Config
 				$scriptName = array_filter($scriptName); 
 				$scriptName = array_values($scriptName);			
 				
-				$url['path'] = split('[/]', $url['path']);
+				$url['path'] = explode('[/]', $url['path']);
 				$url['path'] = array_filter($url['path']);
 				$url['path'] = array_values($url['path']);
 				
@@ -131,7 +131,7 @@ class Config
 			}		
 				
 			if (array_key_exists('query', $url))
-				$url['query'] = split('[;&]', $url['query']);
+				$url['query'] = explode('[;&]', $url['query']);
 			
 			$this->url = $url;
 			

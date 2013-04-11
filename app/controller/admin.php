@@ -147,22 +147,14 @@ class Controller_Admin extends Controller
 		$this->view->loadTemplate('admin/posts');
 	}
 
+
+	/**
+	 * ports to new controller
+	 * @todo build in functionality to do this automatically?
+	 */
 	public function league() {
-		
-// must now look up the league controllers and dig out the functionality
-
-		$ttdivision = new Model_Ttdivision($this->database, $this->config);
-		$ttdivision->read();
-		$user = new Model_Mainuser($this->database, $this->config);
-		$user->setObject($this->config->getObject('session'));
-		$this->view->setObject($ttdivision);
-		$this->view->setObject($user);
-
-		if (array_key_exists('page', $_GET)) {
-			$this->view->loadTemplate('admin/league/' . $_GET['page']);
-		}
-
-		$this->view->loadTemplate('admin/league');
+		$controller = new Controller_Admin_League($this->database, $this->config);
+		$controller->loadMethod($this->config->getUrl(2));
 	}
 
 	

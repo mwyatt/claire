@@ -1,33 +1,61 @@
 <?php
 
 /**
- * League
+ * admin
  *
  * PHP version 5
  * 
- * @access 9
  * @package	~unknown~
  * @author Martin Wyatt <martin.wyatt@gmail.com> 
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
 
-// next page
+class Controller_Admin_League extends Controller
+{
 
-if ($config->getUrl(2)) {
 
-	$path = BASE_PATH . 'app/controller/admin/league/' . $config->getUrl(2) . '.php';
+	/**
+	 * dashboard of admin area, displays login until logged in, then dashboard
+	 */
+	public function index() {
+		echo '<pre>';
+		print_r($this);
+		echo '</pre>';
+		exit;
+		
 
-	if (is_file($path))
-		require_once($path);
+		// $ttdivision = new Model_Ttdivision($this->database, $this->config);
+		// $ttdivision->read();
+		// $user = new Model_Mainuser($this->database, $this->config);
+		// $user->setObject($this->config->getObject('session'));
+		// $this->view->setObject($ttdivision);
+		// $this->view->setObject($user);
+
+		// if (array_key_exists('page', $_GET)) {
+		// 	$this->view->loadTemplate('admin/league/' . $_GET['page']);
+		// }
+
+		// $this->view->loadTemplate('admin/league');
+
+		
+	}
+
+
+	public function player() {
+		echo '<pre>';
+		print_r('player');
+		echo '</pre>';
+		exit;
+		
+	}
+
+
+	public function team() {}
+
+
+	public function fixture() {}
+
 	
 }
- 
-// invalid url
-
-if ($config->getUrl(2))
-	$route->home('admin/league/');
-
-// default page
-
-$view->loadTemplate('admin/league');
+	

@@ -12,16 +12,3 @@
  */
 
 
-// Controller
-// ============================================================================
-
-$controller = new Controller($database, $config);
-
-if ($controller->load($config->getUrl(0))) {
-	exit;
-} else {
-	$view = new View($database, $config);
-	$cache = new Cache(false);
-	$cache->load('home');
-	$view->loadTemplate('home');
-}

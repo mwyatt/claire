@@ -12,23 +12,28 @@
  */
 class Error
 {
+
 	
     private $debug;
 	
 	
-    public function __construct($debug = 'no')
-    {
+    public function __construct($debug = 'no') {
         $this->debug = $debug;
 		set_error_handler(array($this, 'handle'));
     }
 	
 	
-    public function handle($errorType, $errorString, $errorFile, $errorLine)
-    {
-		switch ($this->debug)
-		{
+    public function handle($errorType, $errorString, $errorFile, $errorLine) {
+		switch ($this->debug) {
 			case 'no':
-				echo '<h1>A error has occurred. Please contact the administrator <a href="mailto:martin.wyatt@gmail.com">martin.wyatt@gmail.com</a></h1>';
+			$error['Line: ' . $errorLine]['Type'] = $errorType;
+			$error['Line: ' . $errorLine]['Message'] = $errorString;
+			$error['Line: ' . $errorLine]['File'] = $errorFile;
+			echo '<pre>';
+			print_r($error);
+			echo '</pre>';
+			
+				echo 'A error has occurred. Please contact the administrator <a href="mailto:martin.wyatt@gmail.com">martin.wyatt@gmail.com</a>';
 				exit;		
 			case 'yes':
 				// build array

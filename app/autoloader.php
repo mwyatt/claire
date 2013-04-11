@@ -28,22 +28,22 @@ class Autoloader {
 			return;
 		}
 
-		if ($explodedPath = explode('_', $title)) {
-			if (current($explodedPath) == 'controller') {
-				$path = BASE_PATH . 'app/' . current($explodedPath) . '/' . next($explodedPath) . '.php';
-				if (is_file($path)) {
-					include($path);
-					return;
-				}
-			}
-			if (current($explodedPath) == 'model') {
-				$path = BASE_PATH . 'app/' . current($explodedPath) . '/' . next($explodedPath) . '.php';
-				if (is_file($path)) {
-					include($path);
-					return;
-				}
-			}
+		$path = BASE_PATH . 'app/';
+
+		foreach (explode('_', $title) as $sliceOfPathPie) {
+			$path .= $sliceOfPathPie . '/';
 		}
+
+		$path = rtrim($path, '/');
+		$path .= '.php';
+
+		if (is_file($path)) {
+			include($path);
+			return;
+		}
+
+		echo $path;
+
 
 		echo '<h2>' . 'Class or Model does not exist' . '<h2>';
 		echo '<pre>';

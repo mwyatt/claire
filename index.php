@@ -9,40 +9,15 @@
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */ 
 
-// Base Path
-// ============================================================================
-
 define('BASE_PATH', (string) (__DIR__ . '/'));
-
-
-// AutoLoader
-// ============================================================================
 
 require_once(BASE_PATH . 'app/autoloader.php');
 spl_autoload_register(array('Autoloader', 'load'));
-
 		
-// Error Handling
-// ============================================================================
-
-$error = new Error('yes');
-
-
-// Database
-// ============================================================================
-
+$error = new Error('no');
 $database = new Database();
-
-
-// Session
-// ============================================================================
-
 $session = new Session();
 $session->start();
-
-
-// Config, Route
-// ============================================================================
 
 $config = new Config();
 $config
@@ -60,18 +35,19 @@ $config
 	));
 
 
-// Install
-// ============================================================================
-
 if (array_key_exists('install', $_GET)) {
-
 	require_once(BASE_PATH . 'install.php');
-	
 }
 
+$controller = new Controller($database, $config);
 
-// App
-// ============================================================================
+if ($controller->load($config->getUrl(0))) {
+	exit;
+} else {
+	$view = new View($database, $config);
+	$cache = new Cache(false);
+	$cache->load('home');
+	$view->loadTemplate('home');
+}
 
-require_once(BASE_PATH . '/app/index.php');
 exit;
