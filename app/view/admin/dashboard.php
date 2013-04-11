@@ -2,7 +2,7 @@
 
 <div id="content" class="dashboard">
 
-	<form name="" method="post" action="<?php echo $baseurl; ?>basket/add">
+	<form name="" method="post" action="<?php echo $this->urlHome(); ?>basket/add">
 
 		<label for="form-name">Name</label><input type="text" id="review-name">
 		<p class="clearfix"><label for="review-email">Email</label><input type="text" id="review-email"></p>

@@ -67,6 +67,9 @@ class View extends Model
 		}
 
 		$this->template = $path;
+		
+		$session = new Session();
+		$this->config->url['history'] = $session->getPreviousUrl($this->config->url['current']);
 
 		// prepare common models
 		$this->header();

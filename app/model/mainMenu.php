@@ -174,6 +174,26 @@ class Model_mainMenu extends Model
 		 * url(2) then build the submenu, this can then be accessed using 
 		 * another method
 		 */
+		
+		$className = 'Controller_';
+
+		foreach ($this->config->getUrl('path') as $pathCake) {
+			$className .= ucfirst($pathCake) . '_';
+		}
+
+		$className = substr($className, 0, -1);
+
+		if (class_exists($className)) {
+			$array = get_class_methods($className);
+		}
+
+		echo '<pre>';
+		print_r($array);
+		echo '</pre>';
+		exit;
+		
+		
+
 			
 			/*// sub menu
 

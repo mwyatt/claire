@@ -19,24 +19,18 @@ class Controller_Admin_League extends Controller
 	 * dashboard of admin area, displays login until logged in, then dashboard
 	 */
 	public function index() {
-		echo '<pre>';
-		print_r($this);
-		echo '</pre>';
-		exit;
-		
+		$ttdivision = new Model_Ttdivision($this->database, $this->config);
+		$ttdivision->read();
+		$user = new Model_Mainuser($this->database, $this->config);
+		$user->setObject($this->config->getObject('session'));
+		$this->view->setObject($ttdivision);
+		$this->view->setObject($user);
 
-		// $ttdivision = new Model_Ttdivision($this->database, $this->config);
-		// $ttdivision->read();
-		// $user = new Model_Mainuser($this->database, $this->config);
-		// $user->setObject($this->config->getObject('session'));
-		// $this->view->setObject($ttdivision);
-		// $this->view->setObject($user);
+		if (array_key_exists('page', $_GET)) {
+			$this->view->loadTemplate('admin/league/' . $_GET['page']);
+		}
 
-		// if (array_key_exists('page', $_GET)) {
-		// 	$this->view->loadTemplate('admin/league/' . $_GET['page']);
-		// }
-
-		// $this->view->loadTemplate('admin/league');
+		$this->view->loadTemplate('admin/league');
 
 		
 	}

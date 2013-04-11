@@ -23,6 +23,7 @@ $config = new Config();
 $config
 	->setUrl();
 
+// depreciated object (now resides within controllers)
 $route = new Route();
 $route
 	->setObject($config);
