@@ -22,17 +22,20 @@ class Controller_Admin extends Controller
 
 		if (array_key_exists('logout', $_GET)) {
 			$user->logout();
-			$this->route('home', 'admin/');
+			$this->route('base', 'admin/');
 		}
 
 		if (array_key_exists('form_login', $_POST)) {
 			if ($user->login()) {
 				$user->setSession();
 			}
-			$this->route('home', 'admin/');
+			$this->route('base', 'admin/');
 		}
 
 		if (! $user->isLogged()) {
+			if ($this->config->getUrl(1)) {
+				$this->route('base', 'admin/');
+			}
 			$this->view->loadTemplate('admin/login');
 		}
 	}
@@ -145,21 +148,7 @@ class Controller_Admin extends Controller
 	}
 
 	public function league() {
-		foreach (get_class_methods('Controller_Admin') as $method) {
-			if ($method == 'loadMethod') {
-				break;
-			}
-			if ($method != 'index') {
-				$pages[] = $method;
-			}
-		}
-
-		echo '<pre>';
-		print_r($pages);
-		echo '</pre>';
-		exit;
 		
-
 // must now look up the league controllers and dig out the functionality
 
 		$ttdivision = new Model_Ttdivision($this->database, $this->config);

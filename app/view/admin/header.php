@@ -50,7 +50,7 @@
 
 			<!-- main -->
 
-			<nav class="main"><?php echo $modelMainmenu->adminBuild(); ?></nav>
+			<nav class="main"><?php echo $modelMainmenu->admin(); ?></nav>
 
 			<!-- sub -->
 

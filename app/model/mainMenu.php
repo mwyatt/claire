@@ -143,54 +143,32 @@ class Model_mainMenu extends Model
 	  *	@param		string type
 	  *	@returns	assoc array if successful, empty array otherwise
 	  */
-	public function adminBuild($parent = 0)
+	public function admin()
     {
-    	$user = $this->getObject('model_mainuser')->get();
+		$html = '<ul>';
+		$baseUrl = $this->config->getUrl('base') . $this->config->getUrl(0). '/';
 
-		$path = 'app/controller/' . $this->config->getUrl(0). '/'; // set dir
+		$current = ($this->config->getUrl(1) == '' ? ' class="current"' : '');
+		$html .= '<li' . $current . '><a href="' . $baseUrl . '">Dashboard</a></li>';
 		
-		if ($handle = opendir($path)) {
-		
-			$html = '<ul>';
-			
-			$adminBaseUrl = $this->config->getUrl('base') . $this->config->getUrl(0). '/';
 
-			$current = (! $this->config->getUrl(1) ? ' class="current"' : false);
-			
-			$html .= '<li' . $current . '><a href="' . $adminBaseUrl . '">Dashboard</a></li>';
-					
-			while (($file = readdir($handle)) !== false) {
-			
-				if ($file != "." && $file != ".." && $file != ".htaccess" && $file != "index.php") {
-				
-					if (strpos($file, '.php')) {
+		foreach (get_class_methods('Controller_Admin') as $method) {
+			if ($method == '__construct') {
+				break;
+			}
+			if (($method == 'initialise') || ($method == 'index')) {
 
-						$title = str_replace('.php', '', $file);
-						
-						$adminBaseUrl = $this->config->getUrl('base') . $this->config->getUrl(0) . '/' . $title . '/';
-						
-						//$icon = (file_exists($path.'/'.$file.'/assets/img/cms_icon.png') ? $path.'/'.$file.'/cms_icon.png' : 'assets/img/32x32.gif'); // needs work
-						
-						$current = ($this->config->getUrl(1) == $title ? ' class="current"' : false);
-						
-						$html .= '<li'.$current.'><a href="'.$adminBaseUrl.'">'.$title.'</a></li>';
-						
-					} else {
-
-						$folders[] = $file;
-
-					}
-		
-				}
-				
+			} else {
+				$current = ($this->config->getUrl(1) == $method ? ' class="current"' : '');
+				$html .= '<li' . $current . '><a href="' . $baseUrl . $method . '/">' . $method . '</a></li>';
 			}
 
-			$html .= '<div class="clearfix"></div>';						
-			$html .= '</ul>';						
-			
-			closedir($handle); // close
+		}
 
-			// sub menu
+		$html .= '<div class="clearfix"></div>';						
+		$html .= '</ul>';						
+			
+			/*// sub menu
 
 			foreach ($folders as $folder) {
 
@@ -239,8 +217,9 @@ class Model_mainMenu extends Model
 
 		}
 
-		return false;
+		return false;*/
 
+		return $html;
     }	
 
 

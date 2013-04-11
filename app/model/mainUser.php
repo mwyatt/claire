@@ -149,7 +149,6 @@ class Model_Mainuser extends Model
 			':email' => $_POST['email_address']
 		));
 
-		$this->getObject('session')->set('form_field', array('email' => $_POST['email_address']));
 
 		if ($this->setDataStatement($sth)) {
 
@@ -164,6 +163,7 @@ class Model_Mainuser extends Model
 		}
 
 		$this->getObject('session')->set('feedback', array('error', 'Email Address or password incorrect'));
+		$this->getObject('session')->set('form_field', array('email' => $_POST['email_address']));
 
 		return false;
 
