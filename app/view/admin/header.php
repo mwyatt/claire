@@ -54,6 +54,6 @@
 
 			<!-- sub -->
 
-			<?php echo $modelMainmenu->getAdminSubMenu(); ?>
+			<?php echo $modelMainmenu->adminSub(); ?>
 
 		</header>

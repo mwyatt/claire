@@ -139,6 +139,44 @@ class Model_mainMenu extends Model
 	
 	
 	/**
+	 * attempts to find a sub controller and builds a nav menu using its
+	 * methods (?page=method)
+	 * @return html the menu
+	 */
+	public function adminSub() {
+		$html = '';
+		$className = 'Controller_' . ucfirst($this->config->getUrl(0)) . '_' . ucfirst($this->config->getUrl(1));
+
+		if (class_exists($className)) {
+			$html = '<nav class="sub">';
+			$html .= '<ul>';
+			$baseUrl = $this->config->getUrl('base') . $this->config->getUrl(0) . '/' . $this->config->getUrl(1). '/';
+			$page = (array_key_exists('page', $_GET) ? $_GET['page'] : '');
+
+			$current = ($page == '' ? ' class="current"' : '');
+			$html .= '<li' . $current . '><a href="' . $baseUrl . '">Overview</a></li>';
+
+			foreach (get_class_methods($className) as $method) {
+				if ($method == '__construct') {
+					break;
+				}
+
+				if (($method != 'initialise') || ($method != 'index')) {
+					$current = ($page == $method ? ' class="current"' : '');
+					$html .= '<li' . $current . '><a href="' . $baseUrl . '?page=' . $method . '">' . $method . '</a></li>';
+				}
+			}
+
+			$html .= '<div class="clearfix"></div>';						
+			$html .= '</ul>';
+			$html .= '</nav>';						
+		}
+
+		return $html;
+	}
+
+
+	/**
 	  *	Builds menu tree for admin area
 	  *	@param		string type
 	  *	@returns	assoc array if successful, empty array otherwise
@@ -165,87 +203,7 @@ class Model_mainMenu extends Model
 
 		}
 
-		$html .= '<div class="clearfix"></div>';						
-		$html .= '</ul>';						
-
-
-		/**
-		 * @todo check for the existence of a controller using url partitions
-		 * url(2) then build the submenu, this can then be accessed using 
-		 * another method
-		 */
-		
-		$className = 'Controller_';
-
-		foreach ($this->config->getUrl('path') as $pathCake) {
-			$className .= ucfirst($pathCake) . '_';
-		}
-
-		$className = substr($className, 0, -1);
-
-		if (class_exists($className)) {
-			$array = get_class_methods($className);
-		}
-
-		echo '<pre>';
-		print_r($array);
-		echo '</pre>';
-		exit;
-		
-		
-
-			
-			/*// sub menu
-
-			foreach ($folders as $folder) {
-
-				if ($this->config->getUrl(1) == $folder) {
-
-					$path = 'app/controller/admin/' . $folder . '/';
-
-					if ($handle = opendir($path)) {
-
-						$this->adminSubMenu = '<nav class="sub">';
-						$this->adminSubMenu .= '<ul>';
-						
-						$folderBaseUrl = $this->config->getUrl('base') . $this->config->getUrl(0) . '/league/';
-
-						while (($file = readdir($handle)) !== false) {
-						
-							if ($file != "." && $file != ".." && $file != ".htaccess" && $file != "index.php") {
-							
-								if (strpos($file, '.php')) {
-
-									$title = str_replace('.php', '', $file);
-									
-									$url = $this->config->getUrl('base') . $this->config->getUrl(0) . '/' . $this->config->getUrl(1) . '/' . $title . '/';
-									
-									$current = ($this->config->getUrl(2) == $title ? ' class="current"' : false);
-									
-									$this->adminSubMenu .= '<li' . $current . '><a href="' . $url . '">' . $title . '</a></li>';
-									
-								}
-						
-							}
-							
-						}
-
-						$this->adminSubMenu .= '<div class="clearfix"></div>';
-						$this->adminSubMenu .= '</ul>';
-						$this->adminSubMenu .= '</nav>';
-
-					}
-
-				}
-
-			}
-			
-			return $this->html = $html;
-
-		}
-
-		return false;*/
-
+		$html .= '</ul>';		
 		return $html;
     }	
 

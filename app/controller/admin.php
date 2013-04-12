@@ -29,6 +29,7 @@ class Controller_Admin extends Controller
 			if ($user->login()) {
 				$user->setSession();
 			}
+
 			$this->route('base', 'admin/');
 		}
 
@@ -36,6 +37,7 @@ class Controller_Admin extends Controller
 			if ($this->config->getUrl(1)) {
 				$this->route('base', 'admin/');
 			}
+			
 			$this->view->loadTemplate('admin/login');
 		}
 	}
@@ -60,6 +62,8 @@ class Controller_Admin extends Controller
 	 * general page mangement, complete crud
 	 */
 	public function page() {
+		exit('under construction');
+
 		$user = new Model_Mainuser($this->database, $this->config);
 
 		if (! $user->checkPermission($path)) {
@@ -91,6 +95,7 @@ class Controller_Admin extends Controller
 	}
 
 	public function media() {
+		exit('under construction');
 		// initialise 
 
 		$mainMedia = new Model_Mainmedia($this->database, $this->config);
@@ -131,20 +136,31 @@ class Controller_Admin extends Controller
 	}
 
 	public function posts() {
-	echo '<pre>';
-		print_r('variable');
-		echo '</pre>';
-		exit;
-			
+		exit('under construction');
 		 
+		// initialise 
+		$post = new Post($database, $config);
+		$post
+			->setObject($session)
+			->setObject($mainUser);
+
+		// next page
+		if ($config->getUrl(3)) {
+			$view->loadTemplate('admin/posts/press/new');
+		}
+
 		// invalid url
+		if ($config->getUrl(3))
+			$route->home('admin/' . $config->getUrl(1) . '/');
 
-		if ($this->config->getUrl(2))
-			$this->config->getObject('route')->home('admin/posts/');
+		// view 	
+		$post->readByType('press');
 
-		// default page
+		$view
+			->setObject($post)
+			->loadTemplate('admin/posts/press/list');
 
-		$this->view->loadTemplate('admin/posts');
+		// $this->view->loadTemplate('admin/posts');
 	}
 
 
@@ -154,7 +170,11 @@ class Controller_Admin extends Controller
 	 */
 	public function league() {
 		$controller = new Controller_Admin_League($this->database, $this->config);
-		$controller->loadMethod($this->config->getUrl(2));
+		if (array_key_exists('page', $_GET)) {
+			$controller->loadMethod($_GET['page']);
+		} else {
+			$controller->loadMethod('index');
+		}
 	}
 
 	
