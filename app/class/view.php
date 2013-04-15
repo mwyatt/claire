@@ -81,12 +81,8 @@ class View extends Model
 				$this->data[$title] = false;
 			}
 		}
-echo '<pre>';
-print_r($this->data);
-echo '</pre>';
-exit;
 
-		// template boot!
+		// presentation & cache
 		ob_start();	
 		require_once($path);
 		$cache->create($templateTitle, ob_get_contents());
@@ -95,7 +91,21 @@ exit;
 	}		
 		
 
+
+	/**
+	 * master get function for interacting with $this->data
+	 * @param  string|array  $key      
+	 * @param  string $keyTwo   
+	 * @param  string $keyThree 
+	 * @return array|string|int            
+	 */
 	public function get($key, $keyTwo = false, $keyThree = false) {	
+		if (is_array($key)) {
+			if (array_key_exists($keyTwo, $key)) {
+				return $key[$keyTwo];
+			}
+			return;
+		}
 		if (array_key_exists($key, $this->data)) {
 			if (array_key_exists($keyTwo, $this->data[$key])) {
 				if (array_key_exists($keyThree, $this->data[$key][$keyTwo])) {
@@ -105,7 +115,7 @@ exit;
 			}
 			return $this->data[$key];
 		}
-		return false;
+		return;
 	}	
 
 
