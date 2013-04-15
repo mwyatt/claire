@@ -15,6 +15,20 @@ class Controller_Admin_League extends Controller
 {
 
 
+	public function initialise() {
+		echo '<pre>';
+		print_r('variable');
+		echo '</pre>';
+		exit;
+		
+		if (array_key_exists('page', $_GET)) {
+			$controller->loadMethod($_GET['page']);
+		} else {
+			$controller->loadMethod('index');
+		}
+	}
+
+
 	/**
 	 * dashboard of admin area, displays login until logged in, then dashboard
 	 */

@@ -49,8 +49,7 @@ class Controller extends Config
 		$this->config = $config;
 		$this->view = new View($this->database, $this->config);
 		$this->cache = new Cache(false);
-		$this->view->setObject($this->config->getObject('Session'));
-
+		$this->view->setObject($this->config->getObject('session'));
 		if (method_exists($this, 'initialise')) {
 			$this->initialise();
 		}
@@ -59,22 +58,21 @@ class Controller extends Config
 
 	/**
 	 * loads up controller method, otherwise use default method 'index'
-	 * @param  string $action 
+	 * @param  string $method 
 	 * @return null         
 	 */
-	public function loadMethod($action) {
-		$words = explode('-', $action);
-		$action = '';
+	public function loadMethod($method) {
+		$words = explode('-', $method);
+		$method = '';
 		foreach ($words as $word) {
-			$action .= ucfirst($word);
+			$method .= ucfirst($word);
 		}
-		$action = lcfirst($action);
-		
-		if (method_exists($this, $action)) {
-			$this->$action($this->config->getUrl(2));
+		$method = lcfirst($method);
+		if (method_exists($this, $method)) {
+			$this->$method();
 			return;			
 		} else {
-			$this->index($action);
+			$this->index();
 		}
 	}
 
@@ -89,17 +87,22 @@ class Controller extends Config
 		$path = BASE_PATH . 'app/controller/';
 		if (is_array($segments)) {
 			foreach ($segments as $key => $segment) {
-				$path .= $segment . '/';
+				if ($segment) {
+					$path .= strtolower($segment) . '/';
+				}
 			}
-			$path = substr_replace($path, '', -1);
+			$path = rtrim($path, '/');
 		} else {
-			$path .= $segments;
+			$path .= strtolower($segments);
 		}
 		$path .= '.php';
 		if (is_file($path)) {
-			$controllerName = 'Controller_' . ucfirst($this->config->getUrl(0));
+			/**
+			 * @todo get this to handle strings and arrays..
+			 */
+			$controllerName = 'Controller_' . ucfirst(reset($segments));
 			$controller = new $controllerName($this->database, $this->config);
-			$controller->loadMethod($this->config->getUrl(1));
+			$controller->loadMethod(next($segments));
 			return true;
 		}
 		return false;
@@ -108,12 +111,12 @@ class Controller extends Config
 
 	/**
 	 * moves the script to another url, possibly replaces class 'Route'
-	 * @param  string  $action see class 'Config'
+	 * @param  string  $base see class 'Config'
 	 * @param  string $path   extension of the base action
 	 * @return null          
 	 */
-	public function route($action, $path = false) {		
-		header("Location: " . $this->config->getUrl($action) . $path);
+	public function route($base, $path = false) {		
+		header("Location: " . $this->config->getUrl($base) . $path);
 		exit;
 	}
 

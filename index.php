@@ -51,4 +51,4 @@ if ($controller->load($config->getUrl(0))) {
 	$view->loadTemplate('home');
 }
 
-exit;
+exit();

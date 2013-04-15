@@ -58,7 +58,6 @@ class View extends Model
 	 */
 	public function loadTemplate($templateTitle)
 	{			
-
 		$cache = new Cache($this->database, $this->config)	;
 		$path = BASE_PATH . 'app/view/' . strtolower($templateTitle) . '.php';
 		

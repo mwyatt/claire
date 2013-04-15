@@ -19,26 +19,24 @@ class Autoloader {
 	 * @return null            
 	 */
 	public static function load($title) {
-
 		$title = strtolower($title);
 		$path = BASE_PATH . 'app' . '/' . 'class' . '/' . $title . '.php';
 						
 		if (is_file($path)) {
-			include($path);
+			require_once($path);
 			return;
 		}
 
 		$path = BASE_PATH . 'app/';
 
 		foreach (explode('_', $title) as $sliceOfPathPie) {
-			$path .= $sliceOfPathPie . '/';
+			$path .= strtolower($sliceOfPathPie) . '/';
 		}
 
 		$path = rtrim($path, '/');
 		$path .= '.php';
-
 		if (is_file($path)) {
-			include($path);
+			require_once($path);
 			return;
 		}
 
