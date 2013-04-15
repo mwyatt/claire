@@ -20,40 +20,26 @@
     	<![endif]-->
 
    	<div class="wrap">
-
 		<header class="main">
-
 		    <div class="title">
-		    	
-		    	<div><img src="" alt="" width="16" height="16"></div>
-
+		    	<div>
+		    		<img src="" alt="" width="16" height="16">
+		    	</div>
 		    	<a href="<?php echo $this->urlHome(); ?>" target="_blank" title="Open Homepage"><?php echo $this->get('model_mainoption', 'site_title'); ?></a>
-
 		    </div>
-		    
 			<div class="user">
-
-				<a href="#" class="name"><?php echo $modelMainuser->get('first_name'); ?></a>
-
+				<a href="#" class="name"><?php echo $this->get('session', 'user', 'first_name') . ' ' . $this->get('session', 'user', 'last_name'); ?></a>
 				<ul>
 					<li><a href="<?php echo $this->urlHome(); ?>admin/user/">Profile</a></li>
 					<li><a href="?logout=true">Logout</a></li>
 				</ul>
-
 			</div>
-
 			<div class="clearfix"></div>
 
-			<!-- feedback -->
+<?php echo $this->getFeedback(); ?>
 
-			<?php echo $this->getFeedback(); ?>
+			<nav class="main"><?php echo $this->get('model_mainmenu', 'admin'); ?></nav>
 
-			<!-- main -->
-
-			<nav class="main"><?php echo $modelMainmenu->admin(); ?></nav>
-
-			<!-- sub -->
-
-			<?php echo $modelMainmenu->adminSub(); ?>
+<?php echo $this->get('model_mainmenu', 'admin_sub'); ?>
 
 		</header>

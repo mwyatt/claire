@@ -30,7 +30,6 @@ class Controller_Admin extends Controller
 			if ($user->login()) {
 				$user->setSession();
 			}
-
 			$this->route('base', 'admin/');
 		}
 
@@ -166,7 +165,7 @@ class Controller_Admin extends Controller
 	 * @todo build in functionality to do this automatically?
 	 */
 	public function league() {
-		$this->load('league');
+		$this->load(array('admin', 'league'));
 	}
 
 	

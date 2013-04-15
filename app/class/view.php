@@ -14,6 +14,7 @@ class View extends Model
 {
 
 	public $template;
+	public $session;
 	public $meta = array();
 	public $cache = array(
 		'player' => true
@@ -24,30 +25,23 @@ class View extends Model
 	 * prepare all core objects here and register
 	 */	
 	public function header() {
-	
-		$user = new Model_mainUser($this->database, $this->config);
-	
-		// initiate menu
-
-		$menu = new Model_mainMenu($this->database, $this->config);
-		$menu
-			->setObject($user);
-		
-		//$menu->adminBuild();
-		
-		$mainOption = new Model_mainOption($this->database, $this->config);
-		$mainOption->select();		
-
+		$user = new Model_Mainuser($this->database, $this->config);
+		$menu = new Model_Mainmenu($this->database, $this->config);
+		$session = new Session($this->database, $this->config);
+		$mainoption = new Model_Mainoption($this->database, $this->config);
+		$menu->admin();
+		$menu->adminSub();
+		$mainoption->select();		
 		$this->setMeta(array(
-			'title' => $mainOption->get('meta_title'),
-			'keywords' => $mainOption->get('meta_keywords'),
-			'description' => $mainOption->get('meta_description')
+			'title' => $mainoption->get('meta_title'),
+			'keywords' => $mainoption->get('meta_keywords'),
+			'description' => $mainoption->get('meta_description')
 		));
-		
-		// register new objects
-
-		$this->setObject(array($mainOption, $menu));
-		
+		$this->setObject(array(
+			$mainoption
+			, $menu
+			, $session
+		));
 	}
 
 	
@@ -67,20 +61,35 @@ class View extends Model
 
 		$this->template = $path;
 		
-		$session = new Session();
-		$this->config->url['history'] = $session->getPreviousUrl($this->config->url['current']);
+		
+		// $this->config->url['history'] = $session->getPreviousUrl($this->config->url['current']);
 
 		// prepare common models
 		$this->header();
 	
 		// push objects to method scope
+		$index = 0;
 		foreach ($this->objects as $title => $object) {
 			if ($object->getData()) {
-				$this->data[$title] = $object->getData();
+				if (array_key_exists($title, $this->data)) {
+					$this->data[$title . $index ++] = $object->getData();
+				} else {
+					$this->data[$title] = $object->getData();
+				}
 			} else {
-				$this->data[$title] = false;
+				if (array_key_exists($title, $this->data)) {
+					$this->data[$title . $index ++] = false;
+				} else {
+					$this->data[$title] = false;
+				}
 			}
 		}
+
+		echo '<pre>';
+		print_r($this);
+		echo '</pre>';
+		exit;
+		
 
 		// presentation & cache
 		ob_start();	
@@ -94,26 +103,26 @@ class View extends Model
 
 	/**
 	 * master get function for interacting with $this->data
-	 * @param  string|array  $key      
-	 * @param  string $keyTwo   
-	 * @param  string $keyThree 
+	 * @param  string|array  $one      
+	 * @param  string $two   
+	 * @param  string $three 
 	 * @return array|string|int            
 	 */
-	public function get($key, $keyTwo = false, $keyThree = false) {	
-		if (is_array($key)) {
-			if (array_key_exists($keyTwo, $key)) {
-				return $key[$keyTwo];
+	public function get($one, $two = false, $three = false) {	
+		if (is_array($one)) {
+			if (array_key_exists($two, $one)) {
+				return $one[$two];
 			}
 			return;
 		}
-		if (array_key_exists($key, $this->data)) {
-			if (array_key_exists($keyTwo, $this->data[$key])) {
-				if (array_key_exists($keyThree, $this->data[$key][$keyTwo])) {
-					return $this->data[$key][$keyTwo][$keyThree];
+		if (array_key_exists($one, $this->data)) {
+			if (is_array($this->data[$one]) && array_key_exists($two, $this->data[$one])) {
+				if (is_array($this->data[$one][$two]) && array_key_exists($three, $this->data[$one][$two])) {
+					return $this->data[$one][$two][$three];
 				}
-				return $this->data[$key][$keyTwo];
+				return $this->data[$one][$two];
 			}
-			return $this->data[$key];
+			return $this->data[$one];
 		}
 		return;
 	}	
@@ -123,12 +132,12 @@ class View extends Model
 	 * return feedback and unset session variable
 	 */
 	public function getFeedback() {
-
-		if ($this->getObject('Session')->get('feedback')) {
+		$session = new Session();
+		if ($session->get('feedback')) {
 
 			$output = '';
 
-			$feedback = $this->getObject('Session')->getUnset('feedback');
+			$feedback = $session->getUnset('feedback');
 			
 			if (is_array($feedback)) {
 

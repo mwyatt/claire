@@ -10,7 +10,7 @@
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Model_mainMenu extends Model
+class Model_Mainmenu extends Model
 {
 
 	public $type;
@@ -117,7 +117,7 @@ class Model_mainMenu extends Model
 		$html .= '</ol>';		
 		
 		// Return
-		return $this->html = $html;
+		return $this->data = $html;
 	}	
 	
 	
@@ -144,17 +144,17 @@ class Model_mainMenu extends Model
 	 * @return html the menu
 	 */
 	public function adminSub() {
-		$html = '';
+		$this->data['admin_sub'] = '';
 		$className = 'Controller_' . ucfirst($this->config->getUrl(0)) . '_' . ucfirst($this->config->getUrl(1));
 
 		if (class_exists($className)) {
-			$html = '<nav class="sub">';
-			$html .= '<ul>';
+			$this->data['admin_sub'] = '<nav class="sub">';
+			$this->data['admin_sub'] .= '<ul>';
 			$baseUrl = $this->config->getUrl('base') . $this->config->getUrl(0) . '/' . $this->config->getUrl(1). '/';
 			$page = (array_key_exists('page', $_GET) ? $_GET['page'] : '');
 
 			$current = ($page == '' ? ' class="current"' : '');
-			$html .= '<li' . $current . '><a href="' . $baseUrl . '">Overview</a></li>';
+			$this->data['admin_sub'] .= '<li' . $current . '><a href="' . $baseUrl . '">Overview</a></li>';
 
 			foreach (get_class_methods($className) as $method) {
 				if ($method == '__construct') {
@@ -163,16 +163,16 @@ class Model_mainMenu extends Model
 
 				if (($method != 'initialise') || ($method != 'index')) {
 					$current = ($page == $method ? ' class="current"' : '');
-					$html .= '<li' . $current . '><a href="' . $baseUrl . '?page=' . $method . '">' . $method . '</a></li>';
+					$this->data['admin_sub'] .= '<li' . $current . '><a href="' . $baseUrl . '?page=' . $method . '">' . $method . '</a></li>';
 				}
 			}
 
-			$html .= '<div class="clearfix"></div>';						
-			$html .= '</ul>';
-			$html .= '</nav>';						
+			$this->data['admin_sub'] .= '<div class="clearfix"></div>';						
+			$this->data['admin_sub'] .= '</ul>';
+			$this->data['admin_sub'] .= '</nav>';						
 		}
 
-		return $html;
+		return $this->data['admin_sub'];
 	}
 
 
@@ -183,11 +183,11 @@ class Model_mainMenu extends Model
 	  */
 	public function admin()
     {
-		$html = '<ul>';
+		$this->data['admin'] = '<ul>';
 		$baseUrl = $this->config->getUrl('base') . $this->config->getUrl(0). '/';
 
 		$current = ($this->config->getUrl(1) == '' ? ' class="current"' : '');
-		$html .= '<li' . $current . '><a href="' . $baseUrl . '">Dashboard</a></li>';
+		$this->data['admin'] .= '<li' . $current . '><a href="' . $baseUrl . '">Dashboard</a></li>';
 		
 
 		foreach (get_class_methods('Controller_Admin') as $method) {
@@ -198,23 +198,23 @@ class Model_mainMenu extends Model
 
 			} else {
 				$current = ($this->config->getUrl(1) == $method ? ' class="current"' : '');
-				$html .= '<li' . $current . '><a href="' . $baseUrl . $method . '/">' . $method . '</a></li>';
+				$this->data['admin'] .= '<li' . $current . '><a href="' . $baseUrl . $method . '/">' . $method . '</a></li>';
 			}
 
 		}
 
-		$html .= '</ul>';		
-		return $html;
+		$this->data['admin'] .= '</ul>';		
+		return $this->data['admin'];
     }	
 
 
     public function buildDivision() {
     	$ttDivision = new Model_Ttdivision($this->database, $this->config);
     	$ttDivision->read();
-		$this->html .= '<ul>';
+		$this->data .= '<ul>';
     	foreach ($ttDivision->getData() as $division) {
     		$division['lowername'] = strtolower($division['name']);
-    		$this->html .= '
+    		$this->data .= '
     			<li>
     				<div>
     					<span></span>
@@ -228,8 +228,8 @@ class Model_mainMenu extends Model
     				</div>
                 </li>';
     	}
-		$this->html .= '</ul>';
-    	return $this->html;
+		$this->data .= '</ul>';
+    	return $this->data;
     }
 
 	

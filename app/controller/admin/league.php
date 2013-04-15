@@ -44,6 +44,10 @@ class Controller_Admin_League extends Controller
 
 
 	public function player() {
+		echo '<pre>';
+		print_r('variable');
+		echo '</pre>';
+		exit;
 		
 		// initialise 
 

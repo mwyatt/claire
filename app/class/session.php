@@ -92,5 +92,8 @@ class Session
 		}
 	}
 
+	public function getData() {		
+		return $this->data = $_SESSION;
+	}	
 
 }

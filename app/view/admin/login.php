@@ -19,34 +19,23 @@
     	    <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
     	<![endif]-->
 
-   	<div class="wrap">
-
-		<div class="content login">
-
-
-			<a class="logo" href="<?php echo $this->urlHome(); ?>" title="Open Homepage"><span>4</span></a>
-
-			<form method="post">
-				<input type="hidden" name="form_login" value="true">
-                <?php echo $this->getFeedback(); ?>
-                <div>
-                    <input type="text" name="email_address" placeholder="Email Address" autofocus="autofocus"<?php echo ($this->getObject('session')->get('form_field', 'email') ? ' value="' . $this->getObject('session')->getUnset('form_field', 'email') . '"' : ''); ?>>
-                </div>
-                <div>
-                    <input type="password" name="password" placeholder="Password">
-                </div>
-                <input class="" type="submit" value="Login">
-            </form>
-				
-
-		</div> <!-- .container -->
-
-		<!-- js -->
-
-        <script src="<?php echo $this->urlHome(); ?>js/vendor/jquery-1.8.2.min.js"></script>
-        <script src="<?php echo $this->urlHome(); ?>js/admin/main.js"></script>
-
-	</div> <!-- .wrap -->
-
+       	<div class="wrap">
+    		<div class="content login">
+    			<a class="logo" href="<?php echo $this->urlHome(); ?>" title="Open Homepage"><span>4</span></a>
+    			<form method="post">
+    				<input type="hidden" name="form_login" value="true">
+                    <?php echo $this->getFeedback(); ?>
+                    <div>
+                        <input type="text" name="email_address" placeholder="Email Address" autofocus="autofocus"<?php echo ($this->getObject('session')->get('form_field', 'email') ? ' value="' . $this->getObject('session')->getUnset('form_field', 'email') . '"' : ''); ?>>
+                    </div>
+                    <div>
+                        <input type="password" name="password" placeholder="Password">
+                    </div>
+                    <input class="" type="submit" value="Login">
+                </form>
+    		</div>
+            <script src="<?php echo $this->urlHome(); ?>js/vendor/jquery-1.8.2.min.js"></script>
+            <script src="<?php echo $this->urlHome(); ?>js/admin/main.js"></script>
+    	</div>
     </body>
 </html>
