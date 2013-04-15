@@ -49,7 +49,7 @@ class Controller extends Config
 		$this->config = $config;
 		$this->view = new View($this->database, $this->config);
 		$this->cache = new Cache(false);
-		$this->view->setObject($this->config->getObject('session'));
+		// $this->view->setObject($this->config->getObject('session'));
 		if (method_exists($this, 'initialise')) {
 			$this->initialise();
 		}
@@ -92,17 +92,17 @@ class Controller extends Config
 				}
 			}
 			$path = rtrim($path, '/');
+			$controllerName = 'Controller_' . ucfirst(reset($segments));
+			$methodName = next($segments);
 		} else {
 			$path .= strtolower($segments);
+			$controllerName = 'Controller_' . $segments;
+			$methodName = '';
 		}
 		$path .= '.php';
 		if (is_file($path)) {
-			/**
-			 * @todo get this to handle strings and arrays..
-			 */
-			$controllerName = 'Controller_' . ucfirst(reset($segments));
 			$controller = new $controllerName($this->database, $this->config);
-			$controller->loadMethod(next($segments));
+			$controller->loadMethod($methodName);
 			return true;
 		}
 		return false;

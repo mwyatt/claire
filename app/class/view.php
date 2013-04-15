@@ -75,15 +75,16 @@ class View extends Model
 	
 		// push objects to method scope
 		foreach ($this->objects as $title => $object) {
-			$words = explode('_', $title);
-			$title = '';
-			foreach ($words as $key => $word) {
-				$title .= ucfirst($word);
+			if ($object->getData()) {
+				$this->data[$title] = $object->getData();
+			} else {
+				$this->data[$title] = false;
 			}
-			$title = lcfirst($title);
-			$$title = $object;
-			$variables[$title] = $object;
 		}
+echo '<pre>';
+print_r($this->data);
+echo '</pre>';
+exit;
 
 		// template boot!
 		ob_start();	
@@ -91,11 +92,23 @@ class View extends Model
 		$cache->create($templateTitle, ob_get_contents());
 		ob_end_flush();	
 		exit;
-		
 	}		
 		
 
-	
+	public function get($key, $keyTwo = false, $keyThree = false) {	
+		if (array_key_exists($key, $this->data)) {
+			if (array_key_exists($keyTwo, $this->data[$key])) {
+				if (array_key_exists($keyThree, $this->data[$key][$keyTwo])) {
+					return $this->data[$key][$keyTwo][$keyThree];
+				}
+				return $this->data[$key][$keyTwo];
+			}
+			return $this->data[$key];
+		}
+		return false;
+	}	
+
+
 	/**
 	 * return feedback and unset session variable
 	 */

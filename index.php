@@ -35,20 +35,21 @@ $config
 		, $route
 	));
 
-
 if (array_key_exists('install', $_GET)) {
 	require_once(BASE_PATH . 'install.php');
 }
 
 $controller = new Controller($database, $config);
 
-if ($controller->load($config->getUrl(0))) {
-	exit;
-} else {
-	$view = new View($database, $config);
-	$cache = new Cache(false);
-	$cache->load('home');
-	$view->loadTemplate('home');
+if ($config->getUrl(0) == 'admin') {
+	$controller->load($config->getUrl(0));
+} elseif ($config->getUrl(0)) {
+	$controller->load(array($config->getUrl(0), $config->getUrl(1)));
 }
 
-exit();
+$view = new View($database, $config);
+$cache = new Cache(false);
+$cache->load('home');
+$view->loadTemplate('home');
+
+exit;

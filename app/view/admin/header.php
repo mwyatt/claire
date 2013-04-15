@@ -27,7 +27,7 @@
 		    	
 		    	<div><img src="" alt="" width="16" height="16"></div>
 
-		    	<a href="<?php echo $this->urlHome(); ?>" target="_blank" title="Open Homepage"><?php echo $modelMainoption->get('site_title'); ?></a>
+		    	<a href="<?php echo $this->urlHome(); ?>" target="_blank" title="Open Homepage"><?php echo $this->get('model_mainoption', 'site_title'); ?></a>
 
 		    </div>
 		    
