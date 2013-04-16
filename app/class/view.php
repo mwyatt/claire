@@ -32,6 +32,7 @@ class View extends Model
 		$menu->admin();
 		$menu->adminSub();
 		$mainoption->select();		
+		$this->getFeedback();
 		$this->setMeta(array(
 			'title' => $mainoption->get('meta_title'),
 			'keywords' => $mainoption->get('meta_keywords'),
@@ -107,7 +108,7 @@ class View extends Model
 	 * @param  string $three 
 	 * @return array|string|int            
 	 */
-	public function get($one, $two = null, $three = null) {	
+	public function get($one = null, $two = null, $three = null) {	
 		if (is_array($one)) {
 			if (array_key_exists($two, $one)) {
 				return $one[$two];
@@ -123,6 +124,9 @@ class View extends Model
 			}
 			return $this->data[$one];
 		}
+		if (! $one && ! $two && ! $three) {
+			return $this->data;
+		}
 		return;
 	}	
 
@@ -132,37 +136,7 @@ class View extends Model
 	 */
 	public function getFeedback() {
 		$session = new Session();
-		if ($session->get('feedback')) {
-
-			$output = '';
-
-			$feedback = $session->getUnset('feedback');
-			
-			if (is_array($feedback)) {
-
-				$type = current($feedback);
-				$message = end($feedback);
-
-				$output .= '<div class="feedback ' . $type . '" title="Dismiss">';
-				$output .= '<h2>' . $type . '</h2>';
-				$output .= '<p>' . $message . '</p>';
-
-			} else {
-
-				$output .= '<div class="feedback" title="Dismiss">';
-				$output .= '<p>' . $feedback . '</p>';
-
-			}
-			
-			$output .= '<div class="clearfix"></div>';
-			$output .= '</div>';
-
-			return $output;
-			
-		}
-
-		return false;
-
+		return $this->data['session']['feedback'] = $session->getUnset('feedback');
 	}	
 	
 	

@@ -1,3 +1,8 @@
+function formSubmit() {
+	$(this).closest('form').submit();
+	return false;
+}
+
 /* main.js */
 
 // document ready

@@ -20,18 +20,27 @@
     	<![endif]-->
 
        	<div class="wrap">
-    		<div class="content login">
+    		<div class="content login clearfix">
     			<a class="logo" href="<?php echo $this->urlHome(); ?>" title="Open Homepage"><span>4</span></a>
-    			<form method="post">
+    			<form method="post" name="form_login" onsubmit="">
     				<input type="hidden" name="form_login" value="true">
-                    <?php echo $this->getFeedback(); ?>
+
+<?php if ($feedback = $this->get('session', 'feedback')): ?>
+
+                    <div class="feedback clearfix<?php echo ($this->get($feedback, 0) ? ' ' . $this->get($feedback, 0) : ''); ?>" title="Dismiss">
+                        <p><?php echo $this->get($feedback, 1); ?></p>
+                    </div>
+    
+<?php endif ?>
+
                     <div>
                         <input type="text" name="email_address" placeholder="Email Address" autofocus="autofocus"<?php echo ($this->getObject('session')->get('form_field', 'email') ? ' value="' . $this->getObject('session')->getUnset('form_field', 'email') . '"' : ''); ?>>
                     </div>
                     <div>
                         <input type="password" name="password" placeholder="Password">
                     </div>
-                    <input class="" type="submit" value="Login">
+                    <input type="submit">
+                    <a href="#" class="submit" onclick="document.form_login.submit()">Login</a>
                 </form>
     		</div>
             <script src="<?php echo $this->urlHome(); ?>js/vendor/jquery-1.8.2.min.js"></script>

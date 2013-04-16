@@ -1,4 +1,4 @@
-@orange: #ff5512;
+// @orange: #ff5512;
 @orange-highlight: #ff8812;
 @orange-gray: rgb(180, 174, 172);
 @orange-light-gray: rgb(240, 233, 231);
@@ -177,20 +177,6 @@
     -o-transform-origin:      @x @y;
 }
 
-
-* ::-webkit-input-placeholder { /* WebKit browsers */
-    color:    @orange;
-}
-* :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-    color:    @orange;
-}
-* ::-moz-placeholder { /* Mozilla Firefox 19+ */
-    color:    @orange;
-}
-* :-ms-input-placeholder { /* Internet Explorer 10+ */
-    color:    @orange;
-}
-
 ::-moz-selection {
     background: @orange;
     color: @orange;
@@ -299,19 +285,19 @@
 }
 
 ::-webkit-input-placeholder {
-   color: @orange;
+    color:    darken(@white, 30%);
 }
 
 :-moz-placeholder { /* Firefox 18- */
-   color: @orange;  
+    color:    darken(@white, 30%);
 }
 
 ::-moz-placeholder {  /* Firefox 19+ */
-   color: @orange;  
+    color:    darken(@white, 30%);
 }
 
 :-ms-input-placeholder {  
-   color: @orange;  
+    color:    darken(@white, 30%);
 }
 
 a,
