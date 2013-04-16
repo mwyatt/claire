@@ -18,6 +18,7 @@
 class Model_Ttplayer extends Model
 {		
 
+
 	public function create() {	
 
 		// validation

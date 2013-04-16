@@ -60,30 +60,28 @@ class Controller_Admin extends Controller
 	public function page() {
 		$user = new Model_Mainuser($this->database, $this->config);
 		$session = new Session($this->database, $this->config);
-
-		// if (! $user->checkPermission($path)) {
-		// 	$this->view->loadTemplate('admin/permission');	
-		// }
-
 		$page = new Model_Page($this->database, $this->config);
-		$page
-			->setObject($session)
-			->setObject($user);
+		$mainContent = new Model_Maincontent($this->database, $this->config);
+		$page->setObject($session)->setObject($user);
 
+		if (array_key_exists('edit', $_GET)) {
+			$mainContent->readById($_GET['edit']);
+			$this->view->loadTemplate('admin/page/create-update');
+		}
+		
 		if (array_key_exists('form_page_new', $_POST)) {
 			$page->create();
 			$this->config->getObject('route')->current();
 		}
 
 		if ($this->config->getUrl(2) == 'new') {
-			$this->view->loadTemplate('admin/page/new');
+			$this->view->loadTemplate('admin/page/create-update');
 		}
 		 
 		if ($this->config->getUrl(2)) {
 			$this->config->getObject('route')->home('admin/page/');
 		}
 
-		$mainContent = new Model_Maincontent($this->database, $this->config);
 		$mainContent->readByType('page');
 
 		$this->view

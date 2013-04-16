@@ -22,7 +22,7 @@ class Model_Maincontent extends Model
 	 * @param  string $limit the amount of content required
 	 * @return null        data property will be set
 	 */
-	public function read($type = '', $limit = 0) {	
+	public function read($where = '', $limit = 0, $id = false) {	
 		$sth = $this->database->dbh->prepare("	
 			select
 				main_content.id
@@ -37,13 +37,17 @@ class Model_Maincontent extends Model
 			from main_content
 			left join main_content_meta on main_content_meta.content_id = main_content.id
 			left join main_user on main_user.id = main_content.user_id
-			" . ($type ? ' where main_content.type = :type ' : '') . "
+			" . ($where ? ' where main_content.type = :type ' : '') . "
+			" . ($id ? ' and main_content.id = :id ' : '') . "
 			group by main_content.id
 			order by main_content.date_published
 			" . ($limit ? ' limit 0, :limit ' : '') . "
 		");
-		if ($type) {
-			$sth->bindValue(':type', $type, PDO::PARAM_STR);
+		if ($id) {
+			$sth->bindValue(':id', $id, PDO::PARAM_STR);
+		}
+		if ($where) {
+			$sth->bindValue(':type', $where, PDO::PARAM_STR);
 		}
 		if ($limit) {
 			$sth->bindValue(':limit', (int) $limit, PDO::PARAM_INT);
@@ -54,8 +58,7 @@ class Model_Maincontent extends Model
 	}	
 
 
-	public function readByType($type = 'post')
-	{	
+	public function readByType($type = 'post') {	
 	
 		$sth = $this->database->dbh->prepare("	
 
@@ -101,8 +104,7 @@ class Model_Maincontent extends Model
 		return $sth->rowCount();
 	}	
 
-	public function readById($id)
-	{	
+	public function readById($id) {	
 	
 		$sth = $this->database->dbh->prepare("	
 
@@ -199,8 +201,7 @@ class Model_Maincontent extends Model
 	 * sets one result row at a time
 	 * @param object $sth 
 	 */
-	public function setData($results)
-	{		
+	public function setData($results) {		
 		foreach ($results as $key => $result) {
 			if (array_key_exists('title', $result)) {
 				$result['slug'] = $this->urlFriendly($result['title']);

@@ -21,10 +21,9 @@
 			</td>
 			<td class="text-center"><?php echo date('j D M Y', $this->get($page, 'date_published')); ?></td>
 			<td class="action">
-				<button>view on frontend</button>
-				<button>edit</button>
-				<button>delete</button>
-				<!-- <a href="<?php echo $this->urlCurrent(); ?>?delete=<?php echo $this->get($page, 'id'); ?>" title="Delete <?php echo $this->get($page, 'title'); ?>">Delete</a> -->
+				<a href="<?php echo $this->urlCurrent(); ?>?delete=<?php echo $this->get($page, 'id'); ?>" title="View <?php echo $this->get($page, 'title'); ?>" target="_blank" class="view">View</a>
+				<a href="<?php echo $this->urlCurrent(); ?>?edit=<?php echo $this->get($page, 'id'); ?>" title="Edit <?php echo $this->get($page, 'title'); ?>" class="edit">Edit</a>
+				<a href="<?php echo $this->urlCurrent(); ?>?delete=<?php echo $this->get($page, 'id'); ?>" title="Delete <?php echo $this->get($page, 'title'); ?>" class="delete">Delete</a>
 			</td>
 		</tr>		
 
