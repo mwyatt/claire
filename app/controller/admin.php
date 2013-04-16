@@ -58,36 +58,37 @@ class Controller_Admin extends Controller
 	 * general page mangement, complete crud
 	 */
 	public function page() {
-		// exit('under construction');
-
-		// $user = new Model_Mainuser($this->database, $this->config);
+		$user = new Model_Mainuser($this->database, $this->config);
+		$session = new Session($this->database, $this->config);
 
 		// if (! $user->checkPermission($path)) {
 		// 	$this->view->loadTemplate('admin/permission');	
 		// }
 
-		// $page = new Model_Page($this->database, $this->config);
-		// $page
-		// 	->setObject($session)
-		// 	->setObject($mainUser);
+		$page = new Model_Page($this->database, $this->config);
+		$page
+			->setObject($session)
+			->setObject($user);
 
-		// if (array_key_exists('form_page_new', $_POST)) {
-		// 	$page->create();
-		// 	$this->config->getObject('route')->current();
-		// }
+		if (array_key_exists('form_page_new', $_POST)) {
+			$page->create();
+			$this->config->getObject('route')->current();
+		}
 
-		// if ($this->config->getUrl(2) == 'new') {
-		// 	$this->view->loadTemplate('admin/page/new');
-		// }
+		if ($this->config->getUrl(2) == 'new') {
+			$this->view->loadTemplate('admin/page/new');
+		}
 		 
-		// if ($this->config->getUrl(2))	$this->config->getObject('route')->home('admin/page/');
+		if ($this->config->getUrl(2)) {
+			$this->config->getObject('route')->home('admin/page/');
+		}
 
-		// $mainContent = new Model_Maincontent($this->database, $this->config);
-		// $mainContent->readByType('page');
+		$mainContent = new Model_Maincontent($this->database, $this->config);
+		$mainContent->readByType('page');
 
-		// $this->view
-		// 	->setObject($mainContent)
-		// 	->loadTemplate('admin/page');
+		$this->view
+			->setObject($mainContent)
+			->loadTemplate('admin/page');
 	}
 
 	public function media() {

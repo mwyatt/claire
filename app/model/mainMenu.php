@@ -147,7 +147,7 @@ class Model_Mainmenu extends Model
 		$this->data['admin_sub'] = '';
 		$className = 'Controller_' . ucfirst($this->config->getUrl(0)) . '_' . ucfirst($this->config->getUrl(1));
 
-		if (class_exists($className)) {
+		if (class_exists($className, false)) {
 			$this->data['admin_sub'] = '<nav class="sub">';
 			$this->data['admin_sub'] .= '<ul>';
 			$baseUrl = $this->config->getUrl('base') . $this->config->getUrl(0) . '/' . $this->config->getUrl(1). '/';

@@ -62,10 +62,8 @@ class Model_Maincontent extends Model
 			select
 				main_content.id
 				, main_content.title
-				, main_content.title_slug
 				, main_content.html
 				, main_content.date_published
-				, main_content.guid
 				, main_content.status
 				, main_content.type
 				, main_content_meta.name as meta_name

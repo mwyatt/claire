@@ -1,45 +1,38 @@
 <?php require_once($this->pathView() . 'admin/header.php'); ?>
 
 <div class="content page">
-
 	<h1>Page</h1>
-
 	<a class="new" href="<?php echo $this->urlCurrent(); ?>new/" title="Add a new Press Release">New</a>
 
-	<?php if ($mainContent->getData()) : ?>
+<?php if ($this->get('model_maincontent')) : ?>
 
 	<table class="main" width="100%" cellspacing="0" cellpadding="0">
-
 		<tr>
-			<th>Select</th>
 			<th>Title</th>
 			<th class="text-center">Created on</th>
 			<th>Action</th>
 		</tr>
 
-		<?php while ($mainContent->nextRow()) : ?>
+	<?php foreach ($this->get('model_maincontent') as $page) : ?>
 
-		<tr data-id="<?php echo $mainContent->getRow('id'); ?>">
-
+		<tr data-id="<?php echo $this->get($page, 'id'); ?>">
 			<td>
-				<input type="checkbox" name="id" value="<?php echo $mainContent->getRow('id'); ?>">
+				<a href="<?php echo $this->get($page, 'guid'); ?>" title="View mainContent <?php echo $this->get($page, 'title'); ?>"><?php echo $this->get($page, 'title'); ?></a>
 			</td>
-
-			<td>
-				<a href="<?php echo $mainContent->getRow('guid'); ?>" title="View mainContent <?php echo $mainContent->getRow('title'); ?>"><?php echo $mainContent->getRow('title'); ?></a>
+			<td class="text-center"><?php echo date('j D M Y', $this->get($page, 'date_published')); ?></td>
+			<td class="action">
+				<button>view on frontend</button>
+				<button>edit</button>
+				<button>delete</button>
+				<!-- <a href="<?php echo $this->urlCurrent(); ?>?delete=<?php echo $this->get($page, 'id'); ?>" title="Delete <?php echo $this->get($page, 'title'); ?>">Delete</a> -->
 			</td>
-
-			<td class="text-center"><?php echo date('j D M Y', $mainContent->getRow('date_published')); ?></td>
-
-			<td class="action"><a href="<?php echo $this->urlCurrent(); ?>?delete=<?php echo $mainContent->getRow('id'); ?>" title="Delete <?php echo $mainContent->getRow('title'); ?>">Delete</a></td>
-
 		</tr>		
 
-		<?php endwhile; ?>
+	<?php endforeach; ?>
 
 	</table>
 	
-	<?php endif; ?>	
+<?php endif; ?>	
 		
 </div>
 

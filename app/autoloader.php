@@ -35,18 +35,16 @@ class Autoloader {
 
 		$path = rtrim($path, '/');
 		$path .= '.php';
+		
 		if (is_file($path)) {
 			require_once($path);
 			return;
 		}
 
-		echo $path;
-
-
-		echo '<h2>' . 'Class or Model does not exist' . '<h2>';
+		echo '<h2>' . 'Class can\'t be found' . '<h2>';
 		echo '<pre>';
 		echo $title . '<br>';
-		print_r($explodedPath);
+		print_r($path);
 		echo '</pre>';
 
 		exit;

@@ -41,11 +41,10 @@ if (array_key_exists('install', $_GET)) {
 
 $controller = new Controller($database, $config);
 
-if ($config->getUrl(0) == 'admin') {
-	$controller->load($config->getUrl(0));
-} elseif ($config->getUrl(0)) {
-	$controller->load(array($config->getUrl(0), $config->getUrl(1)));
+if ($controller->load($config->getUrl(0), $config->getUrl(1))) {
+	exit;
 }
+
 
 $view = new View($database, $config);
 $cache = new Cache(false);

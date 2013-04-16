@@ -85,11 +85,10 @@ class View extends Model
 			}
 		}
 
-		echo '<pre>';
-		print_r($this);
-		echo '</pre>';
-		exit;
-		
+		// echo '<pre>';
+		// print_r($this->data);
+		// echo '</pre>';
+		// exit;
 
 		// presentation & cache
 		ob_start();	
@@ -108,7 +107,7 @@ class View extends Model
 	 * @param  string $three 
 	 * @return array|string|int            
 	 */
-	public function get($one, $two = false, $three = false) {	
+	public function get($one, $two = null, $three = null) {	
 		if (is_array($one)) {
 			if (array_key_exists($two, $one)) {
 				return $one[$two];

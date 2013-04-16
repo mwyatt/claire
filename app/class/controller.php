@@ -83,26 +83,26 @@ class Controller extends Config
 	 * @param  string $path
 	 * @return null
 	 */
-	public function load($segments)	{
+	public function load($names, $method = false)	{
 		$path = BASE_PATH . 'app/controller/';
-		if (is_array($segments)) {
-			foreach ($segments as $key => $segment) {
-				if ($segment) {
-					$path .= strtolower($segment) . '/';
+		$controllerName = 'Controller_';
+		if (is_array($names)) {
+			foreach ($names as $name) {
+				if ($name) {
+					$path .= strtolower($name) . '/';
+					$controllerName .= ucfirst($name) . '_';
 				}
 			}
+			$controllerName = rtrim($controllerName, '_');
 			$path = rtrim($path, '/');
-			$controllerName = 'Controller_' . ucfirst(reset($segments));
-			$methodName = next($segments);
 		} else {
-			$path .= strtolower($segments);
-			$controllerName = 'Controller_' . $segments;
-			$methodName = '';
+			$path .= strtolower($names);
+			$controllerName = 'Controller_' . ucfirst($names);
 		}
 		$path .= '.php';
 		if (is_file($path)) {
 			$controller = new $controllerName($this->database, $this->config);
-			$controller->loadMethod($methodName);
+			$controller->loadMethod($method);
 			return true;
 		}
 		return false;
