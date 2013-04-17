@@ -62,7 +62,6 @@ class View extends Model
 
 		$this->template = $path;
 		
-		
 		// $this->config->url['history'] = $session->getPreviousUrl($this->config->url['current']);
 
 		// prepare common models
@@ -136,7 +135,7 @@ class View extends Model
 	 */
 	public function getFeedback() {
 		$session = new Session();
-		return $this->data['session']['feedback'] = $session->getUnset('feedback');
+		return $this->data['feedback'] = $session->getUnset('feedback');
 	}	
 	
 	

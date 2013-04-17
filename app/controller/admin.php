@@ -66,7 +66,9 @@ class Controller_Admin extends Controller
 
 		if (array_key_exists('edit', $_GET)) {
 			$mainContent->readById($_GET['edit']);
-			$this->view->loadTemplate('admin/page/create-update');
+			$this->view
+				->setObject($mainContent)
+				->loadTemplate('admin/page/create-update');
 		}
 		
 		if (array_key_exists('form_page_new', $_POST)) {

@@ -17,11 +17,11 @@
 
 		<tr data-id="<?php echo $this->get($page, 'id'); ?>">
 			<td>
-				<a href="<?php echo $this->get($page, 'guid'); ?>" title="View mainContent <?php echo $this->get($page, 'title'); ?>"><?php echo $this->get($page, 'title'); ?></a>
+				<a href="?edit=<?php echo $this->get($page, 'id'); ?>" title="View mainContent <?php echo $this->get($page, 'title'); ?>"><?php echo $this->get($page, 'title'); ?></a>
 			</td>
 			<td class="text-center"><?php echo date('j D M Y', $this->get($page, 'date_published')); ?></td>
 			<td class="action">
-				<a href="<?php echo $this->urlCurrent(); ?>?delete=<?php echo $this->get($page, 'id'); ?>" title="View <?php echo $this->get($page, 'title'); ?>" target="_blank" class="view">View</a>
+				<a href="<?php echo $this->get($page, 'guid'); ?>" title="View mainContent <?php echo $this->get($page, 'title'); ?>">View <?php echo $this->get($page, 'title'); ?></a>
 				<a href="<?php echo $this->urlCurrent(); ?>?edit=<?php echo $this->get($page, 'id'); ?>" title="Edit <?php echo $this->get($page, 'title'); ?>" class="edit">Edit</a>
 				<a href="<?php echo $this->urlCurrent(); ?>?delete=<?php echo $this->get($page, 'id'); ?>" title="Delete <?php echo $this->get($page, 'title'); ?>" class="delete">Delete</a>
 			</td>
