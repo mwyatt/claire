@@ -185,6 +185,7 @@ form {
 	a.submit {
 		.gradient (darken(@white, 5%), darken(@white, 10%));
 		border: 1px solid darken(@white, 15%);
+		border-bottom-color: darken(@white, 30%);
 		color: lighten(@black, 50%);
 		font-weight: bold;
 		font-size: 1.1em;
@@ -195,6 +196,14 @@ form {
 		&:hover {
 			.gradient (darken(@white, 3%), darken(@white, 7%));
 			border-color: darken(@white, 10%);
+			border-bottom-color: darken(@white, 20%);
+			color: lighten(@black, 70%);
+		}
+
+		&:active {
+			.gradient (darken(@white, 3%), darken(@white, 7%));
+			border-color: darken(@white, 10%);
+			border-bottom-color: darken(@white, 20%);
 			color: lighten(@black, 70%);
 		}
 	}

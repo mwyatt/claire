@@ -27,12 +27,11 @@ class View extends Model
 	public function header() {
 		$user = new Model_Mainuser($this->database, $this->config);
 		$menu = new Model_Mainmenu($this->database, $this->config);
-		$session = new Session($this->database, $this->config);
+		$this->session = new Session($this->database, $this->config);
 		$mainoption = new Model_Mainoption($this->database, $this->config);
 		$menu->admin();
 		$menu->adminSub();
 		$mainoption->select();		
-		$this->getFeedback();
 		$this->setMeta(array(
 			'title' => $mainoption->get('meta_title'),
 			'keywords' => $mainoption->get('meta_keywords'),
@@ -41,7 +40,6 @@ class View extends Model
 		$this->setObject(array(
 			$mainoption
 			, $menu
-			, $session
 		));
 	}
 
@@ -134,8 +132,7 @@ class View extends Model
 	 * return feedback and unset session variable
 	 */
 	public function getFeedback() {
-		$session = new Session();
-		return $this->data['feedback'] = $session->getUnset('feedback');
+		return '<div class="feedback clearfix" title="Dismiss"><p>' . $this->session->getUnset('feedback', 1) . '</p></div>';
 	}	
 	
 	

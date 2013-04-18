@@ -149,24 +149,12 @@ class Model_Mainuser extends Model
 			':email' => $_POST['email_address']
 		));
 
-
 		if ($this->setDataStatement($sth)) {
-
 			if (crypt($_POST['password'], parent::get('password')) == parent::get('password')) {
-
-				$this->getObject('session')->set('feedback', array('success', 'Successfully Logged in as ' . parent::get('first_name') . ' ' . parent::get('last_name')));
-
 				return true;
-
 			}
-
 		}
-
-		$this->getObject('session')->set('feedback', array('error', 'Email Address or password incorrect'));
-		$this->getObject('session')->set('form_field', array('email' => $_POST['email_address']));
-
 		return false;
-
 	}
 	
 	
@@ -174,54 +162,33 @@ class Model_Mainuser extends Model
 	 * check the session variable for logged in user
 	 */
 	public function isLogged() {	
-		if (array_key_exists('user', $_SESSION)) {
+		$session = new Session();
+		if ($session->get('user')) {
 			return true;
 		}
+		return false;
 	}
 	
 	
 	public function logout() {	
-	
-		if (array_key_exists('user', $_SESSION))
-			unset($_SESSION['user']);
-			
+		$session = new Session();
+		$session->getUnset('user');
 	}
 	
 	
 	public function setSession() {	
-	
-		unset($_SESSION['user']);
-	
-		foreach ($this->getData() as $key => $value) {
-		
-			$_SESSION['user'][$key] = $value;
-		
-		}
-		
+		$session = new Session();
+		$session->getUnset('user');
+		$session->set('user', $this->getData());
 	}
 	
 	public function get($key = false) {
-
+		$session = new Session();
 		if ($key) {
-
-			return $_SESSION['user'][$key];
-
-		} else {
-
-			return $_SESSION['user'];
-
+			return $session->get('user', $key);
 		}
-
+		return $session->get('user');
 	}
-	
-	public function setFeedback($string) {	
-	
-		$_SESSION['feedback'] = $string;
-		
-		return;
-
-	}
-	
 	
 	public function checkPermission($path) {
 

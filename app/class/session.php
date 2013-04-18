@@ -54,9 +54,12 @@ class Session
 	}
 
 
-	public function set($key, $value) {
-
-		if ($_SESSION[$key] = $value)
+	public function set($key, $keyTwo, $keyThree = false) {
+		if ($keyThree) {
+			$_SESSION[$key][$keyTwo] = $keyThree;
+			return true;
+		}
+		if ($_SESSION[$key] = $keyTwo)
 			return true;
 		else
 			return false;

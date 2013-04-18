@@ -25,18 +25,12 @@
     			<form method="post" name="form_login" onsubmit="">
     				<input type="hidden" name="form_login" value="true">
 
-<?php if ($feedback = $this->get('session', 'feedback')): ?>
+<?php echo $this->getFeedback(); ?>
 
-                    <div class="feedback clearfix<?php echo ($this->get($feedback, 0) ? ' ' . $this->get($feedback, 0) : ''); ?>" title="Dismiss">
-                        <p><?php echo $this->get($feedback, 1); ?></p>
+                    <div class="row">
+                        <input type="text" name="email_address" placeholder="Email Address" autofocus="autofocus"<?php echo ($this->session->get('form_field', 'email') ? ' value="' . $this->session->getUnset('form_field', 'email') . '"' : ''); ?>>
                     </div>
-    
-<?php endif ?>
-
-                    <div>
-                        <input type="text" name="email_address" placeholder="Email Address" autofocus="autofocus"<?php echo ($this->getObject('session')->get('form_field', 'email') ? ' value="' . $this->getObject('session')->getUnset('form_field', 'email') . '"' : ''); ?>>
-                    </div>
-                    <div>
+                    <div class="row">
                         <input type="password" name="password" placeholder="Password">
                     </div>
                     <input type="submit">

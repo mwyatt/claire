@@ -15,6 +15,9 @@ class Controller extends Config
 {
 
 
+	public $session;
+
+
 	/**
 	 * cache object which will allow the controller to push out cached files
 	 * speeding up some model intensive pages
@@ -48,8 +51,8 @@ class Controller extends Config
 		$this->database = $database;
 		$this->config = $config;
 		$this->view = new View($this->database, $this->config);
+		$this->session = new Session();
 		$this->cache = new Cache(false);
-		// $this->view->setObject($this->config->getObject('session'));
 		if (method_exists($this, 'initialise')) {
 			$this->initialise();
 		}

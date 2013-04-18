@@ -17,7 +17,6 @@ class Controller_Admin extends Controller
 
 	public function initialise() {
 		$user = new Model_Mainuser($this->database, $this->config);
-		$user->setObject($this->config->getObject('session'));
 		$this->setObject($user);
 		$this->view->setObject($user);
 
@@ -29,7 +28,10 @@ class Controller_Admin extends Controller
 		if (array_key_exists('form_login', $_POST)) {
 			if ($user->login()) {
 				$user->setSession();
+				$this->session->set('feedback', array('success', 'Successfully Logged in as ' . $this->session->get('user', 'first_name') . ' ' . $this->session->get('user', 'last_name')));
 			}
+			$this->session->set('feedback', array('error', 'Email Address or password incorrect'));
+			$this->session->set('form_field', array('email' => $_POST['email_address']));
 			$this->route('base', 'admin/');
 		}
 
