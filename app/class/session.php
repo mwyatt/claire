@@ -39,16 +39,18 @@ class Session
 	 * @param  boolean $subKey will be string when used
 	 * @return anything          
 	 */
-	public function getUnset($key, $subKey = '') {
+	public function getUnset($key, $subKey = false) {
 		if (array_key_exists($key, $_SESSION)) {
+			if (! $subKey) {
+				$value = $_SESSION[$key];
+				unset($_SESSION[$key]);
+				return $value;
+			}
 			if (array_key_exists($subKey, $_SESSION[$key])) {
 				$value = $_SESSION[$key][$subKey];
 				unset($_SESSION[$key][$subKey]);
 				return $value;
 			}
-			$value = $_SESSION[$key];
-			unset($_SESSION[$key]);
-			return $value;
 		}
 		return false;
 	}

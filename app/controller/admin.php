@@ -17,25 +17,27 @@ class Controller_Admin extends Controller
 
 	public function initialise() {
 		$user = new Model_Mainuser($this->database, $this->config);
-		$this->setObject($user);
-		$this->view->setObject($user);
 
 		if (array_key_exists('logout', $_GET)) {
 			$user->logout();
+			$this->session->set('feedback', 'Successfully logged out');
 			$this->route('base', 'admin/');
 		}
 
 		if (array_key_exists('form_login', $_POST)) {
-			if ($user->login()) {
-				$user->setSession();
-				$this->session->set('feedback', array('success', 'Successfully Logged in as ' . $this->session->get('user', 'first_name') . ' ' . $this->session->get('user', 'last_name')));
+			if ($user->login($_POST['email_address'], $_POST['password'])) {
+				$this->session->set('feedback', 'Successfully Logged in as ' . $this->session->get('user', 'first_name') . ' ' . $this->session->get('user', 'last_name'));
+				$this->route('base', 'admin/');
 			}
-			$this->session->set('feedback', array('error', 'Email Address or password incorrect'));
+			$this->session->set('feedback', 'Email Address or password incorrect');
 			$this->session->set('form_field', array('email' => $_POST['email_address']));
 			$this->route('base', 'admin/');
 		}
 
-		if (! $user->isLogged()) {
+		if ($user->isLogged()) {
+			$user->setData($user->get());
+			$this->view->setObject($user);
+		} else {
 			if ($this->config->getUrl(1)) {
 				$this->route('base', 'admin/');
 			}
@@ -48,7 +50,10 @@ class Controller_Admin extends Controller
 	 * dashboard of admin area, displays login until logged in, then dashboard
 	 */
 	public function index() {
-		if ($this->getObject('model_mainuser')->isLogged()) {			
+		$user = new Model_Mainuser($this->database, $this->config);
+		if ($user->isLogged()) {			
+			$user->setData($user->get());
+			$this->view->setObject($user);
 			$this->view->loadTemplate('admin/dashboard');		
 		} else {
 			$this->view->loadTemplate('admin/login');
@@ -66,16 +71,27 @@ class Controller_Admin extends Controller
 		$mainContent = new Model_Maincontent($this->database, $this->config);
 		$page->setObject($session)->setObject($user);
 
+		if (array_key_exists('form_create', $_POST)) {
+			if ($id = $page->create()) {
+				$this->route('base', 'admin/page/?edit=' . $id);
+			} else {
+				$this->route('base', 'admin/page/');
+			}
+		}
+
+		if (array_key_exists('form_update', $_POST)) {
+			if ($page->update()) {
+				$this->route('current');
+			} else {
+				$this->route('current');
+			}
+		}
+
 		if (array_key_exists('edit', $_GET)) {
 			$mainContent->readById($_GET['edit']);
 			$this->view
 				->setObject($mainContent)
 				->loadTemplate('admin/page/create-update');
-		}
-		
-		if (array_key_exists('form_page_new', $_POST)) {
-			$page->create();
-			$this->config->getObject('route')->current();
 		}
 
 		if ($this->config->getUrl(2) == 'new') {

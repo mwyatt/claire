@@ -67,22 +67,19 @@ class View extends Model
 	
 		// push objects to method scope
 		$index = 0;
+
 		foreach ($this->objects as $title => $object) {
 			if ($object->getData()) {
-				if (array_key_exists($title, $this->data)) {
-					$this->data[$title . $index ++] = $object->getData();
-				} else {
-					$this->data[$title] = $object->getData();
-				}
+				$titles[] = $title; // temp
+				$this->data[$title] = $object->getData();
 			} else {
-				if (array_key_exists($title, $this->data)) {
-					$this->data[$title . $index ++] = false;
-				} else {
-					$this->data[$title] = false;
-				}
+				$this->data[$title] = false;
 			}
 		}
 
+		echo '<pre>';
+		print_r($titles);
+		echo '</pre>';
 		// echo '<pre>';
 		// print_r($this->data);
 		// echo '</pre>';
@@ -95,7 +92,6 @@ class View extends Model
 		ob_end_flush();	
 		exit;
 	}		
-		
 
 
 	/**
@@ -132,7 +128,9 @@ class View extends Model
 	 * return feedback and unset session variable
 	 */
 	public function getFeedback() {
-		return '<div class="feedback clearfix" title="Dismiss"><p>' . $this->session->getUnset('feedback', 1) . '</p></div>';
+		if ($message = $this->session->getUnset('feedback')) {
+			return '<div class="feedback clearfix" title="Dismiss"><p>' . $message . '</p></div>';
+		}
 	}	
 	
 	

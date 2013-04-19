@@ -114,12 +114,12 @@ class Controller extends Config
 
 	/**
 	 * moves the script to another url, possibly replaces class 'Route'
-	 * @param  string  $base see class 'Config'
+	 * @param  string  $scheme see class 'Config'
 	 * @param  string $path   extension of the base action
 	 * @return null          
 	 */
-	public function route($base, $path = false) {		
-		header("Location: " . $this->config->getUrl($base) . $path);
+	public function route($scheme, $path = false) {		
+		header("Location: " . $this->config->getUrl($scheme) . $path);
 		exit;
 	}
 

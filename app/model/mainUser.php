@@ -118,39 +118,31 @@ class Model_Mainuser extends Model
 	 * login user
 	 * @return bool 
 	 */
-	public function login() {	
+	public function login($emailAddress, $password) {	
 	
 		$sth = $this->database->dbh->prepare("	
-
 			select
 				main_user.id
-				, email
-				, password
-				, date_registered
-				, level
-				, meta.name as meta_name
-				, meta.value as meta_value
-
-			from
-				main_user				
-
-			left join
-				main_user_meta as meta
-
-			on
-				main_user.id = meta.user_id		
-
-			where 
-				email = :email
-
+				, main_user.email
+				, main_user.password
+				, main_user.date_registered
+				, main_user.level
+				, main_user_meta.name as meta_name
+				, main_user_meta.value as meta_value
+			from main_user				
+			left join main_user_meta on main_user.id = main_user_meta.user_id
+			where email = :email
 		");		
 		
 		$sth->execute(array(
-			':email' => $_POST['email_address']
+			':email' => $emailAddress
 		));
 
-		if ($this->setDataStatement($sth)) {
-			if (crypt($_POST['password'], parent::get('password')) == parent::get('password')) {
+		if ($row = $this->parseMeta($sth->fetchAll(PDO::FETCH_ASSOC))) {
+			if (crypt($password, $row['password']) == $row['password']) {
+				unset($row['password']);
+				$session = new Session();
+				$session->set('user', $row);
 				return true;
 			}
 		}

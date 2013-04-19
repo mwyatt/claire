@@ -14,66 +14,92 @@ class Model_Page extends Model_Maincontent
 {
 	
 	public function create() {	
-
-		// validation
+		$user = new Model_Mainuser($this->database, $this->config);
 
 		if (! $this->validatePost($_POST, array('title', 'html'))) {
-
-			$this->getObject('mainUser')->setFeedback('All required fields must be filled');
-
+			$this->session->set('feedback', 'All required fields must be filled');
 			return false;
-			
 		}
 
-		// prepare
-
 		$sth = $this->database->dbh->prepare("
-			insert into main_content
-				(
-					title
-					, title_slug
-					, html
-					, type
-					, date_published
-					, status
-					, user_id
-				)
-			values
-				(
-					:title
-					, :title_slug
-					, :html
-					, :type
-					, :date_published
-					, :status
-					, :user_id
-				)
+			insert into main_content (
+				title
+				, html
+				, type
+				, date_published
+				, status
+				, user_id
+			)
+			values (
+				:title
+				, :html
+				, :type
+				, :date_published
+				, :status
+				, :user_id
+			)
 		");				
 		
 		$sth->execute(array(
 			':title' => $_POST['title']
-			, ':title_slug' => $this->urlFriendly($_POST['title'])
 			, ':html' => $_POST['html']
-			, ':type' => 'page'
+			, ':type' => $_POST['type']
 			, ':date_published' => time()
 			, ':status' => $this->isChecked('status')
-			, ':user_id' => $this->getObject('mainUser')->get('id')
+			, ':user_id' => $user->get('id')
 		));		
 
-		// return & feedback
+		if ($sth->rowCount()) {
+			$this->session->set('feedback', ucfirst($_POST['type']) . ' "' . $_POST['title'] . '" created');
+			return $this->database->dbh->lastInsertId();
+		}
+		$this->session->set('feedback', 'Problem while creating ' . ucfirst($_POST['type']));
+		return false;
+	}
+				
+	public function update() {
+		$user = new Model_Mainuser($this->database, $this->config);
+
+		$sth = $this->database->dbh->prepare("
+			select 
+				title
+				, html
+				, type
+				, date_published
+				, status
+				, user_id
+			from main_content
+			where id = ?
+		");				
+
+		$sth->execute(array(
+			$_GET['edit']
+		));		
+
+		$row = $sth->fetch(PDO::FETCH_ASSOC);
+
+		$sth = $this->database->dbh->prepare("
+			update main_content set
+				title = ?
+				, html = ?
+				, status = ?
+			where
+				id = ?
+		");				
+		
+		$sth->execute(array(
+			$_POST['title']
+			, $_POST['html']
+			, $this->isChecked('status')
+			, $_GET['edit']
+		));		
 
 		if ($sth->rowCount()) {
-
-			$this->getObject('Session')->set('feedback', array('success', 'Page Created'));
+			$this->session->set('feedback', ucfirst($row['type']) . ' "' . $row['title'] . '" updated');
 			return true;
-			
-		} else {
-
-			$this->getObject('Session')->set('feedback', array('error', 'Page not Created'));
-			return false;
-
 		}
-		
+		$this->session->set('feedback', 'Problem while updating');
+		return false;
 	}
 				
 }

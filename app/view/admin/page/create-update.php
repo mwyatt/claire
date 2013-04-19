@@ -12,13 +12,14 @@
 				<a data-wysihtml5-command="italic" title="CTRL+I">italic</a>
 				<a data-wysihtml5-action="change_view">switch to html view</a>
 			</div>
-			<textarea id="textarea" placeholder="Enter text ..." name="html" value="<?php echo $this->get('model_maincontent', 'html'); ?>"></textarea>
+			<textarea id="textarea" placeholder="Enter text ..." name="html"><?php echo $this->get('model_maincontent', 'html'); ?></textarea>
 		</div>
 		<div class="row">
 			<label for="status">Visibility</label>
-			<input id="status" type="checkbox" name="status" value="<?php echo $this->get('model_maincontent', 'status'); ?>">
+			<input id="status" type="checkbox" name="status" value="visible"<?php echo ($this->get('model_maincontent', 'status') == 'visible' ? ' checked' : ''); ?>>
 		</div>
-		<input name="form_page_<?php echo ($this->get('model_maincontent') ? 'update' : 'create'); ?>" type="hidden" value="true">
+		<input name="form_<?php echo ($this->get('model_maincontent') ? 'update' : 'create'); ?>" type="hidden" value="true">
+		<input name="type" type="hidden" value="page">
 		<a href="#" onclick="this.submit()">Save</a>
 		<input type="submit">
 	</form>

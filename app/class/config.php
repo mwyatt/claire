@@ -34,17 +34,24 @@ class Config
 	/**
 	 * intention is to build the object with submitted objects
 	 * takes the __CLASS__ name of objects and sets them within array
-	 * @param array $objects 
+	 * @param string|object|array $objects
 	 */
-	public function setObject($objects) {
-		if (is_array($objects)) {
-			foreach ($objects as $object) {
-				$classTitle = get_class($object);
-				$this->objects[strtolower($classTitle)] = $object;
+	public function setObject($objectsOrKey, $objectOrArray = false) {
+		// if (gettype($objectOrArray) == 'array') {
+		// 	$this->objects[strtolower($objectsOrKey)] = $objectOrArray;
+		// }
+		if ((gettype($objectsOrKey) == 'string') && $objectOrArray) {
+			$this->objects[strtolower($objectsOrKey)] = $objectOrArray;
+			return $this;
+		}
+		if (is_array($objectsOrKey)) {
+			foreach ($objectsOrKey as $objectOrArray) {
+				$classTitle = get_class($objectOrArray);
+				$this->objects[strtolower($classTitle)] = $objectOrArray;
 			}
 		} else {
-			$classTitle = get_class($objects);
-			$this->objects[strtolower($classTitle)] = $objects;
+			$classTitle = get_class($objectsOrKey);
+			$this->objects[strtolower($classTitle)] = $objectsOrKey;
 		}
 		return $this;
 	}
@@ -142,7 +149,8 @@ class Config
 		
 			$_SERVER['REQUEST_URI'] = strtok($_SERVER['REQUEST_URI'], '?');
 
-			$this->url['current'] = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+			// $this->url['current'] = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+			$this->url['current'] = $_SERVER['HTTP_REFERER'];
 		}
 	
 		return $this;
