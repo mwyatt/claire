@@ -16,24 +16,12 @@ class Controller_Admin_Content extends Controller
 
 
 	public function initialise() {
-		echo '<pre>';
-		print_r($_FILES);
-		print_r($_POST);
-		echo '</pre>';
-		exit();
-
-		$maincontent = new Model_Maincontent($this->database, $this->config);
-
-		if (! empty($_FILES)) {
-			echo '<pre>';
-			print_r('variable');
-			echo '</pre>';
-			exit;
-			
-		}
+		$content = new Model_Maincontent($this->database, $this->config);
+		$media = new Model_Mainmedia($this->database, $this->config);
 
 		if (array_key_exists('form_create', $_POST)) {
-			if ($id = $maincontent->create()) {
+			if ($id = $content->create()) {
+				$media->uploadAttach($id);
 				$this->route('base', 'admin/content/' . $this->config->getUrl(2) . '/?edit=' . $id);
 			} else {
 				$this->route('base', 'admin/content/' . $this->config->getUrl(2) . '/');
@@ -41,7 +29,7 @@ class Controller_Admin_Content extends Controller
 		}
 
 		if (array_key_exists('form_update', $_POST)) {
-			if ($maincontent->update()) {
+			if ($content->update()) {
 				$this->route('current');
 			} else {
 				$this->route('current');
@@ -49,9 +37,9 @@ class Controller_Admin_Content extends Controller
 		}
 
 		if (array_key_exists('edit', $_GET)) {
-			$maincontent->readById($_GET['edit']);
+			$content->readById($_GET['edit']);
 			$this->view
-				->setObject($maincontent)
+				->setObject($content)
 				->loadTemplate('admin/content/create-update');
 		}
 

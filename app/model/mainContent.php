@@ -255,7 +255,7 @@ class Model_Maincontent extends Model
 		
 		$sth->execute(array(
 			':title' => $_POST['title']
-			, ':html' => $_POST['html']
+			, ':html' => (array_key_exists('html', $_POST) ? $_POST['html'] : '')
 			, ':type' => $_POST['type']
 			, ':date_published' => time()
 			, ':status' => $this->isChecked('status')

@@ -23,7 +23,7 @@
 <?php if ($this->urlSegment(2) == 'minutes'): ?>
 
 		<div class="row">
-			<input type="file" name="upload">
+			<input type="file" name="attachments[]" multiple>
 		</div>
 
 <?php endif ?>

@@ -127,6 +127,23 @@ class Model_Mainmedia extends Model
 		return $new;
 	}
 	
+
+	public function uploadAttach($id) {
+		$files = $_FILES;
+		if (empty($files) || ! array_key_exists('attachments', $files)) {
+			return;
+		}
+
+		$files = $this->rearrange($files);
+
+		echo '<pre>';
+		print_r($id);
+		print_r($files);
+		echo '</pre>';
+		exit;
+		
+	}
+
 	
 	/**
 	 * upload and arrange multiple files, handles duplicates and too large items
