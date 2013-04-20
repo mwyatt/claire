@@ -61,52 +61,8 @@ class Controller_Admin extends Controller
 	}
 
 
-	/**
-	 * general page mangement, complete crud
-	 */
-	public function page() {
-		$user = new Model_Mainuser($this->database, $this->config);
-		$session = new Session($this->database, $this->config);
-		$page = new Model_Page($this->database, $this->config);
-		$mainContent = new Model_Maincontent($this->database, $this->config);
-		$page->setObject($session)->setObject($user);
-
-		if (array_key_exists('form_create', $_POST)) {
-			if ($id = $page->create()) {
-				$this->route('base', 'admin/page/?edit=' . $id);
-			} else {
-				$this->route('base', 'admin/page/');
-			}
-		}
-
-		if (array_key_exists('form_update', $_POST)) {
-			if ($page->update()) {
-				$this->route('current');
-			} else {
-				$this->route('current');
-			}
-		}
-
-		if (array_key_exists('edit', $_GET)) {
-			$mainContent->readById($_GET['edit']);
-			$this->view
-				->setObject($mainContent)
-				->loadTemplate('admin/page/create-update');
-		}
-
-		if ($this->config->getUrl(2) == 'new') {
-			$this->view->loadTemplate('admin/page/create-update');
-		}
-		 
-		if ($this->config->getUrl(2)) {
-			$this->config->getObject('route')->home('admin/page/');
-		}
-
-		$mainContent->readByType('page');
-
-		$this->view
-			->setObject($mainContent)
-			->loadTemplate('admin/page');
+	public function content() {
+		$this->load(array('admin', 'content'), $this->config->getUrl(2));
 	}
 
 	public function media() {

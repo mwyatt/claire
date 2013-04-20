@@ -151,7 +151,7 @@ class Model_Mainmenu extends Model
 			$this->data['admin_sub'] = '<nav class="sub">';
 			$this->data['admin_sub'] .= '<ul>';
 			$baseUrl = $this->config->getUrl('base') . $this->config->getUrl(0) . '/' . $this->config->getUrl(1). '/';
-			$page = (array_key_exists('page', $_GET) ? $_GET['page'] : '');
+			$page = ($this->config->getUrl(2) ? $this->config->getUrl(2) : '');
 
 			$current = ($page == '' ? ' class="current"' : '');
 			$this->data['admin_sub'] .= '<li' . $current . '><a href="' . $baseUrl . '">Overview</a></li>';
@@ -160,10 +160,9 @@ class Model_Mainmenu extends Model
 				if ($method == '__construct') {
 					break;
 				}
-
-				if (($method != 'initialise') || ($method != 'index')) {
+				if (($method !== 'initialise') && ($method !== 'index')) {
 					$current = ($page == $method ? ' class="current"' : '');
-					$this->data['admin_sub'] .= '<li' . $current . '><a href="' . $baseUrl . '?page=' . $method . '">' . $method . '</a></li>';
+					$this->data['admin_sub'] .= '<li' . $current . '><a href="' . $baseUrl . $method . '/">' . $method . '</a></li>';
 				}
 			}
 

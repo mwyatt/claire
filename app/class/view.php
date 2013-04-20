@@ -51,8 +51,17 @@ class View extends Model
 	 */
 	public function loadTemplate($templateTitle)
 	{			
+		$path = BASE_PATH . 'app/view';
+		if (is_array($templateTitle)) {
+			foreach ($templateTitle as $title) {
+				$path .= '/' . $title;
+			}
+		} else {
+			$path = BASE_PATH . 'app/view/' . strtolower($templateTitle);
+		}
+		$path .= '.php';
+
 		$cache = new Cache($this->database, $this->config)	;
-		$path = BASE_PATH . 'app/view/' . strtolower($templateTitle) . '.php';
 		
 		if (!file_exists($path)) {
 			return false;
@@ -145,6 +154,11 @@ class View extends Model
 	 */	
 	public function urlHome() { 
 		return $this->config->getUrl('base');
+	}	
+
+	
+	public function urlSegment($index) { 
+		return $this->config->getUrl($index);
 	}	
 	
 	

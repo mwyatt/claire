@@ -147,10 +147,14 @@ class Config
 
 			// removes $_GET
 		
-			$_SERVER['REQUEST_URI'] = strtok($_SERVER['REQUEST_URI'], '?');
+			// $_SERVER['REQUEST_URI'] = strtok($_SERVER['REQUEST_URI'], '?');
 
-			// $this->url['current'] = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-			$this->url['current'] = $_SERVER['HTTP_REFERER'];
+			// $this->url['current'] = false;
+			// if (array_key_exists('HTTP_REFERER', $_SERVER)) {
+			// 	$this->url['current'] = $_SERVER['HTTP_REFERER'];
+			// }
+			
+			$this->url['current'] = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 		}
 	
 		return $this;
