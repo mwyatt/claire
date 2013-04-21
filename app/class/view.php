@@ -88,10 +88,8 @@ class View extends Model
 
 		echo '<pre>';
 		print_r($titles);
+		print_r($this->data);
 		echo '</pre>';
-		// echo '<pre>';
-		// print_r($this->data);
-		// echo '</pre>';
 		// exit;
 
 		// presentation & cache
@@ -101,36 +99,6 @@ class View extends Model
 		ob_end_flush();	
 		exit;
 	}		
-
-
-	/**
-	 * master get function for interacting with $this->data
-	 * @param  string|array  $one      
-	 * @param  string $two   
-	 * @param  string $three 
-	 * @return array|string|int            
-	 */
-	public function get($one = null, $two = null, $three = null) {	
-		if (is_array($one)) {
-			if (array_key_exists($two, $one)) {
-				return $one[$two];
-			}
-			return;
-		}
-		if (array_key_exists($one, $this->data)) {
-			if (is_array($this->data[$one]) && array_key_exists($two, $this->data[$one])) {
-				if (is_array($this->data[$one][$two]) && array_key_exists($three, $this->data[$one][$two])) {
-					return $this->data[$one][$two][$three];
-				}
-				return $this->data[$one][$two];
-			}
-			return $this->data[$one];
-		}
-		if (! $one && ! $two && ! $three) {
-			return $this->data;
-		}
-		return;
-	}	
 
 
 	/**

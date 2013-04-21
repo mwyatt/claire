@@ -11,54 +11,37 @@
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
 
- 
-// look for installed.txt
-if (is_file(BASE_PATH . 'installed.txt')) {
+$controller = new Controller($database, $config);
 
-	// refresh database
+// session_unset();
+// session_destroy();
+// session_write_close();
+// setcookie(session_name(),'',0,'/');
+// session_regenerate_id(true);
+// echo '<pre>';
+// print_r($_SESSION);
+// echo '</pre>';
+// exit;
 
+// exit;
+
+if ($session->get('installing')) {
+	$user = new Model_Mainuser($database, $config);
+	require_once(BASE_PATH . 'install-table.php');
+	require_once(BASE_PATH . 'install-tabledata.php');
+	$ttfixture = new Model_Ttfixture($database, $config);
+	$ttfixture->generateAll();
+	
+	$session->getUnset('installing');
+	$controller->route('home');
+	// $files = glob(BASE_PATH . 'img/upload/'); // get all file names
+	// foreach($files as $file){ // iterate files
+	//   if(is_file($file))
+	//     unlink($file); // delete file
+	// }
+} else {
 	$database->dbh->query("DROP DATABASE " . Database::$credentials['basename']); 
 	$database->dbh->query("CREATE DATABASE " . Database::$credentials['basename']);
-	
-	// delete installed.txt
-
-	unlink(BASE_PATH . 'installed.txt');
-
-	$route->current('?install');
-
-} else {
-
-	// try installation
-	try {	
-
-		$mainuser = new Model_Mainuser($database, $config);
-
-		require_once(BASE_PATH . 'install-table.php');
-		require_once(BASE_PATH . 'install-tabledata.php');
-		
-		// fixture generation
-		$ttfixture = new Model_Ttfixture($database, $config);
-		$ttfixture->generateAll();
-
-		// remove uploaded media
-
-		$files = glob(BASE_PATH . 'img/upload/'); // get all file names
-		foreach($files as $file){ // iterate files
-		  if(is_file($file))
-		    unlink($file); // delete file
-		}
-
-		// create installed.txt
-		$file = fopen(BASE_PATH . 'installed.txt', 'w');
-
-	} catch (PDOException $e) { 
-
-		// Handle Exception
-		echo '<h1>Exception while Installing Website</h1>';
-		echo $e;
-		
-	}		
-	
-	$route->current();
-	
+	$session->set('installing', true);
+	$controller->route('home', '?install');
 }

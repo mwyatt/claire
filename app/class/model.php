@@ -151,23 +151,23 @@ abstract class Model extends Config
 	}	
 	
 	
-	/**
-	 * Searches $this->data for key match
-	 * @return value from $this->data
-	 * @usage $options->get('site_title')
-	 */
-	public function get($key)
-	{	
+	// /**
+	//  * Searches $this->data for key match
+	//  * @return value from $this->data
+	//  * @usage $options->get('site_title')
+	//  */
+	// public function get($key)
+	// {	
 
-		if (array_key_exists($key, $this->data)) {
+	// 	if (array_key_exists($key, $this->data)) {
 
-			return $this->data[$key];
+	// 		return $this->data[$key];
 
-		}
+	// 	}
 
-		return false;
+	// 	return false;
 
-	}	
+	// }	
 
 	
 	/**

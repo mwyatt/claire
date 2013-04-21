@@ -69,9 +69,6 @@ class Model_Ttfixture extends Model
 			}
 		
 		}
-
-		echo 'All Fixtures Generated';
-		
 	}
 	
 	
@@ -567,9 +564,9 @@ class Model_Ttfixture extends Model
 
 	}
 
-	public function getGuid($row) {
-		return $this->config->getUrl('base') . 'fixture/' . $this->urlFriendly($row['team_left_name']) . '-vs-' . $this->urlFriendly($row['team_right_name']) . '-' . $row['id'] . '/';
-	}
+	// public function getGuid($row) {
+	// 	return $this->config->getUrl('base') . 'fixture/' . $this->urlFriendly($row['team_left_name']) . '-vs-' . $this->urlFriendly($row['team_right_name']) . '-' . $row['id'] . '/';
+	// }
 
 
 	

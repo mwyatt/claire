@@ -59,9 +59,7 @@ class Model_Maincontent extends Model
 
 
 	public function readByType($type = 'post') {	
-	
 		$sth = $this->database->dbh->prepare("	
-
 			select
 				main_content.id
 				, main_content.title
@@ -71,35 +69,40 @@ class Model_Maincontent extends Model
 				, main_content.type
 				, main_content_meta.name as meta_name
 				, main_content_meta.value as meta_value
-
 			from main_content
-
 			left join
 				main_content_meta on main_content_meta.content_id = main_content.id
-
 			left join
 				main_user on main_user.id = main_content.user_id
-
 			where
 				main_content.type = :type
-
 			order by
 				main_content.date_published
-
 		");
-
 		$sth->execute(array(
 			':type' => $type
 		));	
+		$this->setData($sth->fetchAll(PDO::FETCH_ASSOC));
 
-		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
-			if (! array_key_exists($row['id'], $this->data)) {
-				$this->data[$row['id']] = $row;
-				$this->data[$row['id']]['guid'] = $this->getGuid('post', $row['title'], $row['id']);
-			}
-			if ($row['meta_name'])
-				$this->data[$row['id']][$row['meta_name']] = $row['meta_value'];
-		}
+		echo '<pre>';
+		print_r($this->data);
+		echo '</pre>';
+		exit;
+		
+
+
+
+
+		// while (
+
+		// 	) {
+		// 	if (! array_key_exists($row['id'], $this->data)) {
+		// 		$this->data[$row['id']] = $row;
+		// 		$this->data[$row['id']]['guid'] = $this->getGuid('post', $row['title'], $row['id']);
+		// 	}
+		// 	if ($row['meta_name'])
+		// 		$this->data[$row['id']][$row['meta_name']] = $row['meta_value'];
+		// }
 
 		return $sth->rowCount();
 	}	
@@ -215,14 +218,8 @@ class Model_Maincontent extends Model
 				$results[$result['id']] = $result;
 			}
 		}
-		// if (count($this->data) > 1) {
-		// } else {
-		// }
 		$this->data = array_filter($results);
-		// $this->data = reset($results);
-
 		return true;
-		
 	}
 
 

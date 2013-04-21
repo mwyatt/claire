@@ -42,13 +42,12 @@ if (array_key_exists('install', $_GET)) {
 $controller = new Controller($database, $config);
 
 if ($controller->load($config->getUrl(0), $config->getUrl(1))) {
-	exit;
+	// begin the controller
+} else {
+	$view = new View($database, $config);
+	$cache = new Cache(false);
+	$cache->load('home');
+	$view->loadTemplate('home');
 }
-
-
-$view = new View($database, $config);
-$cache = new Cache(false);
-$cache->load('home');
-$view->loadTemplate('home');
 
 exit;

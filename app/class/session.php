@@ -11,26 +11,68 @@
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
 
-class Session
+class Session extends Config
 {
-
 
 	public function start() {
 		session_start();
 	}
 
 
-	public function get($key, $subKey = '') {
-		if (array_key_exists($key, $_SESSION)) {
-			if (array_key_exists($subKey, $_SESSION[$key])) {
-				$value = $_SESSION[$key][$subKey];
-				return $value;
+	/**
+	 * master get function for interacting with $_SESSION
+	 * @param  string|array  $one      
+	 * @param  string $two   
+	 * @param  string $three 
+	 * @return array|string|int            
+	 */
+	public function get($one = null, $two = null, $three = null) {	
+		if (is_array($one)) {
+			if (array_key_exists($two, $one)) {
+				return $one[$two];
 			}
-			$value = $_SESSION[$key];
-			return $value;
+			return;
 		}
-		return false;
-	}
+		if (array_key_exists($one, $_SESSION)) {
+			if (is_array($_SESSION[$one]) && array_key_exists($two, $_SESSION[$one])) {
+				if (is_array($_SESSION[$one][$two]) && array_key_exists($three, $_SESSION[$one][$two])) {
+					return $_SESSION[$one][$two][$three];
+				}
+				return $_SESSION[$one][$two];
+			}
+			return $_SESSION[$one];
+		}
+		if (! $one && ! $two && ! $three) {
+			return $_SESSION;
+		}
+		return;
+	}	
+
+
+
+	// public function __construct() {
+	// 	if (session_id() == '') {
+	// 	}
+	// 	$_SESSION = $_SESSION;
+	// }
+
+	// public function __destruct() {
+	// 	$_SESSION = $_SESSION;
+	// }
+
+	// public function get($key, $subKey = '') {
+	// 	if (array_key_exists($key, $_SESSION)) {
+	// 		if (is_array($_SESSION[$key])) {
+	// 			if (array_key_exists($subKey, $_SESSION[$key])) {
+	// 				$value = $_SESSION[$key][$subKey];
+	// 				return $value;
+	// 			}
+	// 		}
+	// 		$value = $_SESSION[$key];
+	// 		return $value;
+	// 	}
+	// 	return false;
+	// }
 
 
 	/**
@@ -98,7 +140,7 @@ class Session
 	}
 
 	public function getData() {		
-		return $this->data = $_SESSION;
+		return $_SESSION = $_SESSION;
 	}	
 
 }

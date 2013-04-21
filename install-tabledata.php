@@ -4,11 +4,11 @@ try {
 
 	$epochTime = time();
 	
-	$mainuser
+	$user
 		->setEmail('martin.wyatt@gmail.com')
 		->setPassword('123')
 		->insert(10);
-	$mainuser
+	$user
 		->setEmail('mike.turner@gmail.com')
 		->setPassword('223')
 		->insert(1);

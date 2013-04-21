@@ -82,10 +82,10 @@ try {
 			main_media
 			(
 				id INT UNSIGNED NOT NULL AUTO_INCREMENT
-				, file_name VARCHAR(255) NOT NULL
-				, title VARCHAR(255)
+				, filename VARCHAR(255)
+				, basename VARCHAR(255)
+				, type VARCHAR(50)
 				, date_published INT UNSIGNED
-				, type VARCHAR(50) NOT NULL
 				, user_id INT UNSIGNED
 				, PRIMARY KEY (id)
 			)		

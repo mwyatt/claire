@@ -174,10 +174,10 @@ class Model_Mainuser extends Model
 		$session->set('user', $this->getData());
 	}
 	
-	public function get($key = false) {
+	public function get($one = null, $two = null, $three = null) {	
 		$session = new Session();
-		if ($key) {
-			return $session->get('user', $key);
+		if ($one) {
+			return $session->get('user', $one);
 		}
 		return $session->get('user');
 	}
