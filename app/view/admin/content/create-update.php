@@ -32,9 +32,6 @@
 			<label for="status">Visibility</label>
 			<input id="status" type="checkbox" name="status" value="visible"<?php echo ($this->get('model_maincontent', 'status') == 'visible' ? ' checked' : ''); ?>>
 		</div>
-		<div class="row">
-			<label for="media">Media</label>
-		</div>
 		<input name="form_<?php echo ($this->get('model_maincontent') ? 'update' : 'create'); ?>" type="hidden" value="true">
 		<input name="type" type="hidden" value="<?php echo $this->urlSegment(2); ?>">
 		<a href="#" onclick="this.submit()">Save</a>

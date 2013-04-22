@@ -88,7 +88,7 @@ class View extends Model
 
 		echo '<pre>';
 		print_r($titles);
-		print_r($this->data);
+		// print_r($this->data);
 		echo '</pre>';
 		// exit;
 

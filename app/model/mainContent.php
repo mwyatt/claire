@@ -138,22 +138,7 @@ class Model_Maincontent extends Model
 				));	
 			}
 		}
-		$results = $sth->fetchAll(PDO::FETCH_ASSOC);
-		echo '<pre>';
-		print_r($results);
-		echo '</pre>';
-		exit;
-		
-
-		
-		$this->setMeta($sth->fetchAll(PDO::FETCH_ASSOC));
-		$this->data = current($this->data);
-		if (array_key_exists('media', $this->data)) {
-			$this->data = $this->data['media'];
-		} else {
-			$this->data = false;
-		}
-		return $sth->rowCount();
+		$this->data = $sth->fetchAll(PDO::FETCH_ASSOC);
 	}
 
 	public function readByTitleSlug($titleSlug) {
