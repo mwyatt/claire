@@ -7,21 +7,23 @@ var BASE_URL = $('body').data('url-base');
  */
 var media = {
 	container: false,
+	uploadDir: BASE_URL + 'img/upload/',
+	htmlModule: '<div class="row"><label for="media">Media</label></div>',
 
 	init: function(container) {
 		media.container = $(container);
 	},
 
-	loads: function() {
+	loadCurrent: function() {
 		$.getJSON(BASE_URL + '/ajax/main-content/?media=' + $(media.container).data('id'), function(results) {
 			if (results) {
 				console.log(results);
-				var section = search.parent().find('section').html('');
+				$(media.container).find('.row').last().after(media.htmlModule);
 				$.each(results, function(index, result) {
-					$(section).append('<a class="' + result.type.toLowerCase() + '" href="' + result.guid + '">' + result.name + '<span>' + result.type + '</span></a>');
+					$(media.container).find('.row').last().find('label').after('<a href="' + media.uploadDir + result.basename + '"><img src="' + media.uploadDir + result.basename + '" alt="' + result.filename + '"><span class="title">' + result.filename + '</span></a>');
 				});
 			} else {
-				console.log('value');
+				// console.log('value');
 			}
 		});		
 	}
@@ -48,7 +50,7 @@ $(document).ready(function() {
 
 	if ($('.content.update').length) {
 		media.init('.content.update');
-		media.loads();
+		media.loadCurrent();
 	}
 
 

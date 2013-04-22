@@ -109,9 +109,6 @@ class Model_Maincontent extends Model
 		return $this->data = $result;
 	}
 
-
-
-		
 	// 	$this->setMeta($sth->fetchAll(PDO::FETCH_ASSOC));
 	// 	$this->data = current($this->data);
 	// 	if (array_key_exists('media', $this->data)) {
@@ -121,6 +118,40 @@ class Model_Maincontent extends Model
 	// 	}
 	// 	return $sth->rowCount();
 	// }
+
+	public function readMedia($id) {	
+		$sth = $this->database->dbh->prepare("	
+			select
+				main_content_meta.id
+				, main_content_meta.content_id
+				, main_content_meta.name
+				, main_content_meta.value
+			from main_content_meta
+			where main_content_meta.content_id = :id
+		");
+		$sth->execute(array(
+			':id' => $id
+		));	
+		$results = $sth->fetchAll(PDO::FETCH_ASSOC);
+		$sth = $this->database->dbh->prepare("	
+			select
+				id
+				, filename
+				, basename
+				, type
+				, date_published
+			from main_media
+			where main_media.id = :id
+		");
+		foreach ($results as $result) {
+			if ($result['name'] == 'media') {
+				$sth->execute(array(
+					':id' => $result['value']
+				));	
+			}
+		}
+		$this->data = $sth->fetchAll(PDO::FETCH_ASSOC);
+	}
 
 	public function readByTitleSlug($titleSlug) {
 		$sth = $this->database->dbh->prepare("	
