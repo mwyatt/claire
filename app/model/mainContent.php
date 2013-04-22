@@ -78,8 +78,7 @@ class Model_Maincontent extends Model
 		$sth->execute(array(
 			':type' => $type
 		));	
-		$this->setMeta($sth->fetchAll(PDO::FETCH_ASSOC));
-		return $sth->rowCount();
+		return $this->data = $this->setMeta($sth->fetchAll(PDO::FETCH_ASSOC));
 	}	
 
 	public function readById($id) {	
@@ -102,59 +101,26 @@ class Model_Maincontent extends Model
 		$sth->execute(array(
 			':id' => $id
 		));	
-		$this->setMeta($sth->fetchAll(PDO::FETCH_ASSOC));
-		$this->data = current($this->data);
-		return $sth->rowCount();
+		$result = $this->setMeta($sth->fetchAll(PDO::FETCH_ASSOC));
+		$result = current($result);
+		// if (array_key_exists('media', $result)) {
+		// 	$result['media'] = ;
+		// }
+		return $this->data = $result;
 	}
 
-	public function readMedia($id) {	
-		$sth = $this->database->dbh->prepare("	
-			select
-				main_content_meta.id
-				, main_content_meta.content_id
-				, main_content_meta.name
-				, main_content_meta.value
-			from main_content_meta
-			where main_content_meta.content_id = :id
-		");
-		$sth->execute(array(
-			':id' => $id
-		));	
-		$results = $sth->fetchAll(PDO::FETCH_ASSOC);
-		$sth = $this->database->dbh->prepare("	
-			select
-				id
-				, filename
-				, basename
-				, type
-				, date_published
-			from main_media
-			where main_media.id = :id
-		");
-		foreach ($results as $result) {
-			if ($result['name'] == 'media') {
-				$sth->execute(array(
-					':id' => $result['value']
-				));	
-			}
-		}
-		$results = $sth->fetchAll(PDO::FETCH_ASSOC);
-		echo '<pre>';
-		print_r($results);
-		echo '</pre>';
-		exit;
-		
+
 
 		
-		$this->setMeta($sth->fetchAll(PDO::FETCH_ASSOC));
-		$this->data = current($this->data);
-		if (array_key_exists('media', $this->data)) {
-			$this->data = $this->data['media'];
-		} else {
-			$this->data = false;
-		}
-		return $sth->rowCount();
-	}
+	// 	$this->setMeta($sth->fetchAll(PDO::FETCH_ASSOC));
+	// 	$this->data = current($this->data);
+	// 	if (array_key_exists('media', $this->data)) {
+	// 		$this->data = $this->data['media'];
+	// 	} else {
+	// 		$this->data = false;
+	// 	}
+	// 	return $sth->rowCount();
+	// }
 
 	public function readByTitleSlug($titleSlug) {
 		$sth = $this->database->dbh->prepare("	
@@ -238,7 +204,7 @@ class Model_Maincontent extends Model
 			, ':html' => (array_key_exists('html', $_POST) ? $_POST['html'] : '')
 			, ':type' => $_POST['type']
 			, ':date_published' => time()
-			, ':status' => $this->isChecked('status')
+			, ':status' => ($this->isChecked('status') ? 'visible' : 'hidden')
 			, ':user_id' => $user->get('id')
 		));		
 
@@ -252,7 +218,6 @@ class Model_Maincontent extends Model
 				
 	public function update() {
 		$user = new Model_Mainuser($this->database, $this->config);
-
 		$sth = $this->database->dbh->prepare("
 			select 
 				title
@@ -264,13 +229,10 @@ class Model_Maincontent extends Model
 			from main_content
 			where id = ?
 		");				
-
 		$sth->execute(array(
 			$_GET['edit']
 		));		
-
 		$row = $sth->fetch(PDO::FETCH_ASSOC);
-
 		$sth = $this->database->dbh->prepare("
 			update main_content set
 				title = ?
@@ -279,20 +241,14 @@ class Model_Maincontent extends Model
 			where
 				id = ?
 		");				
-		
 		$sth->execute(array(
-			$_POST['title']
-			, $_POST['html']
-			, $this->isChecked('status')
-			, $_GET['edit']
+			(array_key_exists('title', $_POST) ? $_POST['title'] : '')
+			, (array_key_exists('html', $_POST) ? $_POST['html'] : '')
+			, ($this->isChecked('status') ? 'visible' : 'hidden')
+			, (array_key_exists('edit', $_GET) ? $_GET['edit'] : '')
 		));		
-
-		if ($sth->rowCount()) {
-			$this->session->set('feedback', ucfirst($row['type']) . ' "' . $row['title'] . '" updated');
-			return true;
-		}
-		$this->session->set('feedback', 'Problem while updating');
-		return false;
+		$this->session->set('feedback', ucfirst($row['type']) . ' "' . $row['title'] . '" updated');
+		return true;
 	}
 
 }

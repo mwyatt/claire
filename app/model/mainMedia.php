@@ -37,46 +37,39 @@ class Model_Mainmedia extends Model
 			'width' => 650, 'height' => 650
 		)
 	);
-	
-	
-	/**
-	 * all users are found
-	 * create new setmetadatastaement, this method will pair the meta data with the normal data. grouping by the main id.
-	 * @return null
-	 */
-	public function read()
-	{	
+	public $dir = 'img/upload/';
 
+	
+	public function read($id) {	
+		$or = '';
+		if (is_array($id)) {
+			$ids = $id;
+			foreach ($ids as $id) {
+				$or .= " or main_media.id = '$id' ";
+			}
+		}
 		$sth = $this->database->dbh->query("	
-
 			select
-				main_media.id
-				, main_media.file_name
-				, main_media.title
-				, main_media.date_published
-				, main_media.type
-				, main_user_meta.name
-
+				id
+				, filename
+				, basename
+				, type
+				, date_published
+				, user_id
 			from main_media
-
-			left join main_user on main_user.id = main_media.user_id
-
-			left join main_user_meta on main_user_meta.user_id = main_user.id
-
+			where main_media.id = '$id'
+			$or
 			group by main_media.id
-
 		");
-				// , case when main_user_meta.name = 'first_name' then main_user_meta.value end as user_first_name
-				// , case when main_user_meta.name = 'last_name' then main_user_meta.value end as user_last_name
-		
-
-
-
-
-		$this->setDataStatement($sth);
-
+		return $this->data = $this->setData($sth->fetchAll(PDO::FETCH_ASSOC));
 	}	
 
+	public function setData($rows) {
+		foreach ($rows as $key => $row) {
+			$rows[$key]['guid'] = $this->getGuid('media', $row['basename']);
+		}
+		return $rows;
+	}
 	
 	
 	public function getExtension($val)
@@ -139,6 +132,12 @@ class Model_Mainmedia extends Model
 	 * @return bool  
 	 */
 	public function uploadAttach($contentId) {
+		$files = $_FILES;
+		if (empty($files) || ! array_key_exists('media', $files)) {
+			return;
+		}
+		$uploadPath = BASE_PATH . $this->dir;
+		$files = $this->tidyFiles($files['media']);
 		$sthMedia = $this->database->dbh->prepare("
 			insert into main_media (
 				filename
@@ -166,17 +165,14 @@ class Model_Mainmedia extends Model
 				, :name
 				, :value
 			)
-		");	
-		$files = $_FILES;
-		if (empty($files) || ! array_key_exists('media', $files)) {
-			return;
-		}
-		$uploadPath = BASE_PATH . 'img/upload/';
-		$files = $this->tidyFiles($files['media']);
-
+		");			
 		foreach ($files as $key => $file) {
 			$fileInformation = pathinfo($file['name']);
 			$filePath = $uploadPath . $fileInformation['basename'];
+
+			if ($file['error']) {
+				return false;
+			}
 
 			if (
 				$file['type'] != 'image/gif'
@@ -236,7 +232,7 @@ class Model_Mainmedia extends Model
 	// public function upload($files)
 	// {	
 
-	// 	$uploadPath = BASE_PATH . 'img/upload/';
+	// 	$uploadPath = BASE_PATH . $this->dir;
 
 	// 	// tidy array for readability
 
@@ -428,7 +424,7 @@ class Model_Mainmedia extends Model
 
 		if ($row = $sth->fetch()) {
 			
-			$file = BASE_PATH . 'img/upload/' . $row['file_name'];
+			$file = BASE_PATH . $this->dir . $row['file_name'];
 
 			if (is_file($file))
 			  unlink($file);

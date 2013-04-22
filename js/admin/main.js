@@ -60,7 +60,7 @@ $(document).ready(function() {
 
 
 
-	if ($('.content.page.new').length) {
+	if ($('.content.page').length || $('.content.press').length) {
 
 		var editor = new wysihtml5.Editor("textarea", {
 		  toolbar:        "toolbar",

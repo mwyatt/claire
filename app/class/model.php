@@ -308,12 +308,15 @@ abstract class Model extends Config
 		
 	}
 
-	public function getGuid($type, $name, $id) {
+	public function getGuid($type = false, $name = false, $id = false) {
+		if ($type == 'media') {
+			return $this->config->getUrl('base') . $this->dir . $name;
+		}
 		return $this->config->getUrl('base') . $type . '/' . $this->urlFriendly($name) . '-' . $id . '/';
 	}
 
 	public function isChecked($key) {
-		return (array_key_exists($key, $_POST) ? $_POST[$key] : false);
+		return (array_key_exists($key, $_POST) ? true : false);
 	}
 
 
@@ -388,8 +391,10 @@ if (array_key_exists('title', $result)) {
 				$parsedResults[$result['id']] = $result;
 			}
 		}
-		$this->data = array_filter($parsedResults);
-		return true;
+		foreach ($parsedResults as $key => $parsed) {
+			$parsedResults[$key] = array_filter($parsed);
+		}
+		return array_filter($parsedResults);
 	}
 
 	

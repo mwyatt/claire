@@ -30,6 +30,7 @@ class Controller_Admin_Content extends Controller
 
 		if (array_key_exists('form_update', $_POST)) {
 			if ($content->update()) {
+				$media->uploadAttach($_GET['edit']);
 				$this->route('current');
 			} else {
 				$this->route('current');
@@ -38,6 +39,10 @@ class Controller_Admin_Content extends Controller
 
 		if (array_key_exists('edit', $_GET)) {
 			$content->readById($_GET['edit']);
+			if (array_key_exists('media', $content->data)) {
+				$media->read($content->data['media']);
+				$this->view->setObject($media);
+			}
 			$this->view
 				->setObject($content)
 				->loadTemplate('admin/content/create-update');
@@ -55,28 +60,28 @@ class Controller_Admin_Content extends Controller
 
 
 	public function page() {
-		$page = new Model_Maincontent($this->database, $this->config);
-		$page->readByType($this->config->getUrl(2));
+		$content = new Model_Maincontent($this->database, $this->config);
+		$content->readByType($this->config->getUrl(2));
 		$this->view
-			->setObject($page)
+			->setObject($content)
 			->loadTemplate('admin/content/list');
 	}
 
 
 	public function minutes() {
-		$page = new Model_Maincontent($this->database, $this->config);
-		$page->readByType($this->config->getUrl(2));
+		$content = new Model_Maincontent($this->database, $this->config);
+		$content->readByType($this->config->getUrl(2));
 		$this->view
-			->setObject($page)
+			->setObject($content)
 			->loadTemplate('admin/content/list');
 	}
 
 
 	public function press() {
-		$page = new Model_Maincontent($this->database, $this->config);
-		$page->readByType($this->config->getUrl(2));
+		$content = new Model_Maincontent($this->database, $this->config);
+		$content->readByType($this->config->getUrl(2));
 		$this->view
-			->setObject($page)
+			->setObject($content)
 			->loadTemplate('admin/content/list');
 	}
 }

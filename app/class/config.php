@@ -170,26 +170,62 @@ class Config
 	 * @param  string $three 
 	 * @return array|string|int            
 	 */
-	public function get($one = null, $two = null, $three = null) {	
+	public function get($one = false, $two = false, $three = false) {	
 		if (is_array($one)) {
 			if (array_key_exists($two, $one)) {
 				return $one[$two];
 			}
 			return;
 		}
-		if (array_key_exists($one, $this->data)) {
-			if (is_array($this->data[$one]) && array_key_exists($two, $this->data[$one])) {
-				if (is_array($this->data[$one][$two]) && array_key_exists($three, $this->data[$one][$two])) {
-					return $this->data[$one][$two][$three];
+		if ($one && $two && $three) {
+			if (is_array($this->data)) {
+				if (array_key_exists($one, $this->data)) {
+					if (is_array($this->data[$one])) {
+						if (array_key_exists($two, $this->data[$one])) {
+							if (is_array($this->data[$one][$two])) {
+								if (array_key_exists($three, $this->data[$one][$two])) {
+									return $this->data[$one][$two][$three];
+								}
+							} else {
+								return $this->data[$one][$two][$three];
+							}
+						}
+					} else {
+						return $this->data[$one][$two];
+					}
 				}
-				return $this->data[$one][$two];
+			} else {
+				return $this->data;
 			}
-			return $this->data[$one];
+			return false;
 		}
-		if (! $one && ! $two && ! $three) {
-			return $this->data;
+		if ($one && $two) {
+			if (is_array($this->data)) {
+				if (array_key_exists($one, $this->data)) {
+					if (is_array($this->data[$one])) {
+						if (array_key_exists($two, $this->data[$one])) {
+							return $this->data[$one][$two];
+						}
+					} else {
+						return $this->data[$one][$two];
+					}
+				}
+			} else {
+				return $this->data;
+			}
+			return false;
 		}
-		return;
+		if ($one) {
+			if (is_array($this->data)) {
+				if (array_key_exists($one, $this->data)) {
+					return $this->data[$one];
+				}
+			} else {
+				return $this->data[$one];
+			}
+			return false;
+		}
+		return $this->data;
 	}	
 	
 }
