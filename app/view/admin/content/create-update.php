@@ -1,6 +1,6 @@
 <?php require_once($this->pathView() . 'admin/header.php'); ?>
 
-<div class="content <?php echo ucfirst($this->urlSegment(2)); ?> <?php echo ($this->get('model_maincontent') ? 'update' : 'create'); ?>">
+<div class="content <?php echo ucfirst($this->urlSegment(2)); ?> <?php echo ($this->get('model_maincontent') ? 'update' : 'create'); ?>" data-id="<?php echo $this->get('model_maincontent', 'id'); ?>">
 	<h1><?php echo ($this->get('model_maincontent') ? 'Update ' . ucfirst($this->urlSegment(2)) . ' ' . $this->get('model_maincontent', 'title') : 'Create new ' . ucfirst($this->urlSegment(2))); ?></h1>
 	<form class="main" method="post"<?php echo ($this->urlSegment(2) == 'minutes' ? ' enctype="multipart/form-data"' : ''); ?>>
 		<div class="row">			
@@ -31,6 +31,9 @@
 		<div class="row">
 			<label for="status">Visibility</label>
 			<input id="status" type="checkbox" name="status" value="visible"<?php echo ($this->get('model_maincontent', 'status') == 'visible' ? ' checked' : ''); ?>>
+		</div>
+		<div class="row">
+			<label for="media">Media</label>
 		</div>
 		<input name="form_<?php echo ($this->get('model_maincontent') ? 'update' : 'create'); ?>" type="hidden" value="true">
 		<input name="type" type="hidden" value="<?php echo $this->urlSegment(2); ?>">

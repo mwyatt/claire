@@ -53,7 +53,7 @@ class Model_Maincontent extends Model
 			$sth->bindValue(':limit', (int) $limit, PDO::PARAM_INT);
 		}
 		$sth->execute();	
-		$this->setData($sth->fetchAll(PDO::FETCH_ASSOC));
+		$this->setMeta($sth->fetchAll(PDO::FETCH_ASSOC));
 		return $sth->rowCount();		
 	}	
 
@@ -70,79 +70,89 @@ class Model_Maincontent extends Model
 				, main_content_meta.name as meta_name
 				, main_content_meta.value as meta_value
 			from main_content
-			left join
-				main_content_meta on main_content_meta.content_id = main_content.id
-			left join
-				main_user on main_user.id = main_content.user_id
-			where
-				main_content.type = :type
-			order by
-				main_content.date_published
+			left join main_content_meta on main_content_meta.content_id = main_content.id
+			left join main_user on main_user.id = main_content.user_id
+			where main_content.type = :type
+			order by main_content.date_published
 		");
 		$sth->execute(array(
 			':type' => $type
 		));	
-		$this->setData($sth->fetchAll(PDO::FETCH_ASSOC));
-
-		echo '<pre>';
-		print_r($this->data);
-		echo '</pre>';
-		exit;
-		
-
-
-
-
-		// while (
-
-		// 	) {
-		// 	if (! array_key_exists($row['id'], $this->data)) {
-		// 		$this->data[$row['id']] = $row;
-		// 		$this->data[$row['id']]['guid'] = $this->getGuid('post', $row['title'], $row['id']);
-		// 	}
-		// 	if ($row['meta_name'])
-		// 		$this->data[$row['id']][$row['meta_name']] = $row['meta_value'];
-		// }
-
+		$this->setMeta($sth->fetchAll(PDO::FETCH_ASSOC));
 		return $sth->rowCount();
 	}	
 
 	public function readById($id) {	
-	
 		$sth = $this->database->dbh->prepare("	
-
 			select
 				main_content.id
 				, main_content.title
 				, main_content.html
-				, main_content.type
 				, main_content.date_published
 				, main_content.status
-				, main_content.user_id
-
+				, main_content.type
+				, main_content_meta.name as meta_name
+				, main_content_meta.value as meta_value
 			from main_content
-
-			left join
-				main_user on main_user.id = main_content.user_id
-
-			where
-				main_content.id = :id
-
+			left join main_content_meta on main_content_meta.content_id = main_content.id
+			left join main_user on main_user.id = main_content.user_id
+			where main_content.id = :id
 		");
 
 		$sth->execute(array(
 			':id' => $id
 		));	
+		$this->setMeta($sth->fetchAll(PDO::FETCH_ASSOC));
+		$this->data = current($this->data);
+		return $sth->rowCount();
+	}
 
-		// while ($row = ) {
-		// 	if (! array_key_exists($row['id'], $this->data)) {
-		// 		$this->data[$row['id']] = $row;
-		// 		$this->data[$row['id']]['guid'] = $this->getGuid('post', $row['title'], $row['id']);
-		// 	}
-		// 	if ($row['meta_name'])
-		// 		$this->data[$row['id']][$row['meta_name']] = $row['meta_value'];
-		// }
-		$this->data = $sth->fetch(PDO::FETCH_ASSOC);
+	public function readMedia($id) {	
+		$sth = $this->database->dbh->prepare("	
+			select
+				main_content_meta.id
+				, main_content_meta.content_id
+				, main_content_meta.name
+				, main_content_meta.value
+			from main_content_meta
+			where main_content_meta.content_id = :id
+		");
+		$sth->execute(array(
+			':id' => $id
+		));	
+		$results = $sth->fetchAll(PDO::FETCH_ASSOC);
+		$sth = $this->database->dbh->prepare("	
+			select
+				id
+				, filename
+				, basename
+				, type
+				, date_published
+			from main_media
+			where main_media.id = :id
+		");
+		foreach ($results as $result) {
+			if ($result['name'] == 'media') {
+				$sth->execute(array(
+					':id' => $result['value']
+				));	
+			}
+		}
+		$results = $sth->fetchAll(PDO::FETCH_ASSOC);
+		echo '<pre>';
+		print_r($results);
+		echo '</pre>';
+		exit;
+		
+
+		
+		$this->setMeta($sth->fetchAll(PDO::FETCH_ASSOC));
+		$this->data = current($this->data);
+		if (array_key_exists('media', $this->data)) {
+			$this->data = $this->data['media'];
+		} else {
+			$this->data = false;
+		}
 		return $sth->rowCount();
 	}
 
@@ -193,34 +203,7 @@ class Model_Maincontent extends Model
 	}
 
 
-	/**
-	 * sets one result row at a time
-	 * @param object $sth 
-	 */
-	public function setData($results) {		
-		foreach ($results as $key => $result) {
-			if (array_key_exists('title', $result)) {
-				$result['slug'] = $this->urlFriendly($result['title']);
-				if (array_key_exists('type', $result)) {
-					$result['guid'] = $this->getGuid($result['type'], $result['title'], $result['id']);
-				}
-			}
-			if (array_key_exists('meta_name', $result)) {
-				if (array_key_exists($result['id'], $this->data)) {
-					$results[$result['id']][$result['meta_name']] = $result['meta_value'];
-				} else {
-					$results[$result['id']] = $result;
-					$results[$result['id']][$result['meta_name']] = $result['meta_value'];
-				}
-				unset($results[$result['id']]['meta_name']);
-				unset($results[$result['id']]['meta_value']);
-			} else {
-				$results[$result['id']] = $result;
-			}
-		}
-		$this->data = array_filter($results);
-		return true;
-	}
+
 
 
 	public function create() {	

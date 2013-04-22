@@ -319,30 +319,78 @@ abstract class Model extends Config
 
 
 
+	// /**
+	//  * pairs meta values with corresponding rows
+	//  * this requires the key 'id' to function
+	//  * @param  array $rows full set of data which needs pairing
+	//  * @return bool       
+	//  */
+	// public function parseMeta($rows) {
+	// 	$parsedRows = array();
+	// 	foreach ($rows as $key => $row) {
+	// 		if (! array_key_exists('id', $row) || ! array_key_exists('meta_name', $row)) {
+	// 			return false;
+	// 		}
+	// 		if (array_key_exists($row['id'], $parsedRows)) {
+	// 			$parsedRows[$row['id']][$row['meta_name']] = $row['meta_value'];
+	// 		} else {
+	// 			$parsedRows[$row['id']] = $row;
+	// 			$parsedRows[$row['id']][$row['meta_name']] = $row['meta_value'];
+	// 			unset($parsedRows[$row['id']]['meta_name']);
+	// 			unset($parsedRows[$row['id']]['meta_value']);
+	// 		}
+	// 	}
+	// 	$parsedRows = array_values($parsedRows);
+	// 	$parsedRows = reset($parsedRows);
+	// 	return $parsedRows;
+	// }
+
+
 	/**
-	 * pairs meta values with corresponding rows
-	 * this requires the key 'id' to function
-	 * @param  array $rows full set of data which needs pairing
-	 * @return bool       
+	 * sets all meta keys, how clever!
+	 * at the moment requires id, title, meta_key and meta_value
+	 * @param array $results 
 	 */
-	public function parseMeta($rows) {
-		$parsedRows = array();
-		foreach ($rows as $key => $row) {
-			if (! array_key_exists('id', $row) || ! array_key_exists('meta_name', $row)) {
-				return false;
-			}
-			if (array_key_exists($row['id'], $parsedRows)) {
-				$parsedRows[$row['id']][$row['meta_name']] = $row['meta_value'];
+	public function setMeta($results) {		
+
+/*
+if (array_key_exists('title', $result)) {
+	$result['slug'] = $this->urlFriendly($result['title']);
+	if (array_key_exists('type', $result)) {
+		$result['guid'] = $this->getGuid($result['type'], $result['title'], $result['id']);
+	}
+}
+ */
+
+		$parsedResults = array();
+		foreach ($results as $result) {
+			if (array_key_exists('meta_name', $result)) {
+				if (array_key_exists($result['id'], $parsedResults)) {
+					if (array_key_exists($result['meta_name'], $parsedResults[$result['id']])) {
+						if (is_array($parsedResults[$result['id']][$result['meta_name']])) {
+							$parsedResults[$result['id']][$result['meta_name']][] = $result['meta_value'];
+						} else {
+							$existingValue = $parsedResults[$result['id']][$result['meta_name']];
+							unset($parsedResults[$result['id']][$result['meta_name']]);
+							$parsedResults[$result['id']][$result['meta_name']][] = $existingValue;
+							$parsedResults[$result['id']][$result['meta_name']][] = $result['meta_value'];
+						}
+					} else {
+						$parsedResults[$result['id']][$result['meta_name']] = $result['meta_value'];
+					}
+				} else {
+					$parsedResults[$result['id']] = $result;
+					$parsedResults[$result['id']][$result['meta_name']] = $result['meta_value'];
+				}
+				unset($parsedResults[$result['id']]['meta_name']);
+				unset($parsedResults[$result['id']]['meta_value']);
 			} else {
-				$parsedRows[$row['id']] = $row;
-				$parsedRows[$row['id']][$row['meta_name']] = $row['meta_value'];
-				unset($parsedRows[$row['id']]['meta_name']);
-				unset($parsedRows[$row['id']]['meta_value']);
+				$parsedResults[$result['id']] = $result;
 			}
 		}
-		$parsedRows = array_values($parsedRows);
-		$parsedRows = reset($parsedRows);
-		return $parsedRows;
+		$this->data = array_filter($parsedResults);
+		return true;
 	}
+
 	
 }

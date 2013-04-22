@@ -31,15 +31,14 @@ if ($session->get('installing')) {
 	require_once(BASE_PATH . 'install-tabledata.php');
 	$ttfixture = new Model_Ttfixture($database, $config);
 	$ttfixture->generateAll();
-	
 	$session->getUnset('installing');
 	$controller->route('home');
-	// $files = glob(BASE_PATH . 'img/upload/'); // get all file names
-	// foreach($files as $file){ // iterate files
-	//   if(is_file($file))
-	//     unlink($file); // delete file
-	// }
 } else {
+	$files = glob(BASE_PATH . 'img/upload/'); // get all file names
+	foreach($files as $file){ // iterate files
+	  if(is_file($file))
+	    unlink($file); // delete file
+	}
 	$database->dbh->query("DROP DATABASE " . Database::$credentials['basename']); 
 	$database->dbh->query("CREATE DATABASE " . Database::$credentials['basename']);
 	$session->set('installing', true);

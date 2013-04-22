@@ -63,9 +63,13 @@ class Controller_Ajax extends Controller
 
 	
 	public function mainContent() {
+		$mainContent = new Model_Maincontent($this->database, $this->config);
 		if (array_key_exists('type', $_GET)) {
-			$mainContent = new Model_Maincontent($this->database, $this->config);
 			$mainContent->read($_GET['type'], (array_key_exists('limit', $_GET) ? $_GET['limit'] : ''));
+			$this->out($mainContent->getData());
+		}
+		if (array_key_exists('media', $_GET)) {
+			$mainContent->readMedia($_GET['media']);
 			$this->out($mainContent->getData());
 		}
 	}
