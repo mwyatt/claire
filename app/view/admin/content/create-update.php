@@ -54,7 +54,7 @@
 		</div>
 		<input name="form_<?php echo ($this->get('model_maincontent') ? 'update' : 'create'); ?>" type="hidden" value="true">
 		<input name="type" type="hidden" value="<?php echo $this->urlSegment(2); ?>">
-		<a href="#" class="submit">Save</a>
+		<a href="#" class="submit button">Save</a>
 		<input type="submit">
 	</form>
 </div>

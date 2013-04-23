@@ -68,7 +68,6 @@ function formSubmit() {
 
 $(document).ready(function() {
 
-
 	less.watch();
 
 	$.ajaxSetup ({  

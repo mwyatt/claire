@@ -22,19 +22,21 @@
        	<div class="wrap">
     		<div class="content login clearfix">
     			<a class="logo" href="<?php echo $this->urlHome(); ?>" title="Open Homepage"><span>4</span></a>
-    			<form method="post" name="form_login" onsubmit="">
+    			<form method="post" name="form_login">
     				<input type="hidden" name="form_login" value="true">
 
 <?php echo $this->getFeedback(); ?>
 
                     <div class="row">
-                        <input type="text" name="email_address" placeholder="Email Address" autofocus="autofocus"<?php echo ($this->session->get('form_field', 'email') ? ' value="' . $this->session->getUnset('form_field', 'email') . '"' : ''); ?>>
+                        <label for="email_address">Email Address</label>
+                        <input id="email_address" type="text" name="email_address" autofocus="autofocus"<?php echo ($this->session->get('form_field', 'email') ? ' value="' . $this->session->getUnset('form_field', 'email') . '"' : ''); ?>>
                     </div>
                     <div class="row">
-                        <input type="password" name="password" placeholder="Password">
+                        <label for="password">Password</label>
+                        <input id="password" type="password" name="password">
                     </div>
                     <input type="submit">
-                    <a href="#" class="submit" onclick="document.form_login.submit()">Login</a>
+                    <a href="#" class="submit button">Login</a>
                 </form>
     		</div>
             <script src="<?php echo $this->urlHome(); ?>js/vendor/jquery-1.8.2.min.js"></script>
