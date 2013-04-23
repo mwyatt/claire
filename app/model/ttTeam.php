@@ -344,7 +344,7 @@ class Model_Ttteam extends Model
 			if (array_key_exists('home_night', $row))
 				$row['home_night'] = self::$weekDays[$row['home_night']];
 
-			$row['guid'] = $this->getGuid($row['name'], $row['id']);
+			$row['guid'] = $this->getGuid('team', $row['name'], $row['id']);
 
 			$this->data[] = $row;
 		
@@ -420,20 +420,11 @@ class Model_Ttteam extends Model
 		$sth->execute(array(':division_id' => $divisionId));
 
 		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {	
-			$row['guid'] = $this->getGuid($row['name'], $row['id']);
+			$row['guid'] = $this->getGuid('team', $row['name'], $row['id']);
 			$this->data[] = $row;
 		}
 
 		return $this;
 
 	}
-		
-	public function getGuid($name, $id) {
-		return $this->config->getUrl('base') . 'team/' . $this->urlFriendly($name) . '-' . $id . '/';
-	}
-
-	
-	
-
-	
 }

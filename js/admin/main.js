@@ -1,33 +1,60 @@
 var BASE_URL = $('body').data('url-base');
 
+var selectDrop = {
+	container: false,
+	division: false,
+	team: false,
+
+	init: function() {
+		selectDrop.container = $('.content');
+		selectDrop.division = $(selectDrop.container).find('select[name="division_id"]');
+		selectDrop.team = $(selectDrop.container).find('select[name="team_id"]');
+		$(selectDrop.division).on('change', selectDrop.loadTeam);
+	},
+
+	loadTeam: function() {
+		$(selectDrop.team).html('');
+		$.getJSON(BASE_URL + '/ajax/team/?division_id=' + $(selectDrop.division).val(), function(results) {
+			if (results) {
+				$.each(results, function(index, result) {
+					$(selectDrop.team).append('<option value="' + result.id + '">' + result.name + '</option>');
+				});
+			}
+		});		
+	}
+}
+
+
+
+
 
 /**
  * media
  * @type {Object}
  */
-var media = {
-	container: false,
-	uploadDir: BASE_URL + 'img/upload/',
-	htmlModule: '<div class="row"><label for="media">Media</label></div>',
+// var media = {
+// 	container: false,
+// 	uploadDir: BASE_URL + 'img/upload/',
+// 	htmlModule: '<div class="row"><label for="media">Media</label></div>',
 
-	init: function(container) {
-		media.container = $(container);
-	},
+// 	init: function(container) {
+// 		media.container = $(container);
+// 	},
 
-	loadCurrent: function() {
-		$.getJSON(BASE_URL + '/ajax/main-content/?media=' + $(media.container).data('id'), function(results) {
-			if (results) {
-				console.log(results);
-				$(media.container).find('.row').last().after(media.htmlModule);
-				$.each(results, function(index, result) {
-					$(media.container).find('.row').last().find('label').after('<a href="' + media.uploadDir + result.basename + '"><img src="' + media.uploadDir + result.basename + '" alt="' + result.filename + '"><span class="title">' + result.filename + '</span></a>');
-				});
-			} else {
-				// console.log('value');
-			}
-		});		
-	}
-}
+// 	loadCurrent: function() {
+// 		$.getJSON(BASE_URL + '/ajax/main-content/?media=' + $(media.container).data('id'), function(results) {
+// 			if (results) {
+// 				console.log(results);
+// 				$(media.container).find('.row').last().after(media.htmlModule);
+// 				$.each(results, function(index, result) {
+// 					$(media.container).find('.row').last().find('label').after('<a href="' + media.uploadDir + result.basename + '"><img src="' + media.uploadDir + result.basename + '" alt="' + result.filename + '"><span class="title">' + result.filename + '</span></a>');
+// 				});
+// 			} else {
+// 				// console.log('value');
+// 			}
+// 		});		
+// 	}
+// }
 
 
 function formSubmit() {
@@ -47,6 +74,10 @@ $(document).ready(function() {
 		cache: false  
 	});
 
+
+	if ($('.content.player').length || $('.content.team').length) {
+		selectDrop.init();
+	}
 
 	if ($('.content.update').length) {
 		media.init('.content.update');
@@ -167,7 +198,7 @@ $(document).ready(function() {
 
 	// on
 
-	selectDivision.on('change', changeDivision);
+	// selectDivision.on('change', changeDivision);
 	selectTeamGroup.on('change', changeTeam);
 	selectPlayerGroup.on('change', changePlayer);
 	inputScore.on('keyup', changeInputScore);
@@ -238,25 +269,25 @@ $(document).ready(function() {
 
 	}
 
-	/**
-	 * trigger once division select is used
-	 * @return {null} 
-	 */
-	function changeDivision() {
+	// /**
+	//  * trigger once division select is used
+	//  * @return {null} 
+	//  */
+	// function changeDivision() {
 
-		$.get('http://' + window.location.host + '/git/mvc/ajax/team/',
-			{ division_id: $(this).val() },
-			function(result) {
-				if (result) {
-					$(selectTeamGroup).html(result);
-				}
-			}, "html"
-		);
+	// 	$.get('http://' + window.location.host + '/git/mvc/ajax/team/',
+	// 		{ division_id: $(this).val() },
+	// 		function(result) {
+	// 			if (result) {
+	// 				$(selectTeamGroup).html(result);
+	// 			}
+	// 		}, "html"
+	// 	);
 
-		// reset player select
-		$(selectPlayerGroup).html('');
+	// 	// reset player select
+	// 	$(selectPlayerGroup).html('');
 
-	}
+	// }
 
 
 	/**

@@ -6,7 +6,7 @@
 
 	<a class="new" href="<?php echo $this->urlCurrent(); ?>new/" title="Add a new Player">New</a>
 
-	<?php if ($ttPlayer->getData()) : ?>
+<?php if ($this->get('model_ttplayer')) : ?>
 
 	<table class="main" width="100%" cellspacing="0" cellpadding="0">
 
@@ -19,33 +19,36 @@
 			<th>Action</th>
 		</tr>
 
-		<?php while ($ttPlayer->nextRow()) : ?>
+	<?php foreach ($this->get('model_ttplayer') as $player): ?>
 
-		<tr data-id="<?php echo $ttPlayer->getRow('id'); ?>">
+		<tr data-id="<?php echo $this->get($player, 'id'); ?>">
 
 			<td>
-				<input type="checkbox" name="id" value="<?php echo $ttPlayer->getRow('id'); ?>">
+				<input type="checkbox" name="id" value="<?php echo $this->get($player, 'id'); ?>">
 			</td>
 
 			<td>
-				<a href="<?php echo $this->urlCurrent(); ?>?update=<?php echo $ttPlayer->getRow('id'); ?>" title="Edit Player <?php echo $ttPlayer->getRow('full_name'); ?>"><?php echo $ttPlayer->getRow('full_name'); ?></a>
+				<a href="<?php echo $this->urlCurrent(); ?>?edit=<?php echo $this->get($player, 'id'); ?>" title="Edit Player <?php echo $this->get($player, 'full_name'); ?>"><?php echo $this->get($player, 'full_name'); ?></a>
 			</td>
 
-			<td class="text-center"><?php echo $ttPlayer->getRow('rank'); ?></td>
+			<td class="text-center"><?php echo $this->get($player, 'rank'); ?></td>
 
-			<td><?php echo $ttPlayer->getRow('team_name'); ?></td>
+			<td><?php echo $this->get($player, 'team_name'); ?></td>
 
-			<td><?php echo $ttPlayer->getRow('division_name'); ?></td>
+			<td><?php echo $this->get($player, 'division_name'); ?></td>
 
-			<td class="action"><a href="<?php echo $this->urlCurrent(); ?>?delete=<?php echo $ttPlayer->getRow('id'); ?>" title="Delete <?php echo $ttPlayer->getRow('full_name'); ?>">Delete</a></td>
+			<td class="action">
+				<a href="<?php echo $this->urlCurrent(); ?>?edit=<?php echo $this->get($player, 'id'); ?>" title="Edit <?php echo $this->get($player, 'full_name'); ?>">Edit</a>
+				<a href="<?php echo $this->urlCurrent(); ?>?delete=<?php echo $this->get($player, 'id'); ?>" title="Delete <?php echo $this->get($player, 'full_name'); ?>">Delete</a>
+			</td>
 
 		</tr>		
 
-		<?php endwhile; ?>
+	<?php endforeach ?>
 
 	</table>
 	
-	<?php endif; ?>	
+<?php endif; ?>	
 
 </div> <!-- styling aid -->
 

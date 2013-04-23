@@ -25,11 +25,16 @@
 <?php endif ?>
 
 		<div class="row media">
+
+<?php if (count($this->get('model_mainmedia')) < 2 || $this->urlSegment(2) != 'minutes'): ?>
+
 			<input type="file" name="media[]"<?php echo ($this->urlSegment(2) == 'minutes' ? '' : ' multiple') ?>>
 
+<?php endif ?>
 <?php if ($this->get('model_mainmedia')): ?>
 
 			<div class="attached">
+				<h3>Attached Media</h3>
 				
 	<?php foreach ($this->get('model_mainmedia') as $media): ?>
 		

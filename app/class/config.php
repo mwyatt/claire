@@ -225,7 +225,7 @@ class Config
 			}
 			return false;
 		}
-		return $this->data;
+		// return $this->data;
 	}	
 	
 }

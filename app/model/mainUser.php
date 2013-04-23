@@ -138,7 +138,7 @@ class Model_Mainuser extends Model
 			':email' => $emailAddress
 		));
 
-		if ($row = $this->parseMeta($sth->fetchAll(PDO::FETCH_ASSOC))) {
+		if ($row = current($this->setMeta($sth->fetchAll(PDO::FETCH_ASSOC)))) {
 			if (crypt($password, $row['password']) == $row['password']) {
 				unset($row['password']);
 				$session = new Session();

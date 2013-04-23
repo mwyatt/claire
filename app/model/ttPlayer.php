@@ -93,12 +93,11 @@ class Model_Ttplayer extends Model
 		
 		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {	
 			$row['name'] = $row['full_name'];
-			$row['guid'] = $this->getGuid($row['full_name'], $row['id']);
+			$row['guid'] = $this->getGuid('player', $row['full_name'], $row['id']);
 			$this->data[] = $row;
 		}
 
-		// $this->setDataStatement($sth);
-
+		return $sth->rowCount();
 	}	
 
 
@@ -260,7 +259,7 @@ class Model_Ttplayer extends Model
 
 		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {	
 			$row['name'] = $row['full_name'];
-			$row['guid'] = $this->getGuid($row['full_name'], $row['id']);
+			$row['guid'] = $this->getGuid('player', $row['full_name'], $row['id']);
 			$this->data[] = $row;
 		}
 
@@ -304,7 +303,7 @@ class Model_Ttplayer extends Model
 		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {	
 			$average = $this->calcAverage($row['won'], $row['played']);
 			$averages[$row['id']] = $average;
-			$row['guid'] = $this->getGuid($row['full_name'], $row['id']);
+			$row['guid'] = $this->getGuid('player', $row['full_name'], $row['id']);
 			$row['average'] = $average . '&#37;';
 			$this->data[$row['id']] = $row;
 		}
@@ -730,9 +729,4 @@ class Model_Ttplayer extends Model
 		return false;
 
 	}
-
-	public function getGuid($fullName, $id) {
-		return $this->config->getUrl('base') . 'player/' . $this->urlFriendly($fullName) . '-' . $id . '/';
-	}
-
 }

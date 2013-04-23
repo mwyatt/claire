@@ -15,134 +15,78 @@ class Controller_Admin_League extends Controller
 {
 
 
-	public function initialise() {
-		echo '<pre>';
-		print_r('variable');
-		echo '</pre>';
-		exit;
-		
-		if (array_key_exists('page', $_GET)) {
-			$controller->loadMethod($_GET['page']);
-		} else {
-			$controller->loadMethod('index');
-		}
-	}
+	// public function initialise() {
+	// 	if (array_key_exists('page', $_GET)) {
+	// 		$controller->loadMethod($_GET['page']);
+	// 	} else {
+	// 		$controller->loadMethod('index');
+	// 	}
+	// }
 
 
 	/**
 	 * dashboard of admin area, displays login until logged in, then dashboard
 	 */
 	public function index() {
-		$ttdivision = new Model_Ttdivision($this->database, $this->config);
-		$ttdivision->read();
+		$division = new Model_Ttdivision($this->database, $this->config);
+		$division->read();
 		$user = new Model_Mainuser($this->database, $this->config);
 		$user->setObject($this->config->getObject('session'));
-		$this->view->setObject($ttdivision);
+		$this->view->setObject($division);
 		$this->view->setObject($user);
 		$this->view->loadTemplate('admin/league');
 	}
 
 
 	public function player() {
-		echo '<pre>';
-		print_r('variable');
-		echo '</pre>';
-		exit;
-		
-		// initialise 
-
-		$ttPlayer = new ttPlayer($database, $config);
-		$ttDivision = new ttDivision($database, $config);
-
-		$ttPlayer
-			->setObject($session)
-			->setObject($mainUser);
-
-		// (POST) update
-
+		$player = new Model_Ttplayer($this->database, $this->config);
+		$division = new Model_Ttdivision($this->database, $this->config);
 		if (array_key_exists('form_player_update', $_POST)) {
-
-			$ttPlayer->update($_POST);
-				
-			$route->current();
-			
+			$player->update($_POST);
+			$this->route('current');
 		}
-
-		// (POST) new
-
 		if (array_key_exists('form_player_new', $_POST)) {
-			
-			$ttPlayer->create($_POST);
-
-			$route->homeAdmin('player/');
-			
+			$player->create($_POST);
+			$this->route('admin', 'player/');
 		}
-
-		// (GET) update
-
-		if (array_key_exists('update', $_GET)) {
-
-			if (! $ttPlayer->readById($_GET['update']))
-				$route->current();
-
-			$ttDivision->read();
-			$ttTeam = new ttTeam($database, $config);
-			$ttTeam->readByDivision($ttPlayer->get('division_id'));
-
-			$view	
-				->setObject($ttDivision)
-				->setObject($ttTeam)
-				->setObject($ttPlayer)
-				->loadTemplate('admin/league/player/update');
-				
-		}
-
-		// (GET) delete
-
-		if (array_key_exists('delete', $_GET)) {
-			
-			$ttPlayer->deleteById($_GET['delete']);
-				
-		}
-
-		// next page
-
-		if ($config->getUrl(3)) {
-
-			if ($config->getUrl(3) == 'new') {
-
-				$ttDivision->read();
-
-				$view->setObject($ttDivision);
-
+		if (array_key_exists('edit', $_GET)) {
+			if (! $player->readById($_GET['edit'])) {
+				$this->route('current');
 			}
-
-			$view->loadTemplate('admin/league/player/new');	
-			
+			$division->read();
+			$ttTeam = new Model_Ttteam($this->database, $this->config);
+			$ttTeam->readByDivision($player->get('division_id'));
+			$this->view	
+				->setObject($division)
+				->setObject($ttTeam)
+				->setObject($player)
+				->loadTemplate('admin/league/player-create-update');
 		}
-
-		// invalid url
-
-		if ($config->getUrl(3))
-			$route->home('admin/' . $config->getUrl(2) . '/');
-
-		// view 	
-			
-		$ttPlayer->read();
-
-		$view
-			->setObject(array($mainUser, $ttPlayer))
-			->loadTemplate('admin/league/player/list');
+		if (array_key_exists('delete', $_GET)) {
+			$player->deleteById($_GET['delete']);
+		}
+		if ($this->config->getUrl(3)) {
+			if ($this->config->getUrl(3) == 'new') {
+				$division->read();
+				$this->view->setObject($division);
+			}
+			$this->view->loadTemplate('admin/league/player-create-update');	
+		}
+		if ($this->config->getUrl(3)) {
+			$this->route('home', 'admin/' . $this->config->getUrl(2) . '/');
+		}
+		$player->read();
+		$this->view
+			->setObject($player)
+			->loadTemplate('admin/league/player');
 	}
 
 
 	public function team() {
 		// initialise 
 
-		$ttTeam = new ttTeam($database, $config);
-		$ttDivision = new ttDivision($database, $config);
-
-		$ttTeam->setObject($mainUser);
+		$ttTeam = new Model_Ttteam($this->database, $this->config);
+		$division = new Model_Ttdivision($this->database, $this->config);
 
 		// (POST) update
 
@@ -150,18 +94,15 @@ class Controller_Admin_League extends Controller
 
 			$ttTeam->update($_POST);
 				
-			$route->current();
+			$this->route('current');
 			
 		}
 
 		// (POST) new
 
 		if (array_key_exists('form_team_new', $_POST)) {
-
 			$ttTeam->create($_POST);
-
-			$route->homeAdmin('team/');
-			
+			$this->route('admin', 'team/');
 		}
 
 		// (GET) update
@@ -169,16 +110,16 @@ class Controller_Admin_League extends Controller
 		if (array_key_exists('update', $_GET)) {
 
 			if (! $ttTeam->readById($_GET['update']))
-				$route->current();
+				$this->route('current');
 
-			$ttVenue = new ttVenue($database, $config);
+			$ttVenue = new Model_Ttvenue($this->database, $this->config);
 			$ttVenue->read();
-			$ttSecretary = new ttSecretary($database, $config);
+			$ttSecretary = new Model_Ttsecretary($this->database, $this->config);
 			$ttSecretary->read();
-			$ttDivision->read();
+			$division->read();
 
-			$view
-				->setObject($ttDivision)
+			$this->view
+				->setObject($division)
 				->setObject($ttVenue)
 				->setObject($ttSecretary)
 				->setObject($ttTeam)
@@ -196,37 +137,37 @@ class Controller_Admin_League extends Controller
 
 		// next page
 
-		if ($config->getUrl(3)) {
+		if ($this->config->getUrl(3)) {
 
 			// new
 
-			if ($config->getUrl(3) == 'new') {
+			if ($this->config->getUrl(3) == 'new') {
 
-				$ttVenue = new ttVenue($database, $config);
+				$ttVenue = new Model_Ttvenue($this->database, $this->config);
 				$ttVenue->read();
-				$ttDivision->read();
+				$division->read();
 
-				$view
+				$this->view
 					->setObject($ttTeam)
-					->setObject($ttDivision)
+					->setObject($division)
 					->setObject($ttVenue);
 
 			}
 
-			$view->loadTemplate($config->getUrl(1) . '/' . $config->getUrl(2) . '/' . $config->getUrl(3));	
+			$this->view->loadTemplate($this->config->getUrl(1) . '/' . $this->config->getUrl(2) . '/' . $this->config->getUrl(3));	
 			
 		}
 
 		// invalid url
 
-		if ($config->getUrl(3))
-			$route->home('admin/' . $config->getUrl(2) . '/');
+		if ($this->config->getUrl(3))
+			$this->route('home', 'admin/' . $this->config->getUrl(2) . '/');
 
 		// view 	
 			
 		$ttTeam->read();
 
-		$view
+		$this->view
 			->setObject($ttTeam)
 			->loadTemplate('admin/league/team/list');
 	}
@@ -236,16 +177,12 @@ class Controller_Admin_League extends Controller
 		// Init
 		// ============================================================================
 
-		$ttFixture = new ttFixture($database, $config);
-		$ttFixture
-			->setObject($mainUser)
-			->setObject($session);
+		$ttFixture = new Model_Ttfixture($this->database, $this->config);
+		$division = new Model_Ttdivision($this->database, $this->config);
 
-		$ttDivision = new ttDivision($database, $config);
+		$division->read();
 
-		$ttDivision->read();
-
-		$view->setObject(array($mainUser, $ttDivision, $ttFixture, $session));
+		$this->view->setObject(array($division, $ttFixture));
 
 		// Form Submission
 		// ============================================================================
@@ -253,7 +190,7 @@ class Controller_Admin_League extends Controller
 		if (array_key_exists('form_fixture_fulfill', $_POST)) {
 
 			$ttFixture->fulfill($_POST);
-			$route->current();		
+			$this->route('current');		
 			
 		}
 
@@ -261,9 +198,9 @@ class Controller_Admin_League extends Controller
 		// Sub Page
 		// ============================================================================
 
-		if ($config->getUrl(3)) {
+		if ($this->config->getUrl(3)) {
 
-			$view->loadTemplate($config->getUrl(0) . '/' . $config->getUrl(1) . '/' . $config->getUrl(2) . '/' . $config->getUrl(3));
+			$this->view->loadTemplate($this->config->getUrl(0) . '/' . $this->config->getUrl(1) . '/' . $this->config->getUrl(2) . '/' . $this->config->getUrl(3));
 
 		}
 
@@ -273,7 +210,7 @@ class Controller_Admin_League extends Controller
 				
 		$ttFixture->read();
 
-		$view
+		$this->view
 			->setObject($ttFixture)
 			->loadTemplate('admin/league/fixture/list');
 	}
