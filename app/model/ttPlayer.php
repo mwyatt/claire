@@ -684,49 +684,37 @@ class Model_Ttplayer extends Model
 	 * @param  array $post 
 	 * @return bool        
 	 */
-	public function update($post) {
-
-		// validation
-
-		if (! $this->validatePost($post, array(
-			'first_name'
-			, 'last_name'
-			, 'rank'
-			, 'team_id'
-		))) {
-
-			$this->getObject('mainUser')->setFeedback('All required fields must be filled');
-
-			return false;
-			
-		}
-
+	public function update() {
 		$sth = $this->database->dbh->prepare("
-			update tt_player
-			set
+			select 
+				first_name
+				, last_name
+				, rank
+				, team_id
+			from tt_player
+			where id = ?
+		");				
+		$sth->execute(array(
+			$_GET['edit']
+		));		
+		$row = $sth->fetch(PDO::FETCH_ASSOC);
+		$sth = $this->database->dbh->prepare("
+			update tt_player set
 				first_name = ?
 				, last_name = ?
 				, rank = ?
 				, team_id = ?
-			where id = '{$_GET['update']}'
-		");	
-
+			where
+				id = ?
+		");				
 		$sth->execute(array(
-			$post['first_name']
-			, $post['last_name']
-			, $post['rank']
-			, $post['team_id']
+			(array_key_exists('first_name', $_POST) ? $_POST['first_name'] : '')
+			, (array_key_exists('last_name', $_POST) ? $_POST['last_name'] : '')
+			, (array_key_exists('rank', $_POST) ? $_POST['rank'] : '')
+			, (array_key_exists('team_id', $_POST) ? $_POST['team_id'] : '')
+			, (array_key_exists('edit', $_GET) ? $_GET['edit'] : '')
 		));		
-
-		if ($sth->rowCount()) {
-
-			$this->getObject('mainUser')->setFeedback('Player Successfully Updated');
-
-			return true;
-			
-		}
-
-		return false;
-
+		$this->session->set('feedback', 'Player ' . ucfirst($row['first_name']) . ' ' . ucfirst($row['last_name']) . ' updated');
+		return true;
 	}
 }

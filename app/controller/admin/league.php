@@ -41,11 +41,11 @@ class Controller_Admin_League extends Controller
 	public function player() {
 		$player = new Model_Ttplayer($this->database, $this->config);
 		$division = new Model_Ttdivision($this->database, $this->config);
-		if (array_key_exists('form_player_update', $_POST)) {
-			$player->update($_POST);
+		if (array_key_exists('form_update', $_POST)) {
+			$player->update();
 			$this->route('current');
 		}
-		if (array_key_exists('form_player_new', $_POST)) {
+		if (array_key_exists('form_new', $_POST)) {
 			$player->create($_POST);
 			$this->route('admin', 'player/');
 		}

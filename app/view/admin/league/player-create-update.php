@@ -1,7 +1,7 @@
 <?php require_once($this->pathView() . 'admin/header.php'); ?>
 
 <div class="content <?php echo $this->urlSegment(2); ?> <?php echo ($this->get('model_ttplayer') ? 'update' : 'create'); ?>" data-id="<?php echo $this->get('model_ttplayer', 'id'); ?>">
-	<h1><?php echo ($this->get('model_ttplayer') ? 'Update ' . ucfirst($this->urlSegment(2)) . ' ' . $this->get('model_ttplayer', 'title') : 'Create new ' . ucfirst($this->urlSegment(2))); ?></h1>
+	<h1><?php echo ($this->get('model_ttplayer') ? 'Update ' . ucfirst($this->urlSegment(2)) . ' ' . $this->get('model_ttplayer', 'full_name') : 'Create new ' . ucfirst($this->urlSegment(2))); ?></h1>
 
 	<form class="main" method="post">
 
@@ -45,9 +45,9 @@
 
 			</select>
 		</div>
-	
-
 		<input name="form_<?php echo ($this->get('model_ttplayer') ? 'update' : 'create'); ?>" type="hidden" value="true">
+		<a href="#" class="submit">Save</a>
+		<input type="submit">
 	</form>
 </div>
 

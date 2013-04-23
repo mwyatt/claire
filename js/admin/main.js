@@ -68,6 +68,7 @@ function formSubmit() {
 
 $(document).ready(function() {
 
+
 	less.watch();
 
 	$.ajaxSetup ({  
@@ -79,12 +80,13 @@ $(document).ready(function() {
 		selectDrop.init();
 	}
 
-	if ($('.content.update').length) {
+	if ($('.content.update.page').length || $('.content.update.minutes').length || $('.content.update.press').length) {
 		media.init('.content.update');
 		media.loadCurrent();
 	}
 
 
+	$('form').find('a.submit').on('mouseup', formSubmit);
 
 
 
