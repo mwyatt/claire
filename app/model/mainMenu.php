@@ -186,7 +186,7 @@ class Model_Mainmenu extends Model
 		$baseUrl = $this->config->getUrl('base') . $this->config->getUrl(0). '/';
 
 		$current = ($this->config->getUrl(1) == '' ? ' class="current"' : '');
-		$this->data['admin'] .= '<li' . $current . '><a href="' . $baseUrl . '">Dashboard</a></li>';
+		$this->data['admin'] .= '<li' . $current . '><a class="button" href="' . $baseUrl . '">Dashboard</a></li>';
 		
 
 		foreach (get_class_methods('Controller_Admin') as $method) {
@@ -197,7 +197,7 @@ class Model_Mainmenu extends Model
 
 			} else {
 				$current = ($this->config->getUrl(1) == $method ? ' class="current"' : '');
-				$this->data['admin'] .= '<li' . $current . '><a href="' . $baseUrl . $method . '/">' . $method . '</a></li>';
+				$this->data['admin'] .= '<li' . $current . '><a class="button" href="' . $baseUrl . $method . '/">' . $method . '</a></li>';
 			}
 
 		}
