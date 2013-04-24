@@ -87,6 +87,7 @@ class View extends Model
 		}
 
 		// echo '<pre>';
+		// print_r($this->config);
 		// print_r($titles);
 		// print_r($this->data);
 		// echo '</pre>';
@@ -116,6 +117,11 @@ class View extends Model
 	public function pathView() { 
 		return BASE_PATH . 'app/view/';
 	}	
+	
+
+	public function url($key) {
+		$this->config->getUrl($key);
+	}
 	
 	/**
 	 * return base url
