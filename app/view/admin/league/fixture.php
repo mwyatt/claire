@@ -1,57 +1,43 @@
 <?php require_once($this->pathView() . 'admin/header.php'); ?>
 
-<div class="fixtures">
-	
+<div id="content" class="league fixtures">
 	<h2>Fixtures</h2>
+	<a class="new button" href="<?php echo $this->url('current_noquery'); ?>fulfill/" title="Add a new fixture">Submit Scorecard</a>
 
-	<nav>
-		<ul>
-			<li>
-				<a class="new" href="<?php echo $this->urlCurrent(); ?>fulfill/" title="Add a new Player">Submit Scorecard</a>
-			</li>
-		</ul>
-	</nav>
+<?php if ($this->get('model_ttfixture')) : ?>
+	<?php foreach ($this->get('model_ttfixture') as $fixture): ?>
 
-	<?php if ($ttFixture->getData()) : ?>	
+<div class="fixture">
 
-	<table width="100%" cellspacing="0" cellpadding="0">
+		<?php if ($this->get($fixture, 'date_fulfilled')): ?>
 
+	<span class="date-fulfilled"><?php echo $this->get($fixture, 'date_fulfilled') ?></span>
+	<a href="<?php echo $this->url('current_noquery'); ?>?edit=<?php echo $this->get($fixture, 'id'); ?>" title="Edit <?php echo $this->get($fixture, 'name'); ?>">Edit</a>
+	<a href="<?php echo $this->url('current_noquery'); ?>?reset=<?php echo $this->get($fixture, 'id'); ?>" title="Reset <?php echo $this->get($fixture, 'name'); ?>">Reset</a>
+
+		<?php endif ?>
+
+	<table width="100%" cellspacing="0" cellpadding="0" data-id="<?php echo $this->get($fixture, 'id'); ?>">
 		<tr>
-			<th>Select</th>
-			<th>Name</th>
-			<th>Rank</th>
-			<th>Team</th>
-			<th>Action</th>
+			<th><?php echo $this->get($fixture, 'team_left_name'); ?></th>
+			<th><?php echo $this->get($fixture, 'team_right_name'); ?></th>
 		</tr>
 
-		<?php while ($ttFixture->nextRow()) : ?>
+		<?php if ($this->get($fixture, 'date_fulfilled')): ?>
+		
+		<tr>
+			<td><?php echo $this->get($fixture, 'score_left'); ?></td>
+			<td><?php echo $this->get($fixture, 'score_right'); ?></td>
+		</tr>
 
-		<tr data-id="<?php echo $ttFixture->getRow('player_id'); ?>">
-
-			<td>
-				<input type="checkbox" name="player_id" value="<?php echo $ttFixture->getRow('player_id'); ?>">
-			</td>
-
-			<td>
-				<a href="#" title="(Ajax) Open Edit Panel"><?php echo $ttFixture->getRow('player_name'); ?></a>
-			</td>
-
-			<td title="(Ajax) Turn in to a input field and OK button"><?php echo $ttFixture->getRow('player_rank'); ?></td>
-
-			<td><?php echo $ttFixture->getRow('team_name'); ?></td>
-
-			<td><?php echo $ttFixture->getRow('division_name'); ?></td>
-
-			<td><a href="#" title="(Ajax) Delete Player">Delete</a></td>
-
-		</tr>		
-
-		<?php endwhile; ?>
+		<?php endif ?>
 
 	</table>
-	
-	<?php endif; ?>	
+</div>
 
-</div> <!-- styling aid -->
+	<?php endforeach ?>
+<?php endif ?>
+
+</div>
 
 <?php require_once($this->pathView() . 'admin/footer.php'); ?>

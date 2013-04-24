@@ -1,62 +1,44 @@
 <?php require_once($this->pathView() . 'admin/header.php'); ?>
 
 <div id="content" class="league team">
-	
 	<h2>Teams</h2>
+	<a class="new button" href="<?php echo $this->url('current_noquery'); ?>new/" title="Add a new team">New</a>
 
-	<nav>
-		<ul>
-			<li>
-				<a href="<?php echo $this->urlCurrent(); ?>new/" title="New Team">New</a>
-			</li>
-		</ul>
-	</nav>
-
-	<?php echo $this->getFeedback(); ?>
-
-	<?php if ($ttTeam->getData()) : ?>	
+<?php if ($this->get('model_ttteam')) : ?>
 
 	<table class="main" width="100%" cellspacing="0" cellpadding="0">
+		<thead>
+			<tr>
+				<th class="text-left">Name</th>
+				<th class="text-center">Home night</th>
+				<th class="text-left">Venue</th>
+				<th class="text-left">Division</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			
+	<?php foreach ($this->get('model_ttteam') as $team): ?>
 
-		<tr>
-			<th>Checkbox</th>
-			<th>Name</th>
-			<th>Players</th>
-			<th>Home Night</th>
-			<th>Venue</th>
-			<th>Division</th>
-			<th>Delete</th>
-		</tr>
-
-		<?php while ($ttTeam->nextRow()) : ?>
-
-		<tr data-id="<?php echo $ttTeam->getRow('id'); ?>">
-
+		<tr data-id="<?php echo $this->get($team, 'id'); ?>">
 			<td>
-				<input type="checkbox" name="id" value="<?php echo $ttTeam->getRow('id'); ?>">
+				<a href="<?php echo $this->url('current_noquery'); ?>?edit=<?php echo $this->get($team, 'id'); ?>" title="Edit team <?php echo $this->get($team, 'name'); ?>"><?php echo $this->get($team, 'name'); ?></a>
 			</td>
-
-			<td>
-				<a href="<?php echo $this->urlCurrent(); ?>?update=<?php echo $ttTeam->getRow('id'); ?>" title="Edit <?php echo $ttTeam->getRow('name'); ?>"><?php echo $ttTeam->getRow('name'); ?></a>
+			<td><?php echo $this->get($team, 'home_night'); ?></td>
+			<td><?php echo $this->get($team, 'venue_name'); ?></td>
+			<td><?php echo $this->get($team, 'division_name'); ?></td>
+			<td class="action">
+				<a href="<?php echo $this->url('current_noquery'); ?>?edit=<?php echo $this->get($team, 'id'); ?>" title="Edit <?php echo $this->get($team, 'name'); ?>">Edit</a>
+				<a href="<?php echo $this->url('current_noquery'); ?>?delete=<?php echo $this->get($team, 'id'); ?>" title="Delete <?php echo $this->get($team, 'name'); ?>">Delete</a>
 			</td>
-
-			<td><?php echo $ttTeam->getRow('player_count'); ?></td>
-
-			<td><?php echo $ttTeam->getRow('home_night'); ?></td>
-
-			<td><?php echo $ttTeam->getRow('venue_name'); ?></td>
-
-			<td><?php echo $ttTeam->getRow('division_name'); ?></td>
-
-			<td><a href="<?php echo $this->urlCurrent(); ?>?delete=<?php echo $ttTeam->getRow('id'); ?>" title="Delete <?php echo $ttTeam->getRow('name'); ?>">Delete</a></td>
-
 		</tr>		
 
-		<?php endwhile; ?>
+	<?php endforeach ?>
 
+		</tbody>			
 	</table>
 	
-	<?php endif; ?>	
+<?php endif; ?>	
 
 </div> <!-- styling aid -->
 

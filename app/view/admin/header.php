@@ -35,10 +35,9 @@
 
 <?php endif ?>
 
-<?php echo $this->getFeedback(); ?>
-
-			<nav class="main"><?php echo $this->get('model_mainmenu', 'admin'); ?></nav>
+            <nav class="main"><?php echo $this->get('model_mainmenu', 'admin'); ?></nav>
 
 <?php echo $this->get('model_mainmenu', 'admin_sub'); ?>
+<?php echo $this->getFeedback(); ?>
 
 		</header>

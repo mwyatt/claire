@@ -31,10 +31,8 @@ class Controller_Admin_Content extends Controller
 		if (array_key_exists('form_update', $_POST)) {
 			if ($content->update()) {
 				$media->uploadAttach($_GET['edit']);
-				$this->route('current');
-			} else {
-				$this->route('current');
 			}
+			$this->route('current');
 		}
 
 		if (array_key_exists('edit', $_GET)) {
@@ -46,6 +44,11 @@ class Controller_Admin_Content extends Controller
 			$this->view
 				->setObject($content)
 				->loadTemplate('admin/content/create-update');
+		}
+
+		if (array_key_exists('delete', $_GET)) {
+			$content->deleteById($_GET['delete']);
+			$this->route('current_noquery');
 		}
 
 		if ($this->config->getUrl(3) == 'new') {

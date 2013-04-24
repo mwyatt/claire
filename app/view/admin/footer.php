@@ -1,4 +1,6 @@
-			footer
+			<footer class="main clearfix">
+				<p>footer</p>
+			</footer>
 
 	        <script src="<?php echo $this->urlHome(); ?>js/vendor/jquery-1.8.2.min.js"></script>
 	        <script src="<?php echo $this->urlHome(); ?>plugin/wysihtml5/simple.js"></script>

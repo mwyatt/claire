@@ -205,12 +205,10 @@ class Model_Maincontent extends Model
 
 	public function create() {	
 		$user = new Model_Mainuser($this->database, $this->config);
-
 		if (! $this->validatePost($_POST, array('title'))) {
 			$this->session->set('feedback', 'All required fields must be filled');
 			return false;
 		}
-
 		$sth = $this->database->dbh->prepare("
 			insert into main_content (
 				title
@@ -279,6 +277,40 @@ class Model_Maincontent extends Model
 			, (array_key_exists('edit', $_GET) ? $_GET['edit'] : '')
 		));		
 		$this->session->set('feedback', ucfirst($row['type']) . ' "' . $row['title'] . '" updated');
+		return true;
+	}
+
+	public function deleteById($id) {
+		$sth = $this->database->dbh->prepare("
+			select 
+				title
+				, html
+				, type
+				, date_published
+				, status
+				, user_id
+			from main_content
+			where id = ?
+		");	
+		$sth->execute(array(
+			$id
+		));		
+		$row = $sth->fetch(PDO::FETCH_ASSOC);
+		$sth = $this->database->dbh->prepare("
+			delete from main_content
+			where id = ? 
+		");				
+		$sth->execute(array(
+			$id
+		));		
+		$sth = $this->database->dbh->prepare("
+			delete from main_content_meta
+			where content_id = ? 
+		");				
+		$sth->execute(array(
+			$id
+		));		
+		$this->session->set('feedback', ucfirst($row['type']) . ' "' . $row['title'] . '" deleted');
 		return true;
 	}
 

@@ -26,7 +26,7 @@
 
 		<div class="row media">
 
-<?php if (count($this->get('model_mainmedia')) < 2 || $this->urlSegment(2) != 'minutes'): ?>
+<?php if (count($this->get('model_mainmedia')) < 1 || $this->urlSegment(2) != 'minutes'): ?>
 
 			<input type="file" name="media[]"<?php echo ($this->urlSegment(2) == 'minutes' ? '' : ' multiple') ?>>
 

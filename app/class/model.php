@@ -355,16 +355,6 @@ abstract class Model extends Config
 	 * @param array $results 
 	 */
 	public function setMeta($results) {		
-
-/*
-if (array_key_exists('title', $result)) {
-	$result['slug'] = $this->urlFriendly($result['title']);
-	if (array_key_exists('type', $result)) {
-		$result['guid'] = $this->getGuid($result['type'], $result['title'], $result['id']);
-	}
-}
- */
-
 		$parsedResults = array();
 		foreach ($results as $result) {
 			if (array_key_exists('meta_name', $result)) {
@@ -389,6 +379,12 @@ if (array_key_exists('title', $result)) {
 				unset($parsedResults[$result['id']]['meta_value']);
 			} else {
 				$parsedResults[$result['id']] = $result;
+			}
+			if (array_key_exists('title', $result)) {
+				$result['slug'] = $this->urlFriendly($result['title']);
+				if (array_key_exists('type', $result)) {
+					$result['guid'] = $this->getGuid($result['type'], $result['title'], $result['id']);
+				}
 			}
 		}
 		foreach ($parsedResults as $key => $parsed) {

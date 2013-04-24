@@ -155,10 +155,11 @@ class Config
 			// 	$this->url['current'] = $_SERVER['HTTP_REFERER'];
 			// }
 			
-			$url = 'http://' . $this->url['host'] . '/';
+			$url = $this->url['base'];
 			foreach ($this->url['path'] as $segment) {
 				$url .= $segment . '/';
 			}
+			
 			$this->url['current_noquery'] =  $url;
 			$this->url['current'] = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 		}

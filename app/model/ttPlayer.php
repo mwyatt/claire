@@ -20,23 +20,10 @@ class Model_Ttplayer extends Model
 
 
 	public function create() {	
-
-		// validation
-
-		if (! $this->validatePost($_POST, array(
-			'first_name'
-			, 'last_name'
-			, 'rank'
-		))) {
-
-			$this->getObject('mainUser')->setFeedback('All required fields must be filled');
-
+		if (! $this->validatePost($_POST, array('first_name', 'last_name', 'rank'))) {
+			$this->session->set('feedback', 'All required fields must be filled');
 			return false;
-			
 		}
-		
-		// prepare
-
 		$sth = $this->database->dbh->prepare("
 			INSERT INTO
 				tt_player
@@ -44,31 +31,19 @@ class Model_Ttplayer extends Model
 			VALUES
 				(:first_name, :last_name, :rank, :team_id)
 		");				
-		
 		$sth->execute(array(
-			':first_name' => $_POST['first_name']
-			, ':last_name' => $_POST['last_name']
-			, ':rank' => $_POST['rank']
-			, ':team_id' => $_POST['team_id']
-		));		
-
-		// return
+			':first_name' => (array_key_exists('first_name', $_POST) ? $_POST['first_name'] : '')
+			, ':last_name' => (array_key_exists('last_name', $_POST) ? $_POST['last_name'] : '')
+			, ':rank' => (array_key_exists('rank', $_POST) ? $_POST['rank'] : '')
+			, ':team_id' => (array_key_exists('team_id', $_POST) ? $_POST['team_id'] : '')
+		));	
 
 		if ($sth->rowCount()) {
-
-			$this->getObject('mainUser')->setFeedback('Success! Player has been created');
-
-			return true;
-			
-		} else {
-
-			$this->getObject('mainUser')->setFeedback('Error Detected, Player has not been Created');
-
-			return false;
-
+			$this->session->set('feedback', 'Success, player "' . $_POST['first_name'] . ' ' . $_POST['last_name'] . '" created');
+			return $this->database->dbh->lastInsertId();
 		}
-
-		
+		$this->session->set('feedback', 'Problem while creating player');
+		return false;
 	}
 	
 

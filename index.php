@@ -39,9 +39,9 @@ if (array_key_exists('install', $_GET)) {
 	require_once(BASE_PATH . 'install.php');
 }
 
-$controller = new Controller($database, $config);
+$controller = new Controller();
 
-if ($controller->load($config->getUrl(0), $config->getUrl(1))) {
+if ($controller->load($config->getUrl(0), $config->getUrl(1), false, $database, $config)) {
 	// begin the controller
 } else {
 	$view = new View($database, $config);

@@ -25,21 +25,10 @@ class Model_Ttteam extends Model
 
 
 	public function create() {	
-
-		// validation
-
-		if (! $this->validatePost($_POST, array(
-			'name'
-		))) {
-
-			$this->getObject('mainUser')->setFeedback('All required fields must be filled');
-
+ 		if (! $this->validatePost($_POST, array('name', 'division_id', 'home_night', 'venue_id', 'form_create'))) {
+			$this->session->set('feedback', 'All required fields must be filled');
 			return false;
-			
 		}
-		
-		// prepare
-
 		$sth = $this->database->dbh->prepare("
 			INSERT INTO
 				tt_team
@@ -47,33 +36,25 @@ class Model_Ttteam extends Model
 			VALUES
 				(:name, :home_night, :venue_id, :division_id)
 		");				
-		
 		$sth->execute(array(
-			':name' => $_POST['name']
-			, ':home_night' => $_POST['home_night']
-			, ':venue_id' => $_POST['venue_id']
-			, ':division_id' => $_POST['division_id']
-		));		
-
-		// return
-
+			':name' => (array_key_exists('name', $_POST) ? $_POST['name'] : '')
+			, ':home_night' => (array_key_exists('home_night', $_POST) ? $_POST['home_night'] : '')
+			, ':venue_id' => (array_key_exists('venue_id', $_POST) ? $_POST['venue_id'] : '')
+			, ':division_id' => (array_key_exists('division_id', $_POST) ? $_POST['division_id'] : '')
+		));	
 		if ($sth->rowCount()) {
-
-			$this->getObject('mainUser')->setFeedback('Success! Team ' . $_POST['name'] . ' has been created');
-
-			return true;
-			
-		} else {
-
-			$this->getObject('mainUser')->setFeedback('Error Detected, Team has not been Created');
-
-			return false;
-
+			$this->session->set('feedback', 'Success, team "' . $_POST['name'] . '" created');
+			return $this->database->dbh->lastInsertId();
 		}
-		
+		$this->session->set('feedback', 'Problem while creating team');
+		return false;
 	}
 
 	
+	public function readWeekDays() {
+		$this->data = $this->getWeekDays();
+	}
+
 	public function getWeekDays() {
 
 		return self::$weekDays;
@@ -86,22 +67,23 @@ class Model_Ttteam extends Model
 	 * @param  array $post 
 	 * @return bool        
 	 */
-	public function update($post) {
-
-		// validation
-
-		if (! $this->validatePost($post, array(
-			'name'
-		))) {
-
-			$this->getObject('mainUser')->setFeedback('All required fields must be filled');
-
+	public function update($id) {
+ 		if (! $this->validatePost($_POST, array('name', 'division_id', 'home_night', 'venue_id', 'form_create'))) {
+			$this->session->set('feedback', 'All required fields must be filled');
 			return false;
-			
 		}
-
 		$sth = $this->database->dbh->prepare("
-
+			select
+				tt_team.name
+			from
+				tt_team
+			where id = ?
+		");				
+		$sth->execute(array(
+			$id
+		));		
+		$row = $sth->fetch(PDO::FETCH_ASSOC);
+		$sth = $this->database->dbh->prepare("
 			update
 				tt_team
 			set
@@ -112,28 +94,17 @@ class Model_Ttteam extends Model
 				, division_id = :division_id
 			where
 				id = :id
-
-		");	
-
+		");				
 		$sth->execute(array(
-			':name' => $post['name']
-			, ':id' => $_GET['update']
-			, ':secretary_id' => $post['secretary_id']
-			, ':venue_id' => $post['venue_id']
-			, ':home_night' => $post['home_night']
-			, ':division_id' => $post['division_id']
+			':name' => (array_key_exists('name', $_POST) ? $_POST['name'] : '')
+			, ':id' => $id
+			, ':secretary_id' => (array_key_exists('secretary_id', $_POST) ? $_POST['secretary_id'] : '')
+			, ':venue_id' => (array_key_exists('venue_id', $_POST) ? $_POST['venue_id'] : '')
+			, ':home_night' => (array_key_exists('home_night', $_POST) ? $_POST['home_night'] : '')
+			, ':division_id' => (array_key_exists('division_id', $_POST) ? $_POST['division_id'] : '')
 		));		
-
-		if ($sth->rowCount()) {
-
-			$this->getObject('mainUser')->setFeedback('Team Successfully Updated');
-
-			return true;
-			
-		}
-
-		return false;
-
+		$this->session->set('feedback', 'Team ' . ucfirst($row['name']) . ' updated');
+		return true;
 	}
 
 
@@ -151,7 +122,9 @@ class Model_Ttteam extends Model
 				tt_team.id
 				, tt_team.name
 				, tt_team.home_night
+				, tt_venue.id as venue_id
 				, tt_venue.name as venue_name
+				, tt_division.id as division_id
 				, tt_division.name as division_name
 
 			from
@@ -340,9 +313,10 @@ class Model_Ttteam extends Model
 		$view = new View($this->database, $this->config);
 
 		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {	
-		
-			if (array_key_exists('home_night', $row))
+
+			if (array_key_exists('home_night', $row) && $row['home_night']) {
 				$row['home_night'] = self::$weekDays[$row['home_night']];
+			}
 
 			$row['guid'] = $this->getGuid('team', $row['name'], $row['id']);
 
@@ -355,18 +329,33 @@ class Model_Ttteam extends Model
 	}	
 	
 
-	public function delete($id)
-	{	
-	
-		$sth = $this->database->dbh->query("
-			DELETE FROM
-				tt_team
-			WHERE
-				id = '$id'		
-		");
-		
-		return $sth->rowCount();
-		
+	public function delete($id)	{
+		$sth = $this->database->dbh->prepare("
+			update tt_player set
+				team_id = ?
+			where
+				team_id = ?
+		");				
+		$sth->execute(array(0, $id));	
+		$sth = $this->database->dbh->prepare("
+			select
+				tt_team.name
+			from tt_team
+			where id = ?
+		");				
+		$sth->execute(array($id));	
+		$row = $sth->fetch(PDO::FETCH_ASSOC);
+		$sth = $this->database->dbh->prepare("
+			delete from tt_team
+			where id = ?
+		");				
+		$sth->execute(array($id));	
+		if ($sth->rowCount()) {
+			$this->session->set('feedback', 'Team ' . ucfirst($row['name']) . ' deleted');
+			return;
+		}
+		$this->session->set('feedback', 'Unable to delete team ' . ucfirst($row['name']));
+		return;
 	}
 	
 

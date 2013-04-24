@@ -91,15 +91,14 @@ class Model_Ttfixture extends Model
 	 * @return null 
 	 */
 	public function read() {	
-	
 		$sth = $this->database->dbh->query("	
 			select
 				tt_fixture.id
 				, tt_fixture.date_fulfilled
-				, team_left.name as team_left
-				, team_right.name as team_right
-				, sum(encounter_part_left.player_score) as left_score
-				, sum(encounter_part_right.player_score) as right_score
+				, team_left.name as team_left_name
+				, team_right.name as team_right_name
+				, sum(encounter_part_left.player_score) as score_left
+				, sum(encounter_part_right.player_score) as score_right
 			from tt_fixture
 			left join tt_team as team_left on team_left.id = tt_fixture.team_left_id
 			left join tt_team as team_right on team_right.id = tt_fixture.team_right_id
@@ -108,9 +107,10 @@ class Model_Ttfixture extends Model
 			left join tt_encounter_part as encounter_part_right on encounter_part_right.id = tt_encounter.part_right_id
 			group by tt_fixture.id
 		");
-
-		$this->setDataStatement($sth);
-
+		if ($sth->rowCount()) {
+			$this->data = $sth->fetchAll(PDO::FETCH_ASSOC);
+		}
+		return;
 	}	
 
 

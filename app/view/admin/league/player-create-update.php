@@ -5,13 +5,17 @@
 
 	<form class="main" method="post">
 
-		<div class="row">			
-			<input class="required" type="text" name="first_name" placeholder="First Name" maxlength="75" value="<?php echo $this->get('model_ttplayer', 'first_name'); ?>">
-			<input class="required" type="text" name="last_name" placeholder="Last Name" maxlength="75" value="<?php echo $this->get('model_ttplayer', 'last_name'); ?>">
+		<div class="row">		
+			<label for="">First name</label>
+			<input class="required" type="text" name="first_name" maxlength="75" value="<?php echo $this->get('model_ttplayer', 'first_name'); ?>">
 		</div>			
-
+		<div class="row">
+			<label for="">Last name</label>
+			<input class="required" type="text" name="last_name" maxlength="75" value="<?php echo $this->get('model_ttplayer', 'last_name'); ?>">
+		</div>
 		<div class="row">			
-			<input class="required" type="text" name="rank" placeholder="Rank (eg 1800)" maxlength="75" value="<?php echo $this->get('model_ttplayer', 'rank'); ?>">
+			<label for="">rank</label>
+			<input class="required" type="text" name="rank" maxlength="75" value="<?php echo $this->get('model_ttplayer', 'rank'); ?>">
 		</div>			
 
 <?php if ($this->get('model_ttdivision')): ?>

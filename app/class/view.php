@@ -86,11 +86,11 @@ class View extends Model
 			}
 		}
 
-		// echo '<pre>';
+		echo '<pre>';
 		// print_r($this->config);
-		// print_r($titles);
+		print_r($titles);
 		// print_r($this->data);
-		// echo '</pre>';
+		echo '</pre>';
 		// exit;
 
 		// presentation & cache
@@ -119,8 +119,8 @@ class View extends Model
 	}	
 	
 
-	public function url($key) {
-		$this->config->getUrl($key);
+	public function url($key = 'base') {
+		return $this->config->getUrl($key);
 	}
 	
 	/**

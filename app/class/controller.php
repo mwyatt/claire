@@ -11,7 +11,7 @@
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
  
-class Controller extends Config
+class Controller
 {
 
 
@@ -47,16 +47,9 @@ class Controller extends Config
 	public $config;
 
 
-	public function __construct($database, $config) {
-		$this->database = $database;
-		$this->config = $config;
-		$this->view = new View($this->database, $this->config);
-		$this->session = new Session();
-		$this->cache = new Cache(false);
-		if (method_exists($this, 'initialise')) {
-			$this->initialise();
-		}
-	}
+	// public function __construct() {
+
+	// }
 
 
 	/**
@@ -64,7 +57,7 @@ class Controller extends Config
 	 * @param  string $method 
 	 * @return null         
 	 */
-	public function loadMethod($method) {
+	protected function loadMethod($method) {
 		$words = explode('-', $method);
 		$method = '';
 		foreach ($words as $word) {
@@ -72,11 +65,9 @@ class Controller extends Config
 		}
 		$method = lcfirst($method);
 		if (method_exists($this, $method)) {
-			$this->$method();
-			return;			
-		} else {
-			$this->index();
+			return $this->$method();
 		}
+		return $this->index();
 	}
 
 
@@ -88,27 +79,43 @@ class Controller extends Config
 	 * @param  string $path
 	 * @return null
 	 */
-	public function load($names, $method = false, $view = false)	{
-		$path = BASE_PATH . 'app/controller/';
-		$controllerName = 'Controller_';
-		if (is_array($names)) {
-			foreach ($names as $name) {
-				if ($name) {
-					$path .= strtolower($name) . '/';
-					$controllerName .= ucfirst($name) . '_';
-				}
-			}
-			$controllerName = rtrim($controllerName, '_');
-			$path = rtrim($path, '/');
-		} else {
-			$path .= strtolower($names);
-			$controllerName = 'Controller_' . ucfirst($names);
+	public function load($names = false, $method = false, $view = false, $database = false, $config = false)	{
+		if ($database && $config) {
+			$this->database = $database;
+			$this->config = $config;
 		}
-		$path .= '.php';
-		if (is_file($path)) {
-			$controller = new $controllerName($this->database, $this->config);
-			$controller->loadMethod($method);
-			return true;
+		$this->view = new View($this->database, $this->config);
+		if ($view) {
+			$this->view = $view;
+		}
+		$this->session = new Session();
+		$this->cache = new Cache(false);
+		if (method_exists($this, 'initialise')) {
+			$this->initialise();
+		}
+		if ($names) {
+			$path = BASE_PATH . 'app/controller/';
+			$controllerName = 'Controller_';
+			if (is_array($names)) {
+				foreach ($names as $name) {
+					if ($name) {
+						$path .= strtolower($name) . '/';
+						$controllerName .= ucfirst($name) . '_';
+					}
+				}
+				$controllerName = rtrim($controllerName, '_');
+				$path = rtrim($path, '/');
+			} else {
+				$path .= strtolower($names);
+				$controllerName = 'Controller_' . ucfirst($names);
+			}
+			$path .= '.php';
+			if (is_file($path)) {
+				$controller = new $controllerName();
+				$controller->load(false, false, $this->view, $this->database, $this->config);
+				$controller->loadMethod($method);
+				return true;
+			}
 		}
 		return false;
 	}
@@ -120,10 +127,14 @@ class Controller extends Config
 	 * @param  string $path   extension of the base action
 	 * @return null          
 	 */
-	public function route($scheme, $path = false) {		
+	protected function route($scheme, $path = false) {		
 		header("Location: " . $this->config->getUrl($scheme) . $path);
 		exit;
 	}
+
+	// public function setView($view) {		
+	// 	$this->view = $view;
+	// }
 
 
 }
