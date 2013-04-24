@@ -83,10 +83,12 @@ class Controller extends Config
 	/**
 	 * attempts to load controller based on segment(s) given
 	 * if file found then it is included and config is passed through
+	 * @todo add a param for passing view object through so that global data
+	 * is spared
 	 * @param  string $path
 	 * @return null
 	 */
-	public function load($names, $method = false)	{
+	public function load($names, $method = false, $view = false)	{
 		$path = BASE_PATH . 'app/controller/';
 		$controllerName = 'Controller_';
 		if (is_array($names)) {
