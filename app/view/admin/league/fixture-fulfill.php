@@ -9,7 +9,7 @@
 
 		<div class="row division">
 			<select name="division_id">
-				<option value="0"></option>
+				<option value="0">Division</option>
 				 
 	<?php foreach ($this->get('model_ttdivision') as $division): ?>
 		
@@ -35,10 +35,15 @@
 	<?php for ($player_row = 1; $player_row <= 3; $player_row ++) { ?>
 
 				<div class="player-<?php echo $player_row; ?>">
-					<img class="play-up" src="" title="Play Up" width="16" height="16">
+
+		<?php echo ($side == 'left' ? '<span class="play-up">Play up</span>' : '') ?>
+
 					<select name="player[<?php echo $side; ?>][<?php echo $player_row; ?>]" tabindex="2">
 						<option value="0"></option>
 					</select>
+
+		<?php echo ($side == 'right' ? '<span class="play-up">Play up</span>' : '') ?>
+
 				</div>
 
 	<?php } ?>
@@ -47,7 +52,6 @@
 			<div class="score">
 
 	<?php $row = 0; ?>
-
 	<?php foreach ($parts as $part) : ?>
 
 				<div class="score-<?php echo $part; ?>">
@@ -56,16 +60,28 @@
 
 		<?php if (($side == 'left') && ($part !== 'doubles')) : ?>
 
-					<input type="checkbox" name="encounter[<?php echo $row; ?>][exclude]">
+					<label for="disable-<?php echo $row ?>">Excluude from merit</label>
+					<input id="disable-<?php echo $row ?>" type="checkbox" name="encounter[<?php echo $row; ?>][exclude]">
 
 		<?php endif; ?>
 
-					<label for="<?php echo $name ?>" class=""><?php echo (($part !== 'doubles') ? 'No Player' : ucfirst($part)); ?></label>
+		<?php if ($side == 'left'): ?>
+
+					<label for="<?php echo $name ?>" class=""><?php echo (($part !== 'doubles') ? '' : ucfirst($part)); ?></label>
+	
+		<?php endif ?>
+
 					<input id="<?php echo $name ?>" name="encounter[<?php echo $row; ?>][<?php echo $side; ?>]" type="text" size="1" maxlength="1" tabindex="<?php echo $tabIndex ++; ?>">
+
+		<?php if ($side == 'right'): ?>
+
+					<label for="<?php echo $name ?>" class=""><?php echo (($part !== 'doubles') ? '' : ucfirst($part)); ?></label>
+		
+		<?php endif ?>
+		
 				</div>
 
 		<?php $row ++; ?>
-
 	<?php endforeach; ?>
 
 			</div>

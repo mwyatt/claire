@@ -133,6 +133,11 @@ class Controller_Admin_League extends Controller
 		$division = new Model_Ttdivision($this->database, $this->config);
 		$division->read();
 		if (array_key_exists('form_fulfill', $_POST)) {
+			echo '<pre>';
+			print_r($_POST);
+			echo '</pre>';
+			exit;
+			
 			$fixture->fulfill();
 			$this->route('current');
 		}
