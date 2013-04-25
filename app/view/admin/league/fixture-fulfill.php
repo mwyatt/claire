@@ -1,7 +1,7 @@
 <?php require_once($this->pathView() . 'admin/header.php'); ?>
 <?php $tabIndex = 0; ?>	
 
-<div class="content fixtures fulfill">
+<div class="content fixtures fulfill clearfix">
 	<h2>Submit Scorecard</h2>
 	<form method="post">
 
@@ -76,6 +76,10 @@
 		</div>
 
 <?php endforeach; ?>
+
+		<input name="form_<?php echo ($this->get('model_ttfixture') ? 'update' : 'fulfill'); ?>" type="hidden" value="true">
+		<a href="#" class="submit button"><?php echo ($this->get('model_ttfixture') ? 'Save' : 'Fulfill'); ?></a>
+		<input type="submit">
 
 		<input name="form_fulfill" type="submit">
 	</form>

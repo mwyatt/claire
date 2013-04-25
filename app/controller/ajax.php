@@ -54,7 +54,7 @@ class Controller_Ajax extends Controller
 		if (array_key_exists('team_id', $_GET)) {
 			$player = new Model_Ttplayer($this->database, $this->config);
 			$player->readByTeam($_GET['team_id']);
-			$this->out($search->getData());
+			$this->out($player->getData());
 		}
 		$ttPlayer = new Model_Ttplayer($this->database, $this->config);
 		$ttPlayer->read();

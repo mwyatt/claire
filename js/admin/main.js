@@ -1,26 +1,73 @@
 var BASE_URL = $('body').data('url-base');
 
-var selectDrop = {
+var select = {
 	container: false,
 	division: false,
 	team: false,
+	player: false,
 
 	init: function() {
-		selectDrop.container = $('.content');
-		selectDrop.division = $(selectDrop.container).find('select[name="division_id"]');
-		selectDrop.team = $(selectDrop.container).find('select[name="team_id"]');
-		$(selectDrop.division).on('change', selectDrop.loadTeam);
+		select.container = $('.content');
+		select.division = $(select.container).find('select[name="division_id"]');
+		select.team = $(select.container).find('select[name^="team"]');
+		select.player = $(select.container).find('select[name^="player"]');
+		$(select.division).on('change', select.loadTeam);
 	},
 
 	loadTeam: function() {
-		$(selectDrop.team).html('');
-		$.getJSON(BASE_URL + '/ajax/team/?division_id=' + $(selectDrop.division).val(), function(results) {
+		$(select.team).html('');
+		$.getJSON(BASE_URL + '/ajax/team/?division_id=' + $(select.division).val(), function(results) {
 			if (results) {
 				$.each(results, function(index, result) {
-					$(selectDrop.team).append('<option value="' + result.id + '">' + result.name + '</option>');
+					$(select.team).append('<option value="' + result.id + '">' + result.name + '</option>');
 				});
+				/*
+				$(select.container).find('.' + side).find('.player').find('select').html(result);
+				for (var index = 0; index < 3; index ++) { 
+					playerIndex = index + 1;
+					playerOptions = $('select[name="player[' + side + '][' + playerIndex + ']"]').find('option');
+					playerOptions.each(function(optionIndex) {
+						if ((optionIndex) == (index + 1)) {
+							$(this).prop('selected', 'selected');
+							$('.' + side).find('.score-' + playerIndex).find('label').html($(this).html());
+						}
+					});
+				}
+				 */
+				$(select.team).on('change', select.loadPlayer);
 			}
 		});		
+	},
+
+	loadPlayer: function() {
+		if ($(this).attr('name') == 'team[left]') {
+			select.player = $(select.container).find('.left').find('select[name^="player"]');
+		} else {
+			select.player = $(select.container).find('.right').find('select[name^="player"]');
+		}
+		$(select.player).html('');
+		$.getJSON(BASE_URL + '/ajax/player/?team_id=' + $(this).val(), function(results) {
+			if (results) {
+				$.each(results, function(index, result) {
+					$(select.player).append('<option value="' + result.id + '">' + result.full_name + '</option>');
+				});
+				$(select.player).on('change', select.changePlayer);
+			}
+		});		
+	},
+
+	changePlayer: function() {
+		var parts, playerName, index, side;
+		playerName = $(this).find('option:selected').html();
+		parts = $(this).prop('name').replace(']', '').replace(']', '');
+		parts = parts.split('[');
+		if (2 in parts) {
+			index = parts[2];
+			if (1 in parts) {
+				side = parts[1];
+			}
+			$('.' + side).find('.score-' + index).find('label').html(playerName);
+		}
 	}
 }
 
@@ -42,9 +89,7 @@ $(document).ready(function() {
 	});
 
 
-	if ($('.content.player').length || $('.content.team').length) {
-		selectDrop.init();
-	}
+	select.init();
 
 	// if ($('.content.update.page').length || $('.content.update.minutes').length || $('.content.update.press').length) {
 	// 	media.init('.content.update');

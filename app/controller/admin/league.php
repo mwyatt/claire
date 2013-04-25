@@ -128,19 +128,18 @@ class Controller_Admin_League extends Controller
 
 
 	public function fixture() {
-		$model = new Model_Ttfixture($this->database, $this->config);
+		$encounterStructure = new Model_Ttfixture($this->database, $this->config);
 		$fixture = new Model_Ttfixture($this->database, $this->config);
 		$division = new Model_Ttdivision($this->database, $this->config);
+		$division->read();
 		if (array_key_exists('form_fulfill', $_POST)) {
 			$fixture->fulfill();
 			$this->route('current');
 		}
-		$division->read();
 		if ($this->config->getUrl(3) == 'fulfill') {
-			$model->data = $model->getEncounterStructure();
-			$division->read();
+			$encounterStructure->data = $encounterStructure->getEncounterStructure();
 			$this->view
-				->setObject('encounter_structure', $model)
+				->setObject('encounter_structure', $encounterStructure)
 				->setObject($division);
 			$this->view->loadTemplate('admin/league/fixture-fulfill');
 		}
