@@ -144,34 +144,21 @@ class Model_Mainmenu extends Model
 	 * @return html the menu
 	 */
 	public function adminSub() {
-		$this->data['admin_sub'] = '';
 		$className = 'Controller_' . ucfirst($this->config->getUrl(0)) . '_' . ucfirst($this->config->getUrl(1));
-
 		if (class_exists($className, false)) {
-			$this->data['admin_sub'] = '<nav class="sub">';
-			$this->data['admin_sub'] .= '<ul>';
 			$baseUrl = $this->config->getUrl('base') . $this->config->getUrl(0) . '/' . $this->config->getUrl(1). '/';
-			$page = ($this->config->getUrl(2) ? $this->config->getUrl(2) : '');
-
-			$current = ($page == '' ? ' class="current"' : '');
-			$this->data['admin_sub'] .= '<li' . $current . '><a href="' . $baseUrl . '">Overview</a></li>';
-
-			foreach (get_class_methods($className) as $method) {
-				if ($method == '__construct') {
-					break;
-				}
-				if (($method !== 'initialise') && ($method !== 'index')) {
-					$current = ($page == $method ? ' class="current"' : '');
-					$this->data['admin_sub'] .= '<li' . $current . '><a href="' . $baseUrl . $method . '/">' . $method . '</a></li>';
+			$this->data['admin_sub'][0]['name'] = 'Overview';
+			$this->data['admin_sub'][0]['current'] = ($this->config->getUrl(2) == '' ? true : false);
+			$this->data['admin_sub'][0]['guid'] = $baseUrl;
+			foreach (get_class_methods($className) as $key => $method) {
+				if (($method !== 'initialise') && ($method !== 'index') && ($method !== 'load')) {
+					$this->data['admin_sub'][$key]['name'] = ucfirst($method);
+					$this->data['admin_sub'][$key]['current'] = ($this->config->getUrl(1) == $method ? true : false);
+					$this->data['admin_sub'][$key]['guid'] = $baseUrl . $method . '/';
 				}
 			}
-
-			$this->data['admin_sub'] .= '<div class="clearfix"></div>';						
-			$this->data['admin_sub'] .= '</ul>';
-			$this->data['admin_sub'] .= '</nav>';						
 		}
-
-		return $this->data['admin_sub'];
+		return;
 	}
 
 
@@ -180,30 +167,19 @@ class Model_Mainmenu extends Model
 	  *	@param		string type
 	  *	@returns	assoc array if successful, empty array otherwise
 	  */
-	public function admin()
-    {
-		$this->data['admin'] = '<ul>';
+	public function admin() {
 		$baseUrl = $this->config->getUrl('base') . $this->config->getUrl(0). '/';
-
-		$current = ($this->config->getUrl(1) == '' ? ' class="current"' : '');
-		$this->data['admin'] .= '<li' . $current . '><a class="button" href="' . $baseUrl . '">Dashboard</a></li>';
-		
-
-		foreach (get_class_methods('Controller_Admin') as $method) {
-			if ($method == '__construct') {
-				break;
+		$this->data['admin'][0]['name'] = 'Dashboard';
+		$this->data['admin'][0]['current'] = ($this->config->getUrl(1) == '' ? true : false);
+		$this->data['admin'][0]['guid'] = $baseUrl;
+		foreach (get_class_methods('Controller_Admin') as $key => $method) {
+			if (($method !== 'initialise') && ($method !== 'index') && ($method !== 'load')) {
+				$this->data['admin'][$key]['name'] = ucfirst($method);
+				$this->data['admin'][$key]['current'] = ($this->config->getUrl(1) == $method ? true : false);
+				$this->data['admin'][$key]['guid'] = $baseUrl . $method . '/';
 			}
-			if (($method == 'initialise') || ($method == 'index')) {
-
-			} else {
-				$current = ($this->config->getUrl(1) == $method ? ' class="current"' : '');
-				$this->data['admin'] .= '<li' . $current . '><a class="button" href="' . $baseUrl . $method . '/">' . $method . '</a></li>';
-			}
-
 		}
-
-		$this->data['admin'] .= '</ul>';		
-		return $this->data['admin'];
+		return;
     }	
 
 

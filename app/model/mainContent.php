@@ -205,7 +205,7 @@ class Model_Maincontent extends Model
 
 	public function create() {	
 		$user = new Model_Mainuser($this->database, $this->config);
-		if (! $this->validatePost($_POST, array('title'))) {
+		if (! $this->validatePost(array('title'))) {
 			$this->session->set('feedback', 'All required fields must be filled');
 			return false;
 		}

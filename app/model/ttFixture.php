@@ -114,47 +114,28 @@ class Model_Ttfixture extends Model
 	}	
 
 
-	/**
-	 * selects a single fixture from the database
-	 * @param  integer $fixtureId 
-	 * @return null            
-	 */
-	public function readSingle($fixtureId)
-	{	
-	
-		$database->dbh->prepare("	
-
+	public function readFilled() {	
+		$sth = $this->database->dbh->query("	
 			select
-				tt_encounter_row.id
-				, case
-					when tt_player_left.id = null
-					then doubles
-					else concat(tt_player_left.first_name, ' ', tt_player_left.last_name) 
-					end
-					as player_left_full_name
-				, tt_encounter_row.player_left_score
-				, tt_encounter_row.player_left_rank_change
-				
-				, concat(tt_player_right.first_name, ' ', tt_player_right.last_name) as player_right_full_name
-				, tt_encounter_row.player_right_score
-				, tt_encounter_row.player_right_rank_change
-
-			from tt_encounter_row
-
-			left join tt_player as tt_player_left on tt_player_left.id = tt_encounter_row.player_left_id
-			
-			left join tt_player as tt_player_right on tt_player_right.id = tt_encounter_row.player_right_id
-
-			where tt_encounter_row.fixture_id = :fixture_id
-
+				tt_fixture.id
+				, tt_fixture.date_fulfilled
+				, team_left.name as team_left_name
+				, team_right.name as team_right_name
+				, sum(encounter_part_left.player_score) as score_left
+				, sum(encounter_part_right.player_score) as score_right
+			from tt_fixture
+			left join tt_team as team_left on team_left.id = tt_fixture.team_left_id
+			left join tt_team as team_right on team_right.id = tt_fixture.team_right_id
+			left join tt_encounter on tt_encounter.fixture_id = tt_fixture.id
+			left join tt_encounter_part as encounter_part_left on encounter_part_left.id = tt_encounter.part_left_id
+			left join tt_encounter_part as encounter_part_right on encounter_part_right.id = tt_encounter.part_right_id
+			where tt_fixture.date_fulfilled is not null
+			group by tt_fixture.id
 		");
-
-		$sth->execute(array(
-			':fixture_id' => $fixtureId
-		));
-
-		$this->setDataStatement($sth);
-
+		if ($sth->rowCount()) {
+			$this->data = $sth->fetchAll(PDO::FETCH_ASSOC);
+		}
+		return;
 	}	
 
 	
@@ -204,7 +185,7 @@ class Model_Ttfixture extends Model
 			return false;
 		}
 		$playerIds = array_merge($_POST['player']['left'], $_POST['player']['right']);
-		$ttPlayer = new ttPlayer($this->database, $this->config);
+		$ttPlayer = new Model_Ttplayer($this->database, $this->config);
 		$ttPlayer->readById($playerIds);
 		$sthEncounterPart = $this->database->dbh->prepare("
 			insert into tt_encounter_part (
@@ -448,8 +429,8 @@ class Model_Ttfixture extends Model
 		$sth->execute(array(':fixtureId' => $fixtureId));
 		if (!$sth->rowCount()) return false;
 
-		$ttPlayer = new ttPlayer($this->database, $this->config);
-		$ttTeam = new ttTeam($this->database, $this->config);
+		$ttPlayer = new Model_Ttplayer($this->database, $this->config);
+		$ttTeam = new Model_Ttteam($this->database, $this->config);
 
 		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {	
 			$row['player_left_guid'] = $ttPlayer->getGuid($row['player_left_full_name'], $row['player_left_id']);

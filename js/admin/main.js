@@ -132,7 +132,7 @@ var select = {
 			$(select.container).find('.right').find('.total').find('input').val(rightTotal);
 	},
 
-	changeScore: function() {
+	changeScore: function(e) {
 				// exclude tab, shift, backspace key
 
 				if ((e.keyCode == 9) || (e.keyCode == 16)|| (e.keyCode == 8))
@@ -181,7 +181,7 @@ var select = {
 
 				// update the totals
 				
-				updateTotal();
+				select.updateFixtureScore();
 	},
 
 	loadPlayer: function() {
@@ -221,10 +221,11 @@ function formSubmit() {
 $(document).ready(function() {
 	less.watch();
 	$.ajaxSetup ({  
-		cache: false  
+		cache: false
 	});
 	select.init();
 	feedback.init();
+	$('form').find('a.submit').on('mouseup', formSubmit);
 	if ($('.content.page').length || $('.content.press').length) {
 		var editor = new wysihtml5.Editor("textarea", {
 		  toolbar:        "toolbar",

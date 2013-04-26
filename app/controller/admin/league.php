@@ -136,6 +136,22 @@ class Controller_Admin_League extends Controller
 			$fixture->fulfill();
 			$this->route('current');
 		}
+		if (array_key_exists('form_update', $_POST)) {
+			$fixture->update($_GET['edit']);
+			$this->route('current');
+		}
+		if (array_key_exists('edit', $_GET)) {
+			$fixture = new Model_Admin_Ttfixture($this->database, $this->config);
+			if (! $fixture->readById($_GET['edit'])) {
+				$this->route('current_noquery');
+			}
+			$fixtureSingle = new Model_Blank($this->database, $this->config);
+			$fixtureSingle->setData($fixture->data[0]);
+			$this->view	
+				->setObject('fixture', $fixtureSingle)
+				->setObject($fixture)
+				->loadTemplate('admin/league/fixture-update');
+		}
 		if ($this->config->getUrl(3) == 'fulfill') {
 			$encounterStructure->data = $encounterStructure->getEncounterStructure();
 			$this->view
@@ -143,7 +159,7 @@ class Controller_Admin_League extends Controller
 				->setObject($division);
 			$this->view->loadTemplate('admin/league/fixture-fulfill');
 		}
-		$fixture->read();
+		$fixture->readFilled();
 		$this->view
 			->setObject($division)
 			->setObject($fixture)

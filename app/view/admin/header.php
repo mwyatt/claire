@@ -35,9 +35,37 @@
 
 <?php endif ?>
 
-            <nav class="main"><?php echo $this->get('model_mainmenu', 'admin'); ?></nav>
+<?php if ($this->get('model_mainmenu', 'admin')): ?>
+    
+    <nav class="main">
+        <ul>
 
-<?php echo $this->get('model_mainmenu', 'admin_sub'); ?>
+    <?php foreach ($this->get('model_mainmenu', 'admin') as $item): ?>
+
+            <li><a class="button<?php echo ($this->get($item, 'current') ? ' current' : '') ?>" href="<?php echo $this->get($item, 'guid') ?>"><?php echo $this->get($item, 'name') ?></a></li>
+        
+    <?php endforeach ?>
+
+        </ul>
+    </nav>
+
+<?php endif ?>
+<?php if ($this->get('model_mainmenu', 'admin_sub')): ?>
+    
+    <nav class="sub">
+        <ul>
+
+    <?php foreach ($this->get('model_mainmenu', 'admin_sub') as $item): ?>
+
+            <li><a class="<?php echo ($this->get($item, 'current') ? ' current' : '') ?>" href="<?php echo $this->get($item, 'guid') ?>"><?php echo $this->get($item, 'name') ?></a></li>
+        
+    <?php endforeach ?>
+
+        </ul>
+    </nav>
+
+<?php endif ?>
+
 <?php echo $this->getFeedback(); ?>
 
 		</header>

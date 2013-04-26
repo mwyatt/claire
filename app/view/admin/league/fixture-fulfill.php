@@ -3,6 +3,16 @@
 
 <div class="content fixtures fulfill clearfix">
 	<h2>Submit Scorecard</h2>
+
+<?php
+if ($fixtureOverview = $this->session->getUnset('fixture_overview')) {
+	# code...
+echo '<pre>';
+print_r($fixtureOverview);
+echo '</pre>';
+}
+?>
+
 	<form method="post">
 
 <?php if ($this->get('model_ttdivision')): ?>
@@ -39,7 +49,7 @@
 				<div class="player-<?php echo $player_row; ?>">
 
 		<?php echo ($side == 'left' ? '<span class="play-up">Play up</span>' : '') ?>
-					<select id="player_<?php echo $side; ?>_<?php echo $player_row; ?>" name="player[<?php echo $side; ?>][<?php echo $player_row; ?>]" tabindex="2">
+					<select id="player_<?php echo $side; ?>_<?php echo $player_row; ?>" name="player[<?php echo $side; ?>][<?php echo $player_row; ?>]">
 						<option value="0"></option>
 					</select>
 
@@ -95,10 +105,9 @@
 <?php endforeach; ?>
 
 		<input name="form_<?php echo ($this->get('model_ttfixture') ? 'update' : 'fulfill'); ?>" type="hidden" value="true">
+		<input name="form_fulfill" type="hidden">
 		<a href="#" class="submit button"><?php echo ($this->get('model_ttfixture') ? 'Save' : 'Fulfill'); ?></a>
 		<input type="submit">
-
-		<input name="form_fulfill" type="submit">
 	</form>
 </div>
 

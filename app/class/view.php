@@ -29,18 +29,19 @@ class View extends Model
 		$menu = new Model_Mainmenu($this->database, $this->config);
 		$this->session = new Session($this->database, $this->config);
 		$mainoption = new Model_Mainoption($this->database, $this->config);
-		$menu->admin();
-		$menu->adminSub();
+		if ($this->config->getUrl(0) == 'admin') {
+			$menu->admin();
+			$menu->adminSub();
+		}
 		$mainoption->select();		
 		$this->setMeta(array(
 			'title' => $mainoption->get('meta_title'),
 			'keywords' => $mainoption->get('meta_keywords'),
 			'description' => $mainoption->get('meta_description')
 		));
-		$this->setObject(array(
-			$mainoption
-			, $menu
-		));
+		$this
+			->setObject($mainoption)
+			->setObject($menu);
 	}
 
 	
