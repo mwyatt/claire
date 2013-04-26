@@ -1,10 +1,33 @@
 var BASE_URL = $('body').data('url-base');
 
+var feedback = {
+	container: false,
+	speed: 'fast',
+
+	init: function() {
+		feedback.container = $('.feedback');
+		$(feedback.container).on('click', feedback._click);
+	},
+
+	_click: function() {
+		$(this).fadeOut(feedback.speed);
+		// setTimeout(showFeedback, 1000);
+		// function showFeedback() {
+		// 	feedback.fadeIn(animationSpeed);
+		// 	setTimeout(hideFeedback, 10000);
+		// }
+		// function hideFeedback() {
+		// 	// feedback.fadeOut(animationSpeed);
+		// }
+	}
+}
+
 var select = {
 	container: false,
 	division: false,
 	team: false,
 	player: false,
+	side: false,
 
 	init: function() {
 		select.container = $('.content');
@@ -12,472 +35,76 @@ var select = {
 		select.team = $(select.container).find('select[name^="team"]');
 		select.player = $(select.container).find('select[name^="player"]');
 		$(select.division).on('change', select.loadTeam);
+		$(select.container).find('.play-up').on('click', select.clickPlayUp);
+		$(select.container).find('.score').find('input').on('click', select.clickInputScore);
+		$(select.container).find('.score').find('input').on('keyup', select.changeScore);
 	},
 
 	loadTeam: function() {
+		select._reset('player');
 		$(select.team).html('');
 		$.getJSON(BASE_URL + '/ajax/team/?division_id=' + $(select.division).val(), function(results) {
 			if (results) {
+				$(select.team).append('<option value="0"></option>');
 				$.each(results, function(index, result) {
 					$(select.team).append('<option value="' + result.id + '">' + result.name + '</option>');
 				});
-				/*
-				$(select.container).find('.' + side).find('.player').find('select').html(result);
-				for (var index = 0; index < 3; index ++) { 
-					playerIndex = index + 1;
-					playerOptions = $('select[name="player[' + side + '][' + playerIndex + ']"]').find('option');
-					playerOptions.each(function(optionIndex) {
-						if ((optionIndex) == (index + 1)) {
-							$(this).prop('selected', 'selected');
-							$('.' + side).find('.score-' + playerIndex).find('label').html($(this).html());
-						}
-					});
-				}
-				 */
 				$(select.team).on('change', select.loadPlayer);
 			}
 		});		
 	},
 
-	loadPlayer: function() {
-		if ($(this).attr('name') == 'team[left]') {
-			select.player = $(select.container).find('.left').find('select[name^="player"]');
-		} else {
-			select.player = $(select.container).find('.right').find('select[name^="player"]');
-		}
-		$(select.player).html('');
-		$.getJSON(BASE_URL + '/ajax/player/?team_id=' + $(this).val(), function(results) {
+	clickPlayUp: function() {
+		var button = $(this);
+		var select = $(this).closest('select');
+		$.getJSON(BASE_URL + '/ajax/player/', function(results) {
 			if (results) {
+				$(select).html('');
 				$.each(results, function(index, result) {
-					$(select.player).append('<option value="' + result.id + '">' + result.full_name + '</option>');
+					$(select).append('<option value="' + result.id + '">' + result.name + '</option>');
 				});
-				$(select.player).on('change', select.changePlayer);
+				$(select).on('change', select.changePlayer);
 			}
-		});		
-	},
-
-	changePlayer: function() {
-		var parts, playerName, index, side;
-		playerName = $(this).find('option:selected').html();
-		parts = $(this).prop('name').replace(']', '').replace(']', '');
-		parts = parts.split('[');
-		if (2 in parts) {
-			index = parts[2];
-			if (1 in parts) {
-				side = parts[1];
-			}
-			$('.' + side).find('.score-' + index).find('label').html(playerName);
-		}
-	}
-}
-
-function formSubmit() {
-	$(this).closest('form').submit();
-	return false;
-}
-
-/* main.js */
-
-// document ready
-
-$(document).ready(function() {
-
-	less.watch();
-
-	$.ajaxSetup ({  
-		cache: false  
-	});
-
-
-	select.init();
-
-	// if ($('.content.update.page').length || $('.content.update.minutes').length || $('.content.update.press').length) {
-	// 	media.init('.content.update');
-	// 	media.loadCurrent();
-	// }
-
-
-	$('form').find('a.submit').on('mouseup', formSubmit);
-
-
-
-
-
-
-
-
-	if ($('.content.page').length || $('.content.press').length) {
-
-		var editor = new wysihtml5.Editor("textarea", {
-		  toolbar:        "toolbar",
-		  parserRules:    wysihtml5ParserRules,
-		  useLineBreaks:  false
 		});
-		
-	}
-
-
-	// admin/ (login)
-
-	$("form.login").submit(function() {
-		
-		// Variable(s)
-		var form = $("form.login");
-		var fieldName;
-		var field;
-		var valid = true;
-		
-		// Function checkField
-		function checkField(fieldName) {
-		
-			// Set Field
-			field = $("input[name='"+fieldName+"']", form);
-			
-			// Check Field
-			if (field.val() == "") {  
-				$(field)
-					.toggleClass("error")
-					.focus();
-				valid = false;
-			}				
-		}
-		
-		// Removes any Errors
-		$(".error").toggleClass("error");
-		
-		checkField("password");
-		checkField("username");
-		
-		return valid;			
-	});	
-
-
-	// admin/posts/press/new/
-
-	if ($('.post.press.new').length) {
-
-		var $module = $('.post.press.new');
-		var title = $module.find('input[name="title"]');
-		var type = $module.find('input[name="type"]');
-		var attachments = $module.find('.attachments');
-
-		title.on('change', e_change_post_title);
-		title.on('keyup', e_change_post_title);
-
-		function e_change_post_title() {
-
-			if (! title.val()) return false;
-			// if (title.val().length < 3) return false;
-			
-			var slug = $('.slug');
-		
-			$.get('http://' + window.location.host + '/git/mvc/ajax/post/',
-				{ method: 'slug', type: type.val(), title: title.val() },
-				function(result) {
-
-					var link = slug.find('a');
-					link.html(result);
-					link.attr('href', 'http://' + window.location.host + '/post/' + result);
-					
-				}
-				, 'html'
-			);
-
-		}
-
-		attachments.find('.add').on('click', e_click_attachments_add);
-
-		function e_click_attachments_add() {
-
-			
-			
-			return false;
-
-		}
-		
-	}
-
-	// global
-
-	var fulfill = $('.fulfill');
-	var selectDivision = $('select[name="division_id"]');
-	var selectTeamGroup = $(fulfill).find('.team').find('select');
-	var selectPlayerGroup = $(fulfill).find('.player').find('select');
-	var inputScore = $(fulfill).find('.score').find('input');
-	var btnPlayUp = $(fulfill).find('.play-up');
-	var feedback = $('.feedback');
-	var websiteTitle = $('header.main').find('.title').find('a');
-	var user = $('header.main').find('.user');
-
-	// on
-
-	// selectDivision.on('change', changeDivision);
-	selectTeamGroup.on('change', changeTeam);
-	selectPlayerGroup.on('change', changePlayer);
-	inputScore.on('keyup', changeInputScore);
-	inputScore.on('click', clickInputScore);
-	btnPlayUp.on('click', clickBtnPlayUp);
-
-	// universal
-
-	// click the document
-	
-	$(document).mouseup(removeModals);	
-
-	// hit a key escape
-	
-	$(document).keyup(function(e) {
-		if (e.keyCode == 27)
-			removeModals();
-	});	
-
-	function removeModals() {
-		$('*').removeClass('active');
-	}
-
-	// user
-
-	user.find('a').on('click', clickUser);
-
-	function clickUser() {
-		user.addClass('active');
-	}
-
-	// website title
-
-	websiteTitleText = $('header.main').find('.title').find('a').html();
-
-	websiteTitle.hover(function over() {
-		var text = $(this).html();
-		text = 'Open ' + text + ' Homepage';
-		$(this).html(text);
 	},
-	function out() {
-		$(this).html(websiteTitleText);
-	});
 
-	// feedback
-	
-	if (feedback.length) {
+	updatePlayer: function(index, name) {
+		$('.' + select.side).find('.score-' + index).find('label.name').html(name);
+	},
 
-		var
-			animationSpeed = 'fast';
-
-		// setTimeout(showFeedback, 1000);
-
-		// function showFeedback() {
-		// 	feedback.fadeIn(animationSpeed);
-		// 	setTimeout(hideFeedback, 10000);
-		// }
-
-		// function hideFeedback() {
-		// 	// feedback.fadeOut(animationSpeed);
-		// }
-
-		feedback.on('click', clickFeedback);
-
-		function clickFeedback() {
-			$(this).fadeOut(animationSpeed);
-		}
-
-	}
-
-	// /**
-	//  * trigger once division select is used
-	//  * @return {null} 
-	//  */
-	// function changeDivision() {
-
-	// 	$.get('http://' + window.location.host + '/git/mvc/ajax/team/',
-	// 		{ division_id: $(this).val() },
-	// 		function(result) {
-	// 			if (result) {
-	// 				$(selectTeamGroup).html(result);
-	// 			}
-	// 		}, "html"
-	// 	);
-
-	// 	// reset player select
-	// 	$(selectPlayerGroup).html('');
-
-	// }
-
-
-	/**
-	 * trigger once team select is used
-	 * @return {null} 
-	 */
-	function changeTeam() {
-
-		var
-			side
-			;
-
-		// calculate side
-
-		if ($(this).prop('name') == 'team[left]')
-			side = 'left';
-		else
-			side = 'right';
-
-		$.get('http://' + window.location.host + '/git/mvc/ajax/fixture/',
-			{ 
-				team_id: $(this).val()
-			},
-			function(result) {
-
-				if (result) {
-
-					// set results
-					
-					$(fulfill).find('.' + side).find('.player').find('select').html(result);
-
-					// sets the selected index for each select box
-					
-					for (var index = 0; index < 3; index ++) { 
-
-						playerIndex = index + 1;
-
-						playerOptions = $('select[name="player[' + side + '][' + playerIndex + ']"]').find('option');
-
-						playerOptions.each(function(optionIndex) {
-							if ((optionIndex) == (index + 1)) {
-
-								// set index as selected, 1, 2, 3
-								
-								$(this).prop('selected', 'selected');
-
-								// set player labels
-								
-								$('.' + side).find('.score-' + playerIndex).find('label').html($(this).html());
-								
-							}
-						});
-
-					}
-
-				}
-
-			}, "html"
-		);
-		
-	}
-
-
-	/**
-	 * change player
-	 * @return {null} 
-	 */
-	function changePlayer() {
-
-		var
-			parts
-			, playerName
-			, index
-			, side
-			;
-
-		playerName = $(this).find('option:selected').html();
-
-		parts = $(this).prop('name').replace(']', '').replace(']', '');
-		parts = parts.split('[');
-
-		if (2 in parts) {
-
-			index = parts[2];
-
-			if (1 in parts)
-				side = parts[1];
-
-			$('.' + side).find('.score-' + index).find('label').html(playerName);
-
-		}
-
-	}
-
-
-	/**
-	 * input score click
-	 * @return {null} 
-	 */
-	function clickInputScore() {
-
+	clickInputScore: function() {
 		$(this).select();
+	},
 
-	}
-
-
-	/**
-	 * input score change
-	 * @return {null} 
-	 */
-	function changeInputScore(e) {
-
-		// exclude tab, shift, backspace key
-
-		if ((e.keyCode == 9) || (e.keyCode == 16)|| (e.keyCode == 8))
-			return false;
-
-		// continue...
-
-		var
-			currentValue
-			, parts
-			, index
-			, oppositeScore
-			;
-
- 		currentValue = parseInt($(this).val());
- 		if (currentValue == NaN)
- 			currentValue = 0;
-
-		parts = $(this).prop('id').split('_');
-
-		if (2 in parts) {
-
-			if ($(this).val() >= 3)
-				oppositeScore = 0;
-			else
-				oppositeScore = 3;
-
-			if (parts[2] == 'left')
-				$('#encounter_' + parts[1] + '_right').val(oppositeScore);
-			else
-				$('#encounter_' + parts[1] + '_left').val(oppositeScore);
-
+	arrangePlayer: function() {
+		for (var index = 0; index < 3; index ++) { 
+			playerIndex = index + 1;
+			playerOptions = $('select[name="player[' + select.side + '][' + playerIndex + ']"]').find('option');
+			playerOptions.each(function(optionIndex) {
+				if ((optionIndex) == (index)) {
+					$(this).prop('selected', 'selected');
+					select.updatePlayer(playerIndex, $(this).html());
+				}
+			});
 		}
+	},
 
-		if (!currentValue)
-			$(this).val(0);
+	_reset: function(key) {
+		if (key == 'player') {
+			$(select.container).find('select[name^="player"]').html('');
+		}
+		if (key == 'score') {
+			$(select.container).find('select[name^="player"]').html('');
+		}
+	},
 
-		// if ((currentValue == 0) || (currentValue)) 
-		// 	$(this).val(currentValue + 1);
-
-		// if (currentValue == 2)
-		// 	$(this).val(2);
-
-		if (currentValue > 3)
-			$(this).val(3);
-
-		// update the totals
-		
-		updateTotal();
-
-	}
-
-
-	/**
-	 * tots up the main totals for the fixture
-	 * @return {[type]} [description]
-	 */
-	function updateTotal() {
-
+	updateFixtureScore: function() {
 		var
 			score
 			, leftTotal = 0
 			, rightTotal = 0;
 
-		$(fulfill).find('.left').find('.score').find('input').each(function() {
+		$(select.container).find('.left').find('.score').find('input').each(function() {
 
 	 		score = parseInt($(this).val());
 	 		if (isNaN(score))
@@ -487,7 +114,7 @@ $(document).ready(function() {
 
 		});
 
-		$(fulfill).find('.right').find('.score').find('input').each(function() {
+		$(select.container).find('.right').find('.score').find('input').each(function() {
 
 	 		score = parseInt($(this).val());
 	 		if (isNaN(score))
@@ -499,36 +126,133 @@ $(document).ready(function() {
 
 		// set left and right total display and hidden inputs
 
-		$(fulfill).find('.left').find('.total').find('p').html(leftTotal);
-			$(fulfill).find('.left').find('.total').find('input').val(leftTotal);
-		$(fulfill).find('.right').find('.total').find('p').html(rightTotal);
-			$(fulfill).find('.right').find('.total').find('input').val(rightTotal);
+		$(select.container).find('.left').find('.total').find('p').html(leftTotal);
+			$(select.container).find('.left').find('.total').find('input').val(leftTotal);
+		$(select.container).find('.right').find('.total').find('p').html(rightTotal);
+			$(select.container).find('.right').find('.total').find('input').val(rightTotal);
+	},
 
-	}
+	changeScore: function() {
+				// exclude tab, shift, backspace key
 
+				if ((e.keyCode == 9) || (e.keyCode == 16)|| (e.keyCode == 8))
+					return false;
 
-	function clickBtnPlayUp() {
+				// continue...
 
-		var btn = $(this);
-		$(this).addClass('active');
+				var
+					currentValue
+					, parts
+					, index
+					, oppositeScore
+					;
 
-		$.post('http://' + window.location.host + '/git/mvc/ajax/player/',
-			{ 
-				all: true
-			},
-			function(result) {
+		 		currentValue = parseInt($(this).val());
+		 		if (currentValue == NaN)
+		 			currentValue = 0;
 
-				if (result) {
+				parts = $(this).prop('id').split('_');
 
-					
-					$(btn).siblings('select').html(result);
+				if (2 in parts) {
+
+					if ($(this).val() >= 3)
+						oppositeScore = 0;
+					else
+						oppositeScore = 3;
+
+					if (parts[2] == 'left')
+						$('#encounter_' + parts[1] + '_right').val(oppositeScore);
+					else
+						$('#encounter_' + parts[1] + '_left').val(oppositeScore);
 
 				}
 
-			}, "html"
-		);
+				if (!currentValue)
+					$(this).val(0);
 
+				// if ((currentValue == 0) || (currentValue)) 
+				// 	$(this).val(currentValue + 1);
+
+				// if (currentValue == 2)
+				// 	$(this).val(2);
+
+				if (currentValue > 3)
+					$(this).val(3);
+
+				// update the totals
+				
+				updateTotal();
+	},
+
+	loadPlayer: function() {
+		if ($(this).attr('name') == 'team[left]') {
+			select.side = 'left';
+		} else {
+			select.side = 'right';
+		}
+		select.player = $(select.container).find('.' + select.side).find('select[name^="player"]');
+		$(select.player).html('');
+		$.getJSON(BASE_URL + '/ajax/player/?team_id=' + $('.' + select.side).find('select[name^="team"]').val(), function(results) {
+			if (results) {
+				$.each(results, function(index, result) {
+					$(select.player).append('<option value="' + result.id + '">' + result.full_name + '</option>');
+				});
+				select.arrangePlayer();
+				$(select.player).on('change', function() {
+					var name = $(this).find('option:selected').html();
+					var parts = $(this).prop('name').replace(']', '').replace(']', '').split('[');
+					if (2 in parts) {
+						select.updatePlayer(parts[2], name);
+					}
+
+				});
+			}
+		});	
 	}
+}
 
+function formSubmit() {
+	$(this).closest('form').submit();
+	return false;
+}
 
+// document ready
+
+$(document).ready(function() {
+	less.watch();
+	$.ajaxSetup ({  
+		cache: false  
+	});
+	select.init();
+	feedback.init();
+	if ($('.content.page').length || $('.content.press').length) {
+		var editor = new wysihtml5.Editor("textarea", {
+		  toolbar:        "toolbar",
+		  parserRules:    wysihtml5ParserRules,
+		  useLineBreaks:  false
+		});
+	}
+	$(document).mouseup(removeModals);	
+	$(document).keyup(function(e) {
+		if (e.keyCode == 27)
+			removeModals();
+	});	
+	function removeModals() {
+		$('*').removeClass('active');
+	}
+	var user = $('header.main').find('.user');
+	user.find('a').on('click', clickUser);
+	function clickUser() {
+		user.addClass('active');
+	}
+	var websiteTitle = $('header.main').find('.title').find('a');
+	websiteTitleText = $('header.main').find('.title').find('a').html();
+	websiteTitle.hover(function over() {
+		var text = $(this).html();
+		text = 'Open ' + text + ' Homepage';
+		$(this).html(text);
+	},
+	function out() {
+		$(this).html(websiteTitleText);
+	});
 }); // document ready

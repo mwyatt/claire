@@ -8,8 +8,9 @@
 <?php if ($this->get('model_ttdivision')): ?>
 
 		<div class="row division">
-			<select name="division_id">
-				<option value="0">Division</option>
+			<label for="division_id">Division</label>
+			<select id="division_id" name="division_id">
+				<option value="0"></option>
 				 
 	<?php foreach ($this->get('model_ttdivision') as $division): ?>
 		
@@ -26,7 +27,8 @@
     
 		<div class="<?php echo $side; ?>">
 			<div class="team">
-				<select name="team[<?php echo $side; ?>]">
+				<label for="team_<?php echo $side; ?>">Team</label>
+				<select id="team_<?php echo $side; ?>" name="team[<?php echo $side; ?>]">
 					<option value="0"></option>
 				</select>
 			</div>
@@ -37,8 +39,7 @@
 				<div class="player-<?php echo $player_row; ?>">
 
 		<?php echo ($side == 'left' ? '<span class="play-up">Play up</span>' : '') ?>
-
-					<select name="player[<?php echo $side; ?>][<?php echo $player_row; ?>]" tabindex="2">
+					<select id="player_<?php echo $side; ?>_<?php echo $player_row; ?>" name="player[<?php echo $side; ?>][<?php echo $player_row; ?>]" tabindex="2">
 						<option value="0"></option>
 					</select>
 
@@ -67,7 +68,7 @@
 
 		<?php if ($side == 'left'): ?>
 
-					<label for="<?php echo $name ?>" class=""><?php echo (($part !== 'doubles') ? '' : ucfirst($part)); ?></label>
+					<label for="<?php echo $name ?>" class="name"><?php echo (($part !== 'doubles') ? '' : ucfirst($part)); ?></label>
 	
 		<?php endif ?>
 
@@ -75,7 +76,7 @@
 
 		<?php if ($side == 'right'): ?>
 
-					<label for="<?php echo $name ?>" class=""><?php echo (($part !== 'doubles') ? '' : ucfirst($part)); ?></label>
+					<label for="<?php echo $name ?>" class="name"><?php echo (($part !== 'doubles') ? '' : ucfirst($part)); ?></label>
 		
 		<?php endif ?>
 		
