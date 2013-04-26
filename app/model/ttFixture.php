@@ -176,117 +176,63 @@ class Model_Ttfixture extends Model
 	 * @return true || false
 	 */
 	public function fulfill() {
-
-		// validation
-
-		if (! $this->validatePost($_POST, array(
-			'division_id'
-		))) {
-
-			$this->getObject('mainUser')->setFeedback('Please fill all required fields');
-
+		if (! $this->validatePost(array('division_id', 'team', 'player', 'encounter', 'total'))) {
+			$this->session->set('feedback', 'Please fill all required fields');
 			return false;
-			
 		}
-
-		foreach ($_POST['encounter'] as $encounter) {
-			foreach ($encounter as $side) {
-				if ($side === false) {
-					$this->getObject('mainUser')->setFeedback('Please fill all scores');
-						return false;
-				}
-			}
-		}
-
-		// find fixture
-
 		$sth = $this->database->dbh->prepare("	
-
 			select
-				f.id
-				, f.team_left_id
-				, f.team_right_id
-				, f.date_fulfilled
-
-			from
-				tt_fixture as f
-
-			where
-				f.team_left_id = :team_left_id and f.team_right_id = :team_right_id
-
-			group by
-				f.id
-
+				id
+				, team_left_id
+				, team_right_id
+				, date_fulfilled
+			from tt_fixture
+			where team_left_id = :team_left_id and team_right_id = :team_right_id
+			group by id
 		");
-
 		$sth->execute(array(
 			':team_left_id' => $_POST['team']['left']
 			, ':team_right_id' => $_POST['team']['right']
 		));
-
-		// obtain fixture id
-
 		if ($fixture = $sth->fetch(PDO::FETCH_ASSOC)) {
-
-			// has it been filled yet?
-
 			if ($fixture['date_fulfilled']) {
-
-				$this->getObject('mainUser')->setFeedback(array('error', 'This fixture has already been filled on ' . date('D jS F Y', $fixture['date_fulfilled'])));
-
-				return;
-
+				$this->session->set('feedback', 'This fixture has already been filled on ' . date('D jS F Y', $fixture['date_fulfilled']));
+				return false;
 			}
-
 		} else {
-
-			// fixture does not exist
-
-			$this->getObject('mainUser')->setFeedback(array('error', 'This fixture does not exist'));
-
-			return;
-
+			$this->session->set('feedback', 'This fixture does not exist');
+			return false;
 		}
-
-		// get 6 players
-
 		$playerIds = array_merge($_POST['player']['left'], $_POST['player']['right']);
 		$ttPlayer = new ttPlayer($this->database, $this->config);
 		$ttPlayer->readById($playerIds);
-
-		// prepare statements
-
 		$sthEncounterPart = $this->database->dbh->prepare("
-			
-			insert into
-				tt_encounter_part
-				(player_id, player_score, player_rank_change, status)
-
-			values
-				(:player_id, :player_score, :player_rank_change, :status)
-
+			insert into tt_encounter_part (
+				player_id
+				, player_score
+				, player_rank_change
+				, status
+			) values (
+				:player_id
+				, :player_score
+				, :player_rank_change
+				, :status
+			)
 		");				
-		
 		$sthEncounter = $this->database->dbh->prepare("
-
-			insert into
-				tt_encounter
-				(part_left_id, part_right_id, fixture_id)
-
-			values
-				(:part_left_id, :part_right_id, :fixture_id)
-
+			insert into tt_encounter (
+				part_left_id
+				, part_right_id
+				, fixture_id
+			) values (
+				:part_left_id
+				, :part_right_id
+				, :fixture_id
+			)
 		");	
-
-
-		// the loop
-		// builds $encounters
-		
-		// get encounter structure
 		$encounterStructure = $this->getEncounterStructure();
 
 		foreach ($_POST['encounter'] as $key => $score) {
-
 			$doubles = false;
 			$exclude = false;
 
@@ -306,8 +252,9 @@ class Model_Ttfixture extends Model
 
 				// find exclude tick
 
-				if (array_key_exists('exclude', $score))
+				if (array_key_exists('exclude', $score)) {
 					$exclude = true;
+				}
 
 			} else {
 
@@ -424,16 +371,9 @@ class Model_Ttfixture extends Model
 		// update the fixture
 
 		$sthFixture = $this->database->dbh->prepare("
-
-			update
-				tt_fixture
-
-			set 
-				date_fulfilled = :date_fulfilled
-
-			where
-				id = {$fixture['id']}
-
+			update tt_fixture
+			set date_fulfilled = :date_fulfilled
+			where id = {$fixture['id']}
 		");
 
 		$sthFixture->execute(array(
@@ -442,11 +382,10 @@ class Model_Ttfixture extends Model
 
 		// feedback
 
-		$this->getObject('Session')->set('fixture_overview', $encounters);
-		$this->getObject('mainUser')->setFeedback(array('success', 'Fixture Fulfilled Successfully'));
+		$this->session->set('fixture_overview', $encounters);
+		$this->session->set('feedback', 'Fixture Fulfilled Successfully');
 
-		return;
-
+		return true;
 	}	
 
 	
