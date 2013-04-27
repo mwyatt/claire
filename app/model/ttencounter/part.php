@@ -1,7 +1,6 @@
 <?php
 
 /**
- * ttVenue
  *
  * PHP version 5
  * 
@@ -10,8 +9,19 @@
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Model_Ttencounterpart extends Model
+class Model_Ttencounter_Part extends Model
 {		
+
+	public function delete($ids) {
+		$sth = $this->database->dbh->prepare("
+			delete from tt_encounter_part
+			where id = ?
+		");				
+		foreach ($ids as $id) {
+			$sth->execute(array($id));	
+		}
+		return $sth->rowCount();
+	}
 
 	public function readChange($playerId = false)
 	{	

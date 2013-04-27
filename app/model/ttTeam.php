@@ -25,7 +25,7 @@ class Model_Ttteam extends Model
 
 
 	public function create() {	
- 		if (! $this->validatePost($_POST, array('name', 'division_id', 'home_night', 'venue_id', 'form_create'))) {
+ 		if (! $this->validatePost(array('name', 'division_id', 'home_night', 'venue_id', 'form_create'))) {
 			$this->session->set('feedback', 'All required fields must be filled');
 			return false;
 		}
@@ -68,7 +68,7 @@ class Model_Ttteam extends Model
 	 * @return bool        
 	 */
 	public function update($id) {
- 		if (! $this->validatePost($_POST, array('name', 'division_id', 'home_night', 'venue_id', 'form_create'))) {
+ 		if (! $this->validatePost(array('name', 'division_id', 'home_night', 'venue_id', 'form_create'))) {
 			$this->session->set('feedback', 'All required fields must be filled');
 			return false;
 		}

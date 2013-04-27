@@ -177,6 +177,13 @@ class Config
 	 * @return array|string|int            
 	 */
 	public function get($one = false, $two = false, $three = false) {	
+		if ($two === 0) {
+			if (array_key_exists($one, $this->data)) {
+				return $this->data[$one][$two][$three];
+				
+			}
+			return false;
+		}
 		if (is_array($one)) {
 			if (array_key_exists($two, $one)) {
 				return $one[$two];

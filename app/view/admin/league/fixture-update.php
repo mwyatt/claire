@@ -1,117 +1,32 @@
 <?php require_once($this->pathView() . 'admin/header.php'); ?>
-<?php echo '<pre>';
-print_r($this->get('fixture'));
-print_r($this->get('model_admin_ttfixture'));
-echo '</pre>';
-exit;
- ?>
 
-<div class="content fixtures fulfill clearfix">
+<div class="content fixtures update clearfix">
 	<h2>Update Scorecard</h2>
-
-<?php
-if ($fixtureOverview = $this->session->getUnset('fixture_overview')) {
-	# code...
-echo '<pre>';
-print_r($fixtureOverview);
-echo '</pre>';
-}
-?>
-
 	<form method="post">
-
-<?php if ($this->get('model_ttdivision')): ?>
-
-		<div class="row division">
-			<label for="division_id">Division</label>
-			<select id="division_id" name="division_id">
-				<option value="0"></option>
-				 
-	<?php foreach ($this->get('model_ttdivision') as $division): ?>
-		
-				<option value="<?php echo $this->get($division, 'id'); ?>" <?php echo ($this->get($division, 'id') == $this->get('model_ttplayer', 'division_id') ? 'selected' : false); ?>><?php echo $this->get($division, 'name'); ?></option>
-
-	<?php endforeach ?>
-
-			</select>
-		</div>
-	
-<?php endif ?>
-
-<?php foreach ($this->get('encounter_structure') as $side => $parts) : ?>
-    
-		<div class="<?php echo $side; ?>">
-			<div class="team">
-				<label for="team_<?php echo $side; ?>">Team</label>
-				<select id="team_<?php echo $side; ?>" name="team[<?php echo $side; ?>]">
-					<option value="0"></option>
-				</select>
-			</div>
-			<div class="player">
-
-	<?php for ($player_row = 1; $player_row <= 3; $player_row ++) { ?>
-
-				<div class="player-<?php echo $player_row; ?>">
-
-		<?php echo ($side == 'left' ? '<span class="play-up">Play up</span>' : '') ?>
-					<select id="player_<?php echo $side; ?>_<?php echo $player_row; ?>" name="player[<?php echo $side; ?>][<?php echo $player_row; ?>]">
-						<option value="0"></option>
-					</select>
-
-		<?php echo ($side == 'right' ? '<span class="play-up">Play up</span>' : '') ?>
-
-				</div>
-
-	<?php } ?>
-			
-			</div>
-			<div class="score">
-
-	<?php $row = 0; ?>
-	<?php foreach ($parts as $part) : ?>
-
-				<div class="score-<?php echo $part; ?>">
-
-		<?php $name = 'encounter_' . (($part !== 'doubles') ? $row : $part) . '_' . $side; ?>
-
-		<?php if (($side == 'left') && ($part !== 'doubles')) : ?>
-
-					<label for="disable-<?php echo $row ?>">Excluude from merit</label>
-					<input id="disable-<?php echo $row ?>" type="checkbox" name="encounter[<?php echo $row; ?>][exclude]">
-
-		<?php endif; ?>
-
-		<?php if ($side == 'left'): ?>
-
-					<label for="<?php echo $name ?>" class="name"><?php echo (($part !== 'doubles') ? '' : ucfirst($part)); ?></label>
-	
-		<?php endif ?>
-
-					<input id="<?php echo $name ?>" name="encounter[<?php echo $row; ?>][<?php echo $side; ?>]" type="text" size="1" maxlength="1" tabindex="<?php echo $tabIndex ++; ?>">
-
-		<?php if ($side == 'right'): ?>
-
-					<label for="<?php echo $name ?>" class="name"><?php echo (($part !== 'doubles') ? '' : ucfirst($part)); ?></label>
-		
-		<?php endif ?>
-		
-				</div>
-
-		<?php $row ++; ?>
-	<?php endforeach; ?>
-
-			</div>
-			<div class="total">
-				<p></p>
-				<input type="hidden" name="total[<?php echo $side; ?>]">
-			</div>
+		<div class="row">
+			<p><?php echo $this->get('fixture', 'division_name') ?></p>
+			<p><?php echo $this->get('fixture', 'team_left_name') ?> vs <?php echo $this->get('fixture', 'team_right_name') ?></p>
 		</div>
 
-<?php endforeach; ?>
+<?php $tabIndex = 1; ?>
+<?php foreach ($this->get('model_admin_ttfixture') as $row => $encounter): ?>
+	
+		<div class="row">
+			<label for="disable-<?php echo $row ?>">Excluude from merit</label>
+			<input id="disable-<?php echo $row ?>" type="checkbox" name="encounter[<?php echo $row; ?>][exclude]"<?php echo ($this->get($encounter, 'status') == 'exclude' ? ' checked' : '') ?>>
+			<label for="encounter_<?php echo $row ?>_left" class="name"><?php echo (($this->get($encounter, 'status') != 'doubles') ? $this->get($encounter, 'player_left_full_name') : ucfirst($this->get($encounter, 'status'))); ?></label>
+			<input id="encounter_<?php echo $row ?>_left" name="encounter[<?php echo $row; ?>][left]" type="text" size="1" maxlength="1" value="<?php echo $this->get($encounter, 'player_left_score') ?>" tabindex="<?php echo $tabIndex ++; ?>">
+			<input id="encounter_<?php echo $row ?>_right" name="encounter[<?php echo $row; ?>][right]" type="text" size="1" maxlength="1" value="<?php echo $this->get($encounter, 'player_right_score') ?>" tabindex="<?php echo $tabIndex ++; ?>">
+			<label for="encounter_<?php echo $row ?>_right" class="name"><?php echo (($this->get($encounter, 'status') != 'doubles') ? $this->get($encounter, 'player_right_full_name') : ucfirst($this->get($encounter, 'status'))); ?></label>
+		</div>
 
-		<input name="form_<?php echo ($this->get('model_ttfixture') ? 'update' : 'fulfill'); ?>" type="hidden" value="true">
-		<input name="form_fulfill" type="hidden">
-		<a href="#" class="submit button"><?php echo ($this->get('model_ttfixture') ? 'Save' : 'Fulfill'); ?></a>
+<?php endforeach ?>
+
+		<div class="total">
+			<p></p>
+		</div>
+		<input name="form_update" type="hidden" value="true">
+		<a href="#" class="submit button">Save</a>
 		<input type="submit">
 	</form>
 </div>

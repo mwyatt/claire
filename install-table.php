@@ -237,6 +237,8 @@ try {
 
 		select
 			tt_encounter.id as encounter_id
+			, tt_encounter_part_left.id as tt_encounter_part_left_id
+			, tt_encounter_part_right.id as tt_encounter_part_right_id
 			, tt_encounter_part_left.player_id as left_id
 			, tt_encounter_part_right.player_id as right_id
 			, tt_encounter_part_left.player_score as left_score

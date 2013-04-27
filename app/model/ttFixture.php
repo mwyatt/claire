@@ -14,8 +14,16 @@ class Model_Ttfixture extends Model
 {
 
 	public static $encounterStructure = array(
-		'left' => array(1, 3, 2, 3, 1, 'doubles', 2, 3, 2, 1)
-		, 'right' => array(2, 1, 3, 2, 3, 'doubles', 1, 3, 2, 1)
+		0 => array(1, 2)
+		, 1 => array(3, 1)
+		, 2 => array(2, 3)
+		, 3 => array(3, 2)
+		, 4 => array(1, 3)
+		, 5 => array('doubles', 'doubles')
+		, 6 => array(2, 1)
+		, 7 => array(3, 3)
+		, 8 => array(2, 2)
+		, 9 => array(1, 1)
 	);
 
 	
@@ -140,53 +148,28 @@ class Model_Ttfixture extends Model
 
 	
 	/**
-	 * updates a fixture and fills scorecard information
-	 * the objectives are:
-	 * 		fill the encounter parts table with 2 rows
-	 * 		update the encounter table with the 2 ids
-	 * 		update the fixture date filled
-	 *
-	 * need to build some kind of array to store all the results information
-	 * this way the tt_encounter table can be updated with correct id's
-	 *
-	 * build up array so then x vs x can be directly compared, needed for rank
-	 * comparison and other things
-	 *
-	 * possible to have POST sent in as array for the encounter scores?
-	 * 
-	 * @return true || false
+	 * fullfills the fixture, will be recalled when 'updating' a fixture
+	 * @return bool sessison set with message
 	 */
 	public function fulfill() {
-		if (! $this->validatePost(array('division_id', 'team', 'player', 'encounter', 'total'))) {
+		if (! $this->validatePost(array('division_id', 'team', 'player', 'encounter'))) {
 			$this->session->set('feedback', 'Please fill all required fields');
 			return false;
 		}
-		$sth = $this->database->dbh->prepare("	
+		$sthFixture = $this->database->dbh->prepare("	
 			select
-				id
-				, team_left_id
-				, team_right_id
-				, date_fulfilled
+				tt_fixture.id
+				, tt_fixture.team_left_id
+				, team_left.name as team_left_name
+				, tt_fixture.team_right_id
+				, team_right.name as team_right_name
+				, tt_fixture.date_fulfilled
 			from tt_fixture
-			where team_left_id = :team_left_id and team_right_id = :team_right_id
-			group by id
+			left join tt_team as team_left on tt_fixture.team_left_id = team_left.id
+			left join tt_team as team_right on tt_fixture.team_right_id = team_right.id
+			where tt_fixture.team_left_id = ? and tt_fixture.team_right_id = ?
+			group by tt_fixture.id
 		");
-		$sth->execute(array(
-			':team_left_id' => $_POST['team']['left']
-			, ':team_right_id' => $_POST['team']['right']
-		));
-		if ($fixture = $sth->fetch(PDO::FETCH_ASSOC)) {
-			if ($fixture['date_fulfilled']) {
-				$this->session->set('feedback', 'This fixture has already been filled on ' . date('D jS F Y', $fixture['date_fulfilled']));
-				return false;
-			}
-		} else {
-			$this->session->set('feedback', 'This fixture does not exist');
-			return false;
-		}
-		$playerIds = array_merge($_POST['player']['left'], $_POST['player']['right']);
-		$ttPlayer = new Model_Ttplayer($this->database, $this->config);
-		$ttPlayer->readById($playerIds);
 		$sthEncounterPart = $this->database->dbh->prepare("
 			insert into tt_encounter_part (
 				player_id
@@ -211,161 +194,122 @@ class Model_Ttfixture extends Model
 				, :fixture_id
 			)
 		");	
-		$encounterStructure = $this->getEncounterStructure();
-
-		foreach ($_POST['encounter'] as $key => $score) {
+		$sthFixture->execute(array($_POST['team']['left'], $_POST['team']['right']));
+		if ($fixture = $sthFixture->fetch(PDO::FETCH_ASSOC)) {
+			if ($fixture['date_fulfilled']) {
+				$this->session->set('feedback', 'This fixture has already been filled on ' . date('D jS F Y', $fixture['date_fulfilled']));
+				return false;
+			}
+		} else {
+			$this->session->set('feedback', 'This fixture does not exist');
+			return false;
+		}
+		$ttPlayer = new Model_Ttplayer($this->database, $this->config);
+		$players = $ttPlayer->readById(array_merge($_POST['player']['left'], $_POST['player']['right']));
+		foreach ($this->getEncounterStructure() as $key => $playerPositions) {
+			$playerLeft = false;
+			$playerRight = false;
+			$scoreLeft = false;
+			$scoreRight = false;
 			$doubles = false;
 			$exclude = false;
-
-			// encounter || doubles
-
-			if ($key != 5) {
-
-				// fill array with player info or false
-
-				$encounters[$key]['left']['player'] = $ttPlayer->getById($_POST['player']['left'][$encounterStructure['left'][$key]]);
-				$encounters[$key]['right']['player'] = $ttPlayer->getById($_POST['player']['right'][$encounterStructure['right'][$key]]);
-
-				// find absent player
-
-				if (! $encounters[$key]['left']['player'] || ! $encounters[$key]['right']['player'])
-					$exclude = true;
-
-				// find exclude tick
-
-				if (array_key_exists('exclude', $score)) {
-					$exclude = true;
-				}
-
-			} else {
-
-				// doubles
-
-				$encounters[$key]['left']['player'] = false;
-				$encounters[$key]['right']['player'] = false;
+			if ($key == 5) {
 				$doubles = true;
-
-			}
-
-			// set scores
-
-			$encounters[$key]['left']['score'] = $score['left'];
-			$encounters[$key]['right']['score'] = $score['right'];
-
-			// helper: absent player score setter
-
-			if ($exclude) {
-				
-				if (! $encounters[$key]['left']['player']) {
-					$encounters[$key]['left']['score'] = 0;
-					$encounters[$key]['right']['score'] = 3;
-				} else {
-					$encounters[$key]['left']['score'] = 3;
-					$encounters[$key]['right']['score'] = 0;
+			} else {
+				if (array_key_exists($_POST['player']['left'][$playerPositions[0]], $players)) {
+					$playerLeft = $players[$_POST['player']['left'][$playerPositions[0]]];
 				}
-
+				if (array_key_exists($_POST['player']['right'][$playerPositions[1]], $players)) {
+					$playerRight = $players[$_POST['player']['right'][$playerPositions[1]]];
+				}
+				if (array_key_exists('exclude', $_POST['encounter'][$key]) || ! $playerLeft || ! $playerRight) {
+					if (! $playerLeft) {
+						$scoreLeft = 0;
+						$scoreRight = 3;
+					}
+					if (! $playerRight) {
+						$scoreLeft = 3;
+						$scoreRight = 0;
+					}
+					$exclude = true;
+				}
 			}
-
-			// set encounter parts, decide if is absent or doubles
-			// else set rank difference
-
+			$scoreLeft = $_POST['encounter'][$key]['left'];
+			$scoreRight = $_POST['encounter'][$key]['right'];
 			if ($exclude) {
-
 				$sthEncounterPart->execute(array(
-					':player_id' => $encounters[$key]['left']['player']['id']
-					, ':player_score' => $encounters[$key]['left']['score']
+					':player_id' => $playerLeft['id']
+					, ':player_score' => $scoreLeft
 					, ':player_rank_change' => '0'
 					, ':status' => 'exclude'
 				));
-
-				$encounterPartIds['left'] = $this->database->dbh->lastInsertId();
-
+				$encounterPartId['left'] = $this->database->dbh->lastInsertId();
 				$sthEncounterPart->execute(array(
-					':player_id' => $encounters[$key]['right']['player']['id']
-					, ':player_score' => $encounters[$key]['right']['score']
+					':player_id' => $playerRight['id']
+					, ':player_score' => $scoreRight
 					, ':player_rank_change' => '0'
 					, ':status' => 'exclude'
 				));		
-
-				$encounterPartIds['right'] = $this->database->dbh->lastInsertId();
-
+				$encounterPartId['right'] = $this->database->dbh->lastInsertId();
 			} elseif ($doubles) {
-
 				$sthEncounterPart->execute(array(
 					':player_id' => false
-					, ':player_score' => $encounters[$key]['left']['score']
+					, ':player_score' => $scoreLeft
 					, ':player_rank_change' => false
 					, ':status' => 'doubles'
 				));		
-
-				$encounterPartIds['left'] = $this->database->dbh->lastInsertId();
-
+				$encounterPartId['left'] = $this->database->dbh->lastInsertId();
 				$sthEncounterPart->execute(array(
 					':player_id' => false
-					, ':player_score' => $encounters[$key]['right']['score']
+					, ':player_score' => $scoreRight
 					, ':player_rank_change' => false
 					, ':status' => 'doubles'
 				));						
-
-				$encounterPartIds['right'] = $this->database->dbh->lastInsertId();
-
+				$encounterPartId['right'] = $this->database->dbh->lastInsertId();
 			} else {
-
-				$encounters[$key] = $ttPlayer->rankDifference($encounters[$key]);
-
-				// update player ranks
-
-				$ttPlayer->updateRank($encounters[$key]['left']['player']['id'], $encounters[$key]['left']['rank_change']);
-				$ttPlayer->updateRank($encounters[$key]['right']['player']['id'], $encounters[$key]['right']['rank_change']);
-
-
+				if ($scoreLeft > 2) {
+					$winner = true;
+				} else {
+					$winner = false;
+				}
+				$rankChange = $ttPlayer->getRankChange($playerLeft['rank'], $playerRight['rank'], $winner);
+				$ttPlayer->updateRank($playerLeft['id'], $rankChange['left']);
+				$ttPlayer->updateRank($playerLeft['id'], $rankChange['right']);
 				$sthEncounterPart->execute(array(
-					':player_id' => $encounters[$key]['left']['player']['id']
-					, ':player_score' => $encounters[$key]['left']['score']
-					, ':player_rank_change' => $encounters[$key]['left']['rank_change']
+					':player_id' => $playerLeft['id']
+					, ':player_score' => $scoreLeft
+					, ':player_rank_change' => $rankChange['left']
 					, ':status' => false
 				));		
-
-				$encounterPartIds['left'] = $this->database->dbh->lastInsertId();
-				
+				$encounterPartId['left'] = $this->database->dbh->lastInsertId();
 				$sthEncounterPart->execute(array(
-					':player_id' => $encounters[$key]['right']['player']['id']
-					, ':player_score' => $encounters[$key]['right']['score']
-					, ':player_rank_change' => $encounters[$key]['right']['rank_change']
+					':player_id' => $playerRight['id']
+					, ':player_score' => $scoreRight
+					, ':player_rank_change' => $rankChange['right']
 					, ':status' => false
 				));	
-				
-				$encounterPartIds['right'] = $this->database->dbh->lastInsertId();
-
+				$encounterPartId['right'] = $this->database->dbh->lastInsertId();
 			}
-
-			// set encounter
-
 			$sthEncounter->execute(array(
-				':part_left_id' => $encounterPartIds['left']
-				, ':part_right_id' => $encounterPartIds['right']
+				':part_left_id' => $encounterPartId['left']
+				, ':part_right_id' => $encounterPartId['right']
 				, ':fixture_id' => $fixture['id']
-			));	
-
+			));
+			$rowSummary[$key]['playerLeft'] = $playerLeft;
+			$rowSummary[$key]['playerRight'] = $playerRight;
+			$rowSummary[$key]['scoreLeft'] = $scoreLeft;
+			$rowSummary[$key]['scoreRight'] = $scoreRight;
+			$rowSummary[$key]['doubles'] = $doubles;
+			$rowSummary[$key]['exclude'] = $exclude;
 		}
-
-		// update the fixture
-
 		$sthFixture = $this->database->dbh->prepare("
 			update tt_fixture
-			set date_fulfilled = :date_fulfilled
+			set date_fulfilled = ?
 			where id = {$fixture['id']}
 		");
-
-		$sthFixture->execute(array(
-			':date_fulfilled' => time()
-		));	
-
-		// feedback
-
-		$this->session->set('fixture_overview', $encounters);
-		$this->session->set('feedback', 'Fixture Fulfilled Successfully');
-
+		$sthFixture->execute(array(time()));	
+		$this->session->set('fixture_overview', $rowSummary);
+		$this->session->set('feedback', 'Fixture Fulfilled');
 		return true;
 	}	
 
@@ -376,6 +320,15 @@ class Model_Ttfixture extends Model
 	// reset method
 	
 	
+	public function resetDateFulfilled($id) {
+		$sth = $this->database->dbh->prepare("
+			update tt_fixture
+			set date_fulfilled = ?
+			where id = {$id}
+		");
+		$sth->execute(array(null));
+	}
+
 	public function updateRank($homeRankChange, $awayRankChange) {
 	
 		echo $homeRankChange;

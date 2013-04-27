@@ -22,6 +22,22 @@ var feedback = {
 	}
 }
 
+var exclude = {
+	container: $('.exclude'),
+
+	init: function() {
+		$(exclude.container).on('click', exclude.isChecked);
+	},
+
+	isChecked: function() {
+		if ($(this).find('input').prop('checked')) {
+			$(this).closest('.row.score').addClass('excluded');
+		} else {
+			$(this).closest('.row.score').removeClass('excluded');
+		}
+	}
+};
+
 var select = {
 	container: false,
 	division: false,
@@ -38,11 +54,13 @@ var select = {
 		$(select.container).find('.play-up').on('click', select.clickPlayUp);
 		$(select.container).find('.score').find('input').on('click', select.clickInputScore);
 		$(select.container).find('.score').find('input').on('keyup', select.changeScore);
+		$('.play-up').on('mouseup', select.playUp);
 	},
 
 	loadTeam: function() {
 		select._reset('player');
 		$(select.team).html('');
+
 		$.getJSON(BASE_URL + '/ajax/team/?division_id=' + $(select.division).val(), function(results) {
 			if (results) {
 				$(select.team).append('<option value="0"></option>');
@@ -50,40 +68,48 @@ var select = {
 					$(select.team).append('<option value="' + result.id + '">' + result.name + '</option>');
 				});
 				$(select.team).on('change', select.loadPlayer);
+				$(select.team).prop("disabled", false);
 			}
 		});		
 	},
 
-	clickPlayUp: function() {
-		var button = $(this);
-		var select = $(this).closest('select');
+	playUp: function() {
+		var playerSelect;
+		var playUpButton = $(this);
+		$(playUpButton).off();
+		if ($(this).hasClass('left')) {
+			playerSelect = $(this).parent().find('select[name^="player[left]"]');
+		} else {
+			playerSelect = $(this).parent().find('select[name^="player[right]"]');
+		}
 		$.getJSON(BASE_URL + '/ajax/player/', function(results) {
 			if (results) {
-				$(select).html('');
+				$(playerSelect).html('');
 				$.each(results, function(index, result) {
-					$(select).append('<option value="' + result.id + '">' + result.name + '</option>');
+					$(playerSelect).append('<option value="' + result.id + '">' + result.name + '</option>');
 				});
-				$(select).on('change', select.changePlayer);
+				$(playerSelect).on('change', select.changePlayer);
+				$(playUpButton).fadeOut('fast');
 			}
 		});
 	},
 
-	updatePlayer: function(index, name) {
-		$('.' + select.side).find('.score-' + index).find('label.name').html(name);
+	updatePlayerLabel: function(side, index, name) {
+		$('label[for$="' + side + '"].player-' + index).html(name);
 	},
 
 	clickInputScore: function() {
 		$(this).select();
 	},
 
-	arrangePlayer: function() {
+	arrangePlayerSelect: function() {
 		for (var index = 0; index < 3; index ++) { 
 			playerIndex = index + 1;
 			playerOptions = $('select[name="player[' + select.side + '][' + playerIndex + ']"]').find('option');
 			playerOptions.each(function(optionIndex) {
-				if ((optionIndex) == (index)) {
+				if ((optionIndex) == (index + 1)) {
 					$(this).prop('selected', 'selected');
-					select.updatePlayer(playerIndex, $(this).html());
+					select.updatePlayerLabel(select.side, playerIndex, $(this).html());
 				}
 			});
 		}
@@ -99,89 +125,73 @@ var select = {
 	},
 
 	updateFixtureScore: function() {
-		var
-			score
-			, leftTotal = 0
-			, rightTotal = 0;
-
-		$(select.container).find('.left').find('.score').find('input').each(function() {
-
+		var score, leftTotal = 0, rightTotal = 0;
+		$(select.container).find('.row.score').find('input[name$="[left]"]').each(function() {
 	 		score = parseInt($(this).val());
 	 		if (isNaN(score))
 	 			score = 0;
-
 			leftTotal = leftTotal + score;
-
 		});
-
-		$(select.container).find('.right').find('.score').find('input').each(function() {
-
+		$(select.container).find('.row.score').find('input[name$="[right]"]').each(function() {
 	 		score = parseInt($(this).val());
 	 		if (isNaN(score))
 	 			score = 0;
-
 			rightTotal = rightTotal + score;
-
 		});
-
-		// set left and right total display and hidden inputs
-
-		$(select.container).find('.left').find('.total').find('p').html(leftTotal);
-			$(select.container).find('.left').find('.total').find('input').val(leftTotal);
-		$(select.container).find('.right').find('.total').find('p').html(rightTotal);
-			$(select.container).find('.right').find('.total').find('input').val(rightTotal);
+		$(select.container).find('.row.total').find('.left').html(leftTotal);
+		$(select.container).find('.row.total').find('.right').html(rightTotal);
 	},
 
 	changeScore: function(e) {
-				// exclude tab, shift, backspace key
+		// exclude tab, shift, backspace key
 
-				if ((e.keyCode == 9) || (e.keyCode == 16)|| (e.keyCode == 8))
-					return false;
+		if ((e.keyCode == 9) || (e.keyCode == 16)|| (e.keyCode == 8))
+			return false;
 
-				// continue...
+		// continue...
 
-				var
-					currentValue
-					, parts
-					, index
-					, oppositeScore
-					;
+		var
+			currentValue
+			, parts
+			, index
+			, oppositeScore
+			;
 
-		 		currentValue = parseInt($(this).val());
-		 		if (currentValue == NaN)
-		 			currentValue = 0;
+			currentValue = parseInt($(this).val());
+			if (currentValue == NaN)
+				currentValue = 0;
 
-				parts = $(this).prop('id').split('_');
+		parts = $(this).prop('id').split('_');
 
-				if (2 in parts) {
+		if (2 in parts) {
 
-					if ($(this).val() >= 3)
-						oppositeScore = 0;
-					else
-						oppositeScore = 3;
+			if ($(this).val() >= 3)
+				oppositeScore = 0;
+			else
+				oppositeScore = 3;
 
-					if (parts[2] == 'left')
-						$('#encounter_' + parts[1] + '_right').val(oppositeScore);
-					else
-						$('#encounter_' + parts[1] + '_left').val(oppositeScore);
+			if (parts[2] == 'left')
+				$('#encounter_' + parts[1] + '_right').val(oppositeScore);
+			else
+				$('#encounter_' + parts[1] + '_left').val(oppositeScore);
 
-				}
+		}
 
-				if (!currentValue)
-					$(this).val(0);
+		if (!currentValue)
+			$(this).val(0);
 
-				// if ((currentValue == 0) || (currentValue)) 
-				// 	$(this).val(currentValue + 1);
+		// if ((currentValue == 0) || (currentValue)) 
+		// 	$(this).val(currentValue + 1);
 
-				// if (currentValue == 2)
-				// 	$(this).val(2);
+		// if (currentValue == 2)
+		// 	$(this).val(2);
 
-				if (currentValue > 3)
-					$(this).val(3);
+		if (currentValue > 3)
+			$(this).val(3);
 
-				// update the totals
-				
-				select.updateFixtureScore();
+		// update the totals
+		
+		select.updateFixtureScore();
 	},
 
 	loadPlayer: function() {
@@ -190,22 +200,19 @@ var select = {
 		} else {
 			select.side = 'right';
 		}
-		select.player = $(select.container).find('.' + select.side).find('select[name^="player"]');
+		select.player = $(select.container).find('select[name^="player[' + select.side + ']"]');
 		$(select.player).html('');
-		$.getJSON(BASE_URL + '/ajax/player/?team_id=' + $('.' + select.side).find('select[name^="team"]').val(), function(results) {
+		$.getJSON(BASE_URL + '/ajax/player/?team_id=' + $(this).val(), function(results) {
 			if (results) {
+				$(select.player).append('<option value="0">Absent Player</option>');
 				$.each(results, function(index, result) {
 					$(select.player).append('<option value="' + result.id + '">' + result.full_name + '</option>');
 				});
-				select.arrangePlayer();
+				select.arrangePlayerSelect();
 				$(select.player).on('change', function() {
-					var name = $(this).find('option:selected').html();
-					var parts = $(this).prop('name').replace(']', '').replace(']', '').split('[');
-					if (2 in parts) {
-						select.updatePlayer(parts[2], name);
-					}
-
+					select.updatePlayerLabel($(this).data('side'), $(this).data('position'), $(this).find('option:selected').html());
 				});
+				$(select.player).prop("disabled", false);
 			}
 		});	
 	}
@@ -223,6 +230,7 @@ $(document).ready(function() {
 	$.ajaxSetup ({  
 		cache: false
 	});
+	exclude.init();
 	select.init();
 	feedback.init();
 	$('form').find('a.submit').on('mouseup', formSubmit);

@@ -14,32 +14,11 @@ class Model_Admin_Ttfixture extends Model_Ttfixture
 {
 
 	public function readById($id) {
-		// $sth = $this->database->dbh->prepare("	
-		// 	select
-		// 		tt_fixture.id
-		// 		, tt_fixture.date_fulfilled
-		// 		, tt_fixture.team_left_id
-		// 		, team_left.name as team_left_name
-		// 		, tt_fixture.team_right_id
-		// 		, team_right.name as team_right_name
-		// 		, sum(encounter_part_left.player_score) as score_left
-		// 		, sum(encounter_part_right.player_score) as score_right
-		// 	from tt_fixture
-		// 	left join tt_team as team_left on team_left.id = tt_fixture.team_left_id
-		// 	left join tt_team as team_right on team_right.id = tt_fixture.team_right_id
-		// 	left join tt_encounter on tt_encounter.fixture_id = tt_fixture.id
-		// 	left join tt_encounter_part as encounter_part_left on encounter_part_left.id = tt_encounter.part_left_id
-		// 	left join tt_encounter_part as encounter_part_right on encounter_part_right.id = tt_encounter.part_right_id
-		// 	where tt_fixture.id = ? and tt_fixture.date_fulfilled is not null
-		// ");
-		// $sth->execute(array($id));
-		// $fixture = $sth->fetch(PDO::FETCH_OBJ);
-		// if (! $fixture->date_fulfilled) {
-		// 	return false;
-		// }
 		$sth = $this->database->dbh->prepare("	
 			select
 				tt_fixture.id		
+				, tt_division.id as division_id		
+				, tt_division.name as division_name		
 				, concat(player_left.first_name, ' ', player_left.last_name) as player_left_full_name
 				, concat(player_right.first_name, ' ', player_right.last_name) as player_right_full_name
 				, tt_encounter_result.left_id as player_left_id
@@ -63,6 +42,7 @@ class Model_Admin_Ttfixture extends Model_Ttfixture
 			left join tt_fixture_result on tt_fixture_result.fixture_id = tt_encounter_result.fixture_id
 			left join tt_team as team_left on team_left.id = tt_fixture.team_left_id
 			left join tt_team as team_right on team_right.id = tt_fixture.team_right_id
+			left join tt_division on tt_division.id = team_left.division_id
 			where tt_encounter_result.fixture_id = ?
 			group by tt_encounter_result.encounter_id
 			order by tt_encounter_result.encounter_id
@@ -71,9 +51,42 @@ class Model_Admin_Ttfixture extends Model_Ttfixture
 		if (! $sth->rowCount()) {
 			return false;
 		}
-		$this->data = $sth->fetchAll(PDO::FETCH_ASSOC);
-		return true;
+		return $this->data = $sth->fetchAll(PDO::FETCH_ASSOC);
 	}
 
+
+	public function update($id) {
+		$ttPlayer = new Model_Ttplayer($this->database, $this->config);
+		$ttEncounterResult = new Model_Ttencounter_Result($this->database, $this->config);
+		$ttEncounterPart = new Model_Ttencounter_Part($this->database, $this->config);
+		$ttEncounter = new Model_Ttencounter($this->database, $this->config);
+		if ($results = $ttEncounterResult->readByFixtureId($id)) {
+			foreach ($results as $row => $result) {
+				$partIds[] = $result['tt_encounter_part_left_id'];
+				$partIds[] = $result['tt_encounter_part_right_id'];
+				$rankChanges[$result['left_id']][] = $result['left_rank_change'];
+				$rankChanges[$result['right_id']][] = $result['right_rank_change'];
+			}
+			foreach ($rankChanges as $playerId => $changes) {
+				if ($change = array_sum($changes)) {
+					if ($change < 0) {
+						$change = abs($change);
+					} else {
+						$change = -$change;
+					}
+					$rankChanges[$playerId] = $change;
+					$ttPlayer->updateRank($playerId, $change);
+				} else {
+					unset($rankChanges[$playerId]);
+				}
+			}
+			$ttEncounterPart->delete($partIds);
+			$ttEncounter->deleteByFixtureId($id);
+			$this->resetDateFulfilled($id);
+			return true;
+		} else {
+			return false;
+		}
+	}
 	
 }

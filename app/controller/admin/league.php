@@ -129,35 +129,39 @@ class Controller_Admin_League extends Controller
 
 	public function fixture() {
 		$encounterStructure = new Model_Ttfixture($this->database, $this->config);
+		$adminFixture = new Model_Admin_Ttfixture($this->database, $this->config);
 		$fixture = new Model_Ttfixture($this->database, $this->config);
 		$division = new Model_Ttdivision($this->database, $this->config);
 		$division->read();
+		$encounterStructure->data = $encounterStructure->getEncounterStructure();
 		if (array_key_exists('form_fulfill', $_POST)) {
 			$fixture->fulfill();
 			$this->route('current');
 		}
 		if (array_key_exists('form_update', $_POST)) {
-			$fixture->update($_GET['edit']);
+			if ($adminFixture->update($_GET['edit'])) {
+				$adminFixture->fulfill();
+			}
 			$this->route('current');
 		}
 		if (array_key_exists('edit', $_GET)) {
-			$fixture = new Model_Admin_Ttfixture($this->database, $this->config);
-			if (! $fixture->readById($_GET['edit'])) {
+			if (! $adminFixture->readById($_GET['edit'])) {
 				$this->route('current_noquery');
 			}
 			$fixtureSingle = new Model_Blank($this->database, $this->config);
-			$fixtureSingle->setData($fixture->data[0]);
+			$fixtureSingle->setData($adminFixture->data[0]);
 			$this->view	
 				->setObject('fixture', $fixtureSingle)
-				->setObject($fixture)
-				->loadTemplate('admin/league/fixture-update');
+				->setObject($adminFixture)
+				->setObject('encounter_structure', $encounterStructure)
+				->setObject($division)
+				->loadTemplate('admin/league/fixture-create-update');
 		}
 		if ($this->config->getUrl(3) == 'fulfill') {
-			$encounterStructure->data = $encounterStructure->getEncounterStructure();
 			$this->view
 				->setObject('encounter_structure', $encounterStructure)
-				->setObject($division);
-			$this->view->loadTemplate('admin/league/fixture-fulfill');
+				->setObject($division)
+				->loadTemplate('admin/league/fixture-create-update');
 		}
 		$fixture->readFilled();
 		$this->view
