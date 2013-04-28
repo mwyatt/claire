@@ -1,8 +1,10 @@
 <?php require_once($this->pathView() . 'admin/header.php'); ?>
 
 <div id="content" class="league fixtures clearfix">
-	<h2>Fixtures</h2>
-	<a class="new button" href="<?php echo $this->url('current_noquery'); ?>fulfill/" title="Add a new fixture">Submit Scorecard</a>
+	<h1>Fixtures</h1>
+	<div class="clearfix text-right row">
+		<a class="new button" href="<?php echo $this->url('current_noquery'); ?>fulfill/" title="Add a new fixture">Submit Scorecard</a>
+	</div>
 
 <?php if ($this->get('model_ttfixture')) : ?>
 	<?php foreach ($this->get('model_ttfixture') as $fixture): ?>
@@ -24,6 +26,12 @@
 </div>
 
 	<?php endforeach ?>
+<?php else: ?>
+	
+	<div class="nothing-yet">
+		<p>No scorecards have been submitted yet, why not <a href="<?php echo $this->url('current_noquery'); ?>fulfill/">submit</a> one now?</p>
+	</div>
+	
 <?php endif ?>
 
 </div>

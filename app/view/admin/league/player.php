@@ -1,8 +1,10 @@
 <?php require_once($this->pathView() . 'admin/header.php'); ?>
 
 <div id="content" class="league player">
-	<h2>Players</h2>
-	<a class="new button" href="<?php echo $this->url('current_noquery'); ?>new/" title="Add a new player">New</a>
+	<h1>Players</h1>
+	<div class="clearfix text-right row">
+		<a class="new button" href="<?php echo $this->url('current_noquery'); ?>new/" title="Add a new player">New</a>
+	</div>
 
 <?php if ($this->get('model_ttplayer')) : ?>
 
@@ -28,6 +30,7 @@
 			<td><?php echo $this->get($player, 'team_name'); ?></td>
 			<td><?php echo $this->get($player, 'division_name'); ?></td>
 			<td class="action">
+				<a href="<?php echo $this->get($player, 'guid'); ?>" title="View <?php echo $this->get($player, 'full_name'); ?> online">View</a>
 				<a href="<?php echo $this->url('current_noquery'); ?>?edit=<?php echo $this->get($player, 'id'); ?>" title="Edit <?php echo $this->get($player, 'full_name'); ?>">Edit</a>
 				<a href="<?php echo $this->url('current_noquery'); ?>?delete=<?php echo $this->get($player, 'id'); ?>" title="Delete <?php echo $this->get($player, 'full_name'); ?>">Delete</a>
 			</td>

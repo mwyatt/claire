@@ -374,9 +374,9 @@ abstract class Model extends Config
 				$parsedResults[$result['id']] = $result;
 			}
 			if (array_key_exists('title', $result)) {
-				$result['slug'] = $this->urlFriendly($result['title']);
-				if (array_key_exists('type', $result)) {
-					$result['guid'] = $this->getGuid($result['type'], $result['title'], $result['id']);
+				$parsedResults[$result['id']]['slug'] = $this->urlFriendly($parsedResults[$result['id']]['title']);
+				if (array_key_exists('type', $parsedResults[$result['id']])) {
+					$parsedResults[$result['id']]['guid'] = $this->getGuid($parsedResults[$result['id']]['type'], $parsedResults[$result['id']]['title'], $parsedResults[$result['id']]['id']);
 				}
 			}
 		}

@@ -58,7 +58,7 @@ class Model_Maincontent extends Model
 	}	
 
 
-	public function readByType($type = 'post') {	
+	public function readByType($type) {	
 		$sth = $this->database->dbh->prepare("	
 			select
 				main_content.id
@@ -238,7 +238,7 @@ class Model_Maincontent extends Model
 		));		
 
 		if ($sth->rowCount()) {
-			$this->session->set('feedback', ucfirst($_POST['type']) . ' "' . $_POST['title'] . '" created');
+			$this->session->set('feedback', ucfirst($_POST['type']) . ' "' . $_POST['title'] . '" created. <a href="' . $this->config->getUrl('back') . '">Back to list</a>');
 			return $this->database->dbh->lastInsertId();
 		}
 		$this->session->set('feedback', 'Problem while creating ' . ucfirst($_POST['type']));
@@ -276,7 +276,7 @@ class Model_Maincontent extends Model
 			, ($this->isChecked('status') ? 'visible' : 'hidden')
 			, (array_key_exists('edit', $_GET) ? $_GET['edit'] : '')
 		));		
-		$this->session->set('feedback', ucfirst($row['type']) . ' "' . $row['title'] . '" updated');
+		$this->session->set('feedback', ucfirst($row['type']) . ' "' . $row['title'] . '" updated. <a href="' . $this->config->getUrl('current_noquery') . '">Back to list</a>');
 		return true;
 	}
 

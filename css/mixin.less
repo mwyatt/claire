@@ -309,7 +309,10 @@ a:visited {
 a:hover,
 a:focus {
     color: lighten(@orange, 20%);
-    text-decoration: underline;
+}
+
+a:focus {
+    border-color: @orange !important;
 }
 
 a:hover {}

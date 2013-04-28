@@ -9,8 +9,23 @@ try {
 		->setPassword('123')
 		->insert(10);
 	$user
-		->setEmail('mike.turner@gmail.com')
-		->setPassword('223')
+		->setEmail('Realbluesman@tiscali.co.uk')
+		->setPassword('e.l.t.t.l.12')
+		->insert(1);
+	
+	$user
+		->setEmail('gsaggers6@aol.com')
+		->setPassword('e.l.t.t.l.12')
+		->insert(1);
+	
+	$user
+		->setEmail('hepworth_neil@hotmail.com')
+		->setPassword('e.l.t.t.l.12')
+		->insert(1);
+	
+	$user
+		->setEmail('henryrawcliffe@sky.com')
+		->setPassword('e.l.t.t.l.12')
 		->insert(1);
 	
 	$database->dbh->query("
@@ -22,6 +37,12 @@ try {
 			, ('1', 'age', '24')
 			, ('2', 'first_name', 'Mike')
 			, ('2', 'last_name', 'Turner')
+			, ('3', 'first_name', 'Grant')
+			, ('3', 'last_name', 'Saggers')
+			, ('4', 'first_name', 'Neil')
+			, ('4', 'last_name', 'Hepworth')
+			, ('5', 'first_name', 'Harry')
+			, ('5', 'last_name', 'Rawcliffe')
 	");	
 
 	$database->dbh->query("

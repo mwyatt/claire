@@ -11,7 +11,7 @@ class Route extends Config
 	
 	public function current($path = false) {		
 	
-		header("Location: " . $this->getObject('Config')->getUrl('current') . $path);
+		header("Location: " . $this->getObject('config')->getUrl('current') . $path);
 		
 		exit;
 		
@@ -20,7 +20,7 @@ class Route extends Config
 	
 	public function home($path = false)	{		
 	
-		header("Location: " . $this->getObject('Config')->getUrl('base') . $path);
+		header("Location: " . $this->getObject('config')->getUrl('base') . $path);
 		
 		exit;
 		
@@ -29,7 +29,7 @@ class Route extends Config
 	
 	public function homeAdmin($path = false) {		
 	
-		header("Location: " . $this->getObject('Config')->getUrl('base') . "admin/" . $path);
+		header("Location: " . $this->getObject('config')->getUrl('base') . "admin/" . $path);
 		
 		exit;
 		

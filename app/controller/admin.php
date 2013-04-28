@@ -17,6 +17,9 @@ class Controller_Admin extends Controller
 
 	public function initialise() {
 		$user = new Model_Mainuser($this->database, $this->config);
+		if ($user->isLogged()) {
+			$user->permission();
+		}
 
 		if (array_key_exists('logout', $_GET)) {
 			$user->logout();
@@ -27,7 +30,7 @@ class Controller_Admin extends Controller
 		if (array_key_exists('form_login', $_POST)) {
 			if ($user->login($_POST['email_address'], $_POST['password'])) {
 				$this->session->set('feedback', 'Successfully Logged in as ' . $this->session->get('user', 'first_name') . ' ' . $this->session->get('user', 'last_name'));
-				$this->route('base', 'admin/');
+				$user->permission();
 			}
 			$this->session->set('feedback', 'Email Address or password incorrect');
 			$this->session->set('form_field', array('email' => $_POST['email_address']));
@@ -59,6 +62,13 @@ class Controller_Admin extends Controller
 	public function league() {
 		$this->load(array('admin', 'league'), $this->config->getUrl(2), $this->view, $this->database, $this->config);
 	}
+
+
+	// public function settings() {
+	// 	$option = new Model_Mainoption($this->database, $this->config);
+	// 	$this->view
+	// 		->loadTemplate('admin/settings');
+	// }
 
 	
 }

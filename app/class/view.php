@@ -33,7 +33,7 @@ class View extends Model
 			$menu->admin();
 			$menu->adminSub();
 		}
-		$mainoption->select();		
+		$mainoption->read();		
 		$this->setMeta(array(
 			'title' => $mainoption->get('meta_title'),
 			'keywords' => $mainoption->get('meta_keywords'),
@@ -87,11 +87,11 @@ class View extends Model
 			}
 		}
 
-		echo '<pre>';
+		// echo '<pre>';
 		// print_r($this->config);
-		print_r($titles);
+		// print_r($titles);
 		// print_r($this->data);
-		echo '</pre>';
+		// echo '</pre>';
 		// exit;
 
 		// presentation & cache

@@ -1,9 +1,9 @@
 <?php require_once('header.php'); ?>
 
-<div id="content" class="dashboard">
+<!-- <div id="content" class="dashboard">
 
 	<h1>Dashboard</h1>
 
-</div> <!-- .container -->
-
+</div>
+ -->
 <?php require_once('footer.php'); ?>

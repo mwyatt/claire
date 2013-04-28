@@ -182,33 +182,110 @@ class Model_Mainuser extends Model
 		return $session->get('user');
 	}
 	
-	public function checkPermission($path) {
 
-		if (! is_file($path))
-			return false;
 
-		if ($file = file_get_contents($path)) {
+	public function checkPermission() {
+		// $email = $this->get('email');
+		// if ($email == 'martin.wyatt@gmail.com') {
 
-			if ($position = strpos($file, '@access ')) {
+		// }
 
-				$requiredLevel = substr($file, $position + 8, 2);
-				$requiredLevel = intval($requiredLevel);
+		// if ($this->get('email') == 'martin.wyatt@gmail.com') {
+		// 	$this->config->getObject('route')->home('admin/settings/');
+		// }
+		// if ($this->get('email') == 'Realbluesman@tiscali.co.uk') {
+		// 	$this->config->getObject('route')->home('admin/league/fixture/fulfill/');
+		// }
+		// if ($this->get('email') == 'hepworth_neil@hotmail.com') {
+		// 	$this->config->getObject('route')->home('admin/content/page/');
+		// }
+		// if ($this->get('email') == 'gsaggers6@aol.com') {
+		// 	$this->config->getObject('route')->home('admin/league/player/');
+		// }
+		// if ($this->get('email') == 'henryrawcliffe@sky.com') {
+		// 	$this->config->getObject('route')->home('admin/content/minutes/');
+		// }
 
-				$user = $this->get();
+
+		// if ($this->config->getUrl(1)) {
+		// 	# code...
+		// }
+
+		// if ($this->get('email') == 'martin.wyatt@gmail.com') {
+		// 	$this->config->getObject('route')->home('admin/settings/');
+		// }
+
+
+		// if ($file = file_get_contents($path)) {
+
+		// 	if ($position = strpos($file, '@access ')) {
+
+		// 		$requiredLevel = substr($file, $position + 8, 2);
+		// 		$requiredLevel = intval($requiredLevel);
+
+		// 		$user = $this->get();
 				
-				if ($user['level'] >= $requiredLevel)
-					return true;
-				else
-					return false;
+		// 		if ($user['level'] >= $requiredLevel)
+		// 			return true;
+		// 		else
+		// 			return false;
 
-			} else {
+		// 	} else {
 
-				return true;
+		// 		return true;
 
-			}
+		// 	}
 
-		}
+		// }
 
 	}
+
+
+	public function permission() {
+		if (array_key_exists('form_login', $_POST)) {
+			if ($this->get('email') == 'martin.wyatt@gmail.com') {
+				$this->config->getObject('route')->home('admin/settings/');
+			}
+			if ($this->get('email') == 'Realbluesman@tiscali.co.uk') {
+				$this->config->getObject('route')->home('admin/league/fixture/fulfill/');
+			}
+			if ($this->get('email') == 'hepworth_neil@hotmail.com') {
+				$this->config->getObject('route')->home('admin/content/press/');
+			}
+			if ($this->get('email') == 'gsaggers6@aol.com') {
+				$this->config->getObject('route')->home('admin/league/player/');
+			}
+			if ($this->get('email') == 'henryrawcliffe@sky.com') {
+				$this->config->getObject('route')->home('admin/content/minutes/');
+			}
+			$this->config->getObject('route')->home('admin/');
+		}
+		$feedback = 'Access denied. Please contact the administrator if you require access <a href="mailto:martin.wyatt@gmail.com">martin.wyatt@gmail.com</a>';
+		if ($this->get('email') == 'Realbluesman@tiscali.co.uk') {
+			if ($this->config->getUrl(1) != 'league') {
+				$this->session->set('feedback', $feedback);
+				$this->config->getObject('route')->home('admin/league/');
+			}
+		}
+		if ($this->get('email') == 'hepworth_neil@hotmail.com') {
+			if ($this->config->getUrl(2) != 'press') {
+				$this->session->set('feedback', $feedback);
+				$this->config->getObject('route')->home('admin/content/press/');
+			}
+		}
+		if ($this->get('email') == 'gsaggers6@aol.com') {
+			if ($this->config->getUrl(2) != 'player') {
+				$this->session->set('feedback', $feedback);
+				$this->config->getObject('route')->home('admin/league/player/');
+			}
+		}
+		if ($this->get('email') == 'henryrawcliffe@sky.com') {
+			if ($this->config->getUrl(2) != 'minutes') {
+				$this->session->set('feedback', $feedback);
+				$this->config->getObject('route')->home('admin/content/minutes/');
+			}
+		}
+	}
+
 	
 }

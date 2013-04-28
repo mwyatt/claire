@@ -234,8 +234,14 @@ $(document).ready(function() {
 	select.init();
 	feedback.init();
 	$('form').find('a.submit').on('mouseup', formSubmit);
-	if ($('.content.page').length || $('.content.press').length) {
-		var editor = new wysihtml5.Editor("textarea", {
+	if (
+		$('.content.page.create').length
+		|| $('.content.page.update').length
+		|| $('.content.press.create').length
+		|| $('.content.press.update').length
+	) {
+		console.log('value');
+		var editor = new wysihtml5.Editor("form_html", {
 		  toolbar:        "toolbar",
 		  parserRules:    wysihtml5ParserRules,
 		  useLineBreaks:  false

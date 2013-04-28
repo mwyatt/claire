@@ -309,7 +309,7 @@ class Model_Ttfixture extends Model
 		");
 		$sthFixture->execute(array(time()));	
 		$this->session->set('fixture_overview', $rowSummary);
-		$this->session->set('feedback', 'Fixture Fulfilled');
+		$this->session->set('feedback', 'Fixture Fulfilled. <a href="' . $this->config->getUrl('back') . '">Back to list</a>');
 		return true;
 	}	
 

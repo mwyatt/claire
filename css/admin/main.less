@@ -92,6 +92,12 @@ a.button,
 .content.fixtures.update,
 .content.fixtures.fulfill {
 
+	select[name^="division"],
+	select[name^="team"],
+	select[name^="player"] {
+		width: 14em;
+	}
+
 	input[type="checkbox"] {
 		margin: 0 0 0 0.4em;
 	}
@@ -149,9 +155,13 @@ a.button,
 		padding: 0.2em 0.6em 0.3em;
 	}
 
+	.row.total {
+		margin: 0.8em 0 1.4em;
+	}
+
 	.row.score {
 		border-top: 1px dotted darken(@white, 15%);
-		// padding: 1em;
+		padding: 1em;
 		margin: 0;
 
 	}
@@ -233,18 +243,36 @@ input[placeholder] {
 	// color: darken(@white, 20%);
 }
 
+
+label.above {
+	display: block;
+	margin: 0 0 1.1em;
+	font-weight: 600;
+	font-size: 1.1em;
+}
+
 label {
+
 	color: darken(@white, 40%);
 	// font-size: 1.1em;
 	// 
 }
 
+// .row {
+// 	margin: 0 0 3em;
+// 	clear: both;
+// }
+.row {
+	margin: 0 0 3em;
+	clear: both;
+}
+
+input[id="status"] {
+	margin: 0.1em 0 0 0.4em;
+}
+
 form {
 
-	.row {
-		margin: 0 0 1em;
-		clear: both;
-	}
 	
 	.required {
 		/*background: url('../image/main/required.png') 276px 17px no-repeat;*/
@@ -259,63 +287,84 @@ form {
 }
 
 footer.main {
-	border-top: 1px dotted @black;
+	border-top: 1px dotted darken(@white, 20%);
+	padding: 1.5em 0 3em;
+
+	p {
+		margin: 0;
+		font-weight: 100;
+		font-style: italic;
+	}
 }
 
 header.main {
-	margin: 1.5em 0 2em;
+	border-bottom: 1px dotted darken(@white, 20%);
+	margin: 1.5em 0;
 
 	.title {
 		float: left;
 		font-weight: bold;
 		margin: 0 0 2em;
 	}
+}
 
-	.user {
-		position: relative;
+.user {
+	position: relative;
+
+	ul {
+		display: none;	
+	}
+
+	.name {
+		float: right;
+		font-weight: 600;
+	}
+
+	&.active {
+
+		.name,
+		.name:hover {
+			cursor: default;
+			color: darken(@white, 50%);
+			text-decoration: none;
+		}
+
+		// .name,
+		// .name:hover {
+		// 	.gradient (darken(@white, 5%), darken(@white, 7%));
+		// 	.inner-shadow (inset 0 1px 3px darken(@white, 10%));
+		// 	color: darken(@white, 50%);
+		// 	border: 1px solid darken(@white, 15%);
+		// }
 
 		ul {
-			display: none;	
-		}
-
-		.name {
-			float: right;
-		}
-
-		&.active .name {
-			cursor: default;
-		}
-
-		&.active .name,
-		&.active .name:hover {
-			.gradient (darken(@white, 5%), darken(@white, 7%));
-			.inner-shadow (inset 0 1px 3px darken(@white, 10%));
-			color: darken(@white, 50%);
+			.gradient (darken(@white, 2%), darken(@white, 4%));
+			.border-radius (3px);
+			.text-shadow (1px 1px 0 @white);
 			border: 1px solid darken(@white, 15%);
-		}
-
-		&.active ul {
+			color: darken(@white, 50%);
 			background: #fff;
 			display: inline;
 			list-style: none;
 			position: absolute;
 			padding: 0;
 			margin: 0;
-			top: 45px;
+			top: 2.5em;
 			right: 0;
-			border: 1px solid #d3d3d3;
 		}
 
-		&.active ul li a {
-			padding: 15px 50px 15px 15px;
+		ul li a {
+			padding: 0.5em 1em 0.6em;
 			display: block;
-			border-bottom: 1px solid #eee;
+			font-weight: 600;
 		}
 
-		&.active ul li a.hover {
+		ul li a.hover {
+			text-decoration: none;
 			background: #efefef;
 		}
 	}
+
 }
 
 nav {
@@ -331,6 +380,12 @@ nav {
 		float: left;
 		margin: 0 0.8em 0 0;
 	}
+
+	.current a {
+		border-color: darken(@white, 30%);
+		color: darken(@white, 60%);
+		cursor: default;
+	}
 }
 
 nav.main {
@@ -339,10 +394,34 @@ nav.main {
 
 nav.sub {
 	height: 2.6em;
+	margin: 0;
+
+	a {
+		margin: 0 1.7em 0 0;
+		font-weight: 600;
+	}
+
+	.current a {
+		color: darken(@white, 40%);
+	}
 }
 
 table {
 	margin: 0 0 2em;
+}
+
+thead th {
+	padding: 1em;
+}
+
+th,
+td {
+	border-left: 1px solid #eee;
+}
+
+th:first-child,
+td:first-child {
+	border-left: none;
 }
 
 td.action a {
@@ -350,7 +429,7 @@ td.action a {
 }
 
 td {
-	padding: 0.5em;
+	padding: 0.6em;
 }
 
 tbody tr {
@@ -360,8 +439,8 @@ tbody tr {
 	}
 
 	&:hover {
-		background: darken(@white, 3%);
-		border-bottom: 1px solid darken(@white, 7%);
+		background: darken(@white, 5%);
+		// border-bottom: 1px solid darken(@white, 7%);
 	}
 }
 
@@ -456,11 +535,39 @@ tbody tr {
 	clear: both;
 }
 
+h1 {
+	margin: 0 0 1em;
+}
+
+.nothing-yet {
+	// .border-radius (3px);
+	.text-shadow (0 1px 0 darken(@white, 0%));
+	background: darken(@white, 2%);
+	text-align: center;
+	border-top: 1px solid darken(@white, 15%);
+	border-bottom: 1px solid darken(@white, 15%);
+	padding: 2em;
+
+	p {
+		color: darken(@white, 40%);
+		cursor: default;
+		font-weight: 600;
+		margin: 0;
+	}
+}
+
+.content.page textarea,
+.content.press textarea {
+	width: 100%;
+	font-size: 1em;
+	font-weight: 400;
+}
+
 .content.minutes {
 	input[type="file"] {
-		margin: 0 0 1em;
-		border-bottom: 1px dotted #ccc;
-		padding: 0 0 0.9em;
+		// margin: 0 0 1em;
+		// border-bottom: 1px dotted #ccc;
+		// padding: 0 0 0.9em;
 	}
 }
 	/* table */
@@ -548,6 +655,10 @@ tbody tr {
 	form {
 		width: 220px;
 		margin: 0 auto;
+	}
+
+	.row {
+		margin: 0 0 1.1em;
 	}
 }
 

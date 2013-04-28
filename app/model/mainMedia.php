@@ -218,7 +218,6 @@ class Model_Mainmedia extends Model
 				, ':value' => $mediaId
 			));
 		}
-		$this->session->set('feedback', 'success');
 		return true;
 	}
 

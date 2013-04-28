@@ -10,36 +10,28 @@ class Model_Mainoption extends Model
 {	
 
 
-	/**
-	 * returns class title
-	 */
-	public function getClassTitle()
-	{		
+	// /**
+	//  * returns class title
+	//  */
+	// public function getClassTitle()
+	// {		
 	
-		return __CLASS__;
+	// 	return __CLASS__;
 		
-	}
+	// }
 	
 
-	/**
-	 */	
-	public function select()
-	{		
-	
+	public function read()	{		
 		$sth = $this->database->dbh->query("	
-			SELECT
-				name, value
-			FROM
-				main_option
+			select
+				name
+				, value
+			from main_option
 		");
-		
 		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {	
-		
 			$this->data[$row['name']] = $row['value'];
-	
 		}			
-		
-		return $this;
+		return $sth->rowCount();
 	}
 	
 	

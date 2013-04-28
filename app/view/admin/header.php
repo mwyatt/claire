@@ -26,9 +26,9 @@
 <?php if ($this->get('model_mainuser')): ?>
 
 			<div class="user">
-				<a href="#" class="name button"><?php echo ($this->get('model_mainuser', 'first_name') ? $this->get('model_mainuser', 'first_name') . ' ' . $this->get('model_mainuser', 'last_name') : $this->get('model_mainuser', 'email')); ?></a>
+				<a href="#" class="name"><?php echo ($this->get('model_mainuser', 'first_name') ? $this->get('model_mainuser', 'first_name') . ' ' . $this->get('model_mainuser', 'last_name') : $this->get('model_mainuser', 'email')); ?></a>
 				<ul>
-					<li><a href="<?php echo $this->urlHome(); ?>admin/user/">Profile</a></li>
+					<!-- <li><a href="<?php echo $this->urlHome(); ?>admin/user/">Profile</a></li> -->
 					<li><a href="?logout=true">Logout</a></li>
 				</ul>
 			</div>
@@ -37,32 +37,32 @@
 
 <?php if ($this->get('model_mainmenu', 'admin')): ?>
     
-    <nav class="main">
-        <ul>
+            <nav class="main">
+                <ul>
 
     <?php foreach ($this->get('model_mainmenu', 'admin') as $item): ?>
 
-            <li><a class="button<?php echo ($this->get($item, 'current') ? ' current' : '') ?>" href="<?php echo $this->get($item, 'guid') ?>"><?php echo $this->get($item, 'name') ?></a></li>
+                    <li<?php echo ($this->get($item, 'current') ? ' class="current"' : '') ?>><a class="button" href="<?php echo $this->get($item, 'guid') ?>"><?php echo $this->get($item, 'name') ?></a></li>
         
     <?php endforeach ?>
 
-        </ul>
-    </nav>
+                </ul>
+            </nav>
 
 <?php endif ?>
 <?php if ($this->get('model_mainmenu', 'admin_sub')): ?>
     
-    <nav class="sub">
-        <ul>
+            <nav class="sub">
+                <ul>
 
     <?php foreach ($this->get('model_mainmenu', 'admin_sub') as $item): ?>
 
-            <li><a class="<?php echo ($this->get($item, 'current') ? ' current' : '') ?>" href="<?php echo $this->get($item, 'guid') ?>"><?php echo $this->get($item, 'name') ?></a></li>
+                    <li<?php echo ($this->get($item, 'current') ? ' class="current"' : '') ?>><a href="<?php echo $this->get($item, 'guid') ?>"><?php echo $this->get($item, 'name') ?></a></li>
         
     <?php endforeach ?>
 
-        </ul>
-    </nav>
+                </ul>
+            </nav>
 
 <?php endif ?>
 

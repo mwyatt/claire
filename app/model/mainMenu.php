@@ -146,15 +146,15 @@ class Model_Mainmenu extends Model
 	public function adminSub() {
 		$className = 'Controller_' . ucfirst($this->config->getUrl(0)) . '_' . ucfirst($this->config->getUrl(1));
 		if (class_exists($className, false)) {
-			$baseUrl = $this->config->getUrl('base') . $this->config->getUrl(0) . '/' . $this->config->getUrl(1). '/';
-			$this->data['admin_sub'][0]['name'] = 'Overview';
-			$this->data['admin_sub'][0]['current'] = ($this->config->getUrl(2) == '' ? true : false);
-			$this->data['admin_sub'][0]['guid'] = $baseUrl;
+			// $baseUrl = $this->config->getUrl('base') . $this->config->getUrl(0) . '/' . $this->config->getUrl(1). '/';
+			// $this->data['admin_sub'][0]['name'] = 'Overview';
+			// $this->data['admin_sub'][0]['current'] = ($this->config->getUrl(2) == '' ? true : false);
+			// $this->data['admin_sub'][0]['guid'] = $baseUrl;
 			foreach (get_class_methods($className) as $key => $method) {
 				if (($method !== 'initialise') && ($method !== 'index') && ($method !== 'load')) {
 					$this->data['admin_sub'][$key]['name'] = ucfirst($method);
-					$this->data['admin_sub'][$key]['current'] = ($this->config->getUrl(1) == $method ? true : false);
-					$this->data['admin_sub'][$key]['guid'] = $baseUrl . $method . '/';
+					$this->data['admin_sub'][$key]['current'] = ($this->config->getUrl(2) == $method ? true : false);
+					$this->data['admin_sub'][$key]['guid'] = $this->config->getUrl('base') . $this->config->getUrl(0) . '/' . $this->config->getUrl(1). '/' . $method . '/';
 				}
 			}
 		}

@@ -162,6 +162,14 @@ class Config
 			
 			$this->url['current_noquery'] =  $url;
 			$this->url['current'] = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+
+			$url = $this->url['base'];
+			$segments = $this->url['path'];
+			array_pop($segments);
+			foreach ($segments as $segment) {
+				$url .= $segment . '/';
+			}
+			$this->url['back'] = $url;
 		}
 	
 		return $this;
