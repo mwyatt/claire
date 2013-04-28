@@ -19,9 +19,9 @@
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
 
-        <div class="art">
+        <div class="wrap">
             <header class="main">
-                <a class="logo" href="<?php echo $this->urlHome(); ?>"><?php echo $modelMainoption->get('site_title'); ?></a>
+                <a class="logo" href="<?php echo $this->urlHome(); ?>"><?php echo $this->get('model_mainoption', 'site_title'); ?></a>
                 <div class="search">
                     <form>
                         <input type="text" name="search" type="search" maxlength="999" placeholder="Search">
@@ -44,7 +44,32 @@
                             <div>
                                 <span></span>
                                 <a href="#">Tables and Results</a>
-                                <?php echo $modelMainmenu->buildDivision(); ?>
+                                    
+<?php if ($this->get('model_mainmenu', 'division')): ?>
+
+                                <ul>
+
+    <?php foreach ($this->get('model_mainmenu', 'division') as $division): ?>
+
+                                <li>
+                                    <div>
+                                        <span></span>
+                                        <a href="<?php echo $this->get($division, 'url') ?>"><?php echo $this->get($division, 'name') ?></a>
+                                        <ul>
+                                            <li><a href="<?php echo $this->get($division, 'url') ?>">Overview</a></li>
+                                            <li><a href="<?php echo $this->get($division, 'url') ?>merit/">Merit Table</a></li>
+                                            <li><a href="<?php echo $this->get($division, 'url') ?>league/">League Table</a></li>
+                                            <li><a href="<?php echo $this->get($division, 'url') ?>fixture/">Fixtures</a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+        
+    <?php endforeach ?>
+
+                                </ul>
+
+<?php endif ?>
+                                
                             </div>
                         </li>
                         <li>

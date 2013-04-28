@@ -32,6 +32,8 @@ class View extends Model
 		if ($this->config->getUrl(0) == 'admin') {
 			$menu->admin();
 			$menu->adminSub();
+		} else {
+			$menu->division();
 		}
 		$mainoption->read();		
 		$this->setMeta(array(
@@ -87,11 +89,11 @@ class View extends Model
 			}
 		}
 
-		// echo '<pre>';
+		echo '<pre>';
 		// print_r($this->config);
-		// print_r($titles);
+		print_r($titles);
 		// print_r($this->data);
-		// echo '</pre>';
+		echo '</pre>';
 		// exit;
 
 		// presentation & cache

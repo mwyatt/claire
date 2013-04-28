@@ -183,28 +183,16 @@ class Model_Mainmenu extends Model
     }	
 
 
-    public function buildDivision() {
+    public function division() {
     	$ttDivision = new Model_Ttdivision($this->database, $this->config);
     	$ttDivision->read();
-		$this->data .= '<ul>';
-    	foreach ($ttDivision->getData() as $division) {
-    		$division['lowername'] = strtolower($division['name']);
-    		$this->data .= '
-    			<li>
-    				<div>
-    					<span></span>
-	                    <a href="#">' . $division['name'] . '</a>
-	                    <ul>
-	                        <li><a href="' . $this->config->getUrl('base') . 'result/' . $division['lowername'] . '/">Overview</a></li>
-	                        <li><a href="' . $this->config->getUrl('base') . 'result/' . $division['lowername'] . '/merit/"">Merit Table</a></li>
-	                        <li><a href="' . $this->config->getUrl('base') . 'result/' . $division['lowername'] . '/league/"">League Table</a></li>
-	                        <li><a href="' . $this->config->getUrl('base') . 'result/' . $division['lowername'] . '/fixture/"">Fixtures</a></li>
-	                    </ul>
-    				</div>
-                </li>';
-    	}
-		$this->data .= '</ul>';
-    	return $this->data;
+		$baseUrl = $this->config->getUrl('base') . 'result/';
+    	foreach ($ttDivision->getData() as $key => $division) {
+			$this->data['division'][$key]['name'] = ucfirst($division['name']);
+			$this->data['division'][$key]['current'] = ($this->config->getUrl(1) == strtolower($division['name']) ? true : false);
+			$this->data['division'][$key]['guid'] = $baseUrl . strtolower($division['name']) . '/';
+		}
+		return;
     }
 
 	

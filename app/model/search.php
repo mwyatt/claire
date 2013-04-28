@@ -19,10 +19,10 @@ class Model_Search extends Model
 		$_POST['search'] = strtolower($_POST['search']);
 
 		$titleWords = explode(' ', $data['title']); // split via ' '
-		$searchWords = explode(' ', $_POST['search']); // split via ' '
+		$words = explode(' ', $_POST['search']); // split via ' '
 
 		foreach ($titleWords as $titleWord) {
-			foreach ($searchWords as $searchWord) {
+			foreach ($words as $searchWord) {
 			
 				// each word matches and !== null
 				if (
@@ -42,107 +42,55 @@ class Model_Search extends Model
 	/**
 	 * search tables using search string
 	 * team
-	 * secretary
 	 * player
-	 * venue
-	 * @param  string $searchString 
+	 * @param  string $query 
 	 * @return array               
 	 */
-	public function read($searchString, $limit = 5) {
-
-		if (! $searchString)
+	public function read($query, $limit = 0) {
+		if (! $query) {
 			return false;
-
-		$searchWords = explode(' ', $searchString);
-		$searchWords = array_map('strtolower', $searchWords);
-
-		$sth = $this->database->dbh->query("	
+		}
+		$words = explode(' ', $query);
+		$sth = $this->database->dbh->prepare("	
 			select
 				tt_player.id
 				, concat(tt_player.first_name, ' ', tt_player.last_name) as name
 			from tt_player
+			where
+				tt_player.first_name like ?
+				or tt_player.last_name like ?
 		");
-		
-		$data1 = $sth->fetchAll(PDO::FETCH_ASSOC);
-		foreach ($data1 as $key => $data)
-			$data1[$key]['type'] = 'player';
-
-/*		$sth = $this->database->dbh->query("	
-			select
-				tt_secretary.id
-				, concat(tt_secretary.first_name, ' ', tt_secretary.last_name) as name
-			from tt_secretary
-		");
-
-		$data2 = $sth->fetchAll(PDO::FETCH_ASSOC);
-		foreach ($data2 as $key => $data)
-			$data2[$key]['type'] = 'secretary';*/
-
-		$sth = $this->database->dbh->query("	
-			select
-				tt_division.id
-				, tt_division.name
-			from tt_division
-		");
-
-		$data3 = $sth->fetchAll(PDO::FETCH_ASSOC);
-		foreach ($data3 as $key => $data)
-			$data3[$key]['type'] = 'division';
-
-		$sth = $this->database->dbh->query("	
+		foreach ($words as $word) {
+			$sth->execute(array(
+				'%' . $word . '%'
+				, '%' . $word . '%'
+			));
+			while ($match = $sth->fetch(PDO::FETCH_ASSOC)) {
+				$matches['player_' . $match['id']] = $match;
+				$matches['player_' . $match['id']]['guid'] = $this->getGuid('player', $match['name'], $match['id']);
+			}
+		}
+		$sth = $this->database->dbh->prepare("	
 			select
 				tt_team.id
 				, tt_team.name
 			from tt_team
+			where tt_team.name like ?
 		");
-
-		$data4 = $sth->fetchAll(PDO::FETCH_ASSOC);
-		foreach ($data4 as $key => $data)
-			$data4[$key]['type'] = 'team';
-
-/*		$sth = $this->database->dbh->query("	
-			select
-				tt_venue.id
-				, tt_venue.name
-			from tt_venue
-		");
-
-		$data5 = $sth->fetchAll(PDO::FETCH_ASSOC);
-		foreach ($data5 as $key => $data)
-			$data5[$key]['type'] = 'venue';
-*/
-		$data = array_merge($data1, /*$data2, */$data3, $data4/*, $data5*/);
-		$scores = array();
-
-		foreach ($data as $key => $file) {
-			$score = 0;
-			foreach ($searchWords as $searchWord) {
-				if (strpos($data[$key]['id'], $searchWord) !== false)
-					$score ++;
-				$names = explode(' ', $data[$key]['name']);
-				foreach ($names as $name) {
-					if (strpos(strtolower($name), $searchWord) !== false)
-						$score ++;
-				}
-				if (strpos(strtolower($data[$key]['name']), $searchWord) !== false)
-					$score ++;
-			}
-			if (! $score)
-				unset($data[$key]);
-			else {
-				$data[$key]['score'] = $score;
-				$scores[$key] = $data[$key]['score'];
-				$data[$key]['guid'] = $this->getGuid($data[$key]['type'], $data[$key]['name'], $data[$key]['id']);
+		foreach ($words as $word) {
+			$sth->execute(array(
+				'%' . $word . '%'
+			));
+			while ($match = $sth->fetch(PDO::FETCH_ASSOC)) {
+				$matches['team_' . $match['id']] = $match;
+				$matches['team_' . $match['id']]['guid'] = $this->getGuid('team', $match['name'], $match['id']);
 			}
 		}
-		array_multisort($scores, SORT_DESC, $data);
-
-		$data = array_slice($data, 0, $limit);
-		$this->setData(json_encode($data));
-
-		if ($this->getData())
-			return true;
-		
+		if ($limit) {	
+			$matches = array_slice($matches, 0, $limit);
+		}
+		$this->setData($matches);
+		return true;
 	}
 
 	

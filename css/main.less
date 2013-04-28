@@ -3,74 +3,12 @@
 
 body {
 	background: @white;
-	color: lighten(@black, 20%);
-	font-family: "Cabin", Arial, sans-serif;
+	color: darken(@white, 50%);
 	font-size: 1em;
-	line-height: 1em;
+	font-family: 'Open Sans', 'Arial', 'sans-serif';
 	-webkit-font-smoothing: antialiased;
 	-webkit-text-size-adjust: 100%;
 }
-
-.wrap {
-	margin: 0 auto;
-	padding: 30px 20px;
-	width: 900px;
-}
-
-/* link */
-
-a,
-a:visited {
-	color: #e87208;
-	text-decoration: none;
-}
-
-a:hover,
-a:focus {
-	color: #333;
-	/*color: #ca6000;*/
-}
-
-a:hover {}
-
-a:active {}
-
-a:link {
-	-webkit-tap-highlight-color : @orange-highlight;
-}
-
-*:focus {
-	outline: none;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-	color: #333;
-}
-
-h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
-	font-weight: inherit;
-}
-
-h1 {}
-
-h2 {}
-
-h3 {}
-
-h4 {}
-
-h5 {}
-
-h6 {}
-
-p {}
-
-/* header */
 
 header.main {
 	.gradient (@orange-highlight, @orange);
@@ -87,68 +25,74 @@ header.main {
 		overflow: hidden;
 	}
 
-	.search {
-		background-position: -22px -24px;
+	form {
+		display: none;
+	}
+}
 
-		form {
-			display: none;
-		}
+header.main .search {
+	background-position: -22px -24px;
 
-		&.active {
-			form {
-				position: absolute;
-				top: 55px;
-				left: 0;
-				width: 100%;
-				display: block;
-				border-bottom: 5px solid;
-				z-index: 1;
-				section {
-					padding: 0;
-					margin: 0;
-					background: white;
-					a {
-						position: relative;
-						display: block;
-						font-size: 1.3em;
-						padding: 15px;
-						background: @grayie;
-						border-bottom: 1px solid @orange-gray/1.5;
-						color: white;
-						font-size: 1.3em;
-						font-weight: 700;
-						span {
-							background: white;
-							position: absolute;
-							right: 0;
-							padding: 7px 20px 8px 8px;
-							.border-radius(3px 0 0 3px);
-							text-transform: uppercase;
-							font-size: 16px;
-							color: @blackie;
-							top: 8px;
-						}
-					}
-					a:focus {
-						background: red;
-					}
-				}
-				input[type="text"] {
-					// .border-box();
-					.box-shadow(0 0 5px rgba(0, 0, 0, 0.3));
-					display: block;
-					width: 100%;
-					padding: 10px 10px 10px 10px;
-					margin: 0;
-					line-height: 1em;
-					font-size: 1.3em;
-					font-weight: bold;
-					color: #666;
-					border: none;
-					border-bottom: 1px solid #ccc;
-				}
-			}
-		}
+	&.active form {
+		display: block;
+	}
+
+	form {
+		position: absolute;
+		top: 55px;
+		left: 0;
+		width: 100%;
+		border-bottom: 5px solid;
+		z-index: 1;
+	}
+
+	input[type="text"] {
+		// .border-box();
+		.box-shadow(0 0 5px rgba(0, 0, 0, 0.3));
+		display: block;
+		width: 100%;
+		padding: 10px 10px 10px 10px;
+		margin: 0;
+		line-height: 1em;
+		font-size: 1.3em;
+		font-weight: bold;
+		color: #666;
+		border: none;
+		border-bottom: 1px solid #ccc;
+	}
+
+	section {
+		padding: 0;
+		margin: 0;
+		background: white;
+	}
+
+	a {
+		position: relative;
+		display: block;
+		font-size: 1.3em;
+		padding: 15px;
+		background: @grayie;
+		border-bottom: 1px solid @orange-gray/1.5;
+		color: white;
+		font-size: 1.3em;
+		font-weight: 700;
+	}
+
+	a:focus {
+		background: red;
+	}
+
+	span {
+		background: white;
+		position: absolute;
+		right: 0;
+		padding: 7px 20px 8px 8px;
+		.border-radius(3px 0 0 3px);
+		text-transform: uppercase;
+		font-size: 16px;
+		color: @blackie;
+		top: 8px;
 	}
 }
 
@@ -177,6 +121,7 @@ nav.sub {
 nav.main {
 	cursor: pointer;
 	background-position: -122px -24px;
+
 	> ul {
 		display: none;
 	}
@@ -345,18 +290,6 @@ div.accordion {
 	}
 }
 
-.content.home .handbook {
-	background: @orange;
-	color: @white;
-	border-top: 1px solid lighten(@orange, 20%);
-	display: block;
-	padding: 0.5em 0.5em 0.5em 3em;
-	font-size: 1.5em;
-	text-transform: uppercase;
-	line-height: 1em;
-	font-weight: bold;
-}
-
 div.content {
 	padding: 15px 0;
 
@@ -405,7 +338,19 @@ div.content.single {
 div.content.home {
 	padding: 0;
 
-	a.cover {
+	.handbook {
+		background: @orange;
+		color: @white;
+		border-top: 1px solid lighten(@orange, 20%);
+		display: block;
+		padding: 0.5em 0.5em 0.5em 3em;
+		font-size: 1.5em;
+		text-transform: uppercase;
+		line-height: 1em;
+		font-weight: bold;
+	}
+
+	.cover {
 		.gradient (lighten(@purple, 15%), @purple);
 		border-top: 1px solid lighten(@purple, 30%);
 		border-bottom: 1px solid darken(@purple, 15%);

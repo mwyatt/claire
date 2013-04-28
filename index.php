@@ -30,11 +30,9 @@ $route
 	->setObject($config);
 
 $config
-	->setObject(array(
-		$error
-		, $session
-		, $route
-	));
+	->setObject($error)
+	->setObject($session)
+	->setObject($route);
 
 if (array_key_exists('install', $_GET)) {
 	require_once(BASE_PATH . 'install.php');
@@ -43,7 +41,7 @@ if (array_key_exists('install', $_GET)) {
 $controller = new Controller();
 
 if ($controller->load($config->getUrl(0), $config->getUrl(1), false, $database, $config)) {
-	// begin the controller
+	// controller
 } else {
 	$view = new View($database, $config);
 	$cache = new Cache(false);
