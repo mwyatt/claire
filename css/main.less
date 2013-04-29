@@ -10,20 +10,35 @@ body {
 	-webkit-text-size-adjust: 100%;
 }
 
+.logo .full-text {
+	display: none;
+}
+
+.logo {
+	font-size: 2.4em;
+	font-weight: 400;
+	display: block;
+	height: 3.3em;
+	vertical-align: top;
+	width: 15em;
+
+	img {
+		float: left;
+		margin: 0 0.5em 0 0;
+		width: 1.6em;
+	}
+
+	abbr {
+		
+	}
+}
+
 header.main {
 	.gradient (@orange-highlight, @orange);
 	clear: both;
 	position: relative;
 
-	a.logo {
-		background: url(../img/main/logo.png) 5px 3px no-repeat;
-		display: block;
-		width: 145px;
-		height: 55px;
-		text-indent: -999em;
-		float: left;
-		overflow: hidden;
-	}
+
 
 	form {
 		display: none;
@@ -686,53 +701,53 @@ footer.main {
 	}
 }
 
-@media screen and (min-width : @mq-mobile-landscape) {
-	@import "mobile-landscape.less";
-}
+// @media screen and (min-width : @mq-mobile-landscape) {
+// 	@import "mobile-landscape.less";
+// }
 
-@media screen and (min-width : @mq-tablet-portrait) {
-	@import "tablet-portrait.less";
-}
+// @media screen and (min-width : @mq-tablet-portrait) {
+// 	@import "tablet-portrait.less";
+// }
 
-@media screen and (min-width : @mq-tablet-landscape) {
-	@import "tablet-landscape.less";
-}
+// @media screen and (min-width : @mq-tablet-landscape) {
+// 	@import "tablet-landscape.less";
+// }
 
-@media screen and (min-width : @mq-desktop) {
-	@import "desktop.less";
-}
+// @media screen and (min-width : @mq-desktop) {
+// 	@import "desktop.less";
+// }
 
-html.lt-ie9 {
+// html.lt-ie9 {
 	
-	body {
-		background: black;
-		text-align: center;
-	}
+// 	body {
+// 		background: black;
+// 		text-align: center;
+// 	}
 
-	header.main,
-	footer.main,
-	div.content {
-		text-align: left;
-		width: 960px;
-		margin: 0 auto;		
-	}
+// 	header.main,
+// 	footer.main,
+// 	div.content {
+// 		text-align: left;
+// 		width: 960px;
+// 		margin: 0 auto;		
+// 	}
 
-	header.main {
+// 	header.main {
 
-		a.logo {
-			// font-size: 10em;
-			// height: 88px;
-			// width: 158px;
-			// padding: 6px 7px;
-		}
+// 		a.logo {
+// 			// font-size: 10em;
+// 			// height: 88px;
+// 			// width: 158px;
+// 			// padding: 6px 7px;
+// 		}
 
-	}
+// 	}
 
-	div.content {
-		background: red;
-		font-size: 120%;
-	}
-	// div.content.merit td {
-	// 	display: table-cell;
-	// }
-}
+// 	div.content {
+// 		background: red;
+// 		font-size: 120%;
+// 	}
+// 	// div.content.merit td {
+// 	// 	display: table-cell;
+// 	// }
+// }

@@ -20,8 +20,15 @@
         <![endif]-->
 
         <div class="wrap">
+            <a class="logo" href="<?php echo $this->urlHome(); ?>">
+                <img src="<?php echo $this->urlHome(); ?>img/main/logov2.png" alt="<?php echo $this->get('model_mainoption', 'site_title'); ?> Logo">
+                <span class="full-text"><?php echo $this->get('model_mainoption', 'site_title'); ?></span>
+                <abbr title="<?php echo $this->get('model_mainoption', 'site_title'); ?>">ELTTL</abbr>
+            </a>
+
+
             <header class="main">
-                <a class="logo" href="<?php echo $this->urlHome(); ?>"><?php echo $this->get('model_mainoption', 'site_title'); ?></a>
+                
                 <div class="search">
                     <form>
                         <input type="text" name="search" type="search" maxlength="999" placeholder="Search">
