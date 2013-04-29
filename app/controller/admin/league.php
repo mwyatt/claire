@@ -15,18 +15,6 @@ class Controller_Admin_League extends Controller
 {
 
 
-	// public function initialise() {
-	// 	if (array_key_exists('page', $_GET)) {
-	// 		$controller->loadMethod($_GET['page']);
-	// 	} else {
-	// 		$controller->loadMethod('index');
-	// 	}
-	// }
-
-
-	/**
-	 * dashboard of admin area, displays login until logged in, then dashboard
-	 */
 	public function index() {
 		$division = new Model_Ttdivision($this->database, $this->config);
 		$division->read();
@@ -48,7 +36,7 @@ class Controller_Admin_League extends Controller
 			$this->route('current');
 		}
 		if (array_key_exists('edit', $_GET)) {
-			if (! $player->readById($_GET['edit'])) {
+			if (! $player->readById(array($_GET['edit']))) {
 				$this->route('current_noquery');
 			}
 			$division->read();

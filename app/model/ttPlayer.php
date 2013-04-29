@@ -135,9 +135,12 @@ class Model_Ttplayer extends Model
 		foreach ($ids as $id) {
 			$sth->execute(array($id));
 			$player = $sth->fetch(PDO::FETCH_ASSOC);
-			$this->data[$player['id']] = $player;
+			$players[$player['id']] = $player;
 		}
-		return $this->data;
+		if (count($players) == 1) {
+			$players = current($players);
+		}
+		return $this->data = $players;
 	}	
 
 
