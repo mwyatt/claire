@@ -1,5 +1,52 @@
 @import "../vendor/normalize.css";
+@import "../palette.less";
 @import "../mixin.less";
+@import "../font-open-sans.less";
+
+::-moz-selection {
+    background: @orange;
+    color: @orange;
+    text-shadow: none;
+}
+
+::selection {
+    background: @orange;
+    color: @orange;
+    text-shadow: none;
+}
+
+.ajax-load {
+    height: 80px;
+    background: url('../images-skin/main/ajax.gif') 50% 50% no-repeat;
+}
+
+a,
+a:visited {
+    color: @orange;
+    text-decoration: none;
+}
+
+a:hover,
+a:focus {
+    color: lighten(@orange, 20%);
+}
+
+a:focus {
+    border-color: @orange !important;
+}
+
+a:hover {}
+
+a:active {}
+
+a:link {
+    -webkit-tap-highlight-color : rgba(0,0,0,0);
+}
+
+*:focus {
+    outline: none;
+}
+
 
 body {
 	background: @white;
