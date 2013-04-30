@@ -83,33 +83,30 @@ class Controller
 		if ($database && $config) {
 			$this->database = $database;
 			$this->config = $config;
-		}
-		$this->view = new View($this->database, $this->config);
-		if ($view) {
-			$this->view = $view;
+		} else {
+			return false;
 		}
 		$this->session = new Session();
 		$this->cache = new Cache(false);
+		if ($view) {
+			$this->view = $view;
+		} else {
+			$this->view = new View($this->database, $this->config);
+		}
 		if (method_exists($this, 'initialise')) {
 			$this->initialise();
 		}
 		if ($names) {
 			$path = BASE_PATH . 'app/controller/';
 			$controllerName = 'Controller_';
-			if (is_array($names)) {
-				foreach ($names as $name) {
-					if ($name) {
-						$path .= strtolower($name) . '/';
-						$controllerName .= ucfirst($name) . '_';
-					}
+			foreach ($names as $name) {
+				if ($name) {
+					$path .= strtolower($name) . '/';
+					$controllerName .= ucfirst($name) . '_';
 				}
-				$controllerName = rtrim($controllerName, '_');
-				$path = rtrim($path, '/');
-			} else {
-				$path .= strtolower($names);
-				$controllerName = 'Controller_' . ucfirst($names);
 			}
-			$path .= '.php';
+			$controllerName = rtrim($controllerName, '_');
+			$path = rtrim($path, '/') . '.php';
 			if (is_file($path)) {
 				$controller = new $controllerName();
 				$controller->load(false, false, $this->view, $this->database, $this->config);

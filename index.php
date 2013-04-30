@@ -10,43 +10,30 @@
  */ 
 
 define('BASE_PATH', (string) (__DIR__ . '/'));
-
 require_once(BASE_PATH . 'app/autoloader.php');
 spl_autoload_register(array('Autoloader', 'load'));
-		
 $error = new Error('yes');
 $database = new Database();
 $session = new Session();
 $session
 	->start();
-
 $config = new Config();
 $config
 	->setUrl();
-
-// depreciated object (now resides within controllers)
 $route = new Route();
 $route
 	->setObject($config);
-
 $config
 	->setObject($error)
 	->setObject($session)
 	->setObject($route);
-
 if (array_key_exists('install', $_GET)) {
 	require_once(BASE_PATH . 'install.php');
 }
-
 $controller = new Controller();
-
-if ($controller->load($config->getUrl(0), $config->getUrl(1), false, $database, $config)) {
-	// controller
+if ($controller->load(array($config->getUrl(0)), $config->getUrl(1), false, $database, $config)) {
+	// admin, ajax
 } else {
-	$view = new View($database, $config);
-	$cache = new Cache(false);
-	$cache->load('home');
-	$view->loadTemplate('home');
+	$controller->load(array('front'), $config->getUrl(0), false, $database, $config);
 }
-
 exit;

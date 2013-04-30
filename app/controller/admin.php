@@ -16,17 +16,19 @@ class Controller_Admin extends Controller
 
 
 	public function initialise() {
+		$menu = new Model_Mainmenu($this->database, $this->config);
+		$menu->admin();
+		$menu->adminSub();
+		$this->view->setObject($menu);
 		$user = new Model_Mainuser($this->database, $this->config);
 		if ($user->isLogged()) {
 			$user->permission();
 		}
-
 		if (array_key_exists('logout', $_GET)) {
 			$user->logout();
 			$this->session->set('feedback', 'Successfully logged out');
 			$this->route('base', 'admin/');
 		}
-
 		if (array_key_exists('form_login', $_POST)) {
 			if ($user->login($_POST['email_address'], $_POST['password'])) {
 				$this->session->set('feedback', 'Successfully Logged in as ' . $this->session->get('user', 'first_name') . ' ' . $this->session->get('user', 'last_name'));
@@ -36,7 +38,6 @@ class Controller_Admin extends Controller
 			$this->session->set('form_field', array('email' => $_POST['email_address']));
 			$this->route('base', 'admin/');
 		}
-
 		if ($user->isLogged()) {
 			$user->setData($user->get());
 			$this->view->setObject($user);

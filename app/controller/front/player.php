@@ -11,7 +11,7 @@
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
 
-class Controller_Player extends Controller
+class Controller_Front_Player extends Controller
 {
 
 

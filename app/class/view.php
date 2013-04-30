@@ -25,25 +25,16 @@ class View extends Model
 	 * prepare all core objects here and register
 	 */	
 	public function header() {
-		$user = new Model_Mainuser($this->database, $this->config);
-		$menu = new Model_Mainmenu($this->database, $this->config);
 		$this->session = new Session($this->database, $this->config);
 		$mainoption = new Model_Mainoption($this->database, $this->config);
-		if ($this->config->getUrl(0) == 'admin') {
-			$menu->admin();
-			$menu->adminSub();
-		} else {
-			$menu->division();
-		}
-		$mainoption->read();		
 		$this->setMeta(array(
 			'title' => $mainoption->get('meta_title'),
 			'keywords' => $mainoption->get('meta_keywords'),
 			'description' => $mainoption->get('meta_description')
 		));
+		$mainoption->read();		
 		$this
-			->setObject($mainoption)
-			->setObject($menu);
+			->setObject($mainoption);
 	}
 
 	
@@ -89,11 +80,11 @@ class View extends Model
 			}
 		}
 
-		echo '<pre>';
+		// echo '<pre>';
 		// print_r($this->config);
-		print_r($titles);
+		// print_r($titles);
 		// print_r($this->data);
-		echo '</pre>';
+		// echo '</pre>';
 		// exit;
 
 		// presentation & cache

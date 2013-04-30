@@ -21,18 +21,20 @@
 
         <div class="wrap">
             <header class="main">
-                <a class="logo" href="<?php echo $this->urlHome(); ?>">
-                    <img src="<?php echo $this->urlHome(); ?>img/main/logov2.png" alt="<?php echo $this->get('model_mainoption', 'site_title'); ?> Logo">
-                    <span class="full-text"><?php echo $this->get('model_mainoption', 'site_title'); ?></span>
-                    <abbr title="<?php echo $this->get('model_mainoption', 'site_title'); ?>">ELTTL</abbr>
-                </a>
-                <div class="search">
-                    <form class="main" method="get">
-                        <input type="text" name="search" type="search" maxlength="150">
-                        <input name="form_search" type="hidden" value="true">
-                        <a href="#" class="submit button">Search</a>
-                        <input type="submit">
-                    </form> 
+                <div class="row clearfix">
+                    <a class="logo" href="<?php echo $this->urlHome(); ?>">
+                        <img src="<?php echo $this->urlHome(); ?>img/logov2.png" alt="<?php echo $this->get('model_mainoption', 'site_title'); ?> Logo">
+                        <span class="full-text"><?php echo $this->get('model_mainoption', 'site_title'); ?></span>
+                        <abbr title="<?php echo $this->get('model_mainoption', 'site_title'); ?>">ELTTL</abbr>
+                    </a>
+                    <div class="search">
+                        <form class="main" method="get">
+                            <span class="close"></span>
+                            <input type="text" name="query" type="search" maxlength="75">
+                            <a href="#" class="submit button">Search</a>
+                            <input type="submit">
+                        </form> 
+                    </div>
                 </div>
                 <nav class="sub">
                     <a href="<?php echo $this->urlHome(); ?>coaching/">Coaching</a>
@@ -42,33 +44,10 @@
                     <a href="<?php echo $this->urlHome(); ?>local-clubs/">Local Clubs</a>
                 </nav>   
                 <nav class="main clearfix">
-                    <a href="<?php echo $this->urlHome(); ?>">Home</a>
-                    <div>
-                        <a href="#">Results</a>
-
-<?php if ($this->get('model_mainmenu', 'division')): ?>
-
-                        <div class="drop">
-                            
-    <?php foreach ($this->get('model_mainmenu', 'division') as $division): ?>
-
-                            <div>
-                                <h4><a href="<?php echo $this->get($division, 'url') ?>"><?php echo $this->get($division, 'name') ?></a></h4>
-                                <a href="<?php echo $this->get($division, 'url') ?>">Overview</a>
-                                <a href="<?php echo $this->get($division, 'url') ?>merit/">Merit Table</a>
-                                <a href="<?php echo $this->get($division, 'url') ?>league/">League Table</a>
-                                <a href="<?php echo $this->get($division, 'url') ?>fixture/">Fixtures</a>
-                            </div>
-        
-    <?php endforeach ?>
-
-                        </div>        
-
-<?php endif ?>
-
-                    </div>
-                    <div>
-                        <a href="#">The League</a>
+                    <!-- <a href="<?php echo $this->urlHome(); ?>">Home</a> -->
+                    <a href="#">Tables and Results</a>
+                    <!--<a href="#">The League</a>-->
+<!--                     <div>
                         <div class="drop">
                             <a href="#">Handbook</a>
                             <a href="<?php echo $this->urlHome(); ?>player/performance/">Player Performance</a>
@@ -76,6 +55,28 @@
                             <a href="<?php echo $this->urlHome(); ?>page/10/competitions/">Competitions</a>
                             <a href="#">Contact us</a>
                         </div>
+                    </div> -->
+
+<?php if ($this->get('model_mainmenu', 'division')): ?>
+    
+                    <div class="drop">
+
+    <?php foreach ($this->get('model_mainmenu', 'division') as $division): ?>
+
+                        <div class="division-<?php echo strtolower($this->get($division, 'name')) ?>">
+                            <h4><a href="<?php echo $this->get($division, 'url') ?>"><?php echo $this->get($division, 'name') ?></a></h4>
+                            <a href="<?php echo $this->get($division, 'url') ?>">Overview</a>
+                            <a href="<?php echo $this->get($division, 'url') ?>merit/">Merit Table</a>
+                            <a href="<?php echo $this->get($division, 'url') ?>league/">League Table</a>
+                            <a href="<?php echo $this->get($division, 'url') ?>fixture/">Fixtures</a>
+                        </div>        
+        
+    <?php endforeach ?>
+
                     </div>
+
+<?php endif ?>
+
                 </nav>             
+
             </header>
