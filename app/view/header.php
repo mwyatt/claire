@@ -41,29 +41,35 @@
                     <a href="<?php echo $this->urlHome(); ?>summer-league/">Summer League</a>
                     <a href="<?php echo $this->urlHome(); ?>local-clubs/">Local Clubs</a>
                 </nav>   
-                <nav class="main">
+                <nav class="main clearfix">
                     <a href="<?php echo $this->urlHome(); ?>">Home</a>
                     <div>
                         <a href="#">Results</a>
-                                    
+
 <?php if ($this->get('model_mainmenu', 'division')): ?>
+
+                        <div class="drop">
+                            
     <?php foreach ($this->get('model_mainmenu', 'division') as $division): ?>
 
-                        <div>
-                            <h4><a href="<?php echo $this->get($division, 'url') ?>"><?php echo $this->get($division, 'name') ?></a></h4>
-                            <a href="<?php echo $this->get($division, 'url') ?>">Overview</a>
-                            <a href="<?php echo $this->get($division, 'url') ?>merit/">Merit Table</a>
-                            <a href="<?php echo $this->get($division, 'url') ?>league/">League Table</a>
-                            <a href="<?php echo $this->get($division, 'url') ?>fixture/">Fixtures</a>
-                        </div>
+                            <div>
+                                <h4><a href="<?php echo $this->get($division, 'url') ?>"><?php echo $this->get($division, 'name') ?></a></h4>
+                                <a href="<?php echo $this->get($division, 'url') ?>">Overview</a>
+                                <a href="<?php echo $this->get($division, 'url') ?>merit/">Merit Table</a>
+                                <a href="<?php echo $this->get($division, 'url') ?>league/">League Table</a>
+                                <a href="<?php echo $this->get($division, 'url') ?>fixture/">Fixtures</a>
+                            </div>
         
     <?php endforeach ?>
+
+                        </div>        
+
 <?php endif ?>
 
                     </div>
                     <div>
                         <a href="#">The League</a>
-                        <div>
+                        <div class="drop">
                             <a href="#">Handbook</a>
                             <a href="<?php echo $this->urlHome(); ?>player/performance/">Player Performance</a>
                             <a href="<?php echo $this->urlHome(); ?>post/">Press Releases</a>

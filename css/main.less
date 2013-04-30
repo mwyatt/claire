@@ -10,6 +10,11 @@ body {
 	-webkit-text-size-adjust: 100%;
 }
 
+.wrap {
+	margin: 0 auto;
+	max-width: 60em;
+}
+
 .logo .full-text {
 	display: none;
 }
@@ -18,6 +23,7 @@ body {
 	width: 12em;
 	display: block;
 	text-decoration: none;
+	float: left;
 
 	img {
 		float: left;
@@ -44,7 +50,7 @@ header.main {
 }
 
 header.main .search {
-	background-position: -22px -24px;
+	background-position: -29px -30px;
 
 	&.active form {
 		display: block;
@@ -52,7 +58,7 @@ header.main .search {
 
 	form {
 		position: absolute;
-		top: 55px;
+		top: 0;
 		left: 0;
 		width: 100%;
 		border-bottom: 5px solid;
@@ -109,14 +115,14 @@ header.main .search {
 	}
 }
 
-nav.main,
+nav.sub,
 div.search {
+	.border-radius (2px);
 	cursor: pointer;
-	border-left: 1px solid @orange;
-	background: url(../img/main/sprite-100.png) 0 0 no-repeat;
+	background: lighten(@black, 50%) url(../img/main/sprite-100.png) 0 0 no-repeat;
 	display: block;
-	width: 55px;
-	height: 55px;
+	width: 2.5em;
+	height: 2.5em;
 	float: right;
 
 	&.active {
@@ -132,86 +138,28 @@ nav.sub {
 }
 
 nav.main {
-	cursor: pointer;
-	background-position: -122px -24px;
+	background: lighten(@black, 50%);
+	margin: 7em 0;
 
-	> ul {
+	.drop {
 		display: none;
 	}
 
-	&.active {
-		span {
-			background: url(../img/main/sprite-100.png) 0 0 no-repeat;
-		}
-		div {
-			span {
-				background-position: -424px -25px;
-				width: 50px;
-				height: 50px;
-				float: right;
-			}
-			a {
-				color: @orange-gray;
-				padding-left: 40px;
-			}
-			ul {
-				display: none;
-			}
-		}
-		div.active {
-			> span {
-				background-position: -624px -25px;
-			}
-			> a {
-				background-color: @blackie;
-			}
-			> ul {
-				display: block;
-				li {
-					background-color: @blackie;
-					div {
-						li {
-							background-color: black;
-						}
-						
-					}
-				}
-			}
-		}
-		ul {
-			display: block;
-			margin: 0;
-			padding: 0;
-			width: 100%;
-			li {
-				background: @grayie;
-				a {
-					.text-shadow(none);
-					display: block;
-					padding: 16px 15px 20px;
-					border-bottom: 1px solid @orange-gray;
-					color: white;
-					font-size: 1.3em;
-					font-weight: 700;
-				}
-				div {
-					span {
-
-					}
-				}
-			}
-			li:last-child a {
-				border: none;
-			}
-		}
-		> ul {
-			border-bottom: 5px solid;
-			position: absolute;
-			z-index: 1;
-			top: 55px;
-			left: 0;
-		}
+	> div {
+		display: inline;
 	}
+
+	> div > a,
+	> a {
+		background: red;
+		display: block;
+		width: 31.3%;
+		float: left;
+		text-align: center;
+		padding: 1%
+	}
+
+
 }
 
 div.accordion {
