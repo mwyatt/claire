@@ -96,46 +96,6 @@ try {
 			, ('thumb3', '500, 500')
 	");	
 
-	// $database->dbh->query("
-	// 	INSERT INTO main_media_tree
-	// 		(title, title_slug, parent_id)
-	// 	VALUES
-	// 		('Root', 'root', '')
-	// 		, ('Artwork', 'artwork', '1')
-	// 			, ('Cover', 'cover', '2')
-	// 		, ('Product', 'product', '1')
-	// 		, ('Temp', 'temp', '1')
-	// ");	
-
-	
-/*				id INT UNSIGNED NOT NULL AUTO_INCREMENT
-				, file_name VARCHAR(255) NOT NULL
-				, title VARCHAR(255)
-				, date_published INT UNSIGNED
-				, type VARCHAR(50) NOT NULL
-				, user_id INT UNSIGNED
-				, PRIMARY KEY (id)*/
-/*	$database->dbh->query("
-		INSERT INTO main_media (
-			file_name
-			, title
-			, date_published
-			, type
-			, user_id
-		)
-		VALUES
-			('grandma-and-family.jpg', 'Grandma and Family', 'example-media-1', $epochTime, 'jpg', '1')
-			, ('minutes-081112.pdf', 'Minutes 002', 'minutes-002', $epochTime, 'pdf', '2')
-	");*/
-
-	// $database->dbh->query("
-	// 	INSERT INTO main_ads
-	// 		(title, html, target, type, status, position, media_id)
-	// 	VALUES
-	// 		('Example Advertisement 1', '<p>Example HTML Code</p>', 'http://localhost/mvc/example-link/', 'cover', 'visible', '1', '1')
-	// 		, ('Example Advertisement 2', '<p>Example HTML Code</p>', 'http://localhost/mvc/example-link/', 'cover', 'visible', '1', '1')
-	// ");
-
 	$database->dbh->query("
 		INSERT INTO main_menu
 			(title, guid, parent_id, position, type)
@@ -145,8 +105,6 @@ try {
 			, ('Contact', 'http://localhost/mvc/contact-me/', '0', '3', 'main')
 	");	
 
-	// Table Tennis
-	
 	$database->dbh->query("
 		INSERT INTO
 			tt_archive
@@ -452,9 +410,6 @@ try {
 	");	
 
 } catch (PDOException $e) { 
-
-	// Handle Exception
 	echo '<h1>Exception while Installing Test Data</h1>';
 	echo $e;
-	
 }
