@@ -7,8 +7,8 @@ try {
 			main_user
 			(
 				id INT UNSIGNED NOT NULL AUTO_INCREMENT
-				, email VARCHAR(50) NOT NULL
-				, password VARCHAR(255) NOT NULL
+				, email VARCHAR(50) NOT NULL DEFAULT ''
+				, password VARCHAR(255) NOT NULL DEFAULT ''
 				, date_registered TIMESTAMP DEFAULT NOW()
 				, level TINYINT(1) UNSIGNED NOT NULL DEFAULT '1'
 				, PRIMARY KEY (id)
@@ -20,11 +20,14 @@ try {
 			main_user_meta
 			(
 				id INT UNSIGNED NOT NULL AUTO_INCREMENT
-				, user_id INT UNSIGNED
-				, name VARCHAR(255) NOT NULL
-				, value VARCHAR(255) NOT NULL
+				, user_id INT UNSIGNED DEFAULT ''
+				, name VARCHAR(255) NOT NULL DEFAULT ''
+				, value VARCHAR(255) NOT NULL DEFAULT ''
 				, PRIMARY KEY (id)
 			)
+	");
+	$database->dbh->query("
+		alter table main_user_meta add index (user_id);
 	");
 
 	$database->dbh->query("
@@ -41,6 +44,9 @@ try {
 				, PRIMARY KEY (id)
 			)
 	");
+	$database->dbh->query("
+		alter table main_content add index (user_id);
+	");
 
 	$database->dbh->query("
 		CREATE TABLE IF NOT EXISTS 
@@ -52,6 +58,9 @@ try {
 				, value VARCHAR(255) NOT NULL
 				, PRIMARY KEY (id)
 			)
+	");
+	$database->dbh->query("
+		alter table main_content_meta add index (content_id);
 	");
 
 	$database->dbh->query("
@@ -90,22 +99,9 @@ try {
 				, PRIMARY KEY (id)
 			)		
 	");
-
-	// $database->dbh->query("
-	// 	CREATE TABLE IF NOT EXISTS 
-	// 		main_ads
-	// 		(
-	// 			id INT UNSIGNED NOT NULL AUTO_INCREMENT
-	// 			, title VARCHAR(255) NOT NULL
-	// 			, html VARCHAR(8000)
-	// 			, target VARCHAR(255)
-	// 			, type VARCHAR(50) NOT NULL
-	// 			, status VARCHAR(50) NOT NULL DEFAULT 'invisible'
-	// 			, position INT UNSIGNED
-	// 			, media_id INT UNSIGNED				
-	// 			, PRIMARY KEY (id)
-	// 		)
-	// ");	
+	$database->dbh->query("
+		alter table main_media add index (user_id);
+	");
 
 	$database->dbh->query("
 		CREATE TABLE IF NOT EXISTS 
@@ -120,8 +116,6 @@ try {
 				, PRIMARY KEY (id)
 			)		
 	");
-
-	// Table Tennis
 	
 	$database->dbh->query("
 		CREATE TABLE IF NOT EXISTS
@@ -181,6 +175,11 @@ try {
 				, PRIMARY KEY (id)
 			)		
 	");	
+	$database->dbh->query("
+		alter table tt_team add index (secretary_id);
+		alter table tt_team add index (venue_id);
+		alter table tt_team add index (division_id);
+	");
 	
 	$database->dbh->query("
 		CREATE TABLE IF NOT EXISTS
@@ -194,6 +193,9 @@ try {
 				, PRIMARY KEY (id)
 			)		
 	");	
+	$database->dbh->query("
+		alter table tt_player add index (team_id);
+	");
 	
 	$database->dbh->query("
 		CREATE TABLE IF NOT EXISTS
@@ -206,6 +208,10 @@ try {
 				, PRIMARY KEY (id)
 			)		
 	");	
+	$database->dbh->query("
+		alter table tt_fixture add index (team_left_id);
+		alter table tt_fixture add index (team_right_id);
+	");
 	
 	$database->dbh->query("
 		CREATE TABLE IF NOT EXISTS
@@ -231,10 +237,13 @@ try {
 				, PRIMARY KEY (id)
 			)		
 	");	
+	$database->dbh->query("
+		alter table tt_encounter add index (part_left_id);
+		alter table tt_encounter add index (part_right_id);
+	");
 
 	$database->dbh->query("	
 		create view tt_encounter_result as
-
 		select
 			tt_encounter.id as encounter_id
 			, tt_encounter_part_left.id as tt_encounter_part_left_id
@@ -247,44 +256,29 @@ try {
 			, tt_encounter_part_right.player_rank_change as right_rank_change
 			, tt_encounter.fixture_id
 			, tt_encounter_part_left.status
-
 		from tt_encounter
-
 		left join tt_encounter_part as tt_encounter_part_left on tt_encounter_part_left.id = tt_encounter.part_left_id
-
 		left join tt_encounter_part as tt_encounter_part_right on tt_encounter_part_right.id = tt_encounter.part_right_id
-
 		group by tt_encounter.id
 	");
 	
 	$database->dbh->query("	
 		create view tt_fixture_result as
-
 		select
 			tt_fixture.id as fixture_id
 			, team_left.id as left_id
 			, team_right.id as right_id
 			, sum(tt_encounter_result.left_score) as left_score
 			, sum(tt_encounter_result.right_score) as right_score
-
 		from tt_fixture
-
 		left join tt_team as team_left on team_left.id = tt_fixture.team_left_id
-
 		left join tt_team as team_right on team_right.id = tt_fixture.team_right_id
-
 		left join tt_encounter_result on tt_encounter_result.fixture_id = tt_fixture.id
-
 		where tt_fixture.date_fulfilled IS NOT NULL
-
 		group by tt_fixture.id
 	");
-
 	
 } catch (PDOException $e) { 
-
-	// Handle Exception
 	echo '<h1>Exception while Installing Tables</h1>';
 	echo $e;
-	
 }

@@ -20,81 +20,56 @@
         <![endif]-->
 
         <div class="wrap">
-            <a class="logo" href="<?php echo $this->urlHome(); ?>">
-                <img src="<?php echo $this->urlHome(); ?>img/main/logov2.png" alt="<?php echo $this->get('model_mainoption', 'site_title'); ?> Logo">
-                <span class="full-text"><?php echo $this->get('model_mainoption', 'site_title'); ?></span>
-                <abbr title="<?php echo $this->get('model_mainoption', 'site_title'); ?>">ELTTL</abbr>
-            </a>
-
-
             <header class="main">
-                
+                <a class="logo" href="<?php echo $this->urlHome(); ?>">
+                    <img src="<?php echo $this->urlHome(); ?>img/main/logov2.png" alt="<?php echo $this->get('model_mainoption', 'site_title'); ?> Logo">
+                    <span class="full-text"><?php echo $this->get('model_mainoption', 'site_title'); ?></span>
+                    <abbr title="<?php echo $this->get('model_mainoption', 'site_title'); ?>">ELTTL</abbr>
+                </a>
                 <div class="search">
-                    <form>
-                        <input type="text" name="search" type="search" maxlength="999" placeholder="Search">
-                        <section></section>
+                    <form class="main" method="get">
+                        <input type="text" name="search" type="search" maxlength="150">
+                        <input name="form_search" type="hidden" value="true">
+                        <a href="#" class="submit button">Search</a>
+                        <input type="submit">
                     </form> 
                 </div>
                 <nav class="sub">
-                    <ul>
-                        <li><a href="<?php echo $this->urlHome(); ?>coaching/">Coaching</a></li>
-                        <li><a href="<?php echo $this->urlHome(); ?>schools/">Schools</a></li>
-                        <li><a href="<?php echo $this->urlHome(); ?>town-teams/">Town Teams</a></li>
-                        <li><a href="<?php echo $this->urlHome(); ?>summer-league/">Summer League</a></li>
-                        <li><a href="<?php echo $this->urlHome(); ?>local-clubs/">Local Clubs</a></li>
-                    </ul>
+                    <a href="<?php echo $this->urlHome(); ?>coaching/">Coaching</a>
+                    <a href="<?php echo $this->urlHome(); ?>schools/">Schools</a>
+                    <a href="<?php echo $this->urlHome(); ?>town-teams/">Town Teams</a>
+                    <a href="<?php echo $this->urlHome(); ?>summer-league/">Summer League</a>
+                    <a href="<?php echo $this->urlHome(); ?>local-clubs/">Local Clubs</a>
                 </nav>   
                 <nav class="main">
-                    <ul>
-                        <li><a href="<?php echo $this->urlHome(); ?>">Home</a></li>
-                        <li>
-                            <div>
-                                <span></span>
-                                <a href="#">Tables and Results</a>
+                    <a href="<?php echo $this->urlHome(); ?>">Home</a>
+                    <div>
+                        <a href="#">Results</a>
                                     
 <?php if ($this->get('model_mainmenu', 'division')): ?>
-
-                                <ul>
-
     <?php foreach ($this->get('model_mainmenu', 'division') as $division): ?>
 
-                                <li>
-                                    <div>
-                                        <span></span>
-                                        <a href="<?php echo $this->get($division, 'url') ?>"><?php echo $this->get($division, 'name') ?></a>
-                                        <ul>
-                                            <li><a href="<?php echo $this->get($division, 'url') ?>">Overview</a></li>
-                                            <li><a href="<?php echo $this->get($division, 'url') ?>merit/">Merit Table</a></li>
-                                            <li><a href="<?php echo $this->get($division, 'url') ?>league/">League Table</a></li>
-                                            <li><a href="<?php echo $this->get($division, 'url') ?>fixture/">Fixtures</a></li>
-                                        </ul>
-                                    </div>
-                                </li>
+                        <div>
+                            <h4><a href="<?php echo $this->get($division, 'url') ?>"><?php echo $this->get($division, 'name') ?></a></h4>
+                            <a href="<?php echo $this->get($division, 'url') ?>">Overview</a>
+                            <a href="<?php echo $this->get($division, 'url') ?>merit/">Merit Table</a>
+                            <a href="<?php echo $this->get($division, 'url') ?>league/">League Table</a>
+                            <a href="<?php echo $this->get($division, 'url') ?>fixture/">Fixtures</a>
+                        </div>
         
     <?php endforeach ?>
-
-                                </ul>
-
 <?php endif ?>
-                                
-                            </div>
-                        </li>
-                        <li>
-                            <div>
-                                <span></span>
-                                <a href="#">The League</a>
-                                <ul>
-                                    <li><a href="#">Handbook</a></li>
-                                    <li><a href="#">Handbook</a></li>
-                                    <li><a href="#">Handbook</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li><a href="<?php echo $this->urlHome(); ?>player/performance/">Player Performance</a></li>
-                        <li><a href="<?php echo $this->urlHome(); ?>post/">Press Releases</a></li>
-                        <li><a href="<?php echo $this->urlHome(); ?>page/10/competitions/">Competitions</a></li>
-                        <li><a href="#">Contact us</a></li>
-                    </ul>
+
+                    </div>
+                    <div>
+                        <a href="#">The League</a>
+                        <div>
+                            <a href="#">Handbook</a>
+                            <a href="<?php echo $this->urlHome(); ?>player/performance/">Player Performance</a>
+                            <a href="<?php echo $this->urlHome(); ?>post/">Press Releases</a>
+                            <a href="<?php echo $this->urlHome(); ?>page/10/competitions/">Competitions</a>
+                            <a href="#">Contact us</a>
+                        </div>
+                    </div>
                 </nav>             
-                <div class="clearfix"></div>
             </header>
