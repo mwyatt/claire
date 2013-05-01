@@ -94,20 +94,16 @@ var navMain = {
 	initialise: function(container) {
 		if ($(container).length) {
 			navMain.container = $(container);
-			// navMain.drop = $('body').find('.drop' + '.' + $(navMain.container).attr("class"));
-			$(navMain.container).find('li').find('a').on('mouseup', navMain.openClose);
+			$(navMain.container).find('li > a').on('click', function(e) {
+				navMain.openClose(this, e);
+			});
 		}
 	},
 
-	openClose: function() {
-		$(this).parent().toggleClass('active');
-		preventDefault(e);
-		// $(navMain.drop).find('a').on('mouseup', clickprevent);
+	openClose: function(button, e) {
+		$(button).parent().toggleClass('active');
+		e.preventDefault();
 	}
-}
-
-function preventDefault(e) {
-	e.preventDefault();
 }
 
 var search = {
@@ -121,7 +117,7 @@ var search = {
 		if ($(container).length) {
 			search.container = $(container);
 			search.input = $(search.container).find('input[name="query"]');
-			$(search.input).on('change', search.setTimer);
+			// $(search.input).on('change', search.setTimer);
 			$(search.input).on('keyup', search.setTimer);			
 		}
 	},
