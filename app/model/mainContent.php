@@ -41,7 +41,7 @@ class Model_Maincontent extends Model
 			" . ($id ? ' and main_content.id = :id ' : '') . "
 			group by main_content.id
 			order by main_content.date_published
-			" . ($limit ? ' limit 0, :limit ' : '') . "
+			" . ($limit ? ' limit :limit ' : '') . "
 		");
 		if ($id) {
 			$sth->bindValue(':id', $id, PDO::PARAM_STR);

@@ -1,4 +1,4 @@
-			<footer class="main">
+			<footer class="main clearfix">
 				<nav>
 					<a href="<?php echo $this->urlHome(); ?>premier-league-for-sport/">Premier League for Sport</a>
 					<a href="<?php echo $this->urlHome(); ?>archive/">Archive (Old Website)</a>
@@ -6,7 +6,7 @@
 					<a href="<?php echo $this->urlHome(); ?>minutes/">Minutes</a>
 					<a href="<?php echo $this->urlHome(); ?>fred-holden-cup/">Fred Holden Cup</a>
 				</nav>				
-				<div class="address left">
+				<div class="address">
 					<a href="<?php echo $this->urlHome(); ?>contact-us/"><strong>© East Lancashire Table Tennis League</strong></a><br>
 					Hyndburn Sports Centre<br>
 					Henry Street<br>

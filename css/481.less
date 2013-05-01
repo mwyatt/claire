@@ -1,0 +1,33 @@
+header nav.sub {
+	clear: both;
+	background-image: none;
+	background-color: lighten(@black, 90%);
+	cursor: default;
+	height: auto;
+	float: none;
+	margin: 0 0 1em;
+
+	label {
+		display: none;
+	}
+
+	.inner {
+		display: block;
+		position: static;
+		border-bottom: none;
+	}
+
+	.close {
+		display: none;
+	}
+
+	a {
+		display: inline;
+		border-top: none;
+		margin: 0 0 0 .5em;
+
+		&:first-of-type {
+			margin-left: 0;
+		}
+	}
+}
