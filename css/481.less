@@ -82,6 +82,7 @@ header .search {
 }
 
 nav.main {
+	position: relative;
 	font-size: 1.2em;
 
 	li > a {
@@ -91,32 +92,11 @@ nav.main {
 		padding: 1.1%;
 	}
 
-	// h4 {
-	// 	margin: 0;
-	// 	border-top: 1px solid lighten(@black, 45%);
-	// }
-
-	// .drop {
-	// 	display: none;
-	// 	font-size: 1em;
-	// 	padding: .5em;
-	// 	background-color: lighten(@black, 40%);
-
-	// 	div a {
-	// 		display: none;
-	// 		color: @white;
-	// 	}
-
-	// 	h4 a {
-	// 		display: block;
-	// 		padding: .5em;
-	// 	}
-
-	// 	div[class^="division"]:first-child h4 {
-	// 		border-top: 0;
-	// 		padding-top: 0;
-	// 	}
-	// }
+	.drop {
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
 
 	// .active .drop {
 	// 	display: block;

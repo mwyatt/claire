@@ -196,39 +196,4 @@ class Model_Mainmenu extends Model
     }
 
 	
-	/**
-	  * adds subtree to items array
-	  * currently unused
-	  */
-/*	  
-	public function buildSubTree()
-    {
-		foreach ($this->items as $rootKey => $item) {
-			foreach ($item as $key => $val) {
-				if ($key == 'current' && $val == true) {
-				
-					$i = 0;
-					$dir = Config::read('dir.cc.controller').$this->items[$rootKey]['name'].'/sub/'; // set dir
-					if ($dirHandle = opendir($dir)) { // find subNav
-						while (($file = readdir($dirHandle)) !== false) { // loop over files
-							if ($file != "." && $file != ".." && $file != ".htaccess" && $file != "index.php" && $file != "ajax") { // filter
-								$this->items[$rootKey]['subNav'][$i]['path'] = $dir.$file;
-								$file = preg_replace('/[.$](php)+/', '', $file); // remove .php
-								$this->items[$rootKey]['subNav'][$i]['name'] = $file;
-								if ($this->config->getUrl(2) == $file) {
-									$this->items[$rootKey]['subNav'][$i]['current'] = true;
-								}								
-								$i++;
-							}
-						}
-						// close
-						closedir($dirHandle);
-						return true;
-					}					
-				}
-			}
-		}
-		return false;
-    }	*/
-	
 }
