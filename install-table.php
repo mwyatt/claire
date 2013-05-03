@@ -20,7 +20,7 @@ try {
 			main_user_meta
 			(
 				id INT UNSIGNED NOT NULL AUTO_INCREMENT
-				, user_id INT UNSIGNED DEFAULT ''
+				, user_id INT UNSIGNED
 				, name VARCHAR(255) NOT NULL DEFAULT ''
 				, value VARCHAR(255) NOT NULL DEFAULT ''
 				, PRIMARY KEY (id)

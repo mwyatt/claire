@@ -100,7 +100,11 @@ class Controller_Ajax extends Controller
 	public function ttEncounterResult() {
 		$ttEncounterResult = new Model_Ttencounter_result($this->database, $this->config);
 		if (array_key_exists('player_id', $_GET)) {
-			$ttEncounterResult->readByPlayerId($_GET['player_id']);
+			if (array_key_exists('limit', $_GET)) {
+				$ttEncounterResult->readByPlayerId($_GET['player_id'], $_GET['limit']);
+			} else {
+				$ttEncounterResult->readByPlayerId($_GET['player_id']);
+			}
 		}
 		$this->out($ttEncounterResult->getData());
 	}
