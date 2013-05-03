@@ -145,7 +145,7 @@ class Model_Mainmenu extends Model
 	 */
 	public function adminSub() {
 		$className = 'Controller_' . ucfirst($this->config->getUrl(0)) . '_' . ucfirst($this->config->getUrl(1));
-		if (class_exists($className, false)) {
+		if (class_exists($className)) {
 			// $baseUrl = $this->config->getUrl('base') . $this->config->getUrl(0) . '/' . $this->config->getUrl(1). '/';
 			// $this->data['admin_sub'][0]['name'] = 'Overview';
 			// $this->data['admin_sub'][0]['current'] = ($this->config->getUrl(2) == '' ? true : false);

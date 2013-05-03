@@ -136,11 +136,15 @@ class Model_Ttplayer extends Model
 			$sth->execute(array($id));
 			$player = $sth->fetch(PDO::FETCH_ASSOC);
 			$players[$player['id']] = $player;
+			$players[$player['id']]['average'] = $this->calcAverage($player['won'], $player['played']);
 		}
 		if (count($players) == 1) {
 			$players = current($players);
 		}
-		return $this->data = $players;
+		if (! empty($players)) {
+			return $this->data = $players;
+		}
+		return false;
 	}	
 
 

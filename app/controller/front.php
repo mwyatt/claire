@@ -25,11 +25,6 @@ class Controller_Front extends Controller
 	public function index() {
 		$press = new Model_maincontent($this->database, $this->config);
 		$press->readByType('press', 3);
-		// echo '<pre>';
-		// print_r($press->data);
-		// echo '</pre>';
-		// exit;
-		
 		$this->view
 			->setObject($press)
 			->loadTemplate('home');

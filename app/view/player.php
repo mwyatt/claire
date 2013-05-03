@@ -1,36 +1,38 @@
 <?php require_once($this->pathView() . 'header.php'); ?>
 
 <div class="content player">
-	
-	<h1>All Players</h1>
+	<h1>Players</h1>
 
-	<?php if ($modelTtplayer->getData()) : ?>	
+<?php if ($this->get('model_ttplayer')) : ?>
 
-	<table width="100%" cellspacing="0" cellpadding="0">
+	<table class="main" width="100%" cellspacing="0" cellpadding="0">
+		<thead>
+			<tr>
+				<th class="full-name text-left">Name</th>
+				<th class="rank text-center">Rank</th>
+				<th class="team text-left">Team</th>
+				<th class="division text-left">Division</th>
+			</tr>
+		</thead>
+		<tbody>
+			
+	<?php foreach ($this->get('model_ttplayer') as $player): ?>
 
 		<tr>
-			<th class="full_name">Name</th>
-			<th class="rank">Rank</th>
-			<th class="team">Team</th>
-			<th class="division">Division</th>
-		</tr>
-
-		<?php while ($modelTtplayer->nextRow()) : ?>
-
-		<tr>
-			<td class="full_name">
-				<a href="<?php echo $modelTtplayer->getRow('guid'); ?>" title="View Player <?php echo $modelTtplayer->getRow('full_name'); ?>"><?php echo $modelTtplayer->getRow('full_name'); ?></a>
+			<td class="full-name">
+				<a href="<?php echo $this->get($player, 'guid'); ?>" title="View player <?php echo $this->get($player, 'full_name'); ?>"><?php echo $this->get($player, 'full_name'); ?></a>
 			</td>
-			<td class="rank"><?php echo $modelTtplayer->getRow('rank'); ?></td>
-			<td class="team"><?php echo $modelTtplayer->getRow('team_name'); ?></td>
-			<td class="division"><?php echo $modelTtplayer->getRow('division_name'); ?></td>
+			<td class="rank text-center"><?php echo $this->get($player, 'rank'); ?></td>
+			<td class="team"><?php echo $this->get($player, 'team_name'); ?></td>
+			<td class="division"><?php echo $this->get($player, 'division_name'); ?></td>
 		</tr>		
 
-		<?php endwhile; ?>
+	<?php endforeach ?>
 
+		</tbody>			
 	</table>
 	
-	<?php endif; ?>	
+<?php endif; ?>	
 
 </div> <!-- styling aid -->
 

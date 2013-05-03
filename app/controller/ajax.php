@@ -60,6 +60,12 @@ class Controller_Ajax extends Controller
 			$player->readByTeam($_GET['team_id']);
 			$this->out($player->getData());
 		}
+		if (array_key_exists('id', $_GET)) {
+			$player = new Model_Ttplayer($this->database, $this->config);
+			if ($player->readById(array($_GET['id']))) {
+				$this->out($player->getData());
+			}
+		}
 		$ttPlayer = new Model_Ttplayer($this->database, $this->config);
 		$ttPlayer->read();
 		$this->out($ttPlayer->getData());
@@ -89,6 +95,14 @@ class Controller_Ajax extends Controller
 				$encounter->read($_GET['player_id']);
 			}
 		}
+	}
+
+	public function ttEncounterResult() {
+		$ttEncounterResult = new Model_Ttencounter_result($this->database, $this->config);
+		if (array_key_exists('player_id', $_GET)) {
+			$ttEncounterResult->readByPlayerId($_GET['player_id']);
+		}
+		$this->out($ttEncounterResult->getData());
 	}
 
 

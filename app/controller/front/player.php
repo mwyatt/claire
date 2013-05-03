@@ -20,20 +20,30 @@ class Controller_Front_Player extends Controller
 	 * /player/full-name-1/ single player
 	 * @param  string $action after the index?
 	 */
-	public function index($action) {
-		$this->cache->load('player');
+	public function index() {
+		// $this->cache->load('player');
 		$player = new Model_Ttplayer($this->database, $this->config);
-		if ($action) {
+		if ($this->config->getUrl(1)) {
 			$id = end(explode('-', $this->config->getUrl(1)));
-			if (! $player->readById($id)) {
-				return;
+			if (! $player->readById(array($id))) {
+				$this->route('base', 'player/');
 			}
 			$this->view
+				->setMeta(array(		
+					'title' => 'custom title'
+					, 'keywords' => 'custom title'
+					, 'description' => 'custom title'
+				))
 				->setObject($player)
 				->loadTemplate('player-single');
 		}
 		$player->read();
 		$this->view
+			->setMeta(array(		
+				'title' => 'All registered players'
+				, 'keywords' => 'players, player'
+				, 'description' => 'All registered players in the East Lancashire Table Tennis League'
+			))
 			->setObject($player)
 			->loadTemplate('player');
 	}

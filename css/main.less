@@ -430,30 +430,66 @@ div.accordion {
 	}
 }
 
-div.content {
+.content {
 	padding: 1em;
 
-	a {
-		line-height: 1.1em;
-	}
+	// a {
+	// 	line-height: 1.1em;
+	// }
 	
-	table {
-		tr {
-			border-bottom: 1px dotted @orange-gray;
-			th {
-				text-align: left;
-				color: @orange-gray;
-			}
-			td, th {
-				padding: 20px 15px;
-				font-size: 1.3em;
-				font-weight: bold;
-			}
-		}
+	// p {
+	// 	font-size: 1em;
+	// }
+
+	h1 {
+		font-size: 1.4em;
+		margin: 0 0 1em;
+		color: darken(@white, 70%);
 	}
 
-	p {
-		font-size: 1em;
+	h2 {
+		font-size: 1.1em;
+		margin: 0 0 1em;
+		color: darken(@white, 60%);
+	}
+}
+
+table.main {
+
+	.rank,
+	.team {
+		display: none;
+	}
+
+	td, th {
+		padding: 1em 0;
+	}
+
+	td.full-name {
+		font-weight: bold;
+	}
+
+	tr {
+		// border-bottom: 1px dotted @orange-gray;
+	}
+}
+
+.content.player.single {
+
+	.stats {
+		margin: 0 0 1em;
+
+		th,
+		td {
+			text-align: left;
+			padding: 1em 0;
+			border-top: 1px solid darken(@white, 10%);
+		}
+
+		tr:first-child td,
+		tr:first-child th {
+			border-top: none;
+		}
 	}
 }
 
@@ -603,31 +639,31 @@ div.content.team.single {
 	}
 }
 
-div.content.player {
+// div.content.player {
 
-	table {
+// 	table {
 
-		tr {
-			border-bottom: 1px dotted @orange-gray;
+// 		tr {
+// 			border-bottom: 1px dotted @orange-gray;
 			
-			.team, .division {
-				display: none;
-			}
+// 			.team, .division {
+// 				display: none;
+// 			}
 
-			th {
-				text-align: left;
-				color: @orange-gray;
-			}
-			td, th {
-				padding: 20px 15px;
-				font-size: 1.3em;
-				font-weight: bold;
-			}
+// 			th {
+// 				text-align: left;
+// 				color: @orange-gray;
+// 			}
+// 			td, th {
+// 				padding: 20px 15px;
+// 				font-size: 1.3em;
+// 				font-weight: bold;
+// 			}
 
-		}
+// 		}
 
-	}
-}
+// 	}
+// }
 
 div.content.merit {
 
@@ -874,38 +910,3 @@ footer.main {
 @media screen and (min-width : 697px) {
 	@import "697";
 }
-
-// html.lt-ie9 {
-	
-// 	body {
-// 		background: black;
-// 		text-align: center;
-// 	}
-
-// 	header.main,
-// 	footer.main,
-// 	div.content {
-// 		text-align: left;
-// 		width: 960px;
-// 		margin: 0 auto;		
-// 	}
-
-// 	header.main {
-
-// 		a.logo {
-// 			// font-size: 10em;
-// 			// height: 88px;
-// 			// width: 158px;
-// 			// padding: 6px 7px;
-// 		}
-
-// 	}
-
-// 	div.content {
-// 		background: red;
-// 		font-size: 120%;
-// 	}
-// 	// div.content.merit td {
-// 	// 	display: table-cell;
-// 	// }
-// }

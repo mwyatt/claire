@@ -16,9 +16,9 @@ class View extends Model
 	public $template;
 	public $session;
 	public $meta = array();
-	public $cache = array(
-		'player' => true
-	);
+	// public $cache = array(
+	// 	'player' => true
+	// );
 	
 	
 	/**

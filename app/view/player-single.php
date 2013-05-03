@@ -1,42 +1,32 @@
 <?php require_once($this->pathView() . 'header.php'); ?>
 
 <div class="content player single">
-
-<?php echo ($this->urlPrevious() ? '<a class="back" href="' . $this->urlPrevious() . '">Back</a>' : ''); ?>	
-
-	<h1><?php echo $modelTtplayer->get('full_name'); ?></h1>
-
-	<table width="100%" cellspacing="0" cellpadding="0">
+	<h1><?php echo $this->get('model_ttplayer', 'full_name'); ?></h1>
+	<h2>General stats</h2>
+	<table class="stats" width="100%" cellspacing="0" cellpadding="0">
 		<tr class="played">
 			<th>Played</th>
-			<td><?php echo $modelTtplayer->get('played'); ?></td>
+			<td><?php echo $this->get('model_ttplayer', 'played'); ?></td>
 		</tr>		
 		<tr class="won">
 			<th>Won</th>
-			<td><?php echo $modelTtplayer->get('won'); ?></td>
+			<td><?php echo $this->get('model_ttplayer', 'won'); ?></td>
 		</tr>		
 		<tr class="lost">
 			<th>Lost</th>
-			<td><?php echo $modelTtplayer->get('lost'); ?></td>
+			<td><?php echo $this->get('model_ttplayer', 'lost'); ?></td>
 		</tr>		
 		<tr class="average">
 			<th>Average</th>
-			<td><?php echo $modelTtplayer->get('average'); ?></td>
+			<td><?php echo $this->get('model_ttplayer', 'average'); ?></td>
 		</tr>		
 	</table>
-
-	<div class="accordion progress" data-player-id="<?php echo $modelTtplayer->get('id'); ?>">
-		<h2><span></span>Progress</h2>
-		<section></section>
+	<div class="performance">
+		<h2>Performance</h2>
 	</div>
-
-	<ul>
-		<li>results (personal results, vs martin 3-1, vs david 3-2)
-			[load 10 more results button]
-		</li>
-		<li>venue and team</li>
-	</ul>
-
-</div> <!-- styling aid -->
+	<div class="fixture">
+		<h2>Fixtures</h2>
+	</div>
+</div>
 
 <?php require_once($this->pathView() . 'footer.php'); ?>
