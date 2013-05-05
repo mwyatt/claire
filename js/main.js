@@ -184,6 +184,18 @@ var player = {
 				});
 			}
 		});
+	},
+
+	getRankChange: function() {
+		$.getJSON(url.base + '/ajax/search/?query=' + $(search.input).val() + '&limit=5', function(results) {
+			if (results) {
+				console.log(results);
+				$(search.section).html('');
+				$.each(results, function(index, result) {
+					$(search.section).append('<a href="' + result.guid + '">' + result.name + '</a>');
+				});
+			}
+		});
 	}
 }
 
@@ -230,7 +242,6 @@ function formSubmit() {
 }
 
 $(document).ready(function() {
-	console.log(value);
 	less.watch();
 	$('form').find('a.submit').on('mouseup', formSubmit);
 	resize.initialise();

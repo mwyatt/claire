@@ -60,15 +60,12 @@ class Model_Ttencounter_Result extends Model
 			order by tt_encounter_result.encounter_id desc
 			" . ($limit ? ' limit ? ' : '') . "
 		");				
+		$sth->bindParam(1, $id, PDO::PARAM_INT);
+		$sth->bindParam(2, $id, PDO::PARAM_INT);
 		if ($limit) {
-			$sth->bindValue('?', (int) $limit, PDO::PARAM_INT);
+			$sth->bindValue(3, (int) $limit, PDO::PARAM_INT);
 		}
-		$sth->execute(array($id, $id));	
-		echo '<pre>';
-		print_r($sth->fetchAll(PDO::FETCH_ASSOC));
-		echo '</pre>';
-		exit;
-		
+		$sth->execute();
 		if ($sth->rowCount()) {
 			return $this->data = $sth->fetchAll(PDO::FETCH_ASSOC);
 		} 

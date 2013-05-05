@@ -23,26 +23,18 @@ class Model_Ttencounter_Part extends Model
 		return $sth->rowCount();
 	}
 
+
 	public function readChange($playerId = false)
 	{	
-
-		$sql = "select sum(tt_encounter_part.player_rank_change) as player_rank_change from tt_encounter_part where tt_encounter_part.status = '' ";
-
-		if ($playerId) {
-			$sql .= " and tt_encounter_part.player_id = :playerId ";
-			$sth = $this->database->dbh->prepare($sql);
-			$sth->execute(array(
-				':playerId' => $playerId
-			));	
-		} else {
-			$sth = $this->database->dbh->query($sql);
-		}
-
-		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {	
-			$this->data[] = $row;
-		}
-
+		$sth = $this->database->dbh->prepare("
+			select sum(tt_encounter_part.player_rank_change) as player_rank_change
+			from tt_encounter_part
+			where tt_encounter_part.status = '' and tt_encounter_part.player_id = ?	
+		");
+		$sth->execute(array($playerId));	
+		$this->data = $sth->fetch(PDO::FETCH_ASSOC);
 	}	
+
 
 	public function read($playerId = false, $limit = false)
 	{	
@@ -66,6 +58,7 @@ class Model_Ttencounter_Part extends Model
 		}
 
 	}	
+
 
 	public function readPerformance($playerId = false)
 	{	
@@ -95,7 +88,7 @@ class Model_Ttencounter_Part extends Model
 			$row['team_guid'] = $this->getGuid('team', $row['team_name'], $row['team_id']);
 			$this->data[] = $row;
 		}
-
 	}	
+
 
 }

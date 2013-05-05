@@ -85,16 +85,10 @@ class Controller_Ajax extends Controller
 	}
 
 	
-	public function encounterPart() {
-		if (array_key_exists('method', $_GET) && array_key_exists('player_id', $_GET)) {
-			$encounter = new Model_Ttencounterpart($this->database, $this->config);
-			if ($_GET['method'] == 'group') {
-				$encounter->readChange($_GET['player_id']);
-			}
-			if ($_GET['method'] == 'row') {
-				$encounter->read($_GET['player_id']);
-			}
-		}
+	public function ttEncounterPart() {
+		$encounter = new Model_Ttencounter_Part($this->database, $this->config);
+		$encounter->$_GET['method']($_GET['player_id']);
+		$this->out($encounter->getData());
 	}
 
 	public function ttEncounterResult() {

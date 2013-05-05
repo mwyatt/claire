@@ -35,12 +35,12 @@ try {
 			main_content
 			(
 				id INT UNSIGNED NOT NULL AUTO_INCREMENT
-				, title VARCHAR(255) NOT NULL
-				, html VARCHAR(8000)
-				, type VARCHAR(50) NOT NULL
-				, date_published INT UNSIGNED
+				, title VARCHAR(255) NOT NULL DEFAULT ''
+				, html VARCHAR(8000) DEFAULT ''
+				, type VARCHAR(50) NOT NULL DEFAULT ''
+				, date_published INT UNSIGNED DEFAULT NOW()
 				, status VARCHAR(50) NOT NULL DEFAULT 'hidden'
-				, user_id INT UNSIGNED				
+				, user_id INT UNSIGNED NOT NULL	
 				, PRIMARY KEY (id)
 			)
 	");
@@ -53,9 +53,9 @@ try {
 			main_content_meta
 			(
 				id INT UNSIGNED NOT NULL AUTO_INCREMENT
-				, content_id INT UNSIGNED
-				, name VARCHAR(255) NOT NULL
-				, value VARCHAR(255) NOT NULL
+				, content_id INT UNSIGNED NOT NULL
+				, name VARCHAR(255) NOT NULL DEFAULT ''
+				, value VARCHAR(255) NOT NULL DEFAULT ''
 				, PRIMARY KEY (id)
 			)
 	");
@@ -68,34 +68,20 @@ try {
 			main_option
 			(
 				id INT UNSIGNED NOT NULL AUTO_INCREMENT
-				, name VARCHAR(255) NOT NULL
-				, value VARCHAR(255) NOT NULL
+				, name VARCHAR(255) NOT NULL DEFAULT ''
+				, value VARCHAR(255) NOT NULL DEFAULT ''
 				, PRIMARY KEY (id)
 			)
 	");	
-
-	// $database->dbh->query("
-	// 	CREATE TABLE IF NOT EXISTS 
-	// 		main_media_tree
-	// 		(
-	// 			id INT UNSIGNED NOT NULL AUTO_INCREMENT
-	// 			, title VARCHAR(255) NOT NULL
-	// 			, title_slug VARCHAR(255) NOT NULL
-	// 			, parent_id INT UNSIGNED									
-	// 			, PRIMARY KEY (id)
-	// 		)		
-	// ");
 
 	$database->dbh->query("
 		CREATE TABLE IF NOT EXISTS 
 			main_media
 			(
 				id INT UNSIGNED NOT NULL AUTO_INCREMENT
-				, filename VARCHAR(255)
-				, basename VARCHAR(255)
-				, type VARCHAR(50)
-				, date_published INT UNSIGNED
-				, user_id INT UNSIGNED
+				, path VARCHAR(500) NOT NULL
+				, date_published INT UNSIGNED DEFAULT NOW()
+				, user_id INT UNSIGNED NOT NULL
 				, PRIMARY KEY (id)
 			)		
 	");
@@ -103,19 +89,19 @@ try {
 		alter table main_media add index (user_id);
 	");
 
-	$database->dbh->query("
-		CREATE TABLE IF NOT EXISTS 
-			main_menu
-			(
-				id INT UNSIGNED NOT NULL AUTO_INCREMENT
-				, title VARCHAR(255) NOT NULL
-				, parent_id INT UNSIGNED									
-				, guid VARCHAR(255) NOT NULL
-				, position INT UNSIGNED									
-				, type VARCHAR(20) DEFAULT 'main'
-				, PRIMARY KEY (id)
-			)		
-	");
+	// $database->dbh->query("
+	// 	CREATE TABLE IF NOT EXISTS 
+	// 		main_menu
+	// 		(
+	// 			id INT UNSIGNED NOT NULL AUTO_INCREMENT
+	// 			, title VARCHAR(255) NOT NULL DEFAULT ''
+	// 			, parent_id INT UNSIGNED
+	// 			, guid VARCHAR(255) NOT NULL
+	// 			, position INT UNSIGNED
+	// 			, type VARCHAR(20) DEFAULT 'main'
+	// 			, PRIMARY KEY (id)
+	// 		)		
+	// ");
 	
 	$database->dbh->query("
 		CREATE TABLE IF NOT EXISTS
@@ -123,7 +109,7 @@ try {
 			(
 				id INT UNSIGNED NOT NULL AUTO_INCREMENT
 				, season VARCHAR(20) NOT NULL
-				, html VARCHAR(8000)
+				, html VARCHAR(8000) DEFAULT ''
 				, PRIMARY KEY (id)
 			)		
 	");	

@@ -122,7 +122,7 @@ class Model_Ttplayer extends Model
 				, (sum(case when tt_encounter_result.left_id = tt_player.id and tt_encounter_result.status = '' then tt_encounter_result.right_score else 0 end) + sum(case when tt_encounter_result.right_id = tt_player.id and tt_encounter_result.status = '' then tt_encounter_result.left_score else 0 end)) as lost
 				, sum(
 					case
-						when tt_encounter_result.status = '' and tt_encounter_result.left_id = tt_player.id or tt_encounter_result.right_id = tt_player.id then tt_encounter_result.left_score + tt_encounter_result.right_score
+						when tt_encounter_result.status = '' and tt_encounter_result.left_id = tt_player.id or tt_encounter_result.status = '' and tt_encounter_result.right_id = tt_player.id then tt_encounter_result.left_score + tt_encounter_result.right_score
 					else 0
 				end) as played
 			from tt_player
