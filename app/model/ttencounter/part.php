@@ -24,10 +24,10 @@ class Model_Ttencounter_Part extends Model
 	}
 
 
-	public function readChange($playerId = false)
+	public function readRankChange($playerId = false)
 	{	
 		$sth = $this->database->dbh->prepare("
-			select sum(tt_encounter_part.player_rank_change) as player_rank_change
+			select id, sum(tt_encounter_part.player_rank_change) as player_rank_change
 			from tt_encounter_part
 			where tt_encounter_part.status = '' and tt_encounter_part.player_id = ?	
 		");

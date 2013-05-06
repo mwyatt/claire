@@ -187,13 +187,27 @@ var player = {
 	},
 
 	getRankChange: function() {
-		$.getJSON(url.base + '/ajax/search/?query=' + $(search.input).val() + '&limit=5', function(results) {
-			if (results) {
-				console.log(results);
-				$(search.section).html('');
-				$.each(results, function(index, result) {
-					$(search.section).append('<a href="' + result.guid + '">' + result.name + '</a>');
-				});
+		$.getJSON(url.base + '/ajax/tt-encounter-part/?method=readRankChange&player_id=' + $('.content.player.single').data('id'), function(result) {
+			if (result) {
+				$('.content.player.single').find('.performance').append('<span class="total">' + result['player_rank_change'] + '</span>');
+				if (parseInt(result['player_rank_change'])) {
+					$('.content.player.single').find('.performance').find('.total').addClass('positive');
+				} else {
+					$('.content.player.single').find('.performance').find('.total').addClass('negative');
+				}
+			}
+		});
+	},
+
+	getPerformance: function() {
+		$.getJSON(url.base + '/ajax/tt-encounter-part/?method=readRankChange&player_id=' + $('.content.player.single').data('id'), function(result) {
+			if (result) {
+				$('.content.player.single').find('.performance').append('<span class="total">' + result['player_rank_change'] + '</span>');
+				if (parseInt(result['player_rank_change'])) {
+					$('.content.player.single').find('.performance').find('.total').addClass('positive');
+				} else {
+					$('.content.player.single').find('.performance').find('.total').addClass('negative');
+				}
 			}
 		});
 	}
@@ -265,6 +279,9 @@ $(document).ready(function() {
 	    }
 	  });
 	  return this;
+	};
+	if ($('.content.player.single').length) {
+		player.getRankChange();
 	};
 	// $('header').find('div.search').find('form').on('click', clickprevent);
 	// $('header').find('nav.main').find('ul').on('click', clickprevent);

@@ -87,7 +87,9 @@ class Controller_Ajax extends Controller
 	
 	public function ttEncounterPart() {
 		$encounter = new Model_Ttencounter_Part($this->database, $this->config);
-		$encounter->$_GET['method']($_GET['player_id']);
+		if (method_exists($encounter, $_GET['method'])) {
+			$encounter->$_GET['method']($_GET['player_id']);
+		}
 		$this->out($encounter->getData());
 	}
 

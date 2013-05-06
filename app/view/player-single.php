@@ -1,6 +1,6 @@
 <?php require_once($this->pathView() . 'header.php'); ?>
 
-<div class="content player single">
+<div class="content player single" data-id="<?php echo $this->get('model_ttplayer', 'id'); ?>">
 	<h1><?php echo $this->get('model_ttplayer', 'full_name'); ?></h1>
 	<h2>General stats</h2>
 	<table class="stats" width="100%" cellspacing="0" cellpadding="0">

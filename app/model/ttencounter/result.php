@@ -45,7 +45,9 @@ class Model_Ttencounter_Result extends Model
 				tt_encounter_result.encounter_id
 				, tt_encounter_result.tt_encounter_part_left_id
 				, tt_encounter_result.tt_encounter_part_right_id
+				, player_left.id as player_left_id
 				, concat(player_left.first_name, ' ', player_left.last_name) as player_left_full_name
+				, player_right.id as player_right_id
 				, concat(player_right.first_name, ' ', player_right.last_name) as player_right_full_name
 				, tt_encounter_result.left_score
 				, tt_encounter_result.right_score
@@ -66,8 +68,18 @@ class Model_Ttencounter_Result extends Model
 			$sth->bindValue(3, (int) $limit, PDO::PARAM_INT);
 		}
 		$sth->execute();
+		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
+			$row['player_left_guid'] = $this->getGuid('player', $row['player_left_full_name'], $row['player_left_id']);
+			$row['player_right_guid'] = $this->getGuid('player', $row['player_right_full_name'], $row['player_right_id']);
+			$rows[] = $row;
+		}
+		echo '<pre>';
+		print_r($rows);
+		echo '</pre>';
+		exit;
+		
 		if ($sth->rowCount()) {
-			return $this->data = $sth->fetchAll(PDO::FETCH_ASSOC);
+			return $this->data = $rows;
 		} 
 		return false;
 	}
