@@ -474,7 +474,48 @@ table.main {
 	}
 }
 
+.fixture .card {
+	border: 1px solid;
+	margin: 0 0 1em;
+	display: block;
+	padding: .6em;
+
+	div {
+		float: left;
+
+		&[class^="team"] {
+			clear: left;
+			font-weight: 600;
+		}
+
+		&[class^="score"] {
+			float: right;
+		}
+	}
+}
+
 .content.player.single {
+
+	.performance {
+
+		div {
+			margin: 0 0 1em;
+		}
+	}
+
+	.total {
+		color: @white;
+		float: right;
+		font-size: 1.2em;
+		font-weight: bold;
+		font-family: 'arial';
+		cursor: default;
+
+		&.positive {
+			background-color: @orange;
+			padding: 0.1em 0.3em 0.1em;
+		}
+	}
 
 	.stats {
 		margin: 0 0 1em;

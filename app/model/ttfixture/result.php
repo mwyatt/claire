@@ -13,27 +13,22 @@ class Model_Ttfixture_Result extends Model
 {
 
 
-	public function readByTeamId($id, $limit = 0) {
+	public function readByPlayerId($id, $limit = 0) {
 		$sth = $this->database->dbh->prepare("
 			select
-				tt_encounter_result.encounter_id
-				, tt_encounter_result.tt_encounter_part_left_id
-				, tt_encounter_result.tt_encounter_part_right_id
-				, player_left.id as player_left_id
-				, concat(player_left.first_name, ' ', player_left.last_name) as player_left_full_name
-				, player_right.id as player_right_id
-				, concat(player_right.first_name, ' ', player_right.last_name) as player_right_full_name
-				, tt_encounter_result.left_score
-				, tt_encounter_result.right_score
-				, tt_encounter_result.left_rank_change
-				, tt_encounter_result.right_rank_change
-				, tt_encounter_result.fixture_id
-			from tt_encounter_result
-			left join tt_player as player_left on player_left.id = tt_encounter_result.left_id
-			left join tt_player as player_right on player_right.id = tt_encounter_result.right_id
-			where tt_encounter_result.left_id = ? and tt_encounter_result.status = '' or tt_encounter_result.right_id = ? and tt_encounter_result.status = ''
-			group by tt_encounter_result.encounter_id
-			order by tt_encounter_result.encounter_id desc
+				tt_fixture.id
+				, tt_fixture.date_fulfilled
+				, team_left.name as team_left_name
+				, team_right.name as team_right_name
+				, tt_fixture_result.left_score as team_left_score
+				, tt_fixture_result.right_score as team_right_score
+			from tt_fixture_result
+			left join tt_fixture on tt_fixture_result.fixture_id = tt_fixture.id
+			left join tt_team as team_left on team_left.id = tt_fixture_result.left_id
+			left join tt_team as team_right on team_right.id = tt_fixture_result.right_id
+			left join tt_encounter_result on tt_fixture.id = tt_encounter_result.fixture_id
+			where tt_encounter_result.left_id = ? or tt_encounter_result.right_id = ?
+			group by tt_fixture.id
 			" . ($limit ? ' limit ? ' : '') . "
 		");				
 		$sth->bindParam(1, $id, PDO::PARAM_INT);
@@ -43,8 +38,7 @@ class Model_Ttfixture_Result extends Model
 		}
 		$sth->execute();
 		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
-			$row['player_left_guid'] = $this->getGuid('player', $row['player_left_full_name'], $row['player_left_id']);
-			$row['player_right_guid'] = $this->getGuid('player', $row['player_right_full_name'], $row['player_right_id']);
+			$row['guid'] = $this->getGuid('fixture', $row['team_left_name'] . '-' . $row['team_right_name'], $row['id']);
 			$rows[] = $row;
 		}
 		if ($sth->rowCount()) {

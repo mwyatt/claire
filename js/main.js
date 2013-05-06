@@ -174,10 +174,11 @@ var navSub = {
 }
 
 var player = {
+
 	getSingle: function() {
 		$.getJSON(url.base + '/ajax/search/?query=' + $(search.input).val() + '&limit=5', function(results) {
 			if (results) {
-				console.log(results);
+				// console.log(results);
 				$(search.section).html('');
 				$.each(results, function(index, result) {
 					$(search.section).append('<a href="' + result.guid + '">' + result.name + '</a>');
@@ -186,10 +187,27 @@ var player = {
 		});
 	},
 
+	getFixture: function() {
+		$.getJSON(url.base + '/ajax/tt-fixture-result/?method=readByPlayerId&player_id=' + $('.content.player.single').data('id'), function(results) {
+			if (results) {
+				$.each(results, function(index, result) {
+					$('.content.player.single').find('.fixture').append(
+						'<a href="' + result.guid + '" class="card clearfix">'
+							+ '<div class="team-left">' + result.team_left_name + '</div>'
+							+ '<div class="score-left">' + result.team_left_score + '</div>'
+							+ '<div class="team-right">' + result.team_right_name + '</div>'
+							+ '<div class="score-right">' + result.team_left_score + '</div>'
+						+ '</div>'
+					);
+				});
+			}
+		});
+	},
+
 	getRankChange: function() {
 		$.getJSON(url.base + '/ajax/tt-encounter-part/?method=readRankChange&player_id=' + $('.content.player.single').data('id'), function(result) {
 			if (result) {
-				$('.content.player.single').find('.performance').append('<span class="total">' + result['player_rank_change'] + '</span>');
+				$('.content.player.single').find('.performance').prepend('<span class="total">' + result['player_rank_change'] + '</span>');
 				if (parseInt(result['player_rank_change'])) {
 					$('.content.player.single').find('.performance').find('.total').addClass('positive');
 				} else {
@@ -206,8 +224,7 @@ var player = {
 		var playerId = $('.content.player.single').data('id');
 		$.getJSON(url.base + '/ajax/tt-encounter-result/?player_id=' + playerId + '&limit=3', function(results) {
 			if (results) {
-				console.log(results);
-				$('.content.player.single').find('.performance').append('<ul>');
+				// console.log(results);
 				$.each(results, function(index, result) {
 					if (result['player_left_id'] == playerId) {
 						side = 'left';
@@ -221,9 +238,8 @@ var player = {
 					} else {
 						victor = 'lost';
 					}
-					$('.content.player.single').find('.performance').append('<li>' + victor + ' vs <a href="' + result['player_' + otherSide + '_guid'] + '" title="View player ' + result['player_' + otherSide + '_full_name'] + '">' + result['player_' + otherSide + '_full_name'] + '</a> <span class="rank-change">' + result[side + '_rank_change'] + '</span></li>');
+					$('.content.player.single').find('.performance').append('<div>' + victor + ' vs <a href="' + result['player_' + otherSide + '_guid'] + '" title="View player ' + result['player_' + otherSide + '_full_name'] + '">' + result['player_' + otherSide + '_full_name'] + '</a> <span class="rank-change">' + result[side + '_rank_change'] + '</span></div>');
 				});
-				$('.content.player.single').find('.performance').append('</ul>');
 			}
 		});
 	}
@@ -241,7 +257,6 @@ var spinnerOptions = {
 	trail: 50, // Afterglow percentage
 	shadow: false, // Whether to render a shadow
 	hwaccel: false, // Whether to use hardware acceleration
-	className: 'spinner', // The CSS class to assign to the spinner
 	zIndex: 2e9, // The z-index (defaults to 2000000000)
 	top: 'auto', // Top position relative to parent in px
 	left: 'auto' // Left position relative to parent in px
@@ -299,6 +314,7 @@ $(document).ready(function() {
 	if ($('.content.player.single').length) {
 		player.getRankChange();
 		player.getPerformance();
+		player.getFixture();
 	};
 	// $('header').find('div.search').find('form').on('click', clickprevent);
 	// $('header').find('nav.main').find('ul').on('click', clickprevent);
