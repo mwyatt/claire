@@ -200,14 +200,30 @@ var player = {
 	},
 
 	getPerformance: function() {
-		$.getJSON(url.base + '/ajax/tt-encounter-part/?method=readRankChange&player_id=' + $('.content.player.single').data('id'), function(result) {
-			if (result) {
-				$('.content.player.single').find('.performance').append('<span class="total">' + result['player_rank_change'] + '</span>');
-				if (parseInt(result['player_rank_change'])) {
-					$('.content.player.single').find('.performance').find('.total').addClass('positive');
-				} else {
-					$('.content.player.single').find('.performance').find('.total').addClass('negative');
-				}
+		var side = '';
+		var otherSide = '';
+		var victor = '';
+		var playerId = $('.content.player.single').data('id');
+		$.getJSON(url.base + '/ajax/tt-encounter-result/?player_id=' + playerId + '&limit=3', function(results) {
+			if (results) {
+				console.log(results);
+				$('.content.player.single').find('.performance').append('<ul>');
+				$.each(results, function(index, result) {
+					if (result['player_left_id'] == playerId) {
+						side = 'left';
+						otherSide = 'right';
+					} else {
+						side = 'right';
+						otherSide = 'left';
+					}
+					if (result[side + '_score'] == 3) {
+						victor = 'Won';
+					} else {
+						victor = 'lost';
+					}
+					$('.content.player.single').find('.performance').append('<li>' + victor + ' vs <a href="' + result['player_' + otherSide + '_guid'] + '" title="View player ' + result['player_' + otherSide + '_full_name'] + '">' + result['player_' + otherSide + '_full_name'] + '</a> <span class="rank-change">' + result[side + '_rank_change'] + '</span></li>');
+				});
+				$('.content.player.single').find('.performance').append('</ul>');
 			}
 		});
 	}
@@ -282,6 +298,7 @@ $(document).ready(function() {
 	};
 	if ($('.content.player.single').length) {
 		player.getRankChange();
+		player.getPerformance();
 	};
 	// $('header').find('div.search').find('form').on('click', clickprevent);
 	// $('header').find('nav.main').find('ul').on('click', clickprevent);
