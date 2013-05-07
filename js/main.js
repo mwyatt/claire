@@ -95,7 +95,9 @@ var navMain = {
 		if ($(container).length) {
 			navMain.container = $(container);
 			$(navMain.container).find('li > a').on('click', function(e) {
-				navMain.openClose(this, e);
+				if ($(this).parent().find('.drop').length) {
+					navMain.openClose(this, e);
+				};
 			});
 		}
 	},

@@ -129,6 +129,11 @@ class Controller
 		exit;
 	}
 
+
+	protected function getId($segment) {
+		return end(explode('-', $segment));
+	}
+
 	// public function setView($view) {		
 	// 	$this->view = $view;
 	// }

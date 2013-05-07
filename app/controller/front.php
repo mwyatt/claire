@@ -36,4 +36,9 @@ class Controller_Front extends Controller
 	}
 
 
+	public function press() {
+		$this->load(array('front', 'press'), $this->config->getUrl(1), $this->view, $this->database, $this->config);
+	}
+
+
 }

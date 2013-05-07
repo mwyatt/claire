@@ -97,15 +97,11 @@ class Model_Maincontent extends Model
 			left join main_user on main_user.id = main_content.user_id
 			where main_content.id = :id
 		");
-
 		$sth->execute(array(
 			':id' => $id
 		));	
 		$result = $this->setMeta($sth->fetchAll(PDO::FETCH_ASSOC));
 		$result = current($result);
-		// if (array_key_exists('media', $result)) {
-		// 	$result['media'] = ;
-		// }
 		return $this->data = $result;
 	}
 

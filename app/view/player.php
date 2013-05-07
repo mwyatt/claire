@@ -34,6 +34,6 @@
 	
 <?php endif; ?>	
 
-</div> <!-- styling aid -->
+</div>
 
 <?php require_once($this->pathView() . 'footer.php'); ?>

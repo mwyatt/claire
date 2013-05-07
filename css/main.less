@@ -84,8 +84,6 @@ body {
 }
 
 .wrap {
-	margin: 0 auto;
-	max-width: 60em;
 }
 
 .logo {
@@ -121,6 +119,13 @@ form {
 		width: 1px;
 		height: 1px;
 	}
+}
+
+.content,
+footer.main,
+header.main {
+	margin: 0 auto;
+	max-width: 60em;
 }
 
 header.main {
@@ -430,28 +435,20 @@ div.accordion {
 	}
 }
 
+h1 {
+	font-size: 1.6em;
+	margin: 0 0 1em;
+	color: darken(@white, 70%);
+}
+
+h2 {
+	font-size: 1.1em;
+	margin: 0 0 1em;
+	color: darken(@white, 60%);
+}
+
 .content {
 	padding: 1em;
-
-	// a {
-	// 	line-height: 1.1em;
-	// }
-	
-	// p {
-	// 	font-size: 1em;
-	// }
-
-	h1 {
-		font-size: 1.4em;
-		margin: 0 0 1em;
-		color: darken(@white, 70%);
-	}
-
-	h2 {
-		font-size: 1.1em;
-		margin: 0 0 1em;
-		color: darken(@white, 60%);
-	}
 }
 
 table.main {
@@ -486,9 +483,15 @@ table.main {
 		&[class^="team"] {
 			clear: left;
 			font-weight: 600;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			width: 80%;
 		}
 
 		&[class^="score"] {
+			width: 20%;
+			text-align: right;
 			float: right;
 		}
 	}
@@ -517,21 +520,26 @@ table.main {
 		}
 	}
 
-	.stats {
-		margin: 0 0 1em;
+	.general-stats {
 
-		th,
-		td {
-			text-align: left;
-			padding: 1em 0;
-			border-top: 1px solid darken(@white, 10%);
-		}
+		table {
+			margin: 0 0 1em;
 
-		tr:first-child td,
-		tr:first-child th {
-			border-top: none;
+			th,
+			td {
+				text-align: left;
+				padding: 1em 0;
+				border-top: 1px solid darken(@white, 10%);
+			}
+
+			tr:first-child td,
+			tr:first-child th {
+				border-top: none;
+			}
 		}
 	}
+
+
 }
 
 div.content.single {
@@ -596,12 +604,17 @@ div.content.home {
 
 }
 
-.content.home .cover {
+
+.cover {
+
+}
+
+.cover .inner {
 	// .gradient (lighten(@purple, 20%), @purple);
 	background-color: lighten(@black, 20%);
 	padding: 1em;
 	display: block;
-	margin: 0 0 1em;
+	margin: 0 1em 1em 1em;
 
 	h1 {
 		font-size: 2em;
@@ -948,6 +961,12 @@ footer.main {
 @media screen and (min-width : 481px) {
 	@import "481";
 }
+@media screen and (min-width : 583px) {
+	@import "583";
+}
 @media screen and (min-width : 697px) {
 	@import "697";
+}
+@media screen and (min-width : 975px) {
+	@import "975";
 }
