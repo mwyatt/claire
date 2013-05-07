@@ -131,7 +131,7 @@ header.main {
 header.main {
 	clear: both;
 	position: relative;
-	padding: 1em;
+	padding: 1em 1em 0;
 }
 
 header nav.sub {
@@ -302,6 +302,7 @@ nav.main {
 	}
 
 	li > a {
+		border-top: 1px solid darken(@orange, 5%);
 		background: @orange;
 		display: block;
 		color: @white;
@@ -969,4 +970,7 @@ footer.main {
 }
 @media screen and (min-width : 975px) {
 	@import "975";
+}
+@media screen and (min-width : 996px) {
+	@import "996";
 }
