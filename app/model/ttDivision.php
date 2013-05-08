@@ -13,17 +13,8 @@
 class Model_Ttdivision extends Model
 {	
 	
-	/* Create
-	======================================================================== */
-	
-	/* Read
-	======================================================================== */
 
-	/**
-	 * all divisions
-	 */
-	public function read()
-	{	
+	public function read() {	
 	
 		$sth = $this->database->dbh->query("	
 			select
@@ -40,19 +31,9 @@ class Model_Ttdivision extends Model
 		}	
 
 	}	
-	
 
-	/* Update
-	======================================================================== */
-	
-	/* Delete
-	======================================================================== */
 
-	/**
-	 *
-	 */
-	public function delete($id)
-	{	
+	public function delete($id)	{	
 	
 		$sth = $this->database->dbh->query("
 			DELETE FROM

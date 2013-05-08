@@ -63,11 +63,11 @@
     <?php foreach ($this->get('model_mainmenu', 'division') as $division): ?>
 
                                 <div class="division-<?php echo strtolower($this->get($division, 'name')) ?>">
-                                    <h4><a href="<?php echo $this->get($division, 'url') ?>"><?php echo $this->get($division, 'name') ?></a></h4>
-                                    <a href="<?php echo $this->get($division, 'url') ?>">Overview</a>
-                                    <a href="<?php echo $this->get($division, 'url') ?>merit/">Merit Table</a>
-                                    <a href="<?php echo $this->get($division, 'url') ?>league/">League Table</a>
-                                    <a href="<?php echo $this->get($division, 'url') ?>fixture/">Fixtures</a>
+                                    <h4><a href="<?php echo $this->get($division, 'guid') ?>"><?php echo $this->get($division, 'name') ?></a></h4>
+                                    <a href="<?php echo $this->get($division, 'guid') ?>">Overview</a>
+                                    <a href="<?php echo $this->get($division, 'guid') ?>merit/">Merit Table</a>
+                                    <a href="<?php echo $this->get($division, 'guid') ?>league/">League Table</a>
+                                    <a href="<?php echo $this->get($division, 'guid') ?>fixture/">Fixtures</a>
                                 </div>        
         
     <?php endforeach ?>
