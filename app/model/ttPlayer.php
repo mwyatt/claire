@@ -48,30 +48,49 @@ class Model_Ttplayer extends Model
 
 
 	public function readTop($divisionId, $limit = 0)
-	{
-		/*select
-			tt_player.id
-			, tt_player.rank
-			, tt_player.first_name
-			, tt_player.last_name
-			, concat(tt_player.first_name, ' ', tt_player.last_name) as full_name
-			, tt_team.id as team_id
-			, tt_division.id as division_id
-			, tt_team.name as team_name
-			, (sum(case when tt_encounter_result.left_id = tt_player.id and tt_encounter_result.status = '' then tt_encounter_result.left_score else 0 end) + sum(case when tt_encounter_result.right_id = tt_player.id and tt_encounter_result.status = '' then tt_encounter_result.right_score else 0 end)) as won
-			, (sum(case when tt_encounter_result.left_id = tt_player.id and tt_encounter_result.status = '' then tt_encounter_result.right_score else 0 end) + sum(case when tt_encounter_result.right_id = tt_player.id and tt_encounter_result.status = '' then tt_encounter_result.left_score else 0 end)) as lost
-			, sum(
-				case
-					when tt_encounter_result.status = '' and tt_encounter_result.left_id = tt_player.id or tt_encounter_result.status = '' and tt_encounter_result.right_id = tt_player.id then tt_encounter_result.left_score + tt_encounter_result.right_score
-				else 0
-			end) as played
-		from tt_player
-		left join tt_team on tt_player.team_id = tt_team.id
-		left join tt_encounter_result on tt_encounter_result.left_id = tt_player.id or tt_encounter_result.right_id = tt_player.id
-		left join tt_division on tt_division.id = tt_team.division_id
-		where tt_player.id = ?
-		group by tt_player.id*/
-	}
+	{/*
+		$sth = $this->database->dbh->prepare("	
+			select
+				(Count(Grade)* 100 / (Select Count(*) From MyTable)) as Score
+
+
+
+				tt_player.id
+				, tt_player.rank
+				, tt_player.first_name
+				, tt_player.last_name
+				, concat(tt_player.first_name, ' ', tt_player.last_name) as full_name
+				, tt_team.id as team_id
+				, tt_division.id as division_id
+				, tt_team.name as team_name
+				, (sum(case when tt_encounter_result.left_id = tt_player.id and tt_encounter_result.status = '' then tt_encounter_result.left_score else 0 end) + sum(case when tt_encounter_result.right_id = tt_player.id and tt_encounter_result.status = '' then tt_encounter_result.right_score else 0 end)) as won
+				, (sum(case when tt_encounter_result.left_id = tt_player.id and tt_encounter_result.status = '' then tt_encounter_result.right_score else 0 end) + sum(case when tt_encounter_result.right_id = tt_player.id and tt_encounter_result.status = '' then tt_encounter_result.left_score else 0 end)) as lost
+				, sum(
+					case
+						when tt_encounter_result.status = '' and tt_encounter_result.left_id = tt_player.id or tt_encounter_result.status = '' and tt_encounter_result.right_id = tt_player.id then tt_encounter_result.left_score + tt_encounter_result.right_score
+					else 0
+				end) as played
+			from tt_player
+			left join tt_team on tt_player.team_id = tt_team.id
+			left join tt_encounter_result on tt_encounter_result.left_id = tt_player.id or tt_encounter_result.right_id = tt_player.id
+			left join tt_division on tt_division.id = tt_team.division_id
+			where tt_player.id = ?
+			group by tt_player.id
+		");
+		foreach ($ids as $id) {
+			$sth->execute(array($id));
+			$player = $sth->fetch(PDO::FETCH_ASSOC);
+			$players[$player['id']] = $player;
+			$players[$player['id']]['average'] = $this->calcAverage($player['won'], $player['played']);
+		}
+		if (count($players) == 1) {
+			$players = current($players);
+		}
+		if (! empty($players)) {
+			return $this->data = $players;
+		}
+		return false;
+	*/}
 	
 
 	public function read()

@@ -15,15 +15,25 @@ class Controller_Front_Division extends Controller
 
 
 	public function index() {
+		$division = new Model_Ttdivision($this->database, $this->config);
+		if (! $division->readByName($this->config->getUrl(1))) {
+			$this->route('base');
+		}
 		$player = new Model_Ttplayer($this->database, $this->config);
 		$team = new Model_Ttteam($this->database, $this->config);
 		$fixtureResult = new Model_Ttfixture_Result($this->database, $this->config);
-		$player->
+		$player->readMerit($division->getData('id'));
+		$team->readLeague($division->getData('id'));
+		// array_slice($player->getData(), 0, 3)
+		
+		echo '<pre>';
+		print_r($player);
+		print_r($team);
+		echo '</pre>';
+		exit;
+		
 
-echo '<pre>';
-print_r($press);
-echo '</pre>';
-exit;
+
 
 
 		if ($this->config->getUrl(1)) {

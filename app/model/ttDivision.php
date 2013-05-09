@@ -47,14 +47,19 @@ class Model_Ttdivision extends Model
 	}
 	
 	
-		
-	
-
-	
-	
-
-	
-	
+	public function readByName($name) {	
+		$sth = $this->database->dbh->prepare("	
+			select
+				tt_division.id
+				, tt_division.name
+			from tt_division
+			where tt_division.name like ?
+			limit 1
+		");
+		$sth->execute(array('%' . $name . '%'));
+		$this->data = $sth->fetch(PDO::FETCH_ASSOC);
+		return $sth->rowCount();
+	}	
 
 	
 }
