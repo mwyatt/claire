@@ -41,8 +41,8 @@ class Controller_Front extends Controller
 	}
 
 
-	public function result() {
-		$this->load(array('front', 'result'), $this->config->getUrl(1), $this->view, $this->database, $this->config);
+	public function division() {
+		$this->load(array('front', 'division'), $this->config->getUrl(1), $this->view, $this->database, $this->config);
 	}
 
 

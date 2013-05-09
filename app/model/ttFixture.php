@@ -404,30 +404,29 @@ class Model_Ttfixture extends Model
 		$sth = $this->database->dbh->prepare("	
 			select
 				tt_fixture_result.fixture_id as id
+				, team_left.id as team_left_id
 				, team_left.name as team_left_name
 				, tt_fixture_result.left_score
 				, team_right.name as team_right_name
+				, team_right.id as team_right_id
 				, tt_fixture_result.right_score
 				, tt_fixture.date_fulfilled
-
 			from tt_fixture_result
-
 			left join tt_team as team_left on team_left.id = tt_fixture_result.left_id
-
 			left join tt_team as team_right on team_right.id = tt_fixture_result.right_id
-
 			left join tt_division on team_left.division_id = tt_division.id
-
 			left join tt_fixture on tt_fixture.id = tt_fixture_result.fixture_id
-
-			where team_left.division_id = :division_id
-
+			where team_left.division_id = ?
 			group by tt_fixture_result.fixture_id
-
 			order by tt_fixture.date_fulfilled desc
 		");
 
-		$sth->execute(array(':division_id' => $divisionId));
+		$sth->execute($divisionId);
+echo '<pre>';
+		print_r($sth->fetchAll(PDO::FETCH_ASSOC));
+		echo '</pre>';
+		exit;
+				
 
 		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {	
 			$row['guid'] = $this->getGuid($row);
