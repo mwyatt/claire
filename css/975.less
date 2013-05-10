@@ -1,3 +1,40 @@
 .fixture .card {
 	width: 20.9%;
 }
+
+.content.division.overview table.summary {
+	display: table;
+	table-layout: fixed;
+	color: darken(@white, 15%);
+	font-size: 1em;
+	font-weight: bold;
+	margin: 0 0 2em;
+
+	tr:first-child th {
+		// .rotate (-90deg);
+	}
+
+	th {
+		text-align: left;
+	}
+
+	th, td {
+		border: 1px solid;
+		text-align: center;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		padding: 0.6em;
+	}
+
+	.cant-play {
+		background-color: darken(@white, 5%);
+	}
+
+	.played a {
+		color: darken(@white, 50%);
+		text-decoration: underline;
+	}
+
+	.not-played {}
+}

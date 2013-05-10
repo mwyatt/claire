@@ -400,7 +400,6 @@ class Model_Ttfixture extends Model
 	}
 
 	public function readResult($divisionId) {
-
 		$sth = $this->database->dbh->prepare("	
 			select
 				tt_fixture_result.fixture_id as id
@@ -420,27 +419,13 @@ class Model_Ttfixture extends Model
 			group by tt_fixture_result.fixture_id
 			order by tt_fixture.date_fulfilled desc
 		");
-
-		$sth->execute($divisionId);
-echo '<pre>';
-		print_r($sth->fetchAll(PDO::FETCH_ASSOC));
-		echo '</pre>';
-		exit;
-				
-
+		$sth->execute(array($divisionId));
 		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {	
-			$row['guid'] = $this->getGuid($row);
+			$row['guid'] = $this->getGuid('fixture', $row['team_left_name'] . '-' . $row['team_right_name'], $row['id']);
 			$this->data[] = $row;
 		}
-
 		return $this;
-
 	}
-
-	// public function getGuid($row) {
-	// 	return $this->config->getUrl('base') . 'fixture/' . $this->urlFriendly($row['team_left_name']) . '-vs-' . $this->urlFriendly($row['team_right_name']) . '-' . $row['id'] . '/';
-	// }
-
 
 	
 }

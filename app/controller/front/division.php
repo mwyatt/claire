@@ -14,91 +14,81 @@ class Controller_Front_Division extends Controller
 {
 
 
-	public function index() {
+	public function initialise() {
 		$division = new Model_Ttdivision($this->database, $this->config);
-		if (! $division->readByName($this->config->getUrl(1))) {
+		if (! $division->readByName($this->config->getUrl(1)) || ! $this->config->getUrl(1)) {
 			$this->route('base');
 		}
+		$this->view
+			->setObject('division', $division->getData());
+	}
+
+
+	public function merit() {
+		$division = $this->view->getObject('division');
 		$player = new Model_Ttplayer($this->database, $this->config);
-		$team = new Model_Ttteam($this->database, $this->config);
-		$fixtureResult = new Model_Ttfixture_Result($this->database, $this->config);
-		$player->readMerit($division->getData('id'));
-		$team->readLeague($division->getData('id'));
-		// array_slice($player->getData(), 0, 3)
-		
-		echo '<pre>';
-		print_r($player);
-		print_r($team);
-		echo '</pre>';
-		exit;
-		
-
-
-
-
-		if ($this->config->getUrl(1)) {
-			if (! $press->readById($this->getId($this->config->getUrl(1)))) {
-				$this->route('base', 'press/');
-			}
-			$this->view
-				->setMeta(array(		
-					'title' => $press->get('title')
-					, 'keywords' => $press->get('meta_keywords')
-					, 'description' => $press->get('meta_description')
-				))
-				->setObject($press)
-				->loadTemplate('press-single');
-		}
-		$press->readByType('press');
+		$player->readMerit($division['id']);
 		$this->view
 			->setMeta(array(		
-				'title' => 'All press'
-				, 'keywords' => 'press, reports'
-				, 'description' => 'All press currently published'
+				'title' => $division['name'] . ' division merit table'
 			))
-			->setObject($press)
-			->loadTemplate('press');
+			->setObject($player)
+			->loadTemplate('merit');
+	}
 
 
+	public function league() {
+		$division = $this->view->getObject('division');
+		$team = new Model_Ttteam($this->database, $this->config);
+		$team->readLeague($division['id']);
+		$this->view
+			->setMeta(array(		
+				'title' => $division['name'] . ' division league table'
+			))
+			->setObject($team)
+			->loadTemplate('league');
+	}
 
 
+	public function fixture() {
+		$division = $this->view->getObject('division');
+		$fixture = new Model_Ttfixture($this->database, $this->config);
+		$fixture->readResult($division['id']);
+		$this->view
+			->setMeta(array(		
+				'title' => $division['name'] . ' division league table'
+			))
+			->setObject($fixture)
+			->loadTemplate('fixture');
+	}
 
 
-
-		$ttPlayer = new ttPlayer($database, $config);
-		$ttTeam = new ttTeam($database, $config);
-		$ttFixture = new ttFixture($database, $config);
-		$ttEncounterPart = new ttEncounterPart($database, $config);
-		$ttDivision->setData($division);
-
-		$view
-			->setObject($ttDivision);
-
-		if ($config->getUrl(2)) {
-			if ($config->getUrl(2) == 'merit') {
-				$ttPlayer->readMerit($ttDivision->get('id'));
-				$view
-					->setObject($ttPlayer)
-					->loadTemplate('merit');
-			}
-			if ($config->getUrl(2) == 'league') {
-				$ttTeam->readLeague($ttDivision->get('id'));
-				$view
-					->setObject($ttTeam)
-					->loadTemplate('league');
-			}
-			if ($config->getUrl(2) == 'fixture') {
-				$ttFixture->readResult($ttDivision->get('id'));
-				$view
-					->setObject($ttFixture)
-					->loadTemplate('fixture');
+	/**
+	 * divisional overview, skips to merit, league if required
+	 * @todo improve the way this moves to the next url segment
+	 * @return [type] [description]
+	 */
+	public function index() {
+		if ($segment = $this->config->getUrl(2)) {
+			if (method_exists($this, $segment)) {
+				$this->$segment();
 			}
 		}
-		 
-		$ttPlayer->read();
-
-		$view
-			->setObject($ttPlayer)
+		$division = $this->view->getObject('division');
+		$player = new Model_Ttplayer($this->database, $this->config);
+		$team = new Model_Ttteam($this->database, $this->config);
+		if ($player->readMerit($division['id'])) {
+			$this->view
+				->setObject('player', array_slice($player->getData(), 0, 3));
+		}
+		if ($team->readLeague($division['id'])) {
+			$this->view
+				->setObject('team', array_slice($team->getData(), 0, 3));
+		}
+		$this->view
+			->setMeta(array(		
+				'title' => $division['name'] . ' division overview'
+			))
 			->loadTemplate('division');
 	}
 

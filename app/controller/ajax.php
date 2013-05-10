@@ -20,7 +20,18 @@ class Controller_Ajax extends Controller
 	}
 
 	
-	public function division() {}
+	public function division() {
+		if (array_key_exists('summary', $_GET)) {
+			$team = new Model_Ttteam($this->database, $this->config);
+			$fixture = new Model_Ttfixture($this->database, $this->config);
+			$team->readByDivision($_GET['summary']);
+			$fixture->readResult($_GET['summary']);
+			$this->out(array(
+				'result' => $fixture->getData()
+				, 'team' => $team->getData()
+			));
+		}
+	}
 
 	
 	public function ttFixtureResult() {

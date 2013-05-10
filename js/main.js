@@ -80,6 +80,15 @@ var resize = {
 			$(search.container).off();
 			$(navSub.container).off();
 		}
+		if (resize.docWidth > 975) {
+			if ($('.content.division.overview').length) {
+				division.container = '.content.division.overview';
+				division.readResultSummary($('.content.division.overview').data('division-id'));
+			};
+		} else {
+			// $(search.container).off();
+			// $(navSub.container).off();
+		}
 	},
 
 	setDocWidth: function() {
@@ -175,9 +184,53 @@ var navSub = {
 	}
 }
 
+var division = {
+	container: false,
+
+	readResultSummary: function(id) {
+		if ($(division.container).find('table.summary').length) {
+			return false;
+		};
+		$.getJSON(url.base + '/ajax/division/?summary=' + id, function(data) {
+			if (data) {
+				var resultFound;
+				var htmlHeading = '';
+				var htmlRows = '';
+				var html = '<table class="main summary" width="100%" cellspacing="0" cellpadding="0"><tr><th></th>';
+				$.each(data['team'], function(index, team) {
+					html += '<th><a href="' + team.guid + '" title="' + team.name + '">' + team.name + '</a></th>';
+				});
+				html += '</tr>';
+				$.each(data['team'], function(index, teamRow) {
+					html += '<tr><th><a href="' + teamRow.guid + '" title="' + teamRow.name + '">' + teamRow.name + '</a></th>';
+					$.each(data['team'], function(index2, team) {
+						if (teamRow.id == team.id) {
+							html += '<td class="cant-play"></td>';
+						} else {
+							resultFound = false;
+							$.each(data['result'], function(index3, result) {
+								if (result.team_left_id == teamRow.id && result.team_right_id == team.id) {
+									html += '<td class="played"><a href="' + result.guid + '" title="' + result.team_left_name + ' vs ' + result.team_right_name + '">' + result.left_score + ' - ' + result.right_score + '</a></td>';
+									resultFound = true;
+								};
+							});
+							if (! resultFound) {
+								html += '<td class="not-played"></td>';
+							}
+						}
+					});
+					html += '</tr>';
+				});
+				html += '</table>';
+				$(division.container).find('h1').after(html);
+			}
+		});
+	}
+}
+
 var player = {
 
-	getSingle: function() {
+	readSingle: function() {
 		$.getJSON(url.base + '/ajax/search/?query=' + $(search.input).val() + '&limit=5', function(results) {
 			if (results) {
 				// console.log(results);
@@ -189,7 +242,7 @@ var player = {
 		});
 	},
 
-	getFixture: function() {
+	readFixture: function() {
 		$.getJSON(url.base + '/ajax/tt-fixture-result/?method=readByPlayerId&player_id=' + $('.content.player.single').data('id'), function(results) {
 			if (results) {
 				$.each(results, function(index, result) {
@@ -206,7 +259,7 @@ var player = {
 		});
 	},
 
-	getRankChange: function() {
+	readRankChange: function() {
 		$.getJSON(url.base + '/ajax/tt-encounter-part/?method=readRankChange&player_id=' + $('.content.player.single').data('id'), function(result) {
 			if (result) {
 				$('.content.player.single').find('.performance').prepend('<span class="total">' + result['player_rank_change'] + '</span>');
@@ -219,7 +272,7 @@ var player = {
 		});
 	},
 
-	getPerformance: function() {
+	readPerformance: function() {
 		var side = '';
 		var otherSide = '';
 		var victor = '';
@@ -314,119 +367,8 @@ $(document).ready(function() {
 	  return this;
 	};
 	if ($('.content.player.single').length) {
-		player.getRankChange();
-		player.getPerformance();
-		player.getFixture();
+		player.readRankChange();
+		player.readPerformance();
+		player.readFixture();
 	};
-	// $('header').find('div.search').find('form').on('click', clickprevent);
-	// $('header').find('nav.main').find('ul').on('click', clickprevent);
-	// function resize() {
-	// 	var documentWidth;
-	// 	var scale_mobile_portrait = 320;
-	// 	var scale_mobile_landscape = 480;
-	// 	var scale_tablet_portrait = 600;
-	// 	var scale_tablet_landscape = 1024;
-	// 	var scale_desktop = 1382;
-
-	// 	this.poll;
-	// 	this._scale_tablet_portrait;
-	// 	this.timer;
-
-	// 	this.poll = function() {
-
-	// 		documentWidth = document.documentElement.clientWidth;
-	// 		$('header').find('nav.main').off();
-	// 		$('header').find('div.search').off();
-	// 		$('header').find('nav.main').find('div').off();
-
-	// 		if (documentWidth < scale_mobile_landscape+1) {
-	// 			$('header').find('nav.main').on('click', menu.activateIcon);
-	// 			$('header').find('div.search').on('click', menu.activateIcon);
-	// 			$('header').find('nav.main').find('div').on('click', menu.activateSub);
-	// 		}
-
-	// 		if (documentWidth > scale_tablet_portrait) {
-	// 			$('header').find('.active').removeClass('active');
-	// 		}
-
-	// 	}
-	// }
-	// var menu = new menu();
-	// var resize = new resize;
-	// resize.poll();
-	// $(window).resize(function() {
-	// 	clearTimeout(resize.timer);
-	// 	resize.timer = setTimeout(resize.poll, 200);
-	// });
-
-
-
-
-
-	// function accordion() {
-	// 	var accordions = $('.accordion');
-	// 	this.h2 = $(accordions).find('h2');
-	// 	this._close_all;
-	// 	this._open = function() {
-	// 		var parent = $(this).parent();
-	// 		var sections = $(accordions).find('div');
-	// 		var section = $(parent).find('div').html('');
-	// 		if ($(parent).hasClass('active')) {
-	// 			$(parent).removeClass('active');
-	// 			$(sections).html('');
-	// 		} else {
-	// 			$(sections).html('');
-	// 			$(accordions).removeClass('active');
-	// 			$(parent).addClass('active');
-	// 			$(parent).spin(opts);
-
-	// 			if ($(parent).hasClass('press')) {
-	// 				$.getJSON(url.base + '/ajax/main-content?type=press&limit=3', function(results) {
-	// 					if (results) {
-	// 						$.each(results, function(index, result) {
-	// 							var d = new Date(0);
-	// 							d.setUTCSeconds(result.date_published);
-	// 							$(section).append('<a href="'+url.base + 'post/'+result.title_slug+'/">'+result.title+'<span>'+d.getUTCDate()+'/'+d.getUTCMonth()+'/'+d.getUTCFullYear()+'</span></a>');
-	// 						});
-	// 					}
-	// 					$(parent).spin(false);
-	// 				});
-	// 			}
-
-	// 			if ($(parent).hasClass('player')) {
-	// 				$.getJSON(url.base + '/ajax/player/?team_id='+$(parent).data('team-id'), function(results) {
-	// 					$(parent).spin(opts);
-	// 					if (results) {
-	// 						$.each(results, function(index, result) {
-	// 							$(section).append('<a href="'+result.guid+'">'+result.full_name+'</a>');
-	// 						});
-	// 					}
-	// 					$(parent).spin(false);
-	// 				});
-	// 			}
-
-	// 			if ($(parent).hasClass('progress')) {
-	// 				$.getJSON(url.base + '/ajax/encounter-part/?method=row&player_id='+$(parent).data('player-id'), function(results) {
-	// 					$(parent).spin(opts);
-	// 					if (results) {
-	// 						$.each(results, function(index, result) {
-	// 							$(section).append('<div>'+result.player_rank_change+'</div>');
-	// 						});
-	// 					}
-	// 					$(parent).spin(false);
-	// 				});
-	// 			}
-
-	// 		}
-	// 	}
-	// }
-	// var accordion = new accordion;
-	// $(accordion.h2).on('click', accordion._open);
-	// if ($('.content.player.single').length) {
-	// 	$.getJSON(url.base + '/ajax/encounter-part/?method=group&player_id='+$('.accordion.progress').data('player-id'), function(result) {
-	// 		if (result)
-	// 			$('.accordion.progress').append('<span>'+result[0].player_rank_change+'</span>');
-	// 			$('.accordion.progress > span').fadeIn(500);
-	// 	});
-	// }
 });

@@ -1,13 +1,12 @@
 <?php require_once($this->pathView() . 'header.php'); ?>
 
-<div class="content merit">
-	
-	<h1><?php echo $modelTtdivision->get('name') ?> Divsion Merit</h1>
+<div class="content division merit">
+	<h1><?php echo ucfirst($this->get('division', 'name')) ?> division merit</h1>
+	<a href="<?php echo $this->url('back') ?>" class="button">Back to overview</a>
 
-	<?php if ($modelTtplayer->getData()) : ?>	
+<?php if ($this->get('model_ttplayer')) : ?>
 
-	<table width="100%" cellspacing="0" cellpadding="0">
-
+	<table class="main" width="100%" cellspacing="0" cellpadding="0">
 		<tr>
 			<th class="full_name">Name</th>
 			<th class="team">Team</th>
@@ -17,25 +16,27 @@
 			<th class="average">Average</th>
 		</tr>
 
-		<?php while ($modelTtplayer->nextRow()) : ?>
+	<?php foreach ($this->get('model_ttplayer') as $player): ?>
 
 		<tr>
 			<td class="full_name">
-				<a href="<?php echo $modelTtplayer->getRow('guid'); ?>" title="View Player <?php echo $modelTtplayer->getRow('full_name'); ?>"><?php echo $modelTtplayer->getRow('full_name'); ?></a>
+				<a href="<?php echo $this->get($player, 'guid'); ?>" title="View player <?php echo $this->get($player, 'full_name'); ?>"><?php echo $this->get($player, 'full_name'); ?></a>
 			</td>
-			<td class="team"><?php echo $modelTtplayer->getRow('team_name'); ?></td>
-			<td class="rank"><?php echo $modelTtplayer->getRow('rank'); ?></td>
-			<td class="won"><?php echo $modelTtplayer->getRow('won'); ?></td>
-			<td class="played"><?php echo $modelTtplayer->getRow('played'); ?></td>
-			<td class="average"><?php echo $modelTtplayer->getRow('average'); ?></td>
+			<td class="team">
+				<a href="<?php echo $this->get($player, 'team_guid'); ?>" title="View team <?php echo $this->get($player, 'team_name'); ?>"><?php echo $this->get($player, 'team_name'); ?></a>
+			</td>
+			<td class="rank"><?php echo $this->get($player, 'rank'); ?></td>
+			<td class="won"><?php echo $this->get($player, 'won'); ?></td>
+			<td class="played"><?php echo $this->get($player, 'played'); ?></td>
+			<td class="average"><?php echo $this->get($player, 'average'); ?></td>
 		</tr>		
 
-		<?php endwhile; ?>
+	<?php endforeach ?>
 
 	</table>
 	
-	<?php endif; ?>	
+<?php endif; ?>	
 
-</div> <!-- styling aid -->
+</div>
 
 <?php require_once($this->pathView() . 'footer.php'); ?>

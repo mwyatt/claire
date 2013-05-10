@@ -1,7 +1,7 @@
 <?php require_once('header.php'); ?>
 
 <div class="cover">
-	<a href="#" class="inner clearfix">
+	<a href="gallery/" class="inner clearfix">
 		<h1>Photo Gallery</h1>
 		<p>View photos from the recent 2013 tournament.</p>
 		<span class="button">Go</span>

@@ -61,5 +61,24 @@ class Model_Ttdivision extends Model
 		return $sth->rowCount();
 	}	
 
+
+	// public function readSummary() {	
+	
+	// 	$sth = $this->database->dbh->query("	
+	// 		select
+	// 			tt_division.id
+	// 			, tt_division.name
+	// 		from
+	// 			tt_division
+	// 		order by
+	// 			tt_division.id
+	// 	");
+		
+	// 	while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {	
+	// 		$this->data[] = $row;
+	// 	}	
+
+	// }	
+
 	
 }

@@ -359,32 +359,26 @@ class Model_Ttteam extends Model
 	}
 	
 
-	/**
-	 * pull team data for a single division
-	 * @param  int $division_id 
-	 * @return object              
-	 */
-	public function readByDivision($division_id) {
-
-		$sth = $this->database->dbh->query("	
+	public function readByDivision($id) {
+		$sth = $this->database->dbh->prepare("	
 			select
-				t.id
-				, t.name
-			from tt_team as t
-			where t.division_id = '$division_id'
-			group by t.id
-			order by t.name asc
+				tt_team.id
+				, tt_team.name
+			from tt_team
+			where tt_team.division_id = ?
+			group by tt_team.id
+			order by tt_team.name asc
 		");
-
-		$this->setDataStatement($sth);
-
+		$sth->execute(array($id));
+		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {	
+			$row['guid'] = $this->getGuid('team', $row['name'], $row['id']);
+			$this->data[] = $row;
+		}
 		return $this;
-
 	}
 
 
 	public function readLeague($divisionId) {
-
 		$sth = $this->database->dbh->prepare("	
 			select
 				tt_team.id
@@ -394,26 +388,25 @@ class Model_Ttteam extends Model
 				, sum(case when tt_fixture_result.left_id = tt_team.id and tt_fixture_result.left_score < tt_fixture_result.right_score or tt_fixture_result.right_id = tt_team.id and tt_fixture_result.right_score < tt_fixture_result.left_score then 1 else 0 end) as lost
 				, count(tt_fixture_result.fixture_id) as played
 				, (sum(case when tt_fixture_result.left_id = tt_team.id then tt_fixture_result.left_score else 0 end) + sum(case when tt_fixture_result.right_id = tt_team.id then tt_fixture_result.right_score else 0 end)) as points
-
 			from tt_team
-
 			left join tt_fixture_result on tt_fixture_result.left_id = tt_team.id or tt_fixture_result.right_id = tt_team.id
-
 			where tt_team.division_id = :division_id
-
 			group by tt_team.id
-
 			order by points desc
 		");
-
 		$sth->execute(array(':division_id' => $divisionId));
-
 		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {	
 			$row['guid'] = $this->getGuid('team', $row['name'], $row['id']);
-			$this->data[] = $row;
+			if ($row['points']) {
+				$this->data[] = $row;
+			}
 		}
-
-		return $this;
-
+		if ($this->data) {
+			return $this->data;
+		} else {
+			return false;
+		}
 	}
+
+
 }
