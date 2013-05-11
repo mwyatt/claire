@@ -86,7 +86,7 @@ try {
 			tt_archive
 			(
 				id INT UNSIGNED NOT NULL AUTO_INCREMENT
-				, season VARCHAR(20) NOT NULL
+				, title VARCHAR(20) NOT NULL DEFAULT ''
 				, html VARCHAR(8000) DEFAULT ''
 				, PRIMARY KEY (id)
 			)		

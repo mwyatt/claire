@@ -124,14 +124,6 @@ try {
 
 	$database->dbh->query("
 		INSERT INTO
-			tt_archive
-			(season, html)
-		VALUES
-			('2011', '<h1>Example Content</h1>')
-	");	
-
-	$database->dbh->query("
-		INSERT INTO
 			tt_division
 			(name)
 		VALUES

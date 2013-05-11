@@ -30,6 +30,7 @@ if ($session->get('installing')) {
 	require_once(BASE_PATH . 'install-table.php');
 	require_once(BASE_PATH . 'install-tabledata.php');
 	require_once(BASE_PATH . 'install-tabledata-maincontent.php');
+	require_once(BASE_PATH . 'install-tabledata-ttarchive.php');
 	$ttfixture = new Model_Ttfixture($database, $config);
 	$ttfixture->generateAll();
 	$session->getUnset('installing');
