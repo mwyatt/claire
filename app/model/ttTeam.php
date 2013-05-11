@@ -113,46 +113,40 @@ class Model_Ttteam extends Model
 	 * @param  int $id 
 	 * @return bool     
 	 */
-	public function readById($id)
+	public function readById($ids)
 	{	
-
-		$sth = $this->database->dbh->prepare("
-
+		$sth = $this->database->dbh->prepare("	
 			select
 				tt_team.id
 				, tt_team.name
 				, tt_team.home_night
+				, count(tt_player.id) as player_count
 				, tt_venue.id as venue_id
 				, tt_venue.name as venue_name
 				, tt_division.id as division_id
 				, tt_division.name as division_name
-
-			from
-				tt_team
-
+			from tt_team
+			left join tt_player on tt_player.team_id = tt_team.id
 			left join tt_division on tt_team.division_id = tt_division.id
 			left join tt_venue on tt_team.venue_id = tt_venue.id
-			
-			where
-				tt_team.id = :id
-
-			group by
-				tt_team.id
-
-		");				
-		
-		$sth->execute(array(
-			':id' => $id
-		));
-
-		if ($this->setDataStatement($sth))
-
-			return true;
-
-		else
-
-			return false;
-
+			where tt_team.id = ?
+			group by tt_team.id
+			order by tt_division.id, tt_team.name
+		");
+		foreach ($ids as $id) {
+			$sth->execute(array($id));
+			$team = $sth->fetch(PDO::FETCH_ASSOC);
+			$teams[$team['id']] = $team;
+			$teams[$team['id']]['home_night'] = self::$weekDays[$team['home_night']];
+			$teams[$team['id']]['guid'] = $this->getGuid('team', $team['name'], $team['id']);
+		}
+		if (count($teams) == 1) {
+			$teams = current($teams);
+		}
+		if (! empty($teams)) {
+			return $this->data = $teams;
+		}
+		return $sth->rowCount();
 	}	
 
 

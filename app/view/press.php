@@ -8,11 +8,11 @@
 
 	<article>
 		<header>
-			<h2><a href="<?php echo $this->get($press, 'guid'); ?>"><?php echo $this->get($press, 'title'); ?></a></h2>
+			<h2><a href="<?php echo $this->get($press, 'guid'); ?>"><?php echo ucfirst($this->get($press, 'title')) ?></a></h2>
 		</header>
-		<p><?php echo $this->get($press, 'html'); ?></p>
+		<p><?php echo strip_tags(substr($this->get($press, 'html'), 0, 150)) ?></p>
 		<footer>
-			<a class="read-more" href="<?php echo $this->get($press, 'guid'); ?>">Read full press</a>
+			<a class="read-more" href="<?php echo $this->get($press, 'guid'); ?>">Read full report</a>
 			<span class="date"><?php echo date('D jS F Y', $this->get('model_maincontent', 'date_published')) ?></span>
 		</footer>
 	</article>

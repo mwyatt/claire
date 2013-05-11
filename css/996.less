@@ -1,5 +1,6 @@
 .cover {
-	background-color: darken(@white, 50%);
+	background-image: url('../img/cover-bg.png');
+	background-repeat: repeat;
 }
 
 .cover .inner {
@@ -30,5 +31,80 @@
 	.button {
 		display: block;
 		text-align: center;
+	}
+}
+
+nav.main {
+	position: relative;
+	font-size: 1.2em;
+
+	li > a {
+		border-top: none;
+		border-left: 1px solid darken(@orange, 5%);
+		display: inline;
+		width: 31%;
+		float: left;
+		padding: 1.1%;
+	}
+
+	div[class^="division"] {
+		float: left;
+		width: 11.8em;
+
+		h4 {
+			border: none;
+		}
+	}
+
+	.drop {
+		.box-shadow (0 2px 4px rgba(0,0,0,0.2));
+		position: absolute;
+		top: 2.4em;
+		left: 0;
+		width: 50em;
+	}
+}
+
+footer.main {
+	background-image: url('../img/cover-bg.png');
+	background-repeat: repeat;
+
+	.inner {
+		padding: 1em;
+		background-color: lighten(@black, 20%);
+		max-width: 58em;
+	}
+
+	nav {
+		margin: 0 0 2em 0;
+
+		a:first-child {
+			margin-left: 0;
+			padding-left: 0;
+			border: none;
+		}
+
+		a {
+			border: none;
+			border-left: 1px solid darken(@white, 70%);
+			padding: 0 0 0 1em;
+			margin: 0 .5em;
+			display: inline;
+			background-color: transparent;
+			text-decoration: underline;
+			color: @white;
+			font-size: .9em;
+		}
+	}
+
+	.address a {
+		font-size: 1.1em;
+		margin: 0 0 1em;
+	}
+
+	.address a,
+	.address {
+		line-height: 1.7em;
+		color: darken(@white, 10%);
 	}
 }

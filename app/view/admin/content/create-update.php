@@ -1,18 +1,18 @@
 <?php require_once($this->pathView() . 'admin/header.php'); ?>
 
-<div class="content <?php echo $this->urlSegment(2); ?> <?php echo ($this->get('model_maincontent') ? 'update' : 'create'); ?>" data-id="<?php echo $this->get('model_maincontent', 'id'); ?>">
-	<h1><?php echo ($this->get('model_maincontent') ? 'Update ' . ucfirst($this->urlSegment(2)) . ' ' . $this->get('model_maincontent', 'title') : 'Create new ' . ucfirst($this->urlSegment(2))); ?></h1>
+<div class="content <?php echo $this->urlSegment(2); ?> <?php echo ($this->get('model_admin_maincontent') ? 'update' : 'create'); ?>" data-id="<?php echo $this->get('model_admin_maincontent', 'id'); ?>">
+	<h1><?php echo ($this->get('model_admin_maincontent') ? 'Update ' . ucfirst($this->urlSegment(2)) . ' ' . $this->get('model_admin_maincontent', 'title') : 'Create new ' . ucfirst($this->urlSegment(2))); ?></h1>
 	<form class="main" method="post"<?php echo ($this->urlSegment(2) == 'minutes' ? ' enctype="multipart/form-data"' : ''); ?>>
 		<div class="row">	
 			<label class="above" for="form_title">Title</label>
-			<input id="form_title" class="required" type="text" name="title" maxlength="75" value="<?php echo $this->get('model_maincontent', 'title'); ?>">
+			<input id="form_title" class="required" type="text" name="title" maxlength="75" value="<?php echo $this->get('model_admin_maincontent', 'title'); ?>">
 		</div>			
 
 <?php if ($this->urlSegment(2) != 'minutes'): ?>
 
 		<div class="row">
 			<label class="above" for="form_meta_title">Meta Title</label>
-			<input id="form_meta_title" type="text" name="meta_title" maxlength="75" value="<?php echo $this->get('model_maincontent', 'meta_title'); ?>">
+			<input id="form_meta_title" type="text" name="meta_title" maxlength="75" value="<?php echo $this->get('model_admin_maincontent', 'meta_title'); ?>">
 		</div>
 
 		<div class="row">
@@ -55,7 +55,7 @@
 					<a class="button" data-wysihtml5-dialog-action="save">OK</a>&nbsp;<a class="button" data-wysihtml5-dialog-action="cancel">Cancel</a>
 				</div>
 			</div>
-			<textarea id="form_html" name="html"><?php echo $this->get('model_maincontent', 'html'); ?></textarea>
+			<textarea id="form_html" name="html"><?php echo $this->get('model_admin_maincontent', 'html'); ?></textarea>
 		</div>
 
 <?php endif ?>
@@ -75,7 +75,7 @@
 				
 	<?php foreach ($this->get('model_mainmedia') as $media): ?>
 		
-				<div><a href="<?php echo $this->get($media, 'guid') ?>" target="_blank"><?php echo $this->get($media, 'filename') ?></a></div>
+				<div><a href="<?php echo $this->get($media, 'guid') ?>" target="_blank"><?php echo $this->get($media, 'path') ?></a></div>
 
 	<?php endforeach ?>
 
@@ -87,9 +87,9 @@
 
 		<div class="row">
 			<label for="status">Show on website</label>
-			<input id="status" type="checkbox" name="status" value="visible"<?php echo ($this->get('model_maincontent', 'status') == 'visible' ? ' checked' : ''); ?>>
+			<input id="status" type="checkbox" name="status" value="visible"<?php echo ($this->get('model_admin_maincontent', 'status') == 'visible' ? ' checked' : ''); ?>>
 		</div>
-		<input name="form_<?php echo ($this->get('model_maincontent') ? 'update' : 'create'); ?>" type="hidden" value="true">
+		<input name="form_<?php echo ($this->get('model_admin_maincontent') ? 'update' : 'create'); ?>" type="hidden" value="true">
 		<input name="type" type="hidden" value="<?php echo $this->urlSegment(2); ?>">
 		<a href="#" class="submit button">Save</a>
 		<input type="submit">

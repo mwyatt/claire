@@ -228,7 +228,54 @@ var division = {
 	}
 }
 
+var fixtureResult = {
+
+	readByTeam: function() {
+	$.getJSON(url.base + '/ajax/tt-fixture-result/?method=readByTeam&action=' + $('.content.team.single').data('id'), function(results) {
+			if (results) {
+				console.log(results);
+				$.each(results, function(index, result) {
+					$('.content.team.single').find('.fixture').append(
+						'<a href="' + result.guid + '" class="card clearfix">'
+							+ '<div class="team-left">' + result.team_left_name + '</div>'
+							+ '<div class="score-left">' + result.team_left_score + '</div>'
+							+ '<div class="team-right">' + result.team_right_name + '</div>'
+							+ '<div class="score-right">' + result.team_right_score + '</div>'
+						+ '</div>'
+					);
+				});
+			}
+		});
+	}
+}
+
 var player = {
+	container: false,
+
+	readByTeam: function() {
+		if ($('.content.team.single').find('.players').length) {
+			return false;
+		} else {
+			$('.content.team.single').find('.general-stats').after(
+				'<div class="players clearfix">'
+					+ '<h2>Registered players</h2>'
+					+ '<div class="ajax"></div>'
+				+ '</div>'
+			);
+		}
+		$.getJSON(url.base + '/ajax/player/?team_id=' + $('.content.team.single').data('id'), function(results) {
+			if (results) {
+				console.log(results);
+				$('.ajax').remove();
+				html = '<ul>';
+				$.each(results, function(index, result) {
+					html += '<li><a href="' + result.guid + '" title="View player ' + result.name + '">' + result.name + '</a></li>';
+				});
+				html += '</ul>';
+				$('.content.team.single').find('.players').find('h2').after(html);
+			}
+		});
+	},
 
 	readSingle: function() {
 		$.getJSON(url.base + '/ajax/search/?query=' + $(search.input).val() + '&limit=5', function(results) {
@@ -251,7 +298,7 @@ var player = {
 							+ '<div class="team-left">' + result.team_left_name + '</div>'
 							+ '<div class="score-left">' + result.team_left_score + '</div>'
 							+ '<div class="team-right">' + result.team_right_name + '</div>'
-							+ '<div class="score-right">' + result.team_left_score + '</div>'
+							+ '<div class="score-right">' + result.team_right_score + '</div>'
 						+ '</div>'
 					);
 				});
@@ -370,5 +417,9 @@ $(document).ready(function() {
 		player.readRankChange();
 		player.readPerformance();
 		player.readFixture();
+	};
+	if ($('.content.team.single').length) {
+		player.readByTeam();
+		fixtureResult.readByTeam();
 	};
 });

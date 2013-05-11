@@ -51,9 +51,7 @@ class Model_Mainmedia extends Model
 		$sth = $this->database->dbh->query("	
 			select
 				id
-				, filename
-				, basename
-				, type
+				, path
 				, date_published
 				, user_id
 			from main_media
@@ -140,16 +138,12 @@ class Model_Mainmedia extends Model
 		$files = $this->tidyFiles($files['media']);
 		$sthMedia = $this->database->dbh->prepare("
 			insert into main_media (
-				filename
-				, basename
-				, type
+				path
 				, date_published
 				, user_id
 			)
 			values (
-				:filename
-				, :basename
-				, :type
+				:path
 				, :date_published
 				, :user_id
 			)
@@ -203,9 +197,7 @@ class Model_Mainmedia extends Model
 			}
 
 			$sthMedia->execute(array(
-				':filename' => $fileInformation['filename']
-				, ':basename' => $fileInformation['basename']
-				, ':type' => $file['type']
+				':path' => $fileInformation['basename']
 				, ':date_published' => time()
 				, ':user_id' => $this->session->get('user', 'id')
 			));
@@ -333,42 +325,42 @@ class Model_Mainmedia extends Model
 	/**
 	  *	@returns result rows or false
 	  */
-	public function create()
-	{	
-		echo '<pre>';
-		print_r($this->upload);
-		echo '</pre>';
-		exit;
+	// public function create()
+	// {	
+	// 	echo '<pre>';
+	// 	print_r($this->upload);
+	// 	echo '</pre>';
+	// 	exit;
 		
 
-		$PDO = Database::getInstance(); // instance
-		$SQL = "	
-			INSERT INTO
-				media
-					(title, title_slug, alt, type, filename, user_id)			
-				VALUE
-					(:title, :title_slug, :alt, :type, :filename, :user_id)			
-		";	
+	// 	$PDO = Database::getInstance(); // instance
+	// 	$SQL = "	
+	// 		INSERT INTO
+	// 			media
+	// 				(title, title_slug, alt, type, filename, user_id)			
+	// 			VALUE
+	// 				(:title, :title_slug, :alt, :type, :filename, :user_id)			
+	// 	";	
 
 		
-		$count = 0;
+	// 	$count = 0;
 	
-		foreach ($this->getUpload() as $file) {
+	// 	foreach ($this->getUpload() as $file) {
 		
 
 		
-			$STH = $PDO->dbh->prepare($SQL);
+	// 		$STH = $PDO->dbh->prepare($SQL);
 			
  
-			$STH->execute($file); // execute
+	// 		$STH->execute($file); // execute
 
-			$count += $STH->rowCount();
+	// 		$count += $STH->rowCount();
 			
-		}	
+	// 	}	
 			
-		return true;
+	// 	return true;
 			
-	}
+	// }
 	
 	
 	/**
@@ -376,78 +368,78 @@ class Model_Mainmedia extends Model
 	 * @param  int $id 
 	 * @return bool     
 	 */
-	public function deleteById($id)
-	{	
+	// public function deleteById($id)
+	// {	
 	
-		// are you tied to any posts?
+	// 	// are you tied to any posts?
 
-		$sth = $this->database->dbh->prepare("
+	// 	$sth = $this->database->dbh->prepare("
 
-			select
-				main_content_media.id
-			from
-				main_content_media
-			where
-				main_content_media.media_id = $id
+	// 		select
+	// 			main_content_media.id
+	// 		from
+	// 			main_content_media
+	// 		where
+	// 			main_content_media.media_id = $id
 
-		");				
+	// 	");				
 
-		$sth->execute();
+	// 	$sth->execute();
 
-		if ($sth->rowCount()) {
+	// 	if ($sth->rowCount()) {
 
-			$this->getObject('Session')->set('feedback', array('error', 'Unable to delete media, it is attached to posts'));
+	// 		$this->getObject('Session')->set('feedback', array('error', 'Unable to delete media, it is attached to posts'));
 
-			return;
+	// 		return;
 			
-		}
+	// 	}
 
-		// delete
+	// 	// delete
 
-		$sth = $this->database->dbh->prepare("
+	// 	$sth = $this->database->dbh->prepare("
 
-			select
-				main_media.id
-				, main_media.file_name
-				, main_media.title
-				, main_media.date_published
-				, main_media.type
-			from
-				main_media
-			where
-				main_media.id = $id
+	// 		select
+	// 			main_media.id
+	// 			, main_media.file_name
+	// 			, main_media.title
+	// 			, main_media.date_published
+	// 			, main_media.type
+	// 		from
+	// 			main_media
+	// 		where
+	// 			main_media.id = $id
 
-		");				
+	// 	");				
 
-		$sth->execute();
+	// 	$sth->execute();
 
-		if ($row = $sth->fetch()) {
+	// 	if ($row = $sth->fetch()) {
 			
-			$file = BASE_PATH . $this->dir . $row['file_name'];
+	// 		$file = BASE_PATH . $this->dir . $row['file_name'];
 
-			if (is_file($file))
-			  unlink($file);
+	// 		if (is_file($file))
+	// 		  unlink($file);
 
-		}
+	// 	}
 
-		$sth = $this->database->dbh->prepare("
+	// 	$sth = $this->database->dbh->prepare("
 
-			delete from
-				main_media
-			where
-				main_media.id = $id
+	// 		delete from
+	// 			main_media
+	// 		where
+	// 			main_media.id = $id
 
-		");	
+	// 	");	
 
-		$sth->execute();
+	// 	$sth->execute();
 
-		if ($sth->rowCount()) {
+	// 	if ($sth->rowCount()) {
 
-			$this->getObject('Session')->set('feedback', array('success', '"' . $row['title'] .'" Deleted'));
+	// 		$this->getObject('Session')->set('feedback', array('success', '"' . $row['title'] .'" Deleted'));
 
-		}
+	// 	}
 
-	}
+	// }
 	
 	
 }

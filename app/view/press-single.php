@@ -1,14 +1,12 @@
 <?php require_once('header.php'); ?>
 
 <article class="content press single">
-	<!-- <a href="" class="bread"></a> -->
+	<a href="<?php echo $this->url('back') ?>" class="button back">Back</a>
 	<header>
-		<h1><?php echo $this->get('model_maincontent', 'title'); ?></h1>
+		<h1><?php echo ucfirst($this->get('model_maincontent', 'title')) ?></h1>
 		<span class="date"><?php echo date('D jS F Y', $this->get('model_maincontent', 'date_published')) ?></span>
 	</header>
-	<div class="html">
-		<?php echo $this->get('model_maincontent', 'html'); ?>
-	</div>
+	<section><?php echo $this->get('model_maincontent', 'html'); ?></section>
 	<footer>
 		Share this press release: <strong>twitter</strong> <strong>facebook</strong>
 	</footer>

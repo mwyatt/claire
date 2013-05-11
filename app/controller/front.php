@@ -36,6 +36,11 @@ class Controller_Front extends Controller
 	}
 
 
+	public function team() {
+		$this->load(array('front', 'team'), $this->config->getUrl(1), $this->view, $this->database, $this->config);
+	}
+
+
 	public function press() {
 		$this->load(array('front', 'press'), $this->config->getUrl(1), $this->view, $this->database, $this->config);
 	}
@@ -43,6 +48,27 @@ class Controller_Front extends Controller
 
 	public function division() {
 		$this->load(array('front', 'division'), $this->config->getUrl(1), $this->view, $this->database, $this->config);
+	}
+
+	public function page() {
+		if ($this->config->getUrl(1)) {
+			$page = new Model_Maincontent($this->database, $this->config);
+			if (! $page->readByTitle(array($this->config->getUrl(1)))) {
+				$this->route('base');
+			}
+			$this->view
+				->setMeta(array(		
+					'title' => $page->getData('title')
+				))
+				->setObject($page)
+				->loadTemplate('page');
+		}
+		$this->route('base');
+	}
+
+
+	public function minutes() {
+		$this->load(array('front', 'minutes'), $this->config->getUrl(1), $this->view, $this->database, $this->config);
 	}
 
 

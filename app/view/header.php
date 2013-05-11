@@ -40,11 +40,11 @@
                         <label>Menu</label>
                         <div class="inner">
                             <span class="close"></span>
-                            <a href="<?php echo $this->urlHome(); ?>coaching/">Coaching</a>
-                            <a href="<?php echo $this->urlHome(); ?>schools/">Schools</a>
-                            <a href="<?php echo $this->urlHome(); ?>town-teams/">Town Teams</a>
-                            <a href="<?php echo $this->urlHome(); ?>summer-league/">Summer League</a>
-                            <a href="<?php echo $this->urlHome(); ?>local-clubs/">Local Clubs</a>
+                            <a href="<?php echo $this->urlHome(); ?>page/coaching/">Coaching</a>
+                            <a href="<?php echo $this->urlHome(); ?>page/schools/">Schools</a>
+                            <a href="<?php echo $this->urlHome(); ?>page/town-teams/">Town Teams</a>
+                            <a href="<?php echo $this->urlHome(); ?>page/summer-league/">Summer League</a>
+                            <a href="<?php echo $this->urlHome(); ?>page/local-clubs/">Local Clubs</a>
                         </div>
                     </nav> 
                 </div>
@@ -82,9 +82,9 @@
                             <div class="drop">
                                 <a href="#">Handbook</a>
                                 <a href="<?php echo $this->urlHome(); ?>player/performance/">Player Performance</a>
-                                <a href="<?php echo $this->urlHome(); ?>post/">Press Releases</a>
-                                <a href="<?php echo $this->urlHome(); ?>page/10/competitions/">Competitions</a>
-                                <a href="#">Contact us</a>
+                                <a href="<?php echo $this->urlHome(); ?>press/">Press Releases</a>
+                                <a href="<?php echo $this->urlHome(); ?>page/competitions/">Competitions</a>
+                                <a href="<?php echo $this->urlHome(); ?>page/contact-us/">Contact us</a>
                             </div>
                         </li>
                     </ul>

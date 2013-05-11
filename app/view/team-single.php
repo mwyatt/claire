@@ -1,42 +1,27 @@
 <?php require_once($this->pathView() . 'header.php'); ?>
 
-<div class="content team single">
-
-	<ul>
-		<li>add in link to league table</li>
-	</ul>
-	
-	<div class="bread"><< Back to Here</div>
-
-	<h1><?php echo $ttTeam->get('name'); ?></h1>
-
-	<table width="100%" cellspacing="0" cellpadding="0">
-		<tr class="home-night">
-			<th>Home Night</th>
-			<td><?php echo $ttTeam->get('home_night'); ?></td>
-		</tr>		
-		<tr class="venue">
-			<th>Venue</th>
-			<td><?php echo $ttTeam->get('venue_name'); ?></td>
-		</tr>		
-		<tr class="player">
-			<th>Players</th>
-			<td>
-				<a href="<?php echo $ttTeam->get('guid'); ?>" title="View Team <?php echo $ttTeam->get('name'); ?>"><?php echo $ttTeam->get('name'); ?></a>
-			</td>
-		</tr>		
-		<tr class="division">
-			<th>Division</th>
-			<td><?php echo $ttTeam->get('division_name'); ?></td>
-		</tr>		
-		<tr>
-	</table>
-
-	<div class="accordion player" data-team-id="<?php echo $ttTeam->get('id'); ?>">
-		<h2>Players <span>8</span></h2>
-		<section></section>
+<div class="content team single" data-id="<?php echo $this->get('model_ttteam', 'id'); ?>">
+	<h1><?php echo $this->get('model_ttteam', 'name'); ?></h1>
+	<div class="general-stats">
+		<h2>General stats</h2>
+		<table width="100%" cellspacing="0" cellpadding="0">
+			<tr class="home-night">
+				<th>Home Night</th>
+				<td><?php echo $this->get('model_ttteam', 'home_night'); ?></td>
+			</tr>			
+			<tr class="venue">
+				<th>Venue</th>
+				<td><?php echo $this->get('model_ttteam', 'venue_name'); ?></td>
+			</tr>		
+			<tr class="division">
+				<th>Division</th>
+				<td><?php echo $this->get('model_ttteam', 'division_name'); ?> division</td>
+			</tr>		
+		</table>
 	</div>
-
-</div> <!-- styling aid -->
+	<div class="fixture clearfix">
+		<h2>Fixtures</h2>
+	</div>
+</div>
 
 <?php require_once($this->pathView() . 'footer.php'); ?>

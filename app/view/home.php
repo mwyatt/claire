@@ -12,6 +12,7 @@
 <?php if ($this->get('model_maincontent')): ?>
     
 	<div class="press">
+		<a href="press/" class="button">All press</a>
 		<h2>Hot off the press</h2>
 
     <?php foreach ($this->get('model_maincontent') as $press): ?>

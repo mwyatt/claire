@@ -16,7 +16,7 @@ class Controller_Admin_Content extends Controller
 
 
 	public function initialise() {
-		$content = new Model_Maincontent($this->database, $this->config);
+		$content = new Model_Admin_Maincontent($this->database, $this->config);
 		$media = new Model_Mainmedia($this->database, $this->config);
 
 		if (array_key_exists('form_create', $_POST)) {
@@ -63,7 +63,7 @@ class Controller_Admin_Content extends Controller
 
 
 	public function page() {
-		$content = new Model_Maincontent($this->database, $this->config);
+		$content = new Model_Admin_Maincontent($this->database, $this->config);
 		$content->readByType($this->config->getUrl(2));
 		$this->view
 			->setObject($content)
@@ -72,7 +72,7 @@ class Controller_Admin_Content extends Controller
 
 
 	public function minutes() {
-		$content = new Model_Maincontent($this->database, $this->config);
+		$content = new Model_Admin_Maincontent($this->database, $this->config);
 		$content->readByType($this->config->getUrl(2));
 		$this->view
 			->setObject($content)
@@ -81,7 +81,7 @@ class Controller_Admin_Content extends Controller
 
 
 	public function press() {
-		$content = new Model_Maincontent($this->database, $this->config);
+		$content = new Model_Admin_Maincontent($this->database, $this->config);
 		$content->readByType($this->config->getUrl(2));
 		$this->view
 			->setObject($content)

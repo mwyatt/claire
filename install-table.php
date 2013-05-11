@@ -24,10 +24,8 @@ try {
 				, name VARCHAR(255) NOT NULL DEFAULT ''
 				, value VARCHAR(255) NOT NULL DEFAULT ''
 				, PRIMARY KEY (id)
+				, KEY (user_id)
 			)
-	");
-	$database->dbh->query("
-		alter table main_user_meta add index (user_id);
 	");
 
 	$database->dbh->query("
@@ -38,14 +36,12 @@ try {
 				, title VARCHAR(255) NOT NULL DEFAULT ''
 				, html VARCHAR(8000) DEFAULT ''
 				, type VARCHAR(50) NOT NULL DEFAULT ''
-				, date_published INT UNSIGNED DEFAULT NOW()
+				, date_published INT UNSIGNED DEFAULT 0
 				, status VARCHAR(50) NOT NULL DEFAULT 'hidden'
 				, user_id INT UNSIGNED NOT NULL	
 				, PRIMARY KEY (id)
+				, KEY (user_id)
 			)
-	");
-	$database->dbh->query("
-		alter table main_content add index (user_id);
 	");
 
 	$database->dbh->query("
@@ -57,10 +53,8 @@ try {
 				, name VARCHAR(255) NOT NULL DEFAULT ''
 				, value VARCHAR(255) NOT NULL DEFAULT ''
 				, PRIMARY KEY (id)
+				, KEY (content_id)
 			)
-	");
-	$database->dbh->query("
-		alter table main_content_meta add index (content_id);
 	");
 
 	$database->dbh->query("
@@ -80,28 +74,12 @@ try {
 			(
 				id INT UNSIGNED NOT NULL AUTO_INCREMENT
 				, path VARCHAR(500) NOT NULL
-				, date_published INT UNSIGNED DEFAULT NOW()
+				, date_published INT UNSIGNED DEFAULT 0
 				, user_id INT UNSIGNED NOT NULL
 				, PRIMARY KEY (id)
+				, KEY (user_id)
 			)		
 	");
-	$database->dbh->query("
-		alter table main_media add index (user_id);
-	");
-
-	// $database->dbh->query("
-	// 	CREATE TABLE IF NOT EXISTS 
-	// 		main_menu
-	// 		(
-	// 			id INT UNSIGNED NOT NULL AUTO_INCREMENT
-	// 			, title VARCHAR(255) NOT NULL DEFAULT ''
-	// 			, parent_id INT UNSIGNED
-	// 			, guid VARCHAR(255) NOT NULL
-	// 			, position INT UNSIGNED
-	// 			, type VARCHAR(20) DEFAULT 'main'
-	// 			, PRIMARY KEY (id)
-	// 		)		
-	// ");
 	
 	$database->dbh->query("
 		CREATE TABLE IF NOT EXISTS
@@ -159,13 +137,11 @@ try {
 				, venue_id INT UNSIGNED NOT NULL
 				, division_id INT UNSIGNED NOT NULL
 				, PRIMARY KEY (id)
+				, KEY (secretary_id)
+				, KEY (venue_id)
+				, KEY (division_id)
 			)		
 	");	
-	$database->dbh->query("
-		alter table tt_team add index (secretary_id);
-		alter table tt_team add index (venue_id);
-		alter table tt_team add index (division_id);
-	");
 	
 	$database->dbh->query("
 		CREATE TABLE IF NOT EXISTS
@@ -177,11 +153,9 @@ try {
 				, rank INT UNSIGNED
 				, team_id INT UNSIGNED NOT NULL
 				, PRIMARY KEY (id)
+				, KEY (team_id)
 			)		
 	");	
-	$database->dbh->query("
-		alter table tt_player add index (team_id);
-	");
 	
 	$database->dbh->query("
 		CREATE TABLE IF NOT EXISTS
@@ -192,12 +166,10 @@ try {
 				, team_right_id INT UNSIGNED NOT NULL
 				, date_fulfilled INT
 				, PRIMARY KEY (id)
+				, KEY (team_left_id)
+				, KEY (team_right_id)
 			)		
 	");	
-	$database->dbh->query("
-		alter table tt_fixture add index (team_left_id);
-		alter table tt_fixture add index (team_right_id);
-	");
 	
 	$database->dbh->query("
 		CREATE TABLE IF NOT EXISTS
@@ -221,12 +193,10 @@ try {
 				, part_right_id INT UNSIGNED
 				, fixture_id INT UNSIGNED NOT NULL
 				, PRIMARY KEY (id)
+				, KEY (part_left_id)
+				, KEY (part_right_id)
 			)		
 	");	
-	$database->dbh->query("
-		alter table tt_encounter add index (part_left_id);
-		alter table tt_encounter add index (part_right_id);
-	");
 
 	$database->dbh->query("	
 		create view tt_encounter_result as

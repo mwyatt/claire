@@ -29,6 +29,7 @@ if ($session->get('installing')) {
 	$user = new Model_Mainuser($database, $config);
 	require_once(BASE_PATH . 'install-table.php');
 	require_once(BASE_PATH . 'install-tabledata.php');
+	require_once(BASE_PATH . 'install-tabledata-maincontent.php');
 	$ttfixture = new Model_Ttfixture($database, $config);
 	$ttfixture->generateAll();
 	$session->getUnset('installing');

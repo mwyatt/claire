@@ -58,7 +58,7 @@ class Model_Maincontent extends Model
 	}	
 
 
-	public function readByType($type) {	
+	public function readByType($type, $limit = 0) {	
 		$sth = $this->database->dbh->prepare("	
 			select
 				main_content.id
@@ -72,14 +72,42 @@ class Model_Maincontent extends Model
 			from main_content
 			left join main_content_meta on main_content_meta.content_id = main_content.id
 			left join main_user on main_user.id = main_content.user_id
-			where main_content.type = :type
-			order by main_content.date_published
+			where main_content.type = :type and main_content.status = 'visible'
+			order by main_content.date_published desc
+			" . ($limit ? ' limit :limit ' : '') . "
 		");
-		$sth->execute(array(
-			':type' => $type
-		));	
+		$sth->bindValue(':type', $type, PDO::PARAM_STR);
+		if ($limit) {
+			$sth->bindValue(':limit', (int) $limit, PDO::PARAM_INT);
+		}
+		$sth->execute();
 		return $this->data = $this->setMeta($sth->fetchAll(PDO::FETCH_ASSOC));
 	}	
+
+
+	public function readByTitle($title) {
+		$title = str_replace('-', ' ', $title)	;
+		$sth = $this->database->dbh->prepare("	
+			select
+				main_content.id
+				, main_content.title
+				, main_content.html
+				, main_content.date_published
+				, main_content.status
+				, main_content.type
+				, main_content_meta.name as meta_name
+				, main_content_meta.value as meta_value
+			from main_content
+			left join main_content_meta on main_content_meta.content_id = main_content.id
+			left join main_user on main_user.id = main_content.user_id
+			where main_content.title like ? and main_content.status = 'visible'
+			order by main_content.date_published
+		");
+		$sth->execute(array('%' . current($title) . '%'));	
+		$this->data = $this->setMeta($sth->fetchAll(PDO::FETCH_ASSOC));
+		return $this->data = current($this->data);
+	}	
+
 
 	public function readById($id) {	
 		$sth = $this->database->dbh->prepare("	
@@ -95,7 +123,7 @@ class Model_Maincontent extends Model
 			from main_content
 			left join main_content_meta on main_content_meta.content_id = main_content.id
 			left join main_user on main_user.id = main_content.user_id
-			where main_content.id = :id
+			where main_content.id = :id and main_content.status = 'visible'
 		");
 		$sth->execute(array(
 			':id' => $id
@@ -194,120 +222,6 @@ class Model_Maincontent extends Model
 		$this->data = current($this->data);
 		return $sth->rowCount();
 	}
-
-
-
-
-
-	public function create() {	
-		$user = new Model_Mainuser($this->database, $this->config);
-		if (! $this->validatePost(array('title'))) {
-			$this->session->set('feedback', 'All required fields must be filled');
-			return false;
-		}
-		$sth = $this->database->dbh->prepare("
-			insert into main_content (
-				title
-				, html
-				, type
-				, date_published
-				, status
-				, user_id
-			)
-			values (
-				:title
-				, :html
-				, :type
-				, :date_published
-				, :status
-				, :user_id
-			)
-		");				
-		
-		$sth->execute(array(
-			':title' => $_POST['title']
-			, ':html' => (array_key_exists('html', $_POST) ? $_POST['html'] : '')
-			, ':type' => $_POST['type']
-			, ':date_published' => time()
-			, ':status' => ($this->isChecked('status') ? 'visible' : 'hidden')
-			, ':user_id' => $user->get('id')
-		));		
-
-		if ($sth->rowCount()) {
-			$this->session->set('feedback', ucfirst($_POST['type']) . ' "' . $_POST['title'] . '" created. <a href="' . $this->config->getUrl('back') . '">Back to list</a>');
-			return $this->database->dbh->lastInsertId();
-		}
-		$this->session->set('feedback', 'Problem while creating ' . ucfirst($_POST['type']));
-		return false;
-	}
-				
-	public function update() {
-		$user = new Model_Mainuser($this->database, $this->config);
-		$sth = $this->database->dbh->prepare("
-			select 
-				title
-				, html
-				, type
-				, date_published
-				, status
-				, user_id
-			from main_content
-			where id = ?
-		");				
-		$sth->execute(array(
-			$_GET['edit']
-		));		
-		$row = $sth->fetch(PDO::FETCH_ASSOC);
-		$sth = $this->database->dbh->prepare("
-			update main_content set
-				title = ?
-				, html = ?
-				, status = ?
-			where
-				id = ?
-		");				
-		$sth->execute(array(
-			(array_key_exists('title', $_POST) ? $_POST['title'] : '')
-			, (array_key_exists('html', $_POST) ? $_POST['html'] : '')
-			, ($this->isChecked('status') ? 'visible' : 'hidden')
-			, (array_key_exists('edit', $_GET) ? $_GET['edit'] : '')
-		));		
-		$this->session->set('feedback', ucfirst($row['type']) . ' "' . $row['title'] . '" updated. <a href="' . $this->config->getUrl('current_noquery') . '">Back to list</a>');
-		return true;
-	}
-
-	public function deleteById($id) {
-		$sth = $this->database->dbh->prepare("
-			select 
-				title
-				, html
-				, type
-				, date_published
-				, status
-				, user_id
-			from main_content
-			where id = ?
-		");	
-		$sth->execute(array(
-			$id
-		));		
-		$row = $sth->fetch(PDO::FETCH_ASSOC);
-		$sth = $this->database->dbh->prepare("
-			delete from main_content
-			where id = ? 
-		");				
-		$sth->execute(array(
-			$id
-		));		
-		$sth = $this->database->dbh->prepare("
-			delete from main_content_meta
-			where content_id = ? 
-		");				
-		$sth->execute(array(
-			$id
-		));		
-		$this->session->set('feedback', ucfirst($row['type']) . ' "' . $row['title'] . '" deleted');
-		return true;
-	}
+	
 
 }
