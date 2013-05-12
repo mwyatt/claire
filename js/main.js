@@ -112,7 +112,8 @@ var navMain = {
 	},
 
 	openClose: function(button, e) {
-		$(button).parent().toggleClass('active');
+		$(navMain.container).find('.active').removeClass('active');
+		$(button).parent().addClass('active');
 		e.preventDefault();
 	}
 }
@@ -241,7 +242,7 @@ var fixtureResult = {
 							+ '<div class="score-left">' + result.team_left_score + '</div>'
 							+ '<div class="team-right">' + result.team_right_name + '</div>'
 							+ '<div class="score-right">' + result.team_right_score + '</div>'
-						+ '</div>'
+						+ '</a>'
 					);
 				});
 			}
@@ -299,7 +300,7 @@ var player = {
 							+ '<div class="score-left">' + result.team_left_score + '</div>'
 							+ '<div class="team-right">' + result.team_right_name + '</div>'
 							+ '<div class="score-right">' + result.team_right_score + '</div>'
-						+ '</div>'
+						+ '</a>'
 					);
 				});
 			}
@@ -367,6 +368,10 @@ var spinnerOptions = {
 function closeActive () {
 	$('.active').removeClass('active');
 }
+
+// $(document).mouseup(function(e) {
+// 	closeActive();
+// });
 
 $(document).keyup(function(e) {
 	// backspace

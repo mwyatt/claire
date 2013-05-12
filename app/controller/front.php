@@ -50,6 +50,7 @@ class Controller_Front extends Controller
 		$this->load(array('front', 'division'), $this->config->getUrl(1), $this->view, $this->database, $this->config);
 	}
 
+
 	public function page() {
 		if ($this->config->getUrl(1)) {
 			$page = new Model_Maincontent($this->database, $this->config);
@@ -69,6 +70,32 @@ class Controller_Front extends Controller
 
 	public function minutes() {
 		$this->load(array('front', 'minutes'), $this->config->getUrl(1), $this->view, $this->database, $this->config);
+	}
+
+
+	public function archive() {
+		$archive = new Model_Ttarchive($this->database, $this->config);
+		if ($this->config->getUrl(1)) {
+			$id = $this->getId($this->config->getUrl(1));
+			if (! $archive->readById(array($id))) {
+				$this->route('base', 'archive/');
+			}
+			$this->view
+				->setMeta(array(		
+					'title' => 'East Lancashire Table Tennis League archive'
+				))
+				->setObject($archive)
+				->loadTemplate('archive-single');
+		}
+		$archive->read();
+		$this->view
+			->setMeta(array(		
+				'title' => 'All archives'
+				, 'keywords' => 'archives, archive'
+				, 'description' => 'All archives in the East Lancashire Table Tennis League'
+			))
+			->setObject($archive)
+			->loadTemplate('archive');
 	}
 
 

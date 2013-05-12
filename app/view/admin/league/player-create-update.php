@@ -6,22 +6,23 @@
 	<form class="main" method="post">
 
 		<div class="row">		
-			<label for="">First name</label>
-			<input class="required" type="text" name="first_name" maxlength="75" value="<?php echo $this->get('model_ttplayer', 'first_name'); ?>">
+			<label class="above" for="form-first-name">First name</label>
+			<input id="form-first-name" class="required" type="text" name="first_name" maxlength="75" value="<?php echo $this->get('model_ttplayer', 'first_name'); ?>">
 		</div>			
 		<div class="row">
-			<label for="">Last name</label>
-			<input class="required" type="text" name="last_name" maxlength="75" value="<?php echo $this->get('model_ttplayer', 'last_name'); ?>">
+			<label class="above" for="form-last-name">Last name</label>
+			<input id="form-last-name" class="required" type="text" name="last_name" maxlength="75" value="<?php echo $this->get('model_ttplayer', 'last_name'); ?>">
 		</div>
 		<div class="row">			
-			<label for="">rank</label>
-			<input class="required" type="text" name="rank" maxlength="75" value="<?php echo $this->get('model_ttplayer', 'rank'); ?>">
+			<label class="above" for="form-rank">rank</label>
+			<input id="form-rank" class="required" type="text" name="rank" maxlength="75" value="<?php echo $this->get('model_ttplayer', 'rank'); ?>">
 		</div>			
 
 <?php if ($this->get('model_ttdivision')): ?>
 
 		<div class="row division">
-			<select name="division_id">
+			<label class="above" for="form-division-id">Division</label>
+			<select id="form-division-id" name="division_id">
 				<option value="0"></option>
 				 
 	<?php foreach ($this->get('model_ttdivision') as $division): ?>
@@ -36,7 +37,8 @@
 <?php endif ?>
 
 		<div class="row team">
-			<select name="team_id">
+			<label class="above" for="form-team-id">Team</label>
+			<select id="form-team-id" name="team_id">
 				<option value="0"></option>
 
 <?php if ($this->get('model_ttteam')): ?>

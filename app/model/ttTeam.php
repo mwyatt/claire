@@ -119,6 +119,7 @@ class Model_Ttteam extends Model
 			select
 				tt_team.id
 				, tt_team.name
+				, tt_team.home_night as home_night_id
 				, tt_team.home_night
 				, count(tt_player.id) as player_count
 				, tt_venue.id as venue_id

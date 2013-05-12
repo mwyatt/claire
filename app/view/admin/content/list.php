@@ -1,6 +1,6 @@
 <?php require_once($this->pathView() . 'admin/header.php'); ?>
 
-<div class="content page">
+<div class="content <?php echo $this->get($content, 'type'); ?>">
 	<h1><?php echo ucfirst($this->urlSegment(2)); ?></h1>
 	<div class="clearfix text-right row">
 		<a class="button new" href="<?php echo $this->url('current_noquery'); ?>new/" title="Create a new <?php echo ucfirst($this->urlSegment(2)); ?>">New</a>
@@ -23,7 +23,7 @@
 
 			<tr data-id="<?php echo $this->get($content, 'id'); ?>">
 				<td>
-					<a href="?edit=<?php echo $this->get($content, 'id'); ?>" title="Edit page <?php echo $this->get($content, 'title'); ?>"><?php echo $this->get($content, 'title'); ?></a>
+					<a href="?edit=<?php echo $this->get($content, 'id'); ?>" title="Edit <?php echo $this->get($content, 'title'); ?>"><?php echo $this->get($content, 'title'); ?></a>
 				</td>
 				<td class="text-center"><?php echo date('j D M Y', $this->get($content, 'date_published')); ?></td>
 				<td class="text-center">

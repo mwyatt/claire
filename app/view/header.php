@@ -23,7 +23,7 @@
             <header class="main">
                 <div class="row clearfix">
                     <a class="logo" href="<?php echo $this->urlHome(); ?>">
-                        <img src="<?php echo $this->urlHome(); ?>img/logov2.png" alt="<?php echo $this->get('model_mainoption', 'site_title'); ?> Logo">
+                        <img src="<?php echo $this->urlHome(); ?>media/logov2.png" alt="<?php echo $this->get('model_mainoption', 'site_title'); ?> Logo">
                         <span class="full-text"><?php echo $this->get('model_mainoption', 'site_title'); ?></span>
                         <abbr title="<?php echo $this->get('model_mainoption', 'site_title'); ?>">ELTTL</abbr>
                     </a>

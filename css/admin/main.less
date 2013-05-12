@@ -15,11 +15,6 @@
     text-shadow: none;
 }
 
-.ajax-load {
-    height: 80px;
-    background: url('../images-skin/main/ajax.gif') 50% 50% no-repeat;
-}
-
 a,
 a:visited {
     color: @orange;
@@ -126,6 +121,47 @@ a.button,
 	width: 12em;
 	border: 1px solid;
 	margin: 1em;
+}
+
+.content.league.fixtures {
+
+	.card {
+		.border-radius (2px);
+		position: relative;
+		float: left;
+		width: 20.9%;
+		border: 1px solid;
+		margin: 1em;
+		display: block;
+		padding: .6em;
+
+		.date-fulfilled {
+			position: absolute;
+			right: 0;
+			top: -2em;
+			font-size: .7em;
+			color: @gray;
+		}
+
+		div {
+			float: left;
+
+			&[class^="team"] {
+				clear: left;
+				font-weight: 600;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				width: 80%;
+			}
+
+			&[class^="score"] {
+				width: 20%;
+				text-align: right;
+				float: right;
+			}
+		}
+	}
 }
 
 .content.fixtures.update,
@@ -446,10 +482,13 @@ nav.sub {
 }
 
 table {
+	border: 1px solid #eee;
 	margin: 0 0 2em;
 }
 
 thead th {
+	background-color: #eee;
+
 	padding: 1em;
 }
 

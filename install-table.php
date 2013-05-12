@@ -87,7 +87,7 @@ try {
 			(
 				id INT UNSIGNED NOT NULL AUTO_INCREMENT
 				, title VARCHAR(20) NOT NULL DEFAULT ''
-				, html VARCHAR(8000) DEFAULT ''
+				, html longtext NOT NULL
 				, PRIMARY KEY (id)
 			)		
 	");	

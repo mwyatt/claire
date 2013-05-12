@@ -4,15 +4,15 @@
 	<h1><?php echo ($this->get('model_ttteam') ? 'Update ' . $this->urlSegment(2) . ' ' . $this->get('model_ttteam', 'name') : 'Create new ' . ucfirst($this->urlSegment(2))); ?></h1>
 	<form class="main" method="post">
 		<div class="row">
-			<label for="">Name</label>		
-			<input class="required" type="text" name="name" maxlength="75" value="<?php echo $this->get('model_ttteam', 'name'); ?>">
+			<label class="above" for="form-name">Name</label>		
+			<input id="form-name" class="required" type="text" name="name" maxlength="75" value="<?php echo $this->get('model_ttteam', 'name'); ?>">
 		</div>			
 
 <?php if ($this->get('model_ttdivision')): ?>
 
 		<div class="row division">
-			<label for="">Division</label>
-			<select name="division_id">
+			<label class="above" for="form-division">Division</label>
+			<select id="form-division" name="division_id">
 				<option value="0"></option>
 				 
 	<?php foreach ($this->get('model_ttdivision') as $division): ?>
@@ -29,13 +29,13 @@
 <?php if ($this->get('home_nights')): ?>
 
 		<div class="row">
-			<label for="">Home Night</label>
-			<select name="home_night">
+			<label class="above" for="form-home-night">Home Night</label>
+			<select id="form-home-night" name="home_night">
 				<option value="0"></option>
 				 
 	<?php foreach ($this->get('home_nights') as $key => $night): ?>
 		
-				<option value="<?php echo $key ?>" <?php echo ($key == $this->get('model_ttteam', 'home_night') ? 'selected' : false); ?>><?php echo $night ?></option>
+				<option value="<?php echo $key ?>" <?php echo ($key == $this->get('model_ttteam', 'home_night_id') ? 'selected' : false); ?>><?php echo $night ?></option>
 
 	<?php endforeach ?>
 
@@ -47,8 +47,8 @@
 <?php if ($this->get('model_ttvenue')): ?>
 
 		<div class="row venue">
-			<label for="">Venue</label>
-			<select name="venue_id">
+			<label class="above" for="form-venue">Venue</label>
+			<select id="form-venue" name="venue_id">
 				<option value="0"></option>
 				 
 	<?php foreach ($this->get('model_ttvenue') as $venue): ?>
@@ -65,7 +65,7 @@
 <?php if ($this->get('model_ttplayer')): ?>
 
 		<div class="row">
-			<h3>Players</h3>
+			<h3>Registered players</h3>
 			<ul>
 
 	<?php foreach ($this->get('model_ttplayer') as $player): ?>

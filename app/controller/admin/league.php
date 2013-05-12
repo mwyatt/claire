@@ -79,7 +79,7 @@ class Controller_Admin_League extends Controller
 			$this->route('current');
 		}
 		if (array_key_exists('edit', $_GET)) {
-			if ($team->readById($_GET['edit'])) {
+			if ($team->readById(array($_GET['edit']))) {
 				$division->read();
 				$weekday->readWeekDays();
 				$venue->read();
