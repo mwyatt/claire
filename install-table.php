@@ -73,6 +73,7 @@ try {
 			main_media
 			(
 				id INT UNSIGNED NOT NULL AUTO_INCREMENT
+				, title VARCHAR(500) NOT NULL
 				, path VARCHAR(500) NOT NULL
 				, date_published INT UNSIGNED DEFAULT 0
 				, user_id INT UNSIGNED NOT NULL

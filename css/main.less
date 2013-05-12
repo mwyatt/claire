@@ -112,7 +112,7 @@ body {
 		font-size: 2.1em;
 		font-weight: 300;
 		border: none;
-		color: lighten(@black, 40%);
+		color: lighten(@warmBlack, 40%);
 	}
 }
 
@@ -228,7 +228,7 @@ header.main {
 header nav.sub {
 	background-image: url(../media/sprite-100.png);
 	background-position: -129px -30px;
-	background-color: lighten(@black, 50%);
+	background-color: lighten(@warmBlack, 50%);
 	cursor: pointer;
 	width: 2.7em;
 	height: 2.7em;
@@ -269,7 +269,7 @@ header nav.sub {
 
 	a {
 		display: block;
-		border-top: 1px solid lighten(@black, 80%);
+		border-top: 1px solid lighten(@warmBlack, 80%);
 		padding: 1em;
 
 		&:first-of-type {
@@ -354,7 +354,7 @@ header .search {
 		color: #666;
 		border: none;
 		padding: 0 0 1em;
-		border-bottom: 1px solid lighten(@black, 90%);
+		border-bottom: 1px solid lighten(@warmBlack, 90%);
 		display: block;
 	}
 
@@ -385,8 +385,9 @@ header .search {
 } 
 
 nav.main {
-	background: lighten(@black, 80%);
-	font-size: 1em;
+	background: lighten(@warmBlack, 80%);
+	font-size: 1.2em;
+	margin: 0 0 1em;
 
 	ul, li {
 		margin: 0;
@@ -398,30 +399,32 @@ nav.main {
 	}
 
 	li > a {
-		border-top: 1px solid darken(@orange, 5%);
-		background: @orange;
+		.gradient (darken(@orangeHighlight, 5%), @orange);
+		// border-top: 1px solid darken(@orange, 10%);
+		border-top: 1px solid lighten(@orange, 15%);
+		// background: @orange;
 		display: block;
 		color: @white;
 		font-weight: 600;
-		padding: 0.4em .7em 0.6em 0.7em;
+		padding: 0.5em .7em 0.7em 0.7em;
 		text-align: center;
 	}
 
 	h4 {
 		margin: 0;
-		border-top: 1px solid lighten(@black, 45%);
+		border-top: 1px solid lighten(@warmBlack, 45%);
 	}
 
 	.drop {
 		display: none;
 		font-size: 1em;
-		background-color: lighten(@black, 40%);
+		background-color: lighten(@warmBlack, 40%);
 
 		a {
 			display: block;
 			color: @white;
 			padding: 1em;
-			border-top: 1px solid lighten(@black, 50%);
+			border-top: 1px solid lighten(@warmBlack, 50%);
 			font-size: .9em;
 		}
 
@@ -433,7 +436,7 @@ nav.main {
 			display: block;
 			font-size: 1.1em;
 			text-align: center;
-			background-color: lighten(@black, 35%);
+			background-color: lighten(@warmBlack, 35%);
 			padding: .5em;
 		}
 
@@ -754,7 +757,7 @@ div.content.home {
 
 		.item {
 			clear: both;
-			border-top: 1px solid lighten(@black, 80%);
+			border-top: 1px solid lighten(@warmBlack, 80%);
 			padding: 1em 0;
 			display: block;
 
@@ -766,7 +769,7 @@ div.content.home {
 
 		span {
 			float: right;
-			color: lighten(@black, 50%);
+			color: lighten(@warmBlack, 50%);
 		}
 
 		h3 {
@@ -782,7 +785,7 @@ div.content.home {
 }
 
 .cover .inner {
-	background-color: lighten(@black, 20%);
+	background-color: lighten(@warmBlack, 20%);
 	padding: 1em;
 	display: block;
 	margin: 0 1em 1em 1em;
