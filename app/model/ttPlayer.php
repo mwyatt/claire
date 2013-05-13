@@ -303,7 +303,8 @@ class Model_Ttplayer extends Model
 			$x = 0; $y = 0; $average = 0;			
 			$x = $won / $played;
 			$y = $x * 100;
-			$average = round($y);
+			// $average = round($y);
+			$average = number_format((float)$y, 2, '.', '');
 		}
 		
 	    return $average;

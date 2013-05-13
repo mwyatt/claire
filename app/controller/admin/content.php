@@ -80,6 +80,15 @@ class Controller_Admin_Content extends Controller
 	}
 
 
+	public function cup() {
+		$content = new Model_Admin_Maincontent($this->database, $this->config);
+		$content->readByType($this->config->getUrl(2));
+		$this->view
+			->setObject($content)
+			->loadTemplate('admin/content/list');
+	}
+
+
 	public function press() {
 		$content = new Model_Admin_Maincontent($this->database, $this->config);
 		$content->readByType($this->config->getUrl(2));
