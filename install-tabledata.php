@@ -29,6 +29,27 @@ try {
 		->insert(1);
 	
 	$database->dbh->query("
+		insert into main_media (
+			title
+			, path
+			, date_published
+			, user_id
+		) values
+		(
+			'Playing for fun'
+			, 'gallery/fun.jpg'
+			, '$epochTime'
+			, '1'
+		)
+		, (
+			'Playing with my friends'
+			, 'gallery/fun2.jpg'
+			, '$epochTime'
+			, '1'
+		)
+	");	
+
+	$database->dbh->query("
 		INSERT INTO main_user_meta
 			(user_id, name, value)
 		VALUES
