@@ -13,6 +13,7 @@
 class Model_Ttfixture extends Model
 {
 
+
 	public static $encounterStructure = array(
 		0 => array(1, 2)
 		, 1 => array(3, 1)
@@ -27,12 +28,10 @@ class Model_Ttfixture extends Model
 	);
 
 	
-	/* Create
-	========================================================================= */
-	
 	/**
 	 * generates each fixture seperated by division
 	 * teams must not change division beyond this point
+	 * @return null
 	 */
 	public function generateAll() {
 		
@@ -80,10 +79,6 @@ class Model_Ttfixture extends Model
 	}
 	
 	
-	/* Read
-	========================================================================= */
-
-
 	/**
 	 * return $encounterParts for output on scoresheet
 	 */
@@ -316,12 +311,6 @@ class Model_Ttfixture extends Model
 	}	
 
 	
-	/* Delete
-	========================================================================= */
-	
-	// reset method
-	
-	
 	public function resetDateFulfilled($id) {
 		$sth = $this->database->dbh->prepare("
 			update tt_fixture
@@ -331,16 +320,8 @@ class Model_Ttfixture extends Model
 		$sth->execute(array(null));
 	}
 
-	public function updateRank($homeRankChange, $awayRankChange) {
-	
-		echo $homeRankChange;
-		echo $awayRankChange;
-	
-	}
-
 
 	public function readSingleResult($fixtureId) {
-
 		$sth = $this->database->dbh->prepare("	
 			select
 				concat(player_left.first_name, ' ', player_left.last_name) as player_left_full_name
@@ -359,45 +340,29 @@ class Model_Ttfixture extends Model
 				, tt_fixture_result.right_score as team_right_score
 				, tt_encounter_result.status
 				, tt_fixture.date_fulfilled		
-
 			from tt_encounter_result
-
 			left join tt_player as player_left on player_left.id = tt_encounter_result.left_id
-
 			left join tt_player as player_right on player_right.id = tt_encounter_result.right_id
-
 			left join tt_fixture on tt_fixture.id = tt_encounter_result.fixture_id
-
 			left join tt_fixture_result on tt_fixture_result.fixture_id = tt_encounter_result.fixture_id
-
 			left join tt_team as team_left on team_left.id = tt_fixture.team_left_id
-
 			left join tt_team as team_right on team_right.id = tt_fixture.team_right_id
-
 			where tt_encounter_result.fixture_id = :fixtureId
-
 			group by tt_encounter_result.encounter_id
-
 			order by tt_encounter_result.encounter_id
 		");
-
 		$sth->execute(array(':fixtureId' => $fixtureId));
 		if (!$sth->rowCount()) return false;
-
-		$ttPlayer = new Model_Ttplayer($this->database, $this->config);
-		$ttTeam = new Model_Ttteam($this->database, $this->config);
-
 		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {	
-			$row['player_left_guid'] = $ttPlayer->getGuid($row['player_left_full_name'], $row['player_left_id']);
-			$row['player_right_guid'] = $ttPlayer->getGuid($row['player_right_full_name'], $row['player_right_id']);
-			$row['team_left_guid'] = $ttTeam->getGuid($row['team_left_name'], $row['team_left_id']);
-			$row['team_right_guid'] = $ttTeam->getGuid($row['team_right_name'], $row['team_right_id']);
+			$row['player_left_guid'] = $this->getGuid('player', $row['player_left_full_name'], $row['player_left_id']);
+			$row['player_right_guid'] = $this->getGuid('player', $row['player_right_full_name'], $row['player_right_id']);
+			$row['team_left_guid'] = $this->getGuid('team', $row['team_left_name'], $row['team_left_id']);
+			$row['team_right_guid'] = $this->getGuid('team', $row['team_right_name'], $row['team_right_id']);
 			$this->data[] = $row;
 		}
-
 		return true;
-
 	}
+
 
 	public function readResult($divisionId) {
 		$sth = $this->database->dbh->prepare("	

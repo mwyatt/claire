@@ -99,4 +99,24 @@ class Controller_Front extends Controller
 	}
 
 
+	public function fixture() {
+		$fixture = new Model_Ttfixture($this->database, $this->config);
+		if ($this->config->getUrl(1)) {
+			$id = $this->getId($this->config->getUrl(1));
+			if (! $fixture->readSingleResult($id)) {
+				$this->route('base');
+			}
+			$fixtureInfo = current($fixture->data);
+			$this->view
+				->setMeta(array(		
+					'title' => 'East Lancashire Table Tennis League fixture'
+				))
+				->setObject($fixture)
+				->setObject('fixture_info', $fixtureInfo)
+				->loadTemplate('fixture-single');
+		}
+		$this->route('base');
+	}
+
+
 }

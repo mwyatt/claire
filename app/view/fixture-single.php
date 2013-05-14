@@ -1,43 +1,69 @@
 <?php require_once($this->pathView() . 'header.php'); ?>
 
-<?php $fixture = $ttFixture->get(0); ?>
-
 <div class="content fixture single">
-	
-	<h1><?php echo $fixture['team_left_name'] . ' vs ' . $fixture['team_right_name']; ?></h1>
+	<h1><a href="<?php echo $this->get('fixture_info', 'team_left_guid') ?>"><?php echo $this->get('fixture_info', 'team_left_name') ?></a> <span class="vs">vs</span> <a href="<?php echo $this->get('fixture_info', 'team_right_guid') ?>"><?php echo $this->get('fixture_info', 'team_right_name') ?></a></h1>
+	<p class="date">Fulfilled on <?php echo date('D jS F Y', $this->get('fixture_info', 'date_fulfilled')); ?></p>
 
-	<span>Fulfilled on: <?php echo date('d/m/Y', $fixture['date_fulfilled']); ?></span>
+<?php if ($this->get('model_ttfixture')) : ?>
 
-	<?php if ($ttFixture->getData()) : ?>
+		<table cellspacing="0" cellpadding="0">
 
-		<table width="100%" cellspacing="0" cellpadding="0">
+	<?php foreach ($this->get('model_ttfixture') as $fixture): ?>
+		
+			<tr<?php echo ($this->get($fixture, 'status') ? ' class="' . $this->get($fixture, 'status') . '"' : ''); ?>>
+				<td class="player text-right">
 
-		<?php while ($ttFixture->nextRow()) : ?>
+		<?php if ($this->get($fixture, 'status') == 'doubles') : ?>
 
-			<tr<?php echo ($ttFixture->getRow('status') ? ' class="' . $ttFixture->getRow('status') . '"' : ''); ?>>
-				<td>
-					<?php if ($ttFixture->getRow('status') == 'doubles') : ?>
 					Doubles
-					<?php else : ?>
-					<a href="<?php echo $ttFixture->getRow('player_left_guid'); ?>"><?php echo $ttFixture->getRow('player_left_full_name'); ?></a>
-					<?php endif; ?>	
+
+		<?php else : ?>
+			<?php if ($this->get($fixture, 'player_left_id')): ?>
+				
+					<a href="<?php echo $this->get($fixture, 'player_left_guid'); ?>"><?php echo $this->get($fixture, 'player_left_full_name'); ?></a>
+
+			<?php else : ?>
+
+					Absent player
+
+			<?php endif ?>
+		<?php endif; ?>	
+
 				</td>
-				<td><?php echo $ttFixture->getRow('player_left_score'); ?></td>
-				<td><?php echo $ttFixture->getRow('player_right_score'); ?></td>
-				<td><a href="<?php echo $ttFixture->getRow('player_right_guid'); ?>"><?php echo $ttFixture->getRow('player_right_full_name'); ?></a></td>
+				<td class="score"><?php echo $this->get($fixture, 'player_left_score'); ?></td>
+				<td class="score"><?php echo $this->get($fixture, 'player_right_score'); ?></td>
+				<td class="player text-left">
+
+		<?php if ($this->get($fixture, 'status') == 'doubles') : ?>
+
+					Doubles
+
+		<?php else : ?>
+			<?php if ($this->get($fixture, 'player_right_id')): ?>
+				
+					<a href="<?php echo $this->get($fixture, 'player_right_guid'); ?>"><?php echo $this->get($fixture, 'player_right_full_name'); ?></a>
+
+			<?php else : ?>
+
+					Absent player
+
+			<?php endif ?>
+		<?php endif; ?>	
+
+				</td>				
 			</tr>
 
-		<?php endwhile; ?>
+	<?php endforeach ?>
 
 			<tr class="total">
 				<th>Total</th>
-				<td><?php echo $fixture['team_left_score']; ?></td>
-				<td><?php echo $fixture['team_right_score']; ?></td>
+				<td><?php echo $this->get('fixture_info', 'team_left_score'); ?></td>
+				<td><?php echo $this->get('fixture_info', 'team_right_score'); ?></td>
 				<td></td>
 			</tr>
 		</table>
 	
-	<?php endif; ?>	
+<?php endif; ?>	
 
 </div> <!-- styling aid -->
 
