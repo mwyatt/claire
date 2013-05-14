@@ -1,15 +1,13 @@
 <?php
 
 /**
-	Image
-	
-	http://net.tutsplus.com/tutorials/php/image-resizing-made-easy-with-php/
-	to create an image resize script
-	
-	@author Martin Wyatt <martin.wyatt@gmail.com> 
-	@copyright 2012 Martin Wyatt
-	@license http://www.php.net/license/3_01.txt PHP License 3.01
-*/ 
+ * Image
+ * http://net.tutsplus.com/tutorials/php/image-resizing-made-easy-with-php/
+ * to create an image resize script
+ * @author Martin Wyatt <martin.wyatt@gmail.com
+ * @copyright 2012 Martin Wya
+ * @license http://www.php.net/license/3_01.txt PHP License 3.01
+ */
 Class Image  
 {  
     // *** Class variables  

@@ -23,6 +23,7 @@
 class Model_Mainmedia extends Model
 {
 	
+	
 	protected $tick = 0;
 	public $upload;
 	public $error;
@@ -40,27 +41,20 @@ class Model_Mainmedia extends Model
 	public $dir = 'img/upload/';
 
 	
-	public function read($id) {	
-		$or = '';
-		if (is_array($id)) {
-			$ids = $id;
-			foreach ($ids as $id) {
-				$or .= " or main_media.id = '$id' ";
-			}
-		}
+	public function read() {	
 		$sth = $this->database->dbh->query("	
 			select
 				id
+				, title
 				, path
 				, date_published
 				, user_id
 			from main_media
-			where main_media.id = '$id'
-			$or
-			group by main_media.id
 		");
-		return $this->data = $this->setData($sth->fetchAll(PDO::FETCH_ASSOC));
+		$this->data = $sth->fetchAll(PDO::FETCH_ASSOC);
+		return $sth->rowCount();
 	}	
+
 
 	public function setData($rows) {
 		foreach ($rows as $key => $row) {

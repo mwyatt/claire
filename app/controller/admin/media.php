@@ -16,15 +16,20 @@ class Controller_Admin_Media extends Controller
 
 
 	public function index() {
-		$division = new Model_Ttdivision($this->database, $this->config);
-		$division->read();
-		$user = new Model_Mainuser($this->database, $this->config);
-		$this->view->setObject($division);
-		$this->view->loadTemplate('admin/league');
+		$media = new model_mainmedia($this->database, $this->config);
+		$media->read();
+		echo '<pre>';
+		print_r($media);
+		echo '</pre>';
+		exit;
+		
+		$this->view->loadTemplate('admin/media');
 	}
 
 
 	public function gallery() {
+
+
 		$player = new Model_Ttplayer($this->database, $this->config);
 		$division = new Model_Ttdivision($this->database, $this->config);
 		if (array_key_exists('form_update', $_POST)) {

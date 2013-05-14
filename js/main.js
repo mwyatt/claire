@@ -389,6 +389,10 @@ function clickprevent(e) {
 }
 
 function formSubmit() {
+	if ($(this).hasClass('disabled')) {
+		return false;
+	}
+	$(this).addClass('disabled');
 	$(this).closest('form').submit();
 	return false;
 }
