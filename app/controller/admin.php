@@ -64,7 +64,10 @@ class Controller_Admin extends Controller
 		$this->load(array('admin', 'league'), $this->config->getUrl(2), $this->view, $this->database, $this->config);
 	}
 
-
+	public function media() {
+		$this->load(array('admin', 'media'), $this->config->getUrl(2), $this->view, $this->database, $this->config);
+	}
+	
 	// public function settings() {
 	// 	$option = new Model_Mainoption($this->database, $this->config);
 	// 	$this->view
