@@ -1,5 +1,11 @@
 var BASE_URL = $('body').data('url-base');
 
+(function($) {  
+$.fn.mediaBrowser = function(options) {  
+	console.log(options);  
+};  
+})(jQuery); 
+
 var feedback = {
 	container: false,
 	speed: 'fast',
