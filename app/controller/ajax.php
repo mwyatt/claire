@@ -20,6 +20,11 @@ class Controller_Ajax extends Controller
 	}
 
 	
+	public function mediaBrowser() {
+		$this->load(array('ajax', 'mediabrowser'), $this->config->getUrl(2), $this->view, $this->database, $this->config);
+	}
+
+
 	public function division() {
 		if (array_key_exists('summary', $_GET)) {
 			$team = new Model_Ttteam($this->database, $this->config);
@@ -41,6 +46,7 @@ class Controller_Ajax extends Controller
 		}
 		$this->out($fixtureResult->getData());
 	}
+
 
 	public function fixture() {
 

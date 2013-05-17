@@ -87,7 +87,6 @@ class Model_Admin_Maincontent extends Model
 				, :user_id
 			)
 		");				
-		
 		$sth->execute(array(
 			':title' => $_POST['title']
 			, ':html' => (array_key_exists('html', $_POST) ? $_POST['html'] : '')
@@ -96,7 +95,6 @@ class Model_Admin_Maincontent extends Model
 			, ':status' => ($this->isChecked('status') ? 'visible' : 'hidden')
 			, ':user_id' => $user->get('id')
 		));		
-
 		if ($sth->rowCount()) {
 			$this->session->set('feedback', ucfirst($_POST['type']) . ' "' . $_POST['title'] . '" created. <a href="' . $this->config->getUrl('back') . '">Back to list</a>');
 			return $this->database->dbh->lastInsertId();

@@ -1,10 +1,7 @@
 <?php require_once($this->pathView() . 'admin/header.php'); ?>
 
-<div class="content media clearfix">
-	<h1>Media</h1>
-	<div class="clearfix text-right row">
-		upload
-	</div>
+<div class="content media gallery clearfix">
+	<h1>Gallery</h1>
 	<div class="browser"></div>
 </div>
 

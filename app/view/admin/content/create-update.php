@@ -2,13 +2,13 @@
 
 <div class="content <?php echo $this->urlSegment(2); ?> <?php echo ($this->get('model_admin_maincontent') ? 'update' : 'create'); ?>" data-id="<?php echo $this->get('model_admin_maincontent', 'id'); ?>">
 	<h1><?php echo ($this->get('model_admin_maincontent') ? 'Update ' . ucfirst($this->urlSegment(2)) . ' ' . $this->get('model_admin_maincontent', 'title') : 'Create new ' . ucfirst($this->urlSegment(2))); ?></h1>
-	<form class="main" method="post"<?php echo ($this->urlSegment(2) == 'minutes' ? ' enctype="multipart/form-data"' : ''); ?>>
+	<form class="main" method="post" enctype="multipart/form-data">
 		<div class="row">	
 			<label class="above" for="form_title">Title</label>
 			<input id="form_title" class="required" type="text" name="title" maxlength="75" value="<?php echo $this->get('model_admin_maincontent', 'title'); ?>">
 		</div>			
 
-<?php if ($this->urlSegment(2) != 'minutes'): ?>
+<?php if ($this->urlSegment(2) != 'minutes' && $this->urlSegment(2) != 'cup'): ?>
 
 		<div class="row">
 			<label class="above" for="form_meta_title">Meta Title</label>
@@ -65,7 +65,7 @@
 <?php if (! $this->get('model_mainmedia') || $this->urlSegment(2) != 'minutes'): ?>
 
 			<label class="above" for="form_attach">Attach a file</label>
-			<input id="form_attach" type="file" name="media[]"<?php echo ($this->urlSegment(2) == 'minutes' ? '' : ' multiple') ?>>
+			<input id="form_attach" type="file" name="media[]"<?php echo ($this->urlSegment(2) == 'minutes' || $this->urlSegment(2) == 'cup' ? '' : ' multiple') ?>>
 
 <?php endif ?>
 <?php if ($this->get('model_mainmedia')): ?>

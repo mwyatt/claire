@@ -1,10 +1,231 @@
-var BASE_URL = $('body').data('url-base');
+var ajax = '<div class="ajax"></div>';
 
-(function($) {  
-$.fn.mediaBrowser = function(options) {  
-	console.log(options);  
-};  
-})(jQuery); 
+/**
+ * constructs a media browser area based on the options provided
+ * can customise the root directory
+ * requires a php ajax construct to upload and remove files
+ * options
+ * 		directory: string,
+ * @param  {object} $ 
+ */
+(function($){
+	$.fn.mediaBrowser = function(options) {
+		// @todo find a way to remove
+		if (! this.length) {
+			return;
+		};
+		var thisCore = this;
+		var html = {
+			base: '<div class="control clearfix">'
+				+ '<p class="bread">'
+					+ '<span class="tree"></span>'
+				+ '</p>'
+				+ '<div class="upload">'
+				    + '<label for="form_images">Upload Media</label>'
+				    + '<input id="form_images" type="file" name="images" multiple />'
+				    + '<div id="response"></div>'
+				    + '<ul id="image-list"></ul>'
+				+ '</div>'
+			+ '</div>'
+			+ '<div class="directory clearfix" ></div>'
+			, newFolder: '<div class="new">'
+					+ '<div class="inner clearfix">'
+						+ '<label for="form_create_folder">Create Folder</label>'
+						+ '<input id="form_create_folder" type="text">'
+						+ '<a class="submit">Create</a>'
+					+ '</div>'
+				+ '</div>'
+		}
+		var bread = [];
+		var defaults = {
+			defaultDirectory: ''
+			, thumbWidth: '250'
+			, thumbHeight: '200'
+		}
+		var options = $.extend(defaults, options);
+		$(thisCore).html(html.base);
+		getDirectory('');
+		var uploadFormData = false;
+		if (window.FormData) {
+	  		uploadFormData = new FormData();
+	  		// document.getElementById("btn").style.display = "none";
+		}
+		function getBread() {
+			var path = options.defaultDirectory + '';
+			for (var i = 0; i < bread.length; i++) {
+				path += bread[i];
+			}
+			return path;
+		}
+		function assignHandler() {
+			$(thisCore).find('.directory').find('.folder').off().on('click', function() {
+				getDirectory($(this).data('path'));
+			});
+			$(thisCore).find('.directory').find('.file').find('.remove').on('click', function(e) {
+				e.preventDefault();
+				e.stopPropagation();
+				removeFile($(this).parent().data('path'));
+			});
+			$(thisCore).find('.directory').find('.folder').find('.remove').on('click', function(e) {
+				e.preventDefault();
+				e.stopPropagation();
+				removeFolder($(this).parent().data('path'));
+			});
+			$(thisCore).find('.back').off().on('click', getPreviousDirectory);
+			$(thisCore).find('.directory').find('.submit').off().on('click', function() {
+				createFolder($(thisCore).find('.directory').find('input#form_create_folder').val());
+			});
+			$(thisCore).find('.directory').find('input').on('keyup', function(e) {
+				if (e.keyCode == 13) {
+					createFolder($(thisCore).find('.directory').find('input#form_create_folder').val());
+					e.preventDefault();
+					return false;
+				}
+			});
+			$('#form_images').on('change', upload);
+		}
+		function getDirectory(folder) {
+			$(thisCore).find('.directory').html(ajax);
+			if (folder) {
+				bread.push(folder);
+			};
+			$.getJSON(url.base + 'ajax/media-browser/get-directory?path=' + getBread(), function(results) {
+				$(thisCore).find('.ajax').remove();
+				if (results) {
+					$(thisCore).find('.back').remove();
+					$(thisCore).find('.directory').html('');
+					if (bread.length) {
+						$(thisCore).find('.bread').prepend('<a class="back">Back</a>');
+					};
+					$(thisCore).find('.bread').find('.tree').html(getBread());
+					if ('folder' in results) {
+						$.each(results.folder, function() {
+							$(thisCore).find('.directory').append('<a class="folder" data-path="' + this.basename + '/" title="/' + this.basename + '/"><div class="img"><img src="' + url.base + 'media/folder.png" alt="' + this.basename + '"></div><span title="Remove folder" class="remove">&times;</span><p>' + this.basename + '</p></a>');
+						});
+					};
+					$(thisCore).find('.directory').append(html.newFolder);
+					if ('file' in results) {
+						$.each(results.file, function() {
+							this.extension = this.extension.toLowerCase();
+							if (this.extension == 'png' || this.extension == 'jpg' || this.extension == 'gif') {
+								$(thisCore).find('.directory').append('<a target=_blank" href="' + url.base + this.guid + '" class="clearfix file hide" data-path="' + getBread() + this.basename + '" title="' + this.basename + '"><div class="img"><img src="' + url.base + 'timthumb/?src=' + url.base + this.guid + '&w=' + options.thumbWidth + '&h=' + options.thumbHeight + '" alt="' + this.basename + '"></div><span title="Remove file" class="remove">&times;</span><p>' + this.basename + '</p></a>');
+							}
+							if (this.extension == 'pdf') {
+								$(thisCore).find('.directory').append('<a class="clearfix file hide" data-path="' + this.path + '" title="' + this.basename + '"><div class="img"><img src="img/icon-pdf.png" alt="' + this.basename + '"></div><span title="Remove file" class="remove">&times;</span><p>' + this.basename + '</p></a>');
+							}
+						});
+					};
+					assignHandler();
+					bringIn();
+				}
+			});
+		}
+		function bringIn() {
+			$(thisCore).find('.hide').each(function(index) {
+				$(this).delay(100 * index).fadeIn(300);
+			});
+		}
+		function getPreviousDirectory() {
+			if (bread.length) {
+				bread.splice(-1, 1);
+			};
+		    getDirectory('');
+		}
+		function createFolder(folderName) {
+			if (! /\S/.test(folderName)) {
+				return;
+			}
+			// folderName = folderName.replace(/\s/g, '-').toLowerCase();
+			$.getJSON(url.base + 'ajax/media-browser/create-folder?path=' + getBread() + folderName + '/', function(results) {
+				if (results) {
+					getDirectory('');
+				};
+			});
+		}
+		function removeFolder(path) {
+			if (confirm('Are you sure you want to remove this folder? "' + path + '". Note: If the folder contains files or folders it will not be removed.')) {
+				$.getJSON(url.base + 'ajax/media-browser/remove-folder?path=' + getBread() + path, function(results) {
+					if (results) {
+						getDirectory('');
+					};
+				});
+			}
+		}
+		function removeFile(path) {
+			if (confirm('Are you sure you want to remove this file? "' + path + '". This can\'t be undone.')) {
+				$.getJSON(url.base + 'ajax/media-browser/remove-file?path=' + path, function(results) {
+					if (results) {
+						getDirectory('');
+					};
+				});
+			}
+		}
+		function upload() {
+	 		document.getElementById("response").innerHTML = "Uploading..."
+	 		var i = 0;
+	 		var len = this.files.length;
+	 		var img;
+	 		var reader;
+	 		var file;
+			for ( ; i < len; i++ ) {
+				file = this.files[i];
+				// if (!!file.type.match(/image.*/)) {
+					if ( window.FileReader ) {
+						reader = new FileReader();
+						// reader.onloadend = function (e) { 
+						// 	// showUploadedItem(e.target.result, file.fileName);
+						// };
+						reader.readAsDataURL(file);
+					}
+					if (uploadFormData) {
+						uploadFormData.append("images[]", file);
+					}
+				// }	
+			}
+			if (uploadFormData) {
+				$.ajax({
+					url: url.base + 'ajax/media-browser/upload?path=' + getBread(),
+					type: 'POST',
+					data: uploadFormData,
+					processData: false,
+					contentType: false,
+					success: function (res) {
+						document.getElementById("response").innerHTML = res; 
+						$('#form_images').remove();
+						$('.upload').find('label').after('<input id="form_images" type="file" name="images" multiple />');
+						uploadFormData = new FormData();
+						$('#form_images').on('change', upload);
+						getDirectory('');
+					}
+				});
+			}
+		}
+	};
+})(jQuery);
+
+var url = {
+	base: '',
+	query: false,
+
+	initialise: function() {
+		var vars = [], hash;
+		var hashes = window.location.href.slice(window.location.href.indexOf('&') + 1).split('&');
+		for(var i = 0; i < hashes.length; i++)
+		{
+		    hash = hashes[i].split('=');
+		    vars.push(hash[0]);
+		    vars[hash[0]] = hash[1];
+		}
+		url.query = vars;
+	},
+
+	getPart: function(part) {
+		if (part in url.query) {
+			return url.query[part];
+		}
+		return false;
+	}
+}
 
 var feedback = {
 	container: false,
@@ -67,7 +288,7 @@ var select = {
 		select._reset('player');
 		$(select.team).html('');
 
-		$.getJSON(BASE_URL + '/ajax/team/?division_id=' + $(select.division).val(), function(results) {
+		$.getJSON(url.base + '/ajax/team/?division_id=' + $(select.division).val(), function(results) {
 			if (results) {
 				$(select.team).append('<option value="0"></option>');
 				$.each(results, function(index, result) {
@@ -88,7 +309,7 @@ var select = {
 		} else {
 			playerSelect = $(this).parent().find('select[name^="player[right]"]');
 		}
-		$.getJSON(BASE_URL + '/ajax/player/', function(results) {
+		$.getJSON(url.base + '/ajax/player/', function(results) {
 			if (results) {
 				$(playerSelect).html('');
 				$.each(results, function(index, result) {
@@ -208,7 +429,7 @@ var select = {
 		}
 		select.player = $(select.container).find('select[name^="player[' + select.side + ']"]');
 		$(select.player).html('');
-		$.getJSON(BASE_URL + '/ajax/player/?team_id=' + $(this).val(), function(results) {
+		$.getJSON(url.base + '/ajax/player/?team_id=' + $(this).val(), function(results) {
 			if (results) {
 				$(select.player).append('<option value="0">Absent Player</option>');
 				$.each(results, function(index, result) {
@@ -232,6 +453,7 @@ function formSubmit() {
 // document ready
 
 $(document).ready(function() {
+	url.base = $('body').data('url-base');
 	less.watch();
 	$.ajaxSetup ({  
 		cache: false
@@ -240,13 +462,20 @@ $(document).ready(function() {
 	select.init();
 	feedback.init();
 	$('form').find('a.submit').on('mouseup', formSubmit);
+	if ($('.content.media.index').length) {
+		$('.browser').mediaBrowser();
+	}
+	if ($('.content.media.gallery').length) {
+		$('.browser').mediaBrowser({
+			defaultDirectory: 'gallery/'
+		});
+	}
 	if (
 		$('.content.page.create').length
 		|| $('.content.page.update').length
 		|| $('.content.press.create').length
 		|| $('.content.press.update').length
 	) {
-		console.log('value');
 		var editor = new wysihtml5.Editor("form_html", {
 		  toolbar:        "toolbar",
 		  parserRules:    wysihtml5ParserRules,
@@ -255,8 +484,9 @@ $(document).ready(function() {
 	}
 	$(document).mouseup(removeModals);	
 	$(document).keyup(function(e) {
-		if (e.keyCode == 27)
+		if (e.keyCode == 27) {
 			removeModals();
+		}
 	});	
 	function removeModals() {
 		$('*').removeClass('active');

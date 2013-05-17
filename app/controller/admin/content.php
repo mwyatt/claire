@@ -18,7 +18,6 @@ class Controller_Admin_Content extends Controller
 	public function initialise() {
 		$content = new Model_Admin_Maincontent($this->database, $this->config);
 		$media = new Model_Mainmedia($this->database, $this->config);
-
 		if (array_key_exists('form_create', $_POST)) {
 			if ($id = $content->create()) {
 				$media->uploadAttach($id);
@@ -27,30 +26,26 @@ class Controller_Admin_Content extends Controller
 				$this->route('base', 'admin/content/' . $this->config->getUrl(2) . '/');
 			}
 		}
-
 		if (array_key_exists('form_update', $_POST)) {
 			if ($content->update()) {
 				$media->uploadAttach($_GET['edit']);
 			}
 			$this->route('current');
 		}
-
 		if (array_key_exists('edit', $_GET)) {
 			$content->readById($_GET['edit']);
-			if (array_key_exists('media', $content->data)) {
-				$media->read($content->data['media']);
+		if (array_key_exists('media', $content->data)) {
+				$media->readById($content->data['media']);
 				$this->view->setObject($media);
 			}
 			$this->view
 				->setObject($content)
 				->loadTemplate('admin/content/create-update');
 		}
-
 		if (array_key_exists('delete', $_GET)) {
 			$content->deleteById($_GET['delete']);
 			$this->route('current_noquery');
 		}
-
 		if ($this->config->getUrl(3) == 'new') {
 			$this->view->loadTemplate('admin/content/create-update');
 		}

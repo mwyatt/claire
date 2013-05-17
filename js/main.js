@@ -1,3 +1,5 @@
+var ajax = '<div class="ajax"></div>';
+
 var a =  document.createElement('a');
 a.href = window.location.href;
 var url = {

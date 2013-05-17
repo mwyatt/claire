@@ -15,6 +15,9 @@ class Controller
 {
 
 
+	public $path = 'app/controller/';
+
+
 	public $session;
 
 
@@ -47,9 +50,9 @@ class Controller
 	public $config;
 
 
-	// public function __construct() {
-
-	// }
+	public function __construct() {
+		$this->path = BASE_PATH . $this->path;
+	}
 
 
 	/**
@@ -64,55 +67,53 @@ class Controller
 			$method .= ucfirst($word);
 		}
 		$method = lcfirst($method);
+		if ($method == '__construct') {
+			return $this->index();
+		}
 		if (method_exists($this, $method)) {
 			return $this->$method();
 		}
-		return $this->index();
+		if (method_exists($this, 'index')) {
+			return $this->index();
+		}
+		return false;
 	}
 
 
 	/**
-	 * attempts to load controller based on segment(s) given
-	 * if file found then it is included and config is passed through
-	 * @todo add a param for passing view object through so that global data
-	 * is spared
-	 * @param  string $path
-	 * @return null
+	 * loads a controller based on the properties given
+	 * @param  array $names    the url segments to find the controller
+	 * @param  string $method   url portion to isse next command
+	 * @param  object $view     the previous view to retain stored object data
+	 * @param  object $database 
+	 * @param  object $config   
+	 * @return null           the controller is loaded into this scope
 	 */
-	public function load($names = false, $method = false, $view = false, $database = false, $config = false)	{
-		if ($database && $config) {
-			$this->database = $database;
-			$this->config = $config;
-		} else {
-			return false;
-		}
+	public function load($names, $method, $view, $database, $config)	{
+		$path = $this->path;
 		$this->session = new Session();
 		$this->cache = new Cache(false);
-		if ($view) {
-			$this->view = $view;
-		} else {
+		$this->database = $database;
+		$this->config = $config;
+		$this->view = $view;
+		if (! $view) {
 			$this->view = new View($this->database, $this->config);
 		}
 		if (method_exists($this, 'initialise')) {
 			$this->initialise();
 		}
-		if ($names) {
-			$path = BASE_PATH . 'app/controller/';
-			$controllerName = 'Controller_';
-			foreach ($names as $name) {
-				if ($name) {
-					$path .= strtolower($name) . '/';
-					$controllerName .= ucfirst($name) . '_';
-				}
-			}
-			$controllerName = rtrim($controllerName, '_');
-			$path = rtrim($path, '/') . '.php';
-			if (is_file($path)) {
-				$controller = new $controllerName();
-				$controller->load(false, false, $this->view, $this->database, $this->config);
-				$controller->loadMethod($method);
-				return true;
-			}
+		$controllerName = 'Controller_';
+		foreach ($names as $name) {
+			$path .= strtolower($name) . '/';
+			$controllerName .= ucfirst($name) . '_';
+		}
+		$controllerName = rtrim($controllerName, '_');
+		$path = rtrim($path, '/') . '.php';
+		if (is_file($path)) {
+			$controller = new $controllerName();
+			$controller->load(false, false, $this->view, $this->database, $this->config);
+			$controller->loadMethod($method);
+			return true;
 		}
 		return false;
 	}
@@ -133,10 +134,6 @@ class Controller
 	protected function getId($segment) {
 		return end(explode('-', $segment));
 	}
-
-	// public function setView($view) {		
-	// 	$this->view = $view;
-	// }
 
 
 }

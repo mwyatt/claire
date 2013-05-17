@@ -16,12 +16,12 @@ class Controller_Admin_Media extends Controller
 
 
 	public function index() {
-		$this->view->loadTemplate('admin/media/index');
+		$this->view->loadTemplate('admin/media-index');
 	}
 
 
 	public function gallery() {
-		$this->view->loadTemplate('admin/media/gallery');
+		$this->view->loadTemplate('admin/media-gallery');
 	}
 
 	
