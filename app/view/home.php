@@ -32,20 +32,20 @@
 	<div class="ads">
 		<a href="media/handbook.pdf" class="handbook ad">
 			<span></span>
-			Download the Handbook
+			<h4>Download the Handbook</h4>
 		</a>
 		<a href="" class="ad">
 			<span></span>
-			Tables and results
+			<h4>Tables and results</h4>
 		</a>
 		<a href="gallery/" class="ad">
 			<span></span>
-			The gallery
+			<h4>The gallery</h4>
 		</a>
 		<a href="player/prformance/" class="ad">
 			<span class="tag new">New</span>
 			<span></span>
-			Player performance
+			<h4>Player performance</h4>
 		</a>
 	</div>
 </div>

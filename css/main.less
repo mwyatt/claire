@@ -749,14 +749,13 @@ div.content.single {
 
 	a {
 		background-color: @orange;
-		color: @white;
 		display: block;
-		padding: 1.5em;
-		font-size: 1em;
-		font-weight: 600;
+		padding: 1em;
 		margin: 0 0 1em;
+		min-height: 3em;
 
 		span {
+			background-color: red;
 			background-image: url(../media/sprite-100.png);
 			background-position: -343px -42px;
 			display: block;
@@ -764,6 +763,14 @@ div.content.single {
 			height: 1em;
 			margin: 0 .7em 0 0;
 			float: left;
+		}
+
+		h4 {
+			color: @white;
+			font-weight: 400;
+			font-size: 1.6em;
+			line-height: 1.3em;
+			margin: 0 0 0 2em;
 		}
 	}
 }
