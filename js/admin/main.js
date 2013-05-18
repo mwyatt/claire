@@ -135,7 +135,7 @@ var ajax = '<div class="ajax"></div>';
 			if (! /\S/.test(folderName)) {
 				return;
 			}
-			// folderName = folderName.replace(/\s/g, '-').toLowerCase();
+			folderName = folderName.replace(/\s/g, '-').toLowerCase();
 			$.getJSON(url.base + 'ajax/media-browser/create-folder?path=' + getBread() + folderName + '/', function(results) {
 				if (results) {
 					getDirectory('');

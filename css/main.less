@@ -3,6 +3,41 @@
 @import "mixin.less";
 @import "font-open-sans.less";
 
+.content.gallery {
+
+	.left, .right {
+		float: none;
+	}
+
+	.col.left {
+		background-color: darken(@white, 5%);
+		border: 1px solid darken(@white, 20%);
+		padding: 1em;
+		margin: 0 0 1em;
+	}
+
+	// .col.right {
+	// 	width: 70%;
+	// }
+
+	.folder {
+		display: block;
+		// margin: 0 0 .5em;
+		padding: .7em 0;
+		font-weight: bold;
+		border-top: 1px solid darken(@white, 15%);
+
+		&:first-child {
+			border: none;
+		}
+	}
+
+	.file img {
+		width: 29.8%;
+		margin: 1.3%;
+	}
+}
+
 a.button,
 .button {
 	.gradient (darken(@white, 2%), darken(@white, 4%));

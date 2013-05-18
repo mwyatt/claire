@@ -302,6 +302,9 @@ abstract class Model extends Config
 	}
 
 	public function getGuid($type = false, $name = false, $id = false) {
+		if ($type == 'timthumb') {
+			return $this->config->getUrl('base') . 'timthumb/?src=' . $this->config->getUrl('base') . $name;
+		}
 		if ($type == 'media') {
 			return $this->config->getUrl('base') . $this->dir . $name;
 		}

@@ -73,6 +73,42 @@ class Controller_Front extends Controller
 	}
 
 
+	public function gallery() {
+		$model = new Model_Maincontent($this->database, $this->config);
+		$basePath = BASE_PATH . 'media/upload/gallery/';
+		$albumTitle = '';
+		foreach (new DirectoryIterator($basePath) as $order => $file) {
+		    if ($file->isDir() && ! $file->isDot()) {
+		    	$folderTitle = '';
+		    	foreach (explode('-', $file->getFilename()) as $word) {
+		    		$folderTitle .= ucfirst($word) . ' ';
+		    	}
+		        $folders[$order]['title'] = trim($folderTitle);
+		        $folders[$order]['guid'] = $model->getGuid('media', 'gallery/' . urlencode($file->getFilename()) . '/');
+		    }
+		}
+		if ($this->config->getUrl(1)) {
+			$basePath .= $this->config->getUrl(1) . '/';
+			foreach (explode('-', $this->config->getUrl(1)) as $word) {
+				$albumTitle .= ucfirst($word) . ' ';
+			}
+			$this->view->setObject('album_title', trim($albumTitle));
+		}
+		foreach (glob($basePath . '*', GLOB_MARK) as $key => $handle) {
+			if (! is_dir($handle)) {
+				$fileInfo = pathinfo($handle);
+				$files[$key] = $fileInfo;
+				$files[$key]['timthumb'] = $model->getGuid('timthumb', 'media/upload/gallery/' . ($this->config->getUrl(1) ? $this->config->getUrl(1) . '/' : '') . $fileInfo['basename'] . '&w=250&h=200');
+				$files[$key]['guid'] = $model->getGuid('media', 'media/upload/gallery/' . ($this->config->getUrl(1) ? $this->config->getUrl(1) . '/' : '') . urlencode($fileInfo['basename']));
+			}
+		}
+		$this->view
+			->setObject('folder', $folders)
+			->setObject('file', $files)
+			->loadTemplate('gallery');
+	}
+
+
 	public function archive() {
 		$archive = new Model_Ttarchive($this->database, $this->config);
 		if ($this->config->getUrl(1)) {

@@ -67,10 +67,9 @@ class View extends Model
 
 		// prepare common models
 		$this->header();
-	
 		foreach ($this->objects as $title => $object) {
 			$titles[] = $title; // temp
-			if (method_exists($object, 'getData')) {
+			if ($object instanceof Model) {
 				if ($object->getData()) {
 					$this->data[$title] = $object->getData();
 				} else {

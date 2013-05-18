@@ -102,7 +102,8 @@ class Controller_Ajax_Mediabrowser extends Controller_Ajax
 		}
 		foreach ($_FILES["images"]["error"] as $key => $error) {
 		    if ($error == UPLOAD_ERR_OK) {
-		        move_uploaded_file($_FILES["images"]["tmp_name"][$key], $this->basePath . $this->currentPath . $_FILES["images"]["name"][$key]);
+		        $name = strtolower(str_replace(' ', '-', $_FILES["images"]["name"][$key]));
+		        move_uploaded_file($_FILES["images"]["tmp_name"][$key], $this->basePath . $this->currentPath . $name);
 		    }
 		}
 	}
