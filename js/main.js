@@ -1,5 +1,65 @@
 var ajax = '<div class="ajax"></div>';
 
+/**
+ * takes control of a list of items and makes them scrollable fun
+ * functions this can perform:
+ * scroll between banners using speed option
+ */
+(function($){
+	$.fn.cover = function(options) {
+		if (! this.length) return;
+		var core = this;
+		var defaults = {
+			speed: 3000
+			, fadeSpeed: 200
+		}
+		var options = $.extend(defaults, options);
+		var interval = {
+			timer: 0
+			, start: function() {
+				clearTimeout(interval.timer);
+				interval.timer = setTimeout(next, options.speed);
+			}
+			, stop: function() {
+				clearTimeout(interval.timer);
+				interval.timer = setTimeout(next, options.speed);
+			}
+		}
+		var info = {
+			total: $(core).find('a').length
+		}
+		if (info.total > 1) {
+			start();
+		};
+		function start() {
+			$.each($(core).find('a'), function(index) {
+				if (index > 0) {
+					$(this).addClass('hide');
+				};
+			});
+			interval.start();
+		}
+		function next() {
+			var nextIndex = false;
+			$.each($(core).find('a'), function(index) {
+				if (! $(this).hasClass('hide')) {
+					nextIndex = index + 1;
+					$(this).fadeOut(options.fadeSpeed).delay(options.fadeSpeed).addClass('hide');
+				};
+			});
+			if (nextIndex > info.total) {
+				$(core).find('a').first().fadeIn(options.fadeSpeed).delay(options.fadeSpeed).removeClass('hide');
+				return
+			};
+			$.each($(core).find('a'), function(index) {
+				if (index == nextIndex) {
+					$(this).fadeIn(options.fadeSpeed).delay(options.fadeSpeed).removeClass('hide');
+				};
+			});
+		}
+	};
+})(jQuery);
+
 var a =  document.createElement('a');
 a.href = window.location.href;
 var url = {
@@ -350,23 +410,6 @@ var player = {
 	}
 }
 
-var spinnerOptions = {
-	lines: 7, // The number of lines to draw
-	length: 2, // The length of each line
-	width: 2, // The line thickness
-	radius: 8, // The radius of the inner circle
-	corners: 0, // Corner roundness (0..1)
-	rotate: 0, // The rotation offset
-	color: '#fff', // #rgb or #rrggbb
-	speed: 1.5, // Rounds per second
-	trail: 50, // Afterglow percentage
-	shadow: false, // Whether to render a shadow
-	hwaccel: false, // Whether to use hardware acceleration
-	zIndex: 2e9, // The z-index (defaults to 2000000000)
-	top: 'auto', // Top position relative to parent in px
-	left: 'auto' // Left position relative to parent in px
-};
-
 function closeActive () {
 	$('.active').removeClass('active');
 }
@@ -410,19 +453,8 @@ $(document).ready(function() {
 	$.ajaxSetup ({  
 		cache: false  
 	});
-	$.fn.spin = function(spinnerOptions) {
-	  this.each(function() {
-	    var $this = $(this),
-	        data = $this.data();
-	    if (data.spinner) {
-	      data.spinner.stop();
-	      delete data.spinner;
-	    }
-	    if (spinnerOptions !== false) {
-	      data.spinner = new Spinner($.extend({color: $this.css('color')}, spinnerOptions)).spin(this);
-	    }
-	  });
-	  return this;
+	if ($('.content.home').length) {
+		// $('.cover').cover();
 	};
 	if ($('.content.player.single').length) {
 		player.readRankChange();

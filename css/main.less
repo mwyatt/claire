@@ -818,44 +818,55 @@ div.content.home {
 
 
 .cover {
-  
-}
+	position: relative;
 
-.cover .inner {
-	background-color: lighten(@warmBlack, 20%);
-	padding: 1em;
-	display: block;
-	margin: 0 1em 1em 1em;
-
-	h1 {
-		font-size: 2em;
-		font-weight: 600;
-		margin: 0 0 0.3em;
-	}
-
-	h1,
-	p {
-		color: @white;
-		line-height: 1em;
-	}
-
-	p {
-		margin: 0 0 1.1em;
-		line-height: 1.4em;
-		font-size: 1.1em;
-		font-weight: 100;
-	}
-
-	.button {
+	.inner {
+		position: absolute;
+		background-color: lighten(@warmBlack, 20%);
+		padding: 1em;
 		display: block;
-		text-align: center;
-	}
+		margin: 0 1em 1em 1em;
 
-	&.gallery {
-		background-image: url('../media/cover-1.png');
-		background-position: 100% 100%;
+		h1 {
+			font-size: 2em;
+			font-weight: 600;
+			margin: 0 0 0.3em;
+		}
+
+		h1,
+		p {
+			color: @white;
+			line-height: 1em;
+		}
+
+		p {
+			margin: 0 0 1.1em;
+			line-height: 1.4em;
+			font-size: 1.1em;
+			font-weight: 100;
+		}
+
+		.button {
+			display: block;
+			text-align: center;
+		}
+
+		&.photo-gallery {
+			background-image: url('../media/cover-1.png');
+			background-position: 100% 100%;
+		}
+
+		&.hide {
+			display: none;
+		}
+
+		.bring-in {
+			.animation (coverFadeIn, 1s, 0, ease-in-out);
+		}
 	}
 }
+
+.cover 
 
 div.content.team {
 

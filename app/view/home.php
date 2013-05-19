@@ -1,12 +1,43 @@
 <?php require_once('header.php'); ?>
-
+<?php 
+$covers[] = array(
+	'title' => 'Photo Gallery'
+	, 'guid' => $this->url('base') . 'gallery/'
+	, 'description' => 'View photos from the recent 2013 tournament.'
+	, 'button' => 'Go'
+);
+$covers[] = array(
+	'title' => 'Summer League'
+	, 'guid' => $this->url('base') . 'page/summer-league/'
+	, 'description' => 'Register your interest for the upcoming summer league.'
+	, 'button' => 'More Information'
+);
+$covers[] = array(
+	'title' => 'Player Performance'
+	, 'guid' => $this->url('base') . 'player/performance/'
+	, 'description' => 'Visit the player performance to see who has gained the most ranking points throughout the season.'
+	, 'button' => 'Go'
+);
+shuffle($covers);
+?>
+<?php if ($covers): ?>
+	
 <div class="cover">
-	<a href="gallery/" class="inner clearfix gallery">
-		<h1>Photo Gallery</h1>
-		<p>View photos from the recent 2013 tournament.</p>
-		<span class="button">Go</span>
+
+	<?php foreach ($covers as $cover): ?>
+		
+	<a href="<?php echo $this->get($cover, 'guid') ?>" class="inner clearfix <?php echo $this->urlFriendly($this->get($cover, 'title')) ?>">
+		<h1><?php echo $this->get($cover, 'title') ?></h1>
+		<p><?php echo $this->get($cover, 'description') ?></p>
+		<span class="button"><?php echo $this->get($cover, 'button') ?></span>
 	</a>
+
+	<?php endforeach ?>
+
 </div>
+
+<?php endif ?>
+
 <div class="content home clearfix">
 
 <?php if ($this->get('model_maincontent')): ?>
