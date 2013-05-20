@@ -10,7 +10,7 @@ var ajax = '<div class="ajax"></div>';
 		if (! this.length) return;
 		var core = this;
 		var defaults = {
-			speed: 3000
+			speed: 2000
 			, fadeSpeed: 200
 		}
 		var options = $.extend(defaults, options);
@@ -18,15 +18,17 @@ var ajax = '<div class="ajax"></div>';
 			timer: 0
 			, start: function() {
 				clearTimeout(interval.timer);
-				interval.timer = setTimeout(next, options.speed);
+				interval.timer = setInterval(next, options.speed);
 			}
 			, stop: function() {
 				clearTimeout(interval.timer);
-				interval.timer = setTimeout(next, options.speed);
+				interval.timer = setInterval(next, options.speed);
 			}
 		}
 		var info = {
 			total: $(core).find('a').length
+			, current: 0
+			, next: 0
 		}
 		if (info.total > 1) {
 			start();
@@ -40,20 +42,15 @@ var ajax = '<div class="ajax"></div>';
 			interval.start();
 		}
 		function next() {
-			var nextIndex = false;
-			$.each($(core).find('a'), function(index) {
-				if (! $(this).hasClass('hide')) {
-					nextIndex = index + 1;
-					$(this).fadeOut(options.fadeSpeed).delay(options.fadeSpeed).addClass('hide');
-				};
-			});
-			if (nextIndex > info.total) {
-				$(core).find('a').first().fadeIn(options.fadeSpeed).delay(options.fadeSpeed).removeClass('hide');
-				return
+			info.current += 1;
+			if (info.current > info.total) {
+				info.current = 0;
 			};
+			console.log(info.current);
 			$.each($(core).find('a'), function(index) {
-				if (index == nextIndex) {
-					$(this).fadeIn(options.fadeSpeed).delay(options.fadeSpeed).removeClass('hide');
+				$(this).addClass('bring-out');
+				if (info.current == index) {
+					$(this).removeClass('bring-out').removeClass('hide').addClass('bring-in');
 				};
 			});
 		}
@@ -454,7 +451,7 @@ $(document).ready(function() {
 		cache: false  
 	});
 	if ($('.content.home').length) {
-		// $('.cover').cover();
+		$('.cover').cover();
 	};
 	if ($('.content.player.single').length) {
 		player.readRankChange();
