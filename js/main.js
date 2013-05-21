@@ -43,15 +43,18 @@ var ajax = '<div class="ajax"></div>';
 		}
 		function next() {
 			info.current += 1;
-			if (info.current > info.total) {
+			if (info.current == info.total) {
 				info.current = 0;
 			};
 			console.log(info.current);
 			$.each($(core).find('a'), function(index) {
-				$(this).addClass('bring-out');
 				if (info.current == index) {
+					// $(this).show();
 					$(this).removeClass('bring-out').removeClass('hide').addClass('bring-in');
-				};
+				} else {
+					// $(this).hide();
+					$(this).removeClass('bring-in').addClass('bring-out');
+				}
 			});
 		}
 	};

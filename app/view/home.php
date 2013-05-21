@@ -26,7 +26,7 @@ shuffle($covers);
 
 	<?php foreach ($covers as $cover): ?>
 		
-	<a href="<?php echo $this->get($cover, 'guid') ?>" class="inner clearfix <?php echo $this->urlFriendly($this->get($cover, 'title')) ?>">
+	<a href="<?php echo $this->get($cover, 'guid') ?>" class="inner clearfix hide <?php echo $this->urlFriendly($this->get($cover, 'title')) ?>">
 		<h1><?php echo $this->get($cover, 'title') ?></h1>
 		<p><?php echo $this->get($cover, 'description') ?></p>
 		<span class="button"><?php echo $this->get($cover, 'button') ?></span>
