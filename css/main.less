@@ -410,6 +410,8 @@ header .search {
 	}
 }
 
+.action {}
+
 .row {
 	margin: 0 0 1.5em;
 } 
@@ -417,7 +419,7 @@ header .search {
 nav.main {
 	background: lighten(@warmBlack, 80%);
 	font-size: 1.2em;
-	margin: 0 0 1em;
+	// margin: 0 0 1em;
 
 	ul, li {
 		margin: 0;
@@ -818,14 +820,14 @@ div.content.home {
 
 
 .cover {
-	position: relative;
 
 	.inner {
-		position: absolute;
 		background-color: lighten(@warmBlack, 20%);
 		padding: 1em;
-		display: block;
+		// display: block;
 		margin: 0 1em 1em 1em;
+		background-position: 100% 100%;
+		min-height: 20em;
 
 		h1 {
 			font-size: 2em;
@@ -853,24 +855,23 @@ div.content.home {
 
 		&.photo-gallery {
 			background-image: url('../media/cover-1.png');
-			background-position: 100% 100%;
 		}
 
 		&.hide {
 			display: none;
 		}
-
-		.bring-in {
-			.animation (coverFadeIn, 1s, 0, ease-in-out);
-		}
-		
-		.bring-out {
-			.animation (coverFadeOut, 1s, 0, ease-in-out);
-		}
 	}
 }
 
-.cover 
+.bring-in {
+	.animation (fadeIn, 1s, 0, ease-in-out, 1);
+	display: block;
+} 
+
+.bring-out {
+	.animation (fadeOut, 1s, 0, ease-in-out, 1);
+	display: none;
+}
 
 div.content.team {
 

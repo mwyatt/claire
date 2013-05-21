@@ -79,10 +79,12 @@
     background-image: -o-linear-gradient(left, @startColor, @endColor);
 }
 
-.animation (@name, @duration: 300ms, @delay: 0, @ease: ease) {
+.animation (@name, @duration: 300ms, @delay: 0, @ease: ease, @iteration: 1) {
     -webkit-animation: @name @duration @delay @ease;
     -moz-animation:    @name @duration @delay @ease;
     -ms-animation:     @name @duration @delay @ease;
+    -webkit-animation-iteration-count: $iteration;
+    -webkit-animation-fill-mode: forwards;
 }
 
 .transition (@transition) {
@@ -243,7 +245,7 @@
     background-repeat: no-repeat;
 }
 
-@-webkit-keyframes coverFadeIn {
+@-webkit-keyframes fadeIn {
 
     0%  {
         .opacity (0);
@@ -254,7 +256,7 @@
     }
 }
 
-@-webkit-keyframes coverFadeOut {
+@-webkit-keyframes fadeOut {
 
     0%  {
         .opacity (1);

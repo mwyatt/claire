@@ -10,7 +10,7 @@ var ajax = '<div class="ajax"></div>';
 		if (! this.length) return;
 		var core = this;
 		var defaults = {
-			speed: 2000
+			speed: 6000
 			, fadeSpeed: 200
 		}
 		var options = $.extend(defaults, options);

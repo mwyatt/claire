@@ -5,8 +5,10 @@
 
 <?php if ($this->get('player') || $this->get('team')): ?>
 	
-	<a href="merit/" class="button">Merit Table</a>
-	<a href="league/" class="button">League Table</a>
+	<div class="action clearfix">
+		<a href="merit/" class="button">Merit Table</a>
+		<a href="league/" class="button">League Table</a>
+	</div>
 
 	<?php if ($this->get('player')) : ?>
 	
