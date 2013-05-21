@@ -281,7 +281,7 @@ class Model_Ttplayer extends Model
 			}
 		}
 		if ($this->data) {
-			array_multisort($averages, SORT_DESC, $this->data);
+			array_multisort(array_filter($averages), SORT_DESC, $this->data);
 			return $this->data;
 		} else {
 			return false;

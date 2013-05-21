@@ -41,8 +41,13 @@ class Controller_Ajax extends Controller
 	
 	public function ttFixtureResult() {
 		$fixtureResult = new Model_Ttfixture_Result($this->database, $this->config);
-		if (method_exists($fixtureResult, $_GET['method'])) {
+		if (
+			$_GET['method'] == 'readByPlayerId'
+			|| $_GET['method'] == 'another'
+		) {
 			$fixtureResult->$_GET['method']($_GET['action']);
+		}
+		if (method_exists($fixtureResult, $_GET['method'])) {
 		}
 		$this->out($fixtureResult->getData());
 	}

@@ -26,7 +26,7 @@ shuffle($covers);
 
 	<?php foreach ($covers as $key => $cover): ?>
 		
-	<a href="<?php echo $this->get($cover, 'guid') ?>" class="inner clearfix <?php echo ($key !== 0 ? 'hide' : '') ?>  <?php echo $this->urlFriendly($this->get($cover, 'title')) ?>">
+	<a href="<?php echo $this->get($cover, 'guid') ?>" class="inner clearfix <?php echo $this->urlFriendly($this->get($cover, 'title')) ?>">
 		<h1><?php echo $this->get($cover, 'title') ?></h1>
 		<p><?php echo $this->get($cover, 'description') ?></p>
 		<span class="button"><?php echo $this->get($cover, 'button') ?></span>
@@ -43,8 +43,8 @@ shuffle($covers);
 <?php if ($this->get('model_maincontent')): ?>
     
 	<div class="press">
-		<a href="press/" class="button">All press</a>
-		<h2>Hot off the press</h2>
+		<a href="press/" class="all right">All press</a>
+		<h2>Press Releases</h2>
 
     <?php foreach ($this->get('model_maincontent') as $press): ?>
 
@@ -65,15 +65,15 @@ shuffle($covers);
 			<span></span>
 			<h4>Download the Handbook</h4>
 		</a>
-		<a href="" class="ad">
+		<a href="" class="ad green">
 			<span></span>
 			<h4>Tables and results</h4>
 		</a>
-		<a href="gallery/" class="ad">
+		<a href="gallery/" class="ad silver">
 			<span></span>
 			<h4>The gallery</h4>
 		</a>
-		<a href="player/prformance/" class="ad">
+		<a href="player/prformance/" class="ad red">
 			<span class="tag new">New</span>
 			<span></span>
 			<h4>Player performance</h4>

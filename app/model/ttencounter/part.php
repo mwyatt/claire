@@ -60,9 +60,13 @@ class Model_Ttencounter_Part extends Model
 	}	
 
 
-	public function readPerformance($playerId = false)
+	/**
+	 * pulls out a full list of the entire player performance list, ordered by
+	 * the player ranking change. the player with the most ranking points
+	 * is the one who has beaten the most players with the most points
+	 */
+	public function readPerformance()
 	{	
-
 		$sth = $this->database->dbh->query("
 			select
 				tt_player.id as player_id
@@ -77,17 +81,12 @@ class Model_Ttencounter_Part extends Model
 			group by tt_player.id
 			order by player_rank_change desc
 		");
-
-		// if ($playerId) {
-		// 	$sql .= " where tt_encounter_part.player_id = :playerId ";
-		// 	$execution[':playerId'] = $playerId;
-		// }
-		
 		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {	
 			$row['player_guid'] = $this->getGuid('player', $row['player_name'], $row['player_id']);
 			$row['team_guid'] = $this->getGuid('team', $row['team_name'], $row['team_id']);
 			$this->data[] = $row;
 		}
+		
 	}	
 
 

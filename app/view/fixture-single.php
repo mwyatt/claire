@@ -6,7 +6,7 @@
 
 <?php if ($this->get('model_ttfixture')) : ?>
 
-		<table cellspacing="0" cellpadding="0">
+		<table class="main" width="100%" cellspacing="0" cellpadding="0">
 
 	<?php foreach ($this->get('model_ttfixture') as $fixture): ?>
 		

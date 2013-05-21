@@ -68,10 +68,11 @@ header .search {
 	}
 
 	input[type="text"] {
-		background: lighten(@black, 90%);
+		background: darken(@white, 5%);
 		margin: 0;
 		padding: 0.4em 0.5em;
 		font-size: 1.1em;
+		border: 1px solid darken(@white, 10%);
 	}
 
 	section {
@@ -107,27 +108,6 @@ header .search {
 	margin-bottom: .9em;
 }
 
-footer.main { 
-
-	nav {
-		margin: 0 1em 1em;
-
-		a {
-			background: darken(@white, 10%);
-			color: darken(@white, 50%);
-			font-family: 'Arial', 'sans-serif';
-			font-weight: bold;
-			display: block;
-			padding: 1em;
-			border-top: 1px solid darken(@white, 15%);
-
-			&:first-child {
-				border-top: none;
-			}
-		}
-	}
-
-	.address {
-		font-size: 0.8em;
-	}
+div.content.league table.main .won {
+	display: table-cell;
 }

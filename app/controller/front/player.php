@@ -54,9 +54,8 @@ class Controller_Front_Player extends Controller
 	 * the best
 	 */
 	public function performance() {
-		$this->cache->load('performance');
 		$player = new Model_Ttplayer($this->database, $this->config);
-		$encounterPart = new Model_ttEncounterPart($this->database, $this->config);
+		$encounterPart = new Model_Ttencounter_Part($this->database, $this->config);
 		$encounterPart->readPerformance();
 		$this->view
 			->setObject($encounterPart)

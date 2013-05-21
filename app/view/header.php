@@ -31,7 +31,7 @@
                         <label>Search</label>
                         <form class="main" method="get">
                             <span class="close"></span>
-                            <input type="text" name="query" type="search" maxlength="75">
+                            <input type="text" name="query" type="search" maxlength="75" placeholder="Search Players, Teams...">
                             <a href="#" class="submit button">Search</a>
                             <input type="submit">
                         </form> 

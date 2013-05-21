@@ -46,7 +46,7 @@ var ajax = '<div class="ajax"></div>';
 			if (info.current == info.total) {
 				info.current = 0;
 			};
-			console.log(info.current);
+			// console.log(info.current);
 			$.each($(core).find('a'), function(index) {
 				if (info.current == index) {
 					// $(this).show();
@@ -144,8 +144,7 @@ var resize = {
 		}
 		if (resize.docWidth > 975) {
 			if ($('.content.division.overview').length) {
-				division.container = '.content.division.overview';
-				division.readResultSummary($('.content.division.overview').data('division-id'));
+				load.divisionReadResultSummary($('.content.division.overview').data('division-id'));
 			};
 		} else {
 			// $(search.container).off();
@@ -213,7 +212,7 @@ var search = {
 		$(search.section).html('');
 		$.getJSON(url.base + '/ajax/search/?query=' + $(search.input).val() + '&limit=5', function(results) {
 			if (results) {
-				console.log(results);
+				// console.log(results);
 				$(search.section).html('');
 				$.each(results, function(index, result) {
 					$(search.section).append('<a href="' + result.guid + '">' + result.name + '</a>');
@@ -247,15 +246,132 @@ var navSub = {
 	}
 }
 
-var division = {
-	container: false,
+var fixtureResult = {
 
-	readResultSummary: function(id) {
-		if ($(division.container).find('table.summary').length) {
+	readByTeam: function() {
+	$.getJSON(url.base + '/ajax/tt-fixture-result/?method=readByTeam&action=' + $('.content.team.single').data('id'), function(results) {
+			if (results) {
+				// console.log(results);
+				$.each(results, function(index, result) {
+					$('.content.team.single').find('.fixture').append(
+						'<a href="' + result.guid + '" class="card clearfix">'
+							+ '<div class="team-left">' + result.team_left_name + '</div>'
+							+ '<div class="score-left">' + result.team_left_score + '</div>'
+							+ '<div class="team-right">' + result.team_right_name + '</div>'
+							+ '<div class="score-right">' + result.team_right_score + '</div>'
+						+ '</a>'
+					);
+				});
+			}
+		});
+	}
+}
+
+var load = {
+
+	playerReadByTeam: function() {
+		if ($('.content.team.single').find('.players').length) {
 			return false;
-		};
+		} else {
+			$('.content.team.single').find('.general-stats').after(
+				'<div class="players clearfix">'
+					+ '<h2>Registered players</h2>'
+					+ '<div class="ajax"></div>'
+				+ '</div>'
+			);
+		}
+		$.getJSON(url.base + '/ajax/player/?team_id=' + $('.content.team.single').data('id'), function(results) {
+			if (results) {
+				// console.log(results);
+				$('.ajax').remove();
+				html = '<ul>';
+				$.each(results, function(index, result) {
+					html += '<li><a href="' + result.guid + '" title="View player ' + result.name + '">' + result.name + '</a></li>';
+				});
+				html += '</ul>';
+				$('.content.team.single').find('.players').find('h2').after(html);
+			}
+		});
+	},
+	playerReadSingle: function() {
+		$.getJSON(url.base + '/ajax/search/?query=' + $(search.input).val() + '&limit=5', function(results) {
+			if (results) {
+				// console.log(results);
+				$(search.section).html('');
+				$.each(results, function(index, result) {
+					$(search.section).append('<a href="' + result.guid + '">' + result.name + '</a>');
+				});
+			}
+		});
+	},
+	playerReadFixture: function() {
+		$.getJSON(url.base + 'ajax/tt-fixture-result/?method=readByPlayerId&action=' + $('.content.player.single').data('id'), function(results) {
+			if (results) {
+				$('.content.player.single').find('.performance').after(
+					'<div class="fixture clearfix">'
+						+ '<h2>Fixtures</h2>'
+					+ '</div>'
+				);
+				$.each(results, function(index, result) {
+					$('.content.player.single').find('.fixture').append(
+						'<a href="' + result.guid + '" class="card clearfix">'
+							+ '<div class="team-left">' + result.team_left_name + '</div>'
+							+ '<div class="score-left">' + result.team_left_score + '</div>'
+							+ '<div class="team-right">' + result.team_right_name + '</div>'
+							+ '<div class="score-right">' + result.team_right_score + '</div>'
+						+ '</a>'
+					);
+				});
+			}
+		});
+	},
+	playerReadRankChange: function() {
+		$.getJSON(url.base + '/ajax/tt-encounter-part/?method=readRankChange&player_id=' + $('.content.player.single').data('id'), function(result) {
+			if (result) {
+				$('.content.player.single').find('.performance').prepend('<span class="tag total ' + (result['player_rank_change'] > 0 ? 'positive' : 'negative') + '">' + (result['player_rank_change'] > 0 ? '+' : '') + result['player_rank_change'] + '</span>');
+			}
+		});
+	},
+	playerReadPerformance: function() {
+		var side = '';
+		var otherSide = '';
+		var victor = '';
+		var playerId = $('.content.player.single').data('id');
+		$.getJSON(url.base + '/ajax/tt-encounter-result/?player_id=' + playerId + '&limit=3', function(results) {
+			if (results) {
+				// console.log(results);
+				$.each(results, function(index, result) {
+					$('.content.player.single').find('.general-stats').after(
+						'<div class="performance clearfix">'
+							+ '<h2>Performance</h2>'
+						+ '</div>'
+					);
+					if (result['player_left_id'] == playerId) {
+						side = 'left';
+						otherSide = 'right';
+					} else {
+						side = 'right';
+						otherSide = 'left';
+					}
+					if (result[side + '_score'] == 3) {
+						victor = 'Won';
+					} else {
+						victor = 'lost';
+					}
+					$('.content.player.single').find('.performance').append('<p>' + victor + ' vs <a href="' + result['player_' + otherSide + '_guid'] + '" title="View player ' + result['player_' + otherSide + '_full_name'] + '">' + result['player_' + otherSide + '_full_name'] + '</a> <span class="rank-change tag ' + (result[side + '_rank_change'] > 0 ? 'positive' : 'negative') + '">' + (result[side + '_rank_change'] > 0 ? '+' : '') + result[side + '_rank_change'] + '</span></p>');
+				});
+			}
+		});
+	},
+	divisionReadResultSummary: function(id) {
+		// if ($('.content.division.overview').find('table.summary').length) {
+		// 	return false;
+		// };
 		$.getJSON(url.base + '/ajax/division/?summary=' + id, function(data) {
 			if (data) {
+				if (! data.result.length) {
+					return false;
+				};
 				var resultFound;
 				var htmlHeading = '';
 				var htmlRows = '';
@@ -285,126 +401,9 @@ var division = {
 					html += '</tr>';
 				});
 				html += '</table>';
-				$(division.container).find('h1').after(html);
-			}
-		});
-	}
-}
-
-var fixtureResult = {
-
-	readByTeam: function() {
-	$.getJSON(url.base + '/ajax/tt-fixture-result/?method=readByTeam&action=' + $('.content.team.single').data('id'), function(results) {
-			if (results) {
-				console.log(results);
-				$.each(results, function(index, result) {
-					$('.content.team.single').find('.fixture').append(
-						'<a href="' + result.guid + '" class="card clearfix">'
-							+ '<div class="team-left">' + result.team_left_name + '</div>'
-							+ '<div class="score-left">' + result.team_left_score + '</div>'
-							+ '<div class="team-right">' + result.team_right_name + '</div>'
-							+ '<div class="score-right">' + result.team_right_score + '</div>'
-						+ '</a>'
-					);
-				});
-			}
-		});
-	}
-}
-
-var player = {
-	container: false,
-
-	readByTeam: function() {
-		if ($('.content.team.single').find('.players').length) {
-			return false;
-		} else {
-			$('.content.team.single').find('.general-stats').after(
-				'<div class="players clearfix">'
-					+ '<h2>Registered players</h2>'
-					+ '<div class="ajax"></div>'
-				+ '</div>'
-			);
-		}
-		$.getJSON(url.base + '/ajax/player/?team_id=' + $('.content.team.single').data('id'), function(results) {
-			if (results) {
-				console.log(results);
-				$('.ajax').remove();
-				html = '<ul>';
-				$.each(results, function(index, result) {
-					html += '<li><a href="' + result.guid + '" title="View player ' + result.name + '">' + result.name + '</a></li>';
-				});
-				html += '</ul>';
-				$('.content.team.single').find('.players').find('h2').after(html);
-			}
-		});
-	},
-
-	readSingle: function() {
-		$.getJSON(url.base + '/ajax/search/?query=' + $(search.input).val() + '&limit=5', function(results) {
-			if (results) {
-				// console.log(results);
-				$(search.section).html('');
-				$.each(results, function(index, result) {
-					$(search.section).append('<a href="' + result.guid + '">' + result.name + '</a>');
-				});
-			}
-		});
-	},
-
-	readFixture: function() {
-		$.getJSON(url.base + '/ajax/tt-fixture-result/?method=readByPlayerId&player_id=' + $('.content.player.single').data('id'), function(results) {
-			if (results) {
-				$.each(results, function(index, result) {
-					$('.content.player.single').find('.fixture').append(
-						'<a href="' + result.guid + '" class="card clearfix">'
-							+ '<div class="team-left">' + result.team_left_name + '</div>'
-							+ '<div class="score-left">' + result.team_left_score + '</div>'
-							+ '<div class="team-right">' + result.team_right_name + '</div>'
-							+ '<div class="score-right">' + result.team_right_score + '</div>'
-						+ '</a>'
-					);
-				});
-			}
-		});
-	},
-
-	readRankChange: function() {
-		$.getJSON(url.base + '/ajax/tt-encounter-part/?method=readRankChange&player_id=' + $('.content.player.single').data('id'), function(result) {
-			if (result) {
-				$('.content.player.single').find('.performance').prepend('<span class="total">' + result['player_rank_change'] + '</span>');
-				if (parseInt(result['player_rank_change'])) {
-					$('.content.player.single').find('.performance').find('.total').addClass('positive');
-				} else {
-					$('.content.player.single').find('.performance').find('.total').addClass('negative');
-				}
-			}
-		});
-	},
-
-	readPerformance: function() {
-		var side = '';
-		var otherSide = '';
-		var victor = '';
-		var playerId = $('.content.player.single').data('id');
-		$.getJSON(url.base + '/ajax/tt-encounter-result/?player_id=' + playerId + '&limit=3', function(results) {
-			if (results) {
-				// console.log(results);
-				$.each(results, function(index, result) {
-					if (result['player_left_id'] == playerId) {
-						side = 'left';
-						otherSide = 'right';
-					} else {
-						side = 'right';
-						otherSide = 'left';
-					}
-					if (result[side + '_score'] == 3) {
-						victor = 'Won';
-					} else {
-						victor = 'lost';
-					}
-					$('.content.player.single').find('.performance').append('<div>' + victor + ' vs <a href="' + result['player_' + otherSide + '_guid'] + '" title="View player ' + result['player_' + otherSide + '_full_name'] + '">' + result['player_' + otherSide + '_full_name'] + '</a> <span class="rank-change">' + result[side + '_rank_change'] + '</span></div>');
-				});
+				if (! $('.content.division.overview table.main.summary').length) {
+					$('.content.division.overview').find('h1').after(html);
+				};
 			}
 		});
 	}
@@ -457,12 +456,12 @@ $(document).ready(function() {
 		$('.cover').cover();
 	};
 	if ($('.content.player.single').length) {
-		player.readRankChange();
-		player.readPerformance();
-		player.readFixture();
+		load.playerReadPerformance();
+		load.playerReadRankChange();
+		load.playerReadFixture();
 	};
 	if ($('.content.team.single').length) {
-		player.readByTeam();
+		load.playerReadByTeam();
 		fixtureResult.readByTeam();
 	};
 });
