@@ -337,9 +337,11 @@ var load = {
 		var otherSide = '';
 		var victor = '';
 		var playerId = $('.content.player.single').data('id');
-		$.getJSON(url.base + '/ajax/tt-encounter-result/?player_id=' + playerId + '&limit=3', function(results) {
+		$.getJSON(url.base + '/ajax/tt-encounter-result/', {player_id: playerId, limit: 3}, function(results) {
 			if (results) {
-				// console.log(results);
+				if ($('.content.player.single').find('.performance').length) {
+					return;
+				};
 				$.each(results, function(index, result) {
 					$('.content.player.single').find('.general-stats').after(
 						'<div class="performance clearfix">'
