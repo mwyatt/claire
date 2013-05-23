@@ -3,7 +3,7 @@
 <div class="content league fixtures clearfix">
 	<h1>Fulfilled Fixtures</h1>
 	<div class="clearfix text-right row">
-		<a class="new button" href="<?php echo $this->url('current_noquery'); ?>fulfill/" title="Add a new fixture">Submit Scorecard</a>
+		<a class="new button" href="<?php echo $this->url('current_noquery'); ?>fulfill/" title="Submit scorecard">Submit scorecard</a>
 	</div>
 
 <?php foreach ($this->get('model_ttdivision') as $division): ?>

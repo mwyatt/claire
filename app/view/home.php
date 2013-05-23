@@ -26,7 +26,7 @@ shuffle($covers);
 
 	<?php foreach ($covers as $key => $cover): ?>
 		
-	<a href="<?php echo $this->get($cover, 'guid') ?>" class="inner clearfix <?php echo $this->urlFriendly($this->get($cover, 'title')) ?>">
+	<a href="<?php echo $this->get($cover, 'guid') ?>" class="inner bring-out clearfix <?php echo $this->urlFriendly($this->get($cover, 'title')) ?>">
 		<h1><?php echo $this->get($cover, 'title') ?></h1>
 		<p><?php echo $this->get($cover, 'description') ?></p>
 		<span class="button"><?php echo $this->get($cover, 'button') ?></span>
@@ -59,28 +59,27 @@ shuffle($covers);
 	</div>
 
 <?php endif ?>
-
-<a href="" class="ad green">
-	<span></span>
-	<h4>Tables and results</h4>
-</a>
-<a href="gallery/" class="ad silver">
-	<span></span>
-	<h4>The gallery</h4>
-</a>
-<a href="player/performance/" class="ad red">
-	<span class="tag new">New</span>
-	<span></span>
-	<h4>Player performance</h4>
-</a>
 <?php 
+$covers = false;
 $covers[] = array(
 	'title' => 'Download the Handbook'
 	, 'guid' => $this->url('base') . 'media/handbook.pdf'
+	, 'theme' => 'orange'
 );
 $covers[] = array(
 	'title' => 'Tables and results'
-	, 'guid' => $this->url('base') . 'media/handbook.pdf'
+	, 'guid' => $this->url('base') . 'tables-and-results/'
+	, 'theme' => 'green'
+);
+$covers[] = array(
+	'title' => 'Player Performance'
+	, 'guid' => $this->url('base') . 'player/performance/'
+	, 'theme' => 'silver'
+);
+$covers[] = array(
+	'title' => 'The Gallery'
+	, 'guid' => $this->url('base') . 'gallery/'
+	, 'theme' => 'red'
 );
 shuffle($covers);
 ?>
@@ -90,7 +89,7 @@ shuffle($covers);
 
 	<?php foreach ($covers as $key => $cover): ?>
 		
-	<a href="<?php echo $this->get($cover, 'guid') ?>" class="<?php echo $this->urlFriendly($this->get($cover, 'title')) ?> ad">
+	<a href="<?php echo $this->get($cover, 'guid') ?>" class="<?php echo $this->urlFriendly($this->get($cover, 'title')) ?> ad <?php echo $this->get($cover, 'theme') ?>">
 		<span></span>
 		<h4><?php echo $this->get($cover, 'title') ?></h4>
 	</a>

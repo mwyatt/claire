@@ -37,7 +37,10 @@ var ajax = '<div class="ajax"></div>';
 			$.each($(core).find('a'), function(index) {
 				if (index > 0) {
 					$(this).addClass('hide');
-				};
+				} else {
+					$(this).removeClass('bring-out');
+					$(this).addClass('bring-in');
+				}
 			});
 			interval.start();
 		}
@@ -46,13 +49,10 @@ var ajax = '<div class="ajax"></div>';
 			if (info.current == info.total) {
 				info.current = 0;
 			};
-			// console.log(info.current);
 			$.each($(core).find('a'), function(index) {
 				if (info.current == index) {
-					// $(this).show();
 					$(this).removeClass('bring-out').removeClass('hide').addClass('bring-in');
 				} else {
-					// $(this).hide();
 					$(this).removeClass('bring-in').addClass('bring-out');
 				}
 			});

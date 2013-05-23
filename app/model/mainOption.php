@@ -10,17 +10,6 @@ class Model_Mainoption extends Model
 {	
 
 
-	// /**
-	//  * returns class title
-	//  */
-	// public function getClassTitle()
-	// {		
-	
-	// 	return __CLASS__;
-		
-	// }
-	
-
 	public function read()	{		
 		$sth = $this->database->dbh->query("	
 			select

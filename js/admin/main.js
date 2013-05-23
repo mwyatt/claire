@@ -445,9 +445,9 @@ var select = {
 	}
 }
 
-function formSubmit() {
-	$(this).closest('form').submit();
-	return false;
+function formSubmit(e, button) {
+	$(button).closest('form').submit();
+	e.preventDefault();
 }
 
 // document ready
@@ -461,7 +461,9 @@ $(document).ready(function() {
 	exclude.init();
 	select.init();
 	feedback.init();
-	$('form').find('a.submit').on('mouseup', formSubmit);
+	$('form').find('a.submit').on('click', function(e) {
+		formSubmit(e, this);
+	});
 	if ($('.content.media.index').length) {
 		$('.browser').mediaBrowser();
 	}

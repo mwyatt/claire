@@ -51,6 +51,18 @@ class Controller_Front extends Controller
 	}
 
 
+	public function tablesAndResults() {
+		$division = new Model_Ttdivision($this->database, $this->config);
+		$division->read();
+		$this->view
+			->setMeta(array(		
+				'title' => 'Tables and Results'
+			))
+			->setObject($division)
+			->loadTemplate('tables-and-results');
+	}
+
+
 	public function page() {
 		if ($this->config->getUrl(1)) {
 			$page = new Model_Maincontent($this->database, $this->config);

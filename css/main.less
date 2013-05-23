@@ -445,7 +445,7 @@ nav.main {
 	}
 
 	li.active > a {
-		background-color: darken(@orange, 10%);
+		background: darken(@orange, 20%);
 	}
 
 	li > a {
@@ -465,43 +465,70 @@ nav.main {
 		border-top: 1px solid lighten(@warmBlack, 45%);
 	}
 
-	.drop {
-		display: none;
-		font-size: 1em;
-		background-color: lighten(@warmBlack, 40%);
-
-		a {
-			display: block;
-			color: @white;
-			padding: 1em;
-			border-top: 1px solid lighten(@warmBlack, 50%);
-			font-size: .9em;
-		}
-
-		div a {
-			
-		}
-
-		h4 a {
-			display: block;
-			font-size: 1.1em;
-			text-align: center;
-			background-color: lighten(@warmBlack, 35%);
-			padding: .5em;
-		}
-
-		div[class^="division"]:first-child h4 {
-			border-top: 0;
-			padding-top: 0;
-		}
-	}
-
 	.active .drop {
 		display: block;
 	}
 
 	> div {
 		display: inline;
+	}
+}
+
+nav.main .drop {
+	display: none;
+	font-size: 1em;
+	background-color: darken(@orange, 20%);
+
+	a {
+		padding: 1em;
+		border-top: 1px solid lighten(@orange, 0%);
+		font-size: .9em;
+		font-weight: 600;
+	}
+
+	h4,
+	a {
+		display: block;
+		color: @white;
+	}
+
+	h4 a {
+		font-size: 1.1em;
+		text-align: center;
+		padding: .5em;
+		color: inherit;
+	}
+
+	div[class^="division"]:first-child h4 {
+		border-top: 0;
+		padding-top: 0;
+	}
+}
+
+.content.tables-and-results {
+
+	div[class^="division"] {
+		width: 19.8%;
+		margin: 0;
+		float: left;
+		padding: 0 0 0 5%;
+		border-left: 1px solid darken(@white, 20%);
+		margin-bottom: 3em;
+	}
+
+	a {
+		display: block;
+		padding: 1em;
+	}
+
+	h4 {
+		margin: 0;
+		font-size: 1.3em;
+	}
+
+	div[class^="division"]:first-of-type {
+		margin: 0;
+		border: none;
 	}
 }
 
@@ -696,7 +723,6 @@ table.main {
 
 .tag {
 	.border-radius (3px);
-	// background-color: @orange-gray;
 	cursor: default;
 	font-size: 1.4em;
 	font-weight: 600;
@@ -746,6 +772,30 @@ div.content.single {
 
 .ads {
 
+	span {
+		// display: block;
+		// display: none;
+		// background-color: red;
+		// background-image: url(../media/sprite-100.png);
+		// background-position: -343px -42px;
+		// width: 1em;
+		// height: 1em;
+		// margin: 0 .7em 0 0;
+		// float: left;
+	}
+
+	h4 {
+		color: @white;
+		font-weight: 400;
+		font-size: 1.6em;
+		line-height: 1em;
+		margin: 0;
+	}
+
+	.tag.new {
+		float: right;
+	}
+
 	a {
 		background-color: @orange;
 		display: block;
@@ -754,26 +804,6 @@ div.content.single {
 		min-height: 3em;
 		background-position: 100% 100%;
 		background-repeat: no-repeat;
-
-		span {
-			display: block;
-			display: none;
-			background-color: red;
-			background-image: url(../media/sprite-100.png);
-			background-position: -343px -42px;
-			width: 1em;
-			height: 1em;
-			margin: 0 .7em 0 0;
-			float: left;
-		}
-
-		h4 {
-			color: @white;
-			font-weight: 400;
-			font-size: 1.6em;
-			line-height: 1em;
-			margin: 0;
-		}
 
 		&.green {
 			background-color: @green;
@@ -789,7 +819,7 @@ div.content.single {
 	}
 }
 
-div.content.home { 
+.content.home { 
 	padding: 0 1em 1em;
 
 	.press {
@@ -808,7 +838,6 @@ div.content.home {
 
 		.item {
 			clear: both;
-			border-top: 1px solid lighten(@warmBlack, 80%);
 			padding: 1em 0;
 			display: block;
 
@@ -839,7 +868,7 @@ div.content.home {
 		// display: block;
 		margin: 0 1em 1em 1em;
 		background-position: 100% 100%;
-		// min-height: 20em;
+		min-height: 12em;
 
 		h1 {
 			font-size: 2em;
@@ -1123,10 +1152,6 @@ footer.main {
 		&:first-child {
 			border-top: none;
 		}
-	}
-
-	.address {
-		// font-size: 0.8em;
 	}
 }
 

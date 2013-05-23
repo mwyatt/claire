@@ -38,6 +38,13 @@ class Controller_Admin extends Controller
 			$this->session->set('form_field', array('email' => $_POST['email_address']));
 			$this->route('base', 'admin/');
 		}
+		if (array_key_exists('season', $_GET) && $_GET['season'] == 'start' && ! $this->config->getOption('season_start')) {
+			$ttfixture = new model_admin_ttfixture($this->database, $this->config);
+			$ttfixture->create();
+			$this->session->set('feedback', 'All fixtures generated. You may now <a href="' . $this->config->getUrl('base') . 'league/fixture/fulfill/" title="submit a scorecard">submit a scorecard</a>.');
+			$this->route('base', 'admin/league/fixture/fulfill/');
+		}
+
 		if ($user->isLogged()) {
 			$user->setData($user->get());
 			$this->view->setObject($user);

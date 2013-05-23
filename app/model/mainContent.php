@@ -40,7 +40,7 @@ class Model_Maincontent extends Model
 			" . ($where ? ' where main_content.type = :type ' : '') . "
 			" . ($id ? ' and main_content.id = :id ' : '') . "
 			group by main_content.id
-			order by main_content.date_published
+			order by main_content.date_published desc
 			" . ($limit ? ' limit :limit ' : '') . "
 		");
 		if ($id) {
@@ -101,7 +101,7 @@ class Model_Maincontent extends Model
 			left join main_content_meta on main_content_meta.content_id = main_content.id
 			left join main_user on main_user.id = main_content.user_id
 			where main_content.title like ? and main_content.status = 'visible'
-			order by main_content.date_published
+			order by main_content.date_published desc
 		");
 		$sth->execute(array('%' . current($title) . '%'));	
 		$this->data = $this->setMeta($sth->fetchAll(PDO::FETCH_ASSOC));

@@ -9,7 +9,7 @@ try {
 		->setPassword('123')
 		->insert(10);
 	$user
-		->setEmail('Realbluesman@tiscali.co.uk')
+		->setEmail('realbluesman@tiscali.co.uk')
 		->setPassword('e.l.t.t.l.12')
 		->insert(1);
 	
@@ -111,6 +111,7 @@ try {
 			, ('thumb1', '50, 50')		
 			, ('thumb2', '200, 200')		
 			, ('thumb3', '500, 500')
+			, ('season_status', '')
 	");	
 
 	// $database->dbh->query("

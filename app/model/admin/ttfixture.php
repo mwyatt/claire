@@ -13,6 +13,7 @@
 class Model_Admin_Ttfixture extends Model_Ttfixture
 {
 
+
 	public function readById($id) {
 		$sth = $this->database->dbh->prepare("	
 			select
@@ -89,4 +90,56 @@ class Model_Admin_Ttfixture extends Model_Ttfixture
 		}
 	}
 	
+
+	/**
+	 * generates each fixture seperated by division
+	 * teams must not change division beyond this point
+	 * @return null
+	 */
+	public function create() {
+		
+		$sth = $this->database->dbh->query("	
+			SELECT
+				tt_division.id as division_id
+				, tt_team.id as team_id
+			FROM
+				tt_division				
+			LEFT JOIN tt_team ON tt_division.id = tt_team.division_id
+		");
+		
+		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {	
+			$this->data[$row['division_id']][] = $row['team_id'];
+		}						
+				
+		$sth = $this->database->dbh->prepare("
+			INSERT INTO
+				tt_fixture
+				(team_left_id, team_right_id)
+			VALUES
+				(:team_left_id, :team_right_id)
+		");				
+				
+		// loop to set team vs team fixtures
+		foreach ($this->data as $division) {
+		
+			foreach ($division as $key => $homeTeam) {
+			
+				foreach ($division as $key => $awayTeam) {
+		
+					if ($homeTeam !== $awayTeam) {
+										
+						$sth->execute(array(
+							':team_left_id' => $homeTeam
+							, ':team_right_id' => $awayTeam
+						));					
+					
+					}
+		
+				}
+			}
+		
+		}
+	}
+
+
 }

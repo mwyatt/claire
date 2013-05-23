@@ -1,23 +1,24 @@
 <?php require_once($this->pathView() . 'admin/header.php'); ?>
 
 <div class="content <?php echo $this->urlSegment(2); ?> <?php echo ($this->get('model_admin_maincontent') ? 'update' : 'create'); ?>" data-id="<?php echo $this->get('model_admin_maincontent', 'id'); ?>">
+	<a href="<?php echo $this->url('back') ?>" class="button back">Back</a>
 	<h1><?php echo ($this->get('model_admin_maincontent') ? 'Update ' . ucfirst($this->urlSegment(2)) . ' ' . $this->get('model_admin_maincontent', 'title') : 'Create new ' . ucfirst($this->urlSegment(2))); ?></h1>
 	<form class="main" method="post" enctype="multipart/form-data">
 		<div class="row">	
 			<label class="above" for="form_title">Title</label>
-			<input id="form_title" class="required" type="text" name="title" maxlength="75" value="<?php echo $this->get('model_admin_maincontent', 'title'); ?>">
+			<input id="form_title" class="required" type="text" name="title" maxlength="75" value="<?php echo $this->get('model_admin_maincontent', 'title'); ?>" autofocus="autofocus">
 		</div>			
 
 <?php if ($this->urlSegment(2) != 'minutes' && $this->urlSegment(2) != 'cup'): ?>
 
-		<div class="row">
+		<!-- <div class="row">
 			<label class="above" for="form_meta_title">Meta Title</label>
 			<input id="form_meta_title" type="text" name="meta_title" maxlength="75" value="<?php echo $this->get('model_admin_maincontent', 'meta_title'); ?>">
-		</div>
+		</div> -->
 
 		<div class="row">
 			<label class="above" for="form_html">Content</label>
-			<div id="toolbar" style="display: none;">
+			<div id="toolbar" class="toolbar clearfix" style="display: none;">
 				<a class="button" data-wysihtml5-command="bold" title="CTRL+B">bold</a>
 				<a class="button" data-wysihtml5-command="italic" title="CTRL+I">italic</a>
 				<a class="button" data-wysihtml5-command="createLink">insert link</a>
@@ -64,8 +65,10 @@
 
 <?php if (! $this->get('model_mainmedia') || $this->urlSegment(2) != 'minutes'): ?>
 
-			<label class="above" for="form_attach">Attach a file</label>
-			<input id="form_attach" type="file" name="media[]"<?php echo ($this->urlSegment(2) == 'minutes' || $this->urlSegment(2) == 'cup' ? '' : ' multiple') ?>>
+			<div class="row">
+				<label class="above" for="form_attach">Attach a file</label>
+				<input id="form_attach" type="file" name="media[]"<?php echo ($this->urlSegment(2) == 'minutes' || $this->urlSegment(2) == 'cup' ? '' : ' multiple') ?>>
+			</div>
 
 <?php endif ?>
 <?php if ($this->get('model_mainmedia')): ?>

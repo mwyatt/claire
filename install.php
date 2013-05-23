@@ -12,27 +12,12 @@
  */
 
 $controller = new Controller($database, $config);
-
-// session_unset();
-// session_destroy();
-// session_write_close();
-// setcookie(session_name(),'',0,'/');
-// session_regenerate_id(true);
-// echo '<pre>';
-// print_r($_SESSION);
-// echo '</pre>';
-// exit;
-
-// exit;
-
 if ($session->get('installing')) {
 	$user = new Model_Mainuser($database, $config);
 	require_once(BASE_PATH . 'install-table.php');
 	require_once(BASE_PATH . 'install-tabledata.php');
 	require_once(BASE_PATH . 'install-tabledata-maincontent.php');
 	require_once(BASE_PATH . 'install-tabledata-ttarchive.php');
-	$ttfixture = new Model_Ttfixture($database, $config);
-	$ttfixture->generateAll();
 	$session->getUnset('installing');
 	$controller->route('home');
 } else {

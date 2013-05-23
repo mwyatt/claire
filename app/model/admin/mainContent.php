@@ -29,7 +29,7 @@ class Model_Admin_Maincontent extends Model
 			left join main_content_meta on main_content_meta.content_id = main_content.id
 			left join main_user on main_user.id = main_content.user_id
 			where main_content.type = :type
-			order by main_content.date_published
+			order by main_content.date_published desc
 		");
 		$sth->execute(array(
 			':type' => $type

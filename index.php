@@ -14,21 +14,22 @@ spl_autoload_register(array('Autoloader', 'load'));
 $error = new Error($debug = 'yes');
 $database = new Database();
 $session = new Session();
-$session
-	->start();
+$session->start();
 $config = new Config();
+if (array_key_exists('install', $_GET)) {
+	require_once(BASE_PATH . 'install.php');
+}
+$mainOption = new Model_Mainoption($database, $config);
+$mainOption->read();
 $config
-	->setUrl();
+	->setOptions($mainOption->getData())
+	->setUrl();	
 $route = new Route();
-$route
-	->setObject($config);
+$route->setObject($config);
 $config
 	->setObject($error)
 	->setObject($session)
 	->setObject($route);
-if (array_key_exists('install', $_GET)) {
-	require_once(BASE_PATH . 'install.php');
-}
 $controller = new Controller();
 // admin, ajax
 if ($controller->load(array($config->getUrl(0)), $config->getUrl(1), false, $database, $config)) {

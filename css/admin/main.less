@@ -387,10 +387,100 @@ a.button,
 				width: 20px;
 				height: 24px;
 			}
-
-
 		}
 	}
+}
+
+.content.main-content table.main {
+
+	.title {
+		width: 40%;
+	}
+
+	.date {
+		width: 20%;
+	}
+
+	.status {
+		width: 11%
+	}
+}
+
+table.main {
+	margin: 0 0 2em;
+	
+	table {
+		border: 1px solid #eee;
+		margin: 0 0 2em;
+	}
+
+	thead th {
+		background-color: #eee;
+
+		padding: 1em;
+	}
+
+	th,
+	td {
+		border-left: 1px solid #eee;
+	}
+
+	th:first-child,
+	td:first-child {
+	}
+
+	td.action a {
+		margin: 0 0.9em 0 0;
+	}
+
+	td {
+		padding: 0.6em;
+	}
+
+	tbody tr {
+
+		&:nth-child(even) {
+			background: darken(@white, 2%);
+		}
+
+		&:hover {
+			background: darken(@white, 5%);
+			// border-bottom: 1px solid darken(@white, 7%);
+		}
+	}
+
+	tr {
+		.transition (background-color .1s ease-in-out);
+	}
+
+	tr:hover {
+		.text-shadow (1px 1px 0 @white);
+		background: darken(@white, 3%);
+	}
+
+	tr:first-child td {
+		// border-top: none;
+	}
+
+	th {
+		text-align: left;
+		background: darken(@white, 5%);
+	}
+	
+	th,
+	td {
+		border: 1px solid #e6e4e3;
+		// border-bottom: 1px solid #e6e4e3;
+		padding: 1em;
+	}
+
+	td:first-child {
+		// border-left: 1px solid #e6e4e3;
+	}
+}
+
+.button.back {
+	float: right;
 }
 
 .content.fixtures.update,
@@ -710,46 +800,7 @@ nav.sub {
 	}
 }
 
-table {
-	border: 1px solid #eee;
-	margin: 0 0 2em;
-}
 
-thead th {
-	background-color: #eee;
-
-	padding: 1em;
-}
-
-th,
-td {
-	border-left: 1px solid #eee;
-}
-
-th:first-child,
-td:first-child {
-	border-left: none;
-}
-
-td.action a {
-	margin: 0 0.9em 0 0;
-}
-
-td {
-	padding: 0.6em;
-}
-
-tbody tr {
-
-	&:nth-child(even) {
-		background: darken(@white, 2%);
-	}
-
-	&:hover {
-		background: darken(@white, 5%);
-		// border-bottom: 1px solid darken(@white, 7%);
-	}
-}
 
 
 
@@ -862,6 +913,24 @@ h1 {
 		margin: 0;
 	}
 }
+
+.content.page,
+.content.press {
+
+}
+
+.toolbar {
+	margin: 0 0 1em;
+}
+
+.toolbar .button {
+	float: left;
+	margin: 0 .5em .5em 0;
+	font-size: .8em;
+	padding: .5em 1em;
+	// background: red;
+}
+
 
 .content.page textarea,
 .content.press textarea {

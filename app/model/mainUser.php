@@ -244,7 +244,7 @@ class Model_Mainuser extends Model
 	public function permission() {
 		if (array_key_exists('form_login', $_POST)) {
 			if ($this->get('email') == 'martin.wyatt@gmail.com') {
-				$this->config->getObject('route')->home('admin/settings/');
+				$this->config->getObject('route')->home('admin/');
 			}
 			if ($this->get('email') == 'Realbluesman@tiscali.co.uk') {
 				$this->config->getObject('route')->home('admin/league/fixture/fulfill/');

@@ -16,9 +16,26 @@ class Config
 
 	public $data;
 	public $objects;
+	public $options;
 	public $url;
 
 	
+	public function setOptions($options) {
+		$this->options = $options;
+		return $this;
+	}
+
+
+	public function getOptions($key = '') {
+		return $this->options;
+	}
+
+
+	public function getOption($key) {
+		return (array_key_exists($key, $this->options) ? $this->options[$key] : false);
+	}
+
+
 	/**
 	 * returns an object if it has been registered
 	 */	

@@ -26,15 +26,13 @@ class View extends Model
 	 */	
 	public function header() {
 		$this->session = new Session($this->database, $this->config);
-		$mainoption = new Model_Mainoption($this->database, $this->config);
+		$options = $this->config->getoptions();
 		$this->setMeta(array(
-			'title' => $mainoption->get('meta_title'),
-			'keywords' => $mainoption->get('meta_keywords'),
-			'description' => $mainoption->get('meta_description')
+			'title' => $this->get($options, 'meta_title'),
+			'keywords' => $this->get($options, 'meta_keywords'),
+			'description' => $this->get($options, 'meta_description')
 		));
-		$mainoption->read();		
-		$this
-			->setObject($mainoption);
+		$this->setObject('options', $options);
 	}
 
 	
@@ -54,13 +52,11 @@ class View extends Model
 			$path = BASE_PATH . 'app/view/' . strtolower($templateTitle);
 		}
 		$path .= '.php';
-
 		$cache = new Cache($this->database, $this->config)	;
-		
 		if (!file_exists($path)) {
+			echo 'Template ' . $path . ' does not exist.';
 			return false;
 		}
-
 		$this->template = $path;
 		
 		// $this->config->url['history'] = $session->getPreviousUrl($this->config->url['current']);
@@ -81,6 +77,7 @@ class View extends Model
 		}
 
 		// echo '<pre>';
+		// print_r($this->session->getData());
 		// print_r($this->config);
 		// print_r($titles);
 		// print_r($this->data);
