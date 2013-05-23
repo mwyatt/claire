@@ -60,24 +60,47 @@ shuffle($covers);
 
 <?php endif ?>
 
-	<div class="ads">
-		<a href="media/handbook.pdf" class="handbook ad">
-			<span></span>
-			<h4>Download the Handbook</h4>
-		</a>
-		<a href="" class="ad green">
-			<span></span>
-			<h4>Tables and results</h4>
-		</a>
-		<a href="gallery/" class="ad silver">
-			<span></span>
-			<h4>The gallery</h4>
-		</a>
-		<a href="player/prformance/" class="ad red">
-			<span class="tag new">New</span>
-			<span></span>
-			<h4>Player performance</h4>
-		</a>
+<a href="" class="ad green">
+	<span></span>
+	<h4>Tables and results</h4>
+</a>
+<a href="gallery/" class="ad silver">
+	<span></span>
+	<h4>The gallery</h4>
+</a>
+<a href="player/performance/" class="ad red">
+	<span class="tag new">New</span>
+	<span></span>
+	<h4>Player performance</h4>
+</a>
+<?php 
+$covers[] = array(
+	'title' => 'Download the Handbook'
+	, 'guid' => $this->url('base') . 'media/handbook.pdf'
+);
+$covers[] = array(
+	'title' => 'Tables and results'
+	, 'guid' => $this->url('base') . 'media/handbook.pdf'
+);
+shuffle($covers);
+?>
+<?php if ($covers): ?>
+	
+<div class="ads">
+
+	<?php foreach ($covers as $key => $cover): ?>
+		
+	<a href="<?php echo $this->get($cover, 'guid') ?>" class="<?php echo $this->urlFriendly($this->get($cover, 'title')) ?> ad">
+		<span></span>
+		<h4><?php echo $this->get($cover, 'title') ?></h4>
+	</a>
+
+	<?php endforeach ?>
+
+</div>
+
+<?php endif ?>
+
 	</div>
 </div>
 
