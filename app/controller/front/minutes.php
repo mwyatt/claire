@@ -16,12 +16,20 @@ class Controller_Front_Minutes extends Controller
 
 	public function index() {
 		$minutes = new Model_Maincontent($this->database, $this->config);
+		$media = new model_mainmedia($this->database, $this->config);
 		$minutes->readByType('minutes');
+		foreach ($minutes->getData() as $minute) {
+			if (! array_key_exists('media', $minute)) {
+				continue;
+			}
+			$media->readById(array($minute['media']));
+			$minute['media'] = $media->getData();
+			$minuteCollection[] = $minute;
+		}
+		$minutes->setData($minuteCollection);
 		$this->view
 			->setMeta(array(		
-				'title' => 'All minutes'
-				, 'keywords' => 'minutes, reports'
-				, 'description' => 'All minutes currently published'
+				'title' => 'Minutes'
 			))
 			->setObject($minutes)
 			->loadTemplate('minutes');

@@ -1,6 +1,7 @@
 <?php require_once($this->pathView() . 'header.php'); ?>
 
 <div class="content division merit">
+	<a href="<?php echo $this->url('back') ?>" class="button right">Back to overview</a>
 	<h1><?php echo ucfirst($this->get('division', 'name')) ?> division merit</h1>
 
 <?php if ($this->get('model_ttplayer')) : ?>
@@ -35,10 +36,9 @@
 	</table>
 	
 <?php else: ?>
-	<?php require_once($this->pathView() . 'nothing-yet.php'); ?>
+	<?php require_once($this->pathView() . 'nothing-yet-fixture.php'); ?>
 <?php endif; ?>	
 
-	<a href="<?php echo $this->url('back') ?>" class="button right">Back to overview</a>
 </div>
 
 <?php require_once($this->pathView() . 'footer.php'); ?>

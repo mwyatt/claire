@@ -63,6 +63,28 @@ class Controller_Front extends Controller
 	}
 
 
+	public function fredHoldenCup() {
+		$cup = new Model_Maincontent($this->database, $this->config);
+		$media = new model_mainmedia($this->database, $this->config);
+		$cup->readByType('cup');
+		foreach ($cup->getData() as $minute) {
+			if (! array_key_exists('media', $minute)) {
+				continue;
+			}
+			$media->readById(array($minute['media']));
+			$minute['media'] = $media->getData();
+			$minuteCollection[] = $minute;
+		}
+		$cup->setData($minuteCollection);
+		$this->view
+			->setMeta(array(		
+				'title' => 'Fred Holden Cup'
+			))
+			->setObject($cup)
+			->loadTemplate('minutes');
+	}
+
+
 	public function page() {
 		if ($this->config->getUrl(1)) {
 			$page = new Model_Maincontent($this->database, $this->config);

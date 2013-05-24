@@ -3,30 +3,30 @@
 try {
 
 	$epochTime = time();
-	
+
 	$user
 		->setEmail('martin.wyatt@gmail.com')
 		->setPassword('123')
 		->insert(10);
 	$user
 		->setEmail('realbluesman@tiscali.co.uk')
-		->setPassword('e.l.t.t.l.12')
-		->insert(1);
+		->setPassword('123')
+		->insert(4);
 	
 	$user
 		->setEmail('gsaggers6@aol.com')
-		->setPassword('e.l.t.t.l.12')
+		->setPassword('123')
 		->insert(1);
 	
 	$user
 		->setEmail('hepworth_neil@hotmail.com')
-		->setPassword('e.l.t.t.l.12')
-		->insert(1);
+		->setPassword('123')
+		->insert(3);
 	
 	$user
 		->setEmail('henryrawcliffe@sky.com')
-		->setPassword('e.l.t.t.l.12')
-		->insert(1);
+		->setPassword('123')
+		->insert(2);
 
 	$database->dbh->query("
 		INSERT INTO main_user_meta
@@ -71,7 +71,7 @@ try {
 				Development Officer ELTTL</p>
 				<p>&nbsp;</p>
 				<img class=\"aligncenter\" src=\"http://eastlancstt.org.uk/archive/images/centre2.jpg\" alt=\"How to find us\">', 'page', 'visible', '1', $epochTime)
-			, ('Local Clubs', '<section class=\"post_content clearfix\" itemprop=\"articleBody\"><table id=\"inner_menu\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\"><tbody><tr><td><a href=\"#1\">Hyndburn</a></td><td><a href=\"#2\">Whalley</a></td><td><a href=\"#3\">Rawtenstall</a></td><td><a href=\"#4\">Doals</a></td></tr></tbody></table><h2 id=\"1\">Hyndburn TT Club</h2><p>We offer coaching and competition for all ability levels – from beginner to advanced – we will be starting a junior league for teams and running individual competitions.</p><p><span style=\"font-size: 20px; font-weight: bold;\">Junior Session</span></p><p>We have now started a new junior club for young people interested in table tennis&nbsp;it’s held on Friday evenings. With two sessions&nbsp;5.00 till 6.30 primary age&nbsp;beginners/intermediate&nbsp;6.30 till 8.00 secondary age.</p><p>£2.00 per session</p><h2>Open Session</h2><ul><li>All Ages</li><li>Coaching Avaliable</li></ul><p>Wednesday 5:00 – 7:00</p><h2>Coaching and Competition</h2><p>We offer coaching and competition for all ability levels – from beginner to advanced – we will be starting a junior league for teams and running individual competitions.</p><p>If you don’t want to compete we will just offer coaching and facilities to practice and play just for fun.</p><p>Contact <a title=\"Welcome\" href=\"http://eastlancstt.org.uk/the-league/welcome/\">Mick Moir</a> for more information on 07531674059</p><h2>Future events</h2><ul><li>Junior League</li><li>Ladder</li></ul><hr><h2 id=\"2\">Whalley TT Club</h2><p style=\"text-align: center;\"><span style=\"font-size: 20px; font-weight: bold;\"><a title=\"Venues\" href=\"http://eastlancstt.org.uk/the-league/venues/\">Whalley Village Hall</a></span></p><p style=\"text-align: center;\">Wednesday evening 7.30 till 10.00</p><p style=\"text-align: center;\">Saturday 9.30 to 12.30</p><p>(during term time)</p><p style=\"text-align: left;\">For more information contact</p><h2 style=\"text-align: left;\">Eric Ronnan</h2><p style=\"text-align: left;\">Tel: 01254 822555</p><p>Email: ericronnan@whalleyvillagehall.org.uk</p><hr><h2 id=\"3\">Rawtenstall TT Club</h2><h2><a title=\"Venues\" href=\"http://eastlancstt.org.uk/the-league/venues/\">Kay Street Baptists Table Tennis Club</a></h2><div><p>Rawtenstall</p><p>Mondays 7.30 till 10.00</p><p>New players welcome</p><p>For more information contact</p><h3>Trevor Elkington</h3><p>Tel:&nbsp;01706 217786</p></div><p>&nbsp;</p><hr><h2 id=\"4\">Doals TT Club</h2><p style=\"text-align: center;\"><strong><span style=\"font-size: xx-large;\">WEIR Village</span></strong></p><p>BACUP</p><p style=\"text-align: center;\">(Based in Doals Community Centre</p><p style=\"text-align: center;\">Next to 193 Burnley Road, OL13 8RW)</p><p><a href=\"http://www.doalsttc.co.uk/\" rel=\"nofollow\" target=\"_blank\"><span style=\"color: #0066cc; font-family: Arial; font-size: medium;\">www.doalsttc.co.uk</span></a><span style=\"font-size: medium;\"><span style=\"color: navy; font-family: Arial;\">.</span></span></p><p style=\"text-align: center;\"><img src=\"http://eastlancstt.org.uk/archive/doals_tt_files/image002.jpg\" alt=\"\" width=\"353\" height=\"249\" border=\"0\"><strong></strong></p><p>MONDAYS &amp; WEDS 7.00 till 10.00</p><p style=\"text-align: center;\">(Mondays for league home games only during season)</p><p style=\"text-align: center;\">Top quality tables, designed sports lighting &amp; a high ceiling make us a great place to play table tennis.</p><p style=\"text-align: center;\"><strong>Wheelchair friendly &amp; open to all ages 11+</strong></p><p style=\"text-align: center;\"><strong><em>Members only</em> </strong>but if interested in becoming one ring or email:</p><p>Neil Hepworth 0787 383 4942</p><p>hepworth_neil@hotmail.com</p><hr></section>', 'page', 'visible', '1', $epochTime)
+			, ('Local Clubs', '<section class=\"post_content clearfix\" itemprop=\"articleBody\"><table id=\"inner_menu\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\"><tbody><tr><td><a href=\"#1\">Hyndburn</a></td><td><a href=\"#2\">Whalley</a></td><td><a href=\"#3\">Rawtenstall</a></td><td><a href=\"#4\">Doals</a></td></tr></tbody></table><h2 id=\"1\">Hyndburn TT Club</h2><p>We offer coaching and competition for all ability levels – from beginner to advanced – we will be starting a junior league for teams and running individual competitions.</p><p><span style=\"font-size: 20px; font-weight: bold;\">Junior Session</span></p><p>We have now started a new junior club for young people interested in table tennis&nbsp;it’s held on Friday evenings. With two sessions&nbsp;5.00 till 6.30 primary age&nbsp;beginners/intermediate&nbsp;6.30 till 8.00 secondary age.</p><p>£2.00 per session</p><h2>Open Session</h2><ul><li>All Ages</li><li>Coaching Avaliable</li></ul><p>Wednesday 5:00 – 7:00</p><h2>Coaching and Competition</h2><p>We offer coaching and competition for all ability levels – from beginner to advanced – we will be starting a junior league for teams and running individual competitions.</p><p>If you don’t want to compete we will just offer coaching and facilities to practice and play just for fun.</p><p>Contact <a title=\"Welcome\" href=\"http://eastlancstt.org.uk/the-league/welcome/\">Mick Moir</a> for more information on 07531674059</p><h2>Future events</h2><ul><li>Junior League</li><li>Ladder</li></ul><hr><h2 id=\"2\">Whalley TT Club</h2><p style=\"text-align: center;\"><span style=\"font-size: 20px; font-weight: bold;\"><a title=\"Venues\" href=\"http://eastlancstt.org.uk/the-league/venues/\">Whalley Village Hall</a></span></p><p style=\"text-align: center;\">Wednesday evening 7.30 till 10.00</p><p style=\"text-align: center;\">Saturday 9.30 to 12.30</p><p>(during term time)</p><p style=\"text-align: left;\">For more information contact</p><h2 style=\"text-align: left;\">Eric Ronnan</h2><p style=\"text-align: left;\">Tel: 01254 822555</p><p>Email: ericronnan@whalleyvillagehall.org.uk</p><hr><h2 id=\"3\">Rawtenstall TT Club</h2><h2><a title=\"Venues\" href=\"http://eastlancstt.org.uk/the-league/venues/\">Kay Street Baptists Table Tennis Club</a></h2><div><p>Rawtenstall</p><p>Mondays 7.30 till 10.00</p><p>New players welcome</p><p>For more information contact</p><h3>Trevor Elkington</h3><p>Tel:&nbsp;01706 217786</p></div><p>&nbsp;</p><hr><h2 id=\"4\">Doals TT Club</h2><div class=\"diagram\"><a href=\"http://eastlancstt.org.uk/media/doals-poster.pdf\" target=\"_blank\"><img src=\"http://eastlancstt.org.uk/media/doals-poster.gif\" alt=\"Poster\"></a></div><p style=\"text-align: center;\"><strong><span style=\"font-size: xx-large;\">WEIR Village</span></strong></p><p>BACUP</p><p style=\"text-align: center;\">(Based in Doals Community Centre</p><p style=\"text-align: center;\">Next to 193 Burnley Road, OL13 8RW)</p><p><a href=\"http://www.doalsttc.co.uk/\" rel=\"nofollow\" target=\"_blank\"><span style=\"color: #0066cc; font-family: Arial; font-size: medium;\">www.doalsttc.co.uk</span></a><span style=\"font-size: medium;\"><span style=\"color: navy; font-family: Arial;\">.</span></span></p><p style=\"text-align: center;\"><img src=\"http://eastlancstt.org.uk/archive/doals_tt_files/image002.jpg\" alt=\"\" width=\"353\" height=\"249\" border=\"0\"><strong></strong></p><p>MONDAYS &amp; WEDS 7.00 till 10.00</p><p style=\"text-align: center;\">(Mondays for league home games only during season)</p><p style=\"text-align: center;\">Top quality tables, designed sports lighting &amp; a high ceiling make us a great place to play table tennis.</p><p style=\"text-align: center;\"><strong>Wheelchair friendly &amp; open to all ages 11+</strong></p><p style=\"text-align: center;\"><strong><em>Members only</em> </strong>but if interested in becoming one ring or email:</p><p>Neil Hepworth 0787 383 4942</p><p>hepworth_neil@hotmail.com</p><hr></section>', 'page', 'visible', '1', $epochTime)
 	");
 
 	$database->dbh->query("

@@ -457,6 +457,9 @@ $(document).ready(function() {
 	if ($('.content.home').length) {
 		$('.cover').cover();
 	};
+	if ($('.content.gallery').length) {
+		$('.file').magnificPopup({type:'image'});
+	}
 	if ($('.content.player.single').length) {
 		load.playerReadPerformance();
 		load.playerReadRankChange();
