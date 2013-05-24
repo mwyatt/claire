@@ -137,27 +137,57 @@ class Model_Mainmenu extends Model
 		return false;
 	}	
 	
+
+
 	
+	
+	// public function getAdminSubMethods() {
+	// 	foreach ($this->getAdminMethods() as $method) {
+	// 		foreach (get_class_methods('Controller_Admin') as $method) {
+	// 		if (($method !== 'initialise') && ($method !== 'index') && ($method !== 'load') && ($method !== '__construct')) {
+	// 			$methods[] = array(
+	// 				'name' => ucfirst($method)
+	// 				, 'current' => ($this->config->getUrl(1) == $method ? true : false)
+	// 				, 'guid' => $baseUrl . $method . '/'
+	// 			);
+	// 		}
+	// 	}
+	// 	return $methods;
+	// }
+	
+
 	/**
 	 * attempts to find a sub controller and builds a nav menu using its
 	 * methods (?page=method)
 	 * @return html the menu
 	 */
 	public function adminSub() {
-		$className = 'Controller_' . ucfirst($this->config->getUrl(0)) . '_' . ucfirst($this->config->getUrl(1));
-		if (class_exists($className)) {
-			// $baseUrl = $this->config->getUrl('base') . $this->config->getUrl(0) . '/' . $this->config->getUrl(1). '/';
-			// $this->data['admin_sub'][0]['name'] = 'Overview';
-			// $this->data['admin_sub'][0]['current'] = ($this->config->getUrl(2) == '' ? true : false);
-			// $this->data['admin_sub'][0]['guid'] = $baseUrl;
-			foreach (get_class_methods($className) as $key => $method) {
-				if (($method !== 'initialise') && ($method !== 'index') && ($method !== 'load') && ($method !== '__construct')) {
-					$this->data['admin_sub'][$key]['name'] = ucfirst($method);
-					$this->data['admin_sub'][$key]['current'] = ($this->config->getUrl(2) == $method ? true : false);
-					$this->data['admin_sub'][$key]['guid'] = $this->config->getUrl('base') . $this->config->getUrl(0) . '/' . $this->config->getUrl(1). '/' . $method . '/';
+		
+		if ($this->session->get('user')['email'] == 'martin.wyatt@gmail.com') {
+			$className = 'Controller_' . ucfirst($this->config->getUrl(0)) . '_' . ucfirst($this->config->getUrl(1));
+			if (class_exists($className)) {
+				foreach (get_class_methods($className) as $key => $method) {
+					if (($method !== 'initialise') && ($method !== 'index') && ($method !== 'load') && ($method !== '__construct')) {
+						$this->data['admin_sub'][$key]['name'] = ucfirst($method);
+						$this->data['admin_sub'][$key]['current'] = ($this->config->getUrl(2) == $method ? true : false);
+						$this->data['admin_sub'][$key]['guid'] = $this->config->getUrl('base') . $this->config->getUrl(0) . '/' . $this->config->getUrl(1). '/' . $method . '/';
+					}
 				}
 			}
 		}
+		if ($this->session->get('user')['email'] == 'realbluesman@tiscali.co.uk') {
+			$className = 'Controller_' . ucfirst($this->config->getUrl(0)) . '_' . ucfirst($this->config->getUrl(1));
+			if (class_exists($className)) {
+				foreach (get_class_methods($className) as $key => $method) {
+					if (($method !== 'initialise') && ($method !== 'index') && ($method !== 'load') && ($method !== '__construct')) {
+						$this->data['admin_sub'][$key]['name'] = ucfirst($method);
+						$this->data['admin_sub'][$key]['current'] = ($this->config->getUrl(2) == $method ? true : false);
+						$this->data['admin_sub'][$key]['guid'] = $this->config->getUrl('base') . $this->config->getUrl(0) . '/' . $this->config->getUrl(1). '/' . $method . '/';
+					}
+				}
+			}
+		}		
+		
 		return;
 	}
 

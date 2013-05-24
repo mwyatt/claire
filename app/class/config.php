@@ -265,5 +265,20 @@ class Config
 		}
 		// return $this->data;
 	}	
+
+
+	public function getClassMethods($className) {
+		foreach (get_class_methods($className) as $method) {
+			if (($method !== 'initialise') && ($method !== 'index') && ($method !== 'load') && ($method !== '__construct')) {
+				$methods[] = array(
+					'name' => ucfirst($method)
+					, 'current' => ($this->config->getUrl(1) == $method ? true : false)
+					, 'guid' => $this->getUrl('base') . $method . '/'
+				);
+			}
+		}
+		return $methods;
+	}
+
 	
 }
