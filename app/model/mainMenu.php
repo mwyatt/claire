@@ -151,7 +151,7 @@ class Model_Mainmenu extends Model
 			// $this->data['admin_sub'][0]['current'] = ($this->config->getUrl(2) == '' ? true : false);
 			// $this->data['admin_sub'][0]['guid'] = $baseUrl;
 			foreach (get_class_methods($className) as $key => $method) {
-				if (($method !== 'initialise') && ($method !== 'index') && ($method !== 'load')) {
+				if (($method !== 'initialise') && ($method !== 'index') && ($method !== 'load') && ($method !== '__construct')) {
 					$this->data['admin_sub'][$key]['name'] = ucfirst($method);
 					$this->data['admin_sub'][$key]['current'] = ($this->config->getUrl(2) == $method ? true : false);
 					$this->data['admin_sub'][$key]['guid'] = $this->config->getUrl('base') . $this->config->getUrl(0) . '/' . $this->config->getUrl(1). '/' . $method . '/';
@@ -173,7 +173,7 @@ class Model_Mainmenu extends Model
 		$this->data['admin'][0]['current'] = ($this->config->getUrl(1) == '' ? true : false);
 		$this->data['admin'][0]['guid'] = $baseUrl;
 		foreach (get_class_methods('Controller_Admin') as $key => $method) {
-			if (($method !== 'initialise') && ($method !== 'index') && ($method !== 'load')) {
+			if (($method !== 'initialise') && ($method !== 'index') && ($method !== 'load') && ($method !== '__construct')) {
 				$this->data['admin'][$key]['name'] = ucfirst($method);
 				$this->data['admin'][$key]['current'] = ($this->config->getUrl(1) == $method ? true : false);
 				$this->data['admin'][$key]['guid'] = $baseUrl . $method . '/';

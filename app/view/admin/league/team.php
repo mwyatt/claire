@@ -30,9 +30,15 @@
 			<td><?php echo $this->get($team, 'venue_name'); ?></td>
 			<td><?php echo $this->get($team, 'division_name'); ?></td>
 			<td class="action">
-				<a href="<?php echo $this->get($team, 'guid'); ?>" title="View <?php echo $this->get($team, 'name'); ?> online">View</a>
+				<a href="<?php echo $this->get($team, 'guid'); ?>" title="View <?php echo $this->get($team, 'name'); ?> online" target="_blank">View</a>
 				<a href="<?php echo $this->url('current_noquery'); ?>?edit=<?php echo $this->get($team, 'id'); ?>" title="Edit <?php echo $this->get($team, 'name'); ?>">Edit</a>
+
+		<?php if (! $this->get('options', 'season_status')): ?>
+			
 				<a href="<?php echo $this->url('current_noquery'); ?>?delete=<?php echo $this->get($team, 'id'); ?>" title="Delete <?php echo $this->get($team, 'name'); ?>">Delete</a>
+
+		<?php endif ?>
+
 			</td>
 		</tr>		
 

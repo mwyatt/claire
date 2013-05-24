@@ -51,12 +51,14 @@ class Model_Ttfixture extends Model
 				, team_right.name as team_right_name
 				, sum(encounter_part_left.player_score) as score_left
 				, sum(encounter_part_right.player_score) as score_right
+				, tt_division.id as division_id
 			from tt_fixture
 			left join tt_team as team_left on team_left.id = tt_fixture.team_left_id
 			left join tt_team as team_right on team_right.id = tt_fixture.team_right_id
 			left join tt_encounter on tt_encounter.fixture_id = tt_fixture.id
 			left join tt_encounter_part as encounter_part_left on encounter_part_left.id = tt_encounter.part_left_id
 			left join tt_encounter_part as encounter_part_right on encounter_part_right.id = tt_encounter.part_right_id
+			left join tt_division on team_left.division_id = tt_division.id
 			group by tt_fixture.id
 		");
 		if ($sth->rowCount()) {

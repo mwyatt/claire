@@ -28,11 +28,12 @@ class Controller_Admin_League extends Controller
 		$player = new Model_Ttplayer($this->database, $this->config);
 		$division = new Model_Ttdivision($this->database, $this->config);
 		if (array_key_exists('form_update', $_POST)) {
-			$player->update();
+			$player->update($_GET['edit']);
 			$this->route('current');
 		}
 		if (array_key_exists('form_create', $_POST)) {
-			$player->create();
+			$id = $player->create();
+			$this->route('base', 'admin/league/' . $this->config->getUrl(2) . '/?edit=' . $id);
 			$this->route('current');
 		}
 		if (array_key_exists('edit', $_GET)) {
@@ -75,8 +76,8 @@ class Controller_Admin_League extends Controller
 			$this->route('current');
 		}
 		if (array_key_exists('form_create', $_POST)) {
-			$team->create();
-			$this->route('current');
+			$id = $team->create();
+			$this->route('base', 'admin/league/' . $this->config->getUrl(2) . '/?edit=' . $id);
 		}
 		if (array_key_exists('edit', $_GET)) {
 			if ($team->readById(array($_GET['edit']))) {
@@ -151,7 +152,9 @@ class Controller_Admin_League extends Controller
 				->setObject($division)
 				->loadTemplate('admin/league/fixture-create-update');
 		}
-		$fixture->readFilled();
+		// $filledFixture = new Model_Ttfixture($this->database, $this->config);
+		// $filledFixture->readFilled();
+		$fixture->read();
 		$this->view
 			->setObject($division)
 			->setObject($fixture)

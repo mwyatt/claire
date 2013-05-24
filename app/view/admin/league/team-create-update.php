@@ -1,6 +1,7 @@
 <?php require_once($this->pathView() . 'admin/header.php'); ?>
 
 <div class="content <?php echo $this->urlSegment(2); ?> <?php echo ($this->get('model_ttteam') ? 'update' : 'create'); ?>" data-id="<?php echo $this->get('model_ttteam', 'id'); ?>">
+	<a href="<?php echo $this->url('current_noquery') ?>" class="button back">Back</a>
 	<h1><?php echo ($this->get('model_ttteam') ? 'Update ' . $this->urlSegment(2) . ' ' . $this->get('model_ttteam', 'name') : 'Create new ' . ucfirst($this->urlSegment(2))); ?></h1>
 	<form class="main" method="post">
 		<div class="row">
@@ -8,7 +9,7 @@
 			<input id="form-name" class="required" type="text" name="name" maxlength="75" value="<?php echo $this->get('model_ttteam', 'name'); ?>">
 		</div>			
 
-<?php if ($this->get('model_ttdivision')): ?>
+<?php if ($this->get('model_ttdivision') && ! $this->get('options', 'season_status')): ?>
 
 		<div class="row division">
 			<label class="above" for="form-division">Division</label>
@@ -61,7 +62,23 @@
 		</div>
 	
 <?php endif ?>
+<?php if ($this->get('model_ttplayer')): ?>
 
+		<div class="row secretary">
+			<label class="above" for="form-secretary">Secretary</label>
+			<select id="form-secretary" name="secretary_id">
+				<option value="0"></option>
+				 
+	<?php foreach ($this->get('model_ttplayer') as $secretary): ?>
+		
+				<option value="<?php echo $this->get($secretary, 'id'); ?>" <?php echo ($this->get($secretary, 'id') == $this->get('model_ttteam', 'secretary_id') ? 'selected' : false); ?>><?php echo $this->get($secretary, 'name'); ?></option>
+
+	<?php endforeach ?>
+
+			</select>
+		</div>
+
+<?php endif ?>
 <?php if ($this->get('model_ttplayer')): ?>
 
 		<div class="row">

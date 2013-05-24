@@ -181,64 +181,6 @@ class Model_Mainuser extends Model
 		}
 		return $session->get('user');
 	}
-	
-
-
-	public function checkPermission() {
-		// $email = $this->get('email');
-		// if ($email == 'martin.wyatt@gmail.com') {
-
-		// }
-
-		// if ($this->get('email') == 'martin.wyatt@gmail.com') {
-		// 	$this->config->getObject('route')->home('admin/settings/');
-		// }
-		// if ($this->get('email') == 'Realbluesman@tiscali.co.uk') {
-		// 	$this->config->getObject('route')->home('admin/league/fixture/fulfill/');
-		// }
-		// if ($this->get('email') == 'hepworth_neil@hotmail.com') {
-		// 	$this->config->getObject('route')->home('admin/content/page/');
-		// }
-		// if ($this->get('email') == 'gsaggers6@aol.com') {
-		// 	$this->config->getObject('route')->home('admin/league/player/');
-		// }
-		// if ($this->get('email') == 'henryrawcliffe@sky.com') {
-		// 	$this->config->getObject('route')->home('admin/content/minutes/');
-		// }
-
-
-		// if ($this->config->getUrl(1)) {
-		// 	# code...
-		// }
-
-		// if ($this->get('email') == 'martin.wyatt@gmail.com') {
-		// 	$this->config->getObject('route')->home('admin/settings/');
-		// }
-
-
-		// if ($file = file_get_contents($path)) {
-
-		// 	if ($position = strpos($file, '@access ')) {
-
-		// 		$requiredLevel = substr($file, $position + 8, 2);
-		// 		$requiredLevel = intval($requiredLevel);
-
-		// 		$user = $this->get();
-				
-		// 		if ($user['level'] >= $requiredLevel)
-		// 			return true;
-		// 		else
-		// 			return false;
-
-		// 	} else {
-
-		// 		return true;
-
-		// 	}
-
-		// }
-
-	}
 
 
 	public function permission() {

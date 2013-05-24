@@ -25,19 +25,30 @@ class Model_Ttplayer extends Model
 			return false;
 		}
 		$sth = $this->database->dbh->prepare("
-			INSERT INTO
-				tt_player
-				(first_name, last_name, rank, team_id)
-			VALUES
-				(:first_name, :last_name, :rank, :team_id)
+			INSERT INTO tt_player (
+				first_name
+				, last_name
+				, rank
+				, team_id
+				, phone_landline
+				, phone_mobile
+			) VALUES (
+				:first_name
+				, :last_name
+				, :rank
+				, :team_id
+				, :phone_landline
+				, :phone_mobile
+			)
 		");				
 		$sth->execute(array(
 			':first_name' => (array_key_exists('first_name', $_POST) ? $_POST['first_name'] : '')
 			, ':last_name' => (array_key_exists('last_name', $_POST) ? $_POST['last_name'] : '')
 			, ':rank' => (array_key_exists('rank', $_POST) ? $_POST['rank'] : '')
 			, ':team_id' => (array_key_exists('team_id', $_POST) ? $_POST['team_id'] : '')
+			, ':phone_landline' => (array_key_exists('phone_landline', $_POST) ? $_POST['phone_landline'] : '')
+			, ':phone_mobile' => (array_key_exists('phone_mobile', $_POST) ? $_POST['phone_mobile'] : '')
 		));	
-
 		if ($sth->rowCount()) {
 			$this->session->set('feedback', 'Success, player "' . $_POST['first_name'] . ' ' . $_POST['last_name'] . '" created');
 			return $this->database->dbh->lastInsertId();
@@ -164,6 +175,8 @@ class Model_Ttplayer extends Model
 				, tt_team.id as team_id
 				, tt_division.id as division_id
 				, tt_team.name as team_name
+				, tt_player.phone_landline
+				, tt_player.phone_mobile
 				, (sum(case when tt_encounter_result.left_id = tt_player.id and tt_encounter_result.status = '' then tt_encounter_result.left_score else 0 end) + sum(case when tt_encounter_result.right_id = tt_player.id and tt_encounter_result.status = '' then tt_encounter_result.right_score else 0 end)) as won
 				, (sum(case when tt_encounter_result.left_id = tt_player.id and tt_encounter_result.status = '' then tt_encounter_result.right_score else 0 end) + sum(case when tt_encounter_result.right_id = tt_player.id and tt_encounter_result.status = '' then tt_encounter_result.left_score else 0 end)) as lost
 				, sum(
@@ -619,7 +632,7 @@ class Model_Ttplayer extends Model
 	 * @param  array $post 
 	 * @return bool        
 	 */
-	public function update() {
+	public function update($id) {
 		$sth = $this->database->dbh->prepare("
 			select 
 				first_name
@@ -630,7 +643,7 @@ class Model_Ttplayer extends Model
 			where id = ?
 		");				
 		$sth->execute(array(
-			$_GET['edit']
+			$id
 		));		
 		$row = $sth->fetch(PDO::FETCH_ASSOC);
 		$sth = $this->database->dbh->prepare("
@@ -639,6 +652,8 @@ class Model_Ttplayer extends Model
 				, last_name = ?
 				, rank = ?
 				, team_id = ?
+				, phone_landline = ?
+				, phone_mobile = ?
 			where
 				id = ?
 		");				
@@ -647,9 +662,11 @@ class Model_Ttplayer extends Model
 			, (array_key_exists('last_name', $_POST) ? $_POST['last_name'] : '')
 			, (array_key_exists('rank', $_POST) ? $_POST['rank'] : '')
 			, (array_key_exists('team_id', $_POST) ? $_POST['team_id'] : '')
-			, (array_key_exists('edit', $_GET) ? $_GET['edit'] : '')
+			, (array_key_exists('phone_landline', $_POST) ? $_POST['phone_landline'] : '')
+			, (array_key_exists('phone_mobile', $_POST) ? $_POST['phone_mobile'] : '')
+			, ($id ? $id : '')
 		));		
 		$this->session->set('feedback', 'Player ' . ucfirst($row['first_name']) . ' ' . ucfirst($row['last_name']) . ' updated');
-		return true;
+		return $id;
 	}
 }

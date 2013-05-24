@@ -103,18 +103,18 @@ try {
 			)		
 	");	
 	
-	$database->dbh->query("
-		CREATE TABLE IF NOT EXISTS
-			tt_secretary
-			(
-				id INT UNSIGNED NOT NULL AUTO_INCREMENT
-				, first_name VARCHAR(75)
-				, last_name VARCHAR(75)
-				, phone_landline VARCHAR(30)
-				, phone_mobile VARCHAR(30)
-				, PRIMARY KEY (id)
-			)		
-	");		
+	// $database->dbh->query("
+	// 	CREATE TABLE IF NOT EXISTS
+	// 		tt_secretary
+	// 		(
+	// 			id INT UNSIGNED NOT NULL AUTO_INCREMENT
+	// 			, first_name VARCHAR(75)
+	// 			, last_name VARCHAR(75)
+	// 			, phone_landline VARCHAR(30)
+	// 			, phone_mobile VARCHAR(30)
+	// 			, PRIMARY KEY (id)
+	// 		)		
+	// ");		
 	
 	$database->dbh->query("
 		CREATE TABLE IF NOT EXISTS
@@ -149,10 +149,12 @@ try {
 			tt_player
 			(
 				id INT UNSIGNED NOT NULL AUTO_INCREMENT
-				, first_name VARCHAR(75)
-				, last_name VARCHAR(75)
+				, first_name VARCHAR(75) NOT NULL DEFAULT ''
+				, last_name VARCHAR(75) NOT NULL DEFAULT ''
 				, rank INT UNSIGNED
-				, team_id INT UNSIGNED NOT NULL
+				, team_id INT UNSIGNED
+				, phone_landline VARCHAR(30) DEFAULT ''
+				, phone_mobile VARCHAR(30) DEFAULT ''
 				, PRIMARY KEY (id)
 				, KEY (team_id)
 			)		

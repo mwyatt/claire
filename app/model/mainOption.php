@@ -22,6 +22,21 @@ class Model_Mainoption extends Model
 		}			
 		return $sth->rowCount();
 	}
+
+
+	public function update($name, $value) {
+		$sth = $this->database->dbh->prepare("
+			update main_option set
+				value = ?
+			where
+				name = ?
+		");				
+		$sth->execute(array(
+			$value
+			, $name
+		));		
+		return $sth->rowCount();
+	}
 	
 	
 }

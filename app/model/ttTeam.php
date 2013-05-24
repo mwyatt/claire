@@ -30,17 +30,26 @@ class Model_Ttteam extends Model
 			return false;
 		}
 		$sth = $this->database->dbh->prepare("
-			INSERT INTO
-				tt_team
-				(name, home_night, venue_id, division_id)
-			VALUES
-				(:name, :home_night, :venue_id, :division_id)
+			INSERT INTO tt_team (
+				name
+				, home_night
+				, venue_id
+				, division_id
+				, secretary_id
+			) VALUES (
+				:name
+				, :home_night
+				, :venue_id
+				, :division_id
+				, :secretary_id
+			)
 		");				
 		$sth->execute(array(
 			':name' => (array_key_exists('name', $_POST) ? $_POST['name'] : '')
 			, ':home_night' => (array_key_exists('home_night', $_POST) ? $_POST['home_night'] : '')
 			, ':venue_id' => (array_key_exists('venue_id', $_POST) ? $_POST['venue_id'] : '')
 			, ':division_id' => (array_key_exists('division_id', $_POST) ? $_POST['division_id'] : '')
+			, ':secretary_id' => (array_key_exists('secretary_id', $_POST) ? $_POST['secretary_id'] : '')
 		));	
 		if ($sth->rowCount()) {
 			$this->session->set('feedback', 'Success, team "' . $_POST['name'] . '" created');
@@ -92,6 +101,7 @@ class Model_Ttteam extends Model
 				, venue_id = :venue_id
 				, home_night = :home_night
 				, division_id = :division_id
+				, secretary_id = :secretary_id
 			where
 				id = :id
 		");				
@@ -102,6 +112,7 @@ class Model_Ttteam extends Model
 			, ':venue_id' => (array_key_exists('venue_id', $_POST) ? $_POST['venue_id'] : '')
 			, ':home_night' => (array_key_exists('home_night', $_POST) ? $_POST['home_night'] : '')
 			, ':division_id' => (array_key_exists('division_id', $_POST) ? $_POST['division_id'] : '')
+			, ':secretary_id' => (array_key_exists('secretary_id', $_POST) ? $_POST['secretary_id'] : '')
 		));		
 		$this->session->set('feedback', 'Team ' . ucfirst($row['name']) . ' updated');
 		return true;
@@ -119,6 +130,7 @@ class Model_Ttteam extends Model
 			select
 				tt_team.id
 				, tt_team.name
+				, tt_team.secretary_id
 				, tt_team.home_night as home_night_id
 				, tt_team.home_night
 				, count(tt_player.id) as player_count
