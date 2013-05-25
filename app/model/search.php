@@ -68,6 +68,7 @@ class Model_Search extends Model
 			while ($match = $sth->fetch(PDO::FETCH_ASSOC)) {
 				$matches['player_' . $match['id']] = $match;
 				$matches['player_' . $match['id']]['guid'] = $this->getGuid('player', $match['name'], $match['id']);
+				$matches['player_' . $match['id']]['type'] = 'player';
 			}
 		}
 		$sth = $this->database->dbh->prepare("	
@@ -84,6 +85,7 @@ class Model_Search extends Model
 			while ($match = $sth->fetch(PDO::FETCH_ASSOC)) {
 				$matches['team_' . $match['id']] = $match;
 				$matches['team_' . $match['id']]['guid'] = $this->getGuid('team', $match['name'], $match['id']);
+				$matches['team_' . $match['id']]['type'] = 'team';
 			}
 		}
 		if ($limit) {	

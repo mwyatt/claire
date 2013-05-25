@@ -14,6 +14,7 @@
 class Config
 {
 
+
 	public $data;
 	public $objects;
 	public $options;

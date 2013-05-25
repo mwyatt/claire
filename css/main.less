@@ -4,6 +4,10 @@
 @import "mixin.less";
 @import "font-open-sans.less";
 
+.ajax {
+    background-image: url(../media/ajax.gif);
+}
+
 ::-webkit-input-placeholder {
    color: darken(@white, 20%);
 }
@@ -22,6 +26,59 @@
 
 table th {
 	text-align: left;
+}
+
+.content.search {
+
+	form {
+		.text-shadow (0 1px 0 darken(@white, 0%));
+		background: darken(@white, 2%);
+		text-align: center;
+		border-top: 1px solid darken(@white, 15%);
+		border-bottom: 1px solid darken(@white, 15%);
+		padding: 2em;
+	}
+
+	label {
+		display: none;
+		font-weight: 600;
+		font-size: 1.1em;
+	}
+
+	p {
+		margin-top: 0;
+	}
+
+	.button {
+		display: block;
+	}
+
+	input {
+		display: block;
+		border: 1px solid darken(@white, 15%);
+		padding: 0.6em 0.8em;
+		margin: 0 auto 0;
+		font-weight: bold;
+		color: darken(@white, 60%);
+		margin-bottom: 1em;
+		width: 100%;
+
+		&:focus {
+			.drop-shadow (0 2px 1px darken(@white, 5%));
+			border-color: darken(@white, 25%);
+			color: darken(@white, 70%);
+		}
+	}
+
+	form,
+	.result {
+		margin-bottom: 1em;
+	}
+
+	.result a {
+		padding: 1em 0;
+		display: block;
+	}
 }
 
 .content.fred-holden-cup,
@@ -365,11 +422,13 @@ header .search {
 	height: 2.7em;
 	float: right;
 
+	.ajax {
+		height: 5em;
+	}
+
 	label {
-		display: none;
-		color: @white;
+		// display: none;
 		font-weight: 600;
-		cursor: pointer;
 	}
 
 	&.active {
@@ -419,21 +478,21 @@ header .search {
 		// font-size: 1.1em;
 	}
 
+	label {
+		display: block;
+		padding: 0 1em;
+		margin-bottom: 1em;
+	}
+
 	input[type="text"] {
 		margin: 0 1em 1em;
 		line-height: 1em;
-		font-size: 1.2em;
+		font-size: 1em;
 		font-weight: bold;
-		color: #666;
 		border: none;
 		padding: 0 0 1em;
 		border-bottom: 1px solid lighten(@warmBlack, 90%);
 		display: block;
-	}
-
-	input[type="text"],
-	section a,
-	.submit {
 	}
 
 	section {
@@ -444,7 +503,7 @@ header .search {
 
 		a {
 			display: block;
-			padding: 1em 0 0 0;
+			padding: 1em;
 
 			&:first-child {
 				padding-top: 0;
@@ -537,7 +596,6 @@ nav.main .drop {
 		margin: 0;
 		float: left;
 		padding: 0 0 0 5%;
-		border-left: 1px solid darken(@white, 20%);
 		margin-bottom: 3em;
 	}
 
@@ -667,6 +725,7 @@ h2 {
 	}
 }
 
+.content.archive.single table.general,
 table.main {
 	margin: 0 0 2em;
 	
@@ -702,6 +761,22 @@ table.main {
 	.team {
 		display: none;
 	}
+}
+
+.content.archive.single div[id^="division"] {
+	margin-bottom: 2em;
+}
+
+.content.archive.single a {
+	color: darken(@white, 50%);
+}
+
+.content.archive.single .fixture {
+	width: 20.9%;
+	margin: .5em .5em .5em .5em;
+	float: left;
+	border: 1px solid;
+	padding: .6em;
 }
 
 .fixture .card {
@@ -1208,4 +1283,6 @@ header.main {
 @media screen and (min-width : 1340px) {
 	@import "1340";
 }
-  
+@media print {
+	@import "print";
+}

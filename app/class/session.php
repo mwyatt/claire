@@ -14,6 +14,7 @@
 class Session extends Config
 {
 
+
 	public function start() {
 		session_start();
 	}
@@ -47,32 +48,6 @@ class Session extends Config
 		}
 		return;
 	}	
-
-
-
-	// public function __construct() {
-	// 	if (session_id() == '') {
-	// 	}
-	// 	$_SESSION = $_SESSION;
-	// }
-
-	// public function __destruct() {
-	// 	$_SESSION = $_SESSION;
-	// }
-
-	// public function get($key, $subKey = '') {
-	// 	if (array_key_exists($key, $_SESSION)) {
-	// 		if (is_array($_SESSION[$key])) {
-	// 			if (array_key_exists($subKey, $_SESSION[$key])) {
-	// 				$value = $_SESSION[$key][$subKey];
-	// 				return $value;
-	// 			}
-	// 		}
-	// 		$value = $_SESSION[$key];
-	// 		return $value;
-	// 	}
-	// 	return false;
-	// }
 
 
 	/**
@@ -139,8 +114,10 @@ class Session extends Config
 		}
 	}
 
+
 	public function getData() {		
 		return $_SESSION = $_SESSION;
 	}	
+
 
 }

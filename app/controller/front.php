@@ -19,6 +19,9 @@ class Controller_Front extends Controller
 		$menu = new Model_Mainmenu($this->database, $this->config);
 		$menu->division();
 		$this->view->setObject($menu);
+		if (array_key_exists('search', $_GET)) {
+			$this->search($_GET['search']);
+		}
 	}
 
 
@@ -28,6 +31,16 @@ class Controller_Front extends Controller
 		$this->view
 			->setObject($press)
 			->loadTemplate('home');
+	}
+
+
+	public function search($query) {
+		$search = new Model_Search($this->database, $this->config);
+		$search->read($query);
+		$this->view
+			->setObject('search_query', $query)
+			->setObject($search)
+			->loadTemplate('search');
 	}
 
 

@@ -22,16 +22,17 @@
         <div class="wrap">
             <header class="main">
                 <div class="row clearfix">
+                    <a href="<?php echo $this->urlHome() ?>page/contact-us/" class="button contact-us right hide">Contact us</a>
                     <a class="logo" href="<?php echo $this->urlHome(); ?>">
                         <img src="<?php echo $this->urlHome(); ?>media/logov2.png" alt="<?php echo $this->get('options', 'site_title'); ?> Logo">
                         <span class="full-text"><?php echo $this->get('options', 'site_title'); ?></span>
                         <abbr title="<?php echo $this->get('options', 'site_title'); ?>">ELTTL</abbr>
                     </a>
                     <div class="search">
-                        <label>Search</label>
                         <form class="main" method="get">
+                            <label for="form-search">Search</label>
                             <span class="close"></span>
-                            <input type="text" name="query" type="search" maxlength="75" placeholder="Search Players, Teams...">
+                            <input id="form-search" type="text" name="search" type="search" maxlength="75">
                             <a href="#" class="submit button">Search</a>
                             <input type="submit">
                         </form> 

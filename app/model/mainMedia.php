@@ -35,6 +35,34 @@ class Model_Mainmedia extends Model
 	public $dir = 'media/upload/';
 
 	
+	public function deleteById($id) {	
+		// $sth = $this->database->dbh->prepare("
+		// 	select 
+		// 		id
+		// 		, title
+		// 		, path
+		// 		, date_published
+		// 		, user_id
+		// 	from main_media
+		// 	where id = ?
+		// ");	
+		// $sth->execute(array($id));		
+		// $row = $sth->fetch(PDO::FETCH_ASSOC);
+		$sth = $this->database->dbh->prepare("
+			delete from main_media
+			where id = ? 
+		");				
+		$sth->execute(array($id));		
+		$sth = $this->database->dbh->prepare("
+			delete from main_content_meta
+			where content_id = ? and name = 'media'
+		");				
+		$sth->execute(array($id));		
+		$this->session->set('feedback', 'media was deleted');
+		return $sth->rowCount();
+	}
+
+
 	public function read() {	
 		$sth = $this->database->dbh->query("	
 			select

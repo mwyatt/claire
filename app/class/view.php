@@ -13,12 +13,10 @@
 class View extends Model
 {
 
+
 	public $template;
 	public $session;
 	public $meta = array();
-	// public $cache = array(
-	// 	'player' => true
-	// );
 	
 	
 	/**
@@ -163,30 +161,11 @@ class View extends Model
 
 	}
 	
-	
-	// Convert String to a URL Friendly Version
-	// public function urlFriendly($value = null)
-	// {
-	
-	// 	// everything to lower and no spaces begin or end
-	// 	$value = strtolower(trim($value));
-		
-	// 	// adding - for spaces and union characters
-	// 	$find = array(' ', '&', '\r\n', '\n', '+',',');
-	// 	$value = str_replace ($find, '-', $value);
-		
-	// 	//delete and replace rest of special chars
-	// 	$find = array('/[^a-z0-9\-<>]/', '/[\-]+/', '/<[^>]*>/');
-	// 	$repl = array('', '-', '');
-	// 	$value = preg_replace ($find, $repl, $value);
-		
-	// 	//return the friendly str
-	// 	return $value; 	
-		
-	// }
-	 
 
-	// performs explode() on a string with the given delimiter and trims all whitespace for the elements
+	/**
+	 * performs explode() on a string with the given delimiter
+	 * and trims all whitespace for the elements
+	 */
 	function explodeTrim($str, $delimiter = ',') { 
 	    if ( is_string($delimiter) ) { 
 	        $str = trim(preg_replace('|\\s*(?:' . preg_quote($delimiter) . ')\\s*|', $delimiter, $str)); 
@@ -197,8 +176,6 @@ class View extends Model
 
 
 	public function latestTweet($user) {
-
-		// XML
 		$xml = simplexml_load_file("http://twitter.com/statuses/user_timeline/$user.xml?count=1");
 		echo $xml->status->text[0];
 	}
@@ -270,4 +247,5 @@ class View extends Model
 		return false;
 	}
 	
+
 } 

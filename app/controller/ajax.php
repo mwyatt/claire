@@ -75,12 +75,12 @@ class Controller_Ajax extends Controller
 
 	
 	public function search() {
-		if (array_key_exists('query', $_GET)) {
+		if (array_key_exists('search', $_GET)) {
 			$search = new Model_Search($this->database, $this->config);
 			if (array_key_exists('limit', $_GET)) {
-				$search->read($_GET['query'], $_GET['limit']);
+				$search->read($_GET['search'], $_GET['limit']);
 			} else {
-				$search->read($_GET['query']);
+				$search->read($_GET['search']);
 			}
 			$this->out($search->getData());
 		}

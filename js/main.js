@@ -189,7 +189,7 @@ var search = {
 	initialise: function(container) {
 		if ($(container).length) {
 			search.container = $(container);
-			search.input = $(search.container).find('input[name="query"]');
+			search.input = $(search.container).find('input[name="search"]');
 			// $(search.input).on('change', search.setTimer);
 			$(search.input).on('keyup', search.setTimer);			
 		}
@@ -202,21 +202,21 @@ var search = {
 
 	poll: function() {
 		if ($(search.input).val().length < 2) {
-			$(search.section).html('');
+			$(search.container).find('section').html('');
 			return false;
 		}
-		if (! search.section) {
+		if (! $(search.container).find('section').length) {
 			$(search.input).after('<section></section>');
-			search.section = $(search.container).find('section');
 		};
-		$(search.section).html('');
-		$.getJSON(url.base + '/ajax/search/?query=' + $(search.input).val() + '&limit=5', function(results) {
+		$(search.container).find('section').html(ajax);
+		$.getJSON(url.base + '/ajax/search/?search=' + $(search.input).val() + '&limit=5', function(results) {
 			if (results) {
-				// console.log(results);
-				$(search.section).html('');
+				$(search.container).find('section').html('');
 				$.each(results, function(index, result) {
-					$(search.section).append('<a href="' + result.guid + '">' + result.name + '</a>');
+					$(search.container).find('section').append('<a href="' + result.guid + '">' + result.name + '</a>');
 				});
+			} else {
+				$(search.container).find('section').remove();
 			}
 		});
 	},
@@ -251,7 +251,6 @@ var fixtureResult = {
 	readByTeam: function() {
 	$.getJSON(url.base + '/ajax/tt-fixture-result/?method=readByTeam&action=' + $('.content.team.single').data('id'), function(results) {
 			if (results) {
-				// console.log(results);
 				$.each(results, function(index, result) {
 					$('.content.team.single').find('.fixture').append(
 						'<a href="' + result.guid + '" class="card clearfix">'
@@ -282,7 +281,6 @@ var load = {
 		}
 		$.getJSON(url.base + '/ajax/player/?team_id=' + $('.content.team.single').data('id'), function(results) {
 			if (results) {
-				// console.log(results);
 				$('.ajax').remove();
 				html = '<ul>';
 				$.each(results, function(index, result) {
@@ -294,9 +292,8 @@ var load = {
 		});
 	},
 	playerReadSingle: function() {
-		$.getJSON(url.base + '/ajax/search/?query=' + $(search.input).val() + '&limit=5', function(results) {
+		$.getJSON(url.base + '/ajax/search/?search=' + $(search.input).val() + '&limit=5', function(results) {
 			if (results) {
-				// console.log(results);
 				$(search.section).html('');
 				$.each(results, function(index, result) {
 					$(search.section).append('<a href="' + result.guid + '">' + result.name + '</a>');
