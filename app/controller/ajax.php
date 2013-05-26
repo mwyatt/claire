@@ -43,7 +43,7 @@ class Controller_Ajax extends Controller
 		$fixtureResult = new Model_Ttfixture_Result($this->database, $this->config);
 		if (
 			$_GET['method'] == 'readByPlayerId'
-			|| $_GET['method'] == 'another'
+			|| $_GET['method'] == 'readByTeam'
 		) {
 			$fixtureResult->$_GET['method']($_GET['action']);
 		}

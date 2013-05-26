@@ -37,6 +37,23 @@ class Model_Ttfixture extends Model
 
 	}
 
+
+	public function readTotalByDivision($id) {
+		$sth = $this->database->dbh->prepare("
+			select
+				count(tt_fixture.id)
+			from tt_fixture
+			left join tt_team as team_left on team_left.id = tt_fixture.team_left_id
+			left join tt_team as team_right on team_right.id = tt_fixture.team_right_id
+			left join tt_division on team_left.division_id = tt_division.id
+			where team_left.division_id = ?
+			group by tt_fixture.id
+		");				
+		$sth->execute(array($id));
+		$this->data = $sth->rowCount();
+		return $sth->rowCount();
+	}
+
 	
 	/**
 	 * selects all fixtures

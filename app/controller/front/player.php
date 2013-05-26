@@ -30,9 +30,7 @@ class Controller_Front_Player extends Controller
 			}
 			$this->view
 				->setMeta(array(		
-					'title' => 'custom title'
-					, 'keywords' => 'custom title'
-					, 'description' => 'custom title'
+					'title' => 'Player ' . $player->getData('full_name')
 				))
 				->setObject($player)
 				->loadTemplate('player-single');
@@ -41,8 +39,6 @@ class Controller_Front_Player extends Controller
 		$this->view
 			->setMeta(array(		
 				'title' => 'All registered players'
-				, 'keywords' => 'players, player'
-				, 'description' => 'All registered players in the East Lancashire Table Tennis League'
 			))
 			->setObject($player)
 			->loadTemplate('player');

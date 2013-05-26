@@ -1,7 +1,7 @@
 <?php require_once($this->pathView() . 'header.php'); ?>
 
 <div class="content player">
-	<h1>Players</h1>
+	<h1>All registered players</h1>
 
 <?php if ($this->get('model_ttplayer')) : ?>
 

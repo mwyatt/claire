@@ -22,19 +22,20 @@ class Controller_Front_Team extends Controller
 			if (! $team->readById(array($id))) {
 				$this->route('base', 'team/');
 			}
+			$player = new Model_Ttplayer($this->database, $this->config);
+			$player->readByTeam($id);
 			$this->view
 				->setMeta(array(		
-					'title' => $team->getData('name')
+					'title' => 'Team ' . $team->getData('name')
 				))
 				->setObject($team)
+				->setObject($player)
 				->loadTemplate('team-single');
 		}
 		$team->read();
 		$this->view
 			->setMeta(array(		
-				'title' => 'All registered teams'
-				, 'keywords' => 'teams, team'
-				, 'description' => 'All registered teams in the East Lancashire Table Tennis League'
+				'title' => 'Teams'
 			))
 			->setObject($team)
 			->loadTemplate('team');

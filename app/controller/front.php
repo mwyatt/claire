@@ -35,6 +35,10 @@ class Controller_Front extends Controller
 
 
 	public function search($query) {
+		$query = htmlspecialchars($query);
+		if (! $query) {
+			$this->route('base');
+		}
 		$search = new Model_Search($this->database, $this->config);
 		$search->read($query);
 		$this->view
@@ -165,7 +169,7 @@ class Controller_Front extends Controller
 			}
 			$this->view
 				->setMeta(array(		
-					'title' => 'East Lancashire Table Tennis League archive'
+					'title' => 'Archive'
 				))
 				->setObject($archive)
 				->loadTemplate('archive-single');
@@ -174,8 +178,6 @@ class Controller_Front extends Controller
 		$this->view
 			->setMeta(array(		
 				'title' => 'All archives'
-				, 'keywords' => 'archives, archive'
-				, 'description' => 'All archives in the East Lancashire Table Tennis League'
 			))
 			->setObject($archive)
 			->loadTemplate('archive');
@@ -192,7 +194,7 @@ class Controller_Front extends Controller
 			$fixtureInfo = current($fixture->data);
 			$this->view
 				->setMeta(array(		
-					'title' => 'East Lancashire Table Tennis League fixture'
+					'title' => $fixtureInfo['team_left_name'] . ' vs ' . $fixtureInfo['team_right_name']
 				))
 				->setObject($fixture)
 				->setObject('fixture_info', $fixtureInfo)

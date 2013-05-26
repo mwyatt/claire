@@ -23,8 +23,6 @@ class Controller_Front_Press extends Controller
 			$this->view
 				->setMeta(array(		
 					'title' => $press->get('title')
-					, 'keywords' => $press->get('meta_keywords')
-					, 'description' => $press->get('meta_description')
 				))
 				->setObject($press)
 				->loadTemplate('press-single');
@@ -33,8 +31,6 @@ class Controller_Front_Press extends Controller
 		$this->view
 			->setMeta(array(		
 				'title' => 'All press'
-				, 'keywords' => 'press, reports'
-				, 'description' => 'All press currently published'
 			))
 			->setObject($press)
 			->loadTemplate('press');

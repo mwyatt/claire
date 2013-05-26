@@ -364,7 +364,21 @@ class Model_Ttteam extends Model
 		$this->session->set('feedback', 'Unable to delete team ' . ucfirst($row['name']));
 		return;
 	}
-	
+
+
+	public function readTotalByDivision($id) {
+		$sth = $this->database->dbh->prepare("
+			select
+				count(tt_team.id)
+			from tt_team
+			where tt_team.division_id = ?
+			group by tt_team.id
+		");				
+		$sth->execute(array($id));
+		$this->data = $sth->rowCount();
+		return $sth->rowCount();
+	}
+
 
 	public function readByDivision($id) {
 		$sth = $this->database->dbh->prepare("	

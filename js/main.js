@@ -246,28 +246,39 @@ var navSub = {
 	}
 }
 
-var fixtureResult = {
-
-	readByTeam: function() {
-	$.getJSON(url.base + '/ajax/tt-fixture-result/?method=readByTeam&action=' + $('.content.team.single').data('id'), function(results) {
-			if (results) {
-				$.each(results, function(index, result) {
-					$('.content.team.single').find('.fixture').append(
-						'<a href="' + result.guid + '" class="card clearfix">'
-							+ '<div class="team-left">' + result.team_left_name + '</div>'
-							+ '<div class="score-left">' + result.team_left_score + '</div>'
-							+ '<div class="team-right">' + result.team_right_name + '</div>'
-							+ '<div class="score-right">' + result.team_right_score + '</div>'
-						+ '</a>'
-					);
-				});
-			}
-		});
-	}
-}
-
 var load = {
 
+	fixtureReadByTeam: function() {
+		if ($('.content.team.single').find('.fixture').length) {
+			return false;
+		}
+		$('.content.team.single').find('.players').after(
+			'<div class="fixture clearfix ajax">'
+			+ '</div>'
+		);
+		$.getJSON(
+			url.base + '/ajax/tt-fixture-result/',
+			{method: 'readByTeam', action: $('.content.team.single').data('id')},
+			function(results) {
+				$('.ajax').removeClass('ajax');
+				if (results) {
+					$('.content.team.single').find('.fixture').append('<h2>All Fixtures</h2>');
+					$.each(results, function(index, result) {
+						$('.content.team.single').find('.fixture').append(
+							'<a href="' + result.guid + '" class="card clearfix">'
+								+ '<div class="team-left">' + result.team_left_name + '</div>'
+								+ '<div class="score-left">' + result.team_left_score + '</div>'
+								+ '<div class="team-right">' + result.team_right_name + '</div>'
+								+ '<div class="score-right">' + result.team_right_score + '</div>'
+							+ '</a>'
+						);
+					});
+				} else {
+					$('.content.team.single').find('.fixture').remove();
+				}
+			}
+		);
+	},
 	playerReadByTeam: function() {
 		if ($('.content.team.single').find('.players').length) {
 			return false;
@@ -463,7 +474,7 @@ $(document).ready(function() {
 		load.playerReadFixture();
 	};
 	if ($('.content.team.single').length) {
-		load.playerReadByTeam();
-		fixtureResult.readByTeam();
+		// load.playerReadByTeam();
+		load.fixtureReadByTeam();
 	};
 });

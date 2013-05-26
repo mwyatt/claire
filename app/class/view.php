@@ -219,17 +219,18 @@ class View extends Model
 	}
 
 
-	/**
-	 * [setMeta description]
-	 * @param array $meta filled with jucy meta information
-	 */
-	public function setMeta($metas) {
+	public function setMeta($metas) {		
 		foreach ($metas as $key => $meta) {
+			$titleAppend = '';
+			if ($key == 'title') {
+				$titleAppend = ' | ' . $this->config->getOption('meta_title');
+			}
 			if (array_key_exists($key, $this->meta)) {
-				if (! $this->meta[$key])
-					$this->meta[$key] = $metas[$key];
+				if (! $this->meta[$key]) {
+					$this->meta[$key] = $metas[$key] . $titleAppend;
+				}
 			} else {
-				$this->meta[$key] = $metas[$key];
+				$this->meta[$key] = $metas[$key] . $titleAppend;
 			}
 		}
 		return $this;
@@ -245,6 +246,14 @@ class View extends Model
 		if (array_key_exists($key, $this->meta))
 			return $this->meta[$key];
 		return false;
+	}
+
+
+	public function displayAverage($average) {
+		if (! $average) {
+			return '';
+		}
+		return $average . '&#37;';
 	}
 	
 

@@ -279,23 +279,6 @@ form {
 	}
 }
 
-.content.team.single {
-
-	.players ul {
-		margin: 0;
-		padding: 0;
-		list-style: none;
-
-		li {
-			margin: 0 0 1em;
-		}
-
-		a {
-			font-weight: 600;
-		}
-	}
-}
-
 .content.press {
 
 	article {
@@ -757,8 +740,13 @@ table.main {
 		// border-left: 1px solid #e6e4e3;
 	}
 
+	.player,
+	.home-night,
+	.venue,
+	.team,
+	.won,
 	.rank,
-	.team {
+	.played {
 		display: none;
 	}
 }
@@ -851,6 +839,29 @@ div.content.single {
 }
 
 .content.division.overview {
+
+	.total-blocks {
+		margin-bottom: 2em;
+
+		h6,
+		p {
+			margin: 0;
+			text-align: center;
+			// font-size: 1em;
+		}
+
+		h6 {
+			font-size: 1.5em;
+		}
+
+		.block {
+			.gradient (darken(@white, 2%), darken(@white, 4%));
+			.text-shadow (1px 1px 0 @white);
+			margin-bottom: 1em;
+			border: 1px solid darken(@white, 15%);
+			padding: 1em;
+		}
+	}
 
 	table.summary {
 		display: none;
@@ -1014,72 +1025,18 @@ div.content.single {
 	display: none;
 }
 
-div.content.team {
-
-	table {
-
-		tr {
-			border-bottom: 1px dotted @orange-gray;
-			
-			.player, .home-night, .venue {
-				display: none;
-			}
-
-			th {
-				text-align: left;
-				color: @orange-gray;
-			}
-
-			td, th {
-				padding: 20px 15px;
-				font-size: 1.3em;
-				font-weight: bold;
-			}
-		}
-	}
-}
-
-div.content.team.single {
-
-	table {
-
-		tr.player, tr.home-night, tr.venue {
-			// display: none;
-		}
-
-		tr {
-
-			td, th {
-				line-height: 1.2em;
-				text-align: left;
-				padding: 20px 15px;
-				font-size: 1.3em;
-				font-weight: bold;
-				border-bottom: 1px dotted @orange-gray;
-			}
-
-			th {
-				width: 30%;
-				color: @orange-gray;
-			}
-		}
-	}
-}
-
-div.content.merit table.main {
-
-	.team,
-	.won,
-	.rank,
-	.played {
-		display: none;
-	}
-}
-
 div.content.performance table.main {
 
 	.team {
 		display: none;
+	}
+}
+
+.content.team.single {
+
+	table.main .venue,
+	table.main .home-night {
+		display: table-row;
 	}
 }
 
@@ -1118,6 +1075,7 @@ div.content.league table.main {
 
 	.player {
 		width: 70%;
+		display: table-cell;
 	}
 
 	.score {

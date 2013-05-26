@@ -27,7 +27,7 @@ class Config
 	}
 
 
-	public function getOptions($key = '') {
+	public function getOptions() {
 		return $this->options;
 	}
 
