@@ -53,6 +53,15 @@ class Controller_Ajax extends Controller
 	}
 
 
+	public function ttFixture() {
+		$fixture = new Model_Ttfixture($this->database, $this->config);
+		if (array_key_exists('read_by_team', $_GET)) {
+			$fixture->readByTeam($_GET['read_by_team']);
+		}
+		$this->out($fixture->getData());
+	}
+
+
 	public function fixture() {
 
 

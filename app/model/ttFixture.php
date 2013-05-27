@@ -360,5 +360,36 @@ class Model_Ttfixture extends Model
 		return $this;
 	}
 
+
+	public function readByTeam($id) {
+		$sth = $this->database->dbh->prepare("
+			select
+				tt_fixture.id
+				, tt_fixture.date_fulfilled
+				, team_left.name as team_left_name
+				, team_right.name as team_right_name
+				, tt_fixture_result.left_score as team_left_score
+				, tt_fixture_result.right_score as team_right_score
+			from tt_fixture
+			left join tt_fixture_result on tt_fixture.id = tt_fixture_result.fixture_id
+			left join tt_team as team_left on team_left.id = tt_fixture.team_left_id
+			left join tt_team as team_right on team_right.id = tt_fixture.team_right_id
+			where team_left.id = ? or team_right.id = ?
+			group by tt_fixture.id
+			order by tt_fixture.date_fulfilled desc
+		");				
+		$sth->bindParam(1, $id, PDO::PARAM_INT);
+		$sth->bindParam(2, $id, PDO::PARAM_INT);
+		$sth->execute();
+		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
+			$row['guid'] = $this->getGuid('fixture', $row['team_left_name'] . '-' . $row['team_right_name'], $row['id']);
+			$rows[] = $row;
+		}
+		if ($sth->rowCount()) {
+			return $this->data = $rows;
+		} 
+		return false;
+	}
+
 	
 }

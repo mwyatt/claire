@@ -257,22 +257,22 @@ var load = {
 			+ '</div>'
 		);
 		$.getJSON(
-			url.base + '/ajax/tt-fixture-result/',
-			{method: 'readByTeam', action: $('.content.team.single').data('id')},
+			url.base + '/ajax/tt-fixture/',
+			{read_by_team: $('.content.team.single').data('id')},
 			function(results) {
 				$('.ajax').removeClass('ajax');
 				if (results) {
 					$('.content.team.single').find('.fixture').append('<h2>All Fixtures</h2>');
+					var output = '';
 					$.each(results, function(index, result) {
-						$('.content.team.single').find('.fixture').append(
-							'<a href="' + result.guid + '" class="card clearfix">'
-								+ '<div class="team-left">' + result.team_left_name + '</div>'
-								+ '<div class="score-left">' + result.team_left_score + '</div>'
-								+ '<div class="team-right">' + result.team_right_name + '</div>'
-								+ '<div class="score-right">' + result.team_right_score + '</div>'
-							+ '</a>'
-						);
+						output += (result.date_fulfilled ? '<a href="' + result.guid + '" class="card clearfix">' : '<div class="card clearfix">');
+						output += '<div class="team-left">' + result.team_left_name + '</div>'
+						output += (result.date_fulfilled ? '<div class="score-left">' + result.team_left_score + '</div>' : '');
+						output += '<div class="team-right">' + result.team_right_name + '</div>'
+						output += (result.date_fulfilled ? '<div class="score-right">' + result.team_right_score + '</div>' : '');
+						output += (result.date_fulfilled ? '</a>' : '</div>')
 					});
+					$('.content.team.single').find('.fixture').append(output);
 				} else {
 					$('.content.team.single').find('.fixture').remove();
 				}
