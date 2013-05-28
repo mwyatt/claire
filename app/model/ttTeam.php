@@ -131,18 +131,20 @@ class Model_Ttteam extends Model
 				tt_team.id
 				, tt_team.name
 				, tt_team.secretary_id
+				, concat(tt_secretary.first_name, ' ', tt_secretary.last_name) as secretary_full_name
 				, tt_team.home_night as home_night_id
 				, tt_team.home_night
-				, count(tt_player.id) as player_count
+				, count(main_player.id) as player_count
 				, tt_venue.id as venue_id
 				, tt_venue.name as venue_name
-				, tt_division.id as division_id
+				, tt_team.division_id
 				, tt_division.name as division_name
 			from tt_team
-			left join tt_player on tt_player.team_id = tt_team.id
+			left join tt_player as main_player on main_player.team_id = tt_team.id
+			left join tt_player as tt_secretary on tt_secretary.id = tt_team.secretary_id
 			left join tt_division on tt_team.division_id = tt_division.id
 			left join tt_venue on tt_team.venue_id = tt_venue.id
-			where tt_team.id = ?
+			where tt_team.id = 5
 			group by tt_team.id
 			order by tt_division.id, tt_team.name
 		");
@@ -151,6 +153,8 @@ class Model_Ttteam extends Model
 			$team = $sth->fetch(PDO::FETCH_ASSOC);
 			$teams[$team['id']] = $team;
 			$teams[$team['id']]['home_night'] = self::$weekDays[$team['home_night']];
+			$teams[$team['id']]['division_guid'] = $this->getGuid('division', $team['division_name']);
+			$teams[$team['id']]['secretary_guid'] = $this->getGuid('player', $team['secretary_full_name'], $team['secretary_id']);
 			$teams[$team['id']]['guid'] = $this->getGuid('team', $team['name'], $team['id']);
 		}
 		if (count($teams) == 1) {
@@ -429,5 +433,36 @@ class Model_Ttteam extends Model
 		}
 	}
 
+
+	public function readLeagueByTeam($id) {
+		$sth = $this->database->dbh->prepare("	
+			select
+				tt_team.id
+				, tt_team.name
+				, sum(case when tt_fixture_result.left_id = tt_team.id and tt_fixture_result.left_score > tt_fixture_result.right_score or tt_fixture_result.right_id = tt_team.id and tt_fixture_result.right_score > tt_fixture_result.left_score then 1 else 0 end) as won
+				, sum(case when tt_fixture_result.left_id = tt_team.id and tt_fixture_result.left_score = tt_fixture_result.right_score or tt_fixture_result.right_id = tt_team.id and tt_fixture_result.right_score = tt_fixture_result.left_score then 1 else 0 end) as draw
+				, sum(case when tt_fixture_result.left_id = tt_team.id and tt_fixture_result.left_score < tt_fixture_result.right_score or tt_fixture_result.right_id = tt_team.id and tt_fixture_result.right_score < tt_fixture_result.left_score then 1 else 0 end) as lost
+				, count(tt_fixture_result.fixture_id) as played
+				, (sum(case when tt_fixture_result.left_id = tt_team.id then tt_fixture_result.left_score else 0 end) + sum(case when tt_fixture_result.right_id = tt_team.id then tt_fixture_result.right_score else 0 end)) as points
+			from tt_team
+			left join tt_fixture_result on tt_fixture_result.left_id = tt_team.id or tt_fixture_result.right_id = tt_team.id
+			where tt_team.id = ?
+		");
+		$sth->execute(array($id));
+		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {	
+			if (! $row['played']) {
+				continue;
+			}
+			$row['guid'] = $this->getGuid('team', $row['name'], $row['id']);
+			if ($row['points']) {
+				$this->data = $row;
+			}
+		}
+		if ($this->data) {
+			return $this->data;
+		} else {
+			return false;
+		}
+	}
 
 }

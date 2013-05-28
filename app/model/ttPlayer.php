@@ -189,6 +189,7 @@ class Model_Ttplayer extends Model
 				, concat(tt_player.first_name, ' ', tt_player.last_name) as full_name
 				, tt_team.id as team_id
 				, tt_division.id as division_id
+				, tt_division.name as division_name
 				, tt_team.name as team_name
 				, tt_player.phone_landline
 				, tt_player.phone_mobile
@@ -210,6 +211,8 @@ class Model_Ttplayer extends Model
 			$sth->execute(array($id));
 			$player = $sth->fetch(PDO::FETCH_ASSOC);
 			$players[$player['id']] = $player;
+			$players[$player['id']]['team_guid'] = $this->getGuid('team', $player['team_name'], $player['team_id']);
+			$players[$player['id']]['division_guid'] = $this->getGuid('division', $player['division_name']);
 			$players[$player['id']]['average'] = $this->calcAverage($player['won'], $player['played']);
 		}
 		if (count($players) == 1) {

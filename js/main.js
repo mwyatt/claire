@@ -253,7 +253,7 @@ var load = {
 			return false;
 		}
 		$('.content.team.single').find('.players').after(
-			'<div class="fixture clearfix ajax">'
+			'<div class="row fixture clearfix ajax">'
 			+ '</div>'
 		);
 		$.getJSON(
@@ -262,7 +262,7 @@ var load = {
 			function(results) {
 				$('.ajax').removeClass('ajax');
 				if (results) {
-					$('.content.team.single').find('.fixture').append('<h2>All Fixtures</h2>');
+					$('.content.team.single').find('.fixture').append('<h2>Fixtures</h2>');
 					var output = '';
 					$.each(results, function(index, result) {
 						output += (result.date_fulfilled ? '<a href="' + result.guid + '" class="card clearfix">' : '<div class="card clearfix">');

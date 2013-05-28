@@ -309,7 +309,11 @@ abstract class Model extends Config
 		if ($type == 'media') {
 			return $this->config->getUrl('base') . $this->dir . $name;
 		}
-		return $this->config->getUrl('base') . $type . '/' . $this->urlFriendly($name) . '-' . $id . '/';
+		$url = $this->config->getUrl('base') . $type . '/' . $this->urlFriendly($name) . '-' . $id . '/';
+		if (! $id) {
+			$url = str_replace('-/', '/', $url);
+		}
+		return $url;
 	}
 
 

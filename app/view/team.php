@@ -1,6 +1,6 @@
 <?php require_once($this->pathView() . 'header.php'); ?>
 
-<div class="content team">
+<div class="content team all">
 	<h1>All registered teams</h1>
 
 <?php if ($this->get('model_ttteam')) : ?>

@@ -739,17 +739,9 @@ table.main {
 	td:first-child {
 		// border-left: 1px solid #e6e4e3;
 	}
-
-	.player,
-	.home-night,
-	.venue,
-	.team,
-	.won,
-	.rank,
-	.played {
-		display: none;
-	}
 }
+
+
 
 .content.archive.single div[id^="division"] {
 	margin-bottom: 2em;
@@ -1034,10 +1026,17 @@ div.content.performance table.main {
 
 .content.team.single {
 
-	table.main .venue,
-	table.main .home-night {
-		display: table-row;
-	}
+	// table.main .venue,
+	// table.main .home-night {
+	// 	display: table-row;
+	// }
+
+	// table.main .played,
+	// table.main .won {
+	// 	display: table-cell;
+	// }
+
+
 }
 
 div.content.league table.main {
@@ -1049,6 +1048,8 @@ div.content.league table.main {
 		display: none;
 	}
 }
+
+
 
 .content.fixture.single {
 
@@ -1218,6 +1219,31 @@ footer.main .inner,
 header.main {
 	margin: 0 auto;
 	max-width: 60em;
+}
+
+.content.team.all,
+.content.player.all,
+.content.division.merit,
+.content.division.league {
+
+	.player,
+	.home-night,
+	.venue,
+	.team,
+	.won,
+	.rank,
+	.played {
+		display: none;
+	}
+}
+
+.content.team.single .row.players {
+
+	.won,
+	.rank,
+	.played {
+		display: none;
+	}
 }
 
 @media screen and (min-width : 435px) {
