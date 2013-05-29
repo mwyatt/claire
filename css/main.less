@@ -444,8 +444,11 @@ nav.main {
 		padding: 0;
 	}
 
+	li.active > a:hover,
+	li.active > a:active,
 	li.active > a {
 		background: darken(@orange, 20%);
+		cursor: default;
 	}
 
 	li > a {
@@ -458,6 +461,15 @@ nav.main {
 		font-weight: 600;
 		padding: 0.5em .7em 0.7em 0.7em;
 		text-align: center;
+
+		&:hover {
+			.gradient (@orangeHighlight, lighten(@orange, 5%));
+		}
+
+		&:active {
+			.gradient (darken(@orangeHighlight, 10%), darken(@orange, 5%));
+			.inner-shadow (inset 0 1px 3px darken(@orange, 10%));
+		}
 	}
 
 	h4 {
