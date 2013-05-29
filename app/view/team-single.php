@@ -13,10 +13,16 @@
 				<th>Venue</th>
 				<td><?php echo $this->get('info', 'venue_name'); ?></td>
 			</tr>		
+
+<?php if ($this->get('info', 'secretary_full_name')): ?>
+	
 			<tr class="secretary">
 				<th>Secretary</th>
 				<td><a href="<?php echo $this->get('info', 'secretary_guid'); ?>"><?php echo $this->get('info', 'secretary_full_name'); ?></a></td>
 			</tr>		
+
+<?php endif ?>
+
 			<tr class="division">
 				<th>Division</th>
 				<td><a href="<?php echo $this->get('info', 'division_guid'); ?>"><?php echo $this->get('info', 'division_name'); ?></a></td>
