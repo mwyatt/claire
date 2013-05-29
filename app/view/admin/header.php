@@ -64,7 +64,7 @@
 
 <?php endif ?>
 <?php echo $this->getFeedback(); ?>
-<?php if (! $this->get('options', 'season_status') && $this->get($this->session->get('user'), 'email') == 'martin.wyatt@gmail.com'): ?>
+<?php if (! $this->get('options', 'season_status') && $this->get($this->session->get('user'), 'level') > 3): ?>
 
     <div class="notice season-status clearfix">
         <h3>Season Status</h3>

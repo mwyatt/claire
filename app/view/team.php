@@ -1,11 +1,11 @@
 <?php require_once($this->pathView() . 'header.php'); ?>
 
-<div class="content team">
-	<h1>All Teams</h1>
+<div class="content team all">
+	<h1>All registered teams</h1>
 
 <?php if ($this->get('model_ttteam')) : ?>
 
-	<table width="100%" cellspacing="0" cellpadding="0">
+	<table class="main" width="100%" cellspacing="0" cellpadding="0">
 
 		<tr>
 			<th class="name">Name</th>

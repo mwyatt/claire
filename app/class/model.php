@@ -301,6 +301,7 @@ abstract class Model extends Config
 		
 	}
 
+
 	public function getGuid($type = false, $name = false, $id = false) {
 		if ($type == 'timthumb') {
 			return $this->config->getUrl('base') . 'timthumb/?src=' . $this->config->getUrl('base') . $name;
@@ -308,41 +309,17 @@ abstract class Model extends Config
 		if ($type == 'media') {
 			return $this->config->getUrl('base') . $this->dir . $name;
 		}
-		return $this->config->getUrl('base') . $type . '/' . $this->urlFriendly($name) . '-' . $id . '/';
+		$url = $this->config->getUrl('base') . $type . '/' . $this->urlFriendly($name) . '-' . $id . '/';
+		if (! $id) {
+			$url = str_replace('-/', '/', $url);
+		}
+		return $url;
 	}
+
 
 	public function isChecked($key) {
 		return (array_key_exists($key, $_POST) ? true : false);
 	}
-
-
-
-
-	// /**
-	//  * pairs meta values with corresponding rows
-	//  * this requires the key 'id' to function
-	//  * @param  array $rows full set of data which needs pairing
-	//  * @return bool       
-	//  */
-	// public function parseMeta($rows) {
-	// 	$parsedRows = array();
-	// 	foreach ($rows as $key => $row) {
-	// 		if (! array_key_exists('id', $row) || ! array_key_exists('meta_name', $row)) {
-	// 			return false;
-	// 		}
-	// 		if (array_key_exists($row['id'], $parsedRows)) {
-	// 			$parsedRows[$row['id']][$row['meta_name']] = $row['meta_value'];
-	// 		} else {
-	// 			$parsedRows[$row['id']] = $row;
-	// 			$parsedRows[$row['id']][$row['meta_name']] = $row['meta_value'];
-	// 			unset($parsedRows[$row['id']]['meta_name']);
-	// 			unset($parsedRows[$row['id']]['meta_value']);
-	// 		}
-	// 	}
-	// 	$parsedRows = array_values($parsedRows);
-	// 	$parsedRows = reset($parsedRows);
-	// 	return $parsedRows;
-	// }
 
 
 	/**

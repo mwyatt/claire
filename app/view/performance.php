@@ -33,7 +33,7 @@
 	</table>
 	
 <?php else: ?>
-	<?php require_once($this->pathView() . 'nothing-yet.php'); ?>
+	<?php require_once($this->pathView() . 'nothing-yet-fixture.php'); ?>
 <?php endif; ?>	
 
 </div>

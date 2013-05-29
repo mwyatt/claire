@@ -189,7 +189,7 @@ var search = {
 	initialise: function(container) {
 		if ($(container).length) {
 			search.container = $(container);
-			search.input = $(search.container).find('input[name="query"]');
+			search.input = $(search.container).find('input[name="search"]');
 			// $(search.input).on('change', search.setTimer);
 			$(search.input).on('keyup', search.setTimer);			
 		}
@@ -202,21 +202,21 @@ var search = {
 
 	poll: function() {
 		if ($(search.input).val().length < 2) {
-			$(search.section).html('');
+			$(search.container).find('section').html('');
 			return false;
 		}
-		if (! search.section) {
+		if (! $(search.container).find('section').length) {
 			$(search.input).after('<section></section>');
-			search.section = $(search.container).find('section');
 		};
-		$(search.section).html('');
-		$.getJSON(url.base + '/ajax/search/?query=' + $(search.input).val() + '&limit=5', function(results) {
+		$(search.container).find('section').html(ajax);
+		$.getJSON(url.base + '/ajax/search/?search=' + $(search.input).val() + '&limit=5', function(results) {
 			if (results) {
-				// console.log(results);
-				$(search.section).html('');
+				$(search.container).find('section').html('');
 				$.each(results, function(index, result) {
-					$(search.section).append('<a href="' + result.guid + '">' + result.name + '</a>');
+					$(search.container).find('section').append('<a href="' + result.guid + '">' + result.name + '</a>');
 				});
+			} else {
+				$(search.container).find('section').remove();
 			}
 		});
 	},
@@ -246,29 +246,39 @@ var navSub = {
 	}
 }
 
-var fixtureResult = {
-
-	readByTeam: function() {
-	$.getJSON(url.base + '/ajax/tt-fixture-result/?method=readByTeam&action=' + $('.content.team.single').data('id'), function(results) {
-			if (results) {
-				// console.log(results);
-				$.each(results, function(index, result) {
-					$('.content.team.single').find('.fixture').append(
-						'<a href="' + result.guid + '" class="card clearfix">'
-							+ '<div class="team-left">' + result.team_left_name + '</div>'
-							+ '<div class="score-left">' + result.team_left_score + '</div>'
-							+ '<div class="team-right">' + result.team_right_name + '</div>'
-							+ '<div class="score-right">' + result.team_right_score + '</div>'
-						+ '</a>'
-					);
-				});
-			}
-		});
-	}
-}
-
 var load = {
 
+	fixtureReadByTeam: function() {
+		if ($('.content.team.single').find('.fixture').length) {
+			return false;
+		}
+		$('.content.team.single').find('.players').after(
+			'<div class="row fixture clearfix ajax">'
+			+ '</div>'
+		);
+		$.getJSON(
+			url.base + '/ajax/tt-fixture/',
+			{read_by_team: $('.content.team.single').data('id')},
+			function(results) {
+				$('.ajax').removeClass('ajax');
+				if (results) {
+					$('.content.team.single').find('.fixture').append('<h2>Fixtures</h2>');
+					var output = '';
+					$.each(results, function(index, result) {
+						output += (result.date_fulfilled ? '<a href="' + result.guid + '" class="card clearfix">' : '<div class="card clearfix">');
+						output += '<div class="team-left">' + result.team_left_name + '</div>'
+						output += (result.date_fulfilled ? '<div class="score-left">' + result.team_left_score + '</div>' : '');
+						output += '<div class="team-right">' + result.team_right_name + '</div>'
+						output += (result.date_fulfilled ? '<div class="score-right">' + result.team_right_score + '</div>' : '');
+						output += (result.date_fulfilled ? '</a>' : '</div>')
+					});
+					$('.content.team.single').find('.fixture').append(output);
+				} else {
+					$('.content.team.single').find('.fixture').remove();
+				}
+			}
+		);
+	},
 	playerReadByTeam: function() {
 		if ($('.content.team.single').find('.players').length) {
 			return false;
@@ -282,7 +292,6 @@ var load = {
 		}
 		$.getJSON(url.base + '/ajax/player/?team_id=' + $('.content.team.single').data('id'), function(results) {
 			if (results) {
-				// console.log(results);
 				$('.ajax').remove();
 				html = '<ul>';
 				$.each(results, function(index, result) {
@@ -294,9 +303,8 @@ var load = {
 		});
 	},
 	playerReadSingle: function() {
-		$.getJSON(url.base + '/ajax/search/?query=' + $(search.input).val() + '&limit=5', function(results) {
+		$.getJSON(url.base + '/ajax/search/?search=' + $(search.input).val() + '&limit=5', function(results) {
 			if (results) {
-				// console.log(results);
 				$(search.section).html('');
 				$.each(results, function(index, result) {
 					$(search.section).append('<a href="' + result.guid + '">' + result.name + '</a>');
@@ -457,13 +465,16 @@ $(document).ready(function() {
 	if ($('.content.home').length) {
 		$('.cover').cover();
 	};
+	if ($('.content.gallery').length) {
+		$('.file').magnificPopup({type:'image'});
+	}
 	if ($('.content.player.single').length) {
 		load.playerReadPerformance();
 		load.playerReadRankChange();
 		load.playerReadFixture();
 	};
 	if ($('.content.team.single').length) {
-		load.playerReadByTeam();
-		fixtureResult.readByTeam();
+		// load.playerReadByTeam();
+		load.fixtureReadByTeam();
 	};
 });

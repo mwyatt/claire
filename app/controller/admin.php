@@ -21,8 +21,11 @@ class Controller_Admin extends Controller
 		$menu->adminSub();
 		$this->view->setObject($menu);
 		$user = new Model_Mainuser($this->database, $this->config);
-		if ($user->isLogged()) {
-			$user->permission();
+		if ($user->isLogged() && $user->get('level') < 10) {
+			$accessTo = $user->getPermission($user->get('level'));
+			if ($this->config->getUrl(2) && ! in_array($this->config->getUrl(2), $accessTo)) {
+				$this->route('base', 'admin/');
+			}
 		}
 		if (array_key_exists('logout', $_GET)) {
 			$user->logout();

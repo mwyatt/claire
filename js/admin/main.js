@@ -493,6 +493,9 @@ $(document).ready(function() {
 	function removeModals() {
 		$('*').removeClass('active');
 	}
+	if ($('.content.gallery').length) {
+		$('.file').magnificPopup({type:'image'});
+	}
 	var user = $('header.main').find('.user');
 	user.find('a').on('click', clickUser);
 	function clickUser() {

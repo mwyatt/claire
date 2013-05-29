@@ -162,8 +162,8 @@ class Model_Mainmenu extends Model
 	 * @return html the menu
 	 */
 	public function adminSub() {
-		
-		if ($this->session->get('user')['email'] == 'martin.wyatt@gmail.com') {
+		$user = new model_mainuser($this->database, $this->config);
+		if ($user->get('email') == 'martin.wyatt@gmail.com') {
 			$className = 'Controller_' . ucfirst($this->config->getUrl(0)) . '_' . ucfirst($this->config->getUrl(1));
 			if (class_exists($className)) {
 				foreach (get_class_methods($className) as $key => $method) {
@@ -175,7 +175,7 @@ class Model_Mainmenu extends Model
 				}
 			}
 		}
-		if ($this->session->get('user')['email'] == 'realbluesman@tiscali.co.uk') {
+		if ($user->get('email') == 'realbluesman@tiscali.co.uk') {
 			$className = 'Controller_' . ucfirst($this->config->getUrl(0)) . '_' . ucfirst($this->config->getUrl(1));
 			if (class_exists($className)) {
 				foreach (get_class_methods($className) as $key => $method) {
@@ -198,15 +198,33 @@ class Model_Mainmenu extends Model
 	  *	@returns	assoc array if successful, empty array otherwise
 	  */
 	public function admin() {
-		$baseUrl = $this->config->getUrl('base') . $this->config->getUrl(0). '/';
-		$this->data['admin'][0]['name'] = 'Dashboard';
-		$this->data['admin'][0]['current'] = ($this->config->getUrl(1) == '' ? true : false);
-		$this->data['admin'][0]['guid'] = $baseUrl;
+		$this->data['admin'][] = array(
+			'name' => 'Dashboard'
+			, 'current' => ($this->config->getUrl(1) == '' ? true : false)
+			, 'guid' => $this->config->getUrl('admin')
+		);
+		$user = new model_mainuser($this->database, $this->config);
+		if ($accessTo = $user->getPermission($user->get('level'))) {
+			foreach ($this->getClassMethods('controller_admin') as $adminMethod) {
+				foreach ($this->getClassMethods('controller_admin_' . $adminMethod) as $method) {
+					$methods[]=$method;
+					if (! in_array($method, $accessTo)) {
+						continue;
+					}
+					$this->data['admin'][] = array(
+						'name' => ucfirst($method)
+						, 'current' => ($this->config->getUrl(2) == $method ? true : false)
+						, 'guid' => $this->config->getUrl('admin') . $adminMethod . '/' . $method . '/'
+					);
+				}
+			}
+			return;
+		}
 		foreach (get_class_methods('Controller_Admin') as $key => $method) {
 			if (($method !== 'initialise') && ($method !== 'index') && ($method !== 'load') && ($method !== '__construct')) {
 				$this->data['admin'][$key]['name'] = ucfirst($method);
 				$this->data['admin'][$key]['current'] = ($this->config->getUrl(1) == $method ? true : false);
-				$this->data['admin'][$key]['guid'] = $baseUrl . $method . '/';
+				$this->data['admin'][$key]['guid'] = $this->config->getUrl('admin') . $method . '/';
 			}
 		}
 		return;

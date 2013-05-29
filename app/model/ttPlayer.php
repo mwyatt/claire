@@ -104,6 +104,21 @@ class Model_Ttplayer extends Model
 	*/}
 	
 
+	public function readTotalByDivision($id) {
+		$sth = $this->database->dbh->prepare("
+			select
+				tt_player.id
+			from tt_player
+			left join tt_team on tt_player.team_id = tt_team.id
+			left join tt_division on tt_team.division_id = tt_division.id
+			where tt_division.id = ?
+		");				
+		$sth->execute(array($id));
+		$this->data = $sth->rowCount();
+		return $sth->rowCount();
+	}
+
+
 	public function read()
 	{	
 	
@@ -174,6 +189,7 @@ class Model_Ttplayer extends Model
 				, concat(tt_player.first_name, ' ', tt_player.last_name) as full_name
 				, tt_team.id as team_id
 				, tt_division.id as division_id
+				, tt_division.name as division_name
 				, tt_team.name as team_name
 				, tt_player.phone_landline
 				, tt_player.phone_mobile
@@ -195,6 +211,8 @@ class Model_Ttplayer extends Model
 			$sth->execute(array($id));
 			$player = $sth->fetch(PDO::FETCH_ASSOC);
 			$players[$player['id']] = $player;
+			$players[$player['id']]['team_guid'] = $this->getGuid('team', $player['team_name'], $player['team_id']);
+			$players[$player['id']]['division_guid'] = $this->getGuid('division', $player['division_name']);
 			$players[$player['id']]['average'] = $this->calcAverage($player['won'], $player['played']);
 		}
 		if (count($players) == 1) {
@@ -207,52 +225,37 @@ class Model_Ttplayer extends Model
 	}	
 
 
-	/**
-	 * all data required to display the merit table
-	 * player name, team name, team guid, player rank, sets won, sets played
-	 * must exclude matches which have no opponent
-	 */
 	public function readByTeam($id)
 	{	
-
 		$sth = $this->database->dbh->prepare("
-
 			select
 				tt_player.id
 				, concat(tt_player.first_name, ' ', tt_player.last_name) as full_name
+				, tt_player.rank
 				, tt_team.name as team_name
 				, tt_division.name as division_name
-
-			from
-				tt_player
-
-			left join
-				tt_team on tt_player.team_id = tt_team.id
+				, (sum(case when tt_encounter_result.left_id = tt_player.id and tt_encounter_result.status = '' then tt_encounter_result.left_score else 0 end) + sum(case when tt_encounter_result.right_id = tt_player.id and tt_encounter_result.status = '' then tt_encounter_result.right_score else 0 end)) as won
+				, sum(
+					case
+						when tt_encounter_result.status = '' and tt_encounter_result.left_id = tt_player.id or tt_encounter_result.right_id = tt_player.id then tt_encounter_result.left_score + tt_encounter_result.right_score
+					else 0
+				end) as played
+			from tt_player
+			left join tt_team on tt_player.team_id = tt_team.id
+			left join tt_encounter_result on tt_encounter_result.left_id = tt_player.id or tt_encounter_result.right_id = tt_player.id
 			left join tt_division on tt_team.division_id = tt_division.id
-
-			where
-				tt_team.id = :id
-
-			group by
-				tt_player.id
-
-			order by
-				tt_player.rank desc
-
+			where tt_team.id = ?
+			group by tt_player.id
+			order by tt_player.rank desc
 		");				
-		
-		$sth->execute(array(
-			':id' => $id
-		));
-
-		$view = new View($this->database, $this->config);
-
+		$sth->execute(array($id));
 		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {	
+			$row['average'] = $this->calcAverage($row['won'], $row['played']);
 			$row['name'] = $row['full_name'];
 			$row['guid'] = $this->getGuid('player', $row['full_name'], $row['id']);
 			$this->data[] = $row;
 		}
-
+		return $sth->rowCount();
 	}	
 
 
@@ -284,14 +287,14 @@ class Model_Ttplayer extends Model
 		");
 		$sth->execute(array($divisionId));
 		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {	
-			$average = $this->calcAverage($row['won'], $row['played']);
-			$averages[$row['id']] = $average;
+			if (! $row['played']) {
+				continue;
+			}
+			$row['average'] = $this->calcAverage($row['won'], $row['played']);
+			$averages[$row['id']] = $row['average'];
 			$row['guid'] = $this->getGuid('player', $row['full_name'], $row['id']);
 			$row['team_guid'] = $this->getGuid('team', $row['team_name'], $row['team_id']);
-			$row['average'] = $average . '&#37;';
-			if ($row['played']) {
-				$this->data[$row['id']] = $row;
-			}
+			$this->data[$row['id']] = $row;
 		}
 		if ($this->data) {
 			array_multisort(array_filter($averages), SORT_DESC, $this->data);
@@ -309,19 +312,15 @@ class Model_Ttplayer extends Model
 	 * @return int         percentage value of win / loss ratio
 	 */
 	public function calcAverage($won, $played) {
-		
 		$average = 0;
-
 		if ( $played != 0 ) {
 			$x = 0; $y = 0; $average = 0;			
 			$x = $won / $played;
 			$y = $x * 100;
-			// $average = round($y);
+			// $average = round($y); // converts to 65%
 			$average = number_format((float)$y, 2, '.', '');
 		}
-		
 	    return $average;
-		
 	} 
 
 

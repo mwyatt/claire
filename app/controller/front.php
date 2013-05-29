@@ -19,6 +19,9 @@ class Controller_Front extends Controller
 		$menu = new Model_Mainmenu($this->database, $this->config);
 		$menu->division();
 		$this->view->setObject($menu);
+		if (array_key_exists('search', $_GET)) {
+			$this->search($_GET['search']);
+		}
 	}
 
 
@@ -28,6 +31,20 @@ class Controller_Front extends Controller
 		$this->view
 			->setObject($press)
 			->loadTemplate('home');
+	}
+
+
+	public function search($query) {
+		$query = htmlspecialchars($query);
+		if (! $query) {
+			$this->route('base');
+		}
+		$search = new Model_Search($this->database, $this->config);
+		$search->read($query);
+		$this->view
+			->setObject('search_query', $query)
+			->setObject($search)
+			->loadTemplate('search');
 	}
 
 
@@ -60,6 +77,28 @@ class Controller_Front extends Controller
 			))
 			->setObject($division)
 			->loadTemplate('tables-and-results');
+	}
+
+
+	public function fredHoldenCup() {
+		$cup = new Model_Maincontent($this->database, $this->config);
+		$media = new model_mainmedia($this->database, $this->config);
+		$cup->readByType('cup');
+		foreach ($cup->getData() as $minute) {
+			if (! array_key_exists('media', $minute)) {
+				continue;
+			}
+			$media->readById(array($minute['media']));
+			$minute['media'] = $media->getData();
+			$minuteCollection[] = $minute;
+		}
+		$cup->setData($minuteCollection);
+		$this->view
+			->setMeta(array(		
+				'title' => 'Fred Holden Cup'
+			))
+			->setObject($cup)
+			->loadTemplate('minutes');
 	}
 
 
@@ -130,7 +169,7 @@ class Controller_Front extends Controller
 			}
 			$this->view
 				->setMeta(array(		
-					'title' => 'East Lancashire Table Tennis League archive'
+					'title' => 'Archive'
 				))
 				->setObject($archive)
 				->loadTemplate('archive-single');
@@ -139,8 +178,6 @@ class Controller_Front extends Controller
 		$this->view
 			->setMeta(array(		
 				'title' => 'All archives'
-				, 'keywords' => 'archives, archive'
-				, 'description' => 'All archives in the East Lancashire Table Tennis League'
 			))
 			->setObject($archive)
 			->loadTemplate('archive');
@@ -157,7 +194,7 @@ class Controller_Front extends Controller
 			$fixtureInfo = current($fixture->data);
 			$this->view
 				->setMeta(array(		
-					'title' => 'East Lancashire Table Tennis League fixture'
+					'title' => $fixtureInfo['team_left_name'] . ' vs ' . $fixtureInfo['team_right_name']
 				))
 				->setObject($fixture)
 				->setObject('fixture_info', $fixtureInfo)

@@ -30,7 +30,7 @@
 					<?php echo $this->get($content, 'status') ?>
 				</td>
 				<td class="action text-right">
-					<a href="<?php echo $this->get($content, 'guid'); ?>" title="View <?php echo $this->get($content, 'title'); ?> online">View</a>
+					<a href="<?php echo $this->get($content, 'guid'); ?>" title="View <?php echo $this->get($content, 'title'); ?> online" target="blank">View</a>
 					<a href="<?php echo $this->url('current_noquery'); ?>?edit=<?php echo $this->get($content, 'id'); ?>" title="Edit <?php echo $this->get($content, 'title'); ?>" class="edit">Edit</a>
 					<a href="<?php echo $this->url('current_noquery'); ?>?delete=<?php echo $this->get($content, 'id'); ?>" title="Delete <?php echo $this->get($content, 'title'); ?>" class="delete">Delete</a>
 				</td>

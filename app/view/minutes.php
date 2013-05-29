@@ -1,17 +1,21 @@
 <?php require_once('header.php'); ?>
 
-<div class="content minutes">
-	<h1>Minutes</h1>
+<div class="content minutes clearfix">
+	<h1><?php echo $this->getMeta('title'); ?></h1>
 
 <?php if ($this->get('model_maincontent')) : ?>
 	<?php foreach ($this->get('model_maincontent') as $minute): ?>
-
-	<article>
-		<h2><a href="<?php echo $this->get($minute, 'media'); ?>" target="_blank"><?php echo date('D jS F Y', $this->get('model_maincontent', 'date_published')) ?></a></h2>
-		<a class="button" href="<?php echo $this->get($minute, 'media'); ?>" target="_blank">Download</a>
-	</article>
+		<?php $media = $this->get($minute, 'media'); ?>
+		<?php $media = current($media); ?>
+		
+	<div class="item clearfix">
+		<a class="button" href="<?php echo $media['guid']; ?>" target="_blank">Download</a>
+		<h2><a href="<?php echo $media['guid']; ?>" target="_blank"><?php echo date('D jS F Y', $this->get($minute, 'date_published')) ?></a></h2>
+	</div>
 
 	<?php endforeach ?>
+<?php else: ?>	
+	<?php require_once($this->pathView() . 'nothing-yet.php'); ?>
 <?php endif; ?>	
 
 </div>

@@ -56,7 +56,7 @@ class Controller_Front_Division extends Controller
 		$fixture->readResult($division['id']);
 		$this->view
 			->setMeta(array(		
-				'title' => $division['name'] . ' division league table'
+				'title' => $division['name'] . ' division fixtures'
 			))
 			->setObject($fixture)
 			->loadTemplate('fixture');
@@ -66,7 +66,6 @@ class Controller_Front_Division extends Controller
 	/**
 	 * divisional overview, skips to merit, league if required
 	 * @todo improve the way this moves to the next url segment
-	 * @return [type] [description]
 	 */
 	public function index() {
 		if ($segment = $this->config->getUrl(2)) {
@@ -77,6 +76,17 @@ class Controller_Front_Division extends Controller
 		$division = $this->view->getObject('division');
 		$player = new Model_Ttplayer($this->database, $this->config);
 		$team = new Model_Ttteam($this->database, $this->config);
+		$fixture = new Model_Ttfixture($this->database, $this->config);
+		$player->readTotalByDivision($division['id']);
+		$team->readTotalByDivision($division['id']);
+		$fixture->readTotalByDivision($division['id']);
+		$this->view
+			->setObject('total_players', $player->getData())
+			->setObject('total_teams', $team->getData())
+			->setObject('total_fixtures', $fixture->getData());
+		$player = new Model_Ttplayer($this->database, $this->config);
+		$team = new Model_Ttteam($this->database, $this->config);
+		$fixture = new Model_Ttfixture($this->database, $this->config);
 		if ($player->readMerit($division['id'])) {
 			$this->view
 				->setObject('player', array_slice($player->getData(), 0, 3));

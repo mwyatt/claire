@@ -91,5 +91,7 @@ class Controller_Admin_Content extends Controller
 			->setObject($content)
 			->loadTemplate('admin/content/list');
 	}
+
+	
 }
 	

@@ -9,7 +9,7 @@
 			<input id="form-name" class="required" type="text" name="name" maxlength="75" value="<?php echo $this->get('model_ttteam', 'name'); ?>">
 		</div>			
 
-<?php if ($this->get('model_ttdivision') && ! $this->get('options', 'season_status')): ?>
+<?php if ($this->get('model_ttdivision')): ?>
 
 		<div class="row division">
 			<label class="above" for="form-division">Division</label>

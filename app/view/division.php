@@ -2,11 +2,25 @@
 
 <div class="content division overview" data-division-id="<?php echo $this->get('division', 'id') ?>">
 	<h1><?php echo ucfirst($this->get('division', 'name')) ?> division overview</h1>
+	<div class="total-blocks clearfix">
+		<div class="block">
+			<h6><?php echo $this->get('total_players') ?></h6>
+			<p>Players</p>
+		</div>
+		<div class="block">
+			<h6><?php echo $this->get('total_teams') ?></h6>
+			<p>Teams</p>
+		</div>
+		<div class="block">
+			<h6><?php echo $this->get('total_fixtures') ?></h6>
+			<p>Fixtures</p>
+		</div>
+	</div>
 
 <?php if ($this->get('player') || $this->get('team')): ?>
 	<?php if ($this->get('player')) : ?>
 	
-	<div class="row">
+	<div class="row clearfix">
 		<h2>Top 3 players</h2>
 		<table class="main" width="100%" cellspacing="0" cellpadding="0">
 			<thead>
@@ -39,7 +53,7 @@
 
 	<?php if ($this->get('team')) : ?>
 	
-	<div class="row">
+	<div class="row clearfix">
 		<h2>Top 3 teams</h2>
 		<table class="main" width="100%" cellspacing="0" cellpadding="0">
 			<thead>
@@ -68,7 +82,7 @@
 	
 	<?php endif; ?>
 <?php else: ?>
-	<?php require_once($this->pathView() . 'nothing-yet.php'); ?>
+	<?php require_once($this->pathView() . 'nothing-yet-fixture.php'); ?>
 <?php endif ?>
 
 </div>

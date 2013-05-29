@@ -2,7 +2,7 @@
 				<div class="inner">
 					<nav>
 						<a href="<?php echo $this->urlHome(); ?>page/premier-league-for-sport/">Premier League for Sport</a>
-						<a href="<?php echo $this->urlHome(); ?>page/archive/">Archive (Old Website)</a>
+						<a href="<?php echo $this->urlHome(); ?>archive/">Archive</a>
 						<a href="<?php echo $this->urlHome(); ?>page/links/">Links</a>
 						<a href="<?php echo $this->urlHome(); ?>minutes/">Minutes</a>
 						<a href="<?php echo $this->urlHome(); ?>fred-holden-cup/">Fred Holden Cup</a>
@@ -19,7 +19,7 @@
 			</footer>
         </div>
         <script src="<?php echo $this->urlHome(); ?>js/vendor/jquery-1.8.2.min.js"></script>
-        <script src="<?php echo $this->urlHome(); ?>js/vendor/spin.min.js"></script>
+        <script src="<?php echo $this->urlHome(); ?>js/vendor/jquery.magnific-popup.min.js"></script>
         <script src="<?php echo $this->urlHome(); ?>js/main.js"></script>
     </body>
 </html>

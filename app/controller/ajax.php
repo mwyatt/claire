@@ -43,13 +43,22 @@ class Controller_Ajax extends Controller
 		$fixtureResult = new Model_Ttfixture_Result($this->database, $this->config);
 		if (
 			$_GET['method'] == 'readByPlayerId'
-			|| $_GET['method'] == 'another'
+			|| $_GET['method'] == 'readByTeam'
 		) {
 			$fixtureResult->$_GET['method']($_GET['action']);
 		}
 		if (method_exists($fixtureResult, $_GET['method'])) {
 		}
 		$this->out($fixtureResult->getData());
+	}
+
+
+	public function ttFixture() {
+		$fixture = new Model_Ttfixture($this->database, $this->config);
+		if (array_key_exists('read_by_team', $_GET)) {
+			$fixture->readByTeam($_GET['read_by_team']);
+		}
+		$this->out($fixture->getData());
 	}
 
 
@@ -75,12 +84,12 @@ class Controller_Ajax extends Controller
 
 	
 	public function search() {
-		if (array_key_exists('query', $_GET)) {
+		if (array_key_exists('search', $_GET)) {
 			$search = new Model_Search($this->database, $this->config);
 			if (array_key_exists('limit', $_GET)) {
-				$search->read($_GET['query'], $_GET['limit']);
+				$search->read($_GET['search'], $_GET['limit']);
 			} else {
-				$search->read($_GET['query']);
+				$search->read($_GET['search']);
 			}
 			$this->out($search->getData());
 		}

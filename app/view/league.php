@@ -1,8 +1,8 @@
 <?php require_once($this->pathView() . 'header.php'); ?>
 
 <div class="content division league">
+	<a href="<?php echo $this->url('back') ?>" class="button right">Back to overview</a>
 	<h1><?php echo ucfirst($this->get('division', 'name')) ?> division league</h1>
-	<a href="<?php echo $this->url('back') ?>" class="button">Back to overview</a>
 
 <?php if ($this->get('model_ttteam')) : ?>
 
@@ -35,9 +35,10 @@
 	</table>
 	
 <?php else: ?>
-	<?php require_once($this->pathView() . 'nothing-yet.php'); ?>
+	<?php require_once($this->pathView() . 'nothing-yet-fixture.php'); ?>
 <?php endif; ?>	
 
+	<p><a href="<?php echo $this->urlHome() ?>team/">Can't find the team your looking for?</a></p>
 </div>
 
 <?php require_once($this->pathView() . 'footer.php'); ?>
