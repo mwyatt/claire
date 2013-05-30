@@ -196,6 +196,11 @@ var ajax = '<div class="ajax"></div>';
 						uploadFormData = new FormData();
 						$('#form_images').on('change', upload);
 						getDirectory('');
+					},
+					error: function (jqXHR, textStatus, errorThrown) {
+						console.log(jqXHR);
+						console.log(textStatus);
+						console.log(errorThrown);
 					}
 				});
 			}

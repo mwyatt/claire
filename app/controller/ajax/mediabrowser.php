@@ -88,12 +88,12 @@ class Controller_Ajax_Mediabrowser extends Controller_Ajax
 
 
 	public function upload() {
-		foreach ($_FILES['images']['size'] as $size) {
-			if ($size > 1000000 /* 1mb */) {
-				echo 'Files must be under 1mb each.';
-				exit;
-			}
-		}
+		// foreach ($_FILES['images']['size'] as $size) {
+		// 	if ($size > 1000000  1mb ) {
+		// 		echo 'Files must be under 1mb each.';
+		// 		exit;
+		// 	}
+		// }
 		foreach ($_FILES['images']['type'] as $type) {
 			if ($type != 'image/jpeg' && $type != 'image/png' && $type != 'image/gif' && $type != 'application/pdf') {
 				echo '<p>Please upload only jpg, png, gif or pdf files.</p>';
