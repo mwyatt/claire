@@ -82,6 +82,9 @@ class View extends Model
 		// echo '</pre>';
 		// exit;
 
+
+		header('Content-type: text/html; charset=utf-8'); 
+		
 		// presentation & cache
 		ob_start();	
 		require_once($path);
