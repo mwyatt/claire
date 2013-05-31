@@ -33,6 +33,9 @@
 
 		</table>
 	</div>
+
+<?php if ($this->get('model_ttplayer', 'played')): ?>
+
 	<div class="merit-stats">
 		<h2>Merit stats</h2>
 		<table class="main" width="100%" cellspacing="0" cellpadding="0">
@@ -53,7 +56,13 @@
 				<td><?php echo $this->get('model_ttplayer', 'average'); ?>&#37;</td>
 			</tr>		
 		</table>
+		<div class="clearfix row">
+			<a href="<?php echo $this->get('model_ttplayer', 'division_guid') ?>" class="button right">Merit Table</a>
+		</div>
 	</div>
+
+<?php endif ?>
+
 </div>
 
 <?php require_once($this->pathView() . 'footer.php'); ?>

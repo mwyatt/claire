@@ -93,10 +93,12 @@ class Controller_Front extends Controller
 			$minuteCollection[] = $minute;
 		}
 		$cup->setData($minuteCollection);
+		$information = current($cup->getData());
 		$this->view
 			->setMeta(array(		
 				'title' => 'Fred Holden Cup'
 			))
+			->setObject('information', $information)
 			->setObject($cup)
 			->loadTemplate('minutes');
 	}

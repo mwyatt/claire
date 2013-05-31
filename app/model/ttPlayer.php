@@ -225,6 +225,20 @@ class Model_Ttplayer extends Model
 	}	
 
 
+	public function readSecretaries() {
+		$sth = $this->database->dbh->prepare("
+			select
+				tt_player.id
+				, concat(tt_player.first_name, ' ', tt_player.last_name) as full_name
+			from tt_player
+			where tt_player.phone_landline != '' or tt_player.phone_mobile != ''
+		");				
+		$sth->execute();
+		$this->data = $sth->fetchAll(PDO::FETCH_ASSOC);
+		return $sth->rowCount();
+	}
+
+
 	public function readByTeam($id)
 	{	
 		$sth = $this->database->dbh->prepare("

@@ -169,18 +169,13 @@ var ajax = '<div class="ajax"></div>';
 	 		var file;
 			for ( ; i < len; i++ ) {
 				file = this.files[i];
-				// if (!!file.type.match(/image.*/)) {
-					if ( window.FileReader ) {
-						reader = new FileReader();
-						// reader.onloadend = function (e) { 
-						// 	// showUploadedItem(e.target.result, file.fileName);
-						// };
-						reader.readAsDataURL(file);
-					}
-					if (uploadFormData) {
-						uploadFormData.append("images[]", file);
-					}
-				// }	
+				// if (window.FileReader) {
+				// 	reader = new FileReader();
+				// 	reader.readAsDataURL(file);
+				// }
+				if (uploadFormData) {
+					uploadFormData.append("images[]", file);
+				}
 			}
 			if (uploadFormData) {
 				$.ajax({
@@ -466,6 +461,13 @@ $(document).ready(function() {
 	exclude.init();
 	select.init();
 	feedback.init();
+	$('.button.season-start').on('click', function() {
+		// e.preventDefault();
+		if (confirm('Once you \'start\' the season the fixtures will be generated and you will be unable to move teams to other divisions.')) {
+			return true;
+		}
+		return false;
+	});
 	$('form').find('a.submit').on('click', function(e) {
 		formSubmit(e, this);
 	});

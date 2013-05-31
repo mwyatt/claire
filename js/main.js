@@ -313,25 +313,59 @@ var load = {
 		});
 	},
 	playerReadFixture: function() {
-		$.getJSON(url.base + 'ajax/tt-fixture-result/?method=readByPlayerId&action=' + $('.content.player.single').data('id'), function(results) {
-			if (results) {
-				$('.content.player.single').find('.performance').after(
-					'<div class="fixture clearfix">'
-						+ '<h2>Fixtures</h2>'
-					+ '</div>'
-				);
-				$.each(results, function(index, result) {
-					$('.content.player.single').find('.fixture').append(
-						'<a href="' + result.guid + '" class="card clearfix">'
-							+ '<div class="team-left">' + result.team_left_name + '</div>'
-							+ '<div class="score-left">' + result.team_left_score + '</div>'
-							+ '<div class="team-right">' + result.team_right_name + '</div>'
-							+ '<div class="score-right">' + result.team_right_score + '</div>'
-						+ '</a>'
-					);
-				});
+		if ($('.content.player.single').find('.fixture').length) {
+			return false;
+		}
+		$('.content.player.single').find('.merit-stats').after(
+			'<div class="row fixture clearfix ajax">'
+			+ '</div>'
+		);
+		$.getJSON(
+			url.base + 'ajax/tt-fixture-result/',
+			{method: 'readByPlayerId', action: $('.content.player.single').data('id')},
+			function(results) {
+				if (results) {
+					var output = '<h2>Fixtures played in</h2>';
+					console.log(results);
+					$.each(results, function(index, result) {
+						output +=
+							'<a href="' + result.guid + '" class="card clearfix">'
+								+ '<div class="team-left">' + result.team_left_name + '</div>'
+								+ '<div class="score-left">' + result.team_left_score + '</div>'
+								+ '<div class="team-right">' + result.team_right_name + '</div>'
+								+ '<div class="score-right">' + result.team_right_score + '</div>'
+							+ '</a>';
+					});
+					$('.content.player.single').find('.fixture').removeClass('ajax').html(output);
+				} else {
+					$('.content.player.single').find('.fixture').remove();
+				}
 			}
-		});
+		);
+		
+
+
+
+		// $.getJSON(url.base + 'ajax/tt-fixture-result/?method=readByPlayerId&action=' + $('.content.player.single').data('id'), function(results) {
+		// 	if (results) {
+		// 		$('.content.player.single').find('.performance').after(
+		// 			'<div class="fixture clearfix">'
+		// 				+ '<h2>Fixtures played in</h2>'
+		// 			+ '</div>'
+		// 		);
+		// 		console.log(results);
+		// 		$.each(results, function(index, result) {
+		// 			$('.content.player.single').find('.fixture').append(
+		// 				'<a href="' + result.guid + '" class="card clearfix">'
+		// 					+ '<div class="team-left">' + result.team_left_name + '</div>'
+		// 					+ '<div class="score-left">' + result.team_left_score + '</div>'
+		// 					+ '<div class="team-right">' + result.team_right_name + '</div>'
+		// 					+ '<div class="score-right">' + result.team_right_score + '</div>'
+		// 				+ '</a>'
+		// 			);
+		// 		});
+		// 	}
+		// });
 	},
 	playerReadRankChange: function() {
 		$.getJSON(url.base + '/ajax/tt-encounter-part/?method=readRankChange&player_id=' + $('.content.player.single').data('id'), function(result) {
@@ -341,42 +375,46 @@ var load = {
 		});
 	},
 	playerReadPerformance: function() {
-		var side = '';
-		var otherSide = '';
-		var victor = '';
-		var playerId = $('.content.player.single').data('id');
-		$.getJSON(url.base + '/ajax/tt-encounter-result/', {player_id: playerId, limit: 3}, function(results) {
-			if (results) {
-				if ($('.content.player.single').find('.performance').length) {
-					return;
-				};
-				$.each(results, function(index, result) {
-					$('.content.player.single').find('.general-stats').after(
-						'<div class="performance clearfix">'
-							+ '<h2>Performance</h2>'
-						+ '</div>'
-					);
-					if (result['player_left_id'] == playerId) {
-						side = 'left';
-						otherSide = 'right';
-					} else {
-						side = 'right';
-						otherSide = 'left';
-					}
-					if (result[side + '_score'] == 3) {
-						victor = 'Won';
-					} else {
-						victor = 'lost';
-					}
-					$('.content.player.single').find('.performance').append('<p>' + victor + ' vs <a href="' + result['player_' + otherSide + '_guid'] + '" title="View player ' + result['player_' + otherSide + '_full_name'] + '">' + result['player_' + otherSide + '_full_name'] + '</a> <span class="rank-change tag ' + (result[side + '_rank_change'] > 0 ? 'positive' : 'negative') + '">' + (result[side + '_rank_change'] > 0 ? '+' : '') + result[side + '_rank_change'] + '</span></p>');
-				});
+		if ($('.content.player.single .performance').length) {
+			return;
+		};
+		$('.content.player.single').find('.merit-stats').after('<div class="performance row clearfix ajax"></div>');
+		$.getJSON(url.base + 'ajax/tt-encounter-result/',
+			{player_id: $('.content.player.single').data('id'), limit: 5},
+			function(results) {
+				var side = '';
+				var otherSide = '';
+				var victor = '';
+				var output = '';
+				if (results) {
+					output += '<h2>Performance</h2><div class="row">';
+					$.each(results, function(index, result) {
+						if (result['player_left_id'] == $('.content.player.single').data('id')) {
+							side = 'left';
+							otherSide = 'right';
+						} else {
+							side = 'right';
+							otherSide = 'left';
+						}
+						if (result[side + '_score'] == 3) {
+							victor = 'Won';
+						} else {
+							victor = 'lost';
+						}
+						output += '<p>' + victor + ' vs <a href="' + result['player_' + otherSide + '_guid'] + '" title="View player ' + result['player_' + otherSide + '_full_name'] + '">' + result['player_' + otherSide + '_full_name'] + '</a> <span class="rank-change tag ' + (result[side + '_rank_change'] > 0 ? 'positive' : 'negative') + '">' + (result[side + '_rank_change'] > 0 ? '+' : '') + result[side + '_rank_change'] + '</span></p>';
+					});
+					$('.content.player.single').find('.performance').removeClass('ajax').html(output + '</div><a href="' + url.base + 'player/performance/" class="button right">Performance table</a>');
+				} else {
+					$('.content.player.single').find('.performance').remove();
+				}
 			}
-		});
+		);
 	},
 	divisionReadResultSummary: function(id) {
-		// if ($('.content.division.overview').find('table.summary').length) {
-		// 	return false;
-		// };
+		if ($('.content.division.overview table.main.summary').length) {
+			return;
+		};
+		$('.content.division.overview').find('h1').after(ajax);
 		$.getJSON(url.base + '/ajax/division/?summary=' + id, function(data) {
 			if (data) {
 				if (! data.result.length) {
@@ -385,34 +423,34 @@ var load = {
 				var resultFound;
 				var htmlHeading = '';
 				var htmlRows = '';
-				var html = '<table class="main summary" width="100%" cellspacing="0" cellpadding="0"><tr><th></th>';
+				var output = '<table class="main summary" width="100%" cellspacing="0" cellpadding="0"><tr><th></th>';
 				$.each(data['team'], function(index, team) {
-					html += '<th><a href="' + team.guid + '" title="' + team.name + '">' + team.name + '</a></th>';
+					output += '<th><a href="' + team.guid + '" title="' + team.name + '">' + team.name + '</a></th>';
 				});
-				html += '</tr>';
+				output += '</tr>';
 				$.each(data['team'], function(index, teamRow) {
-					html += '<tr><th><a href="' + teamRow.guid + '" title="' + teamRow.name + '">' + teamRow.name + '</a></th>';
+					output += '<tr><th><a href="' + teamRow.guid + '" title="' + teamRow.name + '">' + teamRow.name + '</a></th>';
 					$.each(data['team'], function(index2, team) {
 						if (teamRow.id == team.id) {
-							html += '<td class="cant-play"></td>';
+							output += '<td class="cant-play"></td>';
 						} else {
 							resultFound = false;
 							$.each(data['result'], function(index3, result) {
 								if (result.team_left_id == teamRow.id && result.team_right_id == team.id) {
-									html += '<td class="played"><a href="' + result.guid + '" title="' + result.team_left_name + ' vs ' + result.team_right_name + '">' + result.left_score + ' - ' + result.right_score + '</a></td>';
+									output += '<td class="played"><a href="' + result.guid + '" title="' + result.team_left_name + ' vs ' + result.team_right_name + '">' + result.left_score + ' - ' + result.right_score + '</a></td>';
 									resultFound = true;
 								};
 							});
 							if (! resultFound) {
-								html += '<td class="not-played"></td>';
+								output += '<td class="not-played"></td>';
 							}
 						}
 					});
-					html += '</tr>';
+					output += '</tr>';
 				});
-				html += '</table>';
+				output += '</table>';
 				if (! $('.content.division.overview table.main.summary').length) {
-					$('.content.division.overview').find('h1').after(html);
+					$('.content.division.overview').find('.ajax').removeClass('ajax').html(output);
 				};
 			}
 		});

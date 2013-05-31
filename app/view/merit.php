@@ -28,7 +28,7 @@
 			<td class="rank"><?php echo $this->get($player, 'rank'); ?></td>
 			<td class="won"><?php echo $this->get($player, 'won'); ?></td>
 			<td class="played"><?php echo $this->get($player, 'played'); ?></td>
-			<td class="average"><?php echo $this->get($player, 'average'); ?></td>
+			<td class="average"><?php echo $this->get($player, 'average'); ?>&#37;</td>
 		</tr>		
 
 	<?php endforeach ?>

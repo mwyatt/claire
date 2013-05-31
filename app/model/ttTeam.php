@@ -132,6 +132,8 @@ class Model_Ttteam extends Model
 				, tt_team.name
 				, tt_team.secretary_id
 				, concat(tt_secretary.first_name, ' ', tt_secretary.last_name) as secretary_full_name
+				, tt_secretary.phone_landline as secretary_phone_landline
+				, tt_secretary.phone_mobile as secretary_phone_mobile
 				, tt_team.home_night as home_night_id
 				, tt_team.home_night
 				, count(main_player.id) as player_count
@@ -144,7 +146,7 @@ class Model_Ttteam extends Model
 			left join tt_player as tt_secretary on tt_secretary.id = tt_team.secretary_id
 			left join tt_division on tt_team.division_id = tt_division.id
 			left join tt_venue on tt_team.venue_id = tt_venue.id
-			where tt_team.id = 5
+			where tt_team.id = ?
 			group by tt_team.id
 			order by tt_division.id, tt_team.name
 		");

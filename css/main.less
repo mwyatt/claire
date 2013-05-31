@@ -81,16 +81,13 @@ table th {
 	}
 }
 
-.content.fred-holden-cup,
+.content.cup,
 .content.minutes {
 	
 	.item {
 		clear: both;
-		background-color: darken(@white, 5%);
-		border: 1px solid darken(@white, 10%);
-		border-bottom-color:  darken(@white, 20%);
 		margin-bottom: 1em;
-		padding: 1em;
+		padding: 1em 0;
 
 		h2 {
 			margin: 0;
@@ -167,6 +164,10 @@ a.button,
 	&:active {
 		.gradient (darken(@white, 5%), darken(@white, 7%));
 		.inner-shadow (inset 0 1px 3px darken(@white, 10%));
+	}
+
+	&:visited {
+		color: darken(@white, 50%);
 	}
 }
 
@@ -506,6 +507,13 @@ nav.main {
 	font-size: 1.2em;
 	// margin: 0 0 1em;
 
+	.current > a:hover,
+	.current > a {
+		.gradient (darken(@orangeHighlight, 10%), darken(@orange, 5%));
+		.inner-shadow (inset 0 1px 3px darken(@orange, 10%));
+		cursor: default;
+	}
+
 	ul, li {
 		margin: 0;
 		padding: 0;
@@ -800,31 +808,46 @@ table.main {
 .content.player.single {
 
 	.performance {
+		position: relative;
 
 		p {
-			margin: 0 0 1em;
+			position: relative;
 			border: 1px solid darken(@white, 10%);
-			padding: 1em;
+			padding: 0.8em;
+			margin: 0;
+			border-top: none;
+		}
+
+		p:first-of-type {
+			border-top: 1px solid darken(@white, 10%);
 		}
 
 		.tag {
-			float: right;
+			position: absolute;
+			top: 0.6em;
+			right: 0.6em;
+			// float: right;
+		}
+
+		.tag.total {
+			top: 0;
+			right: 0;
 		}
 	}
 }
 
 .tag {
 	.border-radius (3px);
+	top: 0;
+	right: 0;
 	cursor: default;
-	font-size: 1.4em;
-	font-weight: 600;
-	cursor: default;
-	line-height: 1.5em;
-	border: 1px solid;
 	display: block;
-	min-width: 2.3em;
-	height: 1.5em;
 	text-align: center;
+	font-size: 1em;
+	font-weight: 700;
+	line-height: 1em;
+	min-width: 2.4em;
+	padding: 0.4em 0;
 
 	&.positive {
 		border: none;
@@ -876,14 +899,7 @@ div.content.single {
 	}
 }
 
-.all {
-	color: @silver;
-	margin: 0.8em 0 0 0;
-	font-size: 0.9em;
-	text-decoration: underline;
-	text-transform: uppercase;
-	font-weight: 700;
-}
+
 
 .ads {
 
@@ -912,6 +928,7 @@ div.content.single {
 	}
 
 	a {
+		.transition (background-color .1s ease-in-out);
 		background-color: @orange;
 		display: block;
 		padding: 1em;
@@ -920,22 +937,59 @@ div.content.single {
 		background-position: 100% 100%;
 		background-repeat: no-repeat;
 
+		&:hover {
+			background-color: lighten(@orange, 10%);
+		}
+		&:active {
+			background-color: darken(@orange, 10%);
+		}
+	
 		&.green {
 			background-color: @green;
+		}
+
+		&.green:hover {
+			background-color: lighten(@green, 10%);
+		}
+		&.green:active {
+			background-color: darken(@green, 10%);
 		}
 
 		&.silver {
 			background-color: @silver;
 		}
 
+		&.silver:hover {
+			background-color: lighten(@silver, 10%);
+		}
+		&.silver:active {
+			background-color: darken(@silver, 10%);
+		}
+
 		&.red {
 			background-color: @red;
+		}
+
+		&.red:hover {
+			background-color: lighten(@red, 10%);
+		}
+		&.red:active {
+			background-color: darken(@red, 10%);
 		}
 	}
 }
 
 .content.home { 
 	padding: 0 1em 1em;
+
+	.all {
+		color: @silver;
+		margin: 0.8em 0 0 0;
+		font-size: 0.9em;
+		text-decoration: underline;
+		text-transform: uppercase;
+		font-weight: 700;
+	}
 
 	.press {
 		margin: 0 0 1em;

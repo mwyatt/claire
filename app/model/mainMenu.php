@@ -234,12 +234,61 @@ class Model_Mainmenu extends Model
     public function division() {
     	$ttDivision = new Model_Ttdivision($this->database, $this->config);
     	$ttDivision->read();
-		$baseUrl = $this->config->getUrl('base') . 'division/';
     	foreach ($ttDivision->getData() as $key => $division) {
-			$this->data['division'][$key]['name'] = ucfirst($division['name']);
-			$this->data['division'][$key]['current'] = ($this->config->getUrl(1) == strtolower($division['name']) ? true : false);
-			$this->data['division'][$key]['guid'] = $baseUrl . strtolower($division['name']) . '/';
+    		$divisionDrop[] = array(
+				'name' => ucfirst($division['name'])
+				, 'current' => ($this->config->getUrl(1) == strtolower($division['name']) ? true : false)
+				, 'guid' => $division['guid']
+			);
 		}
+		$leagueDrop[] = array(
+			'name' => 'Handbook'
+			, 'current' => false
+			, 'guid' => $this->config->getUrl('base') . 'media/handbook.pdf'
+		);
+		$leagueDrop[] = array(
+			'name' => 'Player performance'
+			, 'current' => ($this->config->getUrl(1) == 'performance' ? true : false)
+			, 'guid' => $this->config->getUrl('base') . 'player/performance/'
+		);
+		$leagueDrop[] = array(
+			'name' => 'Press releases'
+			, 'current' => ($this->config->getUrl(0) == 'press' ? true : false)
+			, 'guid' => $this->config->getUrl('base') . 'press/'
+		);
+		$leagueDrop[] = array(
+			'name' => 'Competitions'
+			, 'current' => ($this->config->getUrl(1) == 'competitions' ? true : false)
+			, 'guid' => $this->config->getUrl('base') . 'page/competitions/'
+		);
+		$leagueDrop[] = array(
+			'name' => 'Contact us'
+			, 'current' => ($this->config->getUrl(1) == 'contact-us' ? true : false)
+			, 'guid' => $this->config->getUrl('base') . 'page/contact-us/'
+		);
+    	$this->data['main'][] = array(
+    		'name' => 'Home'
+    		, 'current' => (! $this->config->getUrl(0) ? true : false)
+    		, 'guid' => $this->config->getUrl('base')
+		);
+    	$this->data['main'][] = array(
+    		'name' => 'Tables and Results'
+    		, 'current' => ($this->config->getUrl(0) == 'division' || $this->config->getUrl(0) == 'tables-and-results' ? true : false)
+    		, 'guid' => $this->config->getUrl('base') . 'tables-and-results/'
+    		, 'drop' => array(
+    			'name' => 'division'
+    			, 'items' => $divisionDrop
+			)
+		);
+    	$this->data['main'][] = array(
+    		'name' => 'The League'
+    		, 'current' => false
+    		, 'guid' => '#'
+    		, 'drop' => array(
+    			'name' => 'league'
+    			, 'items' => $leagueDrop
+			)
+		);
 		return;
     }
 

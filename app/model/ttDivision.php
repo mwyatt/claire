@@ -27,6 +27,7 @@ class Model_Ttdivision extends Model
 		");
 		
 		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {	
+			$row['guid'] = $this->getGuid('division', $row['name']);
 			$this->data[] = $row;
 		}	
 

@@ -27,10 +27,12 @@ class Controller_Front_Minutes extends Controller
 			$minuteCollection[] = $minute;
 		}
 		$minutes->setData($minuteCollection);
+		$information = current($minutes->getData());
 		$this->view
 			->setMeta(array(		
 				'title' => 'Minutes'
 			))
+			->setObject('information', $information)
 			->setObject($minutes)
 			->loadTemplate('minutes');
 	}

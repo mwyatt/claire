@@ -20,7 +20,7 @@
 
 	<form class="main" method="get">
 	    <label for="form-search">Search</label>
-	    <input id="form-search" type="text" name="search" type="search" maxlength="75" autofocus="autofocus">
+	    <input id="form-search" type="text" name="search" type="search" maxlength="75" autofocus="autofocus" value="<?php echo $this->get('search_query') ?>">
 	    <a href="#" class="submit button">Search</a>
 	    <input type="submit">
 	</form> 

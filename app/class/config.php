@@ -189,9 +189,7 @@ class Config
 			}
 			$this->url['back'] = $url;
 		}
-	
 		return $this;
-		
 	}	
 
 

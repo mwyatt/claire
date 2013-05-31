@@ -71,6 +71,7 @@ class Controller_Admin_League extends Controller
 		$division = new Model_Ttdivision($this->database, $this->config);
 		$venue = new Model_Ttvenue($this->database, $this->config);
 		$player = new Model_Ttplayer($this->database, $this->config);
+		$secretaries = new Model_Ttplayer($this->database, $this->config);
 		if (array_key_exists('form_update', $_POST)) {
 			$team->update($_GET['edit']);
 			$this->route('current');
@@ -85,10 +86,12 @@ class Controller_Admin_League extends Controller
 				$weekday->readWeekDays();
 				$venue->read();
 				$player->readByTeam($_GET['edit']);
+				$secretaries->readSecretaries();
 				$this->view	
 					->setObject($team)
 					->setObject($venue)
 					->setObject($player)
+					->setObject('secretaries', $secretaries->getData())
 					->setObject('home_nights', $weekday)
 					->setObject($division)
 					->loadTemplate('admin/league/team-create-update');

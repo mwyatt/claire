@@ -18,6 +18,12 @@ $covers[] = array(
 	, 'description' => 'Visit the player performance to see who has gained the most ranking points throughout the season.'
 	, 'button' => 'Go'
 );
+$covers[] = array(
+	'title' => 'Results archive'
+	, 'guid' => $this->url('base') . 'archive/'
+	, 'description' => 'What happened last year? Find out here.'
+	, 'button' => 'Vist the archive'
+);
 shuffle($covers);
 ?>
 <?php if ($covers): ?>

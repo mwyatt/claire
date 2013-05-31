@@ -1,7 +1,7 @@
 <?php require_once('header.php'); ?>
 
-<div class="content minutes clearfix">
-	<h1><?php echo $this->getMeta('title'); ?></h1>
+<div class="content clearfix<?php echo ' ' . $this->get('information', 'type') ?>">
+	<h1><?php echo ucfirst($this->get('information', 'type')) ?></h1>
 
 <?php if ($this->get('model_maincontent')) : ?>
 	<?php foreach ($this->get('model_maincontent') as $minute): ?>
@@ -10,7 +10,7 @@
 		
 	<div class="item clearfix">
 		<a class="button" href="<?php echo $media['guid']; ?>" target="_blank">Download</a>
-		<h2><a href="<?php echo $media['guid']; ?>" target="_blank"><?php echo date('D jS F Y', $this->get($minute, 'date_published')) ?></a></h2>
+		<h2><a href="<?php echo $media['guid']; ?>" target="_blank"><?php echo ($minute['type'] == 'minutes' ? date('D jS F Y', $this->get($minute, 'date_published')) : $minute['title']) ?></a></h2>
 	</div>
 
 	<?php endforeach ?>

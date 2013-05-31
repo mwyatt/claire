@@ -62,16 +62,16 @@
 		</div>
 	
 <?php endif ?>
-<?php if ($this->get('model_ttplayer')): ?>
+<?php if ($this->get('secretaries')): ?>
 
 		<div class="row secretary">
 			<label class="above" for="form-secretary">Secretary</label>
 			<select id="form-secretary" name="secretary_id">
 				<option value="0"></option>
 				 
-	<?php foreach ($this->get('model_ttplayer') as $secretary): ?>
+	<?php foreach ($this->get('secretaries') as $secretary): ?>
 		
-				<option value="<?php echo $this->get($secretary, 'id'); ?>" <?php echo ($this->get($secretary, 'id') == $this->get('model_ttteam', 'secretary_id') ? 'selected' : false); ?>><?php echo $this->get($secretary, 'name'); ?></option>
+				<option value="<?php echo $this->get($secretary, 'id'); ?>" <?php echo ($this->get($secretary, 'id') == $this->get('model_ttteam', 'secretary_id') ? 'selected' : false); ?>><?php echo $this->get($secretary, 'full_name'); ?></option>
 
 	<?php endforeach ?>
 

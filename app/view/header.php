@@ -49,45 +49,52 @@
                         </div>
                     </nav> 
                 </div>
+
+<?php if ($this->get('model_mainmenu', 'main')): ?>
+
                 <nav class="main clearfix">
                     <ul>
-                        <li>
-                            <a href="<?php echo $this->urlHome(); ?>">Home</a>
-                        </li>
-                        <li>
-                            <a href="#">Tables and Results</a>
+                    
+    <?php foreach ($this->get('model_mainmenu', 'main') as $group): ?>
+        
+                        <li<?php echo ($group['current'] ? ' class="current"' : '') ?>>
+                            <a href="<?php echo $group['guid'] ?>"><?php echo $group['name'] ?></a>
 
-<?php if ($this->get('model_mainmenu', 'division')): ?>
-    
+        <?php if (array_key_exists('drop', $group)): ?>
+
                             <div class="drop">
 
-    <?php foreach ($this->get('model_mainmenu', 'division') as $division): ?>
+            <?php if ($group['drop']['name'] == 'division'): ?>
+                <?php foreach ($group['drop']['items'] as $drop): ?>
 
-                                <div class="division-<?php echo strtolower($this->get($division, 'name')) ?>">
-                                    <h4><a href="<?php echo $this->get($division, 'guid') ?>"><?php echo $this->get($division, 'name') ?></a></h4>
-                                    <a href="<?php echo $this->get($division, 'guid') ?>">Overview</a>
-                                    <a href="<?php echo $this->get($division, 'guid') ?>merit/">Merit Table</a>
-                                    <a href="<?php echo $this->get($division, 'guid') ?>league/">League Table</a>
-                                    <a href="<?php echo $this->get($division, 'guid') ?>fixture/">Fixtures</a>
-                                </div>        
-        
+                                <div class="division-<?php echo $drop['name'] ?><?php echo ($drop['current'] ? ' current' : '') ?>">
+                                    <h4><a href="<?php echo $drop['guid'] ?>"><?php echo $drop['name'] ?></a></h4>
+                                    <a href="<?php echo $drop['guid'] ?>">Overview</a>
+                                    <a href="<?php echo $drop['guid'] ?>merit/">Merit Table</a>
+                                    <a href="<?php echo $drop['guid'] ?>league/">League Table</a>
+                                </div> 
+                
+                <?php endforeach ?>
+            <?php endif ?>
+            <?php if ($group['drop']['name'] == 'league'): ?>
+                <?php foreach ($group['drop']['items'] as $drop): ?>
+
+                                <a<?php echo ($drop['current'] ? ' class="current"' : '') ?> href="<?php echo $drop['guid'] ?>"><?php echo $drop['name'] ?></a>
+                
+                <?php endforeach ?>
+            <?php endif ?>
+
+                            </div>
+
+        <?php endif ?>
+
+                        </li>
+
     <?php endforeach ?>
 
-                            </div>
-
-<?php endif ?>   
-
-                        </li>
-                        <li>
-                            <a href="">The League</a>
-                            <div class="drop">
-                                <a href="#">Handbook</a>
-                                <a href="<?php echo $this->urlHome(); ?>player/performance/">Player Performance</a>
-                                <a href="<?php echo $this->urlHome(); ?>press/">Press Releases</a>
-                                <a href="<?php echo $this->urlHome(); ?>page/competitions/">Competitions</a>
-                                <a href="<?php echo $this->urlHome(); ?>page/contact-us/">Contact us</a>
-                            </div>
-                        </li>
                     </ul>
                 </nav>             
+
+<?php endif ?>
+
             </header>

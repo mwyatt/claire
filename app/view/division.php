@@ -37,7 +37,7 @@
 				<td class="full-name">
 					<a href="<?php echo $this->get($player, 'guid'); ?>" title="View player <?php echo $this->get($player, 'full_name'); ?>"><?php echo $this->get($player, 'full_name'); ?></a>
 				</td>
-				<td class="average text-right"><?php echo $this->get($player, 'average'); ?></td>
+				<td class="average text-right"><?php echo $this->get($player, 'average'); ?>&#37;</td>
 			</tr>		
 
 		<?php endforeach ?>

@@ -18,7 +18,10 @@
 	
 			<tr class="secretary">
 				<th>Secretary</th>
-				<td><a href="<?php echo $this->get('info', 'secretary_guid'); ?>"><?php echo $this->get('info', 'secretary_full_name'); ?></a></td>
+				<td>
+					<a href="<?php echo $this->get('info', 'secretary_guid'); ?>"><?php echo $this->get('info', 'secretary_full_name'); ?></a>
+					<?php echo ($this->get('info', 'secretary_phone_landline') ? ' | <strong>Landline</strong> ' . $this->get('info', 'secretary_phone_landline') : '') . ($this->get('info', 'secretary_phone_mobile') ? ' | <strong>Mobile</strong> ' . $this->get('info', 'secretary_phone_mobile') : '') ?>
+				</td>
 			</tr>		
 
 <?php endif ?>
@@ -56,7 +59,7 @@
 				<td><?php echo $row['points'] ?></td>
 			</tr>		
 		</table>
-		<div class="clearfix">
+		<div class="clearfix row">
 			<a href="<?php echo $this->urlHome() . 'division/' . $this->get('division', 'name') . '/league/' ?>" class="button right">League Table</a>
 		</div>
 	</div>
@@ -95,7 +98,7 @@
 
 			</tbody>			
 		</table>
-		<div class="clearfix">
+		<div class="clearfix row">
 			<a href="<?php echo $this->urlHome() . 'division/' . $this->get('division', 'name') . '/merit/' ?>" class="button right">Merit Table</a>
 		</div>
 	</div>
