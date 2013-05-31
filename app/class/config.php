@@ -68,7 +68,7 @@ class Config
 				$classTitle = get_class($objectOrArray);
 				$this->objects[strtolower($classTitle)] = $objectOrArray;
 			}
-		} else {
+		} elseif (is_object($objectsOrKey)) {
 			$classTitle = get_class($objectsOrKey);
 			$this->objects[strtolower($classTitle)] = $objectsOrKey;
 		}

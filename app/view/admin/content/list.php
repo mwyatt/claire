@@ -1,6 +1,6 @@
 <?php require_once($this->pathView() . 'admin/header.php'); ?>
 
-<div class="content main-content <?php echo $this->get($content, 'type'); ?>">
+<div class="content main-content<?php echo $this->urlSegment(2) ?>">
 	<h1><?php echo ucfirst($this->urlSegment(2)); ?></h1>
 	<div class="clearfix text-right row">
 		<a class="button new" href="<?php echo $this->url('current_noquery'); ?>new/" title="Create a new <?php echo ucfirst($this->urlSegment(2)); ?>">New</a>

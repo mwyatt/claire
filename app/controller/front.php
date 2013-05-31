@@ -81,6 +81,7 @@ class Controller_Front extends Controller
 
 
 	public function fredHoldenCup() {
+		$minuteCollection = array();
 		$cup = new Model_Maincontent($this->database, $this->config);
 		$media = new model_mainmedia($this->database, $this->config);
 		$cup->readByType('cup');
@@ -127,6 +128,8 @@ class Controller_Front extends Controller
 
 
 	public function gallery() {
+		$folders = array();
+		$files = array();
 		$model = new Model_Maincontent($this->database, $this->config);
 		$basePath = BASE_PATH . 'media/upload/gallery/';
 		$albumTitle = '';

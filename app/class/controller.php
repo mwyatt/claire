@@ -103,9 +103,11 @@ class Controller
 			$this->initialise();
 		}
 		$controllerName = 'Controller_';
-		foreach ($names as $name) {
-			$path .= strtolower($name) . '/';
-			$controllerName .= ucfirst($name) . '_';
+		if (is_array($names)) {
+			foreach ($names as $name) {
+				$path .= strtolower($name) . '/';
+				$controllerName .= ucfirst($name) . '_';
+			}
 		}
 		$controllerName = rtrim($controllerName, '_');
 		$path = rtrim($path, '/') . '.php';
@@ -132,7 +134,8 @@ class Controller
 
 
 	protected function getId($segment) {
-		return end(explode('-', $segment));
+		$segments = explode('-', $segment);
+		return end($segments);
 	}
 
 

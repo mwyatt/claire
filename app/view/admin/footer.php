@@ -1,5 +1,5 @@
 			<footer class="main clearfix">
-				<p><?php echo $this->get('options', 'site_title') . ' ' . date(Y) ?></p>
+				<p><?php echo $this->get('options', 'site_title') . ' ' . date('Y') ?></p>
 			</footer>
 
 	        <script src="<?php echo $this->urlHome(); ?>js/vendor/jquery-1.8.2.min.js"></script>

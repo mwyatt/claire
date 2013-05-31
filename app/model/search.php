@@ -50,6 +50,7 @@ class Model_Search extends Model
 		if (! $query) {
 			return false;
 		}
+		$matches = array();
 		$query = htmlspecialchars($query);
 		$words = explode(' ', $query);
 		$sth = $this->database->dbh->prepare("	

@@ -88,12 +88,6 @@ class Controller_Ajax_Mediabrowser extends Controller_Ajax
 
 
 	public function upload() {
-		echo 'you got to the upload function';
-		echo '<pre>';
-		print_r($_FILES);
-		echo '</pre>';
-		exit;
-		
 		// foreach ($_FILES['images']['size'] as $size) {
 		// 	if ($size > 1000000  1mb ) {
 		// 		echo 'Files must be under 1mb each.';
@@ -107,12 +101,9 @@ class Controller_Ajax_Mediabrowser extends Controller_Ajax
 			}
 		}
 		foreach ($_FILES["images"]["error"] as $key => $error) {
-		    // if ($error == UPLOAD_ERR_OK) {
-		    //     $name = strtolower(str_replace(' ', '-', $_FILES["images"]["name"][$key]));
-		       
-		    // }
-		    if (move_uploaded_file($_FILES["images"]["tmp_name"][$key], $this->basePath . $this->currentPath . $name)) {
-		    	echo 'uploaded a file';
+		    if ($error == UPLOAD_ERR_OK) {
+		        $name = strtolower(str_replace(' ', '-', $_FILES["images"]["name"][$key]));
+			    move_uploaded_file($_FILES["images"]["tmp_name"][$key], $this->basePath . $this->currentPath . $name);
 		    }
 		}
 	}

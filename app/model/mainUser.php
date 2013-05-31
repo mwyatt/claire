@@ -184,12 +184,10 @@ class Model_Mainuser extends Model
 
 
 	public function getPermission($level) {
+		$accessTo = array();
 		if ($level == 10) {
 			return false;
-// $accessTo[] = 'page';
 		}
-
-		// $accessTo[] = 'dashboard';
 		if ($level == 1) {
 			$accessTo[] = 'player';
 		}

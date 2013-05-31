@@ -8,7 +8,7 @@
 						<a href="<?php echo $this->urlHome(); ?>fred-holden-cup/">Fred Holden Cup</a>
 					</nav>				
 					<div class="address">
-						<a href="<?php echo $this->urlHome(); ?>page/contact-us/"><strong>&copy; <?php echo $this->get('options', 'site_title') . ' ' . date(Y) ?></strong></a><br>
+						<a href="<?php echo $this->urlHome(); ?>page/contact-us/"><strong>&copy; <?php echo $this->get('options', 'site_title') . ' ' . date('Y') ?></strong></a><br>
 						Hyndburn Sports Centre<br>
 						Henry Street<br>
 						Church<br>
