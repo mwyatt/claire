@@ -13,6 +13,7 @@
         <link rel="stylesheet" type="text/css" href="<?php echo $this->urlHome(); ?>css/main-v002.css">
         <!-- <link rel="stylesheet/less" type="text/css" href="<?php echo $this->urlHome(); ?>css/main.less">
         <script src="<?php echo $this->urlHome(); ?>js/vendor/less-1.3.3.min.js"></script> -->
+        <script src="<?php echo $this->urlHome(); ?>js/vendor/respond.min.js"></script>
         <script src="<?php echo $this->urlHome(); ?>js/vendor/modernizr.custom.73218.js"></script>
     </head>
     <body data-url-base="<?php echo $this->urlHome(); ?>">

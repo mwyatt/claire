@@ -134,7 +134,7 @@ var resize = {
 
 	poll: function() {
 		resize.setDocWidth();
-		console.log(resize.docWidth);
+		// console.log(resize.docWidth);
 		if (resize.docWidth > 0 && resize.docWidth < 481) {
 			$(search.container).off().on('mouseup', search.openClose);
 			$(navSub.container).off().on('mouseup', navSub.openClose);
@@ -326,7 +326,7 @@ var load = {
 			function(results) {
 				if (results) {
 					var output = '<h2>Fixtures played in</h2>';
-					console.log(results);
+					// console.log(results);
 					$.each(results, function(index, result) {
 						output +=
 							'<a href="' + result.guid + '" class="card clearfix">'
