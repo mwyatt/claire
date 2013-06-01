@@ -10,7 +10,7 @@
 		<meta name="keywords" content="<?php echo $this->getMeta('keywords'); ?>">
         <meta name="description" content="<?php echo $this->getMeta('description'); ?>">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-        <link rel="stylesheet" type="text/css" href="<?php echo $this->urlHome(); ?>css/main.css">
+        <link rel="stylesheet" type="text/css" href="<?php echo $this->urlHome(); ?>css/main-v002.css">
         <!-- <link rel="stylesheet/less" type="text/css" href="<?php echo $this->urlHome(); ?>css/main.less">
         <script src="<?php echo $this->urlHome(); ?>js/vendor/less-1.3.3.min.js"></script> -->
         <script src="<?php echo $this->urlHome(); ?>js/vendor/modernizr.custom.73218.js"></script>
@@ -30,8 +30,8 @@
                         <abbr title="<?php echo $this->get('options', 'site_title'); ?>">ELTTL</abbr>
                     </a>
                     <div class="search">
+                        <label for="form-search">Search</label>
                         <form class="main" method="get">
-                            <label for="form-search">Search</label>
                             <span class="close"></span>
                             <input id="form-search" type="text" name="search" type="search" maxlength="75">
                             <a href="#" class="submit button">Search</a>

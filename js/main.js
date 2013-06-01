@@ -490,7 +490,7 @@ function formSubmit() {
 }
 
 $(document).ready(function() {
-	less.watch();
+	// less.watch();
 	$('form').find('a.submit').on('mouseup', formSubmit);
 	resize.initialise();
 	scroll.initialise();

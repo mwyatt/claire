@@ -454,7 +454,7 @@ function formSubmit(e, button) {
 
 $(document).ready(function() {
 	url.base = $('body').data('url-base');
-	less.watch();
+	// less.watch();
 	$.ajaxSetup ({  
 		cache: false
 	});
