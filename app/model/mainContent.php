@@ -81,7 +81,8 @@ class Model_Maincontent extends Model
 			$sth->bindValue(':limit', (int) $limit, PDO::PARAM_INT);
 		}
 		$sth->execute();
-		return $this->data = $this->setMeta($sth->fetchAll(PDO::FETCH_ASSOC));
+		$this->data = $this->setMeta($sth->fetchAll(PDO::FETCH_ASSOC));
+		return $this;
 	}	
 
 

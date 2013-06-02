@@ -144,7 +144,7 @@ class Model_Ttplayer extends Model
 			$this->data[] = $row;
 		}
 
-		return $sth->rowCount();
+		return $this;
 	}	
 
 

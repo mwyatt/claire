@@ -1,2 +1,3 @@
 [Type 8] Undefined property: Model_Maincontent::$dir | C:\xampp\htdocs\github\mvc\app\class\model.php [Line 310]
 [Type 8] Undefined property: Model_Maincontent::$dir | C:\xampp\htdocs\github\mvc\app\class\model.php [Line 310]
+[Type 8] Undefined property: Model_Maincontent::$dir | C:\UniServer\www\mvc\app\class\model.php [Line 310]

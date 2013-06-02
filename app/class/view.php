@@ -91,8 +91,42 @@ class View extends Model
 		$cache->create($templateTitle, ob_get_contents());
 		ob_end_flush();	
 		exit;
-	}		
+	}
 
+
+	public function loadJustTemplate($templateTitle)
+	{			
+		$path = BASE_PATH . 'app/view/' . strtolower($templateTitle) . '.php';
+		if (!file_exists($path)) {
+			echo 'Template ' . $path . ' does not exist.';
+			return false;
+		}
+		$this->template = $path;
+
+		foreach ($this->objects as $title => $object) {
+			$titles[] = $title; // temp
+			if ($object instanceof Model) {
+				if ($object->getData()) {
+					$this->data[$title] = $object->getData();
+				} else {
+					$this->data[$title] = false;
+				}
+			} else {
+				$this->data[$title] = $object;
+			}
+		}
+
+		// echo '<pre>';
+		// print_r($this->session->getData());
+		// print_r($this->config);
+		// print_r($titles);
+		// print_r($this->data);
+		// echo '</pre>';
+		// exit;
+
+		require_once($path);
+		exit;
+	}
 
 	/**
 	 * return feedback and unset session variable

@@ -307,7 +307,7 @@ abstract class Model extends Config
 			return $this->config->getUrl('base') . 'timthumb/?src=' . $this->config->getUrl('base') . $name;
 		}
 		if ($type == 'media') {
-			return $this->config->getUrl('base') . $this->dir . $name;
+			return $this->config->getUrl('base') . $id . $name;
 		}
 		$url = $this->config->getUrl('base') . $type . '/' . $this->urlFriendly($name) . '-' . $id . '/';
 		if (! $id) {

@@ -11,10 +11,16 @@
 			<h6><?php echo $this->get('total_teams') ?></h6>
 			<p>Teams</p>
 		</div>
+
+<?php if ($this->get('total_fixtures')): ?>
+
 		<div class="block">
 			<h6><?php echo $this->get('total_fixtures') ?></h6>
 			<p>Fixtures</p>
 		</div>
+		
+<?php endif ?>
+
 	</div>
 
 <?php if ($this->get('player') || $this->get('team')): ?>

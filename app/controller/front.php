@@ -209,4 +209,24 @@ class Controller_Front extends Controller
 	}
 
 
+	public function sitemapxml() {
+		header('Content-Type: application/xml');
+		$content = new model_maincontent($this->database, $this->config);
+		$player = new model_ttplayer($this->database, $this->config);
+		$team = new model_ttteam($this->database, $this->config);
+		$fixture = new model_ttfixture($this->database, $this->config);
+		$division = new model_ttdivision($this->database, $this->config);
+		$this->view
+			->setObject('model_ttfixture', $fixture->readFilled()->getData())
+			->setObject('model_ttdivision', $division->read()->getData())
+			->setObject('model_ttteam', $team->read()->getData())
+			->setObject('model_ttplayer', $player->read()->getData())
+			->setObject('model_maincontent_cup', $content->readByType('cup')->getData())
+			->setObject('model_maincontent_minutes', $content->readByType('minutes')->getData())
+			->setObject('model_maincontent_page', $content->readByType('page')->getData())
+			->setObject('model_maincontent_press', $content->readByType('press')->getData())
+			->loadJustTemplate('sitemap');
+	}
+
+
 }

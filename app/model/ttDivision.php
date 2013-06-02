@@ -30,6 +30,7 @@ class Model_Ttdivision extends Model
 			$row['guid'] = $this->getGuid('division', $row['name']);
 			$this->data[] = $row;
 		}	
+		return $this;
 
 	}	
 

@@ -74,7 +74,7 @@ class Model_Mainmedia extends Model
 			from main_media
 		");
 		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
-			$row['guid'] = $this->getGuid('media', $row['path']);
+			$row['guid'] = $this->getGuid('media', $row['path'], $this->dir);
 			$this->data[] = $row;
 		}
 		return $sth->rowCount();
@@ -99,7 +99,7 @@ class Model_Mainmedia extends Model
 		foreach ($ids as $id) {
 			$sth->execute(array($id));
 			$row = $sth->fetch(PDO::FETCH_ASSOC);
-			$row['guid'] = $this->getGuid('media', $row['path']);
+			$row['guid'] = $this->getGuid('media', $row['path'], $this->dir);
 			$this->data[] = $row;
 		}
 		return $sth->rowCount();
@@ -125,7 +125,7 @@ class Model_Mainmedia extends Model
 
 	public function setData($rows) {
 		foreach ($rows as $key => $row) {
-			$rows[$key]['guid'] = $this->getGuid('media', $row['basename']);
+			$rows[$key]['guid'] = $this->getGuid('media', $row['basename'], $this->dir);
 		}
 		return $rows;
 	}

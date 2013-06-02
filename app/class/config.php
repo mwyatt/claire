@@ -123,10 +123,10 @@ class Config
 	
 		if ($_SERVER) {
 		
-			$url = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+			$url = 'http://' . $_SERVER['HTTP_HOST'] . str_replace('.', '', $_SERVER['REQUEST_URI']);
 			$url = strtolower($url);
 			$url = parse_url($url);
-						
+
 			if (array_key_exists('path', $url)) {
 				$scriptName = explode('/', strtolower($_SERVER['SCRIPT_NAME']));
 				array_pop($scriptName); 

@@ -105,10 +105,11 @@ class Model_Ttfixture extends Model
 			where tt_fixture.date_fulfilled is not null
 			group by tt_fixture.id
 		");
-		if ($sth->rowCount()) {
-			$this->data = $sth->fetchAll(PDO::FETCH_ASSOC);
+		foreach ($sth->fetchAll(PDO::FETCH_ASSOC) as $row) {
+			$row['guid'] = $this->getGuid('fixture', $row['team_left_name'] . '-' . $row['team_right_name'], $row['id']);
+			$this->data[] = $row;
 		}
-		return;
+		return $this;
 	}	
 
 	
