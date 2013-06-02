@@ -6,26 +6,26 @@ try {
 
 	$user
 		->setEmail('martin.wyatt@gmail.com')
-		->setPassword('123')
+		->setPassword('elttl.13.admin')
 		->insert(10);
 	$user
 		->setEmail('realbluesman@tiscali.co.uk')
-		->setPassword('123')
+		->setPassword('elttl.13.246')
 		->insert(4);
 	
 	$user
 		->setEmail('gsaggers6@aol.com')
-		->setPassword('123')
+		->setPassword('elttl.13.548')
 		->insert(1);
 	
 	$user
 		->setEmail('hepworth_neil@hotmail.com')
-		->setPassword('123')
+		->setPassword('elttl.13.867')
 		->insert(3);
 	
 	$user
 		->setEmail('henryrawcliffe@sky.com')
-		->setPassword('123')
+		->setPassword('elttl.13.754')
 		->insert(2);
 
 	$database->dbh->query("

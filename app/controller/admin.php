@@ -80,6 +80,32 @@ class Controller_Admin extends Controller
 		$this->load(array('admin', 'media'), $this->config->getUrl(2), $this->view, $this->database, $this->config);
 	}
 	
+
+	// public function user() {
+	// 	$user = new Model_Ttuser($this->database, $this->config);
+		// if (array_key_exists('form_update', $_POST)) {
+		// 	$user->update($_GET['edit']);
+		// 	$this->route('current');
+		// }
+		// if (array_key_exists('edit', $_GET)) {
+		// 	if (! $user->readById(array($_GET['edit']))) {
+		// 		$this->route('current_noquery');
+		// 	}
+		// 	$division->read();
+		// 	$team = new Model_Ttteam($this->database, $this->config);
+		// 	$team->readByDivision($user->get('division_id'));
+		// 	$this->view	
+		// 		->setObject($division)
+		// 		->setObject($team)
+		// 		->setObject($user)
+		// 		->loadTemplate('admin/league/user-create-update');
+		// }
+	// 	$user->read();
+	// 	$this->view
+	// 		->setObject($user)
+	// 		->loadTemplate('admin/league/user');
+	// }
+
 	// public function settings() {
 	// 	$option = new Model_Mainoption($this->database, $this->config);
 	// 	$this->view

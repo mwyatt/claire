@@ -64,6 +64,24 @@ class Model_Mainuser extends Model
 	}
 	
 	
+	// public function readById($id) {
+	// 	$sql = "
+	// 		select
+	// 			main_user.id
+	// 			, main_user.email
+	// 			, main_user.password
+	// 			, main_user.date_registered
+	// 			, main_user.level
+	// 			, main_user_meta.name as meta_name
+	// 			, main_user_meta.value as meta_value
+	// 		from main_user				
+	// 		left join main_user_meta on main_user.id = main_user_meta.user_id
+	// 		where email = :email
+	// 	";
+	// }
+
+
+
 	/**
 	 * Get all Users and pair with Meta Data
 	 */
