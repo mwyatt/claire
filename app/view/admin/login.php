@@ -10,8 +10,9 @@
         <meta name="keywords" content="<?php echo $this->getMeta('keywords'); ?>">
         <meta name="description" content="<?php echo $this->getMeta('description'); ?>">
         <meta name="viewport" content="width=device-width">
-        <link rel="stylesheet/less" type="text/css" href="<?php echo $this->urlHome(); ?>css/admin/main.less">
-        <script src="<?php echo $this->urlHome(); ?>js/vendor/less-1.3.3.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="<?php echo $this->urlHome(); ?>css/admin/main.css">
+        <!-- <link rel="stylesheet/less" type="text/css" href="<?php echo $this->urlHome(); ?>css/admin/main.less">
+        <script src="<?php echo $this->urlHome(); ?>js/vendor/less-1.3.3.min.js"></script> -->
         <script src="<?php echo $this->urlHome(); ?>js/vendor/modernizr.custom.73218.js"></script>
     </head>
     <body>
