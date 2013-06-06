@@ -30,6 +30,20 @@ try {
 
 	$database->dbh->query("
 		CREATE TABLE IF NOT EXISTS 
+			main_user_action
+			(
+				id INT UNSIGNED NOT NULL AUTO_INCREMENT
+				, description VARCHAR(255) NOT NULL DEFAULT ''
+				, user_id INT UNSIGNED
+				, time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+				, action VARCHAR(6) NOT NULL DEFAULT ''
+				, PRIMARY KEY (id)
+				, KEY (user_id)
+			)
+	");
+
+	$database->dbh->query("
+		CREATE TABLE IF NOT EXISTS 
 			main_content
 			(
 				id INT UNSIGNED NOT NULL AUTO_INCREMENT
