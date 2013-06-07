@@ -16,9 +16,9 @@ $database = new Database();
 $session = new Session();
 $session->start();
 $config = new Config();
-// if (array_key_exists('install', $_GET)) {
-// 	require_once(BASE_PATH . 'install.php');
-// }
+if (array_key_exists('install', $_GET)) {
+	require_once(BASE_PATH . 'install.php');
+}
 $mainOption = new Model_Mainoption($database, $config);
 $mainOption->read();
 $config
