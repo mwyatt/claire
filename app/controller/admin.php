@@ -54,8 +54,10 @@ class Controller_Admin extends Controller
 			$user->setData($user->get());
 			$this->view->setObject($user);
 		} else {
-			if ($this->config->getUrl(1)) {
+			if ($this->config->getUrl(1) != 'lost-password' && $this->config->getUrl(1)) {
 				$this->route('base', 'admin/');
+			} else {
+				$this->view->loadTemplate('admin/login-lost-password');
 			}
 			$this->view->loadTemplate('admin/login');
 		}

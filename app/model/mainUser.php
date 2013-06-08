@@ -13,7 +13,10 @@
 class Model_Mainuser extends Model
 {
 
+
 	public $email;
+
+
 	protected $password;
 		
 	
@@ -32,6 +35,7 @@ class Model_Mainuser extends Model
 		$this->password = crypt($value);
 		return $this;		
 	}
+
 
 	protected function getPassword() {
 		return $this->password;
@@ -137,30 +141,25 @@ class Model_Mainuser extends Model
 	 * @return bool 
 	 */
 	public function login($emailAddress, $password) {	
-	
 		$sth = $this->database->dbh->prepare("	
 			select
 				main_user.id
 				, main_user.email
+				, main_user.first_name
+				, main_user.last_name
 				, main_user.password
 				, main_user.date_registered
 				, main_user.level
-				, main_user_meta.name as meta_name
-				, main_user_meta.value as meta_value
 			from main_user				
-			left join main_user_meta on main_user.id = main_user_meta.user_id
-			where email = :email
+			where email = ?
 		");		
-		
-		$sth->execute(array(
-			':email' => $emailAddress
-		));
-
-		if ($row = current($this->setMeta($sth->fetchAll(PDO::FETCH_ASSOC)))) {
+		$sth->execute(array($emailAddress));
+		if ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
 			if (crypt($password, $row['password']) == $row['password']) {
 				unset($row['password']);
 				$session = new Session();
 				$session->set('user', $row);
+				$this->refreshExpiry();
 				return true;
 			}
 		}
@@ -168,15 +167,28 @@ class Model_Mainuser extends Model
 	}
 	
 	
+	public function refreshExpiry() {
+		$session = new Session();
+		if ($session->get('user')) {
+			$session->set('user', 'expire', time() + 600);
+		}
+		return $this;
+	}
+
+
 	/**
 	 * check the session variable for logged in user
 	 */
 	public function isLogged() {	
 		$session = new Session();
-		if ($session->get('user')) {
-			return true;
+		if ($session->get('user', 'expire') && $session->get('user', 'expire') < time()) {
+			$this->logout();
+			$this->session->set('feedback', 'Logged out due to inactivity.');
+			return false;
+		} else {
+			$this->refreshExpiry();
 		}
-		return false;
+		return $session->get('user');
 	}
 	
 	
@@ -272,9 +284,6 @@ class Model_Mainuser extends Model
 		// 	}
 		// }
 	}
-// blues
-// 	player
-// 	team
 
 	
 }

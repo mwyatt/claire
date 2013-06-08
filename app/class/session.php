@@ -87,12 +87,8 @@ class Session extends Config
 
 
 	public function setIncrement($key, $value) {
-
-		if ($_SESSION[$key][] = $value)
-			return true;
-		else
-			return false;
-
+		$_SESSION[$key][] = $value;
+		return $this;
 	}
 
 

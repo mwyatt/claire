@@ -4,46 +4,38 @@ try {
 
 	$epochTime = time();
 
-	$user
-		->setEmail('martin.wyatt@gmail.com')
-		->setPassword('elttl.13.admin')
-		->insert(10);
-	$user
-		->setEmail('realbluesman@tiscali.co.uk')
-		->setPassword('elttl.13.246')
-		->insert(4);
-	
-	$user
-		->setEmail('gsaggers6@aol.com')
-		->setPassword('elttl.13.548')
-		->insert(1);
-	
-	$user
-		->setEmail('hepworth_neil@hotmail.com')
-		->setPassword('elttl.13.867')
-		->insert(3);
-	
-	$user
-		->setEmail('henryrawcliffe@sky.com')
-		->setPassword('elttl.13.754')
-		->insert(2);
 
 	$database->dbh->query("
-		INSERT INTO main_user_meta
-			(user_id, name, value)
-		VALUES
-			('1', 'first_name', 'Martin')
-			, ('1', 'last_name', 'Wyatt')
-			, ('1', 'age', '24')
-			, ('2', 'first_name', 'Mike')
-			, ('2', 'last_name', 'Turner')
-			, ('3', 'first_name', 'Grant')
-			, ('3', 'last_name', 'Saggers')
-			, ('4', 'first_name', 'Neil')
-			, ('4', 'last_name', 'Hepworth')
-			, ('5', 'first_name', 'Harry')
-			, ('5', 'last_name', 'Rawcliffe')
+		insert into main_user (
+			email
+			, password
+			, first_name
+			, last_name
+			, level
+		) values
+			('martin.wyatt@gmail.com', '" . crypt('elttl.13.admin') . "', 'Martin', 'Wyatt', '10')
+			, ('realbluesman@tiscali.co.uk', '" . crypt('elttl.13.246') . "', 'Mike', 'Turner', '4')
+			, ('gsaggers6@aol.com', '" . crypt('elttl.13.548') . "', 'Grant', 'Saggers', '1')
+			, ('hepworth_neil@hotmail.com', '" . crypt('elttl.13.867') . "', 'Neil', 'Hepworth', '3')
+			, ('henryrawcliffe@sky.com', '" . crypt('elttl.13.754') . "', 'Henry', 'Rawcliffe', '2')
 	");	
+
+	// $database->dbh->query("
+	// 	INSERT INTO main_user_meta
+	// 		(user_id, name, value)
+	// 	VALUES
+	// 		('1', 'first_name', 'Martin')
+	// 		, ('1', 'last_name', 'Wyatt')
+	// 		, ('1', 'age', '24')
+	// 		, ('2', 'first_name', 'Mike')
+	// 		, ('2', 'last_name', 'Turner')
+	// 		, ('3', 'first_name', 'Grant')
+	// 		, ('3', 'last_name', 'Saggers')
+	// 		, ('4', 'first_name', 'Neil')
+	// 		, ('4', 'last_name', 'Hepworth')
+	// 		, ('5', 'first_name', 'Harry')
+	// 		, ('5', 'last_name', 'Rawcliffe')
+	// ");	
 
 	$database->dbh->query("
 		INSERT INTO main_content (

@@ -9,24 +9,26 @@ try {
 				id INT UNSIGNED NOT NULL AUTO_INCREMENT
 				, email VARCHAR(50) NOT NULL DEFAULT ''
 				, password VARCHAR(255) NOT NULL DEFAULT ''
+				, first_name VARCHAR(75) NOT NULL DEFAULT ''
+				, last_name VARCHAR(75) NOT NULL DEFAULT ''
 				, date_registered TIMESTAMP DEFAULT NOW()
 				, level TINYINT(1) UNSIGNED NOT NULL DEFAULT '1'
 				, PRIMARY KEY (id)
 			)
 	");
 	
-	$database->dbh->query("
-		CREATE TABLE IF NOT EXISTS 
-			main_user_meta
-			(
-				id INT UNSIGNED NOT NULL AUTO_INCREMENT
-				, user_id INT UNSIGNED
-				, name VARCHAR(255) NOT NULL DEFAULT ''
-				, value VARCHAR(255) NOT NULL DEFAULT ''
-				, PRIMARY KEY (id)
-				, KEY (user_id)
-			)
-	");
+	// $database->dbh->query("
+	// 	CREATE TABLE IF NOT EXISTS 
+	// 		main_user_meta
+	// 		(
+	// 			id INT UNSIGNED NOT NULL AUTO_INCREMENT
+	// 			, user_id INT UNSIGNED
+	// 			, name VARCHAR(255) NOT NULL DEFAULT ''
+	// 			, value VARCHAR(255) NOT NULL DEFAULT ''
+	// 			, PRIMARY KEY (id)
+	// 			, KEY (user_id)
+	// 		)
+	// ");
 
 	$database->dbh->query("
 		CREATE TABLE IF NOT EXISTS 
@@ -116,19 +118,6 @@ try {
 				, PRIMARY KEY (id)
 			)		
 	");	
-	
-	// $database->dbh->query("
-	// 	CREATE TABLE IF NOT EXISTS
-	// 		tt_secretary
-	// 		(
-	// 			id INT UNSIGNED NOT NULL AUTO_INCREMENT
-	// 			, first_name VARCHAR(75)
-	// 			, last_name VARCHAR(75)
-	// 			, phone_landline VARCHAR(30)
-	// 			, phone_mobile VARCHAR(30)
-	// 			, PRIMARY KEY (id)
-	// 		)		
-	// ");		
 	
 	$database->dbh->query("
 		CREATE TABLE IF NOT EXISTS

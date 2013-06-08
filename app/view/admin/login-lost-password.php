@@ -17,6 +17,7 @@
     		<div class="content login clearfix">
     			<a class="logo" href="<?php echo $this->urlHome(); ?>" title="Open Homepage"><span>4</span></a>
     			<form method="post" name="form_login">
+                    <h1>Password recovery</h1>
     				<input type="hidden" name="form_login" value="true">
 
 <?php echo $this->getFeedback(); ?>
