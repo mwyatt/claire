@@ -17,6 +17,10 @@
 			<input id="form-rank" class="required" type="text" name="rank" maxlength="75" value="<?php echo $this->get('model_ttplayer', 'rank'); ?>">
 		</div>			
 		<div class="row">			
+			<label class="above" for="form-license-number">ETTA license number</label>
+			<input id="form-license-number" class="required" type="text" name="etta_license_number" maxlength="75" value="<?php echo $this->get('model_ttplayer', 'etta_license_number'); ?>">
+		</div>		
+		<div class="row">			
 			<label class="above" for="form-landline">Telephone Number (Landline)</label>
 			<input id="form-landline" class="required" type="text" name="phone_landline" maxlength="75" value="<?php echo $this->get('model_ttplayer', 'phone_landline'); ?>">
 		</div>			

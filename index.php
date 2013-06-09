@@ -14,7 +14,9 @@ spl_autoload_register(array('Autoloader', 'load'));
 $error = new Error($debug = 'yes');
 $database = new Database();
 $session = new Session();
-$session->start();
+$session
+	->start()
+	->refreshExpire();
 $config = new Config();
 if (array_key_exists('install', $_GET)) {
 	require_once(BASE_PATH . 'install.php');

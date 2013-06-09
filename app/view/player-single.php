@@ -14,6 +14,14 @@
 				<td><a href="<?php echo $this->get('model_ttplayer', 'division_guid'); ?>"><?php echo $this->get('model_ttplayer', 'division_name'); ?></a></td>
 			</tr>	
 
+<?php if ($this->get('model_ttplayer', 'etta_license_number')): ?>
+			
+			<tr class="etta-license-number">
+				<th>ETTA license number</th>
+				<td><?php echo $this->get('model_ttplayer', 'etta_license_number'); ?></td>
+			</tr>	
+
+<?php endif ?>
 <?php if ($this->get('model_ttplayer', 'phone_landline')): ?>
 			
 			<tr class="phone-landline">

@@ -25,14 +25,17 @@ class Controller_Admin_League extends Controller
 
 
 	public function player() {
+		$userAction = new model_mainuser_action($this->database, $this->config);
 		$player = new Model_Ttplayer($this->database, $this->config);
 		$division = new Model_Ttdivision($this->database, $this->config);
 		if (array_key_exists('form_update', $_POST)) {
 			$player->update($_GET['edit']);
+			$userAction->create($this->session->get('user', 'id'), 'update', 'player ' . $_POST['first_name'] . ' ' . $_POST['last_name'] . $_POST['edit']);
 			$this->route('current');
 		}
 		if (array_key_exists('form_create', $_POST)) {
 			$id = $player->create();
+			$userAction->create($this->session->get('user', 'id'), 'create', 'player ' . $_POST['first_name'] . ' ' . $_POST['last_name'] . $id);
 			$this->route('base', 'admin/league/' . $this->config->getUrl(2) . '/?edit=' . $id);
 			$this->route('current');
 		}
@@ -51,6 +54,7 @@ class Controller_Admin_League extends Controller
 		}
 		if (array_key_exists('delete', $_GET)) {
 			$player->deleteById($_GET['delete']);
+			$userAction->create($this->session->get('user', 'id'), 'delete', 'player ' . $id);
 			$this->route('current_noquery');
 		}
 		if ($this->config->getUrl(3) == 'new') {
@@ -66,6 +70,7 @@ class Controller_Admin_League extends Controller
 
 
 	public function team() {
+		$userAction = new model_mainuser_action($this->database, $this->config);
 		$team = new Model_Ttteam($this->database, $this->config);
 		$weekday = new Model_Ttteam($this->database, $this->config);
 		$division = new Model_Ttdivision($this->database, $this->config);
@@ -74,10 +79,12 @@ class Controller_Admin_League extends Controller
 		$secretaries = new Model_Ttplayer($this->database, $this->config);
 		if (array_key_exists('form_update', $_POST)) {
 			$team->update($_GET['edit']);
+			$userAction->create($this->session->get('user', 'id'), 'update', 'team ' . $_POST['name']);
 			$this->route('current');
 		}
 		if (array_key_exists('form_create', $_POST)) {
 			$id = $team->create();
+			$userAction->create($this->session->get('user', 'id'), 'create', 'team ' . $_POST['name']);
 			$this->route('base', 'admin/league/' . $this->config->getUrl(2) . '/?edit=' . $id);
 		}
 		if (array_key_exists('edit', $_GET)) {
@@ -100,6 +107,7 @@ class Controller_Admin_League extends Controller
 		}
 		if (array_key_exists('delete', $_GET)) {
 			$team->delete($_GET['delete']);
+			$userAction->create($this->session->get('user', 'id'), 'delete', 'team ' . $_GET['delete']);
 			$this->route('current_noquery');
 		}
 		if ($this->config->getUrl(3) == 'new') {
@@ -120,6 +128,7 @@ class Controller_Admin_League extends Controller
 
 
 	public function fixture() {
+		$userAction = new model_mainuser_action($this->database, $this->config);
 		$encounterStructure = new Model_Ttfixture($this->database, $this->config);
 		$adminFixture = new Model_Admin_Ttfixture($this->database, $this->config);
 		$fixture = new Model_Ttfixture($this->database, $this->config);
@@ -128,11 +137,13 @@ class Controller_Admin_League extends Controller
 		$encounterStructure->data = $encounterStructure->getEncounterStructure();
 		if (array_key_exists('form_fulfill', $_POST)) {
 			$fixture->fulfill();
+			$userAction->create($this->session->get('user', 'id'), 'fulfill', 'fixture fulfilled ' . $_POST['team']['left'] . ' vs ' . $_POST['team']['right']);
 			$this->route('current');
 		}
 		if (array_key_exists('form_update', $_POST)) {
 			if ($adminFixture->update($_GET['edit'])) {
 				$adminFixture->fulfill();
+				$userAction->create($this->session->get('user', 'id'), 'update', 'fixture ' . $_GET['edit']);
 			}
 			$this->route('current');
 		}
@@ -155,8 +166,6 @@ class Controller_Admin_League extends Controller
 				->setObject($division)
 				->loadTemplate('admin/league/fixture-create-update');
 		}
-		// $filledFixture = new Model_Ttfixture($this->database, $this->config);
-		// $filledFixture->readFilled();
 		$fixture->read();
 		$this->view
 			->setObject($division)

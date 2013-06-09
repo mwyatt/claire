@@ -32,6 +32,7 @@ class Model_Ttplayer extends Model
 				, team_id
 				, phone_landline
 				, phone_mobile
+				, etta_license_number
 			) VALUES (
 				:first_name
 				, :last_name
@@ -39,6 +40,7 @@ class Model_Ttplayer extends Model
 				, :team_id
 				, :phone_landline
 				, :phone_mobile
+				, :etta_license_number
 			)
 		");				
 		$sth->execute(array(
@@ -48,6 +50,7 @@ class Model_Ttplayer extends Model
 			, ':team_id' => (array_key_exists('team_id', $_POST) ? $_POST['team_id'] : '')
 			, ':phone_landline' => (array_key_exists('phone_landline', $_POST) ? $_POST['phone_landline'] : '')
 			, ':phone_mobile' => (array_key_exists('phone_mobile', $_POST) ? $_POST['phone_mobile'] : '')
+			, ':etta_license_number' => (array_key_exists('etta_license_number', $_POST) ? $_POST['etta_license_number'] : '')
 		));	
 		if ($sth->rowCount()) {
 			$this->session->set('feedback', 'Success, player "' . $_POST['first_name'] . ' ' . $_POST['last_name'] . '" created');
@@ -121,7 +124,6 @@ class Model_Ttplayer extends Model
 
 	public function read()
 	{	
-	
 		$sth = $this->database->dbh->query("	
 			select
 				tt_player.id
@@ -134,16 +136,13 @@ class Model_Ttplayer extends Model
 			left join tt_team on tt_player.team_id = tt_team.id
 			left join tt_division on tt_team.division_id = tt_division.id
 			order by
-				tt_division.id
-				, tt_player.rank desc
+				tt_player.last_name
 		");
-		
 		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {	
 			$row['name'] = $row['full_name'];
 			$row['guid'] = $this->getGuid('player', $row['full_name'], $row['id']);
 			$this->data[] = $row;
 		}
-
 		return $this;
 	}	
 
@@ -191,6 +190,7 @@ class Model_Ttplayer extends Model
 				, tt_division.id as division_id
 				, tt_division.name as division_name
 				, tt_team.name as team_name
+				, tt_player.etta_license_number
 				, tt_player.phone_landline
 				, tt_player.phone_mobile
 				, (sum(case when tt_encounter_result.left_id = tt_player.id and tt_encounter_result.status = '' then tt_encounter_result.left_score else 0 end) + sum(case when tt_encounter_result.right_id = tt_player.id and tt_encounter_result.status = '' then tt_encounter_result.right_score else 0 end)) as won
@@ -667,6 +667,7 @@ class Model_Ttplayer extends Model
 				, team_id = ?
 				, phone_landline = ?
 				, phone_mobile = ?
+				, etta_license_number = ?
 			where
 				id = ?
 		");				
@@ -677,6 +678,7 @@ class Model_Ttplayer extends Model
 			, (array_key_exists('team_id', $_POST) ? $_POST['team_id'] : '')
 			, (array_key_exists('phone_landline', $_POST) ? $_POST['phone_landline'] : '')
 			, (array_key_exists('phone_mobile', $_POST) ? $_POST['phone_mobile'] : '')
+			, (array_key_exists('etta_license_number', $_POST) ? $_POST['etta_license_number'] : '')
 			, ($id ? $id : '')
 		));		
 		$this->session->set('feedback', 'Player ' . ucfirst($row['first_name']) . ' ' . ucfirst($row['last_name']) . ' updated');

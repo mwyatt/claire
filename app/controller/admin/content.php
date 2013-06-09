@@ -16,10 +16,12 @@ class Controller_Admin_Content extends Controller
 
 
 	public function initialise() {
+		$userAction = new model_mainuser_action($this->database, $this->config);
 		$content = new Model_Admin_Maincontent($this->database, $this->config);
 		$media = new Model_Mainmedia($this->database, $this->config);
 		if (array_key_exists('form_create', $_POST)) {
 			if ($id = $content->create()) {
+				$userAction->create($this->session->get('user', 'id'), 'create', ucfirst($_POST['type']) . ' / ' . $_POST['title']);
 				$media->uploadAttach($id);
 				$this->route('base', 'admin/content/' . $this->config->getUrl(2) . '/?edit=' . $id);
 			} else {
@@ -28,13 +30,14 @@ class Controller_Admin_Content extends Controller
 		}
 		if (array_key_exists('form_update', $_POST)) {
 			if ($content->update()) {
+				$userAction->create($this->session->get('user', 'id'), 'update', ucfirst($_POST['type']) . ' / ' . $_POST['title']);
 				$media->uploadAttach($_GET['edit']);
 			}
 			$this->route('current');
 		}
 		if (array_key_exists('edit', $_GET)) {
 			$content->readById($_GET['edit']);
-		if (array_key_exists('media', $content->data)) {
+			if (array_key_exists('media', $content->data)) {
 				$media->readById($content->data['media']);
 				$this->view->setObject($media);
 			}
@@ -44,6 +47,7 @@ class Controller_Admin_Content extends Controller
 		}
 		if (array_key_exists('delete', $_GET)) {
 			$content->deleteById($_GET['delete']);
+			$userAction->create($this->session->get('user', 'id'), 'delete', 'main_content ' . $_GET['delete']);
 			$this->route('current_noquery');
 		}
 		if ($this->config->getUrl(3) == 'new') {

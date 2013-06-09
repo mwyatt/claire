@@ -17,19 +17,6 @@ try {
 			)
 	");
 	
-	// $database->dbh->query("
-	// 	CREATE TABLE IF NOT EXISTS 
-	// 		main_user_meta
-	// 		(
-	// 			id INT UNSIGNED NOT NULL AUTO_INCREMENT
-	// 			, user_id INT UNSIGNED
-	// 			, name VARCHAR(255) NOT NULL DEFAULT ''
-	// 			, value VARCHAR(255) NOT NULL DEFAULT ''
-	// 			, PRIMARY KEY (id)
-	// 			, KEY (user_id)
-	// 		)
-	// ");
-
 	$database->dbh->query("
 		CREATE TABLE IF NOT EXISTS 
 			main_user_action
@@ -156,6 +143,7 @@ try {
 				, last_name VARCHAR(75) NOT NULL DEFAULT ''
 				, rank INT UNSIGNED
 				, team_id INT UNSIGNED
+				, etta_license_number VARCHAR(10) NOT NULL DEFAULT ''
 				, phone_landline VARCHAR(30) DEFAULT ''
 				, phone_mobile VARCHAR(30) DEFAULT ''
 				, PRIMARY KEY (id)

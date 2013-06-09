@@ -14,58 +14,58 @@ class Model_Mainuser extends Model
 {
 
 
-	public $email;
+	// public $email;
 
 
-	protected $password;
+	// protected $password;
 		
 	
-	public function setEmail($value) {
-		$this->email = $value;
-		return $this;
-	}
+	// public function setEmail($value) {
+	// 	$this->email = $value;
+	// 	return $this;
+	// }
 	
 
-	public function getEmail() {
-		return ($this->email ? $this->email : false);
-	}
+	// public function getEmail() {
+	// 	return ($this->email ? $this->email : false);
+	// }
 	
 
-	public function setPassword($value) {
-		$this->password = crypt($value);
-		return $this;		
-	}
+	// public function setPassword($value) {
+	// 	$this->password = crypt($value);
+	// 	return $this;		
+	// }
 
 
-	protected function getPassword() {
-		return $this->password;
-	}
+	// protected function getPassword() {
+	// 	return $this->password;
+	// }
 	
 
-	/**
-	  * Insert 1 Row into Database | Set Level
-	  */
-	public function insertMeta($user_id) {	
-		$sth = $this->database->dbh->prepare("
-			INSERT INTO main_user_meta
-				(user_id, name, value)
-			values
-				('$user_id', :name, :value)
-		");
+	// /**
+	//   * Insert 1 Row into Database | Set Level
+	//   */
+	// public function insertMeta($user_id) {	
+	// 	$sth = $this->database->dbh->prepare("
+	// 		INSERT INTO main_user_meta
+	// 			(user_id, name, value)
+	// 		values
+	// 			('$user_id', :name, :value)
+	// 	");
 		
-		$sth->execute(
-			array(
-				':name' => 'first_name'
-				, ':value' => 'Steve'
-			)
-		);
-		$sth->execute(
-			array(
-				':name' => 'last_name'
-				, ':value' => 'Smith'
-			)
-		);
-	}
+	// 	$sth->execute(
+	// 		array(
+	// 			':name' => 'first_name'
+	// 			, ':value' => 'Steve'
+	// 		)
+	// 	);
+	// 	$sth->execute(
+	// 		array(
+	// 			':name' => 'last_name'
+	// 			, ':value' => 'Smith'
+	// 		)
+	// 	);
+	// }
 	
 	
 	// public function readById($id) {
@@ -115,25 +115,25 @@ class Model_Mainuser extends Model
 	}	
 
 	
-	/**
-	  * Insert 1 Row into Database | Set Level
-	  */
-	public function insert($level = 1) {	
-		$sth = $this->database->dbh->prepare("
-			INSERT INTO main_user
-				(email, password, level)
-			values
-				(:email, :password, :level)
-		");
+	// /**
+	//   * Insert 1 Row into Database | Set Level
+	//   */
+	// public function insert($level = 1) {	
+	// 	$sth = $this->database->dbh->prepare("
+	// 		INSERT INTO main_user
+	// 			(email, password, level)
+	// 		values
+	// 			(:email, :password, :level)
+	// 	");
 		
-		$sth->execute(
-			array(
-				':email' => $this->getEmail()
-				, ':password' => $this->getPassword()
-				, ':level' => $level
-			)
-		);
-	}
+	// 	$sth->execute(
+	// 		array(
+	// 			':email' => $this->getEmail()
+	// 			, ':password' => $this->getPassword()
+	// 			, ':level' => $level
+	// 		)
+	// 	);
+	// }
 	
 	
 	/**
@@ -151,7 +151,7 @@ class Model_Mainuser extends Model
 				, main_user.date_registered
 				, main_user.level
 			from main_user				
-			where email = ?
+			where main_user.email = ?
 		");		
 		$sth->execute(array($emailAddress));
 		if ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
@@ -159,7 +159,7 @@ class Model_Mainuser extends Model
 				unset($row['password']);
 				$session = new Session();
 				$session->set('user', $row);
-				$this->refreshExpiry();
+				$session->set('user', 'expire', time() + 600);
 				return true;
 			}
 		}
@@ -167,12 +167,50 @@ class Model_Mainuser extends Model
 	}
 	
 	
-	public function refreshExpiry() {
-		$session = new Session();
-		if ($session->get('user')) {
-			$session->set('user', 'expire', time() + 600);
+	public function passwordRecover($emailAddress) {
+		$sth = $this->database->dbh->prepare("	
+			select
+				main_user.email
+			from main_user				
+			where main_user.email = ?
+		");		
+		$sth->execute(array($emailAddress));
+		if ($sth->rowCount()) {
+			$session = new session();
+			$session->set('password_recovery', array(
+				'code' => $this->config->generateRandomString()
+				, 'email' => $emailAddress
+				, 'expire' => time() + 300
+			));
+			$mail = new mail($this->database, $this->config);
+			$mail->send($emailAddress, 'Password recovery', 'password-recovery');
+			return true;
 		}
-		return $this;
+		return false;
+	}
+
+
+	public function passwordReset($password) {
+		$session = new session();
+		if (! strlen($password) > 3) {
+			return false;
+		}
+		$sth = $this->database->dbh->prepare("	
+			update main_user set
+				main_user.password = ?
+			where
+				main_user.email = ?
+		");	
+		$sth->execute(array(
+			crypt($password)
+			, $session->get('password_recovery', 'email')
+		));
+		if ($sth->rowCount()) {
+			$session = new session();
+			$session->getUnset('password_recovery');
+			return true;
+		}
+		return false;
 	}
 
 
@@ -185,8 +223,6 @@ class Model_Mainuser extends Model
 			$this->logout();
 			$this->session->set('feedback', 'Logged out due to inactivity.');
 			return false;
-		} else {
-			$this->refreshExpiry();
 		}
 		return $session->get('user');
 	}
@@ -283,6 +319,28 @@ class Model_Mainuser extends Model
 		// 		$this->config->getObject('route')->home('admin/content/minutes/');
 		// 	}
 		// }
+	}
+
+
+	public function readById($id)
+	{	
+		$sth = $this->database->dbh->prepare("	
+			select
+				main_user.id
+				, main_user.email
+				, main_user.first_name
+				, main_user.last_name
+				, main_user.password
+				, main_user.date_registered
+				, main_user.level
+			from main_user				
+			where main_user.id = ?
+		");		
+		$sth->execute(array($id));
+		if ($this->data = $sth->fetch(PDO::FETCH_ASSOC)) {
+			return true;
+		}
+		return false;
 	}
 
 	

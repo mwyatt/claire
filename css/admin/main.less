@@ -779,9 +779,14 @@ nav {
 		margin: 0 0.8em 0 0;
 	}
 
+	.current a:active,
+	.current a:hover,
 	.current a {
-		border-color: darken(@white, 30%);
-		color: darken(@white, 60%);
+		.box-shadow (none);
+		.inner-shadow (none);
+		background: @white;
+		border-color: darken(@white, 10%);
+		color: darken(@white, 30%);
 		cursor: default;
 	}
 }

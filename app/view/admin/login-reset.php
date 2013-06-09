@@ -15,26 +15,19 @@
 
        	<div class="wrap">
     		<div class="content login clearfix">
-    			<a class="logo" href="<?php echo $this->urlHome(); ?>" title="Open Homepage"><span>4</span></a>
-    			<form method="post" name="form_login">
-                    <h1>Password recovery</h1>
-    				<input type="hidden" name="form_login" value="true">
+    			<form method="post">
+    				<input type="hidden" name="form_login_reset" value="true">
 
 <?php echo $this->getFeedback(); ?>
 
                     <div class="row">
-                        <label for="email_address">Email Address</label>
-                        <input id="email_address" type="text" name="email_address" autofocus="autofocus"<?php echo ($this->session->get('form_field', 'email') ? ' value="' . $this->session->getUnset('form_field', 'email') . '"' : ''); ?>>
-                    </div>
-                    <div class="row">
-                        <label for="password">Password</label>
+                        <label for="password">New password</label>
                         <input id="password" type="password" name="password">
                     </div>
                     <div class="row">
                         <input type="submit">
-                        <a href="#" class="submit button">Login</a>
+                        <a href="#" class="submit button">Change</a>
                     </div>
-                    <a href="<?php echo $this->urlHome() ?>admin/forgot-password/" class="forgot-password">Forgot password?</a>
                 </form>
     		</div>
             <script src="<?php echo $this->urlHome(); ?>js/vendor/jquery-1.8.2.min.js"></script>

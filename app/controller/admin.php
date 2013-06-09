@@ -34,30 +34,52 @@ class Controller_Admin extends Controller
 		}
 		if (array_key_exists('form_login', $_POST)) {
 			if ($user->login($_POST['email_address'], $_POST['password'])) {
-				$this->session->set('feedback', 'Successfully Logged in as ' . $this->session->get('user', 'first_name') . ' ' . $this->session->get('user', 'last_name'));
+				$this->session->set('feedback', 'Successfully Logged in as ' . ($this->session->get('user', 'first_name') ? $this->session->get('user', 'first_name') . ' ' . $this->session->get('user', 'last_name') : $this->session->get('user', 'email')));
 				$user->permission();
 			}
 			$this->session->set('feedback', 'Email Address or password incorrect');
 			$this->session->set('form_field', array('email' => $_POST['email_address']));
 			$this->route('base', 'admin/');
 		}
+		if (array_key_exists('form_login_reset', $_POST)) {
+			if ($user->passwordReset($_POST['password'])) {
+				$this->session->set('feedback', 'Password successfully reset');
+			} else {
+				$this->session->set('feedback', 'Password was not reset');
+			}
+			$this->route('base', 'admin/');
+		}
+		if (array_key_exists('form_login_recovery', $_POST)) {
+			if ($user->passwordRecover($_POST['email_address'])) {
+				$this->session->set('feedback', 'Password recovery email sent to ' . $_POST['email_address'] . '.');
+				$this->route('base', 'admin/');
+			} else {
+				$this->session->set('feedback', 'Email address is not associated with any account.');
+				$this->route('base', 'admin/recovery/');
+			}
+		}
 		if (array_key_exists('season', $_GET) && $_GET['season'] == 'start' && ! $this->config->getOption('season_start')) {
+			$userAction = new model_mainuser_action($this->database, $this->config);
 			$mainOption = new model_mainoption($this->database, $this->config);
 			$mainOption->update('season_status', 'started');
 			$ttfixture = new model_admin_ttfixture($this->database, $this->config);
 			$ttfixture->create();
+			$userAction->create($this->session->get('user', 'id'), 'create', 'All fixtures generated, season started');
 			$this->session->set('feedback', 'All fixtures generated. You may now <a href="' . $this->config->getUrl('base') . 'league/fixture/fulfill/" title="submit a scorecard">submit a scorecard</a>.');
 			$this->route('base', 'admin/league/fixture/fulfill/');
 		}
-
+		if (array_key_exists('code', $_GET) && $_GET['code'] == $this->session->get('password_recovery', 'code')) {
+			$this->view->loadTemplate('admin/login-reset');
+		}
 		if ($user->isLogged()) {
 			$user->setData($user->get());
 			$this->view->setObject($user);
 		} else {
-			if ($this->config->getUrl(1) != 'lost-password' && $this->config->getUrl(1)) {
+			if ($this->config->getUrl(1) == 'recovery') {
+				$this->view->loadTemplate('admin/login-recovery');
+			}
+			if ($this->config->getUrl(1)) {
 				$this->route('base', 'admin/');
-			} else {
-				$this->view->loadTemplate('admin/login-lost-password');
 			}
 			$this->view->loadTemplate('admin/login');
 		}
@@ -78,8 +100,24 @@ class Controller_Admin extends Controller
 		$this->load(array('admin', 'league'), $this->config->getUrl(2), $this->view, $this->database, $this->config);
 	}
 
+
 	public function media() {
 		$this->load(array('admin', 'media'), $this->config->getUrl(2), $this->view, $this->database, $this->config);
+	}
+	
+
+	public function profile() {
+		$userAction = new model_mainuser_action($this->database, $this->config);
+		$user = new model_user($this->database, $this->config);
+		if (array_key_exists('update', $_POST)) {
+			$user->update($_GET['edit']);
+			$userAction->create($this->session->get('user', 'id'), 'update', 'user ' . $_POST['name']);
+			$this->route('current');
+		}
+		$user->readById($this->session->get('user', 'id'));
+		$this->view
+			->setObject($user)
+			->loadTemplate('admin/profile');
 	}
 	
 

@@ -17,7 +17,8 @@
     		<div class="content login clearfix">
     			<a class="logo" href="<?php echo $this->urlHome(); ?>" title="Open Homepage"><span>4</span></a>
     			<form method="post" name="form_login">
-    				<input type="hidden" name="form_login" value="true">
+                    <h1>Password recovery</h1>
+    				<input type="hidden" name="form_login_recovery" value="true">
 
 <?php echo $this->getFeedback(); ?>
 
@@ -26,14 +27,9 @@
                         <input id="email_address" type="text" name="email_address" autofocus="autofocus"<?php echo ($this->session->get('form_field', 'email') ? ' value="' . $this->session->getUnset('form_field', 'email') . '"' : ''); ?>>
                     </div>
                     <div class="row">
-                        <label for="password">Password</label>
-                        <input id="password" type="password" name="password">
-                    </div>
-                    <div class="row">
                         <input type="submit">
-                        <a href="#" class="submit button">Login</a>
+                        <a href="#" class="submit button">Reset password</a>
                     </div>
-                    <a href="<?php echo $this->urlHome() ?>admin/recovery/" class="forgot-password">Forgot password?</a>
                 </form>
     		</div>
             <script src="<?php echo $this->urlHome(); ?>js/vendor/jquery-1.8.2.min.js"></script>

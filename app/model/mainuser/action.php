@@ -41,4 +41,28 @@ class Model_Mainuser_Action extends Model
 	}
 
 
+	public function create($userId, $action, $description) {
+		$sth = $this->database->dbh->prepare("
+			insert into main_user_action (
+				description
+				, user_id
+				, action
+			) values (
+				?
+				, ?
+				, ?
+			)
+		");				
+		$sth->execute(array(
+			$description
+			, $userId
+			, $action
+		));
+		if ($sth->rowCount()) {
+			return true;
+		} 
+		return false;
+	}
+
+
 }

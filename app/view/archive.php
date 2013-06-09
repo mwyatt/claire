@@ -13,7 +13,7 @@
 
 	<?php endforeach ?>
 
-		<li><a href="superarchive/" target="_blank">Older</a></li>
+		<li><a href="archive-older/" target="_blank">Older</a></li>
 	</ul>
 
 <?php endif; ?>	
