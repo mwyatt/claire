@@ -16,12 +16,13 @@
     <div class="wrap">
         <header class="main clearfix">
             <a class="title" href="<?php echo $this->urlHome(); ?>" target="_blank" title="Open Homepage"><?php echo $this->get('options', 'site_title'); ?></a>
+            
 <?php if ($this->get('model_mainuser')): ?>
 
 			<div class="user">
 				<a href="#" class="name"><?php echo ($this->get('model_mainuser', 'first_name') ? $this->get('model_mainuser', 'first_name') . ' ' . $this->get('model_mainuser', 'last_name') : $this->get('model_mainuser', 'email')); ?></a>
 				<ul>
-                    <!-- <li><a href="<?php echo $this->urlHome() ?>admin/user/profile/">Profile</a></li> -->
+                    <li><a href="<?php echo $this->urlHome() ?>admin/profile/">Profile</a></li>
 					<li><a href="?logout=true">Logout</a></li>
 				</ul>
 			</div>

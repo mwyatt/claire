@@ -3,6 +3,8 @@
 /**
  * Config
  *
+ * core base for object, class, option operations
+ *
  * PHP version 5
  * 
  * @package	~unknown~
@@ -15,9 +17,33 @@ class Config
 {
 
 
+	/**
+	 * stores returned model data
+	 * @var array
+	 */
 	public $data;
+
+
+	/**
+	 * storage for objects to be passed into other objects
+	 * @var array
+	 */
 	public $objects;
+
+	/**
+	 * full set of options data from the main_options table
+	 * @var array
+	 */
 	public $options;
+
+
+	/**
+	 * collection of useful urls,
+	 * base
+	 * noquery
+	 * segments of each url partition
+	 * @var array
+	 */
 	public $url;
 
 	
@@ -39,7 +65,9 @@ class Config
 
 	/**
 	 * returns an object if it has been registered
-	 */	
+	 * @param  string $objectTitle 
+	 * @return object|bool              
+	 */
 	public function getObject($objectTitle) {
 		$objectTitle = strtolower($objectTitle);
 		if (array_key_exists($objectTitle, $this->objects)) {
@@ -80,35 +108,20 @@ class Config
 	 * returns url key or path segment
 	 */		
 	public function getUrl($key = false) {	
-	
 		if (gettype($key) == 'integer') {
-		
 			if (array_key_exists('path', $this->url)) {
-			
 				if (array_key_exists($key, $this->url['path'])) {
-				
 					return $this->url['path'][$key];
-				
 				}
-			
 			}
-			
 			return false;
-				
 		}
-	
 		if (gettype($key) == 'string') {
-		
 			if (array_key_exists($key, $this->url))
-			
 				return $this->url[$key];
-				
 			return false;				
-		
 		}		
-		
 		return $this->url;
-			
 	}
 	
 	
@@ -120,13 +133,10 @@ class Config
 	 * returns $this
 	 */	
 	public function setUrl() {
-	
 		if ($_SERVER) {
-		
 			$url = 'http://' . $_SERVER['HTTP_HOST'] . str_replace('.', '', $_SERVER['REQUEST_URI']);
 			$url = strtolower($url);
 			$url = parse_url($url);
-
 			if (array_key_exists('path', $url)) {
 				$scriptName = explode('/', strtolower($_SERVER['SCRIPT_NAME']));
 				array_pop($scriptName); 
@@ -135,52 +145,31 @@ class Config
 				$url['path'] = explode('/', $url['path']);
 				$url['path'] = array_filter($url['path']);
 				$url['path'] = array_values($url['path']);
-				
 				foreach (array_intersect($scriptName, $url['path']) as $key => $value) {
 					unset($url['path'][$key]);
 				}
-				
 				$url['path'] = array_values($url['path']);		
 			}		
-				
 			if (array_key_exists('query', $url)) {
 				$url['query'] = explode('[;&]', $url['query']);
 			}
-			
 			$this->url = $url;
-			
-			// Base
-			
 			$scriptName = explode('/', strtolower($_SERVER['SCRIPT_NAME']));
 			array_pop($scriptName); 
 			$scriptName = array_filter($scriptName); 
 			$scriptName = array_values($scriptName);
-
 			$url = $this->getUrl('scheme') . '://' . $this->getUrl('host') . '/';
-			
 			foreach ($scriptName as $section) {
 				$url .= $section . '/';
 			}
-
 			$this->url['base'] = $url;
-
-			// removes $_GET
-		
-			// $_SERVER['REQUEST_URI'] = strtok($_SERVER['REQUEST_URI'], '?');
-
-			// $this->url['current'] = false;
-			// if (array_key_exists('HTTP_REFERER', $_SERVER)) {
-			// 	$this->url['current'] = $_SERVER['HTTP_REFERER'];
-			// }
 			$this->url['admin'] = $this->url['base'] . 'admin/';
 			$url = $this->url['base'];
 			foreach ($this->url['path'] as $segment) {
 				$url .= $segment . '/';
 			}
-			
 			$this->url['current_noquery'] =  $url;
 			$this->url['current'] = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-
 			$url = $this->url['base'];
 			$segments = $this->url['path'];
 			array_pop($segments);
@@ -195,6 +184,8 @@ class Config
 
 	/**
 	 * master get function for interacting with $this->data
+	 * @todo  remember that if keys have been set, then they
+	 *        expect to be returned the correct data or false
 	 * @param  string|array  $one      
 	 * @param  string $two   
 	 * @param  string $three 
@@ -204,7 +195,6 @@ class Config
 		if ($two === 0) {
 			if (array_key_exists($one, $this->data)) {
 				return $this->data[$one][$two][$three];
-				
 			}
 			return false;
 		}
@@ -266,15 +256,37 @@ class Config
 	}	
 
 
+	/**
+	 * full list of class methods without excluded keywords
+	 * @param  string $className 
+	 * @return array|bool            list of methods
+	 */
 	public function getClassMethods($className) {
+		if (! class_exists($className)) {
+			return false;
+		}
 		$exclusions = array(
 			'initialise'
 			, 'index'
 			, 'load'
 			, '__construct'
+			, 'loadMethod'
+			, 'route'
+			, 'getId'
+			, 'setOptions'
+			, 'getOptions'
+			, 'getOption'
+			, 'getObject'
+			, 'setObject'
+			, 'getUrl'
+			, 'setUrl'
+			, 'get'
+			, 'getClassMethods'
+			, 'generateRandomString'
+			, 'generateRandomString'
 		);
 		foreach (get_class_methods($className) as $method) {
-			if (! in_array(strtolower($method), $exclusions)) {
+			if (! in_array($method, $exclusions)) {
 				$methods[] = $method;
 			}
 		}
@@ -282,6 +294,11 @@ class Config
 	}
 
 
+	/**
+	 * bats back a random string, good for unique codes
+	 * @param  integer $length how big is the code?
+	 * @return string          
+	 */
 	public function generateRandomString($length = 10) {
 	    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 	    $randomString = '';

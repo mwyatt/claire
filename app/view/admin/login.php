@@ -29,11 +29,13 @@
                         <label for="password">Password</label>
                         <input id="password" type="password" name="password">
                     </div>
-                    <div class="row">
+                    <div class="row clearfix">
                         <input type="submit">
                         <a href="#" class="submit button">Login</a>
                     </div>
-                    <a href="<?php echo $this->urlHome() ?>admin/recovery/" class="forgot-password">Forgot password?</a>
+                    <div class="row">
+                        <p><a href="<?php echo $this->urlHome() ?>admin/recovery/" class="forgot-password">Forgot password?</a></p>
+                    </div>
                 </form>
     		</div>
             <script src="<?php echo $this->urlHome(); ?>js/vendor/jquery-1.8.2.min.js"></script>

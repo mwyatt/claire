@@ -137,10 +137,33 @@ class Model_Mainuser extends Model
 	
 	
 	/**
-	 * login user
-	 * @return bool 
+	 * using the id the session is refreshed with fresh updated data
+	 * @param  string $id 
 	 */
-	public function login($emailAddress, $password) {	
+	public function refreshUserSession($id) {	
+		$sth = $this->database->dbh->prepare("	
+			select
+				main_user.id
+				, main_user.email
+				, main_user.first_name
+				, main_user.last_name
+				, main_user.date_registered
+				, main_user.level
+			from main_user				
+			where main_user.id = ?
+		");		
+		$sth->execute(array($id));
+		$session = new Session();
+		$session->set('user', $sth->fetch(PDO::FETCH_ASSOC));
+		$this->setUserExpire();
+	}
+
+
+	/**
+	 * using the id the session is refreshed with fresh updated data
+	 * @param  string $id 
+	 */
+	public function readByEmail($email) {	
 		$sth = $this->database->dbh->prepare("	
 			select
 				main_user.id
@@ -153,13 +176,29 @@ class Model_Mainuser extends Model
 			from main_user				
 			where main_user.email = ?
 		");		
-		$sth->execute(array($emailAddress));
-		if ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
+		$sth->execute(array($email));
+		$this->setData($sth->fetch(PDO::FETCH_ASSOC));
+	}
+
+
+	public function setUserExpire() {
+		$session = new Session();
+		$session->set('user', 'expire', time() + 600);
+	}
+
+
+	/**
+	 * login user
+	 * @return bool 
+	 */
+	public function login($email, $password) {	
+		$this->readByEmail($email);
+		if ($row = $this->getData()) {
 			if (crypt($password, $row['password']) == $row['password']) {
 				unset($row['password']);
 				$session = new Session();
 				$session->set('user', $row);
-				$session->set('user', 'expire', time() + 600);
+				$this->setUserExpire();
 				return true;
 			}
 		}
@@ -330,8 +369,7 @@ class Model_Mainuser extends Model
 				, main_user.email
 				, main_user.first_name
 				, main_user.last_name
-				, main_user.password
-				, main_user.date_registered
+				, unix_timestamp(main_user.date_registered) as date_registered
 				, main_user.level
 			from main_user				
 			where main_user.id = ?
@@ -343,5 +381,37 @@ class Model_Mainuser extends Model
 		return false;
 	}
 
+
+	public function updateById($id) {
+		$sth = $this->database->dbh->prepare("
+			update main_user set
+				main_user.email = ?
+				, main_user.first_name = ?
+				, main_user.last_name = ?
+			where
+				id = ?
+		");				
+		$sth->execute(array(
+			$_POST['email']
+			, $_POST['first_name']
+			, $_POST['last_name']
+			, $id
+		));		
+		if (array_key_exists('password', $_POST) && $_POST['password']) {
+			$sth = $this->database->dbh->prepare("
+				update main_user set
+					main_user.password = ?
+				where
+					id = ?
+			");				
+			$sth->execute(array(
+				crypt($_POST['password'])
+				, $id
+			));		
+		}
+		$this->refreshUserSession($id);
+		$this->session->set('feedback', 'Your profile was updated.');
+		return $sth->rowCount();
+	}
 	
 }

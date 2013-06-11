@@ -13,13 +13,46 @@
 abstract class Model extends Config
 {
 
+
+	/**
+	 * see class database
+	 * @var object
+	 */
 	public $database;
-	public $config;
-	public $session;
-	public $data = array();
-	public $dataRow;
 
 	
+	/**
+	 * see class config
+	 * @var object
+	 */
+	public $config;
+
+
+	/**
+	 * see class session
+	 * @var object
+	 */
+	public $session;
+
+	/**
+	 * returned data from sql requests
+	 * @var array
+	 */
+	public $data = array();
+
+
+	/**
+	 * depreciated?
+	 * @var array
+	 */
+	// public $dataRow;
+
+	
+	/**
+	 * always initiates with the session, database and config
+	 * @param object $database 
+	 * @param object $config   
+	 */
 	public function __construct($database, $config) {
 		$this->session = new Session();
 		$this->database = $database;
@@ -29,23 +62,19 @@ abstract class Model extends Config
 	
 	/**
 	 * Get data array or by key
+	 * @param  string $key 
+	 * @return value|bool       depending upon success
 	 */
 	public function getData($key = false)
 	{		
 		if ($key) {
-		
-			if (array_key_exists($key, $this->data))
-			
+			if (array_key_exists($key, $this->data)) {
 				return $this->data[$key];
-				
-			else
-			
+			} else {
 				return false;
-			
+			}
 		}
-		
 		return $this->data;
-		
 	}	
 	
 	
@@ -102,140 +131,34 @@ abstract class Model extends Config
 	 */
 	public function setData($value)
 	{		
-	
 		$this->data = $value;
-		
 	}
-	
-	
-	/**
-	 * convert only one result to singleton pattern
-	 */
-	// public function singletonRow() {
-	
-	// 	if (count($this->data) == 1)
-		
-	// 		$this->data = $this->data[key($this->data)];
-			
-	// }
 	
 	
 	/**
 	 * use sth to parse rows combining meta data and store in $data
 	 */
 	public function parseRows($sth) {
-	
 		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {	
-		
 			foreach ($row as $key => $value) {
-			
 				$this->data[$row['id']][$key] = $value;
-				
 			}
-		
-			if (array_key_exists('meta_name', $row))
+			if (array_key_exists('meta_name', $row)) {
 				$this->data[$row['id']][$row['meta_name']] = $row['meta_value'];
-		
-			if (array_key_exists($name = 'meta_name', $this->data[$row['id']]))
-				unset($this->data[$row['id']][$name]);
-				
-			if (array_key_exists($name = 'meta_value', $this->data[$row['id']]))
-				unset($this->data[$row['id']][$name]);
-				
-			
-		}
-		
-		if (count($this->data) == 1)
-			$this->data = $this->data[key($this->data)];
-		
-	}	
-	
-	
-	// /**
-	//  * Searches $this->data for key match
-	//  * @return value from $this->data
-	//  * @usage $options->get('site_title')
-	//  */
-	// public function get($key)
-	// {	
-
-	// 	if (array_key_exists($key, $this->data)) {
-
-	// 		return $this->data[$key];
-
-	// 	}
-
-	// 	return false;
-
-	// }	
-
-	
-	/**
-	 * Sets next result row or returns false if last result is returned
-	 */
-	public function nextRow()
-	{		
-
-		if (current($this->data) === false)
-			return false;
-
-		if (! is_array(current($this->data))) {
-
-			if ($this->dataRow !== $this->data) {
-
-				$this->dataRow = $this->data;
-				return true;
-
-			} else {
-
-				return false;
-
 			}
-
+			if (array_key_exists($name = 'meta_name', $this->data[$row['id']])) {
+				unset($this->data[$row['id']][$name]);
+			}
+			if (array_key_exists($name = 'meta_value', $this->data[$row['id']])) {
+				unset($this->data[$row['id']][$name]);
+			}
 		}
-
-		if ($this->dataRow = current($this->data)) {
-
-			next($this->data);
-
-			return true;
-
-		} else {
-
-			unset($this->dataRow);
-
-			reset($this->data);
-
-			return false;
-
-		}		
-				
-	}
-	
-	
-	/**
-	 * Get Single Result Row
-	 * Option to get Specific Key
-	 */
-	public function getRow($key = false) {
-
-		if ($key) {
-		
-			if (array_key_exists($key, $this->dataRow))	
-			
-				return $this->dataRow[$key];
-				
-			else
-			
-				return false;
-				
+		if (count($this->data) == 1) {
+			$this->data = $this->data[key($this->data)];
 		}
-		
-		return $this->dataRow;
-		
 	}	
 	
-	
+
 	/**
 	 * checks through form fields for invalid or null data
 	 * @param  array $_POST 
@@ -261,26 +184,28 @@ abstract class Model extends Config
 	 * @return bool        
 	 */
 	public function validateInt($value) {
-
 		$value = intval($value);
-
-		if (gettype($value) == 'integer')
-
+		if (gettype($value) == 'integer') {
 			return true;
-
-		else
-
-			return false;
-
+		}
+		return false;
 	}
 
+
+	/**
+	 * possibly belongs in the config class?
+	 * @return string
+	 */
 	public function getUploadDir() {
-
 		return $this->getUrl('base') . 'img/upload/';
-
 	}
 	
 
+	/**
+	 * possibly belongs in the config glass?
+	 * @param  string $value 
+	 * @return string        one you can be friends with
+	 */
 	public function urlFriendly($value = null)
 	{
 	
@@ -302,6 +227,13 @@ abstract class Model extends Config
 	}
 
 
+	/**
+	 * constructs a friendly guid using 3 components
+	 * @param  string $type 
+	 * @param  string $name 
+	 * @param  string $id   
+	 * @return string        the url
+	 */
 	public function getGuid($type = false, $name = false, $id = false) {
 		if ($type == 'timthumb') {
 			return $this->config->getUrl('base') . 'timthumb/?src=' . $this->config->getUrl('base') . $name;
@@ -317,6 +249,11 @@ abstract class Model extends Config
 	}
 
 
+	/**
+	 * handy for checking if a checkbox has been ticked
+	 * @param  string  $key 
+	 * @return boolean      
+	 */
 	public function isChecked($key) {
 		return (array_key_exists($key, $_POST) ? true : false);
 	}
@@ -325,6 +262,7 @@ abstract class Model extends Config
 	/**
 	 * sets all meta keys, how clever!
 	 * at the moment requires id, title, meta_key and meta_value
+	 * @todo  horrible idea
 	 * @param array $results 
 	 */
 	public function setMeta($results) {		

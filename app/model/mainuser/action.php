@@ -21,11 +21,8 @@ class Model_Mainuser_Action extends Model
 				, main_user_action.user_id
 				, main_user_action.time
 				, main_user_action.action
-				, main_user_meta.name
-				, main_user_meta.value
 			from main_user_action
 			left join main_user on main_user_action.user_id = main_user.id
-			left join main_user_meta on main_user.id = main_user_meta.id
 		");				
 		$sth->bindParam(1, $id, PDO::PARAM_INT);
 		$sth->bindParam(2, $id, PDO::PARAM_INT);
@@ -38,6 +35,26 @@ class Model_Mainuser_Action extends Model
 			return $this->data = $rows;
 		} 
 		return false;
+	}
+
+
+	public function readById($ids) {
+		$sth = $this->database->dbh->prepare("
+			select
+				main_user_action.id
+				, main_user_action.description
+				, main_user_action.user_id
+				, main_user_action.time
+				, main_user_action.action
+			from main_user_action
+			left join main_user on main_user_action.user_id = main_user.id
+			where main_user_action.user_id = ?
+		");				
+		foreach ($ids as $id) {
+			$sth->execute(array($id));
+		}
+		$this->data = $sth->fetch(PDO::FETCH_ASSOC);
+		return $sth->rowCount();
 	}
 
 

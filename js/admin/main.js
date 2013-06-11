@@ -451,6 +451,14 @@ function formSubmit(e, button) {
 	e.preventDefault();
 }
 
+function clickUser() {
+	user.addClass('active');
+}
+
+function removeModals() {
+	$('*').removeClass('active');
+}
+
 // document ready
 
 $(document).ready(function() {
@@ -498,17 +506,11 @@ $(document).ready(function() {
 			removeModals();
 		}
 	});	
-	function removeModals() {
-		$('*').removeClass('active');
-	}
 	if ($('.content.gallery').length) {
 		$('.file').magnificPopup({type:'image'});
 	}
 	var user = $('header.main').find('.user');
 	user.find('a').on('click', clickUser);
-	function clickUser() {
-		user.addClass('active');
-	}
 	var websiteTitle = $('header.main').find('.title').find('a');
 	websiteTitleText = $('header.main').find('.title').find('a').html();
 	websiteTitle.hover(function over() {
@@ -519,4 +521,4 @@ $(document).ready(function() {
 	function out() {
 		$(this).html(websiteTitleText);
 	});
-}); // document ready
+});

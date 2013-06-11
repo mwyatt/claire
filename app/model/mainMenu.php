@@ -13,21 +13,24 @@
 class Model_Mainmenu extends Model
 {
 
+
 	public $type;
+
 	public $html = '';
-	public $adminSubMenu;
+
+	// public $adminSubMenu;
 
 	
-	public function getAdminSubMenu()
-	{		
+	// public function getAdminSubMenu()
+	// {		
 		
-		if ($this->adminSubMenu)
+	// 	if ($this->adminSubMenu)
 
-			echo $this->adminSubMenu;
+	// 		echo $this->adminSubMenu;
 
-		return false;
+	// 	return false;
 
-	}
+	// }
 
 
 	/**
@@ -166,7 +169,7 @@ class Model_Mainmenu extends Model
 		if ($user->get('email') == 'martin.wyatt@gmail.com') {
 			$className = 'Controller_' . ucfirst($this->config->getUrl(0)) . '_' . ucfirst($this->config->getUrl(1));
 			if (class_exists($className)) {
-				foreach (get_class_methods($className) as $key => $method) {
+				foreach ($this->getClassMethods($className) as $key => $method) {
 					if (($method !== 'initialise') && ($method !== 'index') && ($method !== 'load') && ($method !== '__construct')) {
 						$this->data['admin_sub'][$key]['name'] = ucfirst($method);
 						$this->data['admin_sub'][$key]['current'] = ($this->config->getUrl(2) == $method ? true : false);
@@ -178,7 +181,7 @@ class Model_Mainmenu extends Model
 		if ($user->get('email') == 'realbluesman@tiscali.co.uk') {
 			$className = 'Controller_' . ucfirst($this->config->getUrl(0)) . '_' . ucfirst($this->config->getUrl(1));
 			if (class_exists($className)) {
-				foreach (get_class_methods($className) as $key => $method) {
+				foreach ($this->getClassMethods($className) as $key => $method) {
 					if (($method !== 'initialise') && ($method !== 'index') && ($method !== 'load') && ($method !== '__construct')) {
 						$this->data['admin_sub'][$key]['name'] = ucfirst($method);
 						$this->data['admin_sub'][$key]['current'] = ($this->config->getUrl(2) == $method ? true : false);
@@ -220,17 +223,18 @@ class Model_Mainmenu extends Model
 			}
 			return;
 		}
-		foreach (get_class_methods('Controller_Admin') as $key => $method) {
-			if (($method !== 'initialise') && ($method !== 'index') && ($method !== 'load') && ($method !== '__construct')) {
-				$this->data['admin'][$key]['name'] = ucfirst($method);
-				$this->data['admin'][$key]['current'] = ($this->config->getUrl(1) == $method ? true : false);
-				$this->data['admin'][$key]['guid'] = $this->config->getUrl('admin') . $method . '/';
-			}
+		foreach ($this->getClassMethods('controller_admin') as $key => $method) {
+			$this->data['admin'][$key]['name'] = ucfirst($method);
+			$this->data['admin'][$key]['current'] = ($this->config->getUrl(1) == $method ? true : false);
+			$this->data['admin'][$key]['guid'] = $this->config->getUrl('admin') . $method . '/';
 		}
 		return;
     }	
 
 
+    /**
+     * frontend main menu
+     */
     public function division() {
     	$ttDivision = new Model_Ttdivision($this->database, $this->config);
     	$ttDivision->read();

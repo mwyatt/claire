@@ -116,9 +116,9 @@ class Session extends Config
 	 * expires any session variables which require timing, these are
 	 * set elsewhere
 	 */
-	public function refreshExpire() {		
+	public function refreshExpire() {
 		if ($this->get('user', 'expire') && $this->get('user', 'expire') < time()) {
-			$this->getUnset('user', 'expire');
+			$this->getUnset('user');
 		} else {
 			if ($this->get('user')) {
 				$this->set('user', 'expire', time() + 600);

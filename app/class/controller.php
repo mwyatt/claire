@@ -11,14 +11,15 @@
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
  
-class Controller
+class Controller extends Config
 {
 
 
+	/**
+	 * the core path for the controllers
+	 * @var string
+	 */
 	public $path = 'app/controller/';
-
-
-	public $session;
 
 
 	/**
@@ -37,19 +38,8 @@ class Controller
 
 
 	/**
-	 * database
-	 * @var object
+	 * prepends the constant
 	 */
-	public $database;
-
-
-	/**
-	 * config
-	 * @var object
-	 */
-	public $config;
-
-
 	public function __construct() {
 		$this->path = BASE_PATH . $this->path;
 	}
@@ -111,6 +101,7 @@ class Controller
 		}
 		$controllerName = rtrim($controllerName, '_');
 		$path = rtrim($path, '/') . '.php';
+		// echo $controllerName;
 		if (is_file($path)) {
 			$controller = new $controllerName();
 			$controller->load(false, false, $this->view, $this->database, $this->config);
@@ -133,6 +124,11 @@ class Controller
 	}
 
 
+	/**
+	 * handy for pulling ids from various urls, e.g. martin-wyatt-22
+	 * @param  string $segment url segment
+	 * @return string          the id
+	 */
 	protected function getId($segment) {
 		$segments = explode('-', $segment);
 		return end($segments);

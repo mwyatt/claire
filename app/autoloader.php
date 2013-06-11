@@ -21,7 +21,7 @@ class Autoloader {
 	public static function load($title) {
 		$title = strtolower($title);
 		$path = BASE_PATH . 'app' . '/' . 'class' . '/' . $title . '.php';
-						
+			// echo "$path<br>";			
 		if (is_file($path)) {
 			require_once($path);
 			return;
@@ -41,13 +41,13 @@ class Autoloader {
 			return;
 		}
 
-		echo '<h2>' . 'Class can\'t be found' . '<h2>';
-		echo '<pre>';
-		echo $title . '<br>';
-		print_r($path);
-		echo '</pre>';
+		// echo '<h2>' . 'Class can\'t be found' . '<h2>';
+		// echo '<pre>';
+		// echo $title . '<br>';
+		// print_r($path);
+		// echo '</pre>';
 
-		exit;
+		// exit;
 		
 	}
 	
