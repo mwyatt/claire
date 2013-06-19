@@ -25,13 +25,9 @@ $mainOption = new Model_Mainoption($database, $config);
 $mainOption->read();
 $config
 	->setOptions($mainOption->getData())
-	->setUrl();	
-$route = new Route();
-$route->setObject($config);
-$config
+	->setUrl()
 	->setObject($error)
-	->setObject($session)
-	->setObject($route);
+	->setObject($session);
 $controller = new Controller();
 // admin, ajax
 if ($controller->load(array($config->getUrl(0)), $config->getUrl(1), false, $database, $config)) {

@@ -132,7 +132,11 @@ class Config
 	 * use scheme + host + path implode for urlCurrent
 	 * returns $this
 	 */	
-	public function setUrl() {
+	public function setUrl($scheme = '', $key = '', $value = '') {
+		if ($scheme && $key) {
+			$this->url[$scheme][$key] = $value;
+			return $this;
+		}
 		if ($_SERVER) {
 			$url = 'http://' . $_SERVER['HTTP_HOST'] . str_replace('.', '', $_SERVER['REQUEST_URI']);
 			$url = strtolower($url);
