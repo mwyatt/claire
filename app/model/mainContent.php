@@ -205,11 +205,9 @@ class Model_Maincontent extends Model
 				and
 				main_content.type = 'page'
 		");
-
 		$sth->execute(array(
 			':title_slug' => $titleSlug
 		));	
-
 		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
 			if (! array_key_exists($row['id'], $this->data)) {
 				$this->data[$row['id']] = $row;
