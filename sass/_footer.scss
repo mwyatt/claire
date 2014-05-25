@@ -1,0 +1,113 @@
+.container-footer {
+
+    .propos-portrait {
+        width: 30%;
+    }
+
+    img {
+        width: 100%;
+    }
+
+    /* 
+@include sprite-sprite('bookstack');
+@include image-size('sprite/bookstack.png');
+display: block;
+margin: 0 auto;
+float: left;
+     */
+}
+
+.container-footer .propos {
+    margin: 0 0 1em;
+    padding: 0 0 0 36%;
+    position: relative;
+
+    .propos-title {}
+
+    .propos-description {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .propos-button.button.primary {}
+}
+
+@include breakpoint(900px) {
+
+    .container-footer {
+        border-top: 1px dotted $color-tertiary;
+        margin-top: 1.5em;
+        padding-top: 1.5em;
+        padding-bottom: 6em;
+    }
+
+    .container-footer-inner {
+        width: 800px;
+        margin: 0px auto;
+    }
+
+    .container-footer .menu-item {
+        margin-right: 1em;
+        font-weight: 600;
+        border-bottom: 1px solid;
+    }
+}
+
+@include breakpoint(0 899px) {
+
+    .container-footer {
+        padding: 1em;
+
+        .menu {
+            margin: 1em 0;
+            // border: 1px solid $color-primary;
+        }
+
+        .menu-item:first-child {
+            border: 0;
+        }
+
+        .menu-item {
+            display: block;
+            text-align: center;
+            padding: 0.5em;
+            background-color: $color-primary;
+            color: $color-white;
+            border-top: 1px solid $color-white;
+        }
+        
+        .menu-item:first-child {
+            border: 0;
+        }
+    }
+}
+
+.container-footer {
+
+    .calling-card {
+        margin: 1em 0;
+    }
+
+    .calling-card-portrait {
+        float: left;
+        margin-right: 1em;
+        margin-bottom: 1em;
+        width: 9em;
+        border-radius: 99em;
+        overflow: hidden;
+        height: 9em;
+    }
+
+    .calling-card-content-title {
+        font-size: 1.3em;
+    }
+
+    .calling-card-content-button.button.primary {
+        float: left;
+    }
+
+    .calling-card-content-description {
+        margin-bottom: 1em;
+    }
+}

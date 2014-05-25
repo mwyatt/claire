@@ -1,0 +1,15 @@
+.lightbox .media {
+    cursor: pointer;
+
+    &.is-selected {
+        -webkit-box-shadow: 0 0 3px $color-primary;
+    }
+}
+
+.lightbox.change-made .button.attach {
+	display: block;
+}
+
+.lightbox .button.attach {
+	display: none;
+}

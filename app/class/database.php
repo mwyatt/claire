@@ -13,59 +13,52 @@
 class Database
 {
 
-	public $dbh;
-	public static $credentials = array(
-		'host' => 'localhost',
-		'port' => '80',
-		'basename' => 'mvc_01',
-		'username' => 'root',
-		'password' => 'root'
-	);
 
-	public function __construct() {
+	public $dbh;
+
+	
+	public $credentials;
+
+
+	/**
+	 * connects to the database
+	 */
+	public function __construct($config) {
+		$this->credentials = $config->credentials;
+		
 		$this->connect();
 	}
 	
-	
+
+	/**
+	 * returns the static credentials
+	 * @return [type] [description]
+	 */
 	public function getCredentials() {
-	
-		return self::$credentials;
-		
+		return $this->credentials;
 	}
 	
 	
 	public function connect() {
-	
 		$credentials = $this->getCredentials();
-	
 		try {
-		
-			// Set Data Source Name
-			$dataSourceName = 'mysql:host='.$credentials['host']
-				.';dbname='.$credentials['basename'];
+
+			// set data source name
+			$dataSourceName = 'mysql:host=' . $credentials->host
+				 . ';dbname=' . $credentials->basename;
 			
-			// Connect
+			// connect
 			$this->dbh = new PDO(
 				$dataSourceName,
-				$credentials['username'],
-				$credentials['password']
+				$credentials->username,
+				$credentials->password
 			);	
 		
-			// Set Error Mode
+			// set error mode
 			$this->dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			
 		} catch (PDOException $error) {
-
 			echo '<h1>Unable to Connect to Database</h1>';
-			
 			exit;
-			
 		}	
-	
 	}
-	
-	public function getDbh() {
-		return $this->dbh;
-	}	
-	
 }

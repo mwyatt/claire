@@ -1,9 +1,13 @@
 <?php
 
 /**
- * Session
+ * session object creates a layer between the $_SESSION variable to
+ * help with management of it
  *
- * PHP version 5
+ * the session data is only modified when setting the data
+ * when getting data simply use getData
+ *
+ * how to set the data once you have finished with the class? desctuct?
  * 
  * @package	~unknown~
  * @author Martin Wyatt <martin.wyatt@gmail.com> 
@@ -11,129 +15,110 @@
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
 
-class Session extends Config
+class Session extends Cron
 {
 
 
-	public function start() {
-		session_start();
-		return $this;
+	/**
+	 * extends the normal constructor to set the session data
+	 */
+	public function __construct($system) {
+
+		// follow through to core constructor
+		parent::__construct($system);
+
+		// initial setup of session data only if it has a identity
+		// != 'session'
+		if ($this->getIdentity()) {
+			$this->initialiseData();
+		}
 	}
 
 
 	/**
-	 * master get function for interacting with $_SESSION
-	 * @param  string|array  $one      
-	 * @param  string $two   
-	 * @param  string $three 
-	 * @return array|string|int            
+	 * initialises the session data into the class data property
+	 * adds a empty session key array
 	 */
-	public function get($one = null, $two = null, $three = null) {	
-		if (is_array($one)) {
-			if (array_key_exists($two, $one)) {
-				return $one[$two];
-			}
-			return;
+	public function initialiseData()
+	{
+		if (! array_key_exists($this->getIdentity(), $_SESSION)) {
+			$_SESSION[$this->getIdentity()] = array();
 		}
-		if (array_key_exists($one, $_SESSION)) {
-			if (is_array($_SESSION[$one]) && array_key_exists($two, $_SESSION[$one])) {
-				if (is_array($_SESSION[$one][$two]) && array_key_exists($three, $_SESSION[$one][$two])) {
-					return $_SESSION[$one][$two][$three];
-				}
-				return $_SESSION[$one][$two];
-			}
-			return $_SESSION[$one];
+		$this->setData($_SESSION[$this->getIdentity()]);
+	}
+
+
+	/**
+	 * sets the session variable with information and updates
+	 * the data packet
+	 * @param string $key   
+	 * @param any $value 
+	 */
+	public function setDataKey($key, $value)
+	{
+		$_SESSION[$this->getIdentity()][$key] = $value;
+		return $this->setData($_SESSION[$this->getIdentity()]);
+	}
+
+
+	/**
+	 * excends getdata from parent
+	 * @param  string $key 
+	 * @return any      
+	 */
+	public function getData($key = '')
+	{	
+		if (! $key) {
+			return $this->data;
 		}
-		if (! $one && ! $two && ! $three) {
-			return $_SESSION;
+		if (array_key_exists($key, parent::getData())) {
+			return $this->data[$key];
 		}
-		return;
 	}	
 
 
-	/**
-	 * gets array or sub array, returns and destroys session data
-	 * @param  string  $key    
-	 * @param  boolean $subKey will be string when used
-	 * @return anything          
-	 */
-	public function getUnset($key, $subKey = false) {
-		if (array_key_exists($key, $_SESSION)) {
-			if (! $subKey) {
-				$value = $_SESSION[$key];
-				unset($_SESSION[$key]);
-				return $value;
-			}
-			if (array_key_exists($subKey, $_SESSION[$key])) {
-				$value = $_SESSION[$key][$subKey];
-				unset($_SESSION[$key][$subKey]);
-				return $value;
-			}
-		}
-		return false;
-	}
-
-
-	public function set($key, $keyTwo, $keyThree = false) {
-		if ($keyThree) {
-			$_SESSION[$key][$keyTwo] = $keyThree;
-			return true;
-		}
-		if ($_SESSION[$key] = $keyTwo)
-			return true;
-		else
-			return false;
-
-	}
-
-
-	public function setIncrement($key, $value) {
-		$_SESSION[$key][] = $value;
-		return $this;
-	}
-
-
-	public function getPreviousUrl($current) {
-		if (! array_key_exists('history', $_SESSION)) {
-			$_SESSION['history'][0] = $current;
-			$_SESSION['history'][1] = false;
-			return;
-		} else {
-			if ($_SESSION['history'][0]) {
-				$_SESSION['history'][1] = $_SESSION['history'][0];
-			}
-			$_SESSION['history'][0] = $current;
-			if ($_SESSION['history'][1]) {
-				return $_SESSION['history'][1];
-			} else {
-				return;
-			}
+	public function getDataKey($key)
+	{
+		if (array_key_exists($key, $_SESSION[$this->getIdentity()])) {
+			$data = $_SESSION[$key];
+			return $data;
 		}
 	}
 
 
 	/**
-	 * expires any session variables which require timing, these are
-	 * set elsewhere
+	 * sets all data assigned to session and the object
+	 * @param int|bool|array $value 
 	 */
-	public function refreshExpire() {
-		if ($this->get('user', 'expire') && $this->get('user', 'expire') < time()) {
-			$this->getUnset('user');
-		} else {
-			if ($this->get('user')) {
-				$this->set('user', 'expire', time() + 600);
-			}
-		}
-		if ($this->get('password_recovery', 'expire') && $this->get('password_recovery', 'expire') < time()) {
-			$this->getUnset('password_recovery');
-		}
-		return $this;
+	public function setData($value = false)
+	{	
+		$_SESSION[$this->getIdentity()] = $value;
+		return parent::setData($_SESSION[$this->getIdentity()]);
 	}
 
 
-	public function getData() {		
-		return $_SESSION = $_SESSION;
-	}	
+	/**
+	 * gets the array and unsets it
+	 * @param  string $key 
+	 * @return array      
+	 */
+	public function getUnset($key) {
+		if (array_key_exists($key, $_SESSION[$this->getIdentity()])) {
+			$data = $_SESSION[$key];
+			unset($_SESSION[$key]);
+			return $data;
+		}
+		return $data;
+	}
 
 
+	/**
+	 * just unsets the data
+	 * @param  boolean $key 
+	 */
+	public function delete($key = false) {
+		if (! $key) {
+			unset($_SESSION[$this->getIdentity()]);
+		}
+	}
 }

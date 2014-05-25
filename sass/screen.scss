@@ -1,0 +1,101 @@
+@import "global";
+@import "form";
+@import "header";
+    @import "header/menu";
+@import "home";
+@import "search";
+@import "content";
+@import "content/single";
+@import "content/tag";
+@import "medium";
+@import "month"; 
+@import "pagination";
+@import "footer";
+@import "404";
+@import "coming-soon";
+
+html {
+    // background: image-url("xv.png") repeat; 
+}
+
+body {
+    color: $color-text;
+    font-family: $font-family;
+}
+
+@include breakpoint(0 899px) {
+
+    .container-site {
+        margin-top: 4.1em;
+        padding: 1em;
+    }
+}
+
+@include breakpoint(800px) {
+
+    .container-site {
+        margin-top: 5.1em;
+        width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+
+.wrap-full-width {
+}
+
+.button {
+    @include button($color-primary);
+}
+
+.button-primary,
+.button.primary {
+    @include button($color-primary);
+}
+
+.button-secondary,
+.button.secondary {
+    @include button($color-secondary);
+}
+
+.button-tertiary,
+.button.tertiary {
+    @include button($color-tertiary);
+}
+
+.to-top {
+    @include transition(all 200ms ease);
+    position: fixed;
+    bottom: 1em;
+    z-index: 1;
+    fill: $color-primary;
+    right: -4em;
+    width: 2.5em;
+    height: 2.5em;
+    padding: 0.5em;
+    background-color: #fff;
+    @include border-radius(99em);
+    @include box-shadow(0 0 10px $color-gray-40);
+
+    &.is-active {
+        display: block;
+        right: 1em;
+    }
+}
+
+.core-h1 {
+    @include text-shadow(1px 1px $color-text);
+    text-align: center;
+    padding: 0.3em;
+    background-color: $color-primary;
+    color: $color-white;
+    border-bottom: 1px solid $color-secondary;
+    font-size: 1.4em;
+    margin-bottom: 1em;
+}
+
+.search-result-description {
+    @extend .h4;
+    margin-bottom: 1em;
+}

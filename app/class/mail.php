@@ -1,127 +1,122 @@
 <?php
 
 /**
- * Send Out Mail
- *
- * PHP version 5
- * 
  * @package	~unknown~
  * @author Martin Wyatt <martin.wyatt@gmail.com> 
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Mail extends View
+class Mail extends Config
 {
 
 
+	/**
+	 * mail headers stored here, processed at setHeaders
+	 * @var string
+	 */
 	public $headers;
 
 
-	public $toAddress;
+	/**
+	 * full address of the sender, should this come from the database?
+	 * @var string
+	 */
+	public $addressFrom = 'localhost@localhost.com';
 
 
-	public $fromAddress = 'localhost@localhost.com';
+	/**
+	 * validates the incoming properties array when sending mail
+	 * not really needed?
+	 * @var array
+	 */
+	public $requiredSendProperties = array(
+		'to' => '',
+		'subject' => '',
+		'template' => ''
+	);
 
 
-	public $subject;
+	/**
+	 * @var object
+	 */
+	public $view;
 
 
-	public $template;
+	/**
+	 * used to allow setting of the mail pallete to the parser
+	 * @param object $database 
+	 * @param object $config   
+	 * @param object $view     
+	 */
+	public function __construct($database, $config, $view) {
+
+		// system objects
+		parent::__construct($database, $config);
+		$this->view = $view;
+
+		// pallete
+		$mailPallete = new Mail_Pallete($this);
+		$mailPallete->setSassStyles();
+		$mailPallete->setStyles();
+		$this->view->setObject('styles', $mailPallete);
+	}
+
 
 	
-	public function getStyles() {
-		$style['container'] = ''
-			. 'padding: 10px;'
-			. 'width: 100%;'
-			. 'height: 100%;';
-		$style['body'] = ''
-			. 'margin: 0;'
-			. 'padding: 0;'
-			. 'background: #fff;'
-			. 'color: #000;'
-			. 'border: none;'
-			. 'font-family: arial, sans-serif;';
-		$style['a'] = ''
-			. 'color: #ff5512;'
-			. 'text-decoration: underline;';
-		$style['h1'] = ''
-			. 'font-size: 16px;'
-			. 'margin: 0 0 16px;'
-			. 'color: #333;';
-		$style['p'] = ''
-			. 'font-size: 16px;'
-			. 'margin: 0 0 16px;'
-			. 'color: #666;';
-		return $style;
+	/**
+	 * builds header string for mail function
+	 * @param object $properties 
+	 */
+	public function setHeaders($properties)
+	{
+		$headerSections = array(
+			'From: ' . $this->addressFrom,
+			'Reply-To: '. $this->addressFrom,
+			'MIME-Version: 1.0',
+			'Content-Type: text/html; charset=ISO-8859-1'
+		);
+		$this->headers = implode("\r\n", $headerSections);
 	}
 
 
 	/**
-	 * Sets Headers
-	 * @returns true on send mail success false on failure
-	 */	
-	public function setHeaders()
+	 * configures headers and sends mail out
+	 * @param  array  $properties see requiredSendProperties for rules
+	 * @return bool
+	 */
+	public function send($properties = array())
 	{
-		// $headers = 'From: ' . $this->fromAddress;
-		// $headers .= 'Reply-To: ' . $this->fromAddress . "\n";
-		// $headers .= 'X-Mailer: PHP/' . phpversion() . "\n";
-		// $headers .= 'MIME-Version: 1.0' . "\n";
-		// $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\n";
-		$headers = "From: " . $this->fromAddress;
-		$headers .= "Reply-To: ". $this->fromAddress . "\r\n";
-		$headers .= "MIME-Version: 1.0\r\n";
-		$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
-		$this->headers = $headers;
-		// echo '<pre>';
-		// print_r($this->headers);
-		// echo '</pre>';
-		// exit;
-		
-		return $this;
-	}
 
-	
-	public function getBasePath() {
-		return BASE_PATH . 'app/view/mail/';
-	}
+		// make more usable as object
+		$properties = $this->convertArrayToObject($properties);
 
+		// core headers for mail
+		$this->setHeaders($properties);
 
-	/**
-	 * Sends Mail
-	 * @returns true on send mail success false on failure
-	 */	
-	public function send($toAddress, $subject, $templateTitle, $data = false)
-	{
-		$session = new session();
-		$this->toAddress = $toAddress;
-		$this->subject = $subject;
-		$path = BASE_PATH . 'app/view/mail/' . strtolower($templateTitle) . '.php';
-		if (file_exists($path)) {
-			$data['style'] = $this->getStyles();
-			// parse template html
-			ob_start();	
-			require_once($path);
-			$this->template = ob_get_contents();
-			ob_end_clean();
+		// build html
+		$templateHtml = $this->view->getTemplate($properties->template);
+
+		// debug
+		if ($this->isDebug($this)) {
+			echo '<pre>';
+			print_r($templateHtml);
+			echo '</pre>';
+			exit;
 		}
-		$this->setHeaders();
-		if ($this->toAddress && $this->fromAddress && $this->subject && $this->template) {
-			// test output as plaintext
-			// header("Content-Type: text/plain");
-			// echo $this->template;
-			// exit;
-			return mail(
-				$this->toAddress
-				, $this->subject
-				, $this->template
-				, $this->headers
-			);
-			// echo 'Mail Successfully Sent to '.$this->toAddress;
-		} else {
-			// echo 'Failed to Send Mail';
-			return false;
+
+		// send it!
+		if (mail($properties->to, $properties->subject, $templateHtml, $this->headers)) {
+
+			// create database entry
+			$mold = new Mold_Mail();
+			$mold->addressed_to = $properties->to;
+			$mold->addressed_from = $this->addressFrom;
+			$mold->subject = $properties->subject;
+			$mold->content = $templateHtml;
+			$mold->time = time();
+			$model = new Model_Mail($this);
+			$model->create(array($mold));
+			return true;
 		}
 	}
-
-
 }
