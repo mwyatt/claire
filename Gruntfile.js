@@ -31,11 +31,10 @@ module.exports = function(grunt) {
     compass: {
       dist: {
         options: {
-          // httpPath = '/claireruth/',
           httpPath: '/',
           require: 'breakpoint',
           cssDir: 'asset',
-          sassDir: 'sass',
+          sassDir: 'sass/<%= config.site %>',
           javascriptsDir: 'js',
           imagesDir: 'media',
           relativeAssets: true
@@ -58,7 +57,7 @@ module.exports = function(grunt) {
     watch: {
       js: {
         files: [
-          'js/site/<%= config.site %>/*.js',
+          'js/<%= config.site %>/*.js',
           'js/vendor/*.js',
           'js/global/*.js',
           'js/*.js'

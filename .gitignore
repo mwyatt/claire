@@ -5,3 +5,4 @@ thumb/cache/
 .sass-cache/
 error.txt
 Guardfile
+asset/
