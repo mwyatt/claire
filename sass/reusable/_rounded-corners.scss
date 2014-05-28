@@ -1,6 +1,0 @@
-.rounded-corners {
-
-    @if $site == 'avo' {
-        @include border-radius(3px);
-    }
-}

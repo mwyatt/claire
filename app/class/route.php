@@ -110,7 +110,7 @@ class Route extends System
 
 		// does the class exist?
 		if (! class_exists($this->getCurrent())) {
-			exit('class ' . $this->getCurrent() . ' does not exist in the routing map');
+			exit('class ' . $this->getCurrent() . ' does not exist in the controller folder');
 		}
 
 		// boot class
@@ -142,7 +142,7 @@ class Route extends System
 	public function loadMap()
 	{
 		$json = new Json();
-		$json->read('route-' . $this->config->data->site /*better way to do that?*/);
+		$json->read($this->config->data->site . US . 'route');
 		$this->setMap($json->getData());
 	}
 

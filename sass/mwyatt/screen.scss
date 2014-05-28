@@ -1,0 +1,59 @@
+
+// app
+@import "compass/reset";
+@import "compass/css3";
+@import "compass/utilities/sprites";
+@import "sprite/*.png";        
+@import "breakpoint";
+@import "config";
+@import "pallete";
+@import "mixin";
+@import "form";
+@import "vendor/font";
+@import "typography";
+@import "reusable";
+@import "vendor/lemonade";
+@import "vendor/animate";
+
+// project
+// @import "header";
+// @import "footer";
+// @import "404";
+
+body {
+    line-height: 1.5;
+    color: $color-text;
+    font-family: $font-family;
+}
+
+html {
+    // background: image-url("xv.png") repeat; 
+}
+
+@include breakpoint(0 899px) {
+
+    .container-site {
+        margin-top: 4.1em;
+        padding: 1em;
+    }
+}
+
+.to-top {
+    @include transition(all 200ms ease);
+    position: fixed;
+    bottom: 1em;
+    z-index: 1;
+    fill: $color-primary;
+    right: -4em;
+    width: 2.5em;
+    height: 2.5em;
+    padding: 0.5em;
+    background-color: #fff;
+    @include border-radius(99em);
+    @include box-shadow(0 0 10px $color-gray-40);
+
+    &.is-active {
+        display: block;
+        right: 1em;
+    }
+}

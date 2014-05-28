@@ -1,0 +1,56 @@
+/**
+ * placeholder
+ */
+::-webkit-input-placeholder {
+   color: $color-gray-30; 
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: $color-gray-30;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: $color-gray-30;  
+} 
+ 
+:-ms-input-placeholder {  
+   color: $color-gray-30;  
+}
+
+input[type="submit"] {
+    position: absolute;
+    left: -999em;
+    width: 1px;
+    height: 1px;
+}
+
+input {
+    font-size: 1em;
+}
+
+input,
+input[type="password"],
+textarea {
+    @include transition(border-color 300ms); 
+    color: $color-text;
+    font-family: $font-family;
+    border: 1px solid $color-gray-30;
+    color: $color-text;
+    padding: 0.4em 0.5em 0.3em;
+    margin: 0;
+
+    &:focus {
+        @include box-shadow(0 0 3px $color-gray-20);
+        border-color: $color-gray-30;
+        color: $color-text;
+    }
+}
+
+.row.invalid input {
+    border-color: $color-tertiary;
+}
+
+.row.invalid label {
+    color: $color-tertiary;
+    font-weight: bold;
+}

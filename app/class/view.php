@@ -199,9 +199,9 @@ class View extends Model
 	 * @return string 
 	 */
 	public function pathView($template = '') { 
-		$path = BASE_PATH . 'app/view/';
+		$path = PATH_APP . 'view' . US . $this->config->data->site . US;
 		if ($template) {
-			$path .= $template . '.php';
+			$path .= $template . EXT;
 		}
 		return $path;
 	}
@@ -215,6 +215,16 @@ class View extends Model
 	public function getPath($append) { 
 		$path = BASE_PATH;
 		return $path . $append;
+	}
+
+
+	/**
+	 * grabs base path for the view folder, used for headers, footers
+	 * and all includes within the view templates
+	 * @return string 
+	 */
+	public function getPathMedia($append) {
+		return BASE_PATH . 'media' . US . $this->config->data->site . US . $append;
 	}
 
 
