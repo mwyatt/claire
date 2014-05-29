@@ -1,28 +1,25 @@
 module.exports = function(grunt) {
   grunt.registerTask('default', ['watch']);
   grunt.initConfig({
-    config: grunt.file.readJSON('app/json/config.json'),
+    // config: grunt.file.readJSON('app/json/config.json'),
+    site: 'mwyatt',
     concat: {
 	    js: {
         options: {
           separator: ';'
         },
         src: [
-          'js/site/<%= config.site %>/*.js',
-          'js/vendor/*.js',
-          'js/global/*.js',
-          'js/*.js'
+          'js/<%= site %>/vendor/*.js',
+          'js/<%= site %>/*.js',
+          'js/<%= site %>/global/*.js'
         ],
         dest: 'asset/main.js'
       },
-	    js_admin: {
+      js_admin: {
         options: {
           separator: ';'
         },
         src: [
-          'js/vendor/*.js',
-          'js/global/*.js',
-          'js/admin/vendor/*.js',
           'js/admin/*.js'
         ],
         dest: 'asset/admin/main.js'
@@ -34,7 +31,7 @@ module.exports = function(grunt) {
           httpPath: '/',
           require: 'breakpoint',
           cssDir: 'asset',
-          sassDir: 'sass/<%= config.site %>',
+          sassDir: 'sass/<%= site %>',
           javascriptsDir: 'js',
           imagesDir: 'media',
           relativeAssets: true
@@ -57,10 +54,7 @@ module.exports = function(grunt) {
     watch: {
       js: {
         files: [
-          'js/<%= config.site %>/*.js',
-          'js/vendor/*.js',
-          'js/global/*.js',
-          'js/*.js'
+          'js/<%= site %>/*.js'
         ],
         tasks: ['concat:js'],
         options: {
@@ -69,8 +63,8 @@ module.exports = function(grunt) {
       },
       js_admin: {
         files: [
-          'js/vendor/*.js',
-          'js/global/*.js',
+          'js/<%= site %>/vendor/*.js',
+          'js/<%= site %>/global/*.js',
           'js/admin/vendor/*.js',
           'js/admin/*.js'
         ],

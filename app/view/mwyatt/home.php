@@ -2,9 +2,24 @@
 
 <div class="content home">
 
-<?php //include($this->pathView('_contents')) ?>
+<?php if ($skills): ?>
 
-	<!-- <a href="<?php echo $this->url() ?>post/" class="button primary home-all-posts">View More Posts</a> -->
+	<div class="panel skills">
+
+	<?php foreach ($skills as $skill): ?>
+
+		<div class="skill">
+
+		<?php echo $skill->name ?>
+
+		</div>
+
+	<?php endforeach ?>
+
+	</div>
+
+<?php endif ?>
+
 </div>
 
 <?php include($this->pathView('_footer')) ?>

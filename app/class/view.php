@@ -199,7 +199,7 @@ class View extends Model
 	 * @return string 
 	 */
 	public function pathView($template = '') { 
-		$path = PATH_APP . 'view' . US . $this->config->data->site . US;
+		$path = PATH_APP . 'view' . US . SITE . US;
 		if ($template) {
 			$path .= $template . EXT;
 		}
@@ -224,7 +224,7 @@ class View extends Model
 	 * @return string 
 	 */
 	public function getPathMedia($append) {
-		return BASE_PATH . 'media' . US . $this->config->data->site . US . $append;
+		return BASE_PATH . 'media' . US . SITE . US . $append;
 	}
 
 
@@ -243,7 +243,7 @@ class View extends Model
 	 * @param  string $key 
 	 * @return string      
 	 */
-	public function url($key = 'base') {
+	public function getUrl($key = 'base') {
 		return $this->url->getCache($key);
 	}
 	

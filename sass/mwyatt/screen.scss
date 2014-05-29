@@ -2,8 +2,8 @@
 // app
 @import "compass/reset";
 @import "compass/css3";
-@import "compass/utilities/sprites";
-@import "sprite/*.png";        
+// @import "compass/utilities/sprites";
+// @import "sprite/*.png";        
 @import "breakpoint";
 @import "config";
 @import "pallete";
@@ -14,6 +14,7 @@
 @import "reusable";
 @import "vendor/lemonade";
 @import "vendor/animate";
+@import "vendor/mmenu/core";
 
 // project
 // @import "header";
@@ -24,19 +25,20 @@ body {
     line-height: 1.5;
     color: $color-text;
     font-family: $font-family;
+    background-color: rgb(138, 115, 199);
 }
 
 html {
     // background: image-url("xv.png") repeat; 
 }
 
-@include breakpoint(0 899px) {
+// @include breakpoint(0 899px) {
 
-    .container-site {
-        margin-top: 4.1em;
-        padding: 1em;
-    }
-}
+//     .container-site {
+//         margin-top: 4.1em;
+//         padding: 1em;
+//     }
+// }
 
 .to-top {
     @include transition(all 200ms ease);
@@ -56,4 +58,48 @@ html {
         display: block;
         right: 1em;
     }
+}
+
+.container-header {
+    
+}
+
+.logo {
+    @extend .animated;
+    @extend .bounceIn;
+    display: block;
+    width: 7em;
+    fill: white;
+    // fill: #444;
+    margin-right: auto;
+}
+
+svg {
+    width: 100%;
+    height: 100%;
+}
+
+.site-wrap {
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.header-button-mobile-menu {
+    display: block;
+    width: 1em;
+}
+
+.skill {
+    @extend .animated;
+    @extend .bounceIn;
+    float: left;
+    width: 31%;
+    padding: 1%;
+    margin: 1%;
+    background: #eee;
+    height: 6em;
+    text-align: center;
+    border-radius: 5px;
 }

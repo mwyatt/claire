@@ -104,11 +104,4 @@ class Config extends Data
 
 		return $this;
 	}
-
-
-	public function getDataSite()
-	{
-		$data = $this->getData();
-		return $data->site;
-	}
 }

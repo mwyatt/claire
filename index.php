@@ -12,6 +12,12 @@
 /**
  * directory seperator
  */
+define('SITE', 'mwyatt');
+
+
+/**
+ * directory seperator
+ */
 define('DS', DIRECTORY_SEPARATOR);
 
 
@@ -76,12 +82,6 @@ spl_autoload_register(array('Autoloader', 'call'));
 $json = new Json();
 $json->read('config');
 $configRaw = $json->getData();
-
-
-/**
- * model core dir
- */
-define('SITE', $configRaw->site);
 
 
 /**

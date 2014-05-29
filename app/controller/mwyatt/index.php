@@ -58,26 +58,15 @@ class Controller_Index extends Controller
 			$this->view->setObject('contents', $modelContent->getData());
 			$cache->create($modelContent->getData());
 		}
+		$this->loadSkills();
 		$this->view->getTemplate('home');
 	}
 
 
-	public function sitemapxml() {
-		header('Content-Type: application/xml');
-		$content = new model_content($this);
-		$player = new model_ttplayer($this);
-		$team = new model_ttteam($this);
-		$fixture = new model_ttfixture($this);
-		$division = new model_ttdivision($this);
-		$this->view
-			->setObject('model_ttfixture', $fixture->readFilled()->getData())
-			->setObject('model_ttdivision', $division->read()->getData())
-			->setObject('model_ttteam', $team->read()->getData())
-			->setObject('model_ttplayer', $player->read()->getData())
-			->setObject('model_content_cup', $content->readByType('cup')->getData())
-			->setObject('model_content_minutes', $content->readByType('minutes')->getData())
-			->setObject('model_content_page', $content->readByType('page')->getData())
-			->setObject('model_content_press', $content->readByType('press')->getData())
-			->loadJustTemplate('sitemap');
+	public function loadSkills()
+	{
+		$json = new Json($this);
+		$json->read('skills');
+		$this->view->setObject('skills', $json->getData());
 	}
 }

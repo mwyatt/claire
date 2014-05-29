@@ -10,10 +10,10 @@
 	<meta name="keywords" content="<?php echo $this->getMeta('keywords') ?>">
 	<meta name="description" content="<?php echo $this->getMeta('description') ?>">
 	<meta name="viewport" content="width=device-width">
-	<link href="<?php echo $this->url() ?>asset/admin/screen.css?v=1" media="screen, projection" rel="stylesheet" type="text/css" />
-	<script src="<?php echo $this->url() ?>js/exclude/modernizr.js"></script>
+	<link href="<?php echo $this->getUrl() ?>asset/admin/screen.css?v=1" media="screen, projection" rel="stylesheet" type="text/css" />
+	<script src="<?php echo $this->getUrl() ?>js/exclude/modernizr.js"></script>
 </head>
-<body<?php echo ($this->getBodyClass() ? ' class="' . $this->getBodyClass() . '"' : '') ?> data-url-base="<?php echo $this->url() ?>">
+<body<?php echo ($this->getBodyClass() ? ' class="' . $this->getBodyClass() . '"' : '') ?> data-url-base="<?php echo $this->getUrl() ?>">
 	<!--[if lt IE 7]>
 	    <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
 	<![endif]-->
@@ -25,7 +25,7 @@
     <header class="main clearfix js-header-main">
     	<div class="wrap-full-width">
 	    	<div class="inner-title-nav-user clearfix">
-		        <a class="header-site-title" href="<?php echo $this->url() ?>" target="_blank" title="Open Homepage"><?php echo $this->getOption('site_title') ?></a>
+		        <a class="header-site-title" href="<?php echo $this->getUrl() ?>" target="_blank" title="Open Homepage"><?php echo $this->getOption('site_title') ?></a>
 
 	<?php require_once($this->pathView('admin/header/_user')) ?>
 	<?php require_once($this->pathView('admin/header/_nav')) ?>

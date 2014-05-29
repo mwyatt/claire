@@ -1,11 +1,72 @@
 [
 	{
+		"name": "git",
+		"symbol": ".svg",
+	},
+	{
 		"name": "sass"
 	},
 	{
 		"name": "less"
 	},
 	{
-		"name": "git"
+		"name": "html"
 	},
+	{
+		"name": "css"
+	},
+	{
+		"name": "sql"
+	},
+	{
+		"name": "database design"
+	},
+	{
+		"name": "php"
+	},
+	{
+		"name": "pdo"
+	},
+	{
+		"name": "mysqli"
+	},
+	{
+		"name": "js"
+	},
+	{
+		"name": "jquery"
+	},
+	{
+		"name": "google analytics"
+	},
+	{
+		"name": "event analytics"
+	},
+	{
+		"name": "grunt task running"
+	},
+	{
+		"name": "ux / ui design"
+	},
+	{
+		"name": "email design"
+	},
+	{
+		"name": "php - object oriented design"
+	},
+	{
+		"name": "mvc pattern"
+	},
+	{
+		"name": "build dynamic classes"
+	},
+	{
+		"name": "photoshop"
+	},
+	{
+		"name": "illustrator"
+	},
+	{
+		"name": "ecommerce"
+	}
 ]

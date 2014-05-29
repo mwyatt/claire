@@ -41,7 +41,7 @@ class Json extends Data
 	 * @return string      
 	 */
 	public function getPath($key) {
-		return BASE_PATH . ($this->getUsePath() ? $this->path : '') . $key . $this->extension;
+		return BASE_PATH . ($this->getUsePath() ? $this->path : '') . SITE . US . $key . $this->extension;
 	}
 
 

@@ -142,7 +142,7 @@ class Route extends System
 	public function loadMap()
 	{
 		$json = new Json();
-		$json->read($this->config->data->site . US . 'route');
+		$json->read('route');
 		$this->setMap($json->getData());
 	}
 
