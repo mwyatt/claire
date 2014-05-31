@@ -59,6 +59,7 @@ class Controller_Index extends Controller
 			$cache->create($modelContent->getData());
 		}
 		$this->loadSkills();
+		$this->loadProjects();
 		$this->view->getTemplate('home');
 	}
 
@@ -68,5 +69,13 @@ class Controller_Index extends Controller
 		$json = new Json($this);
 		$json->read('skills');
 		$this->view->setObject('skills', $json->getData());
+	}
+
+
+	public function loadProjects()
+	{
+		$json = new Json($this);
+		$json->read('projects');
+		$this->view->setObject('projects', $json->getData());
 	}
 }

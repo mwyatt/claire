@@ -25,7 +25,7 @@ body {
     line-height: 1.5;
     color: $color-text;
     font-family: $font-family;
-    background-color: rgb(138, 115, 199);
+    background-color: $color-gray-10;
 }
 
 html {
@@ -50,7 +50,7 @@ html {
     width: 2.5em;
     height: 2.5em;
     padding: 0.5em;
-    background-color: #fff;
+    background-color: $color-white;
     @include border-radius(99em);
     @include box-shadow(0 0 10px $color-gray-40);
 
@@ -65,13 +65,16 @@ html {
 }
 
 .logo {
-    @extend .animated;
-    @extend .bounceIn;
+    @include transition(200ms ease);
     display: block;
     width: 7em;
-    fill: white;
+    fill: $color-gray-50;
     // fill: #444;
     margin-right: auto;
+
+    &:hover {
+        @include transform(scale(1.1));
+    }
 }
 
 svg {
@@ -80,20 +83,30 @@ svg {
 }
 
 .site-wrap {
+    @extend .clearfix;
     margin-left: 5%;
     margin-right: 5%;
     margin-top: 5%;
     margin-bottom: 5%;
 }
+@include breakpoint(1000px) {
+    .site-wrap {
+        margin-left: 20%;
+        margin-right: 20%;
+    }
+}
 
 .header-button-mobile-menu {
     display: block;
-    width: 1em;
+    float: right;
+    width: 3em;
+    fill: $color-gray-50;
+    height: 3em;
 }
 
 .skill {
-    @extend .animated;
-    @extend .bounceIn;
+    // @extend .animated;
+    // @extend .bounceIn;
     float: left;
     width: 31%;
     padding: 1%;
@@ -102,4 +115,101 @@ svg {
     height: 6em;
     text-align: center;
     border-radius: 5px;
+}
+
+.project {
+    @extend .clearfix;
+    // background-color: $color-gray-50;
+    height: 9em;
+    margin: 4% 0;
+    border-radius: 5px;
+    padding: 4%;
+    color: $color-white;
+    position: relative;
+
+    &:hover .project-button-more {
+        border-bottom-color: $color-white;
+    }
+
+    svg {
+        fill: $color-white;
+    }
+}
+.project-name,
+.project-url,
+.project-description,
+.project-display {
+    display: none;
+}
+// .project-url a {
+//     color: $color-white;
+//     border-bottom: 1px solid $color-white;
+// }
+.project-button-more {
+    float: right;
+}
+.is-claire {
+    background-color: $color-claire;
+}
+.is-elttl {
+    background-color: $color-elttl;
+
+    svg {
+        width: 74%;
+    }
+}
+.is-spectral {
+    background-color: $color-spectral;
+}
+.is-avo {
+    background-color: $color-avo;
+}
+.project-logo {
+    text-align: center;
+    margin: 9%;
+}
+.heading-home {
+    text-align: center;
+    margin: 5% 0;
+    font-size: 1.5em;
+    font-weight: 400;
+    padding: 1% 0;
+    // border-top: 1px solid #ccc;
+    // border-bottom: 1px solid #ccc;
+    // background-color: #eee;
+}
+.about-me {
+    line-height: 1.7;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 4%;
+    margin-bottom: 4%;
+}
+
+@include breakpoint(550px) {
+    .project {
+        float: left;
+        width: 46%;
+        margin: 2%;
+    }
+    .projects {
+        margin: 3% 0;
+    }
+}
+.svg-elttl-county {
+    @include opacity(.2);
+}
+.project-button-more {
+    position: absolute;
+    bottom: 8%;
+    right: 5%;
+    color: #F1F1F1;
+    font-weight: 100;
+    font-size: 1em;
+    border-bottom: 1px solid transparent;
+    transition: 200ms ease;
+
+    &:hover {
+        color: $color-white;
+    }
 }

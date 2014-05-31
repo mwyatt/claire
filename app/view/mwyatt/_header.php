@@ -22,12 +22,12 @@
 <div id="top"></div>
 <div class="site-wrap">
     <header class="container-header js-container-header">
+        <a href="#my-menu" class="js-smooth-scroll header-button-mobile header-button-mobile-menu js-header-button-mobile-menu"><?php include($this->getPathMedia('menu.svg')) ?></a>
         <a href="echo" class="logo">
             
 <?php include($this->getPathMedia('logo.rev1.svg')) ?>
             
         </a>
-        <a href="#my-menu">Open the menu</a>
         <nav id="my-menu">
            <ul>
               <li><a href="/">Home</a></li>
@@ -42,7 +42,6 @@
               <li><a href="/contact/">Contact</a></li>
            </ul>
         </nav>
-        <a href="#menu" class="js-smooth-scroll header-button-mobile header-button-mobile-menu js-header-button-mobile-menu"><?php include($this->getPathMedia('menu.svg')) ?></a>
 
         <?php $menu = $mainMenu; ?>
         <?php //include($this->pathView('_menu')) ?>

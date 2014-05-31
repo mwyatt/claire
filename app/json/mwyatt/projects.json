@@ -1,9 +1,56 @@
 [
 	{
 		"name": "AudioVisual Online",
-		"logo": ".svg",
+		"logo": "avo",
+		"time": "",
 		"url": "http://www.audiovisualonline.co.uk/",
-		"skills_used": "http://www.audiovisualonline.co.uk/",
-		"html": "html structure to display a cool layout about the design"
+		"skills": [
+			{
+				"name": "photoshop"
+			}
+		],
+		"description": "The philosophy at Audiovisual Online has always been to provide peerless customer service, an enjoyable shopping experience (be it online or in-store) and above all else dependable technical support.",
+		"display": "html structure to display a cool layout about the design"
 	},
+	{
+		"name": "East Lancashire Table Tennis League",
+		"logo": "elttl",
+		"time": "",
+		"url": "http://eastlancstt.org.uk/",
+		"skills": [
+			{
+				"name": "photoshop",
+				"name": "Responsive"
+			}
+		],
+		"description": "",
+		"display": "html structure to display a cool layout about the design"
+	},
+	{
+		"name": "Claire's Blog",
+		"logo": "claire",
+		"time": "",
+		"url": "http://claireruth.com/",
+		"skills": [
+			{
+				"name": "photoshop",
+				"name": "Responsive"
+			}
+		],
+		"description": "Created for my girlfriend Claire after she decided to migrate over from tumblr. Took me a while to get this off the ground but I think she is happy with it.",
+		"display": "html structure to display a cool layout about the design"
+	},
+	{
+		"name": "Simply Spectral",
+		"logo": "spectral",
+		"time": "",
+		"url": "http://www.simplyspectral.co.uk/",
+		"skills": [
+			{
+				"name": "photoshop"
+			}
+		],
+		"description": "As a premier retailer and supercentre for Spectral Furniture in the UK we can offer you the best advice when looking for a TV furniture solution. At our Lancashire showroom we have most Spectral ranges on display. We are authorised retailers supplied by Spectral GB.",
+		"display": "html structure to display a cool layout about the design"
+	}
 ]
