@@ -23,7 +23,7 @@
 <div class="site-wrap">
     <header class="container-header js-container-header">
         <a href="#my-menu" class="js-smooth-scroll header-button-mobile header-button-mobile-menu js-header-button-mobile-menu"><?php include($this->getPathMedia('menu.svg')) ?></a>
-        <a href="echo" class="logo">
+        <a href="<?php echo $this->getUrl() ?>" class="logo">
             
 <?php include($this->getPathMedia('logo.rev1.svg')) ?>
             

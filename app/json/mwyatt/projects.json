@@ -1,6 +1,7 @@
 [
 	{
 		"name": "AudioVisual Online",
+		"slug": "avo",
 		"logo": "avo",
 		"time": "",
 		"url": "http://www.audiovisualonline.co.uk/",
@@ -14,6 +15,7 @@
 	},
 	{
 		"name": "East Lancashire Table Tennis League",
+		"slug": "elttl",
 		"logo": "elttl",
 		"time": "",
 		"url": "http://eastlancstt.org.uk/",
@@ -28,6 +30,7 @@
 	},
 	{
 		"name": "Claire's Blog",
+		"slug": "claire",
 		"logo": "claire",
 		"time": "",
 		"url": "http://claireruth.com/",
@@ -42,6 +45,7 @@
 	},
 	{
 		"name": "Simply Spectral",
+		"slug": "spectral",
 		"logo": "spectral",
 		"time": "",
 		"url": "http://www.simplyspectral.co.uk/",

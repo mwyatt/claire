@@ -2,8 +2,6 @@
 // app
 @import "compass/reset";
 @import "compass/css3";
-// @import "compass/utilities/sprites";
-// @import "sprite/*.png";        
 @import "breakpoint";
 @import "config";
 @import "pallete";
@@ -15,6 +13,7 @@
 @import "vendor/lemonade";
 @import "vendor/animate";
 @import "vendor/mmenu/core";
+@import "project-all";
 
 // project
 // @import "header";
@@ -103,7 +102,9 @@ svg {
     fill: $color-gray-50;
     height: 3em;
 }
-
+.skills {
+    @extend .clearfix;
+}
 .skill {
     // @extend .animated;
     // @extend .bounceIn;
@@ -117,57 +118,7 @@ svg {
     border-radius: 5px;
 }
 
-.project {
-    @extend .clearfix;
-    // background-color: $color-gray-50;
-    height: 9em;
-    margin: 4% 0;
-    border-radius: 5px;
-    padding: 4%;
-    color: $color-white;
-    position: relative;
 
-    &:hover .project-button-more {
-        border-bottom-color: $color-white;
-    }
-
-    svg {
-        fill: $color-white;
-    }
-}
-.project-name,
-.project-url,
-.project-description,
-.project-display {
-    display: none;
-}
-// .project-url a {
-//     color: $color-white;
-//     border-bottom: 1px solid $color-white;
-// }
-.project-button-more {
-    float: right;
-}
-.is-claire {
-    background-color: $color-claire;
-}
-.is-elttl {
-    background-color: $color-elttl;
-
-    svg {
-        width: 74%;
-    }
-}
-.is-spectral {
-    background-color: $color-spectral;
-}
-.is-avo {
-    background-color: $color-avo;
-}
-.project-logo {
-    text-align: center;
-    margin: 9%;
-}
 .heading-home {
     text-align: center;
     margin: 5% 0;
@@ -185,31 +136,7 @@ svg {
     margin-top: 4%;
     margin-bottom: 4%;
 }
-
-@include breakpoint(550px) {
-    .project {
-        float: left;
-        width: 46%;
-        margin: 2%;
-    }
-    .projects {
-        margin: 3% 0;
-    }
-}
-.svg-elttl-county {
-    @include opacity(.2);
-}
-.project-button-more {
-    position: absolute;
-    bottom: 8%;
-    right: 5%;
-    color: #F1F1F1;
-    font-weight: 100;
-    font-size: 1em;
-    border-bottom: 1px solid transparent;
-    transition: 200ms ease;
-
-    &:hover {
-        color: $color-white;
-    }
+.container-footer {
+    @extend .clearfix;
+    border-top: 1px dotted #ccc;
 }
