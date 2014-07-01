@@ -4,7 +4,6 @@
  * handles form validation, can be used through ajax which will pass
  * a json object, otherwise an array is returned and passed to the view
  * various functions
- * @package	~unknown~
  * @author Martin Wyatt <martin.wyatt@gmail.com> 
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01

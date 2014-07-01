@@ -1,12 +1,10 @@
 <?php
 
 /**
- * @package	~unknown~
  * @author Martin Wyatt <martin.wyatt@gmail.com> 
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-
 class Test extends Config
 {
 
@@ -156,5 +154,15 @@ exit;
 		$modelContent->update(
 			array('status' => 'visible')
 		);
+	}
+
+
+	public function microTime()
+	{
+		$start = microtime(true);
+		while (...) {
+
+		}
+		$time_elapsed_us = microtime(true) - $start;
 	}
 }
