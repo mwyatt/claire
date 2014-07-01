@@ -3,7 +3,6 @@
 /**
  * boilerplate for all objects in the app. responsible for how each object
  * should be implemented
- * @package	~unknown~
  * @author Martin Wyatt <martin.wyatt@gmail.com> 
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
