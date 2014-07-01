@@ -2,20 +2,6 @@
     display: block;
 }
 
-.ir {
-    background-color: transparent;
-    border: 0;
-    overflow: hidden;
-    *text-indent: -9999px;
-}
-
-.ir:before {
-    content: "";
-    display: block;
-    width: 0;
-    height: 150%;
-}
-
 .hidden {
     display: none !important;
     visibility: hidden;
@@ -102,7 +88,7 @@
 label.top {
     display: block;
     margin: 0 0 0.8em;
-    font-weight: bold;
+    font-weight: 600;
 }
 
 // arggg dont like this
@@ -118,26 +104,11 @@ label.top {
 }
 
 .is-highlighted {
-    font-weight: bold;
+    font-weight: 600;
 }
 
 .is-fixed {
     position: fixed;
-}
-
-
-table.basic {
-    margin: 1em 0;
-
-    th {
-        font-weight: bold;
-    }
-
-    th,
-    td {
-        padding: 0.5em;
-        border: 1px solid $color-secondary;
-    }
 }
 
 .text-ellipsis {
@@ -150,10 +121,6 @@ table.basic {
     border: 0;
 }
 
-
-/**
- * introduced for inputs
- */
 .w100 {
     width: 100%;
 }
@@ -168,4 +135,57 @@ table.basic {
 
 .position-fixed {
     position: fixed;
+}
+
+.clearfix:before,
+.clearfix:after {
+    content: " "; 
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.clearfix {
+    *zoom: 1;
+}
+
+.page-break {
+    display: block;
+    page-break-after: always;
+    page-break-inside: avoid;
+}
+
+.color-primary {
+    color: $color-primary;
+}
+
+.color-secondary {
+    color: $color-secondary;
+}
+
+.color-tertiary {
+    color: $color-tertiary;
+}
+
+.table-basic {
+    @extend .block-margins;
+    width: 100%;
+
+    th {
+        font-weight: 600;
+        text-align: left;
+        background-color: $color-gray-5;
+    }
+
+    th,
+    td {
+        padding: 0.5em;
+        border: 1px solid $color-secondary;
+    }
+}
+
+.do-print {
+    @extend .hide;
 }

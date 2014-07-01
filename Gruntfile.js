@@ -1,88 +1,105 @@
+/**
+ * tasks
+ */
 module.exports = function(grunt) {
-  grunt.registerTask('default', ['watch']);
+
+  // dep
+  grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-sass');
+
+  // task
+  grunt.registerTask('default', ['watch:local']);
+  grunt.registerTask('watch-local', ['watch:local']);
+  grunt.registerTask('watch-remote', ['watch:remote']);
+
+  // config
   grunt.initConfig({
-    // config: grunt.file.readJSON('app/json/config.json'),
-    site: 'mwyatt',
-    concat: {
-	    js: {
+    pkg: grunt.file.readJSON('package.json'),
+    sass: {
+      local: {
+        files: [{
+          expand: true,
+          cwd: 'sass/<%= pkg.name %>/',
+          src: ['*.scss'],
+          dest: 'asset/',
+          ext: '.css'
+        }],
         options: {
-          separator: ';'
-        },
-        src: [
-          'js/<%= site %>/vendor/*.js',
-          'js/<%= site %>/*.js',
-          'js/<%= site %>/global/*.js'
-        ],
-        dest: 'asset/main.js'
+        	loadPath: 'sass/',
+          sourceComments: 'normal',
+          outputStyle: 'nested'
+        }
       },
-      js_admin: {
+      remote: {
+        files: [{
+          expand: true,
+          cwd: 'sass/<%= pkg.name %>/',
+          src: ['*.scss'],
+          dest: 'asset/',
+          ext: '.css'
+        }],
         options: {
-          separator: ';'
-        },
-        src: [
-          'js/admin/*.js'
-        ],
-        dest: 'asset/admin/main.js'
-      },
-    },
-    compass: {
-      dist: {
-        options: {
-          httpPath: '/',
-          require: 'breakpoint',
-          cssDir: 'asset',
-          sassDir: 'sass/<%= site %>',
-          javascriptsDir: 'js',
-          imagesDir: 'media',
-          relativeAssets: true
-
-// # output_style = :expanded or :nested or :compact or :compressed
-
-        },
-        files: {                            
-          'screen.css': 'screen.scss',        
-          'admin/screen.css': 'admin/screen.scss'
+          sourceComments: 'none',
+          outputStyle: 'compressed'
         }
       }
-      // dev: {                                  
-      //   files: {
-      //     'screen.css': 'screen.scss',
-      //     'admin/screen.css': 'admin/screen.scss',
-      //   }
-      // }
+    },
+    concat: {
+      js: {
+        options: {
+          separator: ';'
+        },
+        src: [
+          'js/*.js',
+          'js/vendor/*.js',
+          '!js/jquery-1.8.2.js',
+        ],
+        dest: 'asset/main.min.js'
+      }
+    },
+    js: {
+      options: {
+        separator: ';'
+      },
+      src: [
+        'js/<%= pkg.name %>/vendor/*.js',
+        'js/<%= pkg.name %>/*.js',
+        'js/<%= pkg.name %>/global/*.js'
+      ],
+      dest: 'asset/main.min.js'
+    },
+    uglify: {
+      js: {
+        files: {
+          'asset/main.min.js': ['asset/main.min.js'],
+        }
+      },
     },
     watch: {
-      js: {
+      local: {
         files: [
-          'js/<%= site %>/*.js'
+          'sass/**',
+          'js/**',
         ],
-        tasks: ['concat:js'],
-        options: {
-          livereload: true
-        }
+        tasks: [
+          'sass:local',
+          'concat:js',
+        ]
       },
-      js_admin: {
+      remote: {
         files: [
-          'js/<%= site %>/vendor/*.js',
-          'js/<%= site %>/global/*.js',
-          'js/admin/vendor/*.js',
-          'js/admin/*.js'
+          'sass/**',
+          'js/**',
         ],
-        tasks: ['concat:js_admin'],
-        options: {
-          livereload: true
-        }
-      },
-      css: {
-        files: ['sass/**'],
-        tasks: ['compass'],
-        options: {
-          livereload: true
-        }
+        tasks: [
+          'sass:remote',
+          'concat:js',
+          'uglify:js',
+        ]
       },
     },
   });
-  grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-compass');
 };
+

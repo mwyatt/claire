@@ -12,12 +12,6 @@
 /**
  * directory seperator
  */
-define('SITE', 'mwyatt');
-
-
-/**
- * directory seperator
- */
 define('DS', DIRECTORY_SEPARATOR);
 
 
@@ -64,6 +58,27 @@ define('PATH_MODEL', PATH_APP . 'model' . DS);
 
 
 /**
+ * site
+ * get from package.json
+ */
+$package = json_decode(file_get_contents(BASE_PATH . 'package.json'));
+define('SITE', $package->name);
+
+
+/**
+ * model core dir
+ */
+define('PATH_CONTROLLER', PATH_APP . 'controller' . DS . SITE . DS);
+
+
+
+/**
+ * view core dir
+ */
+define('PATH_VIEW', PATH_APP . 'view' . DS . SITE . DS);
+
+
+/**
  * common extension for classes
  */
 define('EXT', '.php');
@@ -82,12 +97,6 @@ spl_autoload_register(array('Autoloader', 'call'));
 $json = new Json();
 $json->read('config');
 $configRaw = $json->getData();
-
-
-/**
- * model core dir
- */
-define('PATH_CONTROLLER', PATH_APP . 'controller' . DS . SITE . DS);
 
 
 /**

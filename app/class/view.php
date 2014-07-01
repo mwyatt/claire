@@ -199,7 +199,7 @@ class View extends Model
 	 * @return string 
 	 */
 	public function pathView($template = '') { 
-		$path = PATH_APP . 'view' . US . SITE . US;
+		$path = PATH_VIEW;
 		if ($template) {
 			$path .= $template . EXT;
 		}

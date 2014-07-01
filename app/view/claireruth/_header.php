@@ -11,7 +11,7 @@
     <meta name="description" content="<?php echo $this->getMeta('description') ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link href="<?php echo $this->getUrl() ?>asset/screen.css?v=1" media="screen, projection" rel="stylesheet" type="text/css" />
-    <!-- // <script src="<?php echo $this->getUrl() ?>js/vendor/respond.min.js"></script> -->
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800" rel="stylesheet" type="text/css">
     <script src="<?php echo $this->getUrl() ?>js/exclude/modernizr.js"></script>
 </head>
 <body<?php echo ($this->getBodyClass() ? ' class="' . $this->getBodyClass() . '"' : '') ?> data-url-base="<?php echo $this->getUrl() ?>">
@@ -21,7 +21,7 @@
 
 <div id="top"></div>
 <div class="container container-site">
-    <a href="#top" class="to-top js-smooth-scroll"><?php include($this->getPath('media/arrow-up.svg')) ?></a>
+    <a href="#top" class="to-top js-smooth-scroll"><?php include($this->getPathMedia('arrow-up.svg')) ?></a>
     <header class="container-header row js-container-header clearfix js-fixed-bar">
         <div class="container-header-inner">
     
@@ -36,8 +36,8 @@
             -->
 
 
-            <a href="#menu" class="js-smooth-scroll header-button-mobile header-button-mobile-menu js-header-button-mobile-menu"><?php include($this->getPath('media/menu.svg')) ?></a>
-            <a href="#search" class="js-smooth-scroll header-button-mobile header-button-mobile-search js-header-button-mobile-search"><?php include($this->getPath('media/search.svg')) ?></a>
+            <a href="#menu" class="js-smooth-scroll header-button-mobile header-button-mobile-menu js-header-button-mobile-menu"><?php include($this->getPathMedia('menu.svg')) ?></a>
+            <a href="#search" class="js-smooth-scroll header-button-mobile header-button-mobile-search js-header-button-mobile-search"><?php include($this->getPathMedia('search.svg')) ?></a>
 
     <?php $menu = $mainMenu; ?>
     <?php include($this->pathView('_menu')) ?>
