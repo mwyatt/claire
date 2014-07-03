@@ -28,9 +28,17 @@ class Route extends System
 	public $map;
 
 
+	/**
+	 * the go-to controller if nothing is found
+	 * @var string
+	 */
 	public $default = 'controller_index';
 
 
+	/**
+	 * storage of current class being reviewed
+	 * @var string
+	 */
 	public $current;
 
 
@@ -92,15 +100,6 @@ class Route extends System
 			$this->setCurrent($class);
 		}
 		
-// 		echo '<pre>';
-// // var_dump($path);
-// // var_dump($mapPath);
-// // var_dump($this->getMap());
-// var_dump($this->isInvalid());
-// var_dump($this->getCurrent());
-// 		echo '</pre>';
-// exit;
-
 		// trying to access a route but it does not exist
 		if ($this->isInvalid()) {
 			$this->route('base', 'not-found/');
@@ -145,19 +144,12 @@ class Route extends System
 	}
 
 
-	/**
-	 * @param object $value 
-	 */
 	public function setView($value)
 	{
 		$this->view = $value;
 	}
 
 
-	/**
-	 * get view
-	 * @return object 
-	 */
 	public function getView()
 	{		
 		return $this->view;

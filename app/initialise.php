@@ -6,9 +6,6 @@
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */ 
-$config = new config();
-$config->setData($configRaw);
-$database = new database($configRaw);
 
 
 /**
@@ -18,19 +15,24 @@ session_start();
 
 
 /**
- * core object
+ * system
  */
 $system = new system();
 $system->setPhpSettings();
 
 
 /**
+ * setup database
+ */
+require PATH_APP . 'credentials' . EXT;
+$database = new database($credentials);
+
+
+/**
  * set other objects
  */
 $system->setUrl(new url());
-$error = new error($system);
-$error->initialise();
-$system->setConfig($config);
+$system->setConfig(new config());
 $system->setDatabase($database);
 
 
@@ -40,10 +42,18 @@ $system->setDatabase($database);
  */
 $options = new model_options($system);
 $options->read();
-$options->arrangeByName();
+$options->arrangeByProperty('name');
 $system->config->setOptions($options->getData());
 
-	
+
+/**
+ * error reporting
+ * @var error
+ */
+$error = new error($system);
+$error->initialise();
+
+
 /**
  * store each unique url
  */

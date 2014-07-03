@@ -31,16 +31,30 @@ class Error extends System
 
     public function initialise()
     {
-        $this->setReporting($this->url->isLocal());
-        if ($this->getReporting()) {
-	        ini_set('display_errors', 1);
-        }
-        error_reporting(30711);
-		set_error_handler(array($this, 'handle'));
+        // $this->setReporting($this->url->isLocal());
+        error_reporting(E_ALL);
+        ini_set('display_errors', '1');
+        ini_set('log_errors', '0');
+        ini_set('error_log', './');
+        set_error_handler(array($this, 'handle'));
     }
 
 
     public function handle($errorType, $errorString, $errorFile, $errorLine) {  	
+        echo '<pre>';
+        print_r($errorType);
+        echo '</pre>';
+        echo '<pre>';
+        print_r($errorString);
+        echo '</pre>';
+        echo '<pre>';
+        print_r($errorFile);
+        echo '</pre>';
+        echo '<pre>';
+        print_r($errorLine);
+        echo '</pre>';
+    	exit;
+    	
 		switch ($this->reporting) {
 			case false:
 
