@@ -159,10 +159,10 @@ exit;
 
 	public function microTime()
 	{
-		$start = microtime(true);
-		while (...) {
+		// $start = microtime(true);
+		// while (...) {
 
-		}
-		$time_elapsed_us = microtime(true) - $start;
+		// }
+		// $time_elapsed_us = microtime(true) - $start;
 	}
 }
