@@ -1,6 +1,6 @@
 <?php include($this->pathView('_header')) ?>
 
-<div class="content home">
+<div class="page home">
 
 <?php include($this->pathView('_contents')) ?>
 

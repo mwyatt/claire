@@ -20,6 +20,8 @@
     @include background-size(cover);
     height: 13em;
     margin-bottom: 1em;
+    @extend .animated;
+    @extend .fadeIn;
 }
 
 .tags {
@@ -27,24 +29,19 @@
 }
 
 a.tag {
-    margin-right: .5em;
-    margin-bottom: .5em;
-    color: $color-white;
-    background-color: $color-tertiary;
-    padding: .4em;
-    margin: .2em;
+    margin-right: 15px;
+    margin-bottom: 15px;
+    color: $color-secondary;
+    padding: 0 0 3px;
     float: left;
     line-height: 1.1;
-    font-size: .8em;
-    border-radius: 5px;
+    border-bottom: 1px solid $color-gray-10;
+    font-size: 13px;
 }
 
 .content.element {
     position: relative;
-    min-height: 13em;
-    border: 1px solid $color-secondary;
-    padding: 0.7em;
-    -webkit-box-shadow: 0 1px 1px $color-gray-20;
+    padding: 5%;
 }
 
 .content-author {

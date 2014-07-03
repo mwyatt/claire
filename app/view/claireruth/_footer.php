@@ -18,6 +18,7 @@
 		</footer>
 
 		</div> <!-- .container -->
-        <script src="<?php echo $this->getUrl() ?>asset/main.js?v=1"></script>
+        <script src="<?php echo $this->getUrlJs('exclude.jquery-2.1.1.js?v=1') ?>"></script>
+        <script src="<?php echo $this->getUrl() ?>asset/main.min.js?v=1"></script>
     </body>
 </html>

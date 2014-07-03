@@ -44,6 +44,12 @@ a:link {
 /**
  * headings, spacing
  */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
 .h1,
 .h2,
 .h3,
@@ -52,6 +58,7 @@ a:link {
 .h6 {
     font-family: $heading-font-family;
     font-weight: $heading-font-weight;
+    margin: 0;
 }
 
 .h1, 

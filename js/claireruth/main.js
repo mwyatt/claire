@@ -1,4 +1,5 @@
 $(document).ready(function() {  
+	console.log('value'); 
 	var topButton = new Button_To_Top({
 		button: '.to-top'
 	});

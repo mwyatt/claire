@@ -227,6 +227,11 @@ class View extends Model
 	}
 
 
+	public function getUrlJs($append) {
+		return $this->url->getCache('base') . 'js' . US . SITE . US . $append;
+	}
+
+
 	/**
 	 * appends admin to the path
 	 * @param  string $template 

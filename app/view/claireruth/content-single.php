@@ -1,4 +1,7 @@
 <?php require_once($this->pathView('_header')) ?>
+
+<div class="page">
+
 <?php if ($contents): ?>
 	<?php foreach ($contents as $content): ?>
 		
@@ -19,4 +22,8 @@
 
 	<?php endforeach ?>
 <?php endif ?>
+
+</div>
+
 <?php require_once($this->pathView('_footer')) ?>
+

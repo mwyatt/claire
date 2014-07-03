@@ -4,3 +4,4 @@ thumb/cache/
 error.txt
 Guardfile
 asset/
+node_modules/

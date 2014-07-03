@@ -52,9 +52,8 @@ module.exports = function(grunt) {
           separator: ';'
         },
         src: [
-          'js/*.js',
-          'js/vendor/*.js',
-          '!js/jquery-1.8.2.js',
+          'js/<%= pkg.name %>/*.js',
+          '!js/<%= pkg.name %>/exclude*',
         ],
         dest: 'asset/main.min.js'
       }
