@@ -1,10 +1,6 @@
 <?php
 
 /**
- * Database
- *
- * PHP version 5
- * 
  * @author Martin Wyatt <martin.wyatt@gmail.com> 
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
@@ -22,22 +18,27 @@ class Database
 	/**
 	 * connects to the database
 	 */
-	public function __construct($config) {
-		$this->credentials = $config->credentials;
-		
+	public function __construct($credentials) {
+		$this->setCredentials($credentials);
 		$this->connect();
 	}
 	
 
-	/**
-	 * returns the static credentials
-	 * @return [type] [description]
-	 */
+	public function setCredentials($value)
+	{
+		$this->credentials = $value;
+	}
+
+
 	public function getCredentials() {
 		return $this->credentials;
 	}
 	
 	
+	/**
+	 * attempt connection to the database
+	 * @return null 
+	 */
 	public function connect() {
 		$credentials = $this->getCredentials();
 		try {

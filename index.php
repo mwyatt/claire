@@ -91,14 +91,6 @@ spl_autoload_register(array('Autoloader', 'call'));
 
 
 /**
- * get core config object
- */
-$json = new Json();
-$json->read('config');
-$configRaw = $json->getData();
-
-
-/**
  * initialise app
  */
 require PATH_APP . 'initialise' . EXT;

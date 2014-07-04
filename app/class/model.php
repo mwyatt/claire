@@ -443,6 +443,11 @@ class Model extends Data
 			}
 		} catch (Exception $e) {
 			echo '<pre>';
+			print_r($e);
+			echo '</pre>';
+			exit;
+			
+			echo '<pre>';
 			print_r($sthData);
 			echo '</pre>';
 			exit('error trying to execute statement');
