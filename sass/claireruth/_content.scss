@@ -52,7 +52,7 @@ a.tag {
     display: none;
 }
 
-@include breakpoint(0 599px) {
+@include breakpoint(0 599) {
 
     .content-html img {
         max-width: 100%;
@@ -66,14 +66,14 @@ a.tag {
     }
 }
 
-@include breakpoint(600px) {
+@include breakpoint(600) {
 
     .content.element {
         float: left;
     }
 }
 
-@include breakpoint(600px 899px) {
+@include breakpoint(600px 899) {
 
     .content.element {
         width: 47%;
@@ -81,7 +81,7 @@ a.tag {
     }
 }
 
-@include breakpoint(900px) {
+@include breakpoint(900) {
 
     .content.element {
         width: 31%;

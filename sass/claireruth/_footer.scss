@@ -25,7 +25,7 @@
     .propos-button.button.primary {}
 }
 
-@include breakpoint(900px) {
+@include breakpoint(900) {
 
     .container-footer {
         border-top: 1px dotted $color-tertiary;
@@ -46,7 +46,7 @@
     }
 }
 
-@include breakpoint(0 899px) {
+@include breakpoint(0 899) {
 
     .container-footer {
         padding: 1em;

@@ -7,7 +7,7 @@ body {
     font-family: $font-family;
 }
 
-@include breakpoint(0 899px) {
+@include breakpoint(0 899) {
 
     .container-site {
         margin-top: 4.1em;
@@ -15,7 +15,7 @@ body {
     }
 }
 
-@include breakpoint(800px) {
+@include breakpoint(800) {
 
     .container-site {
         margin-top: 5.1em;

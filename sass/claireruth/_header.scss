@@ -5,8 +5,31 @@
     left: 0;
     right: 0;
     z-index: 10;
-    padding: 5%;
     background-color: $color-primary;
+}
+
+.container-header .form-search {
+    float: left;
+    margin-left: 3%;
+    padding: 1em;
+    width: 37%;
+
+    .form-search-query {
+        width: 50%;
+        float: left;
+        border: 0;
+        border-radius: 0;
+    }
+
+    .form-search-submit {
+        float: left;
+        height: auto;
+        margin-left: 13px;
+        padding-left: 0.6em;
+        padding-right: 0.6em;
+        border-radius: 0;
+        border: 0;
+    }
 }
 
 .container-header .menu,
@@ -24,9 +47,10 @@ svg {
     float: left;
     width: 6.8em;
     fill: $color-white;
+    margin: 1em;
 }
 
-@include breakpoint(0 899px) {
+@include breakpoint(0 899) {
     
     .container-header .menu {
         display: none;
@@ -34,16 +58,16 @@ svg {
 }
 
 .header-button-mobile {
+    margin: 1em 1em 0 0;
     cursor: pointer;
     display: block;
     float: right;
     width: 2em;
     height: 2em;
-    margin: 0.3em 0 0 1em;
     fill: $color-white;
 }
 
-@include breakpoint(900px) {
+@include breakpoint(900) {
 
     .header-button-mobile {
         display: none;
@@ -63,11 +87,34 @@ svg {
     }
 }
 
-@include breakpoint(800px) {
+@include breakpoint(800) {
 
     .container-header-inner {
         width: 800px;
         margin-left: auto;
         margin-right: auto;
+    }
+}
+
+@include breakpoint(700) {
+
+    .header-button-mobile {
+        display: none;
+    }
+
+    .container-header .form-search,
+    .container-header .menu {
+        display: block;
+    }
+}
+
+.container-header .menu {
+    float: right;
+
+    .menu-item {
+        color: $color-white;
+        float: right;
+        padding: 1em;
+        font-weight: 600;
     }
 }
