@@ -1,3 +1,9 @@
+body {
+    font-size: 16px;
+    color: $color-text;
+    font-family: $font-family;
+}
+
 /**
  * selection
  */
@@ -170,6 +176,7 @@ h6,
     ol,
     pre {
         @extend .block-margins;
+        line-height: 1.5;
     }
 
     ul {

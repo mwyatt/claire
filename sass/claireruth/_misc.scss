@@ -2,11 +2,6 @@ html {
     // background: image-url("xv.png") repeat; 
 }
 
-body {
-    color: $color-text;
-    font-family: $font-family;
-}
-
 @include breakpoint(0 899) {
 
     .container-site {
@@ -18,7 +13,6 @@ body {
 @include breakpoint(800) {
 
     .container-site {
-        margin-top: 5.1em;
         width: 800px;
         margin-left: auto;
         margin-right: auto;
@@ -49,14 +43,18 @@ body {
     position: fixed;
     bottom: 1em;
     z-index: 1;
-    fill: $color-primary;
+    fill: $color-white;
     right: -4em;
-    width: 2.5em;
-    height: 2.5em;
+    width: 2em;
+    height: 2em;
     padding: 0.5em;
-    background-color: #fff;
+    background-color: $color-tertiary;
     border-radius: 99em;
-    @include box-shadow(0 0 10px $color-gray-40);
+
+    &:active {
+        bottom: .5em;
+        opacity: .8;
+    }
 
     &.is-active {
         display: block;
@@ -81,5 +79,6 @@ body {
 }
 
 .page {
+    padding: 5%;
     padding-top: 80px;
 }

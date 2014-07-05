@@ -51,7 +51,7 @@ class Config extends Data
 	 */
 	public function getOption($key) {
 		if (array_key_exists($key, $this->options)) {
-			return $this->options[$key];
+			return $this->options[$key]->value;
 		}
 	}
 

@@ -39,7 +39,7 @@
             <a href="#menu" class="js-smooth-scroll header-button-mobile header-button-mobile-menu js-header-button-mobile-menu"><?php include($this->getPathMedia('menu.svg')) ?></a>
             <a href="#search" class="js-smooth-scroll header-button-mobile header-button-mobile-search js-header-button-mobile-search"><?php include($this->getPathMedia('search.svg')) ?></a>
 
-    <?php $menu = $mainMenu; ?>
+    <?php $menu = array_reverse($mainMenu); ?>
     <?php include($this->pathView('_menu')) ?>
     <?php include($this->pathView('_search')) ?>
 

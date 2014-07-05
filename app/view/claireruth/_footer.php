@@ -1,6 +1,15 @@
         </div> <!-- .container-site -->
 		<footer class="container-footer clearfix">
 			<div class="container-footer-inner">
+				<div class="footer-socials">
+					
+<?php foreach (array('twitter', 'facebook', 'pinterest') as $social): ?>
+	
+					<a href="#" class="footer-social"><?php include($this->getPathMedia($social . '.svg')) ?></a>
+
+<?php endforeach ?>
+
+				</div>
 				<div id="search">
 
 <?php include($this->pathView('_search')) ?>
@@ -8,6 +17,7 @@
 				</div>
 				<div id="menu">
 
+<?php $menu = $mainMenu; ?>
 <?php include($this->pathView('_menu')) ?>
 
 				</div>
