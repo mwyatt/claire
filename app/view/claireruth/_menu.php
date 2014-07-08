@@ -1,6 +1,6 @@
 <?php if ($menu): ?>
 	
-<nav class="menu clearfix">
+<nav class="menu">
 
 	<?php foreach ($menu as $menuItem): ?>
 

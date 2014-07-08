@@ -2,23 +2,6 @@ html {
     // background: image-url("xv.png") repeat; 
 }
 
-@include breakpoint(0 899) {
-
-    .container-site {
-        margin-top: 4.1em;
-        padding: 1em;
-    }
-}
-
-@include breakpoint(800) {
-
-    .container-site {
-        width: 800px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-}
-
 .button {
     @include button($color-primary);
 }
@@ -80,5 +63,20 @@ html {
 
 .page {
     padding: 5%;
-    padding-top: 80px;
+    padding-top: 6em;
+}
+
+.container-footer-inner,
+.container-header-inner,
+.page {
+    max-width: 50em;
+    margin: 0 auto;
+}
+
+
+@include breakpoint(600) {
+    
+    .page {
+        padding-top: 6em;
+    }
 }

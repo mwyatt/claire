@@ -1,3 +1,19 @@
+.container-footer .form-search-query {
+    width: 58%;
+    float: left;
+}
+
+.container-footer .form-search-submit {
+    float: right;
+    padding: 6px 0;
+    width: 28%;
+    text-align: center;
+}
+
+.container-footer .form-search {
+    @include clearfix;
+}
+
 .container-footer {
 
     .propos-portrait {
@@ -82,6 +98,10 @@
     float: left;
     fill: $color-secondary;
     margin-right: 1em;
+
+    &:active {
+        opacity: .5;
+    }
 }
 
 .footer-socials {
@@ -98,23 +118,28 @@
     border-top: 1px solid $color-senary;
 }
 
-@include breakpoint(900) {
-
-    .container-footer {
-        border-top: 1px dotted $color-tertiary;
-        margin-top: 1.5em;
-        padding-top: 1.5em;
-        padding-bottom: 6em;
+@include breakpoint(600) {
+    
+    .container-footer .menu {
+        margin: 1em 0;
+        @include clearfix;
     }
 
-    .container-footer-inner {
-        width: 800px;
-        margin: 0px auto;
+    .container-footer .menu .menu-item {
+        float: left;
+        background-color: transparent;
+        color: $color-primary;
+        margin-right: 2em;
+        padding: 0;
     }
 
-    .container-footer .menu-item {
-        margin-right: 1em;
-        font-weight: 600;
-        border-bottom: 1px solid;
+    .container-footer .form-search {
+        float: right;
+        width: 50%;
+    }
+
+    .footer-socials {
+        float: left;
+        width: 50%;
     }
 }

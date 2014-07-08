@@ -1,15 +1,15 @@
+.pagination-text {
+    display: none;
+}
+
 .pagination-summary {
     text-align: center;
-    font-size: 1em;
-    margin: 0.1em 0;
+    color: $color-gray-50;
+    line-height: 2;
 }
 
 .pagination {
     margin: 1em 0;
-    font-size: .8em;
-    border-top: 1px dotted $color-gray-20;
-    padding: 1em 0;
-    border-bottom: 1px dotted $color-gray-20;
 
     a.pagination-page {
         display: none;
@@ -36,15 +36,18 @@
 
 a.pagination-next,
 a.pagination-previous {
-    width: 30%;
-    padding: 0.2em 0.4em;
-    background: $color-secondary;
-    color: $color-white;
-    border-radius: 5px;
+    width: 2.5em;
+    height: 2.5em;
+    fill: $color-secondary;
+
+    &.is-disabled {
+        fill: $color-gray-20;
+    }
 }
 
 .pagination-previous {
     float: left;
+    @include transform(rotate(180deg));
 }
 
 .pagination-next {

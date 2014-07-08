@@ -72,6 +72,7 @@ svg {
         float: right;
         padding: 1em;
         font-weight: 600;
+        line-height: 2;
     }
 }
 
@@ -88,15 +89,6 @@ svg {
     .container-header .form-search,
     .container-header .menu {
         display: block;
-    }
-}
-
-@include breakpoint(800) {
-
-    .container-header-inner {
-        width: 800px;
-        margin-left: auto;
-        margin-right: auto;
     }
 }
 

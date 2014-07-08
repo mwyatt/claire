@@ -1,4 +1,4 @@
-.content.element .content-date {
+.content-date {
     color: $color-quinary;
 }
 
@@ -56,41 +56,20 @@ a.tag {
     display: none;
 }
 
-@include breakpoint(0 599) {
-
-    .content-html img {
-        max-width: 100%;
-        max-height: 100%;
-        margin: 1em auto;
-    }
-
-    .content.element {
-        // border-bottom: 1px dashed $color-tertiary;
-        margin-bottom: 1em;
-    }
-}
-
 @include breakpoint(600) {
 
     .content.element {
         float: left;
-    }
-}
-
-@include breakpoint(600px 899) {
-
-    .content.element {
-        width: 47%;
-        margin: 1%;
+        width: 40%;
+        padding: 5%;
     }
 }
 
 @include breakpoint(900) {
 
     .content.element {
-        width: 31%;
-        margin: 1%;
-        float: left;
+        padding: 3%;
+        width: 27%;
     }
 }
 
