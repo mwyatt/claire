@@ -56,6 +56,16 @@ module.exports = function(grunt) {
           '!js/<%= pkg.name %>/exclude*',
         ],
         dest: 'asset/main.min.js'
+      },
+      js_admin: {
+        options: {
+          separator: ';'
+        },
+        src: [
+          'js/<%= pkg.name %>/admin/*.js',
+          '!js/<%= pkg.name %>/admin/exclude*',
+        ],
+        dest: 'asset/admin-main.min.js'
       }
     },
     js: {
@@ -85,6 +95,7 @@ module.exports = function(grunt) {
         tasks: [
           'sass:local',
           'concat:js',
+          'concat:js_admin',
         ]
       },
       remote: {
@@ -95,6 +106,7 @@ module.exports = function(grunt) {
         tasks: [
           'sass:remote',
           'concat:js',
+          'concat:js_admin',
           'uglify:js',
         ]
       },
