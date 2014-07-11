@@ -11,7 +11,6 @@
 	<meta name="description" content="<?php echo $this->getMeta('description') ?>">
 	<meta name="viewport" content="width=device-width">
 	<link href="<?php echo $this->getUrl() ?>asset/admin-screen.css?v=1" media="screen, projection" rel="stylesheet" type="text/css" />
-	<script src="<?php echo $this->getUrl() ?>js/exclude/modernizr.js"></script>
 </head>
 <body<?php echo ($this->getBodyClass() ? ' class="' . $this->getBodyClass() . '"' : '') ?> data-url-base="<?php echo $this->getUrl() ?>">
 	<!--[if lt IE 7]>
@@ -22,16 +21,15 @@
 
 <?php if ($user): ?>
 	
-    <header class="main clearfix js-header-main">
-    	<div class="wrap-full-width">
-	    	<div class="inner-title-nav-user clearfix">
-		        <a class="header-site-title" href="<?php echo $this->getUrl() ?>" target="_blank" title="Open Homepage"><?php echo $this->getOption('site_title') ?></a>
+    <header class="main js-header-main">
+    	<div class="header-inner wrap-full-width">
+	    	<div class="inner-title-nav-user">
+		        <a class="header-site-title" href="<?php echo $this->getUrl() ?>" target="_blank" title="Open Homepage"><?php echo $this->config->getOption('site_title') ?></a>
 
 	<?php require_once($this->pathView('admin/header/_user')) ?>
 	<?php require_once($this->pathView('admin/header/_nav')) ?>
 
 			</div>
-			<div class="clearfix"></div>
 			
 	<?php $feedback = $sessionFeedback ?>
 	<?php require_once($this->pathView('_feedback')) ?>

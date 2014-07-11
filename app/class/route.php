@@ -110,6 +110,9 @@ class Route extends System
 			exit('class ' . $this->getCurrent() . ' does not exist in the controller folder');
 		}
 
+		// set headers
+		$this->setHeaders();
+
 		// boot class
 		$current = $this->getCurrent();
 		$controller = new $current($this);
@@ -153,5 +156,17 @@ class Route extends System
 	public function getView()
 	{		
 		return $this->view;
+	}
+
+	
+	/**
+	 * analysises the currently set rote and sets appropriate headers
+	 */
+	public function setHeaders()
+	{
+		$current = $this->getCurrent();
+		if ($current == 'controller_notfound') {
+			header('HTTP/1.0 404 Not Found');
+		}
 	}
 }

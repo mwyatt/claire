@@ -13,8 +13,7 @@ header.main.is-fixed-top + .content {
 }
 
 .inner-title-nav-user {
-    padding: 0.4em 0;
-    height: 1em;
+    @include clearfix;
 }
 
 .header-site-title {
@@ -56,7 +55,7 @@ header.main.is-fixed-top + .content {
 }
 
 .nav-main-level1-drop {
-    @include box-shadow(0 0 3px $color-gray-50);
+    box-shadow: 0 0 3px $color-gray-50;
     background: $color-white;
     display: none;
     position: absolute;
@@ -70,4 +69,8 @@ header.main.is-fixed-top + .content {
 .nav-main-level2-link {
     display: block;
     padding: 0 1em 0.4em;
+}
+
+.header-inner {
+    padding-top: 1em;
 }

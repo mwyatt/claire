@@ -51,7 +51,7 @@ html {
     padding: 0.5em;
     background-color: $color-white;
     @include border-radius(99em);
-    @include box-shadow(0 0 10px $color-gray-40);
+    box-shadow: 0 0 10px $color-gray-40;
 
     &.is-active {
         display: block;

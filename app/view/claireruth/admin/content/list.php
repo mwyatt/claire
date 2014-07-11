@@ -13,7 +13,7 @@
 
 		<a class="button right" href="<?php echo $this->getUrl('current_noquery') ?>new/" title="Create a new <?php echo ucfirst($this->url->getPathPart(2)) ?>">New</a>
 	</div>
-	<h1 class="h3 mb1"><?php echo ucfirst($this->url->getPathPart(2)) ?></h1>
+	<h1 class="page-heading"><?php echo ucfirst($this->url->getPathPart(2)) ?></h1>
 
 <?php include($this->pathView('_contents')) ?>
 <?php if (! $contents): ?>

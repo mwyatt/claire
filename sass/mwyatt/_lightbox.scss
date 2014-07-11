@@ -34,7 +34,7 @@
 
 .lightbox {
 	@extend .clearfix;
-	@include box-shadow(0 0 3px $color-black);
+	box-shadow: 0 0 3px $color-black;
 	@include border-radius(3px);
 	background-color: $color-white;
 	position: relative;
@@ -113,7 +113,7 @@
 
 	&.is-active {
 		@include transform(scale(1.05));
-		@include box-shadow(0 0 3px $color-secondary);
+		box-shadow: 0 0 3px $color-secondary;
 		border-color: $color-secondary;
 		cursor: default;
 	}

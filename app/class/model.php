@@ -502,11 +502,11 @@ class Model extends Data
 	 * @param  string $key 
 	 * @return any
 	 */
-	public function getOption($key) {
-		if (array_key_exists($key, $this->config->options)) {
-			return $this->config->options[$key];
-		}
-	}
+	// public function getOption($key) {
+	// 	if (array_key_exists($key, $this->config->options)) {
+	// 		return $this->config->options[$key];
+	// 	}
+	// }
 
 
 	/**

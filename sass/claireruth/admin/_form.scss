@@ -21,7 +21,7 @@ textarea {
     color: darken($color-white, 60%);
 
     &:focus {
-        @include box-shadow(0 2px 1px darken($color-white, 5%));
+        box-shadow: 0 2px 1px darken($color-white, 5%);
         border-color: darken($color-white, 25%);
         color: darken($color-white, 70%);
     }

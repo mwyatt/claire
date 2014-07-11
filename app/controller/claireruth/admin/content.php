@@ -86,7 +86,8 @@ class Controller_Admin_Content extends Controller_Admin
 			'order_by' => 'time_published desc'
 		));
 		$this->view
-			->setObject('statuses', $statuses)
+			// ->setObject('statuses', $statuses)
+			->setObject('statuses', '')
 			->setObject('contents', $content)
 			->getTemplate('admin/content/list');
 	}

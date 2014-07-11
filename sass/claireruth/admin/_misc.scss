@@ -56,3 +56,28 @@ body {
 	font-size: 1em;
 	font-weight: 400;
 }
+
+.nav-main-container {
+
+}
+
+.nav-main {
+	float: left;
+	margin-right: 1em;
+}
+
+.page-heading {
+	margin-bottom: 1em;
+}
+
+.button,
+a.button {
+    @include button($color-primary);
+    color: $color-white;
+}
+
+a.content-action-link {
+    @extend .button;
+    padding: 1px 7px;
+    margin: 0 0 5px 5px;
+}

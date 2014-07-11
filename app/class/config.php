@@ -50,8 +50,10 @@ class Config extends Data
 	 * @return int|string|bool      
 	 */
 	public function getOption($key) {
-		if (array_key_exists($key, $this->options)) {
-			return $this->options[$key]->value;
+		$options = $this->getOptions();
+		if (array_key_exists($key, $options)) {
+			$option = $options[$key];
+			return $option->value;
 		}
 	}
 

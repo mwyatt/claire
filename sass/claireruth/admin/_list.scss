@@ -1,12 +1,7 @@
 .list-container {
     overflow: hidden;
-    height: 2em;
-    border-top: 1px dashed;
-    padding: .2em;
-
-    &:first-child {
-        border-top: 0;
-    }    
+    padding: 0.4em 0;
+    border-top: 1px solid $color-gray-20;
 }
 
 .list-cell-20 {
@@ -35,11 +30,21 @@
 }
 
 .content-action {
-    @extend .list-cell-right;
+    width: 25%;
+    float: right;
+    text-align: right;
 }
 
 .content-link {
     @extend .list-cell-30;
+}
+
+.content-title {
+    font-size: 1em;
+}
+
+.content-status {
+    width: 15%;
 }
 
 .content-status,
