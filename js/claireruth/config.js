@@ -1,5 +1,5 @@
 var config = {
-        site: 'claire-ruth',
+        site: 'claireruth',
         content: '',
         documentBody: '',
         url: {
