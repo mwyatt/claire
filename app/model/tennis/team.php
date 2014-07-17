@@ -5,15 +5,16 @@
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Model_Tennis_Fixture extends Model
+class Model_Tennis_Team extends Model
 {	
 
 
 	public $fields = array(
 		'id',
-		'year_id',
-		'team_id_left',
-		'team_id_right',
-		'time_fulfilled'
+		'division_id',
+		'venue_id',
+		'secretary_id',
+		'name',
+		'home_weekday'
 	);
 }

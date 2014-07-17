@@ -11,31 +11,25 @@
 
 	<h1 class="h3 mb1"><?php echo ($content ? 'Update ' . ucfirst($this->url->getPathPart(2)) . ' ' . $content->title : 'Create new ' . ucfirst($this->url->getPathPart(2))) ?></h1>
 	<form class="main" method="post" enctype="multipart/form-data">
-		<div class="frame">
-		    <div class="bit-2">
-		        <div class="box">
-		        	<label class="h5 block mb05" for="form_title">Title</label>
-		        	<input id="form_title" class="w100 required js-input-title" type="text" name="title" maxlength="75" value="<?php echo $content->title ?>" autofocus="autofocus">
-		        </div>
-		    </div>
-		    <div class="bit-2">
-		        <div class="box">
-		        	<label class="h5 block mb05" for="form_slug">Slug</label>
-		        	<input id="form_slug" class="w100 required js-input-slug" type="text" name="slug" maxlength="75" value="<?php echo $content->slug ?>" autofocus="autofocus">
-		        </div>
-		    </div>
-		</div>
+	    <div class="block-margins">
+        	<label class="h5 block mb05" for="form_title">Title</label>
+        	<input id="form_title" class="w100 required js-input-title" type="text" name="title" maxlength="75" value="<?php echo $content->title ?>" autofocus="autofocus">
+	    </div>
+	    <div class="block-margins">
+        	<label class="h5 block mb05" for="form_slug">Slug</label>
+        	<input id="form_slug" class="w100 required js-input-slug" type="text" name="slug" maxlength="75" value="<?php echo $content->slug ?>" autofocus="autofocus">
+	    </div>
 
 <?php include($this->pathView('admin/content/_wysihtml5')) ?>
 
-		<div class="clearfix">
+		<div class="block-margins">
 			<h2 class="h2">Media</h2>
 
 <?php $media = $content->media ?>
 <?php include($this->pathView('admin/media/_browser')) ?>
 
 		</div>
-		<div class="clearfix">
+		<div class="block-margins">
 			<h2 class="h2">Tags</h2>
 	
 <?php $tags = $content->tag ?>
@@ -45,7 +39,7 @@
 
 <?php if ($contentStatus): ?>
 	
-		<div class="clearfix">
+		<div class="block-margins">
 			<label for="status">Status</label>
 			<select name="status" id="status">
 
@@ -60,12 +54,12 @@
 
 <?php endif ?>
 
-		<div class="clearfix">
+		<div class="block-margins">
 			<label for="time_published">Time Published</label>
 			<input name="time_published[date]" type="date" value="<?php echo $contentDate ?>">
 			<input name="time_published[time]" type="time" value="<?php echo $contentTime ?>">
 		</div>
-		<div class="clearfix">
+		<div class="block-margins">
 			<input name="type" type="hidden" value="<?php echo $this->url->getPathPart(2) ?>">
 			<input name="<?php echo ($content ? 'update' : 'create') ?>" type="hidden" value="true">
 			<span class="submit button right">Save</span>

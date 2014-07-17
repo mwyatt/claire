@@ -11,6 +11,7 @@ class Model_Tennis_Encounter extends Model
 
 	public $fields = array(
 		'id',
+		'fixture_id',
 		'score_left',
 		'score_right',
 		'player_id_left',

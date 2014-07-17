@@ -11,9 +11,12 @@ class Model_Tennis_Player extends Model
 
 	public $fields = array(
 		'id',
+		'team_id',
 		'name_first',
 		'name_last',
 		'rank',
-		'team_id'
+		'phone_landline',
+		'phone_mobile',
+		'etta_license_number'
 	);
 }
