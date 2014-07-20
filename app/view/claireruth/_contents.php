@@ -1,6 +1,6 @@
 <?php if ($contents): ?>
 	
-	<div class="contents clearfix">
+	<div class="contents js-contents">
 
 	<?php foreach ($contents as $content): ?>
 		<?php require($this->pathView('_content')) ?>

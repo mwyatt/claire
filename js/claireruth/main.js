@@ -1,5 +1,9 @@
 $(document).ready(function() {  
-	console.log('value'); 
+
+	// tell me your there
+	console.log('main.js -> document ready'); 
+
+	// to top button
 	var topButton = new Button_To_Top({
 		button: '.to-top'
 	});
@@ -21,5 +25,11 @@ $(document).ready(function() {
 	$('.js-header-button-mobile-search').on('click', function(event) {
 		event.preventDefault();
 		$('.js-form-search-query').focus();
+	});
+
+	// masonry
+	$('.js-contents').masonry({
+	  columnWidth: '.js-content',
+	  itemSelector: '.js-content'
 	});
 });

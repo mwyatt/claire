@@ -68,17 +68,6 @@ module.exports = function(grunt) {
         dest: 'asset/admin-main.min.js'
       }
     },
-    js: {
-      options: {
-        separator: ';'
-      },
-      src: [
-        'js/<%= pkg.name %>/vendor/*.js',
-        'js/<%= pkg.name %>/*.js',
-        'js/<%= pkg.name %>/global/*.js'
-      ],
-      dest: 'asset/main.min.js'
-    },
     uglify: {
       js: {
         files: {

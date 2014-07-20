@@ -1,7 +1,7 @@
 <?php $theDate = date('jS', $content->time_published) . ' of ' . date('F o', $content->time_published) ?>
 <?php $theUrl = $this->url->build(array($content->type, $content->slug)) ?>
 
-<div class="content element is-type-<?php echo $content->type ?> clearfix<?php echo ($content->media ? ' has-thumb' : '') ?>" data-id="<?php echo $content->id ?>">
+<div class="content element is-type-<?php echo $content->type ?> <?php echo ($content->media ? ' has-thumb' : '') ?> js-content" data-id="<?php echo $content->id ?>">
 
 <?php $medium = reset($content->media) ?>
 <?php if ($medium): ?>
