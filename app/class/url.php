@@ -130,7 +130,7 @@ class Url extends Helper
 		$this->cache = array(
 			'base' => $scheme . $host,
 			'admin' => $scheme . $host . 'admin' . US,
-			'media' => $scheme . $host . 'media' . US,
+			'media' => $scheme . $host . 'media' . US . SITE . US,
 			'current' => $scheme . $host . $path . $query,
 			'current_sans_query' => $scheme . $host . $path
 		);

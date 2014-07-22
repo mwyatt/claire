@@ -45,8 +45,10 @@ a.tag {
 
 .content.element {
     position: relative;
-    border: 1px solid;
+    border: 1px solid $color-tertiary;
+    box-shadow: 0 1px 3px $color-tertiary;
     padding: 1em;
+    margin: 1em;
 }
 
 .content-author {

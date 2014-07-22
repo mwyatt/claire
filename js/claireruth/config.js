@@ -1,4 +1,10 @@
+/**
+ * needs reworking to be a system class
+ */
+
 var config = {
+
+        // not needed now?
         site: 'claireruth',
         content: '',
         documentBody: '',
@@ -10,6 +16,8 @@ var config = {
         },
         spinner: '<div class="spinner is-tall"></div>',
         setup: function() {
+
+                // is this needed?
                 config.content = $('.content');
                 config.documentBody = $(document.body);
                 config.url.base = $('body').data('url-base');

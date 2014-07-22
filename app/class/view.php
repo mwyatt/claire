@@ -252,6 +252,11 @@ class View extends Model
 	}
 	
 
+	public function getUrlMedia($append = '') {
+		return $this->url->getCache('media') . $append;
+	}
+	
+
 	/**
 	 * gets a users latest tweet!
 	 * @param  string $user username

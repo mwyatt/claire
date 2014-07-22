@@ -21,7 +21,7 @@
 
 <div id="top"></div>
 <div class="container container-site">
-    <a href="#top" class="to-top js-smooth-scroll"><?php include($this->getPathMedia('arrow-up.svg')) ?></a>
+    <a href="#top" class="to-top js-smooth-scroll"><img class="to-top-image" src="<?php echo $this->getUrlMedia('arrow-up.svg') ?>" onerror="this.src=''; this.onerror=null;"></a>
     <header class="container-header row js-container-header clearfix js-fixed-bar">
         <div class="container-header-inner">
     
@@ -36,8 +36,8 @@
             -->
 
 
-            <a href="#menu" class="js-smooth-scroll header-button-mobile header-button-mobile-menu js-header-button-mobile-menu"><?php include($this->getPathMedia('menu.svg')) ?></a>
-            <a href="#search" class="js-smooth-scroll header-button-mobile header-button-mobile-search js-header-button-mobile-search"><?php include($this->getPathMedia('search.svg')) ?></a>
+            <a href="#menu" class="js-smooth-scroll header-button-mobile header-button-mobile-menu js-header-button-mobile-menu"><img class="header-button-mobile-image" src="<?php echo $this->getUrlMedia('menu.svg') ?>" onerror="this.src=''; this.onerror=null;"></a>
+            <a href="#search" class="js-smooth-scroll header-button-mobile header-button-mobile-search js-header-button-mobile-search"><img class="header-button-mobile-image" src="<?php echo $this->getUrlMedia('search.svg') ?>" onerror="this.src=''; this.onerror=null;"></a>
 
     <?php $menu = array_reverse($mainMenu); ?>
     <?php include($this->pathView('_menu')) ?>
