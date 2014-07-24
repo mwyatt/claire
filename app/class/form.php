@@ -1,14 +1,17 @@
 <?php
 
+
 /**
  * handles form validation, can be used through ajax which will pass
  * a json object, otherwise an array is returned and passed to the view
  * various functions
+ * @todo must be portable and json passed if ajax
+ * @todo could be a massive json file which can be referred to
  * @author Martin Wyatt <martin.wyatt@gmail.com> 
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */ 
-class Form extends Config
+class Form
 {
 
 
@@ -21,13 +24,13 @@ class Form extends Config
 	 * once form is valid this data should be replaced? with feedback
 	 * @var array
 	 */
-	public $data = array(
-		'form_admin_login' => array(
-			'email' => array('email')
-			, 'password' => array('email')
-			, 'another' => true
-		)
-	);
+	// public $data = array(
+	// 	'form_admin_login' => array(
+	// 		'email' => array('email')
+	// 		, 'password' => array('email')
+	// 		, 'another' => true
+	// 	)
+	// );
 
 
 	/**
@@ -94,3 +97,28 @@ class Form extends Config
 		return (array_key_exists($key, $_POST) ? true : false);
 	}	
 }
+
+
+$form = new Form();
+$form->validate($_GET, array(
+	'form_user_create_name' => array(
+		'nice_name' => 'Name',
+		'type' => 'text',
+		'required' => true,
+		'max' => 150
+	),
+	'form_user_create_email' => array(
+		'nice_name' => 'Email Address',
+		'type' => 'email',
+		'required' => true,
+		'max' => 150
+	),
+	'form_user_create_telephone' => array(
+		'nice_name' => 'Telephone Number',
+		'type' => 'number',
+		'required' => true,
+		'max' => 500
+	)
+));
+$form->isValid();
+$form->getErrors();
