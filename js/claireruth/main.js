@@ -8,18 +8,17 @@ $(document).ready(function() {
 		button: '.to-top'
 	});
 
-	// $('.js-header-button-mobile-menu').on('click', function(event) {
-	// 	event.preventDefault();
-	// 	$(this).closest('.js-container-header').toggleClass('is-menu-open');
-	// });
-
 	// smooth scrolling when clicked
 	var smoothScroll = new Smooth_Scroll({
 		target: '.js-smooth-scroll',
 		topOffset: 75,
 		scrollSpeed: 500
 	});
+
+	// fixed
 	var modelFixedBar = new Model_Fixed_Bar();
+
+	// setup submit buttons
 	setSubmit();
 
 	$('.js-header-button-mobile-search').on('click', function(event) {
@@ -27,9 +26,16 @@ $(document).ready(function() {
 		$('.js-form-search-query').focus();
 	});
 
-	// masonry
-	$('.js-contents').masonry({
-	  columnWidth: '.js-content',
-	  itemSelector: '.js-content'
+	// equalheight
+	equalheight('.js-content');
+	$(window).resize(function(){
+		equalheight('.js-content');
+	});
+
+	// product single carousel
+	$('.js-content-single-gallery').owlCarousel({
+		slideSpeed: 200,
+		paginationSpeed: 200,
+		singleItem: true
 	});
 });

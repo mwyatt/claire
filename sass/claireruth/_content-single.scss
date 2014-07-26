@@ -11,17 +11,15 @@
     float: left;
 }
 
-.content-single .content-post-date {
+.content-single .content-date {
+    margin: 1em 0;
     float: right;
-}
-
-.content-single {
-    // padding-left: 1em;
-    // padding-right: 1em;
-    // padding-top: 1.5em;
-    // padding-bottom: 1em;
 }
 
 .content-single .content-html {
     margin-bottom: 4em;
+}
+
+.content-single-title-two {
+    font-size: 1.2em;
 }

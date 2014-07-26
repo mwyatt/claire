@@ -9,10 +9,20 @@
 	<div class="content-date"><?php echo date('jS', $content->time_published) . ' of ' . date('F o', $content->time_published) ?></div>
 	<h1 class="h1 content-single-title"><?php echo $content->title ?></h1>
 
-		<?php $medium = reset($content->media) ?>
-		<?php include($this->pathView('_medium')) ?>
+	<?php if ($media = $content->media): ?>
+
+	<div class="media js-content-single-gallery">
+
+		<?php foreach ($media as $medium): ?>
+			<?php require($this->pathView('_medium')) ?>
+		<?php endforeach ?>
+		
+	</div>
+
+	<?php endif ?>
 
 	<div class="content-html typography"><?php echo $content->html ?></div>
+	<h2 class="content-single-title-two">Tagged Under</h2>
 
 		<?php $tags = $content->tag ?>
 		<?php include($this->pathView('_tags')) ?>

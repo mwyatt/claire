@@ -50,7 +50,7 @@
         display: block;
         text-align: center;
         padding: 1em;
-        background-color: $color-primary;
+        background-color: $color-quinary;
         color: $color-white;
 
         &:active {
@@ -97,7 +97,7 @@
     height: 3em;
     float: left;
     fill: $color-secondary;
-    margin-right: 1em;
+    margin-right: 7px;
 
     &:active {
         opacity: .5;

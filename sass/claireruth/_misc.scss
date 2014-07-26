@@ -2,25 +2,6 @@ html {
     // background: image-url("xv.png") repeat; 
 }
 
-.button {
-    @include button($color-primary);
-}
-
-.button-primary,
-.button.primary {
-    @include button($color-primary);
-}
-
-.button-secondary,
-.button.secondary {
-    @include button($color-secondary);
-}
-
-.button-tertiary,
-.button.tertiary {
-    @include button($color-tertiary);
-}
-
 .to-top {
     @include transition(all 200ms ease);
     position: fixed;
@@ -62,8 +43,10 @@ html {
 }
 
 .page {
-    // padding: 5%;
-    padding-top: 6em;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 61px;
+    padding-bottom: 61px;
 }
 
 .container-footer-inner,
@@ -75,6 +58,22 @@ html {
 
 .container-header-inner {
     @include clearfix;
+}
+
+.button-base {
+    padding: 12px 14px;
+    background-color: $color-gray-50;
+    color: $color-white;
+}
+
+.button-primary {
+    @extend .button-base;
+    background-color: $color-primary;
+}
+
+.button-secondary {
+    @extend .button-base;
+    background-color: $color-secondary;
 }
 
 @include breakpoint(600) {

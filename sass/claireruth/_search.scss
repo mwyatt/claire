@@ -2,6 +2,16 @@
     display: none;
 }
 
+.form-search-query {
+	@extend .input;
+}
+
+
+.form-search-submit {
+	@extend .button-primary;
+}
+
+
 @include breakpoint(0 899px) {
 
 	.container-header .form-search {
@@ -71,8 +81,4 @@
 		   color: $color-white;  
 		}
 	}
-}
-
-.form-search-submit {
-	// height: 35px;	
 }

@@ -48,7 +48,7 @@ a.tag {
     border: 1px solid $color-tertiary;
     box-shadow: 0 1px 3px $color-tertiary;
     padding: 1em;
-    margin: 1em;
+    margin: 1em 0;
 }
 
 .content-author {
@@ -63,8 +63,12 @@ a.tag {
 
     .content.element {
         float: left;
-        width: 35%;
-        padding: 5%;
+        width: 41%;
+        margin-right: 5%;
+
+        &:nth-child(2n) {
+            margin-right: 0;
+        }
     }
 }
 
@@ -72,7 +76,15 @@ a.tag {
 
     .content.element {
         padding: 3%;
-        width: 27%;
+        width: 23%;
+
+        &:nth-child(2n) {
+            margin-right: 2em;
+        }
+
+        &:nth-child(3n) {
+            margin-right: 0;
+        }
     }
 }
 
