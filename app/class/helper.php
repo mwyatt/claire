@@ -105,7 +105,7 @@ class Helper
 	public function delimiterToCamel($value, $delimiter = '_')
 	{
 
-		// return passed value if no underscores found
+		// return passed value if no delimiter present
 		if (strpos($value, $delimiter) === false) {
 			return $value;
 		}
