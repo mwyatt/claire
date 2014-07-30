@@ -3,6 +3,10 @@ $(document).ready(function() {
 	// tell me your there
 	console.log('main.js -> document ready'); 
 
+	// system objects
+	var system = new System();
+	var form = new Form();
+
 	// to top button
 	var topButton = new Button_To_Top({
 		button: '.to-top'
@@ -17,9 +21,6 @@ $(document).ready(function() {
 
 	// fixed
 	var modelFixedBar = new Model_Fixed_Bar();
-
-	// setup submit buttons
-	setSubmit();
 
 	$('.js-header-button-mobile-search').on('click', function(event) {
 		event.preventDefault();
