@@ -40,4 +40,21 @@ class Mold_Content extends Mold
 
 
 	public $media = array();
+
+
+	/**
+	 * @return string 
+	 */
+	public function getTitle() {
+	    return $this->title;
+	}
+	
+	
+	/**
+	 * @param string $title 
+	 */
+	public function setTitle($title) {
+	    $this->title = $title;
+	    return $this;
+	}
 }
