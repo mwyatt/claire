@@ -27,6 +27,7 @@ module.exports = function(grunt) {
           ext: '.css'
         }],
         options: {
+          imagePath: '../media/<%= pkg.name %>',
         	loadPath: 'sass/',
           sourceComments: 'normal',
           outputStyle: 'nested'

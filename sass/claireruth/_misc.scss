@@ -1,5 +1,9 @@
-html {
-    // background: image-url("xv.png") repeat; 
+%art-bordeaux-left {
+    background: image-url('bordeaux-left.png') bottom left no-repeat;
+}
+
+%art-bordeaux-right {
+    background: image-url('bordeaux-right.png') bottom right no-repeat;
 }
 
 .to-top {
@@ -80,5 +84,20 @@ html {
     
     .page {
         padding-top: 6em;
+    }
+}
+
+@include breakpoint(1300) {
+
+    html {
+        background: image-url('lightpaperfibers.png') repeat;
+    }
+
+    .container-site {
+        background: image-url('bordeaux-left.png') bottom left no-repeat;
+    }
+
+    .container-site-inner {
+        background: image-url('bordeaux-right.png') bottom right no-repeat;
     }
 }

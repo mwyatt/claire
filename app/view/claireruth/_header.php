@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link href="<?php echo $this->getUrl() ?>asset/screen.css?v=1" media="screen, projection" rel="stylesheet" type="text/css" />
     <link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800" rel="stylesheet" type="text/css">
-    <script>var urlBase = <?php echo $this->getUrl() ?>;</script>
+    <script>var urlBase = '<?php echo $this->getUrl() ?>';</script>
     <script src="<?php echo $this->getUrlJs('exclude.modernizr.js?v=1') ?>"></script>
 </head>
 <body<?php echo ($this->getBodyClass() ? ' class="' . $this->getBodyClass() . '"' : '') ?>>
@@ -22,6 +22,7 @@
 
 <div id="top"></div>
 <div class="container container-site">
+<div class="container-site-inner">
     <a href="#top" class="to-top js-smooth-scroll"><img class="to-top-image" src="<?php echo $this->getUrlMedia('arrow-up.svg') ?>" onerror="this.src=''; this.onerror=null;"></a>
     <header class="container-header row js-container-header clearfix js-fixed-bar">
         <div class="container-header-inner">

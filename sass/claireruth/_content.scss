@@ -45,10 +45,7 @@ a.tag {
 
 .content.element {
     position: relative;
-    border: 1px solid $color-tertiary;
-    box-shadow: 0 1px 3px $color-tertiary;
     padding: 1em;
-    margin: 1em 0;
 }
 
 .content-author {
@@ -62,8 +59,6 @@ a.tag {
 @include breakpoint(600) {
 
     .content.element {
-        float: left;
-        width: 41%;
         margin-right: 5%;
 
         &:nth-child(2n) {
@@ -76,7 +71,6 @@ a.tag {
 
     .content.element {
         padding: 3%;
-        width: 23%;
 
         &:nth-child(2n) {
             margin-right: 2em;

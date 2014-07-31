@@ -1,3 +1,4 @@
+        </div> <!-- .container-site-inner -->
         </div> <!-- .container-site -->
 		<footer class="container-footer">
 			<div class="container-footer-inner">
