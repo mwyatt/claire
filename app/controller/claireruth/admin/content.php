@@ -79,7 +79,7 @@ class Controller_Admin_Content extends Controller_Admin
 				$where['status'] = $_GET['status'];
 			}
 		} else {
-			$where['status'] = 'visible';
+			// $where['status'] = 'visible';
 		}
 		$content->read(array(
 			'where' => $where,
