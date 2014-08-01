@@ -3,10 +3,8 @@
  * all blocks of functionaltiy seperated into 'module**'
  */
 $(document).ready(function() {
-	config.setup();
-
-	// form submission
-	setSubmit();
+	var system = new System();
+	var form = new Form();
 
 	// try adding all logic for manipulating objects here...
 	if (config.content.hasClass('content-create-update')) {

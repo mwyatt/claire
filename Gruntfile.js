@@ -54,9 +54,12 @@ module.exports = function(grunt) {
         },
         src: [
           'js/<%= pkg.name %>/*.js',
-          '!js/<%= pkg.name %>/exclude*',
+          'js/<%= pkg.name %>/vendor/*.js',
+          'js/<%= pkg.name %>/global/*.js',
+          '!js/<%= pkg.name %>/jquery.js',
+          '!js/<%= pkg.name %>/modernizr.js',
         ],
-        dest: 'asset/main.min.js'
+        dest: 'asset/main.js'
       },
       js_admin: {
         options: {
@@ -64,15 +67,18 @@ module.exports = function(grunt) {
         },
         src: [
           'js/<%= pkg.name %>/admin/*.js',
-          '!js/<%= pkg.name %>/admin/exclude*',
+          'js/<%= pkg.name %>/vendor/*.js',
+          'js/<%= pkg.name %>/global/*.js',
+          '!js/<%= pkg.name %>/jquery.js',
+          '!js/<%= pkg.name %>/modernizr.js',
         ],
-        dest: 'asset/admin-main.min.js'
+        dest: 'asset/admin-main.js'
       }
     },
     uglify: {
       js: {
         files: {
-          'asset/main.min.js': ['asset/main.min.js'],
+          'asset/main.js': ['asset/main.min.js'],
         }
       },
     },

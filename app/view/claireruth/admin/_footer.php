@@ -6,8 +6,8 @@
 			
 <?php endif ?>
 
-	        <script src="<?php echo $this->getUrlJs('exclude.jquery-2.1.1.js?v=1') ?>"></script>
-	        <script src="<?php echo $this->getUrl() ?>asset/admin-main.min.js?v=1"></script>
+	        <script src="<?php echo $this->getUrlJs('jquery.js?v=1') ?>"></script>
+	        <script src="<?php echo $this->getUrl() ?>asset/admin-main.js?v=1"></script>
 		</div>
     </body>
 </html>

@@ -33,6 +33,7 @@
 }
 
 a.tag {
+    font-size: 0.9em;
     margin-right: 15px;
     margin-bottom: 15px;
     color: $color-secondary;
@@ -40,7 +41,6 @@ a.tag {
     float: left;
     line-height: 1.1;
     border-bottom: 1px solid $color-gray-10;
-    font-size: 13px;
 }
 
 .content.element {
