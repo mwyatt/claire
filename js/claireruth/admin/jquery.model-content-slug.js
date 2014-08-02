@@ -15,7 +15,7 @@ var Model_Content_Slug = function (options) {
 
 Model_Content_Slug.prototype.getSlug = function(data, field) {
 	$.ajax({
-		url: config.url.adminAjax + 'content/slug',
+		url: system.url.adminAjax + 'content/slug',
 		data: {
 			title: field.val()
 		},

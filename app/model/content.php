@@ -238,6 +238,13 @@ class Model_Content extends Model
 
 		// execute
 		$this->tryExecute(__METHOD__, $sth);
-		return $this->setData($sth->fetchAll(PDO::FETCH_CLASS, $this->getMoldName()));
+		$molds = $sth->fetchAll(PDO::FETCH_CLASS, $this->getMoldName());
+		$visibleMolds = array();
+		foreach ($molds as $mold) {
+			if ($mold->status == 'visible') {
+				$visibleMolds[] = $mold;
+			}
+		}
+		return $this->setData($visibleMolds);
 	}
 }

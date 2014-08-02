@@ -30,7 +30,6 @@ Form.prototype.setForms = function(data) {
  */
 Form.prototype.setSubmitButtons = function(data) {
 	$('.js-form-button-submit').on('mouseup.form', function() {
-	console.log('value');
 		$(this).closest('form').submit();
 	});
 };

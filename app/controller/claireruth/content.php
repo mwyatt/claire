@@ -37,6 +37,7 @@ class Controller_Content extends Controller_Index
 		if (! $modelContent->read(array(
 			'where' => array(
 				'slug' => $this->url->getPathPart(1),
+				'status' => 'visible',
 				'type' => $this->url->getPathPart(0)
 			)
 		))) {

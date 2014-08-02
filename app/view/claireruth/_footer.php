@@ -31,8 +31,6 @@
 		</div> <!-- .container -->
         <script src="<?php echo $this->getUrlJs('jquery.js?v=1') ?>"></script>
         <script src="<?php echo $this->getUrl() ?>asset/main.js?v=1"></script>
-
-        <!-- google analytics -->
         <script>
           (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
           (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

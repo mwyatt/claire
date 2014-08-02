@@ -36,26 +36,20 @@ class Controller_Index extends Controller
 
 
 	public function home() {
-		$cache = new cache($this);
 
 		// latest 3 posts
-		if ($cache->read('home-latest-posts')) {
-			$this->view->setObject('contents', $cache->getData());
-		} else {
-			$modelContent = new model_content($this);
-			$modelContent->read(array(
-				'where' => array(
-					'type' => 'post',
-					'status' => 'visible'
-				),
-				'limit' => array(0, 6),
-				'order_by' => 'time_published desc'
-			));
-			$modelContent->bindMeta('media');
-			$modelContent->bindMeta('tag');
-			$this->view->setObject('contents', $modelContent->getData());
-			$cache->create($modelContent->getData());
-		}
+		$modelContent = new model_content($this);
+		$modelContent->read(array(
+			'where' => array(
+				'type' => 'post',
+				'status' => 'visible'
+			),
+			'limit' => array(0, 6),
+			'order_by' => 'time_published desc'
+		));
+		$modelContent->bindMeta('media');
+		$modelContent->bindMeta('tag');
+		$this->view->setObject('contents', $modelContent->getData());
 		$this->view->getTemplate('home');
 	}
 

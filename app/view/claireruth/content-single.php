@@ -22,10 +22,13 @@
 	<?php endif ?>
 
 	<div class="content-html typography"><?php echo $content->html ?></div>
+
+	<?php if ($tags = $content->tag): ?>
+		
 	<h2 class="content-single-title-two">Tagged Under</h2>
 
-		<?php $tags = $content->tag ?>
 		<?php include($this->pathView('_tags')) ?>
+	<?php endif ?>
 
 	<div class="content-date"><?php echo date('jS', $content->time_published) . ' of ' . date('F o', $content->time_published) ?></div>
 </div>

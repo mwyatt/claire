@@ -106,7 +106,7 @@ Model_Media_Browser.prototype.events = function(data) {
 Model_Media_Browser.prototype.upload = function(data) {
 	var progressBar = $(data.cache.progressBar);
 	$.ajax({
-		url: config.url.adminAjax + 'media/upload/'
+		url: system.url.adminAjax + 'media/upload/'
 		, type: 'post'
 		, data: data.formData
 		, processData: false
@@ -126,7 +126,6 @@ Model_Media_Browser.prototype.upload = function(data) {
 			return xhr;
 		}
 		, success: function (result) {
-			console.log(result);
 			data.resetFormFileInput(data);
 			progressBar.val(0);
 	  		data.resetFormData(data);
@@ -144,14 +143,17 @@ Model_Media_Browser.prototype.upload = function(data) {
 
 Model_Media_Browser.prototype.refreshBrowser = function(data) {
 	var mediaBrowserDirectory = $(data.cache.mediaBrowserDirectory);
-	mediaBrowserDirectory.html(config.spinner);
+	// mediaBrowserDirectory.html(system.spinner);
 	$.ajax({
-		url: config.url.adminAjax + 'media/read/',
+		url: system.url.adminAjax + 'media/read/',
 		data: {},
 		dataType: 'html',
 		success: function(result) {
 			if (result) {
 				mediaBrowserDirectory.html(result);
+
+				// equal
+				equalheight('.js-medium');
 			} else {
 				mediaBrowserDirectory.html('<p class="p1">Nothing Uploaded Yet.</p>');
 			}

@@ -40,7 +40,7 @@ var Dismiss = function (options) {
  */
 Dismiss.prototype.wipeSession = function(event, thisElement) {
 	$.ajax({
-		url: config.url.ajax + 'dismiss/',
+		url: system.url.ajax + 'dismiss/',
 		success: function () {
 			thisElement.remove();
 		},

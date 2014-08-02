@@ -2,7 +2,7 @@
  */
 var Content_Meta = function (options) {
 	var defaults = {
-		content_id: config.content.data('id'),
+		content_id: system.getPage().data('id'),
 		name: 'tag',
 	}
 	this.options = $.extend(defaults, options);
@@ -18,7 +18,7 @@ var Content_Meta = function (options) {
  */
 Content_Meta.prototype.modify = function(event, action, ids, callback) {
 	$.ajax({
-		url: config.url.adminAjax + 'content/meta/' + action,
+		url: system.url.adminAjax + 'content/meta/' + action,
 		type: 'get',
 		data: {
 			content_id: this.options.content_id,

@@ -3,15 +3,16 @@
  * all blocks of functionaltiy seperated into 'module**'
  */
 $(document).ready(function() {
-	var system = new System();
+	console.log('admin->ready');
+	system = new System();
 	var form = new Form();
 
 	// try adding all logic for manipulating objects here...
-	if (config.content.hasClass('content-create-update')) {
-		var editor = new wysihtml5.Editor('form_html', {
-			toolbar: 'toolbar'
-			, parserRules: wysihtml5ParserRules
-			, useLineBreaks: false
+	if (system.getPage().hasClass('content-create-update')) {
+		var wysihtml5News = new wysihtml5.Editor('form_html', {
+			toolbar: 'toolbar',
+			parserRules: wysihtml5ParserRules,
+			useLineBreaks: false
 		});
 		var modelMediaBrowser = new Model_Media_Browser();
 		var modelTagBrowser = new Model_Tag_Browser();

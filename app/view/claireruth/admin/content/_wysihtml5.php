@@ -1,5 +1,5 @@
 <div class="block-margins">
-	<label class="h5 block mb05" for="form_html">Content</label>
+	<label class="label-title" for="form_html">Content</label>
 	<div id="toolbar" class="toolbar clearfix" style="display: none;">
 		<a class="button" data-wysihtml5-command="bold" title="CTRL+B">bold</a>
 		<a class="button" data-wysihtml5-command="italic" title="CTRL+I">italic</a>

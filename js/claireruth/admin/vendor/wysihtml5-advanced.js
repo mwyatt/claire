@@ -1,6 +1,6 @@
 /**
  * Full HTML5 compatibility rule set
- * These rules define which tags and css classes are supported and which tags should be specially treated.
+ * These rules define which tags and CSS classes are supported and which tags should be specially treated.
  *
  * Examples based on this rule set:
  *
@@ -18,7 +18,7 @@
  *
  *    <marquee>foo</marquee>
  *    ... becomes ...
- *    <span>foo</marquee>
+ *    <span>foo</span>
  *
  *    foo <br clear="both"> bar
  *    ... becomes ...
@@ -35,7 +35,7 @@
 var wysihtml5ParserRules = {
     /**
      * CSS Class white-list
-     * Following css classes won't be removed when parsed by the wysihtml5 html parser
+     * Following CSS classes won't be removed when parsed by the wysihtml5 HTML parser
      */
     "classes": {
         "wysiwyg-clear-both": 1,
@@ -71,22 +71,33 @@ var wysihtml5ParserRules = {
         "wysiwyg-text-align-center": 1,
         "wysiwyg-text-align-justify": 1,
         "wysiwyg-text-align-left": 1,
+        "one": 1,
+        "two": 1,
+        "three": 1,
+        "process": 1,
+        "basic": 1,
+        "clearfix": 1,
+        "text-left": 1,
+        "text-right": 1,
+        "message": 1,
+        "hide": 1,
+        "text-center": 1,
         "wysiwyg-text-align-right": 1
     },
     /**
      * Tag list
      *
-     * Following options are available:
+     * The following options are available:
      *
      *    - add_class:        converts and deletes the given HTML4 attribute (align, clear, ...) via the given method to a css class
      *                        The following methods are implemented in wysihtml5.dom.parse:
      *                          - align_text:  converts align attribute values (right/left/center/justify) to their corresponding css class "wysiwyg-text-align-*")
-                                  <p align="center">foo</p> ... becomes ... <p> class="wysiwyg-text-align-center">foo</p>
+     *                            <p align="center">foo</p> ... becomes ... <p> class="wysiwyg-text-align-center">foo</p>
      *                          - clear_br:    converts clear attribute values left/right/all/both to their corresponding css class "wysiwyg-clear-*"
      *                            <br clear="all"> ... becomes ... <br class="wysiwyg-clear-both">
      *                          - align_img:    converts align attribute values (right/left) on <img> to their corresponding css class "wysiwyg-float-*"
      *                          
-     *    - remove:             removes the element and it's content
+     *    - remove:             removes the element and its content
      *
      *    - rename_tag:         renames the element to the given tag
      *
@@ -95,8 +106,10 @@ var wysihtml5ParserRules = {
      *    - set_attributes:     sets/overrides the given attributes
      *
      *    - check_attributes:   checks the given HTML attribute via the given method
-     *                            - url:      checks whether the given string is an url, deletes the attribute if not
-     *                            - alt:      strips unwanted characters. if the attribute is not set, then it gets set (to ensure valid and compatible HTML)
+     *                            - url:            allows only valid urls (starting with http:// or https://)
+     *                            - src:            allows something like "/foobar.jpg", "http://google.com", ...
+     *                            - href:           allows something like "mailto:bert@foo.com", "http://google.com", "/foobar.jpg"
+     *                            - alt:            strips unwanted characters. if the attribute is not set, then it gets set (to ensure valid and compatible HTML)
      *                            - numbers:  ensures that the attribute only contains numeric characters
      */
     "tags": {
@@ -171,25 +184,34 @@ var wysihtml5ParserRules = {
             "rename_tag": "span"
         },
         "iframe": {
-            "remove": 1
-        },
+            "check_attributes": {
+                "src": "src",
+                "width": "numbers",
+                "height": "numbers"
+            }
+        /*
+            "check_attributes": {
+                "width": "numbers",
+                "height": "numbers"
+            }
+        */},
         "figcaption": {
             "rename_tag": "div"
         },
         "a": {
             "check_attributes": {
-                "href": "url"
-            },
-            "set_attributes": {
-                "rel": "nofollow",
-                "target": "_blank"
+                "href": "href"
             }
+            // "set_attributes": {
+            //     "rel": "nofollow",
+            //     "target": "_blank"
+            // }
         },
         "img": {
             "check_attributes": {
                 "width": "numbers",
                 "alt": "alt",
-                "src": "url",
+                "src": "src",
                 "height": "numbers"
             },
             "add_class": {

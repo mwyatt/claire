@@ -137,7 +137,7 @@ Model_Media = (function () {
 		var refreshPane = $('.js-media-refresh');
 		refreshPane.addClass('ajax');
 		$.get(
-			config.url.ajax + 'media/read/'
+			system.url.ajax + 'media/read/'
 			// , {}
 			, function(result) { 
 				if (result) {
@@ -162,7 +162,7 @@ Model_Media = (function () {
 
 		// perform ajax
 		$.ajax({
-			url: config.url.ajax + 'media/upload/'
+			url: system.url.ajax + 'media/upload/'
 			, type: 'POST'
 			, data: module.prototype.getFormData()
 			, processData: false

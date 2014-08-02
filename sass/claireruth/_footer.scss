@@ -15,7 +15,6 @@
 }
 
 .container-footer {
-    background: image-url('bordeaux-right.png') bottom right no-repeat;
 
     .propos-portrait {
         width: 30%;
@@ -51,7 +50,7 @@
         display: block;
         text-align: center;
         padding: 1em;
-        background-color: $color-quinary;
+        background-color: $color-tertiary;
         color: $color-white;
 
         &:active {
@@ -125,7 +124,7 @@
     .container-footer .menu {
         margin: 1em 0;
         float: left;
-        @include clearfix;
+        clear: left;
     }
 
     .container-footer .menu .menu-item {
@@ -144,6 +143,14 @@
     .footer-socials {
         float: left;
         width: 50%;
+    }
+}
+
+@include breakpoint(1300) {
+
+    .container-footer {
+        background: image-url('bordeaux-right.png') bottom right no-repeat;
+        min-height: 30em;
     }
 }
 

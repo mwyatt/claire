@@ -70,7 +70,7 @@ Model_Tag_Browser.prototype.events = function(data) {
  */
 Model_Tag_Browser.prototype.createPossibly = function(data, field) {
 	$.ajax({
-		url: config.url.adminAjax + 'tag/create'
+		url: system.url.adminAjax + 'tag/create'
 		, data: {
 			title: field.val()
 			, description: ''
@@ -94,7 +94,7 @@ Model_Tag_Browser.prototype.createPossibly = function(data, field) {
  */
 Model_Tag_Browser.prototype.search = function(data, query) {
 	$.ajax({
-		url: config.url.adminAjax + 'tag/searching'
+		url: system.url.adminAjax + 'tag/searching'
 		, data: {
 			query: query
 		}

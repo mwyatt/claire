@@ -6,9 +6,6 @@
 
 	</div>
 	<div class="row">
-    	<div class="media-search columns six">
-    		<input type="text" placeholder="Search" class="js-media-search-input">
-    	</div>
     	<div class="upload columns six js-form-upload js-is-hidden-while-searching">
     	    <label for="form_images">Upload Media</label>
     	    <input id="form_images" class="js-media-input-upload right" type="file" name="media[]" multiple />
