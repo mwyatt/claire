@@ -102,3 +102,14 @@
     //     background: image-url('bordeaux-right.png') bottom right no-repeat;
     // }
 }
+
+@include breakpoint(1500) {
+
+    .container-site {
+        background: image-url('floral-left.png') top left no-repeat;
+    }
+
+    .container-site-inner {
+        background: image-url('floral-right.png') top right no-repeat;
+    }
+}

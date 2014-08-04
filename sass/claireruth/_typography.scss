@@ -24,19 +24,20 @@ body {
  */
 a,
 a:visited {
-    color: $color-primary;
+    color: $color-secondary;
     text-decoration: none;
 }
   
-a.hover,
 a:hover,
 a:focus { 
-    color: lighten($color-primary, 5%);
+    color: lighten($color-secondary, 5%);
 }
 
 a:hover {}
 
-a:active {}
+a:active {
+    color: darken($color-secondary, 5%);
+}
 
 a:link {
     -webkit-tap-highlight-color : $color-secondary;

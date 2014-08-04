@@ -4,9 +4,9 @@
 			<div class="container-footer-inner">
 				<div class="footer-socials">
 					
-<?php foreach (array('twitter', 'facebook', 'pinterest') as $social): ?>
+<?php foreach (array('twitter' => 'https://twitter.com/clmruth', 'facebook' => 'https://www.facebook.com/clurrrpoof', 'pinterest' => 'http://www.pinterest.com/clmruth26/', 'google' => 'https://plus.google.com/100076113648548258052') as $socialTitle => $socialUrl): ?>
 	
-					<a href="#" class="footer-social"><?php include($this->getPathMedia($social . '.svg')) ?></a>
+					<a href="<?php echo $socialUrl ?>" class="footer-social" target="_blank"><?php include($this->getPathMedia($socialTitle . '.svg')) ?></a>
 
 <?php endforeach ?>
 

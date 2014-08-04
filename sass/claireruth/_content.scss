@@ -16,8 +16,8 @@
 }
 
 .content-title {
-    margin-bottom: .5em;
     font-size: 1.6em;
+    margin: 0.5em 0;
 }
 
 .content-thumb-background {
@@ -26,6 +26,10 @@
     margin-bottom: 1em;
     @extend .animated;
     @extend .fadeIn;
+}
+
+.content.element .tags {
+    display: none;
 }
 
 .tags {
@@ -49,36 +53,16 @@ a.tag {
 }
 
 .content-author {
-    position: absolute;
-    bottom: 1em;
-    left: 1em;
-    font-size: 0.7em;
-    display: none;
+    font-size: 0.9em;
+    float: right;
 }
 
-@include breakpoint(600) {
-
-    .content.element {
-        margin-right: 5%;
-
-        &:nth-child(2n) {
-            margin-right: 0;
-        }
-    }
-}
+@include breakpoint(600) {}
 
 @include breakpoint(900) {
 
     .content.element {
         padding: 3%;
-
-        &:nth-child(2n) {
-            margin-right: 2em;
-        }
-
-        &:nth-child(3n) {
-            margin-right: 0;
-        }
     }
 }
 

@@ -10,9 +10,15 @@
 
 <?php endif ?>
 <?php include($this->pathView('_medium')) ?>
+<?php if ($content->user): ?>
+
+	<div class="content-author"><span class="content-author-by">By</span> <a href="https://plus.google.com/100076113648548258052" class="content-author-link"><?php echo $content->user->first_name ?> <?php echo $content->user->last_name ?></a></div>
+	
+<?php endif ?>
 
 	<div class="content-date" title="<?php echo $theDate ?>"><?php echo $theDate ?></div>
 	<h2 class="content-title"><a href="<?php echo $theUrl ?>" class="content-link"><?php echo $content->title ?></a></h2>
+	<div class="content-html-snippet"><?php echo substr($content->html, 0, 90) ?> ... <a href="<?php echo $theUrl ?>" class="content-html-snippet-more">Read More</a></div>
 	<div class="content-html">
 
 <?php echo $content->html ?>
@@ -26,9 +32,6 @@
 
 <?php $tags = $content->tag ?>
 <?php include($this->pathView('_tags')) ?>
-
-	<div class="content-author"><?php // echo $content->user_name ?></div>
-
 <?php if ($this->isAdmin()): ?>
 	
 	<div class="content-action">

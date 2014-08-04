@@ -49,6 +49,7 @@ class Controller_Index extends Controller
 		));
 		$modelContent->bindMeta('media');
 		$modelContent->bindMeta('tag');
+		$modelContent->bindUser();
 		$this->view->setObject('contents', $modelContent->getData());
 		$this->view->getTemplate('home');
 	}

@@ -84,6 +84,42 @@ class Model_Content extends Model
 	}
 
 
+	/**
+	 * requests user objects based on the user_id property of the content
+	 * then binds them together and resets the data property
+	 * @return object this
+	 */
+	public function bindUser()
+	{
+		if (! $this->getData()) {
+			return;
+		}
+		if (! $userIds = array_unique($this->getDataProperty('user_id'))) {
+			return;
+		}
+
+		// get all users
+		$modelUser = new model_user($this);
+		$modelUser->read(array(
+			'where' => array(
+				'id' => $userIds
+			)
+		));
+		if (! $modelUser->getData()) {
+			return;
+		}
+
+		// bind users to content
+		$modelUser->arrangeByProperty('id');
+		$modelUserData = $modelUser->getData();
+		$boundContent = array();
+		foreach ($this->getData() as $moldContent) {
+			$moldContent->user = $modelUserData[$moldContent->user_id];
+			$boundContent[] = $moldContent;
+		}
+		$this->setData($boundContent);
+		return $this;
+	}
 
 
 	/**
@@ -222,6 +258,7 @@ class Model_Content extends Model
 		$statement = array();
 		$statement[] = $this->getSqlSelect();
 		$statement[] = 'where';
+		$query = addslashes($query);
 		foreach (explode(' ', $query) as $word) {
 			$word = trim($word);
 			$statement[] = 'title like \'%' . $word . '%\'';
