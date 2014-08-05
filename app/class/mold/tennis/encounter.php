@@ -1,5 +1,6 @@
 <?php
 
+
 /**
  * @author Martin Wyatt <martin.wyatt@gmail.com> 
  * @version	0.1
@@ -31,4 +32,21 @@ class Mold_Tennis_Encounter extends Mold
 
 	
 	public $status;
+
+
+	/**
+	 * @return int 
+	 */
+	public function getfixtureId() {
+	    return $this->fixture_id;
+	}
+	
+	
+	/**
+	 * @param int $fixtureId 
+	 */
+	public function setfixtureId($fixtureId) {
+	    $this->fixture_id = $fixtureId;
+	    return $this;
+	}
 }

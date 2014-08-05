@@ -2,9 +2,6 @@
 
 
 /**
- *
- * PHP version 5
- * 
  * @author Martin Wyatt <martin.wyatt@gmail.com> 
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
@@ -69,16 +66,15 @@ class Controller_Result extends Controller_Index
 		// fixture
 		$modelTennisFixture = new model_tennis_fixture($this);
 		$modelTennisFixture->read(array(
-			'where' => array('team_left_id' => $modelTennisTeam->getDataProperty('id'))
+			'where' => array('team_id_left' => $modelTennisTeam->getDataProperty('id'))
 		));
 
 		// encounter
-		$modelTennisFixture = new model_tennis_fixture($this);
-		$modelTennisFixture->read(array(
-			'where' => array('team_left_id' => $modelTennisTeam->getDataProperty('id'))
+		$modelTennisEncounter = new model_tennis_encounter($this);
+		$modelTennisEncounter->read(array(
+			'where' => array('fixture_id' => $modelTennisFixture->getDataProperty('id'))
 		));
-		
-
+		$modelTennisEncounter->getData()
 	}
 
 
