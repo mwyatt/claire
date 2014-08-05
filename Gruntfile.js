@@ -55,7 +55,7 @@ module.exports = function(grunt) {
         src: [
           'js/<%= pkg.name %>/*.js',
           'js/<%= pkg.name %>/vendor/*.js',
-          'js/<%= pkg.name %>/global/*.js',
+          'js/*.js',
           '!js/<%= pkg.name %>/jquery.js',
           '!js/<%= pkg.name %>/modernizr.js',
         ],
@@ -68,7 +68,7 @@ module.exports = function(grunt) {
         src: [
           'js/<%= pkg.name %>/admin/*.js',
           'js/<%= pkg.name %>/admin/vendor/*.js',
-          'js/<%= pkg.name %>/global/*.js',
+          'js/*.js',
           '!js/<%= pkg.name %>/jquery.js',
           '!js/<%= pkg.name %>/modernizr.js',
         ],
