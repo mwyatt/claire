@@ -68,6 +68,7 @@ class Controller_Result extends Controller_Index
 		$modelTennisPlayer->read(array(
 			'where' => array('team_id' => $modelTennisTeam->getDataProperty('id'))
 		));
+		$modelTennisPlayer->arrangeByProperty('id');
 
 		// fixture
 		$modelTennisFixture = new model_tennis_fixture($this);
@@ -94,7 +95,8 @@ class Controller_Result extends Controller_Index
 			))
 			->setObject('division', $division)
 			->setObject('teams', $modelTennisTeam->getData())
-			->setObject('players', ??????)
+			->setObject('players', $modelTennisPlayer->getData())
+			->setObject('meritRows', $modelTennisEncounter->getData())
 			->getTemplate('league');
 	}
 

@@ -5,7 +5,7 @@
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Mold_Tennis_Player extends Mold_Meta
+class Mold_Tennis_Player extends Mold
 {
 
 	
@@ -28,4 +28,21 @@ class Mold_Tennis_Player extends Mold_Meta
 
 	
 	public $etta_license_number;
+
+
+	/**
+	 * @return int 
+	 */
+	public function getTeamId() {
+	    return $this->team_id;
+	}
+	
+	
+	/**
+	 * @param int $team_id 
+	 */
+	public function setTeamId($team_id) {
+	    $this->team_id = $team_id;
+	    return $this;
+	}
 }

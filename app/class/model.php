@@ -385,7 +385,8 @@ class Model extends Data
 		foreach ($this->getData() as $mold) {
 			$newOrder[$mold->$property] = $mold;
 		}
-		return $this->setData($newOrder);
+		$this->setData($newOrder);
+		return $this;
 	}
 	
 
