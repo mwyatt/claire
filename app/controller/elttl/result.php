@@ -63,6 +63,12 @@ class Controller_Result extends Controller_Index
 			'where' => array('division_id' => $division->getId())
 		));
 
+		// players
+		$modelTennisPlayer = new model_tennis_player($this);
+		$modelTennisPlayer->read(array(
+			'where' => array('team_id' => $modelTennisTeam->getDataProperty('id'))
+		));
+
 		// fixture
 		$modelTennisFixture = new model_tennis_fixture($this);
 		$modelTennisFixture->read(array(
