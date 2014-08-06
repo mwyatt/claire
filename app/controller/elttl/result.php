@@ -74,7 +74,62 @@ class Controller_Result extends Controller_Index
 		$modelTennisEncounter->read(array(
 			'where' => array('fixture_id' => $modelTennisFixture->getDataProperty('id'))
 		));
-		$modelTennisEncounter->getData()
+
+		// convert encounters to merit results
+		$modelTennisEncounter
+			->removeStatus()
+			->convertToMerit()
+			->orderByHighestAverage();
+
+		// template
+		$this->view
+			->setMeta(array(		
+				'title' => $division->getName() . ' Merit'
+			))
+			->setObject('division', $division)
+			->setObject('teams', $modelTennisTeam->getData())
+			->setObject('players', ??????)
+			->getTemplate('league');
+	}
+
+
+	public function league()
+	{
+
+		// team
+		$division = $this->getDivision();
+		$modelTennisTeam = new model_tennis_team($this);
+		$modelTennisTeam->read(array(
+			'where' => array('division_id' => $division->getId())
+		));
+
+		// fixture
+		$modelTennisFixture = new model_tennis_fixture($this);
+		$modelTennisFixture->read(array(
+			'where' => array('team_id_left' => $modelTennisTeam->getDataProperty('id'))
+		));
+
+		// encounter
+		$modelTennisEncounter = new model_tennis_encounter($this);
+		$modelTennisEncounter->read(array(
+			'where' => array('fixture_id' => $modelTennisFixture->getDataProperty('id'))
+		));
+
+		// convert encounters to league results
+		$modelTennisEncounter->convertToFixtureResults();
+		$modelTennisFixture
+			->convertToLeague($modelTennisEncounter->getData())
+			->orderByHighestPoints();
+
+		// template
+		$this->view
+			->setMeta(array(		
+				'title' => $division->getName() . ' League'
+			))
+			->setObject('division', $division)
+			->setObject('teams', $modelTennisTeam->getData())
+			->setObject('leagueRows', $modelTennisFixture->getData())
+			->getTemplate('league');
 	}
 
 

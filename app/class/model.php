@@ -577,4 +577,13 @@ class Model extends Data
 		}
 		return reset($data);
 	}
+	
+
+	public function getOtherSide($side = '')
+	{
+		if ($side == 'left') {
+			return 'right';
+		}
+		return 'left';
+	}
 }

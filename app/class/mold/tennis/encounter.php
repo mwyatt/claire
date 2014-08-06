@@ -31,6 +31,12 @@ class Mold_Tennis_Encounter extends Mold
 	public $player_rank_change_right;
 
 	
+	/**
+	 * possible values
+	 * doubles
+	 * exclude
+	 * @var string
+	 */
 	public $status;
 
 
@@ -47,6 +53,91 @@ class Mold_Tennis_Encounter extends Mold
 	 */
 	public function setfixtureId($fixtureId) {
 	    $this->fixture_id = $fixtureId;
+	    return $this;
+	}
+
+
+	/**
+	 * @return int 
+	 */
+	public function getScoreLeft() {
+	    return $this->score_left;
+	}
+	
+	
+	/**
+	 * @param int $scoreLeft 
+	 */
+	public function setScoreLeft($scoreLeft) {
+	    $this->score_left = $scoreLeft;
+	    return $this;
+	}
+
+
+	/**
+	 * @return int 
+	 */
+	public function getScoreRight() {
+	    return $this->score_right;
+	}
+	
+	
+	/**
+	 * @param int $scoreRight 
+	 */
+	public function setScoreRight($scoreRight) {
+	    $this->score_right = $scoreRight;
+	    return $this;
+	}
+
+
+	/**
+	 * @return int 
+	 */
+	public function getPlayerIdLeft() {
+	    return $this->player_id_left;
+	}
+	
+	
+	/**
+	 * @param int $playerIdLeft 
+	 */
+	public function setPlayerIdLeft($playerIdLeft) {
+	    $this->player_id_left = $playerIdLeft;
+	    return $this;
+	}
+
+
+	/**
+	 * @return int 
+	 */
+	public function getPlayerIdRight() {
+	    return $this->player_id_right;
+	}
+	
+	
+	/**
+	 * @param int $playerIdRight 
+	 */
+	public function setPlayerIdRight($playerIdRight) {
+	    $this->player_id_right = $playerIdRight;
+	    return $this;
+	}
+
+
+	/**
+	 * @return string 
+	 */
+	public function getStatus() {
+	    return $this->status;
+	}
+	
+	
+	/**
+	 * @param string $status 
+	 */
+	public function setStatus($status) {
+	    $this->status = $status;
 	    return $this;
 	}
 }
