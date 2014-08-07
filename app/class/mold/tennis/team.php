@@ -25,6 +25,23 @@ class Mold_Tennis_Team extends Mold
 
 
 	/**
+	 * @return int 
+	 */
+	public function getDivisionId() {
+	    return $this->division_id;
+	}
+	
+	
+	/**
+	 * @param int $division_id 
+	 */
+	public function setDivisionId($division_id) {
+	    $this->division_id = $division_id;
+	    return $this;
+	}
+
+
+	/**
 	 * @return string 
 	 */
 	public function getName() {

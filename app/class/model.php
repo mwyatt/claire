@@ -545,7 +545,8 @@ class Model extends Data
 	 */
 	public function setData($value)
 	{		
-		return $this->data = $value;
+		$this->data = $value;
+		return $this;
 	}
 
 

@@ -144,17 +144,12 @@ class Controller_Result extends Controller_Index
 	public function division()
 	{
 		$modelTennisDivision = new model_tennis_division($this);
-		if (! $modelTennisDivision->read()) {
-			return;
-		}
-		$urlDivision = $this->url->getPathPart(1);
-		foreach ($modelTennisDivision->getData() as $moldDivision) {
-			if (strtolower($moldDivision->getName()) == $urlDivision) {
-				$this->setDivision($moldDivision);
-				break;
-			}
-		}
-		if (! $theDivision = $this->getDivision()) {
+		$modelTennisDivision->read(array(
+			'where' => array(
+				'name' => $this->url->getPathPart(1)
+			)
+		));
+		if (! $theDivision = $modelTennisDivision->getDataFirst()) {
 			return;
 		}
 

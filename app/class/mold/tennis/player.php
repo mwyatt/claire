@@ -45,4 +45,13 @@ class Mold_Tennis_Player extends Mold
 	    $this->team_id = $team_id;
 	    return $this;
 	}
+
+
+	/**
+	 * first and last name combined with a space
+	 * @return string 
+	 */
+	public function getNameFull() {
+	    return $this->name_first . ' ' . $this->name_last;
+	}
 }
