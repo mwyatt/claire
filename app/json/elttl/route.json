@@ -9,6 +9,7 @@
     "result": "controller_result",
     "player": "controller_player",
     "team": "controller_team",
+    "fixture": "controller_fixture",
     "archive": "controller_archive",
     "archive/player": "controller_archive_player",
     "archive/team": "controller_archive_team",

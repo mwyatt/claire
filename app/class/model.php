@@ -125,7 +125,8 @@ class Model extends Data
 
 		// execute
 		$this->tryExecute(__METHOD__, $sth);
-		return $this->setData($sth->fetchAll(PDO::FETCH_CLASS, $this->getMoldName()));
+		$this->setData($sth->fetchAll(PDO::FETCH_CLASS, $this->getMoldName()));
+		return $this;
 	}
 
 
