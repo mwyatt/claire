@@ -1,0 +1,42 @@
+[
+	{
+		"name": "Dashboard",
+		"children": [],
+		"url": ""
+	},
+	{
+		"name": "Press",
+		"children": [],
+		"url": "content/press/"
+	},
+	{
+		"name": "Page",
+		"children": [],
+		"url": "content/page/"
+	},
+	{
+		"name": "Player",
+		"children": [],
+		"url": "tennis/player/"
+	},
+	{
+		"name": "Team",
+		"children": [],
+		"url": "tennis/team/"
+	},
+	{
+		"name": "Division",
+		"children": [],
+		"url": "tennis/division/"
+	},
+	{
+		"name": "Fixture",
+		"children": [],
+		"url": "tennis/fixture/"
+	},
+	{
+		"name": "Venue",
+		"children": [],
+		"url": "tennis/venue/"
+	}
+]

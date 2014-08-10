@@ -61,7 +61,7 @@ class Controller_Team extends Controller_Index
 		$modelTennisPlayer->read(array(
 			'where' => array('team_id' => $team->getId())
 		));
-		$modelTennisPlayer->arrangeByProperty('id');
+		$modelTennisPlayer->keyByProperty('id');
 
 		// division
 		$modelTennisDivision = new model_tennis_division($this);

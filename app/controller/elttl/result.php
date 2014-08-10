@@ -68,7 +68,7 @@ class Controller_Result extends Controller_Index
 		$modelTennisPlayer->read(array(
 			'where' => array('team_id' => $modelTennisTeam->getDataProperty('id'))
 		));
-		$modelTennisPlayer->arrangeByProperty('id');
+		$modelTennisPlayer->keyByProperty('id');
 
 		// fixture
 		$modelTennisFixture = new model_tennis_fixture($this);

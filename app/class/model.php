@@ -377,7 +377,7 @@ class Model extends Data
 	 * @param  string $property 
 	 * @return array           
 	 */
-	public function arrangeByProperty($property)
+	public function keyByProperty($property)
 	{
 		if (! $this->getData()) {
 			return;
@@ -588,5 +588,16 @@ class Model extends Data
 			return 'right';
 		}
 		return 'left';
+	}
+
+
+	public function orderByPropertyStringAsc($property)
+	{
+		$data = $this->getData();
+		uasort($data, function($a, $b) use ($property) {
+			return strcasecmp($a->$property, $b->$property);
+		});
+		$this->setData($data);
+		return $this;
 	}
 }

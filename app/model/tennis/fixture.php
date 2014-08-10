@@ -20,7 +20,7 @@ class Model_Tennis_Fixture extends Model
 
 	public function convertToLeague($fixtureScores)
 	{
-		$this->arrangeByProperty('id');
+		$this->keyByProperty('id');
 		if (! $fixtureMolds = $this->getData()) {
 			return;
 		}

@@ -57,7 +57,7 @@ class Controller_Fixture extends Controller_Index
 		$modelTennisPlayer->read(array(
 			'where' => array('team_id' => $teamIds)
 		));
-		$modelTennisPlayer->arrangeByProperty('id');
+		$modelTennisPlayer->keyByProperty('id');
 
 		// division
 		$modelTennisDivision = new model_tennis_division($this);

@@ -54,4 +54,106 @@ class Mold_Tennis_Player extends Mold
 	public function getNameFull() {
 	    return $this->name_first . ' ' . $this->name_last;
 	}
+
+
+	/**
+	 * @return string 
+	 */
+	public function getNameFirst() {
+	    return $this->name_first;
+	}
+	
+	
+	/**
+	 * @param string $nameFirst 
+	 */
+	public function setNameFirst($nameFirst) {
+	    $this->name_first = $nameFirst;
+	    return $this;
+	}
+
+
+	/**
+	 * @return string 
+	 */
+	public function getNameLast() {
+	    return $this->name_last;
+	}
+	
+	
+	/**
+	 * @param string $nameLast 
+	 */
+	public function setNameLast($nameLast) {
+	    $this->name_last = $nameLast;
+	    return $this;
+	}
+
+
+	/**
+	 * @return int 
+	 */
+	public function getRank() {
+	    return $this->rank;
+	}
+	
+	
+	/**
+	 * @param int $rank 
+	 */
+	public function setRank($rank) {
+	    $this->rank = $rank;
+	    return $this;
+	}
+
+
+	/**
+	 * @return int 
+	 */
+	public function getPhoneLandline() {
+	    return $this->phone_landline;
+	}
+	
+	
+	/**
+	 * @param int $phoneLandline 
+	 */
+	public function setPhoneLandline($phoneLandline) {
+	    $this->phone_landline = $phoneLandline;
+	    return $this;
+	}
+
+
+	/**
+	 * @return int 
+	 */
+	public function getPhoneMobile() {
+	    return $this->phone_mobile;
+	}
+	
+	
+	/**
+	 * @param int $phoneMobile 
+	 */
+	public function setPhoneMobile($phoneMobile) {
+	    $this->phone_mobile = $phoneMobile;
+	    return $this;
+	}
+
+
+	/**
+	 * @return int 
+	 */
+	public function getEttaLicenseNumber() {
+	    return $this->etta_license_number;
+	}
+	
+	
+	/**
+	 * @param int $ettaLicenseNumber 
+	 */
+	public function setEttaLicenseNumber($ettaLicenseNumber) {
+	    $this->etta_license_number = $ettaLicenseNumber;
+	    return $this;
+	}
 }

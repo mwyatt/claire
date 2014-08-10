@@ -42,7 +42,7 @@ $system->setDatabase($database);
  */
 $options = new model_options($system);
 $options->read();
-$options->arrangeByProperty('name');
+$options->keyByProperty('name');
 $system->config->setOptions($options->getData());
 
 
