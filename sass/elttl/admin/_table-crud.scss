@@ -1,0 +1,28 @@
+.table-crud {
+	@extend .table;
+}
+
+.table-crud-input {
+	@extend .input;
+	border-color: $color-white;
+	width: 100%;
+
+	&:hover {
+		border-color: $color-primary-0;
+	}
+}
+
+.table-crud-select {
+	@extend .select;
+	width: 100%;
+}
+
+.table-crud-row {
+	border-color: $color-white;
+	border-width: 1px;
+	border-style: solid;
+
+	&:hover {
+		border-color: $color-primary-0;
+	}
+}
