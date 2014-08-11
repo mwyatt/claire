@@ -1,0 +1,135 @@
+.logo-image {
+    width: 100%;
+    height: auto;
+}
+
+.header-button-mobile-image {
+    width: 100%;
+    height: auto;
+}
+
+.to-top-image {
+    width: 100%;
+    height: auto;
+}
+
+.container-header {
+    @include transition(all 300ms ease);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    background-color: $color-primary-0;
+}
+
+.container-header .form-search {
+    float: left;
+    margin-left: 3%;
+    width: 35%;
+    margin: 14px 0 0 5%;
+
+    .form-search-query {
+        width: 50%;
+        float: left;
+        border: 0;
+        border-radius: 0;
+        background-color: lighten($color-primary-0, 10%);
+        color: $color-white;
+
+        &::-webkit-input-placeholder {
+            color: lighten($color-primary-0, 20%);
+        }
+
+        &:-moz-placeholder { /* Firefox 18- */
+            color: lighten($color-primary-0, 20%);
+        }
+
+        &::-moz-placeholder {  /* Firefox 19+ */
+            color: lighten($color-primary-0, 20%);
+        } 
+         
+        &:-ms-input-placeholder {  
+            color: lighten($color-primary-0, 20%);
+        }
+    }
+
+    .form-search-submit {
+        float: left;
+        height: auto;
+        margin-left: 13px;
+        padding-left: 0.6em;
+        padding-right: 0.6em;
+        border-radius: 0;
+        border: 0;
+
+        margin: 0;
+        padding: 0;
+        margin: 0 0 0 1em;
+        padding: 6px 13px;
+        background-color: lighten($color-primary-0, 10%);
+        color: lighten($color-primary-0, 30%);
+        cursor: pointer;
+    }
+}
+
+.container-header .menu,
+.container-header .form-search {
+    display: none;
+}
+
+svg {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.logo {
+    display: block;
+    float: left;
+    width: 6.8em;
+    margin: 10px;
+}
+
+.container-header .menu {
+    display: none;
+}
+
+.header-button-mobile {
+    margin: 1em 1em 0 0;
+    cursor: pointer;
+    display: block;
+    float: right;
+    width: 2em;
+    height: 2em;
+}
+
+.container-header .menu {
+    float: right;
+
+    .menu-item {
+        color: $color-white;
+        float: right;
+        padding: 22px 16px;
+        font-weight: 600;
+        line-height: 1;
+    }
+}
+
+@include breakpoint(700) {
+
+    .header-button-mobile {
+        display: none;
+    }
+
+    .container-header .form-search,
+    .container-header .menu {
+        display: block;
+    }
+}
+
+@include breakpoint(900) {
+
+    .header-button-mobile {
+        display: none;
+    }
+}

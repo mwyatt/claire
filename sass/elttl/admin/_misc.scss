@@ -1,0 +1,94 @@
+.label-title {
+	display: block;
+	margin-bottom: .5em;
+	font-size: 1.2em;
+}
+
+body {
+	background: $color-white;
+	color: darken($color-white, 50%);
+	font-family: $font-family;
+	line-height: 1.5;
+}
+
+.wrap {
+	margin: 0 auto; 
+	max-width: 860px;
+}
+
+.wrap-full-width {
+	width: 860px;
+	margin: 0 auto; 
+}
+
+.button.back {
+	float: right;
+}
+
+.button.primary,
+.button.secondary,
+.button.tertiary,
+.button {
+    // @include admin-button($color-white);
+}
+
+.nothing-yet {
+	// @include border-radius(3px);
+	text-shadow: 0 1px 0 darken($color-white, 0%);
+	background: darken($color-white, 2%);
+	text-align: center;
+	border-top: 1px solid darken($color-white, 15%);
+	border-bottom: 1px solid darken($color-white, 15%);
+	padding: 2em;
+
+	p {
+		color: darken($color-white, 40%);
+		cursor: default;
+		font-weight: 600;
+		margin: 0;
+	}
+}
+
+.toolbar {
+	margin: 0 0 1em;
+}
+
+.toolbar .button {
+	float: left;
+	margin: 0 .5em .5em 0;
+	font-size: .8em;
+	padding: .5em 1em;
+	// background: red;
+}
+
+.content.page textarea,
+.content.post textarea {
+	width: 100%;
+	font-size: 1em;
+	font-weight: 400;
+}
+
+.nav-main-container {
+
+}
+
+.nav-main {
+	float: left;
+	margin-right: 1em;
+}
+
+.page-heading {
+	margin-bottom: 1em;
+}
+
+.button,
+a.button {
+    @include button($color-primary-0);
+    color: $color-white;
+}
+
+a.content-action-link {
+    @extend .button;
+    padding: 1px 7px;
+    margin: 0 0 5px 5px;
+}

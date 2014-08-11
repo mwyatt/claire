@@ -1,0 +1,83 @@
+/**
+ * allows dynamic usage of media queries, here ranges of breakpoints
+ * can be defined then refered to in a friendly way
+ * usage:
+ *      @include breakpoint(papa-bear) { width: 60%; }
+ *      midget
+ *      dwarf
+ *      orc
+ *      human
+ *      giant
+ */
+// @mixin breakpoint($point) {
+//     @if $point == papa-bear {
+//         @media (max-width: 1600px) { @content; }
+//     }
+//     @else if $point == mama-bear {
+//         @media (max-width: 1250px) { @content; }
+//     }
+//     @else if $point == baby-bear {
+//         @media (max-width: 650px)  { @content; }
+//     }
+// }
+
+@mixin breakpoint($point) {
+    @media only screen and (min-width: $point + px) { @content; }
+}
+
+
+@mixin gradient ($startColor: #eee, $endColor: white) {
+    background-color: $startColor;
+    background: -webkit-gradient(linear, left top, left bottom, from($startColor), to($endColor));
+    background: -webkit-linear-gradient(top, $startColor, $endColor);
+    background: -moz-linear-gradient(top, $startColor, $endColor);
+    background: -ms-linear-gradient(top, $startColor, $endColor);
+    background: -o-linear-gradient(top, $startColor, $endColor);
+}
+
+
+@mixin horizontal-gradient ($startColor: #eee, $endColor: white) {
+    background-color: $startColor;
+    background-image: -webkit-gradient(linear, left top, right top, from($startColor), to($endColor));
+    background-image: -webkit-linear-gradient(left, $startColor, $endColor);
+    background-image: -moz-linear-gradient(left, $startColor, $endColor);
+    background-image: -ms-linear-gradient(left, $startColor, $endColor);
+    background-image: -o-linear-gradient(left, $startColor, $endColor);
+}
+
+
+/**
+ * Formal syntax: <single-animation-name> || <time> || <timing-function> || <time> || <single-animation-iteration-count> || <single-animation-direction> || <single-animation-fill-mode>
+ */
+@mixin animation ($string) {
+    -webkit-animation: $string;
+    -moz-animation:    $string;
+    -ms-animation:     $string;
+}
+
+
+@mixin perspective ($value: 1000) {
+    -webkit-perspective:    $value;
+    -moz-perspective:   $value;
+    -ms-perspective:    $value;
+    perspective:        $value;
+}
+
+
+@mixin transform-origin ($x:center, $y:center) {
+    -webkit-transform-origin: $x $y;
+    -moz-transform-origin:    $x $y;
+    -ms-transform-origin:     $x $y;
+    -o-transform-origin:      $x $y;
+}
+
+
+@mixin text-selection($color, $background) {
+   $prefixes: ("-moz-", "-webkit-", "-o-", "-ms-", "");
+   @each $prefix in $prefixes {
+      ::#{$prefix}selection {
+        color: $color;
+        background: $background;
+      }
+   }
+}

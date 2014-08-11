@@ -1,0 +1,115 @@
+%art-bordeaux-left {
+    background: image-url('bordeaux-left.png') bottom left no-repeat;
+}
+
+%art-bordeaux-right {
+    background: image-url('bordeaux-right.png') bottom right no-repeat;
+}
+
+.to-top {
+    border: 1px solid $color-white;
+    @include transition(all 200ms ease);
+    position: fixed;
+    bottom: 1em;
+    z-index: 1;
+    fill: $color-white;
+    right: -4em;
+    width: 2em;
+    height: 2em;
+    padding: 0.5em;
+    background-color: $color-secondary-2-0;
+    border-radius: 99em;
+
+    &:active {
+        bottom: .5em;
+        opacity: .8;
+    }
+
+    &.is-active {
+        display: block;
+        right: 1em;
+    }
+}
+
+.core-h1 {
+    text-shadow: 1px 1px $color-primary-4;
+    text-align: center;
+    padding: 0.3em;
+    background-color: $color-primary-0;
+    color: $color-white;
+    border-bottom: 1px solid $color-secondary-1-0;
+    font-size: 1.4em;
+    margin-bottom: 1em;
+}
+
+.search-result-description {
+    @extend .h4;
+    margin-bottom: 1em;
+}
+
+.page {
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 85px;
+    padding-bottom: 61px;
+}
+
+.container-footer-inner,
+.container-header-inner,
+.page {
+    max-width: 50em;
+    margin: 0 auto;
+}
+
+.container-header-inner {
+    @include clearfix;
+}
+
+.button-base {
+    padding: 12px 14px;
+    background-color: $color-gray-50;
+    color: $color-white;
+}
+
+.button-primary {
+    @extend .button-base;
+    background-color: $color-primary-0;
+}
+
+.button-secondary {
+    @extend .button-base;
+    background-color: $color-secondary-1-0;
+}
+
+@include breakpoint(600) {
+    
+    .page {
+        padding-top: 6em;
+    }
+}
+
+@include breakpoint(1300) {
+
+    html {
+        background: image-url('lightpaperfibers.png') repeat;
+    }
+
+    // .container-site {
+    //     background: image-url('bordeaux-left.png') bottom left no-repeat;
+    // }
+
+    // .container-site-inner {
+    //     background: image-url('bordeaux-right.png') bottom right no-repeat;
+    // }
+}
+
+@include breakpoint(1500) {
+
+    .container-site {
+        background: image-url('floral-left.png') top left no-repeat;
+    }
+
+    .container-site-inner {
+        background: image-url('floral-right.png') top right no-repeat;
+    }
+}

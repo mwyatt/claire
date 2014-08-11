@@ -1,0 +1,76 @@
+.content-date {
+    // color: $color-quinary;
+}
+
+.content.element .medium {
+    display: none;
+}
+
+.contents {
+    @extend .clearfix;
+}
+
+.content-status,
+.content.element .content-html {
+    display: none;
+}
+
+.content-title {
+    font-size: 1.6em;
+    margin: 0.5em 0;
+}
+
+.content-thumb-background {
+    background-size: cover;
+    height: 13em;
+    margin-bottom: 1em;
+    @extend .animated;
+    @extend .fadeIn;
+}
+
+.content.element .tags {
+    display: none;
+}
+
+.tags {
+    margin: 1em 0;
+}
+
+a.tag {
+    font-size: 0.9em;
+    margin-right: 15px;
+    margin-bottom: 15px;
+    color: $color-secondary-1-0;
+    padding: 0 0 3px;
+    float: left;
+    line-height: 1.1;
+    border-bottom: 1px solid $color-gray-10;
+}
+
+.content.element {
+    position: relative;
+    padding: 1em;
+}
+
+.content-author {
+    font-size: 0.9em;
+    float: right;
+}
+
+@include breakpoint(600) {}
+
+@include breakpoint(900) {
+
+    .content.element {
+        padding: 3%;
+    }
+}
+
+.content-single .content-date {
+    display: none;
+}
+
+.content-single.is-type-post .content-date {
+    display: block;
+    text-align: right;
+}
