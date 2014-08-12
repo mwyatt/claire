@@ -594,8 +594,38 @@ class Model extends Data
 	public function orderByPropertyStringAsc($property)
 	{
 		$data = $this->getData();
+
+		// fail silent
+		$dataSample = current($data);
+		if (! property_exists($dataSample, $property)) {
+			return;
+		}
+
+		// sort
 		uasort($data, function($a, $b) use ($property) {
 			return strcasecmp($a->$property, $b->$property);
+		});
+		$this->setData($data);
+		return $this;
+	}
+
+
+	public function orderByPropertyIntDesc($property)
+	{
+		$data = $this->getData();
+
+		// fail silent
+		$dataSample = current($data);
+		if (! property_exists($dataSample, $property)) {
+			return;
+		}
+
+		// sort
+		uasort($data, function($a, $b) use ($property) {
+			if ($a->$property == $b->$property) {
+				return 0;
+			}
+			return $a->$property > $b->$property ? -1 : 1;
 		});
 		$this->setData($data);
 		return $this;

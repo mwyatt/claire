@@ -1,6 +1,7 @@
 <?php require_once($this->pathView('admin/_header')) ?>
 
 <div class="page tennis-player-list">
+	<h1>Players</h1>
 	<table class="table-crud" width="100%">
 		<tr>
 			<th class="table-crud-heading">First Name</th>
