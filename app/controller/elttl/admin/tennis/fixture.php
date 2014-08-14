@@ -107,13 +107,12 @@ class Controller_Admin_Tennis_Fixture extends Controller_Admin
 		// teams
 		$modelTennisTeam = new model_tennis_team($this);
 		if ($isFilled) {
-			$modelTennisTeam
-				->read(array(
-					'where' => array('id' => array(
-						$fixture->getTeamIdLeft(),
-						$fixture->getTeamIdRight()
-					))
+			$modelTennisTeam->read(array(
+				'where' => array('id' => array(
+					$fixture->getTeamIdLeft(),
+					$fixture->getTeamIdRight()
 				))
+			));
  		} else {
 			$modelTennisTeam->read();
 		}
