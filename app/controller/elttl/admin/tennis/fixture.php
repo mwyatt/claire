@@ -74,20 +74,16 @@ class Controller_Admin_Tennis_Fixture extends Controller_Admin
 
 
 	/**
-	 * get single for edit
+	 * get single for edit or new
+	 * find out if is already filled based on the isFilled flag
+	 * then load only what is required
 	 * @return null 
 	 */
 	public function single()
 	{
 
-		// encounters
-		$modelTennisEncounter = new model_tennis_encounter($this);
-		$modelTennisEncounter->read(array(
-			'where' => array('fixture_id' => $this->getFixtureId())
-		));
-		if ($modelTennisEncounter->getData()) {
-			$isFilled = true;
-		}
+		// flag to mark if the fixture has been filled
+		$isFilled = false;
 
 		// fixtures
 		$modelTennisFixture = new model_tennis_Fixture($this);
@@ -95,24 +91,66 @@ class Controller_Admin_Tennis_Fixture extends Controller_Admin
 			'where' => array('id' => $this->getFixtureId())
 		));
 		$fixture = $modelTennisFixture->getDataFirst();
+		if (! $fixture) {
+			return;
+		}
+
+		// encounters
+		$modelTennisEncounter = new model_tennis_encounter($this);
+		$modelTennisEncounter->read(array(
+			'where' => array('fixture_id' => $fixture->getId())
+		));
+		if ($modelTennisEncounter->getData()) {
+			$isFilled = true;
+		}
 
 		// teams
 		$modelTennisTeam = new model_tennis_team($this);
-		$modelTennisTeam
-			->read(array(
-				'where' => array('id' => array(
-					$fixture->getTeamIdLeft(),
-					$fixture->getTeamIdRight()
+		if ($isFilled) {
+			$modelTennisTeam
+				->read(array(
+					'where' => array('id' => array(
+						$fixture->getTeamIdLeft(),
+						$fixture->getTeamIdRight()
+					))
 				))
-			))
-			->keyByProperty('id');
+ 		} else {
+			$modelTennisTeam->read();
+		}
+		$modelTennisTeam->keyByProperty('id');
+		$team = $modelTennisTeam->getDataFirst();
+
+		// divisions
+		$modelTennisDivision = new model_tennis_Division($this);
+		if ($isFilled) {
+			$modelTennisDivision->read(array(
+				'where' => array('id' => array(
+					$team->getDivisionId()
+				))
+			));
+		} else {
+			$modelTennisDivision->read();
+		}
+
+		$modelTennisPlayer = new model_tennis_Player($this);
+		if ($isFilled) {
+			$modelTennisPlayer->read(array(
+				'where' => array('team_id' => $team->getDataProperty('id'))
+			));
+		} else {
+			$modelTennisPlayer->read();
+		}
+		$modelTennisPlayer->keyByProperty('id');
+
 
 		// template
 		$this->view
-			->setObject('encounters', $modelTennisEncounter->getData())
+			->setObject('isFilled', $isFilled)
+			->setObject('divisions', $modelTennisDivision)
+			->setObject('encounters', $modelTennisEncounter)
 			->setObject('fixture', $fixture)
+			->setObject('encounterStructure', $modelTennisFixture->getEncounterStructure())
 			->setObject('teams', $modelTennisTeam)
-			->setObject('tabIndex', 1)
 			->getTemplate('admin/tennis/fixture/single');
 	}
 

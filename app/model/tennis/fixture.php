@@ -19,21 +19,21 @@ class Model_Tennis_Fixture extends Model
 
 
 	/**
-	 * structure representing the encounter pattern for a standard
+	 * structure representing the player positioning for a standard
 	 * table tennis league match
 	 * @var array
 	 */
 	public $encounterStructure = array(
-		0 => array(1, 2)
-		, 1 => array(3, 1)
-		, 2 => array(2, 3)
-		, 3 => array(3, 2)
-		, 4 => array(1, 3)
-		, 5 => array('doubles', 'doubles')
-		, 6 => array(2, 1)
-		, 7 => array(3, 3)
-		, 8 => array(2, 2)
-		, 9 => array(1, 1)
+		array(1, 2),
+		array(3, 1),
+		array(2, 3),
+		array(3, 2),
+		array(1, 3),
+		array('doubles', 'doubles'),
+		array(2, 1),
+		array(3, 3),
+		array(2, 2),
+		array(1, 1)
 	);
 
 
