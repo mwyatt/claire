@@ -1,33 +1,198 @@
 
 
 var Page_Tennis_Fixture_Single = function (options) {
-	console.log('Page_Tennis_Fixture_Single->ready');
-	this.setForms(this);
+	console.log('Page_Tennis_Fixture_Single.ready');
+	this.setResource(pageTennisFixtureSingleResource);
+	this.exclude();
+	this.eventsRefresh(this);
 };
 
 
-Page_Tennis_Fixture_Single.prototype.setForms = function(data) {
+Page_Tennis_Fixture_Single.prototype.eventsRefresh = function(data) {
 
+	// division
+	$('.js-fixture-single-division').on('change.page-tennis-fixture-single', function(event) {
+		data.divisionChange(data, $(this));
+	});
+
+	// team
+	$('.js-fixture-single-team').on('change.page-tennis-fixture-single', function(event) {
+		data.teamChange(data, $(this));
+	});
+
+	// player
+	$('.js-fixture-single-player').on('change.page-tennis-fixture-single', function(event) {
+		data.playerChange(data, $(this));
+	});
+
+	// player.play-up
+	$('.js-fixture-single-button-play-up').on('click', function(event) {
+		data.playUp(data, $(this));
+	});
 };
 
 
+Page_Tennis_Fixture_Single.prototype.playUp = function(data, trigger) {
 
-var exclude = {
-	container: $('.exclude'),
+	// resource
+	var resource = data.getResource();
+	var side = trigger.data('side');
+	var position = trigger.data('position');
+	var players = resource.players;
+	var player;
+	var html = '';
 
-	init: function() {
-		$(exclude.container).on('click', exclude.isChecked);
-	},
+	// empty player and add initial value
+	var playerSelect = $('.js-fixture-single-player[data-side="' + side + '"][data-position="' + position + '"]').html(data.getOption('', ''));
 
-	isChecked: function() {
-		if ($(this).find('input').prop('checked')) {
-			$(this).closest('.row.score').addClass('excluded');
-		} else {
-			$(this).closest('.row.score').removeClass('excluded');
-		}
+	// fill player select with all players
+	for (var i = players.length - 1; i >= 0; i--) {
+		player = players[i];
+		html += data.getOption(player.name_first + ' ' + player.name_last, player.id);
+	};
+	playerSelect.html(playerSelect.html() + html);
+};
+
+
+Page_Tennis_Fixture_Single.prototype.getOption = function(name, value) {
+	return '<option value="' + value + '">' + name + '</option>';
+};
+
+
+/**
+ * the division select has changed
+ * @param  {object} data    
+ * @param  {object} trigger select
+ * @return {null}         
+ */
+Page_Tennis_Fixture_Single.prototype.divisionChange = function(data, trigger) {
+
+	// resource
+	var resource = data.getResource();
+	var divisionId = trigger.val();
+	var teams = resource.teams;
+	var team;
+	var html = '';
+
+	// empty team, player and add initial values
+	var teamSelect = $('.js-fixture-single-team').html(data.getOption('', ''));
+	$('.js-fixture-single-player').html(data.getOption('', ''));
+
+	// fill team selects with teams from the division
+	for (var i = teams.length - 1; i >= 0; i--) {
+		team = teams[i];
+		if (team.division_id == divisionId) {
+			html += data.getOption(team.name, team.id);
+		};
+	};
+	teamSelect.html(teamSelect.html() + html);
+};
+
+
+/**
+ * the team select has changed
+ * @param  {object} data    
+ * @param  {object} trigger select
+ * @return {null}         
+ */
+Page_Tennis_Fixture_Single.prototype.teamChange = function(data, trigger) {
+
+	// resource
+	var resource = data.getResource();
+	var teamId = trigger.val();
+	var side = trigger.data('side');
+	var players = resource.players;
+	var player;
+	var html = '';
+
+	// empty player and add initial values
+	var playerSelect = $('.js-fixture-single-player[data-side="' + side + '"]').html(data.getOption('', ''));
+
+	// fill team selects with player from the team
+	for (var i = players.length - 1; i >= 0; i--) {
+		player = players[i];
+		if (player.team_id == teamId) {
+			html += data.getOption(player.name_first + ' ' + player.name_last, player.id);
+		};
+	};
+	playerSelect.html(playerSelect.html() + html);
+	data.playerArrange(data, side);
+};
+
+
+Page_Tennis_Fixture_Single.prototype.updatePlayerLabel = function(data, side, position, playerName) {
+	console.log(data, side, position, playerName);
+	$('.js-fixture-single-score-row-encounter-label[data-side="' + side + '"][data-position="' + position + '"]').html(playerName);
+};
+
+
+/**
+ * arranges players into their select slots
+ * @param  {object} data 
+ * @param  {string} side left, right
+ * @return {null}      
+ */
+Page_Tennis_Fixture_Single.prototype.playerArrange = function(data, side) {
+	var options;
+	var option;
+	for (var position = 1; position < 4; position ++) { 
+		options = $('.js-fixture-single-player[data-side="' + side + '"][data-position="' + position + '"]').find('option');
+		for (var index = options.length - 1; index >= 0; index--) {
+			joption = $(options[index]);
+			if (index == position) {
+				joption.prop('selected', 'selected');
+				data.updatePlayerLabel(data, side, position, joption.html());
+			}
+		};
 	}
 };
 
+
+/**
+ * the player select has changed
+ * @param  {object} data    
+ * @param  {object} trigger select
+ * @return {null}         
+ */
+Page_Tennis_Fixture_Single.prototype.playerChange = function(data, trigger) {
+	data.updatePlayerLabel(data, trigger.data('side'), trigger.data('position'), trigger.find('option:selected').html());
+};
+
+
+/**
+ * handles exclusion of particular row
+ * @return {null} 
+ */
+Page_Tennis_Fixture_Single.prototype.exclude = function() {
+	$('.js-fixture-single-score-row-exclude-checkbox').on('click.page-tennis-fixture-single', function(event) {
+		var jthis = $(this);
+		jthis.closest('.js-fixture-single-score-row').removeClass('is-excluded');
+		if (jthis.prop('checked')) {
+			jthis.closest('.js-fixture-single-score-row').addClass('is-excluded');
+		};
+	});
+};
+
+
+/**
+ * currently contains:
+ * 		divisions
+ * 		teams
+ * 		players
+ * @return {array} 
+ */
+Page_Tennis_Fixture_Single.prototype.getResource = function() {
+	return this.resource;
+};
+
+
+/**
+ * sets the database resource which was json encoded
+ * @param {object} resource 
+ */
+Page_Tennis_Fixture_Single.prototype.setResource = function(resource) {
+	this.resource = resource;
+};
 
 
 var select = {
@@ -49,21 +214,21 @@ var select = {
 		$('.play-up').on('mouseup', select.playUp);
 	},
 
-	loadTeam: function() {
-		select._reset('player');
-		$(select.team).html('');
+	// loadTeam: function() {
+	// 	select._reset('player');
+	// 	$(select.team).html('');
 
-		$.getJSON(url.base + '/ajax/team/?division_id=' + $(select.division).val(), function(results) {
-			if (results) {
-				$(select.team).append('<option value="0"></option>');
-				$.each(results, function(index, result) {
-					$(select.team).append('<option value="' + result.id + '">' + result.name + '</option>');
-				});
-				$(select.team).on('change', select.loadPlayer);
-				$(select.team).prop("disabled", false);
-			}
-		});		
-	},
+	// 	$.getJSON(url.base + '/ajax/team/?division_id=' + $(select.division).val(), function(results) {
+	// 		if (results) {
+	// 			$(select.team).append('<option value="0"></option>');
+	// 			$.each(results, function(index, result) {
+	// 				$(select.team).append('<option value="' + result.id + '">' + result.name + '</option>');
+	// 			});
+	// 			$(select.team).on('change', select.loadPlayer);
+	// 			$(select.team).prop("disabled", false);
+	// 		}
+	// 	});		
+	// },
 
 	playUp: function() {
 		var playerSelect;

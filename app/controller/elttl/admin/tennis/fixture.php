@@ -83,26 +83,23 @@ class Controller_Admin_Tennis_Fixture extends Controller_Admin
 	{
 
 		// flag to mark if the fixture has been filled
-		$isFilled = false;
-
-		// fixtures
-		$modelTennisFixture = new model_tennis_Fixture($this);
-		$modelTennisFixture->read(array(
-			'where' => array('id' => $this->getFixtureId())
-		));
-		$fixture = $modelTennisFixture->getDataFirst();
-		if (! $fixture) {
-			return;
-		}
-
-		// encounters
 		$modelTennisEncounter = new model_tennis_encounter($this);
 		$modelTennisEncounter->read(array(
-			'where' => array('fixture_id' => $fixture->getId())
+			'where' => array('fixture_id' => $this->getFixtureId())
 		));
+		$isFilled = false;
 		if ($modelTennisEncounter->getData()) {
 			$isFilled = true;
 		}
+
+		// fixtures
+		$modelTennisFixture = new model_tennis_Fixture($this);
+		if ($isFilled) {
+			$modelTennisFixture->read(array(
+				'where' => array('id' => $this->getFixtureId())
+			));
+		}
+		$fixture = $modelTennisFixture->getDataFirst();
 
 		// teams
 		$modelTennisTeam = new model_tennis_team($this);
@@ -116,7 +113,6 @@ class Controller_Admin_Tennis_Fixture extends Controller_Admin
  		} else {
 			$modelTennisTeam->read();
 		}
-		$modelTennisTeam->keyByProperty('id');
 		$team = $modelTennisTeam->getDataFirst();
 
 		// divisions
@@ -131,6 +127,7 @@ class Controller_Admin_Tennis_Fixture extends Controller_Admin
 			$modelTennisDivision->read();
 		}
 
+		// player
 		$modelTennisPlayer = new model_tennis_Player($this);
 		if ($isFilled) {
 			$modelTennisPlayer->read(array(
@@ -139,13 +136,14 @@ class Controller_Admin_Tennis_Fixture extends Controller_Admin
 		} else {
 			$modelTennisPlayer->read();
 		}
-		$modelTennisPlayer->keyByProperty('id');
-
+		$modelTennisPlayer->orderByPropertyStringAsc('name_last');
+		$modelTennisPlayer->setData(array_values($modelTennisPlayer->getData()));
 
 		// template
 		$this->view
 			->setObject('isFilled', $isFilled)
 			->setObject('divisions', $modelTennisDivision)
+			->setObject('players', $modelTennisPlayer)
 			->setObject('encounters', $modelTennisEncounter)
 			->setObject('fixture', $fixture)
 			->setObject('encounterStructure', $modelTennisFixture->getEncounterStructure())
