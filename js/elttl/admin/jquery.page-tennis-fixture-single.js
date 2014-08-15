@@ -2,23 +2,85 @@
 
 var Page_Tennis_Fixture_Single = function (options) {
 	console.log('Page_Tennis_Fixture_Single.ready');
+	this.isFilled;
 	this.setResource(pageTennisFixtureSingleResource);
 	this.exclude();
+	this.determineState(this);
 	this.eventsRefresh(this);
+
+	// filled is setup in a new way
+	if (this.getIsFilled()) {
+		this.formFill(this);
+	};
+};
+
+
+Page_Tennis_Fixture_Single.prototype.formFill = function(data) {
+
+	// resource
+	var resource = data.getResource();
+	var fixture = resource.fixture;
+	var encounters = resource.encounters;
+	var encounter;
+	var divisions = resource.divisions;
+	var division;
+	var teams = resource.teams;
+	var team;
+	var players = resource.players;
+	var player;
+	var html = '';
+	var sides = ['left', 'right'];
+	var side;
+
+	// fill division
+	for (var i = divisions.length - 1; i >= 0; i--) {
+		division = divisions[i];
+		$('.js-fixture-single-division').html(data.getOption(division.name, division.id));
+	};
+
+	// fill teams using fixture as template
+	for (var a = sides.length - 1; a >= 0; a--) {
+		side = sides[a];
+		for (var b = teams.length - 1; b >= 0; b--) {
+			team = teams[b];
+			if (fixture['team_id_' + side] == team.id) {
+				$('.js-fixture-single-team[data-side="' + side + '"]').html(data.getOption(team.name, team.id));
+			};
+		};
+	};
+
+	// fill players using encounters as template
+	
+};
+
+
+
+
+/**
+ * sets up the state of the fixture, is it filled or not?
+ * @param  {object} data 
+ * @return {null}      
+ */
+Page_Tennis_Fixture_Single.prototype.determineState = function(data) {
+	var resource = data.getResource();
+	this.setIsFilled(resource.isFilled);
 };
 
 
 Page_Tennis_Fixture_Single.prototype.eventsRefresh = function(data) {
 
-	// division
-	$('.js-fixture-single-division').on('change.page-tennis-fixture-single', function(event) {
-		data.divisionChange(data, $(this));
-	});
+	if (data.isFilled) {
 
-	// team
-	$('.js-fixture-single-team').on('change.page-tennis-fixture-single', function(event) {
-		data.teamChange(data, $(this));
-	});
+		// division
+		$('.js-fixture-single-division').on('change.page-tennis-fixture-single', function(event) {
+			data.divisionChange(data, $(this));
+		});
+
+		// team
+		$('.js-fixture-single-team').on('change.page-tennis-fixture-single', function(event) {
+			data.teamChange(data, $(this));
+		});
+	};
 
 	// player
 	$('.js-fixture-single-player').on('change.page-tennis-fixture-single', function(event) {
@@ -192,6 +254,22 @@ Page_Tennis_Fixture_Single.prototype.getResource = function() {
  */
 Page_Tennis_Fixture_Single.prototype.setResource = function(resource) {
 	this.resource = resource;
+	return this;
+};
+
+
+Page_Tennis_Fixture_Single.prototype.getIsFilled = function() {
+	return this.isFilled;
+};
+
+
+/**
+ * sets the database IsFilled which was json encoded
+ * @param {object} IsFilled 
+ */
+Page_Tennis_Fixture_Single.prototype.setIsFilled = function(isFilled) {
+	this.isFilled = isFilled;
+	return this;
 };
 
 

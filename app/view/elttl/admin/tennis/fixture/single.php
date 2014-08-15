@@ -3,13 +3,16 @@
 
 <script>
 	var pageTennisFixtureSingleResource = {
+		isFilled: <?php echo json_encode($isFilled) ?>,
+		fixture: <?php echo json_encode($fixture) ?>,
+		encounters: <?php echo json_encode($encounters) ?>,
 		divisions: <?php echo json_encode($divisions) ?>,
 		teams: <?php echo json_encode($teams) ?>,
 		players: <?php echo json_encode($players) ?>
 	};
 </script>
 <div class="page tennis-fixture-single js-tennis-fixture-single">
-	<h2 class="page-heading"><?php echo ($fixture ? 'Update' : 'Fulfill') ?> scorecard</h2>
+	<h2 class="page-heading"><?php echo ($isFilled ? 'Update' : 'Fulfill') ?> scorecard</h2>
 	<form class="main" method="post" class="fixture-single-form">
 
 <?php if ($divisions): ?>
@@ -99,7 +102,7 @@
 
 		</section>
 		<section class="fixture-single-section">
-			<span class="js-form-button-submit"><?php echo ($fixture ? 'Update' : 'Fulfill') ?></span>
+			<span class="js-form-button-submit"><?php echo ($isFilled ? 'Update' : 'Fulfill') ?></span>
 		</section>
 	</form>
 </div>

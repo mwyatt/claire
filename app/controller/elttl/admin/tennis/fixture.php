@@ -113,15 +113,12 @@ class Controller_Admin_Tennis_Fixture extends Controller_Admin
  		} else {
 			$modelTennisTeam->read();
 		}
-		$team = $modelTennisTeam->getDataFirst();
 
 		// divisions
 		$modelTennisDivision = new model_tennis_Division($this);
 		if ($isFilled) {
 			$modelTennisDivision->read(array(
-				'where' => array('id' => array(
-					$team->getDivisionId()
-				))
+				'where' => array('id' => $modelTennisTeam->getDataProperty('division_id'))
 			));
 		} else {
 			$modelTennisDivision->read();
@@ -131,7 +128,7 @@ class Controller_Admin_Tennis_Fixture extends Controller_Admin
 		$modelTennisPlayer = new model_tennis_Player($this);
 		if ($isFilled) {
 			$modelTennisPlayer->read(array(
-				'where' => array('team_id' => $team->getDataProperty('id'))
+				'where' => array('team_id' => $modelTennisTeam->getDataProperty('id'))
 			));
 		} else {
 			$modelTennisPlayer->read();
