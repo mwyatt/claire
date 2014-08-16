@@ -66,13 +66,13 @@
 
 	<?php foreach ($encounterStructure as $row => $playerPositions) : ?>
 
-			<div class="fixture-single-score-row js-fixture-single-score-row">
+			<div class="fixture-single-score-row js-fixture-single-score-row" data-row="<?php echo $row ?>">
 			
 		<?php if (! in_array('doubles', $playerPositions)): ?>
 			
 				<div class="fixture-single-score-row-exclude">
 					<label for="exclude_<?php echo $row ?>" class="fixture-single-score-row-exclude-label">Exclude</label>
-					<input id="exclude_<?php echo $row ?>" type="checkbox" name="encounter[<?php echo $row ?>][exclude]" class="fixture-single-score-row-exclude-checkbox js-fixture-single-score-row-exclude-checkbox">
+					<input id="exclude_<?php echo $row ?>" type="checkbox" name="encounter[<?php echo $row ?>][exclude]" class="fixture-single-score-row-exclude-checkbox js-fixture-single-score-row-exclude-checkbox" data-row="<?php echo $row ?>">
 				</div>
 
 		<?php endif ?>
@@ -80,7 +80,7 @@
 			<?php $playerPosition = $playerPositions[$side == 'left' ? 0 : 1] ?>
 
 				<label for="encounter_<?php echo $row ?>_<?php echo $side ?>" class="fixture-single-score-row-encounter-label js-fixture-single-score-row-encounter-label fixture-single-score-row-encounter-label-<?php echo $side ?>" data-position="<?php echo $playerPosition ?>" data-side="<?php echo $side ?>"></label>
-				<input id="encounter_<?php echo $row ?>_<?php echo $side ?>" name="encounter[<?php echo $row ?>][<?php echo $side ?>]" type="text" size="1" maxlength="1" value="">
+				<input id="encounter_<?php echo $row ?>_<?php echo $side ?>" name="encounter[<?php echo $row ?>][<?php echo $side ?>]" class="fixture-single-encounter-input js-fixture-single-encounter-input" type="text" size="1" maxlength="1" value="" data-row="<?php echo $row ?>" data-side="<?php echo $side ?>">
 			
 		<?php endforeach ?>
 
@@ -96,7 +96,7 @@
 
 <?php foreach ($sides as $side): ?>
 	
-			<span class="fixture-single-total-<?php echo $side ?>"></span>
+			<span class="fixture-single-total-<?php echo $side ?> js-fixture-single-total" data-side="<?php echo $side ?>"></span>
 	
 <?php endforeach ?>
 

@@ -4,7 +4,6 @@ var Page_Tennis_Fixture_Single = function (options) {
 	console.log('Page_Tennis_Fixture_Single.ready');
 	this.isFilled;
 	this.setResource(pageTennisFixtureSingleResource);
-	this.exclude();
 	this.determineState(this);
 	this.eventsRefresh(this);
 
@@ -12,6 +11,14 @@ var Page_Tennis_Fixture_Single = function (options) {
 	if (this.getIsFilled()) {
 		this.formFill(this);
 	};
+
+	// force update of score
+	this.updateScore(this);
+};
+
+
+Page_Tennis_Fixture_Single.prototype.getSides = function(data) {
+	return ['left', 'right'];
 };
 
 
@@ -26,11 +33,13 @@ Page_Tennis_Fixture_Single.prototype.formFill = function(data) {
 	var division;
 	var teams = resource.teams;
 	var team;
+	var teamId;
 	var players = resource.players;
 	var player;
 	var html = '';
-	var sides = ['left', 'right'];
+	var sides = data.getSides();
 	var side;
+	var position;
 
 	// fill division
 	for (var i = divisions.length - 1; i >= 0; i--) {
@@ -49,11 +58,79 @@ Page_Tennis_Fixture_Single.prototype.formFill = function(data) {
 		};
 	};
 
-	// fill players using encounters as template
-	
+	// fill players using teams as reference
+	for (var a = sides.length - 1; a >= 0; a--) {
+		html = data.getOption('', '');
+		side = sides[a];
+		teamId = $('.js-fixture-single-team[data-side="' + side + '"]').val();
+		for (var b = players.length - 1; b >= 0; b--) {
+			player = players[b];
+			if (player.team_id == teamId) {
+				html += data.getOption(player.name_first + ' ' + player.name_last, player.id);
+			};
+		};
+		$('.js-fixture-single-player[data-side="' + side + '"]').html(html);
+	};
+
+	// arrange players based on encounters
+	var options;
+	var joption;
+	var playerId;
+	position = 1;
+	for (var s = sides.length - 1; s >= 0; s--) {
+		side = sides[s];
+		for (var position = 1; position < 4; position ++) {
+			encounter = encounters[position - 1];
+			playerId = encounter['player_id_' + side];
+			options = $('.js-fixture-single-player[data-side="' + side + '"][data-position="' + position + '"]').find('option');
+			for (var o = options.length - 1; o >= 0; o--) {
+				joption = $(options[o]);
+				if (playerId == joption.val()) {
+					joption.prop('selected', 'selected');
+					data.updatePlayerLabel(data, side, position, joption.html());
+				};
+			};
+		};
+	};
+
+	// fill encounters
+	for (var e = encounters.length - 1; e >= 0; e--) {
+		encounter = encounters[e];
+
+		// excludes
+		if (encounter.status == 'exclude') {
+			data.encounterExclude(data, $('.js-fixture-single-score-row-exclude-checkbox[data-row="' + e + '"]'));
+		};
+
+		// scores
+		for (var s = sides.length - 1; s >= 0; s--) {
+			side = sides[s];
+			$('.js-fixture-single-encounter-input[data-side="' + side + '"][data-row="' + e + '"]').val(encounter['score_' + side]);
+		};
+	};
 };
 
 
+Page_Tennis_Fixture_Single.prototype.updateScore = function(data) {
+
+	// resources
+	var sides = data.getSides();
+	var total;
+	var inputScores;
+	var jinputScore;
+	
+	// count each side and change total
+	for (var s = sides.length - 1; s >= 0; s--) {
+		side = sides[s];
+		total = 0;
+		inputScores = $('.js-fixture-single-encounter-input[data-side="' + side + '"]');
+		for (var r = inputScores.length - 1; r >= 0; r--) {
+			jinputScore = $(inputScores[r]);
+			total += parseInt(jinputScore.val());
+		};
+		$('.js-fixture-single-total[data-side="' + side + '"]').html(total.toString());
+	};
+};
 
 
 /**
@@ -69,7 +146,7 @@ Page_Tennis_Fixture_Single.prototype.determineState = function(data) {
 
 Page_Tennis_Fixture_Single.prototype.eventsRefresh = function(data) {
 
-	if (data.isFilled) {
+	if (! data.isFilled) {
 
 		// division
 		$('.js-fixture-single-division').on('change.page-tennis-fixture-single', function(event) {
@@ -88,9 +165,33 @@ Page_Tennis_Fixture_Single.prototype.eventsRefresh = function(data) {
 	});
 
 	// player.play-up
-	$('.js-fixture-single-button-play-up').on('click', function(event) {
+	$('.js-fixture-single-button-play-up').on('click.page-tennis-fixture-single', function(event) {
 		data.playUp(data, $(this));
 	});
+
+	// encounter exclude
+	$('.js-fixture-single-score-row-exclude-checkbox').on('click.page-tennis-fixture-single', function(event) {
+		event.preventDefault();
+		data.encounterExclude(data, $(this));
+	});
+
+	// select score when clicking
+	$('.js-fixture-single-encounter-input').on('click.page-tennis-fixture-single', function(event) {
+		$(this).select();
+	});
+
+	// update totals when changing the encounter inputs
+	$('.js-fixture-single-encounter-input').on('change.page-tennis-fixture-single', function(event) {
+		console.log($(this).val());
+		data.updateScore(data);
+	});
+};
+
+
+Page_Tennis_Fixture_Single.prototype.encounterExclude = function(data, trigger) {
+	var row = trigger.closest('.js-fixture-single-score-row').toggleClass('is-excluded');
+	trigger.prop('checked', row.hasClass('is-excluded'));
+	console.log(trigger.prop('checked'));
 };
 
 
@@ -183,7 +284,6 @@ Page_Tennis_Fixture_Single.prototype.teamChange = function(data, trigger) {
 
 
 Page_Tennis_Fixture_Single.prototype.updatePlayerLabel = function(data, side, position, playerName) {
-	console.log(data, side, position, playerName);
 	$('.js-fixture-single-score-row-encounter-label[data-side="' + side + '"][data-position="' + position + '"]').html(playerName);
 };
 
@@ -196,7 +296,7 @@ Page_Tennis_Fixture_Single.prototype.updatePlayerLabel = function(data, side, po
  */
 Page_Tennis_Fixture_Single.prototype.playerArrange = function(data, side) {
 	var options;
-	var option;
+	var joption;
 	for (var position = 1; position < 4; position ++) { 
 		options = $('.js-fixture-single-player[data-side="' + side + '"][data-position="' + position + '"]').find('option');
 		for (var index = options.length - 1; index >= 0; index--) {
@@ -218,21 +318,6 @@ Page_Tennis_Fixture_Single.prototype.playerArrange = function(data, side) {
  */
 Page_Tennis_Fixture_Single.prototype.playerChange = function(data, trigger) {
 	data.updatePlayerLabel(data, trigger.data('side'), trigger.data('position'), trigger.find('option:selected').html());
-};
-
-
-/**
- * handles exclusion of particular row
- * @return {null} 
- */
-Page_Tennis_Fixture_Single.prototype.exclude = function() {
-	$('.js-fixture-single-score-row-exclude-checkbox').on('click.page-tennis-fixture-single', function(event) {
-		var jthis = $(this);
-		jthis.closest('.js-fixture-single-score-row').removeClass('is-excluded');
-		if (jthis.prop('checked')) {
-			jthis.closest('.js-fixture-single-score-row').addClass('is-excluded');
-		};
-	});
 };
 
 
@@ -308,26 +393,26 @@ var select = {
 	// 	});		
 	// },
 
-	playUp: function() {
-		var playerSelect;
-		var playUpButton = $(this);
-		$(playUpButton).off();
-		if ($(this).hasClass('left')) {
-			playerSelect = $(this).parent().find('select[name^="player[left]"]');
-		} else {
-			playerSelect = $(this).parent().find('select[name^="player[right]"]');
-		}
-		$.getJSON(url.base + '/ajax/player/', function(results) {
-			if (results) {
-				$(playerSelect).html('');
-				$.each(results, function(index, result) {
-					$(playerSelect).append('<option value="' + result.id + '">' + result.name + '</option>');
-				});
-				$(playerSelect).on('change', select.changePlayer);
-				$(playUpButton).fadeOut('fast');
-			}
-		});
-	},
+	// playUp: function() {
+	// 	var playerSelect;
+	// 	var playUpButton = $(this);
+	// 	$(playUpButton).off();
+	// 	if ($(this).hasClass('left')) {
+	// 		playerSelect = $(this).parent().find('select[name^="player[left]"]');
+	// 	} else {
+	// 		playerSelect = $(this).parent().find('select[name^="player[right]"]');
+	// 	}
+	// 	$.getJSON(url.base + '/ajax/player/', function(results) {
+	// 		if (results) {
+	// 			$(playerSelect).html('');
+	// 			$.each(results, function(index, result) {
+	// 				$(playerSelect).append('<option value="' + result.id + '">' + result.name + '</option>');
+	// 			});
+	// 			$(playerSelect).on('change', select.changePlayer);
+	// 			$(playUpButton).fadeOut('fast');
+	// 		}
+	// 	});
+	// },
 
 	updatePlayerLabel: function(side, index, name) {
 		$('label[for$="' + side + '"].player-' + index).html(name);
