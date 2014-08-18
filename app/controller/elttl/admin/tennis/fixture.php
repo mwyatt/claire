@@ -48,6 +48,11 @@ class Controller_Admin_Tennis_Fixture extends Controller_Admin
 			return $this->single();
 		}
 
+		// fulfill
+		if ($this->url->getPathPart(3)) {
+			return $this->single();
+		}
+
 		// all
 		$this->read();
 	}

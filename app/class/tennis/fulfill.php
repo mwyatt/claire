@@ -112,12 +112,86 @@ class Tennis_Fulfill extends Data
 {
 
 
+    public $fixture;
+
+
 	public function __construct()
 	{
 		if (! $this->validate()) {
 			return;
 		}
+        if (! $this->readFixture()) {
+            return;
+        }
+        if ($this->isFilled()) {
+            $this->clear();
+        }
+        $this->begin();
 	}
+
+
+    public function isFilled()
+    {
+        $fixture = $this->getFixture();
+        $fixture->get
+    }
+
+    /**
+     * begin the fulfill process
+     * always a blank slate
+     * @return null
+     */
+    public function begin()
+    {
+        
+    }
+
+
+    /**
+     * revert existing filled fixture
+     * @return null 
+     */
+    public function clear()
+    {
+        
+    }
+
+
+    /**
+     * retrieve fixture and store
+     * @return bool  
+     */
+    public function readFixture()
+    {
+        $modelTennisFixture = new model_tennis_fixture($this);
+        $modelTennisFixture->read(array(
+            'where' => array(
+                'id' => $_REQUEST['fixture_id']
+            )
+        ));
+        if (! $data = $modelTennisFixture->getData()) {
+            $this->session->set('feedback', 'This fixture does not exist');
+            return;
+        }
+        return $this->setFixture($data);
+    }
+
+
+    /**
+     * @return object mold_fixture
+     */
+    public function getFixture() {
+        return $this->fixture;
+    }
+    
+    
+    /**
+     * @param object $fixture Mold_fixture
+     */
+    public function setFixture($fixture) {
+        $this->fixture = $fixture;
+        return $this;
+    }
 
 
     /**
@@ -140,11 +214,4 @@ class Tennis_Fulfill extends Data
 		}
 		return true;
 	}
-
-
-	public function FunctionName($value='')
-	{
-		# code...
-	}
-	array($_POST['team']['left'], $_POST['team']['right'])
 } 
