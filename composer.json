@@ -1,0 +1,5 @@
+{
+    "require": {
+        "aura/session": "dev-master"
+    }
+}

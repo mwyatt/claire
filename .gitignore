@@ -6,3 +6,4 @@ Guardfile
 asset/
 node_modules/
 app/credentials.php
+vendor/
