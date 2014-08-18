@@ -1,5 +1,103 @@
 <?php
+/*
+Array
+(
+    [fixture_id] => 120
+    [division_id] => 2
+    [team] => Array
+        (
+            [left] => 16
+            [right] => 46
+        )
 
+    [player] => Array
+        (
+            [left] => Array
+                (
+                    [1] => 56
+                    [2] => 261
+                    [3] => 216
+                )
+
+            [right] => Array
+                (
+                    [1] => 298
+                    [2] => 14
+                    [3] => 
+                )
+
+        )
+
+    [encounter] => Array
+        (
+            [0] => Array
+                (
+                    [left] => 3
+                    [right] => 0
+                )
+
+            [1] => Array
+                (
+                    [left] => 0
+                    [right] => 3
+                )
+
+            [2] => Array
+                (
+                    [exclude] => on
+                    [left] => 3
+                    [right] => 0
+                )
+
+            [3] => Array
+                (
+                    [left] => 2
+                    [right] => 3
+                )
+
+            [4] => Array
+                (
+                    [exclude] => on
+                    [left] => 3
+                    [right] => 0
+                )
+
+            [5] => Array
+                (
+                    [left] => 1
+                    [right] => 3
+                )
+
+            [6] => Array
+                (
+                    [left] => 2
+                    [right] => 3
+                )
+
+            [7] => Array
+                (
+                    [exclude] => on
+                    [left] => 3
+                    [right] => 0
+                )
+
+            [8] => Array
+                (
+                    [left] => 1
+                    [right] => 3
+                )
+
+            [9] => Array
+                (
+                    [left] => 2
+                    [right] => 3
+                )
+
+        )
+
+)
+
+ */
 
 /**
  * fulfill / update a fixture
@@ -22,6 +120,11 @@ class Tennis_Fulfill extends Data
 	}
 
 
+    /**
+     * ensure correct data is present, otherwise return to single with
+     * error msg
+     * @return bool
+     */
 	public function validate()
 	{
 		$global = '_REQUEST';

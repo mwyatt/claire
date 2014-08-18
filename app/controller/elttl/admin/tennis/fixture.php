@@ -33,14 +33,18 @@ class Controller_Admin_Tennis_Fixture extends Controller_Admin
 	public function run()
 	{
 
+		echo '<pre>';
+		print_r($_REQUEST);
+		echo '</pre>';
+		// exit;
+		if (array_key_exists('division_id', $_REQUEST)) {
+			$this->update();
+		}
+		
+
 		// single
 		if (array_key_exists('fixture_id', $_REQUEST)) {
 			$this->setFixtureId($_REQUEST['fixture_id']);
-			return $this->single();
-		}
-
-		// update
-		if ($this->url->getPathPart(3)) {
 			return $this->single();
 		}
 
