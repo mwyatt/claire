@@ -32,11 +32,6 @@ class Controller_Admin_Tennis_Fixture extends Controller_Admin
 
 	public function run()
 	{
-
-		echo '<pre>';
-		print_r($_REQUEST);
-		echo '</pre>';
-		// exit;
 		if (array_key_exists('division_id', $_REQUEST)) {
 			$this->update();
 		}
@@ -165,5 +160,6 @@ class Controller_Admin_Tennis_Fixture extends Controller_Admin
 	public function update()
 	{
 		$tennisFulfill = new tennis_fulfill($this);
+		$tennisFulfill->run();
 	}
 }
