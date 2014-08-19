@@ -72,8 +72,12 @@
 			
 				<div class="fixture-single-score-row-exclude">
 					<label for="exclude_<?php echo $row ?>" class="fixture-single-score-row-exclude-label">Exclude</label>
-					<input id="exclude_<?php echo $row ?>" type="checkbox" name="encounter[<?php echo $row ?>][exclude]" class="fixture-single-score-row-exclude-checkbox js-fixture-single-score-row-exclude-checkbox" data-row="<?php echo $row ?>">
+					<input id="exclude_<?php echo $row ?>" type="checkbox" name="encounter[<?php echo $row ?>][status]" class="fixture-single-score-row-exclude-checkbox js-fixture-single-score-row-exclude-checkbox" data-row="<?php echo $row ?>" value="exclude">
 				</div>
+
+		<?php else: ?>
+
+				<input name="encounter[<?php echo $row ?>][status]" type="hidden" value="doubles">
 
 		<?php endif ?>
 		<?php foreach ($sides as $side): ?>

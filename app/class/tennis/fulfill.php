@@ -108,7 +108,8 @@ $modelEncounter->update(
         foreach ($modelFixture->getEncounterStructure() as $row => $positions) {
             $config = (object) array(
                 'row' => $row,
-                'positions' => $positions
+                'positions' => $positions,
+                'status' => ''
             );
             $this->encounter($config);
         }
@@ -117,15 +118,25 @@ $modelEncounter->update(
 
     public function encounter($config)
     {
+
+        echo '<pre>';
+        print_r('variable');
+        echo '</pre>';
+        exit;
+        
         $fixture = $this->getFixture();
+        $inputEncounter = $_REQUEST['encounter'][$config->row];
+        if (array_key_exists('status', $inputEncounter)) {
+            $config->status = $inputEncounter['status'];
+        }
         $modelEncounter = new model_tennis_Encounter($this);
         $moldEncounter = new mold_tennis_encounter();
         $moldEncounter->setfixtureId($fixture->getId());
-        $moldEncounter->setScoreLeft();
-        $moldEncounter->setScoreRight();
-        $moldEncounter->setPlayerIdLeft();
-        $moldEncounter->setPlayerIdRight();
-        $moldEncounter->setStatus();
+        $moldEncounter->setScoreLeft($inputEncounter['left']);
+        $moldEncounter->setScoreRight($inputEncounter['right']);
+        $moldEncounter->setPlayerIdLeft($inputEncounter['player']['left'][reset($config->positions)]);
+        $moldEncounter->setPlayerIdRight($inputEncounter['player']['right'][end($config->positions)]);
+        $moldEncounter->setStatus($config->status);
         $modelEncounter->create($moldEncounter);
     }
 

@@ -194,7 +194,7 @@ Page_Tennis_Fixture_Single.prototype.eventsRefresh = function(data) {
 
 	// encounter exclude
 	$('.js-fixture-single-score-row-exclude-checkbox').on('click.page-tennis-fixture-single', function(event) {
-		event.preventDefault();
+		// event.preventDefault();
 		data.encounterExclude(data, $(this));
 	});
 
