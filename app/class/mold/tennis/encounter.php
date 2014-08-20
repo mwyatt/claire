@@ -140,4 +140,38 @@ class Mold_Tennis_Encounter extends Mold
 	    $this->status = $status;
 	    return $this;
 	}
+
+
+	/**
+	 * @return int 
+	 */
+	public function getPlayerRankChangeLeft() {
+	    return $this->player_rank_change_left;
+	}
+	
+	
+	/**
+	 * @param int $player_rank_change_left 
+	 */
+	public function setPlayerRankChangeLeft($playerRankChangeLeft) {
+	    $this->player_rank_change_left = $playerRankChangeLeft;
+	    return $this;
+	}
+
+
+	/**
+	 * @return int 
+	 */
+	public function getPlayerRankChangeRight() {
+	    return $this->player_rank_change_right;
+	}
+	
+	
+	/**
+	 * @param int $player_rank_change_right 
+	 */
+	public function setPlayerRankChangeRight($playerRankChangeRight) {
+	    $this->player_rank_change_right = $playerRankChangeRight;
+	    return $this;
+	}
 }

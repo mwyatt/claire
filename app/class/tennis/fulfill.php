@@ -97,7 +97,7 @@ $modelEncounter->update(
         $modelPlayer->keyByProperty('id');
         $this->setPlayers($modelPlayer->getData());
 
-        // continue
+        // encouters loop
         $this->encounters();
     }
 
@@ -106,10 +106,14 @@ $modelEncounter->update(
     {
         $modelFixture = new model_tennis_fixture($this);
         foreach ($modelFixture->getEncounterStructure() as $row => $positions) {
+            $input = $_REQUEST['encounter'][$row];
+            $rankChanges = $this->getPlayerRankChanges();
             $config = (object) array(
                 'row' => $row,
                 'positions' => $positions,
-                'status' => ''
+                'status' => $this->getInputStatus($input),
+                'scoreLeft' => $input['left'],
+                'scoreRight' => $input['right']
             );
             $this->encounter($config);
         }
@@ -118,26 +122,27 @@ $modelEncounter->update(
 
     public function encounter($config)
     {
-
-        echo '<pre>';
-        print_r('variable');
-        echo '</pre>';
-        exit;
-        
         $fixture = $this->getFixture();
-        $inputEncounter = $_REQUEST['encounter'][$config->row];
-        if (array_key_exists('status', $inputEncounter)) {
-            $config->status = $inputEncounter['status'];
-        }
-        $modelEncounter = new model_tennis_Encounter($this);
+        $modelEncounter = new model_tennis_encounter($this);
         $moldEncounter = new mold_tennis_encounter();
         $moldEncounter->setfixtureId($fixture->getId());
-        $moldEncounter->setScoreLeft($inputEncounter['left']);
-        $moldEncounter->setScoreRight($inputEncounter['right']);
-        $moldEncounter->setPlayerIdLeft($inputEncounter['player']['left'][reset($config->positions)]);
-        $moldEncounter->setPlayerIdRight($inputEncounter['player']['right'][end($config->positions)]);
+        $moldEncounter->setScoreLeft($config->scoreLeft);
+        $moldEncounter->setScoreRight($config->scoreRight);
+        $moldEncounter->setPlayerIdLeft($_REQUEST['player']['left'][reset($config->positions)]);
+        $moldEncounter->setPlayerIdRight($_REQUEST['player']['right'][end($config->positions)]);
+        $moldEncounter->setPlayerRankChangeLeft();
+        $moldEncounter->setPlayerRankChangeRight();
         $moldEncounter->setStatus($config->status);
         $modelEncounter->create($moldEncounter);
+    }
+
+
+    public function getInputStatus($array)
+    {
+        if (array_key_exists('status', $array)) {
+            return $array['status'];
+        }
+        return '';
     }
 
 
@@ -223,6 +228,187 @@ $modelEncounter->update(
     public function setPlayers($players) {
         $this->players = $players;
         return $this;
+    }
+
+
+    public function getPlayerRankChanges($config)
+    {
+        // $rankLeft, $rankRight, $winner
+
+        // work out rank difference
+        $difference = $config->left > $config->right ? $config->left - $config->right : $config->right - $config->left;
+
+        // blank change recorded
+        $change = (object) array(
+            'left' => 0,
+            'right' => 0
+        );
+
+        // find out changes
+        if ($difference <= 24) {
+            if ($rankLeft > $rankRight) {
+                if ($winner == true) {
+                    $change->left += 12; // expected
+                    $change->right -= 8; // expected
+                } else {
+                    $change->right += 12; // unexpected
+                    $change->left -= 8; // unexpected
+                }
+            } else {
+                if ($winner == false) {
+                    $change->right += 12; // expected
+                    $change->left -= 8; // expected
+                } else {
+                    $change->left += 12; // unexpected
+                    $change->right -= 8; // unexpected
+                }
+            }
+        } elseif ($difference <= 49) {
+            if ($rankLeft > $rankRight) {
+                if ($winner == true) {
+                    $change->left += 11; // expected
+                    $change->right -= 7; // expected
+                } else {
+                    $change->right += 14; // unexpected
+                    $change->left -= 9; // unexpected
+                }
+            } else {
+                if ($winner == false) {
+                    $change->right += 11; // expected
+                    $change->left -= 7; // expected
+                } else {
+                    $change->left += 14; // unexpected
+                    $change->right -= 9; // unexpected
+                }
+            }
+        } elseif ($difference <= 99) {
+            if ($rankLeft > $rankRight) {
+                if ($winner == true) {
+                    $change->left += 9; // expected
+                    $change->right -= 6; // expected
+                } else {
+                    $change->right += 17; // unexpected
+                    $change->left -= 11; // unexpected
+                }
+            } else {
+                if ($winner == false) {
+                    $change->right += 9; // expected
+                    $change->left -= 6; // expected
+                } else {
+                    $change->left += 17; // unexpected
+                    $change->right -= 11; // unexpected
+                }
+            }
+        } elseif ($difference <= 149) {
+            if ($rankLeft > $rankRight) {
+                if ($winner == true) {
+                    $change->left += 8; // expected
+                    $change->right -= 5; // expected
+                } else {
+                    $change->right += 21; // unexpected
+                    $change->left -= 14; // unexpected
+                }
+            } else {
+                if ($winner == false) {
+                    $change->right += 8; // expected
+                    $change->left -= 5; // expected
+                } else {
+                    $change->left += 21; // unexpected
+                    $change->right -= 14; // unexpected
+                }
+            }
+        } elseif ($difference <= 199) {
+            if ($rankLeft > $rankRight) {
+                if ($winner == true) {
+                    $change->left += 6; // expected
+                    $change->right -= 4; // expected
+                } else {
+                    $change->right += 26; // unexpected
+                    $change->left -= 17; // unexpected
+                }
+            } else {
+                if ($winner == false) {
+                    $change->right += 6; // expected
+                    $change->left -= 4; // expected
+                } else {
+                    $change->left += 26; // unexpected
+                    $change->right -= 17; // unexpected
+                }
+            }
+        } elseif ($difference <= 299) {
+            if ($rankLeft > $rankRight) {
+                if ($winner == true) {
+                    $change->left += 5; // expected
+                    $change->right -= 3; // expected
+                } else {
+                    $change->right += 33; // unexpected
+                    $change->left -= 22; // unexpected
+                }
+            } else {
+                if ($winner == false) {
+                    $change->right += 5; // expected
+                    $change->left -= 3; // expected
+                } else {
+                    $change->left += 33; // unexpected
+                    $change->right -= 22; // unexpected
+                }
+            }
+        } elseif ($difference <= 399) {
+            if ($rankLeft > $rankRight) {
+                if ($winner == true) {
+                    $change->left += 3; // expected
+                    $change->right -= 2; // expected
+                } else {
+                    $change->right += 45; // unexpected
+                    $change->left -= 30; // unexpected
+                }
+            } else {
+                if ($winner == false) {
+                    $change->right += 3; // expected
+                    $change->left -= 2; // expected
+                } else {
+                    $change->left += 45; // unexpected
+                    $change->right -= 30; // unexpected
+                }
+            }
+        } elseif ($difference <= 499) {
+            if ($rankLeft > $rankRight) {
+                if ($winner == true) {
+                    $change->left += 2; // expected
+                    $change->right -= 1; // expected
+                } else {
+                    $change->right += 60; // unexpected
+                    $change->left -= 40; // unexpected
+                }
+            } else {
+                if ($winner == false) {
+                    $change->right += 2; // expected
+                    $change->left -= 1; // expected
+                } else {
+                    $change->left += 60; // unexpected
+                    $change->right -= 40; // unexpected
+                }
+            }
+        } elseif ($difference >= 500) {
+            if ($rankLeft > $rankRight) {
+                if ($winner == true) {
+                    //$change->left += 0; // expected
+                    //$change->right -= 0; // expected
+                } else {
+                    $change->right += 75; // unexpected
+                    $change->left -= 50; // unexpected
+                }
+            } else {
+                if ($winner == false) {
+                    //$change->right += 0; // expected
+                    //$change->left -= 0; // expected
+                } else {
+                    $change->left += 75; // unexpected
+                    $change->right -= 50; // unexpected
+                }
+            }
+        }
+        return $change;
     }
 } 
 
