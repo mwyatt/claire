@@ -17,10 +17,15 @@ class Controller_Index extends Controller
 	public function initialise()
 	{
 
-		// main nav
+		// menu primary
 		$json = new Json();
 		$json->read('menu-primary');
 		$this->view->setObject('menuPrimary', $json->getData());
+
+		// menu Secondary
+		$json = new Json();
+		$json->read('menu-Secondary');
+		$this->view->setObject('menuSecondary', $json->getData());
 	}
 
 
@@ -42,7 +47,7 @@ class Controller_Index extends Controller
 		$modelContent = new model_content($this);
 		$modelContent->read(array(
 			'where' => array(
-				'type' => 'post',
+				'type' => 'press',
 				'status' => 'visible'
 			),
 			'limit' => array(0, 6),

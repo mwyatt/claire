@@ -30,8 +30,41 @@ class Controller_Result extends Controller_Index
 	}
 
 
+	/**
+	 * @return int 
+	 */
+	public function getYear() {
+	    return $this->year;
+	}
+	
+	
+	/**
+	 * @param int $year 
+	 */
+	public function setYear($year) {
+	    $this->year = $year;
+	    return $this;
+	}
+
+
+	public function readYear()
+	{
+		if ($this->url->getPathPart(0) != 'archive') {
+			return;
+
+			
+		}
+		
+			$modelTennisDivision = new model_tennis_division($this);
+			$modelTennisDivision->read();
+
+			$this->url->getPathPart(1)
+	}
+
+
 	public function run()
 	{
+		$this->readYear();
 
 		// result/premier/
 		if ($this->url->getPathPart(1)) {
@@ -39,17 +72,22 @@ class Controller_Result extends Controller_Index
 		} else {
 			$this->divisionList();
 		}
-		$this->route('base');
 	}
 
 
 	public function divisionList()
 	{
-		echo '<pre>';
-		print_r('divisionList');
-		echo '</pre>';
-		exit;
+
+		$modelTennisDivision = new model_tennis_division($this);
+		$modelTennisDivision->read();
 		
+		// template
+		$this->view
+			->setMeta(array(		
+				'title' => 'Divisions'
+			))
+			->setObject('divisions', $modelTennisDivision->getData())
+			->getTemplate('division/list');
 	}
 
 
@@ -62,6 +100,7 @@ class Controller_Result extends Controller_Index
 		$modelTennisTeam->read(array(
 			'where' => array('division_id' => $division->getId())
 		));
+		$modelTennisTeam->keyByProperty('id');
 
 		// players
 		$modelTennisPlayer = new model_tennis_player($this);
@@ -96,8 +135,8 @@ class Controller_Result extends Controller_Index
 			->setObject('division', $division)
 			->setObject('teams', $modelTennisTeam->getData())
 			->setObject('players', $modelTennisPlayer->getData())
-			->setObject('meritRows', $modelTennisEncounter->getData())
-			->getTemplate('league');
+			->setObject('meritStats', $modelTennisEncounter->getData())
+			->getTemplate('division/merit');
 	}
 
 
@@ -110,6 +149,7 @@ class Controller_Result extends Controller_Index
 		$modelTennisTeam->read(array(
 			'where' => array('division_id' => $division->getId())
 		));
+		$modelTennisTeam->keyByProperty('id');
 
 		// fixture
 		$modelTennisFixture = new model_tennis_fixture($this);
@@ -136,8 +176,8 @@ class Controller_Result extends Controller_Index
 			))
 			->setObject('division', $division)
 			->setObject('teams', $modelTennisTeam->getData())
-			->setObject('leagueRows', $modelTennisFixture->getData())
-			->getTemplate('league');
+			->setObject('leagueStats', $modelTennisFixture->getData())
+			->getTemplate('division/league');
 	}
 
 
@@ -149,23 +189,25 @@ class Controller_Result extends Controller_Index
 				'name' => $this->url->getPathPart(1)
 			)
 		));
-		if (! $theDivision = $modelTennisDivision->getDataFirst()) {
-			return;
+		$division = $modelTennisDivision->getDataFirst();
+		if (! $division) {
+			$this->route('base');
 		}
+		$this->setDivision($division);
 
 		// result/premier/merit
 		if ($table = $this->url->getPathPart(2)) {
 			if (in_array($table, array('merit', 'league'))) {
-				$this->$table();
+				return $this->$table();
 			}
 		}
 		
 		// single division view
 		$this->view
 			->setMeta(array(		
-				'title' => $theDivision->getName() . ' Division Summary'
+				'title' => $division->getName() . ' division overview'
 			))
-			->setObject('division', $theDivision)
-			->getTemplate('division-single');
+			->setObject('division', $division)
+			->getTemplate('division/overview');
 	}
 }

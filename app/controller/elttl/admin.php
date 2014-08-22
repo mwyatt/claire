@@ -15,10 +15,28 @@ class Controller_Admin extends Controller
 
 	public function initialise()
 	{
+		$sessionAdminUser = new session_admin_user($this);
+
+		// look for logout
+		if (array_key_exists('logout', $_REQUEST) && $sessionAdminUser->getData()) {
+			$this->logout();
+		}
 		$this->checkLogged();
 		$this->setMenu();
 		$this->setUser();
 		$this->setFeedback();
+	}
+
+
+	public function logout()
+	{
+		$sessionAdminUser = new session_admin_user($this);
+		$sessionFeedback = new session_feedback($this);
+		$sessionHistory = new session_history($this);
+		$sessionAdminUser->delete();
+		$sessionHistory->delete();
+		$sessionFeedback->set('Successfully logged out');
+		$this->route('admin');
 	}
 
 
@@ -36,13 +54,7 @@ class Controller_Admin extends Controller
 		$sessionHistory = new session_history($this);
 		$this->view->setObject('user', false);
 
-		// logout
-		if (array_key_exists('logout', $_GET) && $sessionAdminUser->getData()) {
-			$sessionAdminUser->delete();
-			$sessionHistory->delete();
-			$sessionFeedback->set('Successfully logged out');
-			$this->route('admin');
-		}
+
 
 		$this->setMenu();
 		$this->setUser();

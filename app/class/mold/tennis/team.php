@@ -56,4 +56,55 @@ class Mold_Tennis_Team extends Mold
 	    $this->name = $name;
 	    return $this;
 	}
+
+
+	/**
+	 * @return int 
+	 */
+	public function getHomeWeekday() {
+	    return $this->home_weekday;
+	}
+	
+	
+	/**
+	 * @param int $homeWeekday 
+	 */
+	public function setHomeWeekday($homeWeekday) {
+	    $this->home_weekday = $homeWeekday;
+	    return $this;
+	}
+
+
+	/**
+	 * @return int 
+	 */
+	public function getVenueId() {
+	    return $this->venue_id;
+	}
+	
+	
+	/**
+	 * @param int $venueId 
+	 */
+	public function setVenueId($venueId) {
+	    $this->venue_id = $venueId;
+	    return $this;
+	}
+
+
+	/**
+	 * @return int 
+	 */
+	public function getSecretaryId() {
+	    return $this->secretary_id;
+	}
+	
+	
+	/**
+	 * @param int $secretaryId 
+	 */
+	public function setSecretaryId($secretaryId) {
+	    $this->secretary_id = $secretaryId;
+	    return $this;
+	}
 }

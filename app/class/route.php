@@ -94,10 +94,9 @@ class Route extends System
 		// find a matching map property
 		$this->setCurrent($this->getDefault());
 		foreach ($this->getMap() as $mapPath => $class) {
-			if (strpos($path, $mapPath) !== 0) {
-				continue;
+			if (strpos($path, $mapPath) !== false) {
+				$this->setCurrent($class);
 			}
-			$this->setCurrent($class);
 		}
 		
 		// trying to access a route but it does not exist
@@ -139,7 +138,7 @@ class Route extends System
 	}
 
 
-	public function loadMap()
+	public function readMap()
 	{
 		$json = new Json();
 		$json->read('route');

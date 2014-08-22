@@ -25,18 +25,8 @@
 		"url": "tennis/team/"
 	},
 	{
-		"name": "Division",
-		"children": [],
-		"url": "tennis/division/"
-	},
-	{
 		"name": "Fixture",
 		"children": [],
 		"url": "tennis/fixture/"
-	},
-	{
-		"name": "Venue",
-		"children": [],
-		"url": "tennis/venue/"
 	}
 ]

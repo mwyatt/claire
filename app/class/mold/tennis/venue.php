@@ -13,4 +13,38 @@ class Mold_Tennis_Venue extends Mold_Meta
 
 
 	public $location;
+
+
+	/**
+	 * @return string 
+	 */
+	public function getName() {
+	    return $this->name;
+	}
+	
+	
+	/**
+	 * @param string $name 
+	 */
+	public function setName($name) {
+	    $this->name = $name;
+	    return $this;
+	}
+
+
+	/**
+	 * @return int 
+	 */
+	public function getLocation() {
+	    return $this->location;
+	}
+	
+	
+	/**
+	 * @param int $location 
+	 */
+	public function setLocation($location) {
+	    $this->location = $location;
+	    return $this;
+	}
 }

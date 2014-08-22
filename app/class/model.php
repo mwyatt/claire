@@ -149,7 +149,7 @@ class Model extends Data
 		// must be writable columns
 		$named = array();
 		foreach ($mold as $key => $value) {
-			if (! $value || in_array($key, $this->fieldsNonWriteable)) {
+			if (in_array($key, $this->fieldsNonWriteable)) {
 				continue;
 			}
 			$named[] = $key . ' = :' . $key;
@@ -303,7 +303,7 @@ class Model extends Data
 	{
 		$excecuteData = array();
 		foreach ($mold as $key => $value) {
-			if ($this->isFieldNonWritable($key) || ! $value) {
+			if ($this->isFieldNonWritable($key)) {
 				continue;
 			}
 			$excecuteData[':' . $key] = $value;

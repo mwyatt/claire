@@ -17,7 +17,6 @@ class Controller_Fixture extends Controller_Index
 		if ($this->url->getPathPart(1)) {
 			$this->single();
 		}
-		$this->route('base');
 	}
 
 
@@ -29,7 +28,7 @@ class Controller_Fixture extends Controller_Index
 		$part = $this->url->getPathPart(1);
 		$part = str_replace('-', ' ', $part);
 		if (! strpos($part, $required)) {
-			return;
+			$this->route('base');
 		}
 		$teamNames = explode($required, $part);
 
@@ -48,7 +47,7 @@ class Controller_Fixture extends Controller_Index
 		));
 		$teamRight = $modelTennisTeam->getDataFirst();
 		if (! $teamLeft || ! $teamRight) {
-			return;
+			$this->route('base');
 		}
 		$teamIds = array($teamLeft->getId(), $teamRight->getId());
 
@@ -81,10 +80,10 @@ class Controller_Fixture extends Controller_Index
 		$modelTennisEncounter->read(array(
 			'where' => array('fixture_id' => $modelTennisFixture->getDataProperty('id'))
 		));
+		$encounters = $modelTennisEncounter->getData();
 
 		// convert to league stats
 		$modelTennisEncounter->convertToFixtureResults();
-		$modelTennisFixture->convertToLeague($modelTennisEncounter->getData());
 
 		// template
 		$this->view
@@ -93,9 +92,10 @@ class Controller_Fixture extends Controller_Index
 			))
 			->setObject('teamLeft', $teamLeft)
 			->setObject('teamRight', $teamRight)
-			->setObject('division', $modelTennisDivision->getData())
+			->setObject('division', $modelTennisDivision->getDataFirst())
 			->setObject('fixture', $modelTennisFixture->getDataFirst())
-			->setObject('encounters', $modelTennisEncounter->getData())
+			->setObject('fixtureResult', $modelTennisEncounter->getDataFirst())
+			->setObject('encounters', $encounters)
 			->setObject('players', $modelTennisPlayer->getData())
 			->getTemplate('fixture-single');
 	}

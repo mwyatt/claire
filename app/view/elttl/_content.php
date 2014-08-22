@@ -18,12 +18,6 @@
 
 	<div class="content-date" title="<?php echo $theDate ?>"><?php echo $theDate ?></div>
 	<h2 class="content-title"><a href="<?php echo $theUrl ?>" class="content-link"><?php echo $content->title ?></a></h2>
-	<div class="content-html-snippet"><?php echo substr($content->html, 0, 90) ?> ... <a href="<?php echo $theUrl ?>" class="content-html-snippet-more">Read More</a></div>
-	<div class="content-html">
-
-<?php echo $content->html ?>
-
-	</div>
 	<div class="content-status">
 
 <?php echo ucfirst($content->status) ?>

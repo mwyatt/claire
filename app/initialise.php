@@ -73,7 +73,7 @@ $test = new test($system);
  * @var route
  */
 $route = new route($system);
-$route->loadMap();
+$route->readMap();
 $route->load();
 
 

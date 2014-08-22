@@ -9,6 +9,16 @@ var Page = function () {
 	if (system.page.hasClass('js-tennis-fixture-single')) {
 		var page = new Page_Tennis_Fixture_Single();
 	};
+	if (system.page.hasClass('js-tennis-player-list')) {
+		var page = new Page_Grid({
+			table: 'player'
+		});
+	};
+	if (system.page.hasClass('js-tennis-team-list')) {
+		var page = new Page_Grid({
+			table: 'team'
+		});
+	};
 };
 
 

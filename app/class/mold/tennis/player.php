@@ -96,6 +96,12 @@ class Mold_Tennis_Player extends Mold
 	public function getRank() {
 	    return $this->rank;
 	}
+
+
+	public function modifyRank($value)
+	{
+		$this->setRank($this->getRank() + $value);
+	}
 	
 	
 	/**

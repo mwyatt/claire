@@ -13,19 +13,6 @@
 class Tennis_Fulfill extends Data
 {
 
-/*
-$modelEncounter->update(
-    $mold,
-    array(
-        'where' => array(
-            'content_id' => 10,
-            'name' => 'test'
-        )
-    )
-);
-
- */
-
 
     /**
      * @var object
@@ -47,14 +34,13 @@ $modelEncounter->update(
         if (! $this->validate()) {
             return;
         }
-        if (! $this->readFixture()) {
+        if (! $this->readFixtureById($_REQUEST['fixture_id'])) {
             return;
         }
         if ($this->isFilled()) {
             $this->clear();
         }
         $this->begin();
-    
     }
 
 
@@ -90,57 +76,129 @@ $modelEncounter->update(
         ));
 
         // players
-        $modelPlayer = new model_tennis_player($this);
-        $modelPlayer->read(array(
-            'where' => array('id' => array_merge($_REQUEST['player']['left'], $_REQUEST['player']['right']))
-        ));
-        $modelPlayer->keyByProperty('id');
-        $this->setPlayers($modelPlayer->getData());
+        $this->readPlayersById(array_merge($_REQUEST['player']['left'], $_REQUEST['player']['right']));
 
         // encouters loop
         $this->encounters();
     }
 
 
+    public function readPlayersById($playerIds)
+    {
+        $modelPlayer = new model_tennis_player($this);
+        $modelPlayer->read(array(
+            'where' => array('id' => $playerIds)
+        ));
+        $modelPlayer->keyByProperty('id');
+        $this->setPlayers($modelPlayer->getData());
+    }
+
+
+    /**
+     * goes through encounter structure and stores each row
+     * taking into account the exclusion and rank changes for players
+     * @return null 
+     */
     public function encounters()
     {
+
+        // resource
         $modelFixture = new model_tennis_fixture($this);
-        foreach ($modelFixture->getEncounterStructure() as $row => $positions) {
-            $input = $_REQUEST['encounter'][$row];
-            $rankChanges = $this->getPlayerRankChanges();
+        $fixture = $this->getFixture();
+        $players = $this->getPlayers();
+        $modelEncounter = new model_tennis_encounter($this);
+
+        // encounter structure
+        foreach ($modelFixture->getEncounterStructure() as $structureRow => $playerPositions) {
+
+            // resource
+            $moldEncounter = new mold_tennis_encounter();
+
+            // for easy access
+            $inputEncounter = $_REQUEST['encounter'][$structureRow];
+            $inputPlayerIdLeft = $_REQUEST['player']['left'][reset($playerPositions)];
+            $inputPlayerIdRight = $_REQUEST['player']['right'][end($playerPositions)];
+
+            // build mold
+            $moldEncounter->setfixtureId($fixture->getId());
+            $moldEncounter->setScoreLeft($inputEncounter['left']);
+            $moldEncounter->setScoreRight($inputEncounter['right']);
+            $moldEncounter->setPlayerIdLeft($inputPlayerIdLeft);
+            $moldEncounter->setPlayerIdRight($inputPlayerIdRight);
+            $moldEncounter->setStatus($this->getInputStatus($inputEncounter));
+
+            // obtain rank changes for the two players
             $config = (object) array(
-                'row' => $row,
-                'positions' => $positions,
-                'status' => $this->getInputStatus($input),
-                'scoreLeft' => $input['left'],
-                'scoreRight' => $input['right']
+                'idLeft' => $moldEncounter->getPlayerIdLeft(),
+                'idRight' => $moldEncounter->getPlayerIdRight(),
+                'scoreLeft' => $moldEncounter->getScoreLeft(),
+                'scoreRight' => $moldEncounter->getScoreRight(),
+                'status' => $moldEncounter->getStatus()
             );
-            $this->encounter($config);
+            $rankChanges = $this->calculatePlayerRankChanges($config);
+
+            // set rank changes and store mold
+            $moldEncounter->setPlayerRankChangeLeft($rankChanges->left);
+            $moldEncounter->setPlayerRankChangeRight($rankChanges->right);
+            $modelEncounter->create($moldEncounter);
+        }
+
+        // remaining operations
+        $this->finalise();
+    }
+
+
+    /**
+     * final fulfill operations such as flagging the fixture as filled and
+     * committing the player rank changes
+     * @return null 
+     */
+    public function finalise()
+    {
+
+        // resource
+        $modelFixture = new model_tennis_fixture($this);
+        $fixture = $this->getFixture();
+
+        // update player ranks
+        $this->updatePlayerRanks();
+
+        // update fixture fulfill time
+        $fixture->setTimeFulfilled(time());
+        $modelFixture->update($fixture, array(
+            'where' => array(
+                'id' => $fixture->getId()
+            )
+        ));
+    }
+
+
+    /**
+     * iterates through all stored players and updates them
+     * @return null 
+     */
+    public function updatePlayerRanks()
+    {
+        $modelPlayer = new model_tennis_Player($this);
+        foreach ($this->getPlayers() as $playerId => $player) {
+            $modelPlayer->update($player, array(
+                'where' => array(
+                    'id' => $playerId
+                )
+            ));
         }
     }
 
 
-    public function encounter($config)
+    /**
+     * gets the status value from an input array
+     * @param  array $inputEncounter 
+     * @return string                 
+     */
+    public function getInputStatus($inputEncounter)
     {
-        $fixture = $this->getFixture();
-        $modelEncounter = new model_tennis_encounter($this);
-        $moldEncounter = new mold_tennis_encounter();
-        $moldEncounter->setfixtureId($fixture->getId());
-        $moldEncounter->setScoreLeft($config->scoreLeft);
-        $moldEncounter->setScoreRight($config->scoreRight);
-        $moldEncounter->setPlayerIdLeft($_REQUEST['player']['left'][reset($config->positions)]);
-        $moldEncounter->setPlayerIdRight($_REQUEST['player']['right'][end($config->positions)]);
-        $moldEncounter->setPlayerRankChangeLeft();
-        $moldEncounter->setPlayerRankChangeRight();
-        $moldEncounter->setStatus($config->status);
-        $modelEncounter->create($moldEncounter);
-    }
-
-
-    public function getInputStatus($array)
-    {
-        if (array_key_exists('status', $array)) {
-            return $array['status'];
+        if (array_key_exists('status', $inputEncounter)) {
+            return $inputEncounter['status'];
         }
         return '';
     }
@@ -152,7 +210,40 @@ $modelEncounter->update(
      */
     public function clear()
     {
+
+        // fixture
+        $fixture = $this->getFixture();
         
+        // encounter
+        $modelEncounter = new model_tennis_encounter($this);
+        $modelEncounter->read(array(
+            'where' => array('fixture_id' => $fixture->getId())
+        ));
+        $this->readPlayersById(array_merge($modelEncounter->getDataProperty('player_id_left'), $modelEncounter->getDataProperty('player_id_right')));
+        $players = $this->getPlayers();
+
+        // make rank changes
+        foreach ($modelEncounter->getData() as $encounter) {
+            $players[$encounter->getPlayerIdLeft()]->modifyRank($encounter->getScoreLeft());
+            $players[$encounter->getPlayerIdRight()]->modifyRank($encounter->getScoreRight());
+        }
+
+        // update player ranks
+        $this->updatePlayerRanks();
+
+        // delete encounters
+        $modelEncounter->delete(array(
+            'where' => array('fixture_id' => $fixture->getId())
+        ));
+
+        // clear fixture date
+        $modelFixture = new model_tennis_fixture($this);
+        $fixture->setTimeFulfilled(0);
+        $modelFixture->update($fixture, array(
+            'where' => array(
+                'id' => $fixture->getId()
+            )
+        ));
     }
 
 
@@ -160,12 +251,12 @@ $modelEncounter->update(
      * retrieve fixture and store
      * @return bool  
      */
-    public function readFixture()
+    public function readFixtureById($fixtureId)
     {
         $modelFixture = new model_tennis_fixture($this);
         $modelFixture->read(array(
             'where' => array(
-                'id' => $_REQUEST['fixture_id']
+                'id' => $fixtureId
             )
         ));
         if (! $data = $modelFixture->getDataFirst()) {
@@ -231,284 +322,217 @@ $modelEncounter->update(
     }
 
 
-    public function getPlayerRankChanges($config)
+    /**
+     * need
+     * idLeft
+     * idRight
+     * scoreLeft
+     * scoreRight
+     * status
+     * player scores
+     * @param  [type] $config [description]
+     * @return [type]         [description]
+     */
+    public function calculatePlayerRankChanges($config)
     {
-        // $rankLeft, $rankRight, $winner
 
-        // work out rank difference
-        $difference = $config->left > $config->right ? $config->left - $config->right : $config->right - $config->left;
-
-        // blank change recorded
-        $change = (object) array(
+        // record changes
+        $changes = (object) array(
             'left' => 0,
             'right' => 0
         );
 
+        // status filled means dont change
+        if ($config->status) {
+            return $changes;
+        }
+
+        // resource
+        $players = $this->getPlayers();
+        $playerLeft = $players[$config->idLeft];
+        $playerRight = $players[$config->idRight];
+        $rankLeft = $playerLeft->getRank();
+        $rankRight = $playerRight->getRank();
+
+        // find rank difference
+        $difference = $config->scoreLeft > $config->scoreRight ? $config->scoreLeft - $config->scoreRight : $config->scoreRight - $config->scoreLeft;
+
+        // find winner
+        $winner = 'right';
+        if ($config->scoreLeft > $config->scoreRight) {
+            $winner = 'left';
+        }
+
         // find out changes
         if ($difference <= 24) {
             if ($rankLeft > $rankRight) {
-                if ($winner == true) {
-                    $change->left += 12; // expected
-                    $change->right -= 8; // expected
+                if ($winner == 'left') {
+                    $changes->left += 12; // expected
+                    $changes->right -= 8; // expected
                 } else {
-                    $change->right += 12; // unexpected
-                    $change->left -= 8; // unexpected
+                    $changes->right += 12; // unexpected
+                    $changes->left -= 8; // unexpected
                 }
             } else {
-                if ($winner == false) {
-                    $change->right += 12; // expected
-                    $change->left -= 8; // expected
+                if ($winner == 'right') {
+                    $changes->right += 12; // expected
+                    $changes->left -= 8; // expected
                 } else {
-                    $change->left += 12; // unexpected
-                    $change->right -= 8; // unexpected
+                    $changes->left += 12; // unexpected
+                    $changes->right -= 8; // unexpected
                 }
             }
         } elseif ($difference <= 49) {
             if ($rankLeft > $rankRight) {
-                if ($winner == true) {
-                    $change->left += 11; // expected
-                    $change->right -= 7; // expected
+                if ($winner == 'left') {
+                    $changes->left += 11; // expected
+                    $changes->right -= 7; // expected
                 } else {
-                    $change->right += 14; // unexpected
-                    $change->left -= 9; // unexpected
+                    $changes->right += 14; // unexpected
+                    $changes->left -= 9; // unexpected
                 }
             } else {
-                if ($winner == false) {
-                    $change->right += 11; // expected
-                    $change->left -= 7; // expected
+                if ($winner == 'right') {
+                    $changes->right += 11; // expected
+                    $changes->left -= 7; // expected
                 } else {
-                    $change->left += 14; // unexpected
-                    $change->right -= 9; // unexpected
+                    $changes->left += 14; // unexpected
+                    $changes->right -= 9; // unexpected
                 }
             }
         } elseif ($difference <= 99) {
             if ($rankLeft > $rankRight) {
-                if ($winner == true) {
-                    $change->left += 9; // expected
-                    $change->right -= 6; // expected
+                if ($winner == 'left') {
+                    $changes->left += 9; // expected
+                    $changes->right -= 6; // expected
                 } else {
-                    $change->right += 17; // unexpected
-                    $change->left -= 11; // unexpected
+                    $changes->right += 17; // unexpected
+                    $changes->left -= 11; // unexpected
                 }
             } else {
-                if ($winner == false) {
-                    $change->right += 9; // expected
-                    $change->left -= 6; // expected
+                if ($winner == 'right') {
+                    $changes->right += 9; // expected
+                    $changes->left -= 6; // expected
                 } else {
-                    $change->left += 17; // unexpected
-                    $change->right -= 11; // unexpected
+                    $changes->left += 17; // unexpected
+                    $changes->right -= 11; // unexpected
                 }
             }
         } elseif ($difference <= 149) {
             if ($rankLeft > $rankRight) {
-                if ($winner == true) {
-                    $change->left += 8; // expected
-                    $change->right -= 5; // expected
+                if ($winner == 'left') {
+                    $changes->left += 8; // expected
+                    $changes->right -= 5; // expected
                 } else {
-                    $change->right += 21; // unexpected
-                    $change->left -= 14; // unexpected
+                    $changes->right += 21; // unexpected
+                    $changes->left -= 14; // unexpected
                 }
             } else {
-                if ($winner == false) {
-                    $change->right += 8; // expected
-                    $change->left -= 5; // expected
+                if ($winner == 'right') {
+                    $changes->right += 8; // expected
+                    $changes->left -= 5; // expected
                 } else {
-                    $change->left += 21; // unexpected
-                    $change->right -= 14; // unexpected
+                    $changes->left += 21; // unexpected
+                    $changes->right -= 14; // unexpected
                 }
             }
         } elseif ($difference <= 199) {
             if ($rankLeft > $rankRight) {
-                if ($winner == true) {
-                    $change->left += 6; // expected
-                    $change->right -= 4; // expected
+                if ($winner == 'left') {
+                    $changes->left += 6; // expected
+                    $changes->right -= 4; // expected
                 } else {
-                    $change->right += 26; // unexpected
-                    $change->left -= 17; // unexpected
+                    $changes->right += 26; // unexpected
+                    $changes->left -= 17; // unexpected
                 }
             } else {
-                if ($winner == false) {
-                    $change->right += 6; // expected
-                    $change->left -= 4; // expected
+                if ($winner == 'right') {
+                    $changes->right += 6; // expected
+                    $changes->left -= 4; // expected
                 } else {
-                    $change->left += 26; // unexpected
-                    $change->right -= 17; // unexpected
+                    $changes->left += 26; // unexpected
+                    $changes->right -= 17; // unexpected
                 }
             }
         } elseif ($difference <= 299) {
             if ($rankLeft > $rankRight) {
-                if ($winner == true) {
-                    $change->left += 5; // expected
-                    $change->right -= 3; // expected
+                if ($winner == 'left') {
+                    $changes->left += 5; // expected
+                    $changes->right -= 3; // expected
                 } else {
-                    $change->right += 33; // unexpected
-                    $change->left -= 22; // unexpected
+                    $changes->right += 33; // unexpected
+                    $changes->left -= 22; // unexpected
                 }
             } else {
-                if ($winner == false) {
-                    $change->right += 5; // expected
-                    $change->left -= 3; // expected
+                if ($winner == 'right') {
+                    $changes->right += 5; // expected
+                    $changes->left -= 3; // expected
                 } else {
-                    $change->left += 33; // unexpected
-                    $change->right -= 22; // unexpected
+                    $changes->left += 33; // unexpected
+                    $changes->right -= 22; // unexpected
                 }
             }
         } elseif ($difference <= 399) {
             if ($rankLeft > $rankRight) {
-                if ($winner == true) {
-                    $change->left += 3; // expected
-                    $change->right -= 2; // expected
+                if ($winner == 'left') {
+                    $changes->left += 3; // expected
+                    $changes->right -= 2; // expected
                 } else {
-                    $change->right += 45; // unexpected
-                    $change->left -= 30; // unexpected
+                    $changes->right += 45; // unexpected
+                    $changes->left -= 30; // unexpected
                 }
             } else {
-                if ($winner == false) {
-                    $change->right += 3; // expected
-                    $change->left -= 2; // expected
+                if ($winner == 'right') {
+                    $changes->right += 3; // expected
+                    $changes->left -= 2; // expected
                 } else {
-                    $change->left += 45; // unexpected
-                    $change->right -= 30; // unexpected
+                    $changes->left += 45; // unexpected
+                    $changes->right -= 30; // unexpected
                 }
             }
         } elseif ($difference <= 499) {
             if ($rankLeft > $rankRight) {
-                if ($winner == true) {
-                    $change->left += 2; // expected
-                    $change->right -= 1; // expected
+                if ($winner == 'left') {
+                    $changes->left += 2; // expected
+                    $changes->right -= 1; // expected
                 } else {
-                    $change->right += 60; // unexpected
-                    $change->left -= 40; // unexpected
+                    $changes->right += 60; // unexpected
+                    $changes->left -= 40; // unexpected
                 }
             } else {
-                if ($winner == false) {
-                    $change->right += 2; // expected
-                    $change->left -= 1; // expected
+                if ($winner == 'right') {
+                    $changes->right += 2; // expected
+                    $changes->left -= 1; // expected
                 } else {
-                    $change->left += 60; // unexpected
-                    $change->right -= 40; // unexpected
+                    $changes->left += 60; // unexpected
+                    $changes->right -= 40; // unexpected
                 }
             }
         } elseif ($difference >= 500) {
             if ($rankLeft > $rankRight) {
-                if ($winner == true) {
-                    //$change->left += 0; // expected
-                    //$change->right -= 0; // expected
+                if ($winner == 'left') {
+                    //$changes->left += 0; // expected
+                    //$changes->right -= 0; // expected
                 } else {
-                    $change->right += 75; // unexpected
-                    $change->left -= 50; // unexpected
+                    $changes->right += 75; // unexpected
+                    $changes->left -= 50; // unexpected
                 }
             } else {
-                if ($winner == false) {
-                    //$change->right += 0; // expected
-                    //$change->left -= 0; // expected
+                if ($winner == 'right') {
+                    //$changes->right += 0; // expected
+                    //$changes->left -= 0; // expected
                 } else {
-                    $change->left += 75; // unexpected
-                    $change->right -= 50; // unexpected
+                    $changes->left += 75; // unexpected
+                    $changes->right -= 50; // unexpected
                 }
             }
         }
-        return $change;
+
+        // update player rank based on this encounter
+        $players[$config->idLeft]->setRank($rankLeft + $changes->left);
+        $players[$config->idRight]->setRank($rankRight + $changes->right);
+
+        // object of changes
+        return $changes;
     }
-} 
-
-/*
-Array
-(
-    [fixture_id] => 120
-    [division_id] => 2
-    [team] => Array
-        (
-            [left] => 16
-            [right] => 46
-        )
-
-    [player] => Array
-        (
-            [left] => Array
-                (
-                    [1] => 56
-                    [2] => 261
-                    [3] => 216
-                )
-
-            [right] => Array
-                (
-                    [1] => 298
-                    [2] => 14
-                    [3] => 
-                )
-
-        )
-
-    [encounter] => Array
-        (
-            [0] => Array
-                (
-                    [left] => 3
-                    [right] => 0
-                )
-
-            [1] => Array
-                (
-                    [left] => 0
-                    [right] => 3
-                )
-
-            [2] => Array
-                (
-                    [exclude] => on
-                    [left] => 3
-                    [right] => 0
-                )
-
-            [3] => Array
-                (
-                    [left] => 2
-                    [right] => 3
-                )
-
-            [4] => Array
-                (
-                    [exclude] => on
-                    [left] => 3
-                    [right] => 0
-                )
-
-            [5] => Array
-                (
-                    [left] => 1
-                    [right] => 3
-                )
-
-            [6] => Array
-                (
-                    [left] => 2
-                    [right] => 3
-                )
-
-            [7] => Array
-                (
-                    [exclude] => on
-                    [left] => 3
-                    [right] => 0
-                )
-
-            [8] => Array
-                (
-                    [left] => 1
-                    [right] => 3
-                )
-
-            [9] => Array
-                (
-                    [left] => 2
-                    [right] => 3
-                )
-
-        )
-
-)
-
- */
-
+}

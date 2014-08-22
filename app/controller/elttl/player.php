@@ -57,7 +57,6 @@ class Controller_Player extends Controller_Index
 		if ($this->url->getPathPart(1)) {
 			$this->single();
 		}
-		$this->route('base');
 	}
 
 
@@ -75,7 +74,7 @@ class Controller_Player extends Controller_Index
 			)
 		));
 		if (! $player = $modelTennisPlayer->getDataFirst()) {
-			return;
+			$this->route('base');
 		}
 		$this->setPlayer($player);
 
@@ -107,14 +106,33 @@ class Controller_Player extends Controller_Index
 		));
 		$acquaintances = $modelTennisPlayer->getData();
 	
-		// fixtures played in
+		// personal encounters
 		$personalEncounters = $this->getPersonalEncounters();
+		$personalEncounters->orderByPropertyIntDesc('id');
+
+		// fixtures played in
 		$fixtureIds = $personalEncounters->getDataProperty('fixture_id');
 		$modelTennisFixture = new model_tennis_fixture($this);
 		$modelTennisFixture->read(array(
 			'where' => array('id' => $fixtureIds)
 		));
 		$fixtures = $modelTennisFixture->getData();
+
+		// players
+		$modelTennisPlayer->read(array(
+			'where' => array('team_id' => array_merge($modelTennisFixture->getDataProperty('team_id_left'), $modelTennisFixture->getDataProperty('team_id_right')))
+		));
+		$modelTennisPlayer->keyByProperty('id');
+
+		// teams
+		$modelTennisTeam
+			->read(array(
+				'where' => array(
+					'id' => array_merge($modelTennisFixture->getDataProperty('team_id_left'), $modelTennisFixture->getDataProperty('team_id_right'))
+				)
+			))
+			->keyByProperty('id');
+		$teams = $modelTennisTeam->getData();
 
 		// all fixtures played in encounters
 		$modelTennisEncounter = new model_tennis_encounter($this);
@@ -131,7 +149,9 @@ class Controller_Player extends Controller_Index
 			))
 			->setObject('division', $modelTennisDivision->getDataFirst())
 			->setObject('player', $player)
+			->setObject('players', $modelTennisPlayer->getData())
 			->setObject('team', $team)
+			->setObject('teams', $teams)
 			->setObject('acquaintances', $acquaintances)
 			->setObject('fixtures', $fixtures)
 			->setObject('fixtureResults', $fixtureResults)
