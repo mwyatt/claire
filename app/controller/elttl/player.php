@@ -6,7 +6,7 @@
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Controller_Player extends Controller_Index
+class Controller_Player extends Controller_Archive
 {
 
 
@@ -52,6 +52,7 @@ class Controller_Player extends Controller_Index
 
 	public function run()
 	{
+		$this->readYear();
 
 		// player/martin-wyatt/
 		if ($this->url->getPathPart(1)) {

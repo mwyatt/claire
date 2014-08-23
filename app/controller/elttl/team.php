@@ -6,7 +6,7 @@
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Controller_Team extends Controller_Index
+class Controller_Team extends Controller_Archive
 {
 
 
@@ -32,6 +32,7 @@ class Controller_Team extends Controller_Index
 
 	public function run()
 	{
+		$this->readYear();
 
 		// team/burnley-boys-club/
 		if ($this->url->getPathPart(1)) {

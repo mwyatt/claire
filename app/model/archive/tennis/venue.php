@@ -5,7 +5,14 @@
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Mold_Tennis_Year extends Mold_Meta
-{
-		
+class Model_Archive_Tennis_Venue extends Model_Tennis_Venue
+{	
+
+
+	public $fields = array(
+		'id',
+		'year_id',
+		'name',
+		'location'
+	);
 }

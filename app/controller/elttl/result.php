@@ -6,7 +6,7 @@
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Controller_Result extends Controller_Index
+class Controller_Result extends Controller_Archive
 {
 
 
@@ -30,44 +30,13 @@ class Controller_Result extends Controller_Index
 	}
 
 
-	/**
-	 * @return int 
-	 */
-	public function getYear() {
-	    return $this->year;
-	}
-	
-	
-	/**
-	 * @param int $year 
-	 */
-	public function setYear($year) {
-	    $this->year = $year;
-	    return $this;
-	}
-
-
-	public function readYear()
-	{
-		if ($this->url->getPathPart(0) != 'archive') {
-			return;
-
-			
-		}
-		
-			$modelTennisDivision = new model_tennis_division($this);
-			$modelTennisDivision->read();
-
-			$this->url->getPathPart(1)
-	}
-
-
 	public function run()
 	{
 		$this->readYear();
 
 		// result/premier/
-		if ($this->url->getPathPart(1)) {
+		// or archive/2013/result/premier/
+		if ($this->getArchivePathPart(1)) {
 			$this->division();
 		} else {
 			$this->divisionList();
@@ -75,11 +44,15 @@ class Controller_Result extends Controller_Index
 	}
 
 
+	/**
+	 * list of all divisions for current year
+	 * @return null 
+	 */
 	public function divisionList()
 	{
-
-		$modelTennisDivision = new model_tennis_division($this);
-		$modelTennisDivision->read();
+		$className = $this->getArchiveClassName('model_tennis_division');
+		$modelTennisDivision = new $className($this);
+		$modelTennisDivision->read($this->getArchiveWhere());
 		
 		// template
 		$this->view
@@ -94,32 +67,38 @@ class Controller_Result extends Controller_Index
 	public function merit()
 	{
 
-		// team
+		// resource
 		$division = $this->getDivision();
-		$modelTennisTeam = new model_tennis_team($this);
-		$modelTennisTeam->read(array(
+
+		// team
+		$className = $this->getArchiveClassName('model_tennis_team');
+		$modelTennisTeam = new $className($this);
+		$modelTennisTeam->read($this->getArchiveWhere(array(
 			'where' => array('division_id' => $division->getId())
-		));
+		)));
 		$modelTennisTeam->keyByProperty('id');
 
 		// players
-		$modelTennisPlayer = new model_tennis_player($this);
-		$modelTennisPlayer->read(array(
+		$className = $this->getArchiveClassName('model_tennis_player');
+		$modelTennisPlayer = new $className($this);
+		$modelTennisPlayer->read($this->getArchiveWhere(array(
 			'where' => array('team_id' => $modelTennisTeam->getDataProperty('id'))
-		));
+		)));
 		$modelTennisPlayer->keyByProperty('id');
 
 		// fixture
-		$modelTennisFixture = new model_tennis_fixture($this);
-		$modelTennisFixture->read(array(
+		$className = $this->getArchiveClassName('model_tennis_fixture');
+		$modelTennisFixture = new $className($this);
+		$modelTennisFixture->read($this->getArchiveWhere(array(
 			'where' => array('team_id_left' => $modelTennisTeam->getDataProperty('id'))
-		));
+		)));
 
 		// encounter
-		$modelTennisEncounter = new model_tennis_encounter($this);
-		$modelTennisEncounter->read(array(
+		$className = $this->getArchiveClassName('model_tennis_encounter');
+		$modelTennisEncounter = new $className($this);
+		$modelTennisEncounter->read($this->getArchiveWhere(array(
 			'where' => array('fixture_id' => $modelTennisFixture->getDataProperty('id'))
-		));
+		)));
 
 		// convert encounters to merit results
 		$modelTennisEncounter
@@ -143,25 +122,30 @@ class Controller_Result extends Controller_Index
 	public function league()
 	{
 
-		// team
+		// resource
 		$division = $this->getDivision();
-		$modelTennisTeam = new model_tennis_team($this);
-		$modelTennisTeam->read(array(
+
+		// team
+		$className = $this->getArchiveClassName('model_tennis_team');
+		$modelTennisTeam = new $className($this);
+		$modelTennisTeam->read($this->getArchiveWhere(array(
 			'where' => array('division_id' => $division->getId())
-		));
+		)));
 		$modelTennisTeam->keyByProperty('id');
 
 		// fixture
-		$modelTennisFixture = new model_tennis_fixture($this);
+		$className = $this->getArchiveClassName('model_tennis_fixture');
+		$modelTennisFixture = new $className($this);
 		$modelTennisFixture->read(array(
 			'where' => array('team_id_left' => $modelTennisTeam->getDataProperty('id'))
 		));
 
 		// encounter
-		$modelTennisEncounter = new model_tennis_encounter($this);
-		$modelTennisEncounter->read(array(
+		$className = $this->getArchiveClassName('model_tennis_encounter');
+		$modelTennisEncounter = new $className($this);
+		$modelTennisEncounter->read($this->getArchiveWhere(array(
 			'where' => array('fixture_id' => $modelTennisFixture->getDataProperty('id'))
-		));
+		)));
 
 		// convert encounters to league results
 		$modelTennisEncounter->convertToFixtureResults();
@@ -183,12 +167,15 @@ class Controller_Result extends Controller_Index
 
 	public function division()
 	{
-		$modelTennisDivision = new model_tennis_division($this);
-		$modelTennisDivision->read(array(
+
+		// division
+		$className = $this->getArchiveClassName('model_tennis_division');
+		$modelTennisDivision = new $className($this);
+		$modelTennisDivision->read($this->getArchiveWhere(array(
 			'where' => array(
-				'name' => $this->url->getPathPart(1)
+				'name' => $this->getArchivePathPart(1)
 			)
-		));
+		)));
 		$division = $modelTennisDivision->getDataFirst();
 		if (! $division) {
 			$this->route('base');
@@ -196,7 +183,7 @@ class Controller_Result extends Controller_Index
 		$this->setDivision($division);
 
 		// result/premier/merit
-		if ($table = $this->url->getPathPart(2)) {
+		if ($table = $this->getArchivePathPart(2)) {
 			if (in_array($table, array('merit', 'league'))) {
 				return $this->$table();
 			}

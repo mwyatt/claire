@@ -250,6 +250,18 @@ class View extends Model
 	public function getUrl($key = 'base') {
 		return $this->url->getCache($key);
 	}
+
+
+	public function buildArchiveUrl($parts)
+	{
+		$urlCurrent = $this->getUrl('current');
+		if (! strpos($urlCurrent, 'archive')) {
+			return $this->url->build($parts);
+		}
+		array_unshift($parts, $this->url->getPathPart(1));
+		array_unshift($parts, 'archive');
+		return $this->url->build($parts);
+	}
 	
 
 	public function getUrlMedia($append = '') {

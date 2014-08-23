@@ -6,12 +6,13 @@
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Controller_Fixture extends Controller_Index
+class Controller_Fixture extends Controller_Archive
 {
 
 
 	public function run()
 	{
+		$this->readYear();
 
 		// fixture/burnley-boys-club-vs-another-team/
 		if ($this->url->getPathPart(1)) {
