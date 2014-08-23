@@ -1,0 +1,23 @@
+
+
+/**
+ * allows dynamic usage of media queries, here ranges of breakpoints
+ * can be defined then refered to in a friendly way
+ */
+@mixin breakpoint($point) {
+    @media only screen and (min-width: $point + px) { @content; }
+}
+
+
+/**
+ * easy to define how text selection should display
+ */
+@mixin text-selection($color, $background) {
+   $prefixes: ("-moz-", "-webkit-", "-o-", "-ms-", "");
+   @each $prefix in $prefixes {
+      ::#{$prefix}selection {
+        color: $color;
+        background: $background;
+      }
+   }
+}

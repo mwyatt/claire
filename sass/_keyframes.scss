@@ -1,0 +1,70 @@
+@include keyframes(go-away) {
+
+	0% {
+        // display: block;
+	}
+
+	100% {
+        display: none;
+	}
+}
+
+@include keyframes(breathe) {
+
+	0% {
+        @include transform(translate3d(0, 0, 0) scale(1));
+	}
+
+	50% {
+        @include transform(translate3d(0, 5px, 0) scale(1));
+	}
+
+	100% {
+        @include transform(translate3d(0, 0, 0) scale(1));
+	}
+}
+
+@include keyframes(soundbar-in) {
+
+	0% {
+		opacity: 0;
+        @include transform(translate3d(0, 1em, 0));
+	}
+
+	70% {
+        @include transform(translate3d(0, -0.3em, 0));
+	}
+
+	100% {
+		opacity: 1;
+        @include transform(translate3d(0, 0, 0));
+	}
+}
+
+@include keyframes(sound-wave) {
+
+	0% {
+		opacity: 0;
+        @include transform(scale(1));
+	}
+
+	50% {
+		opacity: .2;
+	}
+
+	100% {
+		opacity: 0;
+        @include transform(scale(3));
+	}
+}
+
+@include keyframes(bar-primary-in) {
+
+	0% {
+        @include transform(translate3d(0, -5em, 0));
+	}
+
+	100% {
+        @include transform(translate3d(0, 0, 0));
+	}
+}
