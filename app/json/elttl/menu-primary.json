@@ -1,11 +1,8 @@
 [
 	{
-		"name": "Home",
-		"url": ""
-	},
-	{
 		"name": "Results",
-		"url": "results/"
+		"url": "results/",
+		"children": []
 	},
 	{
 		"name": "The League",

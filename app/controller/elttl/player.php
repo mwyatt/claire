@@ -55,7 +55,7 @@ class Controller_Player extends Controller_Archive
 		$this->readYear();
 
 		// player/martin-wyatt/
-		if ($this->url->getPathPart(1)) {
+		if ($this->getArchivePathPart(1)) {
 			$this->single();
 		}
 	}
@@ -65,46 +65,49 @@ class Controller_Player extends Controller_Archive
 	{
 
 		// player
-		$names = $this->url->getPathPart(1);
+		$names = $this->getArchivePathPart(1);
 		$names = explode('-', $names);
-		$modelTennisPlayer = new model_tennis_player($this);
-		$modelTennisPlayer->read(array(
+		$className = $this->getArchiveClassName('model_tennis_player');
+		$modelTennisPlayer = new $className($this);
+		$modelTennisPlayer->read($this->getArchiveWhere(array(
 			'where' => array(
 				'name_first' => reset($names),
 				'name_last' => end($names)
 			)
-		));
+		)));
 		if (! $player = $modelTennisPlayer->getDataFirst()) {
 			$this->route('base');
 		}
 		$this->setPlayer($player);
 
 		// team
-		$modelTennisTeam = new model_tennis_team($this);
-		$modelTennisTeam->read(array(
+		$className = $this->getArchiveClassName('model_tennis_team');
+		$modelTennisTeam = new $className($this);
+		$modelTennisTeam->read($this->getArchiveWhere(array(
 			'where' => array(
 				'id' => $player->getTeamId()
 			)
-		));
+		)));
 		$team = $modelTennisTeam->getDataFirst();
 
 		// division
-		$modelTennisDivision = new model_tennis_division($this);
-		$modelTennisDivision->read(array(
+		$className = $this->getArchiveClassName('model_tennis_division');
+		$modelTennisDivision = new $className($this);
+		$modelTennisDivision->read($this->getArchiveWhere(array(
 			'where' => array(
 				'id' => $team->getDivisionId()
 			)
-		));
+		)));
 
 		// merit
 		$this->getMeritStats();
 
 		// team mates
-		$modelTennisPlayer->read(array(
+		$modelTennisPlayer->read($this->getArchiveWhere(array(
 			'where' => array(
 				'team_id' => $team->getId()
 			)
-		));
+		)));
 		$acquaintances = $modelTennisPlayer->getData();
 	
 		// personal encounters
@@ -113,33 +116,35 @@ class Controller_Player extends Controller_Archive
 
 		// fixtures played in
 		$fixtureIds = $personalEncounters->getDataProperty('fixture_id');
-		$modelTennisFixture = new model_tennis_fixture($this);
-		$modelTennisFixture->read(array(
+		$className = $this->getArchiveClassName('model_tennis_fixture');
+		$modelTennisFixture = new $className($this);
+		$modelTennisFixture->read($this->getArchiveWhere(array(
 			'where' => array('id' => $fixtureIds)
-		));
+		)));
 		$fixtures = $modelTennisFixture->getData();
 
 		// players
-		$modelTennisPlayer->read(array(
+		$modelTennisPlayer->read($this->getArchiveWhere(array(
 			'where' => array('team_id' => array_merge($modelTennisFixture->getDataProperty('team_id_left'), $modelTennisFixture->getDataProperty('team_id_right')))
-		));
+		)));
 		$modelTennisPlayer->keyByProperty('id');
 
 		// teams
 		$modelTennisTeam
-			->read(array(
+			->read($this->getArchiveWhere(array(
 				'where' => array(
 					'id' => array_merge($modelTennisFixture->getDataProperty('team_id_left'), $modelTennisFixture->getDataProperty('team_id_right'))
 				)
-			))
+			)))
 			->keyByProperty('id');
 		$teams = $modelTennisTeam->getData();
 
 		// all fixtures played in encounters
-		$modelTennisEncounter = new model_tennis_encounter($this);
-		$modelTennisEncounter->read(array(
-			'where' => array('fixture_id' => $fixtureIds)
-		));
+		$className = $this->getArchiveClassName('model_tennis_encounter');
+		$modelTennisEncounter = new $className($this);
+		$modelTennisEncounter->read($this->getArchiveWhere(array(
+					'where' => array('fixture_id' => $fixtureIds)
+				)));
 		$modelTennisEncounter->convertToFixtureResults();
 		$fixtureResults = $modelTennisEncounter->getData();
 
@@ -173,17 +178,19 @@ class Controller_Player extends Controller_Archive
 		}
 		
 		// encounters
-		$modelTennisEncounter = new model_tennis_encounter($this);
-		$modelTennisEncounter->read(array(
-			'where' => array('player_id_left' => $player->getId())
-		));
+		$className = $this->getArchiveClassName('model_tennis_encounter');
+		$modelTennisEncounter = new $className($this);
+		$modelTennisEncounter->read($this->getArchiveWhere(array(
+					'where' => array('player_id_left' => $player->getId())
+				)));
 		$encounters = $modelTennisEncounter->getData();
-		$modelTennisEncounter->read(array(
-			'where' => array('player_id_right' => $player->getId())
-		));
+		$modelTennisEncounter->read($this->getArchiveWhere(array(
+					'where' => array('player_id_right' => $player->getId())
+				)));
 		$encounters = array_merge($encounters, $modelTennisEncounter->getData());
 		$modelTennisEncounter->setData($encounters);
-		$modelTennisEncounterCopy = new model_tennis_encounter($this);
+		$className = $this->getArchiveClassName('model_tennis_encounter');
+		$modelTennisEncounterCopy = new $className($this);
 		$modelTennisEncounterCopy->setData($encounters);
 		$this->setPersonalEncounters($modelTennisEncounterCopy);
 

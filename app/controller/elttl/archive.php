@@ -16,13 +16,51 @@ class Controller_Archive extends Controller_Index
 
 	public function run()
 	{
-		echo '<pre>';
-		print_r('Controller_Archive');
-		echo '</pre>';
-		exit;
-		
+		if ($this->url->getPathPart(1)) {
+			return $this->single();
+		}
+		$this->all();
 	}
-	
+
+
+	public function single()
+	{
+		
+		// years
+		$modelTennisYear = new model_tennis_Year($this);
+		$modelTennisYear->read(array(
+			'where' => array('name' => $this->url->getPathPart(1))
+		));
+		if (! $year = $modelTennisYear->getDataFirst()) {
+			$this->route('base');
+		}
+		
+		// template
+		$this->view
+			->setMeta(array(		
+				'title' => 'Season ' . $year->getNameFull()
+			))
+			->setObject('year', $year)
+			->getTemplate('year-single');
+	}
+
+
+	public function all()
+	{
+
+		// years
+		$modelTennisYear = new model_tennis_Year($this);
+		$modelTennisYear->read();
+		
+		// template
+		$this->view
+			->setMeta(array(		
+				'title' => 'Result Archive'
+			))
+			->setObject('years', $modelTennisYear->getData())
+			->getTemplate('year');
+	}
+
 
 	/**
 	 * @return int 

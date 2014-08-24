@@ -1,14 +1,15 @@
 @import "config";
-@import "vendor/_owl.carousel.scss";
-@import "vendor/_owl.theme.scss";
+@import "vendor/owl.carousel.scss";
+@import "vendor/owl.theme.scss";
 @import "misc";
 @import "header";
 @import "home";
-@import "search";
 @import "content";
 @import "content-single";
 @import "content-tag";
-@import "medium";
-@import "month"; 
 @import "pagination";
 @import "footer";
+
+// lemonade
+// @extend .frame;
+// @extend .bit-;

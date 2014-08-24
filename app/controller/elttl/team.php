@@ -35,8 +35,8 @@ class Controller_Team extends Controller_Archive
 		$this->readYear();
 
 		// team/burnley-boys-club/
-		if ($this->url->getPathPart(1)) {
-			$this->single();
+		if ($this->getArchivePathPart(1)) {
+			return $this->single();
 		}
 		$this->route('base');
 	}
@@ -46,47 +46,75 @@ class Controller_Team extends Controller_Archive
 	{
 
 		// team
-		$modelTennisTeam = new model_tennis_Team($this);
-		$modelTennisTeam->read(array(
+		$className = $this->getArchiveClassName('model_tennis_Team');
+		$modelTennisTeam = new $className($this);
+		$modelTennisTeam->read($this->getArchiveWhere(array(
 			'where' => array(
-				'name' => str_replace('-', ' ', $this->url->getPathPart(1))
+				'name' => str_replace('-', ' ', $this->getArchivePathPart(1))
 			)
-		));
+		)));
 		if (! $team = $modelTennisTeam->getDataFirst()) {
-			return;
+			$this->route('base');
 		}
 		$this->setTeam($team);
 
 		// players
-		$modelTennisPlayer = new model_tennis_player($this);
-		$modelTennisPlayer->read(array(
+		$className = $this->getArchiveClassName('model_tennis_player');
+		$modelTennisPlayer = new $className($this);
+		$modelTennisPlayer->read($this->getArchiveWhere(array(
 			'where' => array('team_id' => $team->getId())
-		));
+		)));
 		$modelTennisPlayer->keyByProperty('id');
+		$players = $modelTennisPlayer->getData();
+
+		// secretary
+		$modelTennisPlayer->read($this->getArchiveWhere(array(
+			'where' => array('id' => $team->getSecretaryId())
+		)));
+		$secretary = $modelTennisPlayer->getDataFirst();
 
 		// division
-		$modelTennisDivision = new model_tennis_division($this);
-		$modelTennisDivision->read(array(
+		$className = $this->getArchiveClassName('model_tennis_division');
+		$modelTennisDivision = new $className($this);
+		$modelTennisDivision->read($this->getArchiveWhere(array(
 			'where' => array(
 				'id' => $team->getDivisionId()
 			)
-		));
+		)));
 
 		// fixture
-		$modelTennisFixture = new model_tennis_fixture($this);
-		$modelTennisFixture->read(array(
+		$className = $this->getArchiveClassName('model_tennis_fixture');
+		$modelTennisFixture = new $className($this);
+		$modelTennisFixture->read($this->getArchiveWhere(array(
 			'where' => array('team_id_left' => $team->getId())
-		));
+		)));
 
-		// encounter
-		$modelTennisEncounter = new model_tennis_encounter($this);
-		$modelTennisEncounter->read(array(
+		// teams
+		$modelTennisTeam
+			->read($this->getArchiveWhere(array(
+				'where' => array(
+					'id' => array_merge($modelTennisFixture->getDataProperty('team_id_left'), $modelTennisFixture->getDataProperty('team_id_right'))
+				)
+			)))
+			->keyByProperty('id');
+		$teams = $modelTennisTeam->getData();
+
+		// all fixtures played in encounters
+		$className = $this->getArchiveClassName('model_tennis_encounter');
+		$modelTennisEncounter = new $className($this);
+		$modelTennisEncounter->read($this->getArchiveWhere(array(
 			'where' => array('fixture_id' => $modelTennisFixture->getDataProperty('id'))
-		));
-
-		// convert to league stats
+		)));
 		$modelTennisEncounter->convertToFixtureResults();
-		$modelTennisFixture->convertToLeague($modelTennisEncounter->getData());
+		$fixtureResults = $modelTennisEncounter->getData();
+
+		// venue
+		$className = $this->getArchiveClassName('model_tennis_venue');
+		$modelTennisVenue = new $className($this);
+		$modelTennisVenue->read($this->getArchiveWhere(array(
+			'where' => array('id' => $team->getVenueId())
+		)));
+		$venue = $modelTennisVenue->getDataFirst();
 
 		// template
 		$this->view
@@ -94,9 +122,13 @@ class Controller_Team extends Controller_Archive
 				'title' => $team->getName()
 			))
 			->setObject('team', $team)
-			->setObject('division', $modelTennisDivision->getData())
+			->setObject('teams', $teams)
+			->setObject('venue', $venue)
+			->setObject('division', $modelTennisDivision->getDataFirst())
+			->setObject('secretary', $secretary)
 			->setObject('fixtures', $modelTennisFixture->getData())
-			->setObject('players', $modelTennisPlayer->getData())
+			->setObject('fixtureResults', $fixtureResults)
+			->setObject('players', $players)
 			->getTemplate('team-single');
 	}
 }

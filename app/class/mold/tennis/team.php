@@ -24,6 +24,15 @@ class Mold_Tennis_Team extends Mold
 	public $home_weekday;
 
 
+	public $weekdays = array(
+		1 => 'Monday',
+		2 => 'Tuesday',
+		3 => 'Wednesday',
+		4 => 'Thursday',
+		5 => 'Friday'
+	);
+
+
 	/**
 	 * @return int 
 	 */
@@ -106,5 +115,36 @@ class Mold_Tennis_Team extends Mold
 	public function setSecretaryId($secretaryId) {
 	    $this->secretary_id = $secretaryId;
 	    return $this;
+	}
+
+
+	/**
+	 * @return array 
+	 */
+	public function getWeekdays() {
+	    return $this->weekdays;
+	}
+	
+	
+	/**
+	 * @param array $weekdays 
+	 */
+	public function setWeekdays($weekdays) {
+	    $this->weekdays = $weekdays;
+	    return $this;
+	}
+	
+
+	/**
+	 * weekday as string
+	 * @return string 
+	 */
+	public function getHomeWeekdayName()
+	{
+		$weekdays = $this->getWeekdays();
+		$key = $this->getHomeWeekday();
+		if (array_key_exists($key, $weekdays)) {
+			return $weekdays[$key];
+		}
 	}
 }

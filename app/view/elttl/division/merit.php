@@ -25,7 +25,9 @@
 			<td class="elttl-table-cell is-name">
 				<a href="<?php echo $this->buildArchiveUrl(array('player', $player->getNameFull())) ?>"><?php echo $player->getNameFull() ?></a>
 			</td>
-			<td class="elttl-table-cell is-team"><?php echo $team->getName() ?></td>
+			<td class="elttl-table-cell is-team">
+				<a href="<?php echo $this->buildArchiveUrl(array('team', $team->getName())) ?>"><?php echo $team->getName() ?></a>
+			</td>
 			<td class="elttl-table-cell is-rank"><?php echo $player->getRank() ?></td>
 			<td class="elttl-table-cell is-won"><?php echo $meritStat->won ?></td>
 			<td class="elttl-table-cell is-played"><?php echo $meritStat->played ?></td>

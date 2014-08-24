@@ -7,5 +7,15 @@
  */
 class Mold_Tennis_Year extends Mold_Meta
 {
-		
+
+
+	/**
+	 * 2012-2013
+	 * @return string 
+	 */
+	public function getNameFull()
+	{
+		$nameCurrent = $this->getName() + 0;
+		return $nameCurrent . '-' . ($nameCurrent + 1);
+	}
 }

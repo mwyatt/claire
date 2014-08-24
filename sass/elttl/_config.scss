@@ -1,12 +1,32 @@
+/* core include for front and admin */
+
+
+/**
+ * not sure
+ */
 @charset "utf-8";
-$font-family: 'Open Sans', 'Sans-serif';
-$heading-font-family: $font-family;
-$heading-font-weight: 600;
-@import "palette";
-@import "mixin";
+
+
+/**
+ * vendor libraries
+ */
 @import "vendor/normalize";
 @import "vendor/bourbon/bourbon";
 @import "vendor/animate";
+
+
+/**
+ * variables and mixins
+ */
+@import "palette";
+@import "mixin";
+@import "keyframes";
+
+
+/**
+ * admin / front settings
+ */
 @import "reusable";
 @import "typography";
 @import "form";
+@import "button";

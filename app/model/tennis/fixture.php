@@ -11,7 +11,6 @@ class Model_Tennis_Fixture extends Model
 
 	public $fields = array(
 		'id',
-		'year_id',
 		'team_id_left',
 		'team_id_right',
 		'time_fulfilled'

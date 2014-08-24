@@ -22,7 +22,7 @@
 
 		<tr class="elttl-table-row">
 			<td class="elttl-table-cell is-name">
-				<a href="<?php echo $this->url->build(array('team', $team->getName())) ?>"><?php echo $team->getName() ?></a>
+				<a href="<?php echo $this->buildArchiveUrl(array('team', $team->getName())) ?>"><?php echo $team->getName() ?></a>
 			</td>
 			<td class="elttl-table-cell is-won"><?php echo $leagueStat->won ?></td>
 			<td class="elttl-table-cell is-draw"><?php echo $leagueStat->draw ?></td>
