@@ -41,6 +41,12 @@ class Controller_Content extends Controller_Index
 				'type' => $this->url->getPathPart(0)
 			)
 		));
+		echo '<pre>';
+		print_r($this->url->getPathPart(1));
+		print_r($this->url->getPathPart(0));
+		echo '</pre>';
+		exit;
+		
 		if (! $modelContent->getData()) {
 			$this->route('base');
 		}

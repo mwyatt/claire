@@ -1,9 +1,18 @@
 
+// project
+$color-primary: #ca3566;
+$color-secondary: #E5673C;
+$color-tertiary: #2A9F67; 
+$color-quaternary: #80CE36;
+$color-quinary: #AC8E98;
+$color-senary: #EBD7DE;
+$color-septenary: black;
+$color-octonary: black;
+$color-nonary: black;
+$color-denary: black;
+$color-text: #745E56;
 
-/**
- * generic colours
- * @type {[type]}
- */
+// all apps
 $color-white: #ffffff;
 $color-gray-5: darken($color-white, 5%);
 $color-gray-10: darken($color-white, 10%);
@@ -22,12 +31,8 @@ $color-secondary-30: lighten($color-secondary, 30%);
 $color-secondary-40: lighten($color-secondary, 40%);
 $color-secondary-50: lighten($color-secondary, 50%);
 $color-secondary-60: lighten($color-secondary, 60%);
+
+// descriptive
 $color-twitter: #00adef;
 $color-facebook: #3b5998;
 $color-whathifi-primary: #d82329;
-
-
-/**
- * site specific colours
- */
-@import "palette/paletton-rev1";

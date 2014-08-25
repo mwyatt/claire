@@ -15,14 +15,7 @@
 }
 
 .container-footer {
-
-    .propos-portrait {
-        width: 30%;
-    }
-
-    img {
-        width: 100%;
-    }
+    border-top: 1px solid $color-gray-10;
 }
 
 .container-footer .propos {
@@ -156,4 +149,18 @@
 
 .footer-main {
     display: none;
+}
+
+.container-footer {
+ 
+    .menu-secondary {
+        @include clearfix;
+        margin-bottom: 1em;
+    }
+
+    .menu-secondary-item {
+        @extend .a;
+        float: left;
+        margin: 0 25px 0 0;
+    }
 }
