@@ -7,6 +7,9 @@ $(document).ready(function() {
 	var system = new System();
 	var form = new Form();
 
+	// things
+	var menuPrimary = new Menu_Primary();
+
 	// to top button
 	var topButton = new Button_To_Top({
 		button: '.to-top'
@@ -31,7 +34,7 @@ $(document).ready(function() {
 	});
 
 	// product single carousel
-	$('.js-content-single-gallery').owlCarousel({
+	$('.js-home-cover').owlCarousel({
 		slideSpeed: 200,
 		paginationSpeed: 200,
 		singleItem: true

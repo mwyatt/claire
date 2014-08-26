@@ -1,3 +1,16 @@
+html {
+    background-color: $color-secondary-1-4;
+}
+
+body {
+
+    @include breakpoint(1200) {
+        background-image: image-url('bg.gif');
+        background-position: 50% 0;
+        background-repeat: no-repeat;
+    }
+}
+
 .to-top {
     border: 1px solid $color-white;
     @include transition(all 200ms ease);
@@ -40,10 +53,11 @@
 }
 
 .page {
-    padding-left: 5%;
-    padding-right: 5%;
-    padding-top: 85px;
-    padding-bottom: 61px;
+    background-color: $color-white;
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-top: 55px;
+    padding-bottom: 60px;
 }
 
 .container-header-inner {
@@ -64,31 +78,4 @@
 .button-secondary {
     @extend .button-base;
     background-color: $color-secondary-1-0;
-}
-
-
-@include breakpoint(1300) {
-
-    html {
-        background: image-url('lightpaperfibers.png') repeat;
-    }
-
-    // .container-site {
-    //     background: image-url('bordeaux-left.png') bottom left no-repeat;
-    // }
-
-    // .container-site-inner {
-    //     background: image-url('bordeaux-right.png') bottom right no-repeat;
-    // }
-}
-
-@include breakpoint(1500) {
-
-    .container-site {
-        background: image-url('floral-left.png') top left no-repeat;
-    }
-
-    .container-site-inner {
-        background: image-url('floral-right.png') top right no-repeat;
-    }
 }

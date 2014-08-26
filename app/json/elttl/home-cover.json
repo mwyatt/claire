@@ -1,0 +1,14 @@
+[
+	{
+		"name": "ETTA membership renewal",
+		"description": "Please ensure you have renewed your registration with the ETTA.",
+		"url": "press/etta-membership-renewal/",
+		"button": "More information"
+	},
+	{
+		"name": "Results archive",
+		"description": "What happened last year? Find out here.",
+		"url": "archive/",
+		"button": "Vist the archive"
+	}
+]

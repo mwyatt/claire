@@ -20,6 +20,15 @@
 
 .header-logo-text-full {
     display: none;
+
+    @include breakpoint(780) {
+        display: block;
+        font-size: 1.3em;
+        font-weight: 600;
+        color: white;
+        position: relative;
+        top: 1px;
+    }
 }
 
 .header-logo-text-short {
@@ -28,6 +37,10 @@
     line-height: 1;
     font-weight: 600;
     font-size: 28px;
+
+    @include breakpoint(780) {
+        display: none;
+    }
 }
 
 .header-button-mobile-image {
@@ -153,4 +166,32 @@ svg {
     .header-button-mobile {
         display: none;
     }
+}
+
+.menu-primary {
+    float: right;
+}
+
+.menu-primary-level-1-link {
+    float: right;
+    padding: 1em 1.4em;
+    padding-right: 50px;
+    position: relative;
+    border-left: 1px solid;
+}
+
+.menu-primary-level-2 {
+    display: none;
+}
+
+.is-active .menu-primary-level-2 {
+    display: block;
+}
+
+.menu-primary-level-1-link-image {
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    top: 20px;
+    right: 18px;
 }

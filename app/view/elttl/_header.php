@@ -26,17 +26,11 @@
         <a href="#top" class="to-top js-smooth-scroll"><img class="to-top-image" src="<?php echo $this->getUrlMedia('arrow-up.svg') ?>" onerror="this.src=''; this.onerror=null;"></a>
         <header class="container-header row js-container-header clearfix js-fixed-bar">
             <div class="container-header-inner">
-                <a href="<?php echo $this->getUrl() ?>" class="header-logo">
-                    <span class="header-logo-emblem"><img class="header-logo-emblem-image" src="<?php echo $this->getUrlMedia('logo-emblem.svg') ?>" onerror="this.src=''; this.onerror=null;"></span>
-                    <span class="header-logo-text-full">East Lancashire Table Tennis League</span>
-                    <span class="header-logo-text-short">ELTTL</span>
-                </a>
 
-        <?php $menu = $menuSecondary; ?>
-        <?php include($this->pathView('_menu-secondary')) ?>
-
+        <?php include($this->pathView('header/_logo')) ?>
         <?php $menu = $menuPrimary; ?>
         <?php include($this->pathView('_menu-primary')) ?>
+        <?php include($this->pathView('_menu-division')) ?>
 
             </div>
         </header>

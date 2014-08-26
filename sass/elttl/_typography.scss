@@ -48,6 +48,12 @@ body {
 /**
  * mini reset
  */
+*,
+*:before,
+*:after {
+    @include box-sizing(border-box);
+}
+
 a,
 a:visited {
     text-decoration: none;

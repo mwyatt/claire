@@ -20,12 +20,27 @@ class Controller_Index extends Controller
 		// menu primary
 		$json = new Json();
 		$json->read('menu-primary');
-		$this->view->setObject('menuPrimary', $json->getData());
+		$menuPrimary = $json->getData();
+
+		// cover
+		$json = new Json();
+		$json->read('home-cover');
+		$covers = $json->getData();
 
 		// menu Secondary
 		$json = new Json();
-		$json->read('menu-Secondary');
-		$this->view->setObject('menuSecondary', $json->getData());
+		$json->read('menu-secondary');
+
+		// divisions
+		$modelTennisDivision = new model_tennis_division($this);
+		$modelTennisDivision->read();
+		
+		// template
+		$this->view
+			->setObject('covers', $covers)
+			->setObject('divisions', $modelTennisDivision->getData())
+			->setObject('menuPrimary', $menuPrimary)
+			->setObject('menuSecondary', $json->getData());
 	}
 
 
