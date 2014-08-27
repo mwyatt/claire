@@ -28,7 +28,7 @@ class Controller_Admin_Ajax_Team extends Controller_Admin
 		
 		$insertIds = $modelTeam->create(array($moldTeam));
 		if (count($insertIds)) {
-			echo current($insertIds);
+			echo reset($insertIds);
 		}
 	}
 

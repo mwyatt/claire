@@ -1,6 +1,7 @@
 <?php require_once($this->pathView('admin/_header')) ?>
 <?php require_once($this->pathView('_logo')) ?>
 
+<div class="content page login">
 	<form method="post" action="">
 
 <?php $feedback = $sessionFeedback ?>

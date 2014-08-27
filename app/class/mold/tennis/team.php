@@ -24,15 +24,6 @@ class Mold_Tennis_Team extends Mold
 	public $home_weekday;
 
 
-	public $weekdays = array(
-		1 => 'Monday',
-		2 => 'Tuesday',
-		3 => 'Wednesday',
-		4 => 'Thursday',
-		5 => 'Friday'
-	);
-
-
 	/**
 	 * @return int 
 	 */
@@ -122,7 +113,13 @@ class Mold_Tennis_Team extends Mold
 	 * @return array 
 	 */
 	public function getWeekdays() {
-	    return $this->weekdays;
+	    return array(
+			1 => 'Monday',
+			2 => 'Tuesday',
+			3 => 'Wednesday',
+			4 => 'Thursday',
+			5 => 'Friday'
+		);
 	}
 	
 	

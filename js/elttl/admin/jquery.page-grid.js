@@ -69,16 +69,16 @@ Page_Grid.prototype.modifyRow = function(data, trigger, action) {
 		dataType: 'html',
 		success: function(result) {
 			if (result) {
-				console.log('modifyRow->success');
 				if (action == 'create') {
 					row.find('.js-grid-cell[name="id"]').val(result);
 				};
+				alert(data.options.table + ' ' + action + ' successful');
 			} else {
-				console.log('modifyRow->failure');
+				alert(data.options.table + ' ' + action + ' went wrong');
 			}
 		},
 		error: function() {
-			console.log('modifyRow->failure');
+			alert(data.options.table + ' ' + action + ' went wrong');
 		}
 	});
 };

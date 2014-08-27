@@ -46,6 +46,9 @@ class Controller_Index extends Controller
 
 	public function run()
 	{
+		if ($this->getComingSoon()) {
+			return $this->soon();
+		}
 		if ($this->url->getPathPart(1)) {
 			$this->route('base');
 		}
@@ -73,5 +76,10 @@ class Controller_Index extends Controller
 		$modelContent->bindUser();
 		$this->view->setObject('contents', $modelContent->getData());
 		$this->view->getTemplate('home');
+	}
+
+
+	public function soon() {
+		$this->view->getTemplate('coming-soon');
 	}
 }

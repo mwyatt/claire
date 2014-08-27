@@ -29,7 +29,7 @@ class Controller_Admin_Ajax_Player extends Controller_Admin
 		$moldPlayer->setEttaLicenseNumber($input['etta_license_number']);
 		$insertIds = $modelPlayer->create(array($moldPlayer));
 		if (count($insertIds)) {
-			echo '1';
+			echo reset($insertIds);
 		}
 	}
 

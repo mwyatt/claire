@@ -1,8 +1,8 @@
 <?php require_once($this->pathView('admin/_header')) ?>
 
 <div class="page tennis-player-list js-tennis-player-list">
-	<h1>Players</h1>
-	<span class="button-primary js-grid-button-create">Create</span>
+	<span class="button-primary js-grid-button-create table-crud-button-create">Create</span>
+	<h1 class="page-heading-first">Players</h1>
 	<table class="table-crud js-table-crud" width="100%">
 		<tr class="js-grid-table-headings">
 			<th class="table-crud-heading">First Name</th>
@@ -58,8 +58,8 @@
 
 			</td>
 			<td>
-				<span class="button-primary js-grid-button-save">Save</span>
-				<span class="js-grid-button-delete">Delete</span>
+				<span class="table-crud-button-delete js-grid-button-delete">Delete</span>
+				<span class="button-primary table-crud-button-save js-grid-button-save">Save</span>
 			</td>
 		</tr>
 

@@ -14,6 +14,13 @@ class Route extends System
 
 
 	/**
+	 * splash!
+	 * @var boolean
+	 */
+	public $comingSoon = true;
+
+
+	/**
 	 * view object which will allow the controller to move onto the view stage
 	 * @var object
 	 */
@@ -56,6 +63,9 @@ class Route extends System
 
 	public function getCurrent()
 	{
+		if (! in_array('admin', $this->url->getPath()) && $this->getComingSoon()) {
+			return 'controller_index';
+		}
 		return $this->current;
 	}
 
@@ -101,7 +111,7 @@ class Route extends System
 		
 		// trying to access a route but it does not exist
 		if ($this->isInvalid()) {
-			$this->route('base', 'not-found/');
+			// $this->route('base', 'not-found/');
 		}
 
 		// does the class exist?
@@ -155,6 +165,23 @@ class Route extends System
 	public function getView()
 	{		
 		return $this->view;
+	}
+
+
+	/**
+	 * @return bool 
+	 */
+	public function getComingSoon() {
+	    return $this->comingSoon;
+	}
+	
+	
+	/**
+	 * @param bool $comingSoon 
+	 */
+	public function setComingSoon($comingSoon) {
+	    $this->comingSoon = $comingSoon;
+	    return $this;
 	}
 
 	

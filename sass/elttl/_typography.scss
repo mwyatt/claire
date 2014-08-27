@@ -170,6 +170,11 @@ h6 {
     border-bottom-style: solid;
 }
 
+.page-heading-first {
+    margin-top: 0;
+    @extend .h1;
+}
+
 
 /**
  * typographic window which allows raw tags to be automatically styled

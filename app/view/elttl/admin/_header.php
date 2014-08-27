@@ -38,8 +38,4 @@
 		</div>
 	</header>
 
-<?php else: ?>
-
-	<div class="content page login">
-
 <?php endif ?>

@@ -6,8 +6,11 @@
 	@extend .input;
 	border-color: $color-white;
 	width: 100%;
+	background-color: transparent;
 
+	&:focus,
 	&:hover {
+		background-color: $color-white;
 		border-color: $color-primary-0;
 	}
 }
@@ -23,6 +26,27 @@
 	border-style: solid;
 
 	&:hover {
-		border-color: $color-primary-0;
+		background-color: $color-gray-30;
 	}
+}
+
+.table-crud-button-save {
+    float: right;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.table-crud-button-create {
+    cursor: pointer;
+	float: right;
+}
+
+.table-crud-button-delete {
+    float: right;
+    font-size: 12px;
+    padding: 7px;
+    border: 1px solid;
+    cursor: pointer;
+    color: red;
+    background-color: $color-white;
 }
