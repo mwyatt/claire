@@ -4,16 +4,16 @@
 		"children": [],
 		"url": ""
 	},
-	{
-		"name": "Press",
-		"children": [],
-		"url": "content/press/"
-	},
-	{
-		"name": "Page",
-		"children": [],
-		"url": "content/page/"
-	},
+	// {
+	// 	"name": "Press",
+	// 	"children": [],
+	// 	"url": "content/press/"
+	// },
+	// {
+	// 	"name": "Page",
+	// 	"children": [],
+	// 	"url": "content/page/"
+	// },
 	{
 		"name": "Player",
 		"children": [],
@@ -23,10 +23,10 @@
 		"name": "Team",
 		"children": [],
 		"url": "tennis/team/"
-	},
-	{
-		"name": "Fixture",
-		"children": [],
-		"url": "tennis/fixture/"
 	}
+	// {
+	// 	"name": "Fixture",
+	// 	"children": [],
+	// 	"url": "tennis/fixture/"
+	// }
 ]
