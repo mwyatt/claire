@@ -57,4 +57,21 @@ class Mold_Content extends Mold
 	    $this->title = $title;
 	    return $this;
 	}
+
+
+	/**
+	 * @return string foo-bar
+	 */
+	public function getSlug() {
+	    return $this->slug;
+	}
+	
+	
+	/**
+	 * @param string $slug Foo-bar
+	 */
+	public function setSlug($slug) {
+	    $this->slug = $slug;
+	    return $this;
+	}
 }

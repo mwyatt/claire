@@ -1,6 +1,6 @@
 @import "config";
-@import "../bower_components/owl-carousel/owl-carousel/owl.carousel.css";
-@import "../bower_components/owl-carousel/owl-carousel/owl.theme.css";
+@import "../vendor/bower/owlcarousel/owl-carousel/owl.carousel.css";
+@import "../vendor/bower/owlcarousel/owl-carousel/owl.theme.css";
 @import "misc";
 @import "header";
 @import "home";
@@ -9,4 +9,4 @@
 @import "content-tag";
 @import "pagination";
 @import "footer";
-@import "coming-soon";
+// @import "coming-soon";

@@ -63,19 +63,21 @@ class Controller_Index extends Controller
 
 		// latest 3 posts
 		$modelContent = new model_content($this);
-		$modelContent->read(array(
-			'where' => array(
-				'type' => 'press',
-				'status' => 'visible'
-			),
-			'limit' => array(0, 6),
-			'order_by' => 'time_published desc'
-		));
-		$modelContent->bindMeta('media');
-		$modelContent->bindMeta('tag');
-		$modelContent->bindUser();
-		$this->view->setObject('contents', $modelContent->getData());
-		$this->view->getTemplate('home');
+		$modelContent
+			->read(array(
+				'where' => array(
+					'type' => 'press',
+					'status' => 'visible'
+				),
+				'limit' => array(0, 6),
+				'order_by' => 'time_published desc'
+			))
+			->bindMeta('media')
+			->bindMeta('tag')
+			->bindUser();
+		$this->view
+			->setObject('contents', $modelContent->getData())
+			->getTemplate('home');
 	}
 
 

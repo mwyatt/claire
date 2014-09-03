@@ -80,7 +80,10 @@ class Model_Content extends Model
 				$dataReference[$key]->$metaName = $boundMeta[$modelData->id];
 			}
 		}
-		return $this->setData($dataReference);
+
+		// set and return
+		$this->setData($dataReference);
+		return $this;
 	}
 
 

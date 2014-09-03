@@ -17,7 +17,7 @@ class Route extends System
 	 * splash!
 	 * @var boolean
 	 */
-	public $comingSoon = true;
+	public $comingSoon = false;
 
 
 	/**
@@ -111,7 +111,7 @@ class Route extends System
 		
 		// trying to access a route but it does not exist
 		if ($this->isInvalid()) {
-			// $this->route('base', 'not-found/');
+			$this->setCurrent('controller_notfound');
 		}
 
 		// does the class exist?
