@@ -1,6 +1,6 @@
 @import "config";
-@import "vendor/owl.carousel.scss";
-@import "vendor/owl.theme.scss";
+@import "../bower_components/owl-carousel/owl-carousel/owl.carousel.css";
+@import "../bower_components/owl-carousel/owl-carousel/owl.theme.css";
 @import "misc";
 @import "header";
 @import "home";
@@ -10,7 +10,3 @@
 @import "pagination";
 @import "footer";
 @import "coming-soon";
-
-// lemonade
-// @extend .frame;
-// @extend .bit-;

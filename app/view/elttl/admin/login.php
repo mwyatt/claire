@@ -7,7 +7,7 @@
 <?php $feedback = $sessionFeedback ?>
 <?php require_once($this->pathView('_feedback')) ?>
 
-        <label class="login-label" for="login_email">Email Address</label>
+        <label class="login-label" for="login_email">Username</label>
         <input id="login_email" class="login-input" type="text" name="login_email" autofocus="autofocus" value="<?php echo $this->get('login_email', $sessionFormfield) ?>">
         <label class="login-label" for="login_password">Password</label>
         <input id="login_password" class="login-input" type="password" name="login_password">
