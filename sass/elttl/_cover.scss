@@ -1,0 +1,17 @@
+.cover {
+    display: block;
+    background-color: $color-primary-0;
+    padding: 1em;
+}
+
+.cover-primary-title {
+    @extend .h1;
+}
+
+.cover-description {
+    @extend .p;
+}
+
+.banner-primary {
+    @extend .block-margins;
+}

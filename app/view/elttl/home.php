@@ -6,8 +6,8 @@
 <?php foreach ($covers as $cover): ?>
 	
 		<a href="<?php echo $cover->url ?>" class="cover">
-			<h2><?php echo $cover->name ?></h2>
-			<p><?php echo $cover->description ?></p>
+			<h2 class="cover-primary-title"><?php echo $cover->name ?></h2>
+			<p class="cover-description"><?php echo $cover->description ?></p>
 			<span class="cover-button"><?php echo $cover->button ?></span>
 		</a>
 

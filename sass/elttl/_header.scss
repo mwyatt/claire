@@ -60,7 +60,7 @@
     left: 0;
     right: 0;
     z-index: 10;
-    background-color: $color-primary-0;
+    background-color: $color-white;
 }
 
 .container-header .form-search {
@@ -170,6 +170,11 @@ svg {
 
 .menu-primary {
     float: right;
+    font-size: 7px;
+
+    @include breakpoint(600) {
+        font-size: 16px;
+    }
 }
 
 .menu-primary-level-1-link {

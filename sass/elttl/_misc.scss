@@ -71,11 +71,11 @@ body {
 }
 
 .button-primary {
-    @extend .button-base;
-    background-color: $color-primary-0;
+    @include button('primary');
 }
 
 .button-secondary {
     @extend .button-base;
     background-color: $color-secondary-1-0;
 }
+

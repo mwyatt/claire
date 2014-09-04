@@ -4,7 +4,7 @@
  * global body color
  * @type {int}
  */
-$color-body: $color-secondary-2-0;
+$color-body: $color-primary-3;
 
 
 /**
@@ -170,7 +170,8 @@ h6 {
     border-bottom-style: solid;
 }
 
-.page-heading-first {
+.page-heading-first /* fraud! */,
+.page-primary-title /* use this one */ {
     margin-top: 0;
     @extend .h1;
 }

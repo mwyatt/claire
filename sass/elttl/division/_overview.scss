@@ -1,0 +1,20 @@
+.division-overview-options {
+	@include clearfix;
+
+	@include breakpoint(400) {
+		@extend .block-margins;
+	}
+}
+
+.division-overview-option {
+	@include clearfix;
+    @include button('primary');
+	@extend .block-margins;
+	display: block;
+	text-align: center;
+
+	@media only screen and (min-width: 400px) {
+		float: left;
+		margin-right: 1em;
+	}
+}

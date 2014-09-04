@@ -21,3 +21,34 @@
       }
    }
 }
+
+
+@mixin button($type: 'primary') {
+
+	// determine colors
+	$color-foreground: $color-white;
+	$color-background: $color-primary-0;
+	@if $type == 'secondary' {
+		$color-background: $color-secondary-1-0;
+	}
+
+	@include transition(background 200ms ease);
+	box-shadow: 0 0 0 white;
+	padding: 0.6em 0.9em;
+	color: $color-foreground;
+	background-color: $color-background;
+	border-radius: 2px;
+	
+	&:hover {
+		background-color: lighten($color-background, 5%);
+	}
+
+	&:active {
+		background-color: darken($color-background, 5%);
+	}
+
+	&:disabled {
+		opacity: 0.5;
+		cursor: not-allowed;
+	}
+}
