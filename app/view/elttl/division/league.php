@@ -5,7 +5,7 @@
 
 <?php if ($leagueStats): ?>
 
-	<p>This is the league table for the <?php echo $division->getName() ?> division.</p>
+	<p class="page-primary-description">This is the league table for the <?php echo $division->getName() ?> division.</p>
 	<table class="elttl-table">
 		<tr class="elttl-table-row elttl-table-headings">
 			<th class="elttl-table-cell elttl-table-heading is-name">Name</th>

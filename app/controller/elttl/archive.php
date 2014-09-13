@@ -92,6 +92,9 @@ class Controller_Archive extends Controller_Index
 			return;
 		}
 		$this->setYear($year);
+		$this
+			->view
+			->setObject('year', $this->getYear());
 	}
 
 

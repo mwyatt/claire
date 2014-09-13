@@ -177,31 +177,28 @@ svg {
     }
 }
 
-.menu-primary-level-1 {
-    display: none;
-}
-
 .menu-primary-level-1-link {
-    float: right;
-    padding: 1em 1.4em;
-    padding-right: 50px;
-    position: relative;
-    border-left: 1px solid;
-}
-
-.menu-primary-level-2 {
     display: none;
-}
 
-.is-active .menu-primary-level-2 {
-    display: block;
+    @media only screen and (min-width: 450px) {
+        @extend .a;
+        display: block;
+        float: right;
+        padding: 13px 1em;
+        padding-right: 50px;
+        position: relative;
+        border-left: 1px solid $color-gray-10;
+        border-bottom: none;
+        font-weight: 600;
+    }
 }
 
 .menu-primary-level-1-link-image {
-    width: 16px;
-    height: 16px;
+    @include transition(all 200ms ease);
+    width: 0.7em;
+    height: 0.7em;
     position: absolute;
-    top: 20px;
+    top: 19px;
     right: 18px;
 }
 
@@ -211,10 +208,80 @@ svg {
 }
 
 .menu-primary-reduced-trigger {
-    padding: 10px;
-    width: 44px;
-    height: 44px;
-    background-color: $color-primary-0;
+    padding: 0.8em .8em;
+    width: 3.8em;
+    height: 3em;
     display: block;
-    border-left: 1px solid darken($color-primary-0, 10%);
+    border-left: 1px solid $color-gray-10;
+
+    @media only screen and (min-width: 450px) {
+        display: none;
+    }
+}
+
+.menu-primary-level-2 {
+    z-index: 1;
+    display: none;
+    @include transition(all 200ms ease);
+    position: absolute;
+    top: 3em;
+    left: 0;
+    background-color: $color-white;
+    right: 0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+
+    @media only screen and (min-width: 440px) {
+        display: none;
+    }
+}
+
+.menu-primary-reduced-trigger-cross-image {
+    display: none;
+}
+
+.is-active {
+
+    .menu-primary-level-2 {
+        display: block;
+    }
+
+    .menu-primary-reduced-trigger-image {
+        display: none;
+    }
+
+    .menu-primary-reduced-trigger-cross-image {
+        display: block;
+    }
+
+    .menu-primary-level-1-link-image {
+        @include transform(rotate(180deg));
+    }
+}
+
+.menu-primary-level-2-link {
+    display: block;
+    padding: 1em;
+    border-top: 1px solid $color-gray-10;
+    @extend .a;
+    border-bottom: none;
+}
+
+.menu-primary-level-1 {
+
+    @media only screen and (min-width: 450px) {
+        position: relative;
+    }
+}
+
+.header-year {
+    position: absolute;
+    top: 48px;
+    left: 0;
+    right: 0;
+    padding: 0.3em;
+    background-color: $color-gray-10;
+    color: $color-gray-40;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .2);
+    border-top: 1px solid $color-gray-20;
 }

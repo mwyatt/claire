@@ -15,10 +15,10 @@
 
 	</div>
 	<div class="home-press">
-		<h1 class="home-press-heading">Press releases</h1>
-		<div class="home-press-control">
+		<h1 class="home-press-heading">
 			<a href="<?php echo $this->getUrl() ?>press/" class="home-button-all-posts">View all</a>
-		</div>
+			<span class="home-press-heading-text">Press releases</span>
+		</h1>
 		
 <?php include($this->pathView('_contents')) ?>
 

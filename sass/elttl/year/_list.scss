@@ -1,0 +1,18 @@
+.divisions,
+.years {
+	@include clearfix;
+	@extend .block-margins;
+}
+
+.division,
+.year {
+    display: block;
+    padding: 1em 0;
+    border-top: 1px solid $color-gray-10;
+    @extend .a;
+    border-bottom: none;
+
+    &:first-child {
+    	border: none;
+    }
+}

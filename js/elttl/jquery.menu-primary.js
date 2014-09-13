@@ -29,7 +29,7 @@ Menu_Primary.prototype.events = function(data) {
 
 	// clicking doc
 	$(document).on('mouseup.primary-toggle', function(event) {
-		if (! $(event.target).closest('.js-menu-primary-container').length) {
+		if (! $(event.target).closest('.js-menu-primary-container.is-active').length) {
 			$('.js-menu-primary-container').removeClass('is-active');
 		}
 	});

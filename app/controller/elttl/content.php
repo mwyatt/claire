@@ -67,10 +67,11 @@ class Controller_Content extends Controller_Index
 
 		// load
 		$pagination = new pagination($this);
-		$cache = new cache($this);
-		$pagination->setTotalRows($cache->read('ceil-content-' . $this->url->getPathPart(0)));
-		$pagination->initialise();
 		$modelContent = new model_content($this);
+		$cache = new cache($this);
+		$modelContent->read();
+		$pagination->setTotalRows(count($modelContent->getData()));
+		$pagination->initialise();
 		$modelContent->read(array(
 			'where' => array(
 				'type' => $this->url->getPathPart(0),

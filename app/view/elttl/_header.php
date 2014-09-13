@@ -31,6 +31,7 @@
         <?php $menu = $menuPrimary; ?>
         <?php include($this->pathView('_menu-primary')) ?>
         <?php include($this->pathView('_menu-division')) ?>
+        <?php include $this->pathView('header/_year') ?>
 
             </div>
         </header>

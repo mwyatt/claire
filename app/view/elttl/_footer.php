@@ -7,7 +7,7 @@
 <?php include($this->pathView('_menu-Secondary')) ?>
 
 			<div class="footer-address">
-				<a href="http://eastlancstt.org.uk/page/contact-us/"><strong>© East Lancashire Table Tennis League 2014</strong></a>
+				<a href="<?php echo $this->getUrl() ?>page/contact-us/">&copy; East Lancashire Table Tennis League <?php echo date('Y') ?></a>
 				<br>Hyndburn Sports Centre
 				<br>Henry Street
 				<br>Church

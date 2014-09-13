@@ -177,6 +177,34 @@ h6 {
     @extend .h1;
 }
 
+.page-primary-description {
+    @extend .p;
+}
+
+
+/**
+ * reusable, extendable classes
+ */
+.text-left {
+    text-align: left;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-size-larger {
+    font-size: 1.2em;
+}
+
+.text-size-smaller {
+    font-size: .8em;
+}
+
 
 /**
  * typographic window which allows raw tags to be automatically styled

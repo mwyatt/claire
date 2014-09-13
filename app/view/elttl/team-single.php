@@ -1,9 +1,3 @@
-->setObject('team', $team)
-->setObject('division', $modelTennisDivision->getData())
-->setObject('fixtures', $modelTennisFixture->getData())
-->setObject('players', $modelTennisteam->getData())
-
-
 <?php require_once($this->pathView('_header')) ?>
 
 <div class="page team-single js-page-team-single">
@@ -63,8 +57,6 @@
 <?php include($this->pathView('_fixtures')) ?>
 
 	</div>
-
-
 </div>
 
 <?php require_once($this->pathView('_footer')) ?>

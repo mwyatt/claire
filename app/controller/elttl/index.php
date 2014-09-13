@@ -34,11 +34,12 @@ class Controller_Index extends Controller
 		// divisions
 		$modelTennisDivision = new model_tennis_division($this);
 		$modelTennisDivision->read();
-		
-		// template
+
+		// template defaults
 		$this->view
 			->setObject('covers', $covers)
 			->setObject('divisions', $modelTennisDivision->getData())
+			->setObject('year', 0)
 			->setObject('menuPrimary', $menuPrimary)
 			->setObject('menuSecondary', $json->getData());
 	}

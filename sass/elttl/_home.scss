@@ -1,12 +1,13 @@
-.home-press-heading {
+.home-press-heading-text {
 	@extend .h1;
 }
 
 .home-button-all-posts {
-	@include button('secondary');
+	@extend .a;
+	@extend .text-size-smaller;
 	float: right;
 }
 
-.home-press-control {
+.home-press-heading {
 	@include clearfix;
 }

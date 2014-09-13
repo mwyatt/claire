@@ -1,8 +1,90 @@
 .elttl-table {
     margin: 1em 0;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.elttl-table-row {
+    @include transition(all 200ms ease);
+
+    &:hover {
+    	background-color: rgba(0, 0, 0, 0.03);
+    }
+}
+
+.elttl-table-headings {
+
+	&:hover {
+		background-color: inherit;
+	}
 }
 
 .elttl-table-cell {
     padding: 0.4em;
     border: 1px solid #eee;
+    
+    @media only screen and (min-width: 400px) {
+		padding: .6em;
+	}
+
+    @media only screen and (min-width: 600px) {
+		padding: 1em;
+	}
+
+    @media only screen and (min-width: 800px) {
+		padding: 1.5em;
+	}
+
+    a {
+    	@extend .a;
+    	line-height: 1.5;
+    }
+}
+
+.page.division-league {
+
+	.is-won,
+	.is-draw,
+	.is-loss,
+	.is-played,
+	.is-points {
+		display: none;
+		text-align: center;
+	}
+
+	.is-points {
+		display: table-cell;
+	}
+
+    @media only screen and (min-width: 400px) {
+
+		.is-played {
+			display: table-cell;
+		}
+	}
+
+    @media only screen and (min-width: 600px) {
+
+		.is-won {
+			display: table-cell;
+		}
+	}
+
+    @media only screen and (min-width: 700px) {
+
+		.is-loss {
+			display: table-cell;
+		}
+
+		.is-name {
+		    width: 30%;
+		}
+	}
+
+    @media only screen and (min-width: 800px) {
+
+		.is-draw {
+			display: table-cell;
+		}
+	}
 }

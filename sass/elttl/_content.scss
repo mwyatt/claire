@@ -68,15 +68,6 @@ a.tag {
     }
 }
 
-.content-single .content-date {
-    display: none;
-}
-
-.content-single.is-type-post .content-date {
-    display: block;
-    text-align: right;
-}
-
 .content-link {
     @extend .a;
 }

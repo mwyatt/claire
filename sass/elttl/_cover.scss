@@ -3,6 +3,10 @@
     display: block;
     background-color: $color-primary-0;
     padding: 1em;
+    border-radius: 2px;
+    background-image: image-url('glow.png');
+    background-repeat: no-repeat;
+    background-position: center center;
 }
 
 .cover-primary-title {
@@ -15,13 +19,19 @@
 
 .cover-description {
     @extend .p;
+    color: rgba(255, 255, 255, 0.8);
 }
 
 .banner-primary {
-    @extend .block-margins;
+    margin-bottom: 1em;
 }
 
 .cover-button {
-	@include button('ghost');
+    @include button('ghost');
     float: right;
+    font-weight: 600;
+}
+
+.owl-theme .owl-controls .owl-page span {
+    background-color: $color-primary-0;
 }
