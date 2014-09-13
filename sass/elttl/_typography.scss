@@ -90,6 +90,7 @@ h6 {
 .h4,
 .h5,
 .h6 {
+    color: $color-primary-4;
     font-family: $heading-font-family;
     font-weight: 400;
     margin: 1em 0 0.5em;
@@ -163,8 +164,8 @@ h6 {
 }
 
 .a {
-    color: $color-secondary-2-0;
-    border-bottom-color: $color-secondary-2-0;
+    color: $color-primary-0;
+    border-bottom-color: $color-primary-0;
     text-decoration: none;
     border-bottom-width: 1px;
     border-bottom-style: solid;
@@ -186,6 +187,8 @@ h6 {
     a,
     a:visited {
         @extend .a;
+        line-height: 1.5;
+        word-break: break-all;
     }
 
     a:hover,

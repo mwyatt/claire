@@ -1,4 +1,5 @@
 .cover {
+	@include clearfix;
     display: block;
     background-color: $color-primary-0;
     padding: 1em;
@@ -6,6 +7,10 @@
 
 .cover-primary-title {
     @extend .h1;
+    margin-top: 0;
+    line-height: 1.1;
+    font-weight: 600;
+    color: white;
 }
 
 .cover-description {
@@ -14,4 +19,9 @@
 
 .banner-primary {
     @extend .block-margins;
+}
+
+.cover-button {
+	@include button('ghost');
+    float: right;
 }

@@ -31,6 +31,10 @@
 	@if $type == 'secondary' {
 		$color-background: $color-secondary-1-0;
 	}
+	@if $type == 'ghost' {
+		$color-foreground: $color-primary-0;
+		$color-background: $color-white;
+	}
 
 	@include transition(background 200ms ease);
 	box-shadow: 0 0 0 white;

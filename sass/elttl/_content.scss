@@ -16,11 +16,12 @@
 }
 
 .content-title {
-    font-size: 1.6em;
-    margin: 0.5em 0;
+    @extend .h2;
+    margin-top: 0;
 }
 
 .content-thumb-background {
+    display: none;
     background-size: cover;
     height: 13em;
     margin-bottom: 1em;
@@ -49,10 +50,11 @@ a.tag {
 
 .content.element {
     position: relative;
-    padding: 1em;
+    padding: 1em 0;
 }
 
 .content-author {
+    display: none;
     font-size: 0.9em;
     float: right;
 }
@@ -73,4 +75,8 @@ a.tag {
 .content-single.is-type-post .content-date {
     display: block;
     text-align: right;
+}
+
+.content-link {
+    @extend .a;
 }

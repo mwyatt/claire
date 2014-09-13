@@ -1,6 +1,9 @@
 <?php if ($divisions): ?>
 	
-<nav class="menu-primary js-menu-primary-container">
+<nav class="menu-primary menu-primary-division js-menu-primary-container">
+	<span class="menu-primary-reduced-trigger">
+		<img class="menu-primary-reduced-trigger-image" src="<?php echo $this->getUrlMedia('trophy.svg') ?>" onerror="this.src=''; this.onerror=null;">
+	</span>
 	<div class="menu-primary-level-1">
 		<a href="<?php echo $this->getUrl() ?>result/" class="menu-primary-level-1-link js-menu-primary-toggle">
 			Results

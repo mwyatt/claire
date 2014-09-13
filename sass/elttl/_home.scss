@@ -1,3 +1,12 @@
-.content.home .home-all-posts {
-    display: block;
+.home-press-heading {
+	@extend .h1;
+}
+
+.home-button-all-posts {
+	@include button('secondary');
+	float: right;
+}
+
+.home-press-control {
+	@include clearfix;
 }

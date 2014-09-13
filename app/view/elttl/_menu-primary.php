@@ -1,6 +1,9 @@
 <?php if ($menu): ?>
 	
-<nav class="menu-primary js-menu-primary-container">
+<nav class="menu-primary menu-primary-league js-menu-primary-container">
+	<span class="menu-primary-reduced-trigger">
+		<img class="menu-primary-reduced-trigger-image" src="<?php echo $this->getUrlMedia('menu.svg') ?>" onerror="this.src=''; this.onerror=null;">
+	</span>
 
 	<?php foreach ($menu as $menuItem): ?>
 

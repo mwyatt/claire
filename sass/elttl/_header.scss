@@ -25,7 +25,7 @@
         display: block;
         font-size: 1.3em;
         font-weight: 600;
-        color: white;
+        color: $color-primary-4;
         position: relative;
         top: 1px;
     }
@@ -33,7 +33,7 @@
 
 .header-logo-text-short {
     display: block;
-    color: white;
+    color: $color-primary-4;
     line-height: 1;
     font-weight: 600;
     font-size: 28px;
@@ -55,6 +55,7 @@
 
 .container-header {
     @include transition(all 300ms ease);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .2);
     position: fixed;
     top: 0;
     left: 0;
@@ -170,11 +171,14 @@ svg {
 
 .menu-primary {
     float: right;
-    font-size: 7px;
 
     @include breakpoint(600) {
         font-size: 16px;
     }
+}
+
+.menu-primary-level-1 {
+    display: none;
 }
 
 .menu-primary-level-1-link {
@@ -199,4 +203,18 @@ svg {
     position: absolute;
     top: 20px;
     right: 18px;
+}
+
+.menu-primary-reduced-trigger-image {
+    width: 100%;
+    height: 100%;
+}
+
+.menu-primary-reduced-trigger {
+    padding: 10px;
+    width: 44px;
+    height: 44px;
+    background-color: $color-primary-0;
+    display: block;
+    border-left: 1px solid darken($color-primary-0, 10%);
 }
