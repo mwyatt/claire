@@ -1,5 +1,5 @@
 html {
-    background-color: $color-secondary-1-4;
+    background-color: $color-white;
 }
 
 body {
@@ -51,7 +51,8 @@ body {
 }
 
 .page {
-    background-color: $color-white;
+    max-width: 90em;
+    margin: 0 auto;
     padding-left: 10%;
     padding-right: 10%;
     padding-top: 4.7em;
@@ -63,6 +64,8 @@ body {
 
     @media only screen and (min-width: 650px) {
         padding-top: 6.7em;
+        padding-left: 5%;
+        padding-right: 5%;
     }
 }
 
@@ -84,4 +87,3 @@ body {
     @extend .button-base;
     background-color: $color-secondary-1-0;
 }
-

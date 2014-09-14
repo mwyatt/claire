@@ -57,12 +57,12 @@ class Model_Tennis_Fixture extends Model
 	{
 		$this->keyByProperty('id');
 		if (! $fixtureMolds = $this->getData()) {
-			return;
+			return $this;
 		}
 		$collection = array();
 		foreach ($fixtureScores as $key => $fixtureScore) {
 			if (! array_key_exists($key, $fixtureMolds)) {
-				return;
+				return $this;
 			}
 			foreach (array('left', 'right') as $side) {
 				$teamId = $fixtureMolds[$key]->{'team_id_' . $side};

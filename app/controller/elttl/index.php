@@ -30,6 +30,12 @@ class Controller_Index extends Controller
 		// menu Secondary
 		$json = new Json();
 		$json->read('menu-secondary');
+		$menuSecondary = $json->getData();
+
+		// ads
+		$json = new Json();
+		$json->read('ads');
+		$ads = $json->getData();
 
 		// divisions
 		$modelTennisDivision = new model_tennis_division($this);
@@ -37,11 +43,12 @@ class Controller_Index extends Controller
 
 		// template defaults
 		$this->view
+			->setObject('year', 0)
 			->setObject('covers', $covers)
 			->setObject('divisions', $modelTennisDivision->getData())
-			->setObject('year', 0)
+			->setObject('ads', $ads)
 			->setObject('menuPrimary', $menuPrimary)
-			->setObject('menuSecondary', $json->getData());
+			->setObject('menuSecondary', $menuSecondary);
 	}
 
 

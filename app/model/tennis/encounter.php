@@ -31,7 +31,7 @@ class Model_Tennis_Encounter extends Model
 	public function convertToMerit()
 	{
 		if (! $molds = $this->getData()) {
-			return;
+			return $this;
 		}
 		$collection = array();
 		foreach ($molds as $mold) {

@@ -1,0 +1,53 @@
+.advertisements {
+	@include clearfix;
+	@extend .block-margins;
+}
+
+.advertisement {
+    display: block;
+	background-color: $color-primary-0;
+	padding: 1em;
+	border-radius: 2px;
+	background-image: image-url('glow.png');
+	background-repeat: no-repeat;
+	background-position: bottom right;
+    min-height: 8em;
+	@extend .block-margins;
+    color: $color-white;
+
+    @media only screen and (min-width: 400px) {
+    	float: left;
+    }
+
+    @media only screen and (min-width: 400px) and (max-width: 699px) {
+    	width: 47%;
+    	margin-right: 2%;
+
+    	&:nth-child(2n) {
+    		float: right;
+    		margin-right: 0;
+    	}
+    }
+
+    @media only screen and (min-width: 700px) {
+    	width: 30%;
+    	margin-right: 5%;
+    	padding: 1em;
+
+    	&:nth-child(3n) {
+    		float: right;
+    		margin-right: 0;
+    	}
+    }
+}
+
+.advertisement-title {
+    @extend .h2;
+    margin-top: 0;
+    color: $color-white;
+}
+
+.advertisement-description {
+    @extend .p;
+    color: $color-white;
+}

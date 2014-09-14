@@ -7,6 +7,15 @@
     background-image: image-url('glow.png');
     background-repeat: no-repeat;
     background-position: center center;
+    min-height: 20em;
+}
+
+.owl-item:nth-child(2n) .cover {
+    background-color: $color-secondary-1-0;
+}
+
+.owl-item:nth-child(3n) .cover {
+    background-color: $color-secondary-2-0;
 }
 
 .cover-primary-title {
@@ -14,7 +23,7 @@
     margin-top: 0;
     line-height: 1.1;
     font-weight: 600;
-    color: white;
+    color: $color-white;
 }
 
 .cover-description {
@@ -28,7 +37,9 @@
 
 .cover-button {
     @include button('ghost');
-    float: right;
+    position: absolute;
+    bottom: 1em;
+    right: 1em;
     font-weight: 600;
 }
 

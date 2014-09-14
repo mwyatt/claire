@@ -3,8 +3,8 @@
 <div class="page player-single js-page-player-single">
 	<h1 class="page-primary-title"><?php echo $player->getNameFull() ?></h1>
 	<div class="block-margins">
-		<h2 class="player-single-secondary-title">General</h2>
-		<table class="elttl-table">
+		<h2 class="player-single-secondary-title">General information</h2>
+		<table class="elttl-table is-general">
 			<tr class="elttl-table-row">
 				<th class="elttl-table-cell elttl-table-heading">Team</th>
 				<td class="elttl-table-cell">
@@ -46,7 +46,7 @@
 
 	<div class="block-margins">
 		<h2 class="player-single-secondary-title">Performance</h2>
-		<table class="elttl-table">
+		<table class="elttl-table is-encounter">
 
 	<?php include($this->pathView('_encounters')) ?>
 

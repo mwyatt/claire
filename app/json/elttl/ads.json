@@ -1,0 +1,20 @@
+[
+	{
+		"name": "Get the Handbook",
+		"description": "Download this seasons handbook here",
+		"url": "handbook-download.pdf",
+		"button": ""
+	},
+	{
+		"name": "Tables and Results",
+		"description": "View this seasons merit and league tables",
+		"url": "result/",
+		"button": ""
+	},
+	{
+		"name": "Results archive",
+		"description": "What happened last year? Find out here.",
+		"url": "archive/",
+		"button": "Vist the archive"
+	}
+]

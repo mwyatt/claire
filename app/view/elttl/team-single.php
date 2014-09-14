@@ -3,8 +3,8 @@
 <div class="page team-single js-page-team-single">
 	<h1 class="page-primary-title"><?php echo $team->getName() ?></h1>
 	<div class="block-margins">
-		<h2 class="team-single-secondary-title">General</h2>
-		<table class="elttl-table">
+		<h2 class="team-single-secondary-title">General information</h2>
+		<table class="elttl-table is-general">
 			<tr class="elttl-table-row">
 				<th class="elttl-table-cell elttl-table-heading">Division</th>
 				<td class="elttl-table-cell"><?php echo $division->getName() ?></td>
@@ -40,13 +40,19 @@
 
 	<div class="block-margins">
 		<h2 class="team-single-secondary-title">Registered players</h2>
+		<table class="elttl-table is-general">
 		
 	<?php foreach ($players as $player): ?>
 		
-		<div class="player"><?php echo $player->getNameFull() ?></div>
+			<tr class="elttl-table-row">
+				<td class="elttl-table-cell">
+					<a class="player" href="<?php echo $this->buildArchiveUrl(array('player', $player->getNameFull())) ?>"><?php echo $player->getNameFull() ?></a>
+				</td>
+			</tr>
 
 	<?php endforeach ?>
 
+		</table>
 	</div>
 
 <?php endif ?>

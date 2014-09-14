@@ -41,50 +41,113 @@
     }
 }
 
-.page.division-league {
+.elttl-table-cell {
 
-	.is-won,
-	.is-draw,
-	.is-loss,
-	.is-played,
-	.is-points {
+	// player
+	&.is-rank,
+	&.is-average,
+
+	// team
+	&.is-won,
+	&.is-draw,
+	&.is-loss,
+	&.is-played,
+	&.is-points {
 		display: none;
 		text-align: center;
 	}
 
-	.is-points {
+	&.is-team {
+		display: none;
+	}
+
+	&.is-average,
+	&.is-points {
 		display: table-cell;
 	}
 
     @media only screen and (min-width: 400px) {
 
-		.is-played {
+		&.is-played {
 			display: table-cell;
 		}
 	}
 
     @media only screen and (min-width: 600px) {
 
-		.is-won {
+		&.is-rank,
+		&.is-won {
 			display: table-cell;
 		}
 	}
 
     @media only screen and (min-width: 700px) {
 
-		.is-loss {
+		&.is-loss {
 			display: table-cell;
 		}
 
-		.is-name {
+		&.is-name {
 		    width: 30%;
 		}
 	}
 
     @media only screen and (min-width: 800px) {
 
-		.is-draw {
+		&.is-team,
+		&.is-draw {
 			display: table-cell;
 		}
+
+		&.is-team {
+		    width: 20%;
+		}
 	}
+}
+
+.is-encounter .encounter-rank-change {
+    border-radius: 2px;
+    background: $color-secondary-1-1;
+    color: $color-white;
+    line-height: 1.9;
+    text-align: center;
+    font-weight: 400;
+    font-size: 0.8em;
+    display: block;
+    padding: 0 0.7em;
+    margin: 0 0 0.5em;
+    clear: both;
+
+    @media only screen and (min-width: 800px) {
+    	clear: none;
+	    margin: 2px 0 0 0.8em;
+	    float: right;
+	    min-width: 3em;
+	}
+}
+
+.is-encounter .elttl-table-cell {
+    position: relative;
+	width: 20%;
+	word-wrap: break-word;
+
+	&.is-score {
+	    text-align: center;
+		width: 15%;
+	}
+
+	&.is-score-total {
+	    text-align: center;
+	    font-weight: 600;
+	    @extend .text-size-larger;
+	}
+}
+
+.elttl-table-heading {
+	background-color: rgba(0, 0, 0, 0.03);
+}
+
+.is-general .elttl-table-heading {
+	text-align: left;
+	width: 30%;
 }

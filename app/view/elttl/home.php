@@ -23,12 +23,9 @@
 <?php include($this->pathView('_contents')) ?>
 
 	</div>
-	<div class="home-banner-secondary">
-		<div>1</div>
-		<div>2</div>
-		<div>3</div>
-		<div>4</div>
-	</div>
+
+<?php include($this->pathView('_advertisements')) ?>
+
 </div>
 
 <?php include($this->pathView('_footer')) ?>

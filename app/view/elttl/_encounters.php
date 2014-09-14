@@ -17,28 +17,27 @@
 			Doubles
 			
 		<?php else: ?>
-	
-		<a href="<?php echo $this->url->build(array('player', $playerLeft->getNameFull())) ?>"><?php echo $playerLeft->getNameFull() ?></a>
-
 			<?php if ($encounter->getPlayerRankChangeLeft() != 0): ?>
 			
 		<span class="encounter-rank-change"><?php echo $encounter->getPlayerRankChangeLeft() ?></span>
 
 			<?php endif ?>
+	
+		<a href="<?php echo $this->url->build(array('player', $playerLeft->getNameFull())) ?>"><?php echo $playerLeft->getNameFull() ?></a>
 		<?php endif ?>
 
 	</td>
-	<td class="elttl-table-cell"><?php echo $encounter->getScoreLeft() ?></td>
-	<td class="elttl-table-cell"><?php echo $encounter->getScoreRight() ?></td>
+	<td class="elttl-table-cell is-score"><?php echo $encounter->getScoreLeft() ?></td>
+	<td class="elttl-table-cell is-score"><?php echo $encounter->getScoreRight() ?></td>
 	<td class="elttl-table-cell">
-		<a href="<?php echo $this->url->build(array('player', $playerRight->getNameFull())) ?>"><?php echo $playerRight->getNameFull() ?></a>
 
 		<?php if ($encounter->getPlayerRankChangeRight() != 0): ?>
 		
 		<span class="encounter-rank-change"><?php echo $encounter->getPlayerRankChangeRight() ?></span>
 
 		<?php endif ?>
-
+		
+		<a href="<?php echo $this->url->build(array('player', $playerRight->getNameFull())) ?>"><?php echo $playerRight->getNameFull() ?></a>
 	</td>
 </tr>
 

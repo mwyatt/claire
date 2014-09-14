@@ -41,7 +41,7 @@
 
 <?php else: ?>
 	
-	<p>No merit table yet.</p>
+	<p>No fixtures have been fulfilled yet.</p>
 
 <?php endif ?>
 <?php include($this->pathView('_footer')) ?>

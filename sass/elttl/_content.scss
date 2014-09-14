@@ -1,7 +1,3 @@
-.content-date {
-    // color: $color-quinary;
-}
-
 .content.element .medium {
     display: none;
 }
@@ -57,15 +53,6 @@ a.tag {
     display: none;
     font-size: 0.9em;
     float: right;
-}
-
-@include breakpoint(600) {}
-
-@include breakpoint(900) {
-
-    .content.element {
-        padding: 3%;
-    }
 }
 
 .content-link {
