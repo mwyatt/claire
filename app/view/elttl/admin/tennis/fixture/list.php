@@ -1,7 +1,7 @@
 <?php require_once($this->pathView('admin/_header')) ?>
 
 <div class="page tennis-fixture-list">
-	<h1>Fixtures</h1>
+	<h1 class="page-primary-title">Fixtures</h1>
 
 <?php if ($fixtures) : ?>
 

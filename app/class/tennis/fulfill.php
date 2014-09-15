@@ -27,10 +27,31 @@ class Tennis_Fulfill extends Data
 
 
     /**
+     * prints r and echos message if debugging mode on
+     * @param  string|array $message 
+     * @return null          
+     */
+    public function outputDebugBlock($message)
+    {
+        if ($this->isDebug($this)) {
+            echo '<pre>';
+            if (is_array($message)) {
+                print_r($message);
+            } elseif (is_string($message)) {
+                echo $message;
+            }
+            echo '</pre>';
+            echo '<hr>';
+        }
+    }
+
+
+    /**
      * validate and determine whether to clear first
      */
     public function run()
     {
+        $this->outputDebugBlock('running fixture fulfillment procedure');
         if (! $this->validate()) {
             return;
         }

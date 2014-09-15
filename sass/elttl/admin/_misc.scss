@@ -92,3 +92,7 @@ a.content-action-link {
     padding: 1px 7px;
     margin: 0 0 5px 5px;
 }
+
+.button-new {
+	@include button;
+}
