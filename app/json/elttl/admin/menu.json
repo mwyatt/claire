@@ -13,5 +13,10 @@
 		"name": "Team",
 		"children": [],
 		"url": "tennis/team/"
+	},
+	{
+		"name": "Fixture",
+		"children": [],
+		"url": "tennis/fixture/"
 	}
 ]

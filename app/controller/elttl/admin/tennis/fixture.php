@@ -32,10 +32,18 @@ class Controller_Admin_Tennis_Fixture extends Controller_Admin
 
 	public function run()
 	{
+		// generating
+		if (array_key_exists('generate', $_REQUEST)) {
+			$modelTennisFixture = new model_tennis_Fixture($this);
+			$modelTennisFixture->generate();
+			$this->route('current');
+		}
+
+
+		// updating
 		if (array_key_exists('division_id', $_REQUEST)) {
 			$this->update();
 		}
-		
 
 		// single
 		if (array_key_exists('fixture_id', $_REQUEST)) {

@@ -612,12 +612,14 @@ class Model extends Data
 
 	public function orderByPropertyIntDesc($property)
 	{
-		$data = $this->getData();
+		if (! $data = $this->getData()) {
+			return $this;
+		}
 
 		// fail silent
 		$dataSample = current($data);
 		if (! property_exists($dataSample, $property)) {
-			return;
+			return $this;
 		}
 
 		// sort
