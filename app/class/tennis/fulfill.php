@@ -298,7 +298,7 @@ class Tennis_Fulfill extends Data
         ));
         $this->outputDebugBlock($modelFixture->getData());
         if (! $data = $modelFixture->getDataFirst()) {
-            $this->session->set('feedback', 'This fixture does not exist');
+            // $this->session->set('feedback', 'This fixture does not exist');
             return;
         }
         return $this->setFixture($data);
