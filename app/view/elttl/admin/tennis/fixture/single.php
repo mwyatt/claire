@@ -12,7 +12,7 @@
 	};
 </script>
 <div class="page tennis-fixture-single js-tennis-fixture-single">
-	<h2 class="page-heading"><?php echo ($isFilled ? 'Update' : 'Fulfill') ?> scorecard</h2>
+	<h1 class="page-primary-title"><?php echo ($isFilled ? 'Update' : 'Fulfill') ?> scorecard</h1>
 	<form class="main" method="post" class="fixture-single-form">
 
 <?php if ($divisions): ?>
@@ -45,15 +45,15 @@
 		</section>
 		<section class="fixture-single-section">
 
-<?php foreach ($sides as $side): ?>
-
-
-	<?php foreach (array('1', '2', '3') as $playerPosition): ?>
+<?php foreach (array('1', '2', '3') as $playerPosition): ?>
+	<?php foreach ($sides as $side): ?>
 	
-			<span class="fixture-single-button-play-up fixture-single-button-play-up-<?php echo $side ?> js-fixture-single-button-play-up" data-side="<?php echo $side ?>" data-position="<?php echo $playerPosition ?>">Play up</span>
-			<select class="fixture-single-select fixture-single-player js-fixture-single-player fixture-single-player-<?php echo $side ?>" name="player[<?php echo $side ?>][<?php echo $playerPosition ?>]" data-side="<?php echo $side ?>" data-position="<?php echo $playerPosition ?>">
-				<option value="0"><?php echo ucfirst($side) ?> Player <?php echo $playerPosition ?></option>
-			</select>
+			<div class="fixture-single-player-row is-<?php echo $side ?>">
+				<span class="fixture-single-button-play-up fixture-single-button-play-up-<?php echo $side ?> js-fixture-single-button-play-up" data-side="<?php echo $side ?>" data-position="<?php echo $playerPosition ?>">Play up</span>
+				<select class="fixture-single-select fixture-single-player js-fixture-single-player fixture-single-player-<?php echo $side ?>" name="player[<?php echo $side ?>][<?php echo $playerPosition ?>]" data-side="<?php echo $side ?>" data-position="<?php echo $playerPosition ?>">
+					<option value="0"><?php echo ucfirst($side) ?> Player <?php echo $playerPosition ?></option>
+				</select>
+			</div>
 			
 	<?php endforeach ?>
 <?php endforeach ?>
@@ -106,7 +106,7 @@
 
 		</section>
 		<section class="fixture-single-section">
-			<span class="js-form-button-submit"><?php echo ($isFilled ? 'Update' : 'Fulfill') ?></span>
+			<span class="admin-button-primary js-form-button-submit"><?php echo ($isFilled ? 'Update' : 'Fulfill') ?></span>
 		</section>
 	</form>
 </div>

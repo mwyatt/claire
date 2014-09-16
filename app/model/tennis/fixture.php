@@ -131,21 +131,21 @@ class Model_Tennis_Fixture extends Model
 	public function generate() {
 		$sth = $this->database->dbh->query("	
 			SELECT
-				tt_division.id as division_id
-				, tt_team.id as team_id
+				tennis_division.id as division_id
+				, tennis_team.id as team_id
 			FROM
-				tt_division				
-			LEFT JOIN tt_team ON tt_division.id = tt_team.division_id
+				tennis_division				
+			LEFT JOIN tennis_team ON tennis_division.id = tennis_team.division_id
 		");
 		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {	
 			$this->data[$row['division_id']][] = $row['team_id'];
 		}						
 		$sth = $this->database->dbh->prepare("
 			INSERT INTO
-				tt_fixture
-				(team_left_id, team_right_id)
+				tennis_fixture
+				(team_id_left, team_id_right)
 			VALUES
-				(:team_left_id, :team_right_id)
+				(:team_id_left, :team_id_right)
 		");				
 				
 		// loop to set team vs team fixtures
@@ -154,8 +154,8 @@ class Model_Tennis_Fixture extends Model
 				foreach ($division as $key => $awayTeam) {
 					if ($homeTeam !== $awayTeam) {
 						$sth->execute(array(
-							':team_left_id' => $homeTeam
-							, ':team_right_id' => $awayTeam
+							':team_id_left' => $homeTeam
+							, ':team_id_right' => $awayTeam
 						));					
 					}
 				}

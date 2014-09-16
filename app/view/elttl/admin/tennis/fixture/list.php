@@ -2,13 +2,11 @@
 
 <div class="page tennis-fixture-list">
 	<h1 class="page-primary-title">Fixtures</h1>
+	<div class="admin-block-controls">
+		<a class="button-new" href="fulfill/" title="Fulfill scorecard">Fulfill scorecard</a>
+	</div>
 
 <?php if ($fixtures) : ?>
-
-	<div>
-		<a class="button-new" href="fulfill/" title="Submit scorecard">Submit scorecard</a>
-	</div>
-	
 	<?php foreach ($divisions as $division): ?>
 
 	<h2><?php echo $division->getName() ?> division</h2>

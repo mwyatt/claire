@@ -146,6 +146,7 @@ Page_Tennis_Fixture_Single.prototype.updateTotals = function(data) {
 			jinputScore = $(inputScores[r]);
 			total += parseInt(jinputScore.val());
 		};
+		total = isNaN(parseFloat(total)) ? 0 : total;
 		$('.js-fixture-single-total[data-side="' + side + '"]').html(total.toString());
 	};
 };
@@ -227,6 +228,7 @@ Page_Tennis_Fixture_Single.prototype.smartFillEncounter = function(data, trigger
 	if (score < 3) {
 		scoreOpposing = 3;
 	};
+	score = isNaN(parseFloat(score)) ? 0 : score;
 	trigger.val(score);
 	for (var s = sides.length - 1; s >= 0; s--) {
 		side = sides[s];

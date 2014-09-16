@@ -42,6 +42,7 @@
 	color: $color-foreground;
 	background-color: $color-background;
 	border-radius: 2px;
+	cursor: pointer;
 	
 	&:hover {
 		background-color: lighten($color-background, 5%);

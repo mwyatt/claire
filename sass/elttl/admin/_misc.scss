@@ -95,4 +95,14 @@ a.content-action-link {
 
 .button-new {
 	@include button;
+	float: right;
+}
+
+.admin-block-controls {
+	@include clearfix;
+	@extend .block-margins;
+}
+
+.admin-button-primary {
+	@include button;
 }

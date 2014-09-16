@@ -51,11 +51,11 @@ class Tennis_Fulfill extends Data
      */
     public function run()
     {
-        $this->outputDebugBlock('running fixture fulfillment procedure');
+        $this->outputDebugBlock('running fixture fulfillment procedure');    
         if (! $this->validate()) {
             return;
         }
-        if (! $this->readFixtureById($_REQUEST['fixture_id'])) {
+        if (! $this->readFixture()) {
             return;
         }
         if ($this->isFilled()) {
@@ -87,17 +87,9 @@ class Tennis_Fulfill extends Data
         // fixture
         $fixture = $this->getFixture();
 
-        // teams
-        $modelTeam = new model_tennis_team($this);
-        $modelTeam->read(array(
-            'where' => array('id' => array(
-                $fixture->getTeamIdLeft(),
-                $fixture->getTeamIdRight()
-            ))
-        ));
-
         // players
         $this->readPlayersById(array_merge($_REQUEST['player']['left'], $_REQUEST['player']['right']));
+        $this->outputDebugBlock($this->getPlayers());
 
         // encouters loop
         $this->encounters();
@@ -161,7 +153,9 @@ class Tennis_Fulfill extends Data
             // set rank changes and store mold
             $moldEncounter->setPlayerRankChangeLeft($rankChanges->left);
             $moldEncounter->setPlayerRankChangeRight($rankChanges->right);
+            $this->outputDebugBlock($moldEncounter);
             $modelEncounter->create($moldEncounter);
+            $this->outputDebugBlock('encounter created');
         }
 
         // remaining operations
@@ -183,6 +177,7 @@ class Tennis_Fulfill extends Data
 
         // update player ranks
         $this->updatePlayerRanks();
+        $this->outputDebugBlock('player ranks updated');
 
         // update fixture fulfill time
         $fixture->setTimeFulfilled(time());
@@ -191,6 +186,7 @@ class Tennis_Fulfill extends Data
                 'id' => $fixture->getId()
             )
         ));
+        $this->outputDebugBlock('fixture updated with {time()}');
     }
 
 
@@ -231,6 +227,7 @@ class Tennis_Fulfill extends Data
      */
     public function clear()
     {
+        $this->outputDebugBlock('clearing existing fixture...');
 
         // fixture
         $fixture = $this->getFixture();
@@ -265,21 +262,41 @@ class Tennis_Fulfill extends Data
                 'id' => $fixture->getId()
             )
         ));
+        $this->outputDebugBlock('existing fixture cleared');
     }
 
 
     /**
-     * retrieve fixture and store
+     * retrieve fixture by looking at the teams selected
      * @return bool  
      */
-    public function readFixtureById($fixtureId)
+    public function readFixture()
     {
+        
+        // teams
+        $modelTeam = new model_tennis_team($this);
+        $modelTeam->read(array(
+            'where' => array('id' => array(
+                $_REQUEST['team']['left'],
+                $_REQUEST['team']['right']
+            ))
+        ));
+        if (count($modelTeam->getData()) != 2) {
+            return;
+        }
+        $teams = $modelTeam->getData();
+        $teamLeft = reset($teams);
+        $teamRight = end($teams);
+        
+        // find fixture based on teams
         $modelFixture = new model_tennis_fixture($this);
         $modelFixture->read(array(
             'where' => array(
-                'id' => $fixtureId
+                'team_id_left' => $teamLeft->getId(),
+                'team_id_right' => $teamRight->getId()
             )
         ));
+        $this->outputDebugBlock($modelFixture->getData());
         if (! $data = $modelFixture->getDataFirst()) {
             $this->session->set('feedback', 'This fixture does not exist');
             return;
