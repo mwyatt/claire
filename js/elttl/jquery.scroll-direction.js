@@ -1,9 +1,5 @@
 
 
-/**
- * detects the scroll direction and adds a class to the container
- * @param {object} options 
- */
 var Scroll_Direction = function (options) {
 	var defaults = {
 
@@ -24,18 +20,18 @@ Scroll_Direction.prototype.refreshEvents = function(data) {
 
 	// scroll event
 	theWindow.scroll(function(event) {
-	   var scrollPositionNext = $(this).scrollTop();
-	   if (scrollPositionNext > scrollPositionPrevious){
-	       scrollCache = 'down';
-	   } else {
-	       scrollCache = 'up';
-	   }
-	   scrollPositionPrevious = scrollPositionNext;
-	});
+		var scrollPositionNext = $(this).scrollTop();
+		if (scrollPositionNext > scrollPositionPrevious){
+			scrollCache = 'down';
+		} else {
+			scrollCache = 'up';
+		}
+		scrollPositionPrevious = scrollPositionNext;
 
-	// toggle class
-	$('.' + data.options.container)
-		.removeClass('is-scrolling-down')
-		.removeClass('is-scrolling-up')
-		.addClass('is-scrolling-' + scrollCache);
+		// toggle class
+		$(data.options.container)
+			.removeClass('is-scrolling-down')
+			.removeClass('is-scrolling-up')
+			.addClass('is-scrolling-' + scrollCache);
+	});
 };

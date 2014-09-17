@@ -35,7 +35,7 @@ class Tennis_Fulfill extends Data
     {
         if ($this->isDebug($this)) {
             echo '<pre>';
-            if (is_array($message)) {
+            if (is_array($message) || is_object($message)) {
                 print_r($message);
             } elseif (is_string($message)) {
                 echo $message;
@@ -62,6 +62,8 @@ class Tennis_Fulfill extends Data
             $this->clear();
         }
         $this->begin();
+        $this->outputDebugBlock('finished fixture fulfillment procedure');
+        exit;
     }
 
 
@@ -120,6 +122,7 @@ class Tennis_Fulfill extends Data
         $fixture = $this->getFixture();
         $players = $this->getPlayers();
         $modelEncounter = new model_tennis_encounter($this);
+        $moldEncounters = [];
 
         // encounter structure
         foreach ($modelFixture->getEncounterStructure() as $structureRow => $playerPositions) {
@@ -129,8 +132,13 @@ class Tennis_Fulfill extends Data
 
             // for easy access
             $inputEncounter = $_REQUEST['encounter'][$structureRow];
-            $inputPlayerIdLeft = $_REQUEST['player']['left'][reset($playerPositions)];
-            $inputPlayerIdRight = $_REQUEST['player']['right'][end($playerPositions)];
+            if (reset($playerPositions) == 'doubles') {
+                $inputPlayerIdLeft = 0;
+                $inputPlayerIdRight = 0;
+            } else {
+                $inputPlayerIdLeft = $_REQUEST['player']['left'][reset($playerPositions)];
+                $inputPlayerIdRight = $_REQUEST['player']['right'][end($playerPositions)];
+            }
 
             // build mold
             $moldEncounter->setfixtureId($fixture->getId());
@@ -154,13 +162,10 @@ class Tennis_Fulfill extends Data
             $moldEncounter->setPlayerRankChangeLeft($rankChanges->left);
             $moldEncounter->setPlayerRankChangeRight($rankChanges->right);
             $this->outputDebugBlock($moldEncounter);
-echo '<pre>';
-print_r('variable');
-echo '</pre>';
-exit;
-            $modelEncounter->create($moldEncounter);
-            $this->outputDebugBlock('encounter created');
+            $moldEncounters[] = $moldEncounter;
+            $this->outputDebugBlock('encounter stored');
         }
+        $modelEncounter->create($moldEncounters);
 
         // remaining operations
         $this->finalise();
@@ -246,8 +251,12 @@ exit;
 
         // make rank changes
         foreach ($modelEncounter->getData() as $encounter) {
-            $players[$encounter->getPlayerIdLeft()]->modifyRank($encounter->getScoreLeft());
-            $players[$encounter->getPlayerIdRight()]->modifyRank($encounter->getScoreRight());
+            if (array_key_exists($encounter->getPlayerIdLeft(), $players)) {
+                $players[$encounter->getPlayerIdLeft()]->modifyRank($encounter->getPlayerRankChangeLeft());
+            }
+            if (array_key_exists($encounter->getPlayerIdRight(), $players)) {
+                $players[$encounter->getPlayerIdRight()]->modifyRank($encounter->getPlayerRankChangeRight());
+            }
         }
 
         // update player ranks

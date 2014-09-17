@@ -1,3 +1,5 @@
+
+
 var Smooth_Scroll = function (options) {
 	var defaults = {
 		target: '.js-smooth-scroll',
