@@ -9,9 +9,6 @@ class Mold_Tennis_Fixture extends Mold
 {
 
 	
-	public $year_id;
-
-	
 	public $team_id_left;
 
 	

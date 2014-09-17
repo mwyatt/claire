@@ -144,7 +144,7 @@ class System extends Helper
 	 */
 	public function isDebug($theObject)
 	{
-		if (array_key_exists('debug', $_GET) && strtolower($_GET['debug']) == strtolower(get_class($theObject))) {
+		if (array_key_exists('debug', $_REQUEST) && strtolower($_REQUEST['debug']) == strtolower(get_class($theObject))) {
 			return true;
 		}
 	}

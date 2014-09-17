@@ -7,4 +7,7 @@
  */
 class Mold_Archive_Tennis_Fixture extends Mold_Tennis_Fixture
 {
+
+
+	public $year_id;
 }

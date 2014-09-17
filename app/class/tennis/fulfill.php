@@ -154,6 +154,10 @@ class Tennis_Fulfill extends Data
             $moldEncounter->setPlayerRankChangeLeft($rankChanges->left);
             $moldEncounter->setPlayerRankChangeRight($rankChanges->right);
             $this->outputDebugBlock($moldEncounter);
+echo '<pre>';
+print_r('variable');
+echo '</pre>';
+exit;
             $modelEncounter->create($moldEncounter);
             $this->outputDebugBlock('encounter created');
         }

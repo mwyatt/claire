@@ -129,6 +129,15 @@ class Model_Tennis_Fixture extends Model
 	 * @return null
 	 */
 	public function generate() {
+
+		// clear all fixtures
+		$sth = $this->database->dbh->query("	
+			delete from
+				tennis_fixture
+			where id != 0
+		");
+
+		// select all divisions
 		$sth = $this->database->dbh->query("	
 			SELECT
 				tennis_division.id as division_id
@@ -161,5 +170,11 @@ class Model_Tennis_Fixture extends Model
 				}
 			}
 		}
+
+		// feedback
+		echo '<pre>';
+		print_r('all fixtures removed, and generated using current teams');
+		echo '</pre>';
+		exit;
 	}
 }
