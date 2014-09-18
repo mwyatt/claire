@@ -9,23 +9,23 @@
 <?php if ($fixtures) : ?>
 	<?php foreach ($divisions as $division): ?>
 
-	<h2><?php echo $division->getName() ?> division</h2>
-	<table class="table-crud" width="100%">	
+	<h2 class="page-heading-first"><?php echo $division->getName() ?> division</h2>
+	<table class="table" width="100%">	
 		<tr>
-			<th class="table-crud-heading">Home Team</th>
-			<th class="table-crud-heading">Away Team</th>
-			<th class="table-crud-heading">Date Fulfilled</th>
+			<th>Home Team</th>
+			<th>Away Team</th>
+			<th>Date Fulfilled</th>
 		</tr>
 
 		<?php foreach ($fixtures as $fixture): ?>
 			<?php $isInDivision = $teams[$fixture->getTeamIdLeft()]->getDivisionId() == $division->getId() ?>
 			<?php if ($isInDivision): ?>
 
-		<tr class="table-crud-row js-table-crud-row">
-			<td class="table-crud-cell js-table-crud-cell"><?php echo $teams[$fixture->getTeamIdLeft()]->getName() ?></td>
-			<td class="table-crud-cell js-table-crud-cell"><?php echo $teams[$fixture->getTeamIdRight()]->getName() ?></td>
-			<td class="table-crud-cell js-table-crud-cell"><?php echo $fixture->getTimeFulfilled() ?></td>
-			<td class="table-crud-cell js-table-crud-cell">
+		<tr>
+			<td><?php echo $teams[$fixture->getTeamIdLeft()]->getName() ?></td>
+			<td><?php echo $teams[$fixture->getTeamIdRight()]->getName() ?></td>
+			<td><?php echo $fixture->getTimeFulfilled() ? date('D jS F Y', $fixture->getTimeFulfilled()) : ''; ?></td>
+			<td>
 				
 				<?php if ($fixture->getTimeFulfilled()): ?>
 						

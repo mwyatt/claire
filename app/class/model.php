@@ -610,6 +610,25 @@ class Model extends Data
 	}
 
 
+	public function orderByPropertyStringDesc($property)
+	{
+		$data = $this->getData();
+
+		// fail silent
+		$dataSample = current($data);
+		if (! property_exists($dataSample, $property)) {
+			return;
+		}
+
+		// sort
+		uasort($data, function($a, $b) use ($property) {
+			return strcasecmp($b->$property, $a->$property);
+		});
+		$this->setData($data);
+		return $this;
+	}
+
+
 	public function orderByPropertyIntDesc($property)
 	{
 		if (! $data = $this->getData()) {

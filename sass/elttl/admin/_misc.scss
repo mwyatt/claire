@@ -106,3 +106,15 @@ a.content-action-link {
 .admin-button-primary {
 	@include button;
 }
+
+.tennis-fixture-list {
+
+	.table {
+	    border: 1px solid;
+	}
+
+	th, td {
+	    padding: 0.5em;
+	    border: 1px solid;
+	}
+}

@@ -34,18 +34,19 @@ class Controller_Fixture extends Controller_Archive
 		$teamNames = explode($required, $part);
 
 		// team
-		$modelTennisTeam = new model_tennis_Team($this);
-		$modelTennisTeam->read(array(
+		$className = $this->getArchiveClassName('model_tennis_Team');
+		$modelTennisTeam = new $className($this);
+		$modelTennisTeam->read($this->getArchiveWhere(array(
 			'where' => array(
 				'name' => reset($teamNames)
 			)
-		));
+		)));
 		$teamLeft = $modelTennisTeam->getDataFirst();
-		$modelTennisTeam->read(array(
+		$modelTennisTeam->read($this->getArchiveWhere(array(
 			'where' => array(
 				'name' => end($teamNames)
 			)
-		));
+		)));
 		$teamRight = $modelTennisTeam->getDataFirst();
 		if (! $teamLeft || ! $teamRight) {
 			$this->route('base');
@@ -53,34 +54,44 @@ class Controller_Fixture extends Controller_Archive
 		$teamIds = array($teamLeft->getId(), $teamRight->getId());
 
 		// players
-		$modelTennisPlayer = new model_tennis_player($this);
-		$modelTennisPlayer->read(array(
+		$className = $this->getArchiveClassName('model_tennis_player');
+		$modelTennisPlayer = new $className($this);
+		$modelTennisPlayer->read($this->getArchiveWhere(array(
 			'where' => array('team_id' => $teamIds)
-		));
+		)));
 		$modelTennisPlayer->keyByProperty('id');
 
 		// division
-		$modelTennisDivision = new model_tennis_division($this);
-		$modelTennisDivision->read(array(
+		$className = $this->getArchiveClassName('model_tennis_division');
+		$modelTennisDivision = new $className($this);
+		$modelTennisDivision->read($this->getArchiveWhere(array(
 			'where' => array(
 				'id' => $teamLeft->getDivisionId()
 			)
-		));
+		)));
 
 		// fixture
-		$modelTennisFixture = new model_tennis_fixture($this);
-		$modelTennisFixture->read(array(
+		$className = $this->getArchiveClassName('model_tennis_fixture');
+		$modelTennisFixture = new $className($this);
+		$modelTennisFixture->read($this->getArchiveWhere(array(
 			'where' => array(
 				'team_id_left' => $teamLeft->getId(),
 				'team_id_right' => $teamRight->getId()
 			)
-		));
+		)));
+
+		// must be fulfilled
+		$fixture = $modelTennisFixture->getDataFirst();
+		if (! $fixture->getTimeFulfilled()) {
+			$this->route('base');
+		}
 
 		// encounter
-		$modelTennisEncounter = new model_tennis_encounter($this);
-		$modelTennisEncounter->read(array(
+		$className = $this->getArchiveClassName('model_tennis_encounter');
+		$modelTennisEncounter = new $className($this);
+		$modelTennisEncounter->read($this->getArchiveWhere(array(
 			'where' => array('fixture_id' => $modelTennisFixture->getDataProperty('id'))
-		));
+		)));
 		$encounters = $modelTennisEncounter->getData();
 
 		// convert to league stats

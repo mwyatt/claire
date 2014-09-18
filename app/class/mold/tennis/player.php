@@ -98,9 +98,15 @@ class Mold_Tennis_Player extends Mold
 	}
 
 
-	public function modifyRank($value)
+	/**
+	 * even if the number is negative you add them together and the
+	 * subtraction is made
+	 * @param  int $modifier
+	 * @return null        
+	 */
+	public function modifyRank($modifier)
 	{
-		$this->setRank($this->getRank() + $value);
+		$this->setRank($this->getRank() + $modifier);
 	}
 	
 	

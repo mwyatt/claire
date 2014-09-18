@@ -137,6 +137,13 @@ class Model_Tennis_Fixture extends Model
 			where id != 0
 		");
 
+		// clear all encounters
+		$sth = $this->database->dbh->query("	
+			delete from
+				tennis_encounter
+			where id != 0
+		");
+
 		// select all divisions
 		$sth = $this->database->dbh->query("	
 			SELECT
@@ -173,7 +180,7 @@ class Model_Tennis_Fixture extends Model
 
 		// feedback
 		echo '<pre>';
-		print_r('all fixtures removed, and generated using current teams');
+		print_r('all fixtures and encounters removed, and fixtures re-generated using current team configuration');
 		echo '</pre>';
 		exit;
 	}

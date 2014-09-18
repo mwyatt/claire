@@ -145,7 +145,7 @@ class Controller_Admin_Tennis_Fixture extends Controller_Admin
 		} else {
 			$modelTennisPlayer->read();
 		}
-		$modelTennisPlayer->orderByPropertyStringAsc('name_last');
+		$modelTennisPlayer->orderByPropertyStringDesc('name_last');
 		$modelTennisPlayer->setData(array_values($modelTennisPlayer->getData()));
 
 		// template

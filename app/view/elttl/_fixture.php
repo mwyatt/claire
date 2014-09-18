@@ -4,7 +4,7 @@
 <?php $scoreLeft = $fixtureResult->score_left ?>
 <?php $scoreRight = $fixtureResult->score_right ?>
 
-<a href="<?php echo $this->url->build(array('fixture', $teamLeft->getName() . ' vs ' . $teamRight->getName())) ?>" class="fixture">
+<a href="<?php echo $this->buildArchiveUrl(array('fixture', $teamLeft->getName() . ' vs ' . $teamRight->getName())) ?>" class="fixture">
 	<span class="fixture-score-left"><?php echo $scoreLeft ?></span>
 	<span class="fixture-team-left"><?php echo $teamLeft->getName() ?></span>
 	<span class="fixture-score-right"><?php echo $scoreRight ?></span>

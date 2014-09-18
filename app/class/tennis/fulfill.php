@@ -51,11 +51,14 @@ class Tennis_Fulfill extends Data
      */
     public function run()
     {
+        $sessionFeedback = new session_feedback($this);
         $this->outputDebugBlock('running fixture fulfillment procedure');    
         if (! $this->validate()) {
+            $sessionFeedback->set('something is wrong with the input');
             return;
         }
         if (! $this->readFixture()) {
+            $sessionFeedback->set('fixture does not exist');
             return;
         }
         if ($this->isFilled()) {
@@ -63,7 +66,6 @@ class Tennis_Fulfill extends Data
         }
         $this->begin();
         $this->outputDebugBlock('finished fixture fulfillment procedure');
-        exit;
     }
 
 
@@ -158,14 +160,18 @@ class Tennis_Fulfill extends Data
             );
             $rankChanges = $this->calculatePlayerRankChanges($config);
 
-            // set rank changes and store mold
+            // set rank changes and store mold            
             $moldEncounter->setPlayerRankChangeLeft($rankChanges->left);
             $moldEncounter->setPlayerRankChangeRight($rankChanges->right);
             $this->outputDebugBlock($moldEncounter);
             $moldEncounters[] = $moldEncounter;
-            $this->outputDebugBlock('encounter stored');
         }
-        $modelEncounter->create($moldEncounters);
+
+        // store encounters
+        $this->outputDebugBlock('encounters would be stored at this point');
+        if (! $this->isDebug($this)) {
+            $modelEncounter->create($moldEncounters);
+        }
 
         // remaining operations
         $this->finalise();
@@ -182,20 +188,24 @@ class Tennis_Fulfill extends Data
 
         // resource
         $modelFixture = new model_tennis_fixture($this);
+        $sessionFeedback = new session_feedback($this);
         $fixture = $this->getFixture();
 
         // update player ranks
         $this->updatePlayerRanks();
-        $this->outputDebugBlock('player ranks updated');
 
         // update fixture fulfill time
         $fixture->setTimeFulfilled(time());
-        $modelFixture->update($fixture, array(
-            'where' => array(
-                'id' => $fixture->getId()
-            )
-        ));
-        $this->outputDebugBlock('fixture updated with {time()}');
+        $this->outputDebugBlock($fixture);
+        if (! $this->isDebug($this)) {
+            $modelFixture->update($fixture, array(
+                'where' => array(
+                    'id' => $fixture->getId()
+                )
+            ));
+        }
+        $sessionFeedback->set('fixture fulfilled sucessfully');
+        $this->route('current');
     }
 
 
@@ -205,6 +215,10 @@ class Tennis_Fulfill extends Data
      */
     public function updatePlayerRanks()
     {
+        $this->outputDebugBlock('player ranks would be updated here');
+        if ($this->isDebug($this)) {
+            return;
+        }
         $modelPlayer = new model_tennis_Player($this);
         foreach ($this->getPlayers() as $playerId => $player) {
             $modelPlayer->update($player, array(
@@ -406,7 +420,7 @@ class Tennis_Fulfill extends Data
         $rankRight = $playerRight->getRank();
 
         // find rank difference
-        $difference = $config->scoreLeft > $config->scoreRight ? $config->scoreLeft - $config->scoreRight : $config->scoreRight - $config->scoreLeft;
+        $difference = $rankLeft > $rankRight ? $rankLeft - $rankRight : $rankRight - $rankLeft;
 
         // find winner
         $winner = 'right';
@@ -580,8 +594,13 @@ class Tennis_Fulfill extends Data
         }
 
         // update player rank based on this encounter
-        $players[$config->idLeft]->setRank($rankLeft + $changes->left);
-        $players[$config->idRight]->setRank($rankRight + $changes->right);
+        $players[$config->idLeft]->modifyRank($changes->left);
+        $players[$config->idRight]->modifyRank($changes->right);
+        $this->outputDebugBlock([
+            'previous ' . $rankLeft,
+            'modifier ' . $changes->left,
+            'next ' . ($rankLeft + $changes->left)
+        ]);
 
         // object of changes
         return $changes;
