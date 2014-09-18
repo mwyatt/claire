@@ -260,6 +260,11 @@ class Tennis_Fulfill extends Data
         $modelEncounter->read(array(
             'where' => array('fixture_id' => $fixture->getId())
         ));
+        echo '<pre>';
+        print_r($modelEncounter);
+        echo '</pre>';
+        exit;
+        
         $this->readPlayersById(array_merge($modelEncounter->getDataProperty('player_id_left'), $modelEncounter->getDataProperty('player_id_right')));
         $players = $this->getPlayers();
 
