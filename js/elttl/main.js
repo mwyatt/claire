@@ -39,4 +39,9 @@ $(document).ready(function() {
 		paginationSpeed: 200,
 		singleItem: true
 	});
+
+	// scroll direction
+	var scrollDirection = new Scroll_Direction({
+		container: 'html'
+	});
 });

@@ -35,6 +35,9 @@
 
 		</table>
 	</div>
+
+<?php if ($fixtures && $fixtureResults && $teams): ?>
+
 	<div class="block-margins">
 		<h2 class="player-single-secondary-title">Fixtures</h2>
 
@@ -42,6 +45,7 @@
 
 	</div>
 
+<?php endif ?>
 <?php if ($encounters): ?>
 
 	<div class="block-margins">

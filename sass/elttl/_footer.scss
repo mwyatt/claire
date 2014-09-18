@@ -36,11 +36,6 @@
     margin-top: 0;
 }
 
-.container-footer-inner {
-    @include clearfix;
-    padding: 10%;
-}
-
 .footer-main {
     display: none;
 }
@@ -85,5 +80,7 @@
 
 .footer-address a {
     @extend .a;
-    margin-bottom: 1em;
+    color: $color-white;
+    border-color: $color-white;
+    font-weight: 600;
 }

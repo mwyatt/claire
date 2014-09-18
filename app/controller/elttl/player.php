@@ -123,20 +123,24 @@ class Controller_Player extends Controller_Archive
 		)));
 		$fixtures = $modelTennisFixture->getData();
 
-		// players
-		$modelTennisPlayer->read($this->getArchiveWhere(array(
-			'where' => array('team_id' => array_merge($modelTennisFixture->getDataProperty('team_id_left'), $modelTennisFixture->getDataProperty('team_id_right')))
-		)));
-		$modelTennisPlayer->keyByProperty('id');
+		// players from fixtures if poss
+		if ($fixtures) {
+			$modelTennisPlayer->read($this->getArchiveWhere(array(
+				'where' => array('team_id' => array_merge($modelTennisFixture->getDataProperty('team_id_left'), $modelTennisFixture->getDataProperty('team_id_right')))
+			)));
+			$modelTennisPlayer->keyByProperty('id');
+		}
 
 		// teams
-		$modelTennisTeam
-			->read($this->getArchiveWhere(array(
-				'where' => array(
-					'id' => array_merge($modelTennisFixture->getDataProperty('team_id_left'), $modelTennisFixture->getDataProperty('team_id_right'))
-				)
-			)))
-			->keyByProperty('id');
+		if ($fixtures) {
+			$modelTennisTeam
+				->read($this->getArchiveWhere(array(
+					'where' => array(
+						'id' => array_merge($modelTennisFixture->getDataProperty('team_id_left'), $modelTennisFixture->getDataProperty('team_id_right'))
+					)
+				)))
+				->keyByProperty('id');
+		}
 		$teams = $modelTennisTeam->getData();
 
 		// all fixtures played in encounters

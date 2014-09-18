@@ -26,7 +26,7 @@ class Controller_Fixture extends Controller_Archive
 
 		// url part validation
 		$required = ' vs ';
-		$part = $this->url->getPathPart(1);
+		$part = $this->getArchivePathPart(1);
 		$part = str_replace('-', ' ', $part);
 		if (! strpos($part, $required)) {
 			$this->route('base');

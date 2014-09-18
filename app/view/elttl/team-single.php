@@ -56,13 +56,17 @@
 	</div>
 
 <?php endif ?>
-
+<?php if ($fixtures && $fixtureResults && $teams): ?>
+	
 	<div class="block-margins">
 		<h2 class="team-single-secondary-title">Fixtures</h2>
 
-<?php include($this->pathView('_fixtures')) ?>
+	<?php include($this->pathView('_fixtures')) ?>
 
 	</div>
+
+<?php endif ?>
+
 </div>
 
 <?php require_once($this->pathView('_footer')) ?>

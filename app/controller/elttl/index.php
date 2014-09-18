@@ -77,7 +77,7 @@ class Controller_Index extends Controller
 					'type' => 'press',
 					'status' => 'visible'
 				),
-				'limit' => array(0, 6),
+				'limit' => array(0, 3),
 				'order_by' => 'time_published desc'
 			))
 			->bindMeta('media')

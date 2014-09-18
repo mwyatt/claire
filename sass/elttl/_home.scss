@@ -11,3 +11,23 @@
 .home-press-heading {
 	@include clearfix;
 }
+
+.banner-primary {
+
+	@media only screen and (min-width: 700px) {
+		float: left;
+		width: 45%;
+	}
+}
+
+.home-press {
+	
+	@media only screen and (min-width: 700px) {
+		float: right;
+		width: 45%;
+	}
+}
+
+.banner-and-press {
+	@include clearfix;
+}

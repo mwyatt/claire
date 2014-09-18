@@ -1,14 +1,14 @@
 html {
-    background-color: $color-white;
+    background-color: $color-primary-4;
 }
 
 body {
 
-    @include breakpoint(1200) {
-        background-image: image-url('bg.gif');
-        background-position: 50% 0;
-        background-repeat: no-repeat;
-    }
+    // @media only screen and (min-width: 900px) {
+    //     background-image: image-url('bg.gif');
+    //     background-position: center top;
+    //     background-repeat: no-repeat;
+    // }
 }
 
 .to-top {
@@ -50,20 +50,31 @@ body {
     margin-bottom: 1em;
 }
 
+.container-footer-inner,
 .page {
+    @include clearfix;
     max-width: 90em;
     margin: 0 auto;
-    padding-left: 10%;
-    padding-right: 10%;
+    padding: 10%;
+}
+
+.container-footer-inner {
+    
+    @media only screen and (min-width: 650px) {
+        padding: 5%;
+    }
+}
+
+.page {
     padding-top: 4.7em;
     padding-bottom: 60px;
+    background-color: $color-white;
 
     @media only screen and (min-width: 450px) {
         padding-top: 5.7em;
     }
 
     @media only screen and (min-width: 650px) {
-        padding-top: 6.7em;
         padding-left: 5%;
         padding-right: 5%;
     }

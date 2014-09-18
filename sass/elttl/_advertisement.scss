@@ -6,38 +6,48 @@
 .advertisement {
     display: block;
 	background-color: $color-primary-0;
+    height: 12em;
 	padding: 1em;
 	border-radius: 2px;
-	background-image: image-url('glow.png');
+	background-image: image-url('table-lip.png');
 	background-repeat: no-repeat;
 	background-position: bottom right;
-    min-height: 8em;
 	@extend .block-margins;
     color: $color-white;
 
+    &:nth-child(2n) {
+        background-color: $color-secondary-1-0;
+    }
+
     @media only screen and (min-width: 400px) {
-    	float: left;
+        float: left;
     }
 
     @media only screen and (min-width: 400px) and (max-width: 699px) {
-    	width: 47%;
-    	margin-right: 2%;
+        width: 47%;
+        margin-right: 2%;
+        height: 17em;
 
-    	&:nth-child(2n) {
-    		float: right;
-    		margin-right: 0;
-    	}
+        &:nth-child(2n) {
+            float: right;
+            margin-right: 0;
+        }
     }
 
     @media only screen and (min-width: 700px) {
-    	width: 30%;
-    	margin-right: 5%;
-    	padding: 1em;
+        width: 30%;
+        margin-right: 5%;
+        height: 17em;
+        padding: 1em;
 
-    	&:nth-child(3n) {
-    		float: right;
-    		margin-right: 0;
-    	}
+        &:nth-child(3n) {
+            float: right;
+            margin-right: 0;
+        }
+    }
+
+    @media only screen and (min-width: 900px) {
+        height: 14em;
     }
 }
 

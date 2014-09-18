@@ -88,6 +88,13 @@ class Controller_Team extends Controller_Archive
 		$modelTennisFixture->read($this->getArchiveWhere(array(
 			'where' => array('team_id_left' => $team->getId())
 		)));
+		$fixturesLeft = $modelTennisFixture->getData();
+		$modelTennisFixture->read($this->getArchiveWhere(array(
+			'where' => array('team_id_right' => $team->getId())
+		)));
+		$fixturesRight = $modelTennisFixture->getData();
+		$fixtures = array_merge($fixturesLeft, $fixturesRight);
+		$modelTennisFixture->setData($fixtures);
 
 		// teams
 		$modelTennisTeam
