@@ -124,7 +124,6 @@ class Tennis_Fulfill extends Data
         $fixture = $this->getFixture();
         $players = $this->getPlayers();
         $modelEncounter = new model_tennis_encounter($this);
-        $moldEncounters = [];
 
         // encounter structure
         foreach ($modelFixture->getEncounterStructure() as $structureRow => $playerPositions) {
@@ -164,14 +163,13 @@ class Tennis_Fulfill extends Data
             $moldEncounter->setPlayerRankChangeLeft($rankChanges->left);
             $moldEncounter->setPlayerRankChangeRight($rankChanges->right);
             $this->outputDebugBlock($moldEncounter);
-            $moldEncounters[] = $moldEncounter;
+
+            // store encounters
+            if (! $this->isDebug($this)) {
+                $modelEncounter->create([$moldEncounter]);
+            }
         }
 
-        // store encounters
-        $this->outputDebugBlock('encounters would be stored at this point');
-        if (! $this->isDebug($this)) {
-            $modelEncounter->create($moldEncounters);
-        }
 
         // remaining operations
         $this->finalise();
@@ -205,7 +203,7 @@ class Tennis_Fulfill extends Data
             ));
         }
         $sessionFeedback->set('fixture fulfilled sucessfully');
-        $this->route('current');
+        $this->route('current', 'fixture_id=' . $fixture->getId());
     }
 
 
@@ -216,6 +214,7 @@ class Tennis_Fulfill extends Data
     public function updatePlayerRanks()
     {
         $this->outputDebugBlock('player ranks would be updated here');
+        $this->outputDebugBlock($this->getPlayers());
         if ($this->isDebug($this)) {
             return;
         }
@@ -260,11 +259,6 @@ class Tennis_Fulfill extends Data
         $modelEncounter->read(array(
             'where' => array('fixture_id' => $fixture->getId())
         ));
-        echo '<pre>';
-        print_r($modelEncounter);
-        echo '</pre>';
-        exit;
-        
         $this->readPlayersById(array_merge($modelEncounter->getDataProperty('player_id_left'), $modelEncounter->getDataProperty('player_id_right')));
         $players = $this->getPlayers();
 

@@ -97,7 +97,8 @@ class Controller_Admin_Tennis_Fixture extends Controller_Admin
 		// flag to mark if the fixture has been filled
 		$modelTennisEncounter = new model_tennis_encounter($this);
 		$modelTennisEncounter->read(array(
-			'where' => array('fixture_id' => $this->getFixtureId())
+			'where' => array('fixture_id' => $this->getFixtureId()),
+			'order_by' => 'id'
 		));
 		$isFilled = false;
 		if ($modelTennisEncounter->getData()) {
