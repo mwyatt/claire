@@ -32,7 +32,7 @@ class Tennis_Fulfill extends Data
      * @return null          
      */
     public function outputDebugBlock($message)
-    {
+    {       
         if ($this->isDebug($this)) {
             echo '<pre>';
             if (is_array($message) || is_object($message)) {
@@ -64,7 +64,11 @@ class Tennis_Fulfill extends Data
         if ($this->isFilled()) {
             $this->clear();
         }
-        $this->begin();
+
+        // encouters loop
+        $this->encounters();
+
+        // debug
         $this->outputDebugBlock('finished fixture fulfillment procedure');
     }
 
@@ -81,32 +85,20 @@ class Tennis_Fulfill extends Data
 
 
     /**
-     * begin the fulfill process
-     * always a blank slate
-     * @return null
+     * retrieve passed player ids for players
+     * players stored in player property
+     * @param  array $playerIds 
+     * @return null            
      */
-    public function begin()
-    {
-        
-        // fixture
-        $fixture = $this->getFixture();
-
-        // players
-        $this->readPlayersById(array_merge($_REQUEST['player']['left'], $_REQUEST['player']['right']));
-        $this->outputDebugBlock($this->getPlayers());
-
-        // encouters loop
-        $this->encounters();
-    }
-
-
     public function readPlayersById($playerIds)
     {
         $modelPlayer = new model_tennis_player($this);
         $modelPlayer->read(array(
             'where' => array('id' => $playerIds)
         ));
-        $modelPlayer->keyByProperty('id');
+        $modelPlayer
+            ->orderByPropertyIntAsc('rank')
+            ->keyByProperty('id');
         $this->setPlayers($modelPlayer->getData());
     }
 
@@ -118,6 +110,10 @@ class Tennis_Fulfill extends Data
      */
     public function encounters()
     {
+
+        // load player resource
+        $this->readPlayersById(array_merge($_REQUEST['player']['left'], $_REQUEST['player']['right']));
+        $this->outputDebugBlock($this->getPlayers());
 
         // resource
         $modelFixture = new model_tennis_fixture($this);
@@ -133,10 +129,9 @@ class Tennis_Fulfill extends Data
 
             // for easy access
             $inputEncounter = $_REQUEST['encounter'][$structureRow];
-            if (reset($playerPositions) == 'doubles') {
-                $inputPlayerIdLeft = 0;
-                $inputPlayerIdRight = 0;
-            } else {
+            $inputPlayerIdLeft = 0;
+            $inputPlayerIdRight = 0;
+            if (reset($playerPositions) != 'doubles') {
                 $inputPlayerIdLeft = $_REQUEST['player']['left'][reset($playerPositions)];
                 $inputPlayerIdRight = $_REQUEST['player']['right'][end($playerPositions)];
             }
@@ -265,14 +260,15 @@ class Tennis_Fulfill extends Data
         // make rank changes
         foreach ($modelEncounter->getData() as $encounter) {
             if (array_key_exists($encounter->getPlayerIdLeft(), $players)) {
-                $players[$encounter->getPlayerIdLeft()]->modifyRank($encounter->getPlayerRankChangeLeft());
+                $players[$encounter->getPlayerIdLeft()]->modifyRank($encounter->getPlayerRankChangeLeft(), true);
             }
             if (array_key_exists($encounter->getPlayerIdRight(), $players)) {
-                $players[$encounter->getPlayerIdRight()]->modifyRank($encounter->getPlayerRankChangeRight());
+                $players[$encounter->getPlayerIdRight()]->modifyRank($encounter->getPlayerRankChangeRight(), true);
             }
         }
 
-        // update player ranks
+        // set players and update player ranks
+        $this->setPlayers($players);
         $this->updatePlayerRanks();
 
         // delete encounters
@@ -310,9 +306,9 @@ class Tennis_Fulfill extends Data
         if (count($modelTeam->getData()) != 2) {
             return;
         }
-        $teams = $modelTeam->getData();
-        $teamLeft = reset($teams);
-        $teamRight = end($teams);
+        $modelTeam->keyByProperty('id');
+        $teamLeft = $modelTeam->getData($_REQUEST['team']['left']);
+        $teamRight = $modelTeam->getData($_REQUEST['team']['right']);
         
         // find fixture based on teams
         $modelFixture = new model_tennis_fixture($this);
@@ -408,6 +404,11 @@ class Tennis_Fulfill extends Data
 
         // status filled means dont change
         if ($config->status) {
+            return $changes;
+        }
+
+        // a player missing from one side means dont change
+        if (! $config->idLeft || ! $config->idRight) {
             return $changes;
         }
 

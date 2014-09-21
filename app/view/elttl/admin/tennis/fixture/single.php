@@ -8,6 +8,7 @@
 		encounters: <?php echo json_encode($encounters) ?>,
 		divisions: <?php echo json_encode($divisions) ?>,
 		teams: <?php echo json_encode($teams) ?>,
+		encounterStructure: <?php echo json_encode($encounterStructure) ?>,
 		players: <?php echo json_encode($players) ?>
 	};
 </script>

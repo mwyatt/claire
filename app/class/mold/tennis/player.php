@@ -101,14 +101,24 @@ class Mold_Tennis_Player extends Mold
 	/**
 	 * even if the number is negative you add them together and the
 	 * subtraction is made
+	 * remember testing wont work as you keep getting new val
 	 * @param  int $modifier
 	 * @return null        
 	 */
-	public function modifyRank($modifier)
+	public function modifyRank($modifier, $reverse = false)
 	{
-		$this->setRank($this->getRank() + $modifier);
+		// echo '<pre>';
+		// print_r(['current' => $this->getRank(), 'change' => $modifier]);
+		if ($reverse) {
+			$this->setRank($this->getRank() - $modifier);
+			// print_r(['new' => $this->getRank() - $modifier]);
+		} else {
+			$this->setRank($this->getRank() + $modifier);
+			// print_r(['new' => $this->getRank() + $modifier]);
+		}
+		// echo '</pre>';
 	}
-	
+
 	
 	/**
 	 * @param int $rank 

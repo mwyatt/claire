@@ -23,7 +23,7 @@
 
 			<?php endif ?>
 	
-		<a href="<?php echo $this->url->build(array('player', $playerLeft->getNameFull())) ?>"><?php echo $playerLeft->getNameFull() ?></a>
+		<a href="<?php echo $this->buildArchiveUrl(array('player', $playerLeft->getNameFull())) ?>"><?php echo $playerLeft->getNameFull() ?></a>
 		<?php endif ?>
 
 	</td>
@@ -37,7 +37,7 @@
 
 		<?php endif ?>
 		
-		<a href="<?php echo $this->url->build(array('player', $playerRight->getNameFull())) ?>"><?php echo $playerRight->getNameFull() ?></a>
+		<a href="<?php echo $this->buildArchiveUrl(array('player', $playerRight->getNameFull())) ?>"><?php echo $playerRight->getNameFull() ?></a>
 	</td>
 </tr>
 

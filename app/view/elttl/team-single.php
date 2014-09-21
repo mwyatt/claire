@@ -25,8 +25,20 @@
 				<td class="elttl-table-cell">
 					<div class="team-single-secretary">
 						<a class="team-single-secretary-name" href="<?php echo $this->buildArchiveUrl(array('player', $secretary->getNameFull())) ?>"><?php echo $secretary->getNameFull() ?></a>
-						<span class="team-single-secretary-telephone-landline"><?php echo $secretary->getPhoneLandline() ?></span>
-						<span class="team-single-secretary-telephone-mobile"><?php echo $secretary->getPhoneMobile() ?></span>
+
+	<?php if ($secretary->getPhoneLandline()): ?>
+
+						<span class="team-single-secretary-telephone-landline">
+							<strong>Landline:</strong> <?php echo $secretary->getPhoneLandline() ?></span>
+							
+	<?php endif ?>
+	<?php if ($secretary->getPhoneMobile()): ?>
+
+						<span class="team-single-secretary-telephone-mobile">
+							<strong>Mobile:</strong> <?php echo $secretary->getPhoneMobile() ?></span>
+							
+	<?php endif ?>
+
 					</div>
 				</td>
 			</tr>

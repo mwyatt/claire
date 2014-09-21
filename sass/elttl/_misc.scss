@@ -98,3 +98,13 @@ body {
     @extend .button-base;
     background-color: $color-secondary-1-0;
 }
+
+.team-single-secretary-telephone-mobile,
+.team-single-secretary-telephone-landline {
+    display: block;
+    margin: 1em 0;
+}
+
+.container-site-inner {
+    background-color: $color-white;
+}

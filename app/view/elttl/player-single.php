@@ -8,7 +8,7 @@
 			<tr class="elttl-table-row">
 				<th class="elttl-table-cell elttl-table-heading">Team</th>
 				<td class="elttl-table-cell">
-					<a href="<?php echo $this->url->build(array('team', $team->getName())) ?>"><?php echo $team->getName() ?></a>
+					<a href="<?php echo $this->buildArchiveUrl(array('team', $team->getName())) ?>"><?php echo $team->getName() ?></a>
 				</td>
 			</tr>
 			<tr class="elttl-table-row">

@@ -5,6 +5,16 @@
 		"url": ""
 	},
 	{
+		"name": "Press",
+		"children": [],
+		"url": "content/press/"
+	},
+	{
+		"name": "Page",
+		"children": [],
+		"url": "content/page/"
+	},
+	{
 		"name": "Player",
 		"children": [],
 		"url": "tennis/player/"

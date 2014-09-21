@@ -40,6 +40,9 @@ Page_Tennis_Fixture_Single.prototype.formFill = function(data) {
 	// resource
 	var resource = data.getResource();
 	var fixture = resource.fixture;
+	var encounterStructure = resource.encounterStructure;
+	var encounterStructureRow;
+	var encounterStructurePart;
 	var encounters = resource.encounters;
 	var encounter;
 	var divisions = resource.divisions;
@@ -73,7 +76,7 @@ Page_Tennis_Fixture_Single.prototype.formFill = function(data) {
 
 	// fill players using teams as reference
 	for (var a = sides.length - 1; a >= 0; a--) {
-		html = data.getOption('', '');
+		html = data.getOption('', 0);
 		side = sides[a];
 		teamId = $('.js-fixture-single-team[data-side="' + side + '"]').val();
 		for (var b = players.length - 1; b >= 0; b--) {
@@ -93,14 +96,16 @@ Page_Tennis_Fixture_Single.prototype.formFill = function(data) {
 	for (var s = sides.length - 1; s >= 0; s--) {
 		side = sides[s];
 		for (var position = 1; position < 4; position ++) {
+			encounterStructureRow = encounterStructure[position - 1];
+			encounterStructurePart = encounterStructureRow[side == 'left' ? 0 : 1];
 			encounter = encounters[position - 1];
 			playerId = encounter['player_id_' + side];
-			options = $('.js-fixture-single-player[data-side="' + side + '"][data-position="' + position + '"]').find('option');
+			options = $('.js-fixture-single-player[data-side="' + side + '"][data-position="' + encounterStructurePart + '"]').find('option');
 			for (var o = options.length - 1; o >= 0; o--) {
 				joption = $(options[o]);
 				if (playerId == joption.val()) {
 					joption.prop('selected', 'selected');
-					data.updatePlayerLabel(data, side, position, joption.html());
+					data.updatePlayerLabel(data, side, encounterStructurePart, joption.html());
 				};
 			};
 		};
@@ -270,7 +275,7 @@ Page_Tennis_Fixture_Single.prototype.playUp = function(data, trigger) {
 	var html = '';
 
 	// empty player and add initial value
-	var playerSelect = $('.js-fixture-single-player[data-side="' + side + '"][data-position="' + position + '"]').html(data.getOption('', ''));
+	var playerSelect = $('.js-fixture-single-player[data-side="' + side + '"][data-position="' + position + '"]').html(data.getOption('', 0));
 
 	// fill player select with all players
 	for (var i = players.length - 1; i >= 0; i--) {
@@ -308,8 +313,8 @@ Page_Tennis_Fixture_Single.prototype.divisionChange = function(data, trigger) {
 	var html = '';
 
 	// empty team, player and add initial values
-	var teamSelect = $('.js-fixture-single-team').html(data.getOption('', ''));
-	$('.js-fixture-single-player').html(data.getOption('', ''));
+	var teamSelect = $('.js-fixture-single-team').html(data.getOption('', 0));
+	$('.js-fixture-single-player').html(data.getOption('', 0));
 
 	// fill team selects with teams from the division
 	for (var i = teams.length - 1; i >= 0; i--) {
@@ -339,7 +344,7 @@ Page_Tennis_Fixture_Single.prototype.teamChange = function(data, trigger) {
 	var html = '';
 
 	// empty player and add initial values
-	var playerSelect = $('.js-fixture-single-player[data-side="' + side + '"]').html(data.getOption('', ''));
+	var playerSelect = $('.js-fixture-single-player[data-side="' + side + '"]').html(data.getOption('', 0));
 
 	// fill team selects with player from the team
 	for (var i = players.length - 1; i >= 0; i--) {

@@ -41,6 +41,7 @@ class Controller_Content extends Controller_Index
 				'type' => $this->url->getPathPart(0)
 			)
 		));
+		
 		if (! $modelContent->getData()) {
 			$this->route('base');
 		}
