@@ -14,6 +14,7 @@
 				<br>Accrington
 				<br><b>Telephone:</b> 01254 385945
 			</div>
+			<a href="http://tabletennisengland.co.uk/" target="_blank" class="logo-table-tennis-england"><img class="logo-table-tennis-england-image" src="<?php echo $this->getUrlMedia('logo-table-tennis-england.gif') ?>" alt="Table Tennis England Logo"></a>
 		</div>
 	</footer>
     <script src="<?php echo $this->getUrlJs('jquery.js?v=1') ?>"></script>

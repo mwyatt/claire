@@ -117,6 +117,13 @@ class System extends Helper
 		// keep processing after user disconnect (for cron)
 		ignore_user_abort(true);
 
+		// max out memory limit, needed for class image which was crashing
+		// while creating jpg
+		ini_set('memory_limit', '-1');
+
+		// execution time for url increased to 5min
+		ini_set('max_execution_time', 300);
+
 		return $this;
 	}
 

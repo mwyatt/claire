@@ -83,6 +83,11 @@ class Controller_Index extends Controller
 			->bindMeta('media')
 			->bindMeta('tag')
 			->bindUser();
+
+		// gallery
+		$this->setGallery();
+
+		// template
 		$this->view
 			->setObject('contents', $modelContent->getData())
 			->getTemplate('home');
@@ -91,5 +96,20 @@ class Controller_Index extends Controller
 
 	public function soon() {
 		$this->view->getTemplate('coming-soon');
+	}
+
+
+	public function setGallery()
+	{
+		$folder = glob(BASE_PATH . 'media' . DS . SITE . DS . 'thumb' . DS . '*');
+		$files = [];
+		foreach ($folder as $filePath) {
+			$filePath = str_replace(BASE_PATH, '', $filePath);
+			$files[] = str_replace(DS, US, $filePath);
+		}
+		
+		// template
+		$this->view
+			->setObject('galleryPaths', $files);
 	}
 }

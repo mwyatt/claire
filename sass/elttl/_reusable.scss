@@ -169,3 +169,8 @@ label.top {
 .do-print {
     @extend .hide;
 }
+
+.block-clear {
+    @extend .block-margins;
+    @extend .clearfix;
+}

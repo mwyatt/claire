@@ -40,6 +40,12 @@ $(document).ready(function() {
 		singleItem: true
 	});
 
+	// gallery
+	$('.js-gallery').owlCarousel({
+		slideSpeed: 200,
+		paginationSpeed: 200
+	});
+
 	// scroll direction
 	var scrollDirection = new Scroll_Direction({
 		container: 'html'

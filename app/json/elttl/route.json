@@ -1,6 +1,7 @@
 {
     "search": "controller_search",
     "ajax": "controller_ajax",
+    "ajax/image": "controller_ajax_image",
     "press": "controller_content",
     "tag": "controller_tag",
     "archive": "controller_archive",

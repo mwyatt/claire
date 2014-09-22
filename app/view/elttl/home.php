@@ -26,6 +26,24 @@
 		</div>
 	</div>
 
+<?php if (isset($galleryPaths)): ?>
+
+	<div class="gallery">
+		<h1 class="home-press-heading">
+			<span class="home-press-heading-text">Gallery</span>
+		</h1>
+		<div class="js-gallery">
+			
+	<?php foreach ($galleryPaths as $path): ?>
+	
+			<a class="gallery-link" href="<?php echo $path ?>"><img class="gallery-image" src="<?php echo $path ?>" alt=""></a>
+
+	<?php endforeach ?>
+
+		</div>
+	</div>
+
+<?php endif ?>
 <?php include($this->pathView('_advertisements')) ?>
 
 </div>

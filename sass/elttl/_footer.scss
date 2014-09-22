@@ -76,6 +76,11 @@
     margin: 2em 0 0;
     line-height: 1.5;
     color: $color-white;
+
+    @media only screen and (min-width: 600px) {
+        float: left;
+        width: 75%;
+    }
 }
 
 .footer-address a {
@@ -83,4 +88,24 @@
     color: $color-white;
     border-color: $color-white;
     font-weight: 600;
+}
+
+.logo-table-tennis-england {
+    display: block;
+    background-color: $color-white;
+    text-align: center;
+    padding: 1em;
+    @extend .block-margins;
+    overflow: hidden;
+    border-radius: 2px;
+
+    @media only screen and (min-width: 600px) {
+        float: right;
+        width: 20%;
+    }
+}
+
+.logo-table-tennis-england-image {
+    max-width: 100%;
+    height: auto;
 }

@@ -31,3 +31,24 @@
 .banner-and-press {
 	@include clearfix;
 }
+
+.gallery {
+    @extend .block-clear;    
+}
+
+.gallery-link {
+    border-radius: 2px;
+    display: block;
+    margin: 1em;
+    overflow: hidden;
+
+    &:hover .gallery-image {
+        @include transform(scale(1.2));
+    }
+}
+
+.gallery-image {
+    @include transition(all 5s ease);
+    max-width: 100%;
+    height: auto;
+}
