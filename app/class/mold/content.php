@@ -25,6 +25,17 @@ class Mold_Content extends Mold
 
 	
 	public $status;
+
+
+	/**
+	 * possible status options
+	 * @var array
+	 */
+	public $statusPossible = [
+		'visible',
+		'draft',
+		'hidden'
+	];
 	
 
 	public $user_id;
@@ -72,6 +83,44 @@ class Mold_Content extends Mold
 	 */
 	public function setSlug($slug) {
 	    $this->slug = $slug;
+	    return $this;
+	}
+
+
+	/**
+	 * @return string 
+	 */
+	public function getStatus() {
+	    return $this->status;
+	}
+	
+	
+	/**
+	 * refers to statusPossible to ensure this status can be done
+	 * otherwise it is not changed
+	 * @param string $status 
+	 */
+	public function setStatus($status) {
+		if (in_array($status, $this->getStatusPossible())) {
+		    $this->status = $status;
+		}
+	    return $this;
+	}
+
+
+	/**
+	 * @return array 
+	 */
+	public function getStatusPossible() {
+	    return $this->statusPossible;
+	}
+	
+	
+	/**
+	 * @param array $statusPossible 
+	 */
+	public function setStatusPossible($statusPossible) {
+	    $this->statusPossible = $statusPossible;
 	    return $this;
 	}
 }
