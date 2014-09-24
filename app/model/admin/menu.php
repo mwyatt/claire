@@ -92,9 +92,12 @@ class Menu
     public function recurse($categories, $parentId = 0, $level = 1)
     {
 
+        // resources
+        $classPartLabel = $this->getClassPartLabel();
+
         // not root levels
         if ($parentId) {
-            $output = '<div class="menu' . $this->getClassPartLabel() . '-level-' . $level . ' js-menu' . $this->getClassPartLabel() . '-level-' . $level . '">';
+            $output = '<div class="menu' . $classPartLabel . '-level-' . $level . ' js-menu' . $classPartLabel . '-level-' . $level . '">';
         }
 
         // category loop
@@ -110,9 +113,9 @@ class Menu
 
             // single menu item
             if ($hasChildren) {
-                $output .= '<div class="menu' . $this->getClassPartLabel() . '-level-' . $level . ' js-menu' . $this->getClassPartLabel() . '-level-' . $level . '">';
+                $output .= '<div class="menu' . $classPartLabel . '-level-' . $level . ' js-menu' . $classPartLabel . '-level-' . $level . '">';
             }
-            $output .= '<a href="' . $category->url . '" class="menu' . $this->getClassPartLabel() . '-level-' . $level . '-link">' . $category->name . '</a>';
+            $output .= '<a href="' . $category->url . '" class="menu' . $classPartLabel . '-level-' . $level . '-link">' . $category->name . '</a>';
 
             // recurse to children
             if ($hasChildren) {
