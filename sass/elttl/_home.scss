@@ -37,10 +37,19 @@
 }
 
 .gallery-link {
+    @include transition(all 300ms ease);
+    @include transform(rotate(-2deg));
     border-radius: 2px;
     display: block;
     margin: 1em;
     overflow: hidden;
+    box-shadow: 0 1px 3px rgba($color-black, .5);
+    width: 12em;
+    height: 8.7em;
+
+    &:hover {
+	    @include transform(rotate(1deg));
+    }
 
     &:hover .gallery-image {
         @include transform(scale(1.2));

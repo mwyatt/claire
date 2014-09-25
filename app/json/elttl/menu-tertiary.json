@@ -4,15 +4,15 @@
 		"url": "page/premier-league-for-sport/"
 	},
 	{
-		"name": "Archive",
-		"url": "page/archive/"
+		"name": "Results archive",
+		"url": "archive/"
 	},
 	{
-		"name": "Minutes",
-		"url": "minutes/"
+		"name": "Contact us",
+		"url": "page/contact-us/"
 	},
 	{
-		"name": "Fred Holden Cup",
-		"url": "fred-holden-cup/"
+		"name": "Town Teams",
+		"url": "page/town-teams/"
 	}
 ]

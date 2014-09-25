@@ -32,6 +32,11 @@ class Controller_Index extends Controller
 		$json->read('menu-secondary');
 		$menuSecondary = $json->getData();
 
+		// menu Tertiary
+		$json = new Json();
+		$json->read('menu-Tertiary');
+		$menuTertiary = $json->getData();
+
 		// ads
 		$json = new Json();
 		$json->read('ads');
@@ -48,7 +53,8 @@ class Controller_Index extends Controller
 			->setObject('divisions', $modelTennisDivision->getData())
 			->setObject('ads', $ads)
 			->setObject('menuPrimary', $menuPrimary)
-			->setObject('menuSecondary', $menuSecondary);
+			->setObject('menuSecondary', $menuSecondary)
+			->setObject('menuTertiary', $menuTertiary);
 	}
 
 
