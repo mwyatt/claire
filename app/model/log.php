@@ -36,7 +36,7 @@ class Model_Log extends Model
 			return;
 		}
 		if ($type == 'admin') {
-			$this->adminUnseen($ids);
+			// $this->adminUnseen($ids);
 		}
 	}
 

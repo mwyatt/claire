@@ -142,8 +142,8 @@ class Controller_Admin_Content extends Controller_Admin
 		));
 		$this->updateMeta('media');
 		$this->updateMeta('tag');
-			$modelLog->log('admin', 'post updated');
-			$sessionFeedback->set('Content updated. <a href="' . $this->url->getCache('current_sans_query') . '">Back to list</a>');
+		$modelLog->log('admin', 'post updated');
+		$sessionFeedback->set('Content updated. <a href="' . $this->url->getCache('current_sans_query') . '">Back to list</a>');
 		$this->route('current');
 	}
 

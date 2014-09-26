@@ -43,6 +43,7 @@
 .menu-secondary {
     margin-bottom: 2em;
     border-radius: 2px;
+    overflow: hidden;
 
     @media only screen and (min-width: 650px) {
         float: right;

@@ -2,8 +2,13 @@ html {
     background-color: $color-primary-4;
 }
 
-body {
+html.lt-ie9 {
+    background-color: $color-white;
+}
 
+.lt-ie9 .container-site,
+.lt-ie9 .container-footer {
+    display: none;
 }
 
 .to-top {
@@ -99,4 +104,14 @@ body {
         background-position: center top;
         background-repeat: no-repeat;
     }
+}
+
+.is-archive {
+    padding-top: 33px;
+}
+
+.google-map {
+    border: 0;
+    width: 100%;
+    height: 15em;
 }

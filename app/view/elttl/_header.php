@@ -16,12 +16,12 @@
     <script>var urlBase = '<?php echo $this->getUrl() ?>';</script>
 </head>
 <body<?php echo ($this->getBodyClass() ? ' class="' . $this->getBodyClass() . '"' : '') ?>>
-    <!--[if lt IE 7]>
+    <!--[if lt IE 9]>
         <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
     <![endif]-->
 
 <div id="top"></div>
-<div class="container container-site">
+<div class="container container-site <?php echo ! empty($year) ? 'is-archive' : '' ?>">
     <div class="container-site-inner">
         <a href="#top" class="to-top js-smooth-scroll"><img class="to-top-image" src="<?php echo $this->getUrlMedia('arrow-up.svg') ?>" onerror="this.src=''; this.onerror=null;"></a>
         <header class="container-header row js-container-header clearfix js-fixed-bar">

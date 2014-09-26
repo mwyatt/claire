@@ -38,6 +38,21 @@ class Model_Content extends Model
 
 
 	/**
+	 * used to reduce fields to writable ones
+	 * for update, create
+	 * why am i having to define this?
+	 * @var array
+	 */
+	public $fieldsNonWriteable = array(
+		'id',
+		'statusPossible',
+		'user',
+		'tag',
+		'media'
+	);
+
+
+	/**
 	 * needs to get all 'tag' or 'media' and assign to relevant content rows
 	 * @param  string $metaName 
 	 * @return bool           

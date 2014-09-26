@@ -2,12 +2,14 @@
 	{
 		"name": "ETTA membership renewal",
 		"description": "Please ensure you have renewed your registration with the ETTA.",
+		"image": "cover/renewal.png",
 		"url": "press/etta-membership-renewal/",
 		"button": "More information"
 	},
 	{
 		"name": "Results archive",
-		"description": "What happened last year? Find out here.",
+		"description": "See the stats for previous seasons.",
+		"image": "cover/time.png",
 		"url": "archive/",
 		"button": "Vist the archive"
 	}

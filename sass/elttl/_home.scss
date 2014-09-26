@@ -61,3 +61,62 @@
     max-width: 100%;
     height: auto;
 }
+
+.home .division {
+    display: block;
+    border: 0;
+    position: relative;
+    padding: 1em 1em 1em 3.5em;
+    background-color: #eee;
+    border-radius: 2px;
+    margin-top: 1em;
+
+    @media only screen and (max-width: 399px) {
+
+        &:first-child {
+            margin-top: 0;
+        }
+    }
+
+    @media only screen and (min-width: 400px) {
+        float: left;
+    }
+
+    @media only screen and (min-width: 400px) and (max-width: 949px) {
+        width: 47%;
+        margin: 3% 0;
+        margin-right: 3%;
+
+        &:nth-child(2n) {
+            float: right;
+            margin-right: 0;
+        }
+    }
+
+    @media only screen and (min-width: 950px) {
+        float: left;
+        margin-left: 4%;
+        width: 22%;
+        
+        &:first-child {
+            float: left;
+            margin-left: 0;
+        }
+    }
+}
+
+.home .divisions {
+    @extend .block-margins;
+}
+
+.home .division-image {
+    width: 1.5em;
+    position: absolute;
+    top: 1.2em;
+    left: 1em;
+}
+
+.home .division-name {
+    font-size: 1.4em;
+    font-weight: 600;
+}
