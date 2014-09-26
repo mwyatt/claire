@@ -108,7 +108,7 @@ class Controller_Index extends Controller
 	public function setGallery()
 	{
 		$folder = glob(BASE_PATH . 'media' . DS . SITE . DS . 'thumb' . DS . '*');
-		$files = [];
+		$files = array();
 		foreach ($folder as $filePath) {
 			$filePath = str_replace(BASE_PATH, '', $filePath);
 			$files[] = str_replace(DS, US, $filePath);
