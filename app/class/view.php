@@ -217,6 +217,12 @@ class View extends Model
 	}
 
 
+	public function getAssetVersion()
+	{
+		return '?v=3';
+	}
+
+
 	/**
 	 * grabs base path for the view folder, used for headers, footers
 	 * and all includes within the view templates
