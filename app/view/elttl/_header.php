@@ -15,8 +15,12 @@
     <link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800" rel="stylesheet" type="text/css">
     <script src="<?php echo $this->getUrlJs('modernizr.js?v=1') ?>"></script>
     <script>var urlBase = '<?php echo $this->getUrl() ?>';</script>
+    
+<?php include($this->pathView('header/_google-analytics.php')) ?>
+
 </head>
 <body<?php echo ($this->getBodyClass() ? ' class="' . $this->getBodyClass() . '"' : '') ?>>
+
     <!--[if lt IE 9]>
         <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
     <![endif]-->
