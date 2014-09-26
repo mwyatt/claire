@@ -7,6 +7,12 @@
 		"button": "More information"
 	},
 	{
+		"name": "Doubles merit",
+		"description": "Introducing the new doubles merit table, see which teams perform the best in doubles.",
+		"url": "archive/2013/result/",
+		"button": "Select division"
+	},
+	{
 		"name": "Results archive",
 		"description": "See the stats for previous seasons.",
 		"image": "cover/time.png",

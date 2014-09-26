@@ -2,7 +2,7 @@
 
 <div class="page division-list js-page-division-list">
 	<h1 class="page-primary-title">Divisions</h1>
-	<p>Here are all the divisions for the current season.</p>
+	<p>Here are all the divisions in this season.</p>
 
 <?php if ($divisions): ?>
 

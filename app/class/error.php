@@ -14,7 +14,7 @@ class Error extends System
 {
 
 	
-    private $reporting;
+    private $reporting = false;
 	
 
     public function setReporting($value)
@@ -40,28 +40,29 @@ class Error extends System
     }
 
 
-    public function handle($errorType, $errorString, $errorFile, $errorLine) {  	
-        echo '<pre>';
-        print_r($errorType);
-        echo '</pre>';
-        echo '<pre>';
-        print_r($errorString);
-        echo '</pre>';
-        echo '<pre>';
-        print_r($errorFile);
-        echo '</pre>';
-        echo '<pre>';
-        print_r($errorLine);
-        echo '</pre>';
-    	exit;
-    	
-		switch ($this->reporting) {
+    public function handle($errorType, $errorString, $errorFile, $errorLine) {  	   	
+		switch ($this->getReporting()) {
 			case false:
 
 				// put error info and echo friendly schpiel
 				file_put_contents(BASE_PATH . 'error.txt', file_get_contents(BASE_PATH . 'error.txt') . '[Type ' . $errorType . '] ' . $errorString . ' | ' . $errorFile . ' [Line ' . $errorLine . '] [Date ' . date('d/m/Y', time()) . ']' . "\n");
 				echo 'A error has occurred. We all make mistakes. Please notify the administrator <a href="mailto:martin.wyatt@gmail.com">martin.wyatt@gmail.com</a>';
+                exit;
 			case true:
+
+                echo '<pre>';
+                print_r($errorType);
+                echo '</pre>';
+                echo '<pre>';
+                print_r($errorString);
+                echo '</pre>';
+                echo '<pre>';
+                print_r($errorFile);
+                echo '</pre>';
+                echo '<pre>';
+                print_r($errorLine);
+                echo '</pre>';
+                exit;
 
 				// display error(s)
 				echo '[Type ' . $errorType . '] ' . $errorString . ' | ' . $errorFile . ' [Line ' . $errorLine . ']' . "\n";

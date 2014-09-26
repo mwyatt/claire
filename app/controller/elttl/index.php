@@ -26,6 +26,7 @@ class Controller_Index extends Controller
 		$json = new Json();
 		$json->read('home-cover');
 		$covers = $json->getData();
+		shuffle($covers);
 
 		// menu Secondary
 		$json = new Json();
