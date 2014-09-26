@@ -34,7 +34,7 @@ class Controller_Index extends Controller
 
 		// menu Tertiary
 		$json = new Json();
-		$json->read('menu-Tertiary');
+		$json->read('menu-tertiary');
 		$menuTertiary = $json->getData();
 
 		// ads
