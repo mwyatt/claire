@@ -19,7 +19,7 @@
 			<a href="http://tabletennisengland.co.uk/" target="_blank" class="logo-table-tennis-england"><img class="logo-table-tennis-england-image" src="<?php echo $this->getUrlMedia('logo-table-tennis-england.gif') ?>" alt="Table Tennis England Logo"></a>
 		</div>
 	</footer>
-    <script src="<?php echo $this->getUrlJs('jquery.js<?php echo $this->getAssetVersion() ?>') ?>"></script>
+    <script src="<?php echo $this->getUrlJs('jquery.js') ?><?php echo $this->getAssetVersion() ?>"></script>
     <script src="<?php echo $this->getUrl() ?>asset/main.js<?php echo $this->getAssetVersion() ?>"></script>
     <script>
     </script>
