@@ -1,11 +1,13 @@
 <?php include($this->pathView('_header')) ?>
 
 <div class="page division-league js-page-division-league">
-	<h1 class="page-primary-title"><?php echo $division->getName() ?> division league table</h1>
+	<h1 class="page-primary-title"><?php echo $division->getName() ?> division <?php echo $tableName ?> table</h1>
 
 <?php if ($leagueStats): ?>
+	<p class="page-primary-description">This is the <?php echo $tableName ?> table for the <?php echo $division->getName() ?> division.</p>
 
-	<p class="page-primary-description">This is the league table for the <?php echo $division->getName() ?> division.</p>
+	<?php include($this->pathView('division/_menu-tables')) ?>
+	
 	<table class="elttl-table">
 		<tr class="elttl-table-row elttl-table-headings">
 			<th class="elttl-table-cell elttl-table-heading is-name">Name</th>

@@ -200,7 +200,7 @@ class Controller_Player extends Controller_Archive
 
 		// convert encounters to merit results
 		$modelTennisEncounter
-			->removeStatus()
+			->filterStatus(array('doubles', 'exclude'))
 			->convertToMerit()
 			->orderByHighestAverage();
 

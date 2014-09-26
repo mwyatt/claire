@@ -98,18 +98,12 @@ class Model_Tennis_Encounter extends Model
 	}
 
 
-	public function removeStatus($status = '')
+	public function filterStatus($status = array())
 	{
 		$molds = $this->getData();
 		foreach ($molds as $key => $mold) {
-			if ($status) {
-				if ($mold->getStatus() == $status) {
-					unset($molds[$key]);
-				}
-			} else {
-				if ($mold->getStatus()) {
-					unset($molds[$key]);
-				}
+			if (in_array($mold->getStatus(), $status)) {
+				unset($molds[$key]);
 			}
 		}
 		$this->setData($molds);

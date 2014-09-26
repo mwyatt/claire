@@ -9,6 +9,7 @@
     <title><?php echo $this->getMeta('title') ?></title>   
     <meta name="keywords" content="<?php echo $this->getMeta('keywords') ?>">
     <meta name="description" content="<?php echo $this->getMeta('description') ?>">
+    <link rel="icon" type="image/png" href="<?php echo $this->getUrlMedia('favicon.png') ?>?rev=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link href="<?php echo $this->getUrl() ?>asset/screen.css<?php echo $this->getAssetVersion() ?>" media="screen, projection" rel="stylesheet" type="text/css" />
     <link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800" rel="stylesheet" type="text/css">
@@ -28,6 +29,9 @@
             <div class="container-header-inner">
 
         <?php include($this->pathView('header/_logo')) ?>
+
+                <a href="mailto:martin.wyatt@gmail.com" class="header-sticker-beta" title="<?php echo $this->config->getOption('site_title') ?> is still actively under development. If you notice any bugs or have any improvements please email me: martin.wyatt@gmail.com">Beta</a>
+
         <?php $menu = $menuPrimary; ?>
         <?php include($this->pathView('_menu-primary')) ?>
         <?php include($this->pathView('_menu-division')) ?>
