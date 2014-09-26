@@ -16,7 +16,7 @@
     <script src="<?php echo $this->getUrlJs('modernizr.js?v=1') ?>"></script>
     <script>var urlBase = '<?php echo $this->getUrl() ?>';</script>
     
-<?php include($this->pathView('header/_google-analytics.php')) ?>
+<?php include($this->pathView('header/_google-analytics')) ?>
 
 </head>
 <body<?php echo ($this->getBodyClass() ? ' class="' . $this->getBodyClass() . '"' : '') ?>>
