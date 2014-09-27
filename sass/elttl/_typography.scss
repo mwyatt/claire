@@ -4,7 +4,7 @@
  * global body color
  * @type {int}
  */
-$color-body: $color-primary-3;
+$color-body: lighten($color-primary-4, 20%);
 
 
 /**

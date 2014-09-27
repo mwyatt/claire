@@ -2,13 +2,13 @@ html {
     background-color: $color-primary-4;
 }
 
-body {
+html.lt-ie9 {
+    background-color: $color-white;
+}
 
-    // @media only screen and (min-width: 900px) {
-    //     background-image: image-url('bg.gif');
-    //     background-position: center top;
-    //     background-repeat: no-repeat;
-    // }
+.lt-ie9 .container-site,
+.lt-ie9 .container-footer {
+    display: none;
 }
 
 .to-top {
@@ -50,7 +50,6 @@ body {
     margin-bottom: 1em;
 }
 
-.container-footer-inner,
 .page {
     @include clearfix;
     max-width: 90em;
@@ -58,17 +57,9 @@ body {
     padding: 10%;
 }
 
-.container-footer-inner {
-    
-    @media only screen and (min-width: 650px) {
-        padding: 5%;
-    }
-}
-
 .page {
     padding-top: 4.7em;
     padding-bottom: 60px;
-    background-color: $color-white;
 
     @media only screen and (min-width: 450px) {
         padding-top: 5.7em;
@@ -107,4 +98,51 @@ body {
 
 .container-site-inner {
     background-color: $color-white;
+
+    @media only screen and (min-width: 1500px) {
+        background-image: image-url('bg.gif');
+        background-position: center top;
+        background-repeat: no-repeat;
+    }
+}
+
+.is-archive {
+    padding-top: 33px;
+}
+
+.google-map {
+    border: 0;
+    width: 100%;
+    height: 15em;
+    margin-top: 3em;
+}
+
+.menu-tables-option {
+    @include clearfix;
+    @include button('primary');
+    @extend .block-margins;
+    display: block;
+    text-align: center;
+
+    @media only screen and (min-width: 500px) {
+        float: left;
+        margin-right: 1em;
+    }
+}
+
+.header-sticker-beta {
+    float: left;
+    text-transform: uppercase;
+    font-size: 0.7em;
+    background-color: $color-gray-20;
+    color: $color-white;
+    line-height: 1;
+    padding: 0.3em;
+    border-radius: 2px;
+    position: relative;
+    top: 1em;
+
+    &:hover {
+        background-color: $color-gray-30;
+    }
 }

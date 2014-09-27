@@ -26,11 +26,17 @@ class Controller_Index extends Controller
 		$json = new Json();
 		$json->read('home-cover');
 		$covers = $json->getData();
+		shuffle($covers);
 
 		// menu Secondary
 		$json = new Json();
 		$json->read('menu-secondary');
 		$menuSecondary = $json->getData();
+
+		// menu Tertiary
+		$json = new Json();
+		$json->read('menu-tertiary');
+		$menuTertiary = $json->getData();
 
 		// ads
 		$json = new Json();
@@ -48,7 +54,8 @@ class Controller_Index extends Controller
 			->setObject('divisions', $modelTennisDivision->getData())
 			->setObject('ads', $ads)
 			->setObject('menuPrimary', $menuPrimary)
-			->setObject('menuSecondary', $menuSecondary);
+			->setObject('menuSecondary', $menuSecondary)
+			->setObject('menuTertiary', $menuTertiary);
 	}
 
 
@@ -102,7 +109,7 @@ class Controller_Index extends Controller
 	public function setGallery()
 	{
 		$folder = glob(BASE_PATH . 'media' . DS . SITE . DS . 'thumb' . DS . '*');
-		$files = [];
+		$files = array();
 		foreach ($folder as $filePath) {
 			$filePath = str_replace(BASE_PATH, '', $filePath);
 			$files[] = str_replace(DS, US, $filePath);

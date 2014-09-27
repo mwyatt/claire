@@ -6,6 +6,9 @@
 <?php if ($meritStats): ?>
 
 	<p class="p">This is the merit table for the <?php echo $division->getName() ?> division.</p>
+
+	<?php include($this->pathView('division/_menu-tables')) ?>
+	
 	<table class="elttl-table">
 		<tr class="elttl-table-row elttl-table-headings">
 			<th class="elttl-table-cell elttl-table-heading is-name">Name</th>

@@ -57,6 +57,10 @@
     top: -50px;
 }
 
+.is-scrolling-down .is-active .menu-primary-level-2 {
+    display: none;
+}
+
 .container-header {
     @include transition(all 300ms ease);
     box-shadow: 0 1px 3px rgba(0, 0, 0, .2);

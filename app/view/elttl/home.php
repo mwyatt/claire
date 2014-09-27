@@ -9,6 +9,13 @@
 			<a href="<?php echo $cover->url ?>" class="cover">
 				<h2 class="cover-primary-title"><?php echo $cover->name ?></h2>
 				<p class="cover-description"><?php echo $cover->description ?></p>
+
+	<?php if (isset($cover->image)): ?>
+		
+				<img class="cover-image" src="<?php echo $this->getUrlMedia($cover->image) ?>" alt="<?php echo $cover->name ?>">
+				
+	<?php endif ?>
+
 				<span class="cover-button"><?php echo $cover->button ?></span>
 			</a>
 
@@ -41,6 +48,18 @@
 	<?php endforeach ?>
 
 		</div>
+	</div>
+
+<?php endif ?>
+<?php if (isset($divisions)): ?>
+
+	<div class="home-divisions">
+		<h1 class="home-press-heading">
+			<span class="home-press-heading-text">Divisions</span>
+		</h1>
+
+	<?php include($this->pathView('_divisions')) ?>
+
 	</div>
 
 <?php endif ?>

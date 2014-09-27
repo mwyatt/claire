@@ -19,7 +19,7 @@
 		<?php else: ?>
 			<?php if ($encounter->getPlayerRankChangeLeft() != 0): ?>
 			
-		<span class="encounter-rank-change"><?php echo $encounter->getPlayerRankChangeLeft() ?></span>
+		<span class="encounter-rank-change" title="Rank change"><?php echo $encounter->getPlayerRankChangeLeft() ?></span>
 
 			<?php endif ?>
 	
@@ -33,7 +33,7 @@
 
 		<?php if ($encounter->getPlayerRankChangeRight() != 0): ?>
 		
-		<span class="encounter-rank-change"><?php echo $encounter->getPlayerRankChangeRight() ?></span>
+		<span class="encounter-rank-change" title="Rank change"><?php echo $encounter->getPlayerRankChangeRight() ?></span>
 
 		<?php endif ?>
 		

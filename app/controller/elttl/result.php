@@ -64,8 +64,62 @@ class Controller_Result extends Controller_Archive
 	}
 
 
+	public function meritDoubles()
+	{
+		
+		// resource
+		$division = $this->getDivision();
+
+		// team
+		$className = $this->getArchiveClassName('model_tennis_team');
+		$modelTennisTeam = new $className($this);
+		$modelTennisTeam->read($this->getArchiveWhere(array(
+			'where' => array('division_id' => $division->getId())
+		)));
+		$modelTennisTeam->keyByProperty('id');
+
+		// fixture
+		$className = $this->getArchiveClassName('model_tennis_fixture');
+		$modelTennisFixture = new $className($this);
+		$modelTennisFixture->read($this->getArchiveWhere(array(
+			'where' => array('team_id_left' => $modelTennisTeam->getDataProperty('id'))
+		)));
+
+		// encounter
+		$className = $this->getArchiveClassName('model_tennis_encounter');
+		$modelTennisEncounter = new $className($this);
+		$modelTennisEncounter->read($this->getArchiveWhere(array(
+			'where' => array('fixture_id' => $modelTennisFixture->getDataProperty('id'))
+		)));
+
+		// convert encounters to merit results
+		$modelTennisEncounter
+			->filterStatus(array('', 'exclude'))
+			->convertToFixtureResults();
+
+		// convert encounter conversion, keyed by team id
+		$modelTennisFixture
+			->convertToLeague($modelTennisEncounter->getData())
+			->orderByHighestPoints();
+
+		// template
+		$this->view
+			->setMeta(array(		
+				'title' => $division->getName() . ' doubles merit'
+			))
+			->setObject('division', $division)
+			->setObject('tableName', 'doubles merit')
+			->setObject('teams', $modelTennisTeam->getData())
+			->setObject('leagueStats', $modelTennisFixture->getData())
+			->getTemplate('division/league');
+	}
+
+
 	public function merit()
 	{
+		if ($this->getArchivePathPart(3) == 'doubles') {
+			return $this->meritDoubles();
+		}
 
 		// resource
 		$division = $this->getDivision();
@@ -102,7 +156,7 @@ class Controller_Result extends Controller_Archive
 
 		// convert encounters to merit results
 		$modelTennisEncounter
-			->removeStatus()
+			->filterStatus(array('doubles', 'exclude'))
 			->convertToMerit()
 			->orderByHighestAverage();
 
@@ -160,11 +214,18 @@ class Controller_Result extends Controller_Archive
 			))
 			->setObject('division', $division)
 			->setObject('teams', $modelTennisTeam->getData())
+			->setObject('tableName', 'league')
 			->setObject('leagueStats', $modelTennisFixture->getData())
 			->getTemplate('division/league');
 	}
 
 
+	/**
+	 * initialises the division which is in the current url path
+	 * and stores in the division property
+	 * moves to merit || league from here
+	 * @return null 
+	 */
 	public function division()
 	{
 

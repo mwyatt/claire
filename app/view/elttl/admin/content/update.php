@@ -22,14 +22,14 @@
 
 <?php include($this->pathView('admin/content/_wysihtml5')) ?>
 
-		<div class="block-margins">
+		<div class="block-margins hidden">
 			<h2 class="label-title">Media</h2>
 
 <?php $media = $content->media ?>
 <?php include($this->pathView('admin/media/_browser')) ?>
 
 		</div>
-		<div class="block-margins">
+		<div class="block-margins hidden">
 			<h2 class="label-title">Tags</h2>
 	
 <?php $tags = $content->tag ?>
@@ -59,7 +59,7 @@
 			<input name="time_published[date]" type="date" value="<?php echo $contentDate ?>">
 			<input name="time_published[time]" type="time" value="<?php echo $contentTime ?>">
 		</div>
-		<div class="block-margins">
+		<div class="block-clear">
 			<input name="type" type="hidden" value="<?php echo $this->url->getPathPart(2) ?>">
 			<input name="<?php echo ($content ? 'update' : 'create') ?>" type="hidden" value="true">
 			<span class="submit button right js-form-button-submit">Save</span>

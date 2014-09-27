@@ -31,11 +31,11 @@ class Mold_Content extends Mold
 	 * possible status options
 	 * @var array
 	 */
-	public $statusPossible = [
+	public $statusPossible = array(
 		'visible',
 		'draft',
 		'hidden'
-	];
+	);
 	
 
 	public $user_id;

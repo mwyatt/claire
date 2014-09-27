@@ -8,6 +8,7 @@
     background-repeat: no-repeat;
     background-position: center center;
     min-height: 20em;
+    position: relative;
 }
 
 .owl-item:nth-child(2n) .cover {
@@ -45,4 +46,12 @@
 
 .owl-theme .owl-controls .owl-page span {
     background-color: $color-primary-0;
+}
+
+.cover-image {
+    position: absolute;
+    bottom: -7em;
+    left: 50%;
+    margin-left: -256.5px;
+    z-index: 0;
 }

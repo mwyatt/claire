@@ -1,19 +1,19 @@
 [
 	{
 		"name": "Get the Handbook",
-		"description": "Download this seasons handbook here",
+		"description": "Download this seasons handbook.",
 		"url": "media/handbook-2014-2015.pdf",
 		"button": ""
 	},
 	{
 		"name": "Tables and Results",
-		"description": "View this seasons merit and league tables",
+		"description": "View the merit and league tables for the current season.",
 		"url": "result/",
 		"button": ""
 	},
 	{
 		"name": "Results archive",
-		"description": "What happened last year? Find out here.",
+		"description": "See the stats for previous seasons.",
 		"url": "archive/",
 		"button": "Vist the archive"
 	}
