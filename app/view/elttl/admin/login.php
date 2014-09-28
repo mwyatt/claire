@@ -13,7 +13,7 @@
         <input id="login_password" class="login-input" type="password" name="login_password">
         <input type="hidden" name="login" value="true">
         <input type="submit">
-        <a href="#" class="submit button login-button">Login</a>
+        <span class="submit button login-button js-form-button-submit">Login</span>
     </form>
 </div>
 

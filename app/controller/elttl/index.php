@@ -55,6 +55,7 @@ class Controller_Index extends Controller
 			->setObject('ads', $ads)
 			->setObject('menuPrimary', $menuPrimary)
 			->setObject('menuSecondary', $menuSecondary)
+			->setObject('campaign', new Google_Analytics_Campaign())
 			->setObject('menuTertiary', $menuTertiary);
 	}
 

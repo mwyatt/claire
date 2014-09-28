@@ -4,9 +4,12 @@
 	<div class="banner-and-press">
 		<div class="banner-primary js-home-cover">
 		
+<?php $campaign->setSource('home cover banners') ?>
+<?php $campaign->setMedium('referral') ?>
 <?php foreach ($covers as $cover): ?>
+	<?php $campaign->setCampaign($cover->name) ?>
 	
-			<a href="<?php echo $cover->url ?>" class="cover">
+			<a href="<?php echo $campaign->get($cover->url) ?>" class="cover">
 				<h2 class="cover-primary-title"><?php echo $cover->name ?></h2>
 				<p class="cover-description"><?php echo $cover->description ?></p>
 

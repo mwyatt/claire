@@ -55,7 +55,7 @@ class Google_Analytics_Campaign
 	 * auto create on instanciate
 	 * @param array $config see create
 	 */
-	function __construct($config)
+	function __construct($config = array())
 	{
 		$this->create($config);
 	}
@@ -66,8 +66,15 @@ class Google_Analytics_Campaign
 	 * @param array $config campaign, source, medium
 	 * @return null         
 	 */
-	public function create($config)
+	public function create($config = array())
 	{
+		if (
+			empty($config['campaign'])
+			|| empty($config['source'])
+			|| empty($config['medium'])
+		) {
+			return;
+		}
 		$this->setCampaign($config['campaign']);
 		$this->setSource($config['source']);
 		$this->setMedium($config['medium']);
@@ -81,17 +88,19 @@ class Google_Analytics_Campaign
 	 * @param  string $prepend unset by user
 	 * @return string          
 	 */
-	public function get($url, $content, $prepend = '?')
+	public function get($url, $content = '', $prepend = '?')
 	{
 		if (strpos($url, '?')) {
 			$prepend = '&';
 		}
-		$parts = [
+		$parts = array(
 			'utm_campaign' => $this->getCampaign(),
 			'utm_source' => $this->getSource(),
 			'utm_medium' => $this->getMedium(),
-			'utm_content' => $content
-		];
+		);
+		if ($content) {
+			$parts['utm_content'] = $content;
+		}
 		return $url . $prepend . http_build_query($parts);
 	}
 
