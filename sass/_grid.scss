@@ -1,0 +1,103 @@
+
+
+/**
+ * choose a grid width, the number of columns and the margin between columns.
+ * the result of the following equation has to be an integer, not a fraction:
+ * (width - (columns - 1) * col_margin) / columns = n
+ * @author  http://bjorkoy.com/2010/05/css-grids-with-sass/
+ */
+
+
+/**
+ * total with of page
+ * @type {%}
+ */
+$gridWidth: 100%;
+
+
+/**
+ * number of columns
+ * @type {Number}
+ */
+$gridTotalColumns: 12;
+
+
+/**
+ * margin between columns
+ * @type {%}
+ */
+$gridColMargin: 2%;
+
+
+/**
+ * maths
+ * @type {int}
+ */
+$gridColWidth: ($gridWidth - ($gridColMargin * ($gridTotalColumns - 1))) / $gridTotalColumns;
+
+
+/**
+ * maths
+ * @type {int}
+ */
+$gridColTotalWidth: $gridColWidth + $gridColMargin;  
+
+
+/**
+ * create row div
+ */
+@mixin row() {
+	float: left;
+	width: $gridWidth;
+	@include clearfix;
+}
+
+
+/**
+ * create a column div
+ * @type {int}
+ */
+@mixin col($n: 1) {
+	float: left;
+	@include span($n);
+}
+
+
+/**
+ * make an element span n columns
+ * @type {int}
+ */
+@mixin span($n: 1) {
+	width: ($n * $gridColWidth) + (($n - 1) * $gridColMargin);
+	@if $n == $gridTotalColumns {
+		margin-right: 0;
+	} @else {
+		margin-right: $gridColMargin;
+	}
+}
+
+
+/**
+ * the last column in a row needs this
+ */
+@mixin last() {
+	margin-right: 0;
+}
+
+
+/**
+ * prepend n blank columns
+ * @type {int}
+ */
+@mixin prepend($n: 1) {
+	margin-left: $gridColTotalWidth * $n
+}
+
+
+/**
+ * append n blank columns
+ * @type {int}
+ */
+@mixin append($n: 1) {
+	margin-right: $gridColTotalWidth * $n + $gridColMargin
+}

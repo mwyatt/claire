@@ -118,3 +118,53 @@ a.content-action-link {
 	    border: 1px solid;
 	}
 }
+
+.ads,
+.grid-test {
+	@include row;
+	margin-top: 2%;
+}
+
+.grid-test .main {
+	@include col(6);
+
+	@media only screen and (min-width: 600px) {
+		@include col(8);
+	}
+}
+
+.grid-test .sidebar {
+	@include col(6);
+	@include last;
+
+	@media only screen and (min-width: 600px) {
+		@include col(4);
+	}
+}
+
+.ads .three {
+	
+	@media only screen and (max-width: 599px) {
+		margin-top: 2%;
+
+		&:first-child {
+			margin-top: 0;
+		}
+	}
+
+	@media only screen and (min-width: 400px) and (max-width: 599px) {
+		@include col(6);
+
+		&:nth-child(2n) {
+			@include last;
+		}
+	}
+
+	@media only screen and (min-width: 600px) {
+		@include col(4);
+
+		&:last-child {
+			@include last;
+		}
+	}
+}

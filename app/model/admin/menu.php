@@ -94,6 +94,7 @@ class Menu
 
         // resources
         $classPartLabel = $this->getClassPartLabel();
+        $output = '';
 
         // not root levels
         if ($parentId) {
