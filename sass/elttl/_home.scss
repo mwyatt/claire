@@ -15,21 +15,20 @@
 .banner-primary {
 
 	@media only screen and (min-width: 700px) {
-		float: left;
-		width: 45%;
+		@include col(6);
 	}
 }
 
 .home-press {
 	
 	@media only screen and (min-width: 700px) {
-		float: right;
-		width: 45%;
+        @include col(6);
+        @include last;
 	}
 }
 
 .banner-and-press {
-	@include clearfix;
+	@include row;
 }
 
 .gallery {
