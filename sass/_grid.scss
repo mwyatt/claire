@@ -4,6 +4,7 @@
  * choose a grid width, the number of columns and the margin between columns.
  * the result of the following equation has to be an integer, not a fraction:
  * (width - (columns - 1) * col_margin) / columns = n
+ * reformatted by Martin Wyatt
  * @author  http://bjorkoy.com/2010/05/css-grids-with-sass/
  */
 
@@ -12,35 +13,35 @@
  * total with of page
  * @type {%}
  */
-$gridWidth: 100%;
+$grid-width: 100%;
 
 
 /**
  * number of columns
  * @type {Number}
  */
-$gridTotalColumns: 12;
+$grid-total-columns: 12;
 
 
 /**
  * margin between columns
  * @type {%}
  */
-$gridColMargin: 4%;
+$grid-col-margin: 4%;
 
 
 /**
  * maths
  * @type {int}
  */
-$gridColWidth: ($gridWidth - ($gridColMargin * ($gridTotalColumns - 1))) / $gridTotalColumns;
+$grid-col-width: ($grid-width - ($grid-col-margin * ($grid-total-columns - 1))) / $grid-total-columns;
 
 
 /**
  * maths
  * @type {int}
  */
-$gridColTotalWidth: $gridColWidth + $gridColMargin;  
+$grid-col-total-width: $grid-col-width + $grid-col-margin;  
 
 
 /**
@@ -48,7 +49,7 @@ $gridColTotalWidth: $gridColWidth + $gridColMargin;
  */
 @mixin row() {
 	float: left;
-	width: $gridWidth;
+	width: $grid-width;
 	@include clearfix;
 }
 
@@ -68,11 +69,11 @@ $gridColTotalWidth: $gridColWidth + $gridColMargin;
  * @type {int}
  */
 @mixin span($n: 1) {
-	width: ($n * $gridColWidth) + (($n - 1) * $gridColMargin);
-	@if $n == $gridTotalColumns {
+	width: ($n * $grid-col-width) + (($n - 1) * $grid-col-margin);
+	@if $n == $grid-total-columns {
 		margin-right: 0;
 	} @else {
-		margin-right: $gridColMargin;
+		margin-right: $grid-col-margin;
 	}
 }
 
@@ -90,7 +91,7 @@ $gridColTotalWidth: $gridColWidth + $gridColMargin;
  * @type {int}
  */
 @mixin prepend($n: 1) {
-	margin-left: $gridColTotalWidth * $n
+	margin-left: $grid-col-total-width * $n
 }
 
 
@@ -99,5 +100,5 @@ $gridColTotalWidth: $gridColWidth + $gridColMargin;
  * @type {int}
  */
 @mixin append($n: 1) {
-	margin-right: $gridColTotalWidth * $n + $gridColMargin
+	margin-right: $grid-col-total-width * $n + $grid-col-margin
 }

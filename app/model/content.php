@@ -58,6 +58,7 @@ class Model_Content extends Model
 
 		// 2. bind
 	    $sth->bindValue(':type', $bar, PDO::PARAM_INT);
+	    $sth->bindValue(':status', 'visible', PDO::PARAM_STRING);
 
 	    // 3. execute
 		try {
