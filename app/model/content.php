@@ -35,9 +35,42 @@ class Model_Content extends Model
 	);
 
 
-	public function readv2()
+	public function readv2($config)
 	{
-		# code...
+		$config['where']
+		$config['columns']
+		$config['dataToBind']
+
+		// 1. query
+		$sth = $this->database->dbh->prepare("	
+			select
+				id,
+				rows,
+				static
+			from content
+            where
+            	content.status = 'visible'
+            	and content.type = :type
+
+            order by
+            limit
+		");
+
+		// 2. bind
+	    $sth->bindValue(':type', $bar, PDO::PARAM_INT);
+
+	    // 3. execute
+		try {
+			$sth->execute($values);
+		} catch (Exception $e) {
+			$message = 'there is a problem reading things today';
+		}
+
+		// 4. return data
+		$this->setData($sth->fetchAll(PDO::FETCH_CLASS, $this->getMoldName()));
+
+		// 5. return
+		return $this;
 	}
 
 
