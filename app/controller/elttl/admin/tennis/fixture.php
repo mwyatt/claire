@@ -35,7 +35,7 @@ class Controller_Admin_Tennis_Fixture extends Controller_Admin
 
 		// generating
 		if (array_key_exists('generate', $_REQUEST)) {
-			exit('are you sure? enable this feature by uncommenting the code');
+			// exit('are you sure? enable this feature by uncommenting the code');
 			$modelTennisFixture = new model_tennis_Fixture($this);
 			$modelTennisFixture->generate();
 			$this->route('current');
