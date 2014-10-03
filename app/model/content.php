@@ -37,9 +37,9 @@ class Model_Content extends Model
 
 	public function readv2($config)
 	{
-		$config['where']
-		$config['columns']
-		$config['dataToBind']
+		// $config['where']
+		// $config['columns']
+		// $config['dataToBind']
 
 		// 1. query
 		$sth = $this->database->dbh->prepare("	

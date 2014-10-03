@@ -50,4 +50,8 @@ $(document).ready(function() {
 	var scrollDirection = new Scroll_Direction({
 		container: 'html'
 	});
+
+	$('.js-magnific-gallery').magnificPopup({
+		type:'image'
+	});
 });

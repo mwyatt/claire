@@ -44,9 +44,9 @@
 		</h1>
 		<div class="js-gallery">
 			
-	<?php foreach ($galleryPaths as $path): ?>
+	<?php foreach ($galleryPaths as $key => $path): ?>
 	
-			<a class="gallery-link" href="<?php echo $path ?>"><img class="gallery-image" src="<?php echo $path ?>" alt=""></a>
+			<a class="gallery-link js-magnific-gallery" href="<?php echo $this->getUrl() . $path ?>"><img class="gallery-image" src="<?php echo $path ?>" alt=""></a>
 
 	<?php endforeach ?>
 
