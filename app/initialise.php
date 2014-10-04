@@ -65,7 +65,7 @@ $sessionHistory->add($system->url->getCache('current'));
  * unit tests
  */
 $test = new test($system);
-// $test->updateContent();
+// $test->exceptionHandling();
 
 
 /**

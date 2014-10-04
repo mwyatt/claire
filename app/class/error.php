@@ -14,6 +14,11 @@ class Error extends System
 {
 
 	
+    /**
+     * needs to be inside the package.json
+     * or options database
+     * @var boolean
+     */
     private $reporting = false;
 	
 

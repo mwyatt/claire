@@ -165,4 +165,18 @@ exit;
 		// }
 		// $time_elapsed_us = microtime(true) - $start;
 	}
+
+
+	public function exceptionHandling()
+	{
+		try {
+			echo $haha[''];
+		} catch (Exception $e) {
+			echo '<pre>';
+			print_r($e);
+			echo '</pre>';
+			exit;
+			
+		}
+	}
 }
