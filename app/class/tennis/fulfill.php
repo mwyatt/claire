@@ -67,7 +67,8 @@ class Tennis_Fulfill extends Data
 
         // if delete is flagged, dont refulfill
         if ($this->isDelete()) {
-            $this->route('current', 'fixture_id=' . $fixture->getId());
+            $sessionFeedback->set('fixture deleted');
+            $this->route('current');
         }
 
         // fulfill the fixture
@@ -76,6 +77,14 @@ class Tennis_Fulfill extends Data
 
         // debug
         $this->outputDebugBlock('finished fixture fulfillment procedure');
+    }
+
+
+    public function isDelete()
+    {
+        if (! empty($_REQUEST['delete'])) {
+            return true;
+        }
     }
 
 
@@ -606,7 +615,7 @@ class Tennis_Fulfill extends Data
             'previous ' . $rankLeft,
             'modifier ' . $changes->left,
             'next ' . ($rankLeft + $changes->left)
-        });
+        ));
 
         // object of changes
         return $changes;

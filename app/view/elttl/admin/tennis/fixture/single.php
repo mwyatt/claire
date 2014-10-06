@@ -22,9 +22,6 @@
 		<span class="admin-button-primary js-form-button-submit js-form-button-fixture-delete">Delete</span>
 
 <?php endif ?>
-
-		<input class="js-form-fixture-delete-field" name="delete" type="hidden" value="">
-
 <?php if ($divisions): ?>
 
 		<section class="fixture-single-section">

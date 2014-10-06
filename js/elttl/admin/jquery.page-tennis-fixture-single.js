@@ -216,9 +216,12 @@ Page_Tennis_Fixture_Single.prototype.eventsRefresh = function(data) {
 	});
 
 	// delete fixture add hidden value
-	$('.js-form-button-fixture-delete').on('click.page-tennis-fixture-single', function(event) {
+	$('.js-form-button-fixture-delete').off().on('click.page-tennis-fixture-single', function(event) {
 		event.preventDefault();
-		$('.js-form-fixture-delete-field').value('true');
+		$(this)
+			.after('<input name="delete" type="hidden" value="1">')
+			.closest('form')
+			.submit();
 	});
 };
 
