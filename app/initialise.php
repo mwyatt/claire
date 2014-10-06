@@ -51,7 +51,9 @@ $system->config->setOptions($options->getData());
  * @var error
  */
 $error = new error($system);
-$error->initialise();
+$error
+	->setReporting($config->errorReporting)
+	->initialise();
 
 
 /**

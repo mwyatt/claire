@@ -35,8 +35,18 @@ class Model_Content extends Model
 	);
 
 
-	public function readv2($config)
+	public function readName($config)
 	{
+/*
+'where' => array(
+	'type' => $this->url->getPathPart(0),
+	'status' => 'visible'
+),
+'limit' => $pagination->getLimit(),
+'order_by' => 'time_published desc'
+
+ */
+
 		// $config['where']
 		// $config['columns']
 		// $config['dataToBind']

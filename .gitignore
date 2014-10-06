@@ -1,9 +1,9 @@
+error.txt
+config.json
+asset/
+vendor/
+node_modules/
 media/upload/
 app/cache/
 thumb/cache/
-error.txt
-Guardfile
-asset/
-node_modules/
 app/credentials.php
-vendor/

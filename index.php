@@ -60,8 +60,8 @@ define('PATH_MODEL', PATH_APP . 'model' . DS);
  * site
  * get from package.json
  */
-$package = json_decode(file_get_contents(BASE_PATH . 'package.json'));
-define('SITE', $package->name);
+$config = json_decode(file_get_contents(BASE_PATH . 'config.json'));
+define('SITE', $config->siteName);
 
 
 /**
