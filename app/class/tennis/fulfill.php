@@ -65,6 +65,12 @@ class Tennis_Fulfill extends Data
             $this->clear();
         }
 
+        // if delete is flagged, dont refulfill
+        if ($this->isDelete()) {
+            $this->route('current', 'fixture_id=' . $fixture->getId());
+        }
+
+        // fulfill the fixture
         // encouters loop
         $this->encounters();
 
@@ -161,7 +167,7 @@ class Tennis_Fulfill extends Data
 
             // store encounters
             if (! $this->isDebug($this)) {
-                $modelEncounter->create([$moldEncounter]);
+                $modelEncounter->create(array($moldEncounter));
             }
         }
 
@@ -596,11 +602,11 @@ class Tennis_Fulfill extends Data
         // update player rank based on this encounter
         $players[$config->idLeft]->modifyRank($changes->left);
         $players[$config->idRight]->modifyRank($changes->right);
-        $this->outputDebugBlock([
+        $this->outputDebugBlock(array(
             'previous ' . $rankLeft,
             'modifier ' . $changes->left,
             'next ' . ($rankLeft + $changes->left)
-        ]);
+        });
 
         // object of changes
         return $changes;
