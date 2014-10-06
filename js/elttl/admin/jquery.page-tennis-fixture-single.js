@@ -174,7 +174,6 @@ Page_Tennis_Fixture_Single.prototype.determineState = function(data) {
  * @return {null}      
  */
 Page_Tennis_Fixture_Single.prototype.eventsRefresh = function(data) {
-
 	if (! data.isFilled) {
 
 		// division

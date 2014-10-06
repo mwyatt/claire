@@ -219,7 +219,7 @@ class View extends Model
 
 	public function getAssetVersion()
 	{
-		return '?v=6';
+		return '?v=7';
 	}
 
 

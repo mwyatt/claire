@@ -16,18 +16,18 @@ module.exports = function(grunt) {
 
   // config
   grunt.initConfig({
-    pkg: grunt.file.readJSON('package.json'),
+    config: grunt.file.readJSON('config.json'),
     sass: {
       local: {
         files: [{
           expand: true,
-          cwd: 'sass/<%= pkg.name %>/',
+          cwd: 'sass/<%= config.siteName %>/',
           src: ['*.scss'],
           dest: 'asset/',
           ext: '.css'
         }],
         options: {
-          imagePath: '../media/<%= pkg.name %>',
+          imagePath: '../media/<%= config.siteName %>',
         	loadPath: 'sass/',
           sourceComments: 'normal',
           outputStyle: 'nested'
@@ -36,7 +36,7 @@ module.exports = function(grunt) {
       remote: {
         files: [{
           expand: true,
-          cwd: 'sass/<%= pkg.name %>/',
+          cwd: 'sass/<%= config.siteName %>/',
           src: ['*.scss'],
           dest: 'asset/',
           ext: '.css'
@@ -53,11 +53,11 @@ module.exports = function(grunt) {
           separator: ';'
         },
         src: [
-          'js/<%= pkg.name %>/*.js',
-          'js/<%= pkg.name %>/vendor/*.js',
+          'js/<%= config.siteName %>/*.js',
+          'js/<%= config.siteName %>/vendor/*.js',
           'js/*.js',
-          '!js/<%= pkg.name %>/jquery.js',
-          '!js/<%= pkg.name %>/modernizr.js',
+          '!js/<%= config.siteName %>/jquery.js',
+          '!js/<%= config.siteName %>/modernizr.js',
         ],
         dest: 'asset/main.js'
       },
@@ -66,11 +66,11 @@ module.exports = function(grunt) {
           separator: ';'
         },
         src: [
-          'js/<%= pkg.name %>/admin/*.js',
-          'js/<%= pkg.name %>/admin/vendor/*.js',
+          'js/<%= config.siteName %>/admin/*.js',
+          'js/<%= config.siteName %>/admin/vendor/*.js',
           'js/*.js',
-          '!js/<%= pkg.name %>/jquery.js',
-          '!js/<%= pkg.name %>/modernizr.js',
+          '!js/<%= config.siteName %>/jquery.js',
+          '!js/<%= config.siteName %>/modernizr.js',
         ],
         dest: 'asset/admin-main.js'
       }

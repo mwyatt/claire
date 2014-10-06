@@ -19,7 +19,7 @@
 
 <?php if ($isFilled): ?>
 	
-		<span class="admin-button-primary js-form-button-submit js-form-button-fixture-delete">Delete</span>
+		<span class="admin-button-primary-delete js-form-button-submit js-form-button-fixture-delete">Delete Fixture</span>
 
 <?php endif ?>
 <?php if ($divisions): ?>

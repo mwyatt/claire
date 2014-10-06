@@ -95,3 +95,11 @@
     font-size: 3em;
     margin: 0 1em;
 }
+
+.admin-button-primary-delete {
+    float: right;
+    @extend .a;
+    cursor: pointer;
+    top: -54px;
+    position: relative;
+}
