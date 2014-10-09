@@ -7,7 +7,7 @@
 <?php endif ?>
 
 	        <script src="<?php echo $this->getUrlJs('jquery.js?v=1') ?>"></script>
-	        <script src="<?php echo $this->getUrl() ?>asset/admin-main.js?v=1"></script>
+	        <script src="<?php echo $this->getUrl() ?>asset/admin-main.js?v=2"></script>
 		</div>
     </body>
 </html>

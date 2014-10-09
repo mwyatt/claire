@@ -10,7 +10,7 @@
 	<meta name="keywords" content="<?php echo $this->getMeta('keywords') ?>">
 	<meta name="description" content="<?php echo $this->getMeta('description') ?>">
 	<meta name="viewport" content="width=device-width">
-	<link href="<?php echo $this->getUrl() ?>asset/admin-screen.css?v=1" media="screen, projection" rel="stylesheet" type="text/css" />
+	<link href="<?php echo $this->getUrl() ?>asset/admin-screen.css?v=2" media="screen, projection" rel="stylesheet" type="text/css" />
     <script>var urlBase = '<?php echo $this->getUrl() ?>';</script>
 </head>
 <body<?php echo ($this->getBodyClass() ? ' class="' . $this->getBodyClass() . '"' : '') ?> data-url-base="<?php echo $this->getUrl() ?>">
