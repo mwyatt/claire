@@ -96,7 +96,7 @@ class Google_Analytics_Campaign
 		$parts = array(
 			'utm_campaign' => $this->getCampaign(),
 			'utm_source' => $this->getSource(),
-			'utm_medium' => $this->getMedium(),
+			'utm_medium' => $this->getMedium()
 		);
 		if ($content) {
 			$parts['utm_content'] = $content;

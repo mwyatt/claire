@@ -83,6 +83,23 @@ class Helper
 
 
 	/**
+	 * needs testing, is it good?
+	 * @param  string $slug 
+	 * @return string       foo-bar
+	 */
+	public function slugify($slug)
+	{
+	    $slug = preg_replace('/\xE3\x80\x80/', ' ', $slug);
+	    $slug = str_replace('-', ' ', $slug);
+	    $slug = preg_replace('#[:\#\*"@+=;!><&\.%()\]\/\'\\\\|\[]#', "\x20", $slug);
+	    $slug = str_replace('?', '', $slug);
+	    $slug = trim(mb_strtolower($slug, 'UTF-8'));
+	    $slug = preg_replace('#\x20+#', '-', $slug);
+	    return $slug;
+	}
+
+
+	/**
 	 * takes 1 dimensional array and converts to an object
 	 * @param  array $array 
 	 * @return object        
