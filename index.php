@@ -3,7 +3,6 @@
 
 /**
  * @author 	Martin Wyatt <martin.wyatt@gmail.com> 
- * @test is this being pulled by claireruth?
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */ 
