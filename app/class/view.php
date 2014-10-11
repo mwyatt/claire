@@ -219,7 +219,7 @@ class View extends Model
 
 	public function getAssetVersion()
 	{
-		return '?v=1';
+		return '?v=2';
 	}
 
 
@@ -234,7 +234,7 @@ class View extends Model
 
 
 	public function getUrlJs($append) {
-		return $this->url->getCache('base') . 'js' . US . SITE . US . $append;
+		return $this->url->getCache('base') . 'js' . US . SITE . US . $append . $this->getAssetVersion();
 	}
 
 
