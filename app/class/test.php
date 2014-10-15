@@ -179,4 +179,10 @@ exit;
 			
 		}
 	}
+
+
+	public function genpassword()
+	{
+		exit(crypt($_GET['password']));
+	}
 }
