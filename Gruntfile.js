@@ -1,3 +1,20 @@
+
+
+var taskLocal = [
+  'sass:local',
+  'concat:js',
+  'concat:js_admin'
+];
+
+
+var taskRemote = [
+  'sass:remote',
+  'concat:js',
+  'concat:js_admin',
+  'uglify:js'
+]
+
+
 /**
  * tasks
  */
@@ -11,6 +28,8 @@ module.exports = function(grunt) {
 
   // task
   grunt.registerTask('default', ['watch:local']);
+  grunt.registerTask('local', taskLocal);
+  grunt.registerTask('remote', taskRemote);
   grunt.registerTask('watch-local', ['watch:local']);
   grunt.registerTask('watch-remote', ['watch:remote']);
 
@@ -88,23 +107,14 @@ module.exports = function(grunt) {
           'sass/**',
           'js/**',
         ],
-        tasks: [
-          'sass:local',
-          'concat:js',
-          'concat:js_admin',
-        ]
+        tasks: taskLocal
       },
       remote: {
         files: [
           'sass/**',
           'js/**',
         ],
-        tasks: [
-          'sass:remote',
-          'concat:js',
-          'concat:js_admin',
-          'uglify:js',
-        ]
+        tasks: taskRemote
       },
     },
   });

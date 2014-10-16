@@ -35,7 +35,7 @@ class Model_Content extends Model
 	);
 
 
-	public function readName($config)
+	public function readId($config)
 	{
 /*
 'where' => array(
@@ -52,12 +52,9 @@ class Model_Content extends Model
 		// $config['dataToBind']
 
 		// 1. query
-		$sth = $this->database->dbh->prepare("	
-			select
-				id,
-				rows,
-				static
-			from content
+		$sth = $this->database->dbh->prepare("
+			select $this->getSqlFields()
+			from $this->getTableName()
             where
             	content.status = 'visible'
             	and content.type = :type

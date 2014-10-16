@@ -13,7 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link href="<?php echo $this->getUrl() ?>asset/screen.css<?php echo $this->getAssetVersion() ?>" media="screen, projection" rel="stylesheet" type="text/css" />
     <link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800" rel="stylesheet" type="text/css">
-    <script src="<?php echo $this->getUrlJs('modernizr.js?v=1') ?>"></script>
+    <script src="<?php echo $this->getUrlJs('modernizr.js') ?>"></script>
     <script>var urlBase = '<?php echo $this->getUrl() ?>';</script>
     
 <?php include($this->pathView('header/_google-analytics')) ?>

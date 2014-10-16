@@ -141,13 +141,16 @@ class Controller_Admin_Tennis_Fixture extends Controller_Admin
 		// player
 		$modelTennisPlayer = new model_tennis_Player($this);
 		if ($isFilled) {
-			$modelTennisPlayer->read(array(
-				'where' => array('team_id' => $modelTennisTeam->getDataProperty('id'))
-			));
+			$modelTennisPlayer
+				->read(array(
+					'where' => array('team_id' => $modelTennisTeam->getDataProperty('id'))
+				))
+				->orderByPropertyIntAsc('rank');
 		} else {
-			$modelTennisPlayer->read();
+			$modelTennisPlayer
+				->read()
+				->orderByPropertyStringDesc('name_last');
 		}
-		$modelTennisPlayer->orderByPropertyIntAsc('rank');
 		$modelTennisPlayer->setData(array_values($modelTennisPlayer->getData()));
 
 		// template

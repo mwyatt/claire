@@ -219,7 +219,7 @@ class View extends Model
 
 	public function getAssetVersion()
 	{
-		return '?v=9';
+		return '?v=2';
 	}
 
 
@@ -234,7 +234,7 @@ class View extends Model
 
 
 	public function getUrlJs($append) {
-		return $this->url->getCache('base') . 'js' . US . SITE . US . $append;
+		return $this->url->getCache('base') . 'js' . US . SITE . US . $append . $this->getAssetVersion();
 	}
 
 
@@ -307,18 +307,21 @@ class View extends Model
 	 * @param array $metas 
 	 */
 	public function setMeta($metas) {		
+
+		// pass through and set the keys
 		foreach ($metas as $key => $meta) {
+
+			// append title of site to the title if one is passed
 			$titleAppend = '';
 			if ($key == 'title') {
 				$titleAppend = ' | ' . $this->config->getOption('meta_title');
 			}
-			if (array_key_exists($key, $this->meta)) {
-				if (! $this->meta[$key]) {
-					$this->meta[$key] = $metas[$key] . $titleAppend;
-				}
-			} else {
-				$this->meta[$key] = $metas[$key] . $titleAppend;
-			}
+			$this->meta[$key] = $metas[$key] . $titleAppend;
+		}
+
+		// empty title means just fall back to default title
+		if (empty($this->meta['title'])) {
+			$this->meta['title'] = $this->config->getOption('meta_title');
 		}
 		return $this;
 	}

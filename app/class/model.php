@@ -521,6 +521,12 @@ class Model extends Data
 	}
 
 
+	public function getTableName()
+	{
+		return $this->getIdentity();
+	}
+
+
 	/**
 	 * sets the identity property manually
 	 * or get the class name and turn_into_this format
