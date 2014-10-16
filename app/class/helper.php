@@ -62,28 +62,15 @@ class Helper
 	 * @param  string $value 
 	 * @return string        one you can be friends with
 	 */
-	public function urlFriendly($value = null)
+	public function urlFriendly($value = '')
 	{
-	
-		// everything to lower and no spaces begin or end
-		$value = strtolower(trim($value));
-		
-		// adding - for spaces and union characters
-		$find = array(' ', '&', '\r\n', '\n', '+',',');
-		$value = str_replace ($find, '-', $value);
-		
-		//delete and replace rest of special chars
-		$find = array('/[^a-z0-9\-<>]/', '/[\-]+/', '/<[^>]*>/');
-		$repl = array('', '-', '');
-		$value = preg_replace ($find, $repl, $value);
-		
-		//return the friendly str
-		return $value; 	
+		return $this->slugify($value);
 	}
 
 
 	/**
-	 * needs testing, is it good?
+	 * better than urlfriendly because & becomes 'amp' then when 
+	 * making urls it can be translated?
 	 * @param  string $slug 
 	 * @return string       foo-bar
 	 */
