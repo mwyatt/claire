@@ -4,11 +4,12 @@
 /**
  * build menu using passed data structure
  * can be outputted as html
+ * utilises some attributes from model class
  * @author Martin Wyatt <martin.wyatt@gmail.com> 
  * @version 0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Menu
+class Menu extends Model
 {
 
 
@@ -16,31 +17,7 @@ class Menu
      * modifies the class names to customise the menu
      * @var string
      */
-    public $label = '';
-
-
-    /**
-     * generic storage
-     * @var string
-     */
-    public $data;
-
-
-    /**
-     * @return string 
-     */
-    public function getData() {
-        return $this->data;
-    }
-    
-    
-    /**
-     * @param string $data 
-     */
-    public function setData($data) {
-        $this->data = $data;
-        return $this;
-    }
+    public $label = 'primary';
 
 
     /**

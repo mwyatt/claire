@@ -171,8 +171,7 @@ h6 {
     border-bottom-style: solid;
 }
 
-.page-heading-first /* fraud! */,
-.page-primary-title /* use this one */ {
+.page-primary-title {
     margin-top: 0;
     @extend .h1;
 }
