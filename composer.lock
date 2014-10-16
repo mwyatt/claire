@@ -103,24 +103,16 @@
                 "session",
                 "sessions"
             ],
-            "time": "2014-05-31 00:00:00"
+            "time": "2014-05-31 17:16:27"
         }
     ],
-    "packages-dev": [
-
-    ],
-    "aliases": [
-
-    ],
+    "packages-dev": [],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "aura/session": 20
     },
     "prefer-stable": false,
-    "platform": [
-
-    ],
-    "platform-dev": [
-
-    ]
+    "platform": [],
+    "platform-dev": []
 }

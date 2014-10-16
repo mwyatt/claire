@@ -37,6 +37,12 @@ $system->setDatabase($database);
 
 
 /**
+ * absolute url
+ */
+define('URL_ABSOLUTE', $system->url->getCache('base'));
+
+
+/**
  * build options and set into config
  * @var model_options
  */

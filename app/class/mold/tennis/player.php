@@ -178,4 +178,15 @@ class Mold_Tennis_Player extends Mold
 	    $this->etta_license_number = $ettaLicenseNumber;
 	    return $this;
 	}
+
+
+	/**
+	 * untested example of how the url could be built using a constant
+	 * registry pattern perhaps?
+	 * @return string url
+	 */
+	public function getUrl()
+	{
+		return implode('/', array(URL_ABSOLUTE, 'player', $this->slugify($this->getNameFull())));
+	}
 }
