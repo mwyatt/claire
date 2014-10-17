@@ -19,11 +19,11 @@
         background-color: $color-secondary-1-0;
     }
 
-    @media only screen and (min-width: 400px) {
+    @media all and (min-width: 400px) {
         float: left;
     }
 
-    @media only screen and (min-width: 400px) and (max-width: 699px) {
+    @media all and (min-width: 400px) and (max-width: 699px) {
         width: 47%;
         margin-right: 2%;
         height: 17em;
@@ -34,7 +34,7 @@
         }
     }
 
-    @media only screen and (min-width: 700px) {
+    @media all and (min-width: 700px) {
         width: 30%;
         margin-right: 5%;
         height: 17em;
@@ -46,7 +46,7 @@
         }
     }
 
-    @media only screen and (min-width: 900px) {
+    @media all and (min-width: 900px) {
         height: 14em;
     }
 }

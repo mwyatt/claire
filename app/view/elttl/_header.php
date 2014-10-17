@@ -6,14 +6,14 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title><?php echo $this->getMeta('title') ?></title>   
+    <title><?php echo $this->getMeta('title') ?></title>
     <meta name="keywords" content="<?php echo $this->getMeta('keywords') ?>">
     <meta name="description" content="<?php echo $this->getMeta('description') ?>">
     <link rel="icon" type="image/png" href="<?php echo $this->getUrlMedia('favicon.png') ?>?rev=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link href="<?php echo $this->getUrl() ?>asset/screen.css<?php echo $this->getAssetVersion() ?>" media="screen, projection" rel="stylesheet" type="text/css" />
+    <link href="<?php echo $this->getUrlAsset('asset/screen.css') ?>" media="screen, projection, print" rel="stylesheet" type="text/css" />
     <link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800" rel="stylesheet" type="text/css">
-    <script src="<?php echo $this->getUrlJs('modernizr.js') ?>"></script>
+    <script src="<?php echo $this->getUrlAsset('vendor/bower/modernizr/modernizr.js') ?>"></script>
     <script>var urlBase = '<?php echo $this->getUrl() ?>';</script>
     
 <?php include($this->pathView('header/_google-analytics')) ?>

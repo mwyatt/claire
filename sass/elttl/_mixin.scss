@@ -5,7 +5,7 @@
  * can be defined then refered to in a friendly way
  */
 @mixin breakpoint($point) {
-    @media only screen and (min-width: $point + px) { @content; }
+    @media all and (min-width: $point + px) { @content; }
 }
 
 
@@ -64,11 +64,11 @@
  */
 @mixin gridSample() {
 
-    @media only screen and (min-width: 600px) {
+    @media all and (min-width: 600px) {
         margin-bottom: $gridColMargin;
     }
     
-    @media only screen and (min-width: 600px) and (max-width: 859px) {
+    @media all and (min-width: 600px) and (max-width: 859px) {
         @include col(6);
 
         &:nth-child(2n) {
@@ -76,7 +76,7 @@
         }
     }
     
-    @media only screen and (min-width: 860px) and (max-width: 1199px) {
+    @media all and (min-width: 860px) and (max-width: 1199px) {
         @include col(4);
 
         &:nth-child(3n) {
@@ -84,7 +84,7 @@
         }
     }
     
-    @media only screen and (min-width: 1200px) {
+    @media all and (min-width: 1200px) {
         @include col(3);
 
         &:nth-child(4n) {
@@ -100,7 +100,7 @@
 @mixin sitePadding() {
     padding: 5%;
 
-    @media only screen and (min-width: 1200px) {
+    @media all and (min-width: 1200px) {
         padding: 60px;
     }
 }
@@ -118,5 +118,13 @@
     &:hover,
     &:focus { 
         opacity: .8;
+    }
+}
+
+
+@mixin dont-print() {
+
+    @media print {
+        display: none !important;
     }
 }

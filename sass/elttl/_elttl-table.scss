@@ -24,15 +24,15 @@
     padding: 0.4em;
     border: 1px solid rgba(0, 0, 0, 0.03);
     
-    @media only screen and (min-width: 400px) {
+    @media all and (min-width: 400px) {
 		padding: .6em;
 	}
 
-    @media only screen and (min-width: 600px) {
+    @media all and (min-width: 600px) {
 		padding: 1em;
 	}
 
-    @media only screen and (min-width: 800px) {
+    @media all and (min-width: 800px) {
 		padding: 1.5em;
 	}
 
@@ -67,14 +67,14 @@
 		display: table-cell;
 	}
 
-    @media only screen and (min-width: 400px) {
+    @media all and (min-width: 400px) {
 
 		&.is-played {
 			display: table-cell;
 		}
 	}
 
-    @media only screen and (min-width: 600px) {
+    @media all and (min-width: 600px) {
 
 		&.is-rank,
 		&.is-won {
@@ -82,7 +82,7 @@
 		}
 	}
 
-    @media only screen and (min-width: 700px) {
+    @media all and (min-width: 700px) {
 
 		&.is-loss {
 			display: table-cell;
@@ -93,7 +93,7 @@
 		}
 	}
 
-    @media only screen and (min-width: 800px) {
+    @media all and (min-width: 800px) {
 
 		&.is-team,
 		&.is-draw {
@@ -119,7 +119,7 @@
     margin: 0 0 0.5em;
     clear: both;
 
-    @media only screen and (min-width: 800px) {
+    @media all and (min-width: 800px) {
     	clear: none;
 	    margin: 2px 0 0 0.8em;
 	    float: right;

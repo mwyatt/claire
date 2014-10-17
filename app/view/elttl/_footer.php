@@ -19,8 +19,9 @@
 			<a href="http://tabletennisengland.co.uk/" target="_blank" class="logo-table-tennis-england"><img class="logo-table-tennis-england-image" src="<?php echo $this->getUrlMedia('logo-table-tennis-england.gif') ?>" alt="Table Tennis England Logo"></a>
 		</div>
 	</footer>
-    <script src="<?php echo $this->getUrlJs('jquery.js') ?><?php echo $this->getAssetVersion() ?>"></script>
-    <script src="<?php echo $this->getUrl() ?>vendor/bower/magnific-popup/dist/jquery.magnific-popup.min.js<?php echo $this->getAssetVersion() ?>"></script>
-    <script src="<?php echo $this->getUrl() ?>asset/main.js<?php echo $this->getAssetVersion() ?>"></script>
+    <script src="<?php echo $this->getUrlAsset('vendor/bower/jquery/dist/jquery.min.js') ?>"></script>
+    <script src="<?php echo $this->getUrlAsset('vendor/bower/owlcarousel/owl-carousel/owl.carousel.min.js') ?>"></script>
+    <script src="<?php echo $this->getUrlAsset('vendor/bower/magnific-popup/dist/jquery.magnific-popup.min.js') ?>"></script>
+    <script src="<?php echo $this->getUrlAsset('asset/main.js') ?>"></script>
 </body>
 </html>

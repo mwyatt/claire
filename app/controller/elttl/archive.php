@@ -34,7 +34,7 @@ class Controller_Archive extends Controller_Index
 		if (! $year = $modelTennisYear->getDataFirst()) {
 			$this->route('base');
 		}
-		
+
 		// template
 		$this->view
 			->setMeta(array(		
@@ -55,7 +55,7 @@ class Controller_Archive extends Controller_Index
 		// template
 		$this->view
 			->setMeta(array(		
-				'title' => 'Result Archive'
+				'title' => 'Results Archive'
 			))
 			->setObject('years', $modelTennisYear->getData())
 			->getTemplate('year');

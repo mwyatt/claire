@@ -250,6 +250,9 @@ class Controller_Result extends Controller_Archive
 			}
 		}
 		
+		// fixture summary table
+		$this->readFixtureSummaryTable();
+
 		// single division view
 		$this->view
 			->setMeta(array(		
@@ -257,5 +260,57 @@ class Controller_Result extends Controller_Archive
 			))
 			->setObject('division', $division)
 			->getTemplate('division/overview');
+	}
+
+
+	public function readFixtureSummaryTable()
+	{
+
+		// resource
+		$division = $this->getDivision();
+
+		// team
+		$className = $this->getArchiveClassName('model_tennis_team');
+		$modelTeam = new $className($this);
+		$teams = $modelTeam
+			->read($this->getArchiveWhere(array(
+				'where' => array(
+					'division_id' => $division->getId()
+				)
+			)))
+			->keyByProperty('id')
+			->getData();
+
+		// fixture
+		$className = $this->getArchiveClassName('model_tennis_fixture');
+		$modelFixture = new $className($this);
+		$modelFixture->read($this->getArchiveWhere(array(
+			'where' => array('team_id_left' => $modelTeam->getDataProperty('id'))
+		)));
+		$fixtures = array();
+
+		// weed out only fulfilled fixtures
+		foreach ($modelFixture->getData() as $fixture) {
+			if ($fixture->getTimeFulfilled()) {
+				$fixtures[] = $fixture;
+			}
+		}
+		$modelFixture->setData($fixtures);
+
+		// fixture results
+		$className = $this->getArchiveClassName('model_tennis_encounter');
+		$modelTennisEncounter = new $className($this);
+		$modelTennisEncounter->read($this->getArchiveWhere(array(
+			'where' => array('fixture_id' => $modelFixture->getDataProperty('id'))
+		)));
+		$modelTennisEncounter->convertToFixtureResults();
+		$fixtureResults = $modelTennisEncounter->getData();
+
+		// template
+		$this
+			->view
+			->setObject('fixtureResults', $fixtureResults)
+			->setObject('fixtures', $fixtures)
+			->setObject('teams', $teams);
 	}
 }

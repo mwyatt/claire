@@ -6,11 +6,11 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<title><?php //echo $this->getMeta('title') ?></title>	
+	<title><?php echo $this->getMeta('title') ?></title>	
 	<meta name="keywords" content="<?php echo $this->getMeta('keywords') ?>">
 	<meta name="description" content="<?php echo $this->getMeta('description') ?>">
 	<meta name="viewport" content="width=device-width">
-	<link href="<?php echo $this->getUrl() ?>asset/admin-screen.css?v=2" media="screen, projection" rel="stylesheet" type="text/css" />
+    <link href="<?php echo $this->getUrlAsset('asset/admin-screen.css') ?>" media="screen, projection" rel="stylesheet" type="text/css" />
     <script>var urlBase = '<?php echo $this->getUrl() ?>';</script>
 </head>
 <body<?php echo ($this->getBodyClass() ? ' class="' . $this->getBodyClass() . '"' : '') ?> data-url-base="<?php echo $this->getUrl() ?>">

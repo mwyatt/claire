@@ -13,8 +13,46 @@
 	display: block;
 	text-align: center;
 
-	@media only screen and (min-width: 400px) {
+	@media all and (min-width: 400px) {
 		float: left;
 		margin-right: 1em;
 	}
 }
+
+.division-overview-fixture-table {
+
+	@media all and (max-width: 749px) {
+	    display: none;
+	}
+}
+
+.division-overview-fixture-table .fixture {
+    font-size: 11px;
+
+	.fixture-team-right,
+	.fixture-team-left {
+	    display: none;
+	}
+}
+
+.division-overview-fixture-table .elttl-table-cell {
+	padding: 5px;
+	text-align: center;
+
+	&.is-blank {
+		opacity: .5;
+	}
+}
+
+.division-overview-fixture-table .elttl-table-heading {
+	@extend %text-ellipsis;
+	text-align: left;
+}
+
+.division-overview-fixture-table .elttl-table-heading a {
+	font-size: 11px;
+	font-weight: 400;
+	border: 0;
+}
+
+

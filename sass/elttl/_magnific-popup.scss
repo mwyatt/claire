@@ -15,11 +15,11 @@
     padding-top: 1em;
     max-width: 40em;
 
-    @media only screen and (min-width: 600px) {
+    @media all and (min-width: 600px) {
         padding: 5%;
     }
 
-    @media only screen and (min-width: 712px) {
+    @media all and (min-width: 712px) {
         padding: 35px;
     }
 }

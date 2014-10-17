@@ -5,7 +5,7 @@
 
 <?php if ($meritStats): ?>
 
-	<p class="p">This is the merit table for the <?php echo $division->getName() ?> division.</p>
+	<p class="p dont-print">This is the merit table for the <?php echo $division->getName() ?> division.</p>
 
 	<?php include($this->pathView('division/_menu-tables')) ?>
 	

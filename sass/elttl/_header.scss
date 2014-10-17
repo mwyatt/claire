@@ -178,6 +178,7 @@ svg {
 }
 
 .menu-primary {
+    @include dont-print;
     float: right;
 
     @include breakpoint(600) {
@@ -188,7 +189,7 @@ svg {
 .menu-primary-level-1-link {
     display: none;
 
-    @media only screen and (min-width: 450px) {
+    @media all and (min-width: 450px) {
         @extend .a;
         display: block;
         float: right;
@@ -222,7 +223,7 @@ svg {
     display: block;
     border-left: 1px solid $color-gray-10;
 
-    @media only screen and (min-width: 450px) {
+    @media all and (min-width: 450px) {
         display: none;
     }
 }
@@ -238,7 +239,7 @@ svg {
     right: 0;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 
-    @media only screen and (min-width: 440px) {
+    @media all and (min-width: 440px) {
         display: none;
     }
 }
@@ -276,7 +277,7 @@ svg {
 
 .menu-primary-level-1 {
 
-    @media only screen and (min-width: 450px) {
+    @media all and (min-width: 450px) {
         position: relative;
     }
 }

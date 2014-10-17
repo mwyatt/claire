@@ -47,15 +47,16 @@ class View extends Model
 
 
 	/**
-	 * if any meta has been missed, merge with the defaults
+	 * needed for meta defaults
+	 * @param array $system 
 	 */
-	public function setMetaDefaults()
-	{
-		$this->setMeta(array(
-			'title' => $this->config->getOption('meta_title'),
-			'keywords' => $this->config->getOption('meta_keywords'),
-			'description' => $this->config->getOption('meta_description')
-		));
+	public function __construct($system = false) {
+
+		// construct in default fashion
+		parent::__construct($system);
+
+		// meta defaults first, then overriden when setting up template
+		$this->setMetaDefaults();
 	}
 
 
@@ -95,7 +96,6 @@ class View extends Model
 		if (! file_exists($path)) {
 			return;
 		}
-		$this->setMetaDefaults();
 		$this->setObject('options', $this->config->getoptions());
 
 		// push variables into data variable
@@ -217,9 +217,20 @@ class View extends Model
 	}
 
 
+	/**
+	 * returns an absolute url of the asset complete with asset version
+	 * @param  [type] $url [description]
+	 * @return [type]      [description]
+	 */
+	public function getUrlAsset($url)
+	{
+		return $this->url->getCache('base') . $url . $this->getAssetVersion();
+	}
+
+
 	public function getAssetVersion()
 	{
-		return '?v=2';
+		return '?v=' . ASSET_VERSION;
 	}
 
 
@@ -300,6 +311,20 @@ class View extends Model
 
 
 	/**
+	 * if any meta has been missed, merge with the defaults
+	 */
+	public function setMetaDefaults()
+	{
+		$this->setMeta(array(
+			'title' => $this->config->getOption('meta_title'),
+			'keywords' => $this->config->getOption('meta_keywords'),
+			'description' => $this->config->getOption('meta_description')
+		));
+		return $this;
+	}
+	
+
+	/**
 	 * sets the meta for a common page
 	 * title
 	 * description
@@ -308,20 +333,22 @@ class View extends Model
 	 */
 	public function setMeta($metas) {		
 
-		// pass through and set the keys
+		// resource for appending
+		$append = '';
+
+		// site title which can be added on to make the page title
+		// more interesting
+		$siteTitle = $this->config->getOption('meta_title');
+
+		// pass through and set the keys where required
+		// keys are already set on construct
 		foreach ($metas as $key => $meta) {
 
 			// append title of site to the title if one is passed
-			$titleAppend = '';
-			if ($key == 'title') {
-				$titleAppend = ' | ' . $this->config->getOption('meta_title');
+			if ($key == 'title' && $meta != $siteTitle) {
+				$append = ' | ' . $siteTitle;
 			}
-			$this->meta[$key] = $metas[$key] . $titleAppend;
-		}
-
-		// empty title means just fall back to default title
-		if (empty($this->meta['title'])) {
-			$this->meta['title'] = $this->config->getOption('meta_title');
+			$this->meta[$key] = $metas[$key] . $append;
 		}
 		return $this;
 	}
@@ -333,9 +360,9 @@ class View extends Model
 	 * @return bool or string
 	 */
 	public function getMeta($key) {
-		if (array_key_exists($key, $this->meta))
+		if (array_key_exists($key, $this->meta)) {
 			return $this->meta[$key];
-		return false;
+		}
 	}
 
 

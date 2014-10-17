@@ -1,6 +1,6 @@
 <?php $teamLeft = $teams[$fixture->getTeamIdLeft()] ?>
 <?php $teamRight = $teams[$fixture->getTeamIdRight()] ?>
-<?php if (array_key_exists($fixture->getId(), $fixtureResults)): ?>
+<?php if (isset($fixtureResults[$fixture->getId()])): ?>
 	<?php $fixtureResult = $fixtureResults[$fixture->getId()] ?>
 	<?php $scoreLeft = $fixtureResult->score_left ?>
 	<?php $scoreRight = $fixtureResult->score_right ?>

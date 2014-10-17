@@ -174,3 +174,7 @@ label.top {
     @extend .block-margins;
     @extend .clearfix;
 }
+
+.dont-print {
+    @include dont-print;
+}

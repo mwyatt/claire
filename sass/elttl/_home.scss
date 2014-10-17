@@ -14,14 +14,14 @@
 
 .banner-primary {
 
-	@media only screen and (min-width: 700px) {
+	@media all and (min-width: 700px) {
 		@include col(6);
 	}
 }
 
 .home-press {
 	
-	@media only screen and (min-width: 700px) {
+	@media all and (min-width: 700px) {
         @include col(6);
         @include last;
 	}
@@ -71,18 +71,18 @@
     background-color: #FFF7E0;
     border: 1px solid #FAE8B4;
 
-    @media only screen and (max-width: 399px) {
+    @media all and (max-width: 399px) {
 
         &:first-child {
             margin-top: 0;
         }
     }
 
-    @media only screen and (min-width: 400px) {
+    @media all and (min-width: 400px) {
         float: left;
     }
 
-    @media only screen and (min-width: 400px) and (max-width: 949px) {
+    @media all and (min-width: 400px) and (max-width: 949px) {
         width: 47%;
         margin: 3% 0;
         margin-right: 3%;
@@ -93,7 +93,7 @@
         }
     }
 
-    @media only screen and (min-width: 950px) {
+    @media all and (min-width: 950px) {
         float: left;
         margin-left: 4%;
         width: 22%;

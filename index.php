@@ -65,6 +65,15 @@ define('SITE', $config->siteName);
 
 
 /**
+ * asset version for css / js
+ * battle google pagespeed!
+ */
+if (isset($config->assetVersion)) {
+	define('ASSET_VERSION', $config->assetVersion);
+}
+
+
+/**
  * model core dir
  */
 define('PATH_CONTROLLER', PATH_APP . 'controller' . DS . SITE . DS);

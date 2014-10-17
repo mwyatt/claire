@@ -61,11 +61,11 @@ html.lt-ie9 {
     padding-top: 4.7em;
     padding-bottom: 60px;
 
-    @media only screen and (min-width: 450px) {
+    @media all and (min-width: 450px) {
         padding-top: 5.7em;
     }
 
-    @media only screen and (min-width: 650px) {
+    @media all and (min-width: 650px) {
         padding-left: 5%;
         padding-right: 5%;
     }
@@ -99,7 +99,7 @@ html.lt-ie9 {
 .container-site-inner {
     background-color: $color-white;
 
-    @media only screen and (min-width: 1500px) {
+    @media all and (min-width: 1500px) {
         background-image: image-url('bg.gif');
         background-position: center top;
         background-repeat: no-repeat;
@@ -119,18 +119,20 @@ html.lt-ie9 {
 
 .menu-tables-option {
     @include clearfix;
+    @include dont-print;
     @include button('primary');
     @extend .block-margins;
     display: block;
     text-align: center;
 
-    @media only screen and (min-width: 500px) {
+    @media all and (min-width: 500px) {
         float: left;
         margin-right: 1em;
     }
 }
 
 .header-sticker-beta {
+    @include dont-print;
     float: left;
     text-transform: uppercase;
     font-size: 0.7em;
@@ -140,7 +142,8 @@ html.lt-ie9 {
     padding: 0.3em;
     border-radius: 2px;
     position: relative;
-    top: 1em;
+    top: 16px;
+    left: 6px;
 
     &:hover {
         background-color: $color-gray-30;
