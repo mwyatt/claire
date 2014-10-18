@@ -13,6 +13,15 @@ class Autoloader {
 
 
 	/**
+	 * new possible
+	 * find site classes first
+	 * fall back to core
+	 * 		app/site/SITE/class/foo.php
+	 * 		app/site/SITE/class/model/foo.php
+	 * 		app/site/SITE/class/service/foo.php
+	 * 		app/class/foo.php
+	 * 		app/class/model/foo.php
+	 * 		app/class/service/foo.php
 	 * possible
 	 * 		app/class/foo.php
 	 * 		app/model/foo.php

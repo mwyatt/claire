@@ -1,5 +1,6 @@
 error.txt
 config.json
+config.php
 asset/
 vendor/
 node_modules/
