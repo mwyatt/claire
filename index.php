@@ -60,16 +60,16 @@ define('PATH_MODEL', PATH_APP . 'model' . DS);
  * site
  * get from package.json
  */
-$config = json_decode(file_get_contents(BASE_PATH . 'config.json'));
-define('SITE', $config->siteName);
+$config = include BASE_PATH . 'config.php';
+define('SITE', $config['siteName']);
 
 
 /**
  * asset version for css / js
  * battle google pagespeed!
  */
-if (isset($config->assetVersion)) {
-	define('ASSET_VERSION', $config->assetVersion);
+if (isset($config['assetVersion'])) {
+	define('ASSET_VERSION', $config['assetVersion']);
 }
 
 
