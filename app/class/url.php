@@ -168,10 +168,18 @@ class Url extends Helper
 		$script = array_filter($script); 
 		$script = array_values($script);
 
-		// hostname/script/ <- install directory
-		return $this->host = $host . US . implode(US, $script) . US;
-	}
+		// server side for some reason adding trailing slash
+		// this adds double and then strips out
+		$host = $host . US . implode(US, $script) . US;
+		if (strpos($host, '//')) {
+			$host = str_replace('//', '/', $host);
+		}
 
+		// hostname/script/ <- install directory
+		$this->host = $host;
+		return $this;
+	}
+	
 
 	/**
 	 * http(s)://
