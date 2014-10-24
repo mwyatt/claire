@@ -126,4 +126,26 @@ class Helper
 		// always returns a camelcase
 		return lcfirst($newValue);
 	}
+	
+
+	/**
+	 * accepts html and returns minified (no whitespace)
+	 * @param  string $html html
+	 * @return string         
+	 */
+	static function htmlSanitise($html = '')
+	{
+		$search = array(
+		    '/\>[^\S ]+/s',  // strip whitespaces after tags, except space
+		    '/[^\S ]+\</s',  // strip whitespaces before tags, except space
+		    '/(\s)+/s'       // shorten multiple whitespace sequences
+		);
+		$replace = array(
+		    '>',
+		    '<',
+		    '\\1'
+		);
+		$html = preg_replace($search, $replace, $html);
+		return $html;
+	}
 }

@@ -12,7 +12,7 @@ var taskRemote = [
   'concat:js',
   'concat:js_admin',
   'uglify:js'
-]
+];
 
 
 /**
