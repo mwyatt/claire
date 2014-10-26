@@ -61,6 +61,8 @@ module.exports = function(grunt) {
           ext: '.css'
         }],
         options: {
+          imagePath: '../media/<%= config.siteName %>',
+          loadPath: 'sass/',
           sourceComments: 'none',
           outputStyle: 'compressed'
         }
@@ -97,7 +99,7 @@ module.exports = function(grunt) {
     uglify: {
       js: {
         files: {
-          'asset/main.js': ['asset/main.min.js'],
+          'asset/main.js': ['asset/main.js'],
         }
       },
     },
