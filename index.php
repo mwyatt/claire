@@ -1,5 +1,6 @@
 <?php
 
+namespace \;
 
 /**
  * @author 	Martin Wyatt <martin.wyatt@gmail.com> 
