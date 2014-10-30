@@ -1,5 +1,6 @@
 <?php
 
+
 /**
  * Image
  * http://net.tutsplus.com/tutorials/php/image-resizing-made-easy-with-php/

@@ -1,5 +1,6 @@
 <?php
 
+
 /**
  * pulls information from the palette.scss and turns the information
  * into variables which can be used for templating

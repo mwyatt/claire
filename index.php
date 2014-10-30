@@ -1,6 +1,5 @@
 <?php
 
-namespace \;
 
 /**
  * @author 	Martin Wyatt <martin.wyatt@gmail.com> 
@@ -28,7 +27,13 @@ define('CS', '_');
 
 
 /**
- * ?
+ * common extension for classes
+ */
+define('EXT', '.php');
+
+
+/**
+ * possibly unused?
  */
 define('ENV', getenv('APP_ENV'));
 
@@ -40,67 +45,35 @@ define('BASE_PATH', (string) (__DIR__ . DS));
 
 
 /**
- * app core dir
+ * handy for file includes
  */
-define('PATH_APP', BASE_PATH . 'app' . DS);
+define('APP_PATH', BASE_PATH . 'app' . DS);
 
 
 /**
- * class core dir
+ * composer autoloader
  */
-define('PATH_CLASS', PATH_APP . 'class' . DS);
+include BASE_PATH . 'vendor' . DS . 'autoload' . EXT;
 
 
 /**
- * model core dir
+ * app configuration
  */
-define('PATH_MODEL', PATH_APP . 'model' . DS);
-
-
-/**
- * site
- * get from package.json
- */
-$config = include BASE_PATH . 'config.php';
-define('SITE', $config['siteName']);
-
-
-/**
- * asset version for css / js
- * battle google pagespeed!
- */
-if (isset($config['assetVersion'])) {
-	define('ASSET_VERSION', $config['assetVersion']);
+$config = include APP_PATH . 'config' . EXT;
+if (! isset($config['site'])) {
+	exit('please specify a site key');
 }
+define('SITE', $config['site']);
 
 
 /**
- * model core dir
+ * handy for file includes
  */
-define('PATH_CONTROLLER', PATH_APP . 'controller' . DS . SITE . DS);
-
+define('SITE_PATH', APP_PATH . 'site' . DS . SITE . DS);
 
 
 /**
- * view core dir
+ * boot
  */
-define('PATH_VIEW', PATH_APP . 'view' . DS . SITE . DS);
-
-
-/**
- * common extension for classes
- */
-define('EXT', '.php');
-
-
-/**
- * autoloader include and register function
- */
-require PATH_CLASS . 'autoloader' . EXT;
-spl_autoload_register(array('Autoloader', 'call'));
-
-
-/**
- * initialise app
- */
-require PATH_APP . 'initialise' . EXT;
+include APP_PATH . 'ini' . EXT;
+include APP_PATH . 'index' . EXT;

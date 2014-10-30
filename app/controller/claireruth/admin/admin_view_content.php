@@ -1,5 +1,6 @@
 <?php
 
+
 /**
  * functions here can be repeated for ease of use in various areas, ajax
  * normal control etc

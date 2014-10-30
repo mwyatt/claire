@@ -1,5 +1,6 @@
 <?php
 
+
 /**
  * will concern itself with large collections of objects and or arrays
  * these will be easily accessible by storing in files '-' delimiter

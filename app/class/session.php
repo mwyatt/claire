@@ -1,5 +1,8 @@
 <?php
 
+namespace OriginalAppName;
+
+
 /**
  * session object creates a layer between the $_SESSION variable to
  * help with management of it
@@ -13,7 +16,7 @@
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Session extends Cron
+class Session extends OriginalAppName\Cron
 {
 
 

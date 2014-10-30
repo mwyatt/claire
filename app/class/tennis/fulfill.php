@@ -372,7 +372,7 @@ class Tennis_Fulfill extends Data
 			'player',
 			'encounter'
 		);
-		if (! $this->arrayKeyExists($required, $_REQUEST)) {
+		if (! Helper::arrayKeyExists($required, $_REQUEST)) {
 			$this->session->set('feedback', 'Please fill all required fields');
 			return false;
 		}

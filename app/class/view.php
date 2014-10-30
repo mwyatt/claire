@@ -1,5 +1,6 @@
 <?php
 
+
 /**
  * @author Martin Wyatt <martin.wyatt@gmail.com> 
  * @version	0.1
@@ -163,7 +164,7 @@ class View extends Model
 	{
 		$convertedObjects = array();
 		foreach ($this->objects as $title => $object) {
-			$camelTitle = $this->delimiterToCamel($title);
+			$camelTitle = Helper::delimiterToCamel($title);
 
 			// array / variable
 			if (! is_object($object)) {

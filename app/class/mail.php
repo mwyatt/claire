@@ -1,5 +1,6 @@
 <?php
 
+
 /**
  * @author Martin Wyatt <martin.wyatt@gmail.com> 
  * @version	0.1
@@ -87,7 +88,7 @@ class Mail extends Config
 	{
 
 		// make more usable as object
-		$properties = $this->convertArrayToObject($properties);
+		$properties = Helper::convertArrayToObject($properties);
 
 		// core headers for mail
 		$this->setHeaders($properties);

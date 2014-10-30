@@ -1,5 +1,6 @@
 <?php
 
+
 /**
  * collection of allowed ajax requests
  * @todo expand so that admin are seperate, modular not methods

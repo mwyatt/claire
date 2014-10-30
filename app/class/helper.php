@@ -1,8 +1,11 @@
 <?php
 
+namespace OriginalAppName;
+
 
 /**
  * commonly used and helpful functions
+ * static because they should be
  * @author Martin Wyatt <martin.wyatt@gmail.com> 
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
@@ -17,7 +20,7 @@ class Helper
 	 * @param  array $array 
 	 * @return bool        
 	 */
-	public function arrayKeyExists($keys, $array)
+	public static function arrayKeyExists($keys, $array)
 	{
 		foreach ($keys as $key) {
 			if (array_key_exists($key, $array)) {
@@ -34,7 +37,7 @@ class Helper
 	 * @param  integer $length how big is the code?
 	 * @return string          
 	 */
-	public function getRandomString($length = 10) {
+	public static function getRandomString($length = 10) {
 	    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 	    $randomString = '';
 	    for ($i = 0; $i < $length; $i++) {
@@ -48,7 +51,7 @@ class Helper
 	 * performs explode() on a string with the given delimiter
 	 * and trims all whitespace for the elements
 	 */
-	public function explodeTrim($str, $delimiter = ',') { 
+	public static function explodeTrim($str, $delimiter = ',') { 
 	    if ( is_string($delimiter) ) { 
 	        $str = trim(preg_replace('|\\s*(?:' . preg_quote($delimiter) . ')\\s*|', $delimiter, $str)); 
 	        return explode($delimiter, $str); 
@@ -62,9 +65,9 @@ class Helper
 	 * @param  string $value 
 	 * @return string        one you can be friends with
 	 */
-	public function urlFriendly($value = '')
+	public static function urlFriendly($value = '')
 	{
-		return $this->slugify($value);
+		return Helper::slugify($value);
 	}
 
 
@@ -74,7 +77,7 @@ class Helper
 	 * @param  string $slug 
 	 * @return string       foo-bar
 	 */
-	public function slugify($slug)
+	public static function slugify($slug)
 	{
 	    $slug = preg_replace('/\xE3\x80\x80/', ' ', $slug);
 	    $slug = str_replace('-', ' ', $slug);
@@ -91,7 +94,7 @@ class Helper
 	 * @param  array $array 
 	 * @return object        
 	 */
-	public function convertArrayToObject($array)
+	public static function convertArrayToObject($array)
 	{
 		$object = new StdClass();
 		foreach ($array as $key => $value) {
@@ -107,7 +110,7 @@ class Helper
 	 * @param  string $value     
 	 * @return string            
 	 */	
-	public function delimiterToCamel($value, $delimiter = '_')
+	public static function delimiterToCamel($value, $delimiter = '_')
 	{
 
 		// return passed value if no delimiter present
@@ -133,7 +136,7 @@ class Helper
 	 * @param  string $html html
 	 * @return string         
 	 */
-	static function htmlSanitise($html = '')
+	public static function htmlSanitise($html = '')
 	{
 		$search = array(
 		    '/\>[^\S ]+/s',  // strip whitespaces after tags, except space

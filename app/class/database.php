@@ -1,5 +1,8 @@
 <?php
 
+namespace OriginalAppName;
+
+
 /**
  * @author Martin Wyatt <martin.wyatt@gmail.com> 
  * @version	0.1
@@ -9,9 +12,17 @@ class Database
 {
 
 
+	/**
+	 * PDO object once connected
+	 * @var object
+	 */
 	public $dbh;
 
 	
+	/**
+	 * connection credentials
+	 * @var array
+	 */
 	public $credentials;
 
 
@@ -20,18 +31,40 @@ class Database
 	 */
 	public function __construct($credentials) {
 		$this->setCredentials($credentials);
+		$this->validateCredentials();
 		$this->connect();
 	}
 	
 
-	public function setCredentials($value)
+	public function validateCredentials()
 	{
-		$this->credentials = $value;
+		$expected = array(
+			'host',
+			'port',
+			'basename',
+			'username',
+			'password'
+		);
+		if (! Helper::arrayKeyExists($expected, $this->getCredentials())) {
+			exit('database validateCredentials failed');
+		}
 	}
 
 
+	/**
+	 * @return array 
+	 */
 	public function getCredentials() {
-		return $this->credentials;
+	    return $this->credentials;
+	}
+	
+	
+	/**
+	 * @param array $credentials 
+	 */
+	public function setCredentials($credentials) {
+	    $this->credentials = $credentials;
+	    return $this;
 	}
 	
 	
@@ -44,21 +77,20 @@ class Database
 		try {
 
 			// set data source name
-			$dataSourceName = 'mysql:host=' . $credentials->host
-				 . ';dbname=' . $credentials->basename;
+			$dataSourceName = 'mysql:host=' . $credentials['host']
+				 . ';dbname=' . $credentials['basename'];
 			
 			// connect
-			$this->dbh = new PDO(
+			$this->dbh = new \PDO(
 				$dataSourceName,
-				$credentials->username,
-				$credentials->password
+				$credentials['username'],
+				$credentials['password']
 			);	
 		
 			// set error mode
-			$this->dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			$this->dbh->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 		} catch (PDOException $error) {
-			echo '<h1>Unable to Connect to Database</h1>';
-			exit;
+			exit('unable to connect to database');
 		}	
 	}
 }

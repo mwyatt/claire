@@ -1,5 +1,6 @@
 <?php
 
+
 /**
  * @todo could be more general, session var which is tracking the history
  * of loved items?

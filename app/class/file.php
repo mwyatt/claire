@@ -1,5 +1,6 @@
 <?php
 
+
 /**
  * handles all file operations, including the upload of them
  * @author Martin Wyatt <martin.wyatt@gmail.com> 
@@ -197,11 +198,11 @@ class File extends Config
 	{
 
 		// both file and file info converted to objects
-		$file = $this->convertArrayToObject($file);
-		$fileInformation = $this->convertArrayToObject(pathinfo($file->name));
+		$file = Helper::convertArrayToObject($file);
+		$fileInformation = Helper::convertArrayToObject(pathinfo($file->name));
 
 		// handy variable names
-		$friendlyFileName = $this->urlFriendly($fileInformation->filename);
+		$friendlyFileName = Helper::urlFriendly($fileInformation->filename);
 		$friendlyFileNameWithExtension = $friendlyFileName . '.' . $fileInformation->extension;
 		$pathFile = $this->getPath($friendlyFileNameWithExtension);
 

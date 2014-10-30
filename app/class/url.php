@@ -1,5 +1,7 @@
 <?php
 
+namespace OriginalAppName;
+
 
 /**
  * 
@@ -7,7 +9,7 @@
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */ 
-class Url extends Helper
+class Url
 {
 
 
@@ -68,12 +70,12 @@ class Url extends Helper
 
 		// server validation
 		$keys = array('HTTP_HOST', 'SCRIPT_NAME', 'HTTP_HOST', 'REQUEST_URI', 'SERVER_PORT');
-		if (! $this->arrayKeyExists($keys, $_SERVER)) {
+		if (! Helper::arrayKeyExists($keys, $_SERVER)) {
 			exit('a required server key is missing to build the url');
 		}
 		$this->setParsed();
 		$keys = array('scheme', 'host', 'path');
-		if (! $this->arrayKeyExists($keys, $this->getParsed())) {
+		if (! Helper::arrayKeyExists($keys, $this->getParsed())) {
 			exit('a key is missing from the parse_url array');
 		}
 		$this->setHost();
@@ -324,7 +326,7 @@ class Url extends Helper
 		$finalUrl = $this->getCache('base');
 		foreach ($segments as $segment) {
 			if ($friendly) {
-				$segment = $this->urlFriendly($segment);
+				$segment = Helper::urlFriendly($segment);
 			}
 			$finalUrl .= $segment . ($friendly ? '/' : '');
 		}

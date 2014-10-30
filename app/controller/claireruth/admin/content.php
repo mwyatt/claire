@@ -1,5 +1,6 @@
 <?php
 
+
 /**
  * admin
  *
@@ -130,7 +131,7 @@ class Controller_Admin_Content extends Controller_Admin
 		));
 		$mold = new mold_content();
 		$mold->title = $_POST['title'];
-		$mold->slug = $this->urlFriendly($_POST['slug']);
+		$mold->slug = Helper::urlFriendly($_POST['slug']);
 		$mold->html = $_POST['html'];
 		$mold->type = $_POST['type'];
 		$mold->time_published = strtotime(implode(' ', $_POST['time_published']));
