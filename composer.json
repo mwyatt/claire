@@ -1,12 +1,17 @@
 {
     "require": {
         "aura/session": "dev-master",
+        "intervention/image": "dev-master",
         "joseph-lenton/php-error": "dev-master",
         "orno/route": "dev-master"
     },
     "autoload": {
         "psr-4": {
             "OriginalAppName\\": "app/class/",
+            "OriginalAppName\\Controller\\": "app/class/controller/",
+            "OriginalAppName\\Cron\\": "app/class/Cron/",
+            "OriginalAppName\\Model\\": "app/class/Model/",
+            "OriginalAppName\\Entity\\": "app/class/Entity/",
             "OriginalAppName\\Site\\Avo\\": "app/site/avo/",
             "OriginalAppName\\Site\\Avo\\Controller\\": "app/site/avo/controller/"
         }

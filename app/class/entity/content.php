@@ -28,6 +28,9 @@ class Content extends OriginalAppName\Entity
 
 	
 	private $status;
+	
+
+	private $user_id;
 
 
 	/**
@@ -39,21 +42,6 @@ class Content extends OriginalAppName\Entity
 		'draft',
 		'hidden'
 	);
-	
-
-	private $user_id;
-
-
-	/**
-	 * @var object
-	 */
-	private $user;
-
-
-	private $tag = array();
-
-
-	private $media = array();
 
 
 	/**
