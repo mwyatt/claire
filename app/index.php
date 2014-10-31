@@ -1,5 +1,8 @@
 <?php
 
+use Orno\Http\Request;
+use Orno\Http\Response;
+
 
 /**
  * @author 	Martin Wyatt <martin.wyatt@gmail.com> 
@@ -15,27 +18,47 @@ session_start();
 
 
 /**
- * system
+ * setup registry
  */
-$system = new OriginalAppName\System();
-
-
-/**
- * setup database
- */
-$database = new OriginalAppName\Database(include SITE_PATH . 'credentials' . EXT);
-
-
-/**
- * url
- */
-$url = new OriginalAppName\Url();
+$registry = OriginalAppName\Registry::getInstance();
+$registry->set('system', new OriginalAppName\System);
+$registry->set('database', new OriginalAppName\Database(include SITE_PATH . 'credentials' . EXT));
+$registry->set('url', new OriginalAppName\Url);
 
 
 /**
  * absolute url
  */
-define('URL_ABSOLUTE', $url->getCache('base'));
+define('URL_ABSOLUTE', $registry->get('url')->getCache('base'));
+
+
+/**
+ * routing with orno
+ */
+$router = new Orno\Route\RouteCollection;
+
+// site specific routes
+$routes = include SITE_PATH . 'route' . EXT;
+
+// builds the routes
+foreach ($routes as $route) {
+	$router->addRoute(strtoupper($route[0]), $route[1], $route[2]);
+}
+
+// fire the request, collect the response
+try {
+	$dispatcher = $router->getDispatcher();
+	$response = $dispatcher->dispatch('GET', $registry->get('url')->getPathString());
+} catch (Exception $e) {
+	header('HTTP/1.0 404 Not Found');
+	exit('404');
+}
+
+// outputs html
+$response->send();
+exit;
+
+
 
 
 /**

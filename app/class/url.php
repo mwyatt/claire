@@ -278,7 +278,9 @@ class Url
 
 	public function getPathString()
 	{
-		return implode(US, $this->path);
+		$path = implode(US, $this->path) . US;
+		$path = str_replace('//', '/', $path);
+		return $path;
 	}
 
 
@@ -331,5 +333,17 @@ class Url
 			$finalUrl .= $segment . ($friendly ? '/' : '');
 		}
 		return $finalUrl;
+	}
+
+
+	public function getHash()
+	{
+		return '';
+	}
+
+
+	public function getRequest()
+	{
+		return $this->getPathString() . $this->getHash() . $this->getQuery();
 	}
 }

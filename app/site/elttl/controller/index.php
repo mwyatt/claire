@@ -1,5 +1,7 @@
 <?php
 
+namespace OriginalAppName\Site\Elttl\Controller;
+
 
 /**
  * Controller
@@ -10,8 +12,21 @@
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Controller_Index extends Controller
+class Index extends \OriginalAppName\Controller
 {
+
+
+	public function resultYear($request, $response, $args)
+	{
+		echo '<pre>';
+		print_r($args);
+		print_r($request);
+		print_r($response);
+		echo '</pre>';
+		exit;
+		return $response;
+		
+	}
 
 
 	public function initialise()

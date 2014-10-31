@@ -12,26 +12,57 @@ class Content extends OriginalAppName\Entity
 {
 
 
+	/**
+	 * main title for the content
+	 * @var string
+	 */
 	private $title;
 
 
+	/**
+	 * foo-bar seperated title, for url
+	 * @var string
+	 */
 	private $slug;
 
-	
+
+	/**
+	 * raw html code for the body of the content
+	 * @var string
+	 */
 	private $html;
 
 	
+	/**
+	 * the type of content
+	 * @var string
+	 */
 	private $type;
 
-	
-	private $time_published;
+
+	/**
+	 * possible type options
+	 * @var array
+	 */
+	private $typePossible = array(
+		'post',
+		'page'
+	);
 
 	
+	/**
+	 * epoch time of when the content was created
+	 * @var int
+	 */
+	private $timePublished;
+
+	
+	/**
+	 * status of the content
+	 * @var string
+	 */
 	private $status;
 	
-
-	private $user_id;
-
 
 	/**
 	 * possible status options
@@ -42,6 +73,13 @@ class Content extends OriginalAppName\Entity
 		'draft',
 		'hidden'
 	);
+
+
+	/**
+	 * the id of the user which created this content
+	 * @var int
+	 */
+	private $userId;
 
 
 	/**
@@ -81,6 +119,76 @@ class Content extends OriginalAppName\Entity
 	/**
 	 * @return string 
 	 */
+	public function getHtml() {
+	    return $this->html;
+	}
+	
+	
+	/**
+	 * @param string $html 
+	 */
+	public function setHtml($html) {
+	    $this->html = $html;
+	    return $this;
+	}
+
+
+	/**
+	 * @return string 
+	 */
+	public function getType() {
+	    return $this->type;
+	}
+	
+	
+	/**
+	 * @param string $type 
+	 */
+	public function setType($type) {
+		if (in_array($type, $this->getTypePossible())) {
+		    $this->type = $type;
+		}
+	    return $this;
+	}
+
+
+	/**
+	 * @return array 
+	 */
+	public function getTypePossible() {
+	    return $this->typePossible;
+	}
+	
+	
+	/**
+	 * @param array $typePossible 
+	 */
+	public function setTypePossible($typePossible) {
+	    $this->typePossible = $typePossible;
+	    return $this;
+	}
+
+
+	/**
+	 * @return int 
+	 */
+	public function getTimePublished() {
+	    return $this->timePublished;
+	}
+	
+	
+	/**
+	 * @param int $timePublished 
+	 */
+	public function setTimePublished($timePublished) {
+	    $this->timePublished = $timePublished;
+	    return $this;
+	}
+
+
+	/**
+	 * @return string 
+	 */
 	public function getStatus() {
 	    return $this->status;
 	}
@@ -112,6 +220,23 @@ class Content extends OriginalAppName\Entity
 	 */
 	public function setStatusPossible($statusPossible) {
 	    $this->statusPossible = $statusPossible;
+	    return $this;
+	}
+
+
+	/**
+	 * @return int 7
+	 */
+	public function getUserId() {
+	    return $this->userId;
+	}
+	
+	
+	/**
+	 * @param int $userId 
+	 */
+	public function setUserId($userId) {
+	    $this->userId = $userId;
 	    return $this;
 	}
 }

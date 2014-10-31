@@ -12,9 +12,17 @@ class Meta extends OriginalAppName\Entity
 {
 
 
+	/**
+	 * key to represent the connection
+	 * @var string
+	 */
 	private $name;
 
 	
+	/**
+	 * value often connecting to another row in another table
+	 * @var bool|int|string 
+	 */
 	private $value;
 
 

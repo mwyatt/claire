@@ -1,5 +1,7 @@
 <?php
 
+namespace OriginalAppName;
+
 
 /**
  * Controller
@@ -10,7 +12,7 @@
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Controller extends Route
+class Controller extends \OriginalAppName\Route
 {
 
 
@@ -33,17 +35,5 @@ class Controller extends Route
 	{
 		
 		// code for core logic
-	}
-
-
-	public function runMethod($part)
-	{
-		if (! $action = $this->url->getPathPart($part)) {
-			return;
-		}
-		if (! method_exists($this, $action)) {
-			return;
-		}
-		$this->$action();
 	}
 }

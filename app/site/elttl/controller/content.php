@@ -1,5 +1,7 @@
 <?php
 
+namespace OriginalAppName\Site\Elttl\Controller;
+
 
 /**
  *
@@ -9,24 +11,17 @@
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Controller_Content extends Controller_Index
+class Content extends \OriginalAppName\Controller
 {
 
 
-	public function run()
+	public function single($request, $response, $args)
 	{
-		if ($this->single()) {
+
+		// foo-bar
+		if (! isset($args['title'])) {
 			return;
 		}
-		if ($this->all()) {
-			return;
-		}
-		$this->route('base');
-	}
-
-
-	public function single()
-	{
 
 		// type/slug/
 		if (! $this->url->getPathPart(1)) {

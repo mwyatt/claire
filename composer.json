@@ -9,11 +9,13 @@
         "psr-4": {
             "OriginalAppName\\": "app/class/",
             "OriginalAppName\\Controller\\": "app/class/controller/",
-            "OriginalAppName\\Cron\\": "app/class/Cron/",
-            "OriginalAppName\\Model\\": "app/class/Model/",
-            "OriginalAppName\\Entity\\": "app/class/Entity/",
-            "OriginalAppName\\Site\\Avo\\": "app/site/avo/",
-            "OriginalAppName\\Site\\Avo\\Controller\\": "app/site/avo/controller/"
+            "OriginalAppName\\Model\\": "app/class/model/",
+            "OriginalAppName\\Entity\\": "app/class/entity/",
+            "OriginalAppName\\Site\\": "app/site/",
+            "OriginalAppName\\Site\\Elttl\\": "app/site/elttl/",
+            "OriginalAppName\\Site\\Elttl\\Controller\\": "app/site/elttl/controller/",
+            "OriginalAppName\\Site\\Elttl\\Model\\": "app/site/elttl/model/",
+            "OriginalAppName\\Site\\Elttl\\Entity\\": "app/site/elttl/entity/"
         }
     }
 }

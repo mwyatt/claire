@@ -1,13 +1,41 @@
 <?php
 
+namespace OriginalAppName\Site\Elttl\Controller;
+
 
 /**
  * @author Martin Wyatt <martin.wyatt@gmail.com> 
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Controller_Result extends Controller_Archive
+class Result extends \OriginalAppName\Controller
 {
+
+
+	public function index($request, $response)
+	{
+		echo '<pre>';
+		print_r($request->getContent());
+		echo '</pre>';
+
+
+
+		$response->setContent('hi');
+	    $response->setStatusCode(200);
+	    return $response;
+	}
+
+
+	public function year($request, $response, $args)
+	{
+		echo '<pre>';
+		print_r($args);
+		print_r($request);
+		print_r($response);
+		echo '</pre>';
+		exit;
+	}
+
 
 
 	public $division;

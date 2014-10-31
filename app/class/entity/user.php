@@ -12,20 +12,146 @@ class User extends OriginalAppName\Entity
 {
 
 
+	/**
+	 * email address for the user, also used for logging in
+	 * @var string
+	 */
 	private $email;
 
 
+	/**
+	 * password for the user stored as sha5
+	 * @var string
+	 */
 	private $password;
 
 
-	private $first_name;
+	/**
+	 * first name
+	 * @var string
+	 */
+	private $nameFirst;
 
 
-	private $last_name;
+	/**
+	 * last name
+	 * @var string
+	 */
+	private $nameLast;
 
 
-	private $time_registered;
+	/**
+	 * epoch time of registering
+	 * @var int
+	 */
+	private $timeRegistered;
 
 
+	/**
+	 * value for determining the permissions
+	 * @var int
+	 */
 	private $level;
+
+
+	/**
+	 * @return string 
+	 */
+	public function getEmail() {
+	    return $this->email;
+	}
+	
+	
+	/**
+	 * @param string $email 
+	 */
+	public function setEmail($email) {
+	    $this->email = $email;
+	    return $this;
+	}
+
+
+	/**
+	 * @return string 
+	 */
+	public function getPassword() {
+	    return $this->password;
+	}
+	
+	
+	/**
+	 * @param string $password 
+	 */
+	public function setPassword($password) {
+	    $this->password = $password;
+	    return $this;
+	}
+
+
+	/**
+	 * @return string 
+	 */
+	public function getNameFirst() {
+	    return $this->nameFirst;
+	}
+	
+	
+	/**
+	 * @param string $nameFirst 
+	 */
+	public function setNameFirst($nameFirst) {
+	    $this->nameFirst = $nameFirst;
+	    return $this;
+	}
+
+
+	/**
+	 * @return string 
+	 */
+	public function getNameLast() {
+	    return $this->nameLast;
+	}
+	
+	
+	/**
+	 * @param string $nameLast 
+	 */
+	public function setNameLast($nameLast) {
+	    $this->nameLast = $nameLast;
+	    return $this;
+	}
+
+
+	/**
+	 * @return int 
+	 */
+	public function getTimeRegistered() {
+	    return $this->timeRegistered;
+	}
+	
+	
+	/**
+	 * @param int $timeRegistered 
+	 */
+	public function setTimeRegistered($timeRegistered) {
+	    $this->timeRegistered = $timeRegistered;
+	    return $this;
+	}
+
+
+	/**
+	 * @return int 
+	 */
+	public function getLevel() {
+	    return $this->level;
+	}
+	
+	
+	/**
+	 * @param int $level 
+	 */
+	public function setLevel($level) {
+	    $this->level = $level;
+	    return $this;
+	}
 }
