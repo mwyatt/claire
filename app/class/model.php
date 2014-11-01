@@ -1,12 +1,14 @@
 <?php
 
+namespace OriginalAppName;
+
 
 /**
  * @author Martin Wyatt <martin.wyatt@gmail.com> 
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */ 
-class Model extends Data
+class Model extends OriginalAppName\Data
 {
 
 
@@ -20,6 +22,8 @@ class Model extends Data
 	 */
 	public $identity = '';
 
+
+	private $tableName;
 
 
 	/**
@@ -522,9 +526,20 @@ class Model extends Data
 	}
 
 
-	public function getTableName()
-	{
-		return $this->getIdentity();
+	/**
+	 * @return string 
+	 */
+	public function getTableName() {
+	    return $this->tableName;
+	}
+	
+	
+	/**
+	 * @param string $tableName 
+	 */
+	public function setTableName($tableName) {
+	    $this->tableName = $tableName;
+	    return $this;
 	}
 
 

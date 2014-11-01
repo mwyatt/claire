@@ -1,5 +1,7 @@
 <?php
 
+namespace OriginalAppName;
+
 
 /**
  * responsible for various content types (projects, posts and pages)
@@ -7,8 +9,11 @@
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Model_Content extends Model
+class Content extends OriginalAppName\Model
 {	
+
+
+	private $tableName = 'content';
 
 
 	public $fields = array(
@@ -35,33 +40,25 @@ class Model_Content extends Model
 	);
 
 
-	public function readId($config)
+	/**
+	 * @todo one prepared statement, loop through ids
+	 * @param  array $ids
+	 * @return object
+	 */
+	public function readId($ids)
 	{
-/*
-'where' => array(
-	'type' => $this->url->getPathPart(0),
-	'status' => 'visible'
-),
-'limit' => $pagination->getLimit(),
-'order_by' => 'time_published desc'
-
- */
-
-		// $config['where']
-		// $config['columns']
-		// $config['dataToBind']
 
 		// 1. query
 		$sth = $this->database->dbh->prepare("
 			select $this->getSqlFields()
 			from $this->getTableName()
-            where
-            	content.status = 'visible'
-            	and content.type = :type
-
-            order by
-            limit
+            where id = ?
 		");
+
+		// loop prepared statement
+		foreach ($ids as $id) {
+			
+		}
 
 		// 2. bind
 	    $sth->bindValue(':type', $bar, PDO::PARAM_INT);
