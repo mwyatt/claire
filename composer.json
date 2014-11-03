@@ -3,6 +3,7 @@
         "aura/session": "dev-master",
         "intervention/image": "dev-master",
         "joseph-lenton/php-error": "dev-master",
+        "symfony/routing": "2.6.*@dev",
         "orno/route": "dev-master"
     },
     "autoload": {

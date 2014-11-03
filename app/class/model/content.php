@@ -29,26 +29,15 @@ class Content extends OriginalAppName\Model
 
 
 	/**
-	 * possible status of a content item
-	 * @var array
-	 */
-	public $status = array(
-		'visible'
-		, 'hidden'
-		, 'draft'
-		, 'archive'
-	);
-
-
-	/**
 	 * @todo one prepared statement, loop through ids
 	 * @param  array $ids
 	 * @return object
 	 */
 	public function readId($ids)
 	{
+		$data = [];
 
-		// 1. query
+		// query
 		$sth = $this->database->dbh->prepare("
 			select $this->getSqlFields()
 			from $this->getTableName()
@@ -57,24 +46,40 @@ class Content extends OriginalAppName\Model
 
 		// loop prepared statement
 		foreach ($ids as $id) {
+		    $sth->bindValue('?', $id, PDO::PARAM_INT);
 			
+		    // execute
+			try {
+				$sth->execute();
+				$data[] = $sth->fetch(PDO::FETCH_CLASS, 'OriginalAppName\\Entity\\Content')
+			} catch (Exception $e) {
+				$message = 'there is a problem reading things today';
+			}
 		}
 
-		// 2. bind
-	    $sth->bindValue(':type', $bar, PDO::PARAM_INT);
-	    $sth->bindValue(':status', 'visible', PDO::PARAM_STRING);
+		// return data
+		$this->setData($data);
+		return $this;
+	}
 
-	    // 3. execute
-		try {
-			$sth->execute($values);
-		} catch (Exception $e) {
-			$message = 'there is a problem reading things today';
+
+	/**
+	 * accepts a valid status and filters out any entities which do not match
+	 * @param  string $status 
+	 * @return object         instance
+	 */
+	public function filterStatus($status)
+	{
+		if (! $this->getData()) {
+			return;
 		}
-
-		// 4. return data
-		$this->setData($sth->fetchAll(PDO::FETCH_CLASS, $this->getMoldName()));
-
-		// 5. return
+		$data = array();
+		foreach ($this->getData() as $entity) {
+			if ($data[$entity->getStatus()] == $status) {
+				$data[] = $entity;
+			}
+		}
+		$this->setData($data);
 		return $this;
 	}
 
@@ -164,25 +169,6 @@ class Content extends OriginalAppName\Model
 		}
 		$this->setData($boundContent);
 		return $this;
-	}
-
-
-	/**
-	 * check to see if a value is a valid status
-	 * @param  string $value 
-	 * @return bool        
-	 */
-	public function validateStatus($value = '')
-	{
-		if (in_array($value, $this->getStatus)) {
-			return true;
-		}
-	}
-
-
-	public function getStatus()
-	{
-		return $this->status;
 	}
 
 

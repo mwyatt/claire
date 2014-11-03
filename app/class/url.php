@@ -4,7 +4,8 @@ namespace OriginalAppName;
 
 
 /**
- * 
+ * example url split by sesctions
+ * {http://}{store}.{example}.{com}/{topics/subtopic/}{descriptive-product-name}{#top}
  * @author Martin Wyatt <martin.wyatt@gmail.com> 
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
@@ -14,52 +15,65 @@ class Url
 
 
 	/**
-	 * http
+	 * {http://}
 	 * @var string
 	 */
-	public $scheme;
+	private $protocol;
+
+
+	private $subdomain;
+
+
+	private $domain;
+
+
+	private $topLevelDomain;
+
+	
+
+	private $anchor;
 
 
 	/**
 	 * foo.co.uk/
 	 * @var string
 	 */
-	public $host;
+	private $host;
 
 
 	/**
 	 * foo, bar
 	 * @var array
 	 */
-	public $path;
+	private $path;
 
 
 	/**
 	 * ?foo=bar
 	 * @var string
 	 */
-	public $query;
+	private $query;
 
 
 	/**
 	 * #foo
 	 * @var string
 	 */
-	public $hash;
+	private $hash;
 
 
 	/**
 	 * filled with handy urls which are required in many places
 	 * @var array
 	 */
-	public $cache;
+	private $cache;
 
 
 	/**
 	 * segmented path for controller use
 	 * @var array
 	 */
-	public $parsed;
+	private $parsed;
 
 
 	/**
@@ -81,7 +95,7 @@ class Url
 		$this->setHost();
 		$this->setPath();
 		$this->setQuery();
-		$this->setScheme();
+		$this->setProtocol();
 		$this->setCache();
 	}
 
@@ -125,16 +139,16 @@ class Url
 	 */
 	public function setCache()
 	{
-		$scheme = $this->getScheme();
+		$protocol = $this->getProtocol();
 		$host = $this->getHost();
 		$query = '?' . $this->getQuery();
 		$path = implode(US, $this->getPath()) . US;
 		$this->cache = array(
-			'base' => $scheme . $host,
-			'admin' => $scheme . $host . 'admin' . US,
-			'media' => $scheme . $host . 'media' . US . SITE . US,
-			'current' => $scheme . $host . $path . $query,
-			'current_sans_query' => $scheme . $host . $path
+			'base' => $protocol . $host,
+			'admin' => $protocol . $host . 'admin' . US,
+			'media' => $protocol . $host . 'media' . US . SITE . US,
+			'current' => $protocol . $host . $path . $query,
+			'current_sans_query' => $protocol . $host . $path
 		);
 	}
 
@@ -187,13 +201,13 @@ class Url
 	 * http(s)://
 	 * @return string 
 	 */
-	public function getScheme($secure = false)
+	public function getProtocol($secure = false)
 	{
-		$scheme = 'http';
+		$protocol = 'http';
 		if ($secure || $this->isSecure()) {
-			$scheme .= 's';
+			$protocol .= 's';
 		}
-		return  $scheme . ':' . US . US;
+		return  $protocol . ':' . US . US;
 	}
 
 
@@ -213,7 +227,7 @@ class Url
 	{
 		$host = strtolower($_SERVER['HTTP_HOST']);
 		$request = strtolower($_SERVER['REQUEST_URI']);
-		$urlParsed = parse_url($this->getScheme() . $host . $request);
+		$urlParsed = parse_url($this->getProtocol() . $host . $request);
 		$this->parsed = $urlParsed;
 	}
 
@@ -261,7 +275,7 @@ class Url
 	 * sets the scheme
 	 * @todo make more dynamic?
 	 */
-	public function setScheme()
+	public function setProtocol()
 	{
 		$parsed = $this->getParsed();
 		$this->scheme = $parsed['scheme'] . ':' . US . US;

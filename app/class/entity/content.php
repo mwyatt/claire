@@ -239,4 +239,32 @@ class Content extends OriginalAppName\Entity
 	    $this->userId = $userId;
 	    return $this;
 	}
+
+
+	/**
+	 * example.com/type/foo-bar/
+	 * @return string url
+	 */
+	public function getUrl()
+	{
+		return implode('/', [
+			$this->getUrlAbsolute(),
+			Helper::slugify($this->getType()),
+			$this->getSlug()
+		]);
+	}
+
+
+	/**
+	 * example.com/admin/content/?id=22
+	 * @return string url
+	 */
+	public function getUrlAdmin()
+	{
+		return implode('/', [
+			$this->getUrlAbsolute(),
+			'admin',
+			'content?id=' . $this->getId()
+		]);
+	}
 }

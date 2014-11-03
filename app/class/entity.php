@@ -30,4 +30,16 @@ class Entity
 	    $this->id = $id;
 	    return $this;
 	}
+
+
+	/**
+	 * takes the url object from the registry and passes back the
+	 * absolute url for the website
+	 * @return string 
+	 */
+	public function getUrlAbsolute()
+	{
+		$registry = OriginalAppName\Registry::getInstance();
+		return $registry->get('url')->getCache('base');
+	}
 }
