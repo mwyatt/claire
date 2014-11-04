@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "cf3e5f3c0572a8329d26f9b287e2d074",
+    "hash": "0586ba99ae3bc47b742ef6884576afd1",
     "packages": [
         {
             "name": "aura/installer-default",
@@ -103,63 +103,7 @@
                 "session",
                 "sessions"
             ],
-            "time": "2014-05-31 00:00:00"
-        },
-        {
-            "name": "intervention/image",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Intervention/image.git",
-                "reference": "e626de028b4734da1e461c8cd2d4d5fc195f1478"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Intervention/image/zipball/e626de028b4734da1e461c8cd2d4d5fc195f1478",
-                "reference": "e626de028b4734da1e461c8cd2d4d5fc195f1478",
-                "shasum": ""
-            },
-            "require": {
-                "ext-fileinfo": "*",
-                "php": ">=5.3.0"
-            },
-            "require-dev": {
-                "mockery/mockery": "~0.9.2",
-                "phpunit/phpunit": "3.*"
-            },
-            "suggest": {
-                "ext-gd": "to use GD library based image processing.",
-                "ext-imagick": "to use Imagick based image processing.",
-                "intervention/imagecache": "Caching extension for the Intervention Image library"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Intervention\\Image\\": "src/Intervention/Image"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Oliver Vogel",
-                    "email": "oliver@olivervogel.net",
-                    "homepage": "http://olivervogel.net/"
-                }
-            ],
-            "description": "Image handling and manipulation library with support for Laravel integration",
-            "homepage": "http://image.intervention.io/",
-            "keywords": [
-                "gd",
-                "image",
-                "imagick",
-                "laravel",
-                "thumbnail",
-                "watermark"
-            ],
-            "time": "2014-10-23 18:51:15"
+            "time": "2014-05-31 17:16:27"
         },
         {
             "name": "joseph-lenton/php-error",
@@ -451,12 +395,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Routing.git",
-                "reference": "3909bb01ed95fb2d4173646a3b3205ca0f07e0bf"
+                "reference": "f0bb6f818f9a7ece41c7dfe14e08b13c2de55b0c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Routing/zipball/3909bb01ed95fb2d4173646a3b3205ca0f07e0bf",
-                "reference": "3909bb01ed95fb2d4173646a3b3205ca0f07e0bf",
+                "url": "https://api.github.com/repos/symfony/Routing/zipball/f0bb6f818f9a7ece41c7dfe14e08b13c2de55b0c",
+                "reference": "f0bb6f818f9a7ece41c7dfe14e08b13c2de55b0c",
                 "shasum": ""
             },
             "require": {
@@ -509,7 +453,7 @@
                 "uri",
                 "url"
             ],
-            "time": "2014-11-03 13:44:52"
+            "time": "2014-11-03 19:16:49"
         }
     ],
     "packages-dev": [],
@@ -517,7 +461,6 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "aura/session": 20,
-        "intervention/image": 20,
         "joseph-lenton/php-error": 20,
         "symfony/routing": 20,
         "orno/route": 20

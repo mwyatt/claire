@@ -1,8 +1,5 @@
 <?php
 
-use Orno\Http\Request;
-use Orno\Http\Response;
-
 
 /**
  * @author 	Martin Wyatt <martin.wyatt@gmail.com> 
@@ -26,39 +23,33 @@ $registry->set('database', new OriginalAppName\Database(include SITE_PATH . 'cre
 $registry->set('url', new OriginalAppName\Url);
 
 
-/**
- * absolute url
- */
-define('URL_ABSOLUTE', $registry->get('url')->getCache('base'));
+// routing fun
 
 
-/**
- * routing with orno
- */
-$router = new Orno\Route\RouteCollection;
 
-// site specific routes
-$routes = include SITE_PATH . 'route' . EXT;
-
-// builds the routes
-foreach ($routes as $route) {
-	$router->addRoute(strtoupper($route[0]), $route[1], $route[2]);
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+ 
+$request = Request::createFromGlobals();
+$response = new Response();
+ 
+switch ($request->getPathInfo()) {
+case '/':
+    $response->setContent('This is the website home');
+    break;
+ 
+    case '/about':
+        $response->setContent('This is the about page');
+        break;
+ 
+    default:
+        $response->setContent('Not found !');
+    $response->setStatusCode(Response::HTTP_NOT_FOUND);
 }
-
-// fire the request, collect the response
-try {
-	$dispatcher = $router->getDispatcher();
-	$response = $dispatcher->dispatch('GET', $registry->get('url')->getPathString());
-} catch (Exception $e) {
-	header('HTTP/1.0 404 Not Found');
-	exit('404');
-}
-
-// outputs html
+ 
 $response->send();
+
 exit;
-
-
 
 
 /**
