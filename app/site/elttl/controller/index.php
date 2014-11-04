@@ -16,6 +16,12 @@ class Index extends \OriginalAppName\Controller
 {
 
 
+	public static function hiTest()
+	{
+		return 'ok hi test';
+	}
+
+
 	public function resultYear($request, $response, $args)
 	{
 		echo '<pre>';
