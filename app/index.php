@@ -30,73 +30,51 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Matcher\UrlMatcher;
 use Symfony\Component\Routing\RequestContext;
-use Symfony\Component\Routing\RouteCollection;
-use Symfony\Component\Routing\Route;
  
 $request = Request::createFromGlobals();
 $response = new Response();
-$routes = new RouteCollection();
-
-$routes->add('label?', new Route(
-   '/ok/',
-   array('controller' => function() {
-        return 'what';
-   })
-));
-$routes->add('ok?', new Route(
-   '/player/{name}/',
-   array('controller' => function($name) {
-    echo '<pre>';
-    print_r($name);
-    echo '</pre>';
-    exit;
-    
-        return new Response('Hello '.$name);
-   })
-));
-
 $context = new RequestContext();
 $context->fromRequest($request);
+$siteRoutePath = SITE_PATH . 'route' . EXT;
+if (! file_exists($siteRoutePath)) {
+    exit('site \'' . SITE . '\' must have routes configured');
+}
+$routes = new Symfony\Component\Routing\RouteCollection();
+
+// add routes
+
+// admin
+include APP_PATH . 'admin' . DS . 'route' . EXT;
+
+// site
+include $siteRoutePath;
+
+// url generator
+$registry->set('urlGenerator', new Symfony\Component\Routing\Generator\UrlGenerator($routes, $context));
+
+// get match
 $matcher = new UrlMatcher($routes, $context);
 
 try {
     $attributes = $matcher->match($request->getPathInfo());
+
+    // echo '<pre>';
+    // print_r($attributes);
+    // echo '</pre>';
+    // exit;
+
     $controller = $attributes['controller'];
+    unset($attributes['controller']);
     $response = call_user_func_array($controller, $attributes);
-} catch (ResourceNotFoundException $e) {
+} catch (Symfony\Component\Routing\Exception\ResourceNotFoundException $e) {
     $response = new Response('Not found!', Response::HTTP_NOT_FOUND);
+} catch (Exception $e) {
+    $response = new Response('An error occurred', 500);
 }
 
 echo '<pre>';
 print_r($response);
 echo '</pre>';
-exit;
-
-return $response;
-
-
-
-
- 
-switch ($request->getPathInfo()) {
-case '/':
-    $response->setContent('This is the website home');
-    break;
- 
-    case '/about':
-        $response->setContent('This is the about page');
-        break;
- 
-    default:
-        $response->setContent('Not found !');
-    $response->setStatusCode(Response::HTTP_NOT_FOUND);
-}
-
-
-
- 
-$response->send();
-
 exit;
 
 

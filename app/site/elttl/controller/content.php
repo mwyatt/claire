@@ -15,8 +15,15 @@ class Content extends \OriginalAppName\Controller
 {
 
 
-	public function single($request, $response, $args)
+	public static function single($type, $name)
 	{
+
+		echo '<pre>';
+		print_r($type);
+		echo '<pre>';
+		print_r($name);
+		exit;
+		
 
 		// foo-bar
 		if (! isset($args['title'])) {
@@ -55,7 +62,13 @@ class Content extends \OriginalAppName\Controller
 	}
 
 
-	public function all() {
+	public static function all($type) {
+
+echo '<pre>';
+print_r('all ' . $type);
+echo '</pre>';
+exit;
+
 
 		// post/ only
 		if ($this->url->getPathPart(1)) {

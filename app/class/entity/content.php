@@ -242,16 +242,21 @@ class Content extends OriginalAppName\Entity
 
 
 	/**
-	 * example.com/type/foo-bar/
+	 * example.com/type/slug/
 	 * @return string url
 	 */
 	public function getUrl()
 	{
-		return implode('/', [
-			$this->getUrlAbsolute(),
-			Helper::slugify($this->getType()),
-			$this->getSlug()
-		]);
+		$registry = OriginalAppName\Registry::getInstance();
+		$generator = $registry->get('urlGenerator');
+		return $generator->generate(
+			'content-single',
+			array(
+				'type' => $this->getType(),
+				'slug' => $this->getSlug()
+			),
+			true
+		);
 	}
 
 

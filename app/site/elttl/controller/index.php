@@ -16,13 +16,7 @@ class Index extends \OriginalAppName\Controller
 {
 
 
-	public static function hiTest()
-	{
-		return 'ok hi test';
-	}
-
-
-	public function resultYear($request, $response, $args)
+	public static function resultYear($request, $response, $args)
 	{
 		echo '<pre>';
 		print_r($args);
@@ -96,7 +90,11 @@ class Index extends \OriginalAppName\Controller
 	}
 
 
-	public function home() {
+	public static function home() {
+echo '<pre>';
+print_r('home');
+echo '</pre>';
+exit;
 
 		// latest 3 posts
 		$modelContent = new model_content($this);
@@ -123,12 +121,12 @@ class Index extends \OriginalAppName\Controller
 	}
 
 
-	public function soon() {
+	public static function soon() {
 		$this->view->getTemplate('coming-soon');
 	}
 
 
-	public function setGallery()
+	public static function setGallery()
 	{
 		$folder = glob(BASE_PATH . 'media' . DS . SITE . DS . 'thumb' . DS . '*');
 		$files = array();

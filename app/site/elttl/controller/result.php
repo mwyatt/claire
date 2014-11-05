@@ -12,26 +12,10 @@ class Result extends \OriginalAppName\Controller
 {
 
 
-	public function index($request, $response)
+	public static function year($year)
 	{
 		echo '<pre>';
-		print_r($request->getContent());
-		echo '</pre>';
-
-
-
-		$response->setContent('hi');
-	    $response->setStatusCode(200);
-	    return $response;
-	}
-
-
-	public function year($request, $response, $args)
-	{
-		echo '<pre>';
-		print_r($args);
-		print_r($request);
-		print_r($response);
+		print_r($year);
 		echo '</pre>';
 		exit;
 	}
@@ -254,8 +238,13 @@ class Result extends \OriginalAppName\Controller
 	 * moves to merit || league from here
 	 * @return null 
 	 */
-	public function division()
+	public static function division($year, $division)
 	{
+echo '<pre>';
+print_r($year);
+print_r($division);
+echo '</pre>';
+exit;
 
 		// division
 		$className = $this->getArchiveClassName('model_tennis_division');
