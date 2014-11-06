@@ -1,12 +1,14 @@
 <?php
 
+namespace OriginalAppName;
+
 
 /**
  * @author Martin Wyatt <martin.wyatt@gmail.com> 
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Pagination extends Model
+class Pagination extends \OriginalAppName\Data
 {
 
 
@@ -20,7 +22,40 @@ class Pagination extends Model
 
 
 	public $possiblePages;
+
+
+	public $url;
 	
+
+	/**
+	 * inject dependencies
+	 * url
+	 */
+	public function __construct() {
+		$registry = \OriginalAppName\Registry::getInstance();
+		if (! $url = $registry->get('url')) {
+			throw new Exception('OriginalAppName\\Model::__construct, missing dependency url');
+		}
+		$this->setUrl($url);
+	}
+
+
+	/**
+	 * @return object 
+	 */
+	public function getUrl() {
+	    return $this->url;
+	}
+	
+	
+	/**
+	 * @param object $url 
+	 */
+	public function setUrl($url) {
+	    $this->url = $url;
+	    return $this;
+	}
+
 
 	public function initialise()
 	{
@@ -106,21 +141,21 @@ class Pagination extends Model
 		}
 
 		// structure of object
-		$data = new StdClass();
+		$data = new \StdClass();
 		$data->previous = false;
 		$data->pages = array();
 		$data->next = false;
 
 		// previous (if possible)
 	    if ($this->getPageCurrent() > 1) {
-			$page = new StdClass();
+			$page = new \StdClass();
 			$page->url = $this->urlBuild($this->getPageCurrent() - 1);
 	        $data->previous = $page;
 	    }
 		
 		// page 1, 2, 3
 	    for ($index = 1; $index <= $this->getPossiblePages(); $index ++) { 
-			$page = new StdClass();
+			$page = new \StdClass();
 	        $page->current = ($this->getPageCurrent() == $index ? true : false);
 	        $page->url = $this->urlBuild($index);
 	        $data->pages[$index] = $page;
@@ -128,7 +163,7 @@ class Pagination extends Model
 
 	    // next only if possible
 	    if ($this->getPageCurrent() < $this->getPossiblePages()) {
-			$page = new StdClass();
+			$page = new \StdClass();
 			// var_dump($this->getPageCurrent());
 			// exit;
 			$page->url = $this->urlBuild($this->getPageCurrent() + 1);
@@ -154,8 +189,9 @@ class Pagination extends Model
      */
     public function urlBuild($key)
     {
-    	$current = $this->url->getCache('current_sans_query');
-    	$query = $this->url->getQuery();
+    	$url = $this->getUrl();
+    	$current = $url->getCache('current_sans_query');
+    	$query = $url->getQuery();
 		parse_str($query, $queryParts);
 		$queryParts['page'] = $key;
     	$query = '?' . http_build_query($queryParts);

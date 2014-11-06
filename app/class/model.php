@@ -8,40 +8,22 @@ namespace OriginalAppName;
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */ 
-class Model extends OriginalAppName\Data
+class Model extends \OriginalAppName\Data
 {
 
 
 	/**
-	 * identifies the the instance of some classes
-	 * for example
-	 * 		$_SESSION[$keyName]
-	 * 		or table name
-	 * 	usually parsed from the class title
+	 * the table being read
 	 * @var string
 	 */
-	public $identity = '';
-
-
-	private $tableName;
-
-
-	/**
-	 * universal storage property, used for many things
-	 * @var array
-	 */
-	public $data;
+	public $tableName;
 
 
 	/**
 	 * comprehensive list of database fields for use when building queries
 	 * @var array
 	 */
-	public $fields = array(
-		'id'
-		, 'name'
-		, 'value'
-	);
+	public $fields = [];
 
 
 	/**
@@ -49,18 +31,85 @@ class Model extends OriginalAppName\Data
 	 * for update, create
 	 * @var array
 	 */
-	public $fieldsNonWriteable = array(
+	public $fieldsNonWriteable = [
 		'id'
-	);
+	];
 
 
-	public function __construct($system = false) {
+	/**
+	 * inject dependencies
+	 * database
+	 */
+	public function __construct() {
+		$registry = \OriginalAppName\Registry::getInstance();
+		if (! $database = $registry->get('database')) {
+			throw new Exception('OriginalAppName\\Model::__construct, missing dependency database');
+		}
+		$this->setDatabase($database);
+	}
 
-		// construct in default fashion
-		parent::__construct($system);
 
-		// set the identity for use on crud
-		$this->setIdentity();
+	/**
+	 * @return string 
+	 */
+	public function getEntity() {
+	    return $this->entity;
+	}
+	
+	
+	/**
+	 * @param string $entity 
+	 */
+	public function setEntity($entity) {
+	    $this->entity = $entity;
+	    return $this;
+	}
+
+
+	/**
+	 * @return array 
+	 */
+	public function getFields() {
+	    return $this->fields;
+	}
+	
+	
+	/**
+	 * @param array $fields 
+	 */
+	public function setFields($fields) {
+	    $this->fields = $fields;
+	    return $this;
+	}
+
+
+	/**
+	 * global read for ids
+	 * extend this if more detail required
+	 * @param  array $ids
+	 * @return object
+	 */
+	public function readId($ids)
+	{
+
+		// query
+		$sth = $this->database->dbh->prepare("
+			{$this->getSqlSelect()}
+            where id = :id
+		");
+
+		// mode
+		$sth->setFetchMode(\PDO::FETCH_CLASS, $this->getEntity());
+
+		// loop prepared statement
+		foreach ($ids as $id) {
+		    $sth->bindValue(':id', $id, \PDO::PARAM_INT);
+			$sth->execute();
+			$this->appendData($sth->fetch());
+		}
+
+		// instance
+		return $this;
 	}
 
 
@@ -228,7 +277,7 @@ class Model extends OriginalAppName\Data
 		$statement[] = 'select';
 		$statement[] = $this->getSqlFields();
 		$statement[] = 'from';
-		$statement[] = $this->getIdentity();
+		$statement[] = $this->getTableName();
 		return implode(' ', $statement);
 	}
 
@@ -360,24 +409,6 @@ class Model extends OriginalAppName\Data
 
 
 	/**
-	 * builds an array of {property} from the data property
-	 * @param  string $property 
-	 * @return array           
-	 */
-	public function getDataProperty($property)
-	{
-		if (! $this->getData()) {
-			return;
-		}
-		$collection = array();
-		foreach ($this->getData() as $mold) {
-			$collection[] = $mold->$property;
-		}
-		return $collection;
-	}
-
-
-	/**
 	 * arranges this->data by a specified property
 	 * @param  string $property 
 	 * @return array           
@@ -394,7 +425,176 @@ class Model extends OriginalAppName\Data
 		$this->setData($newOrder);
 		return $this;
 	}
+
+
+	/**
+	 * @return string 
+	 */
+	public function getTableName() {
+	    return $this->tableName;
+	}
 	
+	
+	/**
+	 * @param string $tableName 
+	 */
+	public function setTableName($tableName) {
+	    $this->tableName = $tableName;
+	    return $this;
+	}
+
+
+	/**
+	 * move elsewhere
+	 * @param  string $side 
+	 * @return string       
+	 */
+	public function getOtherSide($side = '')
+	{
+		if ($side == 'left') {
+			return 'right';
+		}
+		return 'left';
+	}
+
+
+	/**
+	 * order by a property
+	 * @todo try and make more readable
+	 * @param  string $property database table column name
+	 * @param  string $order    asc|desc
+	 * @return object           
+	 */
+	public function orderByProperty($property, $order = 'asc')
+	{
+		$data = $this->getData();
+		$dataSingle = current($data);
+		$method = 'get' . ucfirst($property);
+		if (! method_exists($dataSingle, $method)) {
+			return;
+		}
+		$sampleValue = $dataSingle->$method();
+		if (is_string($sampleValue)) {
+			$type = 'string';
+		}
+		if (is_int($sampleValue)) {
+			$type = 'integer';
+		}
+
+		// sort
+		uasort($data, function($a, $b) use ($method, $type, $order) {
+			if ($type == 'string') {
+				if ($order == 'asc') {
+					return strcasecmp($a->$method(), $b->$method());
+				} else {
+					return strcasecmp($b->$method(), $a->$method());
+				}
+			}
+			if ($type == 'integer') {
+				if ($order = 'asc') {
+					if ($a->$method() == $b->$method()) {
+						return 0;
+					}
+					return $a->$method() < $b->$method() ? -1 : 1;
+				} else {
+					if ($a->$method() == $b->$method()) {
+						return 0;
+					}
+					return $a->$method() > $b->$method() ? -1 : 1;
+				}
+			}
+
+		});
+		$this->setData($data);
+		return $this;
+	}
+
+
+	// public function orderByPropertyStringAsc($property)
+	// {
+	// 	$data = $this->getData();
+
+	// 	// fail silent
+	// 	$dataSample = current($data);
+	// 	if (! property_exists($dataSample, $property)) {
+	// 		return;
+	// 	}
+
+	// 	// sort
+	// 	uasort($data, function($a, $b) use ($property) {
+	// 		return strcasecmp($a->$property, $b->$property);
+	// 	});
+	// 	$this->setData($data);
+	// 	return $this;
+	// }
+
+
+	// public function orderByPropertyStringDesc($property)
+	// {
+	// 	$data = $this->getData();
+
+	// 	// fail silent
+	// 	$dataSample = current($data);
+	// 	if (! property_exists($dataSample, $property)) {
+	// 		return;
+	// 	}
+
+	// 	// sort
+	// 	uasort($data, function($a, $b) use ($property) {
+	// 		return strcasecmp($b->$property, $a->$property);
+	// 	});
+	// 	$this->setData($data);
+	// 	return $this;
+	// }
+
+
+	// public function orderByPropertyIntAsc($property)
+	// {
+	// 	if (! $data = $this->getData()) {
+	// 		return $this;
+	// 	}
+
+	// 	// fail silent
+	// 	$dataSample = current($data);
+	// 	if (! property_exists($dataSample, $property)) {
+	// 		return $this;
+	// 	}
+
+	// 	// sort
+	// 	uasort($data, function($a, $b) use ($property) {
+	// 		if ($a->$property == $b->$property) {
+	// 			return 0;
+	// 		}
+	// 		return $a->$property < $b->$property ? -1 : 1;
+	// 	});
+	// 	$this->setData($data);
+	// 	return $this;
+	// }
+
+
+	// public function orderByPropertyIntDesc($property)
+	// {
+	// 	if (! $data = $this->getData()) {
+	// 		return $this;
+	// 	}
+
+	// 	// fail silent
+	// 	$dataSample = current($data);
+	// 	if (! property_exists($dataSample, $property)) {
+	// 		return $this;
+	// 	}
+
+	// 	// sort
+	// 	uasort($data, function($a, $b) use ($property) {
+	// 		if ($a->$property == $b->$property) {
+	// 			return 0;
+	// 		}
+	// 		return $a->$property > $b->$property ? -1 : 1;
+	// 	});
+	// 	$this->setData($data);
+	// 	return $this;
+	// }
+
 
 	/**
 	 * binds values with unnamed placeholders, 1 2 3 instead of 0 1 2
@@ -462,239 +662,5 @@ class Model extends OriginalAppName\Data
 			return false;
 		}
 		return $sth;
-	}
-
-
-	/**
-	 * returns the latest insert id from the database
-	 * @return int|bool 
-	 */
-	public function getLastInsertId()
-	{
-		return $this->database->dbh->lastInsertId();
-	}
-
-
-	/**
-	 * example which will accept rows and add a url for example
-	 * @param  array $rows 
-	 * @return array       the parsed one
-	 */
-	public function parseRows($rows)
-	{
-		$parsedRows = array();
-		foreach ($rows as $key => $row) {
-			$parsedRows[$key] = $row;
-		}
-		return $parsedRows;
-	}
-
-
-	public function parseRow($row)
-	{
-		// manipulate the row here and return
-		return $row;
-	}
-
-
-	public function getMoldName()
-	{
-		return 'mold_' . $this->getIdentity();
-	}
-	
-
-	/**
-	 * currently a copy of the config method, but needs to go
-	 * through the config?
-	 * @param  string $key 
-	 * @return any
-	 */
-	// public function getOption($key) {
-	// 	if (array_key_exists($key, $this->config->options)) {
-	// 		return $this->config->options[$key];
-	// 	}
-	// }
-
-
-	/**
-	 * simple return of identity
-	 * @return string 
-	 */
-	public function getIdentity()
-	{
-		return $this->identity;
-	}
-
-
-	/**
-	 * @return string 
-	 */
-	public function getTableName() {
-	    return $this->tableName;
-	}
-	
-	
-	/**
-	 * @param string $tableName 
-	 */
-	public function setTableName($tableName) {
-	    $this->tableName = $tableName;
-	    return $this;
-	}
-
-
-	/**
-	 * sets the identity property manually
-	 * or get the class name and turn_into_this format
-	 */
-	public function setIdentity()
-	{
-		$className = get_class($this);
-		$className = explode('_', $className);
-		array_shift($className);
-
-		// catching classes like 'Session' and 'Model'
-		if (! $className) {
-			return $this->identity = '';
-		}
-		$className = implode('_', $className);
-		$this->identity = strtolower($className);
-		return $this;
-	}
-
-
-	/**
-	 * @param mixed $value 
-	 */
-	public function setData($value)
-	{		
-		$this->data = $value;
-		return $this;
-	}
-
-
-	/**
-	 * get
-	 * @param  string $key [description]
-	 * @return [type]      [description]
-	 */
-	public function getData($key = '')
-	{		
-		if ($key) {
-			if (array_key_exists($key, $this->data)) {
-				return $this->data[$key];
-			}
-			return;
-		}
-		return $this->data;
-	}	
-
-
-	/**
-	 * retrieves the first row of data, if there is any
-	 * @return object, array, bool       
-	 */
-	public function getDataFirst()
-	{
-		$data = $this->getData();
-		if (! $data) {
-			return;
-		}
-		return reset($data);
-	}
-	
-
-	public function getOtherSide($side = '')
-	{
-		if ($side == 'left') {
-			return 'right';
-		}
-		return 'left';
-	}
-
-
-	public function orderByPropertyStringAsc($property)
-	{
-		$data = $this->getData();
-
-		// fail silent
-		$dataSample = current($data);
-		if (! property_exists($dataSample, $property)) {
-			return;
-		}
-
-		// sort
-		uasort($data, function($a, $b) use ($property) {
-			return strcasecmp($a->$property, $b->$property);
-		});
-		$this->setData($data);
-		return $this;
-	}
-
-
-	public function orderByPropertyStringDesc($property)
-	{
-		$data = $this->getData();
-
-		// fail silent
-		$dataSample = current($data);
-		if (! property_exists($dataSample, $property)) {
-			return;
-		}
-
-		// sort
-		uasort($data, function($a, $b) use ($property) {
-			return strcasecmp($b->$property, $a->$property);
-		});
-		$this->setData($data);
-		return $this;
-	}
-
-
-	public function orderByPropertyIntAsc($property)
-	{
-		if (! $data = $this->getData()) {
-			return $this;
-		}
-
-		// fail silent
-		$dataSample = current($data);
-		if (! property_exists($dataSample, $property)) {
-			return $this;
-		}
-
-		// sort
-		uasort($data, function($a, $b) use ($property) {
-			if ($a->$property == $b->$property) {
-				return 0;
-			}
-			return $a->$property < $b->$property ? -1 : 1;
-		});
-		$this->setData($data);
-		return $this;
-	}
-
-
-	public function orderByPropertyIntDesc($property)
-	{
-		if (! $data = $this->getData()) {
-			return $this;
-		}
-
-		// fail silent
-		$dataSample = current($data);
-		if (! property_exists($dataSample, $property)) {
-			return $this;
-		}
-
-		// sort
-		uasort($data, function($a, $b) use ($property) {
-			if ($a->$property == $b->$property) {
-				return 0;
-			}
-			return $a->$property > $b->$property ? -1 : 1;
-		});
-		$this->setData($data);
-		return $this;
 	}
 }

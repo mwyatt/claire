@@ -1,6 +1,6 @@
 <?php
 
-namespace OriginalAppName;
+namespace OriginalAppName\Model;
 
 
 /**
@@ -9,56 +9,50 @@ namespace OriginalAppName;
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Content extends OriginalAppName\Model
+class Content extends \OriginalAppName\Model
 {	
 
 
-	private $tableName = 'content';
+	public $tableName = 'content';
+
+
+	public $entity = 'OriginalAppName\\Entity\\Content';
 
 
 	public $fields = array(
-		'id'
-		, 'title'
-		, 'slug'
-		, 'html'
-		, 'type'
-		, 'time_published'
-		, 'status'
-		, 'user_id'
+		'id',
+		'title',
+		'slug',
+		'html',
+		'type',
+		'timePublished',
+		'status',
+		'userId'
 	);
 
 
-	/**
-	 * @todo one prepared statement, loop through ids
-	 * @param  array $ids
-	 * @return object
-	 */
-	public function readId($ids)
+	public function readType($type)
 	{
-		$data = [];
 
 		// query
 		$sth = $this->database->dbh->prepare("
-			select $this->getSqlFields()
-			from $this->getTableName()
-            where id = ?
+			{$this->getSqlSelect()}
+            where type = :type
 		");
 
-		// loop prepared statement
-		foreach ($ids as $id) {
-		    $sth->bindValue('?', $id, PDO::PARAM_INT);
-			
-		    // execute
-			try {
-				$sth->execute();
-				$data[] = $sth->fetch(PDO::FETCH_CLASS, 'OriginalAppName\\Entity\\Content')
-			} catch (Exception $e) {
-				$message = 'there is a problem reading things today';
-			}
-		}
+		// mode
+		$sth->setFetchMode(\PDO::FETCH_CLASS, $this->getEntity());
 
-		// return data
-		$this->setData($data);
+		// bind
+	    $sth->bindValue(':type', $type, \PDO::PARAM_STR);
+
+	    // execute
+		$sth->execute();
+
+		// fetch
+		$this->setData($sth->fetchAll());
+
+		// instance
 		return $this;
 	}
 
@@ -71,15 +65,15 @@ class Content extends OriginalAppName\Model
 	public function filterStatus($status)
 	{
 		if (! $this->getData()) {
-			return;
+			return $this;
 		}
-		$data = array();
+		$dataFiltered = array();
 		foreach ($this->getData() as $entity) {
-			if ($data[$entity->getStatus()] == $status) {
-				$data[] = $entity;
+			if ($entity->getStatus() == $status) {
+				$dataFiltered[] = $entity;
 			}
 		}
-		$this->setData($data);
+		$this->setData($dataFiltered);
 		return $this;
 	}
 

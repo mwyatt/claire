@@ -10,7 +10,7 @@ $routes->add('home', new Symfony\Component\Routing\Route(
 
 $routes->add('content-all', new Symfony\Component\Routing\Route(
 	'/{type}/',
-	['controller' => 'OriginalAppName\\Site\\Elttl\\Controller\\Content::all'],
+	['controller' => 'OriginalAppName\\Controller\\Content::all'],
 	['_method' => 'GET']
 ));
 
@@ -29,35 +29,18 @@ $routes->add('result-all', new Symfony\Component\Routing\Route(
 ));
 
 
+$routes->add('result-year', new Symfony\Component\Routing\Route(
+	'/result/{year}/',
+	['controller' => 'OriginalAppName\\Site\\Elttl\\Controller\\Result::year'],
+	['_method' => 'GET']
+));
+
+
+$routes->add('result-year-division', new Symfony\Component\Routing\Route(
+	'/result/{year}/{division}/',
+	['controller' => 'OriginalAppName\\Site\\Elttl\\Controller\\Result::division'],
+	['_method' => 'GET']
+));
+
+
 return $routes;
-
-return [
-	[
-		'index',
-		'/',
-		''
-	],
-	[
-		'post-all',
-		'',
-		''
-	],
-	[
-
-	],
-	[
-		'result',
-		'/result/',
-		'OriginalAppName\\Site\\Elttl\\Controller\\Result::index'
-	],
-	[
-		'result-year',
-		'/result/{year}/',
-		'OriginalAppName\\Site\\Elttl\\Controller\\Result::year'
-	],
-	[
-		'result-year-division',
-		'/result/{year}/{division}/',
-		'OriginalAppName\\Site\\Elttl\\Controller\\Result::division'
-	]
-];

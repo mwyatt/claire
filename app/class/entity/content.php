@@ -8,7 +8,7 @@ namespace OriginalAppName\Entity;
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Content extends OriginalAppName\Entity
+class Content extends \OriginalAppName\Entity
 {
 
 
@@ -247,7 +247,7 @@ class Content extends OriginalAppName\Entity
 	 */
 	public function getUrl()
 	{
-		$registry = OriginalAppName\Registry::getInstance();
+		$registry = \OriginalAppName\Registry::getInstance();
 		$generator = $registry->get('urlGenerator');
 		return $generator->generate(
 			'content-single',

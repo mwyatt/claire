@@ -8,7 +8,7 @@ namespace OriginalAppName;
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */ 
-class Data extends OriginalAppName\System
+class Data extends \OriginalAppName\System
 {
 
 
@@ -16,7 +16,7 @@ class Data extends OriginalAppName\System
 	 * universal storage property, used for many things
 	 * @var array
 	 */
-	public $data;
+	public $data = [];
 
 
 	/**
@@ -66,13 +66,41 @@ class Data extends OriginalAppName\System
 	 */
 	public function getDataProperty($property)
 	{
-		if (! $this->getData()) {
+		if (! $data = $this->getData()) {
 			return;
 		}
-		$collection = array();
-		foreach ($this->getData() as $mold) {
-			$collection[] = $mold->$property;
+		$method = 'get' . ucfirst($property);
+		$dataSample = current($data);
+		if (! method_exists($dataSample, $method)) {
+			return;
+		}
+		$collection = [];
+		foreach ($data as $entity) {
+			$collection[] = $entity->$method();
 		}
 		return $collection;
+	}
+
+
+	/**
+	 * append 1 to the data array
+	 * @todo is this slow/ok?
+	 * @param  any $dataRow 
+	 * @return object          instance
+	 */
+	public function appendData($dataRow)
+	{
+		$data = $this->getData();
+		$data[] = $dataRow;
+		$this->setData($data);
+		return $this;
+	}
+
+
+	public function limitData($range)
+	{
+		$data = $this->getData();
+		$this->setData(array_slice($data, $range[0], $range[1]));
+		return $this;
 	}
 }

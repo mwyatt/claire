@@ -93,4 +93,14 @@ class Database
 			exit('unable to connect to database');
 		}	
 	}
+
+
+	/**
+	 * returns the latest insert id from the database
+	 * @return int|bool 
+	 */
+	public function getLastInsertId()
+	{
+		return $this->dbh->lastInsertId();
+	}
 }
