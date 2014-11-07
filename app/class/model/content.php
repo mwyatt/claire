@@ -16,7 +16,7 @@ class Content extends \OriginalAppName\Model
 	public $tableName = 'content';
 
 
-	public $entity = 'OriginalAppName\\Entity\\Content';
+	public $entity = '\\OriginalAppName\\Entity\\Content';
 
 
 	public $fields = array(

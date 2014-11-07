@@ -32,6 +32,15 @@ class Content extends \OriginalAppName\Controller
 		}
 		$pagination->setTotalRows(count($modelContent->getData()));
 		$pagination->initialise();
+
+
+
+// get media and tag meta info using ids
+// get all meta for each content
+// group by [name] key then refer when looping
+// 
+
+
 		// $modelContent->bindMeta('media');
 		// $modelContent->bindMeta('tag');
 		$contentSingle = $modelContent->getData();
@@ -42,11 +51,14 @@ class Content extends \OriginalAppName\Controller
 			'contentSingle' => current($contentSingle),
 			'contents' => $modelContent
 		]);
+
+		// a return value from a service?
+		$view->append(['key' => 'value'])
 		return $view->getTemplate('content');
 	}
 
 
-	public static function single($type, $name)
+	public static function single($type, $slug)
 	{
 
 		echo '<pre>';

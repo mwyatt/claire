@@ -12,5 +12,22 @@ class Content_Meta extends OriginalAppName\Entity\Meta
 {
 
 
-	private $content_id;	
+	private $contentId;	
+
+
+	/**
+	 * @return inst 
+	 */
+	public function getContentId() {
+	    return $this->contentId;
+	}
+	
+	
+	/**
+	 * @param inst $contentId 
+	 */
+	public function setContentId($contentId) {
+	    $this->contentId = $contentId;
+	    return $this;
+	}
 }

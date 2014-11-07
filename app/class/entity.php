@@ -12,7 +12,7 @@ class Entity
 {
 
 
-	private $id;
+	protected $id;
 
 
 	/**

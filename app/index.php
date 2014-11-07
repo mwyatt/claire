@@ -23,6 +23,16 @@ $registry->set('database', new OriginalAppName\Database(include SITE_PATH . 'cre
 $registry->set('url', new OriginalAppName\Url);
 
 
+/**
+ * error reporting
+ * @var error
+ */
+$error = new OriginalAppName\Error();
+$error
+    ->setReporting(true)
+    ->initialise();
+
+
 // routing fun
 
 
@@ -86,16 +96,6 @@ $options = new model_options($system);
 $options->read();
 $options->keyByProperty('name');
 $system->config->setOptions($options->getData());
-
-
-/**
- * error reporting
- * @var error
- */
-$error = new error($system);
-$error
-	->setReporting(true)
-	->initialise();
 
 
 /**
