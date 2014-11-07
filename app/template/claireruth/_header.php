@@ -16,7 +16,7 @@
     <script src="<?php echo $this->getUrlJs('modernizr.js') ?>"></script>
     <script>var urlBase = '<?php echo $this->getUrl() ?>';</script>
 
-<?php include($this->pathView('header/_google-analytics')) ?>
+<?php include($this->getTemplatePath('header/_google-analytics')) ?>
 
 </head>
 <body<?php echo ($this->getBodyClass() ? ' class="' . $this->getBodyClass() . '"' : '') ?>>
@@ -31,14 +31,14 @@
     <header class="container-header row js-container-header clearfix js-fixed-bar">
         <div class="container-header-inner">
     
-    <?php include($this->pathView('_logo')) ?>
+    <?php include($this->getTemplatePath('_logo')) ?>
 
             <a href="#menu" class="js-smooth-scroll header-button-mobile header-button-mobile-menu js-header-button-mobile-menu"><img class="header-button-mobile-image" src="<?php echo $this->getUrlMedia('menu.svg') ?>" onerror="this.src=''; this.onerror=null;"></a>
             <a href="#search" class="js-smooth-scroll header-button-mobile header-button-mobile-search js-header-button-mobile-search"><img class="header-button-mobile-image" src="<?php echo $this->getUrlMedia('search.svg') ?>" onerror="this.src=''; this.onerror=null;"></a>
 
     <?php $menu = array_reverse($mainMenu); ?>
-    <?php include($this->pathView('_menu')) ?>
-    <?php include($this->pathView('_search')) ?>
+    <?php include($this->getTemplatePath('_menu')) ?>
+    <?php include($this->getTemplatePath('_search')) ?>
 
         </div>
     </header>

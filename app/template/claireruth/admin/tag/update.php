@@ -1,4 +1,4 @@
-<?php require_once($this->pathView('admin/_header')) ?>
+<?php require_once($this->getTemplatePath('admin/_header')) ?>
 
 <div class="content <?php echo $this->url->getPathPart(2) ?>">
 	<a href="<?php echo $this->getUrl('back') ?>" class="button back">Back</a>
@@ -17,4 +17,4 @@
 	</form>
 </div>
 
-<?php require_once($this->pathView('admin/_footer')) ?>
+<?php require_once($this->getTemplatePath('admin/_footer')) ?>

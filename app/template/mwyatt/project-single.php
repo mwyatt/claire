@@ -1,4 +1,4 @@
-<?php require_once($this->pathView('_header')) ?>
+<?php require_once($this->getTemplatePath('_header')) ?>
 <?php if ($project): ?>
 		
 <div class="project-single">
@@ -9,4 +9,4 @@
 </div>
 
 <?php endif ?>
-<?php require_once($this->pathView('_footer')) ?>
+<?php require_once($this->getTemplatePath('_footer')) ?>

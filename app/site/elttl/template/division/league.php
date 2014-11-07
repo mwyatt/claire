@@ -1,4 +1,4 @@
-<?php include($this->pathView('_header')) ?>
+<?php include($this->getTemplatePath('_header')) ?>
 
 <div class="page division-league js-page-division-league">
 	<h1 class="page-primary-title"><?php echo $division->getName() ?> division <?php echo $tableName ?> table</h1>
@@ -6,7 +6,7 @@
 <?php if ($leagueStats): ?>
 	<p class="page-primary-description">This is the <?php echo $tableName ?> table for the <?php echo $division->getName() ?> division.</p>
 
-	<?php include($this->pathView('division/_menu-tables')) ?>
+	<?php include($this->getTemplatePath('division/_menu-tables')) ?>
 	
 	<table class="elttl-table">
 		<tr class="elttl-table-row elttl-table-headings">
@@ -43,4 +43,4 @@
 	<p>No fixtures have been fulfilled yet.</p>
 
 <?php endif ?>
-<?php include($this->pathView('_footer')) ?>
+<?php include($this->getTemplatePath('_footer')) ?>

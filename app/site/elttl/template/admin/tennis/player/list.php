@@ -1,4 +1,4 @@
-<?php require_once($this->pathView('admin/_header')) ?>
+<?php require_once($this->getTemplatePath('admin/_header')) ?>
 
 <div class="page tennis-player-list js-tennis-player-list">
 	<span class="button-primary js-grid-button-create table-crud-button-create">Create</span>
@@ -69,4 +69,4 @@
 	</table>
 </div>
 
-<?php require_once($this->pathView('admin/_footer')) ?>
+<?php require_once($this->getTemplatePath('admin/_footer')) ?>

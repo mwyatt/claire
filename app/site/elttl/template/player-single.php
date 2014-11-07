@@ -1,4 +1,4 @@
-<?php require_once($this->pathView('_header')) ?>
+<?php require_once($this->getTemplatePath('_header')) ?>
 
 <div class="page player-single js-page-player-single">
 	<h1 class="page-primary-title"><?php echo $player->getNameFull() ?></h1>
@@ -41,7 +41,7 @@
 	<div class="block-margins">
 		<h2 class="player-single-secondary-title">Fixtures</h2>
 
-<?php include($this->pathView('_fixtures')) ?>
+<?php include($this->getTemplatePath('_fixtures')) ?>
 
 	</div>
 
@@ -52,7 +52,7 @@
 		<h2 class="player-single-secondary-title">Performance</h2>
 		<table class="elttl-table is-encounter">
 
-	<?php include($this->pathView('_encounters')) ?>
+	<?php include($this->getTemplatePath('_encounters')) ?>
 
 		</table>
 	</div>
@@ -61,4 +61,4 @@
 
 </div>
 
-<?php require_once($this->pathView('_footer')) ?>
+<?php require_once($this->getTemplatePath('_footer')) ?>

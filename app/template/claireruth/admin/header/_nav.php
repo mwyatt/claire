@@ -4,7 +4,7 @@
     
 <nav class="nav-main-container">
 
-    <?php include($this->pathView('admin/header/_nav-children')) ?>
+    <?php include($this->getTemplatePath('admin/header/_nav-children')) ?>
 
 </nav>
 

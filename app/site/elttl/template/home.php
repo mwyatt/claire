@@ -1,4 +1,4 @@
-<?php include($this->pathView('_header')) ?>
+<?php include($this->getTemplatePath('_header')) ?>
 
 <div class="page home js-page-home">
 	<div class="banner-and-press">
@@ -31,7 +31,7 @@
 				<span class="home-press-heading-text">Press releases</span>
 			</h1>
 		
-<?php include($this->pathView('_contents')) ?>
+<?php include($this->getTemplatePath('_contents')) ?>
 
 		</div>
 	</div>
@@ -61,13 +61,13 @@
 			<span class="home-press-heading-text">Divisions</span>
 		</h1>
 
-	<?php include($this->pathView('_divisions')) ?>
+	<?php include($this->getTemplatePath('_divisions')) ?>
 
 	</div>
 
 <?php endif ?>
-<?php include($this->pathView('_advertisements')) ?>
+<?php include($this->getTemplatePath('_advertisements')) ?>
 
 </div>
 
-<?php include($this->pathView('_footer')) ?>
+<?php include($this->getTemplatePath('_footer')) ?>

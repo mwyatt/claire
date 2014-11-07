@@ -7,7 +7,7 @@
 
         <div class="nav-main-drop">
 
-        <?php include($this->pathView('admin/header/_nav-children')) ?>
+        <?php include($this->getTemplatePath('admin/header/_nav-children')) ?>
 
         </div>
 

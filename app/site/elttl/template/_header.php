@@ -16,7 +16,7 @@
     <script src="<?php echo $this->getUrlAsset('vendor/bower/modernizr/modernizr.js') ?>"></script>
     <script>var urlBase = '<?php echo $this->getUrl() ?>';</script>
     
-<?php include($this->pathView('header/_google-analytics')) ?>
+<?php include($this->getTemplatePath('header/_google-analytics')) ?>
 
 </head>
 <body<?php echo ($this->getBodyClass() ? ' class="' . $this->getBodyClass() . '"' : '') ?>>
@@ -32,14 +32,14 @@
         <header class="container-header row js-container-header clearfix js-fixed-bar">
             <div class="container-header-inner">
 
-        <?php include($this->pathView('header/_logo')) ?>
+        <?php include($this->getTemplatePath('header/_logo')) ?>
 
-                <a href="mailto:martin.wyatt@gmail.com" class="header-sticker-beta" title="<?php echo $this->config->getOption('site_title') ?> is still actively under development. If you notice any bugs or have any improvements please email me: martin.wyatt@gmail.com">Beta</a>
+                <a href="mailto:martin.wyatt@gmail.com" class="header-sticker-beta" title="<?php echo $option['site_title'] ?> is still actively under development. If you notice any bugs or have any improvements please email me: martin.wyatt@gmail.com">Beta</a>
 
         <?php $menu = $menuPrimary; ?>
-        <?php include($this->pathView('_menu-primary')) ?>
-        <?php include($this->pathView('_menu-division')) ?>
-        <?php include $this->pathView('header/_year') ?>
+        <?php include($this->getTemplatePath('_menu-primary')) ?>
+        <?php include($this->getTemplatePath('_menu-division')) ?>
+        <?php include $this->getTemplatePath('header/_year') ?>
 
             </div>
         </header>

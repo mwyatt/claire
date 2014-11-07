@@ -1,4 +1,4 @@
-<?php require_once($this->pathView('admin/_header')) ?>
+<?php require_once($this->getTemplatePath('admin/_header')) ?>
 
 <div class="page tennis-fixture-list">
 	<h1 class="page-primary-title">Fixtures</h1>
@@ -50,4 +50,4 @@
 
 </div>
 
-<?php require_once($this->pathView('admin/_footer')) ?>
+<?php require_once($this->getTemplatePath('admin/_footer')) ?>

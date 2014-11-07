@@ -8,7 +8,7 @@ namespace OriginalAppName\Entity;
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Meta extends OriginalAppName\Entity
+class Meta extends \OriginalAppName\Entity
 {
 
 
@@ -16,14 +16,14 @@ class Meta extends OriginalAppName\Entity
 	 * key to represent the connection
 	 * @var string
 	 */
-	protected $name;
+	public $name;
 
 	
 	/**
 	 * value often connecting to another row in another table
 	 * @var bool|int|string 
 	 */
-	protected $value;
+	public $value;
 
 
 	/**

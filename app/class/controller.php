@@ -16,24 +16,14 @@ class Controller extends \OriginalAppName\Route
 {
 
 
-	/**
-	 * code here to initialise the controller
-	 * this can be overidden or expanded later on down the controller tree
-	 * if required
-	 */
-	public function initialise()
+	public function index()
 	{
-
-		// will run for any class, can expand on this in future classes
-	}
-
-
-	/**
-	 * always happens after initialise
-	 */
-	public function run()
-	{
-		
-		// code for core logic
+		$modelOptions = new Model\Options();
+		$modelOptions
+			->read()
+			->keyDataByProperty('name');
+		return [
+			'option' => $modelOptions->getData()
+		];
 	}
 }

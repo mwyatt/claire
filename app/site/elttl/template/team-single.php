@@ -1,4 +1,4 @@
-<?php require_once($this->pathView('_header')) ?>
+<?php require_once($this->getTemplatePath('_header')) ?>
 
 <div class="page team-single js-page-team-single">
 	<h1 class="page-primary-title"><?php echo $team->getName() ?></h1>
@@ -73,7 +73,7 @@
 	<div class="block-margins">
 		<h2 class="team-single-secondary-title">Fixtures</h2>
 
-	<?php include($this->pathView('_fixtures')) ?>
+	<?php include($this->getTemplatePath('_fixtures')) ?>
 
 	</div>
 
@@ -81,4 +81,4 @@
 
 </div>
 
-<?php require_once($this->pathView('_footer')) ?>
+<?php require_once($this->getTemplatePath('_footer')) ?>

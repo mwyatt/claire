@@ -4,6 +4,7 @@ namespace OriginalAppName\Controller;
 
 use OriginalAppName\Pagination;
 use OriginalAppName\Model;
+use Symfony\Component\HttpFoundation\Response;
 
 
 /**
@@ -33,28 +34,24 @@ class Content extends \OriginalAppName\Controller
 		$pagination->setTotalRows(count($modelContent->getData()));
 		$pagination->initialise();
 
+		// all meta for these ids
+		$modelContentMeta = new Model\Content\Meta();
+		$modelContentMeta->readId($modelContent->getDataProperty('id'), 'contentId');
+		$modelContentMetaMedia = $modelContentMeta->filterData('name', 'media');
+		$modelContentMetaTag = $modelContentMeta->filterData('name', 'tag');
 
+		// single content
+		$contentSingle = current($modelContent->getData());
 
-// get media and tag meta info using ids
-// get all meta for each content
-// group by [name] key then refer when looping
-// 
-
-
-		// $modelContent->bindMeta('media');
-		// $modelContent->bindMeta('tag');
-		$contentSingle = $modelContent->getData();
+		// template
 		$view = new \OriginalAppName\View([
 			'metaTitle' => 'All ' . $contentSingle->getStatus(),
 			'metaDescription' => '',
 			'pagination' => $pagination,
-			'contentSingle' => current($contentSingle),
+			'contentSingle' => $contentSingle,
 			'contents' => $modelContent
 		]);
-
-		// a return value from a service?
-		$view->append(['key' => 'value'])
-		return $view->getTemplate('content');
+		return new Response($view->getTemplate('content'));
 	}
 
 

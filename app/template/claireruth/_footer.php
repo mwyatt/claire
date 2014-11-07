@@ -13,17 +13,17 @@
 				</div>
 				<div id="search">
 
-<?php include($this->pathView('_search')) ?>
+<?php include($this->getTemplatePath('_search')) ?>
 
 				</div>
 				<div id="menu">
 
 <?php $menu = $mainMenu; ?>
-<?php include($this->pathView('_menu')) ?>
+<?php include($this->getTemplatePath('_menu')) ?>
 
 				</div>
 					
-<?php //include($this->pathView('_calling-card')) ?>
+<?php //include($this->getTemplatePath('_calling-card')) ?>
 
 			</div>
 		</footer>

@@ -79,6 +79,11 @@ try {
 } catch (Symfony\Component\Routing\Exception\ResourceNotFoundException $e) {
     $response = new Response('Not found!', Response::HTTP_NOT_FOUND);
 } catch (Exception $e) {
+    echo '<pre>';
+    print_r($e);
+    echo '</pre>';
+    exit;
+    
     $response = new Response('An error occurred', 500);
 }
 

@@ -73,6 +73,16 @@ define('SITE_PATH', APP_PATH . 'site' . DS . SITE . DS);
 
 
 /**
+ * site configuration
+ */
+$config = include SITE_PATH . 'config' . EXT;
+if (! isset($config['assetVersion'])) {
+	exit('please specify a site key');
+}
+define('ASSET_VERSION', $config['assetVersion']);
+
+
+/**
  * boot
  */
 include APP_PATH . 'ini' . EXT;

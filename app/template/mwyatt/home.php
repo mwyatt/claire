@@ -1,4 +1,4 @@
-<?php include($this->pathView('_header')) ?>
+<?php include($this->getTemplatePath('_header')) ?>
 
 <div class="content home">
 
@@ -51,4 +51,4 @@
 
 </div>
 
-<?php include($this->pathView('_footer')) ?>
+<?php include($this->getTemplatePath('_footer')) ?>

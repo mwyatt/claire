@@ -13,28 +13,6 @@ class View extends \OriginalAppName\Data
 
 
 	/**
-	 * the name of the template loaded
-	 * @var string
-	 */
-	public $template;
-
-
-	/**
-	 * flag to detect if this is the last template load
-	 * @var boolean
-	 */
-	public $render = false;
-
-
-	/**
-	 * used to attach objects to the class instance
-	 * see method 'setobject'
-	 * @var array
-	 */
-	public $objects;
-
-
-	/**
 	 * page meta information
 	 * @var array
 	 */
@@ -49,74 +27,78 @@ class View extends \OriginalAppName\Data
 	public $data = '';
 
 
+	public $url;
+
+
 	/**
 	 * needed for meta defaults
 	 * @param array $system 
 	 */
-	public function __construct($system = false) {
-
-		// construct in default fashion
-		parent::__construct($system);
-
-		// meta defaults first, then overriden when setting up template
-		$this->setMetaDefaults();
-	}
-
-
-	public function setRender($value)
-	{
-		return $this->render = $value;
-	}
-
-
-	public function getRender()
-	{
-		return $this->render;
+	public function __construct($data) {
+		$registry = \OriginalAppName\Registry::getInstance();
+		$this->setUrl($registry->get('url'));
+		$this->setMetaDefaults($data);
+		$this->setData(array_merge($this->getDataDefault(), $data));
 	}
 
 
 	/**
-	 * sets header and outputs the data
-	 * only used by the controller class
+	 * @param object $url 
 	 */
-	public function render()
-	{
-
-		// default header
-		header('Content-type: text/html; charset=utf-8'); 
-
-		// output
-		echo $this->getData();
+	public function setUrl($url) {
+	    $this->url = $url;
+	    return $this;
 	}
+
+
+	public function getDataDefault()
+	{
+		$controller = new \OriginalAppName\Controller();
+		return $controller->index();
+	}
+
+
+	// /**
+	//  * sets header and outputs the data
+	//  * only used by the controller class
+	//  */
+	// public function render()
+	// {
+
+	// 	// default header
+	// 	header('Content-type: text/html; charset=utf-8'); 
+
+	// 	// output
+	// 	echo $this->getData();
+	// }
 
 	
 	/**
 	 * load template file and prepare all objects for output
-	 * @param  string $templateTitle 
+	 * @param  string $templatePath 
 	 */
-	public function getTemplate($templateTitle) {
-		$path = $this->pathView($templateTitle);
-		if (! file_exists($path)) {
+	public function getTemplate($templatePath) {
+
+		// obtain path
+		$path = $this->getTemplatePath($templatePath);
+		if (! $path) {
 			return;
 		}
-		$this->setObject('options', $this->config->getoptions());
 
-		// push variables into data variable
-		extract($this->convertObjectsToData());
+		// push stored into method scope
+		extract($this->getData());
+echo '<pre>';
+print_r($this->getData());
+echo '</pre>';
+exit;
 
 		// debugging
 		if ($this->isDebug($this)) {
 			echo '<pre>';
-			print_r($this->convertObjectsToData());
+			print_r($this->getData());
 			echo '</pre>';
 			echo '<hr>';
 			exit;
-		}
-
-		// reset existing data to '' if needed
-		$existingData = $this->getData();
-		if (is_array($existingData)) {
-			$existingData = '';
 		}
 
 		// start output buffer
@@ -130,7 +112,7 @@ class View extends \OriginalAppName\Data
 		ob_end_clean();
 
 		// add this data to existing
-		$this->setData($existingData . $content);
+		$this->setData($content);
 
 		// return just loaded template result
 		return $content;
@@ -138,74 +120,21 @@ class View extends \OriginalAppName\Data
 
 
 	/**
-	 * loads template and sets render status to true
-	 * @param  string $templateTitle 
-	 * @return bool                
-	 */
-	public function renderTemplate($templateTitle)
-	{
-
-		// reset data, do you always want this?
-		$this->setData(array());
-
-		// parse template as usual
-		$this->getTemplate($templateTitle);
-
-		// set final template flag
-		return $this->setRender(true);
-	}
-
-
-	/**
-	 * will create an array within data of all pushed data
-	 * will always be set, false if no data present
-	 * must be a model | array or variable
-	 * converts keys to camelcase
-	 */
-	public function convertObjectsToData()
-	{
-		$convertedObjects = array();
-		foreach ($this->objects as $title => $object) {
-			$camelTitle = Helper::delimiterToCamel($title);
-
-			// array / variable
-			if (! is_object($object)) {
-				$convertedObjects[$camelTitle] = $object;
-				continue;
-			}
-
-			// must be a model
-			if (method_exists($object, 'getData')) {
-
-				// empty model
-				if (! $object->getData()) {
-					$convertedObjects[$camelTitle] = false;
-					continue;
-				}
-
-				// filled model
-				$convertedObjects[$camelTitle] = $object->getData();
-				continue;
-			}
-
-			// mold
-			$convertedObjects[$camelTitle] = $object;
-		}
-		return $convertedObjects;
-	}
-	
-	
-	/**
-	 * grabs base path for the view folder, used for headers, footers
-	 * and all includes within the view templates
+	 * gets template from site specific
+	 * falls back to path from main template dir
+	 * files must exist
 	 * @return string 
 	 */
-	public function pathView($template = '') { 
-		$path = PATH_VIEW;
-		if ($template) {
-			$path .= $template . EXT;
+	public function getTemplatePath($append) {
+		$end = 'template' . DS . $append . EXT;
+		$path = SITE_PATH . $end;
+		if (file_exists($path)) {
+			return $path;
 		}
-		return $path;
+		$path = APP_PATH . $end;
+		if (file_exists($path)) {
+			return $path;
+		}
 	}
 
 
@@ -214,7 +143,7 @@ class View extends \OriginalAppName\Data
 	 * and all includes within the view templates
 	 * @return string 
 	 */
-	public function getPath($append) { 
+	public function getPath($append) {
 		$path = BASE_PATH;
 		return $path . $append;
 	}
@@ -258,7 +187,7 @@ class View extends \OriginalAppName\Data
 	 * @return string           
 	 */
 	public function pathAdminView($template = '') { 
-		return $this->pathView('admin/' . $template);
+		return $this->getTemplatePath('admin/' . $template);
 	}	
 	
 
@@ -318,11 +247,15 @@ class View extends \OriginalAppName\Data
 	 */
 	public function setMetaDefaults()
 	{
-		$this->setMeta(array(
+/*
+array(
 			'title' => $this->config->getOption('meta_title'),
 			'keywords' => $this->config->getOption('meta_keywords'),
 			'description' => $this->config->getOption('meta_description')
-		));
+		)
+ */
+
+		$this->setMeta([]);
 		return $this;
 	}
 	
@@ -341,7 +274,7 @@ class View extends \OriginalAppName\Data
 
 		// site title which can be added on to make the page title
 		// more interesting
-		$siteTitle = $this->config->getOption('meta_title');
+		$siteTitle = 'meta title';/*$this->config->getOption('meta_title')*/
 
 		// pass through and set the keys where required
 		// keys are already set on construct
@@ -382,38 +315,6 @@ class View extends \OriginalAppName\Data
 
 
 	/**
-	 * appends thumbnail information if it is an image
-	 * @todo port to view
-	 * @param array $result modified row
-	 */
-	public function getMediaThumb($result)
-	{
-		if ($result->type != 'application/pdf') {
-			$result->thumb = new stdClass();
-			$result->thumb->{'300'} = $this->url->build(array('thumb/?src=' . $this->url->getCache('base') . $result->path . '&w=300&h=130'), false);
-			$result->thumb->{'150'} = $this->url->build(array('thumb/?src=' . $this->url->getCache('base') . $result->path . '&w=150&h=120'), false);
-			$result->thumb->{'350'} = $this->url->build(array('thumb/?src=' . $this->url->getCache('base') . $result->path . '&w=350&h=220'), false);
-			$result->thumb->{'760'} = $this->url->build(array('thumb/?src=' . $this->url->getCache('base') . $result->path . '&w=760&h=540'), false);
-		}
-		return $result;
-	}
-
-
-	/**
-	 * returns nothing or the array key
-	 * @param  string $needle   
-	 * @param  array $haystack 
-	 * @return string|bool|int|null           
-	 */
-	public function get($needle, $haystack) {	
-		if (! array_key_exists($needle, $haystack)) {
-			return;
-		}
-		return $haystack[$needle];
-	}
-
-
-	/**
 	 * provides a bool response to whether the user is using a admin url
 	 * @return boolean 
 	 */
@@ -430,61 +331,5 @@ class View extends \OriginalAppName\Data
 	 */
 	public function getPathMediaUpload($path) { 
 		return $this->url->getCache('base') . 'media/upload/' . $path;
-	}
-
-
-	/**
-	 * returns an object if it has been registered
-	 * @param  string $objectTitle 
-	 * @return object|bool              
-	 */
-	public function getObject($objectTitle) {
-		$objectTitle = strtolower($objectTitle);
-		if (array_key_exists($objectTitle, $this->objects)) {
-			return $this->objects[$objectTitle];
-		}
-		return false;
-	}
-	
-	
-	/**
-	 * possible to submit:
-	 * 'key' => object
-	 * 'key' => array
-	 * object
-	 * @param string|object|array  $keyName       can represent a few data type
-	 * @param object|array $objectOrArray often the object to set
-	 */
-	public function setObject($keyName, $objectOrArray = false) {
-
-		// looking for 'string' => object/array
-		if ((gettype($keyName) == 'string')) {
-
-			// array
-			if (is_array($objectOrArray)) {
-				$this->objects[$keyName] = $objectOrArray;
-				return $this;
-			}
-
-			// object
-			if (method_exists($objectOrArray, 'getData')) {
-				$objectOrArray = $objectOrArray->getData();
-			}
-			$this->objects[$keyName] = $objectOrArray;
-			return $this;
-		}
-
-		// simple object
-		if (is_object($keyName)) {
-			$classTitle = get_class($keyName);
-			if (method_exists($keyName, 'getData')) {
-				$keyName = $keyName->getData();
-			}
-			$this->objects[strtolower($classTitle)] = $keyName;
-			return $this;
-		}
-
-		// chain
-		return $this;
 	}
 } 

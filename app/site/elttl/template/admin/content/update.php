@@ -1,4 +1,4 @@
-<?php require_once($this->pathView() . 'admin/_header.php') ?>
+<?php require_once($this->getTemplatePath() . 'admin/_header.php') ?>
 
 <div class="page content <?php echo $this->url->getPathPart(2) ?> <?php echo ($content ? 'update' : 'create') ?> content-create-update" data-id="<?php echo $content->id ?>">
 
@@ -20,20 +20,20 @@
         	<input id="form_slug" class="w100 required js-input-slug" type="text" name="slug" maxlength="75" value="<?php echo $content->slug ?>" autofocus="autofocus">
 	    </div>
 
-<?php include($this->pathView('admin/content/_wysihtml5')) ?>
+<?php include($this->getTemplatePath('admin/content/_wysihtml5')) ?>
 
 		<div class="block-margins hidden">
 			<h2 class="label-title">Media</h2>
 
 <?php $media = $content->media ?>
-<?php include($this->pathView('admin/media/_browser')) ?>
+<?php include($this->getTemplatePath('admin/media/_browser')) ?>
 
 		</div>
 		<div class="block-margins hidden">
 			<h2 class="label-title">Tags</h2>
 	
 <?php $tags = $content->tag ?>
-<?php include($this->pathView('admin/tag/_browser')) ?>
+<?php include($this->getTemplatePath('admin/tag/_browser')) ?>
 
 		</div>
 
@@ -68,4 +68,4 @@
 	</form>
 </div>
 
-<?php require_once($this->pathView() . 'admin/_footer.php') ?>
+<?php require_once($this->getTemplatePath() . 'admin/_footer.php') ?>

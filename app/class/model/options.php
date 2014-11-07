@@ -1,12 +1,14 @@
 <?php
 
+namespace OriginalAppName\Model;
+
 
 /**
  * @author 	Martin Wyatt <martin.wyatt@gmail.com> 
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */ 			
-class Model_Options extends Model
+class Options extends \OriginalAppName\Model
 {	
 
 
@@ -15,4 +17,10 @@ class Model_Options extends Model
 		, 'name'
 		, 'value'
 	);
+
+
+	public $tableName = 'options';
+
+
+	public $entity = '\\OriginalAppName\\Entity\\Meta';
 }

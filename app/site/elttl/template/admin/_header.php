@@ -25,15 +25,15 @@
     <header class="main js-header-main">
     	<div class="header-inner wrap-full-width">
 	    	<div class="inner-title-nav-user">
-		        <a class="header-site-title" href="<?php echo $this->getUrl() ?>" target="_blank" title="Open Homepage"><?php echo $this->config->getOption('site_title') ?></a>
+		        <a class="header-site-title" href="<?php echo $this->getUrl() ?>" target="_blank" title="Open Homepage"><?php echo $option['site_title'] ?></a>
 
-	<?php require_once($this->pathView('admin/header/_user')) ?>
-	<?php require_once($this->pathView('admin/header/_nav')) ?>
+	<?php require_once($this->getTemplatePath('admin/header/_user')) ?>
+	<?php require_once($this->getTemplatePath('admin/header/_nav')) ?>
 
 			</div>
 			
 	<?php $feedback = $sessionFeedback ?>
-	<?php require_once($this->pathView('_feedback')) ?>
+	<?php require_once($this->getTemplatePath('_feedback')) ?>
 
 		</div>
 	</header>

@@ -1,4 +1,4 @@
-<?php include($this->pathView('_header')) ?>
+<?php include($this->getTemplatePath('_header')) ?>
 
 <div class="page year-list js-page-year-list">
 	<h1 class="page-primary-title">Results Archive</h1>
@@ -26,4 +26,4 @@
 	<p>No years, not good!</p>
 
 <?php endif ?>
-<?php include($this->pathView('_footer')) ?>
+<?php include($this->getTemplatePath('_footer')) ?>

@@ -32,7 +32,7 @@
 
 			<?php foreach ($fixtures as $fixture): ?>
 				<?php if ($fixture->getTeamIdLeft() == $teamLeft->getId() && $fixture->getTeamIdRight() == $teamRight->getId()): ?>
-					<?php include($this->pathView('_fixture')) ?>
+					<?php include($this->getTemplatePath('_fixture')) ?>
 				<?php endif ?>
 			<?php endforeach ?>
 

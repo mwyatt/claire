@@ -1,4 +1,4 @@
-<?php include($this->pathView('_header')) ?>
+<?php include($this->getTemplatePath('_header')) ?>
 
 <div class="page year-single js-page-year-single">
 	<h1 class="page-primary-title">Season <?php echo $year->getNameFull() ?></h1>
@@ -9,4 +9,4 @@
 
 	</div>
 
-<?php include($this->pathView('_footer')) ?>
+<?php include($this->getTemplatePath('_footer')) ?>

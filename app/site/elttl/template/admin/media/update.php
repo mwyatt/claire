@@ -1,4 +1,4 @@
-<?php require_once($this->pathView('admin/_header')) ?>
+<?php require_once($this->getTemplatePath('admin/_header')) ?>
 <?php $media = $this->get('model_media') ?>
 
 <div class="content <?php echo $this->url->getPathPart(2) ?>">
@@ -32,7 +32,7 @@
 			<div class="tags">
 	
 <?php if ($rowContent['tag'] = $this->get('model_media', 'tag')): ?>
-	<?php include($this->pathView('_content-tags')) ?>
+	<?php include($this->getTemplatePath('_content-tags')) ?>
 	<?php foreach ($this->get('model_media', 'tag') as $tag): ?>
 			
 			<input name="tag[]" type="hidden" value="<?php echo $tag['id'] ?>">
@@ -52,4 +52,4 @@
 	</form>
 </div>
 
-<?php require_once($this->pathView('admin/_footer')) ?>
+<?php require_once($this->getTemplatePath('admin/_footer')) ?>

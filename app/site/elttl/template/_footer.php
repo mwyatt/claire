@@ -12,9 +12,9 @@
 			</div>
 
 <?php $menu = $menuSecondary; ?>
-<?php include($this->pathView('_menu-secondary')) ?>
+<?php include($this->getTemplatePath('_menu-secondary')) ?>
 <?php $menu = $menuTertiary; ?>
-<?php include($this->pathView('_menu-secondary')) ?>
+<?php include($this->getTemplatePath('_menu-secondary')) ?>
 
 			<a href="http://tabletennisengland.co.uk/" target="_blank" class="logo-table-tennis-england"><img class="logo-table-tennis-england-image" src="<?php echo $this->getUrlMedia('logo-table-tennis-england.gif') ?>" alt="Table Tennis England Logo"></a>
 		</div>

@@ -9,7 +9,7 @@
 	<div class="content-thumb-background" style="background-image: url(<?php echo $this->getPathMediaUpload($medium->path) ?>); background-repeat: no-repeat; background-position: center center;"></div>
 
 <?php endif ?>
-<?php include($this->pathView('_medium')) ?>
+<?php include($this->getTemplatePath('_medium')) ?>
 <?php if ($content->user): ?>
 
 	<div class="content-author"><span class="content-author-by">By</span> <a href="https://plus.google.com/100076113648548258052" class="content-author-link"><?php echo $content->user->first_name ?> <?php echo $content->user->last_name ?></a></div>
@@ -25,7 +25,7 @@
 	</div>
 
 <?php $tags = $content->tag ?>
-<?php include($this->pathView('_tags')) ?>
+<?php include($this->getTemplatePath('_tags')) ?>
 <?php if ($this->isAdmin()): ?>
 	
 	<div class="content-action">

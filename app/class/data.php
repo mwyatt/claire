@@ -90,6 +90,9 @@ class Data extends \OriginalAppName\System
 	 */
 	public function appendData($dataRow)
 	{
+		if (! $dataRow) {
+			return $this;
+		}
 		$data = $this->getData();
 		$data[] = $dataRow;
 		$this->setData($data);
@@ -101,6 +104,53 @@ class Data extends \OriginalAppName\System
 	{
 		$data = $this->getData();
 		$this->setData(array_slice($data, $range[0], $range[1]));
+		return $this;
+	}
+
+
+	/**
+	 * arranges this->data by a specified property
+	 * @param  string $property 
+	 * @return array           
+	 */
+	public function keyDataByProperty($property)
+	{
+		if (! $this->getData()) {
+			return;
+		}
+		$newOrder = array();
+		foreach ($this->getData() as $mold) {
+			$newOrder[$mold->$property] = $mold;
+		}
+		$this->setData($newOrder);
+		return $this;
+	}
+
+
+	/**
+	 * filters out any data that does not
+	 * column == value 
+	 * @param  string $column database column
+	 * @param  any $value  
+	 * @return object         
+	 */
+	public function filterData($column, $value)
+	{
+		if (! $data = $this->getData()) {
+			return $this;
+		}
+		$method = 'get' . ucfirst($column);
+		$dataSample = current($data);
+		if (! method_exists($dataSample, $method)) {
+			return;
+		}
+		$dataFiltered = array();
+		foreach ($data as $entity) {
+			if ($entity->$method() == $name) {
+				$dataFiltered[] = $entity;
+			}
+		}
+		$this->setData($dataFiltered);
 		return $this;
 	}
 }

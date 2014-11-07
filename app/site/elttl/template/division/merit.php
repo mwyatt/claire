@@ -1,4 +1,4 @@
-<?php include($this->pathView('_header')) ?>
+<?php include($this->getTemplatePath('_header')) ?>
 
 <div class="page division-merit js-page-division-merit">
 	<h1 class="page-primary-title"><?php echo $division->getName() ?> division merit table</h1>
@@ -7,7 +7,7 @@
 
 	<p class="p dont-print">This is the merit table for the <?php echo $division->getName() ?> division.</p>
 
-	<?php include($this->pathView('division/_menu-tables')) ?>
+	<?php include($this->getTemplatePath('division/_menu-tables')) ?>
 	
 	<table class="elttl-table">
 		<tr class="elttl-table-row elttl-table-headings">
@@ -47,4 +47,4 @@
 	<p>No fixtures have been fulfilled yet.</p>
 
 <?php endif ?>
-<?php include($this->pathView('_footer')) ?>
+<?php include($this->getTemplatePath('_footer')) ?>

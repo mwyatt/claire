@@ -44,6 +44,6 @@
         </nav>
 
         <?php $menu = $mainMenu; ?>
-        <?php //include($this->pathView('_menu')) ?>
+        <?php //include($this->getTemplatePath('_menu')) ?>
 
     </header>

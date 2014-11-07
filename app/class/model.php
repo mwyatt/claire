@@ -89,13 +89,13 @@ class Model extends \OriginalAppName\Data
 	 * @param  array $ids
 	 * @return object
 	 */
-	public function readId($ids)
+	public function readId($ids, $column = 'id')
 	{
 
 		// query
 		$sth = $this->database->dbh->prepare("
 			{$this->getSqlSelect()}
-            where id = :id
+            where {$column} = :id
 		");
 
 		// mode
@@ -145,41 +145,29 @@ class Model extends \OriginalAppName\Data
 	}	
 
 
-	public function read($properties = array())
+	/**
+	 * reads everything
+	 * @return object 
+	 */
+	public function read()
 	{
 
-		// build
-		$statement = array();
-		$statement[] = $this->getSqlSelect();
-		if (array_key_exists('where', $properties)) {
-			$statement[] = $this->getSqlWhere($properties['where']);
-		}
-		if (array_key_exists('order_by', $properties)) {
-			$statement[] = 'order by ' . $properties['order_by'];
-		}
-		if (array_key_exists('limit', $properties)) {
-			$statement[] = $this->getSqlLimit($properties['limit']);
-		}
-		$statement = implode(' ', $statement);
+		// query
+		$sth = $this->database->dbh->prepare("
+			{$this->getSqlSelect()}
+	        where id != 0
+		");
 
-		// prepare
-		$sth = $this->database->dbh->prepare($statement);
+		// mode
+		$sth->setFetchMode(\PDO::FETCH_CLASS, $this->getEntity());
 
-		// bind
-		if (array_key_exists('where', $properties)) {
-			foreach ($properties['where'] as $key => $value) {
-				$this->bindValue($sth, 'where_' . $key, $value);
-			}
-		}
-		if (array_key_exists('limit', $properties)) {
-			foreach ($properties['limit'] as $key => $value) {
-				$sth->bindValue(':limit_' . $key, (int) $value, PDO::PARAM_INT);
-			}
-		}
+	    // execute
+		$sth->execute();
 
-		// execute
-		$this->tryExecute(__METHOD__, $sth);
-		$this->setData($sth->fetchAll(PDO::FETCH_CLASS, $this->getMoldName()));
+		// fetch
+		$this->setData($sth->fetchAll());
+
+		// instance
 		return $this;
 	}
 
@@ -405,25 +393,6 @@ class Model extends \OriginalAppName\Data
 		}
 		$statement[] = implode(', ', $limits);
 		return implode(' ', $statement);
-	}
-
-
-	/**
-	 * arranges this->data by a specified property
-	 * @param  string $property 
-	 * @return array           
-	 */
-	public function keyByProperty($property)
-	{
-		if (! $this->getData()) {
-			return;
-		}
-		$newOrder = array();
-		foreach ($this->getData() as $mold) {
-			$newOrder[$mold->$property] = $mold;
-		}
-		$this->setData($newOrder);
-		return $this;
 	}
 
 

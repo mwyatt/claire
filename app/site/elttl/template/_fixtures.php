@@ -3,7 +3,7 @@
 <div class="fixtures">
 
 	<?php foreach ($fixtures as $fixture): ?>
-		<?php include($this->pathView('_fixture')) ?>
+		<?php include($this->getTemplatePath('_fixture')) ?>
 	<?php endforeach ?>
 		
 </div>

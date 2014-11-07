@@ -2,7 +2,7 @@
 	<div class="attached media-browser-attached js-media-attached clearfix <?php echo ($media ? '' : 'is-empty') ?>">
 	    <p class="media-browser-attached-message text-center">Click files in the browser below to attach.</p>
 
-<?php include($this->pathView('_media')) ?>
+<?php include($this->getTemplatePath('_media')) ?>
 
 	</div>
 	<div class="row">

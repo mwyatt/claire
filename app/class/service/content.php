@@ -1,35 +1,18 @@
 <?php
 
+namespace OriginalAppName\Service;
+
 
 /**
- * responsible for various content types (projects, posts and pages)
- * @author Martin Wyatt <martin.wyatt@gmail.com> 
- * @version	0.1
- * @license http://www.php.net/license/3_01.txt PHP License 3.01
+ * services group up controller commands
+ * making the controllers more readable and tidy
  */
-class Service_Content extends Service
+class Content extends \OriginalAppName\Service
 {
-	
 
-	/**
-	 * example function, this is not really a good use of this
-	 * @return [type] [description]
-	 */
-	public function readAll()
+
+	public function readType($type, $status)
 	{
-		$modelContent = new model_content($this);
-		$modelContent->read(array(
-			'where' => array(
-				'slug' => $this->url->getPathPart(1),
-				'status' => 'visible',
-				'type' => $this->url->getPathPart(0)
-			)
-		));
 		
-		if (! $modelContent->getData()) {
-			$this->route('base');
-		}
-		$modelContent->bindMeta('media');
-		$modelContent->bindMeta('tag');
 	}
 }

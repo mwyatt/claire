@@ -3,7 +3,7 @@
 <div class="tags clearfix">
 
 	<?php foreach ($tags as $tag): ?>
-		<?php include($this->pathView('_tag')) ?>
+		<?php include($this->getTemplatePath('_tag')) ?>
 	<?php endforeach ?>
 		
 </div>

@@ -5,7 +5,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
     <head>
 
-<?php require_once($this->pathView() . 'admin/header-resources.php') ?>
+<?php require_once($this->getTemplatePath() . 'admin/header-resources.php') ?>
 
     </head>
     <body>

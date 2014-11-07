@@ -1,11 +1,11 @@
-<?php require_once($this->pathView() . 'admin/_header.php') ?>
+<?php require_once($this->getTemplatePath() . 'admin/_header.php') ?>
 
 <div class="content <?php echo $this->url->getPathPart(2) ?>-list">
 	<h1><?php echo ucfirst($this->url->getPathPart(2)) ?></h1>
 
 <?php if ($modelTag) : ?>
 	<?php foreach ($modelTag as $tag) : ?>
-		<?php include($this->pathView('admin/_tag')) ?>
+		<?php include($this->getTemplatePath('admin/_tag')) ?>
 	<?php endforeach ?>
 <?php else: ?>
 	
@@ -17,4 +17,4 @@
 		
 </div>
 
-<?php require_once($this->pathView() . 'admin/_footer.php') ?>
+<?php require_once($this->getTemplatePath() . 'admin/_footer.php') ?>

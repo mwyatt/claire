@@ -1,6 +1,6 @@
 <?php
 
-namespace OriginalAppName\Entity;
+namespace OriginalAppName\Entity\Content;
 
 
 /**
@@ -8,11 +8,11 @@ namespace OriginalAppName\Entity;
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Content_Meta extends OriginalAppName\Entity\Meta
+class Meta extends \OriginalAppName\Entity\Meta
 {
 
 
-	private $contentId;	
+	protected $contentId;	
 
 
 	/**

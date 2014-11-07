@@ -1,4 +1,4 @@
-<?php require_once($this->pathView('_header')) ?>
+<?php require_once($this->getTemplatePath('_header')) ?>
 
 <div class="page fixture-single js-page-fixture-single">
 	<p class="fixture-single-time">Fulfilled on <?php echo date('D jS F Y', $fixture->getTimeFulfilled()); ?></p>
@@ -6,7 +6,7 @@
 	<!-- <p><?php echo $division->getName() ?> division</p> -->
 	<table class="elttl-table is-encounter">
 
-<?php include($this->pathView('_encounters')) ?>
+<?php include($this->getTemplatePath('_encounters')) ?>
 
 		<tr class="elttl-table-row">
 			<td class="elttl-table-cell is-score-total" colspan="2"><?php echo $fixtureResult->score_left ?></td>
@@ -15,4 +15,4 @@
 	</table>
 </div>
 
-<?php require_once($this->pathView('_footer')) ?>
+<?php require_once($this->getTemplatePath('_footer')) ?>

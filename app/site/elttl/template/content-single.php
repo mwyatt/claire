@@ -1,4 +1,4 @@
-<?php require_once($this->pathView('_header')) ?>
+<?php require_once($this->getTemplatePath('_header')) ?>
 
 <div class="page">
 
@@ -14,7 +14,7 @@
 	<div class="media js-content-single-gallery">
 
 		<?php foreach ($media as $medium): ?>
-			<?php require($this->pathView('_medium')) ?>
+			<?php require($this->getTemplatePath('_medium')) ?>
 		<?php endforeach ?>
 		
 	</div>
@@ -27,7 +27,7 @@
 		
 	<h2 class="content-single-title-two">Tagged Under</h2>
 
-		<?php include($this->pathView('_tags')) ?>
+		<?php include($this->getTemplatePath('_tags')) ?>
 	<?php endif ?>
 
 	<div class="content-date"><?php echo date('jS', $content->time_published) . ' of ' . date('F o', $content->time_published) ?></div>
@@ -38,5 +38,5 @@
 
 </div>
 
-<?php require_once($this->pathView('_footer')) ?>
+<?php require_once($this->getTemplatePath('_footer')) ?>
 
