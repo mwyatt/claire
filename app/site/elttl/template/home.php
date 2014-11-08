@@ -2,38 +2,48 @@
 
 <div class="page home js-page-home">
 	<div class="banner-and-press">
+
+<?php if (isset($covers)): ?>
+
 		<div class="banner-primary js-home-cover">
-		
-<?php $campaign->setSource('home cover banners') ?>
-<?php $campaign->setMedium('referral') ?>
-<?php foreach ($covers as $cover): ?>
-	<?php $campaign->setCampaign($cover->name) ?>
+	
+	<?php $campaign->setSource('home cover banners') ?>
+	<?php $campaign->setMedium('referral') ?>
+	<?php foreach ($covers as $cover): ?>
+		<?php $campaign->setCampaign($cover->name) ?>
 	
 			<a href="<?php echo $campaign->get($cover->url) ?>" class="cover">
 				<h2 class="cover-primary-title"><?php echo $cover->name ?></h2>
 				<p class="cover-description"><?php echo $cover->description ?></p>
 
-	<?php if (isset($cover->image)): ?>
+		<?php if (isset($cover->image)): ?>
 		
 				<img class="cover-image" src="<?php echo $this->getUrlMedia($cover->image) ?>" alt="<?php echo $cover->name ?>">
 				
-	<?php endif ?>
+		<?php endif ?>
 
 				<span class="cover-button"><?php echo $cover->button ?></span>
 			</a>
 
-<?php endforeach ?>
+	<?php endforeach ?>
 
 		</div>
+
+<?php endif ?>
+<?php if (isset($contents)): ?>
+
 		<div class="home-press">
 			<h1 class="home-press-heading">
 				<a href="<?php echo $this->getUrl() ?>press/" class="home-button-all-posts">View all</a>
 				<span class="home-press-heading-text">Press releases</span>
 			</h1>
 		
-<?php include($this->getTemplatePath('_contents')) ?>
+	<?php include($this->getTemplatePath('_contents')) ?>
 
 		</div>
+		
+<?php endif ?>
+
 	</div>
 
 <?php if (isset($galleryPaths)): ?>

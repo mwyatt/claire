@@ -2,6 +2,9 @@
 
 namespace OriginalAppName;
 
+use OriginalAppName\View;
+use Symfony\Component\HttpFoundation\Response;
+
 
 /**
  * Controller
@@ -16,7 +19,7 @@ class Controller extends \OriginalAppName\Route
 {
 
 
-	public function index()
+	public static function index()
 	{
 		$modelOptions = new Model\Options();
 		$modelOptions
@@ -25,5 +28,40 @@ class Controller extends \OriginalAppName\Route
 		return [
 			'option' => $modelOptions->getData()
 		];
+	}
+
+
+	public static function home() {
+		$modelContent = new Model\Content();
+		$modelContent
+			->readType('post')
+			->filterStatus('visible')
+			->orderByProperty('timePublished', 'desc')
+			->limitData([0, 3]);
+
+		// gallery
+		$folder = glob(BASE_PATH . 'media' . DS . SITE . DS . 'thumb' . DS . '*');
+		$files = array();
+		foreach ($folder as $filePath) {
+			$filePath = str_replace(BASE_PATH, '', $filePath);
+			$files[] = str_replace(DS, US, $filePath);
+		}
+
+		// template
+		$view = new View([
+			'galleryPaths' => $files,
+			'contents' => $modelContent->getData()
+		]);
+		return new Response($view->getTemplate('home'));
+	}
+
+
+	public static function notFound()
+	{
+		// template
+		$view = new View([
+			'metaTitle' => 'Not found'
+		]);
+		return new Response($view->getTemplate('not-found'), Response::HTTP_NOT_FOUND);
 	}
 }

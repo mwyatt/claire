@@ -53,7 +53,7 @@ class View extends \OriginalAppName\Data
 		$controller = new \OriginalAppName\Controller();
 		$siteControllerName = '\\OriginalAppName\\Site\\' . SITE . '\\Controller\\Index';
 		$siteController = new $siteControllerName();
-		return array_merge($controller->index(), $siteController->initialise());
+		return array_merge($controller::index(), $siteController->initialise());
 	}
 
 

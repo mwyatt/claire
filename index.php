@@ -59,11 +59,11 @@ include BASE_PATH . 'vendor' . DS . 'autoload' . EXT;
 /**
  * app configuration
  */
-$config = include APP_PATH . 'config' . EXT;
-if (! isset($config['site'])) {
+$config = json_decode(file_get_contents(APP_PATH . 'config' . '.json'));
+if (! isset($config->site)) {
 	exit('please specify a site key');
 }
-define('SITE', $config['site']);
+define('SITE', $config->site);
 
 
 /**

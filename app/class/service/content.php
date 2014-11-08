@@ -11,7 +11,7 @@ class Content extends \OriginalAppName\Service
 {
 
 
-	public function readType($type, $status)
+	public function all($type)
 	{
 		
 	}

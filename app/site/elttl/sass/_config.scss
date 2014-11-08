@@ -12,16 +12,16 @@
 /**
  * vendor libraries
  */
-@import "../../vendor/bower/normalize-scss/normalize";
-@import "../../vendor/bower/bourbon/app/assets/stylesheets/bourbon";
-@import "../../vendor/bower/animate.scss/scss/animate";
-@import "../grid";
+@import "../../../../vendor/bower/normalize-scss/normalize";
+@import "../../../../vendor/bower/bourbon/app/assets/stylesheets/bourbon";
+@import "../../../../vendor/bower/animate.scss/scss/animate";
+@import "../../../../sass/grid";
 
 
 /**
  * global libraries
  */
-@import "../placeholder";
+@import "../../../../sass/placeholder";
 
 
 /**

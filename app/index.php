@@ -77,7 +77,8 @@ try {
     unset($attributes['controller']);
     $response = call_user_func_array($controller, $attributes);
 } catch (Symfony\Component\Routing\Exception\ResourceNotFoundException $e) {
-    $response = new Response('Not found!', Response::HTTP_NOT_FOUND);
+    $controller = new OriginalAppName\Controller();
+    $response = $controller::notFound();
 } catch (Exception $e) {
     echo '<pre>';
     print_r($e);

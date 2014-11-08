@@ -1,12 +1,12 @@
 {
-	"author": "Martin Wyatt",
-	"version": "0.1.0",
-	"error-reporting": "false",
-	"devDependencies": {
-		"grunt": "~0.4.5",
-		"grunt-contrib-concat": "latest",
-		"grunt-contrib-uglify": "latest",
-		"grunt-contrib-watch": "latest",
-		"grunt-sass": "latest"
-	}
+  "author": "Martin Wyatt",
+  "version": "0.1.0",
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-contrib-concat": "latest",
+    "grunt-contrib-uglify": "latest",
+    "grunt-contrib-watch": "latest",
+    "grunt-sass": "latest",
+    "grunt-contrib-copy": "~0.7.0"
+  }
 }

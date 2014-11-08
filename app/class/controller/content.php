@@ -5,6 +5,7 @@ namespace OriginalAppName\Controller;
 use OriginalAppName\Pagination;
 use OriginalAppName\Model;
 use Symfony\Component\HttpFoundation\Response;
+use OriginalAppName\View;
 
 
 /**
@@ -29,75 +30,52 @@ class Content extends \OriginalAppName\Controller
 			->filterStatus('visible')
 			->orderByProperty('timePublished', 'desc');
 		if (! $modelContent->getData()) {
-			// 404
+			throw new \Symfony\Component\Routing\Exception\ResourceNotFoundException();
 		}
 		$pagination->setTotalRows(count($modelContent->getData()));
 		$pagination->initialise();
-
-		// all meta for these ids
-		$modelContentMeta = new Model\Content\Meta();
-		$modelContentMeta->readId($modelContent->getDataProperty('id'), 'contentId');
-		$modelContentMetaMedia = $modelContentMeta->filterData('name', 'media');
-		$modelContentMetaTag = $modelContentMeta->filterData('name', 'tag');
+		$modelContent->limitData($pagination->getLimit());
 
 		// single content
-		$contentSingle = current($modelContent->getData());
+		$entityContent = current($modelContent->getData());
 
 		// template
-		$view = new \OriginalAppName\View([
-			'metaTitle' => 'All ' . $contentSingle->getStatus(),
-			'metaDescription' => '',
+		$view = new View([
+			'metaTitle' => 'All ' . $entityContent->getType(),
 			'pagination' => $pagination,
-			'contentSingle' => $contentSingle,
+			'contentSingle' => $entityContent,
 			'contents' => $modelContent->getData()
 		]);
 		return new Response($view->getTemplate('content'));
 	}
 
 
+	/**
+	 * a single {type} which has the {slug}
+	 * @param  string $type content type
+	 * @param  string $slug foo-bar
+	 * @return object       response
+	 */
 	public static function single($type, $slug)
 	{
-
-		echo '<pre>';
-		print_r($type);
-		echo '<pre>';
-		print_r($name);
-		exit;
-		
-
-		// foo-bar
-		if (! isset($args['title'])) {
-			return;
-		}
-
-		// type/slug/
-		if (! $this->url->getPathPart(1)) {
-			return;
-		}
-
-		// read by slug and type
-		$modelContent = new model_content($this);
-		$modelContent->read(array(
-			'where' => array(
-				'slug' => $this->url->getPathPart(1),
-				'status' => 'visible',
-				'type' => $this->url->getPathPart(0)
-			)
-		));
-		
+		$modelContent = new Model\Content();
+		$modelContent->readSlug($slug);
 		if (! $modelContent->getData()) {
-			$this->route('base');
+			throw new \Symfony\Component\Routing\Exception\ResourceNotFoundException();
 		}
-		$modelContent->bindMeta('media');
-		$modelContent->bindMeta('tag');
+		$entityContent = current($modelContent->getData());
+		if (! $entityContent->getType() == $type) {
+			throw new \Symfony\Component\Routing\Exception\ResourceNotFoundException();
+		}
+		if (! $entityContent->getStatus() == 'visible') {
+			throw new \Symfony\Component\Routing\Exception\ResourceNotFoundException();
+		}
 
-		// set view
-		$this->view
-			->setMeta(array(		
-				'title' => $modelContent->getData('title')
-			))
-			->setObject('contents', $modelContent)
-			->getTemplate('content-single');
-		return true;
+		// template
+		$view = new View([
+			'metaTitle' => $entityContent->getTitle(),
+			'contents' => $modelContent->getData()
+		]);
+		return new Response($view->getTemplate('content-single'));
 	}
 }

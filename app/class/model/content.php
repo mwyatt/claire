@@ -31,6 +31,11 @@ class Content extends \OriginalAppName\Model
 	);
 
 
+	/**
+	 * read content by type
+	 * @param  string $type 
+	 * @return object       
+	 */
 	public function readType($type)
 	{
 
@@ -53,6 +58,20 @@ class Content extends \OriginalAppName\Model
 		$this->setData($sth->fetchAll());
 
 		// instance
+		return $this;
+	}
+
+
+	public function readSlug($slug)
+	{
+		$sth = $this->database->dbh->prepare("
+			{$this->getSqlSelect()}
+            where slug = :slug
+		");
+		$sth->setFetchMode(\PDO::FETCH_CLASS, $this->getEntity());
+	    $sth->bindValue(':slug', $slug, \PDO::PARAM_STR);
+		$sth->execute();
+		$this->setData($sth->fetchAll());
 		return $this;
 	}
 
