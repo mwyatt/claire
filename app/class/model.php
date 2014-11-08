@@ -149,7 +149,7 @@ class Model extends \OriginalAppName\Data
 	 * reads everything
 	 * @return object 
 	 */
-	public function read()
+	public function read($debug = false)
 	{
 
 		// query
@@ -163,6 +163,15 @@ class Model extends \OriginalAppName\Data
 
 	    // execute
 		$sth->execute();
+
+		// debug result
+		if ($debug) {
+			echo '<pre>';
+			var_dump($this->getEntity());
+			print_r($sth->fetchAll());
+			echo '</pre>';
+			exit;
+		}
 
 		// fetch
 		$this->setData($sth->fetchAll());

@@ -17,14 +17,6 @@ class View extends \OriginalAppName\Data
 	 * @var array
 	 */
 	public $meta = array();
-	
-
-	/**
-	 * stores output html, can be combined when loading multiple templates
-	 * starts as a empty string so that it can be built upon '.='
-	 * @var string
-	 */
-	public $data = '';
 
 
 	public $url;
@@ -37,8 +29,8 @@ class View extends \OriginalAppName\Data
 	public function __construct($data) {
 		$registry = \OriginalAppName\Registry::getInstance();
 		$this->setUrl($registry->get('url'));
-		$this->setMetaDefaults($data);
 		$this->setData(array_merge($this->getDataDefault(), $data));
+		$this->setMeta();
 	}
 
 
@@ -51,10 +43,17 @@ class View extends \OriginalAppName\Data
 	}
 
 
+	/**
+	 * this is possibly poorly placed? retrieves information
+	 * global to all views
+	 * @return array 
+	 */
 	public function getDataDefault()
 	{
 		$controller = new \OriginalAppName\Controller();
-		return $controller->index();
+		$siteControllerName = '\\OriginalAppName\\Site\\' . SITE . '\\Controller\\Index';
+		$siteController = new $siteControllerName();
+		return array_merge($controller->index(), $siteController->initialise());
 	}
 
 
@@ -87,10 +86,6 @@ class View extends \OriginalAppName\Data
 
 		// push stored into method scope
 		extract($this->getData());
-echo '<pre>';
-print_r($this->getData());
-echo '</pre>';
-exit;
 
 		// debugging
 		if ($this->isDebug($this)) {
@@ -245,8 +240,9 @@ exit;
 	/**
 	 * if any meta has been missed, merge with the defaults
 	 */
-	public function setMetaDefaults()
+	public function setMetaDefaults($data)
 	{
+
 /*
 array(
 			'title' => $this->config->getOption('meta_title'),
@@ -261,31 +257,31 @@ array(
 	
 
 	/**
-	 * sets the meta for a common page
-	 * title
-	 * description
-	 * keywords
-	 * @param array $metas 
+	 * modifies the data array to ensure the metas are filled with custom stuff
+	 * or fall back to defaults
 	 */
-	public function setMeta($metas) {		
+	public function setMeta() {		
+		$data = $this->getData();
 
-		// resource for appending
-		$append = '';
-
-		// site title which can be added on to make the page title
-		// more interesting
-		$siteTitle = 'meta title';/*$this->config->getOption('meta_title')*/
-
-		// pass through and set the keys where required
-		// keys are already set on construct
-		foreach ($metas as $key => $meta) {
-
-			// append title of site to the title if one is passed
-			if ($key == 'title' && $meta != $siteTitle) {
-				$append = ' | ' . $siteTitle;
-			}
-			$this->meta[$key] = $metas[$key] . $append;
+		// title
+		if (isset($data['metaTitle'])) {
+			$data['metaTitle'] = $data['metaTitle'] . ' | ' . $data['option']['meta_title']->getValue();
+		} else {
+			$data['metaTitle'] = $data['option']['meta_title']->getValue();
 		}
+
+		// description
+		if (! isset($data['metaDescription'])) {
+			$data['metaDescription'] = $data['option']['meta_description']->getValue();
+		}
+
+		// keywords
+		if (! isset($data['metaKeywords'])) {
+			$data['metaKeywords'] = $data['option']['meta_keywords']->getValue();
+		}
+
+		// commit data
+		$this->setData($data);
 		return $this;
 	}
 

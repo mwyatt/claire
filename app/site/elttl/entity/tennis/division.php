@@ -1,6 +1,6 @@
 <?php
 
-namespace OriginalAppName\Entity;
+namespace OriginalAppName\Site\Elttl\Entity\Tennis;
 
 
 /**
@@ -8,8 +8,9 @@ namespace OriginalAppName\Entity;
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Tennis_Division extends OriginalAppName\Entity
+class Division extends \OriginalAppName\Entity
 {
+
 
 	private $name;
 

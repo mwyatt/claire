@@ -1,4 +1,4 @@
-<?php if ($contents): ?>
+<?php if (isset($contents)): ?>
 	
 	<div class="contents js-contents">
 

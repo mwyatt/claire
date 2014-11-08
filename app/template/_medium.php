@@ -1,4 +1,4 @@
-<?php if ($medium): ?>
+<?php if (isset($medium)): ?>
 	
 <div class="medium js-medium" data-id="<?php echo ($medium->id ? $medium->id : '') ?>">
 	<div class="medium-thumb">

@@ -1,7 +1,7 @@
 <?php if ($user): ?>
 
 			<footer class="main clearfix">
-				<p class="footer-site-title"><?php echo $option['site_title'] . ' ' . date('Y') ?></p>
+				<p class="footer-site-title"><?php echo $option['site_title']->getValue() . ' ' . date('Y') ?></p>
 			</footer>
 			
 <?php endif ?>

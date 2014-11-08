@@ -1,4 +1,4 @@
-<?php if ($tags): ?>
+<?php if (isset($tags)): ?>
 	
 <div class="tags clearfix">
 

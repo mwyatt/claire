@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title><?php echo $this->getMeta('title') ?></title>
+    <title><?php echo $metaTitle ?></title>
     <meta name="keywords" content="<?php echo $this->getMeta('keywords') ?>">
     <meta name="description" content="<?php echo $this->getMeta('description') ?>">
     <link rel="icon" type="image/png" href="<?php echo $this->getUrlMedia('favicon.png') ?>?rev=1">
@@ -34,7 +34,7 @@
 
         <?php include($this->getTemplatePath('header/_logo')) ?>
 
-                <a href="mailto:martin.wyatt@gmail.com" class="header-sticker-beta" title="<?php echo $option['site_title'] ?> is still actively under development. If you notice any bugs or have any improvements please email me: martin.wyatt@gmail.com">Beta</a>
+                <a href="mailto:martin.wyatt@gmail.com" class="header-sticker-beta" title="<?php echo $option['site_title']->getValue() ?> is still actively under development. If you notice any bugs or have any improvements please email me: martin.wyatt@gmail.com">Beta</a>
 
         <?php $menu = $menuPrimary; ?>
         <?php include($this->getTemplatePath('_menu-primary')) ?>

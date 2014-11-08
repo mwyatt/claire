@@ -1,7 +1,9 @@
 <?php
 
 namespace OriginalAppName\Site\Elttl\Controller;
-
+use \OriginalAppName\Json;
+use \OriginalAppName\Site\Elttl\Model\Tennis\Division;
+use \OriginalAppName\Google\Analytics\Campaign;
 
 /**
  * Controller
@@ -29,7 +31,7 @@ class Index extends \OriginalAppName\Controller
 	}
 
 
-	public function initialise()
+	public static function initialise()
 	{
 
 		// menu primary
@@ -59,19 +61,20 @@ class Index extends \OriginalAppName\Controller
 		$ads = $json->getData();
 
 		// divisions
-		$modelTennisDivision = new model_tennis_division($this);
+		$modelTennisDivision = new Division();
 		$modelTennisDivision->read();
 
 		// template defaults
-		$this->view
-			->setObject('year', 0)
-			->setObject('covers', $covers)
-			->setObject('divisions', $modelTennisDivision->getData())
-			->setObject('ads', $ads)
-			->setObject('menuPrimary', $menuPrimary)
-			->setObject('menuSecondary', $menuSecondary)
-			->setObject('campaign', new Google_Analytics_Campaign())
-			->setObject('menuTertiary', $menuTertiary);
+		return [
+			'year' => 0,
+			'covers' => $covers,
+			'divisions' => $modelTennisDivision->getData(),
+			'ads' => $ads,
+			'menuPrimary' => $menuPrimary,
+			'menuSecondary' => $menuSecondary,
+			'campaign' => new Campaign(),
+			'menuTertiary' => $menuTertiary
+		];
 	}
 
 

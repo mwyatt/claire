@@ -9,6 +9,7 @@
     "autoload": {
         "psr-4": {
             "OriginalAppName\\": "app/class/",
+            "OriginalAppName\\Google\\Analytics\\": "app/class/google/analytics",
             "OriginalAppName\\Controller\\": "app/class/controller/",
             "OriginalAppName\\Model\\": "app/class/model/",
             "OriginalAppName\\Entity\\": "app/class/entity/",
@@ -16,7 +17,9 @@
             "OriginalAppName\\Site\\Elttl\\": "app/site/elttl/",
             "OriginalAppName\\Site\\Elttl\\Controller\\": "app/site/elttl/controller/",
             "OriginalAppName\\Site\\Elttl\\Model\\": "app/site/elttl/model/",
-            "OriginalAppName\\Site\\Elttl\\Entity\\": "app/site/elttl/entity/"
+            "OriginalAppName\\Site\\Elttl\\Model\\Tennis\\": "app/site/elttl/model/tennis/",
+            "OriginalAppName\\Site\\Elttl\\Entity\\": "app/site/elttl/entity/",
+            "OriginalAppName\\Site\\Elttl\\Entity\\Tennis\\": "app/site/elttl/entity/tennis/"
         }
     }
 }

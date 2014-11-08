@@ -1,10 +1,12 @@
 <?php 
 
+namespace OriginalAppName\Google\Analytics;
+
 
 /**
  * handles easy output of a google analytics campaign url
  */
-class Google_Analytics_Campaign
+class Campaign
 {
 
 

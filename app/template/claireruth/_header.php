@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta http-equiv="Content-type" content="text/html; charset=iso-8859-1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title><?php echo $this->getMeta('title') ?></title>   
+    <title><?php echo $metaTitle ?></title>   
     <meta name="keywords" content="<?php echo $this->getMeta('keywords') ?>">
     <meta name="description" content="<?php echo $this->getMeta('description') ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">

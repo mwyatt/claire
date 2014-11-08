@@ -49,7 +49,7 @@ class Content extends \OriginalAppName\Controller
 			'metaDescription' => '',
 			'pagination' => $pagination,
 			'contentSingle' => $contentSingle,
-			'contents' => $modelContent
+			'contents' => $modelContent->getData()
 		]);
 		return new Response($view->getTemplate('content'));
 	}

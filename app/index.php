@@ -87,10 +87,7 @@ try {
     $response = new Response('An error occurred', 500);
 }
 
-echo '<pre>';
-print_r($response);
-echo '</pre>';
-exit;
+exit($response->getContent());
 
 
 /**
