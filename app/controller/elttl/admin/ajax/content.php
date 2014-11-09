@@ -40,5 +40,6 @@ class Controller_Admin_Ajax_Content extends Controller_Admin
 		} else {
 			echo $friendlyTitle;
 		}
+		exit();
 	}
 }
