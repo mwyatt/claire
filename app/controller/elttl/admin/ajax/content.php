@@ -30,12 +30,12 @@ class Controller_Admin_Ajax_Content extends Controller_Admin
 		}
 		$friendlyTitle = $this->urlFriendly($_GET['title']);
 		$modelcontent = new model_content($this);
-		$success = $modelcontent->read(array(
+		$modelcontent->read(array(
 			'where' => array(
 				'slug' => $friendlyTitle
 			)
 		));
-		if ($success) {
+		if ($modelcontent->getData()) {
 			echo $friendlyTitle . '-2';
 		} else {
 			echo $friendlyTitle;

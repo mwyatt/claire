@@ -177,7 +177,9 @@ class Model_Content extends Model
 		$modelUserData = $modelUser->getData();
 		$boundContent = array();
 		foreach ($this->getData() as $moldContent) {
-			$moldContent->user = $modelUserData[$moldContent->user_id];
+			if (isset($modelUserData[$moldContent->user_id])) {
+				$moldContent->user = $modelUserData[$moldContent->user_id];
+			}
 			$boundContent[] = $moldContent;
 		}
 		$this->setData($boundContent);

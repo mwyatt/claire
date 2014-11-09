@@ -2,31 +2,37 @@
 	{
 		"name": "Dashboard",
 		"children": [],
-		"url": ""
+		"url": "",
+		"level": 1
 	},
 	{
 		"name": "Press",
 		"children": [],
-		"url": "content/press/"
+		"url": "content/press/",
+		"level": 1
 	},
 	{
 		"name": "Page",
 		"children": [],
-		"url": "content/page/"
+		"url": "content/page/",
+		"level": 2
 	},
 	{
 		"name": "Player",
 		"children": [],
-		"url": "tennis/player/"
+		"url": "tennis/player/",
+		"level": 10
 	},
 	{
 		"name": "Team",
 		"children": [],
-		"url": "tennis/team/"
+		"url": "tennis/team/",
+		"level": 10
 	},
 	{
 		"name": "Fixture",
 		"children": [],
-		"url": "tennis/fixture/"
+		"url": "tennis/fixture/",
+		"level": 10
 	}
 ]

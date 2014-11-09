@@ -1,4 +1,6 @@
 <?php foreach ($item->children as $item): ?>
+	<?php if ($item->level <= $user->level): ?>
+		
 
     <div class="nav-main">
         <a href="<?php echo $this->getUrl('admin') . $item->url ?>" class="nav-main-link"><?php echo $item->name ?></a>
@@ -15,4 +17,5 @@
     
     </div>
     
+	<?php endif ?>
 <?php endforeach ?>
