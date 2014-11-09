@@ -105,7 +105,9 @@ class Model extends \OriginalAppName\Data
 		foreach ($ids as $id) {
 		    $sth->bindValue(':id', $id, \PDO::PARAM_INT);
 			$sth->execute();
-			$this->appendData($sth->fetch());
+			while ($result = $sth->fetch()) {
+				$this->appendData($result);
+			}
 		}
 
 		// instance

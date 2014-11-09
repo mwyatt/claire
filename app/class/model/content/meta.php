@@ -12,7 +12,7 @@ class Meta extends \OriginalAppName\Model
 {	
 
 
-	public $tableName = 'contentMeta';
+	public $tableName = 'content_meta';
 
 
 	public $fields = array(

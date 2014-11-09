@@ -2,6 +2,13 @@
 
 namespace OriginalAppName\Site\Elttl\Controller;
 
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Exception\ResourceNotFoundException as SymfonyResourceNotFound;
+use OriginalAppName\Model;
+use OriginalAppName\Site\Elttl\Model\Tennis as ElttlModelTennis;
+use OriginalAppName\View;
+use OriginalAppName\Site\Elttl\Service\Tennis as ElttlServiceTennis;
+
 
 /**
  * @author Martin Wyatt <martin.wyatt@gmail.com> 
@@ -12,47 +19,26 @@ class Result extends \OriginalAppName\Controller
 {
 
 
-	public static function year($year)
-	{
-		echo '<pre>';
-		print_r($year);
-		echo '</pre>';
-		exit;
-	}
-
-
-
-	public $division;
-
-
 	/**
-	 * @return object mold
+	 * every year past and present for the league
+	 * @return object 
 	 */
-	public function getDivision() {
-	    return $this->division;
-	}
-	
-	
-	/**
-	 * @param object $division mold
-	 */
-	public function setDivision($division) {
-	    $this->division = $division;
-	    return $this;
-	}
-
-
-	public function run()
+	public static function all()
 	{
-		$this->readYear();
-
-		// result/premier/
-		// or archive/2013/result/premier/
-		if ($this->getArchivePathPart(1)) {
-			$this->division();
-		} else {
-			$this->divisionList();
+		$modelYear = new ElttlModelTennis\Year();
+		$modelYear
+			->read()
+			->orderByProperty('name', 'desc');
+		if (! $modelYear->getData()) {
+			throw new SymfonyResourceNotFound();
 		}
+
+		// template
+		$view = new View([
+			'metaTitle' => 'All seasons',
+			'years' => $modelYear->getData()
+		]);
+		return new Response($view->getTemplate('year'));
 	}
 
 
@@ -60,19 +46,88 @@ class Result extends \OriginalAppName\Controller
 	 * list of all divisions for current year
 	 * @return null 
 	 */
-	public function divisionList()
+	public static function year($name)
 	{
-		$className = $this->getArchiveClassName('model_tennis_division');
-		$modelTennisDivision = new $className($this);
-		$modelTennisDivision->read($this->getArchiveWhere());
-		
+
+		// year, make this more global?
+		$serviceYear = new ElttlServiceTennis\Year();
+		$yearSingle = $serviceYear->readName($name);
+
+		// division
+		$modelDivision = new ElttlModelTennis\Division();
+		$modelDivision->readId([$yearSingle->getId()], 'yearId');
+		if (! $modelDivision->getData()) {
+			throw new SymfonyResourceNotFound();
+		}
+
 		// template
+		$view = new View([
+			'metaTitle' => 'Divisions in season ' . $yearSingle->getNameFull(),
+			'divisions' => $modelDivision->getData(),
+			'yearSingle' => $yearSingle
+		]);
+		return new Response($view->getTemplate('tennis/division-list'));
+	}
+
+
+	/**
+	 * initialises the division which is in the current url path
+	 * and stores in the division property
+	 * moves to merit || league from here
+	 * @return null 
+	 */
+	public static function division($year, $division)
+	{
+
+		// year, make this more global?
+		$serviceYear = new ElttlServiceTennis\Year();
+		$yearSingle = $serviceYear->readName($year);
+		if (! $yearSingle) {
+			throw new SymfonyResourceNotFound();
+		}
+
+		// division
+		$modelDivision = new ElttlModelTennis\Division();
+		$modelDivision->readId([$yearSingle->getId()], 'yearId');
+		if (! $modelDivision->getData()) {
+			throw new SymfonyResourceNotFound();
+		}
+		$divisionSingle = current($modelDivision->getData());
+
+		// tables
+		if (isset($_REQUEST['table'])) {
+			
+		}
+
+		// ?table=merit,league,merit-double
+
+
+		// tables
+		// merit
+			// merit-double
+		// league
+
+
+		// result/premier/merit
+		if ($table = $this->getArchivePathPart(2)) {
+			if (in_array($table, array('merit', 'league'))) {
+				return $this->$table();
+			}
+		}
+		
+		// fixture summary table
+		$this->readFixtureSummaryTable();
+		$serviceFixture = new ElttlServiceTennis\Fixture();
+		// $ = $serviceFixture->readSummaryTable($name);
+
+
+		// single division view
 		$this->view
 			->setMeta(array(		
-				'title' => 'Divisions'
+				'title' => $division->getName() . ' division overview'
 			))
-			->setObject('divisions', $modelTennisDivision->getData())
-			->getTemplate('division/list');
+			->setObject('division', $division)
+			->getTemplate('division/overview');
 	}
 
 
@@ -232,102 +287,36 @@ class Result extends \OriginalAppName\Controller
 	}
 
 
+	public $division;
+
+
 	/**
-	 * initialises the division which is in the current url path
-	 * and stores in the division property
-	 * moves to merit || league from here
-	 * @return null 
+	 * @return object mold
 	 */
-	public static function division($year, $division)
-	{
-echo '<pre>';
-print_r($year);
-print_r($division);
-echo '</pre>';
-exit;
-
-		// division
-		$className = $this->getArchiveClassName('model_tennis_division');
-		$modelTennisDivision = new $className($this);
-		$modelTennisDivision->read($this->getArchiveWhere(array(
-			'where' => array(
-				'name' => $this->getArchivePathPart(1)
-			)
-		)));
-		$division = $modelTennisDivision->getDataFirst();
-		if (! $division) {
-			$this->route('base');
-		}
-		$this->setDivision($division);
-
-		// result/premier/merit
-		if ($table = $this->getArchivePathPart(2)) {
-			if (in_array($table, array('merit', 'league'))) {
-				return $this->$table();
-			}
-		}
-		
-		// fixture summary table
-		$this->readFixtureSummaryTable();
-
-		// single division view
-		$this->view
-			->setMeta(array(		
-				'title' => $division->getName() . ' division overview'
-			))
-			->setObject('division', $division)
-			->getTemplate('division/overview');
+	public function getDivision() {
+	    return $this->division;
+	}
+	
+	
+	/**
+	 * @param object $division mold
+	 */
+	public function setDivision($division) {
+	    $this->division = $division;
+	    return $this;
 	}
 
 
-	public function readFixtureSummaryTable()
+	public function run()
 	{
+		$this->readYear();
 
-		// resource
-		$division = $this->getDivision();
-
-		// team
-		$className = $this->getArchiveClassName('model_tennis_team');
-		$modelTeam = new $className($this);
-		$teams = $modelTeam
-			->read($this->getArchiveWhere(array(
-				'where' => array(
-					'division_id' => $division->getId()
-				)
-			)))
-			->keyByProperty('id')
-			->getData();
-
-		// fixture
-		$className = $this->getArchiveClassName('model_tennis_fixture');
-		$modelFixture = new $className($this);
-		$modelFixture->read($this->getArchiveWhere(array(
-			'where' => array('team_id_left' => $modelTeam->getDataProperty('id'))
-		)));
-		$fixtures = array();
-
-		// weed out only fulfilled fixtures
-		foreach ($modelFixture->getData() as $fixture) {
-			if ($fixture->getTimeFulfilled()) {
-				$fixtures[] = $fixture;
-			}
+		// result/premier/
+		// or archive/2013/result/premier/
+		if ($this->getArchivePathPart(1)) {
+			$this->division();
+		} else {
+			$this->divisionList();
 		}
-		$modelFixture->setData($fixtures);
-
-		// fixture results
-		$className = $this->getArchiveClassName('model_tennis_encounter');
-		$modelTennisEncounter = new $className($this);
-		$modelTennisEncounter->read($this->getArchiveWhere(array(
-			'where' => array('fixture_id' => $modelFixture->getDataProperty('id'))
-		)));
-		$modelTennisEncounter->convertToFixtureResults();
-		$fixtureResults = $modelTennisEncounter->getData();
-
-		// template
-		$this
-			->view
-			->setObject('fixtureResults', $fixtureResults)
-			->setObject('fixtures', $fixtures)
-			->setObject('teams', $teams);
 	}
 }

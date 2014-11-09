@@ -16,6 +16,8 @@
             "OriginalAppName\\Site\\": "app/site/",
             "OriginalAppName\\Site\\Elttl\\": "app/site/elttl/",
             "OriginalAppName\\Site\\Elttl\\Controller\\": "app/site/elttl/controller/",
+            "OriginalAppName\\Site\\Elttl\\Service\\": "app/site/elttl/service/",
+            "OriginalAppName\\Site\\Elttl\\Service\\Tennis\\": "app/site/elttl/service/tennis/",
             "OriginalAppName\\Site\\Elttl\\Model\\": "app/site/elttl/model/",
             "OriginalAppName\\Site\\Elttl\\Model\\Tennis\\": "app/site/elttl/model/tennis/",
             "OriginalAppName\\Site\\Elttl\\Entity\\": "app/site/elttl/entity/",

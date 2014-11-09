@@ -24,12 +24,13 @@ class Entity
 	
 	
 	/**
+	 * @todo possibly not needed because when would you use it?
 	 * @param int $id 
 	 */
-	public function setId($id) {
-	    $this->id = $id;
-	    return $this;
-	}
+	// public function setId($id) {
+	//     $this->id = $id;
+	//     return $this;
+	// }
 
 
 	/**
@@ -41,5 +42,12 @@ class Entity
 	{
 		$registry = OriginalAppName\Registry::getInstance();
 		return $registry->get('url')->getCache('base');
+	}
+
+
+	public function getUrlGenerator()
+	{
+		$registry = \OriginalAppName\Registry::getInstance();
+		return $registry->get('urlGenerator');
 	}
 }

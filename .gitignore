@@ -4,3 +4,5 @@ vendor/
 node_modules/
 app/config.php
 app/cache/
+config.php
+config.json

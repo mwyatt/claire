@@ -2,10 +2,10 @@
 
 namespace OriginalAppName\Controller;
 
-use OriginalAppName\Pagination;
-use OriginalAppName\Model;
 use Symfony\Component\HttpFoundation\Response;
+use OriginalAppName\Model;
 use OriginalAppName\View;
+use OriginalAppName\Pagination;
 
 
 /**

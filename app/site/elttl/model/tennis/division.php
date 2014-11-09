@@ -12,7 +12,7 @@ class Division extends \OriginalAppName\Model
 {	
 
 
-	public $tableName = 'tennisDivision';
+	public $tableName = 'tennis_division';
 
 
 	public $entity = '\\OriginalAppName\\Site\\Elttl\\Entity\\Tennis\\Division';
@@ -20,6 +20,7 @@ class Division extends \OriginalAppName\Model
 
 	public $fields = array(
 		'id',
+		'yearId',
 		'name'
 	);
 }

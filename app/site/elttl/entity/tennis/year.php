@@ -1,6 +1,6 @@
 <?php
 
-namespace OriginalAppName\Entity;
+namespace OriginalAppName\Site\Elttl\Entity\Tennis;
 
 
 /**
@@ -8,7 +8,7 @@ namespace OriginalAppName\Entity;
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Tennis_Year extends OriginalAppName\Entity\Meta
+class Year extends \OriginalAppName\Entity\Meta
 {
 
 
@@ -20,5 +20,22 @@ class Tennis_Year extends OriginalAppName\Entity\Meta
 	{
 		$nameCurrent = $this->getName() + 0;
 		return $nameCurrent . '-' . ($nameCurrent + 1);
+	}
+
+
+	/**
+	 * example.com/result/{year}/
+	 * @return string url
+	 */
+	public function getUrl()
+	{
+		$generator = $this->getUrlGenerator();
+		return $generator->generate(
+			'result-year',
+			[
+				'year' => $this->getName()
+			],
+			true
+		);
 	}
 }

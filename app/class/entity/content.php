@@ -247,14 +247,13 @@ class Content extends \OriginalAppName\Entity
 	 */
 	public function getUrl()
 	{
-		$registry = \OriginalAppName\Registry::getInstance();
-		$generator = $registry->get('urlGenerator');
+		$generator = $this->getUrlGenerator();
 		return $generator->generate(
 			'content-single',
-			array(
+			[
 				'type' => $this->getType(),
 				'slug' => $this->getSlug()
-			),
+			],
 			true
 		);
 	}
