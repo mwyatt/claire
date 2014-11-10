@@ -19,7 +19,16 @@ class Controller extends \OriginalAppName\Route
 {
 
 
-	public static function index()
+	public function __construct($request)
+	{
+		if (method_exists($this, $request['_route'])) {
+			return $this->$request['_route']($request);
+		}
+	    $this->notFound($request);
+	}
+
+
+	public function index()
 	{
 		$modelOptions = new Model\Options();
 		$modelOptions
@@ -31,32 +40,7 @@ class Controller extends \OriginalAppName\Route
 	}
 
 
-	public static function home() {
-		$modelContent = new Model\Content();
-		$modelContent
-			->readType('post')
-			->filterStatus('visible')
-			->orderByProperty('timePublished', 'desc')
-			->limitData([0, 3]);
-
-		// gallery
-		$folder = glob(BASE_PATH . 'media' . DS . SITE . DS . 'thumb' . DS . '*');
-		$files = array();
-		foreach ($folder as $filePath) {
-			$filePath = str_replace(BASE_PATH, '', $filePath);
-			$files[] = str_replace(DS, US, $filePath);
-		}
-
-		// template
-		$view = new View([
-			'galleryPaths' => $files,
-			'contents' => $modelContent->getData()
-		]);
-		return new Response($view->getTemplate('home'));
-	}
-
-
-	public static function notFound()
+	public function notFound($request)
 	{
 		// template
 		$view = new View([

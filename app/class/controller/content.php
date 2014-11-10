@@ -3,6 +3,7 @@
 namespace OriginalAppName\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Exception\ResourceNotFoundException as SymfonyResourceNotFound;
 use OriginalAppName\Model;
 use OriginalAppName\View;
 use OriginalAppName\Pagination;
@@ -22,11 +23,11 @@ class Content extends \OriginalAppName\Controller
 	 * @param  string $type e.g. post
 	 * @return object       response
 	 */
-	public static function all($type) {
+	public function contentAll($request) {
 		$pagination = new Pagination();
 		$modelContent = new Model\Content();
 		$modelContent
-			->readType($type)
+			->readType($request['type'])
 			->filterStatus('visible')
 			->orderByProperty('timePublished', 'desc');
 		if (! $modelContent->getData()) {
@@ -56,15 +57,15 @@ class Content extends \OriginalAppName\Controller
 	 * @param  string $slug foo-bar
 	 * @return object       response
 	 */
-	public static function single($type, $slug)
+	public function contentSingle($request)
 	{
 		$modelContent = new Model\Content();
-		$modelContent->readSlug($slug);
+		$modelContent->readSlug($request['slug']);
 		if (! $modelContent->getData()) {
 			throw new \Symfony\Component\Routing\Exception\ResourceNotFoundException();
 		}
 		$entityContent = current($modelContent->getData());
-		if (! $entityContent->getType() == $type) {
+		if (! $entityContent->getType() == $request['type']) {
 			throw new \Symfony\Component\Routing\Exception\ResourceNotFoundException();
 		}
 		if (! $entityContent->getStatus() == 'visible') {

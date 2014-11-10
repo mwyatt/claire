@@ -12,13 +12,6 @@ class View extends \OriginalAppName\Data
 {
 
 
-	/**
-	 * page meta information
-	 * @var array
-	 */
-	public $meta = array();
-
-
 	public $url;
 
 
@@ -236,25 +229,6 @@ class View extends \OriginalAppName\Data
 		return $bodyClass = rtrim($bodyClass, -1);
 	}
 
-
-	/**
-	 * if any meta has been missed, merge with the defaults
-	 */
-	public function setMetaDefaults($data)
-	{
-
-/*
-array(
-			'title' => $this->config->getOption('meta_title'),
-			'keywords' => $this->config->getOption('meta_keywords'),
-			'description' => $this->config->getOption('meta_description')
-		)
- */
-
-		$this->setMeta([]);
-		return $this;
-	}
-	
 
 	/**
 	 * modifies the data array to ensure the metas are filled with custom stuff

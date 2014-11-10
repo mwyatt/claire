@@ -249,7 +249,7 @@ class Content extends \OriginalAppName\Entity
 	{
 		$generator = $this->getUrlGenerator();
 		return $generator->generate(
-			'content-single',
+			'contentSingle',
 			[
 				'type' => $this->getType(),
 				'slug' => $this->getSlug()

@@ -72,33 +72,18 @@ try {
     // print_r($attributes);
     // echo '</pre>';
     // exit;
+    // $response = call_user_func_array($controller, $attributes);
 
     $controller = $attributes['controller'];
-    unset($attributes['controller']);
-    $response = call_user_func_array($controller, $attributes);
+    $response = new $controller($attributes);
 } catch (Symfony\Component\Routing\Exception\ResourceNotFoundException $e) {
     $controller = new OriginalAppName\Controller();
     $response = $controller::notFound();
 } catch (Exception $e) {
-    echo '<pre>';
-    print_r($e);
-    echo '</pre>';
-    exit;
-    
-    $response = new Response('An error occurred', 500);
+    $response = new Response('An internal server error occurred.', HTTP_INTERNAL_SERVER_ERROR);
 }
 
 exit($response->getContent());
-
-
-/**
- * build options and set into config
- * @var model_options
- */
-$options = new model_options($system);
-$options->read();
-$options->keyByProperty('name');
-$system->config->setOptions($options->getData());
 
 
 /**

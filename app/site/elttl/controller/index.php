@@ -22,7 +22,7 @@ class Index extends \OriginalAppName\Controller
 {
 
 
-	public static function initialise()
+	public function initialise()
 	{
 
 		// menu primary
@@ -56,7 +56,11 @@ class Index extends \OriginalAppName\Controller
 	}
 
 
-	public static function home() {
+	public function home($request) {
+echo '<pre>';
+print_r($request);
+echo '</pre>';
+exit;
 
 		// ads
 		$json = new Json();
@@ -96,7 +100,7 @@ class Index extends \OriginalAppName\Controller
 	}
 
 
-	public static function search()
+	public function search()
 	{
 		if (! isset($_REQUEST['query'])) {
 			throw new \Symfony\Component\Routing\Exception\ResourceNotFoundException();

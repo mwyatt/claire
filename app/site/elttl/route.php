@@ -3,7 +3,7 @@
 
 $routes->add('home', new Symfony\Component\Routing\Route(
 	'/',
-	['controller' => 'OriginalAppName\\Site\\Elttl\\Controller\\Index::home']
+	['controller' => 'OriginalAppName\\Site\\Elttl\\Controller\\Index']
 ));
 
 $routes->add('search', new Symfony\Component\Routing\Route(
@@ -42,12 +42,12 @@ $routes->add('result-year-division-merit-double', new Symfony\Component\Routing\
 	['controller' => 'OriginalAppName\\Site\\Elttl\\Controller\\Result::meritDouble']
 ));
 
-$routes->add('content-all', new Symfony\Component\Routing\Route(
+$routes->add('contentAll', new Symfony\Component\Routing\Route(
 	'/{type}/',
-	['controller' => 'OriginalAppName\\Controller\\Content::all']
+	['controller' => 'OriginalAppName\\Controller\\Content']
 ));
 
-$routes->add('content-single', new Symfony\Component\Routing\Route(
+$routes->add('contentSingle', new Symfony\Component\Routing\Route(
 	'/{type}/{slug}/',
-	['controller' => 'OriginalAppName\\Controller\\Content::single']
+	['controller' => 'OriginalAppName\\Controller\\Content']
 ));
