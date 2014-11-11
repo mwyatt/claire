@@ -43,10 +43,10 @@ class View extends \OriginalAppName\Data
 	 */
 	public function getDataDefault()
 	{
-		$controller = new \OriginalAppName\Controller();
+		$controllerResult = new \OriginalAppName\Controller(['_route' => 'index']);
 		$siteControllerName = '\\OriginalAppName\\Site\\' . SITE . '\\Controller\\Index';
-		$siteController = new $siteControllerName();
-		return array_merge($controller::index(), $siteController->initialise());
+		$siteControllerResult = new $siteControllerName(['_route' => 'initialise']);
+		return array_merge($controllerResult, $siteControllerResult);
 	}
 
 

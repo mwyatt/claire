@@ -24,7 +24,8 @@ class Controller extends \OriginalAppName\Route
 		if (method_exists($this, $request['_route'])) {
 			return $this->$request['_route']($request);
 		}
-	    $this->notFound($request);
+		exit('chosen controller method not found');
+	    return $this->notFound($request);
 	}
 
 

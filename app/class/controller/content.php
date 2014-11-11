@@ -23,7 +23,8 @@ class Content extends \OriginalAppName\Controller
 	 * @param  string $type e.g. post
 	 * @return object       response
 	 */
-	public function contentAll($request) {
+	public function contentAll($request)
+	{
 		$pagination = new Pagination();
 		$modelContent = new Model\Content();
 		$modelContent

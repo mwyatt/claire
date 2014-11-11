@@ -33,70 +33,17 @@ $error
     ->initialise();
 
 
-// routing fun
-
-
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Matcher\UrlMatcher;
-use Symfony\Component\Routing\RequestContext;
- 
-$request = Request::createFromGlobals();
-$response = new Response();
-$context = new RequestContext();
-$context->fromRequest($request);
-$siteRoutePath = SITE_PATH . 'route' . EXT;
-if (! file_exists($siteRoutePath)) {
-    exit('site \'' . SITE . '\' must have routes configured');
-}
-$routes = new Symfony\Component\Routing\RouteCollection();
-
-// add routes
-
-// admin
-include APP_PATH . 'admin' . DS . 'route' . EXT;
-
-// site
-include $siteRoutePath;
-
-// url generator
-$registry->set('urlGenerator', new Symfony\Component\Routing\Generator\UrlGenerator($routes, $context));
-
-// get match
-$matcher = new UrlMatcher($routes, $context);
-
-try {
-    $attributes = $matcher->match($request->getPathInfo());
-
-    // echo '<pre>';
-    // print_r($attributes);
-    // echo '</pre>';
-    // exit;
-    // $response = call_user_func_array($controller, $attributes);
-
-    $controller = $attributes['controller'];
-    $response = new $controller($attributes);
-} catch (Symfony\Component\Routing\Exception\ResourceNotFoundException $e) {
-    $controller = new OriginalAppName\Controller();
-    $response = $controller::notFound();
-} catch (Exception $e) {
-    $response = new Response('An internal server error occurred.', HTTP_INTERNAL_SERVER_ERROR);
-}
-
-exit($response->getContent());
-
-
 /**
  * store each unique url
  */
-$sessionHistory = new session_history($system);
-$sessionHistory->add($system->url->getCache('current'));
+// $sessionHistory = new session_history($system);
+// $sessionHistory->add($system->url->getCache('current'));
 
 
 /**
  * unit tests
  */
-$test = new test($system);
+$test = new OriginalAppName\Test($system);
 // $test->genpassword();
 
 
@@ -104,9 +51,7 @@ $test = new test($system);
  * find appropriate route and load controller
  * @var route
  */
-$route = new route($system);
-$route->readMap();
-$route->load();
+$route = new OriginalAppName\Route();
 
 
 /**
