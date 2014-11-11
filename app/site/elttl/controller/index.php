@@ -57,10 +57,6 @@ class Index extends \OriginalAppName\Controller
 
 
 	public function home($request) {
-echo '<pre>';
-print_r($request);
-echo '</pre>';
-exit;
 
 		// ads
 		$json = new Json();

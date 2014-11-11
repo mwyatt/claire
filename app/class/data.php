@@ -153,4 +153,17 @@ class Data extends \OriginalAppName\System
 		$this->setData($dataFiltered);
 		return $this;
 	}
+
+
+	/**
+	 * combines existing data with new rows
+	 * @param  array $dataRows 
+	 * @return object           
+	 */
+	public function mergeData($dataRows)
+	{
+		$data = $this->getData();
+		$this->setData(array_merge($data, $dataRows));
+		return $this;
+	}
 }

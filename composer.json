@@ -3,7 +3,7 @@
         "aura/session": "dev-master",
         "joseph-lenton/php-error": "dev-master",
         "symfony/routing": "2.6.*@dev",
-        "nette/mail": "2.3.*@dev",
+        "swiftmailer/swiftmailer": "5.3.*@dev",
         "orno/route": "dev-master"
     },
     "autoload": {

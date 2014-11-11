@@ -22,7 +22,7 @@ class View extends \OriginalAppName\Data
 	public function __construct($data) {
 		$registry = \OriginalAppName\Registry::getInstance();
 		$this->setUrl($registry->get('url'));
-		$this->setData(array_merge($this->getDataDefault(), $data));
+		$this->setData($data);
 		$this->setMeta();
 	}
 
@@ -43,7 +43,20 @@ class View extends \OriginalAppName\Data
 	 */
 	public function getDataDefault()
 	{
-		$controllerResult = new \OriginalAppName\Controller(['_route' => 'index']);
+		return [];
+
+		$controller = new \OriginalAppName\Controller([]);
+		echo '<pre>';
+		print_r($controller->index());
+		echo '</pre>';
+		exit;
+		
+		echo '<pre>';
+		var_dump(new \OriginalAppName\Controller(['_route' => 'null']));
+		print_r($controller);
+		echo '</pre>';
+		exit;
+		
 		$siteControllerName = '\\OriginalAppName\\Site\\' . SITE . '\\Controller\\Index';
 		$siteControllerResult = new $siteControllerName(['_route' => 'initialise']);
 		return array_merge($controllerResult, $siteControllerResult);
@@ -236,6 +249,11 @@ class View extends \OriginalAppName\Data
 	 */
 	public function setMeta() {		
 		$data = $this->getData();
+
+		// depends on options
+		if (! isset($data['option'])) {
+			return $this;
+		}
 
 		// title
 		if (isset($data['metaTitle'])) {

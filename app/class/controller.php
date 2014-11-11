@@ -3,6 +3,7 @@
 namespace OriginalAppName;
 
 use OriginalAppName\View;
+use OriginalAppName\Service;
 use Symfony\Component\HttpFoundation\Response;
 
 
@@ -15,29 +16,30 @@ use Symfony\Component\HttpFoundation\Response;
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Controller extends \OriginalAppName\Route
+class Controller
 {
+
+
+	public $view;
 
 
 	public function __construct($request)
 	{
-		if (method_exists($this, $request['_route'])) {
-			return $this->$request['_route']($request);
+		if (isset($request['_route'])) {
+			if (method_exists($this, $request['_route'])) {
+				return $this->$request['_route']($request);
+			} else {
+				exit('chosen controller method \'' . $request['_route'] . '\' not found');
+			}
 		}
-		exit('chosen controller method not found');
 	    return $this->notFound($request);
 	}
 
 
-	public function index()
+	public function default()
 	{
-		$modelOptions = new Model\Options();
-		$modelOptions
-			->read()
-			->keyDataByProperty('name');
-		return [
-			'option' => $modelOptions->getData()
-		];
+		$serviceOptions = new Service\Options();
+		$this->view->appenddata?($serviceOptions->read());
 	}
 
 
@@ -48,5 +50,22 @@ class Controller extends \OriginalAppName\Route
 			'metaTitle' => 'Not found'
 		]);
 		return new Response($view->getTemplate('not-found'), Response::HTTP_NOT_FOUND);
+	}
+
+
+	/**
+	 * @return object 
+	 */
+	public function getView() {
+	    return $this->view;
+	}
+	
+	
+	/**
+	 * @param object $view 
+	 */
+	public function setView($view) {
+	    $this->view = $view;
+	    return $this;
 	}
 }
