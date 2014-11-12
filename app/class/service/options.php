@@ -19,8 +19,6 @@ class Options extends \OriginalAppName\Service
 		$modelOptions
 			->read()
 			->keyDataByProperty('name');
-		return [
-			'option' => $modelOptions->getData()
-		];
+		return $modelOptions->getData();
 	}
 }

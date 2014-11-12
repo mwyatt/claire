@@ -88,13 +88,13 @@ class Data extends \OriginalAppName\System
 	 * @param  any $dataRow 
 	 * @return object          instance
 	 */
-	public function appendData($dataRow)
+	public function appendData($dataRow, $key = null)
 	{
 		if (! $dataRow) {
 			return $this;
 		}
 		$data = $this->getData();
-		$data[] = $dataRow;
+		$data[$key] = $dataRow;
 		$this->setData($data);
 		return $this;
 	}

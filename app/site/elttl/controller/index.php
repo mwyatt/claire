@@ -22,7 +22,7 @@ class Index extends \OriginalAppName\Controller
 {
 
 
-	public function initialise()
+	public function siteDefault()
 	{
 
 		// menu primary

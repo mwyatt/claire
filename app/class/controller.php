@@ -25,6 +25,8 @@ class Controller
 
 	public function __construct($request)
 	{
+		$this->setView(new View);
+		$this->default();
 		if (isset($request['_route'])) {
 			if (method_exists($this, $request['_route'])) {
 				return $this->$request['_route']($request);
@@ -36,10 +38,25 @@ class Controller
 	}
 
 
+	/**
+	 * store default data in view
+	 * @return null 
+	 */
 	public function default()
 	{
+
+		// site defaults
+		if (method_exists($this, 'siteDefault')) {
+			$this
+				->view
+				->mergeData($this->siteDefault());
+		}
+
+		// default options
 		$serviceOptions = new Service\Options();
-		$this->view->appenddata?($serviceOptions->read());
+		$this
+			->view
+			->mergeData(['options' => $serviceOptions->read()]);
 	}
 
 
