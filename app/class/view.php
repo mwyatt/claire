@@ -19,10 +19,9 @@ class View extends \OriginalAppName\Data
 	 * needed for meta defaults
 	 * @param array $system 
 	 */
-	public function __construct($data) {
+	public function __construct() {
 		$registry = \OriginalAppName\Registry::getInstance();
 		$this->setUrl($registry->get('url'));
-		$this->setData($data);
 		$this->setMeta();
 	}
 
@@ -34,48 +33,6 @@ class View extends \OriginalAppName\Data
 	    $this->url = $url;
 	    return $this;
 	}
-
-
-	/**
-	 * this is possibly poorly placed? retrieves information
-	 * global to all views
-	 * @return array 
-	 */
-	public function getDataDefault()
-	{
-		return [];
-
-		$controller = new \OriginalAppName\Controller([]);
-		echo '<pre>';
-		print_r($controller->index());
-		echo '</pre>';
-		exit;
-		
-		echo '<pre>';
-		var_dump(new \OriginalAppName\Controller(['_route' => 'null']));
-		print_r($controller);
-		echo '</pre>';
-		exit;
-		
-		$siteControllerName = '\\OriginalAppName\\Site\\' . SITE . '\\Controller\\Index';
-		$siteControllerResult = new $siteControllerName(['_route' => 'initialise']);
-		return array_merge($controllerResult, $siteControllerResult);
-	}
-
-
-	// /**
-	//  * sets header and outputs the data
-	//  * only used by the controller class
-	//  */
-	// public function render()
-	// {
-
-	// 	// default header
-	// 	header('Content-type: text/html; charset=utf-8'); 
-
-	// 	// output
-	// 	echo $this->getData();
-	// }
 
 	
 	/**
@@ -275,18 +232,6 @@ class View extends \OriginalAppName\Data
 		// commit data
 		$this->setData($data);
 		return $this;
-	}
-
-
-	/**
-	 * returns requested meta key
-	 * @param  string $key meta key
-	 * @return bool or string
-	 */
-	public function getMeta($key) {
-		if (array_key_exists($key, $this->meta)) {
-			return $this->meta[$key];
-		}
 	}
 
 

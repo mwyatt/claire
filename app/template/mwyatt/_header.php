@@ -7,8 +7,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title><?php echo $metaTitle ?></title>   
-    <meta name="keywords" content="<?php echo $this->getMeta('keywords') ?>">
-    <meta name="description" content="<?php echo $this->getMeta('description') ?>">
+    <meta name="keywords" content="<?php echo $metaKeywords ?>">
+    <meta name="description" content="<?php echo $metaDescription ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link href="<?php echo $this->getUrl() ?>asset/screen.css?v=1" media="screen, projection" rel="stylesheet" type="text/css" />
     <!-- // <script src="<?php echo $this->getUrl() ?>js/vendor/respond.min.js"></script> -->

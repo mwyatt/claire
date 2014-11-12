@@ -8,8 +8,8 @@
     <meta http-equiv="Content-type" content="text/html; charset=iso-8859-1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title><?php echo $metaTitle ?></title>   
-    <meta name="keywords" content="<?php echo $this->getMeta('keywords') ?>">
-    <meta name="description" content="<?php echo $this->getMeta('description') ?>">
+    <meta name="keywords" content="<?php echo $metaKeywords ?>">
+    <meta name="description" content="<?php echo $metaDescription ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link href="<?php echo $this->getUrl() ?>asset/screen.css<?php echo $this->getAssetVersion() ?>" media="screen, projection" rel="stylesheet" type="text/css" />
     <link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800" rel="stylesheet" type="text/css">

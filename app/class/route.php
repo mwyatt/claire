@@ -3,12 +3,14 @@
 namespace OriginalAppName;
 
 use OriginalAppName\Registry;
+use OriginalAppName\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Matcher\UrlMatcher;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\RouteCollection;
 use Symfony\Component\Routing\Generator\UrlGenerator;
+use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 
 
 /**
@@ -40,6 +42,9 @@ class Route extends \OriginalAppName\System
 		// site
 		include $siteRoutePath;
 
+		// global
+		include APP_PATH . 'route' . EXT;
+
 		// url generator register
 		$registry->set('urlGenerator', new UrlGenerator($routes, $context));
 
@@ -48,17 +53,25 @@ class Route extends \OriginalAppName\System
 
 		// try to catch any exceptions in the controllers
 		try {
+
+			// builds controller and sends to method
 		    $attributes = $matcher->match($request->getPathInfo());
 		    $controller = $attributes['controller'];
-		    $response = new $controller($attributes);
-		} catch (Symfony\Component\Routing\Exception\ResourceNotFoundException $e) {
-		    $controller = new OriginalAppName\Controller();
-		    $response = $controller::notFound();
+		    $controller = new $controller();
+		    echo '<pre>';
+		    print_r($attributes);
+		    echo '</pre>';
+		    exit;
+		    
+		    $response = $controller->$attributes['_route']($attributes);
+		} catch (ResourceNotFoundException $e) {
+		    $controller = new Controller();
+		    $response = $controller->notFound([]);
 		} catch (Exception $e) {
 		    $response = new Response('An internal server error occurred.', HTTP_INTERNAL_SERVER_ERROR);
 		}
 
-		// the response, the only echo
+		// the response, the only echo :(
 		echo $response->getContent();	
 	}
 }

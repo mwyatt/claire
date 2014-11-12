@@ -19,8 +19,17 @@ use OriginalAppName\View;
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Index extends \OriginalAppName\Controller
+class Front extends \OriginalAppName\Controller
 {
+
+
+	public function __construct($request)
+	{
+		Parent::__construct($request);
+		$this
+			->view
+			->mergeData($this->siteDefault());
+	}
 
 
 	public function siteDefault()

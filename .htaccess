@@ -5,8 +5,8 @@ IndexIgnore */*
 # END GENERAL
 
 # BEGIN RULES
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
+# RewriteCond %{REQUEST_FILENAME} !-f
+# RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . index.php
 # END RULES
 
