@@ -22,7 +22,6 @@ class View extends \OriginalAppName\Data
 	public function __construct() {
 		$registry = \OriginalAppName\Registry::getInstance();
 		$this->setUrl($registry->get('url'));
-		$this->setMeta();
 	}
 
 
@@ -40,6 +39,7 @@ class View extends \OriginalAppName\Data
 	 * @param  string $templatePath 
 	 */
 	public function getTemplate($templatePath) {
+		$this->setMeta();
 
 		// obtain path
 		$path = $this->getTemplatePath($templatePath);
@@ -207,7 +207,7 @@ class View extends \OriginalAppName\Data
 	public function setMeta() {		
 		$data = $this->getData();
 
-		// depends on options
+		// depends on option
 		if (! isset($data['option'])) {
 			return $this;
 		}
@@ -264,5 +264,21 @@ class View extends \OriginalAppName\Data
 	 */
 	public function getPathMediaUpload($path) { 
 		return $this->url->getCache('base') . 'media/upload/' . $path;
+	}
+
+
+	/**
+	 * inserts a key -> value pair into the data array
+	 * does this need to be in the data class?
+	 * @param  string $key   
+	 * @param  any $value 
+	 * @return object        
+	 */
+	public function insertData($key, $value)
+	{
+		$data = $this->getData();
+		$data[$key] = $value;
+		$this->setData($data);
+		return $this;
 	}
 } 

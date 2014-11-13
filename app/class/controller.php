@@ -36,7 +36,7 @@ class Controller
 		$serviceOptions = new Service\Options();
 		$this
 			->view
-			->mergeData(['options' => $serviceOptions->read()]);
+			->mergeData(['option' => $serviceOptions->read()]);
 	}
 
 

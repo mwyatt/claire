@@ -88,18 +88,23 @@ class Data extends \OriginalAppName\System
 	 * @param  any $dataRow 
 	 * @return object          instance
 	 */
-	public function appendData($dataRow, $key = null)
+	public function appendData($dataRow)
 	{
 		if (! $dataRow) {
 			return $this;
 		}
 		$data = $this->getData();
-		$data[$key] = $dataRow;
+		$data[] = $dataRow;
 		$this->setData($data);
 		return $this;
 	}
 
 
+	/**
+	 * limit the data stored to a range specified
+	 * @param  array $range [0, 1]
+	 * @return object        
+	 */
 	public function limitData($range)
 	{
 		$data = $this->getData();

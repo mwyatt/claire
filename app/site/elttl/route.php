@@ -12,12 +12,12 @@ $routes->add('search', new Symfony\Component\Routing\Route(
 ));
 
 // doing
-$routes->add('result-all', new Symfony\Component\Routing\Route(
+$routes->add('all', new Symfony\Component\Routing\Route(
 	'/result/',
 	['controller' => 'OriginalAppName\\Site\\Elttl\\Controller\\Result::all']
 ));
 
-$routes->add('result-year', new Symfony\Component\Routing\Route(
+$routes->add('year', new Symfony\Component\Routing\Route(
 	'/result/{year}/',
 	['controller' => 'OriginalAppName\\Site\\Elttl\\Controller\\Result::year']
 ));
@@ -42,7 +42,7 @@ $routes->add('result-year-division-merit-double', new Symfony\Component\Routing\
 	['controller' => 'OriginalAppName\\Site\\Elttl\\Controller\\Result::meritDouble']
 ));
 
-$routes->add('contentAll', new Symfony\Component\Routing\Route(
+$routes->add('all', new Symfony\Component\Routing\Route(
 	'/{type}/',
 	['controller' => 'OriginalAppName\\Controller\\Content']
 ));
