@@ -2,19 +2,13 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js <?php echo isset($templateName) ? 'template-' . $templateName : '' ?>"> <!--<![endif]-->
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title><?php echo $metaTitle ?></title>
-    <meta name="keywords" content="<?php echo $metaKeywords ?>">
-    <meta name="description" content="<?php echo $metaDescription ?>">
-    <link rel="icon" type="image/png" href="<?php echo $this->getUrlMedia('favicon.png') ?>?rev=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link href="<?php echo $this->getUrlAsset('asset/screen.css') ?>" media="screen, projection, print" rel="stylesheet" type="text/css" />
+
+<?php include($this->getTemplatePath('header/_meta')) ?>
+<?php include($this->getTemplatePath('header/_common')) ?>
+
     <link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800" rel="stylesheet" type="text/css">
-    <script src="<?php echo $this->getUrlAsset('vendor/bower/modernizr/modernizr.js') ?>"></script>
-    <script>var urlBase = '<?php echo $this->getUrl() ?>';</script>
     
 <?php include($this->getTemplatePath('header/_google-analytics')) ?>
 

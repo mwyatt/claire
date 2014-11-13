@@ -23,26 +23,23 @@ class Controller
 	{
 		$this->setView(new View);
 		$this->defaultGlobal();
-		$this->defaultSite();
 	}
 
 
 	/**
 	 * store default data in view
+	 * store default site date in view
 	 * @return null 
 	 */
 	public function defaultGlobal()
 	{
 		$serviceOptions = new Service\Options();
+		$className = '\\OriginalAppName\\Site\\' . ucfirst(SITE) . '\\Service\\Common';
+		$serviceCommon = new $className;
 		$this
 			->view
-			->mergeData(['option' => $serviceOptions->read()]);
-	}
-
-
-	public function defaultSite()
-	{
-		// will be set in a site controller
+			->mergeData(['option' => $serviceOptions->read()])
+			->mergeData($serviceCommon->read());
 	}
 
 

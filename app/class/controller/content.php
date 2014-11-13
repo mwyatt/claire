@@ -14,7 +14,7 @@ use OriginalAppName\Pagination;
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Content extends \OriginalAppName\Site\Elttl\Controller\Front
+class Content extends \OriginalAppName\Controller
 {
 
 
@@ -58,7 +58,7 @@ class Content extends \OriginalAppName\Site\Elttl\Controller\Front
 	 * @param  string $slug foo-bar
 	 * @return object       response
 	 */
-	public function contentSingle($request)
+	public function single($request)
 	{
 		$modelContent = new Model\Content();
 		$modelContent->readSlug($request['slug']);

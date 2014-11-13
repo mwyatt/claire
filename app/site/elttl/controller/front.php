@@ -26,33 +26,6 @@ class Front extends \OriginalAppName\Controller
 	public function defaultSite()
 	{
 
-		// menu primary
-		$json = new Json();
-		$json->read('menu-primary');
-		$menuPrimary = $json->getData();
 
-		// menu Secondary
-		$json = new Json();
-		$json->read('menu-secondary');
-		$menuSecondary = $json->getData();
-
-		// menu Tertiary
-		$json = new Json();
-		$json->read('menu-tertiary');
-		$menuTertiary = $json->getData();
-
-		// divisions
-		$modelTennisDivision = new Division();
-		$modelTennisDivision->read();
-
-		// template
-		$this->view->mergeData([
-			'year' => 0,
-			'divisions' => $modelTennisDivision->getData(),
-			'menuPrimary' => $menuPrimary,
-			'menuSecondary' => $menuSecondary,
-			'campaign' => new Campaign(),
-			'menuTertiary' => $menuTertiary
-		]);
 	}
 }
