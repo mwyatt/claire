@@ -8,6 +8,7 @@ use OriginalAppName\Site\Elttl\Model\Tennis\Division;
 use OriginalAppName\Google\Analytics\Campaign;
 use OriginalAppName\Model;
 use OriginalAppName\View;
+use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 
 
 /**
@@ -19,42 +20,8 @@ use OriginalAppName\View;
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Index extends \OriginalAppName\Controller
+class Index extends \OriginalAppName\Site\Elttl\Controller\Front
 {
-
-
-	public function siteDefault()
-	{
-
-		// menu primary
-		$json = new Json();
-		$json->read('menu-primary');
-		$menuPrimary = $json->getData();
-
-		// menu Secondary
-		$json = new Json();
-		$json->read('menu-secondary');
-		$menuSecondary = $json->getData();
-
-		// menu Tertiary
-		$json = new Json();
-		$json->read('menu-tertiary');
-		$menuTertiary = $json->getData();
-
-		// divisions
-		$modelTennisDivision = new Division();
-		$modelTennisDivision->read();
-
-		// template defaults
-		return [
-			'year' => 0,
-			'divisions' => $modelTennisDivision->getData(),
-			'menuPrimary' => $menuPrimary,
-			'menuSecondary' => $menuSecondary,
-			'campaign' => new Campaign(),
-			'menuTertiary' => $menuTertiary
-		];
-	}
 
 
 	public function home($request) {
@@ -87,20 +54,20 @@ class Index extends \OriginalAppName\Controller
 		}
 
 		// template
-		$view = new View([
+		$this->view->mergeData([
 			'ads' => $ads,
 			'covers' => $covers,
 			'galleryPaths' => $files,
 			'contents' => $modelContent->getData()
 		]);
-		return new Response($view->getTemplate('home'));
+		return new Response($this->view->getTemplate('home'));
 	}
 
 
 	public function search()
 	{
 		if (! isset($_REQUEST['query'])) {
-			throw new \Symfony\Component\Routing\Exception\ResourceNotFoundException();
+			throw new ResourceNotFoundException();
 		}
 	    return new Response('you are searching for: ' . $_REQUEST['query']);
 	}

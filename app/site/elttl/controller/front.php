@@ -23,16 +23,7 @@ class Front extends \OriginalAppName\Controller
 {
 
 
-	public function __construct($request)
-	{
-		Parent::__construct($request);
-		$this
-			->view
-			->mergeData($this->siteDefault());
-	}
-
-
-	public function siteDefault()
+	public function defaultSite()
 	{
 
 		// menu primary
@@ -54,63 +45,14 @@ class Front extends \OriginalAppName\Controller
 		$modelTennisDivision = new Division();
 		$modelTennisDivision->read();
 
-		// template defaults
-		return [
+		// template
+		$this->view->mergeData([
 			'year' => 0,
 			'divisions' => $modelTennisDivision->getData(),
 			'menuPrimary' => $menuPrimary,
 			'menuSecondary' => $menuSecondary,
 			'campaign' => new Campaign(),
 			'menuTertiary' => $menuTertiary
-		];
-	}
-
-
-	public function home($request) {
-
-		// ads
-		$json = new Json();
-		$json->read('ads');
-		$ads = $json->getData();
-
-		// 3 content
-		$modelContent = new Model\Content();
-		$modelContent
-			->readType('press')
-			->filterStatus('visible')
-			->orderByProperty('timePublished', 'desc')
-			->limitData([0, 3]);
-
-		// cover
-		$json = new Json();
-		$json->read('home-cover');
-		$covers = $json->getData();
-		shuffle($covers);
-
-		// gallery
-		$folder = glob(SITE_PATH . 'asset' . DS . 'media' . DS . 'thumb' . DS . '*');
-		$files = array();
-		foreach ($folder as $filePath) {
-			$filePath = str_replace(BASE_PATH, '', $filePath);
-			$files[] = str_replace(DS, US, $filePath);
-		}
-
-		// template
-		$view = new View([
-			'ads' => $ads,
-			'covers' => $covers,
-			'galleryPaths' => $files,
-			'contents' => $modelContent->getData()
 		]);
-		return new Response($view->getTemplate('home'));
-	}
-
-
-	public function search()
-	{
-		if (! isset($_REQUEST['query'])) {
-			throw new \Symfony\Component\Routing\Exception\ResourceNotFoundException();
-		}
-	    return new Response('you are searching for: ' . $_REQUEST['query']);
 	}
 }

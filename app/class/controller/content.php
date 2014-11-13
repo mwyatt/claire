@@ -3,7 +3,7 @@
 namespace OriginalAppName\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Exception\ResourceNotFoundException as SymfonyResourceNotFound;
+use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 use OriginalAppName\Model;
 use OriginalAppName\View;
 use OriginalAppName\Pagination;
@@ -14,7 +14,7 @@ use OriginalAppName\Pagination;
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Content extends \OriginalAppName\Controller
+class Content extends \OriginalAppName\Site\Elttl\Controller\Front
 {
 
 
@@ -32,7 +32,7 @@ class Content extends \OriginalAppName\Controller
 			->filterStatus('visible')
 			->orderByProperty('timePublished', 'desc');
 		if (! $modelContent->getData()) {
-			throw new \Symfony\Component\Routing\Exception\ResourceNotFoundException();
+			throw new ResourceNotFoundException();
 		}
 		$pagination->setTotalRows(count($modelContent->getData()));
 		$pagination->initialise();
@@ -42,13 +42,13 @@ class Content extends \OriginalAppName\Controller
 		$entityContent = current($modelContent->getData());
 
 		// template
-		$view = new View([
+		$this->view->mergeData([
 			'metaTitle' => 'All ' . $entityContent->getType(),
 			'pagination' => $pagination,
 			'contentSingle' => $entityContent,
 			'contents' => $modelContent->getData()
 		]);
-		return new Response($view->getTemplate('content'));
+		return new Response($this->view->getTemplate('content'));
 	}
 
 
@@ -63,21 +63,21 @@ class Content extends \OriginalAppName\Controller
 		$modelContent = new Model\Content();
 		$modelContent->readSlug($request['slug']);
 		if (! $modelContent->getData()) {
-			throw new \Symfony\Component\Routing\Exception\ResourceNotFoundException();
+			throw new ResourceNotFoundException();
 		}
 		$entityContent = current($modelContent->getData());
 		if (! $entityContent->getType() == $request['type']) {
-			throw new \Symfony\Component\Routing\Exception\ResourceNotFoundException();
+			throw new ResourceNotFoundException();
 		}
 		if (! $entityContent->getStatus() == 'visible') {
-			throw new \Symfony\Component\Routing\Exception\ResourceNotFoundException();
+			throw new ResourceNotFoundException();
 		}
 
 		// template
-		$view = new View([
+		$this->view->mergeData([
 			'metaTitle' => $entityContent->getTitle(),
 			'contents' => $modelContent->getData()
 		]);
-		return new Response($view->getTemplate('content-single'));
+		return new Response($this->view->getTemplate('content-single'));
 	}
 }
