@@ -31,7 +31,7 @@ class Year extends \OriginalAppName\Entity\Meta
 	{
 		$generator = $this->getUrlGenerator();
 		return $generator->generate(
-			'result-year',
+			'resultYear',
 			[
 				'year' => $this->getName()
 			],

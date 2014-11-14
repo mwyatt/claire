@@ -1,8 +1,5 @@
 <?php 
 
-// enable errors, which a custom error handler is set for later
-ini_set('display_errors', true);	
-
 // set time zone to uk 
 ini_set('date.timezone', "Europe/London");
 

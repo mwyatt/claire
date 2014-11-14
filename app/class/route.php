@@ -118,6 +118,7 @@ class Route extends \OriginalAppName\System
 		}
 		include $siteRoutePath;
 
+		// return all routes
 		return $routes;
 	}
 }

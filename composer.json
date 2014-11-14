@@ -3,8 +3,8 @@
         "aura/session": "dev-master",
         "joseph-lenton/php-error": "dev-master",
         "symfony/routing": "2.6.*@dev",
-        "swiftmailer/swiftmailer": "5.3.*@dev",
-        "orno/route": "dev-master"
+        "symfony/http-foundation": "2.5.6",
+        "swiftmailer/swiftmailer": "5.3.*@dev"
     },
     "autoload": {
         "psr-4": {

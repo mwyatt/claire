@@ -1,6 +1,6 @@
 <?php
 
-namespace OriginalAppName\Entity;
+namespace OriginalAppName\Site\Elttl\Entity\Tennis;
 
 
 /**
@@ -8,29 +8,29 @@ namespace OriginalAppName\Entity;
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Tennis_Encounter extends OriginalAppName\Entity
+class Encounter extends \OriginalAppName\Site\Elttl\Entity\Tennis\YearId
 {
 
 	
-	private $fixture_id;
+	private $fixtureId;
 
 	
-	private $score_left;
+	private $scoreLeft;
 
 	
-	private $score_right;
+	private $scoreRight;
 
 	
-	private $player_id_left;
+	private $playerIdLeft;
 
 	
-	private $player_id_right;
+	private $playerIdRight;
 
 	
-	private $player_rank_change_left;
+	private $playerRankChangeLeft;
 
 	
-	private $player_rank_change_right;
+	private $playerRankChangeRight;
 
 	
 	/**
@@ -46,7 +46,7 @@ class Tennis_Encounter extends OriginalAppName\Entity
 	 * @return int 
 	 */
 	public function getfixtureId() {
-	    return $this->fixture_id;
+	    return $this->fixtureId;
 	}
 	
 	
@@ -54,7 +54,7 @@ class Tennis_Encounter extends OriginalAppName\Entity
 	 * @param int $fixtureId 
 	 */
 	public function setfixtureId($fixtureId) {
-	    $this->fixture_id = $fixtureId;
+	    $this->fixtureId = $fixtureId;
 	    return $this;
 	}
 
@@ -63,7 +63,7 @@ class Tennis_Encounter extends OriginalAppName\Entity
 	 * @return int 
 	 */
 	public function getScoreLeft() {
-	    return $this->score_left;
+	    return $this->scoreLeft;
 	}
 	
 	
@@ -71,7 +71,7 @@ class Tennis_Encounter extends OriginalAppName\Entity
 	 * @param int $scoreLeft 
 	 */
 	public function setScoreLeft($scoreLeft) {
-	    $this->score_left = $scoreLeft;
+	    $this->scoreLeft = $scoreLeft;
 	    return $this;
 	}
 
@@ -80,7 +80,7 @@ class Tennis_Encounter extends OriginalAppName\Entity
 	 * @return int 
 	 */
 	public function getScoreRight() {
-	    return $this->score_right;
+	    return $this->scoreRight;
 	}
 	
 	
@@ -88,7 +88,7 @@ class Tennis_Encounter extends OriginalAppName\Entity
 	 * @param int $scoreRight 
 	 */
 	public function setScoreRight($scoreRight) {
-	    $this->score_right = $scoreRight;
+	    $this->scoreRight = $scoreRight;
 	    return $this;
 	}
 
@@ -97,7 +97,7 @@ class Tennis_Encounter extends OriginalAppName\Entity
 	 * @return int 
 	 */
 	public function getPlayerIdLeft() {
-	    return $this->player_id_left;
+	    return $this->playerIdLeft;
 	}
 	
 	
@@ -105,7 +105,7 @@ class Tennis_Encounter extends OriginalAppName\Entity
 	 * @param int $playerIdLeft 
 	 */
 	public function setPlayerIdLeft($playerIdLeft) {
-	    $this->player_id_left = $playerIdLeft;
+	    $this->playerIdLeft = $playerIdLeft;
 	    return $this;
 	}
 
@@ -114,7 +114,7 @@ class Tennis_Encounter extends OriginalAppName\Entity
 	 * @return int 
 	 */
 	public function getPlayerIdRight() {
-	    return $this->player_id_right;
+	    return $this->playerIdRight;
 	}
 	
 	
@@ -122,7 +122,7 @@ class Tennis_Encounter extends OriginalAppName\Entity
 	 * @param int $playerIdRight 
 	 */
 	public function setPlayerIdRight($playerIdRight) {
-	    $this->player_id_right = $playerIdRight;
+	    $this->playerIdRight = $playerIdRight;
 	    return $this;
 	}
 
@@ -148,15 +148,15 @@ class Tennis_Encounter extends OriginalAppName\Entity
 	 * @return int 
 	 */
 	public function getPlayerRankChangeLeft() {
-	    return $this->player_rank_change_left;
+	    return $this->playerRankChangeLeft;
 	}
 	
 	
 	/**
-	 * @param int $player_rank_change_left 
+	 * @param int $playerRankChangeLeft 
 	 */
 	public function setPlayerRankChangeLeft($playerRankChangeLeft) {
-	    $this->player_rank_change_left = $playerRankChangeLeft;
+	    $this->playerRankChangeLeft = $playerRankChangeLeft;
 	    return $this;
 	}
 
@@ -165,15 +165,15 @@ class Tennis_Encounter extends OriginalAppName\Entity
 	 * @return int 
 	 */
 	public function getPlayerRankChangeRight() {
-	    return $this->player_rank_change_right;
+	    return $this->playerRankChangeRight;
 	}
 	
 	
 	/**
-	 * @param int $player_rank_change_right 
+	 * @param int $playerRankChangeRight 
 	 */
 	public function setPlayerRankChangeRight($playerRankChangeRight) {
-	    $this->player_rank_change_right = $playerRankChangeRight;
+	    $this->playerRankChangeRight = $playerRankChangeRight;
 	    return $this;
 	}
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace OriginalAppName\Entity;
+namespace OriginalAppName\Site\Elttl\Entity\Tennis;
 
 
 /**
@@ -8,38 +8,38 @@ namespace OriginalAppName\Entity;
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Tennis_Team extends OriginalAppName\Entity
+class Team extends \OriginalAppName\Site\Elttl\Entity\Tennis\YearId
 {
 
 	
-	private $division_id;
+	private $divisionId;
 
 	
-	private $venue_id;
+	private $venueId;
 
 	
-	private $secretary_id;
+	private $secretaryId;
 
 	
 	private $name;
 
 	
-	private $home_weekday;
+	private $homeWeekday;
 
 
 	/**
 	 * @return int 
 	 */
 	public function getDivisionId() {
-	    return $this->division_id;
+	    return $this->divisionId;
 	}
 	
 	
 	/**
-	 * @param int $division_id 
+	 * @param int $divisionId 
 	 */
-	public function setDivisionId($division_id) {
-	    $this->division_id = $division_id;
+	public function setDivisionId($divisionId) {
+	    $this->divisionId = $divisionId;
 	    return $this;
 	}
 
@@ -65,7 +65,7 @@ class Tennis_Team extends OriginalAppName\Entity
 	 * @return int 
 	 */
 	public function getHomeWeekday() {
-	    return $this->home_weekday;
+	    return $this->homeWeekday;
 	}
 	
 	
@@ -73,7 +73,7 @@ class Tennis_Team extends OriginalAppName\Entity
 	 * @param int $homeWeekday 
 	 */
 	public function setHomeWeekday($homeWeekday) {
-	    $this->home_weekday = $homeWeekday;
+	    $this->homeWeekday = $homeWeekday;
 	    return $this;
 	}
 
@@ -82,7 +82,7 @@ class Tennis_Team extends OriginalAppName\Entity
 	 * @return int 
 	 */
 	public function getVenueId() {
-	    return $this->venue_id;
+	    return $this->venueId;
 	}
 	
 	
@@ -90,7 +90,7 @@ class Tennis_Team extends OriginalAppName\Entity
 	 * @param int $venueId 
 	 */
 	public function setVenueId($venueId) {
-	    $this->venue_id = $venueId;
+	    $this->venueId = $venueId;
 	    return $this;
 	}
 
@@ -99,7 +99,7 @@ class Tennis_Team extends OriginalAppName\Entity
 	 * @return int 
 	 */
 	public function getSecretaryId() {
-	    return $this->secretary_id;
+	    return $this->secretaryId;
 	}
 	
 	
@@ -107,7 +107,7 @@ class Tennis_Team extends OriginalAppName\Entity
 	 * @param int $secretaryId 
 	 */
 	public function setSecretaryId($secretaryId) {
-	    $this->secretary_id = $secretaryId;
+	    $this->secretaryId = $secretaryId;
 	    return $this;
 	}
 
@@ -143,7 +143,7 @@ class Tennis_Team extends OriginalAppName\Entity
 	{
 		$weekdays = $this->getWeekdays();
 		$key = $this->getHomeWeekday();
-		if (array_key_exists($key, $weekdays)) {
+		if (arrayKeyExists($key, $weekdays)) {
 			return $weekdays[$key];
 		}
 	}

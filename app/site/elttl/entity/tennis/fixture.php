@@ -1,6 +1,6 @@
 <?php
 
-namespace OriginalAppName\Entity;
+namespace OriginalAppName\Site\Elttl\Entity\Tennis;
 
 
 /**
@@ -8,24 +8,24 @@ namespace OriginalAppName\Entity;
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Tennis_Fixture extends OriginalAppName\Entity
+class Fixture extends \OriginalAppName\Site\Elttl\Entity\Tennis\YearId
 {
 
 	
-	private $team_id_left;
+	private $teamIdLeft;
 
 	
-	private $team_id_right;
+	private $teamIdRight;
 
 	
-	private $time_fulfilled;
+	private $timeFulfilled;
 
 
 	/**
 	 * @return int 
 	 */
 	public function getTeamIdLeft() {
-	    return $this->team_id_left;
+	    return $this->teamIdLeft;
 	}
 	
 	
@@ -33,7 +33,7 @@ class Tennis_Fixture extends OriginalAppName\Entity
 	 * @param int $teamIdLeft 
 	 */
 	public function setTeamIdLeft($teamIdLeft) {
-	    $this->team_id_left = $teamIdLeft;
+	    $this->teamIdLeft = $teamIdLeft;
 	    return $this;
 	}
 
@@ -42,7 +42,7 @@ class Tennis_Fixture extends OriginalAppName\Entity
 	 * @return int
 	 */
 	public function getTeamIdRight() {
-	    return $this->team_id_right;
+	    return $this->teamIdRight;
 	}
 	
 	
@@ -50,7 +50,7 @@ class Tennis_Fixture extends OriginalAppName\Entity
 	 * @param int $teamIdRight
 	 */
 	public function setTeamIdRight($teamIdRight) {
-	    $this->team_id_right = $teamIdRight;
+	    $this->teamIdRight = $teamIdRight;
 	    return $this;
 	}
 
@@ -59,7 +59,7 @@ class Tennis_Fixture extends OriginalAppName\Entity
 	 * @return int 
 	 */
 	public function getTimeFulfilled() {
-	    return $this->time_fulfilled;
+	    return $this->timeFulfilled;
 	}
 	
 	
@@ -67,7 +67,7 @@ class Tennis_Fixture extends OriginalAppName\Entity
 	 * @param int $timeFulfilled 
 	 */
 	public function setTimeFulfilled($timeFulfilled) {
-	    $this->time_fulfilled = $timeFulfilled;
+	    $this->timeFulfilled = $timeFulfilled;
 	    return $this;
 	}
 }

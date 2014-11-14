@@ -2,9 +2,9 @@
 
 namespace OriginalAppName\Site\Elttl\Service;
 
-use OriginalAppName\Site\Elttl\Model\Tennis;
+use OriginalAppName\Site\Elttl\Model\Tennis as ModelTennis;
 use OriginalAppName\Json;
-
+use OriginalAppName\Google\Analytics;
 
 /**
  * services group up controller commands
@@ -33,7 +33,7 @@ class Common extends \OriginalAppName\Service
 		$menuTertiary = $json->getData();
 
 		// divisions
-		$modelTennisDivision = new Model\Division();
+		$modelTennisDivision = new ModelTennis\Division();
 		$modelTennisDivision->read();
 
 		// template
@@ -43,7 +43,7 @@ class Common extends \OriginalAppName\Service
 			'divisions' => $modelTennisDivision->getData(),
 			'menuPrimary' => $menuPrimary,
 			'menuSecondary' => $menuSecondary,
-			'campaign' => new Campaign(),
+			'campaign' => new Analytics\Campaign(),
 			'menuTertiary' => $menuTertiary
 		];
 	}

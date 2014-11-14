@@ -1,6 +1,6 @@
 <?php
 
-namespace OriginalAppName\Entity;
+namespace OriginalAppName\Site\Elttl\Entity\Tennis;
 
 
 /**
@@ -8,44 +8,47 @@ namespace OriginalAppName\Entity;
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Tennis_Player extends OriginalAppName\Entity
+class Player extends \OriginalAppName\Site\Elttl\Entity\Tennis\YearId
 {
 
 	
-	private $team_id;
+	private $yearId;
+
+
+	private $teamId;
 
 	
-	private $name_first;
+	private $nameFirst;
 
 	
-	private $name_last;
+	private $nameLast;
 
 	
 	private $rank;
 
 	
-	private $phone_landline;
+	private $phoneLandline;
 
 	
-	private $phone_mobile;
+	private $phoneMobile;
 
 	
-	private $etta_license_number;
+	private $ettaLicenseNumber;
 
 
 	/**
 	 * @return int 
 	 */
 	public function getTeamId() {
-	    return $this->team_id;
+	    return $this->teamId;
 	}
 	
 	
 	/**
-	 * @param int $team_id 
+	 * @param int $teamId 
 	 */
-	public function setTeamId($team_id) {
-	    $this->team_id = $team_id;
+	public function setTeamId($teamId) {
+	    $this->teamId = $teamId;
 	    return $this;
 	}
 
@@ -55,7 +58,7 @@ class Tennis_Player extends OriginalAppName\Entity
 	 * @return string 
 	 */
 	public function getNameFull() {
-	    return $this->name_first . ' ' . $this->name_last;
+	    return $this->nameFirst . ' ' . $this->nameLast;
 	}
 
 
@@ -63,7 +66,7 @@ class Tennis_Player extends OriginalAppName\Entity
 	 * @return string 
 	 */
 	public function getNameFirst() {
-	    return $this->name_first;
+	    return $this->nameFirst;
 	}
 	
 	
@@ -71,7 +74,7 @@ class Tennis_Player extends OriginalAppName\Entity
 	 * @param string $nameFirst 
 	 */
 	public function setNameFirst($nameFirst) {
-	    $this->name_first = $nameFirst;
+	    $this->nameFirst = $nameFirst;
 	    return $this;
 	}
 
@@ -80,7 +83,7 @@ class Tennis_Player extends OriginalAppName\Entity
 	 * @return string 
 	 */
 	public function getNameLast() {
-	    return $this->name_last;
+	    return $this->nameLast;
 	}
 	
 	
@@ -88,7 +91,7 @@ class Tennis_Player extends OriginalAppName\Entity
 	 * @param string $nameLast 
 	 */
 	public function setNameLast($nameLast) {
-	    $this->name_last = $nameLast;
+	    $this->nameLast = $nameLast;
 	    return $this;
 	}
 
@@ -111,13 +114,13 @@ class Tennis_Player extends OriginalAppName\Entity
 	public function modifyRank($modifier, $reverse = false)
 	{
 		// echo '<pre>';
-		// print_r(['current' => $this->getRank(), 'change' => $modifier]);
+		// printR(['current' => $this->getRank(), 'change' => $modifier]);
 		if ($reverse) {
 			$this->setRank($this->getRank() - $modifier);
-			// print_r(['new' => $this->getRank() - $modifier]);
+			// printR(['new' => $this->getRank() - $modifier]);
 		} else {
 			$this->setRank($this->getRank() + $modifier);
-			// print_r(['new' => $this->getRank() + $modifier]);
+			// printR(['new' => $this->getRank() + $modifier]);
 		}
 		// echo '</pre>';
 	}
@@ -136,7 +139,7 @@ class Tennis_Player extends OriginalAppName\Entity
 	 * @return int 
 	 */
 	public function getPhoneLandline() {
-	    return $this->phone_landline;
+	    return $this->phoneLandline;
 	}
 	
 	
@@ -144,7 +147,7 @@ class Tennis_Player extends OriginalAppName\Entity
 	 * @param int $phoneLandline 
 	 */
 	public function setPhoneLandline($phoneLandline) {
-	    $this->phone_landline = $phoneLandline;
+	    $this->phoneLandline = $phoneLandline;
 	    return $this;
 	}
 
@@ -153,7 +156,7 @@ class Tennis_Player extends OriginalAppName\Entity
 	 * @return int 
 	 */
 	public function getPhoneMobile() {
-	    return $this->phone_mobile;
+	    return $this->phoneMobile;
 	}
 	
 	
@@ -161,7 +164,7 @@ class Tennis_Player extends OriginalAppName\Entity
 	 * @param int $phoneMobile 
 	 */
 	public function setPhoneMobile($phoneMobile) {
-	    $this->phone_mobile = $phoneMobile;
+	    $this->phoneMobile = $phoneMobile;
 	    return $this;
 	}
 
@@ -170,7 +173,7 @@ class Tennis_Player extends OriginalAppName\Entity
 	 * @return int 
 	 */
 	public function getEttaLicenseNumber() {
-	    return $this->etta_license_number;
+	    return $this->ettaLicenseNumber;
 	}
 	
 	
@@ -178,7 +181,7 @@ class Tennis_Player extends OriginalAppName\Entity
 	 * @param int $ettaLicenseNumber 
 	 */
 	public function setEttaLicenseNumber($ettaLicenseNumber) {
-	    $this->etta_license_number = $ettaLicenseNumber;
+	    $this->ettaLicenseNumber = $ettaLicenseNumber;
 	    return $this;
 	}
 
@@ -190,6 +193,6 @@ class Tennis_Player extends OriginalAppName\Entity
 	 */
 	public function getUrl()
 	{
-		return implode('/', array(URL_ABSOLUTE, 'player', Helper::slugify($this->getNameFull())));
+		return implode('/', array(URLABSOLUTE, 'player', Helper::slugify($this->getNameFull())));
 	}
 }

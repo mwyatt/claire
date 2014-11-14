@@ -3,7 +3,6 @@ module.exports = function(grunt) {
 	// resource
 	var taskLocal = [
 		'sass:local',
-		'copy:main',
 		'concat:js',
 		'concat:jsAdmin',
 	];
@@ -26,29 +25,21 @@ module.exports = function(grunt) {
 	];
 
 	// dependencies
-	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-sass');
+	grunt.loadNpmTasks('grunt-bowercopy');
 
 	// task
 	grunt.registerTask('default', ['watch:local']);
+	grunt.registerTask('bowercopy', ['bowercopy:scss']);
 	grunt.registerTask('local', taskLocal);
 	grunt.registerTask('remote', taskRemote);
 
 	// config
 	grunt.initConfig({
 		config: grunt.file.readJSON('app/config.json'),
-		copy: {
-			main: {
-				files: [
-
-					// includes files within path and its sub-directories
-					{expand: true, src: ['app/site/<%= config.site %>/asset/**'], dest: 'asset/'},
-				],
-			},
-		},
 		sass: {
 			local: {
 				files: sassFiles,

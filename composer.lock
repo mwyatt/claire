@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "89f2d7f1248bdc41bcf795ee77f71733",
+    "hash": "aaa5b47d6dd7bedde4ccde71eb35ebac",
     "packages": [
         {
             "name": "aura/installer-default",
@@ -149,305 +149,56 @@
             "time": "2013-08-05 19:13:00"
         },
         {
-            "name": "nette/mail",
+            "name": "swiftmailer/swiftmailer",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/nette/mail.git",
-                "reference": "a1ad64dabd6e260df04bfbdd14d7b498584c753a"
+                "url": "https://github.com/swiftmailer/swiftmailer.git",
+                "reference": "d0f361d88e5de851bbb8c542d3b6aa46d61a9ffc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/mail/zipball/a1ad64dabd6e260df04bfbdd14d7b498584c753a",
-                "reference": "a1ad64dabd6e260df04bfbdd14d7b498584c753a",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/d0f361d88e5de851bbb8c542d3b6aa46d61a9ffc",
+                "reference": "d0f361d88e5de851bbb8c542d3b6aa46d61a9ffc",
                 "shasum": ""
             },
             "require": {
-                "ext-iconv": "*",
-                "nette/utils": "~2.2",
-                "php": ">=5.3.1"
-            },
-            "conflict": {
-                "nette/nette": "<2.2"
+                "php": ">=5.3.3"
             },
             "require-dev": {
-                "nette/di": "~2.2",
-                "nette/tester": "~1.0"
-            },
-            "suggest": {
-                "ext-fileinfo": "to detect type of attached files"
+                "mockery/mockery": "~0.9.1"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.3-dev"
+                    "dev-master": "5.3-dev"
                 }
             },
             "autoload": {
-                "classmap": [
-                    "src/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause",
-                "GPL-2.0",
-                "GPL-3.0"
-            ],
-            "authors": [
-                {
-                    "name": "David Grudl",
-                    "homepage": "http://davidgrudl.com"
-                },
-                {
-                    "name": "Nette Community",
-                    "homepage": "http://nette.org/contributors"
-                }
-            ],
-            "description": "Nette Mail: Sending E-mails",
-            "homepage": "http://nette.org",
-            "time": "2014-09-05 21:05:12"
-        },
-        {
-            "name": "nette/utils",
-            "version": "v2.2.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/nette/utils.git",
-                "reference": "09161a4a6311ead542ce1f925b976c6525028e66"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/nette/utils/zipball/09161a4a6311ead542ce1f925b976c6525028e66",
-                "reference": "09161a4a6311ead542ce1f925b976c6525028e66",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.1"
-            },
-            "conflict": {
-                "nette/nette": "<2.2"
-            },
-            "require-dev": {
-                "nette/tester": "~1.0"
-            },
-            "suggest": {
-                "ext-gd": "to use Image",
-                "ext-iconv": "to use Strings::webalize() and toAscii()",
-                "ext-mbstring": "to use Strings::lower() etc..."
-            },
-            "type": "library",
-            "autoload": {
-                "classmap": [
-                    "src/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause",
-                "GPL-2.0",
-                "GPL-3.0"
-            ],
-            "authors": [
-                {
-                    "name": "David Grudl",
-                    "homepage": "http://davidgrudl.com"
-                },
-                {
-                    "name": "Nette Community",
-                    "homepage": "http://nette.org/contributors"
-                }
-            ],
-            "description": "Nette Utility Classes",
-            "homepage": "http://nette.org",
-            "time": "2014-10-26 23:12:20"
-        },
-        {
-            "name": "nikic/fast-route",
-            "version": "v0.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/nikic/FastRoute.git",
-                "reference": "7dc9a43cb856debc22fe158a1144018e16f7a637"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/nikic/FastRoute/zipball/7dc9a43cb856debc22fe158a1144018e16f7a637",
-                "reference": "7dc9a43cb856debc22fe158a1144018e16f7a637",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "FastRoute\\": "src/"
-                },
                 "files": [
-                    "src/functions.php"
+                    "lib/swift_required.php"
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Nikita Popov",
-                    "email": "nikic@php.net"
-                }
-            ],
-            "description": "Fast request router for PHP",
-            "keywords": [
-                "router",
-                "routing"
-            ],
-            "time": "2014-05-17 11:33:04"
-        },
-        {
-            "name": "orno/di",
-            "version": "v2.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/orno/di.git",
-                "reference": "77e432ef527a83dc5d8cebd7293305f50e1a1f19"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/orno/di/zipball/77e432ef527a83dc5d8cebd7293305f50e1a1f19",
-                "reference": "77e432ef527a83dc5d8cebd7293305f50e1a1f19",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.0"
-            },
-            "suggest": {
-                "orno/cache": "Enables caching of reflection based resolution",
-                "orno/config": "Allows useage of config files rather than interacting with the container directly"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Orno\\Di\\": "src/",
-                    "OrnoTest\\Assets\\": "tests/assets"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
                 "MIT"
             ],
             "authors": [
                 {
-                    "name": "Phil Bennett",
-                    "email": "philipobenito@gmail.com"
-                }
-            ],
-            "description": "Orno Di is a small but powerful dependency injection container with automatic resolution of dependencies.",
-            "keywords": [
-                "container",
-                "dependency",
-                "di",
-                "injection",
-                "orno"
-            ],
-            "time": "2014-10-29 10:50:38"
-        },
-        {
-            "name": "orno/http",
-            "version": "v1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/orno/http.git",
-                "reference": "65d37f6f92f3357c234a592fdd57b2f54c2ef514"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/orno/http/zipball/65d37f6f92f3357c234a592fdd57b2f54c2ef514",
-                "reference": "65d37f6f92f3357c234a592fdd57b2f54c2ef514",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4",
-                "symfony/http-foundation": "2.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Orno\\Http\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
+                    "name": "Chris Corbyn"
+                },
                 {
-                    "name": "Phil Bennett",
-                    "email": "philipobenito@gmail.com"
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
                 }
             ],
-            "description": "A wrapper for Symfony\\HttpFoundation with some encapsulation and convenience methods.",
-            "homepage": "http://github.com/orno/http",
+            "description": "Swiftmailer, free feature-rich PHP mailer",
+            "homepage": "http://swiftmailer.org",
             "keywords": [
-                "http",
-                "orno",
-                "request",
-                "response"
+                "mail",
+                "mailer"
             ],
-            "time": "2014-03-05 10:22:10"
-        },
-        {
-            "name": "orno/route",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/orno/route.git",
-                "reference": "7ff5fb086f5ce8f5e4200d9ab1378f18af92c59a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/orno/route/zipball/7ff5fb086f5ce8f5e4200d9ab1378f18af92c59a",
-                "reference": "7ff5fb086f5ce8f5e4200d9ab1378f18af92c59a",
-                "shasum": ""
-            },
-            "require": {
-                "nikic/fast-route": "~0.2",
-                "orno/di": "~2.1",
-                "orno/http": "~1.0",
-                "php": ">=5.4"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Orno\\Route\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Phil Bennett",
-                    "email": "philipobenito@gmail.com"
-                }
-            ],
-            "description": "Fast routing package combining Nikita Popov's FastRoute and Orno\\Di to provide route dispatching to dependency injected controllers.",
-            "keywords": [
-                "FastRoute",
-                "di",
-                "dispatcher",
-                "orno",
-                "route"
-            ],
-            "time": "2014-10-23 14:06:43"
+            "time": "2014-10-30 13:41:35"
         },
         {
             "name": "symfony/http-foundation",
@@ -577,8 +328,7 @@
         "aura/session": 20,
         "joseph-lenton/php-error": 20,
         "symfony/routing": 20,
-        "nette/mail": 20,
-        "orno/route": 20
+        "swiftmailer/swiftmailer": 20
     },
     "prefer-stable": false,
     "platform": [],

@@ -58,7 +58,7 @@ class Content extends \OriginalAppName\Controller
 	 * @param  string $slug foo-bar
 	 * @return object       response
 	 */
-	public function single($request)
+	public function contentSingle($request)
 	{
 		$modelContent = new Model\Content();
 		$modelContent->readSlug($request['slug']);

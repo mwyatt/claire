@@ -1,6 +1,6 @@
 <?php
 
-namespace OriginalAppName\Entity;
+namespace OriginalAppName\Entity\Log\Admin;
 
 
 /**
@@ -8,12 +8,46 @@ namespace OriginalAppName\Entity;
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Log_Admin_Unseen extends OriginalAppName\Entity
+class Unseen extends OriginalAppName\Entity
 {
 
 
-	private $log_id;
+	private $logId;
 
 
-	private $user_id;
+	private $userId;
+
+
+	/**
+	 * @return int 
+	 */
+	public function getLogId() {
+	    return $this->logId;
+	}
+	
+	
+	/**
+	 * @param int $logId 
+	 */
+	public function setLogId($logId) {
+	    $this->logId = $logId;
+	    return $this;
+	}
+
+
+	/**
+	 * @return int 
+	 */
+	public function getUserId() {
+	    return $this->userId;
+	}
+	
+	
+	/**
+	 * @param int $userId 
+	 */
+	public function setUserId($userId) {
+	    $this->userId = $userId;
+	    return $this;
+	}
 }

@@ -10,14 +10,11 @@ use OriginalAppName\Site\Elttl\Service\Tennis as ElttlServiceTennis;
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Division extends \OriginalAppName\Entity
+class Division extends \OriginalAppName\Site\Elttl\Entity\Tennis\YearId
 {
 
-
+	
 	private $name;
-
-
-	private $yearId;
 
 
 	/**
@@ -38,23 +35,6 @@ class Division extends \OriginalAppName\Entity
 
 
 	/**
-	 * @return int 
-	 */
-	public function getYearId() {
-	    return $this->yearId;
-	}
-	
-	
-	/**
-	 * @param int $yearId 
-	 */
-	public function setYearId($yearId) {
-	    $this->yearId = $yearId;
-	    return $this;
-	}
-
-
-	/**
 	 * example.com/result/{year}/{division}/
 	 * @return string url
 	 */
@@ -64,7 +44,7 @@ class Division extends \OriginalAppName\Entity
 		$serviceYear = new ElttlServiceTennis\Year();
 		$yearSingle = $serviceYear->readId($this->getYearId());
 		return $generator->generate(
-			'result-year-division',
+			'resultYearDivision',
 			[
 				'year' => $yearSingle->getName(),
 				'division' => \OriginalAppName\Helper::slugify($this->getName())
