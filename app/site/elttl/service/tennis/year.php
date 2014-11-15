@@ -2,7 +2,7 @@
 
 namespace OriginalAppName\Site\Elttl\Service\Tennis;
 
-use OriginalAppName\Site\Elttl\Model\Tennis as ElttlModelTennis;
+use OriginalAppName\Site\Elttl;
 
 
 /**
@@ -15,7 +15,7 @@ class Year extends \OriginalAppName\Service
 
 	public function readId($id)
 	{
-		$modelYear = new ElttlModelTennis\Year();
+		$modelYear = new Elttl\Model\Tennis\Year();
 		$modelYear->readId([$id]);
 		return current($modelYear->getData());
 	}
@@ -23,8 +23,18 @@ class Year extends \OriginalAppName\Service
 
 	public function readName($name)
 	{
-		$modelYear = new ElttlModelTennis\Year();
+		$modelYear = new Elttl\Model\Tennis\Year();
 		$modelYear->readId([$name], 'name');
 		return current($modelYear->getData());
+	}
+
+
+	public function read()
+	{
+		$modelYear = new Elttl\Model\Tennis\Year();
+		return $modelYear
+			->read()
+			->orderByProperty('name', 'desc')
+			->getData();
 	}
 }

@@ -5,9 +5,8 @@ namespace OriginalAppName\Site\Elttl\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Exception\ResourceNotFoundException as SymfonyResourceNotFound;
 use OriginalAppName\Model;
-use OriginalAppName\Site\Elttl\Model\Tennis as ElttlModelTennis;
 use OriginalAppName\View;
-use OriginalAppName\Site\Elttl\Service\Tennis as ElttlServiceTennis;
+use OriginalAppName\Site\Elttl;
 
 
 /**
@@ -19,26 +18,67 @@ class Result extends \OriginalAppName\Controller
 {
 
 
+	public $year;
+
+
+	public $division;
+
+
+	public function __construct($request)
+	{
+
+		// get year
+		// get division
+		// store
+		// parent controller::
+	}
+
+
+	/**
+	 * @return object mold
+	 */
+	public function getDivision() {
+	    return $this->division;
+	}
+	
+	
+	/**
+	 * @param object $division mold
+	 */
+	public function setDivision($division) {
+	    $this->division = $division;
+	    return $this;
+	}
+
+
+	public function run()
+	{
+		$this->readYear();
+
+		// result/premier/
+		// or archive/2013/result/premier/
+		if ($this->getArchivePathPart(1)) {
+			$this->division();
+		} else {
+			$this->divisionList();
+		}
+	}
+
+
 	/**
 	 * every year past and present for the league
 	 * @return object 
 	 */
-	public static function all()
+	public static function resultAll()
 	{
-		$modelYear = new ElttlModelTennis\Year();
-		$modelYear
-			->read()
-			->orderByProperty('name', 'desc');
-		if (! $modelYear->getData()) {
-			throw new SymfonyResourceNotFound();
-		}
+		$serviceYear = new Elttl\Service\Tennis\Year();
 
 		// template
-		$view = new View([
+		$this->view->mergeData([
 			'metaTitle' => 'All seasons',
-			'years' => $modelYear->getData()
+			'years' => $serviceYear->read()
 		]);
-		return new Response($view->getTemplate('year'));
+		return new Response($this->view->getTemplate('year'));
 	}
 
 
@@ -46,27 +86,27 @@ class Result extends \OriginalAppName\Controller
 	 * list of all divisions for current year
 	 * @return null 
 	 */
-	public static function year($name)
+	public static function resultYear($name)
 	{
 
 		// year, make this more global?
-		$serviceYear = new ElttlServiceTennis\Year();
+		$serviceYear = new Elttl\Service\Tennis\Year();
 		$yearSingle = $serviceYear->readName($name);
 
 		// division
-		$modelDivision = new ElttlModelTennis\Division();
+		$modelDivision = new Elttl\Model\Tennis\Division();
 		$modelDivision->readId([$yearSingle->getId()], 'yearId');
 		if (! $modelDivision->getData()) {
 			throw new SymfonyResourceNotFound();
 		}
 
 		// template
-		$view = new View([
+		$this->view->mergeData([
 			'metaTitle' => 'Divisions in season ' . $yearSingle->getNameFull(),
 			'divisions' => $modelDivision->getData(),
 			'yearSingle' => $yearSingle
 		]);
-		return new Response($view->getTemplate('tennis/division-list'));
+		return new Response($this->view->getTemplate('tennis/division-list'));
 	}
 
 
@@ -76,18 +116,18 @@ class Result extends \OriginalAppName\Controller
 	 * moves to merit || league from here
 	 * @return null 
 	 */
-	public static function division($year, $division)
+	public static function resultYearDivision($year, $division)
 	{
 
 		// year, make this more global?
-		$serviceYear = new ElttlServiceTennis\Year();
+		$serviceYear = new Elttl\Service\Tennis\Year();
 		$yearSingle = $serviceYear->readName($year);
 		if (! $yearSingle) {
 			throw new SymfonyResourceNotFound();
 		}
 
 		// division
-		$modelDivision = new ElttlModelTennis\Division();
+		$modelDivision = new Elttl\Model\Tennis\Division();
 		$modelDivision->readId([$yearSingle->getId()], 'yearId');
 		if (! $modelDivision->getData()) {
 			throw new SymfonyResourceNotFound();
@@ -117,7 +157,7 @@ class Result extends \OriginalAppName\Controller
 		
 		// fixture summary table
 		$this->readFixtureSummaryTable();
-		$serviceFixture = new ElttlServiceTennis\Fixture();
+		$serviceFixture = new Elttl\Service\Tennis\Fixture();
 		// $ = $serviceFixture->readSummaryTable($name);
 
 
@@ -284,39 +324,5 @@ class Result extends \OriginalAppName\Controller
 			->setObject('tableName', 'league')
 			->setObject('leagueStats', $modelTennisFixture->getData())
 			->getTemplate('division/league');
-	}
-
-
-	public $division;
-
-
-	/**
-	 * @return object mold
-	 */
-	public function getDivision() {
-	    return $this->division;
-	}
-	
-	
-	/**
-	 * @param object $division mold
-	 */
-	public function setDivision($division) {
-	    $this->division = $division;
-	    return $this;
-	}
-
-
-	public function run()
-	{
-		$this->readYear();
-
-		// result/premier/
-		// or archive/2013/result/premier/
-		if ($this->getArchivePathPart(1)) {
-			$this->division();
-		} else {
-			$this->divisionList();
-		}
 	}
 }
