@@ -1,7 +1,7 @@
 @import "config";
-@import "../../../vendor/bower/owlcarousel/owl-carousel/owl.carousel.css";
-@import "../../../vendor/bower/owlcarousel/owl-carousel/owl.theme.css";
-@import "../../../vendor/bower/magnific-popup/dist/magnific-popup.css";
+@import "sass/vendor/owl-carousel/owl.carousel";
+@import "sass/vendor/owl-carousel/owl.theme";
+@import "sass/vendor/magnific-popup/magnific-popup";
 @import "misc";
 @import "elttl-table";
 @import "division/overview";

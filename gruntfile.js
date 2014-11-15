@@ -1,4 +1,8 @@
 module.exports = function(grunt) {
+	// var configJson = require('app/config.json');
+	var config = {
+
+	};
 
 	// resource
 	var taskLocal = [
@@ -25,21 +29,66 @@ module.exports = function(grunt) {
 	];
 
 	// dependencies
+	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-sass');
-	grunt.loadNpmTasks('grunt-bowercopy');
 
 	// task
 	grunt.registerTask('default', ['watch:local']);
-	grunt.registerTask('bowercopy', ['bowercopy:scss']);
 	grunt.registerTask('local', taskLocal);
 	grunt.registerTask('remote', taskRemote);
 
 	// config
 	grunt.initConfig({
 		config: grunt.file.readJSON('app/config.json'),
+		taskLocal: taskLocal,
+		taskRemote: taskRemote,
+		sassFiles: sassFiles,
+		watchPaths: watchPaths,
+		copy: {
+			dist: {
+				files: [
+					{
+						expand: true,
+						cwd: 'vendor/bower/animate.scss/scss/',
+						src: '**',
+						dest: 'sass/vendor/animate/',
+					},
+					{
+						expand: true,
+						cwd: 'vendor/bower/bourbon/app/assets/stylesheets/',
+						src: '**',
+						dest: 'sass/vendor/bourbon/',
+					},
+					{
+						expand: true,
+						cwd: 'vendor/bower/magnific-popup/dist/',
+						src: 'magnific-popup.css',
+						dest: 'sass/vendor/magnific-popup/',
+						rename: function(dest, src) {
+							return dest + '_' + src.replace('.css','.scss');
+						},
+					},
+					{
+						expand: true,
+						cwd: 'vendor/bower/owlcarousel/owl-carousel/',
+						src: '*.css',
+						dest: 'sass/vendor/owl-carousel/',
+						rename: function(dest, src) {
+							return dest + '_' + src.replace('.css','.scss');
+						},
+					},
+					{
+						expand: true,
+						cwd: 'vendor/bower/normalize-scss/',
+						src: '*.scss',
+						dest: 'sass/vendor/normalize/',
+					},
+				]
+			}
+		},
 		sass: {
 			local: {
 				files: sassFiles,
