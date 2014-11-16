@@ -120,12 +120,17 @@ class Data extends \OriginalAppName\System
 	 */
 	public function keyDataByProperty($property)
 	{
-		if (! $this->getData()) {
+		if (! $data = $this->getData()) {
 			return;
 		}
 		$newOrder = array();
-		foreach ($this->getData() as $mold) {
-			$newOrder[$mold->$property] = $mold;
+		$dataSample = current($data);
+		$method = 'get' . ucfirst($property);
+		if (! method_exists($dataSample, $method)) {
+			return;
+		}
+		foreach ($data as $mold) {
+			$newOrder[$mold->$method()] = $mold;
 		}
 		$this->setData($newOrder);
 		return $this;
@@ -151,7 +156,7 @@ class Data extends \OriginalAppName\System
 		}
 		$dataFiltered = array();
 		foreach ($data as $entity) {
-			if ($entity->$method() == $name) {
+			if ($entity->$method() == $value) {
 				$dataFiltered[] = $entity;
 			}
 		}

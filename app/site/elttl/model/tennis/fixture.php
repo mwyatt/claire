@@ -1,20 +1,28 @@
 <?php
 
+namespace OriginalAppName\Site\Elttl\Model\Tennis;
+
 
 /**
  * @author Martin Wyatt <martin.wyatt@gmail.com> 
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Model_Tennis_Fixture extends Model
+class Fixture extends \OriginalAppName\Model
 {	
+
+
+	public $tableName = 'tennis_fixture';
+
+
+	public $entity = '\\OriginalAppName\\Site\\Elttl\\Entity\\Tennis\\Fixture';
 
 
 	public $fields = array(
 		'id',
-		'team_id_left',
-		'team_id_right',
-		'time_fulfilled'
+		'teamIdLeft',
+		'teamIdRight',
+		'timeFulfilled'
 	);
 
 
@@ -56,7 +64,7 @@ class Model_Tennis_Fixture extends Model
 
 	public function convertToLeague($fixtureScores)
 	{
-		$this->keyByProperty('id');
+		$this->keyDataByProperty('id');
 		if (! $fixtureMolds = $this->getData()) {
 			return $this;
 		}

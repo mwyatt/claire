@@ -64,7 +64,7 @@ class Controller_Team extends Controller_Archive
 		$modelTennisPlayer->read($this->getArchiveWhere(array(
 			'where' => array('team_id' => $team->getId())
 		)));
-		$modelTennisPlayer->keyByProperty('id');
+		$modelTennisPlayer->keyDataByProperty('id');
 		$players = $modelTennisPlayer->getData();
 
 		// secretary
@@ -103,7 +103,7 @@ class Controller_Team extends Controller_Archive
 					'id' => array_merge($modelTennisFixture->getDataProperty('team_id_left'), $modelTennisFixture->getDataProperty('team_id_right'))
 				)
 			)))
-			->keyByProperty('id');
+			->keyDataByProperty('id');
 		$teams = $modelTennisTeam->getData();
 
 		// all fixtures played in encounters

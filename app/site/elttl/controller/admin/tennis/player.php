@@ -31,7 +31,7 @@ class Controller_Admin_Tennis_Player extends Controller_Admin
 		$modelTennisTeam = new model_tennis_team($this);
 		$modelTennisTeam
 			->read()
-			->keyByProperty('id')
+			->keyDataByProperty('id')
 			->orderByPropertyStringAsc('name');
 		$this->view
 			->setObject('players', $modelTennisPlayer->getData())

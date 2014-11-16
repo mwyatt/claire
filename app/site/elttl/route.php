@@ -7,22 +7,22 @@ $routes->add('home', new Symfony\Component\Routing\Route(
 
 $routes->add('search', new Symfony\Component\Routing\Route(
 	'/search/',
-	['controller' => 'OriginalAppName\\Site\\Elttl\\Controller\\Index::search']
+	['controller' => 'OriginalAppName\\Site\\Elttl\\Controller\\Index']
 ));
 
 $routes->add('resultAll', new Symfony\Component\Routing\Route(
 	'/result/',
-	['controller' => 'OriginalAppName\\Site\\Elttl\\Controller\\Result::all']
+	['controller' => 'OriginalAppName\\Site\\Elttl\\Controller\\Result']
 ));
 
 $routes->add('resultYear', new Symfony\Component\Routing\Route(
 	'/result/{year}/',
-	['controller' => 'OriginalAppName\\Site\\Elttl\\Controller\\Result::year']
+	['controller' => 'OriginalAppName\\Site\\Elttl\\Controller\\Result']
 ));
 
 $routes->add('resultYearDivision', new Symfony\Component\Routing\Route(
 	'/result/{year}/{division}/',
-	['controller' => 'OriginalAppName\\Site\\Elttl\\Controller\\Result::division']
+	['controller' => 'OriginalAppName\\Site\\Elttl\\Controller\\Result']
 ));
 
 $routes->add('resultYearDivisionMerit', new Symfony\Component\Routing\Route(

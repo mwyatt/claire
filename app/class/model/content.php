@@ -125,7 +125,7 @@ class Content extends \OriginalAppName\Model
 		$model->read(array(
 			'where' => array('id' => $modelMeta->getDataProperty('value'))
 		));	
-		$model->keyByProperty('id');
+		$model->keyDataByProperty('id');
 
 		// bind meta to the new table using content id as main key
 		$boundMeta = array();
@@ -173,7 +173,7 @@ class Content extends \OriginalAppName\Model
 		}
 
 		// bind users to content
-		$modelUser->keyByProperty('id');
+		$modelUser->keyDataByProperty('id');
 		$modelUserData = $modelUser->getData();
 		$boundContent = array();
 		foreach ($this->getData() as $moldContent) {

@@ -38,15 +38,13 @@ class Division extends \OriginalAppName\Site\Elttl\Entity\Tennis\YearId
 	 * example.com/result/{year}/{division}/
 	 * @return string url
 	 */
-	public function getUrl()
+	public function getUrl($yearEntity)
 	{
 		$generator = $this->getUrlGenerator();
-		$serviceYear = new ElttlServiceTennis\Year();
-		$yearSingle = $serviceYear->readId($this->getYearId());
 		return $generator->generate(
 			'resultYearDivision',
 			[
-				'year' => $yearSingle->getName(),
+				'year' => $yearEntity->getName(),
 				'division' => \OriginalAppName\Helper::slugify($this->getName())
 			],
 			true

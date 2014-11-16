@@ -59,7 +59,7 @@ class Controller_Fixture extends Controller_Archive
 		$modelTennisPlayer->read($this->getArchiveWhere(array(
 			'where' => array('team_id' => $teamIds)
 		)));
-		$modelTennisPlayer->keyByProperty('id');
+		$modelTennisPlayer->keyDataByProperty('id');
 
 		// division
 		$className = $this->getArchiveClassName('model_tennis_division');

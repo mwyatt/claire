@@ -45,7 +45,7 @@ class Controller_Admin_Tennis_Team extends Controller_Admin
 		$modelTennisDivision = new model_tennis_Division($this);
 		$modelTennisDivision
 			->read()
-			->keyByProperty('id')
+			->keyDataByProperty('id')
 			->orderByPropertyStringAsc('name');
 
 		// template

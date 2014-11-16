@@ -1,22 +1,30 @@
 <?php
 
+namespace OriginalAppName\Site\Elttl\Model\Tennis;
+
 
 /**
  * @author Martin Wyatt <martin.wyatt@gmail.com> 
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Model_Tennis_Team extends Model
+class Team extends \OriginalAppName\Model
 {	
+
+
+	public $tableName = 'tennis_team';
+
+
+	public $entity = '\\OriginalAppName\\Site\\Elttl\\Entity\\Tennis\\Team';
 
 
 	public $fields = array(
 		'id',
-		'division_id',
-		'venue_id',
-		'secretary_id',
+		'divisionId',
+		'venueId',
+		'secretaryId',
 		'name',
-		'home_weekday'
+		'homeWeekday'
 	);
 
 

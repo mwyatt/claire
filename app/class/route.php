@@ -74,7 +74,7 @@ class Route extends \OriginalAppName\System
 			// builds controller and sends to method
 		    $attributes = $matcher->match($request->getPathInfo());
 		    $controller = $attributes['controller'];
-		    $controller = new $controller();
+		    $controller = new $controller($attributes);
 		    $this->setResponse($controller->$attributes['_route']($attributes));
 		} catch (ResourceNotFoundException $e) {
 		    $controller = new Controller();
@@ -105,9 +105,6 @@ class Route extends \OriginalAppName\System
 		// store routes in object
 		$routes = new RouteCollection();
 
-		// global
-		include APP_PATH . 'route' . EXT;
-
 		// admin
 		include APP_PATH . 'admin' . DS . 'route' . EXT;
 
@@ -117,6 +114,9 @@ class Route extends \OriginalAppName\System
 		    exit('site \'' . SITE . '\' must have routes configured');
 		}
 		include $siteRoutePath;
+
+		// global
+		include APP_PATH . 'route' . EXT;
 
 		// return all routes
 		return $routes;

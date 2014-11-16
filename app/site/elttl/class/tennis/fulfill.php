@@ -113,7 +113,7 @@ class Tennis_Fulfill extends Data
         ));
         $modelPlayer
             ->orderByPropertyIntAsc('rank')
-            ->keyByProperty('id');
+            ->keyDataByProperty('id');
         $this->setPlayers($modelPlayer->getData());
     }
 
@@ -321,7 +321,7 @@ class Tennis_Fulfill extends Data
         if (count($modelTeam->getData()) != 2) {
             return;
         }
-        $modelTeam->keyByProperty('id');
+        $modelTeam->keyDataByProperty('id');
         $teamLeft = $modelTeam->getData($_REQUEST['team']['left']);
         $teamRight = $modelTeam->getData($_REQUEST['team']['right']);
         

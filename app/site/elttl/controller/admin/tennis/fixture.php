@@ -75,7 +75,7 @@ class Controller_Admin_Tennis_Fixture extends Controller_Admin
 		$modelTennisTeam = new model_tennis_team($this);
 		$modelTennisTeam
 			->read()
-			->keyByProperty('id');
+			->keyDataByProperty('id');
 		$modelTennisDivision = new model_tennis_Division($this);
 		$modelTennisDivision->read();
 		$this->view

@@ -2,7 +2,7 @@
 
 namespace OriginalAppName\Site\Elttl\Service\Tennis;
 
-use OriginalAppName\Site\Elttl\Model\Tennis as ElttlModelTennis;
+use OriginalAppName\Site\Elttl\Model;
 
 
 /**
@@ -13,54 +13,34 @@ class Fixture extends \OriginalAppName\Service
 {
 
 
-	public function readSummaryTable($divisionId)
+	public function readSummaryTable($entityDivision)
 	{
-		$modelYear = new ElttlModelTennis\Year();
-		$modelYear->readId([$id]);
-		return current($modelYear->getData());
 
-
-
-
-		// resource
-		$division = $this->getDivision();
-
-		// team
-		$className = $this->getArchiveClassName('model_tennis_team');
-		$modelTeam = new $className($this);
-		$teams = $modelTeam
-			->read($this->getArchiveWhere(array(
-				'where' => array(
-					'division_id' => $division->getId()
-				)
-			)))
-			->keyByProperty('id')
+		// teams in division keyed by teamId
+		$modelTeam = new Model\Tennis\Team($this);
+		$modelTeam
+			->readId([$entityDivision->getId()], 'divisionId')
+			->keyDataByProperty('id')
 			->getData();
 
-		// fixture
-		$className = $this->getArchiveClassName('model_tennis_fixture');
-		$modelFixture = new $className($this);
-		$modelFixture->read($this->getArchiveWhere(array(
-			'where' => array('team_id_left' => $modelTeam->getDataProperty('id'))
-		)));
-		$fixtures = array();
+		// fixtures teams have played in
+		// only need left side
+		$modelFixture = new Model\Tennis\Fixture($this);
+		$modelFixture->readId($modelTeam->getDataProperty('id'), 'teamIdLeft');
 
-		// weed out only fulfilled fixtures
-		foreach ($modelFixture->getData() as $fixture) {
-			if ($fixture->getTimeFulfilled()) {
-				$fixtures[] = $fixture;
-			}
-		}
-		$modelFixture->setData($fixtures);
+		// encounters based on fixtures
+		$modelEncounter = new Model\Tennis\Encounter($this);
+		$modelEncounter->readId($modelFixture->getDataProperty('id'), 'fixtureId');
 
-		// fixture results
-		$className = $this->getArchiveClassName('model_tennis_encounter');
-		$modelTennisEncounter = new $className($this);
-		$modelTennisEncounter->read($this->getArchiveWhere(array(
-			'where' => array('fixture_id' => $modelFixture->getDataProperty('id'))
-		)));
-		$modelTennisEncounter->convertToFixtureResults();
-		$fixtureResults = $modelTennisEncounter->getData();
+
+		echo '<pre>';
+		print_r($modelEncounter);
+		echo '</pre>';
+		exit;
+		
+
+		$modelEncounter->convertToFixtureResults();
+		$fixtureResults = $modelEncounter->getData();
 
 		// template
 		$this

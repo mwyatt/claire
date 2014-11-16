@@ -10,7 +10,7 @@
 
 	<?php foreach ($divisions as $division): ?>
 		
-		<a href="<?php echo $division->getUrl() ?>" class="division"><?php echo $division->getName() ?></a>
+		<a href="<?php echo $division->getUrl($yearSingle) ?>" class="division"><?php echo $division->getName() ?></a>
 
 	<?php endforeach ?>
 

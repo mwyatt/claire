@@ -24,18 +24,29 @@ class Result extends \OriginalAppName\Controller
 	public $division;
 
 
+	/**
+	 * requests and stores single year and division entities for
+	 * reference in controllers
+	 * @param null $request
+	 */
 	public function __construct($request)
 	{
-
-		// get year
-		// get division
-		// store
-		// parent controller::
+		if (isset($request['year'])) {
+			$serviceYear = new Elttl\Service\Tennis\Year();
+			$this->setYear($serviceYear->readName($request['year']));
+			
+		}
+		if (isset($request['division']) && $yearSingle = $this->getYear()) {
+			$serviceDivision = new Elttl\Service\Tennis\Division();
+			$entityDivision = $serviceDivision->readYearIdName($yearSingle->getId(), $request['division']);
+			$this->setDivision($entityDivision);
+		}
+		\OriginalAppName\Controller::__construct();
 	}
 
 
 	/**
-	 * @return object mold
+	 * @return object OriginalAppName\Elttl\Entity\Tennis\Division
 	 */
 	public function getDivision() {
 	    return $this->division;
@@ -43,7 +54,7 @@ class Result extends \OriginalAppName\Controller
 	
 	
 	/**
-	 * @param object $division mold
+	 * @param object $year OriginalAppName\Elttl\Entity\Tennis\Division
 	 */
 	public function setDivision($division) {
 	    $this->division = $division;
@@ -51,17 +62,20 @@ class Result extends \OriginalAppName\Controller
 	}
 
 
-	public function run()
-	{
-		$this->readYear();
-
-		// result/premier/
-		// or archive/2013/result/premier/
-		if ($this->getArchivePathPart(1)) {
-			$this->division();
-		} else {
-			$this->divisionList();
-		}
+	/**
+	 * @return object OriginalAppName\Elttl\Entity\Tennis\Year
+	 */
+	public function getYear() {
+	    return $this->year;
+	}
+	
+	
+	/**
+	 * @param object $year OriginalAppName\Elttl\Entity\Tennis\Year
+	 */
+	public function setYear($year) {
+	    $this->year = $year;
+	    return $this;
 	}
 
 
@@ -69,7 +83,7 @@ class Result extends \OriginalAppName\Controller
 	 * every year past and present for the league
 	 * @return object 
 	 */
-	public static function resultAll()
+	public function resultAll($request)
 	{
 		$serviceYear = new Elttl\Service\Tennis\Year();
 
@@ -86,19 +100,13 @@ class Result extends \OriginalAppName\Controller
 	 * list of all divisions for current year
 	 * @return null 
 	 */
-	public static function resultYear($name)
+	public function resultYear($request)
 	{
-
-		// year, make this more global?
-		$serviceYear = new Elttl\Service\Tennis\Year();
-		$yearSingle = $serviceYear->readName($name);
+		$yearSingle = $this->getYear();
 
 		// division
 		$modelDivision = new Elttl\Model\Tennis\Division();
 		$modelDivision->readId([$yearSingle->getId()], 'yearId');
-		if (! $modelDivision->getData()) {
-			throw new SymfonyResourceNotFound();
-		}
 
 		// template
 		$this->view->mergeData([
@@ -116,50 +124,24 @@ class Result extends \OriginalAppName\Controller
 	 * moves to merit || league from here
 	 * @return null 
 	 */
-	public static function resultYearDivision($year, $division)
+	public function resultYearDivision($request)
 	{
 
-		// year, make this more global?
-		$serviceYear = new Elttl\Service\Tennis\Year();
-		$yearSingle = $serviceYear->readName($year);
-		if (! $yearSingle) {
-			throw new SymfonyResourceNotFound();
-		}
-
-		// division
-		$modelDivision = new Elttl\Model\Tennis\Division();
-		$modelDivision->readId([$yearSingle->getId()], 'yearId');
-		if (! $modelDivision->getData()) {
-			throw new SymfonyResourceNotFound();
-		}
-		$divisionSingle = current($modelDivision->getData());
-
-		// tables
+		// possible table request ?table=
 		if (isset($_REQUEST['table'])) {
-			
-		}
-
-		// ?table=merit,league,merit-double
-
-
-		// tables
-		// merit
-			// merit-double
-		// league
-
-
-		// result/premier/merit
-		if ($table = $this->getArchivePathPart(2)) {
-			if (in_array($table, array('merit', 'league'))) {
-				return $this->$table();
+			$method = 'resultYearDivision' . ucfirst($_REQUEST['table']);
+			if (method_exists($this, $method)) {
+				return $this->$method();
 			}
 		}
+
+		// resource
+		$entityYear = $this->getYear();
+		$entityDivision = $this->getDivision();
 		
 		// fixture summary table
-		$this->readFixtureSummaryTable();
 		$serviceFixture = new Elttl\Service\Tennis\Fixture();
-		// $ = $serviceFixture->readSummaryTable($name);
-
+		$serviceFixture->readSummaryTable($entityDivision);
 
 		// single division view
 		$this->view
@@ -171,7 +153,7 @@ class Result extends \OriginalAppName\Controller
 	}
 
 
-	public function meritDoubles()
+	public function resultYearDivisionMeritDoubles()
 	{
 		
 		// resource
@@ -183,7 +165,7 @@ class Result extends \OriginalAppName\Controller
 		$modelTennisTeam->read($this->getArchiveWhere(array(
 			'where' => array('division_id' => $division->getId())
 		)));
-		$modelTennisTeam->keyByProperty('id');
+		$modelTennisTeam->keyDataByProperty('id');
 
 		// fixture
 		$className = $this->getArchiveClassName('model_tennis_fixture');
@@ -222,7 +204,7 @@ class Result extends \OriginalAppName\Controller
 	}
 
 
-	public function merit()
+	public function resultYearDivisionMerit()
 	{
 		if ($this->getArchivePathPart(3) == 'doubles') {
 			return $this->meritDoubles();
@@ -237,7 +219,7 @@ class Result extends \OriginalAppName\Controller
 		$modelTennisTeam->read($this->getArchiveWhere(array(
 			'where' => array('division_id' => $division->getId())
 		)));
-		$modelTennisTeam->keyByProperty('id');
+		$modelTennisTeam->keyDataByProperty('id');
 
 		// players
 		$className = $this->getArchiveClassName('model_tennis_player');
@@ -245,7 +227,7 @@ class Result extends \OriginalAppName\Controller
 		$modelTennisPlayer->read($this->getArchiveWhere(array(
 			'where' => array('team_id' => $modelTennisTeam->getDataProperty('id'))
 		)));
-		$modelTennisPlayer->keyByProperty('id');
+		$modelTennisPlayer->keyDataByProperty('id');
 
 		// fixture
 		$className = $this->getArchiveClassName('model_tennis_fixture');
@@ -280,7 +262,7 @@ class Result extends \OriginalAppName\Controller
 	}
 
 
-	public function league()
+	public function resultYearDivisionLeague()
 	{
 
 		// resource
@@ -292,7 +274,7 @@ class Result extends \OriginalAppName\Controller
 		$modelTennisTeam->read($this->getArchiveWhere(array(
 			'where' => array('division_id' => $division->getId())
 		)));
-		$modelTennisTeam->keyByProperty('id');
+		$modelTennisTeam->keyDataByProperty('id');
 
 		// fixture
 		$className = $this->getArchiveClassName('model_tennis_fixture');
