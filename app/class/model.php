@@ -38,7 +38,7 @@ class Model extends \OriginalAppName\Data
 
 	/**
 	 * inject dependencies
-	 * database
+	 * \OriginalAppName\Database
 	 */
 	public function __construct() {
 		$registry = \OriginalAppName\Registry::getInstance();

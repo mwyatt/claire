@@ -3,34 +3,29 @@
 
 $routes->add('admin', new Symfony\Component\Routing\Route(
 	'/admin/',
-	['controller' => 'OriginalAppName\\Admin\\Controller\\Index::index'],
-	['_method' => 'GET']
+	['controller' => 'OriginalAppName\\Admin\\Controller\\Index']
 ));
 
 
-$routes->add('admin-content-all', new Symfony\Component\Routing\Route(
-	'/admin/{type}/',
-	['controller' => 'OriginalAppName\\Admin\\Controller\\Content::all'],
-	['_method' => 'GET']
+$routes->add('adminContentAll', new Symfony\Component\Routing\Route(
+	'/admin/content/{type}/',
+	['controller' => 'OriginalAppName\\Admin\\Controller\\Content']
 ));
 
 
-$routes->add('admin-content-single', new Symfony\Component\Routing\Route(
-	'/admin/{type}/{slug}/',
-	['controller' => 'OriginalAppName\\Admin\\Controller\\Content::single'],
-	['_method' => 'GET']
+$routes->add('adminContentSingle', new Symfony\Component\Routing\Route(
+	'/admin/content/{type}/{slug}/',
+	['controller' => 'OriginalAppName\\Admin\\Controller\\Content']
 ));
 
 
-$routes->add('admin-ajax-player-read', new Symfony\Component\Routing\Route(
-	'/admin/ajax/player/{id}/',
-	['controller' => 'OriginalAppName\\Admin\\Controller\\Tennis'],
-	['_method' => 'GET']
+$routes->add('adminUserAll', new Symfony\Component\Routing\Route(
+	'/admin/user/',
+	['controller' => 'OriginalAppName\\Admin\\Controller\\User']
 ));
 
 
-$routes->add('admin-ajax-player-create', new Symfony\Component\Routing\Route(
-	'/admin/ajax/player/create/',
-	['controller' => 'OriginalAppName\\Admin\\Controller\\Tennis'],
-	['_method' => 'GET']
+$routes->add('adminUserSingle', new Symfony\Component\Routing\Route(
+	'/admin/user/{id}/',
+	['controller' => 'OriginalAppName\\Admin\\Controller\\User']
 ));

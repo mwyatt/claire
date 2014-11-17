@@ -154,4 +154,16 @@ class User extends OriginalAppName\Entity
 	    $this->level = $level;
 	    return $this;
 	}
+
+
+	/**
+	 * check external password against entity value
+	 * @param  string $password has been crypted
+	 * @return bool
+	 */
+	public function validatePassword($password) {
+		if (crypt($password, $this->getPassword()) == $this->getPassword()) {
+			return true;
+		}
+	}
 }
