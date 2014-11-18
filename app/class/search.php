@@ -3,53 +3,49 @@
 namespace OriginalAppName;
 
 
+$search
+	->setTableName('shop_products')
+	->setScores([
+		'id' => ['full' => 8],
+		'sku' => ['full' => 7, 'part' => 6],
+		'name' => ['full' => 6, 'part' => 5],
+		'status' => [],
+		'keywords' => ['full' => 5, 'part' => 4]
+	])
+	->begin($_REQUEST['query']);
+
+
+
 /**
- * @todo make this search class very high level
+ * @todo untested in the mvc scope
  */
 class Search extends \OriginalAppName\Model
 {
 
 
-	public $tableName = 'content';
+	public $tableName;
 
 
 	public $entity = '\\OriginalAppName\\Entity\\Content';
 
 
-	public $fields = array(
-		'id',
-		'title',
-		'slug',
-		'html',
-		'type',
-		'timePublished',
-		'status',
-		'userId'
-	);
+	public $fields;
 
 
 	public $query;
 
 
-	public $queryArray;
-
-
 	public $queryLimit = 20;
 
 
+	public $dataLimit = 100;
+
+
 	/**
-	 * map of scores to reward certain matches
-	 * @var array
+	 * maps out scores for each column for full and part matches
+	 * @var array multidimensional
 	 */
-	public $scores = [
-		'idFull' => 8,
-		'skuFull' => 7,
-		'skuKeyword' => 6,
-		'titleFull' => 6,
-		'titleKeyword' => 5,
-		'summaryFull' => 5,
-		'summaryKeyword' => 4
-	];
+	public $scores;
 
 
 	/**
@@ -79,10 +75,21 @@ class Search extends \OriginalAppName\Model
 	];
 
 
-	public function begin($query)
+	public function begin($query = '')
 	{
+		if (! $query) {
+			return $this;
+		}
 		$this->validateQuery($query);
-		$this->bigQuery();
+		$this->executeQuery();
+		$this->createLog();
+		return $this;
+	}
+
+
+	public function executeQuery()
+	{
+		$this->setData($this->db->get_all_rows($this->db->query($this->getSql())));
 	}
 
 
@@ -91,109 +98,73 @@ class Search extends \OriginalAppName\Model
 		$sql = [];
 		$sql[] = "if (" . $config['column'] . " like '%";
 		$sql[] = $config['term'];
-		$sql[] = "%', " . $this->getScore($config['keyScore']) . ", 0)";
+		$sql[] = "%', " . $config['score'] . ", 0)";
         return implode('', $sql);
 	}
 
 
-	public function bigQuery()
+	public function getSqlColumn($column)
 	{
-		$sql = [
-			'id' => [],
-			'sku' => [],
-			'title' => [],
-			'summary' => []
-		];
+		$sql = [];
 
-		// full match
-	    if (count($this->getQueryArray()) > 1){
-	        $sql['id'][] = $this->getSqlIf([
+		// full
+	    if ($this->getScore($column, 'full')) {
+	        $sql[] = $this->getSqlIf([
 	        	'term' => $this->getQuery(),
-	        	'column' => 'id',
-	        	'keyScore' => 'titleFull'
+	        	'column' => $column,
+	        	'score' => $this->getScore($column, 'full')
         	]);
-	        $sql['sku'][] = $this->getSqlIf([
-	        	'term' => $this->getQuery(),
-	        	'column' => 'sku',
-	        	'keyScore' => 'skuFull'
-        	]);
-	        $sql['title'][] = $this->getSqlIf([
-	        	'term' => $this->getQuery(),
-	        	'column' => 'name',
-	        	'keyScore' => 'titleFull'
-        	]);
-	        $sql['summary'][] = $this->getSqlIf([
-	        	'term' => $this->getQuery(),
-	        	'column' => 'keywords',
-	        	'keyScore' => 'summaryFull'
-        	]);
-	    }
+		}
 
-	    // keyword match
-	    foreach ($this->getQueryArray() as $word) {
-	        $sql['sku'][] = $this->getSqlIf([
-	        	'term' => $word,
-	        	'column' => 'sku',
-	        	'keyScore' => 'skuKeyword'
-        	]);
-	        $sql['title'][] = $this->getSqlIf([
-	        	'term' => $word,
-	        	'column' => 'name',
-	        	'keyScore' => 'titleKeyword'
-        	]);
-	        $sql['summary'][] = $this->getSqlIf([
-	        	'term' => $word,
-	        	'column' => 'keywords',
-	        	'keyScore' => 'summaryKeyword'
-        	]);
-	    }
+		// part
+		if ($this->getScore($column, 'part')) {
+		    foreach ($this->getQueryArray() as $word) {
+		        $sql[] = $this->getSqlIf([
+		        	'term' => $word,
+		        	'column' => $column,
+		        	'score' => $this->getScore($column, 'part')
+	        	]);
+		    }
+		}
+
+		// sql
+		return $sql;
+	}
 
 
-		$sql = "
-			select
-				id,
-				name,
-				keywords
-	            (
-	                (-- id
-	                " . implode(" + ", $sql['id']) . "
-	                )+
-	                (-- title
-	                " . implode(" + ", $sql['title']) . "
-	                )+
-	                (-- summary
-	                " . implode(" + ", $sql['summary']) . " 
-	                )
-	            ) as relevance
-            from " . $this->getTableName() . "
-            where p.status = 'published'
-            having relevance > 0
-            order by relevance desc
-            limit 100
-        ";
+	public function getSql()
+	{
+		$sql = [];
+		$sql[] = 'select';
+		$sql[] = $this->getSqlFields();
+		$sql[] = ',';
 
+		// relevance
+		$sql[] = '(';
+		$sqlRelevance = [];
+		foreach ($this->getFields() as $column) {
+			$sqlColumn = $this->getSqlColumn($column);
+			if ($sqlColumn) {
+				$sqlRelevance[] = '(' . implode(' + ', $sqlColumn) . ')';
+			}
+		}
+		$sql[] = implode('+', $sqlRelevance);
+		$sql[] = ') as relevance';
+		
+		// from
+		$sql[] = 'from';
+		$sql[] = $this->getTableName();
 
+		// where
+		$sql[] = "where status != '" . Inventory_Product_Status::HIDDEN . "'";
+		$sql[] = "having relevance > 0";
 
-		// query
-		$sth = $this->database->dbh->prepare("
-			{$this->getSqlSelect()}
-            where type = :type
-		");
+		// order / limit
+        $sql[] = 'order by relevance desc';
+        $sql[] = 'limit ' . $this->getDataLimit();
 
-		// mode
-		$sth->setFetchMode(\PDO::FETCH_CLASS, $this->getEntity());
-
-		// bind
-	    $sth->bindValue(':type', $type, \PDO::PARAM_STR);
-
-	    // execute
-		$sth->execute();
-
-		// fetch
-		$this->setData($sth->fetchAll());
-
-		// instance
-		return $this;
+        // concat
+		return implode(' ', $sql);
 	}
 
 
@@ -204,8 +175,10 @@ class Search extends \OriginalAppName\Model
 	 */
 	public function validateQuery($query)
 	{
+		$query = mysql_real_escape_string($query);
 		$this->setQuery($this->getLimitedQuery($query));
-		foreach ($this->getQueryArray() as $key => $word) {
+		$words = $this->getQueryArray();
+		foreach ($words as $key => $word) {
 			if (in_array($word, $this->getDullWords())) {
 				unset($words[$key]);
 			}
@@ -275,10 +248,21 @@ class Search extends \OriginalAppName\Model
 	
 	
 	/**
+	 * store keys as fields list
 	 * @param array $scores 
 	 */
 	public function setScores($scores) {
+		$this->setFields(array_keys($scores));
 	    $this->scores = $scores;
+	    return $this;
+	}
+
+
+	/**
+	 * @param array $fields 
+	 */
+	public function setFields($fields) {
+	    $this->fields = $fields;
 	    return $this;
 	}
 
@@ -288,12 +272,16 @@ class Search extends \OriginalAppName\Model
 	 * @param  string $key 
 	 * @return int      
 	 */
-	public function getScore($key)
+	public function getScore($column, $size)
 	{
 		$scores = $this->getScores();
-		if (isset($scores[$key])) {
-			return $scores[$key];
+		if (! isset($scores[$column])) {
+			return;
 		}
+		if (! isset($scores[$column][$size])) {
+			return;
+		}
+		return $scores[$column][$size];
 	}
 
 

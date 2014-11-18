@@ -68,4 +68,23 @@ class Controller
 	    $this->view = $view;
 	    return $this;
 	}
+
+
+	/**
+	 * redirects the user to another url and terminates
+	 * utilising the generator from symfony
+	 * @param  string $label      routeKey
+	 * @param  array $attributes if required
+	 * @return null             
+	 */
+	public function route($label, $attributes = [])
+	{
+		$registry = \OriginalAppName\Registry::getInstance();
+		$generator = $registry->get('urlGenerator');
+		$url = $generator->generate($label, $attributes, true);
+		header('location:' . $url);
+
+		// prevent continuation
+		exit;
+	}
 }
