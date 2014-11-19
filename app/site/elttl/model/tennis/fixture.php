@@ -8,7 +8,7 @@ namespace OriginalAppName\Site\Elttl\Model\Tennis;
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Fixture extends \OriginalAppName\Model
+class Fixture extends \OriginalAppName\Site\Elttl\Model\Tennis\Archive
 {	
 
 
@@ -20,8 +20,8 @@ class Fixture extends \OriginalAppName\Model
 
 	public $fields = array(
 		'id',
-		'teamIdLeft',
-		'teamIdRight',
+		'teamArchiveIdLeft',
+		'teamArchiveIdRight',
 		'timeFulfilled'
 	);
 
@@ -43,6 +43,10 @@ class Fixture extends \OriginalAppName\Model
 		array(2, 2),
 		array(1, 1)
 	);
+
+
+
+
 
 
 	/**

@@ -34,7 +34,6 @@ class Result extends \OriginalAppName\Controller
 		if (isset($request['year'])) {
 			$serviceYear = new Elttl\Service\Tennis\Year();
 			$this->setYear($serviceYear->readName($request['year']));
-			
 		}
 		if (isset($request['division']) && $yearSingle = $this->getYear()) {
 			$serviceDivision = new Elttl\Service\Tennis\Division();
@@ -42,40 +41,6 @@ class Result extends \OriginalAppName\Controller
 			$this->setDivision($entityDivision);
 		}
 		\OriginalAppName\Controller::__construct();
-	}
-
-
-	/**
-	 * @return object OriginalAppName\Elttl\Entity\Tennis\Division
-	 */
-	public function getDivision() {
-	    return $this->division;
-	}
-	
-	
-	/**
-	 * @param object $year OriginalAppName\Elttl\Entity\Tennis\Division
-	 */
-	public function setDivision($division) {
-	    $this->division = $division;
-	    return $this;
-	}
-
-
-	/**
-	 * @return object OriginalAppName\Elttl\Entity\Tennis\Year
-	 */
-	public function getYear() {
-	    return $this->year;
-	}
-	
-	
-	/**
-	 * @param object $year OriginalAppName\Elttl\Entity\Tennis\Year
-	 */
-	public function setYear($year) {
-	    $this->year = $year;
-	    return $this;
 	}
 
 
@@ -141,7 +106,7 @@ class Result extends \OriginalAppName\Controller
 		
 		// fixture summary table
 		$serviceFixture = new Elttl\Service\Tennis\Fixture();
-		$serviceFixture->readSummaryTable($entityDivision);
+		$serviceFixture->readSummaryTable($entityYear, $entityDivision);
 
 		// single division view
 		$this->view
@@ -306,5 +271,39 @@ class Result extends \OriginalAppName\Controller
 			->setObject('tableName', 'league')
 			->setObject('leagueStats', $modelTennisFixture->getData())
 			->getTemplate('division/league');
+	}
+
+
+	/**
+	 * @return object OriginalAppName\Elttl\Entity\Tennis\Division
+	 */
+	public function getDivision() {
+	    return $this->division;
+	}
+	
+	
+	/**
+	 * @param object $year OriginalAppName\Elttl\Entity\Tennis\Division
+	 */
+	public function setDivision($division) {
+	    $this->division = $division;
+	    return $this;
+	}
+
+
+	/**
+	 * @return object OriginalAppName\Elttl\Entity\Tennis\Year
+	 */
+	public function getYear() {
+	    return $this->year;
+	}
+	
+	
+	/**
+	 * @param object $year OriginalAppName\Elttl\Entity\Tennis\Year
+	 */
+	public function setYear($year) {
+	    $this->year = $year;
+	    return $this;
 	}
 }

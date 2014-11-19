@@ -13,15 +13,21 @@ class Fixture extends \OriginalAppName\Service
 {
 
 
-	public function readSummaryTable($entityDivision)
+	public function readSummaryTable($entityYear, $entityDivision)
 	{
 
 		// teams in division keyed by teamId
 		$modelTeam = new Model\Tennis\Team($this);
 		$modelTeam
-			->readId([$entityDivision->getId()], 'divisionId')
+			->readDivisionId($entityYear->getId(), $entityDivision->getArchiveId())
 			->keyDataByProperty('id')
 			->getData();
+
+echo '<pre>';
+print_r($modelTeam);
+echo '</pre>';
+exit;
+
 
 		// fixtures teams have played in
 		// only need left side

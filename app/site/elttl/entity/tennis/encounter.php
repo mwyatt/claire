@@ -8,7 +8,7 @@ namespace OriginalAppName\Site\Elttl\Entity\Tennis;
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Encounter extends \OriginalAppName\Site\Elttl\Entity\Tennis\YearId
+class Encounter extends \OriginalAppName\Site\Elttl\Entity\Tennis\Archive
 {
 
 	
@@ -21,10 +21,10 @@ class Encounter extends \OriginalAppName\Site\Elttl\Entity\Tennis\YearId
 	private $scoreRight;
 
 	
-	private $playerIdLeft;
+	private $playerArchiveIdLeft;
 
 	
-	private $playerIdRight;
+	private $playerArchiveIdRight;
 
 	
 	private $playerRankChangeLeft;

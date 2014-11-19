@@ -8,14 +8,14 @@ namespace OriginalAppName\Site\Elttl\Entity\Tennis;
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Team extends \OriginalAppName\Site\Elttl\Entity\Tennis\YearId
+class Team extends \OriginalAppName\Site\Elttl\Entity\Tennis\Archive
 {
 
 	
-	private $divisionId;
+	private $divisionArchiveId;
 
 	
-	private $venueId;
+	private $venueArchiveId;
 
 	
 	private $secretaryId;
