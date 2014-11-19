@@ -16,23 +16,38 @@ namespace OriginalAppName;
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Session extends OriginalAppName\Cron
+class Session extends \OriginalAppName\Data
 {
+
+
+	protected $scope;
 
 
 	/**
 	 * extends the normal constructor to set the session data
 	 */
-	public function __construct($system) {
+	public function __construct($scope) {
+		
+		// $scope = 'OriginalAppName\Admin\User\'
+		$this->setScope($scope)
+		$this->initialiseData();
+	}
 
-		// follow through to core constructor
-		parent::__construct($system);
 
-		// initial setup of session data only if it has a identity
-		// != 'session'
-		if ($this->getIdentity()) {
-			$this->initialiseData();
-		}
+	/**
+	 * @return string 
+	 */
+	public function getScope() {
+	    return $this->scope;
+	}
+	
+	
+	/**
+	 * @param string $scope 
+	 */
+	public function setScope($scope) {
+	    $this->scope = $scope;
+	    return $this;
 	}
 
 
@@ -42,10 +57,10 @@ class Session extends OriginalAppName\Cron
 	 */
 	public function initialiseData()
 	{
-		if (! array_key_exists($this->getIdentity(), $_SESSION)) {
-			$_SESSION[$this->getIdentity()] = array();
+		if (! array_key_exists($this->getScope(), $_SESSION)) {
+			$_SESSION[$this->getScope()] = [];
 		}
-		$this->setData($_SESSION[$this->getIdentity()]);
+		$this->setData($_SESSION[$this->getScope()]);
 	}
 
 
@@ -57,8 +72,8 @@ class Session extends OriginalAppName\Cron
 	 */
 	public function setDataKey($key, $value)
 	{
-		$_SESSION[$this->getIdentity()][$key] = $value;
-		return $this->setData($_SESSION[$this->getIdentity()]);
+		$_SESSION[$this->getScope()][$key] = $value;
+		return $this->setData($_SESSION[$this->getScope()]);
 	}
 
 
@@ -78,23 +93,23 @@ class Session extends OriginalAppName\Cron
 	}	
 
 
-	public function getDataKey($key)
-	{
-		if (array_key_exists($key, $_SESSION[$this->getIdentity()])) {
-			$data = $_SESSION[$key];
-			return $data;
-		}
-	}
-
-
 	/**
 	 * sets all data assigned to session and the object
 	 * @param int|bool|array $value 
 	 */
-	public function setData($value = false)
+	public function setData($value)
 	{	
-		$_SESSION[$this->getIdentity()] = $value;
-		return parent::setData($_SESSION[$this->getIdentity()]);
+		$_SESSION[$this->getScope()] = $value;
+		return parent::setData($value);
+	}
+
+
+	public function getDataKey($key)
+	{
+		if (array_key_exists($key, $_SESSION[$this->getScope()])) {
+			$data = $_SESSION[$key];
+			return $data;
+		}
 	}
 
 
@@ -104,7 +119,7 @@ class Session extends OriginalAppName\Cron
 	 * @return array      
 	 */
 	public function getUnset($key) {
-		if (array_key_exists($key, $_SESSION[$this->getIdentity()])) {
+		if (array_key_exists($key, $_SESSION[$this->getScope()])) {
 			$data = $_SESSION[$key];
 			unset($_SESSION[$key]);
 			return $data;
@@ -119,7 +134,7 @@ class Session extends OriginalAppName\Cron
 	 */
 	public function delete($key = false) {
 		if (! $key) {
-			unset($_SESSION[$this->getIdentity()]);
+			unset($_SESSION[$this->getScope()]);
 		}
 	}
 }

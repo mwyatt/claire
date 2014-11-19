@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "aaa5b47d6dd7bedde4ccde71eb35ebac",
+    "hash": "2dfe6c74089d79319d92a17ca08a043e",
     "packages": [
         {
             "name": "aura/installer-default",
@@ -260,12 +260,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Routing.git",
-                "reference": "f0bb6f818f9a7ece41c7dfe14e08b13c2de55b0c"
+                "reference": "5e2c6aba6cbb00a6b7e3760db99f72c85c52b6e5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Routing/zipball/f0bb6f818f9a7ece41c7dfe14e08b13c2de55b0c",
-                "reference": "f0bb6f818f9a7ece41c7dfe14e08b13c2de55b0c",
+                "url": "https://api.github.com/repos/symfony/Routing/zipball/5e2c6aba6cbb00a6b7e3760db99f72c85c52b6e5",
+                "reference": "5e2c6aba6cbb00a6b7e3760db99f72c85c52b6e5",
                 "shasum": ""
             },
             "require": {
@@ -318,7 +318,7 @@
                 "uri",
                 "url"
             ],
-            "time": "2014-11-03 19:16:49"
+            "time": "2014-11-16 17:28:09"
         }
     ],
     "packages-dev": [],

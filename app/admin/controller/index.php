@@ -1,21 +1,26 @@
 <?php
 
+namespace OriginalAppName\Admin\Controller;
+
+use OriginalAppName\View;
+use OriginalAppName\Service;
+use Symfony\Component\HttpFoundation\Response;
+
 
 /**
- * admin
- *
- * PHP version 5
- * 
  * @author Martin Wyatt <martin.wyatt@gmail.com> 
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Controller_Admin extends Controller
+class Admin extends \OriginalAppName\Controller
 {
 
 
 	public function initialise()
 	{
+		$this->route('admin');
+
+
 		$sessionAdminUser = new session_admin_user($this);
 
 		// look for logout
