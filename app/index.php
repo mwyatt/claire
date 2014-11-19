@@ -17,6 +17,7 @@ session_start();
 /**
  * setup registry
  */
+
 $registry = OriginalAppName\Registry::getInstance();
 $registry->set('system', new OriginalAppName\System);
 $registry->set('database', new OriginalAppName\Database(include SITE_PATH . 'credentials' . EXT));

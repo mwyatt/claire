@@ -52,6 +52,13 @@ class Pallete extends \OriginalAppName\Model
 	}
 
 
+	public function __construct()
+	{
+		$this->setSassStyles();
+		$this->setStyles();
+	}
+
+
 	/**
 	 * @param  string $key 
 	 * @return string      hex

@@ -12,10 +12,10 @@ class Mail extends OriginalAppName\Entity
 {
 
 
-	private $addressed_to;
+	private $to;
 
 
-	private $addressed_from;
+	private $from;
 
 
 	private $subject;
@@ -24,5 +24,90 @@ class Mail extends OriginalAppName\Entity
 	private $content;
 
 
-	private $time;
+	private $timeSent;
+
+
+	/**
+	 * @return string 
+	 */
+	public function getTo() {
+	    return $this->to;
+	}
+	
+	
+	/**
+	 * @param string $to 
+	 */
+	public function setTo($to) {
+	    $this->to = $to;
+	    return $this;
+	}
+
+
+	/**
+	 * @return string 
+	 */
+	public function getFrom() {
+	    return $this->from;
+	}
+	
+	
+	/**
+	 * @param string $from 
+	 */
+	public function setFrom($from) {
+	    $this->from = $from;
+	    return $this;
+	}
+
+
+	/**
+	 * @return string 
+	 */
+	public function getSubject() {
+	    return $this->subject;
+	}
+	
+	
+	/**
+	 * @param string $subject 
+	 */
+	public function setSubject($subject) {
+	    $this->subject = $subject;
+	    return $this;
+	}
+
+
+	/**
+	 * @return string 
+	 */
+	public function getBody() {
+	    return $this->body;
+	}
+	
+	
+	/**
+	 * @param string $body 
+	 */
+	public function setBody($body) {
+	    $this->body = $body;
+	    return $this;
+	}
+
+
+	/**
+	 * @return int epoch
+	 */
+	public function getTimeSent() {
+	    return $this->timeSent;
+	}
+	
+	
+	/**
+	 * @param int $timeSent epoch
+	 */
+	public function setTimeSent($timeSent) {
+	    $this->timeSent = $timeSent;
+	    return $this;
+	}
 }

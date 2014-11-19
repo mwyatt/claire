@@ -19,7 +19,7 @@ class Admin extends \OriginalAppName\Controller
 
 	public function __construct()
 	{
-		Parent::__construct();
+		parent::__construct();
 		$this->defaultGlobalAdmin();
 	}
 
@@ -35,7 +35,7 @@ class Admin extends \OriginalAppName\Controller
 		$sessionFeedback = new Session\Feedback;
 
 		// not logged in
-		if (! $sessionUser->isLogged()) {
+		if (! $sessionUser->isLogged() && $_SERVER['REQUEST_URI'] != $this->url->generate('admin')) {
 			$this->route('admin');
 		}
 		
@@ -47,16 +47,18 @@ class Admin extends \OriginalAppName\Controller
 		}
 
 		// more resource
-		$this->readMenu();
-		$this->readUser();
+		if ($sessionUser->isLogged()) {
+			$this->readMenu();
+			$this->readUser();
+		}
 	}
 
 
 	public function readUser()
 	{
 		$sessionUser = new Session\Admin\User;
-		$modelUser = new model_user();
-		$modelUser->readId([$sessionUser->get('id')])
+		$modelUser = new \OriginalAppName\Model\User;
+		$modelUser->readId([$sessionUser->get('id')]);
 		if (! $entityUser = current($modelUser->getData())) {
 			$sessionUser->delete();
 			$this->route('admin');

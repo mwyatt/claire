@@ -36,6 +36,9 @@ abstract class Model extends \OriginalAppName\Data
 	];
 
 
+	public $lastInsertIds;
+
+
 	/**
 	 * inject dependencies
 	 * \OriginalAppName\Database
@@ -116,17 +119,17 @@ abstract class Model extends \OriginalAppName\Data
 
 
 	/**
-	 * @param  array $molds 
+	 * @param  array $entities 
 	 * @return array 	of insert ids
 	 */
-	public function create($molds = array())
+	public function create($entities)
 	{
 
 		// statement
-		$statement = array();
-		$lastInsertIds = array();
+		$statement = [];
+		$lastInsertIds = [];
 		$statement[] = 'insert into';
-		$statement[] = $this->getIdentity();
+		$statement[] = $this->getTableName();
 		$statement[] = '(' . $this->getSqlFieldsWriteable() . ')';
 		$statement[] = 'values';
 		$statement[] = '(' . $this->getSqlPositionalPlaceholders() . ')';
@@ -135,15 +138,16 @@ abstract class Model extends \OriginalAppName\Data
 		$sth = $this->database->dbh->prepare(implode(' ', $statement));
 
 		// execute
-        foreach ($molds as $mold) {
-			$this->tryExecute(__METHOD__, $sth, $this->getSthExecutePositional($mold));
+        foreach ($entities as $entity) {
+			$this->tryExecute(__METHOD__, $sth, $this->getSthExecutePositional($entity));
 			if ($sth->rowCount()) {
 				$lastInsertIds[] = intval($this->database->dbh->lastInsertId());
 			}
         }
 
 		// return
-		return $lastInsertIds;
+		$this->setLastInsertIds($lastInsertIds);
+		return $this;
 	}	
 
 
@@ -196,7 +200,7 @@ abstract class Model extends \OriginalAppName\Data
 		// statement
 		$statement = array();
 		$statement[] = 'update';
-		$statement[] = $this->getIdentity();
+		$statement[] = $this->getTableName();
 		$statement[] = 'set';
 
 		// must be writable columns
@@ -244,7 +248,7 @@ abstract class Model extends \OriginalAppName\Data
 		// build
 		$statement = array();
 		$statement[] = 'delete from';
-		$statement[] = $this->getIdentity();
+		$statement[] = $this->getTableName();
 		if (array_key_exists('where', $properties)) {
 			$statement[] = $this->getSqlWhere($properties['where']);
 		}
@@ -642,5 +646,22 @@ abstract class Model extends \OriginalAppName\Data
 			return false;
 		}
 		return $sth;
+	}
+
+
+	/**
+	 * @return array 
+	 */
+	public function getLastInsertIds() {
+	    return $this->lastInsertIds;
+	}
+	
+	
+	/**
+	 * @param array $lastInsertIds 
+	 */
+	public function setLastInsertIds($lastInsertIds) {
+	    $this->lastInsertIds = $lastInsertIds;
+	    return $this;
 	}
 }

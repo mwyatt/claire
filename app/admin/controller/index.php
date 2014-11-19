@@ -19,12 +19,31 @@ class Index extends \OriginalAppName\Controller\Admin
 
 	public function admin($request)
 	{
+		$sessionUser = new Session\Admin\User;
+		if ($sessionUser->isLogged()) {
+			return $this->adminLoggedIn();
+		}
+		return $this->adminLoggedOut();
+	}
 
+
+	public function adminLoggedIn()
+	{
 		echo '<pre>';
-		print_r($request);
+		print_r('dashboard');
 		echo '</pre>';
 		exit;
 		
+	}
+
+
+	public function adminLoggedOut()
+	{
+		$sessionFeedback = new Session\Feedback;
+		$this
+			->view
+			->setDataKey('feedback', $sessionFeedback->get('message'));
+		return new Response($this->view->getTemplate('admin\login'));
 	}
 
 

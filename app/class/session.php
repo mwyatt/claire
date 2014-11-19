@@ -97,7 +97,9 @@ class Session extends \OriginalAppName\Cron
 	 * @return any 
 	 */
 	public function get($key) {
-	    return $_SESSION[$this->getScope()][$key];
+		if (isset($_SESSION[$this->getScope()][$key])) {
+		    return $_SESSION[$this->getScope()][$key];
+		}
 	}
 	
 	

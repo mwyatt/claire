@@ -4,7 +4,6 @@
 <div class="content page login">
 	<form method="post" action="">
 
-<?php $feedback = $sessionFeedback ?>
 <?php require_once($this->getTemplatePath('_feedback')) ?>
 
         <label class="login-label" for="login_email">Username</label>

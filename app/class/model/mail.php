@@ -1,21 +1,28 @@
 <?php
 
+namespace OriginalAppName\Model;
+
 
 /**
  * @author Martin Wyatt <martin.wyatt@gmail.com> 
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Model_Mail extends Model
+class Mail extends \OriginalAppName\Model
 {	
 
 
+	public $tableName = 'mail';
+
+
+	public $entity = '\\OriginalAppName\\Entity\\Mail';
+
+
 	public $fields = array(
-		'id'
-		, 'addressed_to'
-		, 'addressed_from'
-		, 'subject'
-		, 'content'
-		, 'time'
+		'to',
+		'from',
+		'subject',
+		'content',
+		'timeSent'
 	);
 }

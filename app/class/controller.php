@@ -19,10 +19,22 @@ class Controller
 	public $view;
 
 
+	public $url;
+
+
 	public function __construct()
 	{
 		$this->setView(new View);
 		$this->defaultGlobal();
+		$this->setUrl();
+	}
+
+
+	public function setUrl()
+	{
+		$registry = \OriginalAppName\Registry::getInstance();
+		$this->url = $registry->get('urlGenerator');
+		return $this;
 	}
 
 
@@ -76,8 +88,7 @@ class Controller
 	 */
 	public function route($label, $attributes = [])
 	{
-		$registry = \OriginalAppName\Registry::getInstance();
-		$generator = $registry->get('urlGenerator');
+		$generator = $this->getUrl();
 		$url = $generator->generate($label, $attributes, true);
 		header('location:' . $url);
 

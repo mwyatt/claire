@@ -20,7 +20,7 @@
 
 <div class="wrap">
 
-<?php if ($user): ?>
+<?php if (isset($user)): ?>
 	
     <header class="main js-header-main">
     	<div class="header-inner wrap-full-width">
