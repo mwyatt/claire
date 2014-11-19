@@ -1,24 +1,26 @@
 <?php
 
+namespace OriginalAppName\Session\Admin;
+
 
 /**
  * @author Martin Wyatt <martin.wyatt@gmail.com> 
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Session_Admin_User extends Session
+class User extends \OriginalAppName\Session
 {
 
 
 	/**
 	 * stores user id
-	 * @param  object $mold 
+	 * @param  object $entity 
 	 * @return null       
 	 */
-	public function login($mold)
+	public function login($entity = \OriginalAppName\Entity\User)
 	{
+		$this->set('id', $entity->getId());
 		$this->setExpire();
-		$this->setDataKey('id', $mold->id);
 	}
 
 
@@ -32,21 +34,19 @@ class Session_Admin_User extends Session
 	{
 
 		// not logged in!
-		if (! $this->getData()) {
-			return false;
+		if (! $this->get('id')) {
+			return;
 		}
 
 		// provide feedback as to what has happened
 		if (! $this->refreshExpire()) {
-			$sessionFeedback = new session_feedback($this);
+			$sessionFeedback = new OriginalAppName\Session\Admin\Feedback();
 			$sessionFeedback->set('You have been logged out due to inactivity');
 			return;
 		}
 
 		// logged in
-		if ($this->getData()) {
-			return true;
-		}
+		return true;
 	}
 
 
@@ -72,6 +72,6 @@ class Session_Admin_User extends Session
 	 */
 	public function setExpire()
 	{
-		return $this->setDataKey('expire', time() + $this->getTime('hour'));
+		return $this->set('expire', time() + $this->getTime('hour'));
 	}
 }

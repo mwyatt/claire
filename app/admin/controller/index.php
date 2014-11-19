@@ -12,37 +12,54 @@ use Symfony\Component\HttpFoundation\Response;
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Admin extends \OriginalAppName\Controller
+class Index extends \OriginalAppName\Controller
 {
 
 
-	public function initialise()
+	/**
+	 * custom for admin defaults
+	 */
+	public function __construct()
 	{
-		$this->route('admin');
+
+		// first
+		Parent::__construct();
+
+		// second
+		$this->defaultAdminGlobal();
+	}
 
 
-		$sessionAdminUser = new session_admin_user($this);
+	public function admin($request)
+	{
+		$sessionUser = new \OriginalAppName\Session\Admin\User('OriginalAppName\Session\Admin\User');
+		$sessionFeedback = new OriginalAppName\Session\Admin\Feedback();
 
-		// look for logout
-		if (array_key_exists('logout', $_REQUEST) && $sessionAdminUser->getData()) {
+		if (array_key_exists('logout', $_REQUEST) && $sessionUser->isLogged()) {
 			$this->logout();
 		}
-		$this->checkLogged();
-		$this->setMenu();
-		$this->setUser();
-		$this->setFeedback();
 	}
 
 
 	public function logout()
 	{
-		$sessionAdminUser = new session_admin_user($this);
-		$sessionFeedback = new session_feedback($this);
-		$sessionHistory = new session_history($this);
-		$sessionAdminUser->delete();
-		$sessionHistory->delete();
-		$sessionFeedback->set('Successfully logged out');
+		$sessionUser = new \OriginalAppName\Session\Admin\User('OriginalAppName\Session\Admin\User');
+		$sessionFeedback = new OriginalAppName\Session\Admin\Feedback();
+		$sessionUser->delete();
+		$sessionFeedback->set('successfully logged out');
 		$this->route('admin');
+	}
+
+
+	public function defaultAdminGlobal()
+	{
+
+		$sessionUser = new \OriginalAppName\Session\Admin\User('OriginalAppName\Session\Admin\User');
+		if (! $sessionUser->isLogged()) {
+			$this->route('admin');
+		}
+		$this->readMenu();
+		$this->readUser();
 	}
 
 
@@ -60,11 +77,6 @@ class Admin extends \OriginalAppName\Controller
 		$sessionHistory = new session_history($this);
 		$this->view->setObject('user', false);
 
-
-
-		$this->setMenu();
-		$this->setUser();
-		$this->setFeedback();
 
 		$this->view
 			->setObject($sessionFormfield);
@@ -120,45 +132,27 @@ class Admin extends \OriginalAppName\Controller
 	}
 
 
-	public function setUser()
+	public function readUser()
 	{
-		$modelUser = new model_user($this);
-		$sessionAdminUser = new session_admin_user($this);
-		if (! $sessionAdminUser->isLogged()) {
-			return;
-		}
-		if (! $modelUser->read(array('where' => array('id' => $sessionAdminUser->getData('id'))))) {
+		$sessionUser = new \OriginalAppName\Session\Admin\User('OriginalAppName\Session\Admin\User');
+		$modelUser = new model_user();
+		$modelUser->readId([$sessionUser->get('id')])
+		if (! $entityUser = current($modelUser->getData())) {
+			$sessionUser->delete();
 			$this->route('admin');
 		}
-		$this->view->setObject('user', $modelUser->getDataFirst());
+		$this
+			->view
+			->mergeData(['user', $entityUser]);
 	}
 
 
-	public function checkLogged()
+	public function readMenu()
 	{
-		if ($this->url->getPathPart(0) == 'admin' && ! $this->url->getPathPart(1)) {
-			return;
-		}
-		$sessionAdminUser = new session_admin_user($this);
-		if (! $sessionAdminUser->isLogged()) {
-			$this->route('admin');
-		}
-	}
-
-
-	public function setMenu()
-	{
-		$json = new json($this);
+		$json = new \OriginalAppName\Json($this);
 		$json->read('admin/menu');
-		$this->view
-			->setObject('menu', $json->getData());
-	}
-
-
-	public function setFeedback()
-	{
-		$sessionFeedback = new session_feedback($this);
-		$this->view
-			->setObject($sessionFeedback);
+		$this
+			->view
+			->mergeData(['menu', $json->getData()]);
 	}
 }

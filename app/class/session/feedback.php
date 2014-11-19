@@ -1,20 +1,27 @@
 <?php
 
+namespace OriginalAppName\Session\Admin;
+
 
 /**
  * @author Martin Wyatt <martin.wyatt@gmail.com> 
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Session_Feedback extends Session
+class Feedback extends \OriginalAppName\Session
 {
 
 
-	public function set($message = false, $positivity = false)
+	/**
+	 * stores a message, pull this to show and remove
+	 * @param string $message    
+	 * @param string $positivity positive|negative
+	 */
+	public function setMessage($message, $positivity = 'positive')
 	{
-		$this->setData(array(
-			'message' => $message
+		$this->set('message', [
+			'message' => ucfirst($message)
 			, 'positivity' => $positivity
-		));
+		]);
 	}
 }

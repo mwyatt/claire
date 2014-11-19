@@ -16,7 +16,7 @@ namespace OriginalAppName;
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Session extends \OriginalAppName\Data
+class Session extends \OriginalAppName\Cron
 {
 
 
@@ -26,10 +26,10 @@ class Session extends \OriginalAppName\Data
 	/**
 	 * extends the normal constructor to set the session data
 	 */
-	public function __construct($scope) {
+	public function __construct($scope = __NAMESPACE__) {
 		
-		// $scope = 'OriginalAppName\Admin\User\'
-		$this->setScope($scope)
+		// $scope = 'OriginalAppName\Admin\User'
+		$this->setScope($scope);
 		$this->initialiseData();
 	}
 
@@ -60,7 +60,6 @@ class Session extends \OriginalAppName\Data
 		if (! array_key_exists($this->getScope(), $_SESSION)) {
 			$_SESSION[$this->getScope()] = [];
 		}
-		$this->setData($_SESSION[$this->getScope()]);
 	}
 
 
@@ -93,48 +92,46 @@ class Session extends \OriginalAppName\Data
 	}	
 
 
+
 	/**
-	 * sets all data assigned to session and the object
-	 * @param int|bool|array $value 
+	 * @return any 
 	 */
-	public function setData($value)
-	{	
-		$_SESSION[$this->getScope()] = $value;
-		return parent::setData($value);
+	public function get($key) {
+	    return $_SESSION[$this->getScope()][$key];
 	}
-
-
-	public function getDataKey($key)
-	{
-		if (array_key_exists($key, $_SESSION[$this->getScope()])) {
-			$data = $_SESSION[$key];
-			return $data;
-		}
+	
+	
+	/**
+	 * set a key value pair
+	 * @param string $key   
+	 * @param any $value 
+	 */
+	public function set($key, $value) {
+	    $_SESSION[$this->getScope()][$key] = $value;
+	    return $this;
 	}
 
 
 	/**
-	 * gets the array and unsets it
+	 * gets the value and unsets it
 	 * @param  string $key 
 	 * @return array      
 	 */
-	public function getUnset($key) {
+	public function pull($key) {
 		if (array_key_exists($key, $_SESSION[$this->getScope()])) {
-			$data = $_SESSION[$key];
-			unset($_SESSION[$key]);
-			return $data;
+			$data = $_SESSION[$this->getScope()][$key];
+			unset($_SESSION[$this->getScope()][$key]);
 		}
-		return $data;
+		return isset($data) ? $data : null;
 	}
 
 
 	/**
 	 * just unsets the data
+	 * could just pull to nothing?
 	 * @param  boolean $key 
 	 */
-	public function delete($key = false) {
-		if (! $key) {
-			unset($_SESSION[$this->getScope()]);
-		}
+	public function delete() {
+		unset($_SESSION[$this->getScope()]);
 	}
 }

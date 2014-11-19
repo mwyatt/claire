@@ -4,107 +4,8 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2dfe6c74089d79319d92a17ca08a043e",
+    "hash": "6d45265e938de836198c704458742549",
     "packages": [
-        {
-            "name": "aura/installer-default",
-            "version": "1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/auraphp/installer-default.git",
-                "reference": "52f8de3670cc1ef45a916f40f732937436d028c8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/auraphp/installer-default/zipball/52f8de3670cc1ef45a916f40f732937436d028c8",
-                "reference": "52f8de3670cc1ef45a916f40f732937436d028c8",
-                "shasum": ""
-            },
-            "type": "composer-installer",
-            "extra": {
-                "class": "Aura\\Composer\\DefaultInstaller"
-            },
-            "autoload": {
-                "psr-0": {
-                    "Aura\\Composer\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-2-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Paul M. Jones",
-                    "email": "pmjones88@gmail.com",
-                    "homepage": "http://paul-m-jones.com"
-                }
-            ],
-            "description": "Installs Aura packages using the Composer defaults.",
-            "keywords": [
-                "aura",
-                "installer"
-            ],
-            "time": "2012-11-26 21:35:57"
-        },
-        {
-            "name": "aura/session",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/auraphp/Aura.Session.git",
-                "reference": "8f817ec812eb21d083d76167b7ec4d80a6fca6b0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/auraphp/Aura.Session/zipball/8f817ec812eb21d083d76167b7ec4d80a6fca6b0",
-                "reference": "8f817ec812eb21d083d76167b7ec4d80a6fca6b0",
-                "shasum": ""
-            },
-            "require": {
-                "aura/installer-default": "1.0.*",
-                "php": ">=5.4.0"
-            },
-            "type": "aura-package",
-            "autoload": {
-                "psr-0": {
-                    "Aura\\Session": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-2-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Paul M. Jones",
-                    "email": "pmjones88@gmail.com",
-                    "homepage": "http://paul-m-jones.com"
-                },
-                {
-                    "name": "Hari KT",
-                    "email": "kthari85@gmail.com",
-                    "homepage": "http://harikt.com"
-                },
-                {
-                    "name": "Akihito Koriyama",
-                    "email": "akihito.koriyama@gmail.com",
-                    "homepage": "http://www.kumasystem.com",
-                    "role": "Lead"
-                },
-                {
-                    "name": "Aura.Session Contributors",
-                    "homepage": "https://github.com/auraphp/Aura.Session/contributors"
-                }
-            ],
-            "description": "The Aura Session provides session management functionality, including session\nsegments, read-once (\"flash\") values, CSRF tools, and lazy session starting.",
-            "homepage": "http://auraphp.com/Aura.Session",
-            "keywords": [
-                "session",
-                "sessions"
-            ],
-            "time": "2014-05-31 17:16:27"
-        },
         {
             "name": "joseph-lenton/php-error",
             "version": "dev-master",
@@ -325,9 +226,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "aura/session": 20,
-        "joseph-lenton/php-error": 20,
         "symfony/routing": 20,
+        "joseph-lenton/php-error": 20,
         "swiftmailer/swiftmailer": 20
     },
     "prefer-stable": false,
