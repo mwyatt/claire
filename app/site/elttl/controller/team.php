@@ -128,14 +128,14 @@ class Controller_Team extends Controller_Archive
 			->setMeta(array(		
 				'title' => $team->getName()
 			))
-			->setObject('team', $team)
-			->setObject('teams', $teams)
-			->setObject('venue', $venue)
-			->setObject('division', $modelTennisDivision->getDataFirst())
-			->setObject('secretary', $secretary)
-			->setObject('fixtures', $modelTennisFixture->getData())
-			->setObject('fixtureResults', $fixtureResults)
-			->setObject('players', $players)
+			->setDataKey('team', $team)
+			->setDataKey('teams', $teams)
+			->setDataKey('venue', $venue)
+			->setDataKey('division', $modelTennisDivision->getDataFirst())
+			->setDataKey('secretary', $secretary)
+			->setDataKey('fixtures', $modelTennisFixture->getData())
+			->setDataKey('fixtureResults', $fixtureResults)
+			->setDataKey('players', $players)
 			->getTemplate('team-single');
 	}
 }

@@ -39,7 +39,7 @@ class Controller_Admin_Tag extends Controller_Admin
 		if (array_key_exists('edit', $_GET)) {
 			if ($modelTag->readById(array($_GET['edit']))) {
 				$this->view
-					->setObject('tag', $modelTag->getDataFirst())
+					->setDataKey('tag', $modelTag->getDataFirst())
 					->getTemplate('admin/tag/update');
 			} else {
 				$this->route('current_sans_query');
@@ -63,7 +63,7 @@ class Controller_Admin_Tag extends Controller_Admin
 		$modelTag = new model_tag($this);
 		$modelTag->read();
 		$this->view
-			->setObject($modelTag)
+			->setDataKey($modelTag)
 			->getTemplate('admin/tag/list');
 	}
 }

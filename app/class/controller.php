@@ -27,19 +27,16 @@ class Controller
 
 
 	/**
-	 * store default data in view
-	 * store default site date in view
+	 * needs to be loaded for all controllers
+	 * front, admin and ajax or any others
 	 * @return null 
 	 */
 	public function defaultGlobal()
 	{
 		$serviceOptions = new Service\Options();
-		$className = '\\OriginalAppName\\Site\\' . ucfirst(SITE) . '\\Service\\Common';
-		$serviceCommon = new $className;
 		$this
 			->view
-			->mergeData(['option' => $serviceOptions->read()])
-			->mergeData($serviceCommon->read());
+			->setDataKey('option', $serviceOptions->read());
 	}
 
 

@@ -76,7 +76,7 @@ class Controller_Admin_Ajax extends Controller_Admin
 
 		// view
 		$this->view
-			->setObject($contentMeta)
+			->setDataKey($contentMeta)
 			->getTemplate('_love');
 	}
 }

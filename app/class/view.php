@@ -60,6 +60,7 @@ class View extends \OriginalAppName\Data
 		}
 
 		// start output buffer
+		// @todo start this at the start of the app?
 		ob_start();
 
 		// render template using extracted variables
@@ -67,6 +68,7 @@ class View extends \OriginalAppName\Data
 		$content = ob_get_contents();
 
 		// destroy output buffer
+		// @todo convert to ob_clean
 		ob_end_clean();
 
 		// add this data to existing

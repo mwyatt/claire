@@ -12,6 +12,9 @@ class User extends \OriginalAppName\Session
 {
 
 
+	protected $scope = 'OriginalAppName\Session\Admin\User';
+	
+
 	/**
 	 * stores user id
 	 * @param  object $entity 

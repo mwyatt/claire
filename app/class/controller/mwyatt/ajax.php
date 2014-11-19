@@ -98,7 +98,7 @@ class Controller_Ajax extends Controller_Index
 
 		// view
 		$this->view
-			->setObject($contentMeta)
+			->setDataKey($contentMeta)
 			->getTemplate('_love');
 	}
 

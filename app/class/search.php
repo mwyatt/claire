@@ -18,6 +18,7 @@ $search
 
 /**
  * @todo untested in the mvc scope
+ *       need to work with pdo
  */
 class Search extends \OriginalAppName\Model
 {

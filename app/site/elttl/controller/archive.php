@@ -40,7 +40,7 @@ class Controller_Archive extends Controller_Index
 			->setMeta(array(		
 				'title' => 'Season ' . $year->getNameFull()
 			))
-			->setObject('year', $year)
+			->setDataKey('year', $year)
 			->getTemplate('year-single');
 	}
 
@@ -57,7 +57,7 @@ class Controller_Archive extends Controller_Index
 			->setMeta(array(		
 				'title' => 'Results Archive'
 			))
-			->setObject('years', $modelTennisYear->getData())
+			->setDataKey('years', $modelTennisYear->getData())
 			->getTemplate('year');
 	}
 
@@ -94,7 +94,7 @@ class Controller_Archive extends Controller_Index
 		$this->setYear($year);
 		$this
 			->view
-			->setObject('year', $this->getYear());
+			->setDataKey('year', $this->getYear());
 	}
 
 

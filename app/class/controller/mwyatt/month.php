@@ -30,8 +30,8 @@ class Controller_Month extends Controller_Index
 			->setMeta(array(		
 				'title' => 'All posts from ' . $monthYear
 			))
-			->setObject('month_year', $monthYear)
-			->setObject($content)
+			->setDataKey('month_year', $monthYear)
+			->setDataKey($content)
 			->getTemplate('content-month');
 	}
 }

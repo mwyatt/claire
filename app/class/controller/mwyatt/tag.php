@@ -29,7 +29,7 @@ class Controller_Tag extends Controller_Index
 			$this->route('base');
 		}
 		$mold = $modelTag->getDataFirst();
-		$this->view->setObject('tagCurrent', $mold);
+		$this->view->setDataKey('tagCurrent', $mold);
 
 		// gets content meta using the id of the tag found
 		// get content data
@@ -70,12 +70,12 @@ class Controller_Tag extends Controller_Index
 			->setMeta(array(		
 				'title' => 'All posts by tag name ' . $this->url->getPathPart(1)
 			))
-			->setObject('totalContents', count($molds))
-			->setObject('pageCurrent', $pagination->getCurrentPage())
-			->setObject('pagination_summary', $pagination->getSummary())
-			->setObject('pagination', $pagination)
-			->setObject('contents', $modelContent)
-			->setObject('firstContent', $modelContent->getDataFirst())
+			->setDataKey('totalContents', count($molds))
+			->setDataKey('pageCurrent', $pagination->getCurrentPage())
+			->setDataKey('pagination_summary', $pagination->getSummary())
+			->setDataKey('pagination', $pagination)
+			->setDataKey('contents', $modelContent)
+			->setDataKey('firstContent', $modelContent->getDataFirst())
 			->getTemplate('content-tag');
 	}
 }

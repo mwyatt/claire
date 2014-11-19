@@ -2,6 +2,7 @@
 
 namespace OriginalAppName\Admin\Controller;
 
+use OriginalAppName\Session;
 use OriginalAppName\View;
 use OriginalAppName\Service;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,55 +13,22 @@ use Symfony\Component\HttpFoundation\Response;
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Index extends \OriginalAppName\Controller
+class Index extends \OriginalAppName\Controller\Admin
 {
-
-
-	/**
-	 * custom for admin defaults
-	 */
-	public function __construct()
-	{
-
-		// first
-		Parent::__construct();
-
-		// second
-		$this->defaultAdminGlobal();
-	}
 
 
 	public function admin($request)
 	{
-		$sessionUser = new \OriginalAppName\Session\Admin\User('OriginalAppName\Session\Admin\User');
-		$sessionFeedback = new OriginalAppName\Session\Admin\Feedback();
 
-		if (array_key_exists('logout', $_REQUEST) && $sessionUser->isLogged()) {
-			$this->logout();
-		}
+		echo '<pre>';
+		print_r($request);
+		echo '</pre>';
+		exit;
+		
 	}
 
 
-	public function logout()
-	{
-		$sessionUser = new \OriginalAppName\Session\Admin\User('OriginalAppName\Session\Admin\User');
-		$sessionFeedback = new OriginalAppName\Session\Admin\Feedback();
-		$sessionUser->delete();
-		$sessionFeedback->set('successfully logged out');
-		$this->route('admin');
-	}
 
-
-	public function defaultAdminGlobal()
-	{
-
-		$sessionUser = new \OriginalAppName\Session\Admin\User('OriginalAppName\Session\Admin\User');
-		if (! $sessionUser->isLogged()) {
-			$this->route('admin');
-		}
-		$this->readMenu();
-		$this->readUser();
-	}
 
 
 	/**
@@ -75,11 +43,11 @@ class Index extends \OriginalAppName\Controller
 		$sessionFeedback = new session_feedback($this);
 		$sessionFormfield = new session_formfield($this);
 		$sessionHistory = new session_history($this);
-		$this->view->setObject('user', false);
+		$this->view->setDataKey('user', false);
 
 
 		$this->view
-			->setObject($sessionFormfield);
+			->setDataKey($sessionFormfield);
 
 		// logging in
 		if (array_key_exists('login', $_POST)) {
@@ -120,7 +88,7 @@ class Index extends \OriginalAppName\Controller
 			if (! $modelUser->read(array('where' => array('id' => $sessionAdminUser->getData('id'))))) {
 				$this->route('admin');
 			}
-			$this->view->setObject('user', $modelUser->getDataFirst());
+			$this->view->setDataKey('user', $modelUser->getDataFirst());
 		} else {
 			if ($this->url->getPathPart(1)) {
 				$sessionHistory->setCaptureUrl($this->url->getCache('current'));
@@ -129,30 +97,5 @@ class Index extends \OriginalAppName\Controller
 			return $this->view->getTemplate('admin/login');
 		}
 		return $this->view->getTemplate('admin/dashboard');
-	}
-
-
-	public function readUser()
-	{
-		$sessionUser = new \OriginalAppName\Session\Admin\User('OriginalAppName\Session\Admin\User');
-		$modelUser = new model_user();
-		$modelUser->readId([$sessionUser->get('id')])
-		if (! $entityUser = current($modelUser->getData())) {
-			$sessionUser->delete();
-			$this->route('admin');
-		}
-		$this
-			->view
-			->mergeData(['user', $entityUser]);
-	}
-
-
-	public function readMenu()
-	{
-		$json = new \OriginalAppName\Json($this);
-		$json->read('admin/menu');
-		$this
-			->view
-			->mergeData(['menu', $json->getData()]);
 	}
 }

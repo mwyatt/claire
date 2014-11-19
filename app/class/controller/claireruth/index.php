@@ -20,7 +20,7 @@ class Controller_Index extends Controller
 		// main nav
 		$json = new Json();
 		$json->read('main-menu');
-		$this->view->setObject('mainMenu', $json->getData());
+		$this->view->setDataKey('mainMenu', $json->getData());
 	}
 
 
@@ -51,7 +51,7 @@ class Controller_Index extends Controller
 		$modelContent->bindMeta('media');
 		$modelContent->bindMeta('tag');
 		$modelContent->bindUser();
-		$this->view->setObject('contents', $modelContent->getData());
+		$this->view->setDataKey('contents', $modelContent->getData());
 		$this->view->getTemplate('home');
 	}
 
@@ -64,14 +64,14 @@ class Controller_Index extends Controller
 		$fixture = new model_ttfixture($this);
 		$division = new model_ttdivision($this);
 		$this->view
-			->setObject('model_ttfixture', $fixture->readFilled()->getData())
-			->setObject('model_ttdivision', $division->read()->getData())
-			->setObject('model_ttteam', $team->read()->getData())
-			->setObject('model_ttplayer', $player->read()->getData())
-			->setObject('model_content_cup', $content->readByType('cup')->getData())
-			->setObject('model_content_minutes', $content->readByType('minutes')->getData())
-			->setObject('model_content_page', $content->readByType('page')->getData())
-			->setObject('model_content_press', $content->readByType('press')->getData())
+			->setDataKey('model_ttfixture', $fixture->readFilled()->getData())
+			->setDataKey('model_ttdivision', $division->read()->getData())
+			->setDataKey('model_ttteam', $team->read()->getData())
+			->setDataKey('model_ttplayer', $player->read()->getData())
+			->setDataKey('model_content_cup', $content->readByType('cup')->getData())
+			->setDataKey('model_content_minutes', $content->readByType('minutes')->getData())
+			->setDataKey('model_content_page', $content->readByType('page')->getData())
+			->setDataKey('model_content_press', $content->readByType('press')->getData())
 			->loadJustTemplate('sitemap');
 	}
 }

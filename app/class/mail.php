@@ -1,12 +1,53 @@
 <?php
 
+namespace OriginalAppName;
+
+
+// Create the Transport
+$transport = Swift_SmtpTransport::newInstance('smtp.gmail.com', 465, 'ssl')
+  ->setUsername('martin.wyatt@gmail.com')
+  ->setPassword('google app password')
+  ;
+
+/*
+You could alternatively use a different transport such as Sendmail or Mail:
+
+// Sendmail
+$transport = Swift_SendmailTransport::newInstance('/usr/sbin/sendmail -bs');
+
+// Mail
+$transport = Swift_MailTransport::newInstance();
+*/
+
+// Create the Mailer using your created Transport
+$mailer = Swift_Mailer::newInstance($transport);
+
+// Create a message
+$message = Swift_Message::newInstance('Wonderful Subject')
+  ->setFrom(array('martin.wyatt@gmail.com' => 'MVC'))
+  ->setTo(array('martin.wyatt@gmail.com'))
+  ->setBody('Here is the message itself')
+  ;
+
+// Send the message
+$result = $mailer->send($message);
+
+echo '<pre>';
+print_r($result);
+echo '</pre>';
+exit;
+
+result == 1
+
+
+
 
 /**
  * @author Martin Wyatt <martin.wyatt@gmail.com> 
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Mail extends Config
+class Mail
 {
 
 
@@ -55,10 +96,10 @@ class Mail extends Config
 		$this->view = $view;
 
 		// pallete
-		$mailPallete = new Mail_Pallete($this);
+		$mailPallete = new \OriginalAppName\Pallete($this);
 		$mailPallete->setSassStyles();
 		$mailPallete->setStyles();
-		$this->view->setObject('styles', $mailPallete);
+		$this->view->setDataKey('styles', $mailPallete);
 	}
 
 

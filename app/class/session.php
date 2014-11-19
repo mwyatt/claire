@@ -26,10 +26,10 @@ class Session extends \OriginalAppName\Cron
 	/**
 	 * extends the normal constructor to set the session data
 	 */
-	public function __construct($scope = __NAMESPACE__) {
-		
-		// $scope = 'OriginalAppName\Admin\User'
-		$this->setScope($scope);
+	public function __construct($scope = '') {
+		if ($scope) {
+			$this->setScope($scope);
+		}
 		$this->initialiseData();
 	}
 

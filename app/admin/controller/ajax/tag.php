@@ -27,7 +27,7 @@ class Controller_Admin_Ajax_Tag extends Controller_Admin
 		$model = new model_tag($this);
 		$model->readUniqueLike();
 		$this->view
-			->setObject('tags', $model)
+			->setDataKey('tags', $model)
 			->getTemplate('admin/_tags');
 	}
 
@@ -39,8 +39,8 @@ class Controller_Admin_Ajax_Tag extends Controller_Admin
 		$model = new model_tag($this);
 		$model->readSearch($_GET['query']);
 		$this->view
-			->setObject('dropTemplate', '_tags')
-			->setObject('tags', $model)
+			->setDataKey('dropTemplate', '_tags')
+			->setDataKey('tags', $model)
 			->getTemplate('_drop');
 	}
 
@@ -60,7 +60,7 @@ class Controller_Admin_Ajax_Tag extends Controller_Admin
 			)
 		));
 		if ($mold = $model->getDataFirst()) {
-			$this->view->setObject('tag', $mold);
+			$this->view->setDataKey('tag', $mold);
 		} else {
 			$mold = new mold_tag();
 			$mold->title = $tagNewTitle;
@@ -72,7 +72,7 @@ class Controller_Admin_Ajax_Tag extends Controller_Admin
 				)
 			));
 			$mold = $model->getDataFirst();
-			$this->view->setObject('tag', $mold);
+			$this->view->setDataKey('tag', $mold);
 		}
 		$this->view->getTemplate('_tag');
 	}

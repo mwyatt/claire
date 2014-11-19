@@ -39,7 +39,7 @@ class Controller_Admin_Media extends Controller_Admin
 		if (array_key_exists('edit', $_GET)) {
 			if ($modelMedia->readById(array($_GET['edit']))) {
 				$this->view
-					->setObject('model_media', $modelMedia->getDataFirst())
+					->setDataKey('model_media', $modelMedia->getDataFirst())
 					->getTemplate('admin/media/update');
 			} else {
 				$this->route('current_sans_query');
@@ -63,7 +63,7 @@ class Controller_Admin_Media extends Controller_Admin
 		$modelMedia = new model_media($this);
 		$modelMedia->read();
 		$this->view
-			->setObject($modelMedia)
+			->setDataKey($modelMedia)
 			->getTemplate('admin/media/list');
 	}
 }

@@ -20,7 +20,7 @@ class Controller_Index extends Controller
 		// main nav
 		$json = new Json();
 		$json->read('main-menu');
-		$this->view->setObject('mainMenu', $json->getData());
+		$this->view->setDataKey('mainMenu', $json->getData());
 	}
 
 
@@ -41,7 +41,7 @@ class Controller_Index extends Controller
 
 		// latest 3 posts
 		if ($cache->read('home-latest-posts')) {
-			$this->view->setObject('contents', $cache->getData());
+			$this->view->setDataKey('contents', $cache->getData());
 		} else {
 			$modelContent = new model_content($this);
 			$modelContent->read(array(
@@ -54,7 +54,7 @@ class Controller_Index extends Controller
 			));
 			$modelContent->bindMeta('media');
 			$modelContent->bindMeta('tag');
-			$this->view->setObject('contents', $modelContent->getData());
+			$this->view->setDataKey('contents', $modelContent->getData());
 			$cache->create($modelContent->getData());
 		}
 		$this->loadSkills();
@@ -67,7 +67,7 @@ class Controller_Index extends Controller
 	{
 		$json = new Json($this);
 		$json->read('skills');
-		$this->view->setObject('skills', $json->getData());
+		$this->view->setDataKey('skills', $json->getData());
 	}
 
 
@@ -75,6 +75,6 @@ class Controller_Index extends Controller
 	{
 		$json = new Json($this);
 		$json->read('projects');
-		$this->view->setObject('projects', $json->getData());
+		$this->view->setDataKey('projects', $json->getData());
 	}
 }

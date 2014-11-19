@@ -34,8 +34,8 @@ class Controller_Admin_Tennis_Player extends Controller_Admin
 			->keyDataByProperty('id')
 			->orderByPropertyStringAsc('name');
 		$this->view
-			->setObject('players', $modelTennisPlayer->getData())
-			->setObject('teams', $modelTennisTeam->getData())
+			->setDataKey('players', $modelTennisPlayer->getData())
+			->setDataKey('teams', $modelTennisTeam->getData())
 			->getTemplate('admin/tennis/player/list');
 	}
 

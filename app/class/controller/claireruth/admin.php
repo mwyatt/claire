@@ -35,7 +35,7 @@ class Controller_Admin extends Controller
 		$sessionFeedback = new session_feedback($this);
 		$sessionFormfield = new session_formfield($this);
 		$sessionHistory = new session_history($this);
-		$this->view->setObject('user', false);
+		$this->view->setDataKey('user', false);
 
 		// logout
 		if (array_key_exists('logout', $_GET) && $sessionAdminUser->getData()) {
@@ -50,7 +50,7 @@ class Controller_Admin extends Controller
 		$this->setFeedback();
 
 		$this->view
-			->setObject($sessionFormfield);
+			->setDataKey($sessionFormfield);
 
 		// logging in
 		if (array_key_exists('login', $_POST)) {
@@ -90,7 +90,7 @@ class Controller_Admin extends Controller
 			if (! $modelUser->read(array('where' => array('id' => $sessionAdminUser->getData('id'))))) {
 				$this->route('admin');
 			}
-			$this->view->setObject('user', $modelUser->getDataFirst());
+			$this->view->setDataKey('user', $modelUser->getDataFirst());
 		} else {
 			if ($this->url->getPathPart(1)) {
 				$sessionHistory->setCaptureUrl($this->url->getCache('current'));
@@ -112,7 +112,7 @@ class Controller_Admin extends Controller
 		if (! $modelUser->read(array('where' => array('id' => $sessionAdminUser->getData('id'))))) {
 			$this->route('admin');
 		}
-		$this->view->setObject('user', $modelUser->getDataFirst());
+		$this->view->setDataKey('user', $modelUser->getDataFirst());
 	}
 
 
@@ -133,7 +133,7 @@ class Controller_Admin extends Controller
 		$json = new json($this);
 		$json->read('admin/menu');
 		$this->view
-			->setObject('menu', $json->getData());
+			->setDataKey('menu', $json->getData());
 	}
 
 
@@ -141,6 +141,6 @@ class Controller_Admin extends Controller
 	{
 		$sessionFeedback = new session_feedback($this);
 		$this->view
-			->setObject($sessionFeedback);
+			->setDataKey($sessionFeedback);
 	}
 }

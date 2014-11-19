@@ -102,13 +102,13 @@ class Controller_Fixture extends Controller_Archive
 			->setMeta(array(		
 				'title' => $teamLeft->getName() . ' vs ' . $teamRight->getName()
 			))
-			->setObject('teamLeft', $teamLeft)
-			->setObject('teamRight', $teamRight)
-			->setObject('division', $modelTennisDivision->getDataFirst())
-			->setObject('fixture', $modelTennisFixture->getDataFirst())
-			->setObject('fixtureResult', $modelTennisEncounter->getDataFirst())
-			->setObject('encounters', $encounters)
-			->setObject('players', $modelTennisPlayer->getData())
+			->setDataKey('teamLeft', $teamLeft)
+			->setDataKey('teamRight', $teamRight)
+			->setDataKey('division', $modelTennisDivision->getDataFirst())
+			->setDataKey('fixture', $modelTennisFixture->getDataFirst())
+			->setDataKey('fixtureResult', $modelTennisEncounter->getDataFirst())
+			->setDataKey('encounters', $encounters)
+			->setDataKey('players', $modelTennisPlayer->getData())
 			->getTemplate('fixture-single');
 	}
 }

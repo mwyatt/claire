@@ -51,8 +51,8 @@ exit;
 		// template
 		$this
 			->view
-			->setObject('fixtureResults', $fixtureResults)
-			->setObject('fixtures', $fixtures)
-			->setObject('teams', $teams);
+			->setDataKey('fixtureResults', $fixtureResults)
+			->setDataKey('fixtures', $fixtures)
+			->setDataKey('teams', $teams);
 	}
 }

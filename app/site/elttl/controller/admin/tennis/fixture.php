@@ -79,9 +79,9 @@ class Controller_Admin_Tennis_Fixture extends Controller_Admin
 		$modelTennisDivision = new model_tennis_Division($this);
 		$modelTennisDivision->read();
 		$this->view
-			->setObject('divisions', $modelTennisDivision->getData())
-			->setObject('fixtures', $modelTennisFixture->getData())
-			->setObject('teams', $modelTennisTeam->getData())
+			->setDataKey('divisions', $modelTennisDivision->getData())
+			->setDataKey('fixtures', $modelTennisFixture->getData())
+			->setDataKey('teams', $modelTennisTeam->getData())
 			->getTemplate('admin/tennis/fixture/list');
 	}
 
@@ -155,13 +155,13 @@ class Controller_Admin_Tennis_Fixture extends Controller_Admin
 
 		// template
 		$this->view
-			->setObject('isFilled', $isFilled)
-			->setObject('divisions', $modelTennisDivision)
-			->setObject('players', $modelTennisPlayer)
-			->setObject('encounters', $modelTennisEncounter)
-			->setObject('fixture', $fixture)
-			->setObject('encounterStructure', $modelTennisFixture->getEncounterStructure())
-			->setObject('teams', $modelTennisTeam)
+			->setDataKey('isFilled', $isFilled)
+			->setDataKey('divisions', $modelTennisDivision)
+			->setDataKey('players', $modelTennisPlayer)
+			->setDataKey('encounters', $modelTennisEncounter)
+			->setDataKey('fixture', $fixture)
+			->setDataKey('encounterStructure', $modelTennisFixture->getEncounterStructure())
+			->setDataKey('teams', $modelTennisTeam)
 			->getTemplate('admin/tennis/fixture/single');
 	}
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace OriginalAppName\Session\Admin;
+namespace OriginalAppName\Session;
 
 
 /**
@@ -10,6 +10,9 @@ namespace OriginalAppName\Session\Admin;
  */
 class Feedback extends \OriginalAppName\Session
 {
+
+
+	protected $scope = 'OriginalAppName\Session\Feedback';
 
 
 	/**

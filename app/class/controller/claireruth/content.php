@@ -52,7 +52,7 @@ class Controller_Content extends Controller_Index
 			->setMeta(array(		
 				'title' => $modelContent->getData('title')
 			))
-			->setObject('contents', $modelContent)
+			->setDataKey('contents', $modelContent)
 			->getTemplate('content-single');
 		return true;
 	}
@@ -86,11 +86,11 @@ class Controller_Content extends Controller_Index
 			->setMeta(array(		
 				'title' => 'All posts'
 			))
-			->setObject('pageCurrent', $pagination->getCurrentPage())
-			->setObject('pagination_summary', $pagination->getSummary())
-			->setObject('first_content', current($firstContent))
-			->setObject($pagination)
-			->setObject('contents', $modelContent)
+			->setDataKey('pageCurrent', $pagination->getCurrentPage())
+			->setDataKey('pagination_summary', $pagination->getSummary())
+			->setDataKey('first_content', current($firstContent))
+			->setDataKey($pagination)
+			->setDataKey('contents', $modelContent)
 			->getTemplate('content');
 		return true;
 	}

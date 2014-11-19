@@ -157,15 +157,15 @@ class Controller_Player extends Controller_Archive
 			->setMeta(array(		
 				'title' => 'Player ' . $player->getNameFull()
 			))
-			->setObject('division', $modelTennisDivision->getDataFirst())
-			->setObject('player', $player)
-			->setObject('players', $modelTennisPlayer->getData())
-			->setObject('team', $team)
-			->setObject('teams', $teams)
-			->setObject('acquaintances', $acquaintances)
-			->setObject('fixtures', $fixtures)
-			->setObject('fixtureResults', $fixtureResults)
-			->setObject('encounters', $personalEncounters->getData())
+			->setDataKey('division', $modelTennisDivision->getDataFirst())
+			->setDataKey('player', $player)
+			->setDataKey('players', $modelTennisPlayer->getData())
+			->setDataKey('team', $team)
+			->setDataKey('teams', $teams)
+			->setDataKey('acquaintances', $acquaintances)
+			->setDataKey('fixtures', $fixtures)
+			->setDataKey('fixtureResults', $fixtureResults)
+			->setDataKey('encounters', $personalEncounters->getData())
 			->getTemplate('player-single');
 	}
 
@@ -206,6 +206,6 @@ class Controller_Player extends Controller_Archive
 
 		// template
 		$this->view
-			->setObject('meritRows', $modelTennisEncounter->getData());
+			->setDataKey('meritRows', $modelTennisEncounter->getData());
 	}
 }

@@ -45,7 +45,7 @@ class Controller_Project extends Controller_Index
 			->setMeta(array(		
 				'title' => $project->name
 			))
-			->setObject('project', $project)
+			->setDataKey('project', $project)
 			->getTemplate('project-single');
 	}
 }

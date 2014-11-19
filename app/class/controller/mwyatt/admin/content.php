@@ -24,7 +24,7 @@ class Controller_Admin_Content extends Controller_Admin
 		$cache = new cache($this);
 
 		// get content status always
-		$this->view->setObject('content_status', $modelContent->getStatus());
+		$this->view->setDataKey('content_status', $modelContent->getStatus());
 
 		// any post or get event
 		if (
@@ -87,8 +87,8 @@ class Controller_Admin_Content extends Controller_Admin
 			'order_by' => 'time_published desc'
 		));
 		$this->view
-			->setObject('statuses', $statuses)
-			->setObject('contents', $content)
+			->setDataKey('statuses', $statuses)
+			->setDataKey('contents', $content)
 			->getTemplate('admin/content/list');
 	}
 
@@ -189,9 +189,9 @@ class Controller_Admin_Content extends Controller_Admin
 		// single
 		$content = $modelContent->getDataFirst();
 		$this->view
-			->setObject('contentDate', date('Y-m-d', $content->time_published))
-			->setObject('contentTime', date('G:i', $content->time_published))
-			->setObject('content', $content)
+			->setDataKey('contentDate', date('Y-m-d', $content->time_published))
+			->setDataKey('contentTime', date('G:i', $content->time_published))
+			->setDataKey('content', $content)
 			->getTemplate('admin/content/update');
 	}
 

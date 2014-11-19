@@ -1,6 +1,6 @@
 <?php
 
-namespace OriginalAppName\Site\Elttl\Controller;
+namespace OriginalAppName\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
 use OriginalAppName\Json;
@@ -23,9 +23,24 @@ class Front extends \OriginalAppName\Controller
 {
 
 
-	public function defaultSite()
+	public function __construct()
 	{
+		Parent::__construct();
+		$this->defaultGlobalSite();
+	}
 
 
+	/**
+	 * store default data in view
+	 * store default site date in view
+	 * @return null 
+	 */
+	public function defaultGlobalSite()
+	{
+		$className = '\\OriginalAppName\\Site\\' . ucfirst(SITE) . '\\Service\\Common';
+		$serviceCommon = new $className;
+		$this
+			->view
+			->mergeData($serviceCommon->read());
 	}
 }

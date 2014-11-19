@@ -27,7 +27,7 @@ class Controller_Admin_Ajax_Media extends Controller_Admin
 		$modelMedia = new model_media($this);
 		$modelMedia->read();
 		$this->view
-			->setObject('media', $modelMedia)
+			->setDataKey('media', $modelMedia)
 			->getTemplate('_media');
 	}
 

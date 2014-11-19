@@ -50,11 +50,11 @@ class Controller_Admin_Tennis_Team extends Controller_Admin
 
 		// template
 		$this->view
-			->setObject('weekdays', $modelTennisTeam->getWeekdays())
-			->setObject('teams', $modelTennisTeam->getData())
-			->setObject('divisions', $modelTennisDivision->getData())
-			->setObject('venues', $modelTennisVenue->getData())
-			->setObject('players', $modelTennisPlayer->getData())
+			->setDataKey('weekdays', $modelTennisTeam->getWeekdays())
+			->setDataKey('teams', $modelTennisTeam->getData())
+			->setDataKey('divisions', $modelTennisDivision->getData())
+			->setDataKey('venues', $modelTennisVenue->getData())
+			->setDataKey('players', $modelTennisPlayer->getData())
 			->getTemplate('admin/tennis/team/list');
 	}
 }

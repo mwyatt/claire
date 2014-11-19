@@ -14,7 +14,7 @@ use OriginalAppName\Site\Elttl;
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Result extends \OriginalAppName\Controller
+class Result extends \OriginalAppName\Controller\Front
 {
 
 
@@ -113,7 +113,7 @@ class Result extends \OriginalAppName\Controller
 			->setMeta(array(		
 				'title' => $division->getName() . ' division overview'
 			))
-			->setObject('division', $division)
+			->setDataKey('division', $division)
 			->getTemplate('division/overview');
 	}
 
@@ -161,10 +161,10 @@ class Result extends \OriginalAppName\Controller
 			->setMeta(array(		
 				'title' => $division->getName() . ' doubles merit'
 			))
-			->setObject('division', $division)
-			->setObject('tableName', 'doubles merit')
-			->setObject('teams', $modelTennisTeam->getData())
-			->setObject('leagueStats', $modelTennisFixture->getData())
+			->setDataKey('division', $division)
+			->setDataKey('tableName', 'doubles merit')
+			->setDataKey('teams', $modelTennisTeam->getData())
+			->setDataKey('leagueStats', $modelTennisFixture->getData())
 			->getTemplate('division/league');
 	}
 
@@ -219,10 +219,10 @@ class Result extends \OriginalAppName\Controller
 			->setMeta(array(		
 				'title' => $division->getName() . ' Merit'
 			))
-			->setObject('division', $division)
-			->setObject('teams', $modelTennisTeam->getData())
-			->setObject('players', $modelTennisPlayer->getData())
-			->setObject('meritStats', $modelTennisEncounter->getData())
+			->setDataKey('division', $division)
+			->setDataKey('teams', $modelTennisTeam->getData())
+			->setDataKey('players', $modelTennisPlayer->getData())
+			->setDataKey('meritStats', $modelTennisEncounter->getData())
 			->getTemplate('division/merit');
 	}
 
@@ -266,10 +266,10 @@ class Result extends \OriginalAppName\Controller
 			->setMeta(array(		
 				'title' => $division->getName() . ' League'
 			))
-			->setObject('division', $division)
-			->setObject('teams', $modelTennisTeam->getData())
-			->setObject('tableName', 'league')
-			->setObject('leagueStats', $modelTennisFixture->getData())
+			->setDataKey('division', $division)
+			->setDataKey('teams', $modelTennisTeam->getData())
+			->setDataKey('tableName', 'league')
+			->setDataKey('leagueStats', $modelTennisFixture->getData())
 			->getTemplate('division/league');
 	}
 

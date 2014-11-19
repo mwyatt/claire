@@ -25,7 +25,7 @@ class Controller_Search extends Controller_Index
 		$modelContent = new model_content($this);
 		$modelContent->readSearch($query);
 		$this->view
-			->setObject('result_count', count($modelContent->getData()));
+			->setDataKey('result_count', count($modelContent->getData()));
 
 		// paginate and set slice of data
 		$pagination = new pagination($this);
@@ -36,10 +36,10 @@ class Controller_Search extends Controller_Index
 		$modelContent->bindMeta('media');
 		$modelContent->bindMeta('tag');
 		$this->view
-			->setObject('query', $query)
-			->setObject('contents', $modelContent)
-			->setObject('pagination', $pagination)
-			->setObject('pagination_summary', $pagination->getSummary())
+			->setDataKey('query', $query)
+			->setDataKey('contents', $modelContent)
+			->setDataKey('pagination', $pagination)
+			->setDataKey('pagination_summary', $pagination->getSummary())
 			->getTemplate('search');
 	}
 }

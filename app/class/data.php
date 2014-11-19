@@ -24,23 +24,43 @@ class Data extends \OriginalAppName\System
 	 */
 	public function setData($value)
 	{		
-		return $this->data = $value;
+		$this->data = $value;
 	}
 
 
 	/**
-	 * get
-	 * @param  string $key [description]
-	 * @return [type]      [description]
+	 * set a specific data key
+	 * primary reason view needs to add / merge single keys
+	 * @param string $key   
+	 * @param any $value 
+	 */
+	public function setDataKey($key, $value)
+	{
+		$this->data[$key] = $value;
+		return $this;
+	}
+
+
+	/**
+	 * get all data
+	 * @param  string $key 
+	 * @return any      
 	 */
 	public function getData($key = '')
 	{		
+		$data = $this->data;
+
+		// specific key
+		if (isset($data[$key])) {
+			return $this->data[$key];
+		}
+
+		// key wanted, so pass nothing
 		if ($key) {
-			if (array_key_exists($key, $this->data)) {
-				return $this->data[$key];
-			}
 			return;
 		}
+
+		// all data
 		return $this->data;
 	}	
 

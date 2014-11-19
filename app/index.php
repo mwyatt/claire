@@ -12,7 +12,7 @@
  * boot session
  */
 session_start();
-
+ 
 
 /**
  * setup registry

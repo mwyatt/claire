@@ -31,7 +31,7 @@ class Controller_Admin_Tennis_Division extends Controller_Admin
 
 		// template
 		$this->view
-			->setObject('divisions', $modelTennisDivision->getData())
+			->setDataKey('divisions', $modelTennisDivision->getData())
 			->getTemplate('admin/tennis/division/list');
 	}
 }
