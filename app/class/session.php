@@ -72,7 +72,14 @@ class Session extends \OriginalAppName\Cron
 	public function setDataKey($key, $value)
 	{
 		$_SESSION[$this->getScope()][$key] = $value;
-		return $this->setData($_SESSION[$this->getScope()]);
+		return $this;
+	}
+
+
+	public function setData($value)
+	{
+		$_SESSION[$this->getScope()] = $value;
+		return $this;
 	}
 
 
@@ -81,14 +88,9 @@ class Session extends \OriginalAppName\Cron
 	 * @param  string $key 
 	 * @return any      
 	 */
-	public function getData($key = '')
+	public function getData()
 	{	
-		if (! $key) {
-			return $this->data;
-		}
-		if (array_key_exists($key, parent::getData())) {
-			return $this->data[$key];
-		}
+		return $_SESSION[$this->getScope()];
 	}	
 
 

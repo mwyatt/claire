@@ -2,6 +2,7 @@
 
 namespace OriginalAppName\Admin\Controller;
 
+use OriginalAppName\Model;
 use OriginalAppName\Session;
 use OriginalAppName\View;
 use OriginalAppName\Service;
@@ -20,6 +21,35 @@ class Index extends \OriginalAppName\Controller\Admin
 	public function admin($request)
 	{
 		$sessionUser = new Session\Admin\User;
+		$sessionFormfield = new Session\FormField;
+		$sessionFeedback = new Session\Feedback;
+
+		// login attempt
+		if (isset($_REQUEST['email'])) {
+			
+			// remember attempt
+			$sessionFormfield->add($_POST, [
+				'login_email'
+			]);
+
+			// read user
+			$modelUser = new Model\User;
+			$modelUser->readId([$_REQUEST['email']], 'email');
+			if (! $entityUser = current($modelUser->getData())) {
+				$sessionFeedback->set('incorrect username');
+				$sessionUser->delete();
+				$this->route('admin');
+			}
+
+			
+		}
+
+		// template
+		$this
+			->view
+			->setDataKey('sessionFormfield', $sessionFormfield->getData());
+
+		// test if logged in
 		if ($sessionUser->isLogged()) {
 			return $this->adminLoggedIn();
 		}
@@ -42,12 +72,9 @@ class Index extends \OriginalAppName\Controller\Admin
 		$sessionFeedback = new Session\Feedback;
 		$this
 			->view
-			->setDataKey('feedback', $sessionFeedback->get('message'));
+			->setDataKey('feedback', $sessionFeedback->pull('message'));
 		return new Response($this->view->getTemplate('admin\login'));
 	}
-
-
-
 
 
 	/**
@@ -60,22 +87,17 @@ class Index extends \OriginalAppName\Controller\Admin
 		$modelUser = new model_user($this);
 		$sessionAdminUser = new session_admin_user($this);
 		$sessionFeedback = new session_feedback($this);
-		$sessionFormfield = new session_formfield($this);
 		$sessionHistory = new session_history($this);
 		$this->view->setDataKey('user', false);
 
 
-		$this->view
-			->setDataKey($sessionFormfield);
+
 
 		// logging in
 		if (array_key_exists('login', $_POST)) {
 
 			// remember form field
-			$sessionFormfield->add($_POST, [
-				'login_email',
-				'login_password'
-			]);
+
 
 			// user exists
 			$modelUser->read(array('where' => array('email' => $_POST['login_email'])));
