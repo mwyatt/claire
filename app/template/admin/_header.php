@@ -13,7 +13,7 @@
     <link href="<?php echo $this->getUrlAsset('asset/admin-screen.css') ?>" media="screen, projection" rel="stylesheet" type="text/css" />
     <script>var urlBase = '<?php echo $this->getUrl() ?>';</script>
 </head>
-<body<?php echo ($this->getBodyClass() ? ' class="' . $this->getBodyClass() . '"' : '') ?> data-url-base="<?php echo $this->getUrl() ?>">
+<body>
 	<!--[if lt IE 7]>
 	    <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
 	<![endif]-->

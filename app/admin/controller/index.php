@@ -72,7 +72,10 @@ class Index extends \OriginalAppName\Controller\Admin
 		if (array_key_exists('login', $_POST)) {
 
 			// remember form field
-			$sessionFormfield->add($_POST, array('login_email', 'login_password'));
+			$sessionFormfield->add($_POST, [
+				'login_email',
+				'login_password'
+			]);
 
 			// user exists
 			$modelUser->read(array('where' => array('email' => $_POST['login_email'])));

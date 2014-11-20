@@ -24,6 +24,10 @@ module.exports = function(grunt) {
 		ext: '.css',
 	}];
 	var watchPaths = [
+		'app/sass/**',
+		'app/js/**',
+		'app/admin/sass/**',
+		'app/admin/js/**',
 		'app/site/<%= config.site %>/sass/**',
 		'app/site/<%= config.site %>/js/**',
 	];

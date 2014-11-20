@@ -1,4 +1,4 @@
-<?php if ($user): ?>
+<?php if (isset($user)): ?>
 
 			<footer class="main clearfix">
 				<p class="footer-site-title"><?php echo $option['site_title']->getValue() . ' ' . date('Y') ?></p>

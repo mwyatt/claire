@@ -59,10 +59,10 @@ $route = new OriginalAppName\Route();
  * cron
  * handle any post render processes
  */
-$cron = new cron($system);
-$cron->refresh(array(
-	'cron_email_newsletter'
-));
+// $cron = new cron($system);
+// $cron->refresh(array(
+// 	'cron_email_newsletter'
+// ));
 
 
 /**
