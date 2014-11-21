@@ -17,7 +17,6 @@ session_start();
 /**
  * setup registry
  */
-
 $registry = OriginalAppName\Registry::getInstance();
 $registry->set('system', new OriginalAppName\System);
 $registry->set('database', new OriginalAppName\Database(include SITE_PATH . 'credentials' . EXT));
@@ -38,7 +37,7 @@ $error
  * store each unique url
  */
 $sessionUrlHistory = new OriginalAppName\Session\UrlHistory;
-$sessionUrlHistory->add($system->url->getCache('current'));
+$sessionUrlHistory->append($registry->get('url')->getCache('current'));
 
 
 /**

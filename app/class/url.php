@@ -141,7 +141,7 @@ class Url
 	{
 		$protocol = $this->getProtocol();
 		$host = $this->getHost();
-		$query = '?' . $this->getQuery();
+		$query = $this->getQuery() ? '?' . $this->getQuery() : '';
 		$path = implode(US, $this->getPath()) . US;
 		$this->cache = array(
 			'base' => $protocol . $host,

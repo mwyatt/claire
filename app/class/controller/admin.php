@@ -51,6 +51,11 @@ class Admin extends \OriginalAppName\Controller
 			$this->readMenu();
 			$this->readUser();
 		}
+
+		// users love feedback
+		$this
+			->view
+			->setDataKey('feedback', $sessionFeedback->pull('message'));
 	}
 
 

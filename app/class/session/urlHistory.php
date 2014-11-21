@@ -12,12 +12,15 @@ class UrlHistory extends \OriginalAppName\Session
 {
 
 
+	protected $scope = 'OriginalAppName\Session\UrlHistory';
+
+
 	/**
 	 * gets the last but not the latest val
 	 * @return string url
 	 */
-	public function getLast() {
-		$currentHistory = $this->getData('common');
+	public function getLatest() {
+		$currentHistory = $this->getData();
 		end($currentHistory);
 		return prev($currentHistory);
 	}
@@ -27,15 +30,15 @@ class UrlHistory extends \OriginalAppName\Session
 	 * adds to the session array to keep a record of your request history
 	 * @todo should $this->data be array() as default?
 	 */
-	public function add($url)
+	public function append($url)
 	{
 		if (! $this->validate($url)) {
 			return;
 		}
 
 		// first one
-		if (! $currentHistory = $this->getData('common')) {
-			$currentHistory = array();
+		if (! $currentHistory = $this->getData()) {
+			$currentHistory = [];
 		}
 
 		// check that the record does not breach 20
@@ -50,19 +53,7 @@ class UrlHistory extends \OriginalAppName\Session
 
 		// adds to the array
 		$currentHistory[] = $url;
-		return $this->setDataKey('common', $currentHistory);
-	}
-
-
-	public function setCaptureUrl($url)
-	{
-		return $this->setDataKey('capture_url', $url);
-	}
-
-
-	public function getCaptureUrl()
-	{
-		return $this->getData('capture_url');
+		return $this->setData($currentHistory);
 	}
 
 

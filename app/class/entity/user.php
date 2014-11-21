@@ -199,4 +199,10 @@ class User extends \OriginalAppName\Entity
 	    $url .= '?' . http_build_query($query);
 	    return $url;
 	}
+
+
+	public function getNameFull()
+	{
+		return implode(' ', [$this->getNameFirst(), $this->getNameLast()]);
+	}
 }
