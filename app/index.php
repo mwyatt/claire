@@ -37,8 +37,8 @@ $error
 /**
  * store each unique url
  */
-// $sessionHistory = new session_history($system);
-// $sessionHistory->add($system->url->getCache('current'));
+$sessionUrlHistory = new OriginalAppName\Session\UrlHistory;
+$sessionUrlHistory->add($system->url->getCache('current'));
 
 
 /**

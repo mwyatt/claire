@@ -21,37 +21,27 @@ class Index extends \OriginalAppName\Controller\Admin
 	public function admin($request)
 	{
 		$sessionUser = new Session\Admin\User;
-		$sessionFormfield = new Session\FormField;
+		$sessionForm = new Session\Form;
 		$sessionFeedback = new Session\Feedback;
 
 		// login attempt
-		if (isset($_REQUEST['email'])) {
+		if (isset($_REQUEST['email']) && isset($_REQUEST['password'])) {
 			
-			// remember attempt
-			$sessionFormfield->add($_POST, [
-				'login_email'
+			// store attempt
+			$sessionForm->set('admin\login', [
+				'email' => $_REQUEST['email']
 			]);
 
-			// read user
-			$modelUser = new Model\User;
-			$modelUser->readId([$_REQUEST['email']], 'email');
-			if (! $entityUser = current($modelUser->getData())) {
-				$sessionFeedback->setMessage('incorrect username');
-				$sessionUser->delete();
-				$this->route('admin');
-			}
-
-			
+			// attempt login
+			$serviceUser = \OriginalAppName\Admin\Serivce\User;
+			$serviceUser->login($_REQUEST['email'], $_REQUEST['password']);
+			$this->route(sessiohistory last stored url);
 		}
-echo '<pre>';
-print_r($_SESSION);
-echo '</pre>';
-exit;
 
 		// template
 		$this
 			->view
-			->setDataKey('sessionFormfield', $sessionFormfield->getData());
+			->setDataKey('sessionForm', $sessionForm->getData());
 
 		// test if logged in
 		if ($sessionUser->isLogged()) {
