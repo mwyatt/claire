@@ -39,6 +39,14 @@ class Controller
 
 
 	/**
+	 * @return object 
+	 */
+	public function getUrl() {
+	    return $this->url;
+	}
+	
+
+	/**
 	 * needs to be loaded for all controllers
 	 * front, admin and ajax or any others
 	 * @return null 

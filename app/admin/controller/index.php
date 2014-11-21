@@ -36,13 +36,17 @@ class Index extends \OriginalAppName\Controller\Admin
 			$modelUser = new Model\User;
 			$modelUser->readId([$_REQUEST['email']], 'email');
 			if (! $entityUser = current($modelUser->getData())) {
-				$sessionFeedback->set('incorrect username');
+				$sessionFeedback->setMessage('incorrect username');
 				$sessionUser->delete();
 				$this->route('admin');
 			}
 
 			
 		}
+echo '<pre>';
+print_r($_SESSION);
+echo '</pre>';
+exit;
 
 		// template
 		$this
