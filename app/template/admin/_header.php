@@ -11,7 +11,8 @@
 	<meta name="description" content="<?php echo $metaDescription ?>">
 	<meta name="viewport" content="width=device-width">
     <link href="<?php echo $this->getUrlAsset('asset/admin-screen.css') ?>" media="screen, projection" rel="stylesheet" type="text/css" />
-    <script>var urlBase = '<?php echo $this->getUrl() ?>';</script>
+    <script type="text/javascript">var urlBase = '<?php echo $this->getUrl() ?>';</script>
+    <script type="text/javascript">var feedback = </script>
 </head>
 <body>
 	<!--[if lt IE 7]>
@@ -31,10 +32,6 @@
 	<?php require_once($this->getTemplatePath('admin/header/_nav')) ?>
 
 			</div>
-			
-	<?php $feedback = $sessionFeedback ?>
-	<?php require_once($this->getTemplatePath('_feedback')) ?>
-
 		</div>
 	</header>
 

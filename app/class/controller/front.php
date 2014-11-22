@@ -25,7 +25,7 @@ class Front extends \OriginalAppName\Controller
 
 	public function __construct()
 	{
-		Parent::__construct();
+		parent::__construct();
 		$this->defaultGlobalSite();
 	}
 

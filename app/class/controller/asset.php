@@ -31,6 +31,7 @@ class Asset extends \OriginalAppName\Controller
 
 	public $types = [
 		'pdf' => 'application/pdf',
+		'svg' => 'image/svg+xml',
 		'css' => 'text/css',
 		'txt' => 'text/plain',
 		'gif' => 'image/gif',
@@ -134,11 +135,11 @@ class Asset extends \OriginalAppName\Controller
 
 	public function getPathSite($append = '')
 	{
-		return BASE_PATH . 'site' . DS . SITE . DS . 'asset' . DS . $append;
+		return BASE_PATH . 'app' . DS . 'site' . DS . SITE . DS . 'asset' . DS . $append;
 	}
 
 
-	public function read($request)
+	public function assetSingle($request)
 	{
 		$pathRequest = '';
 		if (isset($request['path'])) {
@@ -161,6 +162,7 @@ class Asset extends \OriginalAppName\Controller
 	public function render()
 	{
 		$path = $this->getPath();
+		
 		$pathInfo = pathinfo($path);
 		$this->setBaseName($pathInfo['basename']);
 		$this->setFileName($pathInfo['filename']);

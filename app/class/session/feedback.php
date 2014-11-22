@@ -22,9 +22,8 @@ class Feedback extends \OriginalAppName\Session
 	 */
 	public function setMessage($message, $positivity = 'positive')
 	{
-		$this->set('message', [
-			'message' => ucfirst($message) . '.'
-			, 'positivity' => $positivity
-		]);
+		$this
+			->set('message', ucfirst($message) . '.')
+			->set('positivity', $positivity);
 	}
 }

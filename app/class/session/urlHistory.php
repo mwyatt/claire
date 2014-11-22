@@ -15,6 +15,12 @@ class UrlHistory extends \OriginalAppName\Session
 	protected $scope = 'OriginalAppName\Session\UrlHistory';
 
 
+	protected $invalidWords = [
+		'ajax',
+		'asset'
+	];
+
+
 	/**
 	 * gets the last but not the latest val
 	 * @return string url
@@ -65,12 +71,28 @@ class UrlHistory extends \OriginalAppName\Session
 	 */
 	public function validate($url)
 	{
-		$invalidThings = array('ajax');
-		foreach ($invalidThings as $invalidThing) {
-			if (strpos($url, $invalidThing) !== false) {
+		foreach ($this->getInvalidWords() as $invalidWord) {
+			if (strpos($url, $invalidWord) !== false) {
 				return false;
 			}
 		}
 		return true;
+	}
+
+
+	/**
+	 * @return array 
+	 */
+	public function getInvalidWords() {
+	    return $this->invalidWords;
+	}
+	
+	
+	/**
+	 * @param array $invalidWords 
+	 */
+	public function setInvalidWords($invalidWords) {
+	    $this->invalidWords = $invalidWords;
+	    return $this;
 	}
 }

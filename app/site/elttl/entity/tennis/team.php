@@ -23,6 +23,9 @@ class Team extends \OriginalAppName\Site\Elttl\Entity\Tennis\Archive
 	
 	private $name;
 
+
+	private $slug;
+
 	
 	private $homeWeekday;
 
@@ -57,6 +60,23 @@ class Team extends \OriginalAppName\Site\Elttl\Entity\Tennis\Archive
 	 */
 	public function setName($name) {
 	    $this->name = $name;
+	    return $this;
+	}
+
+
+	/**
+	 * @return string 
+	 */
+	public function getSlug() {
+	    return $this->slug;
+	}
+	
+	
+	/**
+	 * @param string $slug 
+	 */
+	public function setSlug($slug) {
+	    $this->slug = $slug;
 	    return $this;
 	}
 

@@ -103,4 +103,13 @@ class Controller
 		// prevent continuation
 		exit;
 	}
+
+
+	public function routeAbsolute($url)
+	{
+		header('location:' . $url);
+
+		// prevent continuation
+		exit;
+	}
 }

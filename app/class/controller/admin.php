@@ -42,7 +42,7 @@ class Admin extends \OriginalAppName\Controller
 		// logout
 		if (array_key_exists('logout', $_REQUEST) && $sessionUser->isLogged()) {
 			$sessionUser->delete();
-			$sessionFeedback->set('successfully logged out');
+			$sessionFeedback->setMessage('successfully logged out');
 			$this->route('admin');
 		}
 
@@ -52,7 +52,7 @@ class Admin extends \OriginalAppName\Controller
 			$this->readUser();
 		}
 
-		// users love feedback
+		// users love feedback, all the time!
 		$this
 			->view
 			->setDataKey('feedback', $sessionFeedback->pull('message'));

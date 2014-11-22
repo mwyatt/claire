@@ -174,7 +174,9 @@ class View extends \OriginalAppName\Data
 	
 
 	public function getUrlMedia($append = '') {
-		return $this->url->getCache('media') . $append;
+		$registry = \OriginalAppName\Registry::getInstance();
+		$generator = $registry->get('urlGenerator');
+		return $generator->generate('assetSingle', ['path' => $append], true);
 	}
 	
 
