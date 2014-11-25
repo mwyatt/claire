@@ -161,8 +161,8 @@ class Asset extends \OriginalAppName\Controller
 
 	public function render()
 	{
-		$path = $this->getPath();
 		
+		$path = $this->getPath();
 		$pathInfo = pathinfo($path);
 		$this->setBaseName($pathInfo['basename']);
 		$this->setFileName($pathInfo['filename']);
@@ -184,7 +184,7 @@ class Asset extends \OriginalAppName\Controller
 	{
 		$extension = $this->getExtension();
 		$types = $this->getTypes();
-		if (in_array($extension, $types)) {
+		if (isset($types[$extension])) {
 			return $types[$extension];
 		}
 	}

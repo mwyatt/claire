@@ -45,8 +45,11 @@ abstract class Model extends \OriginalAppName\Data
 	 */
 	public function __construct() {
 		$registry = \OriginalAppName\Registry::getInstance();
+
+		// if not in registry connect + create
 		if (! $database = $registry->get('database')) {
-			throw new Exception('OriginalAppName\\Model::__construct, missing dependency database');
+			$database = new \OriginalAppName\Database(include SITE_PATH . 'credentials' . EXT);
+			$registry->set('database', $database);
 		}
 		$this->setDatabase($database);
 	}

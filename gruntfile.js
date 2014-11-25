@@ -97,7 +97,7 @@ module.exports = function(grunt) {
 			local: {
 				files: sassFiles,
 				options: {
-					imagePath: '../media',
+					imagePath: '../asset',
 					loadPath: 'sass/',
 					sourceComments: 'normal',
 					outputStyle: 'nested',
@@ -106,7 +106,7 @@ module.exports = function(grunt) {
 			remote: {
 				files: sassFiles,
 				options: {
-					imagePath: '../media',
+					imagePath: '../asset',
 					loadPath: 'sass/',
 					sourceComments: 'none',
 					outputStyle: 'compressed',

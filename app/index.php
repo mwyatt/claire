@@ -19,7 +19,6 @@ session_start();
  */
 $registry = OriginalAppName\Registry::getInstance();
 $registry->set('system', new OriginalAppName\System);
-$registry->set('database', new OriginalAppName\Database(include SITE_PATH . 'credentials' . EXT));
 $registry->set('url', new OriginalAppName\Url);
 
 
@@ -43,7 +42,7 @@ $sessionUrlHistory->append($registry->get('url')->getCache('current'));
 /**
  * unit tests
  */
-$test = new OriginalAppName\Test($system);
+// $test = new OriginalAppName\Test($system);
 // $test->genpassword();
 
 
