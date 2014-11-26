@@ -79,6 +79,27 @@ class View extends \OriginalAppName\Data
 	}
 
 
+	public function getTemplateMustache($templatePath)
+	{
+		
+		// data
+		$data = $this->getData();
+
+		// boot engine
+		$mustacheEngine = new Mustache_Engine([
+		    'loader' => new Mustache_Loader_FilesystemLoader(BASE_PATH . 'newsletter' . DS . '24-11-2014' . DS . 'template')
+			// 'partials_loader' => new Mustache_Loader_FilesystemLoader(dirname(__FILE__).'/views/partials'),
+		]);
+		return $mustacheEngine->render($templatePath, $data);
+
+		$m = new Mustache_Engine(array(
+			'loader'          => new Mustache_Loader_FilesystemLoader(dirname(__FILE__).'/views'),
+			'partials_loader' => new Mustache_Loader_FilesystemLoader(dirname(__FILE__).'/views/partials'),
+		));
+
+	}
+
+
 	/**
 	 * gets template from site specific
 	 * falls back to path from main template dir

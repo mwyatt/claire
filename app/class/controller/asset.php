@@ -2,8 +2,6 @@
 
 namespace OriginalAppName\Controller;
 
-use OriginalAppName\View;
-use OriginalAppName\Service;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 
@@ -168,7 +166,15 @@ class Asset extends \OriginalAppName\Controller
 		$this->setFileName($pathInfo['filename']);
 		$this->setExtension($pathInfo['extension']);
 		$this->setHeaders();
-		return file_get_contents($path);
+
+		// start output buffer
+		// return file output
+		// improved speed as file_get_contents too slow
+		ob_start();
+		readfile($path);
+		$content = ob_get_contents();
+		ob_end_clean();
+		return $content;
 	}
 
 
