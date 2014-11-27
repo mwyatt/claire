@@ -4,7 +4,6 @@
  * choose a grid width, the number of columns and the margin between columns.
  * the result of the following equation has to be an integer, not a fraction:
  * (width - (columns - 1) * col_margin) / columns = n
- * reformatted by Martin Wyatt
  * @author  http://bjorkoy.com/2010/05/css-grids-with-sass/
  */
 
@@ -13,35 +12,35 @@
  * total with of page
  * @type {%}
  */
-$grid-width: 100%;
+$gridWidth: 100%;
 
 
 /**
  * number of columns
  * @type {Number}
  */
-$grid-total-columns: 12;
+$gridTotalColumns: 12;
 
 
 /**
  * margin between columns
  * @type {%}
  */
-$grid-col-margin: 4%;
+$gridColMargin: 5%;
 
 
 /**
  * maths
  * @type {int}
  */
-$grid-col-width: ($grid-width - ($grid-col-margin * ($grid-total-columns - 1))) / $grid-total-columns;
+$gridColWidth: ($gridWidth - ($gridColMargin * ($gridTotalColumns - 1))) / $gridTotalColumns;
 
 
 /**
  * maths
  * @type {int}
  */
-$grid-col-total-width: $grid-col-width + $grid-col-margin;  
+$gridColTotalWidth: $gridColWidth + $gridColMargin;  
 
 
 /**
@@ -49,7 +48,7 @@ $grid-col-total-width: $grid-col-width + $grid-col-margin;
  */
 @mixin row() {
 	float: left;
-	width: $grid-width;
+	width: $gridWidth;
 	@include clearfix;
 }
 
@@ -69,11 +68,11 @@ $grid-col-total-width: $grid-col-width + $grid-col-margin;
  * @type {int}
  */
 @mixin span($n: 1) {
-	width: ($n * $grid-col-width) + (($n - 1) * $grid-col-margin);
-	@if $n == $grid-total-columns {
+	width: ($n * $gridColWidth) + (($n - 1) * $gridColMargin);
+	@if $n == $gridTotalColumns {
 		margin-right: 0;
 	} @else {
-		margin-right: $grid-col-margin;
+		margin-right: $gridColMargin;
 	}
 }
 
@@ -91,7 +90,7 @@ $grid-col-total-width: $grid-col-width + $grid-col-margin;
  * @type {int}
  */
 @mixin prepend($n: 1) {
-	margin-left: $grid-col-total-width * $n
+	margin-left: $gridColTotalWidth * $n
 }
 
 
@@ -100,5 +99,5 @@ $grid-col-total-width: $grid-col-width + $grid-col-margin;
  * @type {int}
  */
 @mixin append($n: 1) {
-	margin-right: $grid-col-total-width * $n + $grid-col-margin
+	margin-right: $gridColTotalWidth * $n + $gridColMargin
 }
