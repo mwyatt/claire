@@ -2,8 +2,11 @@
 
 namespace OriginalAppName\Site\Mwyatt\Service;
 
-use OriginalAppName\Json;
 use OriginalAppName\Google\Analytics;
+use OriginalAppName\Json;
+use OriginalAppName\Model;
+use OriginalAppName\Menu;
+
 
 /**
  * services group up controller commands
@@ -15,35 +18,18 @@ class Common extends \OriginalAppName\Service
 
 	public function read()
 	{
-		
+
 		// menu primary
-		$json = new Json();
-		$json->read('menu-primary');
-		$menuPrimary = $json->getData();
-
-		// menu Secondary
-		$json = new Json();
-		$json->read('menu-secondary');
-		$menuSecondary = $json->getData();
-
-		// menu Tertiary
-		$json = new Json();
-		$json->read('menu-tertiary');
-		$menuTertiary = $json->getData();
-
-		// divisions
-		$modelTennisDivision = new ModelTennis\Division();
-		$modelTennisDivision->read();
+		$modelMenu = new Model\Menu;
+		$modelMenu->readColumn('keyGroup', 'primary');
+		$menu = new Menu;
+		$menu->buildTree($modelMenu->getData());
 
 		// template
 		return [
 			'googleAnalyticsTrackingId' => 'UA-35261063-1',
-			'year' => 0,
-			'divisions' => $modelTennisDivision->getData(),
-			'menuPrimary' => $menuPrimary,
-			'menuSecondary' => $menuSecondary,
-			'campaign' => new Analytics\Campaign(),
-			'menuTertiary' => $menuTertiary
+			'menuPrimary' => $menu->getData(),
+			'campaign' => new Analytics\Campaign
 		];
 	}
 }

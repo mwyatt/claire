@@ -122,6 +122,32 @@ abstract class Model extends \OriginalAppName\Data
 
 
 	/**
+	 * reads where column == value
+	 * @param  string $column table column
+	 * @param  any $value  to match
+	 * @return object         
+	 */
+	public function readColumn($column, $value)
+	{
+
+		// query
+		$sth = $this->database->dbh->prepare("
+			{$this->getSqlSelect()}
+            where {$column} = :value
+		");
+
+		// mode
+		$sth->setFetchMode(\PDO::FETCH_CLASS, $this->getEntity());
+	    $this->bindValue($sth, ':value', $value);
+		$sth->execute();
+		$this->setData($sth->fetchAll());
+
+		// instance
+		return $this;
+	}
+
+
+	/**
 	 * @param  array $entities 
 	 * @return array 	of insert ids
 	 */
@@ -610,13 +636,13 @@ abstract class Model extends \OriginalAppName\Data
 	public function bindValue($sth, $key, $value)
 	{
 		if (is_int($value)) {
-		    $sth->bindValue($key, $value, PDO::PARAM_INT);
+		    $sth->bindValue($key, $value, \PDO::PARAM_INT);
 		} elseif (is_bool($value)) {
-		    $sth->bindValue($key, $value, PDO::PARAM_BOOL);
+		    $sth->bindValue($key, $value, \PDO::PARAM_BOOL);
 		} elseif (is_null($value)) {
-		    $sth->bindValue($key, $value, PDO::PARAM_NULL);
+		    $sth->bindValue($key, $value, \PDO::PARAM_NULL);
 		} elseif (is_string($value)) {
-		    $sth->bindValue($key, $value, PDO::PARAM_STR);
+		    $sth->bindValue($key, $value, \PDO::PARAM_STR);
 		}
 	}
 

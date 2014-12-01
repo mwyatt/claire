@@ -44,7 +44,7 @@ class Menu extends \OriginalAppName\View
      */
     public function buildTree($categories)
     {
-        $this->setData($this->recurse($categories, 0, 1));
+        $this->setData($this->recurse(['categories' => $categories]));
         return $this;
     }
 
@@ -61,7 +61,7 @@ class Menu extends \OriginalAppName\View
 
     /**
      * iterates through category list generates html output
-     * @param  array $config categories, parentId and level
+     * @param  array $config categories, idParent and level
      * @return string         
      */
     public function recurse($config)
@@ -73,8 +73,16 @@ class Menu extends \OriginalAppName\View
         $element = $this->getElement();
         $elementClose = '</' . $element . '>';
 
+        // default values
+        if (! isset($config['idParent'])) {
+            $config['idParent'] = 0;
+        }
+        if (! isset($config['level'])) {
+            $config['level'] = 1;
+        }
+
         // not root levels
-        if ($config['parentId']) {
+        if ($config['idParent']) {
             $output = '<' . $element . ' class="menu' . $classPartLabel . '-level-' . $config['level'] . ' js-menu' . $classPartLabel . '-level-' . $config['level'] . '">';
         }
 
@@ -82,28 +90,28 @@ class Menu extends \OriginalAppName\View
         foreach ($config['categories'] as $category) {
 
             // must have a positive parent
-            if ($category->parent != $config['parentId']) {
+            if ($category->getIdParent() != $config['idParent']) {
                 continue;
             }
 
             // children?
             $hasChildren = $this->hasChild([
-                $config['categories'],
-                $category->id
+                'categories' => $config['categories'],
+                'categoryId' => $category->getId()
             ]);
 
             // single menu item
             if ($hasChildren) {
                 $output .= '<' . $element . ' class="menu' . $classPartLabel . '-level-' . $config['level'] . ' js-menu' . $classPartLabel . '-level-' . $config['level'] . '">';
             }
-            $output .= '<a href="' . $category->url . '" class="menu' . $classPartLabel . '-level-' . $config['level'] . '-link">' . $category->name . '</a>';
+            $output .= '<a href="' . $category->getUrl() . '" class="menu' . $classPartLabel . '-level-' . $config['level'] . '-link">' . $category->getName() . '</a>';
 
             // recurse to children
             if ($hasChildren) {
                 $output .= $this->recurse([
-                    $config['categories'],
-                    $category->id,
-                    $config['level'] + 1
+                    'categories' => $config['categories'],
+                    'idParent' => $category->getId(),
+                    'level' => $config['level'] + 1
                 ]);
             }
             if ($hasChildren) {
@@ -112,7 +120,7 @@ class Menu extends \OriginalAppName\View
         }
 
         // not root levels
-        if ($config['parentId']) {
+        if ($config['idParent']) {
             $output .= $elementClose;
         }
 
@@ -124,7 +132,7 @@ class Menu extends \OriginalAppName\View
     /**
      * looks for child in category list, to avoid empty uls
      * @param  array  $categories 
-     * @param  integer  $parentId   
+     * @param  integer  $idParent   
      * @return boolean|null             if found true
      */
     public function hasChild($config)
@@ -133,7 +141,7 @@ class Menu extends \OriginalAppName\View
             return;
         }
         foreach ($config['categories'] as $category) {
-            if ($category->parent == $config['categoryId']) {
+            if ($category->getIdParent() == $config['categoryId']) {
                 return true;
             }
         }
