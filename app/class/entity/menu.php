@@ -1,5 +1,20 @@
 <?php
 
+/*
+
+always insert this so you can update table with the correct definition
+
+CREATE TABLE store_promotion (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR(255) NOT NULL DEFAULT '' COMMENT 'ties into a products id',
+	`content` VARCHAR(255) NOT NULL DEFAULT '' COMMENT 'ties into a specific bundle',
+	`product_id` INT(11) NOT NULL DEFAULT '0' COMMENT 'e.g. free speaker cable with this thing!',
+	`bundle_id` INT(11) NOT NULL DEFAULT '0' COMMENT 'e.g. this is a great speaker cable!',
+	`time_start` INT(11) NOT NULL DEFAULT '0',
+	`time_end` INT(11) NOT NULL DEFAULT '0'
+)
+ */
+
 namespace OriginalAppName\Entity;
 
 
