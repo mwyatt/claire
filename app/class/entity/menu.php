@@ -1,9 +1,6 @@
 <?php
 
 /*
-
-always insert this so you can update table with the correct definition
-
 CREATE TABLE store_promotion (
 	`id` INT(11) NOT NULL AUTO_INCREMENT,
 	`name` VARCHAR(255) NOT NULL DEFAULT '' COMMENT 'ties into a products id',
@@ -13,7 +10,7 @@ CREATE TABLE store_promotion (
 	`time_start` INT(11) NOT NULL DEFAULT '0',
 	`time_end` INT(11) NOT NULL DEFAULT '0'
 )
- */
+*/
 
 namespace OriginalAppName\Entity;
 
