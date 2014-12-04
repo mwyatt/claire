@@ -116,6 +116,7 @@ class View extends \OriginalAppName\Data
 		if (file_exists($path)) {
 			return $path;
 		}
+		return $path . ' - template not found';
 	}
 
 

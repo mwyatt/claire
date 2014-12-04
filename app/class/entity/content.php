@@ -45,6 +45,7 @@ class Content extends \OriginalAppName\Entity
 	 * @var array
 	 */
 	private $typePossible = array(
+		'project',
 		'post',
 		'page'
 	);

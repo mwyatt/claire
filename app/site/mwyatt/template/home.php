@@ -3,20 +3,21 @@
 <div class="page home js-page-home">
 
 <?php if (isset($projects)): ?>
-	
-<?php endif ?>
-<?php if (isset($contents)): ?>
 
-		<div class="home-press">
-			<h1 class="home-press-heading">
-				<a href="<?php echo $this->getUrl() ?>press/" class="home-button-all-posts">View all</a>
-				<span class="home-press-heading-text">Press releases</span>
-			</h1>
-		
-	<?php include $this->getTemplatePath('_contents') ?>
+	<div class="panel projects">
 
-		</div>
-		
+	<?php foreach ($projects as $project): ?>
+
+		<a href="<?php echo $this->getUrl() ?>project/<?php echo $project->getSlug() ?>/" class="project is-<?php echo $project->getSlug() ?>">
+			<span class="project-name"><?php echo $project->getName() ?></span>
+			<span class="project-logo"><?php echo $project->getLogo() ?></span>
+			<span class="project-description-short"><?php echo $project->getDescriptionShort() ?></span>
+		</a>
+
+	<?php endforeach ?>
+
+	</div>
+
 <?php endif ?>
 
 </div>

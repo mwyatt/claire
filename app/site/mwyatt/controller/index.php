@@ -1,10 +1,9 @@
 <?php
 
-namespace OriginalAppName\Site\Elttl\Controller;
+namespace OriginalAppName\Site\Mwyatt\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
 use OriginalAppName\Json;
-use OriginalAppName\Site\Elttl\Model\Tennis\Division;
 use OriginalAppName\Google\Analytics\Campaign;
 use OriginalAppName\Model;
 use OriginalAppName\View;
@@ -26,21 +25,14 @@ class Index extends \OriginalAppName\Controller\Front
 
 	public function home($request) {
 
-		// 3 content
-		$modelContent = new Model\Content();
-		$modelContent
-			->readType('press')
-			->filterStatus('visible')
-			->orderByProperty('timePublished', 'desc')
-			->limitData([0, 3]);
-
+		// all projects
+		$modelProject = new Model\Project();
+		$modelProject->read();
 
 		// template
 		$this->view->mergeData([
-			'ads' => $ads,
-			'covers' => $covers,
-			'galleryPaths' => $files,
-			'contents' => $modelContent->getData()
+			'templateName' => 'home',
+			'projects' => $modelProject->getData()
 		]);
 		return new Response($this->view->getTemplate('home'));
 	}

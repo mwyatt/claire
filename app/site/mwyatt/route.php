@@ -2,5 +2,5 @@
 
 $routes->add('home', new Symfony\Component\Routing\Route(
 	'/',
-	['controller' => 'OriginalAppName\\Site\\Elttl\\Controller\\Index']
+	['controller' => 'OriginalAppName\\Site\\Mwyatt\\Controller\\Index']
 ));
