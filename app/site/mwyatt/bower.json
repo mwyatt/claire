@@ -1,0 +1,13 @@
+{
+	"name": "mwyatt",
+	"version": "0.0.1",
+	"dependencies": {
+		"bourbon": "3.1.8",
+		"jquery": "1.11.1",
+		"modernizr": "2.8.3",
+		"normalize-scss": "3.0.1",
+		"requirejs": "2.1.14",
+		"animate.scss": "latest"
+	},
+	"private": true
+}

@@ -15,7 +15,7 @@
 @import "sass/vendor/normalize/normalize";
 @import "sass/vendor/bourbon/bourbon";
 @import "sass/vendor/animate/animate";
-@import "sass/grid";
+@import "../../../../sass/grid";
 
 
 /**
@@ -28,8 +28,8 @@
  * variables and mixins
  */
 @import "palette";
-@import "mixin";
-@import "keyframes";
+@import "../../../../sass/mixin";
+// @import "keyframes";
 
 
 /**
