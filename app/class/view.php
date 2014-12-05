@@ -51,7 +51,7 @@ class View extends \OriginalAppName\Data
 		extract($this->getData());
 
 		// debugging
-		if ($this->isDebug($this)) {
+		if (isset($_REQUEST['view'])) {
 			echo '<pre>';
 			print_r($this->getData());
 			echo '</pre>';
@@ -138,7 +138,7 @@ class View extends \OriginalAppName\Data
 	 */
 	public function getUrlAsset($url)
 	{
-		return $this->url->getCache('base') . $url . $this->getAssetVersion();
+		return $this->url->getCache('base') . 'asset' . US . $url . $this->getAssetVersion();
 	}
 
 

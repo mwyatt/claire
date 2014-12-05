@@ -86,7 +86,7 @@ module.exports = function(grunt) {
 						expand: true,
 						cwd: 'vendor/bower/modernizr',
 						src: 'modernizr.js',
-						dest: 'asset',
+						dest: 'asset/vendor',
 					},
 				]
 			}
@@ -117,12 +117,14 @@ module.exports = function(grunt) {
 					separator: ';',
 				},
 				src: [
+					'js/vendor/**',
+					'js/**',
+					'../../../js/jquery.button-to-top.js',
 					'../../../js/jquery.form.js',
 					'../../../js/jquery.function.js',
 					'../../../js/jquery.search.js',
 					'../../../js/jquery.spinner.js',
 					'../../../js/jquery.system.js',
-					'js/*'
 				],
 				dest: 'asset/main.js',
 			}

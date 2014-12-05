@@ -16,36 +16,35 @@ class Content extends \OriginalAppName\Entity
 	 * main title for the content
 	 * @var string
 	 */
-	private $title;
+	protected $title;
 
 
 	/**
 	 * foo-bar seperated title, for url
 	 * @var string
 	 */
-	private $slug;
+	protected $slug;
 
 
 	/**
 	 * raw html code for the body of the content
 	 * @var string
 	 */
-	private $html;
+	protected $html;
 
 	
 	/**
 	 * the type of content
 	 * @var string
 	 */
-	private $type;
+	protected $type;
 
 
 	/**
 	 * possible type options
 	 * @var array
 	 */
-	private $typePossible = array(
-		'project',
+	protected $typePossible = array(
 		'post',
 		'page'
 	);
@@ -55,21 +54,21 @@ class Content extends \OriginalAppName\Entity
 	 * epoch time of when the content was created
 	 * @var int
 	 */
-	private $timePublished;
+	protected $timePublished;
 
 	
 	/**
 	 * status of the content
 	 * @var string
 	 */
-	private $status;
+	protected $status;
 	
 
 	/**
 	 * possible status options
 	 * @var array
 	 */
-	private $statusPossible = array(
+	protected $statusPossible = array(
 		'visible',
 		'draft',
 		'hidden'
@@ -80,7 +79,7 @@ class Content extends \OriginalAppName\Entity
 	 * the id of the user which created this content
 	 * @var int
 	 */
-	private $userId;
+	protected $userId;
 
 
 	/**

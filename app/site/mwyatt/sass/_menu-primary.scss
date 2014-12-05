@@ -1,0 +1,7 @@
+.menu-primary {
+	display: none;
+}
+
+.menu-primary-is-active .menu-primary {
+	display: block;
+}

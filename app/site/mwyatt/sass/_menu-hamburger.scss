@@ -8,7 +8,7 @@
     margin: 18px 15px;
     padding: 9px 0;
 
-    .middle,
+    .menu-hamburger-meat,
     &:before,
     &:after {
         @include transition(all 300ms ease);
@@ -16,7 +16,7 @@
         height: 2px;
     }
         
-    .middle {
+    .menu-hamburger-meat {
         background-color: $color-white;
         display: block;
     }
@@ -43,9 +43,9 @@
     }
 }
 
-.nav-primary-is-active .menu-hamburger {
+.menu-primary-is-active .menu-hamburger {
     
-    .middle {
+    .menu-hamburger-meat {
         opacity: 0;
     }
 

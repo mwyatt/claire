@@ -1,20 +1,5 @@
 <?php
 
-/*
-CREATE TABLE dummy (
-	`id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-	`logo` VARCHAR(150) NOT NULL DEFAULT '',
-	`url` VARCHAR(150) NOT NULL DEFAULT '',
-	`title` VARCHAR(255) NOT NULL DEFAULT '',
-	`slug` VARCHAR(255) NOT NULL,
-	`descriptionShort` VARCHAR(255) NOT NULL DEFAULT '',
-	`html` LONGTEXT NULL,
-	`type` VARCHAR(50) NOT NULL DEFAULT '',
-	`timePublished` INT(10) UNSIGNED NULL DEFAULT '0',
-	`status` VARCHAR(50) NOT NULL DEFAULT 'hidden'
-)
- */
-
 namespace OriginalAppName\Entity;
 
 
@@ -31,20 +16,13 @@ class Project extends \OriginalAppName\Entity\Content
 	 * abs url to project
 	 * @var string
 	 */
-	private $url;
-
-
-	/**
-	 * rel path to logo
-	 * @var string
-	 */
-	private $logo;
+	protected $url;
 
 
 	/**
 	 * @var string
 	 */
-	private $descriptionShort;
+	protected $descriptionShort;
 
 
 	/**

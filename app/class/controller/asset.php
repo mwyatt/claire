@@ -159,7 +159,6 @@ class Asset extends \OriginalAppName\Controller
 
 	public function render()
 	{
-		
 		$path = $this->getPath();
 		$pathInfo = pathinfo($path);
 		$this->setBaseName($pathInfo['basename']);

@@ -9,12 +9,12 @@
 
     <link rel="icon" type="image/png" href="<?php echo $this->getUrlMedia('favicon.png') ?>?rev=1">
     <script>var urlBase = '<?php echo $this->getUrl() ?>';</script>
-    <link href="<?php echo $this->getUrlAsset('asset/screen.css') ?>" media="screen, projection, print" rel="stylesheet" type="text/css" />
+    <link href="<?php echo $this->getUrlAsset('screen.css') ?>" media="screen, projection, print" rel="stylesheet" type="text/css" />
     <link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800" rel="stylesheet" type="text/css">
     
 <?php include($this->getTemplatePath('header/_google-analytics')) ?>
 
-    <script src="<?php echo $this->getUrlAsset('vendor/bower/modernizr/modernizr.js') ?>"></script>
+    <script src="<?php echo $this->getUrlAsset('vendor/modernizr.js') ?>"></script>
 </head>
 <body>
     <!--[if lt IE 7]>
@@ -24,19 +24,20 @@
 <div id="top"></div>
 <a class="to-top">Scroll to top</a>
 <div class="site-wrap">
-    <header class="header js-header">
+    <div class="header-bar-height"></div>
+    <header class="header header-bar js-header">
 
 	    <!-- logo -->
 	    <a href="<?php echo $this->getUrl() ?>" class="header-logo">
-			<img class="header-logo-image" src="<?php echo $this->getUrlAsset('asset/logo.svg') ?>" onerror="this.src=''; this.onerror=null;">
+			<img class="header-logo-image" src="<?php echo $this->getUrlAsset('logo.svg') ?>" onerror="this.src=''; this.onerror=null;">
 	    </a>
 
         <!-- hamburger - yum! -->
-        <span class="toggle"></span>OK</a>
+        <span class="menu-hamburger js-toggle-menu-primary"><span class="menu-hamburger-meat"></span></span>
 
 <?php if (isset($menuPrimary)): ?>
 
-        <nav class="menu-primary">
+        <nav class="menu-primary js-menu-primary">
 
         	<?php echo $menuPrimary ?>
 

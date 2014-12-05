@@ -8,10 +8,15 @@
 
 	<?php foreach ($projects as $project): ?>
 
-		<a href="<?php echo $this->getUrl() ?>project/<?php echo $project->getSlug() ?>/" class="project is-<?php echo $project->getSlug() ?>">
-			<span class="project-name"><?php echo $project->getName() ?></span>
-			<span class="project-logo"><?php echo $project->getLogo() ?></span>
-			<span class="project-description-short"><?php echo $project->getDescriptionShort() ?></span>
+		<a href="<?php echo $project->getUrl() ?>" class="project is-<?php echo $project->getSlug() ?>" target="_blank">
+			<span class="project-logo">
+				<img class="project-logo-image" src="<?php echo $this->getUrlAsset('project/' . $project->getSlug() . '.svg') ?>" onerror="this.src=''; this.onerror=null;">
+			</span>
+			<span class="project-description">
+				<span class="project-title"><?php echo $project->getTitle() ?></span>
+				<span class="project-description-short"><?php echo $project->getDescriptionShort() ?></span>
+				<span class="project-button-primary">Goto Project</span>
+			</span>
 		</a>
 
 	<?php endforeach ?>

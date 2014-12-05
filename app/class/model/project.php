@@ -21,6 +21,7 @@ class Project extends \OriginalAppName\Model\Content
 
 	public $fields = array(
 		'id',
+		'descriptionShort',
 		'url',
 		'title',
 		'slug',
