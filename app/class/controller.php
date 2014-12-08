@@ -25,7 +25,6 @@ class Controller
 	public function __construct()
 	{
 		$this->setView(new View);
-		$this->defaultGlobal();
 		$this->setUrl();
 	}
 
@@ -43,20 +42,6 @@ class Controller
 	 */
 	public function getUrl() {
 	    return $this->url;
-	}
-	
-
-	/**
-	 * needs to be loaded for all controllers
-	 * front, admin and ajax or any others
-	 * @return null 
-	 */
-	public function defaultGlobal()
-	{
-		$serviceOptions = new Service\Options();
-		$this
-			->view
-			->setDataKey('option', $serviceOptions->read());
 	}
 
 

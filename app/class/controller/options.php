@@ -19,28 +19,27 @@ use OriginalAppName\View;
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Front extends \OriginalAppName\Controller\Options
+class Options extends \OriginalAppName\Controller
 {
 
 
 	public function __construct()
 	{
 		parent::__construct();
-		$this->defaultGlobalSite();
+		$this->readOptions();
 	}
 
 
 	/**
-	 * store default data in view
-	 * store default site date in view
+	 * needs to be loaded for all controllers
+	 * front, admin and ajax or any others
 	 * @return null 
 	 */
-	public function defaultGlobalSite()
+	public function readOptions()
 	{
-		$className = '\\OriginalAppName\\Site\\' . ucfirst(SITE) . '\\Service\\Common';
-		$serviceCommon = new $className;
+		$serviceOptions = new Service\Options();
 		$this
 			->view
-			->mergeData($serviceCommon->read());
+			->setDataKey('option', $serviceOptions->read());
 	}
 }
