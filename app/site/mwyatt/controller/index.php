@@ -26,13 +26,13 @@ class Index extends \OriginalAppName\Controller\Front
 	public function home($request) {
 
 		// all projects
-		$modelProject = new Model\Project();
-		$modelProject->read();
+		$modelContent = new Model\Content();
+		$modelContent->readType('project');
 
 		// template
 		$this->view->mergeData([
 			'templateName' => 'home',
-			'projects' => $modelProject->getData()
+			'projects' => $modelContent->getData()
 		]);
 		return new Response($this->view->getTemplate('home'));
 	}

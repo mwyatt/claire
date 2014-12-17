@@ -15,4 +15,10 @@ class Content extends \OriginalAppName\Service
 	{
 		
 	}
+
+
+	public function readType($value='')
+	{
+		# code...
+	}
 }
