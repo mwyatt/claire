@@ -61,7 +61,7 @@ include BASE_PATH . 'vendor' . DS . 'autoload' . EXT;
  */
 $config = json_decode(file_get_contents(APP_PATH . 'config' . '.json'));
 if (! isset($config->site)) {
-	exit('please specify a site key');
+	exit('please specify a app config');
 }
 define('SITE', $config->site);
 
@@ -77,7 +77,7 @@ define('SITE_PATH', APP_PATH . 'site' . DS . SITE . DS);
  */
 $config = include SITE_PATH . 'config' . EXT;
 if (! isset($config['assetVersion'])) {
-	exit('please specify a site key');
+	exit('please specify a site config');
 }
 define('ASSET_VERSION', $config['assetVersion']);
 
