@@ -47,7 +47,7 @@ define('BASE_PATH', (string) (__DIR__ . DS));
 /**
  * handy for file includes
  */
-define('APP_PATH', BASE_PATH . 'app' . DS);
+define('APP_PATH', BASE_PATH . 'App' . DS);
 
 
 /**
@@ -69,7 +69,7 @@ define('SITE', $config->site);
 /**
  * handy for file includes
  */
-define('SITE_PATH', APP_PATH . 'site' . DS . SITE . DS);
+define('SITE_PATH', APP_PATH . 'Site' . DS . SITE . DS);
 
 
 /**
