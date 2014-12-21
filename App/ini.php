@@ -12,8 +12,3 @@ ini_set('memory_limit', '-1');
 
 // execution time for url increased to 5min
 ini_set('max_execution_time', 300);
-
-// will this setup errors?
-ini_set('display_errors',1);
-ini_set('display_startup_errors',1);
-error_reporting(-1);

@@ -8,7 +8,7 @@
 
 	<?php foreach ($projects as $project): ?>
 
-		<a href="<?php echo $project->getUrl() ?>" class="project is-<?php echo $project->getSlug() ?>" target="_blank">
+		<a href="<?php echo $project->getMetaKey('url') ?>" class="project is-<?php echo $project->getSlug() ?>" target="_blank">
 			<span class="project-logo">
 				<img class="project-logo-image" src="<?php echo $this->getUrlAsset('project/' . $project->getSlug() . '.svg') ?>" onerror="this.src=''; this.onerror=null;">
 			</span>

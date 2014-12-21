@@ -18,11 +18,16 @@ class Error extends \OriginalAppName\System
 
 	
     /**
-     * needs to be inside the package.json
-     * or options database
      * @var boolean
      */
-    private $reporting = false;
+    private $reporting;
+
+
+    public function __construct($report)
+    {
+        $this->setReporting($report);
+        $this->initialise();
+    }
 	
 
     /**
@@ -49,9 +54,11 @@ class Error extends \OriginalAppName\System
     public function initialise()
     {
         if ($this->getReporting()) {
+            error_reporting(-1);
             error_reporting(E_ALL);
             ini_set('display_errors', '1');
             ini_set('log_errors', '0');
+            ini_set('display_startup_errors',1);
             ini_set('error_log', './');
             set_error_handler(array($this, 'handle'));
         }
@@ -59,14 +66,7 @@ class Error extends \OriginalAppName\System
     }
 
 
-    /**
-     * handles the possible error
-     * @param  [type] $errorType   [description]
-     * @param  [type] $errorString [description]
-     * @param  [type] $errorFile   [description]
-     * @param  [type] $errorLine   [description]
-     * @return [type]              [description]
-     */
+
     public function handle($errorType, $errorString, $errorFile, $errorLine)
     {
         if ($this->getReporting()) {

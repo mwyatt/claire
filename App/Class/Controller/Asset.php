@@ -4,6 +4,7 @@ namespace OriginalAppName\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Exception\ResourceNotFoundException;
+use OriginalAppName\Entity;
 
 
 /**
@@ -15,16 +16,44 @@ class Asset extends \OriginalAppName\Controller
 {
 
 
-	public function getPathDefault($append = '')
-	{
-		return BASE_PATH . 'asset' . DS . $append;
+	protected $file;
+
+
+	/**
+	 * @return object Entity\File
+	 */
+	public function getFile() {
+	    return $this->file;
+	}
+	
+	
+	/**
+	 * @param object $file Entity\File
+	 */
+	public function setFile($file) {
+	    $this->file = $file;
+	    return $this;
 	}
 
 
-	public function getPathSite($append = '')
-	{
-		return BASE_PATH . 'app' . DS . 'site' . DS . SITE . DS . 'asset' . DS . $append;
+	/**
+	 * get the file path of the asset
+	 * could be site specific
+	 * falls back to app
+	 * @return string 
+	 */
+	public function getFilePath($pathRequest) {
+		$path = '';
+		$pathSite = APP_PATH . 'Site' . DS . SITE . DS . 'asset' . DS . $pathRequest;
+		$pathDefault = BASE_PATH . 'asset' . DS . $pathRequest;
+		if (file_exists($pathSite)) {
+			$path = $pathSite;
+		} elseif (file_exists($pathDefault)) {
+			$path = $pathDefault;
+		}
+	    return $path;
 	}
+
 
 
 	/**
@@ -35,22 +64,19 @@ class Asset extends \OriginalAppName\Controller
 	public function assetSingle($request)
 	{
 
-		// logic
-		// if asset not found
-		// 
-
+		// get request path
 		$pathRequest = '';
 		if (isset($request['path'])) {
 			$pathRequest = $request['path'];
 		}
-		$pathSite = $this->getPathSite($pathRequest);
-		$pathDefault = $this->getPathDefault($pathRequest);
-		if (file_exists($pathSite)) {
-			$this->setPath($pathSite);
-		} elseif (file_exists($pathDefault)) {
-			$this->setPath($pathDefault);
-		}
-		if (! $this->getPath()) {
+
+		// entity
+		$file = new Entity\File;
+		$file->setPath($this->getFilePath($pathRequest));
+		$this->setFile($file);
+
+		// exception if no path found for this file
+		if (! $file->getPath()) {
 			throw new ResourceNotFoundException();
 		}
 		return new Response($this->render());
@@ -59,28 +85,34 @@ class Asset extends \OriginalAppName\Controller
 
 	public function render()
 	{
-		$path = $this->getPath();
-		$pathInfo = pathinfo($path);
-		$this->setBaseName($pathInfo['basename']);
-		$this->setFileName($pathInfo['filename']);
-		$this->setExtension($pathInfo['extension']);
-		$this->setHeaders();
+		$file = $this->getFile();
+		$pathInfo = pathinfo($file->getPath());
+		$file
+			->setBaseName($pathInfo['basename'])
+			->setName($pathInfo['filename'])
+			->setExtension($pathInfo['extension']);
+		$this->setFile($file);
 
 		// start output buffer
 		// return file output
 		// improved speed as file_get_contents too slow
+		$this->setHeaders();
 		ob_start();
-		readfile($path);
+		readfile($file->getPath());
 		$content = ob_get_contents();
 		ob_end_clean();
 		return $content;
 	}
 
 
+	/**
+	 * to render the file correctly in the browser
+	 */
 	public function setHeaders()
 	{
-		header('Content-Type:' . $this->getMimeType());
-		header('Content-Length:' . filesize($this->getPath()));
-		header('Content-Disposition: filename="' . $this->getBaseName() . '.jpg"');
+		$file = $this->getFile();
+		header('Content-Type:' . $file->getMimeType());
+		header('Content-Length:' . filesize($file->getPath()));
+		header('Content-Disposition: filename="' . $file->getBaseName() . '.jpg"');
 	}
 }

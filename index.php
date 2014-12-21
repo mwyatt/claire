@@ -1,5 +1,9 @@
 <?php
 
+namespace OriginalAppName;
+
+use OriginalAppName;
+
 
 /**
  * @author 	Martin Wyatt <martin.wyatt@gmail.com> 
@@ -64,6 +68,13 @@ if (! isset($config->site)) {
 	exit('please specify a app config');
 }
 define('SITE', $config->site);
+
+
+/**
+ * get error reporting in asap
+ * whether it reports errors is determined by config.json
+ */
+$error = new OriginalAppName\Error($config->errorReporting);
 
 
 /**

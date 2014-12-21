@@ -28,16 +28,6 @@ $registry->set('url', new OriginalAppName\Url);
 
 
 /**
- * error reporting
- * @var error
- */
-$error = new OriginalAppName\Error();
-$error
-    ->setReporting(true)
-    ->initialise();
-
-
-/**
  * store each unique url
  */
 $sessionUrlHistory = new OriginalAppName\Session\UrlHistory;

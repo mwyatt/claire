@@ -8,7 +8,7 @@ namespace OriginalAppName\Entity;
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Asset extends \OriginalAppName\Entity
+class File extends \OriginalAppName\Entity
 {
 
 
@@ -23,7 +23,7 @@ class Asset extends \OriginalAppName\Entity
 	 * file-name.ext
 	 * @var string
 	 */
-	protected $fileName;
+	protected $name;
 
 
 	/**
@@ -38,13 +38,6 @@ class Asset extends \OriginalAppName\Entity
 	 * @var string
 	 */
 	protected $extension;
-
-
-	/**
-	 * mime type
-	 * @var string
-	 */
-	protected $type;
 
 
 	/**
@@ -78,6 +71,17 @@ class Asset extends \OriginalAppName\Entity
 	public function setTypes($types) {
 	    $this->types = $types;
 	    return $this;
+	}
+
+
+	/**
+	 * get mime type based on extension
+	 * @return string 
+	 */
+	public function getMimeType()
+	{
+		$extension = $this->getExtension();
+		return isset($this->types[$extension]) ? $this->types[$extension] : false;
 	}
 
 
@@ -135,30 +139,16 @@ class Asset extends \OriginalAppName\Entity
 	/**
 	 * @return string 
 	 */
-	public function getFileName() {
-	    return $this->fileName;
+	public function getName() {
+	    return $this->name;
 	}
 	
 	
 	/**
-	 * @param string $fileName 
+	 * @param string $Name 
 	 */
-	public function setFileName($fileName) {
-	    $this->fileName = $fileName;
+	public function setName($name) {
+	    $this->name = $name;
 	    return $this;
-	}
-
-
-	/**
-	 * retreives mime based on ext
-	 * @return string 
-	 */
-	public function getMimeType()
-	{
-		$extension = $this->getExtension();
-		$types = $this->getTypes();
-		if (isset($types[$extension])) {
-			return $types[$extension];
-		}
 	}
 }
