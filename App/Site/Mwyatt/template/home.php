@@ -1,29 +1,18 @@
 <?php include $this->getTemplatePath('_header') ?>
 
 <div class="page home js-page-home">
+	<div class="panel">
+		<h2 class="panel-heading">Recent Work</h2>
 
-<?php if (isset($projects)): ?>
-
-	<div class="panel projects">
-
-	<?php foreach ($projects as $project): ?>
-
-		<a href="<?php echo $project->getMetaKey('url') ?>" class="project is-<?php echo $project->getSlug() ?>" target="_blank">
-			<span class="project-logo">
-				<img class="project-logo-image" src="<?php echo $this->getUrlAsset('project/' . $project->getSlug() . '.svg') ?>" onerror="this.src=''; this.onerror=null;">
-			</span>
-			<span class="project-description">
-				<span class="project-title"><?php echo $project->getTitle() ?></span>
-				<span class="project-button-primary">Goto Project</span>
-			</span>
-		</a>
-
-	<?php endforeach ?>
+	<?php include $this->getTemplatePath('_projects') ?>
 
 	</div>
-
-<?php endif ?>
-
+	<div class="panel">
+		<h2 class="panel-heading">A Little About Me</h2>
+		<div class="typography">
+			<p class="panel-description">I am a dedicated Web Designer / Developer with 5 years experience. Always looking to improve my craft. In my spare time I enjoy playing competitive <a href="http://eastlancstt.org.uk/" target="_blank">ping pong</a> and gaming (hearthstone, starcraft, mario kart 8, super smash bros and diablo).</p>
+		</div>
+	</div>
 </div>
 
 <?php include $this->getTemplatePath('_footer') ?>

@@ -40,7 +40,9 @@ class Content extends \OriginalAppName\Service
 		// bind each content with its meta
 		foreach ($modelContent->getData() as $entityContent) {
 			foreach ($modelContentMeta->getData() as $entityContentMeta) {
-				$entityContent->setMetaKey($entityContentMeta->getName(), $entityContentMeta->getValue());
+				if ($entityContent->getId() == $entityContentMeta->getContentId()) {
+					$entityContent->setMetaKey($entityContentMeta->getName(), $entityContentMeta->getValue());
+				}
 			}
 
 			// store

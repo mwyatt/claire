@@ -1,5 +1,5 @@
 body {
-    background-color: $color-gray-10;
+    background-color: $color-white;
 }
 
 .logo {
@@ -19,21 +19,6 @@ svg {
     height: 100%;
 }
 
-.site-wrap {
-    @extend .clearfix;
-    margin-left: 5%;
-    margin-right: 5%;
-    margin-top: 5%;
-    margin-bottom: 5%;
-}
-
-@include breakpoint(1000px) {
-    .site-wrap {
-        margin-left: 20%;
-        margin-right: 20%;
-    }
-}
-
 .header-button-mobile-menu {
     display: block;
     float: right;
@@ -41,9 +26,11 @@ svg {
     fill: $color-gray-50;
     height: 3em;
 }
+
 .skills {
     @extend .clearfix;
 }
+
 .skill {
     // @extend .animated;
     // @extend .bounceIn;
@@ -57,7 +44,6 @@ svg {
     border-radius: 5px;
 }
 
-
 .heading-home {
     text-align: center;
     margin: 5% 0;
@@ -68,6 +54,7 @@ svg {
     // border-bottom: 1px solid #ccc;
     // background-color: #eee;
 }
+
 .about-me {
     line-height: 1.7;
     margin-left: 0;
@@ -75,18 +62,24 @@ svg {
     margin-top: 4%;
     margin-bottom: 4%;
 }
-.container-footer {
-    @extend .clearfix;
-    border-top: 1px dotted #ccc;
-}
 
 .header-logo {
     width: 90px;
     height: 47px;
     display: block;
+    margin: 10px;
+    float: left;
+    fill: $color-primary-0;
 }
 
 .header-logo-image {
     width: 100%;
     height: 100%;
+}
+
+.page {
+    padding-left: 5%;
+    padding-right: 5%;
+    @extend .clearfix;
+    @include siteBoundary;
 }

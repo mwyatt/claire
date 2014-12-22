@@ -106,7 +106,7 @@ class Route extends \OriginalAppName\System
 		$routes = new RouteCollection();
 
 		// admin
-		include APP_PATH . 'admin' . DS . 'route' . EXT;
+		include APP_PATH . 'Admin' . DS . 'route' . EXT;
 
 		// get site specific routes
 		$siteRoutePath = SITE_PATH . 'route' . EXT;

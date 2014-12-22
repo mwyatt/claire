@@ -28,13 +28,15 @@
  */
 @import "palette";
 @import "../../../../sass/mixin";
+@import "mixin";
+@import "grid";
 // @import "keyframes";
 
 
 /**
  * admin / front settings
  */
+@import "template";
 @import "reusable";
 @import "typography";
 @import "form";
-@import "button";

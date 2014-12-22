@@ -1,34 +1,153 @@
 .projects {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
+    @include row;
 }
 
 .project {
-	width: 200px;
-	height: 200px;
-	border-radius: 5px;
-	background-color: $color-gray-20;
-	flex-grow: 1;
-	margin: 2%;
+    @include transition(all 200ms);
+    border-radius: 5px;
+    background-color: $color-gray-20;
     position: relative;
     overflow: hidden;
+    margin-top: 5%;
+
+    &:hover .project-description {
+        bottom: 0;
+    }
+
+    &.is-audio-visual-online {
+        background-color: #74a611;
+    }
+
+    &.is-brunoco {
+        background-color: #0b93fe;
+    }
+
+    &.is-get-hd-sound {
+        background-color: #795934;
+    }
+
+    &.is-simply-stands {
+        background-color: #333333;
+    }
+
+    @media only screen and (max-width: 699px) {
+        height: 200px;
+    }
+
+    @media only screen and (max-width: 399px) {
+        @include col(12);
+        height: 160px;
+
+        &:first-child {
+            margin-top: 0;
+        }
+    }
+
+    @media only screen and (min-width: 400px) and (max-width: 699px) {
+        @include col(6);
+        
+        &:nth-child(2n) {
+            @include last;
+        }
+    }
+
+    @media only screen and (min-width: 700px) {
+        @include col(4);
+        height: 250px;
+        
+        &:nth-child(3n) {
+            @include last;
+        }
+    }
+}
+
+.project.is-elttl {
+    background-color: #F07818;
+}
+
+.touch .project-description {
+    bottom: 0;
+}
+
+.no-touch .project {
+
+    &:hover {
+        @include transform(scale(1.1));
+    }
+
+    &:active {
+        @include transform(scale(1));
+        opacity: .8;
+    }
 }
 
 .project-description {
+    @include transition(bottom 200ms);
     position: absolute;
-    bottom: -80px;
+    bottom: -60px;
     left: 0;
     right: 0;
+    padding-top: 1em;
+    padding-left: 1em;
+    padding-bottom: 1em;
+    padding-right: 75px;
+    background-color: rgba($color-white, .8);
+    box-shadow: 0 -1px 3px rgba($color-black, .2);
 }
 
 .project-logo {
+    fill: $color-white;
     display: block;
-	height: 140px;
-	padding: 10%;
+    padding: 5%;
+    margin: 0 auto;
+    padding: 20px;
+
+    @media only screen and (max-width: 599px) {
+        height: 106px;
+    }
+
+    @media only screen and (min-width: 600px) and (max-width: 699px) {
+        height: 146px;
+    }
+
+    @media only screen and (min-width: 700px) {
+        height: 174px;
+    }
+}
+
+
+.no-touch .project-logo {
+
+    @media only screen and (max-width: 599px) {
+        height: 106px + 50px;
+    }
+
+    @media only screen and (min-width: 600px) and (max-width: 699px) {
+        height: 146px + 50px;
+    }
+
+    @media only screen and (min-width: 700px) {
+        height: 174px + 50px;
+    }
 }
 
 .project-logo-image {
     width: auto;
     height: auto;
+}
+
+.project-description {
+}
+
+.project-title {
+    font-weight: 600;
+    display: block;
+    color: $color-gray-70;
+}
+
+.project-button-primary {
+    @include button;
+    position: absolute;
+    bottom: 1em;
+    right: 1em;
 }

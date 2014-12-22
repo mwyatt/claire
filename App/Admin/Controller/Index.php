@@ -63,7 +63,7 @@ class Index extends \OriginalAppName\Controller\Admin
 
 		// template
 		$this->view->setDataKey('user', $entityUser);
-		return new Response($this->view->getTemplate('admin\dashboard'));
+		return new Response($this->view->getTemplate('admin/dashboard'));
 		
 	}
 
@@ -76,6 +76,6 @@ class Index extends \OriginalAppName\Controller\Admin
 		$this
 			->view
 			->setDataKey('sessionForm', $sessionForm->getData());
-		return new Response($this->view->getTemplate('admin\login'));
+		return new Response($this->view->getTemplate('admin/login'));
 	}
 }

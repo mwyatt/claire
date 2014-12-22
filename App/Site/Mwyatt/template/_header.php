@@ -22,14 +22,20 @@
     <![endif]-->
 
 <div id="top"></div>
-<a class="to-top">Scroll to top</a>
+<a href="#top" class="to-top js-smooth-scroll">
+    
+<?php include $this->getAssetPath('arrow-up.svg') ?>
+
+</a>
 <div class="site-wrap">
     <div class="header-bar-height"></div>
     <header class="header header-bar js-header">
 
 	    <!-- logo -->
 	    <a href="<?php echo $this->getUrl() ?>" class="header-logo">
-			<img class="header-logo-image" src="<?php echo $this->getUrlAsset('logo.svg') ?>" onerror="this.src=''; this.onerror=null;">
+
+<?php include $this->getAssetPath('logo.svg') ?>
+
 	    </a>
 
         <!-- hamburger - yum! -->
@@ -39,7 +45,7 @@
 
         <nav class="menu-primary js-menu-primary">
 
-        	<?php echo $menuPrimary ?>
+	<?php echo $menuPrimary ?>
 
         </nav>
 

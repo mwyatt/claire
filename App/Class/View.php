@@ -104,11 +104,13 @@ class View extends \OriginalAppName\Data
 	 * gets template from site specific
 	 * falls back to path from main template dir
 	 * files must exist
+	 * used with includes
 	 * @return string 
 	 */
 	public function getTemplatePath($append) {
 		$end = 'template' . DS . $append . EXT;
 		$path = SITE_PATH . $end;
+		$pathOne = SITE_PATH . $end;
 		if (file_exists($path)) {
 			return $path;
 		}
@@ -116,7 +118,27 @@ class View extends \OriginalAppName\Data
 		if (file_exists($path)) {
 			return $path;
 		}
-		return $path . ' - template not found';
+		exit('view::getTemplatePath - ' . $path);
+	}
+
+
+	/**
+	 * find the asset path for a particular path
+	 * used with includes
+	 * @param  string $append foo/bar.svg
+	 * @return string         
+	 */
+	public function getAssetPath($append) {
+		$end = 'asset' . DS . $append;
+		$path = SITE_PATH . $end;
+		if (file_exists($path)) {
+			return $path;
+		}
+		$path = BASE_PATH . $end;
+		if (file_exists($path)) {
+			return $path;
+		}
+		exit('view::getAssetPath - ' . $path);
 	}
 
 

@@ -1,0 +1,21 @@
+.panel-heading {
+    @extend .h2;
+    text-align: center;
+    color: #ccc;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin: 30px 0;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    padding: 8px;
+    line-height: 1;
+}
+
+.panel-description {
+    @extend .p;
+}
+
+.panel {
+	@include clearfix;
+	padding-bottom: 20px;
+}
