@@ -6,8 +6,7 @@
 			
 <?php endif ?>
 
-		    <script src="<?php echo $this->getUrlAsset('vendor/bower/jquery/dist/jquery.min.js') ?>"></script>
-		    <script src="<?php echo $this->getUrlAsset('asset/admin-main.js') ?>"></script>
+		    <script src="<?php echo $this->getUrlAsset('admin/main.js') ?>"></script>
 		</div>
     </body>
 </html>

@@ -8,5 +8,5 @@ $(document).ready(function() {
 	console.log('admin->ready');
 	system = new System();
 	var form = new Form();
-	var page = new Page();
+	var controller = new Controller();
 });

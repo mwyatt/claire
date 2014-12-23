@@ -1,0 +1,16 @@
+.mfp-content {
+    @include animation-name(fadeInBulge);
+    @include animation-fill-mode(forwards);
+    @include animation-duration(300ms);
+    @include animation-timing-function(ease);
+    @include animation-iteration-count(1);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    background-color: $color-white;
+    position: relative;
+    margin: 0 auto;
+    padding: 1em;
+    width: 90%;
+    border-radius: 2px;
+    padding-top: 1em;
+    max-width: 40em;
+}

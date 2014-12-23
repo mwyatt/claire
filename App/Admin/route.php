@@ -7,14 +7,20 @@ $routes->add('admin', new Symfony\Component\Routing\Route(
 ));
 
 
+$routes->add('adminAjaxContentSingle', new Symfony\Component\Routing\Route(
+	'/admin/ajax/content/{id}/',
+	['controller' => 'OriginalAppName\\Admin\\Controller\\Ajax\\Content']
+));
+
+
 $routes->add('adminContentAll', new Symfony\Component\Routing\Route(
-	'/admin/content/{type}/',
+	'/admin/content/',
 	['controller' => 'OriginalAppName\\Admin\\Controller\\Content']
 ));
 
 
 $routes->add('adminContentSingle', new Symfony\Component\Routing\Route(
-	'/admin/content/{type}/{slug}/',
+	'/admin/content/{id}/',
 	['controller' => 'OriginalAppName\\Admin\\Controller\\Content']
 ));
 

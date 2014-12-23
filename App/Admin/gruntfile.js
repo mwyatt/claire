@@ -14,7 +14,7 @@ module.exports = function(grunt) {
 		expand: true,
 		cwd: 'sass',
 		src: ['*.scss'],
-		dest: 'asset',
+		dest: '../../asset/admin',
 		ext: '.css',
 	}];
 	var watchPaths = [
@@ -87,6 +87,23 @@ module.exports = function(grunt) {
 						src: 'modernizr.js',
 						dest: 'asset/vendor',
 					},
+					{
+						expand: true,
+						cwd: 'vendor/bower/magnific-popup/dist',
+						src: 'jquery.magnific-popup.js',
+						dest: 'js/vendor/magnific-popup',
+					},
+					{
+						expand: true,
+						cwd: 'vendor/bower/magnific-popup/dist',
+						src: 'magnific-popup.css',
+						dest: 'sass/vendor/magnific-popup/',
+						rename: function(dest, src) {
+							if (src == 'magnific-popup.css') {
+								return dest + '_' + src.replace('.css', '.scss');
+							};
+						},
+					},
 				]
 			}
 		},
@@ -118,20 +135,20 @@ module.exports = function(grunt) {
 				src: [
 					'js/vendor/**',
 					'js/**',
-					'../../../js/jquery.button-to-top.js',
-					'../../../js/jquery.form.js',
-					'../../../js/jquery.function.js',
-					'../../../js/jquery.search.js',
-					'../../../js/jquery.spinner.js',
-					'../../../js/jquery.system.js',
+					'../../js/jquery.button-to-top.js',
+					'../../js/jquery.form.js',
+					'../../js/jquery.function.js',
+					'../../js/jquery.search.js',
+					'../../js/jquery.spinner.js',
+					'../../js/jquery.system.js',
 				],
-				dest: 'asset/main.js',
+				dest: '../../asset/admin/main.js',
 			}
 		},
 		uglify: {
 			js: {
 				files: {
-					'asset/main.js': ['asset/main.js']
+					'../../asset/admin/main.js': ['asset/main.js']
 				},
 			},
 		},

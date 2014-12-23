@@ -1,4 +1,4 @@
-.content.login {
+.page.login {
 	margin: 0 auto;
 	padding: 5em 0;
     width: 15em;
@@ -24,16 +24,25 @@
 	.logo img {
 	    width: 100%;
 	}
-
-	input {
-	    width: 100%;
-	}
-
-	label {
-		display: block;
-	}
 }
 
-input.login-input {
-	margin: 1em 0;
+.login-input {
+	@include formInput;
+    width: 100%;
+}
+
+.login-label {
+	@include formLabel;
+}
+
+.link-forgot-password {
+    position: relative;
+    top: 17px;
+    @extend .a;
+}
+
+.login-button {
+    position: relative;
+    top: 17px;
+    @include button;
 }

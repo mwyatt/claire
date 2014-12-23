@@ -2,6 +2,8 @@
 
 namespace OriginalAppName;
 
+use OriginalAppName\Registry;
+
 
 /**
  * @author Martin Wyatt <martin.wyatt@gmail.com> 
@@ -20,8 +22,9 @@ class View extends \OriginalAppName\Data
 	 * @param array $system 
 	 */
 	public function __construct() {
-		$registry = \OriginalAppName\Registry::getInstance();
-		$this->setUrl($registry->get('url'));
+		$registry = Registry::getInstance();
+		$generator = $registry->get('urlGenerator');
+		$this->setUrl($generator);
 	}
 
 
@@ -101,23 +104,29 @@ class View extends \OriginalAppName\Data
 
 
 	/**
-	 * gets template from site specific
-	 * falls back to path from main template dir
-	 * files must exist
-	 * used with includes
-	 * @return string 
+	 * finds a template, either using a prioroty or
+	 * gracefully searching
+	 * @param  string $append    foo/bar
+	 * @return string            the path
 	 */
 	public function getTemplatePath($append) {
+
+		// appending
 		$end = 'template' . DS . $append . EXT;
+
+		// site-specific
 		$path = SITE_PATH . $end;
-		$pathOne = SITE_PATH . $end;
 		if (file_exists($path)) {
 			return $path;
 		}
+		
+		// common
 		$path = APP_PATH . $end;
 		if (file_exists($path)) {
 			return $path;
 		}
+
+		// problem
 		exit('view::getTemplatePath - ' . $path);
 	}
 
@@ -160,7 +169,7 @@ class View extends \OriginalAppName\Data
 	 */
 	public function getUrlAsset($url)
 	{
-		return $this->url->getCache('base') . 'asset' . US . $url . $this->getAssetVersion();
+		return $this->getUrl() . 'asset' . US . $url . $this->getAssetVersion();
 	}
 
 
@@ -196,12 +205,14 @@ class View extends \OriginalAppName\Data
 	
 
 	/**
-	 * flexible url return, defualts to the base url of the website
-	 * @param  string $key 
-	 * @return string      
+	 * generates urls based on the routes registered
+	 * @param  string  $path       route plan
+	 * @param  array  $attributes id->
+	 * @param  boolean $absolute   abs/rel toggle?
+	 * @return string              url
 	 */
-	public function getUrl($key = 'base') {
-		return $this->url->getCache($key);
+	public function getUrl($path = 'home', $attributes = [], $absolute = true) {
+		return $this->url->generate($path, $attributes, $absolute);
 	}
 
 

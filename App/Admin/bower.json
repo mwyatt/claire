@@ -1,0 +1,12 @@
+{
+  "name": "admin",
+  "version": "0.0.1",
+  "dependencies": {
+    "bourbon": "3.1.8",
+    "jquery": "1.11.1",
+    "modernizr": "2.8.3",
+    "normalize-scss": "3.0.1",
+    "magnific-popup": "~1.0.0"
+  },
+  "private": true
+}

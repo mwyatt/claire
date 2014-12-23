@@ -1,16 +1,21 @@
 <?php
 
+namespace OriginalAppName\Admin\Controller;
+
+use OriginalAppName;
+use OriginalAppName\Model;
+use OriginalAppName\Session;
+use OriginalAppName\View;
+use OriginalAppName\Service;
+use Symfony\Component\HttpFoundation\Response;
+
 
 /**
- * admin
- *
- * PHP version 5
- * 
  * @author Martin Wyatt <martin.wyatt@gmail.com> 
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Controller_Admin_Content extends Controller_Admin
+class Content extends \OriginalAppName\Controller\Admin
 {
 
 
@@ -69,27 +74,24 @@ class Controller_Admin_Content extends Controller_Admin
 	}
 
 
-	public function content() {
-		$content = new model_content($this);
-		$statuses = $content->getStatus();
-		$where = array(
-			'type' => $this->url->getPathPart(2)
-		);
-		if (array_key_exists('status', $_GET)) {
-			if (in_array($_GET['status'], $statuses)) {
-				$where['status'] = $_GET['status'];
-			}
-		} else {
-			// $where['status'] = 'visible';
-		}
-		$content->read(array(
-			'where' => $where,
-			'order_by' => 'time_published desc'
-		));
+	/**
+	 * content list
+	 * @return object Response
+	 */
+	public function adminContentAll() {
+		$modelContent = new Model\Content;
+		$modelContent->read();
+
+echo '<pre>';
+print_r($modelContent);
+echo '</pre>';
+exit;
+
+
 		$this->view
 			// ->setDataKey('statuses', $statuses)
 			->setDataKey('statuses', '')
-			->setDataKey('contents', $content)
+			->setDataKey('contents', $modelContent)
 			->getTemplate('admin/content/list');
 	}
 
