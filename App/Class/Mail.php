@@ -2,6 +2,8 @@
 
 namespace OriginalAppName;
 
+use OriginalAppName;
+
 
 /**
  * @author Martin Wyatt <martin.wyatt@gmail.com> 
@@ -13,7 +15,7 @@ class Mail extends \OriginalAppName\View
 
 
 	/**
-	 * Swift_Mailer instance
+	 * \Swift_Mailer instance
 	 * @var object
 	 */
 	protected $swiftMailer;
@@ -42,20 +44,39 @@ class Mail extends \OriginalAppName\View
 	}	
 
 
+	/**
+	 * @return string 
+	 */
+	public function getAppPassword() {
+	    return $this->appPassword;
+	}
+	
+	
+	/**
+	 * @param string $appPassword 
+	 */
+	public function setAppPassword() {
+		$registry = OriginalAppName\Registry::getInstance();
+		$configApp = $registry->get('configApp');
+	    $this->appPassword = $configApp->googleAppPassword;
+	    return $this;
+	}
+
+
 	public function __construct() {
-		Parent::__construct();
+		$this->setAppPassword();
 		
 		// mail transport
-		$transport = Swift_SmtpTransport::newInstance('smtp.gmail.com', 465, 'ssl')
+		$transport = \Swift_SmtpTransport::newInstance('smtp.gmail.com', 465, 'ssl')
 			->setUsername('martin.wyatt@gmail.com')
-			->setPassword('google app password');
-		$this->setSwiftMailer(Swift_Mailer::newInstance($transport));
+			->setPassword($this->getAppPassword());
+		$this->setSwiftMailer(\Swift_Mailer::newInstance($transport));
 
 		// pallete
-		$mailPallete = new \OriginalAppName\Mail\Pallete;
-		$this->view->setDataKey('mail\styles', $mailPallete);
+		// $mailPallete = new \OriginalAppName\Mail\Pallete;
+		// $this->view->setDataKey('mail\styles', $mailPallete);
 
-		$this->set_css('asset/screen-email.css');
+		// $this->set_css('asset/screen-email.css');
 
 	}
 
@@ -83,39 +104,32 @@ class Mail extends \OriginalAppName\View
 
 		// resource
 		$mailer = $this->getSwiftMailer();
-		$message = Swift_Message::newInstance($config['subject']);
+		$message = \Swift_Message::newInstance($config['subject']);
 
 		// ['email' => 'contact name']
-		if (isset($config['from'])) {
-			$message->setFrom($config['from'])
-		}
+		$message->setFrom($config['from']);
 
 		// ['email', 'email']
-		if (isset($config['to'])) {
-			$message->setTo($config['to'])
-		}
+		$message->setTo($config['to']);
 
 		// html?
-		if (isset($config['template'])) {
-			$body = $this->getTemplate($config['template']);
-			$message->setBody($body);
-		}
+		$message->setBody($config['body']);
 
 		// send
-		$result = $mailer->send($message);
+		// $result = $mailer->send($message);
 
 		// store
-		if (! $result) {
-			return;
-		}
+		// if (! $result) {
+		// 	return;
+		// }
 
 		// store
 		$entityMail = new \OriginalAppName\Entity\Mail;
 		$entityMail
-			->setTo($config['to'])
 			->setFrom($config['from'])
+			->setTo($config['to'])
 			->setSubject($config['subject'])
-			->setBody($body)
+			->setBody($config['body'])
 			->setTimeSent(time());
 		$model = new \OriginalAppName\Model\Mail;
 		$model->create([$entityMail]);

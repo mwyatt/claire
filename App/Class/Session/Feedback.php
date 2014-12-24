@@ -18,12 +18,12 @@ class Feedback extends \OriginalAppName\Session
 	/**
 	 * stores a message, pull this to show and remove
 	 * @param string $message    
-	 * @param string $positivity positive|negative
+	 * @param string $type positive|negative|neutral
 	 */
-	public function setMessage($message, $positivity = 'positive')
+	public function setMessage($message, $type = 'neutral')
 	{
 		$this
 			->set('message', ucfirst($message) . '.')
-			->set('positivity', $positivity);
+			->set('type', $type);
 	}
 }

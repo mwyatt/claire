@@ -13,7 +13,7 @@
 /**
  * shudder side to side
  */
-@-webkit-keyframes error {
+@include keyframes(error) {
 
 	100%,
 	0% {
@@ -33,7 +33,7 @@
 /**
  * 
  */
-@-webkit-keyframes fadeInDown {
+@include keyframes(fadeInDown) {
 	
 	0% {
 		opacity: 0;
@@ -62,4 +62,21 @@
         @include transform(scale(1));
 		opacity: 1;
 	}
+}
+
+
+@include keyframes(fadeOutUp) {
+  0% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 0;
+    -webkit-transform: translateY(-20px);
+    -ms-transform: translateY(-20px);
+    transform: translateY(-20px);
+  }
 }

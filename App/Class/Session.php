@@ -121,12 +121,20 @@ class Session extends \OriginalAppName\Cron
 	 * @param  string $key 
 	 * @return array      
 	 */
-	public function pull($key) {
-		if (array_key_exists($key, $_SESSION[$this->getScope()])) {
-			$data = $_SESSION[$this->getScope()][$key];
-			unset($_SESSION[$this->getScope()][$key]);
+	public function pull($key = '') {
+		$data = null;
+		if ($key) {
+			if (array_key_exists($key, $_SESSION[$this->getScope()])) {
+				$data = $_SESSION[$this->getScope()][$key];
+				unset($_SESSION[$this->getScope()][$key]);
+			}
+
+		// no key return full package
+		} else {
+			$data = $_SESSION[$this->getScope()];
+			$_SESSION[$this->getScope()] = null;
 		}
-		return isset($data) ? $data : null;
+		return $data;
 	}
 
 

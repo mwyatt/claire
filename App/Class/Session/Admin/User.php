@@ -77,4 +77,17 @@ class User extends \OriginalAppName\Session
 	{
 		return $this->set('expire', time() + $this->getTime('hour'));
 	}
+
+
+	/**
+	 * setup password reset interface
+	 * expiry and randomised key to match
+	 * 30 min expire time
+	 */
+	public function setPasswordReset($key)
+	{
+		$this
+			->set('expire', time() + ($this->getTime('hour') / 2 /* 30min */));
+			->set('key', $key);
+	}
 }

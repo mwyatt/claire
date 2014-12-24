@@ -4,6 +4,7 @@ namespace OriginalAppName;
 
 use OriginalAppName\Registry;
 use OriginalAppName\Controller;
+use OriginalAppName\Session;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Matcher\UrlMatcher;
@@ -76,6 +77,7 @@ class Route extends \OriginalAppName\System
 		    $controller = $attributes['controller'];
 		    $controller = new $controller($attributes);
 		    $this->setResponse($controller->$attributes['_route']($attributes));
+		    $this->validUrl();
 		} catch (ResourceNotFoundException $e) {
 		    $controller = new Controller();
 		    $this->setResponse($controller->notFound([]));
@@ -120,5 +122,18 @@ class Route extends \OriginalAppName\System
 
 		// return all routes
 		return $routes;
+	}
+
+
+	public function validUrl()
+	{
+		
+
+		/**
+		 * store each unique url
+		 */
+		$registry = Registry::getInstance();
+		$sessionUrlHistory = new Session\UrlHistory;
+		$sessionUrlHistory->append($registry->get('url')->getCache('current'));
 	}
 }

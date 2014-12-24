@@ -63,18 +63,18 @@ include BASE_PATH . 'vendor' . DS . 'autoload' . EXT;
 /**
  * app configuration
  */
-$config = json_decode(file_get_contents(APP_PATH . 'config' . '.json'));
-if (! isset($config->site)) {
+$configApp = json_decode(file_get_contents(APP_PATH . 'config' . '.json'));
+if (! isset($configApp->site)) {
 	exit('please specify a app config');
 }
-define('SITE', $config->site);
+define('SITE', $configApp->site);
 
 
 /**
  * get error reporting in asap
  * whether it reports errors is determined by config.json
  */
-$error = new OriginalAppName\Error($config->errorReporting);
+$error = new OriginalAppName\Error($configApp->errorReporting);
 
 
 /**
@@ -86,11 +86,11 @@ define('SITE_PATH', APP_PATH . 'Site' . DS . SITE . DS);
 /**
  * site configuration
  */
-$config = include SITE_PATH . 'config' . EXT;
-if (! isset($config['assetVersion'])) {
+$configSite = include SITE_PATH . 'config' . EXT;
+if (! isset($configSite['assetVersion'])) {
 	exit('please specify a site config');
 }
-define('ASSET_VERSION', $config['assetVersion']);
+define('ASSET_VERSION', $configSite['assetVersion']);
 
 
 /**

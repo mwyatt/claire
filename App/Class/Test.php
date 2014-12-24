@@ -2,8 +2,11 @@
 
 namespace OriginalAppName;
 
+use OriginalAppName;
+
 
 /**
+ * you might need this https://security.google.com/settings/security/apppasswords
  * @author Martin Wyatt <martin.wyatt@gmail.com> 
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
@@ -115,12 +118,13 @@ exit;
 
 	public function mail()
 	{
-		$mail = new Mail($this->database, $this->config, $this->view);
-		$mail->send(array(
-			'to' => 'martin.wyatt@gmail.com',
-			'subject' => 'subject line',
-			'template' => 'mail/test'
-		));
+		$mail = new OriginalAppName\Mail;
+		$mail->send([
+			'subject' => 'Reset Password',
+			'from' => ['admin@site.com' => 'Admin'],
+			'to' => ['martin.wyatt@gmail.com'],
+			'body' => 'hello world'
+		]);
 		exit;
 	}
 

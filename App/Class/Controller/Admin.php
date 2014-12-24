@@ -55,7 +55,7 @@ class Admin extends \OriginalAppName\Controller\Options
 		// users love feedback, all the time!
 		$this
 			->view
-			->setDataKey('feedback', $sessionFeedback->pull('message'));
+			->setDataKey('feedback', $sessionFeedback->pull());
 	}
 
 

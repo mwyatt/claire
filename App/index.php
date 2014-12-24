@@ -17,7 +17,7 @@ use OriginalAppName;
  * boot session
  */
 session_start();
- 
+
 
 /**
  * setup registry
@@ -25,20 +25,15 @@ session_start();
 $registry = OriginalAppName\Registry::getInstance();
 $registry->set('system', new OriginalAppName\System);
 $registry->set('url', new OriginalAppName\Url);
-
-
-/**
- * store each unique url
- */
-$sessionUrlHistory = new OriginalAppName\Session\UrlHistory;
-$sessionUrlHistory->append($registry->get('url')->getCache('current'));
+$registry->set('configApp', $configApp);
+$registry->set('configSite', $configSite);
 
 
 /**
  * unit tests
  */
-// $test = new OriginalAppName\Test($system);
-// $test->genpassword();
+$test = new OriginalAppName\Test();
+$test->mail();
 
 
 /**

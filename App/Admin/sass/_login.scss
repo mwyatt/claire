@@ -3,10 +3,6 @@
 	padding: 5em 0;
     width: 15em;
 
-	.submit {
-		float: right;
-	}
-
 	.logo {
 	    display: block;
 	    text-align: center;
@@ -41,8 +37,28 @@
     @extend .a;
 }
 
-.login-button {
+.button-login {
+	float: right;
     position: relative;
     top: 17px;
     @include button;
+}
+
+.magnific-forgot-password .mfp-content {
+    max-width: 20em;
+
+    h2 {
+    	@extend %primary-title;
+    	@extend .h3;
+    }
+
+    .button-password-reset {
+    	float: right;
+    	@include button;
+    	margin-top: 1em;
+    }
+}
+
+.form-forgot-password {
+	@include clearfix;
 }

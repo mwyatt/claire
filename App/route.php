@@ -19,3 +19,9 @@ $routes->add('contentSingle', new Symfony\Component\Routing\Route(
 	'/{type}/{slug}/',
 	['controller' => 'OriginalAppName\\Controller\\Content']
 ));
+
+// content single
+$routes->add('ajaxAdminUserForgotPassword', new Symfony\Component\Routing\Route(
+	'/ajax/admin/user/forgot-password/',
+	['controller' => 'OriginalAppName\\Controller\\Ajax\\Admin\\User']
+));

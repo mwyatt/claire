@@ -1,0 +1,69 @@
+
+// resource
+$types: positive neutral negative;
+$typesColors: $color-primary-0 $color-gray-50 $color-primary-1;
+
+
+.feedback-stream {
+    position: relative;
+}
+
+.feedback-stream-position {
+    position: fixed;
+    left: 50%;
+    width: 40%;
+    margin-left: -20%;
+    top: 2em;
+    z-index: 9999;
+}
+
+.feedback-stream-single {
+    @include transition(all 200ms);
+    @include animation-name(fadeInDown);
+    @include animation-fill-mode(forwards);
+    @include animation-duration(
+        .5s);
+    @include animation-timing-function(ease);
+    @include animation-iteration-count(1);
+    background-color: white;
+    color: white;
+    padding: 1em 1.3em;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 1em 0;
+
+    &:hover {
+        opacity: .8;
+
+        &:after {
+            background-image: url(../image/cross-2.svg);
+            background-size: 16px 16px;
+            display: block;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 16px;
+            height: 16px;
+            content: '';
+        }
+    }
+
+    &.is-removed {
+        @include animation-name(fadeOutUp);
+    }
+
+    @for $index from 1 through 3 {
+
+        &.is-#{nth($types, $index)} {
+            background-color: nth($typesColors, $index);
+
+            &:hover {
+                background-color: lighten(nth($typesColors, $index), 2%);
+            }
+
+            &:active {
+                background-color: darken(nth($typesColors, $index), 2%);
+            }
+        }
+    }
+}

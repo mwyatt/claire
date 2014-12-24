@@ -79,19 +79,25 @@ module.exports = function(grunt) {
 						expand: true,
 						cwd: 'vendor/bower/jquery/dist',
 						src: 'jquery.js',
-						dest: 'js/vendor/jquery',
+						dest: '../../asset/admin/vendor/jquery',
 					},
 					{
 						expand: true,
 						cwd: 'vendor/bower/modernizr',
 						src: 'modernizr.js',
-						dest: 'asset/vendor',
+						dest: '../../asset/admin/vendor/modernizr',
 					},
 					{
 						expand: true,
 						cwd: 'vendor/bower/magnific-popup/dist',
 						src: 'jquery.magnific-popup.js',
 						dest: 'js/vendor/magnific-popup',
+					},
+					{
+						expand: true,
+						cwd: 'vendor/bower/jquery-serialize-object/dist',
+						src: '**',
+						dest: 'js/vendor/jquery-serialize-object',
 					},
 					{
 						expand: true,

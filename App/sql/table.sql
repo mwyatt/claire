@@ -91,3 +91,14 @@ CREATE TABLE IF NOT EXISTS `menu` (
   `name` VARCHAR(150) NULL,
   `keyGroup` VARCHAR(45) NULL,
   PRIMARY KEY (`id`));
+
+CREATE TABLE `mvc_mwyatt_1`.`mail` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `to` VARCHAR(255) NULL,
+  `from` VARCHAR(255) NULL,
+  `subject` VARCHAR(255) NULL,
+  `body` longtext,
+  `timeSent` int(10) unsigned DEFAULT '0'
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+

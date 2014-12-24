@@ -23,9 +23,35 @@ Controller.prototype.route = function(data) {
 
 
 Controller.prototype.global = function(data) {
+	var feedbackStream = new FeedbackStream;
 
 	// magnific inline
 	$('.js-magnific-inline').magnificPopup({
-		type: 'inline'
+		type: 'inline',
+		mainClass: 'magnific-forgot-password',
+		callbacks: {
+			open: function() {
+				$('.js-form-forgot-password')
+					.off('submit.forgot-password')
+					.on('submit.forgot-password', function(event) {
+						event.preventDefault();
+						$.ajax({
+							url: '../ajax/admin/user/forgot-password/',
+							type: 'get',
+							dataType: 'json',
+							data: $(this).closest('form').serializeObject(),
+							complete: function() {
+								console.log('always do this');
+							},
+							success: function(result) {
+								feedbackStream.createMessage(result.responseJSON);
+							},
+							error: function(result) {
+								feedbackStream.createMessage(result.responseJSON);
+							}
+						});
+				});
+			}
+		}
 	});
 };

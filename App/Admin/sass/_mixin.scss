@@ -50,6 +50,8 @@
  *      secondary
  */
 @mixin button($theme: "primary") {
+    border: none;
+    outline: none;
     cursor: pointer;
     text-decoration: none;
     text-align: center;

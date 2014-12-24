@@ -3,6 +3,7 @@
 namespace OriginalAppName\Admin\Controller;
 
 use OriginalAppName;
+use OriginalAppName\Registry;
 use OriginalAppName\Model;
 use OriginalAppName\Session;
 use OriginalAppName\View;
@@ -36,7 +37,9 @@ class Index extends \OriginalAppName\Controller\Admin
 			// attempt login
 			$serviceUser = new \OriginalAppName\Admin\Service\User;
 			$serviceUser->login($_REQUEST['email'], $_REQUEST['password']);
-			$this->routeAbsolute($sessionUrlHistory->getLatest());
+
+			// route to admin
+			return $this->route('admin');
 		}
 
 		// test if logged in
@@ -75,7 +78,7 @@ class Index extends \OriginalAppName\Controller\Admin
 		// template
 		$this
 			->view
-			->setDataKey('sessionForm', $sessionForm->getData());
+			->setDataKey('sessionForm', $sessionForm->pull('admin\login'));
 		return new Response($this->view->getTemplate('admin/login'));
 	}
 }

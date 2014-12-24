@@ -172,7 +172,20 @@ abstract class Model extends \OriginalAppName\Data
 
 		// execute
         foreach ($entities as $entity) {
-			$this->tryExecute(__METHOD__, $sth, $this->getSthExecutePositional($entity));
+echo '<pre>';
+print_r($entity);
+echo '</pre>';
+exit;
+
+        	echo '<pre>';
+        	print_r($this->getSthExecutePositional($entity));
+        	echo '</pre>';
+        	exit;
+        	
+
+
+			$sth->execute();
+			// $this->tryExecute(__METHOD__, $sth, );
 			if ($sth->rowCount()) {
 				$lastInsertIds[] = intval($this->database->dbh->lastInsertId());
 			}
@@ -370,20 +383,21 @@ abstract class Model extends \OriginalAppName\Data
 
 
 	/**
-	 * uses a mold to build sth execute data
+	 * uses a entity to build sth execute data
 	 * if 'time' involved assume that time needs to be inserted, could be
 	 * a bad idea
-	 * @param  object $mold instance of mold
+	 * @param  object $entity instance of entity
 	 * @return array       
 	 */
-	public function getSthExecutePositional($mold)
+	public function getSthExecutePositional($entity)
 	{
 		$excecuteData = array();
 		foreach ($this->fields as $field) {
+			$method = 'get' . ucfirst($field);
 			if ($this->isFieldNonWritable($field)) {
 				continue;
 			}
-			$excecuteData[] = $mold->$field;
+			$excecuteData[] = $entity->$method();
 		}
 		return $excecuteData;
 	}
