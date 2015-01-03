@@ -110,4 +110,11 @@ class Mail extends \OriginalAppName\Entity
 	    $this->timeSent = $timeSent;
 	    return $this;
 	}
+
+
+	public function beforeSave()
+	{
+		$this->setTo(implode(', ', $this->getTo()));
+		$this->setFrom(implode(', ', $this->getFrom()));
+	}
 }

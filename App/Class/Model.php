@@ -172,10 +172,16 @@ abstract class Model extends \OriginalAppName\Data
 
 		// execute
         foreach ($entities as $entity) {
+        	echo '<pre>';
+        	print_r($entity);
+        	echo '</pre>';
+        	// exit;
+        	
+        	$entity->beforeSave();
 echo '<pre>';
 print_r($entity);
 echo '</pre>';
-exit;
+// exit;
 
         	echo '<pre>';
         	print_r($this->getSthExecutePositional($entity));
