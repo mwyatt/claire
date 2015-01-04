@@ -125,7 +125,7 @@ exit;
 			'to' => ['martin.wyatt@gmail.com'],
 			'body' => 'hello world'
 		]);
-		exit;
+		exit('mail sent and stored in db');
 	}
 
 

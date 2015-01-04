@@ -87,7 +87,7 @@ class User extends \OriginalAppName\Session
 	public function setPasswordReset($key)
 	{
 		$this
-			->set('expire', time() + ($this->getTime('hour') / 2 /* 30min */));
+			->set('expire', time() + ($this->getTime('hour') / 2 /* 30min */))
 			->set('key', $key);
 	}
 }

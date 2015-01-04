@@ -32,8 +32,8 @@ $registry->set('configSite', $configSite);
 /**
  * unit tests
  */
-$test = new OriginalAppName\Test();
-$test->mail();
+// $test = new OriginalAppName\Test();
+// $test->mail();
 
 
 /**

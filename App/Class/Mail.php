@@ -73,6 +73,8 @@ class Mail extends \OriginalAppName\View
 		$this->setSwiftMailer(\Swift_Mailer::newInstance($transport));
 
 		// pallete
+		$this->setCss('email.css');
+
 		// $mailPallete = new \OriginalAppName\Mail\Pallete;
 		// $this->view->setDataKey('mail\styles', $mailPallete);
 
@@ -116,18 +118,18 @@ class Mail extends \OriginalAppName\View
 		$message->setBody($config['body']);
 
 		// send
-		// $result = $mailer->send($message);
+		$result = $mailer->send($message);
 
 		// store
-		// if (! $result) {
-		// 	return;
-		// }
+		if (! $result) {
+			return;
+		}
 
 		// store
 		$entityMail = new \OriginalAppName\Entity\Mail;
 		$entityMail
-			->setFrom($config['from'])
-			->setTo($config['to'])
+			->setFrom(implode(' ', $config['from']))
+			->setTo(implode(' ', $config['to']))
 			->setSubject($config['subject'])
 			->setBody($config['body'])
 			->setTimeSent(time());
@@ -145,7 +147,7 @@ class Mail extends \OriginalAppName\View
 	 */
 	public function setCss($path)
 	{
-		$css = file_get_contents(BASE_PATH . '/' . $path);
+		$css = file_get_contents($this->getAssetPath($path));
 		$cssSelectors = explode('}', $css);
 		$symbolOpeningCurly = '{';
 		$symbolDot = '.';

@@ -172,26 +172,7 @@ abstract class Model extends \OriginalAppName\Data
 
 		// execute
         foreach ($entities as $entity) {
-        	echo '<pre>';
-        	print_r($entity);
-        	echo '</pre>';
-        	// exit;
-        	
-        	$entity->beforeSave();
-echo '<pre>';
-print_r($entity);
-echo '</pre>';
-// exit;
-
-        	echo '<pre>';
-        	print_r($this->getSthExecutePositional($entity));
-        	echo '</pre>';
-        	exit;
-        	
-
-
-			$sth->execute();
-			// $this->tryExecute(__METHOD__, $sth, );
+			$sth->execute($this->getSthExecutePositional($entity));
 			if ($sth->rowCount()) {
 				$lastInsertIds[] = intval($this->database->dbh->lastInsertId());
 			}
@@ -360,7 +341,7 @@ echo '</pre>';
 			if (in_array($field, $this->fieldsNonWriteable)) {
 				continue;
 			}
-			$writeable[] = $field . $append;
+			$writeable[] = '`' . $field . '`' . $append;
 		}
 		return implode(', ', $writeable);
 	}
