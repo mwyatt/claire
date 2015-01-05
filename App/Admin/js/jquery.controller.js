@@ -14,6 +14,7 @@ Controller.prototype.route = function(data) {
 
 	// always fires
 	data.global(data);
+	data.pageLogin(data);
 
 	// // 
 	// if (system.page.hasClass('js-tennis-fixture-single')) {
@@ -24,13 +25,18 @@ Controller.prototype.route = function(data) {
 
 Controller.prototype.global = function(data) {
 	var feedbackStream = new FeedbackStream;
+};
 
-	// magnific inline
+
+Controller.prototype.pageLogin = function(data) {
+	console.log('value');
+	// magnific forgot password
 	$('.js-magnific-inline').magnificPopup({
 		type: 'inline',
 		mainClass: 'magnific-forgot-password',
 		callbacks: {
 			open: function() {
+	console.log('value');
 				$('.js-form-forgot-password')
 					.off('submit.forgot-password')
 					.on('submit.forgot-password', function(event) {
