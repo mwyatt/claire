@@ -52,7 +52,8 @@ class Admin extends \OriginalAppName\Controller\Options
 			$this->readUser();
 		}
 
-		// users love feedback, all the time!
+		// users love feedback, all the time! so give it to 
+		// them every page load!
 		$this
 			->view
 			->setDataKey('feedback', $sessionFeedback->pull());
