@@ -20,8 +20,14 @@ $routes->add('contentSingle', new Symfony\Component\Routing\Route(
 	['controller' => 'OriginalAppName\\Controller\\Content']
 ));
 
-// content single
+// forgot password, perhaps remove?
 $routes->add('ajaxAdminUserForgotPassword', new Symfony\Component\Routing\Route(
 	'/ajax/admin/user/forgot-password/',
 	['controller' => 'OriginalAppName\\Controller\\Ajax\\Admin\\User']
+));
+
+// validate
+$routes->add('validate', new Symfony\Component\Routing\Route(
+	'/validate/',
+	['controller' => 'OriginalAppName\\Controller\\Validate']
 ));
