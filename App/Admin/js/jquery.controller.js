@@ -14,50 +14,14 @@ Controller.prototype.route = function(data) {
 
 	// always fires
 	data.global(data);
-	data.pageLogin(data);
 
-	// // 
-	// if (system.page.hasClass('js-tennis-fixture-single')) {
-	// 	var page = new Page_Tennis_Fixture_Single();
-	// };
+	// 
+	if (system.page.hasClass('login')) {
+		var login = new ControllerLogin();
+	};
 };
 
 
 Controller.prototype.global = function(data) {
 	var feedbackStream = new FeedbackStream;
-};
-
-
-Controller.prototype.pageLogin = function(data) {
-	console.log('value');
-	// magnific forgot password
-	$('.js-magnific-inline').magnificPopup({
-		type: 'inline',
-		mainClass: 'magnific-forgot-password',
-		callbacks: {
-			open: function() {
-	console.log('value');
-				$('.js-form-forgot-password')
-					.off('submit.forgot-password')
-					.on('submit.forgot-password', function(event) {
-						event.preventDefault();
-						$.ajax({
-							url: '../ajax/admin/user/forgot-password/',
-							type: 'get',
-							dataType: 'json',
-							data: $(this).closest('form').serializeObject(),
-							complete: function() {
-								console.log('always do this');
-							},
-							success: function(result) {
-								feedbackStream.createMessage(result.responseJSON);
-							},
-							error: function(result) {
-								feedbackStream.createMessage(result.responseJSON);
-							}
-						});
-				});
-			}
-		}
-	});
 };

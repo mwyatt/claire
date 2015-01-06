@@ -6,8 +6,7 @@
  * @param {object} options 
  */
 var FeedbackStream = function (options) {
-	
-	// construct
+	this.createMessage(options);
 };
 
 

@@ -139,8 +139,10 @@ module.exports = function(grunt) {
 					separator: ';',
 				},
 				src: [
-					'js/vendor/**',
-					'js/**',
+					'js/vendor/jquery/*',
+					'js/vendor/jquery-serialize-object/*',
+					'js/vendor/magnific-popup/*',
+					'js/*',
 					'../../js/jquery.button-to-top.js',
 					'../../js/jquery.form.js',
 					'../../js/jquery.function.js',
