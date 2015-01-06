@@ -16,12 +16,11 @@ Controller.prototype.route = function(data) {
 	data.global(data);
 
 	// 
-	if (system.page.hasClass('login')) {
-		var login = new ControllerLogin();
+	if (data.page.hasClass('login')) {
+		var login = new ControllerLogin;
 	};
 };
 
 
 Controller.prototype.global = function(data) {
-	var feedbackStream = new FeedbackStream;
 };

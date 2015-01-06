@@ -5,7 +5,7 @@
  * simply jumps into if statements and boots functionality where required
  */
 var ControllerLogin = function () {
-	
+
 	// magnific forgot password
 	$('.js-magnific-inline').magnificPopup({
 		type: 'inline',
@@ -17,24 +17,15 @@ var ControllerLogin = function () {
 					.on('submit.forgot-password', function(event) {
 						event.preventDefault();
 						$.ajax({
-							url: '../ajax/admin/user/forgot-password/',
+							url: system.getUrl('base') + 'ajax/admin/user/forgot-password/',
 							type: 'get',
 							dataType: 'json',
 							data: $(this).closest('form').serializeObject(),
-							complete: function() {
-								console.log('always do this');
-							},
 							success: function(result) {
-								var feedbackStream = new FeedbackStream({
-									message: result.responseJSON,
-									type: 'positive'
-								});
+								var feedbackStream = new FeedbackStream(result.responseJSON);
 							},
 							error: function(result) {
-								var feedbackStream = new FeedbackStream({
-									message: result.responseJSON,
-									type: 'negative'
-								});
+								var feedbackStream = new FeedbackStream(result.responseJSON);
 							}
 						});
 				});

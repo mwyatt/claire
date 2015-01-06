@@ -74,26 +74,15 @@ class Mail extends \OriginalAppName\View
 
 		// pallete
 		$this->setCss('email.css');
-
-		// $mailPallete = new \OriginalAppName\Mail\Pallete;
-		// $this->view->setDataKey('mail\styles', $mailPallete);
-
-		// $this->set_css('asset/screen-email.css');
-
 	}
 
 /*
-[
-	'subject' => 'hi world',
-	'from' => [
-		'martin.wyatt@gmail.com' => 'Martin Wyatt'
-	],
-	'to' => [
-		'martin.wyatt@gmail.com',
-		'martin.wyatt@gmail.com'
-	],
-	'template' => 'path/to/template'
-]
+$mail->send([
+	'subject' => 'Reset Password',
+	'from' => ['admin@site.com' => 'Admin'],
+	'to' => [$email],
+	'body' => $body
+]);
 
  */
 	/**
@@ -106,16 +95,17 @@ class Mail extends \OriginalAppName\View
 
 		// resource
 		$mailer = $this->getSwiftMailer();
-		$message = \Swift_Message::newInstance($config['subject']);
+		$message = \Swift_Message::newInstance($config['subject'])
 
-		// ['email' => 'contact name']
-		$message->setFrom($config['from']);
+			// ['email' => 'contact name']
+			->setFrom($config['from'])
 
-		// ['email', 'email']
-		$message->setTo($config['to']);
+			// ['email', 'email']
+			->setTo($config['to'])
 
-		// html?
-		$message->setBody($config['body']);
+			// body
+			->addPart($config['body'], 'text/html')
+			->setBody($config['body']);
 
 		// send
 		$result = $mailer->send($message);
@@ -184,9 +174,8 @@ class Mail extends \OriginalAppName\View
 	 * goes through all styles and replaces any found {$key} with
 	 * its appropriate css
 	 */
-	public function tagReplaceCss()
+	public function replaceTags($body)
 	{
-		$body = $this->get_body();
 		foreach ($this->getCss() as $key => $css) {
 			$match = '{' . $key . '}';
 			if (strpos($body, $match) === false) {
@@ -194,8 +183,7 @@ class Mail extends \OriginalAppName\View
 			}
 			$body = str_replace($match, $css, $body);
 		}
-		$this->set_body($body);
-		return $this;
+		return $body;
 	}
 
 

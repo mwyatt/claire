@@ -1,6 +1,6 @@
 <?php
 
-namespace OriginalAppName\Controller\Ajax\Admin;
+namespace OriginalAppName\Controller\Ajax;
 
 use OriginalAppName;
 use OriginalAppName\Admin\Service;
@@ -18,7 +18,7 @@ class User extends \OriginalAppName\Controller\Ajax
 {
 
 
-	public function ajaxAdminUserForgotPassword($request)
+	public function ajaxAdminForgotPassword($request)
 	{
 
 		// validation
@@ -31,7 +31,7 @@ class User extends \OriginalAppName\Controller\Ajax
 		$serviceUser = new Service\User;
 
 		// reset the password
-		$serviceUser->resetPassword($_REQUEST['email']);
+		$serviceUser->forgotPassword($this->view, $_REQUEST['email']);
 
 		// feedback
 		return new Response(json_encode($sessionFeedback->pull()), Response::HTTP_NOT_FOUND);

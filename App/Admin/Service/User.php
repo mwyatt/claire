@@ -3,6 +3,7 @@
 namespace OriginalAppName\Admin\Service;
 
 use OriginalAppName;
+use OriginalAppName\View;
 use OriginalAppName\Session;
 use OriginalAppName\Model;
 use OriginalAppName\Helper;
@@ -29,7 +30,7 @@ class User extends \OriginalAppName\Service
 		// find user by email
 		$modelUser->readId([$email], 'email');
 		if (! $modelUser->getData()) {
-			return $sessionFeedback->setMessage('email address does not exist', 'negative');
+			return $sessionFeedback->setMessage('email address \'' . $email . '\' does not exist', 'negative');
 		}
 		$entityUser = current($modelUser->getData());
 
@@ -52,7 +53,7 @@ class User extends \OriginalAppName\Service
 	 * @param  string $email 
 	 * @return null        
 	 */
-	public function resetPassword($email)
+	public function forgotPassword($view, $email)
 	{
 	
 		// resource
@@ -63,20 +64,29 @@ class User extends \OriginalAppName\Service
 		// find user by email
 		$modelUser->readId([$email], 'email');
 		if (! $modelUser->getData()) {
-			return $sessionFeedback->setMessage('email address does not exist', 'negative');
+			return $sessionFeedback->setMessage('no account with that email address', 'negative');
 		}
 		$entityUser = current($modelUser->getData());
 
 		// generate random key and setup session to expect it
-		$sessionUser->setPasswordReset(Helper::getRandomString(20));
+		$key = Helper::getRandomString(20);
+		$sessionUser->setPasswordReset($key);
 
-		// send email out
+		// view for email
+		$view
+			->setDataKey('urlRecovery', $view->getUrl('validateAdminForgotPassword') . '?key=' . $key)
+			->setDataKey('key', $key)
+			->setDataKey('email', $email);
+		$body = $view->getTemplate('admin/mail/user/forgot-password');
+
+		// create email
 		$mail = new OriginalAppName\Mail;
+		$body = $mail->replaceTags($body);
 		$mail->send([
 			'subject' => 'Reset Password',
 			'from' => ['admin@site.com' => 'Admin'],
 			'to' => [$email],
-			'template' => 'path/to/template'
+			'body' => $body
 		]);
 		return $sessionFeedback->setMessage('an email has been sent to ' . $email, 'positive');
 	}

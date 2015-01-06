@@ -1,6 +1,6 @@
 <?php
 
-namespace OriginalAppName\Controller\Ajax\Admin;
+namespace OriginalAppName\Controller;
 
 use OriginalAppName;
 use OriginalAppName\Admin\Service;
@@ -10,6 +10,7 @@ use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 
 
 /**
+ * validation gateway for key codes
  * @author Martin Wyatt <martin.wyatt@gmail.com> 
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
@@ -18,22 +19,28 @@ class Validate extends \OriginalAppName\Controller
 {
 
 
-	public function ajaxAdminUserForgotPassword($request)
+	public function validateAdminForgotPassword($request)
 	{
 
+		// resources
+		$sessionUser = new Session\Admin\User;
+
+		// refresh expire
+		$sessionUser->refreshExpire();
+
 		// validation
-		if (! isset($_REQUEST['email'])) {
+		if (! isset($_REQUEST['key'])) {
 			throw new ResourceNotFoundException();
 		}
 
-		// resources
-		$sessionFeedback = new Session\Feedback;
-		$serviceUser = new Service\User;
+		// key must equal stored one
+		if (! $_REQUEST['key'] == $sessionUser->get('key')) {
+			throw new ResourceNotFoundException();
+		}
 
-		// reset the password
-		$serviceUser->resetPassword($_REQUEST['email']);
-
-		// feedback
-		return new Response(json_encode($sessionFeedback->pull()), Response::HTTP_NOT_FOUND);
+		// valid, setup session
+		$sessionUser->
+		$this->route('')
+		
 	}
 }
