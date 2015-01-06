@@ -82,15 +82,9 @@ class Content extends \OriginalAppName\Entity
 	);
 
 
-	/**
-	 * unpublished should not be shown on frontend
-	 */
 	const STATUS_UNPUBLISHED = 0;
+	
 
-
-	/**
-	 * published should be visible to the world!
-	 */
 	const STATUS_PUBLISHED = 1;
 
 
@@ -99,23 +93,6 @@ class Content extends \OriginalAppName\Entity
 	 * @var int
 	 */
 	protected $userId;
-
-
-
-	public function getStatusText()
-	{
-	    $statuses = self::getStatuses();
-	    return isset($statuses[$this->getStatus()]) ? $statuses[$this->getStatus()] : 'Unknown';
-	}
-
-
-	public static function getStatuses()
-	{
-	    return [
-	        self::STATUS_UNPUBLISHED => 'Unpublished',
-	        self::STATUS_PUBLISHED   => 'Published'
-	    ];
-	}
 
 
 	/**
@@ -223,7 +200,7 @@ class Content extends \OriginalAppName\Entity
 
 
 	/**
-	 * @return string 
+	 * @return int 
 	 */
 	public function getStatus() {
 	    return $this->status;
@@ -231,31 +208,10 @@ class Content extends \OriginalAppName\Entity
 	
 	
 	/**
-	 * refers to statusPossible to ensure this status can be done
-	 * otherwise it is not changed
-	 * @param string $status 
+	 * @param int $status 
 	 */
 	public function setStatus($status) {
-		if (in_array($status, $this->getStatusPossible())) {
-		    $this->status = $status;
-		}
-	    return $this;
-	}
-
-
-	/**
-	 * @return array 
-	 */
-	public function getStatusPossible() {
-	    return $this->statusPossible;
-	}
-	
-	
-	/**
-	 * @param array $statusPossible 
-	 */
-	public function setStatusPossible($statusPossible) {
-	    $this->statusPossible = $statusPossible;
+	    $this->status = $status;
 	    return $this;
 	}
 
@@ -345,5 +301,21 @@ class Content extends \OriginalAppName\Entity
 	public function getMetaKey($key)
 	{
 		return isset($this->meta[$key]) ? $this->meta[$key] : false;
+	}
+
+
+	public function getStatusText()
+	{
+	    $statuses = self::getStatuses();
+	    return isset($statuses[$this->getStatus()]) ? $statuses[$this->getStatus()] : 'Unknown';
+	}
+
+
+	public static function getStatuses()
+	{
+	    return [
+	        self::STATUS_UNPUBLISHED => 'Unpublished',
+	        self::STATUS_PUBLISHED   => 'Published'
+	    ];
 	}
 }

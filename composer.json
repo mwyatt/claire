@@ -1,4 +1,12 @@
 {
+    "name": "mwyatt/mvc",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Martin Wyatt",
+            "email": "martin.wyatt@gmail.com"
+        }
+    ],
     "require": {
         "intervention/image": "dev-master",
         "symfony/http-foundation": "2.5.6",
