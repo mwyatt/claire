@@ -1,6 +1,6 @@
 <?php
 
-namespace OriginalAppName\Session\Admin\User;
+namespace OriginalAppName\Admin\Session\User;
 
 
 /**
@@ -12,7 +12,7 @@ class ForgotPassword extends \OriginalAppName\Session\Expire
 {
 
 
-	protected $scope = 'OriginalAppName\Session\Admin\User\ForgotPassword';
+	protected $scope = 'OriginalAppName\Admin\Session\User\ForgotPassword';
 	
 
 
@@ -26,11 +26,5 @@ class ForgotPassword extends \OriginalAppName\Session\Expire
 		$this
 			->set('expire', time() + ($this->getTime('hour') / 2 /* 30min */))
 			->set('key', $key);
-	}
-
-
-	public function setFormForgotPassword($email)
-	{
-		
 	}
 }

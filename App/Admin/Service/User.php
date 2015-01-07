@@ -74,7 +74,7 @@ class User extends \OriginalAppName\Service
 
 		// view for email
 		$view
-			->setDataKey('urlRecovery', $view->getUrl('validateAdminForgotPassword') . '?key=' . $key)
+			->setDataKey('urlRecovery', $view->getUrl('adminUserForgotPassword') . '?key=' . $key)
 			->setDataKey('key', $key)
 			->setDataKey('email', $email);
 		$body = $view->getTemplate('admin/mail/user/forgot-password');

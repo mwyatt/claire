@@ -1,6 +1,6 @@
 <?php
 
-namespace OriginalAppName\Session\Admin;
+namespace OriginalAppName\Admin\Session;
 
 
 /**
@@ -12,7 +12,7 @@ class User extends \OriginalAppName\Session\Expire
 {
 
 
-	protected $scope = 'OriginalAppName\Session\Admin\User';
+	protected $scope = 'OriginalAppName\Admin\Session\User';
 	
 
 	/**
