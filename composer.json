@@ -18,13 +18,9 @@
     "autoload": {
         "psr-4": {
             "OriginalAppName\\": "App/Class/",
-            "OriginalAppName\\Session\\": "App/Class/Session/",
-            "OriginalAppName\\Service\\": "App/Class/Service/",
             "OriginalAppName\\Admin\\": "App/Admin/",
             "OriginalAppName\\Site\\": "App/Site/",
-            "OriginalAppName\\Site\\Mwyatt\\": "App/Site/Mwyatt/",
-            "OriginalAppName\\Site\\Mwyatt\\Controller\\": "App/Site/Mwyatt/Controller/",
-            "OriginalAppName\\Site\\Mwyatt\\Service\\": "App/Site/Mwyatt/Service/"
+            "OriginalAppName\\Site\\Mwyatt\\": "App/Site/Mwyatt/"
         }
     }
 }
