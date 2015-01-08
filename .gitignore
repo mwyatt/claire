@@ -5,6 +5,5 @@ app/config.php
 app/cache/
 config.php
 config.json
-asset/
 credentials.php
 config.json

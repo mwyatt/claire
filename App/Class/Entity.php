@@ -24,13 +24,25 @@ abstract class Entity
 	
 	
 	/**
-	 * @todo possibly not needed because when would you use it?
 	 * @param int $id 
 	 */
-	// public function setId($id) {
-	//     $this->id = $id;
-	//     return $this;
-	// }
+	public function setId($id) {
+	    $this->id = $id;
+	    return $this;
+	}
+
+
+	/**
+	 * consumes array on build for convinience
+	 * @param array $array 
+	 */
+	public function __construct($array = [])
+	{
+		if (! $array) {
+			return $this;
+		}
+		return $this->consumeArray($array);
+	}
 
 
 	/**
@@ -49,5 +61,19 @@ abstract class Entity
 	{
 		$registry = \OriginalAppName\Registry::getInstance();
 		return $registry->get('urlGenerator');
+	}
+
+
+	/**
+	 * merges array key => values with that of the entity
+	 * @param  array $array entity property -> value
+	 * @return object        
+	 */
+	public function consumeArray($array)
+	{
+		foreach ($array as $key => $value) {
+			$this->{'set' . ucfirst($key)}($value);
+		}
+		return $this;
 	}
 }
