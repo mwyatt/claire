@@ -3,6 +3,7 @@
 namespace OriginalAppName\Admin\Controller;
 
 use OriginalAppName;
+use OriginalAppName\Admin\Session as AdminSession;
 use OriginalAppName\Registry;
 use OriginalAppName\Model;
 use OriginalAppName\Session;
@@ -22,7 +23,7 @@ class Index extends \OriginalAppName\Controller\Admin
 
 	public function admin($request)
 	{
-		$sessionUser = new Session\Admin\User;
+		$sessionUser = new AdminSession\User;
 		$sessionForm = new Session\Form;
 		$sessionUrlHistory = new Session\UrlHistory;
 
@@ -54,7 +55,7 @@ class Index extends \OriginalAppName\Controller\Admin
 	{
 
 		// resource
-		$sessionUser = new Session\Admin\User;
+		$sessionUser = new AdminSession\User;
 		$modelUser = new Model\User;
 
 		// find user by id

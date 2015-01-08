@@ -2,7 +2,10 @@
 
 namespace OriginalAppName\Controller;
 
+use OriginalAppName\Model;
+use OriginalAppName\Json;
 use OriginalAppName\Session;
+use OriginalAppName\Admin\Session as AdminSession;
 use OriginalAppName\View;
 use OriginalAppName\Service;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,7 +34,7 @@ class Admin extends \OriginalAppName\Controller\Options
 	 */
 	public function defaultGlobalAdmin()
 	{
-		$sessionUser = new Session\Admin\User;
+		$sessionUser = new AdminSession\User;
 		$sessionFeedback = new Session\Feedback;
 
 		// not logged in
@@ -62,8 +65,8 @@ class Admin extends \OriginalAppName\Controller\Options
 
 	public function readUser()
 	{
-		$sessionUser = new Session\Admin\User;
-		$modelUser = new \OriginalAppName\Model\User;
+		$sessionUser = new AdminSession\User;
+		$modelUser = new Model\User;
 		$modelUser->readId([$sessionUser->get('id')]);
 		if (! $entityUser = current($modelUser->getData())) {
 			$sessionUser->delete();
@@ -77,7 +80,7 @@ class Admin extends \OriginalAppName\Controller\Options
 
 	public function readMenu()
 	{
-		$json = new \OriginalAppName\Json;
+		$json = new Json;
 		$json->read('admin/menu');
 		$this
 			->view

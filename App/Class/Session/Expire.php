@@ -1,6 +1,6 @@
 <?php
 
-namespace OriginalAppName\Session\Admin;
+namespace OriginalAppName\Session;
 
 
 /**

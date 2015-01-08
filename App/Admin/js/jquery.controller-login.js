@@ -17,7 +17,7 @@ var ControllerLogin = function () {
 					.on('submit.forgot-password', function(event) {
 						event.preventDefault();
 						$.ajax({
-							url: system.getUrl('base') + 'ajax/admin/user/forgot-password/',
+							url: system.getUrl('base') + 'admin/ajax/forgot-password/',
 							type: 'get',
 							dataType: 'json',
 							data: $(this).closest('form').serializeObject(),

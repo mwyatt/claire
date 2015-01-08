@@ -37,9 +37,9 @@ $routes->add('adminContentSingle', new Symfony\Component\Routing\Route(
 // ));
 
 // forgot password, perhaps remove?
-$routes->add('adminAjaxUserForgotPassword', new Symfony\Component\Routing\Route(
+$routes->add('adminAjaxForgotPassword', new Symfony\Component\Routing\Route(
 	'/admin/ajax/user/forgot-password/',
-	['controller' => 'OriginalAppName\\Admin\\Controller\\Ajax\\User']
+	['controller' => 'OriginalAppName\\Admin\\Controller\\Ajax\\ForgotPassword']
 ));
 
 // validate and show form
