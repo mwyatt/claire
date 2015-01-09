@@ -2,6 +2,7 @@
 
 namespace OriginalAppName\Controller;
 
+use OriginalAppName;
 use OriginalAppName\Model;
 use OriginalAppName\Json;
 use OriginalAppName\Session;
@@ -16,7 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Admin extends \OriginalAppName\Controller\Options
+class Admin extends \OriginalAppName\Admin\Controller\Feedback
 {
 
 
@@ -54,12 +55,6 @@ class Admin extends \OriginalAppName\Controller\Options
 			$this->readMenu();
 			$this->readUser();
 		}
-
-		// users love feedback, all the time! so give it to 
-		// them every page load!
-		$this
-			->view
-			->setDataKey('feedback', $sessionFeedback->pull());
 	}
 
 
@@ -74,16 +69,19 @@ class Admin extends \OriginalAppName\Controller\Options
 		}
 		$this
 			->view
-			->mergeData(['user', $entityUser]);
+			->setDataKey('user', $entityUser);
 	}
 
 
 	public function readMenu()
 	{
-		$json = new Json;
-		$json->read('admin/menu');
+		// menu primary
+		$modelMenu = new Model\Menu;
+		$modelMenu->readColumn('keyGroup', 'admin');
+		$menu = new OriginalAppName\Menu;
+		$menu->buildTree($modelMenu->getData());
 		$this
 			->view
-			->mergeData(['menu', $json->getData()]);
+			->setDataKey('menu', $menu->getData());
 	}
 }

@@ -1,0 +1,30 @@
+.menu-container {
+    @include transition(all 200ms);
+    box-shadow: 0 0 3px rgba($color-black, .3);
+    position: fixed;
+    left: -130px;
+    top: 0;
+    width: 180px;
+    background: $color-primary-0;
+    bottom: 0;
+}
+
+.menu-primary-level-1-link {
+    @include transition(all 200ms);
+    display: block;
+    padding: 1em;
+    color: white;
+    font-weight: 600;
+}
+
+.menu-primary-level-2-link {
+    display: none;
+}
+
+.menu-primary-level-1-link:hover {
+    background: darken($color-primary-0, 10%);
+}
+
+.menu-container:hover {
+    left: 0;
+}

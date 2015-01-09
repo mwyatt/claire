@@ -158,9 +158,7 @@ class Content extends \OriginalAppName\Entity
 	 * @param string $type 
 	 */
 	public function setType($type) {
-		if (in_array($type, $this->getTypePossible())) {
-		    $this->type = $type;
-		}
+	    $this->type = $type;
 	    return $this;
 	}
 
@@ -240,28 +238,16 @@ class Content extends \OriginalAppName\Entity
 	public function getUrl()
 	{
 		$generator = $this->getUrlGenerator();
+		if (! $this->getType() || ! $this->getSlug()) {
+			return;
+		}
 		return $generator->generate(
 			'contentSingle',
 			[
 				'type' => $this->getType(),
 				'slug' => $this->getSlug()
-			],
-			true
+			]
 		);
-	}
-
-
-	/**
-	 * example.com/admin/content/?id=22
-	 * @return string url
-	 */
-	public function getUrlAdmin()
-	{
-		return implode('/', [
-			$this->getUrlAbsolute(),
-			'admin',
-			'content?id=' . $this->getId()
-		]);
 	}
 
 

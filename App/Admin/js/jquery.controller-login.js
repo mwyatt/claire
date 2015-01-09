@@ -7,11 +7,13 @@
 var ControllerLogin = function () {
 
 	// magnific forgot password
+	var thisMagnific;
 	$('.js-magnific-inline').magnificPopup({
 		type: 'inline',
 		mainClass: 'magnific-forgot-password',
 		callbacks: {
 			open: function() {
+				thisMagnific = this;
 				$('.js-form-forgot-password')
 					.off('submit.forgot-password')
 					.on('submit.forgot-password', function(event) {
@@ -22,10 +24,13 @@ var ControllerLogin = function () {
 							dataType: 'json',
 							data: $(this).closest('form').serializeObject(),
 							success: function(result) {
-								var feedbackStream = new FeedbackStream(result.responseJSON);
+								console.log(result);
+								var feedbackStream = new FeedbackStream(result);
+								$.magnificPopup.close();
 							},
 							error: function(result) {
-								var feedbackStream = new FeedbackStream(result.responseJSON);
+								console.log(result);
+								var feedbackStream = new FeedbackStream(result);
 							}
 						});
 				});

@@ -75,8 +75,16 @@ class Route extends \OriginalAppName\System
 			// builds controller and sends to method
 		    $attributes = $matcher->match($request->getPathInfo());
 		    $controller = $attributes['controller'];
+		    $route = $attributes['_route'];
+
+		    // not clever?
+		    // but needed to lazy pass request array back to routes
+		    unset($attributes['controller']);
+		    unset($attributes['_route']);
+		    
+		    // init controller
 		    $controller = new $controller($attributes);
-		    $this->setResponse($controller->$attributes['_route']($attributes));
+		    $this->setResponse($controller->$route($attributes));
 		    $this->validUrl();
 		} catch (ResourceNotFoundException $e) {
 		    $controller = new Controller();

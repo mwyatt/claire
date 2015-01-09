@@ -17,7 +17,7 @@ var FeedbackStream = function (options) {
  * @return {object}        jquery
  */
 FeedbackStream.prototype.getMessage = function(config) {
-	return $('<div class="feedback-stream-single js-feedback-stream-single is-' + config.type + '">' + config.message + '</div>');
+	return $('<div class="feedback-stream-single js-feedback-stream-single is-' + config['type'] + '">' + config['message'] + '</div>');
 };
 
 

@@ -20,16 +20,17 @@
 
 <div class="wrap">
 
-<?php include($this->getTemplatePath('admin/_feedback-stream')) ?>
+<?php include $this->getTemplatePath('admin/_feedback-stream') ?>
 <?php if (isset($user)): ?>
+	<?php include $this->getTemplatePath('admin/header/_menu') ?>
 	
     <header class="main js-header-main">
     	<div class="header-inner wrap-full-width">
 	    	<div class="inner-title-nav-user">
-		        <a class="header-site-title" href="<?php echo $this->getUrl() ?>" target="_blank" title="Open Homepage"><?php echo $option['site_title']->getValue() ?></a>
+		        <a class="header-site-title" href="<?php echo $this->getUrl() ?>" target="_blank" title="Open Homepage"><?php echo $metaTitle ?></a>
 
-	<?php require_once($this->getTemplatePath('admin/header/_user')) ?>
-	<?php require_once($this->getTemplatePath('admin/header/_nav')) ?>
+	<?php include $this->getTemplatePath('admin/header/_user') ?>
+	<?php include $this->getTemplatePath('admin/header/_notify') ?>
 
 			</div>
 		</div>

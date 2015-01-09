@@ -29,10 +29,10 @@ class Index extends \OriginalAppName\Controller\Front
 		$entitiesProject = $serviceContent->readType('project');
 
 		// template
-		$this->view->mergeData([
-			'templateName' => 'home',
-			'projects' => $entitiesProject
-		]);
+		$this
+			->view
+			->setDataKey('templateName', 'home')
+			->setDataKey('projects', $entitiesProject);
 		return new Response($this->view->getTemplate('home'));
 	}
 

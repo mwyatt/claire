@@ -64,6 +64,12 @@ module.exports = function(grunt) {
 					},
 					{
 						expand: true,
+						cwd: 'vendor/bower/tinymce',
+						src: '**',
+						dest: 'asset/admin/vendor/tinymce/'
+					},
+					{
+						expand: true,
 						cwd: 'vendor/bower/magnific-popup/dist/',
 						src: 'magnific-popup.css',
 						dest: 'sass/vendor/magnific-popup/',

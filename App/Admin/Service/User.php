@@ -5,6 +5,7 @@ namespace OriginalAppName\Admin\Service;
 use OriginalAppName;
 use OriginalAppName\View;
 use OriginalAppName\Session;
+use OriginalAppName\Admin\Session as AdminSession;
 use OriginalAppName\Model;
 use OriginalAppName\Helper;
 
@@ -23,7 +24,7 @@ class User extends \OriginalAppName\Service
 	{
 
 		// resource
-		$sessionUser = new Session\Admin\User;
+		$sessionUser = new AdminSession\User;
 		$sessionFeedback = new Session\Feedback;
 		$modelUser = new Model\User;
 
@@ -57,7 +58,7 @@ class User extends \OriginalAppName\Service
 	{
 	
 		// resource
-		$sessionUser = new Session\Admin\User;
+		$sessionForgotPassword = new AdminSession\User\ForgotPassword;
 		$sessionFeedback = new Session\Feedback;
 		$modelUser = new Model\User;
 
@@ -70,12 +71,11 @@ class User extends \OriginalAppName\Service
 
 		// generate random key and setup session to expect it
 		$key = Helper::getRandomString(20);
-		$sessionUser->setPasswordReset($key);
+		$sessionForgotPassword->setForgotPassword($key, $entityUser->getId());
 
 		// view for email
 		$view
-			->setDataKey('urlRecovery', $view->getUrl('adminUserForgotPassword') . '?key=' . $key)
-			->setDataKey('key', $key)
+			->setDataKey('urlRecovery', $view->getUrl('adminForgotPassword', ['key' => $key]))
 			->setDataKey('email', $email);
 		$body = $view->getTemplate('admin/mail/user/forgot-password');
 

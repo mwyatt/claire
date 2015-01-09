@@ -19,11 +19,12 @@ class ForgotPassword extends \OriginalAppName\Session\Expire
 	/**
 	 * setup password reset interface
 	 * expiry and randomised key to match
-	 * 30 min expire time
+	 * email for getting user information in password reset
 	 */
-	public function setForgotPassword($key)
+	public function setForgotPassword($key, $userId)
 	{
 		$this
+			->set('userId', $userId)
 			->set('expire', time() + ($this->getTime('hour') / 2 /* 30min */))
 			->set('key', $key);
 	}

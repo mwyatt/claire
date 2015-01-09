@@ -12,7 +12,7 @@ class Meta extends \OriginalAppName\Entity\Meta
 {
 
 
-	protected $contentId;	
+	public $contentId;	
 
 
 	/**

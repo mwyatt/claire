@@ -80,10 +80,11 @@ class User extends \OriginalAppName\Entity
 	
 	
 	/**
+	 * @todo always crypt? good idea?
 	 * @param string $password 
 	 */
 	public function setPassword($password) {
-	    $this->password = $password;
+	    $this->password = crypt($password);
 	    return $this;
 	}
 

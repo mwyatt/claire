@@ -24,10 +24,10 @@ class User extends \OriginalAppName\Controller
 
 
 		// template
-		$this->view->mergeData([
-			'metaTitle' => $entityContent->getTitle(),
-			'contents' => $modelContent->getData()
-		]);
+		$this
+			->view
+			->setDataKey('metaTitle', $entityContent->getTitle())
+			->setDataKey('contents', $modelContent->getData());
 		return new Response($this->view->getTemplate('content-single'));
 		
 	}

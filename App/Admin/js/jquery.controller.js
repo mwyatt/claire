@@ -14,13 +14,18 @@ Controller.prototype.route = function(data) {
 
 	// always fires
 	data.global(data);
+	var thisController;
 
 	// 
 	if (data.page.hasClass('login')) {
-		var login = new ControllerLogin;
+		thisController = new ControllerLogin;
+	};
+
+	// 
+	if (data.page.hasClass('content-single')) {
+		thisController = new ControllerContentSingle;
 	};
 };
 
 
-Controller.prototype.global = function(data) {
-};
+Controller.prototype.global = function(data) {};

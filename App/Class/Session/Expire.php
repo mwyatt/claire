@@ -31,7 +31,7 @@ abstract class Expire extends \OriginalAppName\Session
 
 	public function isExpire()
 	{
-		return $this->getData('expire') > time();
+		return time() > $this->getData('expire');
 	}
 
 

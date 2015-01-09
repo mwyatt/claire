@@ -227,46 +227,50 @@ abstract class Model extends \OriginalAppName\Data
 	 * @param  string $by    defines the column to update by
 	 * @return int        
 	 */
-	public function update($mold, $properties = array())
+	public function update($mold, $where = [])
 	{
 
 		// statement
-		$statement = array();
+		$statement = [];
 		$statement[] = 'update';
 		$statement[] = $this->getTableName();
 		$statement[] = 'set';
 
 		// must be writable columns
-		$named = array();
-		foreach ($mold as $key => $value) {
-			if (in_array($key, $this->fieldsNonWriteable)) {
+		$named = [];
+		foreach ($this->getFields() as $field) {
+			if (in_array($field, $this->fieldsNonWriteable)) {
 				continue;
 			}
-			$named[] = $key . ' = :' . $key;
+			$named[] = $field . ' = :' . $field;
 		}
 		$statement[] = implode(', ', $named);
-		if (array_key_exists('where', $properties)) {
-			$statement[] = $this->getSqlWhere($properties['where']);
+		if ($where) {
+			$statement[] = $this->getSqlWhere($where);
 		}
 
 		// prepare
 		$sth = $this->database->dbh->prepare(implode(' ', $statement));
 
 		// bind
-		if (array_key_exists('where', $properties)) {
-			foreach ($properties['where'] as $key => $value) {
-				$this->bindValue($sth, 'where_' . $key, $value);
+		if ($where) {
+			foreach ($where as $key => $value) {
+				$this->bindValue($sth, 'where' . ucfirst($key), $value);
 			}
 		}
 		foreach ($this->getSthExecuteNamed($mold) as $key => $value) {
 			$this->bindValue($sth, $key, $value);
 		}
 
-		// execute
-		$this->tryExecute(__METHOD__, $sth);
+		// mode
+		$sth->setFetchMode(PDO::FETCH_CLASS, $this->getEntity());
+
+	    // execute
+		$sth->execute();
 
 		// return
-        return $sth->rowCount();
+		$this->setRowCount($sth->rowCount());
+        return $this;
 	}
 
 
@@ -275,30 +279,32 @@ abstract class Model extends \OriginalAppName\Data
 	 * @param  array  $properties 
 	 * @return int             
 	 */
-	public function delete($properties = array())
+	public function delete($where = [])
 	{
 
 		// build
-		$statement = array();
+		$statement = [];
 		$statement[] = 'delete from';
 		$statement[] = $this->getTableName();
-		if (array_key_exists('where', $properties)) {
-			$statement[] = $this->getSqlWhere($properties['where']);
-		}
+		$statement[] = $this->getSqlWhere($where);
 
 		// prepare
 		$sth = $this->database->dbh->prepare(implode(' ', $statement));
 
 		// bind
-		if (array_key_exists('where', $properties)) {
-			foreach ($properties['where'] as $key => $value) {
-				$this->bindValue($sth, 'where_' . $key, $value);
-			}
+		foreach ($where as $key => $value) {
+			$this->bindValue($sth, 'where' . ucfirst($key), $value);
 		}
 
-		// execute
-		$this->tryExecute(__METHOD__, $sth);
-		return $sth->rowCount();
+		// mode
+		$sth->setFetchMode(PDO::FETCH_CLASS, $this->getEntity());
+
+	    // execute
+		$sth->execute();
+
+		// return
+		$this->setRowCount($sth->rowCount());
+        return $this;
 	}
 
 
@@ -309,7 +315,7 @@ abstract class Model extends \OriginalAppName\Data
 	 */
 	public function getSqlSelect()
 	{
-		$statement = array();
+		$statement = [];
 		$statement[] = 'select';
 		$statement[] = $this->getSqlFields();
 		$statement[] = 'from';
@@ -336,7 +342,7 @@ abstract class Model extends \OriginalAppName\Data
 	 */ 
 	public function getSqlFieldsWriteable($append = '')
 	{
-		$writeable = array();
+		$writeable = [];
 		foreach ($this->fields as $field) {
 			if (in_array($field, $this->fieldsNonWriteable)) {
 				continue;
@@ -352,7 +358,7 @@ abstract class Model extends \OriginalAppName\Data
 	 */
 	public function getSqlPositionalPlaceholders()
 	{
-		$placeholders = array();
+		$placeholders = [];
 		foreach ($this->fields as $field) {
 			if (in_array($field, $this->fieldsNonWriteable)) {
 				continue;
@@ -378,7 +384,7 @@ abstract class Model extends \OriginalAppName\Data
 	 */
 	public function getSthExecutePositional($entity)
 	{
-		$excecuteData = array();
+		$excecuteData = [];
 		foreach ($this->fields as $field) {
 			$method = 'get' . ucfirst($field);
 			if ($this->isFieldNonWritable($field)) {
@@ -392,12 +398,12 @@ abstract class Model extends \OriginalAppName\Data
 
 	public function getSthExecuteNamed($mold)
 	{
-		$excecuteData = array();
-		foreach ($mold as $key => $value) {
-			if ($this->isFieldNonWritable($key)) {
+		$excecuteData = [];
+		foreach ($this->getFields() as $field) {
+			if ($this->isFieldNonWritable($field)) {
 				continue;
 			}
-			$excecuteData[':' . $key] = $value;
+			$excecuteData[':' . $field] = $mold->{'get' . ucfirst($field)}();
 		}
 		return $excecuteData;
 	}
@@ -408,9 +414,9 @@ abstract class Model extends \OriginalAppName\Data
 	 * @param  array  $where accepts ('column' => 'value') format
 	 * @return string        
 	 */
-	public function getSqlWhere($where = array())
+	public function getSqlWhere($where = [])
 	{
-		$statement = array();
+		$statement = [];
 		foreach ($where as $key => $value) {
 			$statement[] = ($statement ? 'and' : 'where');
 
@@ -421,7 +427,7 @@ abstract class Model extends \OriginalAppName\Data
 			}
 
 			// normal key = val
-			$statement[] = $key . ' = :where_' . $key;
+			$statement[] = $key . ' = :where' . ucfirst($key);
 		}
 		return implode(' ', $statement);
 	}
@@ -432,10 +438,10 @@ abstract class Model extends \OriginalAppName\Data
 	 * @param  array  $limit accepts ('key' => 'value', 'key' => 'value')
 	 * @return string        
 	 */
-	public function getSqlLimit($limit = array())
+	public function getSqlLimit($limit = [])
 	{
-		$statement = array();
-		$limits = array();
+		$statement = [];
+		$limits = [];
 		$statement[] = 'limit';
 		foreach ($limit as $key => $value) {
 			$limits[] = ':limit_' . $key;
@@ -658,7 +664,7 @@ abstract class Model extends \OriginalAppName\Data
 	 * @param  string $errorCode 
 	 * @return object           
 	 */
-	public function tryExecute($errorCode, $sth, $sthData = array())
+	public function tryExecute($errorCode, $sth, $sthData = [])
 	{
 		try {
 			if ($sthData) {
@@ -696,6 +702,23 @@ abstract class Model extends \OriginalAppName\Data
 	 */
 	public function setLastInsertIds($lastInsertIds) {
 	    $this->lastInsertIds = $lastInsertIds;
+	    return $this;
+	}
+
+
+	/**
+	 * @return int 
+	 */
+	public function getRowCount() {
+	    return $this->rowCount;
+	}
+	
+	
+	/**
+	 * @param int $rowCount 
+	 */
+	public function setRowCount($rowCount) {
+	    $this->rowCount = $rowCount;
 	    return $this;
 	}
 }

@@ -12,7 +12,7 @@ abstract class Entity
 {
 
 
-	protected $id;
+	public $id;
 
 
 	/**
@@ -72,7 +72,11 @@ abstract class Entity
 	public function consumeArray($array)
 	{
 		foreach ($array as $key => $value) {
-			$this->{'set' . ucfirst($key)}($value);
+			$method = 'set' . ucfirst($key);
+			if (! method_exists($this, $method)) {
+				continue;
+			}
+			$this->$method($value);
 		}
 		return $this;
 	}

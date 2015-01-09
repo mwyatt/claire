@@ -1,48 +1,75 @@
 <?php
 
+namespace OriginalAppName\Admin\Controller\Ajax\Content;
+
+use OriginalAppName;
+use OriginalAppName\Admin\Service;
+use OriginalAppName\Entity;
+use OriginalAppName\Session;
+use OriginalAppName\Model;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Exception\ResourceNotFoundException;
+
 
 /**
- * ajax
- *
- * PHP version 5
- * 
  * @author Martin Wyatt <martin.wyatt@gmail.com> 
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Controller_Admin_Ajax_Content_Meta extends Controller_Admin
+class Meta extends \OriginalAppName\Admin\Controller\Ajax
 {
 
 
-	public function initialise()
+	public function adminAjaxContentMetaAll($request)
 	{
-		if (! array_key_exists('content_id', $_GET) || ! array_key_exists('name', $_GET) || ! array_key_exists('values', $_GET)) {
-			exit (json_encode(false));
+
+		// validate
+		if (! isset($_GET['contentId'])) {
+			throw new ResourceNotFoundException;
 		}
-		if (! is_array($_GET['values'])) {
-			exit (json_encode(false));
-		}
+
+		// resource
+		$modelContentMeta = new Model\Content\Meta;
+
+		// action
+		$modelContentMeta->readColumn('contentId', $_GET['contentId']);
+
+		// output
+		return new Response(json_encode($modelContentMeta->getData()));
 	}
 
 
-	/**
-	 * creates the desired meta key
-	 * @return null|string 
-	 */
-	public function create() {
-		$modelContentMeta = new model_content_meta($this);
-		if (! $modelContentMeta->create(
-			$_GET['content_id']
-			, $_GET['name']
-			, $_GET['values']
-		)) {
-			exit (json_encode(false));
+	public function adminAjaxContentMetaCreate($request)
+	{
+
+		// validate
+		if (! isset($_GET['contentId']) || ! isset($_GET['name']) || ! isset($_GET['value'])) {
+			throw new ResourceNotFoundException;
 		}
-		exit (json_encode(true));
+
+		// resource
+		$modelContentMeta = new Model\Content\Meta;
+		$entityContentMeta = new Entity\Content\Meta;
+
+		// action
+		$entityContentMeta->consumeArray($_GET);
+		$modelContentMeta
+			->create([$entityContentMeta])
+			->readId($modelContentMeta->getLastInsertIds());
+
+		// output
+		return new Response(json_encode($modelContentMeta->getData()));
 	}
 
 
-	public function delete() {
+	public function adminAjaxContentMetaDelete($request)
+	{
+
+
+
+
+
+		
 		$modelContentMeta = new model_content_meta($this);
 		if (! $modelContentMeta->delete(
 			$_GET['content_id']

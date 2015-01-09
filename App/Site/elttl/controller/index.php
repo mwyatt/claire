@@ -54,12 +54,12 @@ class Index extends \OriginalAppName\Controller\Front
 		}
 
 		// template
-		$this->view->mergeData([
-			'ads' => $ads,
-			'covers' => $covers,
-			'galleryPaths' => $files,
-			'contents' => $modelContent->getData()
-		]);
+		$this
+			->view
+			->setDataKey('ads', $ads)
+			->setDataKey('covers', $covers)
+			->setDataKey('galleryPaths', $files)
+			->setDataKey('contents', $modelContent->getData());
 		return new Response($this->view->getTemplate('home'));
 	}
 

@@ -3,8 +3,10 @@
 namespace OriginalAppName\Admin\Controller;
 
 use OriginalAppName;
+use OriginalAppName\Entity;
 use OriginalAppName\Model;
 use OriginalAppName\Session;
+use OriginalAppName\Admin\Session as AdminSession;
 use OriginalAppName\View;
 use OriginalAppName\Service;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,6 +19,82 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class Content extends \OriginalAppName\Controller\Admin
 {
+
+
+	/**
+	 * content list
+	 * @return object Response
+	 */
+	public function adminContentAll($request) {
+		
+		// resource
+		$modelContent = new Model\Content;
+		$modelContent->readColumn('type', $request['type']);
+		$sessionFeedback = new Session\Feedback;
+
+		// delete
+		if (isset($_GET['delete'])) {
+			$modelContent->delete(['id' => $_GET['delete']]);
+			$sessionFeedback->setMessage('content ' . $_GET['delete'] . ' deleted');
+			$this->route('adminContentAll', $request);
+		}
+
+		// render
+		$this
+			->view
+			->setDataKey('contents', $modelContent->getData())
+			->setDataKey('contentType', $request['type']);
+		return new Response($this->view->getTemplate('admin/content/all'));
+	}
+
+
+	public function adminContentCreate($request)
+	{
+
+		// resource
+		$entityContent = new Entity\Content;
+		$modelContent = new Model\Content;
+		$sessionUser = new AdminSession\User;
+		$sessionFeedback = new Session\Feedback;
+
+		// create new content
+		$entityContent
+			->setType($request['type'])
+			->setTimePublished(time())
+			->setUserId($sessionUser->get('id'));
+		$modelContent->create([$entityContent]);
+
+		// route to single page
+		$sessionFeedback->setMessage('draft created', 'positive');
+		$this->route('adminContentSingle', ['type' => $request['type'], 'id' => current($modelContent->getLastInsertIds())]);
+	}
+
+
+	public function adminContentSingle($request)
+	{
+
+		// resource
+		$modelContent = new Model\Content;
+		$sessionFeedback = new Session\Feedback;
+
+		// read single
+		$modelContent->readId([$request['id']]);
+		$entityContent = $modelContent->getDataFirst();
+
+		// save
+		if ($_POST) {
+			$entityContent->consumeArray($_POST['content']);
+			$modelContent->update($entityContent, ['id' => $entityContent->getId()]);
+			$sessionFeedback->setMessage('content ' . $entityContent->getId() . ' saved', 'positive');
+			$this->route('adminContentSingle', $request);
+		}
+
+		// render
+		$this
+			->view
+			->setDataKey('content', $entityContent);
+		return new Response($this->view->getTemplate('admin/content/single'));
+	}
 
 
 	/**
@@ -71,28 +149,6 @@ class Content extends \OriginalAppName\Controller\Admin
 			return $this->edit();
 		}
 		$this->content();
-	}
-
-
-	/**
-	 * content list
-	 * @return object Response
-	 */
-	public function adminContentAll() {
-		$modelContent = new Model\Content;
-		$modelContent->read();
-
-echo '<pre>';
-print_r($modelContent);
-echo '</pre>';
-exit;
-
-
-		$this->view
-			// ->setDataKey('statuses', $statuses)
-			->setDataKey('statuses', '')
-			->setDataKey('contents', $modelContent)
-			->getTemplate('admin/content/list');
 	}
 
 

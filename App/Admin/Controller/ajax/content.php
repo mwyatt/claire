@@ -1,16 +1,21 @@
 <?php
 
+namespace OriginalAppName\Admin\Controller\Ajax;
+
+use OriginalAppName;
+use OriginalAppName\Admin\Service;
+use OriginalAppName\Session;
+use OriginalAppName\Model;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Exception\ResourceNotFoundException;
+
 
 /**
- * ajax
- *
- * PHP version 5
- * 
  * @author Martin Wyatt <martin.wyatt@gmail.com> 
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Controller_Admin_Ajax_Content extends Controller_Admin
+class Content extends \OriginalAppName\Admin\Controller\Ajax
 {
 
 	

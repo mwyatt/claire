@@ -5,6 +5,7 @@ namespace OriginalAppName\Admin\Controller\Ajax;
 use OriginalAppName;
 use OriginalAppName\Admin\Service;
 use OriginalAppName\Session;
+use OriginalAppName\Model;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 
@@ -34,6 +35,6 @@ class ForgotPassword extends \OriginalAppName\Controller\Ajax
 		$serviceUser->forgotPassword($this->view, $_REQUEST['email']);
 
 		// feedback
-		return new Response(json_encode($sessionFeedback->pull()), Response::HTTP_NOT_FOUND);
+		return new Response(json_encode($sessionFeedback->pull()));
 	}
 }

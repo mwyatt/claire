@@ -42,12 +42,12 @@ class Content extends \OriginalAppName\Controller\Front
 		$entityContent = current($modelContent->getData());
 
 		// template
-		$this->view->mergeData([
-			'metaTitle' => 'All ' . $entityContent->getType(),
-			'pagination' => $pagination,
-			'contentSingle' => $entityContent,
-			'contents' => $modelContent->getData()
-		]);
+		$this
+			->view
+			->setDataKey('metaTitle', 'All ' . $entityContent->getType())
+			->setDataKey('pagination', $pagination)
+			->setDataKey('contentSingle', $entityContent)
+			->setDataKey('contents', $modelContent->getData());
 		return new Response($this->view->getTemplate('content'));
 	}
 
@@ -74,10 +74,10 @@ class Content extends \OriginalAppName\Controller\Front
 		}
 
 		// template
-		$this->view->mergeData([
-			'metaTitle' => $entityContent->getTitle(),
-			'contents' => $modelContent->getData()
-		]);
+		$this
+			->view
+			->setDataKey('metaTitle', $entityContent->getTitle())
+			->setDataKey('contents', $modelContent->getData());
 		return new Response($this->view->getTemplate('content-single'));
 	}
 }

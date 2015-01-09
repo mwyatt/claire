@@ -50,7 +50,7 @@ class Controller
 		// template
 		$this
 			->view
-			->mergeData(['metaTitle' => 'Not found']);
+			->setDataKey('metaTitle', 'Not found');
 		return new Response($this->view->getTemplate('not-found'), Response::HTTP_NOT_FOUND);
 	}
 

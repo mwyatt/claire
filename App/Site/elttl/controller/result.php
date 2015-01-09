@@ -53,10 +53,10 @@ class Result extends \OriginalAppName\Controller\Front
 		$serviceYear = new Elttl\Service\Tennis\Year();
 
 		// template
-		$this->view->mergeData([
-			'metaTitle' => 'All seasons',
-			'years' => $serviceYear->read()
-		]);
+		$this
+			->view
+			->setDataKey('metaTitle', 'All seasons')
+			->setDataKey('years', $serviceYear->read());
 		return new Response($this->view->getTemplate('year'));
 	}
 
@@ -74,11 +74,11 @@ class Result extends \OriginalAppName\Controller\Front
 		$modelDivision->readId([$yearSingle->getId()], 'yearId');
 
 		// template
-		$this->view->mergeData([
-			'metaTitle' => 'Divisions in season ' . $yearSingle->getNameFull(),
-			'divisions' => $modelDivision->getData(),
-			'yearSingle' => $yearSingle
-		]);
+		$this
+			->view
+			->setDataKey('metaTitle', 'Divisions in season ' . $yearSingle->getNameFull())
+			->setDataKey('divisions', $modelDivision->getData())
+			->setDataKey('yearSingle', $yearSingle);
 		return new Response($this->view->getTemplate('tennis/division-list'));
 	}
 
