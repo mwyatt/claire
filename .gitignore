@@ -7,9 +7,3 @@ config.php
 config.json
 credentials.php
 config.json
-asset/*.js
-asset/*.css
-asset/*/*.js
-asset/*/*.css
-asset/*/*/*.js
-asset/*/*/*.css
