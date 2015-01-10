@@ -69,7 +69,7 @@ class Admin extends \OriginalAppName\Admin\Controller\Feedback
 		}
 		$this
 			->view
-			->setDataKey('user', $entityUser);
+			->setDataKey('adminUser', $entityUser);
 	}
 
 

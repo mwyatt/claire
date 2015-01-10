@@ -2,6 +2,8 @@
 
 namespace OriginalAppName\Admin\Session;
 
+use OriginalAppName\Session;
+
 
 /**
  * @author Martin Wyatt <martin.wyatt@gmail.com> 
@@ -43,7 +45,7 @@ class User extends \OriginalAppName\Session\Expire
 
 		// provide feedback as to what has happened
 		if (! $this->refreshExpire()) {
-			$sessionFeedback = new OriginalAppName\Session\Admin\Feedback();
+			$sessionFeedback = new Session\Feedback;
 			$sessionFeedback->set('You have been logged out due to inactivity');
 			return;
 		}

@@ -40,6 +40,6 @@ abstract class Expire extends \OriginalAppName\Session
 	 */
 	public function setExpire()
 	{
-		return $this->set('expire', time() + $this->getTime('hour') / 2);
+		return $this->set('expire', time() + $this->getTime('hour'));
 	}
 }

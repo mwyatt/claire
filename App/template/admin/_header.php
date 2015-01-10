@@ -21,7 +21,7 @@
 <div class="wrap">
 
 <?php include $this->getTemplatePath('admin/_feedback-stream') ?>
-<?php if (isset($user)): ?>
+<?php if (isset($adminUser)): ?>
 	<?php include $this->getTemplatePath('admin/header/_menu') ?>
 	
     <header class="main js-header-main">

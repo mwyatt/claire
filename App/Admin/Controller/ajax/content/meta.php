@@ -65,19 +65,18 @@ class Meta extends \OriginalAppName\Admin\Controller\Ajax
 	public function adminAjaxContentMetaDelete($request)
 	{
 
-
-
-
-
-		
-		$modelContentMeta = new model_content_meta($this);
-		if (! $modelContentMeta->delete(
-			$_GET['content_id']
-			, $_GET['name']
-			, $_GET['values']
-		)) {
-			exit (json_encode(false));
+		// validate
+		if (! isset($_GET['id'])) {
+			throw new ResourceNotFoundException;
 		}
-		exit (json_encode(true));
+
+		// resource
+		$modelContentMeta = new Model\Content\Meta;
+
+		// action
+		$modelContentMeta->delete(['id' => $_GET['id']]);
+
+		// output
+		return new Response(json_encode($modelContentMeta->getRowCount()));
 	}
 }

@@ -19,7 +19,7 @@
 	    </div>
 	    <div class="block-margins">
         	<label class="form-content-label-title" for="form-content-slug">Slug</label>
-        	<input id="form-content-slug" class="required js-input-slug" type="text" name="content[slug]" maxlength="75" value="<?php echo $content->getSlug() ?>" autofocus="autofocus">
+        	<input id="form-content-slug" class="required js-input-slug" type="text" name="content[slug]" maxlength="75" value="<?php echo $content->getSlug() ?>">
 	    </div>
 	    <div class="block-margins">
         	<label class="form-content-label-title" for="form-content-html">Html</label>

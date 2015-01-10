@@ -20,6 +20,21 @@ $routes->add('adminContentSingle', new Symfony\Component\Routing\Route(
 	['controller' => 'OriginalAppName\\Admin\\Controller\\Content']
 ));
 
+$routes->add('adminUserAll', new Symfony\Component\Routing\Route(
+	'/admin/user/',
+	['controller' => 'OriginalAppName\\Admin\\Controller\\User']
+));
+
+$routes->add('adminUserCreate', new Symfony\Component\Routing\Route(
+	'/admin/user/create/',
+	['controller' => 'OriginalAppName\\Admin\\Controller\\User']
+));
+
+$routes->add('adminUserSingle', new Symfony\Component\Routing\Route(
+	'/admin/user/{id}/',
+	['controller' => 'OriginalAppName\\Admin\\Controller\\User']
+));
+
 // forgot password, perhaps remove?
 $routes->add('adminAjaxForgotPassword', new Symfony\Component\Routing\Route(
 	'/admin/ajax/forgot-password/',
