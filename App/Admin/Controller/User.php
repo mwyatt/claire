@@ -71,16 +71,31 @@ class User extends \OriginalAppName\Controller\Admin
 
 		// save
 		if ($_POST) {
+
+			// consume post
+			$entityUser
+				->setEmail($_POST['user']['email'])
+				->setNameFirst($_POST['user']['nameFirst'])
+				->setNameLast($_POST['user']['nameLast'])
+				->setLevel($_POST['user']['level']);
+
+			// optional
 			if (! $entityUser->getTimeRegistered()) {
 				$entityUser->setTimeRegistered(time());
 			}
-			$entityUser->consumeArray($_POST['user']);
+			if ($_POST['user']['password']) {
+				$entityUser->setPassword($_POST['user']['password']);
+			}
+
+			// update / create
 			if ($entityUser->getId()) {
 				$modelUser->update($entityUser, ['id' => $entityUser->getId()]);
 			} else {
 				$modelUser->create([$entityUser]);
 				$entityUser->setId(current($modelUser->getLastInsertIds()));
 			}
+
+			// feeedback / route
 			$sessionFeedback->setMessage('user ' . $entityUser->getId() . ' saved', 'positive');
 			$this->route('adminUserSingle', ['id' => $entityUser->getId()]);
 		}

@@ -25,6 +25,11 @@ Controller.prototype.route = function(data) {
 	if (data.page.hasClass('content-single')) {
 		thisController = new ControllerContentSingle;
 	};
+
+	// 
+	if (data.page.hasClass('option-all')) {
+		thisController = new ControllerOption;
+	};
 };
 
 

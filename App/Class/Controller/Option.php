@@ -20,7 +20,7 @@ use OriginalAppName;
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Options extends \OriginalAppName\Controller
+class Option extends \OriginalAppName\Controller
 {
 
 
@@ -38,9 +38,9 @@ class Options extends \OriginalAppName\Controller
 	 */
 	public function readOptions()
 	{
-		$serviceOptions = new OriginalAppName\Service\Options();
+		$serviceOption = new OriginalAppName\Service\Option();
 		$this
 			->view
-			->setDataKey('option', $serviceOptions->read());
+			->setDataKey('option', $serviceOption->read());
 	}
 }

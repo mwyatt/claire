@@ -10,7 +10,7 @@ use OriginalAppName\Session;
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Feedback extends \OriginalAppName\Controller\Options
+class Feedback extends \OriginalAppName\Controller\Option
 {
 
 

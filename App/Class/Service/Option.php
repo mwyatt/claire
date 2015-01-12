@@ -9,16 +9,16 @@ use OriginalAppName\Model;
  * services group up controller commands
  * making the controllers more readable and tidy
  */
-class Options extends \OriginalAppName\Service
+class Option extends \OriginalAppName\Service
 {
 
 
 	public function read()
 	{
-		$modelOptions = new Model\Options();
-		$modelOptions
+		$modelOption = new Model\Option();
+		$modelOption
 			->read()
 			->keyDataByProperty('name');
-		return $modelOptions->getData();
+		return $modelOption->getData();
 	}
 }

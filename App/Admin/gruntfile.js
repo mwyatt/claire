@@ -152,6 +152,7 @@ module.exports = function(grunt) {
 					'js/jquery.content-meta.js',
 					'js/jquery.controller.js',
 					'js/jquery.controllerContentSingle.js',
+					'js/jquery.controllerOption.js',
 					'js/jquery.controller-login.js',
 					'js/jquery.dismiss.js',
 					'js/jquery.feedback-stream.js',

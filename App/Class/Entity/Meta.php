@@ -4,7 +4,6 @@ namespace OriginalAppName\Entity;
 
 
 /**
- * combines any two tables together in association
  * @author Martin Wyatt <martin.wyatt@gmail.com> 
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
@@ -13,82 +12,50 @@ class Meta extends \OriginalAppName\Entity
 {
 
 
-	public $leftId;
-	
-
-	public $leftTable;
-
-
-	public $rightId;
-	
-
-	public $rightTable;
-
-
 	/**
-	 * @return int 
+	 * key to represent the connection
+	 * @var string
 	 */
-	public function getLeftId() {
-	    return $this->leftId;
-	}
-	
+	public $name;
+
 	
 	/**
-	 * @param int $leftId 
+	 * value often connecting to another row in another table
+	 * @var bool|int|string 
 	 */
-	public function setLeftId($leftId) {
-	    $this->leftId = $leftId;
-	    return $this;
-	}
+	public $value;
 
 
 	/**
 	 * @return string 
 	 */
-	public function getLeftTable() {
-	    return $this->leftTable;
+	public function getName() {
+	    return $this->name;
 	}
 	
 	
 	/**
-	 * @param string $leftTable 
+	 * @param string $name 
 	 */
-	public function setLeftTable($leftTable) {
-	    $this->leftTable = $leftTable;
+	public function setName($name) {
+	    $this->name = $name;
 	    return $this;
 	}
 
 
 	/**
-	 * @return int 
+	 * @return bool|int|string 
 	 */
-	public function getRightId() {
-	    return $this->rightId;
+	public function getValue() {
+	    return $this->value;
 	}
 	
 	
 	/**
-	 * @param int $rightId 
+	 * @param bool|int|string $value 
 	 */
-	public function setRightId($rightId) {
-	    $this->rightId = $rightId;
-	    return $this;
-	}
-
-
-	/**
-	 * @return string 
-	 */
-	public function getRightTable() {
-	    return $this->rightTable;
-	}
-	
-	
-	/**
-	 * @param string $rightTable 
-	 */
-	public function setRightTable($rightTable) {
-	    $this->rightTable = $rightTable;
+	public function setValue($value) {
+	    $this->value = $value;
 	    return $this;
 	}
 }
