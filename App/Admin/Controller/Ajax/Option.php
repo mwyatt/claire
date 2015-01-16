@@ -21,7 +21,7 @@ class Option extends \OriginalAppName\Admin\Controller\Ajax
 {
 
 
-	public function adminAjaxOptionAll($request)
+	public function adminAjaxOptionRead($request)
 	{
 
 		// resource
@@ -35,7 +35,7 @@ class Option extends \OriginalAppName\Admin\Controller\Ajax
 	}
 
 
-	public function adminAjaxOptionEdit($request)
+	public function adminAjaxOptionCreate($request)
 	{
 
 		// validate
@@ -54,7 +54,7 @@ class Option extends \OriginalAppName\Admin\Controller\Ajax
 			->readId($modelOption->getLastInsertIds());
 
 		// output
-		return new Response(json_encode($modelOption->getData()));
+		return new Response(json_encode($modelOption->getDataFirst()));
 	}
 
 
@@ -74,5 +74,15 @@ class Option extends \OriginalAppName\Admin\Controller\Ajax
 
 		// output
 		return new Response(json_encode($modelOption->getRowCount()));
+	}
+
+
+	public function adminAjaxOptionUpdate($request)
+	{
+		echo '<pre>';
+		print_r($request);
+		echo '</pre>';
+		exit;
+		
 	}
 }

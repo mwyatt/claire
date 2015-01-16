@@ -46,7 +46,7 @@ $routes->add('adminAjaxForgotPassword', new Symfony\Component\Routing\Route(
 	['controller' => 'OriginalAppName\\Admin\\Controller\\Ajax\\ForgotPassword']
 ));
 
-$routes->add('adminAjaxOptionAll', new Symfony\Component\Routing\Route(
+$routes->add('adminAjaxOptionRead', new Symfony\Component\Routing\Route(
 	'/admin/ajax/option/',
 	['controller' => 'OriginalAppName\\Admin\\Controller\\Ajax\\Option']
 ));
@@ -58,6 +58,11 @@ $routes->add('adminAjaxOptionCreate', new Symfony\Component\Routing\Route(
 
 $routes->add('adminAjaxOptionDelete', new Symfony\Component\Routing\Route(
 	'/admin/ajax/option/delete/',
+	['controller' => 'OriginalAppName\\Admin\\Controller\\Ajax\\Option']
+));
+
+$routes->add('adminAjaxOptionUpdate', new Symfony\Component\Routing\Route(
+	'/admin/ajax/option/{id}/',
 	['controller' => 'OriginalAppName\\Admin\\Controller\\Ajax\\Option']
 ));
 
