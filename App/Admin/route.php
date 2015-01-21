@@ -46,41 +46,43 @@ $routes->add('adminAjaxForgotPassword', new Symfony\Component\Routing\Route(
 	['controller' => 'OriginalAppName\\Admin\\Controller\\Ajax\\ForgotPassword']
 ));
 
+// ajax/option
 $routes->add('adminAjaxOptionRead', new Symfony\Component\Routing\Route(
 	'/admin/ajax/option/',
 	['controller' => 'OriginalAppName\\Admin\\Controller\\Ajax\\Option']
 ));
-
 $routes->add('adminAjaxOptionCreate', new Symfony\Component\Routing\Route(
 	'/admin/ajax/option/create/',
 	['controller' => 'OriginalAppName\\Admin\\Controller\\Ajax\\Option']
 ));
-
 $routes->add('adminAjaxOptionDelete', new Symfony\Component\Routing\Route(
 	'/admin/ajax/option/delete/',
 	['controller' => 'OriginalAppName\\Admin\\Controller\\Ajax\\Option']
 ));
-
 $routes->add('adminAjaxOptionUpdate', new Symfony\Component\Routing\Route(
 	'/admin/ajax/option/{id}/',
 	['controller' => 'OriginalAppName\\Admin\\Controller\\Ajax\\Option']
 ));
 
+// ajax/content/meta
 $routes->add('adminAjaxContentMetaAll', new Symfony\Component\Routing\Route(
 	'/admin/ajax/content/meta/',
 	['controller' => 'OriginalAppName\\Admin\\Controller\\Ajax\\Content\\Meta']
 ));
-
 $routes->add('adminAjaxContentMetaCreate', new Symfony\Component\Routing\Route(
 	'/admin/ajax/content/meta/create/',
 	['controller' => 'OriginalAppName\\Admin\\Controller\\Ajax\\Content\\Meta']
 ));
-
 $routes->add('adminAjaxContentMetaDelete', new Symfony\Component\Routing\Route(
 	'/admin/ajax/content/meta/delete/',
 	['controller' => 'OriginalAppName\\Admin\\Controller\\Ajax\\Content\\Meta']
 ));
+$routes->add('adminAjaxContentMetaUpdate', new Symfony\Component\Routing\Route(
+	'/admin/ajax/content/meta/{id}/',
+	['controller' => 'OriginalAppName\\Admin\\Controller\\Ajax\\Content\\Meta']
+));
 
+// ajax/content/single
 $routes->add('adminAjaxContentSingle', new Symfony\Component\Routing\Route(
 	'/admin/ajax/content/{id}/',
 	['controller' => 'OriginalAppName\\Admin\\Controller\\Ajax\\Content']

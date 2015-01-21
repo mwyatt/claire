@@ -79,10 +79,28 @@ class Option extends \OriginalAppName\Admin\Controller\Ajax
 
 	public function adminAjaxOptionUpdate($request)
 	{
-		echo '<pre>';
-		print_r($request);
-		echo '</pre>';
-		exit;
 		
+		// validate
+		if (! isset($_REQUEST['name']) || ! isset($_REQUEST['value'])) {
+			throw new ResourceNotFoundException;
+		}
+
+		// resource
+		$modelOption = new Model\Option;
+		$entityOption = new Entity\Option;
+
+		// action
+		$entityOption->consumeArray($_REQUEST);
+		$modelOption->update($entityOption, ['id' => $request['id']]);
+			;
+
+		// validate it happend
+		if (! $modelOption->getRowCount()) {
+			throw new ResourceNotFoundException;
+		}
+
+		// output
+		$modelOption->readId([$request['id']]);
+		return new Response(json_encode($modelOption->getDataFirst()));
 	}
 }

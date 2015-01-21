@@ -3,6 +3,7 @@
 /**
  */
 var ControllerContentSingle = function () {
+	var controller = new ControllerContentMeta;
 	tinymce.init({
 	    selector: '.js-tinymce',
 		menu: {

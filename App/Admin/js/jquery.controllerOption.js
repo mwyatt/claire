@@ -14,11 +14,21 @@ ControllerOption.prototype.events = function(data) {
 
 
 ControllerOption.prototype.eventsRefresh = function(data) {
+
+	// resource
+	var timeout;
+	var trigger;
+
+	// editing name / value
 	$('.js-option-input-name, .js-option-input-value')
-		.off('change.option')
-		.on('change.option', function(event) {
-			data.changeInput(data, this);
-			data.getNewRow(data);
+		.off('keyup.option')
+		.on('keyup.option', function(event) {
+			trigger = this;
+			clearTimeout(timeout);
+			timeout = setTimeout(function() {
+				data.changeInput(data, trigger);
+				data.getNewRow(data);
+			}, 500);
 		});
 	$('.js-delete').on('click.option', function(event) {
 		event.preventDefault();

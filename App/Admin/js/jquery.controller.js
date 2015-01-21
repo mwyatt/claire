@@ -15,6 +15,7 @@ Controller.prototype.route = function(data) {
 	// always fires
 	data.global(data);
 	var thisController;
+	var thatController;
 
 	// 
 	if (data.page.hasClass('login')) {

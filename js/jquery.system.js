@@ -13,6 +13,7 @@ var System = function (options) {
 	this.documentBody = $(document.body);
 	this.setEnvironment(this);
 	this.setUrl(this);
+	this.mustacheTemplates = {};
 };
 
 
@@ -78,4 +79,32 @@ System.prototype.setUrl = function(data) {
 	data.url.admin = data.url.base + 'admin/';
 	data.url.adminAjax = data.url.admin + 'ajax/';
 	data.url.currentNoQuery = [location.protocol, '//', location.host, location.pathname].join('');
+};
+
+
+/**
+ * retreives a mustache template from cache or requests
+ * @param  {object} config template, success
+ * @return {null}        calls the success function
+ */
+System.prototype.getMustacheTemplate = function(config) {
+	var mustacheTemplates = this.mustacheTemplates;
+
+	// cache or new
+	if (mustacheTemplates.hasOwnProperty(config.template)) {
+		config.success(mustacheTemplates[config.template]);
+	} else {
+		$.ajax({
+			url: this.getUrl('base') + 'mustache/' + config.template + '.mst',
+			type: 'get',
+			dataType: 'text',
+			complete: function(response) {
+				mustacheTemplates[config.template] = response.responseText;
+			},
+			success: config.success
+		});
+	}
+
+	// set new cache
+	this.mustacheTemplates = mustacheTemplates;
 };

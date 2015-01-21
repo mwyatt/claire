@@ -47,6 +47,12 @@ module.exports = function(grunt) {
 				files: [
 					{
 						expand: true,
+						cwd: '../../vendor/bower/mustache',
+						src: 'mustache.js',
+						dest: 'js/vendor/mustache'
+					},
+					{
+						expand: true,
 						cwd: 'vendor/bower/animate.scss/scss',
 						src: '**',
 						dest: 'sass/vendor/animate',
@@ -142,6 +148,7 @@ module.exports = function(grunt) {
 					'js/vendor/jquery/jquery.js',
 					'js/vendor/jquery-serialize-object/jquery.serialize-object.min.js',
 					'js/vendor/magnific-popup/jquery.magnific-popup.js',
+					'js/vendor/mustache/mustache.js',
 					'../../js/jquery.button-to-top.js',
 					'../../js/jquery.form.js',
 					'../../js/jquery.function.js',
@@ -152,13 +159,13 @@ module.exports = function(grunt) {
 					'js/jquery.content-meta.js',
 					'js/jquery.controller.js',
 					'js/jquery.controllerContentSingle.js',
+					'js/jquery.controllerContentMeta.js',
 					'js/jquery.controllerOption.js',
 					'js/jquery.controller-login.js',
 					'js/jquery.dismiss.js',
 					'js/jquery.feedback-stream.js',
 					'js/jquery.hover.class.js',
 					'js/jquery.mediabrowser.js',
-					'js/jquery.model-content-meta.js',
 					'js/jquery.model-content-slug.js',
 					'js/jquery.model-example.js',
 					'js/jquery.model-media.js',

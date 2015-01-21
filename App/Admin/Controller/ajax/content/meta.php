@@ -80,4 +80,31 @@ class Meta extends \OriginalAppName\Admin\Controller\Ajax
 		// output
 		return new Response(json_encode($modelContentMeta->getRowCount()));
 	}
+
+
+	public function adminAjaxContentMetaUpdate($request)
+	{
+		
+		// validate
+		if (! isset($_REQUEST['contentId']) || ! isset($_REQUEST['name']) || ! isset($_REQUEST['value'])) {
+			throw new ResourceNotFoundException;
+		}
+
+		// resource
+		$modelContentMeta = new Model\Content\Meta;
+		$entityContentMeta = new Entity\Content\Meta;
+
+		// action
+		$entityContentMeta->consumeArray($_REQUEST);
+		$modelContentMeta->update($entityContentMeta, ['id' => $request['id']]);
+
+		// validate it happend
+		if (! $modelContentMeta->getRowCount()) {
+			throw new ResourceNotFoundException;
+		}
+
+		// output
+		$modelContentMeta->readId([$request['id']]);
+		return new Response(json_encode($modelContentMeta->getDataFirst()));
+	}
 }

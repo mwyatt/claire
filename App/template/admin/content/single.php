@@ -1,6 +1,6 @@
 <?php include $this->getTemplatePath('admin/_header') ?>
 
-<div class="page content-single" data-id="<?php echo $content->getId() ?>">
+<div class="page content-single js-content-single" data-id="<?php echo $content->getId() ?>">
 	<div class="page-actions">
 		<a href="<?php echo $this->getUrl('adminContentAll', ['type' => $content->getType()]) ?>" class="page-action-button">Back</a>
 
@@ -25,9 +25,7 @@
         	<label class="form-content-label-title" for="form-content-html">Html</label>
         	<textarea name="content[html]" id="form-content-html" class="js-tinymce" cols="30" rows="10"><?php echo $content->getHtml() ?></textarea>
 	    </div>
-
-<?php //include($this->getTemplatePath('admin/content/_wysihtml5')) ?>
-
+	    <div class="block-margins js-content-meta-container"></div>
 		<div class="block-margins hidden">
 			<h2 class="form-content-label-title">Media</h2>
 
