@@ -1,32 +1,6 @@
-module.exports = function(grunt) {
 
-	// resource
-	var taskLocal = [
-		'sass:local',
-		'concat:js',
-		'concat:jsAdmin',
-	];
-	var taskRemote = [
-		'sass:remote',
-		'concat:js',
-		'concat:jsAdmin',
-		'uglify:js',
-	];
-	var sassFiles = [{
-		expand: true,
-		cwd: 'app/site/<%= config.site %>/sass',
-		src: ['*.scss'],
-		dest: 'app/site/<%= config.site %>/asset',
-		ext: '.css',
-	}];
-	var watchPaths = [
-		'app/sass/**',
-		'app/js/**',
-		'app/admin/sass/**',
-		'app/admin/js/**',
-		'app/site/<%= config.site %>/sass/**',
-		'app/site/<%= config.site %>/js/**',
-	];
+
+module.exports = function(grunt) {
 
 	// dependencies
 	grunt.loadNpmTasks('grunt-contrib-copy');
@@ -35,7 +9,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-sass');
 
-	// task
+	// tasks
 	grunt.registerTask('default', ['watch:local']);
 	grunt.registerTask('local', taskLocal);
 	grunt.registerTask('remote', taskRemote);
@@ -43,10 +17,32 @@ module.exports = function(grunt) {
 	// config
 	grunt.initConfig({
 		config: grunt.file.readJSON('app/config.json'),
-		taskLocal: taskLocal,
-		taskRemote: taskRemote,
-		sassFiles: sassFiles,
-		watchPaths: watchPaths,
+		taskLocal: [
+			'sass:local',
+			'concat:js',
+			'concat:jsAdmin',
+		],
+		taskRemote: [
+			'sass:remote',
+			'concat:js',
+			'concat:jsAdmin',
+			'uglify:js',
+		],
+		sassFiles: [{
+			expand: true,
+			cwd: 'app/site/<%= config.site %>/sass',
+			src: ['*.scss'],
+			dest: 'app/site/<%= config.site %>/asset',
+			ext: '.css',
+		}],
+		watchPaths: [
+			'app/sass/**',
+			'app/js/**',
+			'app/admin/sass/**',
+			'app/admin/js/**',
+			'app/site/<%= config.site %>/sass/**',
+			'app/site/<%= config.site %>/js/**',
+		],
 		copy: {
 			dist: {
 				files: [
