@@ -1,0 +1,180 @@
+.block {
+    display: block;
+}
+
+.hidden {
+    display: none !important;
+    visibility: hidden;
+}
+
+.hide {
+    display: none;
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+.visuallyhidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+.visuallyhidden.focusable:active,
+.visuallyhidden.focusable:focus {
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+// @import "vendor/spinner";
+.spinner {
+    background: image-url('ajax.gif') 50% 50% no-repeat;
+    
+    &.is-tall {
+        height: 80px;
+    }
+
+    &.position-bottom-right { 
+        background-position: 99% 91%;
+    }
+}
+
+.current:hover {
+    text-decoration: none;
+}
+
+label.top {
+    display: block;
+    margin: 0 0 0.8em;
+    font-weight: 600;
+}
+
+// arggg dont like this
+.inner {
+    position: relative;
+    margin: 0 auto;    
+}
+
+// noooo
+.icon {
+    display: block;
+    position: absolute;
+}
+
+.is-highlighted {
+    font-weight: 600;
+}
+
+.is-fixed {
+    position: fixed;
+}
+
+.text-ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.b0 {
+    border: 0;
+}
+
+.w100 {
+    width: 100%;
+}
+
+.position-relative {
+    position: relative;
+}
+
+.position-absolute {
+    position: absolute;
+}
+
+.position-fixed {
+    position: fixed;
+}
+
+.clearfix:before,
+.clearfix:after {
+    content: " "; 
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.clearfix {
+    *zoom: 1;
+}
+
+.page-break {
+    display: block;
+    page-break-after: always;
+    page-break-inside: avoid;
+}
+
+.color-primary {
+    color: $color-primary-0;
+}
+
+.color-secondary {
+    color: $color-secondary-1-0;
+}
+
+.color-tertiary {
+    color: $color-secondary-2-0;
+}
+
+.table-basic {
+    @extend .block-margins;
+    width: 100%;
+
+    th {
+        font-weight: 600;
+        text-align: left;
+        background-color: $color-gray-5;
+    }
+
+    th,
+    td {
+        padding: 0.5em;
+        border: 1px solid $color-secondary-1-0;
+    }
+}
+
+.do-print {
+    @extend .hide;
+}
+
+.block-clear {
+    @extend .block-margins;
+    @extend .clearfix;
+}
+
+.dont-print {
+    @include dont-print;
+}

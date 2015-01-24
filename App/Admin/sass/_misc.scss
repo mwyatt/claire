@@ -1,0 +1,175 @@
+.label-title {
+	display: block;
+	margin-bottom: .5em;
+	font-size: 1.2em;
+}
+
+body {
+	background: $color-white;
+	color: darken($color-white, 50%);
+	font-family: $font-family;
+	line-height: 1.5;
+}
+
+.wrap {
+	margin: 0 auto; 
+	padding-left: 180 + 20px;
+	max-width: 860px;
+}
+
+.wrap-full-width {
+	width: 860px;
+	margin: 0 auto; 
+}
+
+.button.back {
+	float: right;
+}
+
+.button.primary,
+.button.secondary,
+.button.tertiary,
+.button {
+    // @include admin-button($color-white);
+}
+
+.nothing-yet {
+	// @include border-radius(3px);
+	text-shadow: 0 1px 0 darken($color-white, 0%);
+	background: darken($color-white, 2%);
+	text-align: center;
+	border-top: 1px solid darken($color-white, 15%);
+	border-bottom: 1px solid darken($color-white, 15%);
+	padding: 2em;
+
+	p {
+		color: darken($color-white, 40%);
+		cursor: default;
+		font-weight: 600;
+		margin: 0;
+	}
+}
+
+.toolbar {
+	margin: 0 0 1em;
+}
+
+.toolbar .button {
+	float: left;
+	margin: 0 .5em .5em 0;
+	font-size: .8em;
+	padding: .5em 1em;
+	// background: red;
+}
+
+.content.page textarea,
+.content.post textarea {
+	width: 100%;
+	font-size: 1em;
+	font-weight: 400;
+}
+
+.nav-main-container {
+
+}
+
+.nav-main {
+	float: left;
+	margin-right: 1em;
+}
+
+.page-heading {
+	margin-bottom: 1em;
+}
+
+.button,
+a.button {
+    @include button($color-primary-0);
+    color: $color-white;
+}
+
+a.content-action-link {
+    @extend .button;
+    padding: 1px 7px;
+    margin: 0 0 5px 5px;
+}
+
+.button-new {
+	@include button;
+	float: right;
+}
+
+.admin-block-controls {
+	@include clearfix;
+	@extend .block-margins;
+}
+
+.admin-button-primary {
+	@include button;
+}
+
+.tennis-fixture-list {
+
+	.table {
+	    border: 1px solid;
+	}
+
+	th, td {
+	    padding: 0.5em;
+	    border: 1px solid;
+	}
+}
+
+.ads,
+.grid-test {
+	@include row;
+	margin-top: 2%;
+}
+
+.grid-test .main {
+	@include col(6);
+
+	@media all and (min-width: 600px) {
+		@include col(8);
+	}
+}
+
+.grid-test .sidebar {
+	@include col(6);
+	@include last;
+
+	@media all and (min-width: 600px) {
+		@include col(4);
+	}
+}
+
+.ads .three {
+	
+	@media all and (max-width: 599px) {
+		margin-top: 2%;
+
+		&:first-child {
+			margin-top: 0;
+		}
+	}
+
+	@media all and (min-width: 400px) and (max-width: 599px) {
+		@include col(6);
+
+		&:nth-child(2n) {
+			@include last;
+		}
+	}
+
+	@media all and (min-width: 600px) {
+		@include col(4);
+
+		&:last-child {
+			@include last;
+		}
+	}
+}
+
+#form_html {
+	height: 40em;
+}

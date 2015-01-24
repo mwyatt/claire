@@ -1,0 +1,82 @@
+
+
+/**
+ * see animate.scss for inspiration
+ * animations must be made generic so that they can be fine tuned per use
+ *         @include animation-name('fadeInDown');
+ *         @include animation-duration(.2s);
+ *         @include animation-timing-function('ease');
+ * need more control over animations in css, as when they are finished etc..
+ */
+
+
+/**
+ * shudder side to side
+ */
+@include keyframes(error) {
+
+	100%,
+	0% {
+		@include transform(translate3d(0, 0, 0));
+	}
+
+	25% {
+		@include transform(translate3d(-3px, 0, 0));
+	}
+
+	75% {
+		@include transform(translate3d(3px, 0, 0));
+	}
+}
+
+
+/**
+ * 
+ */
+@include keyframes(fadeInDown) {
+	
+	0% {
+		opacity: 0;
+		@include transform(translateY(-1em));
+	}
+
+	100% {
+		opacity: 1;
+		@include transform(translateY(0));
+	}
+}
+
+
+@include keyframes(fadeInBulge) {
+
+	0% {
+		opacity: 0;
+        @include transform(scale(.97));
+	}
+
+	50% {
+        @include transform(scale(1.03));
+	}
+
+	100% {
+        @include transform(scale(1));
+		opacity: 1;
+	}
+}
+
+
+@include keyframes(fadeOutUp) {
+  0% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 0;
+    -webkit-transform: translateY(-20px);
+    -ms-transform: translateY(-20px);
+    transform: translateY(-20px);
+  }
+}

@@ -1,0 +1,82 @@
+
+
+/**
+ * base styles for all form labels
+ * @param  {string} $theme: 'block'       
+ * @return {css}         
+ */
+@mixin formLabel($theme: 'block') {
+    display: block;
+    margin: 1em 0 .5em;
+}
+
+
+/**
+ * base styles for all form inputs
+ * @param  {string} $theme: 'text'        
+ * @return {css}         
+ */
+@mixin formInput($theme: 'text') {
+    @include transition(all 200ms); 
+    box-shadow: 0 0 3px rgba($color-black, .1);
+    font-size: 1em;
+    border-radius: 2px;
+    color: $color-gray-30;
+    font-family: $font-family;
+    border: 1px solid $color-gray-30;
+    margin: 0;
+    opacity: .8;
+    padding: 6px 7px;
+    line-height: 1;  
+    outline: none;
+
+    &:focus {
+        color: $color-gray-50;
+        border-color: $color-gray-50;
+        box-shadow: 0 0 3px rgba($color-black, .3);
+        opacity: 1;
+    }
+    
+    &:hover {}
+
+    &:active {}
+}
+
+
+/**
+ * allows generation of buttons, this can then be used to set
+ * possible themes
+ *      primary
+ *      secondary
+ */
+@mixin button($theme: "primary") {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    padding: 6px 7px;
+    border-radius: 2px;
+    line-height: 1;   
+
+    @if $theme == "primary" {
+        background-color: $color-primary-0;
+        color: $color-white;
+    }
+    
+    &:hover {
+
+        @if $theme == "primary" {
+            background-color: lighten($color-primary-0, 10%);
+            color: lighten($color-white, 0%);
+        }
+    }
+
+    &:active {
+        
+        @if $theme == "primary" {
+            background-color: darken($color-primary-0, 10%);
+            color: lighten($color-white, 0%);
+        }
+    }
+}

@@ -7,7 +7,8 @@ IndexIgnore */*
 # BEGIN RULES
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . index.php
+RewriteRule ^.*$ index.php [L]
+# RewriteRule . index.php
 # END RULES
 
 # BEGIN EXPIRES

@@ -1,5 +1,9 @@
 <?php
 
+namespace OriginalAppName;
+
+use OriginalAppName;
+
 
 /**
  * @author 	Martin Wyatt <martin.wyatt@gmail.com> 
@@ -27,7 +31,13 @@ define('CS', '_');
 
 
 /**
- * ?
+ * common extension for classes
+ */
+define('EXT', '.php');
+
+
+/**
+ * possibly unused?
  */
 define('ENV', getenv('APP_ENV'));
 
@@ -39,67 +49,52 @@ define('BASE_PATH', (string) (__DIR__ . DS));
 
 
 /**
- * app core dir
+ * handy for file includes
  */
-define('PATH_APP', BASE_PATH . 'app' . DS);
+define('APP_PATH', BASE_PATH . 'App' . DS);
 
 
 /**
- * class core dir
+ * composer autoloader
  */
-define('PATH_CLASS', PATH_APP . 'class' . DS);
+include BASE_PATH . 'vendor' . DS . 'autoload' . EXT;
 
 
 /**
- * model core dir
+ * app configuration
  */
-define('PATH_MODEL', PATH_APP . 'model' . DS);
-
-
-/**
- * site
- * get from package.json
- */
-$config = include BASE_PATH . 'config.php';
-define('SITE', $config['siteName']);
-
-
-/**
- * asset version for css / js
- * battle google pagespeed!
- */
-if (isset($config['assetVersion'])) {
-	define('ASSET_VERSION', $config['assetVersion']);
+$configApp = json_decode(file_get_contents(APP_PATH . 'config' . '.json'));
+if (! isset($configApp->site)) {
+	exit('please specify a app config');
 }
+define('SITE', $configApp->site);
 
 
 /**
- * model core dir
+ * get error reporting in asap
+ * whether it reports errors is determined by config.json
  */
-define('PATH_CONTROLLER', PATH_APP . 'controller' . DS . SITE . DS);
-
+$error = new OriginalAppName\Error($configApp->errorReporting);
 
 
 /**
- * view core dir
+ * handy for file includes
  */
-define('PATH_VIEW', PATH_APP . 'view' . DS . SITE . DS);
+define('SITE_PATH', APP_PATH . 'Site' . DS . SITE . DS);
 
 
 /**
- * common extension for classes
+ * site configuration
  */
-define('EXT', '.php');
+$configSite = include SITE_PATH . 'config' . EXT;
+if (! isset($configSite['assetVersion'])) {
+	exit('please specify a site config');
+}
+define('ASSET_VERSION', $configSite['assetVersion']);
 
 
 /**
- * autoloader include and register function
+ * boot
  */
-require PATH_CLASS . 'autoloader' . EXT;
-spl_autoload_register(array('Autoloader', 'call'));
-
-
-/**
- * initialise app
- */
-require PATH_APP . 'initialise' . EXT;
+include APP_PATH . 'ini' . EXT;
+include APP_PATH . 'index' . EXT;

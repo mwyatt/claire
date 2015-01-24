@@ -1,0 +1,38 @@
+
+// vars
+$header-bar-height: 60px;
+
+.header-bar {
+    @include transition(all 300ms ease);
+    background-color: $color-white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    box-shadow: 0 1px 3px rgba($color-black, .2);
+}
+
+.header-bar-height {
+    height: $header-bar-height;
+}
+
+.is-scrolling-down .header-bar {
+    top: -$header-bar-height - 5;
+}
+
+.header-bar-height {
+    height: $header-bar-height;
+
+    @media only screen and (min-width: 600px) {
+        height: 70px;
+    }
+}
+
+.is-scrolling-down .header-bar {
+    top: -$header-bar-height - 5;
+
+    @media only screen and (min-width: 600px) {
+        top: -70 - 5px;
+    }
+}

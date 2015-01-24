@@ -1,0 +1,26 @@
+.menu-primary {
+	@include transition(all 200ms);
+	// display: none;
+    position: absolute;
+    top: 67px;
+    right: -200px;
+    width: 200px;
+    box-shadow: 0 3px 3px rgba($color-black, .2);
+}
+
+.menu-primary-is-active .menu-primary {
+	// display: block;
+	right: 0;
+}
+
+.is-scrolling-down .menu-primary {
+	right: -200px;
+}
+
+.menu-primary-level-1-link {
+    display: block;
+    background-color: white;
+    padding: 11px 14px;
+    font-weight: 600;
+    color: $color-primary-0;
+}
