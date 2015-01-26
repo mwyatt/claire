@@ -1,6 +1,5 @@
-define(['vendor/jquery/jquery', 'system'], function ($, system) {
+define(['jquery', 'helper'], function ($, helper) {
 
-	console.log(system);
 
 	/**
 	 */
@@ -16,11 +15,11 @@ define(['vendor/jquery/jquery', 'system'], function ($, system) {
 	 * @return {null}      
 	 */
 	ControllerContentMeta.prototype.readAll = function(data) {
-		system.getMustacheTemplate({
+		helper.getMustacheTemplate({
 			template: 'admin/content/meta/all',
 			success: function(template) {
 				$.ajax({
-					url: system.getUrl('base') + 'admin/ajax/content/meta/',
+					url: helper.getUrl('base') + 'admin/ajax/content/meta/',
 					type: 'get',
 					dataType: 'json',
 					data: {
@@ -65,7 +64,7 @@ define(['vendor/jquery/jquery', 'system'], function ($, system) {
 			var closestRow = $this.closest('.js-content-meta');
 			var id = closestRow.attr('data-id');
 			$.ajax({
-				url: system.getUrl('base') + 'admin/ajax/content/meta/delete/',
+				url: helper.getUrl('base') + 'admin/ajax/content/meta/delete/',
 				type: 'get',
 				dataType: 'json',
 				data: {id: id},
@@ -98,7 +97,7 @@ define(['vendor/jquery/jquery', 'system'], function ($, system) {
 
 		// call
 		$.ajax({
-			url: system.getUrl('base') + 'admin/ajax/content/meta/' + (id ? id : 'create') + '/',
+			url: helper.getUrl('base') + 'admin/ajax/content/meta/' + (id ? id : 'create') + '/',
 			type: 'get',
 			dataType: 'json',
 			data: {

@@ -63,6 +63,12 @@ module.exports = function(grunt) {
 					},
 					{
 						expand: true,
+						cwd: 'vendor/bower/mustache',
+						src: 'mustache.js',
+						dest: 'js/vendor/mustache'
+					},
+					{
+						expand: true,
 						cwd: 'vendor/bower/bourbon/app/assets/stylesheets/',
 						src: '**',
 						dest: 'sass/vendor/bourbon/',
@@ -81,6 +87,18 @@ module.exports = function(grunt) {
 						rename: function(dest, src) {
 							return dest + '_' + src.replace('.css','.scss');
 						}
+					},
+					{
+						expand: true,
+						cwd: 'vendor/bower/magnific-popup/dist',
+						src: 'jquery.magnific-popup.js',
+						dest: 'js/vendor/magnific-popup',
+					},
+					{
+						expand: true,
+						cwd: 'vendor/bower/jquery-serialize-object/dist',
+						src: '**',
+						dest: 'js/vendor/jquery-serialize-object',
 					},
 					{
 						expand: true,

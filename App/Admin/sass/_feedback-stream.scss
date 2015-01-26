@@ -34,18 +34,6 @@ $typesColors: $color-primary-0 $color-gray-50 $color-primary-1;
 
     &:hover {
         opacity: .8;
-
-        &:after {
-            background-image: url(../image/cross-2.svg);
-            background-size: 16px 16px;
-            display: block;
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 16px;
-            height: 16px;
-            content: '';
-        }
     }
 
     &.is-removed {
@@ -66,4 +54,11 @@ $typesColors: $color-primary-0 $color-gray-50 $color-primary-1;
             }
         }
     }
+}
+
+.feedback-stream-single-cross {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 2em;
 }

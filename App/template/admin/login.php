@@ -2,7 +2,7 @@
 
 <div class="page login">
 
-<?php include $this->getTemplatePath('_logo') ?>
+<?php // include $this->getTemplatePath('_logo') ?>
 
 	<form method="post" action="" class="form-login">
         <label class="login-label" for="login-email">Email</label>

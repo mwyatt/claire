@@ -75,6 +75,7 @@ class Admin extends \OriginalAppName\Admin\Controller\Feedback
 
 	public function readMenu()
 	{
+	
 		// menu primary
 		$modelMenu = new Model\Menu;
 		$modelMenu->readColumn('keyGroup', 'admin');

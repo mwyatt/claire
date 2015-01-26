@@ -82,6 +82,7 @@ class Index extends \OriginalAppName\Controller\Admin
 		// template
 		$this
 			->view
+			->setDataKey('moduleName', 'login')
 			->setDataKey('sessionForm', $sessionForm->pull('admin\login'));
 		return new Response($this->view->getTemplate('admin/login'));
 	}

@@ -1,0 +1,6 @@
+<div class="feedback-stream-single js-feedback-stream-single is-{{type}}">
+	<span class="feedback-stream-single-cross">&times;</span>
+
+{{message}}
+
+</div>

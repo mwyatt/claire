@@ -1,4 +1,4 @@
-require(['vendor/jquery/jquery', 'vendor/tinymce/tinymce', 'admin/content/meta'], function ($, tinymce, contentMeta) {
+require(['jquery', 'tinymce', 'admin/content/meta'], function ($, tinymce, contentMeta) {
 
   // wysi
   tinymce.init({
