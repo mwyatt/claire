@@ -2,7 +2,7 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" data-module-name="<?php echo isset($moduleName) ? $moduleName : '' ?>"> <!--<![endif]-->
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -25,7 +25,7 @@
 	<?php include $this->getTemplatePath('admin/header/_menu') ?>
 	
     <header class="main js-header-main">
-    	<div class="header-inner wrap-full-width">
+    	<div class="header-inner">
 	    	<div class="inner-title-nav-user">
 		        <a class="header-site-title" href="<?php echo $this->getUrl() ?>" target="_blank" title="Open Homepage"><?php echo $metaTitle ?></a>
 

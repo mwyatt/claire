@@ -967,54 +967,54 @@ img.mfp-img {
  * shudder side to side
  */
 @-webkit-keyframes error {
-  /* line 19, /var/www/html/mvc/App/Admin/sass/keyframe */
+  /* line 19, /var/www/html/mvc/app/admin/sass/keyframe */
   100%, 0% {
     -webkit-transform: translate3d(0, 0, 0); }
 
-  /* line 23, /var/www/html/mvc/App/Admin/sass/keyframe */
+  /* line 23, /var/www/html/mvc/app/admin/sass/keyframe */
   25% {
     -webkit-transform: translate3d(-3px, 0, 0); }
 
-  /* line 27, /var/www/html/mvc/App/Admin/sass/keyframe */
+  /* line 27, /var/www/html/mvc/app/admin/sass/keyframe */
   75% {
     -webkit-transform: translate3d(3px, 0, 0); } }
 
 @-moz-keyframes error {
-  /* line 19, /var/www/html/mvc/App/Admin/sass/keyframe */
+  /* line 19, /var/www/html/mvc/app/admin/sass/keyframe */
   100%, 0% {
     -moz-transform: translate3d(0, 0, 0); }
 
-  /* line 23, /var/www/html/mvc/App/Admin/sass/keyframe */
+  /* line 23, /var/www/html/mvc/app/admin/sass/keyframe */
   25% {
     -moz-transform: translate3d(-3px, 0, 0); }
 
-  /* line 27, /var/www/html/mvc/App/Admin/sass/keyframe */
+  /* line 27, /var/www/html/mvc/app/admin/sass/keyframe */
   75% {
     -moz-transform: translate3d(3px, 0, 0); } }
 
 @-o-keyframes error {
-  /* line 19, /var/www/html/mvc/App/Admin/sass/keyframe */
+  /* line 19, /var/www/html/mvc/app/admin/sass/keyframe */
   100%, 0% {
     -o-transform: translate3d(0, 0, 0); }
 
-  /* line 23, /var/www/html/mvc/App/Admin/sass/keyframe */
+  /* line 23, /var/www/html/mvc/app/admin/sass/keyframe */
   25% {
     -o-transform: translate3d(-3px, 0, 0); }
 
-  /* line 27, /var/www/html/mvc/App/Admin/sass/keyframe */
+  /* line 27, /var/www/html/mvc/app/admin/sass/keyframe */
   75% {
     -o-transform: translate3d(3px, 0, 0); } }
 
 @keyframes error {
-  /* line 19, /var/www/html/mvc/App/Admin/sass/keyframe */
+  /* line 19, /var/www/html/mvc/app/admin/sass/keyframe */
   100%, 0% {
     transform: translate3d(0, 0, 0); }
 
-  /* line 23, /var/www/html/mvc/App/Admin/sass/keyframe */
+  /* line 23, /var/www/html/mvc/app/admin/sass/keyframe */
   25% {
     transform: translate3d(-3px, 0, 0); }
 
-  /* line 27, /var/www/html/mvc/App/Admin/sass/keyframe */
+  /* line 27, /var/www/html/mvc/app/admin/sass/keyframe */
   75% {
     transform: translate3d(3px, 0, 0); } }
 
@@ -1022,118 +1022,118 @@ img.mfp-img {
  * 
  */
 @-webkit-keyframes fadeInDown {
-  /* line 38, /var/www/html/mvc/App/Admin/sass/keyframe */
+  /* line 38, /var/www/html/mvc/app/admin/sass/keyframe */
   0% {
     opacity: 0;
     -webkit-transform: translateY(-1em); }
 
-  /* line 43, /var/www/html/mvc/App/Admin/sass/keyframe */
+  /* line 43, /var/www/html/mvc/app/admin/sass/keyframe */
   100% {
     opacity: 1;
     -webkit-transform: translateY(0); } }
 
 @-moz-keyframes fadeInDown {
-  /* line 38, /var/www/html/mvc/App/Admin/sass/keyframe */
+  /* line 38, /var/www/html/mvc/app/admin/sass/keyframe */
   0% {
     opacity: 0;
     -moz-transform: translateY(-1em); }
 
-  /* line 43, /var/www/html/mvc/App/Admin/sass/keyframe */
+  /* line 43, /var/www/html/mvc/app/admin/sass/keyframe */
   100% {
     opacity: 1;
     -moz-transform: translateY(0); } }
 
 @-o-keyframes fadeInDown {
-  /* line 38, /var/www/html/mvc/App/Admin/sass/keyframe */
+  /* line 38, /var/www/html/mvc/app/admin/sass/keyframe */
   0% {
     opacity: 0;
     -o-transform: translateY(-1em); }
 
-  /* line 43, /var/www/html/mvc/App/Admin/sass/keyframe */
+  /* line 43, /var/www/html/mvc/app/admin/sass/keyframe */
   100% {
     opacity: 1;
     -o-transform: translateY(0); } }
 
 @keyframes fadeInDown {
-  /* line 38, /var/www/html/mvc/App/Admin/sass/keyframe */
+  /* line 38, /var/www/html/mvc/app/admin/sass/keyframe */
   0% {
     opacity: 0;
     transform: translateY(-1em); }
 
-  /* line 43, /var/www/html/mvc/App/Admin/sass/keyframe */
+  /* line 43, /var/www/html/mvc/app/admin/sass/keyframe */
   100% {
     opacity: 1;
     transform: translateY(0); } }
 
 @-webkit-keyframes fadeInBulge {
-  /* line 52, /var/www/html/mvc/App/Admin/sass/keyframe */
+  /* line 52, /var/www/html/mvc/app/admin/sass/keyframe */
   0% {
     opacity: 0;
     -webkit-transform: scale(0.97); }
 
-  /* line 57, /var/www/html/mvc/App/Admin/sass/keyframe */
+  /* line 57, /var/www/html/mvc/app/admin/sass/keyframe */
   50% {
     -webkit-transform: scale(1.03); }
 
-  /* line 61, /var/www/html/mvc/App/Admin/sass/keyframe */
+  /* line 61, /var/www/html/mvc/app/admin/sass/keyframe */
   100% {
     -webkit-transform: scale(1);
     opacity: 1; } }
 
 @-moz-keyframes fadeInBulge {
-  /* line 52, /var/www/html/mvc/App/Admin/sass/keyframe */
+  /* line 52, /var/www/html/mvc/app/admin/sass/keyframe */
   0% {
     opacity: 0;
     -moz-transform: scale(0.97); }
 
-  /* line 57, /var/www/html/mvc/App/Admin/sass/keyframe */
+  /* line 57, /var/www/html/mvc/app/admin/sass/keyframe */
   50% {
     -moz-transform: scale(1.03); }
 
-  /* line 61, /var/www/html/mvc/App/Admin/sass/keyframe */
+  /* line 61, /var/www/html/mvc/app/admin/sass/keyframe */
   100% {
     -moz-transform: scale(1);
     opacity: 1; } }
 
 @-o-keyframes fadeInBulge {
-  /* line 52, /var/www/html/mvc/App/Admin/sass/keyframe */
+  /* line 52, /var/www/html/mvc/app/admin/sass/keyframe */
   0% {
     opacity: 0;
     -o-transform: scale(0.97); }
 
-  /* line 57, /var/www/html/mvc/App/Admin/sass/keyframe */
+  /* line 57, /var/www/html/mvc/app/admin/sass/keyframe */
   50% {
     -o-transform: scale(1.03); }
 
-  /* line 61, /var/www/html/mvc/App/Admin/sass/keyframe */
+  /* line 61, /var/www/html/mvc/app/admin/sass/keyframe */
   100% {
     -o-transform: scale(1);
     opacity: 1; } }
 
 @keyframes fadeInBulge {
-  /* line 52, /var/www/html/mvc/App/Admin/sass/keyframe */
+  /* line 52, /var/www/html/mvc/app/admin/sass/keyframe */
   0% {
     opacity: 0;
     transform: scale(0.97); }
 
-  /* line 57, /var/www/html/mvc/App/Admin/sass/keyframe */
+  /* line 57, /var/www/html/mvc/app/admin/sass/keyframe */
   50% {
     transform: scale(1.03); }
 
-  /* line 61, /var/www/html/mvc/App/Admin/sass/keyframe */
+  /* line 61, /var/www/html/mvc/app/admin/sass/keyframe */
   100% {
     transform: scale(1);
     opacity: 1; } }
 
 @-webkit-keyframes fadeOutUp {
-  /* line 69, /var/www/html/mvc/App/Admin/sass/keyframe */
+  /* line 69, /var/www/html/mvc/app/admin/sass/keyframe */
   0% {
     opacity: 1;
     -webkit-transform: translateY(0);
     -ms-transform: translateY(0);
     transform: translateY(0); }
 
-  /* line 76, /var/www/html/mvc/App/Admin/sass/keyframe */
+  /* line 76, /var/www/html/mvc/app/admin/sass/keyframe */
   100% {
     opacity: 0;
     -webkit-transform: translateY(-20px);
@@ -1141,14 +1141,14 @@ img.mfp-img {
     transform: translateY(-20px); } }
 
 @-moz-keyframes fadeOutUp {
-  /* line 69, /var/www/html/mvc/App/Admin/sass/keyframe */
+  /* line 69, /var/www/html/mvc/app/admin/sass/keyframe */
   0% {
     opacity: 1;
     -webkit-transform: translateY(0);
     -ms-transform: translateY(0);
     transform: translateY(0); }
 
-  /* line 76, /var/www/html/mvc/App/Admin/sass/keyframe */
+  /* line 76, /var/www/html/mvc/app/admin/sass/keyframe */
   100% {
     opacity: 0;
     -webkit-transform: translateY(-20px);
@@ -1156,14 +1156,14 @@ img.mfp-img {
     transform: translateY(-20px); } }
 
 @-o-keyframes fadeOutUp {
-  /* line 69, /var/www/html/mvc/App/Admin/sass/keyframe */
+  /* line 69, /var/www/html/mvc/app/admin/sass/keyframe */
   0% {
     opacity: 1;
     -webkit-transform: translateY(0);
     -ms-transform: translateY(0);
     transform: translateY(0); }
 
-  /* line 76, /var/www/html/mvc/App/Admin/sass/keyframe */
+  /* line 76, /var/www/html/mvc/app/admin/sass/keyframe */
   100% {
     opacity: 0;
     -webkit-transform: translateY(-20px);
@@ -1171,21 +1171,21 @@ img.mfp-img {
     transform: translateY(-20px); } }
 
 @keyframes fadeOutUp {
-  /* line 69, /var/www/html/mvc/App/Admin/sass/keyframe */
+  /* line 69, /var/www/html/mvc/app/admin/sass/keyframe */
   0% {
     opacity: 1;
     -webkit-transform: translateY(0);
     -ms-transform: translateY(0);
     transform: translateY(0); }
 
-  /* line 76, /var/www/html/mvc/App/Admin/sass/keyframe */
+  /* line 76, /var/www/html/mvc/app/admin/sass/keyframe */
   100% {
     opacity: 0;
     -webkit-transform: translateY(-20px);
     -ms-transform: translateY(-20px);
     transform: translateY(-20px); } }
 
-/* line 1, /var/www/html/mvc/App/Admin/sass/magnific-popup */
+/* line 1, /var/www/html/mvc/app/admin/sass/magnific-popup */
 .mfp-content {
   -webkit-animation-name: fadeInBulge;
   -moz-animation-name: fadeInBulge;
@@ -1214,24 +1214,24 @@ img.mfp-img {
 /**
  * admin / front settings
  */
-/* line 1, /var/www/html/mvc/App/Admin/sass/reusable */
+/* line 1, /var/www/html/mvc/app/admin/sass/reusable */
 .block {
   display: block; }
 
-/* line 5, /var/www/html/mvc/App/Admin/sass/reusable */
+/* line 5, /var/www/html/mvc/app/admin/sass/reusable */
 .hidden {
   display: none !important;
   visibility: hidden; }
 
-/* line 10, /var/www/html/mvc/App/Admin/sass/reusable */
+/* line 10, /var/www/html/mvc/app/admin/sass/reusable */
 .hide, .do-print {
   display: none; }
 
-/* line 14, /var/www/html/mvc/App/Admin/sass/reusable */
+/* line 14, /var/www/html/mvc/app/admin/sass/reusable */
 .invisible {
   visibility: hidden; }
 
-/* line 18, /var/www/html/mvc/App/Admin/sass/reusable */
+/* line 18, /var/www/html/mvc/app/admin/sass/reusable */
 .visuallyhidden {
   border: 0;
   clip: rect(0 0 0 0);
@@ -1242,7 +1242,7 @@ img.mfp-img {
   position: absolute;
   width: 1px; }
 
-/* line 30, /var/www/html/mvc/App/Admin/sass/reusable */
+/* line 30, /var/www/html/mvc/app/admin/sass/reusable */
 .visuallyhidden.focusable:active, .visuallyhidden.focusable:focus {
   clip: auto;
   height: auto;
@@ -1251,122 +1251,122 @@ img.mfp-img {
   position: static;
   width: auto; }
 
-/* line 39, /var/www/html/mvc/App/Admin/sass/reusable */
+/* line 39, /var/www/html/mvc/app/admin/sass/reusable */
 .left {
   float: left; }
 
-/* line 43, /var/www/html/mvc/App/Admin/sass/reusable */
+/* line 43, /var/www/html/mvc/app/admin/sass/reusable */
 .right {
   float: right; }
 
-/* line 47, /var/www/html/mvc/App/Admin/sass/reusable */
+/* line 47, /var/www/html/mvc/app/admin/sass/reusable */
 .uppercase {
   text-transform: uppercase; }
 
-/* line 52, /var/www/html/mvc/App/Admin/sass/reusable */
+/* line 52, /var/www/html/mvc/app/admin/sass/reusable */
 .spinner {
   background: url("asset/ajax.gif") 50% 50% no-repeat; }
-  /* line 55, /var/www/html/mvc/App/Admin/sass/reusable */
+  /* line 55, /var/www/html/mvc/app/admin/sass/reusable */
   .spinner.is-tall {
     height: 80px; }
-  /* line 59, /var/www/html/mvc/App/Admin/sass/reusable */
+  /* line 59, /var/www/html/mvc/app/admin/sass/reusable */
   .spinner.position-bottom-right {
     background-position: 99% 91%; }
 
-/* line 64, /var/www/html/mvc/App/Admin/sass/reusable */
+/* line 64, /var/www/html/mvc/app/admin/sass/reusable */
 .current:hover {
   text-decoration: none; }
 
-/* line 68, /var/www/html/mvc/App/Admin/sass/reusable */
+/* line 68, /var/www/html/mvc/app/admin/sass/reusable */
 label.top {
   display: block;
   margin: 0 0 0.8em;
   font-weight: 600; }
 
-/* line 75, /var/www/html/mvc/App/Admin/sass/reusable */
+/* line 75, /var/www/html/mvc/app/admin/sass/reusable */
 .inner {
   position: relative;
   margin: 0 auto; }
 
-/* line 81, /var/www/html/mvc/App/Admin/sass/reusable */
+/* line 81, /var/www/html/mvc/app/admin/sass/reusable */
 .icon {
   display: block;
   position: absolute; }
 
-/* line 86, /var/www/html/mvc/App/Admin/sass/reusable */
+/* line 86, /var/www/html/mvc/app/admin/sass/reusable */
 .is-highlighted {
   font-weight: 600; }
 
-/* line 90, /var/www/html/mvc/App/Admin/sass/reusable */
+/* line 90, /var/www/html/mvc/app/admin/sass/reusable */
 .is-fixed {
   position: fixed; }
 
-/* line 94, /var/www/html/mvc/App/Admin/sass/reusable */
+/* line 94, /var/www/html/mvc/app/admin/sass/reusable */
 .text-ellipsis, .content-all-table td, .content-all-table th, .content-status, .content-link, .content-date {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap; }
 
-/* line 100, /var/www/html/mvc/App/Admin/sass/reusable */
+/* line 100, /var/www/html/mvc/app/admin/sass/reusable */
 .b0 {
   border: 0; }
 
-/* line 104, /var/www/html/mvc/App/Admin/sass/reusable */
+/* line 104, /var/www/html/mvc/app/admin/sass/reusable */
 .w100 {
   width: 100%; }
 
-/* line 108, /var/www/html/mvc/App/Admin/sass/reusable */
+/* line 108, /var/www/html/mvc/app/admin/sass/reusable */
 .position-relative {
   position: relative; }
 
-/* line 112, /var/www/html/mvc/App/Admin/sass/reusable */
+/* line 112, /var/www/html/mvc/app/admin/sass/reusable */
 .position-absolute {
   position: absolute; }
 
-/* line 116, /var/www/html/mvc/App/Admin/sass/reusable */
+/* line 116, /var/www/html/mvc/app/admin/sass/reusable */
 .position-fixed {
   position: fixed; }
 
-/* line 121, /var/www/html/mvc/App/Admin/sass/reusable */
+/* line 121, /var/www/html/mvc/app/admin/sass/reusable */
 .clearfix:before, .block-clear:before, .clearfix:after, .block-clear:after {
   content: " ";
   display: table; }
 
-/* line 126, /var/www/html/mvc/App/Admin/sass/reusable */
+/* line 126, /var/www/html/mvc/app/admin/sass/reusable */
 .clearfix:after, .block-clear:after {
   clear: both; }
 
-/* line 130, /var/www/html/mvc/App/Admin/sass/reusable */
+/* line 130, /var/www/html/mvc/app/admin/sass/reusable */
 .clearfix, .block-clear {
   *zoom: 1; }
 
-/* line 134, /var/www/html/mvc/App/Admin/sass/reusable */
+/* line 134, /var/www/html/mvc/app/admin/sass/reusable */
 .page-break {
   display: block;
   page-break-after: always;
   page-break-inside: avoid; }
 
-/* line 140, /var/www/html/mvc/App/Admin/sass/reusable */
+/* line 140, /var/www/html/mvc/app/admin/sass/reusable */
 .color-primary {
   color: #666666; }
 
-/* line 144, /var/www/html/mvc/App/Admin/sass/reusable */
+/* line 144, /var/www/html/mvc/app/admin/sass/reusable */
 .color-secondary {
   color: #FFD700; }
 
-/* line 148, /var/www/html/mvc/App/Admin/sass/reusable */
+/* line 148, /var/www/html/mvc/app/admin/sass/reusable */
 .color-tertiary {
   color: #E00062; }
 
-/* line 152, /var/www/html/mvc/App/Admin/sass/reusable */
+/* line 152, /var/www/html/mvc/app/admin/sass/reusable */
 .table-basic {
   width: 100%; }
-  /* line 156, /var/www/html/mvc/App/Admin/sass/reusable */
+  /* line 156, /var/www/html/mvc/app/admin/sass/reusable */
   .table-basic th {
     font-weight: 600;
     text-align: left;
     background-color: #f2f2f2; }
-  /* line 163, /var/www/html/mvc/App/Admin/sass/reusable */
+  /* line 163, /var/www/html/mvc/app/admin/sass/reusable */
   .table-basic th, .table-basic td {
     padding: 0.5em;
     border: 1px solid #FFD700; }
@@ -1437,7 +1437,7 @@ label.top {
 /**
  * initial setup of body for typographic purposes
  */
-/* line 41, /var/www/html/mvc/App/Admin/sass/typography */
+/* line 41, /var/www/html/mvc/app/admin/sass/typography */
 body {
   font-size: 16px;
   font-family: 'Open Sans', 'Arial', 'Sans-serif';
@@ -1446,26 +1446,26 @@ body {
 /**
  * mini reset
  */
-/* line 53, /var/www/html/mvc/App/Admin/sass/typography */
+/* line 53, /var/www/html/mvc/app/admin/sass/typography */
 *, *:before, *:after {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box; }
 
-/* line 58, /var/www/html/mvc/App/Admin/sass/typography */
+/* line 58, /var/www/html/mvc/app/admin/sass/typography */
 a, a:visited {
   text-decoration: none; }
 
-/* line 62, /var/www/html/mvc/App/Admin/sass/typography */
+/* line 62, /var/www/html/mvc/app/admin/sass/typography */
 p {
   margin: 0; }
 
-/* line 67, /var/www/html/mvc/App/Admin/sass/typography */
+/* line 67, /var/www/html/mvc/app/admin/sass/typography */
 ul, ol {
   margin: 0;
   padding: 0; }
 
-/* line 77, /var/www/html/mvc/App/Admin/sass/typography */
+/* line 77, /var/www/html/mvc/app/admin/sass/typography */
 h1, h2, h3, h4, h5, h6 {
   font-weight: normal;
   font-size: 1em;
@@ -1474,72 +1474,72 @@ h1, h2, h3, h4, h5, h6 {
 /**
  * individual typographic classes
  */
-/* line 92, /var/www/html/mvc/App/Admin/sass/typography */
+/* line 92, /var/www/html/mvc/app/admin/sass/typography */
 .h1, .page-primary-title, .typography h1, .h2, .typography h2, .h3, .typography h3, .magnific-forgot-password .mfp-content h2, .h4, .typography h4, .h5, .typography h5, .h6, .typography h6 {
   color: #4d4d4d;
   font-family: 'Open Sans', 'Arial', 'Sans-serif';
   font-weight: 400;
   margin: 1em 0 0.5em; }
 
-/* line 99, /var/www/html/mvc/App/Admin/sass/typography */
+/* line 99, /var/www/html/mvc/app/admin/sass/typography */
 .h1, .page-primary-title, .typography h1 {
   font-size: 2em; }
 
-/* line 103, /var/www/html/mvc/App/Admin/sass/typography */
+/* line 103, /var/www/html/mvc/app/admin/sass/typography */
 .h2, .typography h2 {
   font-size: 1.5em; }
 
-/* line 107, /var/www/html/mvc/App/Admin/sass/typography */
+/* line 107, /var/www/html/mvc/app/admin/sass/typography */
 .h3, .typography h3, .magnific-forgot-password .mfp-content h2 {
   font-size: 1.17em; }
 
-/* line 112, /var/www/html/mvc/App/Admin/sass/typography */
+/* line 112, /var/www/html/mvc/app/admin/sass/typography */
 .h3, .typography h3, .magnific-forgot-password .mfp-content h2, .h4, .typography h4 {
   line-height: 1.3; }
 
-/* line 116, /var/www/html/mvc/App/Admin/sass/typography */
+/* line 116, /var/www/html/mvc/app/admin/sass/typography */
 .h5, .typography h5 {
   font-size: 0.83em; }
 
-/* line 120, /var/www/html/mvc/App/Admin/sass/typography */
+/* line 120, /var/www/html/mvc/app/admin/sass/typography */
 .h6, .typography h6 {
   font-size: 0.75em; }
 
-/* line 124, /var/www/html/mvc/App/Admin/sass/typography */
+/* line 124, /var/www/html/mvc/app/admin/sass/typography */
 .p, .page-primary-description, .typography p {
   line-height: 1.5; }
 
-/* line 129, /var/www/html/mvc/App/Admin/sass/typography */
+/* line 129, /var/www/html/mvc/app/admin/sass/typography */
 .bold, .typography b, .typography strong {
   font-weight: 700; }
 
-/* line 133, /var/www/html/mvc/App/Admin/sass/typography */
+/* line 133, /var/www/html/mvc/app/admin/sass/typography */
 .italic, .typography i, .typography em {
   font-style: italic; }
 
-/* line 137, /var/www/html/mvc/App/Admin/sass/typography */
+/* line 137, /var/www/html/mvc/app/admin/sass/typography */
 .underline {
   text-decoration: underline; }
 
-/* line 141, /var/www/html/mvc/App/Admin/sass/typography */
+/* line 141, /var/www/html/mvc/app/admin/sass/typography */
 .block-margins, .table-basic, .block-clear, .p, .page-primary-description, .typography p, .unordered-list, .typography ul, .ordered-list, .typography ol, .typography pre, .typography code, .admin-block-controls {
   margin: 1em 0; }
 
-/* line 145, /var/www/html/mvc/App/Admin/sass/typography */
+/* line 145, /var/www/html/mvc/app/admin/sass/typography */
 .unordered-list, .typography ul {
   list-style-type: disc;
   list-style-position: outside; }
 
-/* line 150, /var/www/html/mvc/App/Admin/sass/typography */
+/* line 150, /var/www/html/mvc/app/admin/sass/typography */
 .ordered-list, .typography ol {
   list-style: decimal; }
 
-/* line 155, /var/www/html/mvc/App/Admin/sass/typography */
+/* line 155, /var/www/html/mvc/app/admin/sass/typography */
 .unordered-list, .typography ul, .ordered-list, .typography ol {
   margin-left: 1em;
   padding-left: 1em; }
 
-/* line 166, /var/www/html/mvc/App/Admin/sass/typography */
+/* line 166, /var/www/html/mvc/app/admin/sass/typography */
 .a, .typography a, .typography a:visited, .link-forgot-password {
   color: #666666;
   border-bottom-color: #666666;
@@ -1547,34 +1547,34 @@ h1, h2, h3, h4, h5, h6 {
   border-bottom-width: 1px;
   border-bottom-style: solid; }
 
-/* line 174, /var/www/html/mvc/App/Admin/sass/typography */
+/* line 174, /var/www/html/mvc/app/admin/sass/typography */
 .magnific-forgot-password .mfp-content h2 {
   margin-top: 0; }
 
-/* line 178, /var/www/html/mvc/App/Admin/sass/typography */
+/* line 178, /var/www/html/mvc/app/admin/sass/typography */
 .page-primary-title {
   margin-top: 0; }
 
 /**
  * reusable, extendable classes
  */
-/* line 191, /var/www/html/mvc/App/Admin/sass/typography */
+/* line 191, /var/www/html/mvc/app/admin/sass/typography */
 .text-left {
   text-align: left; }
 
-/* line 195, /var/www/html/mvc/App/Admin/sass/typography */
+/* line 195, /var/www/html/mvc/app/admin/sass/typography */
 .text-center {
   text-align: center; }
 
-/* line 199, /var/www/html/mvc/App/Admin/sass/typography */
+/* line 199, /var/www/html/mvc/app/admin/sass/typography */
 .text-right {
   text-align: right; }
 
-/* line 203, /var/www/html/mvc/App/Admin/sass/typography */
+/* line 203, /var/www/html/mvc/app/admin/sass/typography */
 .text-size-larger {
   font-size: 1.2em; }
 
-/* line 207, /var/www/html/mvc/App/Admin/sass/typography */
+/* line 207, /var/www/html/mvc/app/admin/sass/typography */
 .text-size-smaller {
   font-size: 0.8em; }
 
@@ -1582,81 +1582,81 @@ h1, h2, h3, h4, h5, h6 {
  * typographic window which allows raw tags to be automatically styled
  * usually for user inputted content
  */
-/* line 219, /var/www/html/mvc/App/Admin/sass/typography */
+/* line 219, /var/www/html/mvc/app/admin/sass/typography */
 .typography a, .typography a:visited {
   line-height: 1.5;
   word-break: break-all; }
-/* line 226, /var/www/html/mvc/App/Admin/sass/typography */
+/* line 226, /var/www/html/mvc/app/admin/sass/typography */
 .typography a:hover, .typography a:focus {
   color: #E00062;
   border-bottom-color: #E00062; }
-/* line 231, /var/www/html/mvc/App/Admin/sass/typography */
+/* line 231, /var/www/html/mvc/app/admin/sass/typography */
 .typography *:focus {
   outline: none; }
 
-/* line 1, /var/www/html/mvc/App/Admin/sass/form */
+/* line 1, /var/www/html/mvc/app/admin/sass/form */
 ::-webkit-input-placeholder {
   color: #b3b3b3; }
 
-/* line 5, /var/www/html/mvc/App/Admin/sass/form */
+/* line 5, /var/www/html/mvc/app/admin/sass/form */
 :-moz-placeholder {
   /* Firefox 18- */
   color: #b3b3b3; }
 
-/* line 9, /var/www/html/mvc/App/Admin/sass/form */
+/* line 9, /var/www/html/mvc/app/admin/sass/form */
 ::-moz-placeholder {
   /* Firefox 19+ */
   color: #b3b3b3; }
 
-/* line 13, /var/www/html/mvc/App/Admin/sass/form */
+/* line 13, /var/www/html/mvc/app/admin/sass/form */
 :-ms-input-placeholder {
   color: #b3b3b3; }
 
-/* line 17, /var/www/html/mvc/App/Admin/sass/form */
+/* line 17, /var/www/html/mvc/app/admin/sass/form */
 .input-reset {
   font-size: 1em; }
 
-/* line 21, /var/www/html/mvc/App/Admin/sass/form */
+/* line 21, /var/www/html/mvc/app/admin/sass/form */
 input[type="submit"] {
   display: none; }
 
-/* line 25, /var/www/html/mvc/App/Admin/sass/form */
+/* line 25, /var/www/html/mvc/app/admin/sass/form */
 .content-all-table {
   -webkit-transition: all 200ms;
   -moz-transition: all 200ms;
   transition: all 200ms;
   width: 100%;
   table-layout: fixed; }
-  /* line 30, /var/www/html/mvc/App/Admin/sass/form */
+  /* line 30, /var/www/html/mvc/app/admin/sass/form */
   .content-all-table tr:hover {
     background-color: rgba(128, 128, 128, 0.1); }
-  /* line 34, /var/www/html/mvc/App/Admin/sass/form */
+  /* line 34, /var/www/html/mvc/app/admin/sass/form */
   .content-all-table th {
     text-align: left;
     background-color: rgba(128, 128, 128, 0.1); }
-  /* line 39, /var/www/html/mvc/App/Admin/sass/form */
+  /* line 39, /var/www/html/mvc/app/admin/sass/form */
   .content-all-table td {
     border: 1px solid green; }
-  /* line 43, /var/www/html/mvc/App/Admin/sass/form */
+  /* line 43, /var/www/html/mvc/app/admin/sass/form */
   .content-all-table td, .content-all-table th {
     padding: 5px 11px;
     border: 1px solid rgba(128, 128, 128, 0.1); }
 
-/* line 1, /var/www/html/mvc/App/Admin/sass/header */
+/* line 1, /var/www/html/mvc/app/admin/sass/header */
 header.main {
   border-bottom: 1px solid #e6e6e6;
   margin-bottom: 1em; }
 
-/* line 6, /var/www/html/mvc/App/Admin/sass/header */
+/* line 6, /var/www/html/mvc/app/admin/sass/header */
 header.main.is-fixed-top {
   background-color: #ffffff;
   z-index: 2; }
 
-/* line 11, /var/www/html/mvc/App/Admin/sass/header */
+/* line 11, /var/www/html/mvc/app/admin/sass/header */
 header.main.is-fixed-top + .content {
   padding-top: 111px; }
 
-/* line 15, /var/www/html/mvc/App/Admin/sass/header */
+/* line 15, /var/www/html/mvc/app/admin/sass/header */
 .inner-title-nav-user {
   *zoom: 1; }
   /* line 18, /var/www/html/mvc/sass/vendor/bourbon/addons/clearfix */
@@ -1667,7 +1667,7 @@ header.main.is-fixed-top + .content {
   .inner-title-nav-user:after {
     clear: both; }
 
-/* line 19, /var/www/html/mvc/App/Admin/sass/header */
+/* line 19, /var/www/html/mvc/app/admin/sass/header */
 .header-site-title {
   float: left;
   width: 20%;
@@ -1676,38 +1676,38 @@ header.main.is-fixed-top + .content {
   overflow: hidden;
   white-space: nowrap; }
 
-/* line 28, /var/www/html/mvc/App/Admin/sass/header */
+/* line 28, /var/www/html/mvc/app/admin/sass/header */
 .nav-main-container {
   float: left; }
 
-/* line 32, /var/www/html/mvc/App/Admin/sass/header */
+/* line 32, /var/www/html/mvc/app/admin/sass/header */
 .nav-user.nav-main-level1 {
   float: right;
   margin: 0; }
 
-/* line 36, /var/www/html/mvc/App/Admin/sass/header */
+/* line 36, /var/www/html/mvc/app/admin/sass/header */
 .nav-user.nav-main-level1 .nav-user-drop {
   right: 0;
   left: auto; }
 
-/* line 41, /var/www/html/mvc/App/Admin/sass/header */
+/* line 41, /var/www/html/mvc/app/admin/sass/header */
 .nav-main-level1 {
   float: left;
   position: relative;
   margin: 0 1.6em 0 0;
   padding-bottom: 1em; }
-  /* line 47, /var/www/html/mvc/App/Admin/sass/header */
+  /* line 47, /var/www/html/mvc/app/admin/sass/header */
   .nav-main-level1:hover .nav-main-level1-drop {
     -webkit-animation: drop-up 200ms ease both;
     -moz-animation: drop-up 200ms ease both;
     animation: drop-up 200ms ease both;
     display: block; }
 
-/* line 53, /var/www/html/mvc/App/Admin/sass/header */
+/* line 53, /var/www/html/mvc/app/admin/sass/header */
 .drop.nav-user-drop {
   display: none; }
 
-/* line 57, /var/www/html/mvc/App/Admin/sass/header */
+/* line 57, /var/www/html/mvc/app/admin/sass/header */
 .nav-main-level1-drop {
   box-shadow: 0 0 3px gray;
   background: #ffffff;
@@ -1719,16 +1719,16 @@ header.main.is-fixed-top + .content {
   top: 1.8em;
   padding: 1em 0; }
 
-/* line 69, /var/www/html/mvc/App/Admin/sass/header */
+/* line 69, /var/www/html/mvc/app/admin/sass/header */
 .nav-main-level2-link {
   display: block;
   padding: 0 1em 0.4em; }
 
-/* line 74, /var/www/html/mvc/App/Admin/sass/header */
+/* line 74, /var/www/html/mvc/app/admin/sass/header */
 .header-inner {
   padding-top: 1em; }
 
-/* line 79, /var/www/html/mvc/App/Admin/sass/header */
+/* line 79, /var/www/html/mvc/app/admin/sass/header */
 .nav-user-gravatar {
   float: left;
   width: 30px;
@@ -1737,7 +1737,7 @@ header.main.is-fixed-top + .content {
   overflow: hidden;
   margin-right: 1em; }
 
-/* line 88, /var/www/html/mvc/App/Admin/sass/header */
+/* line 88, /var/www/html/mvc/app/admin/sass/header */
 .nav-user-gravatar-image {
   position: relative;
   top: 0;
@@ -1745,7 +1745,7 @@ header.main.is-fixed-top + .content {
   width: 30px;
   height: 30px; }
 
-/* line 1, /var/www/html/mvc/App/Admin/sass/menu */
+/* line 1, /var/www/html/mvc/app/admin/sass/menu */
 .menu-container {
   -webkit-transition: all 200ms;
   -moz-transition: all 200ms;
@@ -1758,7 +1758,7 @@ header.main.is-fixed-top + .content {
   background: #666666;
   bottom: 0; }
 
-/* line 12, /var/www/html/mvc/App/Admin/sass/menu */
+/* line 12, /var/www/html/mvc/app/admin/sass/menu */
 .menu-primary-level-1-link {
   -webkit-transition: all 200ms;
   -moz-transition: all 200ms;
@@ -1768,110 +1768,110 @@ header.main.is-fixed-top + .content {
   color: white;
   font-weight: 600; }
 
-/* line 20, /var/www/html/mvc/App/Admin/sass/menu */
+/* line 20, /var/www/html/mvc/app/admin/sass/menu */
 .menu-primary-level-2-link {
   display: none; }
 
-/* line 24, /var/www/html/mvc/App/Admin/sass/menu */
+/* line 24, /var/www/html/mvc/app/admin/sass/menu */
 .menu-primary-level-1-link:hover {
   background: #4d4d4d; }
 
-/* line 28, /var/www/html/mvc/App/Admin/sass/menu */
+/* line 28, /var/www/html/mvc/app/admin/sass/menu */
 .menu-container:hover {
   left: 0; }
 
-/* line 1, /var/www/html/mvc/App/Admin/sass/form */
+/* line 1, /var/www/html/mvc/app/admin/sass/form */
 ::-webkit-input-placeholder {
   color: #b3b3b3; }
 
-/* line 5, /var/www/html/mvc/App/Admin/sass/form */
+/* line 5, /var/www/html/mvc/app/admin/sass/form */
 :-moz-placeholder {
   /* Firefox 18- */
   color: #b3b3b3; }
 
-/* line 9, /var/www/html/mvc/App/Admin/sass/form */
+/* line 9, /var/www/html/mvc/app/admin/sass/form */
 ::-moz-placeholder {
   /* Firefox 19+ */
   color: #b3b3b3; }
 
-/* line 13, /var/www/html/mvc/App/Admin/sass/form */
+/* line 13, /var/www/html/mvc/app/admin/sass/form */
 :-ms-input-placeholder {
   color: #b3b3b3; }
 
-/* line 17, /var/www/html/mvc/App/Admin/sass/form */
+/* line 17, /var/www/html/mvc/app/admin/sass/form */
 .input-reset {
   font-size: 1em; }
 
-/* line 21, /var/www/html/mvc/App/Admin/sass/form */
+/* line 21, /var/www/html/mvc/app/admin/sass/form */
 input[type="submit"] {
   display: none; }
 
-/* line 25, /var/www/html/mvc/App/Admin/sass/form */
+/* line 25, /var/www/html/mvc/app/admin/sass/form */
 .content-all-table {
   -webkit-transition: all 200ms;
   -moz-transition: all 200ms;
   transition: all 200ms;
   width: 100%;
   table-layout: fixed; }
-  /* line 30, /var/www/html/mvc/App/Admin/sass/form */
+  /* line 30, /var/www/html/mvc/app/admin/sass/form */
   .content-all-table tr:hover {
     background-color: rgba(128, 128, 128, 0.1); }
-  /* line 34, /var/www/html/mvc/App/Admin/sass/form */
+  /* line 34, /var/www/html/mvc/app/admin/sass/form */
   .content-all-table th {
     text-align: left;
     background-color: rgba(128, 128, 128, 0.1); }
-  /* line 39, /var/www/html/mvc/App/Admin/sass/form */
+  /* line 39, /var/www/html/mvc/app/admin/sass/form */
   .content-all-table td {
     border: 1px solid green; }
-  /* line 43, /var/www/html/mvc/App/Admin/sass/form */
+  /* line 43, /var/www/html/mvc/app/admin/sass/form */
   .content-all-table td, .content-all-table th {
     padding: 5px 11px;
     border: 1px solid rgba(128, 128, 128, 0.1); }
 
-/* line 1, /var/www/html/mvc/App/Admin/sass/list */
+/* line 1, /var/www/html/mvc/app/admin/sass/list */
 .list-container, .content.element {
   overflow: hidden;
   padding: 0.4em 0;
   border-top: 1px solid #cccccc; }
 
-/* line 7, /var/www/html/mvc/App/Admin/sass/list */
+/* line 7, /var/www/html/mvc/app/admin/sass/list */
 .list-cell-20, .list-cell-left, .content-status, .content-link, .content-date, .list-cell-right {
   width: 20%; }
 
-/* line 11, /var/www/html/mvc/App/Admin/sass/list */
+/* line 11, /var/www/html/mvc/app/admin/sass/list */
 .list-cell-30, .content-link {
   width: 30%; }
 
-/* line 15, /var/www/html/mvc/App/Admin/sass/list */
+/* line 15, /var/www/html/mvc/app/admin/sass/list */
 .list-cell-left, .content-status, .content-link, .content-date {
   margin-right: 1em;
   float: left; }
 
-/* line 21, /var/www/html/mvc/App/Admin/sass/list */
+/* line 21, /var/www/html/mvc/app/admin/sass/list */
 .list-cell-right {
   margin-left: 1em;
   float: right;
   text-align: right; }
 
-/* line 29, /var/www/html/mvc/App/Admin/sass/list */
+/* line 29, /var/www/html/mvc/app/admin/sass/list */
 .content-html-snippet, .content-html {
   display: none; }
 
-/* line 33, /var/www/html/mvc/App/Admin/sass/list */
+/* line 33, /var/www/html/mvc/app/admin/sass/list */
 .content-action {
   width: 25%;
   float: right;
   text-align: right; }
 
-/* line 43, /var/www/html/mvc/App/Admin/sass/list */
+/* line 43, /var/www/html/mvc/app/admin/sass/list */
 .content-title {
   font-size: 1em; }
 
-/* line 47, /var/www/html/mvc/App/Admin/sass/list */
+/* line 47, /var/www/html/mvc/app/admin/sass/list */
 .content-status {
   width: 15%; }
 
-/* line 2, /var/www/html/mvc/App/Admin/sass/media/browser */
+/* line 2, /var/www/html/mvc/app/admin/sass/media/browser */
 .media-browser-attached .medium, .media-browser-directory .medium {
   float: left;
   width: 14%;
@@ -1880,12 +1880,12 @@ input[type="submit"] {
   border: 1px solid;
   cursor: pointer; }
 
-/* line 11, /var/www/html/mvc/App/Admin/sass/media/browser */
+/* line 11, /var/www/html/mvc/app/admin/sass/media/browser */
 .medium-thumb-image {
   max-width: 100%;
   max-height: 100%; }
 
-/* line 16, /var/www/html/mvc/App/Admin/sass/media/browser */
+/* line 16, /var/www/html/mvc/app/admin/sass/media/browser */
 .media-browser-directory {
   *zoom: 1; }
   /* line 18, /var/www/html/mvc/sass/vendor/bourbon/addons/clearfix */
@@ -1896,18 +1896,18 @@ input[type="submit"] {
   .media-browser-directory:after {
     clear: both; }
 
-/* line 1, /var/www/html/mvc/App/Admin/sass/footer */
+/* line 1, /var/www/html/mvc/app/admin/sass/footer */
 footer.main {
   border-top: 1px solid #e6e6e6;
   padding: 1em 0;
   margin-top: 2em; }
 
-/* line 1, /var/www/html/mvc/App/Admin/sass/login */
+/* line 1, /var/www/html/mvc/app/admin/sass/login */
 .page.login {
   margin: 0 auto;
   padding: 5em 0;
   width: 15em; }
-  /* line 6, /var/www/html/mvc/App/Admin/sass/login */
+  /* line 6, /var/www/html/mvc/app/admin/sass/login */
   .page.login .logo {
     display: block;
     text-align: center;
@@ -1916,14 +1916,14 @@ footer.main {
     fill: #666666;
     margin-bottom: 2em;
     width: 60%; }
-  /* line 16, /var/www/html/mvc/App/Admin/sass/login */
+  /* line 16, /var/www/html/mvc/app/admin/sass/login */
   .page.login svg {
     width: 100%; }
-  /* line 20, /var/www/html/mvc/App/Admin/sass/login */
+  /* line 20, /var/www/html/mvc/app/admin/sass/login */
   .page.login .logo img {
     width: 100%; }
 
-/* line 25, /var/www/html/mvc/App/Admin/sass/login */
+/* line 25, /var/www/html/mvc/app/admin/sass/login */
 .login-input {
   -webkit-transition: all 200ms;
   -moz-transition: all 200ms;
@@ -1940,24 +1940,24 @@ footer.main {
   line-height: 1;
   outline: none;
   width: 100%; }
-  /* line 33, /var/www/html/mvc/App/Admin/sass/mixin */
+  /* line 33, /var/www/html/mvc/app/admin/sass/mixin */
   .login-input:focus {
     color: gray;
     border-color: gray;
     box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
     opacity: 1; }
 
-/* line 30, /var/www/html/mvc/App/Admin/sass/login */
+/* line 30, /var/www/html/mvc/app/admin/sass/login */
 .login-label {
   display: block;
   margin: 1em 0 0.5em; }
 
-/* line 34, /var/www/html/mvc/App/Admin/sass/login */
+/* line 34, /var/www/html/mvc/app/admin/sass/login */
 .link-forgot-password {
   position: relative;
   top: 17px; }
 
-/* line 40, /var/www/html/mvc/App/Admin/sass/login */
+/* line 40, /var/www/html/mvc/app/admin/sass/login */
 .button-login {
   float: right;
   position: relative;
@@ -1972,19 +1972,19 @@ footer.main {
   line-height: 1;
   background-color: #666666;
   color: #ffffff; }
-  /* line 67, /var/www/html/mvc/App/Admin/sass/mixin */
+  /* line 67, /var/www/html/mvc/app/admin/sass/mixin */
   .button-login:hover {
     background-color: gray;
     color: white; }
-  /* line 75, /var/www/html/mvc/App/Admin/sass/mixin */
+  /* line 75, /var/www/html/mvc/app/admin/sass/mixin */
   .button-login:active {
     background-color: #4d4d4d;
     color: white; }
 
-/* line 47, /var/www/html/mvc/App/Admin/sass/login */
+/* line 47, /var/www/html/mvc/app/admin/sass/login */
 .magnific-forgot-password .mfp-content {
   max-width: 20em; }
-  /* line 55, /var/www/html/mvc/App/Admin/sass/login */
+  /* line 55, /var/www/html/mvc/app/admin/sass/login */
   .magnific-forgot-password .mfp-content .button-password-reset {
     float: right;
     border: none;
@@ -1998,16 +1998,16 @@ footer.main {
     background-color: #666666;
     color: #ffffff;
     margin-top: 1em; }
-    /* line 67, /var/www/html/mvc/App/Admin/sass/mixin */
+    /* line 67, /var/www/html/mvc/app/admin/sass/mixin */
     .magnific-forgot-password .mfp-content .button-password-reset:hover {
       background-color: gray;
       color: white; }
-    /* line 75, /var/www/html/mvc/App/Admin/sass/mixin */
+    /* line 75, /var/www/html/mvc/app/admin/sass/mixin */
     .magnific-forgot-password .mfp-content .button-password-reset:active {
       background-color: #4d4d4d;
       color: white; }
 
-/* line 62, /var/www/html/mvc/App/Admin/sass/login */
+/* line 62, /var/www/html/mvc/app/admin/sass/login */
 .form-forgot-password {
   *zoom: 1; }
   /* line 18, /var/www/html/mvc/sass/vendor/bourbon/addons/clearfix */
@@ -2018,14 +2018,14 @@ footer.main {
   .form-forgot-password:after {
     clear: both; }
 
-/* line 41, /var/www/html/mvc/App/Admin/sass/tag */
+/* line 41, /var/www/html/mvc/app/admin/sass/tag */
 .browser-tag {
   min-height: 7em;
   padding: 1em;
   background-color: #eee;
   margin: 1em 0; }
 
-/* line 48, /var/www/html/mvc/App/Admin/sass/tag */
+/* line 48, /var/www/html/mvc/app/admin/sass/tag */
 .tag {
   padding: 0.2em 0.5em;
   background-color: #666;
@@ -2035,15 +2035,15 @@ footer.main {
   float: left;
   font-size: 0.8em; }
 
-/* line 57, /var/www/html/mvc/App/Admin/sass/tag */
+/* line 57, /var/www/html/mvc/app/admin/sass/tag */
 .tag:hover {
   color: white; }
 
-/* line 60, /var/www/html/mvc/App/Admin/sass/tag */
+/* line 60, /var/www/html/mvc/app/admin/sass/tag */
 .browser-tag-attached .tag {
   background-color: pink; }
 
-/* line 1, /var/www/html/mvc/App/Admin/sass/feedback */
+/* line 1, /var/www/html/mvc/app/admin/sass/feedback */
 .feedback-container {
   box-shadow: 0 1px 3px green;
   margin: 1em auto;
@@ -2053,19 +2053,19 @@ footer.main {
   border-color: #00b300;
   color: green;
   cursor: default; }
-  /* line 11, /var/www/html/mvc/App/Admin/sass/feedback */
+  /* line 11, /var/www/html/mvc/app/admin/sass/feedback */
   .feedback-container:hover {
     opacity: 0.5; }
 
-/* line 16, /var/www/html/mvc/App/Admin/sass/feedback */
+/* line 16, /var/www/html/mvc/app/admin/sass/feedback */
 .feedback-description {
   margin: 0; }
 
-/* line 7, /var/www/html/mvc/App/Admin/sass/feedback-stream */
+/* line 7, /var/www/html/mvc/app/admin/sass/feedback-stream */
 .feedback-stream {
   position: relative; }
 
-/* line 11, /var/www/html/mvc/App/Admin/sass/feedback-stream */
+/* line 11, /var/www/html/mvc/app/admin/sass/feedback-stream */
 .feedback-stream-position {
   position: fixed;
   left: 50%;
@@ -2074,7 +2074,7 @@ footer.main {
   top: 2em;
   z-index: 9999; }
 
-/* line 20, /var/www/html/mvc/App/Admin/sass/feedback-stream */
+/* line 20, /var/www/html/mvc/app/admin/sass/feedback-stream */
 .feedback-stream-single {
   -webkit-transition: all 200ms;
   -moz-transition: all 200ms;
@@ -2100,10 +2100,10 @@ footer.main {
   border-radius: 5px;
   cursor: pointer;
   margin: 1em 0; }
-  /* line 35, /var/www/html/mvc/App/Admin/sass/feedback-stream */
+  /* line 35, /var/www/html/mvc/app/admin/sass/feedback-stream */
   .feedback-stream-single:hover {
     opacity: 0.8; }
-    /* line 38, /var/www/html/mvc/App/Admin/sass/feedback-stream */
+    /* line 38, /var/www/html/mvc/app/admin/sass/feedback-stream */
     .feedback-stream-single:hover:after {
       background-image: url(../image/cross-2.svg);
       background-size: 16px 16px;
@@ -2114,74 +2114,74 @@ footer.main {
       width: 16px;
       height: 16px;
       content: ''; }
-  /* line 51, /var/www/html/mvc/App/Admin/sass/feedback-stream */
+  /* line 51, /var/www/html/mvc/app/admin/sass/feedback-stream */
   .feedback-stream-single.is-removed {
     -webkit-animation-name: fadeOutUp;
     -moz-animation-name: fadeOutUp;
     animation-name: fadeOutUp; }
-  /* line 57, /var/www/html/mvc/App/Admin/sass/feedback-stream */
+  /* line 57, /var/www/html/mvc/app/admin/sass/feedback-stream */
   .feedback-stream-single.is-positive {
     background-color: #666666; }
-    /* line 60, /var/www/html/mvc/App/Admin/sass/feedback-stream */
+    /* line 60, /var/www/html/mvc/app/admin/sass/feedback-stream */
     .feedback-stream-single.is-positive:hover {
       background-color: #6b6b6b; }
-    /* line 64, /var/www/html/mvc/App/Admin/sass/feedback-stream */
+    /* line 64, /var/www/html/mvc/app/admin/sass/feedback-stream */
     .feedback-stream-single.is-positive:active {
       background-color: #616161; }
-  /* line 57, /var/www/html/mvc/App/Admin/sass/feedback-stream */
+  /* line 57, /var/www/html/mvc/app/admin/sass/feedback-stream */
   .feedback-stream-single.is-neutral {
     background-color: gray; }
-    /* line 60, /var/www/html/mvc/App/Admin/sass/feedback-stream */
+    /* line 60, /var/www/html/mvc/app/admin/sass/feedback-stream */
     .feedback-stream-single.is-neutral:hover {
       background-color: #858585; }
-    /* line 64, /var/www/html/mvc/App/Admin/sass/feedback-stream */
+    /* line 64, /var/www/html/mvc/app/admin/sass/feedback-stream */
     .feedback-stream-single.is-neutral:active {
       background-color: #7a7a7a; }
-  /* line 57, /var/www/html/mvc/App/Admin/sass/feedback-stream */
+  /* line 57, /var/www/html/mvc/app/admin/sass/feedback-stream */
   .feedback-stream-single.is-negative {
     background-color: #43ABC3; }
-    /* line 60, /var/www/html/mvc/App/Admin/sass/feedback-stream */
+    /* line 60, /var/www/html/mvc/app/admin/sass/feedback-stream */
     .feedback-stream-single.is-negative:hover {
       background-color: #4baec5; }
-    /* line 64, /var/www/html/mvc/App/Admin/sass/feedback-stream */
+    /* line 64, /var/www/html/mvc/app/admin/sass/feedback-stream */
     .feedback-stream-single.is-negative:active {
       background-color: #3da7bf; }
 
-/* line 5, /var/www/html/mvc/App/Admin/sass/table-crud */
+/* line 5, /var/www/html/mvc/app/admin/sass/table-crud */
 .table-crud-input {
   border-color: #ffffff;
   width: 100%;
   background-color: transparent; }
-  /* line 12, /var/www/html/mvc/App/Admin/sass/table-crud */
+  /* line 12, /var/www/html/mvc/app/admin/sass/table-crud */
   .table-crud-input:focus, .table-crud-input:hover {
     background-color: #ffffff;
     border-color: #666666; }
 
-/* line 18, /var/www/html/mvc/App/Admin/sass/table-crud */
+/* line 18, /var/www/html/mvc/app/admin/sass/table-crud */
 .table-crud-select {
   width: 100%; }
 
-/* line 23, /var/www/html/mvc/App/Admin/sass/table-crud */
+/* line 23, /var/www/html/mvc/app/admin/sass/table-crud */
 .table-crud-row {
   border-color: #ffffff;
   border-width: 1px;
   border-style: solid; }
-  /* line 28, /var/www/html/mvc/App/Admin/sass/table-crud */
+  /* line 28, /var/www/html/mvc/app/admin/sass/table-crud */
   .table-crud-row:hover {
     background-color: #b3b3b3; }
 
-/* line 33, /var/www/html/mvc/App/Admin/sass/table-crud */
+/* line 33, /var/www/html/mvc/app/admin/sass/table-crud */
 .table-crud-button-save {
   float: right;
   padding: 5px 10px;
   cursor: pointer; }
 
-/* line 39, /var/www/html/mvc/App/Admin/sass/table-crud */
+/* line 39, /var/www/html/mvc/app/admin/sass/table-crud */
 .table-crud-button-create {
   cursor: pointer;
   float: right; }
 
-/* line 44, /var/www/html/mvc/App/Admin/sass/table-crud */
+/* line 44, /var/www/html/mvc/app/admin/sass/table-crud */
 .table-crud-button-delete {
   float: right;
   font-size: 12px;
@@ -2191,35 +2191,35 @@ footer.main {
   color: red;
   background-color: #ffffff; }
 
-/* line 1, /var/www/html/mvc/App/Admin/sass/misc */
+/* line 1, /var/www/html/mvc/app/admin/sass/misc */
 .label-title {
   display: block;
   margin-bottom: 0.5em;
   font-size: 1.2em; }
 
-/* line 7, /var/www/html/mvc/App/Admin/sass/misc */
+/* line 7, /var/www/html/mvc/app/admin/sass/misc */
 body {
   background: #ffffff;
   color: gray;
   font-family: 'Open Sans', 'Arial', 'Sans-serif';
   line-height: 1.5; }
 
-/* line 14, /var/www/html/mvc/App/Admin/sass/misc */
+/* line 14, /var/www/html/mvc/app/admin/sass/misc */
 .wrap {
   margin: 0 auto;
   padding-left: 200px;
   max-width: 860px; }
 
-/* line 20, /var/www/html/mvc/App/Admin/sass/misc */
+/* line 20, /var/www/html/mvc/app/admin/sass/misc */
 .wrap-full-width {
   width: 860px;
   margin: 0 auto; }
 
-/* line 25, /var/www/html/mvc/App/Admin/sass/misc */
+/* line 25, /var/www/html/mvc/app/admin/sass/misc */
 .button.back, a.back.content-action-link {
   float: right; }
 
-/* line 36, /var/www/html/mvc/App/Admin/sass/misc */
+/* line 36, /var/www/html/mvc/app/admin/sass/misc */
 .nothing-yet {
   text-shadow: 0 1px 0 white;
   background: #fafafa;
@@ -2227,40 +2227,40 @@ body {
   border-top: 1px solid #d9d9d9;
   border-bottom: 1px solid #d9d9d9;
   padding: 2em; }
-  /* line 45, /var/www/html/mvc/App/Admin/sass/misc */
+  /* line 45, /var/www/html/mvc/app/admin/sass/misc */
   .nothing-yet p {
     color: #999999;
     cursor: default;
     font-weight: 600;
     margin: 0; }
 
-/* line 53, /var/www/html/mvc/App/Admin/sass/misc */
+/* line 53, /var/www/html/mvc/app/admin/sass/misc */
 .toolbar {
   margin: 0 0 1em; }
 
-/* line 57, /var/www/html/mvc/App/Admin/sass/misc */
+/* line 57, /var/www/html/mvc/app/admin/sass/misc */
 .toolbar .button, .toolbar a.content-action-link {
   float: left;
   margin: 0 0.5em 0.5em 0;
   font-size: 0.8em;
   padding: 0.5em 1em; }
 
-/* line 66, /var/www/html/mvc/App/Admin/sass/misc */
+/* line 66, /var/www/html/mvc/app/admin/sass/misc */
 .content.page textarea, .content.post textarea {
   width: 100%;
   font-size: 1em;
   font-weight: 400; }
 
-/* line 76, /var/www/html/mvc/App/Admin/sass/misc */
+/* line 76, /var/www/html/mvc/app/admin/sass/misc */
 .nav-main {
   float: left;
   margin-right: 1em; }
 
-/* line 81, /var/www/html/mvc/App/Admin/sass/misc */
+/* line 81, /var/www/html/mvc/app/admin/sass/misc */
 .page-heading {
   margin-bottom: 1em; }
 
-/* line 86, /var/www/html/mvc/App/Admin/sass/misc */
+/* line 86, /var/www/html/mvc/app/admin/sass/misc */
 .button, a.content-action-link, a.button, a.content-action-link {
   border: none;
   outline: none;
@@ -2272,12 +2272,12 @@ body {
   line-height: 1;
   color: #ffffff; }
 
-/* line 91, /var/www/html/mvc/App/Admin/sass/misc */
+/* line 91, /var/www/html/mvc/app/admin/sass/misc */
 a.content-action-link {
   padding: 1px 7px;
   margin: 0 0 5px 5px; }
 
-/* line 97, /var/www/html/mvc/App/Admin/sass/misc */
+/* line 97, /var/www/html/mvc/app/admin/sass/misc */
 .button-new {
   border: none;
   outline: none;
@@ -2290,16 +2290,16 @@ a.content-action-link {
   background-color: #666666;
   color: #ffffff;
   float: right; }
-  /* line 67, /var/www/html/mvc/App/Admin/sass/mixin */
+  /* line 67, /var/www/html/mvc/app/admin/sass/mixin */
   .button-new:hover {
     background-color: gray;
     color: white; }
-  /* line 75, /var/www/html/mvc/App/Admin/sass/mixin */
+  /* line 75, /var/www/html/mvc/app/admin/sass/mixin */
   .button-new:active {
     background-color: #4d4d4d;
     color: white; }
 
-/* line 102, /var/www/html/mvc/App/Admin/sass/misc */
+/* line 102, /var/www/html/mvc/app/admin/sass/misc */
 .admin-block-controls {
   *zoom: 1; }
   /* line 18, /var/www/html/mvc/sass/vendor/bourbon/addons/clearfix */
@@ -2310,7 +2310,7 @@ a.content-action-link {
   .admin-block-controls:after {
     clear: both; }
 
-/* line 107, /var/www/html/mvc/App/Admin/sass/misc */
+/* line 107, /var/www/html/mvc/app/admin/sass/misc */
 .admin-button-primary {
   border: none;
   outline: none;
@@ -2322,24 +2322,24 @@ a.content-action-link {
   line-height: 1;
   background-color: #666666;
   color: #ffffff; }
-  /* line 67, /var/www/html/mvc/App/Admin/sass/mixin */
+  /* line 67, /var/www/html/mvc/app/admin/sass/mixin */
   .admin-button-primary:hover {
     background-color: gray;
     color: white; }
-  /* line 75, /var/www/html/mvc/App/Admin/sass/mixin */
+  /* line 75, /var/www/html/mvc/app/admin/sass/mixin */
   .admin-button-primary:active {
     background-color: #4d4d4d;
     color: white; }
 
-/* line 113, /var/www/html/mvc/App/Admin/sass/misc */
+/* line 113, /var/www/html/mvc/app/admin/sass/misc */
 .tennis-fixture-list .table, .tennis-fixture-list .table-crud {
   border: 1px solid; }
-/* line 117, /var/www/html/mvc/App/Admin/sass/misc */
+/* line 117, /var/www/html/mvc/app/admin/sass/misc */
 .tennis-fixture-list th, .tennis-fixture-list td {
   padding: 0.5em;
   border: 1px solid; }
 
-/* line 124, /var/www/html/mvc/App/Admin/sass/misc */
+/* line 124, /var/www/html/mvc/app/admin/sass/misc */
 .ads, .grid-test {
   float: left;
   width: 100%;
@@ -2353,7 +2353,7 @@ a.content-action-link {
   .ads:after, .grid-test:after {
     clear: both; }
 
-/* line 129, /var/www/html/mvc/App/Admin/sass/misc */
+/* line 129, /var/www/html/mvc/app/admin/sass/misc */
 .grid-test .main {
   float: left;
   width: 47.5%;
@@ -2364,7 +2364,7 @@ a.content-action-link {
       width: 65%;
       margin-right: 5%; } }
 
-/* line 137, /var/www/html/mvc/App/Admin/sass/misc */
+/* line 137, /var/www/html/mvc/app/admin/sass/misc */
 .grid-test .sidebar {
   float: left;
   width: 47.5%;
@@ -2379,7 +2379,7 @@ a.content-action-link {
 @media all and (max-width: 599px) {
   .ads .three {
     margin-top: 2%; }
-    /* line 151, /var/www/html/mvc/App/Admin/sass/misc */
+    /* line 151, /var/www/html/mvc/app/admin/sass/misc */
     .ads .three:first-child {
       margin-top: 0; } }
 @media all and (min-width: 400px) and (max-width: 599px) {
@@ -2387,7 +2387,7 @@ a.content-action-link {
     float: left;
     width: 47.5%;
     margin-right: 5%; }
-    /* line 159, /var/www/html/mvc/App/Admin/sass/misc */
+    /* line 159, /var/www/html/mvc/app/admin/sass/misc */
     .ads .three:nth-child(2n) {
       margin-right: 0; } }
 @media all and (min-width: 600px) {
@@ -2395,10 +2395,10 @@ a.content-action-link {
     float: left;
     width: 30%;
     margin-right: 5%; }
-    /* line 167, /var/www/html/mvc/App/Admin/sass/misc */
+    /* line 167, /var/www/html/mvc/app/admin/sass/misc */
     .ads .three:last-child {
       margin-right: 0; } }
 
-/* line 173, /var/www/html/mvc/App/Admin/sass/misc */
+/* line 173, /var/www/html/mvc/app/admin/sass/misc */
 #form_html {
   height: 40em; }

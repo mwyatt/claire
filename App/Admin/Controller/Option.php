@@ -32,6 +32,7 @@ class Option extends \OriginalAppName\Controller\Admin
 		// render
 		$this
 			->view
+			->setDataKey('moduleName', 'option/all')
 			->setDataKey('options', $options);
 		return new Response($this->view->getTemplate('admin/option/all'));
 	}

@@ -6,9 +6,10 @@
 			
 <?php endif ?>
 
-		    <script src="<?php echo $this->getUrl() . 'js/vendor/jquery/jquery.js' ?>"></script>
-		    <script src="<?php echo $this->getUrlAsset('admin/vendor/tinymce/tinymce.js') ?>"></script>
-		    <script src="<?php echo $this->getUrlAsset('admin/main.js') ?>"></script>
+		    <script data-main="<?php echo $this->getUrl() ?>js/admin/main" src="<?php echo $this->getUrl() ?>vendor/bower/requirejs/require.js"></script>
+		    <script>
+
+		    </script>
 		</div>
 
 <?php include($this->getTemplatePath('admin/_feedback-stream-boot')) ?>

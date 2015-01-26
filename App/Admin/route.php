@@ -46,6 +46,11 @@ $routes->add('adminAjaxForgotPassword', new Symfony\Component\Routing\Route(
 	['controller' => 'OriginalAppName\\Admin\\Controller\\Ajax\\ForgotPassword']
 ));
 
+$routes->add('adminAjaxContentGenerateSlug', new Symfony\Component\Routing\Route(
+	'/admin/ajax/content/generate-slug/',
+	['controller' => 'OriginalAppName\\Admin\\Controller\\Ajax\\Content']
+));
+
 // ajax/option
 $routes->add('adminAjaxOptionRead', new Symfony\Component\Routing\Route(
 	'/admin/ajax/option/',

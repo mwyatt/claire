@@ -9,12 +9,6 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-sass');
 
-	// tasks i will need to do
-	// grunt copy:admin -> copies all required vendor assets
-	// grunt copy:site:mwyatt -> copies for site specific
-	// grunt watch:admin -> watch changes to scss in admin area
-	// grunt watch:site -> watch changes in site specific
-	// no need to watch or compile the js as it will be using requirejs
 
 	// config
 	grunt.initConfig({
@@ -28,7 +22,7 @@ module.exports = function(grunt) {
 			'concat:js',
 			'concat:jsAdmin',
 			'uglify:js'
-		],
+fa		],
 		sassFiles: [{
 			expand: true,
 			cwd: 'app/site/<%= config.site %>/sass',

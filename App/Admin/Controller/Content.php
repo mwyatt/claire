@@ -92,6 +92,7 @@ class Content extends \OriginalAppName\Controller\Admin
 		// render
 		$this
 			->view
+			->setDataKey('moduleName', 'content/single')
 			->setDataKey('content', $entityContent);
 		return new Response($this->view->getTemplate('admin/content/single'));
 	}

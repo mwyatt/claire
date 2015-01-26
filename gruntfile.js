@@ -1,8 +1,12 @@
+	// tasks i will need to do
+	// grunt copy:admin -> copies all required vendor assets
+	// grunt copy:site:mwyatt -> copies for site specific
+	// grunt watch:admin -> watch changes to scss in admin area
+	// grunt watch:site -> watch changes in site specific
+	// no need to watch or compile the js as it will be using requirejs
 
 
 module.exports = function(grunt) {
-
-	// dependencies
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
@@ -10,11 +14,17 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-sass');
 	grunt.initConfig({
 		config: grunt.file.readJSON('app/config.json'),
+		watch: {
+			admin: {
+				files: ['app/admin/sass/**'],
+				tasks: ['sass:admin']
+			}
+		},
 		sass: {
 			admin: {
 				files: [{
 					expand: true,
-					cwd: 'App/Admin/sass',
+					cwd: 'app/admin/sass',
 					src: ['*.scss'],
 					dest: 'asset/admin',
 					ext: '.css',
@@ -29,9 +39,9 @@ module.exports = function(grunt) {
 			site: {
 				files: [{
 					expand: true,
-					cwd: 'App/Site/<%= config.site %>/sass',
+					cwd: 'app/site/<%= config.site %>/sass',
 					src: ['*.scss'],
-					dest: 'App/Site/<%= config.site %>/asset',
+					dest: 'app/site/<%= config.site %>/asset',
 					ext: '.css'
 				}],
 				options: {
@@ -61,7 +71,7 @@ module.exports = function(grunt) {
 						expand: true,
 						cwd: 'vendor/bower/tinymce',
 						src: '**',
-						dest: 'asset/admin/vendor/tinymce/'
+						dest: 'js/vendor/tinymce/'
 					},
 					{
 						expand: true,
@@ -70,7 +80,7 @@ module.exports = function(grunt) {
 						dest: 'sass/vendor/magnific-popup/',
 						rename: function(dest, src) {
 							return dest + '_' + src.replace('.css','.scss');
-						},
+						}
 					},
 					{
 						expand: true,
@@ -79,7 +89,7 @@ module.exports = function(grunt) {
 						dest: 'sass/vendor/owl-carousel/',
 						rename: function(dest, src) {
 							return dest + '_' + src.replace('.css','.scss');
-						},
+						}
 					},
 					{
 						expand: true,
@@ -92,7 +102,7 @@ module.exports = function(grunt) {
 						cwd: 'vendor/bower/jquery/dist',
 						src: 'jquery.js',
 						dest: 'js/vendor/jquery',
-					},
+					}
 				]
 			}
 		}
