@@ -59,7 +59,7 @@ class Meta extends \OriginalAppName\Admin\Controller\Ajax
 			->readId($modelContentMeta->getLastInsertIds());
 
 		// output
-		return new Response(json_encode($modelContentMeta->getData()));
+		return new Response(json_encode($modelContentMeta->getDataFirst()));
 	}
 
 

@@ -1,4 +1,4 @@
-require([], function () {
+require(['helper', 'admin/feedbackStream'], function (helper, feedbackStream) {
 
 
   var ControllerOption = function () {
@@ -34,7 +34,7 @@ require([], function () {
       var closestRow = $this.closest('.js-option');
       var id = closestRow.attr('data-id');
       $.ajax({
-        url: baseUrl('admin/ajax/option/delete/'),
+        url: helper.urlBase('admin/ajax/option/delete/'),
         type: 'get',
         dataType: 'json',
         data: {id: id},
@@ -44,7 +44,12 @@ require([], function () {
             closestRow.remove();
           };
         },
-        error: function(result) {}
+        error: function(result) {
+          feedbackStream.createMessage({
+            message: 'Network error.',
+            type: 'negative'
+          });
+        }
       });
       
     });
@@ -66,7 +71,7 @@ require([], function () {
 
     // call
     $.ajax({
-      url: baseUrl('admin/ajax/option/' + (id ? id : 'create') + '/'),
+      url: helper.urlBase('admin/ajax/option/' + (id ? id : 'create') + '/'),
       type: 'get',
       dataType: 'json',
       data: {
@@ -81,7 +86,10 @@ require([], function () {
         data.eventsRefresh(data);
       },
       error: function(result) {
-        console.log(result);
+        feedbackStream.createMessage({
+          message: 'Network error.',
+          type: 'negative'
+        });
       }
     });
   };

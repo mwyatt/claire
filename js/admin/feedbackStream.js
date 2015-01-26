@@ -15,6 +15,7 @@ define(['jquery', 'mustache', 'helper'], function ($, mustache, helper) {
 	 * @return {object}        jquery
 	 */
 	FeedbackStream.prototype.createMessage = function(config) {
+		var newMessage;
 
 		// allow null object, but dont display
 		if (! config.message) {
@@ -29,7 +30,9 @@ define(['jquery', 'mustache', 'helper'], function ($, mustache, helper) {
 
 				// timeout for removal
 				var timer = setTimeout(function() {
-					message.addClass('is-removed');
+					$('.js-feedback-stream-single')
+						.first()
+						.addClass('is-removed');
 
 					// remove single after animation
 					// duplication

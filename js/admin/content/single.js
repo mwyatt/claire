@@ -2,7 +2,7 @@ require(['jquery', 'tinymce', 'admin/content/meta'], function ($, tinymce, conte
 
   // wysi
   tinymce.init({
-      selector: '.js-tinymce',
+    selector: '.js-tinymce',
     menu: {
         file: {title : 'File'  , items : 'newdocument'},
         edit: {title : 'Edit'  , items : 'undo redo | cut copy paste pastetext | selectall'},

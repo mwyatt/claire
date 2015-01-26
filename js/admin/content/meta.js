@@ -1,4 +1,4 @@
-define(['jquery', 'helper'], function ($, helper) {
+define(['jquery', 'helper', 'mustache', 'admin/feedbackStream'], function ($, helper, mustache, feedbackStream) {
 
 
 	/**
@@ -19,19 +19,22 @@ define(['jquery', 'helper'], function ($, helper) {
 			template: 'admin/content/meta/all',
 			success: function(template) {
 				$.ajax({
-					url: helper.getUrl('base') + 'admin/ajax/content/meta/',
+					url: helper.urlBase('admin/ajax/content/meta/'),
 					type: 'get',
 					dataType: 'json',
 					data: {
 						contentId: data.contentId
 					},
 					success: function(metas) {
-						$('.js-content-meta-container').html(Mustache.render(template, {metas: metas}));
+						$('.js-content-meta-container').html(mustache.render(template, {metas: metas}));
 						data.eventsRefresh(data);
-						this.getNewRow(this);
+						data.getNewRow(data);
 					},
 					error: function(result) {
-						console.log(result);
+						feedbackStream.createMessage({
+						  message: 'Network error.',
+						  type: 'negative'
+						});
 					}
 				});
 			}
@@ -53,7 +56,6 @@ define(['jquery', 'helper'], function ($, helper) {
 				clearTimeout(timeout);
 				timeout = setTimeout(function() {
 					data.changeInput(data, trigger);
-					data.getNewRow(data);
 				}, 500);
 			});
 
@@ -64,7 +66,7 @@ define(['jquery', 'helper'], function ($, helper) {
 			var closestRow = $this.closest('.js-content-meta');
 			var id = closestRow.attr('data-id');
 			$.ajax({
-				url: helper.getUrl('base') + 'admin/ajax/content/meta/delete/',
+				url: helper.urlBase('admin/ajax/content/meta/delete/'),
 				type: 'get',
 				dataType: 'json',
 				data: {id: id},
@@ -75,7 +77,10 @@ define(['jquery', 'helper'], function ($, helper) {
 					};
 				},
 				error: function(result) {
-					console.log(result);
+					feedbackStream.createMessage({
+					  message: 'Network error.',
+					  type: 'negative'
+					});
 				}
 			});
 		});
@@ -97,7 +102,7 @@ define(['jquery', 'helper'], function ($, helper) {
 
 		// call
 		$.ajax({
-			url: helper.getUrl('base') + 'admin/ajax/content/meta/' + (id ? id : 'create') + '/',
+			url: helper.urlBase('admin/ajax/content/meta/' + (id ? id : 'create') + '/'),
 			type: 'get',
 			dataType: 'json',
 			data: {
@@ -105,13 +110,18 @@ define(['jquery', 'helper'], function ($, helper) {
 				name: inputName.val(),
 				value: inputValue.val()
 			},
-			complete: function(result) {},
+			complete: function() {
+				data.getNewRow(data);
+			},
 			success: function(meta) {
 				closestRow.attr('data-id', meta.id);
 				data.eventsRefresh(data);
 			},
 			error: function(result) {
-				console.log(result);
+				feedbackStream.createMessage({
+				  message: 'Network error.',
+				  type: 'negative'
+				});
 			}
 		});
 	};
@@ -143,5 +153,5 @@ define(['jquery', 'helper'], function ($, helper) {
 	};
 
 	// return
-	return ControllerContentMeta;
+	return new ControllerContentMeta;
 });

@@ -36,7 +36,7 @@ define(['jquery'], function ($) {
 
 	  // cache or new
 	  if (templates.hasOwnProperty(config.template)) {
-	    config.success(templates[config.template]);
+	    config.success(JSON.parse(templates[config.template]));
 	  } else {
 	    $.ajax({
 	      url: urlBase('mustache/' + config.template + '.mst'),
