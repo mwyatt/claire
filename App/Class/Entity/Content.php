@@ -72,19 +72,14 @@ class Content extends \OriginalAppName\Entity
 	
 
 	/**
-	 * possible status options
-	 * @var array
+	 * content which is not ready for publishing
 	 */
-	protected $statusPossible = array(
-		'visible',
-		'draft',
-		'hidden'
-	);
-
-
 	const STATUS_UNPUBLISHED = 0;
 	
 
+	/**
+	 * content which is ready to be seen
+	 */
 	const STATUS_PUBLISHED = 1;
 
 

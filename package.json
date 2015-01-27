@@ -4,9 +4,10 @@
   "devDependencies": {
     "grunt": "latest",
     "grunt-contrib-concat": "latest",
+    "grunt-contrib-copy": "latest",
+    "grunt-contrib-requirejs": "^0.4.4",
     "grunt-contrib-uglify": "latest",
     "grunt-contrib-watch": "latest",
-    "grunt-contrib-copy": "latest",
     "grunt-sass": "latest"
   }
 }
