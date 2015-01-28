@@ -1,11 +1,11 @@
-	// tasks i will need to do
-	// grunt copy:admin -> copies all required vendor assets
-	// grunt copy:site:mwyatt -> copies for site specific
-	// grunt watch:admin -> watch changes to scss in admin area
-	// grunt watch:site -> watch changes in site specific
-	// no need to watch or compile the js as it will be using requirejs
 
 
+// tasks i will need to do
+// grunt copy:admin -> copies all required vendor assets
+// grunt copy:site:mwyatt -> copies for site specific
+// grunt watch:admin -> watch changes to scss in admin area
+// grunt watch:site -> watch changes in site specific
+// no need to watch or compile the js as it will be using requirejs
 module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-sass');
 	grunt.loadNpmTasks('grunt-contrib-copy');
@@ -38,7 +38,7 @@ module.exports = function(grunt) {
 					cwd: 'app/admin/sass',
 					src: ['*.scss'],
 					dest: 'asset/admin',
-					ext: '.css',
+					ext: '.css'
 				}],
 				options: {
 					imagePath: 'asset',
@@ -61,40 +61,40 @@ module.exports = function(grunt) {
 					sourceComments: 'normal',
 					outputStyle: 'nested'
 				}
-			},
+			}
 		},
 		copy: {
 			all: {
 				files: [
 					{
 						expand: true,
-						cwd: 'vendor/bower/animate.scss/scss/',
-						src: '**',
-						dest: 'sass/vendor/animate/',
+						cwd: 'vendor/bower/mustache',
+						src: 'mustache.js',
+						dest: 'js/vendor'
 					},
 					{
 						expand: true,
-						cwd: 'vendor/bower/mustache',
-						src: 'mustache.js',
-						dest: 'js/vendor/mustache'
+						cwd: 'vendor/bower/requirejs',
+						src: 'require.js',
+						dest: 'js/vendor'
 					},
 					{
 						expand: true,
 						cwd: 'vendor/bower/bourbon/app/assets/stylesheets/',
 						src: '**',
-						dest: 'sass/vendor/bourbon/',
+						dest: 'sass/vendor/bourbon/'
 					},
 					{
 						expand: true,
 						cwd: 'vendor/bower/tinymce',
 						src: '**',
-						dest: 'js/vendor/tinymce/'
+						dest: 'js/vendor/tinymce'
 					},
 					{
 						expand: true,
 						cwd: 'vendor/bower/magnific-popup/dist/',
 						src: 'magnific-popup.css',
-						dest: 'sass/vendor/magnific-popup/',
+						dest: 'sass/vendor',
 						rename: function(dest, src) {
 							return dest + '_' + src.replace('.css','.scss');
 						}
@@ -103,13 +103,13 @@ module.exports = function(grunt) {
 						expand: true,
 						cwd: 'vendor/bower/magnific-popup/dist',
 						src: 'jquery.magnific-popup.js',
-						dest: 'js/vendor/magnific-popup',
+						dest: 'js/vendor'
 					},
 					{
 						expand: true,
 						cwd: 'vendor/bower/jquery-serialize-object/dist',
 						src: '**',
-						dest: 'js/vendor/jquery-serialize-object',
+						dest: 'js/vendor'
 					},
 					{
 						expand: true,
@@ -124,13 +124,13 @@ module.exports = function(grunt) {
 						expand: true,
 						cwd: 'vendor/bower/normalize-scss/',
 						src: '*.scss',
-						dest: 'sass/vendor/normalize/',
+						dest: 'sass/vendor'
 					},
 					{
 						expand: true,
 						cwd: 'vendor/bower/jquery/dist',
 						src: 'jquery.js',
-						dest: 'js/vendor/jquery',
+						dest: 'js/vendor'
 					}
 				]
 			}

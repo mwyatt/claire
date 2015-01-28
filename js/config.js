@@ -1,20 +1,20 @@
 var require = {
-    urlArgs: 'bust=' +  (new Date()).getTime(),
+  urlArgs: 'bust=' +  (new Date()).getTime(),
 	paths: {
-	  'jquery': 'vendor/jquery/jquery',
-	  'tinymce': 'vendor/tinymce/tinymce',
-	  'mustache': 'vendor/mustache/mustache',
-	  'jquerySerializeObject': 'vendor/jquery-serialize-object/jquery.serialize-object.min',
-	  'magnificPopup': 'vendor/magnific-popup/jquery.magnific-popup'
+	  jquery: 'vendor/jquery',
+	  tinymce: 'vendor/tinymce/tinymce',
+	  mustache: 'vendor/mustache',
+	  jquerySerializeObject: 'vendor/jquery.serialize-object.min',
+	  magnificPopup: 'vendor/jquery.magnific-popup'
 	},
 	shim: {
-	  'jquerySerializeObject': {
+	  jquerySerializeObject: {
 	    deps: ['jquery']
 	  },
-	  'tinymce': {
+	  tinymce: {
 	    deps: ['jquery']
 	  },
-	  'magnificPopup': {
+	  magnificPopup: {
 	    deps: ['jquery']
 	  },    
 		tinymce: {

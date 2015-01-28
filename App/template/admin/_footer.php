@@ -7,7 +7,7 @@
 <?php endif ?>
 
 		    <script src="<?php echo $this->getUrl() ?>js/config.js"></script>
-		    <script data-main="<?php echo $this->getUrl() ?>js/admin-main" src="<?php echo $this->getUrl() ?>vendor/bower/requirejs/require.js"></script>
+		    <script data-main="<?php echo $this->getUrl() ?>js/admin-main" src="<?php echo $this->getUrl() ?>js/vendor/require.js"></script>
 		</div>
 
 <?php include $this->getTemplatePath('admin/_feedback-stream-boot') ?>
