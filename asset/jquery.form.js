@@ -1,0 +1,1 @@
+var Form=function(e){this.setForms(this),this.setSubmitButtons(this)};Form.prototype.setForms=function(e){$("form").on("submit.form",function(e){var t=$(this);return t.hasClass("js-is-submitting")?!1:(t.addClass("js-is-submitting"),!0)})},Form.prototype.setSubmitButtons=function(e){$(".js-form-button-submit").on("mouseup.form",function(){$(this).closest("form").submit()})};

@@ -8,6 +8,9 @@
     "grunt-contrib-requirejs": "^0.4.4",
     "grunt-contrib-uglify": "latest",
     "grunt-contrib-watch": "latest",
-    "grunt-sass": "latest"
+    "grunt-sass": "latest",
+    "load-grunt-config": "^0.16.0",
+    "load-grunt-tasks": "^3.0.0",
+    "time-grunt": "^1.0.0"
   }
 }

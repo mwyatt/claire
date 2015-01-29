@@ -1,4 +1,28 @@
 
+// from work
+module.exports = function(grunt) {
+
+  // init
+  grunt.initConfig({
+		config: grunt.file.readJSON('app/config.json')
+  });
+
+  // load tasks
+  require('load-grunt-tasks')(grunt);
+
+  // measures the time each task takes
+  require('time-grunt')(grunt);
+
+  // load grunt config
+  require('load-grunt-config')(grunt);
+
+  // shortcuts
+  grunt.registerTask('default', ['watch:all']);
+  grunt.registerTask('minify', ['sass:minifyFront', 'sass:minifyAdmin']);
+};
+
+
+
 
 // tasks i will need to do
 // grunt copy:admin -> copies all required vendor assets
@@ -7,24 +31,7 @@
 // grunt watch:site -> watch changes in site specific
 // no need to watch or compile the js as it will be using requirejs
 module.exports = function(grunt) {
-	grunt.loadNpmTasks('grunt-sass');
-	grunt.loadNpmTasks('grunt-contrib-copy');
-	grunt.loadNpmTasks('grunt-contrib-watch');
-	grunt.loadNpmTasks('grunt-contrib-requirejs')
-	// grunt.loadNpmTasks('grunt-contrib-uglify');
-	// grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.initConfig({
-		config: grunt.file.readJSON('app/config.json'),
-		requirejs: {
-		  compile: {
-		    options: {
-		      baseUrl: 'js',
-		      mainConfigFile: 'js/build.js',
-		      name: "js/admin-main.js",
-		      out: 'asset/admin/main.js'
-		    }
-		  }
-		},
 		watch: {
 			admin: {
 				files: ['app/admin/sass/**'],

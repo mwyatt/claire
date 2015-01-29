@@ -1,0 +1,1 @@
+Array.prototype.contains=function(e){for(i in this)if(this[i]==e)return!0;return!1};
