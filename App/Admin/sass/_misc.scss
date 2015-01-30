@@ -13,8 +13,6 @@ body {
 
 .wrap {
 	margin: 0 auto; 
-	padding-left: 180 + 20px;
-	max-width: 860px;
 }
 
 .wrap-full-width {
@@ -60,6 +58,10 @@ body {
 	font-size: .8em;
 	padding: .5em 1em;
 	// background: red;
+}
+
+.page {
+  padding: 1em 5%;
 }
 
 .content.page textarea,
@@ -172,4 +174,19 @@ a.content-action-link {
 
 #form_html {
 	height: 40em;
+}
+
+.page-actions {
+    padding-bottom: 1em;
+    margin-bottom: 1em;
+    border-bottom: 1px dotted $color-gray-10;
+    @include clearfix;
+}
+
+.page-action-button {
+  @include button;
+}
+
+.user-all-table {
+	@extend %table-all;
 }

@@ -4,7 +4,7 @@
 	<div class="page-actions">
 		<a href="<?php echo $this->getUrl('adminUserAll') ?>" class="page-action-button">Back</a>
 	</div>
-	<h1 class="page-heading"><?php echo $user->getId() ? 'Editing' : 'Creating' ?> user <?php echo $user->getNameFull() ? $user->getEmail() : $user->getId() ?></h1>
+	<h1 class="page-primary-title"><?php echo $user->getId() ? 'Editing' : 'Creating' ?> user <?php echo $user->getNameFull() ? $user->getEmail() : $user->getId() ?></h1>
 	<form class="main" method="post" enctype="multipart/form-data">
 	    <div class="block-margins">
         	<label class="form-user-label-title" for="form-user-name-first">First Name</label>

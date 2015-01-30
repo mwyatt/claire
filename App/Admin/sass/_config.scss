@@ -12,9 +12,9 @@
 /**
  * vendor libraries
  */
-@import "../../../sass/vendor/normalize/normalize";
+@import "../../../sass/vendor/normalize";
 @import "../../../sass/vendor/bourbon/bourbon";
-@import "../../../sass/vendor/magnific-popup/magnific-popup";
+@import "../../../sass/vendor/magnific-popup";
 @import "../../../sass/grid";
 
 
@@ -37,6 +37,6 @@
 /**
  * admin / front settings
  */
-@import "reusable";
-@import "typography";
+@import "../../../sass/reusable";
+@import "../../../sass/typography";
 @import "form";

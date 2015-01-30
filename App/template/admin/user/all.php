@@ -3,9 +3,9 @@
 
 <div class="page user-all">
 	<div class="page-actions">
-		<a class="button right" href="<?php echo $urlCreate ?>" title="Create a new User">New</a>
+		<a class="page-action-button right" href="<?php echo $urlCreate ?>" title="Create a new User">New</a>
 	</div>
-	<h1 class="page-heading">Users</h1>
+	<h1 class="page-primary-title">Users</h1>
 
 <?php if ($users): ?>
 

@@ -1,7 +1,7 @@
 <?php include $this->getTemplatePath('admin/_header') ?>
 
 <div class="page option-all">
-	<h1 class="page-heading">Settings</h1>
+	<h1 class="page-primary-title">Settings</h1>
 
 <?php if ($options): ?>
 

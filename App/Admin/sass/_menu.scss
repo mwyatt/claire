@@ -2,19 +2,19 @@
     @include transition(all 200ms);
     box-shadow: 0 0 3px rgba($color-black, .3);
     position: fixed;
-    left: -0;
     top: 0;
     width: 180px;
     background: $color-primary-0;
     bottom: 0;
+    left: -180px;
 }
 
 .menu-primary-level-1-link {
     @include transition(all 200ms);
     display: block;
-    padding: 1em;
-    color: white;
+    color: $color-white;
     font-weight: 600;
+    padding: 10px 16px;
 }
 
 .menu-primary-level-2-link {
@@ -27,4 +27,21 @@
 
 .menu-container:hover {
     left: 0;
+}
+
+.menu-hamburger {
+    display: block;
+    position: absolute;
+    top: 0;
+    padding: 9px;
+    right: -44px;
+    background: $color-primary-0;
+    height: 44px;
+    width: 44px;
+
+    svg {
+        fill: $color-white;
+        width: 100%;
+        height: 100%;
+    }
 }

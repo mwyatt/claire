@@ -1,1 +1,0 @@
-define(["jquery","admin/feedbackStream"],function(e,t){e.ajaxSetup({timeout:1e4,cache:!1}),t.createMessage(feedback);var n=e("[data-moduleName]").attr("data-moduleName");if(!n)return;require(["admin/"+n])});

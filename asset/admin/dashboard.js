@@ -1,1 +1,0 @@
-require(["jquery"],function(e){console.log("dashboard ready")});

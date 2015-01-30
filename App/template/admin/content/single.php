@@ -11,7 +11,7 @@
 <?php endif ?>
 
 	</div>
-	<h1 class="page-heading">Editing <?php echo ucfirst($content->getType()) ?> <?php echo $content->getTitle() ? $content->getTitle() : $content->getId() ?></h1>
+	<h1 class="page-primary-title">Editing <?php echo ucfirst($content->getType()) ?> <?php echo $content->getTitle() ? $content->getTitle() : $content->getId() ?></h1>
 	<form class="main" method="post" enctype="multipart/form-data">
 	    <div class="block-margins">
         	<label class="form-content-label-title" for="form-content-title">Title</label>

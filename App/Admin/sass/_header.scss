@@ -1,6 +1,6 @@
 header.main { 
-    border-bottom: 1px solid $color-gray-10;
-    margin-bottom: 1em;
+    box-shadow: 0 0 3px rgba($color-black, .2);
+    height: 44px;
 }
 
 header.main.is-fixed-top {
@@ -18,11 +18,13 @@ header.main.is-fixed-top + .content {
 
 .header-site-title {
     float: left;
-    width: 20%;
     margin-right: 1em;
+    white-space: nowrap;
+    max-width: 200px;
     text-overflow: ellipsis;
     overflow: hidden;
-    white-space: nowrap;
+    width: auto;
+    padding: 10px;
 }
 
 .nav-main-container {
@@ -33,56 +35,59 @@ header.main.is-fixed-top + .content {
     float: right;
     margin: 0;
 }
+
+.nav-user-name {
+    display: block;
+    padding: 13px 13px 13px 58px;
+}
+
 .nav-user.nav-main-level1 .nav-user-drop {
     right: 0;
     left: auto;
 }
 
 .nav-main-level1 {
-    float: left;
     position: relative;
-    margin: 0 1.6em 0 0;
-    padding-bottom: 1em;
 
     &:hover .nav-main-level1-drop {
-        @include animation(drop-up 200ms ease both); 
+        @include animation(fadeInDown 200ms ease both); 
     	display: block;
     }
 }
 
-.drop.nav-user-drop {
-    display: none;
-}
-
 .nav-main-level1-drop {
-    box-shadow: 0 0 3px $color-gray-50;
+    box-shadow: 0 0 3px rgba($color-black, .4);
     background: $color-white;
     display: none;
     position: absolute;
-    width: 9em;
-    border: 1px solid $color-gray-10;
-    border-top: none;
-    top: 1.8em;
-    padding: 1em 0;
+    min-width: 9em;
+    // border: 1px solid $color-gray-10;
+    top: 43px;
+    padding: 8px 0;
 }
 
 .nav-main-level2-link {
     display: block;
-    padding: 0 1em 0.4em;
-}
+    padding: 8px 10px;
+    border-top: 1px dotted $color-gray-10;
 
-.header-inner {
-    padding-top: 1em;
-}
+    &:hover {
+        background: $color-gray-10;
+    }
 
+    &:first-child {
+        border: 0;
+    }
+}
 
 .nav-user-gravatar {
-    float: left;
     width: 30px;
     height: 30px;
     border-radius: 100%;
     overflow: hidden;
-    margin-right: 1em;
+    position: absolute;
+    top: 10px;
+    left: 13px;
 }
 
 .nav-user-gravatar-image {
@@ -91,4 +96,8 @@ header.main.is-fixed-top + .content {
     left: 0;
     width: 30px;
     height: 30px;
+}
+
+.header-inner {
+    padding-left: 44px;
 }

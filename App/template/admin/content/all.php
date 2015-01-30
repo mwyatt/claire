@@ -5,7 +5,7 @@
 	<div class="page-actions">
 		<a class="button right" href="<?php echo $urlCreate ?>" title="Create a new <?php echo ucfirst($contentType) ?>">New</a>
 	</div>
-	<h1 class="page-heading"><?php echo ucfirst($contentType) ?>s</h1>
+	<h1 class="page-primary-title"><?php echo ucfirst($contentType) ?>s</h1>
 
 <?php if ($contents): ?>
 

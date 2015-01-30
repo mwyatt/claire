@@ -1,1 +1,0 @@
-({mainConfigFile:"config.js",dir:"../asset",optimize:"uglify",uglify:{toplevel:!0,ascii_only:!0,beautify:!0,max_line_length:1e3,defines:{DEBUG:["name","false"]},no_mangle:!0}});
