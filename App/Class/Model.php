@@ -515,7 +515,7 @@ abstract class Model extends \OriginalAppName\Data
 				}
 			}
 			if ($type == 'integer') {
-				if ($order = 'asc') {
+				if ($order == 'asc') {
 					if ($a->$method() == $b->$method()) {
 						return 0;
 					}

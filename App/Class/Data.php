@@ -17,14 +17,14 @@ class Data extends \OriginalAppName\System
 	 * @var array
 	 */
 	public $data = [];
-
-
+	
+	
 	/**
-	 * @param mixed $value 
+	 * @param mixed $data Usually array
 	 */
-	public function setData($value)
-	{		
-		$this->data = $value;
+	public function setData($data) {
+	    $this->data = $data;
+	    return $this;
 	}
 
 
