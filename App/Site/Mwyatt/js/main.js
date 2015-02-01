@@ -1,4 +1,18 @@
-$(document).ready(function() {  
+define(['jquery'], function ($) {
+
+
+  feedbackStream.createMessage(feedback);
+  var moduleName = $('[data-moduleName]').attr('data-moduleName');
+  if (! moduleName) {
+    return;
+  };
+  require(['admin/' + moduleName]);
+});
+
+
+
+
+$(document).ready(function() {
 	var html = $('html');
 
 	// toggle menu primary

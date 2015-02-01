@@ -10,17 +10,3 @@ define(['jquery', 'admin/feedbackStream'], function ($, feedbackStream) {
   };
   require(['admin/' + moduleName]);
 });
-
-
-
-// /**  
-
-//  * rules
-//  * all blocks of functionaltiy seperated into 'module**'
-//  */
-// $(document).ready(function() {
-// 	console.log('admin->ready');
-// 	system = new System;
-// 	var form = new Form;
-// 	var controller = new Controller;
-// });

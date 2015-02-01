@@ -17,9 +17,9 @@ module.exports = {
   site: {
     files: [{
       expand: true,
-      cwd: 'app/site/<%= config.site %>/sass',
+      cwd: 'app/site/<%= package.site %>/sass',
       src: ['*.scss'],
-      dest: 'app/site/<%= config.site %>/asset',
+      dest: 'app/site/<%= package.site %>/asset',
       ext: '.css'
     }],
     options: {

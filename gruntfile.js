@@ -7,11 +7,6 @@
 // no need to watch or compile the js as it will be using requirejs
 module.exports = function(grunt) {
 
-  // init
-  grunt.initConfig({
-		config: grunt.file.readJSON('app/config.json')
-  });
-
   // load tasks
   require('load-grunt-tasks')(grunt);
 
@@ -20,8 +15,10 @@ module.exports = function(grunt) {
 
   // load grunt config
   require('load-grunt-config')(grunt);
-
+  
   // shortcuts
   grunt.registerTask('default', ['watch:all']);
   // grunt.registerTask('minify', ['sass:minifyFront', 'sass:minifyAdmin']);
+
+  // config: grunt.file.readJSON('../app/config.json'),
 };
