@@ -1,4 +1,4 @@
-{
+({
   "paths": {
     "jquery": "vendor/jquery",
     "tinymce": "vendor/tinymce/tinymce",
@@ -34,4 +34,4 @@
     },
     "no_mangle": true
   }
-}
+})
