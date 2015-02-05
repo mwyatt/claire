@@ -1,3 +1,8 @@
+
+
+/**
+ * visibility
+ */
 .block {
     display: block;
 }
@@ -36,6 +41,10 @@
     width: auto;
 }
 
+
+/**
+ * position
+ */
 .left {
     float: left;
 }
@@ -44,111 +53,18 @@
     float: right;
 }
 
-.uppercase {
-    text-transform: uppercase;
-}
 
-// @import "vendor/spinner";
-.spinner {
-    background: image-url('ajax.gif') 50% 50% no-repeat;
-    
-    &.is-tall {
-        height: 80px;
-    }
-
-    &.position-bottom-right { 
-        background-position: 99% 91%;
-    }
-}
-
-.current:hover {
-    text-decoration: none;
-}
-
-label.top {
-    display: block;
-    margin: 0 0 0.8em;
-    font-weight: 600;
-}
-
-// arggg dont like this
-.inner {
-    position: relative;
-    margin: 0 auto;    
-}
-
-// noooo
-.icon {
-    display: block;
-    position: absolute;
-}
-
-.is-highlighted {
-    font-weight: 600;
-}
-
-.is-fixed {
-    position: fixed;
-}
-
-.text-ellipsis {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.b0 {
-    border: 0;
-}
-
+/**
+ * form?
+ */
 .w100 {
     width: 100%;
 }
 
-.position-relative {
-    position: relative;
-}
 
-.position-absolute {
-    position: absolute;
-}
-
-.position-fixed {
-    position: fixed;
-}
-
-.clearfix:before,
-.clearfix:after {
-    content: " "; 
-    display: table;
-}
-
-.clearfix:after {
-    clear: both;
-}
-
-.clearfix {
-    *zoom: 1;
-}
-
-.page-break {
-    display: block;
-    page-break-after: always;
-    page-break-inside: avoid;
-}
-
-.color-primary {
-    color: $color-primary-0;
-}
-
-.color-secondary {
-    color: $color-secondary-1-0;
-}
-
-.color-tertiary {
-    color: $color-secondary-2-0;
-}
-
+/**
+ * table
+ */
 .table-basic {
     @extend .block-margins;
     width: 100%;
@@ -166,15 +82,94 @@ label.top {
     }
 }
 
-.do-print {
-    @extend .hide;
+
+
+/**
+ * buttons
+ */
+.button-primary {
+    @include button('primary');
 }
 
+.button-secondary {
+    @include button('secondary');
+}
+
+
+/**
+ * links
+ */
+.link-primary {
+    @include link('primary');
+}
+
+.link-secondary {
+    @include link('secondary');
+}
+
+
+/**
+ * spacing
+ */
 .block-clear {
     @extend .block-margins;
     @extend .clearfix;
 }
 
+.m1 {
+    margin: 1em;
+}
+
+.mt1 {
+    margin-top: 1em;
+}
+
+.mr1 {
+    margin-right: 1em;
+}
+
+.mb1 {
+    margin-bottom: 1em;
+}
+
+.ml1 {
+    margin-left: 1em;
+}
+
+.p1 {
+    padding: 1em;
+}
+
+.pt1 {
+    padding-top: 1em;
+}
+
+.pr1 {
+    padding-right: 1em;
+}
+
+.pb1 {
+    padding-bottom: 1em;
+}
+
+.pl1 {
+    padding-left: 1em;
+}
+
+
+/**
+ * print
+ */
+.do-print {
+    @extend .hide;
+}
+
 .dont-print {
     @include dont-print;
+}
+
+.page-break {
+    display: block;
+    page-break-after: always;
+    page-break-inside: avoid;
 }

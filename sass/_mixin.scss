@@ -64,3 +64,107 @@
         display: none !important;
     }
 }
+
+
+@mixin button($theme: 'primary') {
+    @include transition(background-color 100ms linear);
+    @include borderRadius;
+    font-weight: 600;
+    cursor: pointer; 
+    border: none;
+    outline: none;
+    cursor: pointer;
+    text-align: center;
+    line-height: 1;
+    padding: 7px 10px;
+
+    &.disabled:hover,
+    &.disabled:active,
+    &.disabled {
+        background-color: tint($color-secondary, 80%);
+        color: $color-secondary;
+        text-shadow: none;
+        cursor: default;
+    }
+
+    @if $theme == 'primary' {
+        background-color: $color-primary;
+        color: $color-white;
+
+        &:hover {
+            background-color: tint($color-primary, 20%);
+        }
+
+        &:active {
+            background-color: shade($color-primary, 21%);
+        }
+    }
+
+    @if $theme == 'secondary' {
+        background-color: $color-secondary;
+        color: $color-white;
+
+        &:hover {
+            background-color: tint($color-secondary, 20%);
+        }
+
+        &:active {
+            background-color: shade($color-secondary, 21%);
+        }
+    }
+}
+
+
+@mixin link($theme: 'primary') {
+    @include linkContent($theme);
+
+    &:visited {
+        @include linkContent($theme);
+    }
+}
+
+
+@mixin linkContent($theme: 'primary') {
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+
+    @if $theme == 'primary' {
+        color: $color-primary;
+        border-bottom-color: $color-white;
+    }
+
+    @if $theme == 'secondary' {
+        color: $color-secondary;
+        border-bottom-color: $color-secondary;
+    }
+
+    &.hover,
+    &:hover,
+    &:focus { 
+
+        @if $theme == 'primary' {
+            color: $color-secondary;
+            border-bottom-color: $color-secondary;
+        }
+    }
+}
+
+
+@mixin input($type: 'text') {
+    font-size: 1em;
+    @include box-sizing(border-box);
+    @include borderRadius;
+    @include appearance(none);
+    @include transition(all 200ms); 
+    color: $color-text;
+    font-family: $font-family;
+    border: 1px solid $color-gray-30;
+    padding: 0.4em 0.5em 0.3em;
+    margin: 0;
+
+    &:focus {
+        box-shadow: 0 0 3px $color-gray-20;
+        border-color: $color-gray-30;
+        color: $color-text;
+    }
+}
