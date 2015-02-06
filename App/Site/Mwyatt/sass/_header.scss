@@ -10,7 +10,7 @@ $header-bar-height: 60px;
     left: 0;
     right: 0;
     z-index: 1;
-    box-shadow: 0 1px 3px rgba($color-black, .2);
+    box-shadow: 0 0 3px rgba($color-black, .1);
 }
 
 .header-bar-height {
@@ -35,4 +35,35 @@ $header-bar-height: 60px;
     @media only screen and (min-width: 600px) {
         top: -70 - 5px;
     }
+}
+
+.menu-primary-container:hover .menu-primary {
+    right: 0;
+}
+
+.menu-primary {
+    @include transition(all 200ms);
+    // display: none;
+    position: absolute;
+    top: 67px;
+    right: 3 + -200px;
+    width: 200px;
+    box-shadow: 0 0 3px rgba($color-black, .1);
+}
+
+.menu-primary-is-active .menu-primary {
+    // display: block;
+    right: 0;
+}
+
+.is-scrolling-down .menu-primary {
+    right: -200px;
+}
+
+.menu-primary-level-1-link {
+    display: block;
+    background-color: white;
+    padding: 11px 14px;
+    font-weight: 600;
+    color: $color-primary-0;
 }

@@ -2,7 +2,7 @@
 
 <div class="page home js-page-home">
 	<div class="panel">
-		<h2 class="panel-heading">Recent Work</h2>
+		<h2 class="panel-heading">Project</h2>
 
 	<?php include $this->getTemplatePath('_projects') ?>
 

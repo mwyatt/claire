@@ -7,7 +7,7 @@
 }
 
 .contents {
-    @extend .clearfix;
+    @include clearfix;
 }
 
 .content-status,

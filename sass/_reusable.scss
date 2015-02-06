@@ -88,11 +88,11 @@
  * buttons
  */
 .button-primary {
-    @include button('primary');
+    @include button(blue);
 }
 
 .button-secondary {
-    @include button('secondary');
+    @include button(gray);
 }
 
 
@@ -100,11 +100,11 @@
  * links
  */
 .link-primary {
-    @include link('primary');
+    @include link(blue);
 }
 
 .link-secondary {
-    @include link('secondary');
+    @include link(gray);
 }
 
 
@@ -113,7 +113,7 @@
  */
 .block-clear {
     @extend .block-margins;
-    @extend .clearfix;
+    @include clearfix;
 }
 
 .m1 {

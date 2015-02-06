@@ -1,6 +1,20 @@
 
 
 /**
+ * requirements
+ * $font-family
+ * palette
+ */
+
+
+
+/**
+ * extend
+ */
+@import "mixin/grid";
+
+
+/**
  * allows dynamic usage of media queries, here ranges of breakpoints
  * can be defined then refered to in a friendly way
  */
@@ -66,9 +80,8 @@
 }
 
 
-@mixin button($theme: 'primary') {
+@mixin button($color: white, $backgroundColor: black) {
     @include transition(background-color 100ms linear);
-    @include borderRadius;
     font-weight: 600;
     cursor: pointer; 
     border: none;
@@ -77,75 +90,43 @@
     text-align: center;
     line-height: 1;
     padding: 7px 10px;
+    background-color: $backgroundColor;
+    color: $color;
 
-    &.disabled:hover,
-    &.disabled:active,
-    &.disabled {
-        background-color: tint($color-secondary, 80%);
-        color: $color-secondary;
-        text-shadow: none;
-        cursor: default;
+    &:hover {
+        background-color: tint($backgroundColor, 20%);
     }
 
-    @if $theme == 'primary' {
-        background-color: $color-primary;
-        color: $color-white;
-
-        &:hover {
-            background-color: tint($color-primary, 20%);
-        }
-
-        &:active {
-            background-color: shade($color-primary, 21%);
-        }
-    }
-
-    @if $theme == 'secondary' {
-        background-color: $color-secondary;
-        color: $color-white;
-
-        &:hover {
-            background-color: tint($color-secondary, 20%);
-        }
-
-        &:active {
-            background-color: shade($color-secondary, 21%);
-        }
+    &:active {
+        background-color: shade($backgroundColor, 21%);
     }
 }
 
 
-@mixin link($theme: 'primary') {
-    @include linkContent($theme);
+@mixin link($color: blue) {
+    @include linkContent($color);
 
     &:visited {
-        @include linkContent($theme);
+        @include linkContent($color);
     }
 }
 
 
-@mixin linkContent($theme: 'primary') {
+@mixin linkContent($color) {
     border-bottom-width: 1px;
     border-bottom-style: solid;
+    color: $color;
+    border-bottom-color: $color-white;
 
-    @if $theme == 'primary' {
-        color: $color-primary;
-        border-bottom-color: $color-white;
+    &:hover { 
+        color: shade($color, 20%);
+        border-bottom-color: shade($color, 20%);
     }
 
-    @if $theme == 'secondary' {
-        color: $color-secondary;
-        border-bottom-color: $color-secondary;
-    }
-
-    &.hover,
-    &:hover,
-    &:focus { 
-
-        @if $theme == 'primary' {
-            color: $color-secondary;
-            border-bottom-color: $color-secondary;
-        }
+    &:focus,
+    &:active {
+        color: shade($color, 50%);
+        border-bottom-color: shade($color, 50%);
     }
 }
 
@@ -153,7 +134,6 @@
 @mixin input($type: 'text') {
     font-size: 1em;
     @include box-sizing(border-box);
-    @include borderRadius;
     @include appearance(none);
     @include transition(all 200ms); 
     color: $color-text;

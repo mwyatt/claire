@@ -172,7 +172,7 @@ label.top {
 
 .block-clear {
     @extend .block-margins;
-    @extend .clearfix;
+    @include clearfix;
 }
 
 .dont-print {

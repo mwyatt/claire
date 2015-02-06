@@ -4,30 +4,30 @@
 
 .project {
     @include transition(all 200ms);
-    border-radius: 5px;
     background-color: $color-gray-20;
     position: relative;
     overflow: hidden;
-    margin-top: 5%;
+    display: block;
+    float: left;
 
     &:hover .project-description {
         bottom: 0;
     }
 
     &.is-audio-visual-online {
-        background-color: #74a611;
+        @include linear-gradient(tint(#74a611, 10%), #74a611);
     }
 
     &.is-brunoco {
-        background-color: #0b93fe;
+        @include linear-gradient(tint(#0b93fe, 10%), #0b93fe);
     }
 
     &.is-get-hd-sound {
-        background-color: #795934;
+        @include linear-gradient(tint(#795934, 10%), #795934);
     }
 
     &.is-simply-stands {
-        background-color: #333333;
+        @include linear-gradient(tint(#333333, 10%), #333333);
     }
 
     @media only screen and (max-width: 699px) {
@@ -35,29 +35,16 @@
     }
 
     @media only screen and (max-width: 399px) {
-        @include col(12);
         height: 160px;
-
-        &:first-child {
-            margin-top: 0;
-        }
     }
 
     @media only screen and (min-width: 400px) and (max-width: 699px) {
-        @include col(6);
-        
-        &:nth-child(2n) {
-            @include last;
-        }
+        width: 50%;
     }
 
     @media only screen and (min-width: 700px) {
-        @include col(4);
+        width: 33%;
         height: 250px;
-        
-        &:nth-child(3n) {
-            @include last;
-        }
     }
 }
 
@@ -71,12 +58,7 @@
 
 .no-touch .project {
 
-    &:hover {
-        @include transform(scale(1.1));
-    }
-
     &:active {
-        @include transform(scale(1));
         opacity: .8;
     }
 }
@@ -91,8 +73,9 @@
     padding-left: 1em;
     padding-bottom: 1em;
     padding-right: 75px;
-    background-color: rgba($color-white, .8);
-    box-shadow: 0 -1px 3px rgba($color-black, .2);
+    background-color: rgba($color-white, .1);
+    box-shadow: 0 0 3px rgba($color-black, .1);
+    color: $color-white;
 }
 
 .project-logo {
@@ -136,17 +119,13 @@
     height: auto;
 }
 
-.project-description {
-}
-
 .project-title {
     font-weight: 600;
     display: block;
-    color: $color-gray-70;
 }
 
 .project-button-primary {
-    @include button;
+    @include button($color-white, $color-primary-0);
     position: absolute;
     bottom: 1em;
     right: 1em;

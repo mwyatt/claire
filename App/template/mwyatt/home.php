@@ -23,11 +23,7 @@
 	</div>
 
 <?php endif ?>
-
-	<h2 class="heading-home">Me</h2>
-	<div class="panel about-me">
 		<p>I'm a talented, eager Web Design and Development professional. On a daily basis I work with a variety of technologies. Please see some of the most current websites I have had the pleasure to work on. Also review the skills I have acquired over the past 4 years of work.</p>
-	</div>
 
 	<h2 class="heading-home">Skills</h2>
 

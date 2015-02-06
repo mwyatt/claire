@@ -33,7 +33,7 @@
 }
 
 .lightbox {
-	@extend .clearfix;
+	@include clearfix;
 	box-shadow: 0 0 3px $color-black;
 	@include border-radius(3px);
 	background-color: $color-white;

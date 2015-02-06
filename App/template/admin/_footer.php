@@ -5,12 +5,9 @@
 			</footer>
 			
 <?php endif ?>
-
-		    <script src="<?php echo $this->getUrl() ?>js/config.js"></script>
-		    <script data-main="<?php echo $this->getUrl() ?>js/admin-main" src="<?php echo $this->getUrl() ?>js/vendor/require.js"></script>
-		</div>
-
 <?php include $this->getTemplatePath('admin/_feedback-stream-boot') ?>
-		
+
+		    <script src="<?php echo $this->getUrl() ?>asset/admin/main.js"></script>
+		</div>
     </body>
 </html>

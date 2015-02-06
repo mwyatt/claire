@@ -1,5 +1,5 @@
 .content-tags {
-    @extend .clearfix;
+    @include clearfix;
     margin: 0 0 1em;
 }
 

@@ -1,24 +1,24 @@
 
 
 /**
- * global body color
- * @type {int}
+ * coore body color
+ * @type {hex}
  */
-$color-body: lighten($color-primary-4, 20%);
+$typography-color-body: lighten($color-primary-4, 20%);
 
 
 /**
  * font family for entire site
  * @type {String}
  */
-$font-family: 'Open Sans', 'Arial', 'Sans-serif';
+$typography-font-family: 'Open Sans', 'Arial', 'Sans-serif';
 
 
 /**
  * font family for only headings
  * @type {String}
  */
-$heading-font-family: 'Open Sans', 'Arial', 'Sans-serif';
+$heading-font-family: $typography-font-family;
 
 
 /**
@@ -40,7 +40,7 @@ $heading-font-family: 'Open Sans', 'Arial', 'Sans-serif';
  */
 body {
     font-size: 16px;
-    font-family: $font-family;
+    font-family: $typography-font-family;
     color: $color-body;
 }
 

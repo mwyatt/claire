@@ -14,7 +14,7 @@ module.exports = {
       outputStyle: 'nested'
     }
   },
-  site: {
+  front: {
     files: [{
       expand: true,
       cwd: 'app/site/<%= package.site %>/sass',

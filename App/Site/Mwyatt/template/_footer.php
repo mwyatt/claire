@@ -14,7 +14,6 @@
 <?php include $this->getTemplatePath('admin/_feedback-stream-boot') ?>
 <?php include $this->getTemplatePath('_require-config') ?>
 
-	    <script data-main="main" src="<?php echo $this->getUrl() ?>vendor/bower/requirejs/require.js"></script>
-        <!-- // <script src="<?php echo $this->getUrl() ?>asset/main.js?v=1"></script> -->
+        <script src="<?php echo $this->getUrl() ?>asset/main.js"></script>
     </body>
 </html>

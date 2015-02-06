@@ -6,8 +6,8 @@
 .footer-inner {
 	padding-left: 5%;
 	padding-right: 5%;
-	@extend .clearfix;
-	@include siteBoundary;
+	@include clearfix;
+	// @include siteBoundary;
 }
 
 .attribution {

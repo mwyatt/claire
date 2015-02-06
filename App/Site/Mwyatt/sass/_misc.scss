@@ -28,7 +28,7 @@ svg {
 }
 
 .skills {
-    @extend .clearfix;
+    @include clearfix;
 }
 
 .skill {
@@ -67,9 +67,13 @@ svg {
     width: 90px;
     height: 47px;
     display: block;
-    margin: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     float: left;
     fill: $color-primary-0;
+    margin-left: 50%;
+    position: relative;
+    left: -45px;
 }
 
 .header-logo-image {
@@ -78,8 +82,5 @@ svg {
 }
 
 .page {
-    padding-left: 5%;
-    padding-right: 5%;
-    @extend .clearfix;
-    @include siteBoundary;
+    @include clearfix;
 }

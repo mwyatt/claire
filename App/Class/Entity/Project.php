@@ -25,22 +25,6 @@ class Project extends \OriginalAppName\Entity\Content
 	protected $descriptionShort;
 
 
-	/**
-	 * @return string 
-	 */
-	public function getUrl() {
-	    return $this->url;
-	}
-	
-	
-	/**
-	 * @param string $url 
-	 */
-	public function setUrl($url) {
-	    $this->url = $url;
-	    return $this;
-	}
-
 
 	/**
 	 * @return string 

@@ -1,18 +1,5 @@
 module.exports = {
-  magnific: {
-    files: [
-    {
-      expand: true,
-      cwd: 'vendor/bower/magnific-popup/dist/',
-      src: 'magnific-popup.css',
-      dest: 'sass/vendor/',
-      rename: function(dest, src) {
-        return dest + '_' + src.replace('.css','.scss');
-      }
-    },
-    ]
-  },
-  all: {
+  dist: {
     files: [
       {
         expand: true,
@@ -25,6 +12,12 @@ module.exports = {
         cwd: 'vendor/bower/requirejs/',
         src: 'require.js',
         dest: 'js/vendor/'
+      },
+      {
+        expand: true,
+        cwd: 'vendor/bower/modernizr/',
+        src: 'modernizr.js',
+        dest: 'asset/vendor/'
       },
       {
         expand: true,

@@ -1,11 +1,11 @@
 .projects {
-    @extend .clearfix;
+    @include clearfix;
 }
 .svg-elttl-county {
     @include opacity(.2);
 }
 .project {
-    @extend .clearfix;
+    @include clearfix;
     // background-color: $color-gray-50;
     height: 12em;
     margin: 4% 0;

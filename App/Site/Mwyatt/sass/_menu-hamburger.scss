@@ -1,5 +1,4 @@
 .menu-hamburger {
-    cursor: pointer;
     @include transition(all 200ms ease);
     display: block;
     position: relative;
@@ -42,6 +41,7 @@
     }
 }
 
+.menu-primary-container:hover .menu-hamburger,
 .menu-primary-is-active .menu-hamburger {
     
     .menu-hamburger-meat {
@@ -62,4 +62,21 @@
         @include transform(rotate(-45deg));
         bottom: 9px;
     }
+}
+
+.menu-hamburger {
+    margin: 0;
+    position: relative;
+    top: 3px;
+    right: 5px;
+}
+
+.menu-hamburger-container {
+    padding: 21px;
+    display: block;
+    width: 67px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 67px;
 }

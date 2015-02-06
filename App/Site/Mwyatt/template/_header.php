@@ -38,16 +38,18 @@
 
 	    </a>
 
-        <!-- hamburger - yum! -->
-        <span class="menu-hamburger js-toggle-menu-primary"><span class="menu-hamburger-meat"></span></span>
-
 <?php if (isset($menuPrimary)): ?>
 
-        <nav class="menu-primary js-menu-primary">
+        <div class="menu-primary-container">
+            <span class="menu-hamburger-container">
+                <span class="menu-hamburger js-toggle-menu-primary"><span class="menu-hamburger-meat"></span></span>
+            </span>
+            <nav class="menu-primary js-menu-primary">
 
 	<?php echo $menuPrimary ?>
 
-        </nav>
+            </nav>
+        </div>
 
 <?php endif ?>
 

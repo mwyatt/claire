@@ -10,33 +10,30 @@
 
 
 /**
- * vendor libraries
- */
-@import "sass/vendor/normalize";
-@import "sass/vendor/bourbon/bourbon";
-@import "../../../../sass/grid";
-
-
-/**
- * global libraries
- */
-@import "../../../../sass/placeholder";
-
-
-/**
- * variables and mixins
+ * variable
  */
 @import "palette";
-@import "../../../../sass/mixin";
-@import "mixin";
-@import "grid";
-// @import "keyframes";
 
 
 /**
- * admin / front settings
+ * currently only typography
  */
-@import "template";
-@import "reusable";
-@import "typography";
-@import "form";
+$typography-font-family: 'Open Sans', 'Arial', 'Sans-serif';
+
+
+/**
+ * vendor
+ * @todo get npm to eventually consume this?
+ */
+@import "../../../../sass/vendor/normalize";
+@import "../../../../sass/vendor/magnific-popup";
+@import "../../../../sass/vendor/bourbon/bourbon";
+
+
+/**
+ * app
+ */
+@import "../../../../sass/mixin";
+@import "../../../../sass/reusable";
+@import "../../../../sass/typography";
+@import "../../../../sass/keyframe";
