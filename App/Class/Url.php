@@ -342,7 +342,7 @@ class Url
 		$finalUrl = $this->getCache('base');
 		foreach ($segments as $segment) {
 			if ($friendly) {
-				$segment = Helper::urlFriendly($segment);
+				$segment = Helper::slugify($segment);
 			}
 			$finalUrl .= $segment . ($friendly ? '/' : '');
 		}

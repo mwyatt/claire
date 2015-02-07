@@ -29,7 +29,7 @@ class Controller_Admin_Ajax_Content extends Controller_Admin
 		if (! array_key_exists('title', $_GET)) {
 			exit;
 		}
-		$friendlyTitle = Helper::urlFriendly($_GET['title']);
+		$friendlyTitle = Helper::slugify($_GET['title']);
 		$modelcontent = new model_content($this);
 		$success = $modelcontent->read(array(
 			'where' => array(

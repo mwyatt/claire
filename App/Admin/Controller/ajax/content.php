@@ -29,7 +29,7 @@ class Content extends \OriginalAppName\Admin\Controller\Ajax
 		if (! isset($_REQUEST['title'])) {
 			throw new ResourceNotFoundException;
 		}
-		$friendlyTitle = Helper::urlFriendly($_REQUEST['title']);
+		$friendlyTitle = Helper::slugify($_REQUEST['title']);
 		$ouput = $friendlyTitle;
 		$modelContent = new Model\Content;
 		$modelContent->readColumn('slug', $friendlyTitle);

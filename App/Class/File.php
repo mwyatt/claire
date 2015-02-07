@@ -204,7 +204,7 @@ class File extends \OriginalAppName\Config
 		$fileInformation = Helper::convertArrayToObject(pathinfo($file->name));
 
 		// handy variable names
-		$friendlyFileName = Helper::urlFriendly($fileInformation->filename);
+		$friendlyFileName = Helper::slugify($fileInformation->filename);
 		$friendlyFileNameWithExtension = $friendlyFileName . '.' . $fileInformation->extension;
 		$pathFile = $this->getPath($friendlyFileNameWithExtension);
 

@@ -28,7 +28,7 @@ class Controller_Ajax_Content extends Controller_Ajax
 			if ($mold->slug) {
 				continue;
 			}
-			$mold->slug = Helper::urlFriendly($mold->title);
+			$mold->slug = Helper::slugify($mold->title);
 			if ($modelContent->update($mold, array('where' => array('id' => $mold->id)))) {
 				echo 'updated slug of content ' . $mold->title . ', slug name = ' . $mold->slug . '<hr>';
 			}

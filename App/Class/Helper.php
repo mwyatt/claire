@@ -61,17 +61,6 @@ class Helper
 
 
 	/**
-	 * friendly url building
-	 * @param  string $value 
-	 * @return string        one you can be friends with
-	 */
-	public static function urlFriendly($value = '')
-	{
-		return Helper::slugify($value);
-	}
-
-
-	/**
 	 * better than urlfriendly because & becomes 'amp' then when 
 	 * making urls it can be translated?
 	 * @param  string $slug 
@@ -150,5 +139,16 @@ class Helper
 		);
 		$html = preg_replace($search, $replace, $html);
 		return $html;
+	}
+
+
+	/**
+	 * to add or not to add 's'
+	 * @param  array $group to count
+	 * @return string        's' | ''
+	 */
+	public function pluralise($group)
+	{
+		return count($group) > 1 ? 's' : '';
 	}
 }
