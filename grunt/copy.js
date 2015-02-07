@@ -29,7 +29,7 @@ module.exports = {
         expand: true,
         cwd: 'vendor/bower/tinymce/',
         src: '**',
-        dest: 'js/vendor/tinymce/'
+        dest: 'asset/vendor/tinymce/'
       },
       {
         expand: true,

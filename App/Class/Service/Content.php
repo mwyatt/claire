@@ -13,9 +13,46 @@ class Content extends \OriginalAppName\Service
 {
 
 
-	public function all($type)
+	/**
+	 * single result based on slug
+	 * @param  string $slug 
+	 * @return object instance       
+	 */
+	public function readSlug($slug)
 	{
-		
+
+		// resource
+		$entitiesContent = [];
+		$modelContent = new Model\Content();
+
+		// read by slug
+		$modelContent->readSlug($slug);
+		if (! $modelContent->getData()) {
+			return $this->getData();
+		}
+
+		// all meta for single
+		$modelContentMeta = new Model\Content\Meta();
+		$modelContentMeta->readId($modelContent->getDataProperty('id'), 'contentId');
+		if (! $modelContentMeta->getData()) {
+			return $this->getData();
+		}
+
+		// bind each content with its meta
+		foreach ($modelContent->getData() as $entityContent) {
+			foreach ($modelContentMeta->getData() as $entityContentMeta) {
+				if ($entityContent->getId() == $entityContentMeta->getContentId()) {
+					$entityContent->setMetaKey($entityContentMeta->getName(), $entityContentMeta->getValue());
+				}
+			}
+
+			// store
+			$entitiesContent[] = $entityContent;
+		}
+
+		// injected content with meta
+		$this->setData($entitiesContent);
+		return $this;
 	}
 
 

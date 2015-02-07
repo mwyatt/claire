@@ -23,6 +23,7 @@ module.exports = {
       ext: '.css'
     }],
     options: {
+      sourceMap: true,
       imagePath: 'asset',
       loadPath: 'sass',
       sourceComments: 'normal',

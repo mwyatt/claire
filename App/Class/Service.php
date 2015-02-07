@@ -8,5 +8,5 @@ namespace OriginalAppName;
  * making the controllers more readable and tidy
  * service methods can then be used within two controllers
  */
-class Service extends \OriginalAppName\System
+class Service extends \OriginalAppName\Data
 {}

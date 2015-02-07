@@ -4,7 +4,6 @@
  * dependencies
  */
 var $ = require('jquery');
-var tinymce = require('vendor/tinymce');
 var contentMeta = require('admin/content/meta');
 
 

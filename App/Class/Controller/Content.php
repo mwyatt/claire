@@ -7,6 +7,7 @@ use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 use OriginalAppName\Model;
 use OriginalAppName\View;
 use OriginalAppName\Pagination;
+use OriginalAppName\Service;
 
 
 /**
@@ -60,12 +61,12 @@ class Content extends \OriginalAppName\Controller\Front
 	 */
 	public function contentSingle($request)
 	{
-		$modelContent = new Model\Content();
-		$modelContent->readSlug($request['slug']);
-		if (! $modelContent->getData()) {
+		$serviceContent = new Service\Content();
+		$serviceContent->readSlug($request['slug']);
+		if (! $serviceContent->getData()) {
 			throw new ResourceNotFoundException();
 		}
-		$entityContent = current($modelContent->getData());
+		$entityContent = current($serviceContent->getData());
 		if (! $entityContent->getType() == $request['type']) {
 			throw new ResourceNotFoundException();
 		}
@@ -77,7 +78,7 @@ class Content extends \OriginalAppName\Controller\Front
 		$this
 			->view
 			->setDataKey('metaTitle', $entityContent->getTitle())
-			->setDataKey('contents', $modelContent->getData());
+			->setDataKey('contents', $serviceContent->getData());
 		return new Response($this->view->getTemplate('content-single'));
 	}
 }

@@ -21,12 +21,15 @@
     "vendor/tinymce": "./js/vendor/tinymce/tinymce",
     "vendor/jquery/magnificPopup": "./js/vendor/jquery.magnific-popup.js",
     "vendor/jquery/serializeObject": "./js/vendor/jquery.serialize-object.min.js",
+    "vendor/mustache": "./js/vendor/mustache.js",
     "admin/feedbackStream": "./js/admin/feedbackStream.js",
     "admin/login": "./js/admin/login.js",
     "admin/option/all": "./js/admin/option/all.js",
     "admin/content/single": "./js/admin/content/single.js",
     "admin/content/meta": "./js/admin/content/meta.js",
-    "helper": "./js/helper.js",
-    "mustache": "./js/vendor/mustache.js"
+    "helper": "./js/helper.js"
+  },
+  "scripts": {
+    "test": "browserify js/admin/main.js -o asset/admin/main.js"
   }
 }

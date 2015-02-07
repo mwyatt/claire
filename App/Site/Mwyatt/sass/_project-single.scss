@@ -1,0 +1,38 @@
+.is-audio-visual-online {
+    @include linear-gradient(tint(#74a611, 10%), #74a611);
+}
+
+.is-brunoco {
+    @include linear-gradient(tint(#0b93fe, 10%), #0b93fe);
+}
+
+.is-get-hd-sound {
+    @include linear-gradient(tint(#795934, 10%), #795934);
+}
+
+.is-simply-stands {
+    @include linear-gradient(tint(#333333, 10%), #333333);
+}
+
+.is-elttl {
+    @include linear-gradient(tint(#F07818, 10%), #F07818);
+}
+
+.project-single {
+    padding: 1em;
+}
+
+.project-single-title {
+    color: $color-white;
+    font-size: 2em;
+    margin: 1em 0;
+}
+
+.project-single-banner-logo {
+    display: block;
+    height: 110px;
+    fill: $color-white;
+    max-width: 320px;
+    display: block;
+    margin: 0 auto;
+}

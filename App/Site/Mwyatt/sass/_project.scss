@@ -18,6 +18,10 @@
         @include linear-gradient(tint(#74a611, 10%), #74a611);
     }
 
+    &.is-elttl {
+        @include linear-gradient(tint(#F07818, 10%), #F07818);
+    }
+
     &.is-brunoco {
         @include linear-gradient(tint(#0b93fe, 10%), #0b93fe);
     }
@@ -43,13 +47,9 @@
     }
 
     @media only screen and (min-width: 700px) {
-        width: 33%;
+        width: 33.3%;
         height: 250px;
     }
-}
-
-.project.is-elttl {
-    background-color: #F07818;
 }
 
 .touch .project-description {
@@ -125,8 +125,8 @@
 }
 
 .project-button-primary {
-    @include button($color-white, $color-primary-0);
+    @include button($color-primary-0, $color-white);
     position: absolute;
-    bottom: 1em;
-    right: 1em;
+    bottom: 12px;
+    right: 12px;
 }

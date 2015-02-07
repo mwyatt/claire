@@ -4,7 +4,7 @@
  * dependencies
  */
 var $ = require('jquery');
-var mustache = require('mustache');
+var mustache = require('vendor/mustache');
 var helper = require('helper');
 
 
