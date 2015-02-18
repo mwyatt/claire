@@ -189,11 +189,6 @@ class View extends \OriginalAppName\Data
 	}
 
 
-	public function getUrlJs($append) {
-		return $this->url->getCache('base') . 'js' . US . SITE . US . $append . $this->getAssetVersion();
-	}
-
-
 	/**
 	 * appends admin to the path
 	 * @param  string $template 
@@ -232,17 +227,6 @@ class View extends \OriginalAppName\Data
 		$registry = \OriginalAppName\Registry::getInstance();
 		$generator = $registry->get('urlGenerator');
 		return $generator->generate('assetSingle', ['path' => $append], true);
-	}
-	
-
-	/**
-	 * gets a users latest tweet!
-	 * @param  string $user username
-	 * @return string       the tweet
-	 */
-	public function latestTweet($user) {
-		$xml = simplexml_load_file("http://twitter.com/statuses/user_timeline/$user.xml?count=1");
-		echo $xml->status->text[0];
 	}
 
 
@@ -302,7 +286,7 @@ class View extends \OriginalAppName\Data
 	 * @param  string $label 
 	 * @return string        
 	 */
-	public function appendS($items)
+	public function pluralise($items)
 	{
 		return count($items) > 1 ? 's' : '';
 	}
@@ -325,21 +309,5 @@ class View extends \OriginalAppName\Data
 	 */
 	public function getPathMediaUpload($path) { 
 		return $this->url->getCache('base') . 'media/upload/' . $path;
-	}
-
-
-	/**
-	 * inserts a key -> value pair into the data array
-	 * does this need to be in the data class?
-	 * @param  string $key   
-	 * @param  any $value 
-	 * @return object        
-	 */
-	public function insertData($key, $value)
-	{
-		$data = $this->getData();
-		$data[$key] = $value;
-		$this->setData($data);
-		return $this;
 	}
 } 

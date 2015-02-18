@@ -6,6 +6,8 @@ namespace OriginalAppName;
 /**
  * example url split by sesctions
  * {http://}{store}.{example}.{com}/{topics/subtopic/}{descriptive-product-name}{#top}
+ * @todo create generator which looks at various structures and outputs
+ * @todo $url->generate('templateName', ['id' => 10, 'name' => 'ok'])
  * @author Martin Wyatt <martin.wyatt@gmail.com> 
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
