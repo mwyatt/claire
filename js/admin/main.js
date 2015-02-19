@@ -1,7 +1,3 @@
-
-/**
- * dependencies
- */
 var $ = require('jquery');
 var feedbackStream = require('admin/feedbackStream');
 

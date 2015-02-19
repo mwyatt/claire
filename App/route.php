@@ -1,6 +1,5 @@
 <?php
 
-
 // asset
 $routes->add('assetSingle', new Symfony\Component\Routing\Route(
 	'/asset/{path}',
