@@ -27,7 +27,8 @@
     "admin/option/all": "./js/admin/option/all.js",
     "admin/content/single": "./js/admin/content/single.js",
     "admin/content/meta": "./js/admin/content/meta.js",
-    "helper": "./js/helper.js"
+    "helper": "./js/helper.js",
+    "url": "./js/url.js"
   },
   "scripts": {
     "test": "browserify js/admin/main.js -o asset/admin/main.js"

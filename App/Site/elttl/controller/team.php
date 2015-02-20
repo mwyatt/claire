@@ -38,7 +38,7 @@ class Controller_Team extends Controller_Archive
 		if ($this->getArchivePathPart(1)) {
 			return $this->single();
 		}
-		$this->route('base');
+		$this->redirect('base');
 	}
 
 
@@ -54,7 +54,7 @@ class Controller_Team extends Controller_Archive
 			)
 		)));
 		if (! $team = $modelTennisTeam->getDataFirst()) {
-			$this->route('base');
+			$this->redirect('base');
 		}
 		$this->setTeam($team);
 

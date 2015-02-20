@@ -104,7 +104,7 @@ class Menu extends \OriginalAppName\View
             if ($hasChildren) {
                 $output .= '<' . $element . ' class="menu' . $classPartLabel . '-level-' . $config['level'] . ' js-menu' . $classPartLabel . '-level-' . $config['level'] . '">';
             }
-            $output .= '<a href="' . $this->getUrl() . $category->getUrl() . '" class="menu' . $classPartLabel . '-level-' . $config['level'] . '-link">' . $category->getName() . '</a>';
+            $output .= '<a href="' . $this->url->generate('home') . $category->getUrl() . '" class="menu' . $classPartLabel . '-level-' . $config['level'] . '-link">' . $category->getName() . '</a>';
 
             // recurse to children
             if ($hasChildren) {

@@ -5,8 +5,8 @@ namespace OriginalAppName\Controller;
 use OriginalAppName;
 use OriginalAppName\Admin\Service;
 use OriginalAppName\Session;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Exception\ResourceNotFoundException;
+use OriginalAppName\Response;
+
 
 
 /**
@@ -30,17 +30,17 @@ class Validate extends \OriginalAppName\Controller
 
 		// validation
 		if (! isset($_REQUEST['key'])) {
-			throw new ResourceNotFoundException();
+			return new Response('', 404);
 		}
 
 		// key must equal stored one
 		if (! $_REQUEST['key'] == $sessionUser->get('key')) {
-			throw new ResourceNotFoundException();
+			return new Response('', 404);
 		}
 
 		// valid, setup session
 		$sessionUser->
-		$this->route('')
+		$this->redirect('')
 		
 	}
 }

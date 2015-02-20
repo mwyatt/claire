@@ -2,11 +2,12 @@
 
 namespace OriginalAppName\Controller;
 
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Exception\ResourceNotFoundException;
+use OriginalAppName\Response;
+use \Exception;
 use OriginalAppName\Model;
 use OriginalAppName\View;
 use OriginalAppName\Pagination;
+use OriginalAppName\Entity;
 use OriginalAppName\Service;
 
 
@@ -24,16 +25,16 @@ class Content extends \OriginalAppName\Controller\Front
 	 * @param  string $type e.g. post
 	 * @return object       response
 	 */
-	public function contentAll($request)
+	public function all($type)
 	{
 		$pagination = new Pagination();
 		$modelContent = new Model\Content();
 		$modelContent
-			->readType($request['type'])
-			->filterStatus('visible')
+			->readType($type)
+			->filterStatus(Entity\Content::STATUS_PUBLISHED)
 			->orderByProperty('timePublished', 'desc');
 		if (! $modelContent->getData()) {
-			throw new ResourceNotFoundException();
+			return new Response('', 404);
 		}
 		$pagination->setTotalRows(count($modelContent->getData()));
 		$pagination->initialise();
@@ -59,19 +60,19 @@ class Content extends \OriginalAppName\Controller\Front
 	 * @param  string $slug foo-bar
 	 * @return object       response
 	 */
-	public function contentSingle($request)
+	public function single($type, $slug)
 	{
 		$serviceContent = new Service\Content();
-		$serviceContent->readSlug($request['slug']);
+		$serviceContent->readSlug($slug);
 		if (! $serviceContent->getData()) {
-			throw new ResourceNotFoundException();
+			return new Response('', 404);
 		}
 		$entityContent = current($serviceContent->getData());
-		if (! $entityContent->getType() == $request['type']) {
-			throw new ResourceNotFoundException();
+		if (! $entityContent->getType() == $type) {
+			return new Response('', 404);
 		}
 		if (! $entityContent->getStatus() == 'visible') {
-			throw new ResourceNotFoundException();
+			return new Response('', 404);
 		}
 
 		// template

@@ -42,7 +42,7 @@ class Controller_Admin extends Controller
 			$sessionAdminUser->delete();
 			$sessionHistory->delete();
 			$sessionFeedback->set('Successfully logged out');
-			$this->route('admin');
+			$this->redirect('admin');
 		}
 
 		$this->setMenu();
@@ -61,13 +61,13 @@ class Controller_Admin extends Controller
 			// user exists
 			if (! $modelUser->read(array('where' => array('email' => $_POST['login_email'])))) {
 				$sessionFeedback->set('Email address does not exist');
-				$this->route('admin');
+				$this->redirect('admin');
 			}
 
 			// validate password
 			if (! $modelUser->validatePassword($_POST['login_password'])) {
 				$sessionFeedback->set('Password incorrect');
-				$this->route('admin');
+				$this->redirect('admin');
 			}
 
 			// the mold
@@ -81,20 +81,20 @@ class Controller_Admin extends Controller
 			if ($sessionHistory->getCaptureUrl()) {
 				$this->route($sessionHistory->getCaptureUrl());
 			} else {
-				$this->route('admin');
+				$this->redirect('admin');
 			}
 		}
 
 		// is logged in?
 		if ($sessionAdminUser->isLogged()) {
 			if (! $modelUser->read(array('where' => array('id' => $sessionAdminUser->getData('id'))))) {
-				$this->route('admin');
+				$this->redirect('admin');
 			}
 			$this->view->setDataKey('user', $modelUser->getDataFirst());
 		} else {
 			if ($this->url->getPathPart(1)) {
 				$sessionHistory->setCaptureUrl($this->url->getCache('current'));
-				$this->route('admin');
+				$this->redirect('admin');
 			}
 			return $this->view->getTemplate('admin/login');
 		}
@@ -110,7 +110,7 @@ class Controller_Admin extends Controller
 			return;
 		}
 		if (! $modelUser->read(array('where' => array('id' => $sessionAdminUser->getData('id'))))) {
-			$this->route('admin');
+			$this->redirect('admin');
 		}
 		$this->view->setDataKey('user', $modelUser->getDataFirst());
 	}
@@ -123,7 +123,7 @@ class Controller_Admin extends Controller
 		}
 		$sessionAdminUser = new session_admin_user($this);
 		if (! $sessionAdminUser->isLogged()) {
-			$this->route('admin');
+			$this->redirect('admin');
 		}
 	}
 

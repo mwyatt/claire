@@ -2,13 +2,13 @@
 
 namespace OriginalAppName\Site\Mwyatt\Controller;
 
-use Symfony\Component\HttpFoundation\Response;
+use OriginalAppName\Response;
 use OriginalAppName\Json;
 use OriginalAppName\Google\Analytics\Campaign;
 use OriginalAppName\Model;
 use OriginalAppName\View;
 use OriginalAppName\Service;
-use Symfony\Component\Routing\Exception\ResourceNotFoundException;
+
 
 
 /**
@@ -24,7 +24,7 @@ class Index extends \OriginalAppName\Controller\Front
 {
 
 
-	public function home($request) {
+	public function home() {
 		$serviceContent = new Service\Content();
 		$entitiesProject = $serviceContent->readType('project');
 
@@ -40,7 +40,7 @@ class Index extends \OriginalAppName\Controller\Front
 	public function search()
 	{
 		if (! isset($_REQUEST['query'])) {
-			throw new ResourceNotFoundException();
+			return new Response('', 404);
 		}
 	    return new Response('you are searching for: ' . $_REQUEST['query']);
 	}

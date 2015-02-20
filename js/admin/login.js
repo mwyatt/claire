@@ -1,13 +1,9 @@
-
-
-/**
- * dependencies
- */
 var $ = require('jquery');
 var serializeObject = require('vendor/jquery/serializeObject');
 var magnificPopup = require('vendor/jquery/magnificPopup');
 var helper = require('helper');
 var feedbackStream = require('admin/feedbackStream');
+var url = require('url');
 
 
 /**
@@ -25,7 +21,7 @@ $('.js-magnific-inline').magnificPopup({
 				.on('submit.forgot-password', function(event) {
 					event.preventDefault();
 					$.ajax({
-						url: helper.urlBase('admin/ajax/forgot-password/'),
+						url: url.getUrlBase('admin/ajax/user/forgot-password/'),
 						type: 'get',
 						dataType: 'json',
 						data: $(this).closest('form').serializeObject(),

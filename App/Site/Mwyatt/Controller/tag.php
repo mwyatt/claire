@@ -26,7 +26,7 @@ class Controller_Tag extends Controller_Index
 			'where' => array('title' => $modelTagName)
 		));
 		if (! $molds) {
-			$this->route('base');
+			$this->redirect('base');
 		}
 		$mold = $modelTag->getDataFirst();
 		$this->view->setDataKey('tagCurrent', $mold);
@@ -40,7 +40,7 @@ class Controller_Tag extends Controller_Index
 			)
 		));
 		if (! $molds) {
-			$this->route('base');
+			$this->redirect('base');
 		}
 		$contentIds = $modelContentMeta->getDataProperty('content_id');
 

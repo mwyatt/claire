@@ -24,9 +24,24 @@ session_start();
  */
 $registry = OriginalAppName\Registry::getInstance();
 $registry->set('system', new OriginalAppName\System);
-$registry->set('url', new OriginalAppName\Url);
 $registry->set('configApp', $configApp);
 $registry->set('configSite', $configSite);
+
+
+/**
+ * find all possible routes
+ * @var OriginalAppName
+ */
+$route = new OriginalAppName\Route;
+$route->readRoutes();
+
+
+/**
+ * url must contain a reference to the routes
+ */
+$url = new OriginalAppName\Url;
+$url->setRoutes($route->getRoutes());
+$registry->set('url', $url);
 
 
 /**
@@ -40,7 +55,7 @@ $registry->set('configSite', $configSite);
  * find appropriate route and load controller
  * @var route
  */
-$route = new OriginalAppName\Route();
+$route->init();
 
 
 /**

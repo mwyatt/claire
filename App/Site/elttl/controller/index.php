@@ -2,13 +2,13 @@
 
 namespace OriginalAppName\Site\Elttl\Controller;
 
-use Symfony\Component\HttpFoundation\Response;
+use OriginalAppName\Response;
 use OriginalAppName\Json;
 use OriginalAppName\Site\Elttl\Model\Tennis\Division;
 use OriginalAppName\Google\Analytics\Campaign;
 use OriginalAppName\Model;
 use OriginalAppName\View;
-use Symfony\Component\Routing\Exception\ResourceNotFoundException;
+
 
 
 /**
@@ -67,7 +67,7 @@ class Index extends \OriginalAppName\Controller\Front
 	public function search()
 	{
 		if (! isset($_REQUEST['query'])) {
-			throw new ResourceNotFoundException();
+			return new Response('', 404);
 		}
 	    return new Response('you are searching for: ' . $_REQUEST['query']);
 	}

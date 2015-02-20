@@ -9,7 +9,7 @@ use OriginalAppName\Session;
 use OriginalAppName\Admin\Session as AdminSession;
 use OriginalAppName\View;
 use OriginalAppName\Service;
-use Symfony\Component\HttpFoundation\Response;
+use OriginalAppName\Response;
 
 
 /**
@@ -38,7 +38,7 @@ class User extends \OriginalAppName\Controller\Admin
 		if (isset($_GET['delete'])) {
 			$modelUser->delete(['id' => $_GET['delete']]);
 			$sessionFeedback->setMessage('user ' . $_GET['delete'] . ' deleted');
-			$this->route('adminUserAll');
+			$this->redirect('adminUserAll');
 		}
 
 		// render
@@ -97,7 +97,7 @@ class User extends \OriginalAppName\Controller\Admin
 
 			// feeedback / route
 			$sessionFeedback->setMessage('user ' . $entityUser->getId() . ' saved', 'positive');
-			$this->route('adminUserSingle', ['id' => $entityUser->getId()]);
+			$this->redirect('adminUserSingle', ['id' => $entityUser->getId()]);
 		}
 
 		// render
@@ -220,7 +220,7 @@ class User extends \OriginalAppName\Controller\Admin
 		$this->updateMeta('tag');
 		$modelLog->log('admin', 'post updated');
 		$sessionFeedback->set('User updated. <a href="' . $this->url->getCache('current_sans_query') . '">Back to list</a>');
-		$this->route('current');
+		$this->redirect('current');
 	}
 
 
@@ -243,7 +243,7 @@ class User extends \OriginalAppName\Controller\Admin
 		}
 		$sessionFeedback->set('User archived successfully');
 		$modelLog->log('admin', 'post archived');
-		$this->route('current_sans_query');
+		$this->redirect('current_sans_query');
 	}
 
 
@@ -259,7 +259,7 @@ class User extends \OriginalAppName\Controller\Admin
 		$modelUser->bindMeta('media');
 		$modelUser->bindMeta('tag');
 		if (! $modelUser->getData()) {
-			$this->route('current_sans_query');
+			$this->redirect('current_sans_query');
 		}
 
 		// single
@@ -289,4 +289,89 @@ class User extends \OriginalAppName\Controller\Admin
 		$modelUser->create(array($mold));
 		$this->route($this->url->getCache('admin') . $this->url->getPathPart(1) . '/' . $this->url->getPathPart(2) . '/?edit=' . $modelUser->getLastInsertId());
 	}
+
+
+	public function forgotPassword($key)
+	{
+
+		// resources
+		$sessionForgotPassword = new AdminSession\User\ForgotPassword;
+		$sessionFeedback = new Session\Feedback;
+		$modelUser = new Model\User;
+
+
+		// dependency
+		if (! isset($key)) {
+			$sessionFeedback->setMessage('you need a key', 'negative');
+			$this->redirect('admin');
+		}
+
+		// refresh expire
+		if ($sessionForgotPassword->isExpire()) {
+			$sessionForgotPassword->delete();
+			$sessionFeedback->setMessage('your key has expired, please try again', 'negative');
+			$this->redirect('admin');
+		}
+
+		// validation
+		if (! $sessionForgotPassword->get('key')) {
+			$sessionForgotPassword->delete();
+			$sessionFeedback->setMessage('you need a key', 'negative');
+			$this->redirect('admin');
+		}
+
+		// key must equal stored one
+		if (! $key == $sessionForgotPassword->get('key')) {
+			$sessionForgotPassword->delete();
+			$sessionFeedback->setMessage('your key is incorrect', 'negative');
+			$this->redirect('admin');
+		}
+
+		// find user by email
+		$modelUser->readId([$sessionForgotPassword->get('userId')]);
+		if (! $modelUser->getData()) {
+			return $sessionFeedback->setMessage('no account with that email address', 'negative');
+		}
+		$entityUser = current($modelUser->getData());
+		$this
+			->view
+			->setDataKey('userEmail', $entityUser->getEmail());
+		return new Response($this->view->getTemplate('admin/forgot-password'));
+	}
+
+
+	public function forgotPasswordSubmit($key)
+	{
+		
+		// handle submission
+		if ($_POST) {
+
+			// validation
+			if (! isset($_POST['password']) || ! isset($_POST['password_confirm'])) {
+				$sessionFeedback->setMessage('you need to define a new password and confirmation', 'negative');
+				$this->redirect('adminForgotPassword', ['key' => $key]);
+			}
+
+			// new passwords must be equal
+			if ($_POST['password'] != $_POST['password_confirm']) {
+				$sessionFeedback->setMessage('both password and confirm password must match', 'negative');
+				$this->redirect('adminForgotPassword', ['key' => $key]);
+			}
+
+			// save
+			$modelUser->readId([$sessionForgotPassword->get('userId')]);
+			$entityUser = $modelUser->getDataFirst();
+			$entityUser->consumeArray($_REQUEST);
+			$modelUser->update($entityUser, ['id' => $entityUser->getId()]);
+			if ($modelUser->getRowCount()) {
+				$sessionFeedback->setMessage('password saved', 'positive');
+				$this->redirect('admin');
+			}
+
+			// failure
+			$sessionFeedback->setMessage('unable to save password', 'negative');
+			$this->redirect('adminForgotPassword', ['key' => $key]);
+		}
+	}
+
 }

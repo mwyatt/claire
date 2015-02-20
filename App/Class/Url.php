@@ -79,6 +79,14 @@ class Url
 
 
 	/**
+	 * storage of routes once collected by Route
+	 * used to build urls later on
+	 * @var array
+	 */
+	private $routes;
+
+
+	/**
 	 * remember, you dont need all the url constructs, right away
 	 * just build the base url, without https / http
 	 */
@@ -165,6 +173,12 @@ class Url
 			return;
 		}
 		return $this->cache[$key];
+	}
+
+
+	public function getCurrent()
+	{
+		return $this->getCache('current');
 	}
 
 
@@ -361,5 +375,47 @@ class Url
 	public function getRequest()
 	{
 		return $this->getPathString() . $this->getHash() . $this->getQuery();
+	}
+
+
+	/**
+	 * builds a url based on the plans stored
+	 * swap :key for $config[$key]
+	 * @param  string $key    
+	 * @param  array $config key, value
+	 * @return string         url/path/
+	 */
+	public function generate($key = 'home', $config = [], $absolute = true)
+	{
+	    $route = $this->getRoute($key);
+	    $path = ltrim($route['mux/path'], US);
+	    foreach ($config as $key => $value) {
+	        $path = str_replace(':' . $key, $value, $path);
+	    }
+	    return $this->getCache('base') . $path;
+	}
+
+
+	public function getRoute($key)
+	{
+		$routes = $this->getRoutes();
+		return $routes[$key];
+	}
+
+
+	/**
+	 * @return array 
+	 */
+	public function getRoutes() {
+	    return $this->routes;
+	}
+	
+	
+	/**
+	 * @param array $routes 
+	 */
+	public function setRoutes($routes) {
+	    $this->routes = $routes;
+	    return $this;
 	}
 }

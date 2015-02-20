@@ -7,7 +7,7 @@ use OriginalAppName\Model;
 use OriginalAppName\Session;
 use OriginalAppName\View;
 use OriginalAppName\Service;
-use Symfony\Component\HttpFoundation\Response;
+use OriginalAppName\Response;
 
 
 /**
@@ -24,7 +24,7 @@ class Ajax extends \OriginalAppName\Controller\Admin
 
 		// must be looking specifically for an id
 		if (! isset($request['id'])) {
-			throw new ResourceNotFoundException();
+			return new Response('', 404);
 		}
 
 		// read the 
@@ -38,14 +38,14 @@ exit;
 
 
 		if (! $modelContent->getData()) {
-			throw new ResourceNotFoundException();
+			return new Response('', 404);
 		}
 		$entityContent = current($modelContent->getData());
 		if (! $entityContent->getType() == $request['type']) {
-			throw new ResourceNotFoundException();
+			return new Response('', 404);
 		}
 		if (! $entityContent->getStatus() == 'visible') {
-			throw new ResourceNotFoundException();
+			return new Response('', 404);
 		}
 
 		// template

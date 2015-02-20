@@ -5,8 +5,8 @@ namespace OriginalAppName\Controller\Ajax;
 use OriginalAppName;
 use OriginalAppName\Admin\Service;
 use OriginalAppName\Session;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Exception\ResourceNotFoundException;
+use OriginalAppName\Response;
+
 
 
 /**
@@ -23,7 +23,7 @@ class User extends \OriginalAppName\Controller\Ajax
 
 		// validation
 		if (! isset($_REQUEST['email'])) {
-			throw new ResourceNotFoundException();
+			return new Response('', 404);
 		}
 
 		// resources

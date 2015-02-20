@@ -24,7 +24,7 @@ class Controller_Project extends Controller_Index
 
 		// type/slug/
 		if (! $this->url->getPathPart(1)) {
-			$this->route('base');
+			$this->redirect('base');
 		}
 
 		// read by slug and type
@@ -37,7 +37,7 @@ class Controller_Project extends Controller_Index
 			}
 		}
 		if (! $project = reset($projects)) {
-			$this->route('base');
+			$this->redirect('base');
 		}
 
 		// set view

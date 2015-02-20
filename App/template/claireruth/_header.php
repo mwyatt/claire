@@ -11,10 +11,10 @@
     <meta name="keywords" content="<?php echo $metaKeywords ?>">
     <meta name="description" content="<?php echo $metaDescription ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link href="<?php echo $this->getUrl() ?>asset/screen.css<?php echo $this->getAssetVersion() ?>" media="screen, projection" rel="stylesheet" type="text/css" />
+    <link href="<?php echo $this->url->generate() ?>asset/screen.css<?php echo $this->getAssetVersion() ?>" media="screen, projection" rel="stylesheet" type="text/css" />
     <link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800" rel="stylesheet" type="text/css">
     <script src="<?php echo $this->getUrlJs('modernizr.js') ?>"></script>
-    <script>var urlBase = '<?php echo $this->getUrl() ?>';</script>
+    <script>var urlBase = '<?php echo $this->url->generate() ?>';</script>
 
 <?php include($this->getTemplatePath('header/_google-analytics')) ?>
 
@@ -27,14 +27,14 @@
 <div id="top"></div>
 <div class="container container-site">
 <div class="container-site-inner">
-    <a href="#top" class="to-top js-smooth-scroll"><img class="to-top-image" src="<?php echo $this->getUrlMedia('arrow-up.svg') ?>" onerror="this.src=''; this.onerror=null;"></a>
+    <a href="#top" class="to-top js-smooth-scroll"><img class="to-top-image" src="<?php echo $this->getAssetPath('arrow-up.svg') ?>" onerror="this.src=''; this.onerror=null;"></a>
     <header class="container-header row js-container-header clearfix js-fixed-bar">
         <div class="container-header-inner">
     
     <?php include($this->getTemplatePath('_logo')) ?>
 
-            <a href="#menu" class="js-smooth-scroll header-button-mobile header-button-mobile-menu js-header-button-mobile-menu"><img class="header-button-mobile-image" src="<?php echo $this->getUrlMedia('menu.svg') ?>" onerror="this.src=''; this.onerror=null;"></a>
-            <a href="#search" class="js-smooth-scroll header-button-mobile header-button-mobile-search js-header-button-mobile-search"><img class="header-button-mobile-image" src="<?php echo $this->getUrlMedia('search.svg') ?>" onerror="this.src=''; this.onerror=null;"></a>
+            <a href="#menu" class="js-smooth-scroll header-button-mobile header-button-mobile-menu js-header-button-mobile-menu"><img class="header-button-mobile-image" src="<?php echo $this->getAssetPath('menu.svg') ?>" onerror="this.src=''; this.onerror=null;"></a>
+            <a href="#search" class="js-smooth-scroll header-button-mobile header-button-mobile-search js-header-button-mobile-search"><img class="header-button-mobile-image" src="<?php echo $this->getAssetPath('search.svg') ?>" onerror="this.src=''; this.onerror=null;"></a>
 
     <?php $menu = array_reverse($mainMenu); ?>
     <?php include($this->getTemplatePath('_menu')) ?>

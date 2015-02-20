@@ -21,7 +21,7 @@ class Controller_Content extends Controller_Index
 		if ($this->all()) {
 			return;
 		}
-		$this->route('base');
+		$this->redirect('base');
 	}
 
 
@@ -42,7 +42,7 @@ class Controller_Content extends Controller_Index
 				'type' => $this->url->getPathPart(0)
 			)
 		))) {
-			$this->route('base');
+			$this->redirect('base');
 		}
 		$modelContent->bindMeta('media');
 		$modelContent->bindMeta('tag');
@@ -62,7 +62,7 @@ class Controller_Content extends Controller_Index
 
 		// post/ only
 		if ($this->url->getPathPart(1)) {
-			$this->route('base');
+			$this->redirect('base');
 		}
 
 		// load

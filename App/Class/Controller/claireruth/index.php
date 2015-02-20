@@ -27,7 +27,7 @@ class Controller_Index extends Controller
 	public function run()
 	{
 		if ($this->url->getPathPart(1)) {
-			$this->route('base');
+			$this->redirect('base');
 		}
 		if (array_key_exists('query', $_GET)) {
 			return $this->search();

@@ -8,19 +8,14 @@
         }
     ],
     "require": {
-        "intervention/image": "dev-master",
-        "symfony/http-foundation": "2.5.6",
-        "symfony/routing": "2.6.*@dev",
-        "mustache/mustache": "dev-master",
-        "joseph-lenton/php-error": "dev-master",
+        "corneltek/pux": "~1.5",
         "swiftmailer/swiftmailer": "5.3.*@dev"
     },
     "autoload": {
         "psr-4": {
             "OriginalAppName\\": "App/Class/",
             "OriginalAppName\\Admin\\": "App/Admin/",
-            "OriginalAppName\\Site\\": "App/Site/",
-            "OriginalAppName\\Site\\Mwyatt\\": "App/Site/Mwyatt/"
+            "OriginalAppName\\Site\\": "App/Site/"
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace OriginalAppName\Controller;
 
-use Symfony\Component\HttpFoundation\Response;
+use OriginalAppName\Response;
 use OriginalAppName\Json;
 use OriginalAppName\Site\Elttl\Model\Tennis\Division;
 use OriginalAppName\Google\Analytics\Campaign;

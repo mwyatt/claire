@@ -18,7 +18,7 @@
 
 		<?php if (isset($cover->image)): ?>
 		
-				<img class="cover-image" src="<?php echo $this->getUrlMedia($cover->image) ?>" alt="<?php echo $cover->name ?>">
+				<img class="cover-image" src="<?php echo $this->getAssetPath($cover->image) ?>" alt="<?php echo $cover->name ?>">
 				
 		<?php endif ?>
 
@@ -34,7 +34,7 @@
 
 		<div class="home-press">
 			<h1 class="home-press-heading">
-				<a href="<?php echo $this->getUrl() ?>press/" class="home-button-all-posts">View all</a>
+				<a href="<?php echo $this->url->generate() ?>press/" class="home-button-all-posts">View all</a>
 				<span class="home-press-heading-text">Press releases</span>
 			</h1>
 		
@@ -56,7 +56,7 @@
 			
 	<?php foreach ($galleryPaths as $key => $path): ?>
 	
-			<a class="gallery-link js-magnific-gallery" href="<?php echo $this->getUrl() . $path ?>"><img class="gallery-image" src="<?php echo $path ?>" alt=""></a>
+			<a class="gallery-link js-magnific-gallery" href="<?php echo $this->url->generate() . $path ?>"><img class="gallery-image" src="<?php echo $path ?>" alt=""></a>
 
 	<?php endforeach ?>
 

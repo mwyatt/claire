@@ -145,7 +145,7 @@ class Controller_Admin_Content extends Controller_Admin
 		$this->updateMeta('tag');
 			$modelLog->log('admin', 'post updated');
 			$sessionFeedback->set('Content updated. <a href="' . $this->url->getCache('current_sans_query') . '">Back to list</a>');
-		$this->route('current');
+		$this->redirect('current');
 	}
 
 
@@ -168,7 +168,7 @@ class Controller_Admin_Content extends Controller_Admin
 		}
 		$sessionFeedback->set('Content archived successfully');
 		$modelLog->log('admin', 'post archived');
-		$this->route('current_sans_query');
+		$this->redirect('current_sans_query');
 	}
 
 
@@ -184,7 +184,7 @@ class Controller_Admin_Content extends Controller_Admin
 		$modelContent->bindMeta('media');
 		$modelContent->bindMeta('tag');
 		if (! $modelContent->getData()) {
-			$this->route('current_sans_query');
+			$this->redirect('current_sans_query');
 		}
 
 		// single

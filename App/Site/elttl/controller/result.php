@@ -2,7 +2,7 @@
 
 namespace OriginalAppName\Site\Elttl\Controller;
 
-use Symfony\Component\HttpFoundation\Response;
+use OriginalAppName\Response;
 use Symfony\Component\Routing\Exception\ResourceNotFoundException as SymfonyResourceNotFound;
 use OriginalAppName\Model;
 use OriginalAppName\View;

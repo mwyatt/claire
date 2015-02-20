@@ -38,7 +38,7 @@ class Controller_Admin_Tennis_Fixture extends Controller_Admin
 			exit('are you sure? enable this feature by uncommenting the code');
 			// $modelTennisFixture = new model_tennis_Fixture($this);
 			// $modelTennisFixture->generate();
-			// $this->route('current');
+			// $this->redirect('current');
 		}
 
 		// updating

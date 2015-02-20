@@ -29,7 +29,7 @@
 				
 				<?php if ($fixture->getTimeFulfilled()): ?>
 						
-				<a href="<?php echo $this->getUrl('current_sans_query') ?>?fixture_id=<?php echo $fixture->getId() ?>" class="button-edit">Edit</a>
+				<a href="<?php echo $this->url->generate('current_sans_query') ?>?fixture_id=<?php echo $fixture->getId() ?>" class="button-edit">Edit</a>
 
 				<?php endif ?>
 

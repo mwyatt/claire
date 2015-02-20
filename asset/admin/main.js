@@ -167,7 +167,7 @@ ControllerContentMeta.prototype.getNewRow = function(data) {
  */
 module.exports = new ControllerContentMeta;
 
-},{"admin/feedbackStream":3,"helper":7,"jquery":8,"vendor/mustache":11}],2:[function(require,module,exports){
+},{"admin/feedbackStream":3,"helper":7,"jquery":9,"vendor/mustache":12}],2:[function(require,module,exports){
 
 
 /**
@@ -214,7 +214,7 @@ $('.js-input-title').on('keypress.content-single', function(event) {
   }, 500);
 });
 
-},{"admin/content/meta":1,"jquery":8}],3:[function(require,module,exports){
+},{"admin/content/meta":1,"jquery":9}],3:[function(require,module,exports){
 
 
 /**
@@ -288,17 +288,13 @@ FeedbackStream.prototype.createMessage = function(config) {
  */
 module.exports = new FeedbackStream;
 
-},{"helper":7,"jquery":8,"vendor/mustache":11}],4:[function(require,module,exports){
-
-
-/**
- * dependencies
- */
+},{"helper":7,"jquery":9,"vendor/mustache":12}],4:[function(require,module,exports){
 var $ = require('jquery');
 var serializeObject = require('vendor/jquery/serializeObject');
 var magnificPopup = require('vendor/jquery/magnificPopup');
 var helper = require('helper');
 var feedbackStream = require('admin/feedbackStream');
+var url = require('url');
 
 
 /**
@@ -316,7 +312,7 @@ $('.js-magnific-inline').magnificPopup({
 				.on('submit.forgot-password', function(event) {
 					event.preventDefault();
 					$.ajax({
-						url: helper.urlBase('admin/ajax/forgot-password/'),
+						url: url.getUrlBase('admin/ajax/user/forgot-password/'),
 						type: 'get',
 						dataType: 'json',
 						data: $(this).closest('form').serializeObject(),
@@ -334,11 +330,7 @@ $('.js-magnific-inline').magnificPopup({
 	}
 });
 
-},{"admin/feedbackStream":3,"helper":7,"jquery":8,"vendor/jquery/magnificPopup":9,"vendor/jquery/serializeObject":10}],5:[function(require,module,exports){
-
-/**
- * dependencies
- */
+},{"admin/feedbackStream":3,"helper":7,"jquery":9,"url":8,"vendor/jquery/magnificPopup":10,"vendor/jquery/serializeObject":11}],5:[function(require,module,exports){
 var $ = require('jquery');
 var feedbackStream = require('admin/feedbackStream');
 
@@ -369,7 +361,7 @@ if (moduleName == 'content/single') {
   require('admin/content/single');
 };
 
-},{"admin/content/single":2,"admin/feedbackStream":3,"admin/login":4,"admin/option/all":6,"jquery":8}],6:[function(require,module,exports){
+},{"admin/content/single":2,"admin/feedbackStream":3,"admin/login":4,"admin/option/all":6,"jquery":9}],6:[function(require,module,exports){
 
 
 /**
@@ -505,7 +497,7 @@ ControllerOption.prototype.getNewRow = function(data) {
  */
 module.exports = new ControllerOption;
 
-},{"admin/feedbackStream":3,"helper":7,"jquery":8}],7:[function(require,module,exports){
+},{"admin/feedbackStream":3,"helper":7,"jquery":9}],7:[function(require,module,exports){
 
 
 /**
@@ -583,7 +575,49 @@ Helper.prototype.urlBase = function (append) {
 // return
 module.exports = new Helper;
 
-},{"jquery":8}],8:[function(require,module,exports){
+},{"jquery":9}],8:[function(require,module,exports){
+
+
+/**
+ * urlBase must be defined
+ */
+var Url = function () {
+  if (typeof urlBase === 'undefined') {
+    return console.warn('variable urlBase must be defined');
+  };
+	this.urlBase = urlBase;
+};
+
+
+Url.prototype.getUrlBase = function(append) {
+  var append = typeof append === 'undefined' ? '' : append;
+	return this.urlBase + append;
+};
+
+
+/**
+ * jump to a specified url
+ * @param  {string} path combine base and relative
+ * @return {null}              
+ */
+Url.prototype.redirect = function(path) {
+	window.location.href = this.getUrlBase() + path;
+};
+
+
+/**
+ * jump to a specified url
+ * @param  {string} path combine base and relative
+ * @return {null}              
+ */
+Url.prototype.redirectAbsolute = function(path) {
+	window.location.href = path;
+};
+
+
+module.exports = new Url;
+
+},{}],9:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v1.11.1
  * http://jquery.com/
@@ -10893,7 +10927,7 @@ return jQuery;
 
 }));
 
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 /*! Magnific Popup - v1.0.0 - 2014-12-12
 * http://dimsemenov.com/plugins/magnific-popup/
 * Copyright (c) 2014 Dmitry Semenov; */
@@ -12956,7 +12990,7 @@ $.magnificPopup.registerModule(RETINA_NS, {
 
 /*>>fastclick*/
  _checkInstance(); }));
-},{"jquery":8}],10:[function(require,module,exports){
+},{"jquery":9}],11:[function(require,module,exports){
 /**
  * jQuery serializeObject
  * @copyright 2014, macek <paulmacek@gmail.com>
@@ -12965,7 +12999,7 @@ $.magnificPopup.registerModule(RETINA_NS, {
  * @version 2.4.5
  */
 !function(e,r){if("function"==typeof define&&define.amd)define(["exports","jquery"],function(e,i){return r(e,i)});else if("undefined"!=typeof exports){var i=require("jquery");r(exports,i)}else r(e,e.jQuery||e.Zepto||e.ender||e.$)}(this,function(e,r){function i(e,i){function n(e,r,i){return e[r]=i,e}function a(e,r){for(var i,a=e.match(t.key);void 0!==(i=a.pop());)if(t.push.test(i)){var o=s(e.replace(/\[\]$/,""));r=n([],o,r)}else t.fixed.test(i)?r=n([],i,r):t.named.test(i)&&(r=n({},i,r));return r}function s(e){return void 0===h[e]&&(h[e]=0),h[e]++}function o(e){switch(r('[name="'+e.name+'"]',i).attr("type")){case"checkbox":return"on"===e.value?!0:e.value;default:return e.value}}function u(r){if(!t.validate.test(r.name))return this;var i=a(r.name,o(r));return c=e.extend(!0,c,i),this}function f(r){if(!e.isArray(r))throw new Error("formSerializer.addPairs expects an Array");for(var i=0,t=r.length;t>i;i++)this.addPair(r[i]);return this}function d(){return c}function l(){return JSON.stringify(d())}var c={},h={};this.addPair=u,this.addPairs=f,this.serialize=d,this.serializeJSON=l}var t={validate:/^[a-z_][a-z0-9_]*(?:\[(?:\d*|[a-z0-9_]+)\])*$/i,key:/[a-z0-9_]+|(?=\[\])/gi,push:/^$/,fixed:/^\d+$/,named:/^[a-z0-9_]+$/i};return i.patterns=t,i.serializeObject=function(){return this.length>1?new Error("jquery-serialize-object can only serialize one form at a time"):new i(r,this).addPairs(this.serializeArray()).serialize()},i.serializeJSON=function(){return this.length>1?new Error("jquery-serialize-object can only serialize one form at a time"):new i(r,this).addPairs(this.serializeArray()).serializeJSON()},"undefined"!=typeof r.fn&&(r.fn.serializeObject=i.serializeObject,r.fn.serializeJSON=i.serializeJSON),e.FormSerializer=i,i});
-},{"jquery":8}],11:[function(require,module,exports){
+},{"jquery":9}],12:[function(require,module,exports){
 /*!
  * mustache.js - Logic-less {{mustache}} templates with JavaScript
  * http://github.com/janl/mustache.js

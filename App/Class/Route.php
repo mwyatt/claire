@@ -5,13 +5,9 @@ namespace OriginalAppName;
 use OriginalAppName\Registry;
 use OriginalAppName\Controller;
 use OriginalAppName\Session;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Matcher\UrlMatcher;
-use Symfony\Component\Routing\RequestContext;
-use Symfony\Component\Routing\RouteCollection;
-use Symfony\Component\Routing\Generator\UrlGenerator;
-use Symfony\Component\Routing\Exception\ResourceNotFoundException;
+use OriginalAppName\Response;
+use Pux;
+use Pux\Executor;
 
 
 /**
@@ -24,6 +20,9 @@ class Route extends \OriginalAppName\System
 
 
 	public $response;
+
+
+	public $routes;
 
 
 	/**
@@ -46,62 +45,62 @@ class Route extends \OriginalAppName\System
 	/**
 	 * @todo split off into readable class
 	 */
-	public function __construct()
+	public function init()
 	{
 	
 		// resource
 		$registry = Registry::getInstance();
-		$request = Request::createFromGlobals();
-		$context = new RequestContext();
-		$context->fromRequest($request);
+		$mux = new Pux\Mux;
+		$url = $registry->get('url');
+		$controller = new Controller;
 
 		// build route tree
 		$routes = $this->getRoutes();
 
-		// url generator register
-		$registry->set('urlGenerator', new UrlGenerator($routes, $context));
+		// store routes in mux
+		foreach ($routes as $route) {
+			$mux->$route['mux/type']($route['mux/path'], $route['mux/controller/method'], $route['mux/options']);
+		}
 
 		// get match
-		$matcher = new UrlMatcher($routes, $context);
+		// needs / prepending for mux
+		$route = $mux->dispatch(US . $url->getPathString());
 
-		// will always be overridden below
-	    $this->setResponse(new Response);
-
-		// any problems in the controllers will be caught here to throw
-		// an internal server error
-		// not found controllers throw 404
+		// if route not ok will be caught
 		try {
 
-			// builds controller and sends to method
-		    $attributes = $matcher->match($request->getPathInfo());
-		    $controller = $attributes['controller'];
-		    $route = $attributes['_route'];
+			// attempt execution of route
+		    $response = Executor::execute($route);
+		} catch (ReflectionException $exception) {
+			
+			// 404
+		    $response = $controller->notFound();
+		} catch (Exception $exception) {
 
-		    // not clever?
-		    // but needed to lazy pass request array back to routes
-		    unset($attributes['controller']);
-		    unset($attributes['_route']);
-		    
-		    // init controller
-		    $controller = new $controller($attributes);
-		    $this->setResponse($controller->$route($attributes));
-		    $this->validUrl();
-		} catch (ResourceNotFoundException $e) {
-		    $controller = new Controller();
-		    $this->setResponse($controller->notFound([]));
-		} catch (Exception $e) {
-		    $this->setResponse(new Response('An internal server error occurred.', HTTP_INTERNAL_SERVER_ERROR));
+			// 404
+		    $response = $controller->notFound();
+		}
+
+		if ($response->getStatusCode() == 404) {
+		    $response = $controller->notFound();
 		}
 
 		// headers
+		// code is returned in response object
+		$this->setResponse($response);
 		$this->setHeaders();
 
 		// the response, the only echo :(
 		$response = $this->getResponse();
+
+		// output
 		echo $response->getContent();
 	}
 
 
+	/**
+	 * just response code for now
+	 */
 	public function setHeaders()
 	{
 		$response = $this->getResponse();
@@ -109,39 +108,48 @@ class Route extends \OriginalAppName\System
 	}
 
 
-	public function getRoutes()
+	/**
+	 * collect all routes and return for storage
+	 * @return array route definitions
+	 */
+	public function readRoutes()
 	{
 
-		// store routes in object
-		$routes = new RouteCollection();
+		// store all routes here
+		$routes = [];
 
-		// admin
+		// admin first because of global ovverides
 		include APP_PATH . 'Admin' . DS . 'route' . EXT;
 
-		// get site specific routes
+		// global
+		include APP_PATH . 'route' . EXT;
+
+		// site specific
 		$siteRoutePath = SITE_PATH . 'route' . EXT;
 		if (! file_exists($siteRoutePath)) {
 		    exit('site \'' . SITE . '\' must have routes configured');
 		}
 		include $siteRoutePath;
 
-		// global
-		include APP_PATH . 'route' . EXT;
-
 		// return all routes
-		return $routes;
+		// store also
+		return $this->setRoutes($routes);
 	}
 
-
-	public function validUrl()
-	{
-		
-
-		/**
-		 * store each unique url
-		 */
-		$registry = Registry::getInstance();
-		$sessionUrlHistory = new Session\UrlHistory;
-		$sessionUrlHistory->append($registry->get('url')->getCache('current'));
+	
+	/**
+	 * @return array 
+	 */
+	public function getRoutes() {
+	    return $this->routes;
+	}
+	
+	
+	/**
+	 * @param array $routes 
+	 */
+	public function setRoutes($routes) {
+	    $this->routes = $routes;
+	    return $this;
 	}
 }

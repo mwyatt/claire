@@ -36,8 +36,8 @@
 	
 	<div class="content-action">
 		<!-- <a class="content-action-link" href="<?php echo $theUrl ?>" title="View <?php echo $content->title ?> online" target="blank">View</a> -->
-		<a class="content-action-link" href="<?php echo $this->getUrl('current_noquery') ?>?edit=<?php echo $content->id ?>" title="Edit <?php echo $content->title ?>" class="edit">Edit</a>
-		<!-- <a class="content-action-link" href="<?php echo $this->getUrl('current_noquery') ?>?<?php echo ($content->status == 'archive' ? 'delete' : 'archive') ?>=<?php echo $content->id ?>" title="<?php echo ($content->status == 'archive' ? 'Delete' : 'Archive') ?> <?php echo $content->title ?>" class="archive"><?php echo ($content->status == 'archive' ? 'Delete' : 'Archive') ?></a> -->
+		<a class="content-action-link" href="<?php echo $this->url->generate('current_noquery') ?>?edit=<?php echo $content->id ?>" title="Edit <?php echo $content->title ?>" class="edit">Edit</a>
+		<!-- <a class="content-action-link" href="<?php echo $this->url->generate('current_noquery') ?>?<?php echo ($content->status == 'archive' ? 'delete' : 'archive') ?>=<?php echo $content->id ?>" title="<?php echo ($content->status == 'archive' ? 'Delete' : 'Archive') ?> <?php echo $content->title ?>" class="archive"><?php echo ($content->status == 'archive' ? 'Delete' : 'Archive') ?></a> -->
 	</div>
 
 <?php endif ?>

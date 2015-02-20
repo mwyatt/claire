@@ -3,7 +3,7 @@
 namespace OriginalAppName\Controller;
 
 use OriginalAppName;
-use Symfony\Component\HttpFoundation\Response;
+use OriginalAppName\Response;
 
 
 /**

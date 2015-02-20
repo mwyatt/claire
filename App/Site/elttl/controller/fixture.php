@@ -29,7 +29,7 @@ class Controller_Fixture extends Controller_Archive
 		$part = $this->getArchivePathPart(1);
 		$part = str_replace('-', ' ', $part);
 		if (! strpos($part, $required)) {
-			$this->route('base');
+			$this->redirect('base');
 		}
 		$teamNames = explode($required, $part);
 
@@ -49,7 +49,7 @@ class Controller_Fixture extends Controller_Archive
 		)));
 		$teamRight = $modelTennisTeam->getDataFirst();
 		if (! $teamLeft || ! $teamRight) {
-			$this->route('base');
+			$this->redirect('base');
 		}
 		$teamIds = array($teamLeft->getId(), $teamRight->getId());
 
@@ -83,7 +83,7 @@ class Controller_Fixture extends Controller_Archive
 		// must be fulfilled
 		$fixture = $modelTennisFixture->getDataFirst();
 		if (! $fixture->getTimeFulfilled()) {
-			$this->route('base');
+			$this->redirect('base');
 		}
 
 		// encounter

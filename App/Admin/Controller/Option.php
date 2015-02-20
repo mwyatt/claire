@@ -9,7 +9,7 @@ use OriginalAppName\Session;
 use OriginalAppName\Admin\Session as AdminSession;
 use OriginalAppName\View;
 use OriginalAppName\Service;
-use Symfony\Component\HttpFoundation\Response;
+use OriginalAppName\Response;
 
 
 /**

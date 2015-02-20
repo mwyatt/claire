@@ -18,7 +18,7 @@ class Controller_Month extends Controller_Index
 		
 		// is the date acceptable
 		if (! $content->readByMonth(array($this->url->getPathPart(1)))) {
-			$this->route('404');
+			$this->redirect('404');
 		}
 		
 		// make month pretty

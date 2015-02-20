@@ -1,5 +1,5 @@
 <?php include $this->getTemplatePath('admin/_header') ?>
-	<?php $urlCreate = $this->getUrl('adminUserCreate') ?>
+	<?php $urlCreate = $this->url->generate('adminUserCreate') ?>
 
 <div class="page user-all">
 	<div class="page-actions">
@@ -19,7 +19,7 @@
 	</tr>
 
 	<?php foreach($users as $user): ?>
-		<?php $urlEdit = $this->getUrl('adminUserSingle', ['id' => $user->getId()]) ?>
+		<?php $urlEdit = $this->url->generate('adminUserSingle', ['id' => $user->getId()]) ?>
 
 	<tr class="user js-user">
 		<td><a href="<?php echo $urlEdit ?>"><?php echo $user->getNameFull() ?></a></td>
@@ -28,7 +28,7 @@
 		<td><?php echo $user->getLevel() ?></td>
 		<td>
 			<a class="button-edit" href="<?php echo $urlEdit ?>">Edit</a>
-			<a class="button-delete" href="<?php echo $this->getUrl('adminUserAll', ['delete' => $user->getId()]) ?>">Delete</a>
+			<a class="button-delete" href="<?php echo $this->url->generate('adminUserAll', ['delete' => $user->getId()]) ?>">Delete</a>
 		</td>
 	</tr>
 

@@ -30,6 +30,6 @@
 
 		</div> <!-- .container -->
         <script src="<?php echo $this->getUrlJs('jquery.js') ?>"></script>
-        <script src="<?php echo $this->getUrl() ?>asset/main.js<?php echo $this->getAssetVersion() ?>"></script>
+        <script src="<?php echo $this->url->generate() ?>asset/main.js<?php echo $this->getAssetVersion() ?>"></script>
     </body>
 </html>

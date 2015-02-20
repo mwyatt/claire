@@ -2,8 +2,8 @@
 
 namespace OriginalAppName\Site\Mwyatt\Controller;
 
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Exception\ResourceNotFoundException;
+use OriginalAppName\Response;
+
 use OriginalAppName\Model;
 use OriginalAppName\View;
 use OriginalAppName\Pagination;
@@ -30,11 +30,11 @@ class Content extends \OriginalAppName\Controller\Front
 		$serviceContent = new Service\Content();
 		$serviceContent->readSlug($request['slug']);
 		if (! $serviceContent->getData()) {
-			throw new ResourceNotFoundException();
+			return new Response('', 404);
 		}
 		$entityContent = current($serviceContent->getData());
 		if (! $entityContent->getStatus() == 'visible') {
-			throw new ResourceNotFoundException();
+			return new Response('', 404);
 		}
 
 		// template

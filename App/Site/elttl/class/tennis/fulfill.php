@@ -68,7 +68,7 @@ class Tennis_Fulfill extends Data
         // if delete is flagged, dont refulfill
         if ($this->isDelete()) {
             $sessionFeedback->set('fixture deleted');
-            $this->route('current');
+            $this->redirect('current');
         }
 
         // fulfill the fixture
@@ -213,7 +213,7 @@ class Tennis_Fulfill extends Data
             ));
         }
         $sessionFeedback->set('fixture fulfilled sucessfully');
-        $this->route('current', 'fixture_id=' . $fixture->getId());
+        $this->redirect('current', 'fixture_id=' . $fixture->getId());
     }
 
 

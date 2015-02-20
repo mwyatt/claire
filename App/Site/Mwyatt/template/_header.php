@@ -7,8 +7,8 @@
 
 <?php include($this->getTemplatePath('header/_meta')) ?>
 
-    <link rel="icon" type="image/png" href="<?php echo $this->getUrlMedia('favicon.png') ?>?rev=1">
-    <script>var urlBase = '<?php echo $this->getUrl() ?>';</script>
+    <link rel="icon" type="image/png" href="<?php echo $this->getAssetPath('favicon.png') ?>?rev=1">
+    <script>var urlBase = '<?php echo $this->url->generate() ?>';</script>
     <link href="<?php echo $this->getUrlAsset('screen.css') ?>" media="screen, projection, print" rel="stylesheet" type="text/css" />
     <link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800" rel="stylesheet" type="text/css">
     
@@ -32,7 +32,7 @@
     <header class="header header-bar js-header">
 
 	    <!-- logo -->
-	    <a href="<?php echo $this->getUrl() ?>" class="header-logo">
+	    <a href="<?php echo $this->url->generate() ?>" class="header-logo">
 
 <?php include $this->getAssetPath('logo.svg') ?>
 

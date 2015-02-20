@@ -23,8 +23,8 @@ class View extends \OriginalAppName\Data
 	 */
 	public function __construct() {
 		$registry = Registry::getInstance();
-		$generator = $registry->get('urlGenerator');
-		$this->setUrl($generator);
+		$url = $registry->get('url');
+		$this->setUrl($url);
 	}
 
 
@@ -169,7 +169,7 @@ class View extends \OriginalAppName\Data
 	 */
 	public function getUrlAsset($url)
 	{
-		return $this->getUrl() . 'asset' . US . $url . $this->getAssetVersion();
+		return $this->url->generate() . 'asset' . US . $url . $this->getAssetVersion();
 	}
 
 
@@ -197,23 +197,11 @@ class View extends \OriginalAppName\Data
 	public function pathAdminView($template = '') { 
 		return $this->getTemplatePath('admin/' . $template);
 	}	
-	
-
-	/**
-	 * generates urls based on the routes registered
-	 * @param  string  $path       route plan
-	 * @param  array  $attributes id->
-	 * @param  boolean $absolute   abs/rel toggle?
-	 * @return string              url
-	 */
-	public function getUrl($path = 'home', $attributes = [], $absolute = true) {
-		return $this->url->generate($path, $attributes, $absolute);
-	}
 
 
 	public function buildArchiveUrl($parts)
 	{
-		$urlCurrent = $this->getUrl('current');
+		$urlCurrent = $this->url->generate('current');
 		if (! strpos($urlCurrent, 'archive')) {
 			return $this->url->build($parts);
 		}
@@ -222,13 +210,6 @@ class View extends \OriginalAppName\Data
 		return $this->url->build($parts);
 	}
 	
-
-	public function getUrlMedia($append = '') {
-		$registry = \OriginalAppName\Registry::getInstance();
-		$generator = $registry->get('urlGenerator');
-		return $generator->generate('assetSingle', ['path' => $append], true);
-	}
-
 
 	/**
 	 * returns a body class using the parts of the url after the domain
@@ -282,6 +263,7 @@ class View extends \OriginalAppName\Data
 
 	/**
 	 * looks at an array and creates a string e.g. '3 Items'
+	 * is this view only? otherwise should be in helper
 	 * @param  array  $items 
 	 * @param  string $label 
 	 * @return string        

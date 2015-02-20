@@ -4,7 +4,8 @@ namespace OriginalAppName;
 
 use OriginalAppName\View;
 use OriginalAppName\Service;
-use Symfony\Component\HttpFoundation\Response;
+use OriginalAppName\Registry;
+use OriginalAppName\Response;
 
 
 /**
@@ -24,34 +25,21 @@ class Controller
 
 	public function __construct()
 	{
-		$this->setView(new View);
-		$this->setUrl();
+		$registry = Registry::getInstance();
+		$this
+			->setUrl($registry->get('url'))
+			->setView(new View);
 	}
 
 
-	public function setUrl()
+	public function notFound()
 	{
-		$registry = \OriginalAppName\Registry::getInstance();
-		$this->url = $registry->get('urlGenerator');
-		return $this;
-	}
 
-
-	/**
-	 * @return object 
-	 */
-	public function getUrl() {
-	    return $this->url;
-	}
-
-
-	public function notFound($request)
-	{
 		// template
 		$this
 			->view
 			->setDataKey('metaTitle', 'Not found');
-		return new Response($this->view->getTemplate('not-found'), Response::HTTP_NOT_FOUND);
+		return new Response($this->view->getTemplate('not-found'), 404);
 	}
 
 
@@ -75,14 +63,19 @@ class Controller
 	/**
 	 * redirects the user to another url and terminates
 	 * utilising the generator from symfony
-	 * @param  string $label      routeKey
-	 * @param  array $attributes if required
+	 * @param  string $key      routeKey
+	 * @param  array $config if required
 	 * @return null             
 	 */
-	public function route($label, $attributes = [])
+	public function redirect($key, $config = [])
 	{
-		$generator = $this->getUrl();
-		$url = $generator->generate($label, $attributes, true);
+
+		// get url from registry and generate string
+		$registry = \OriginalAppName\Registry::getInstance();
+		$url = $registry->get('url');
+		$url = $url->generate($key, $config);
+
+		// redirect
 		header('location:' . $url);
 
 		// prevent continuation
@@ -90,11 +83,28 @@ class Controller
 	}
 
 
-	public function routeAbsolute($url)
+	public function redirectAbsolute($url)
 	{
 		header('location:' . $url);
 
 		// prevent continuation
 		exit;
+	}
+
+
+	/**
+	 * @return object 
+	 */
+	public function getUrl() {
+	    return $this->url;
+	}
+	
+	
+	/**
+	 * @param object $url 
+	 */
+	public function setUrl($url) {
+	    $this->url = $url;
+	    return $this;
 	}
 }

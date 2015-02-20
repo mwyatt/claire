@@ -144,7 +144,7 @@
 				<table width="100%" style="{table} {container_fullwidth} background: #ffffff; border-bottom: 1px solid; border-{color-gray-30} margin-bottom: 1em;" cellpadding="0" cellspacing="0" border="0" align="center" class="email-fade">
 				<tr>
 					<td width="300" valign="top">
-						<a style="{a}" href="<?php echo $this->getUrl() ?>" title="Open homepage"><img src="<?php echo 'logo url' ?>" alt="website name" width="200" height="44"></a>
+						<a style="{a}" href="<?php echo $this->url->generate() ?>" title="Open homepage"><img src="<?php echo 'logo url' ?>" alt="website name" width="200" height="44"></a>
 					</td>
 				</table>
 

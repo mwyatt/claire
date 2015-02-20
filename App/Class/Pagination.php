@@ -189,7 +189,7 @@ class Pagination extends \OriginalAppName\Data
      */
     public function urlBuild($key)
     {
-    	$url = $this->getUrl();
+    	$url = $this->url->generate();
     	$current = $url->getCache('current_sans_query');
     	$query = $url->getQuery();
 		parse_str($query, $queryParts);

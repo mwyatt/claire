@@ -25,7 +25,7 @@ class Controller_Admin_Profile extends Controller_Admin
 		// 		// $modelUser->updateById($sessionAdminUser->getData('id'));
 		// 		// crypt($_POST['password'])
 		// 		$sessionFeedback->set('Profile successfully updated');
-		// 		$this->route('current');
+		// 		$this->redirect('current');
 		// 	}
 		// 	$this->view
 		// 		->getTemplate('admin/profile');

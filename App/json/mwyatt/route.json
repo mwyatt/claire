@@ -1,6 +1,0 @@
-{
-    "not-found": "controller_notfound",
-    "search": "controller_search",
-    "ajax": "controller_ajax",
-    "project": "controller_project"
-}

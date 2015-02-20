@@ -32,7 +32,7 @@ class Controller_Archive extends Controller_Index
 			'where' => array('name' => $this->url->getPathPart(1))
 		));
 		if (! $year = $modelTennisYear->getDataFirst()) {
-			$this->route('base');
+			$this->redirect('base');
 		}
 
 		// template

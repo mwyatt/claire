@@ -9,7 +9,7 @@ use OriginalAppName\Session;
 use OriginalAppName\Admin\Session as AdminSession;
 use OriginalAppName\View;
 use OriginalAppName\Service;
-use Symfony\Component\HttpFoundation\Response;
+use OriginalAppName\Response;
 
 
 /**
@@ -39,15 +39,15 @@ class Admin extends \OriginalAppName\Admin\Controller\Feedback
 		$sessionFeedback = new Session\Feedback;
 
 		// not logged in
-		if (! $sessionUser->isLogged() && $_SERVER['REQUEST_URI'] != $this->url->generate('admin')) {
-			$this->route('admin');
+		if (! $sessionUser->isLogged() && $this->url->getCurrent() != $this->url->generate('admin')) {
+			$this->redirect('admin');
 		}
 		
 		// logout
 		if (array_key_exists('logout', $_REQUEST) && $sessionUser->isLogged()) {
 			$sessionUser->delete();
 			$sessionFeedback->setMessage('successfully logged out');
-			$this->route('admin');
+			$this->redirect('admin');
 		}
 
 		// more resource
@@ -65,7 +65,7 @@ class Admin extends \OriginalAppName\Admin\Controller\Feedback
 		$modelUser->readId([$sessionUser->get('id')]);
 		if (! $entityUser = current($modelUser->getData())) {
 			$sessionUser->delete();
-			$this->route('admin');
+			$this->redirect('admin');
 		}
 		$this
 			->view

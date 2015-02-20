@@ -11,8 +11,9 @@ var Url = function () {
 };
 
 
-Url.prototype.getUrlBase = function() {
-	return this.urlBase;
+Url.prototype.getUrlBase = function(append) {
+  var append = typeof append === 'undefined' ? '' : append;
+	return this.urlBase + append;
 };
 
 

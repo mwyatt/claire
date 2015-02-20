@@ -2,8 +2,8 @@
 
 namespace OriginalAppName\Controller;
 
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Exception\ResourceNotFoundException;
+use OriginalAppName\Response;
+
 use OriginalAppName\Entity;
 
 
@@ -18,6 +18,33 @@ class Asset extends \OriginalAppName\Controller
 
 	protected $file;
 
+
+	/**
+	 * starting point to handle the asset
+	 * @param  array $request 
+	 * @return object          response
+	 */
+	public function single($request)
+	{
+
+		// get request path
+		$pathRequest = '';
+		if (isset($request['path'])) {
+			$pathRequest = $request['path'];
+		}
+
+		// entity
+		$file = new Entity\File;
+		$file->setPath($this->getFilePath($pathRequest));
+		$this->setFile($file);
+
+		// exception if no path found for this file
+		if (! $file->getPath()) {
+			return new Response('', 404);
+		}
+		return new Response($this->render());
+	}
+	
 
 	/**
 	 * @return object Entity\File
@@ -52,34 +79,6 @@ class Asset extends \OriginalAppName\Controller
 			$path = $pathDefault;
 		}
 	    return $path;
-	}
-
-
-
-	/**
-	 * starting point to handle the asset
-	 * @param  array $request 
-	 * @return object          response
-	 */
-	public function assetSingle($request)
-	{
-
-		// get request path
-		$pathRequest = '';
-		if (isset($request['path'])) {
-			$pathRequest = $request['path'];
-		}
-
-		// entity
-		$file = new Entity\File;
-		$file->setPath($this->getFilePath($pathRequest));
-		$this->setFile($file);
-
-		// exception if no path found for this file
-		if (! $file->getPath()) {
-			throw new ResourceNotFoundException();
-		}
-		return new Response($this->render());
 	}
 
 

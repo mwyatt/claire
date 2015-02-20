@@ -22,7 +22,7 @@
 <div id="top"></div>
 <div class="container container-site <?php echo ! empty($year) ? 'is-archive' : '' ?>">
     <div class="container-site-inner">
-        <a href="#top" class="to-top js-smooth-scroll"><img class="to-top-image" src="<?php echo $this->getUrlMedia('arrow-up.svg') ?>" onerror="this.src=''; this.onerror=null;"></a>
+        <a href="#top" class="to-top js-smooth-scroll"><img class="to-top-image" src="<?php echo $this->getAssetPath('arrow-up.svg') ?>" onerror="this.src=''; this.onerror=null;"></a>
         <header class="container-header row js-container-header clearfix js-fixed-bar">
             <div class="container-header-inner">
 

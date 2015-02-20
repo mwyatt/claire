@@ -2,11 +2,11 @@
 
 <div class="page content-single js-content-single" data-id="<?php echo $content->getId() ?>">
 	<div class="page-actions">
-		<a href="<?php echo $this->getUrl('adminContentAll', ['type' => $content->getType()]) ?>" class="page-action-button">Back</a>
+		<a href="<?php echo $this->url->generate('adminContentAll', ['type' => $content->getType()]) ?>" class="page-action-button">Back</a>
 
 <?php if ($content->getStatusText() == 'Published'): ?>
 	
-		<a href="<?php echo $this->getUrl('contentSingle', ['type' => $content->getType(), 'slug' => $content->getSlug()]) ?>" class="button right" target="_blank">View</a>
+		<a href="<?php echo $this->url->generate('contentSingle', ['type' => $content->getType(), 'slug' => $content->getSlug()]) ?>" class="button right" target="_blank">View</a>
 
 <?php endif ?>
 

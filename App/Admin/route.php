@@ -1,24 +1,85 @@
 <?php
 
-$routes->add('admin', new Symfony\Component\Routing\Route(
-	'/admin/',
-	['controller' => 'OriginalAppName\\Admin\\Controller\\Index']
-));
+// login / dash
+$routes['admin'] = [
+    'mux/type' => 'get',
+    'mux/path' => '/admin/',
+    'mux/controller/method' => ['OriginalAppName\\Admin\\Controller\\Index', 'admin'],
+    'mux/options' => []
+];
+$routes[] = [
+    'mux/type' => 'post',
+    'mux/path' => '/admin/',
+    'mux/controller/method' => ['OriginalAppName\\Admin\\Controller\\Index', 'login'],
+    'mux/options' => []
+];
 
-$routes->add('adminContentAll', new Symfony\Component\Routing\Route(
-	'/admin/content/{type}/',
-	['controller' => 'OriginalAppName\\Admin\\Controller\\Content']
-));
+// content
+$class = 'OriginalAppName\\Admin\\Controller\\Content';
+$routes['admin/content/create'] = [
+    'mux/type' => 'get',
+    'mux/path' => '/admin/:type/create/',
+    'mux/controller/method' => [$class, 'single'],
+    'mux/options' => []
+];
+$routes[] = [
+    'mux/type' => 'post',
+    'mux/path' => '/admin/:type/create/',
+    'mux/controller/method' => [$class, 'create'],
+    'mux/options' => []
+];
+$routes['admin/content/all'] = [
+    'mux/type' => 'get',
+    'mux/path' => '/admin/:type/',
+    'mux/controller/method' => [$class, 'all'],
+    'mux/options' => []
+];
+$routes['admin/content/single'] = [
+    'mux/type' => 'get',
+    'mux/path' => '/admin/:type/:id/',
+    'mux/controller/method' => [$class, 'single'],
+    'mux/options' => []
+];
+$routes[] = [
+    'mux/type' => 'post',
+    'mux/path' => '/admin/:type/:id/',
+    'mux/controller/method' => [$class, 'update'],
+    'mux/options' => []
+];
+$routes[] = [
+    'mux/type' => 'delete',
+    'mux/path' => '/admin/:type/:id/',
+    'mux/controller/method' => [$class, 'delete'],
+    'mux/options' => []
+];
 
-$routes->add('adminContentCreate', new Symfony\Component\Routing\Route(
-	'/admin/content/{type}/create/',
-	['controller' => 'OriginalAppName\\Admin\\Controller\\Content']
-));
+// forgot password init ajax
+$routes['admin/ajax/user/forgot-password'] = [
+    'mux/type' => 'get',
+    'mux/path' => '/admin/ajax/user/forgot-password/',
+    'mux/controller/method' => ['OriginalAppName\\Admin\\Controller\\Ajax\\User', 'forgotPassword'],
+    'mux/options' => []
+];
 
-$routes->add('adminContentSingle', new Symfony\Component\Routing\Route(
-	'/admin/content/{type}/{id}/',
-	['controller' => 'OriginalAppName\\Admin\\Controller\\Content']
-));
+// forgot password form and submission
+$class = 'OriginalAppName\\Admin\\Controller\\User';
+$routes['admin/user/forgot-password/key'] = [
+    'mux/type' => 'get',
+    'mux/path' => '/admin/forgot-password/:key/',
+    'mux/controller/method' => [$class, 'forgotPassword'],
+    'mux/options' => []
+];
+$routes[] = [
+    'mux/type' => 'post',
+    'mux/path' => '/admin/forgot-password/:key/',
+    'mux/controller/method' => [$class, 'forgotPasswordSubmit'],
+    'mux/options' => []
+];
+
+
+return;
+
+
 
 $routes->add('adminOptionAll', new Symfony\Component\Routing\Route(
 	'/admin/settings/',
@@ -40,11 +101,6 @@ $routes->add('adminUserSingle', new Symfony\Component\Routing\Route(
 	['controller' => 'OriginalAppName\\Admin\\Controller\\User']
 ));
 
-// forgot password, perhaps remove?
-$routes->add('adminAjaxForgotPassword', new Symfony\Component\Routing\Route(
-	'/admin/ajax/forgot-password/',
-	['controller' => 'OriginalAppName\\Admin\\Controller\\Ajax\\ForgotPassword']
-));
 
 $routes->add('adminAjaxContentGenerateSlug', new Symfony\Component\Routing\Route(
 	'/admin/ajax/content/generate-slug/',
@@ -91,10 +147,4 @@ $routes->add('adminAjaxContentMetaUpdate', new Symfony\Component\Routing\Route(
 $routes->add('adminAjaxContentSingle', new Symfony\Component\Routing\Route(
 	'/admin/ajax/content/{id}/',
 	['controller' => 'OriginalAppName\\Admin\\Controller\\Ajax\\Content']
-));
-
-// validate and show form
-$routes->add('adminForgotPassword', new Symfony\Component\Routing\Route(
-	'/admin/forgot-password/{key}/',
-	['controller' => 'OriginalAppName\\Admin\\Controller\\ForgotPassword']
 ));

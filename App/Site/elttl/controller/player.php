@@ -76,7 +76,7 @@ class Controller_Player extends Controller_Archive
 			)
 		)));
 		if (! $player = $modelTennisPlayer->getDataFirst()) {
-			$this->route('base');
+			$this->redirect('base');
 		}
 		$this->setPlayer($player);
 

@@ -10,7 +10,7 @@
 
 	<?php foreach ($projects as $project): ?>
 
-		<a href="<?php echo $this->getUrl() ?>project/<?php echo $project->slug ?>/" class="project is-<?php echo $project->logo ?>">
+		<a href="<?php echo $this->url->generate() ?>project/<?php echo $project->slug ?>/" class="project is-<?php echo $project->logo ?>">
 			<span class="project-name"><?php echo $project->name ?></span>
 			<span class="project-logo"><?php include($this->getPathMedia('project/' . $project->logo . '.svg')) ?></span>
 			<span class="project-skills"><?php //echo $project->skills ?></span>

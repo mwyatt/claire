@@ -32,7 +32,7 @@ class Controller_Admin_Tag extends Controller_Admin
 			} else {
 				$sessionFeedback->set('Problem updating ' . $this->url->getPathPart(1) . ' ' . $_POST['title']);
 			}
-			$this->route('current');
+			$this->redirect('current');
 		}
 
 		// edit
@@ -42,7 +42,7 @@ class Controller_Admin_Tag extends Controller_Admin
 					->setDataKey('tag', $modelTag->getDataFirst())
 					->getTemplate('admin/tag/update');
 			} else {
-				$this->route('current_sans_query');
+				$this->redirect('current_sans_query');
 			}
 		}
 
@@ -55,7 +55,7 @@ class Controller_Admin_Tag extends Controller_Admin
 			} else {
 				$sessionFeedback->set('Problem deleting ' . $this->url->getPathPart(1));
 			}
-			$this->route('current_sans_query');
+			$this->redirect('current_sans_query');
 		}
 	}
 

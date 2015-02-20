@@ -10,10 +10,10 @@
 	<meta name="keywords" content="<?php echo $metaKeywords ?>">
 	<meta name="description" content="<?php echo $metaDescription ?>">
 	<meta name="viewport" content="width=device-width">
-	<link href="<?php echo $this->getUrl() ?>asset/admin-screen.css?v=1" media="screen, projection" rel="stylesheet" type="text/css" />
-    <script>var urlBase = '<?php echo $this->getUrl() ?>';</script>
+	<link href="<?php echo $this->url->generate() ?>asset/admin-screen.css?v=1" media="screen, projection" rel="stylesheet" type="text/css" />
+    <script>var urlBase = '<?php echo $this->url->generate() ?>';</script>
 </head>
-<body<?php echo ($this->getBodyClass() ? ' class="' . $this->getBodyClass() . '"' : '') ?> data-url-base="<?php echo $this->getUrl() ?>">
+<body<?php echo ($this->getBodyClass() ? ' class="' . $this->getBodyClass() . '"' : '') ?> data-url-base="<?php echo $this->url->generate() ?>">
 	<!--[if lt IE 7]>
 	    <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
 	<![endif]-->
@@ -25,7 +25,7 @@
     <header class="main js-header-main">
     	<div class="header-inner wrap-full-width">
 	    	<div class="inner-title-nav-user">
-		        <a class="header-site-title" href="<?php echo $this->getUrl() ?>" target="_blank" title="Open Homepage"><?php echo $option['site_title']->getValue() ?></a>
+		        <a class="header-site-title" href="<?php echo $this->url->generate() ?>" target="_blank" title="Open Homepage"><?php echo $option['site_title']->getValue() ?></a>
 
 	<?php require_once($this->getTemplatePath('admin/header/_user')) ?>
 	<?php require_once($this->getTemplatePath('admin/header/_nav')) ?>

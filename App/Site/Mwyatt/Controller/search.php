@@ -15,12 +15,12 @@ class Controller_Search extends Controller_Index
 
 	public function run() {
 		if (! array_key_exists('query', $_GET)) {
-			$this->route('base');
+			$this->redirect('base');
 		}
 		$query = $_GET['query'];
 		$query = htmlspecialchars($query);
 		if (! $query) {
-			$this->route('base');
+			$this->redirect('base');
 		}
 		$modelContent = new model_content($this);
 		$modelContent->readSearch($query);
