@@ -42,6 +42,8 @@ class View extends \OriginalAppName\Data
 	 * @param  string $templatePath 
 	 */
 	public function getTemplate($templatePath) {
+
+		// common meta vars
 		$this->setMeta();
 
 		// obtain path

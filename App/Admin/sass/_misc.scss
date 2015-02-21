@@ -7,7 +7,7 @@
 body {
 	background: $color-white;
 	color: darken($color-white, 50%);
-	font-family: $font-family;
+	font-family: $typography-font-family;
 	line-height: 1.5;
 }
 
@@ -22,13 +22,6 @@ body {
 
 .button.back {
 	float: right;
-}
-
-.button.primary,
-.button.secondary,
-.button.tertiary,
-.button {
-    // @include admin-button($color-white);
 }
 
 .nothing-yet {
@@ -189,4 +182,28 @@ a.content-action-link {
 
 .user-all-table {
 	@extend %table-all;
+}
+
+
+/**
+ * buttons
+ */
+.button-primary {
+    @include button($color-white, $color-primary-0);
+}
+
+.button-secondary {
+    @include button($color-white, $color-secondary-1-0);
+}
+
+
+/**
+ * links
+ */
+.link-primary {
+    @include link($color-primary-0);
+}
+
+.link-secondary {
+    @include link($color-secondary-1-0);
 }

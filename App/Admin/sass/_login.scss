@@ -22,15 +22,6 @@
 	}
 }
 
-.login-input {
-	@include formInput;
-    width: 100%;
-}
-
-.login-label {
-	@include formLabel;
-}
-
 .link-forgot-password {
     position: relative;
     top: 17px;

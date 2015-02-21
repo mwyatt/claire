@@ -1,10 +1,10 @@
 
 
 /**
- * global body color
- * @type {int}
+ * font family for only headings
+ * @type {String}
  */
-$color-body: $color-gray-60;
+$heading-font-family: 'Open Sans', 'Arial', 'Sans-serif';
 
 
 /**
@@ -15,10 +15,10 @@ $font-family: 'Open Sans', 'Arial', 'Sans-serif';
 
 
 /**
- * font family for only headings
- * @type {String}
+ * global body color
+ * @type {int}
  */
-$heading-font-family: 'Open Sans', 'Arial', 'Sans-serif';
+$color-body: $color-gray-60;
 
 
 /**

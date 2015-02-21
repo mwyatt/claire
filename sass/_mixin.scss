@@ -2,7 +2,7 @@
 
 /**
  * requirements
- * $font-family
+ * $typography-font-family
  * palette
  */
 
@@ -136,8 +136,8 @@
     @include box-sizing(border-box);
     @include appearance(none);
     @include transition(all 200ms); 
-    color: $color-text;
-    font-family: $font-family;
+    color: $typography-color-body;
+    font-family: $typography-font-family;
     border: 1px solid $color-gray-30;
     padding: 0.4em 0.5em 0.3em;
     margin: 0;
@@ -145,6 +145,6 @@
     &:focus {
         box-shadow: 0 0 3px $color-gray-20;
         border-color: $color-gray-30;
-        color: $color-text;
+        color: $typography-color-body;
     }
 }

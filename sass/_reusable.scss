@@ -83,7 +83,6 @@
 }
 
 
-
 /**
  * buttons
  */
@@ -105,6 +104,20 @@
 
 .link-secondary {
     @include link(gray);
+}
+
+
+/**
+ * form
+ */
+.label-block {
+    display: block;
+    margin: 1em 0 .5em;
+    font-weight: 600;
+}
+
+.input-text {
+    @include input;
 }
 
 

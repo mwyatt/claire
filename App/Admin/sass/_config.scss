@@ -10,6 +10,15 @@
 
 
 /**
+ * variables
+ */
+@import "palette";
+$typography-color-body: $color-secondary-3-0;
+$typography-font-family: 'Open Sans', 'Arial', 'Sans-serif';
+$heading-font-family: $typography-font-family;
+
+
+/**
  * vendor libraries
  */
 @import "../../../sass/vendor/normalize";
@@ -26,9 +35,8 @@
 /**
  * variables and mixins
  */
-@import "palette";
+@import "../../../sass/typography";
 @import "../../../sass/mixin";
-@import "mixin";
 @import "keyframe";
 @import "magnific-popup";
 
@@ -37,5 +45,4 @@
  * admin / front settings
  */
 @import "../../../sass/reusable";
-@import "../../../sass/typography";
 @import "form";

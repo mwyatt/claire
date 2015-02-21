@@ -14,7 +14,31 @@ $routes[] = [
     'mux/options' => []
 ];
 
+// forgot password init ajax
+$routes['admin/ajax/user/forgot-password'] = [
+    'mux/type' => 'get',
+    'mux/path' => '/admin/ajax/user/forgot-password/',
+    'mux/controller/method' => ['OriginalAppName\\Admin\\Controller\\Ajax\\User', 'forgotPassword'],
+    'mux/options' => []
+];
+
+// forgot password form and submission
+$class = 'OriginalAppName\\Controller\\Admin\\User';
+$routes['admin/user/forgot-password/key'] = [
+    'mux/type' => 'get',
+    'mux/path' => '/admin/forgot-password/:key/',
+    'mux/controller/method' => [$class, 'forgotPassword'],
+    'mux/options' => []
+];
+$routes[] = [
+    'mux/type' => 'post',
+    'mux/path' => '/admin/forgot-password/:key/',
+    'mux/controller/method' => [$class, 'forgotPasswordSubmit'],
+    'mux/options' => []
+];
+
 // content
+// must be lower down because it will match things it shouldnt
 $class = 'OriginalAppName\\Admin\\Controller\\Content';
 $routes['admin/content/create'] = [
     'mux/type' => 'get',
@@ -53,28 +77,6 @@ $routes[] = [
     'mux/options' => []
 ];
 
-// forgot password init ajax
-$routes['admin/ajax/user/forgot-password'] = [
-    'mux/type' => 'get',
-    'mux/path' => '/admin/ajax/user/forgot-password/',
-    'mux/controller/method' => ['OriginalAppName\\Admin\\Controller\\Ajax\\User', 'forgotPassword'],
-    'mux/options' => []
-];
-
-// forgot password form and submission
-$class = 'OriginalAppName\\Admin\\Controller\\User';
-$routes['admin/user/forgot-password/key'] = [
-    'mux/type' => 'get',
-    'mux/path' => '/admin/forgot-password/:key/',
-    'mux/controller/method' => [$class, 'forgotPassword'],
-    'mux/options' => []
-];
-$routes[] = [
-    'mux/type' => 'post',
-    'mux/path' => '/admin/forgot-password/:key/',
-    'mux/controller/method' => [$class, 'forgotPasswordSubmit'],
-    'mux/options' => []
-];
 
 
 return;

@@ -1,27 +1,6 @@
 
 
 /**
- * coore body color
- * @type {hex}
- */
-$typography-color-body: lighten($color-primary-4, 20%);
-
-
-/**
- * font family for entire site
- * @type {String}
- */
-$typography-font-family: 'Open Sans', 'Arial', 'Sans-serif';
-
-
-/**
- * font family for only headings
- * @type {String}
- */
-$heading-font-family: $typography-font-family;
-
-
-/**
  * click drag selection of text
  */
 @include selection {
