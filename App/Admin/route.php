@@ -37,6 +37,45 @@ $routes[] = [
     'mux/options' => []
 ];
 
+// user
+$class = 'OriginalAppName\\Admin\\Controller\\User';
+$routes['admin/user/create'] = [
+    'mux/type' => 'get',
+    'mux/path' => '/admin/user/create/',
+    'mux/controller/method' => [$class, 'single'],
+    'mux/options' => []
+];
+$routes[] = [
+    'mux/type' => 'post',
+    'mux/path' => '/admin/user/create/',
+    'mux/controller/method' => [$class, 'create'],
+    'mux/options' => []
+];
+$routes['admin/user/all'] = [
+    'mux/type' => 'get',
+    'mux/path' => '/admin/user/',
+    'mux/controller/method' => [$class, 'all'],
+    'mux/options' => []
+];
+$routes['admin/user/single'] = [
+    'mux/type' => 'get',
+    'mux/path' => '/admin/user/:id/',
+    'mux/controller/method' => [$class, 'single'],
+    'mux/options' => []
+];
+$routes[] = [
+    'mux/type' => 'post',
+    'mux/path' => '/admin/user/:id/',
+    'mux/controller/method' => [$class, 'update'],
+    'mux/options' => []
+];
+$routes[] = [
+    'mux/type' => 'delete',
+    'mux/path' => '/admin/user/:id/',
+    'mux/controller/method' => [$class, 'delete'],
+    'mux/options' => []
+];
+
 // content
 // must be lower down because it will match things it shouldnt
 $class = 'OriginalAppName\\Admin\\Controller\\Content';
@@ -87,22 +126,6 @@ $routes->add('adminOptionAll', new Symfony\Component\Routing\Route(
 	'/admin/settings/',
 	['controller' => 'OriginalAppName\\Admin\\Controller\\Option']
 ));
-
-$routes->add('adminUserAll', new Symfony\Component\Routing\Route(
-	'/admin/user/',
-	['controller' => 'OriginalAppName\\Admin\\Controller\\User']
-));
-
-$routes->add('adminUserCreate', new Symfony\Component\Routing\Route(
-	'/admin/user/create/',
-	['controller' => 'OriginalAppName\\Admin\\Controller\\User']
-));
-
-$routes->add('adminUserSingle', new Symfony\Component\Routing\Route(
-	'/admin/user/{id}/',
-	['controller' => 'OriginalAppName\\Admin\\Controller\\User']
-));
-
 
 $routes->add('adminAjaxContentGenerateSlug', new Symfony\Component\Routing\Route(
 	'/admin/ajax/content/generate-slug/',

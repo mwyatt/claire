@@ -1,5 +1,5 @@
 <?php if (isset($adminUser)): ?>
-	<?php $urlSingle = $this->url->generate('adminUserSingle', ['id' => $adminUser->getId()]) ?>
+	<?php $urlSingle = $this->url->generate('admin/user/single', ['id' => $adminUser->getId()]) ?>
     
 <div class="nav-user js-hover-addclass nav-main-level1">
 	<span class="nav-user-gravatar"><img src="<?php echo $adminUser->getUrlGravatar(['s' => 30, 'd' => 'mm', 'r' => 'g', 'img' => false]) ?>" alt="" class="nav-user-gravatar-image"></span>
