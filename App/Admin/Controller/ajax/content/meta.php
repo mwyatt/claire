@@ -21,7 +21,7 @@ class Meta extends \OriginalAppName\Admin\Controller\Ajax
 {
 
 
-	public function adminAjaxContentMetaAll($request)
+	public function all()
 	{
 
 		// validate
@@ -40,7 +40,7 @@ class Meta extends \OriginalAppName\Admin\Controller\Ajax
 	}
 
 
-	public function adminAjaxContentMetaCreate($request)
+	public function create()
 	{
 
 		// validate
@@ -63,7 +63,7 @@ class Meta extends \OriginalAppName\Admin\Controller\Ajax
 	}
 
 
-	public function adminAjaxContentMetaDelete($request)
+	public function delete()
 	{
 
 		// validate
@@ -82,11 +82,11 @@ class Meta extends \OriginalAppName\Admin\Controller\Ajax
 	}
 
 
-	public function adminAjaxContentMetaUpdate($request)
+	public function update()
 	{
 		
 		// validate
-		if (! isset($_REQUEST['contentId']) || ! isset($_REQUEST['name']) || ! isset($_REQUEST['value'])) {
+		if (! isset($_REQUEST['id']) || ! isset($_REQUEST['contentId']) || ! isset($_REQUEST['name']) || ! isset($_REQUEST['value'])) {
 			throw new Exception;
 		}
 
@@ -96,7 +96,7 @@ class Meta extends \OriginalAppName\Admin\Controller\Ajax
 
 		// action
 		$entityContentMeta->consumeArray($_REQUEST);
-		$modelContentMeta->update($entityContentMeta, ['id' => $request['id']]);
+		$modelContentMeta->update($entityContentMeta, ['id' => $_REQUEST['id']]);
 
 		// validate it happend
 		if (! $modelContentMeta->getRowCount()) {
@@ -104,7 +104,7 @@ class Meta extends \OriginalAppName\Admin\Controller\Ajax
 		}
 
 		// output
-		$modelContentMeta->readId([$request['id']]);
+		$modelContentMeta->readId([$_REQUEST['id']]);
 		return new Response(json_encode($modelContentMeta->getDataFirst()));
 	}
 }

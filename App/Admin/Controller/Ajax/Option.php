@@ -21,7 +21,7 @@ class Option extends \OriginalAppName\Admin\Controller\Ajax
 {
 
 
-	public function adminAjaxOptionRead($request)
+	public function read()
 	{
 
 		// resource
@@ -35,7 +35,7 @@ class Option extends \OriginalAppName\Admin\Controller\Ajax
 	}
 
 
-	public function adminAjaxOptionCreate($request)
+	public function create()
 	{
 
 		// validate
@@ -60,11 +60,11 @@ class Option extends \OriginalAppName\Admin\Controller\Ajax
 	}
 
 
-	public function adminAjaxOptionDelete($request)
+	public function delete()
 	{
 
 		// validate
-		if (! isset($_GET['id'])) {
+		if (! isset($_REQUEST['id'])) {
 			throw new Exception;
 		}
 
@@ -72,18 +72,18 @@ class Option extends \OriginalAppName\Admin\Controller\Ajax
 		$modelOption = new Model\Option;
 
 		// action
-		$modelOption->delete(['id' => $_GET['id']]);
+		$modelOption->delete(['id' => $_REQUEST['id']]);
 
 		// output
 		return new Response(json_encode($modelOption->getRowCount()));
 	}
 
 
-	public function adminAjaxOptionUpdate($request)
+	public function update()
 	{
 		
 		// validate
-		if (! isset($_REQUEST['name']) || ! isset($_REQUEST['value'])) {
+		if (! isset($_REQUEST['id']) || ! isset($_REQUEST['name']) || ! isset($_REQUEST['value'])) {
 			throw new Exception;
 		}
 
@@ -93,7 +93,7 @@ class Option extends \OriginalAppName\Admin\Controller\Ajax
 
 		// action
 		$entityOption->consumeArray($_REQUEST);
-		$modelOption->update($entityOption, ['id' => $request['id']]);
+		$modelOption->update($entityOption, ['id' => $_REQUEST['id']]);
 			;
 
 		// validate it happend
@@ -102,7 +102,7 @@ class Option extends \OriginalAppName\Admin\Controller\Ajax
 		}
 
 		// output
-		$modelOption->readId([$request['id']]);
+		$modelOption->readId([$_REQUEST['id']]);
 		return new Response(json_encode($modelOption->getDataFirst()));
 	}
 }

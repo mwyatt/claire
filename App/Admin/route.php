@@ -37,44 +37,47 @@ $routes[] = [
     'mux/options' => []
 ];
 
-// user
-$class = 'OriginalAppName\\Admin\\Controller\\User';
-$routes['admin/user/create'] = [
-    'mux/type' => 'get',
-    'mux/path' => '/admin/user/create/',
-    'mux/controller/method' => [$class, 'single'],
-    'mux/options' => []
-];
-$routes[] = [
-    'mux/type' => 'post',
-    'mux/path' => '/admin/user/create/',
-    'mux/controller/method' => [$class, 'create'],
-    'mux/options' => []
-];
-$routes['admin/user/all'] = [
-    'mux/type' => 'get',
-    'mux/path' => '/admin/user/',
-    'mux/controller/method' => [$class, 'all'],
-    'mux/options' => []
-];
-$routes['admin/user/single'] = [
-    'mux/type' => 'get',
-    'mux/path' => '/admin/user/:id/',
-    'mux/controller/method' => [$class, 'single'],
-    'mux/options' => []
-];
-$routes[] = [
-    'mux/type' => 'post',
-    'mux/path' => '/admin/user/:id/',
-    'mux/controller/method' => [$class, 'update'],
-    'mux/options' => []
-];
-$routes[] = [
-    'mux/type' => 'delete',
-    'mux/path' => '/admin/user/:id/',
-    'mux/controller/method' => [$class, 'delete'],
-    'mux/options' => []
-];
+// classic crud(s)
+// quick way to build route for simple cruds
+foreach (['user'] as $entity) {
+    $class = "OriginalAppName\\Admin\\Controller\\ucfirst($entity)";
+    $routes["admin/$entity/create"] = [
+        'mux/type' => 'get',
+        'mux/path' => "/admin/$entity/create/",
+        'mux/controller/method' => [$class, 'single'],
+        'mux/options' => []
+    ];
+    $routes[] = [
+        'mux/type' => 'post',
+        'mux/path' => '/admin/$entity/create/',
+        'mux/controller/method' => [$class, 'create'],
+        'mux/options' => []
+    ];
+    $routes["admin/$entity/all"] = [
+        'mux/type' => 'get',
+        'mux/path' => "/admin/$entity/",
+        'mux/controller/method' => [$class, 'all'],
+        'mux/options' => []
+    ];
+    $routes["admin/$entity/single"] = [
+        'mux/type' => 'get',
+        'mux/path' => "/admin/$entity/:id/",
+        'mux/controller/method' => [$class, 'single'],
+        'mux/options' => []
+    ];
+    $routes[] = [
+        'mux/type' => 'post',
+        'mux/path' => '/admin/$entity/:id/',
+        'mux/controller/method' => [$class, 'update'],
+        'mux/options' => []
+    ];
+    $routes[] = [
+        'mux/type' => 'delete',
+        'mux/path' => '/admin/$entity/:id/',
+        'mux/controller/method' => [$class, 'delete'],
+        'mux/options' => []
+    ];
+}
 
 // crud-option
 $routes['admin/option/all'] = [
@@ -84,31 +87,59 @@ $routes['admin/option/all'] = [
     'mux/options' => []
 ];
 
-
-
 // ajax-option
+$class = 'OriginalAppName\\Admin\\Controller\\Ajax\\Option';
 $routes['admin/ajax/option/all'] = [
     'mux/type' => 'get',
-    'mux/path' => '/admin/settings/',
-    'mux/controller/method' => ['OriginalAppName\\Admin\\Controller\\Option', 'all'],
+    'mux/path' => '/admin/ajax/option/',
+    'mux/controller/method' => [$class, 'all'],
     'mux/options' => []
 ];
-$routes->add('adminAjaxOptionRead', new Symfony\Component\Routing\Route(
-    '/admin/ajax/option/',
-    ['controller' => 'OriginalAppName\\Admin\\Controller\\Ajax\\Option']
-));
-$routes->add('adminAjaxOptionCreate', new Symfony\Component\Routing\Route(
-    '/admin/ajax/option/create/',
-    ['controller' => 'OriginalAppName\\Admin\\Controller\\Ajax\\Option']
-));
-$routes->add('adminAjaxOptionDelete', new Symfony\Component\Routing\Route(
-    '/admin/ajax/option/delete/',
-    ['controller' => 'OriginalAppName\\Admin\\Controller\\Ajax\\Option']
-));
-$routes->add('adminAjaxOptionUpdate', new Symfony\Component\Routing\Route(
-    '/admin/ajax/option/{id}/',
-    ['controller' => 'OriginalAppName\\Admin\\Controller\\Ajax\\Option']
-));
+$routes['admin/ajax/option/create'] = [
+    'mux/type' => 'get',
+    'mux/path' => '/admin/ajax/option/create/',
+    'mux/controller/method' => [$class, 'create'],
+    'mux/options' => []
+];
+$routes['admin/ajax/option/delete'] = [
+    'mux/type' => 'get',
+    'mux/path' => '/admin/ajax/option/delete/',
+    'mux/controller/method' => [$class, 'delete'],
+    'mux/options' => []
+];
+$routes['admin/ajax/option/update'] = [
+    'mux/type' => 'get',
+    'mux/path' => '/admin/ajax/option/update/',
+    'mux/controller/method' => [$class, 'update'],
+    'mux/options' => []
+];
+
+// ajax-content-meta
+$class = 'OriginalAppName\\Admin\\Controller\\Ajax\\Content\\Meta';
+$routes['admin/ajax/content/meta/all'] = [
+    'mux/type' => 'get',
+    'mux/path' => '/admin/ajax/content/meta/',
+    'mux/controller/method' => [$class, 'all'],
+    'mux/options' => []
+];
+$routes['admin/ajax/content/meta/create'] = [
+    'mux/type' => 'get',
+    'mux/path' => '/admin/ajax/content/meta/create/',
+    'mux/controller/method' => [$class, 'create'],
+    'mux/options' => []
+];
+$routes['admin/ajax/content/meta/delete'] = [
+    'mux/type' => 'get',
+    'mux/path' => '/admin/ajax/content/meta/delete/',
+    'mux/controller/method' => [$class, 'delete'],
+    'mux/options' => []
+];
+$routes['admin/ajax/content/meta/update'] = [
+    'mux/type' => 'get',
+    'mux/path' => '/admin/ajax/content/meta/update/',
+    'mux/controller/method' => [$class, 'update'],
+    'mux/options' => []
+];
 
 // ajax-content
 $routes[] = [
@@ -157,33 +188,3 @@ $routes['admin/content/delete'] = [
     'mux/controller/method' => [$class, 'delete'],
     'mux/options' => []
 ];
-
-
-
-return;
-
-
-
-
-
-
-
-
-
-// ajax/content/meta
-$routes->add('adminAjaxContentMetaAll', new Symfony\Component\Routing\Route(
-	'/admin/ajax/content/meta/',
-	['controller' => 'OriginalAppName\\Admin\\Controller\\Ajax\\Content\\Meta']
-));
-$routes->add('adminAjaxContentMetaCreate', new Symfony\Component\Routing\Route(
-	'/admin/ajax/content/meta/create/',
-	['controller' => 'OriginalAppName\\Admin\\Controller\\Ajax\\Content\\Meta']
-));
-$routes->add('adminAjaxContentMetaDelete', new Symfony\Component\Routing\Route(
-	'/admin/ajax/content/meta/delete/',
-	['controller' => 'OriginalAppName\\Admin\\Controller\\Ajax\\Content\\Meta']
-));
-$routes->add('adminAjaxContentMetaUpdate', new Symfony\Component\Routing\Route(
-	'/admin/ajax/content/meta/{id}/',
-	['controller' => 'OriginalAppName\\Admin\\Controller\\Ajax\\Content\\Meta']
-));

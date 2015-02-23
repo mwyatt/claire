@@ -76,10 +76,6 @@ class Route extends \OriginalAppName\System
 
 			// attempt execution of route
 		    $response = Executor::execute($route);
-		} catch (ReflectionException $exception) {
-			
-			// 404
-		    $response = $controller->notFound();
 		} catch (Exception $exception) {
 
 			// 404
