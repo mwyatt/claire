@@ -8,6 +8,7 @@ use OriginalAppName\Session;
 use OriginalAppName\Response;
 use Pux;
 use Pux\Executor;
+use \Exception;
 
 
 /**
@@ -82,11 +83,6 @@ class Route extends \OriginalAppName\System
 		} catch (Exception $exception) {
 
 			// 404
-		    $response = $controller->notFound();
-		}
-
-		// 404 but no error
-		if ($response->getStatusCode() == 404) {
 		    $response = $controller->notFound();
 		}
 

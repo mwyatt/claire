@@ -21,7 +21,7 @@ class User extends \OriginalAppName\Controller\Admin
 {
 
 
-	public function create($type)
+	public function create()
 	{
 		
 		// resource
@@ -115,7 +115,7 @@ class User extends \OriginalAppName\Controller\Admin
 
 		// feedback / route
 		$sessionFeedback->setMessage("user $id saved", 'positive');
-		$this->redirect('adminUserSingle', ['id' => $entityUser->getId()]);
+		$this->redirect('admin/user/single', ['id' => $entityUser->getId()]);
 	}
 
 

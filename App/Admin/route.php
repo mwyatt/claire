@@ -76,7 +76,49 @@ $routes[] = [
     'mux/options' => []
 ];
 
-// content
+// crud-option
+$routes['admin/option/all'] = [
+    'mux/type' => 'get',
+    'mux/path' => '/admin/settings/',
+    'mux/controller/method' => ['OriginalAppName\\Admin\\Controller\\Option', 'all'],
+    'mux/options' => []
+];
+
+
+
+// ajax-option
+$routes['admin/ajax/option/all'] = [
+    'mux/type' => 'get',
+    'mux/path' => '/admin/settings/',
+    'mux/controller/method' => ['OriginalAppName\\Admin\\Controller\\Option', 'all'],
+    'mux/options' => []
+];
+$routes->add('adminAjaxOptionRead', new Symfony\Component\Routing\Route(
+    '/admin/ajax/option/',
+    ['controller' => 'OriginalAppName\\Admin\\Controller\\Ajax\\Option']
+));
+$routes->add('adminAjaxOptionCreate', new Symfony\Component\Routing\Route(
+    '/admin/ajax/option/create/',
+    ['controller' => 'OriginalAppName\\Admin\\Controller\\Ajax\\Option']
+));
+$routes->add('adminAjaxOptionDelete', new Symfony\Component\Routing\Route(
+    '/admin/ajax/option/delete/',
+    ['controller' => 'OriginalAppName\\Admin\\Controller\\Ajax\\Option']
+));
+$routes->add('adminAjaxOptionUpdate', new Symfony\Component\Routing\Route(
+    '/admin/ajax/option/{id}/',
+    ['controller' => 'OriginalAppName\\Admin\\Controller\\Ajax\\Option']
+));
+
+// ajax-content
+$routes[] = [
+    'mux/type' => 'get',
+    'mux/path' => '/admin/ajax/content/generate-slug/',
+    'mux/controller/method' => ['OriginalAppName\\Admin\\Controller\\Ajax\\Content', 'generateSlug'],
+    'mux/options' => []
+];
+
+// crud content
 // must be lower down because it will match things it shouldnt
 $class = 'OriginalAppName\\Admin\\Controller\\Content';
 $routes['admin/content/create'] = [
@@ -109,9 +151,9 @@ $routes[] = [
     'mux/controller/method' => [$class, 'update'],
     'mux/options' => []
 ];
-$routes[] = [
-    'mux/type' => 'delete',
-    'mux/path' => '/admin/:type/:id/',
+$routes['admin/content/delete'] = [
+    'mux/type' => 'get',
+    'mux/path' => '/admin/content/delete/:id/',
     'mux/controller/method' => [$class, 'delete'],
     'mux/options' => []
 ];
@@ -122,33 +164,11 @@ return;
 
 
 
-$routes->add('adminOptionAll', new Symfony\Component\Routing\Route(
-	'/admin/settings/',
-	['controller' => 'OriginalAppName\\Admin\\Controller\\Option']
-));
 
-$routes->add('adminAjaxContentGenerateSlug', new Symfony\Component\Routing\Route(
-	'/admin/ajax/content/generate-slug/',
-	['controller' => 'OriginalAppName\\Admin\\Controller\\Ajax\\Content']
-));
 
-// ajax/option
-$routes->add('adminAjaxOptionRead', new Symfony\Component\Routing\Route(
-	'/admin/ajax/option/',
-	['controller' => 'OriginalAppName\\Admin\\Controller\\Ajax\\Option']
-));
-$routes->add('adminAjaxOptionCreate', new Symfony\Component\Routing\Route(
-	'/admin/ajax/option/create/',
-	['controller' => 'OriginalAppName\\Admin\\Controller\\Ajax\\Option']
-));
-$routes->add('adminAjaxOptionDelete', new Symfony\Component\Routing\Route(
-	'/admin/ajax/option/delete/',
-	['controller' => 'OriginalAppName\\Admin\\Controller\\Ajax\\Option']
-));
-$routes->add('adminAjaxOptionUpdate', new Symfony\Component\Routing\Route(
-	'/admin/ajax/option/{id}/',
-	['controller' => 'OriginalAppName\\Admin\\Controller\\Ajax\\Option']
-));
+
+
+
 
 // ajax/content/meta
 $routes->add('adminAjaxContentMetaAll', new Symfony\Component\Routing\Route(
@@ -166,10 +186,4 @@ $routes->add('adminAjaxContentMetaDelete', new Symfony\Component\Routing\Route(
 $routes->add('adminAjaxContentMetaUpdate', new Symfony\Component\Routing\Route(
 	'/admin/ajax/content/meta/{id}/',
 	['controller' => 'OriginalAppName\\Admin\\Controller\\Ajax\\Content\\Meta']
-));
-
-// ajax/content/single
-$routes->add('adminAjaxContentSingle', new Symfony\Component\Routing\Route(
-	'/admin/ajax/content/{id}/',
-	['controller' => 'OriginalAppName\\Admin\\Controller\\Ajax\\Content']
 ));

@@ -227,26 +227,6 @@ class Content extends \OriginalAppName\Entity
 
 
 	/**
-	 * example.com/type/slug/
-	 * @return string url
-	 */
-	public function getUrl()
-	{
-		$generator = $this->getUrlGenerator();
-		if (! $this->getType() || ! $this->getSlug()) {
-			return;
-		}
-		return $generator->generate(
-			'contentSingle',
-			[
-				'type' => $this->getType(),
-				'slug' => $this->getSlug()
-			]
-		);
-	}
-
-
-	/**
 	 * @return array 
 	 */
 	public function getMeta() {

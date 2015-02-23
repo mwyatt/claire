@@ -37,7 +37,7 @@ class Content extends \OriginalAppName\Controller\Admin
 		$modelContent->create([$entityContent]);
 
 		// update
-		$this->update($type, current($modelContent->getLastInsertIds()));
+		$this->update(current($modelContent->getLastInsertIds()));
 	}
 
 
@@ -74,6 +74,7 @@ class Content extends \OriginalAppName\Controller\Admin
 		// render
 		$this
 			->view
+			->setDataKey('contentType', $type)
 			->setDataKey('content', $entityContent ? $entityContent : new Entity\Content);
 		return new Response($this->view->getTemplate('admin/content/single'));
 	}
@@ -103,7 +104,7 @@ class Content extends \OriginalAppName\Controller\Admin
 		$modelContent->update($entityContent, ['id' => $id]);
 
 		// feedback
-		$sessionFeedback->setMessage("content $id saved", 'positive');
+		$sessionFeedback->setMessage(implode(' ', [$entityContent->getType(), $entityContent->getTitle(), 'saved']), 'positive');
 
 		// redirect
 		$this->redirect('admin/content/single', ['type' => $entityContent->getType(), 'id' => $id]);
@@ -132,8 +133,8 @@ class Content extends \OriginalAppName\Controller\Admin
 
 		// prove it
 		if ($modelContent->getRowCount()) {
-			$sessionFeedback->setMessage("content $id deleted");
-			$this->redirect('admin/content/all');
+			$sessionFeedback->setMessage($entityContent->getType() . " $id deleted");
+			$this->redirect('admin/content/all', ['type' => $entityContent->getType()]);
 		} else {
 			$sessionFeedback->setMessage("unable to delete $id");
 		}

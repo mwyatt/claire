@@ -8,6 +8,7 @@ use OriginalAppName\Admin\Service;
 use OriginalAppName\Session;
 use OriginalAppName\Model;
 use OriginalAppName\Response;
+use \Exception;
 
 
 
@@ -25,9 +26,9 @@ class Content extends \OriginalAppName\Admin\Controller\Ajax
 	 * content 
 	 * @return string 
 	 */
-	public function adminAjaxContentGenerateSlug() {
+	public function generateSlug() {
 		if (! isset($_REQUEST['title'])) {
-			throw new ResourceNotFoundException;
+			throw new Exception;
 		}
 		$friendlyTitle = Helper::slugify($_REQUEST['title']);
 		$ouput = $friendlyTitle;

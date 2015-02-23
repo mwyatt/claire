@@ -2,16 +2,21 @@
 
 <div class="page content-single js-content-single" data-id="<?php echo $content->getId() ?>">
 	<div class="page-actions">
-		<a href="<?php echo $this->url->generate('adminContentAll', ['type' => $content->getType()]) ?>" class="page-action-button">Back</a>
+		<a href="<?php echo $this->url->generate('admin/content/all', ['type' => $content->getType()]) ?>" class="page-action-button">Back</a>
 
+<?php if ($content->getId()): ?>
+	
+		<a class="page-action-button button-secondary" href="<?php echo $this->url->generate('admin/content/delete', ['id' => $content->getId()]) ?>">Delete</a>
+
+<?php endif ?>
 <?php if ($content->getStatusText() == 'Published'): ?>
 	
-		<a href="<?php echo $this->url->generate('contentSingle', ['type' => $content->getType(), 'slug' => $content->getSlug()]) ?>" class="button right" target="_blank">View</a>
+		<a href="<?php echo $this->url->generate('content/single', ['type' => $content->getType(), 'slug' => $content->getSlug()]) ?>" class="button right" target="_blank">View</a>
 
 <?php endif ?>
 
 	</div>
-	<h1 class="page-primary-title">Editing <?php echo ucfirst($content->getType()) ?> <?php echo $content->getTitle() ? $content->getTitle() : $content->getId() ?></h1>
+	<h1 class="page-primary-title"><?php echo $content->getId() ? 'Edit' : 'Create' ?> <?php echo ucfirst($contentType) ?></h1>
 	<form class="main" method="post" enctype="multipart/form-data">
 	    <div class="block-margins">
         	<label class="form-content-label-title" for="form-content-title">Title</label>

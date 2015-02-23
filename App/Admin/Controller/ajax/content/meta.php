@@ -26,7 +26,7 @@ class Meta extends \OriginalAppName\Admin\Controller\Ajax
 
 		// validate
 		if (! isset($_GET['contentId'])) {
-			throw new ResourceNotFoundException;
+			throw new Exception;
 		}
 
 		// resource
@@ -45,7 +45,7 @@ class Meta extends \OriginalAppName\Admin\Controller\Ajax
 
 		// validate
 		if (! isset($_GET['contentId']) || ! isset($_GET['name']) || ! isset($_GET['value'])) {
-			throw new ResourceNotFoundException;
+			throw new Exception;
 		}
 
 		// resource
@@ -68,7 +68,7 @@ class Meta extends \OriginalAppName\Admin\Controller\Ajax
 
 		// validate
 		if (! isset($_GET['id'])) {
-			throw new ResourceNotFoundException;
+			throw new Exception;
 		}
 
 		// resource
@@ -87,7 +87,7 @@ class Meta extends \OriginalAppName\Admin\Controller\Ajax
 		
 		// validate
 		if (! isset($_REQUEST['contentId']) || ! isset($_REQUEST['name']) || ! isset($_REQUEST['value'])) {
-			throw new ResourceNotFoundException;
+			throw new Exception;
 		}
 
 		// resource
@@ -100,7 +100,7 @@ class Meta extends \OriginalAppName\Admin\Controller\Ajax
 
 		// validate it happend
 		if (! $modelContentMeta->getRowCount()) {
-			throw new ResourceNotFoundException;
+			throw new Exception;
 		}
 
 		// output

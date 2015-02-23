@@ -24,7 +24,7 @@ class Option extends \OriginalAppName\Controller\Admin
 	/**
 	 * @return object Response
 	 */
-	public function adminOptionAll($request) {
+	public function all() {
 		
 		// get options
 		$options = $this->view->getData('option');

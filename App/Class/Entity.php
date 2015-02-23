@@ -57,13 +57,6 @@ abstract class Entity
 	}
 
 
-	public function getUrlGenerator()
-	{
-		$registry = \OriginalAppName\Registry::getInstance();
-		return $registry->get('urlGenerator');
-	}
-
-
 	/**
 	 * merges array key => values with that of the entity
 	 * @param  array $array entity property -> value

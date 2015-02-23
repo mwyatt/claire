@@ -40,9 +40,9 @@ class Option extends \OriginalAppName\Admin\Controller\Ajax
 
 		// validate
 		if (! isset($_REQUEST['name']) || ! isset($_REQUEST['value'])) {
-			throw new ResourceNotFoundException;
+			throw new Exception;
 		} elseif (! $_REQUEST['name'] || ! $_REQUEST['value']) {
-			throw new ResourceNotFoundException;
+			throw new Exception;
 		}
 
 		// resource
@@ -65,7 +65,7 @@ class Option extends \OriginalAppName\Admin\Controller\Ajax
 
 		// validate
 		if (! isset($_GET['id'])) {
-			throw new ResourceNotFoundException;
+			throw new Exception;
 		}
 
 		// resource
@@ -84,7 +84,7 @@ class Option extends \OriginalAppName\Admin\Controller\Ajax
 		
 		// validate
 		if (! isset($_REQUEST['name']) || ! isset($_REQUEST['value'])) {
-			throw new ResourceNotFoundException;
+			throw new Exception;
 		}
 
 		// resource
@@ -98,7 +98,7 @@ class Option extends \OriginalAppName\Admin\Controller\Ajax
 
 		// validate it happend
 		if (! $modelOption->getRowCount()) {
-			throw new ResourceNotFoundException;
+			throw new Exception;
 		}
 
 		// output
