@@ -6,7 +6,7 @@ use OriginalAppName;
 use OriginalAppName\Model;
 use OriginalAppName\Json;
 use OriginalAppName\Session;
-use OriginalAppName\Admin\Session as AdminSession;
+use OriginalAppName\Admin;
 use OriginalAppName\View;
 use OriginalAppName\Service;
 use OriginalAppName\Response;
@@ -25,7 +25,7 @@ class User extends \OriginalAppName\Controller\Front
 	{
 
 		// resources
-		$sessionForgotPassword = new AdminSession\User\ForgotPassword;
+		$sessionForgotPassword = new Admin\Session\User\ForgotPassword;
 		$sessionFeedback = new Session\Feedback;
 		$modelUser = new Model\User;
 
@@ -74,7 +74,7 @@ class User extends \OriginalAppName\Controller\Front
 	{
 		
 		// resource\|
-		$sessionForgotPassword = new AdminSession\User\ForgotPassword;
+		$sessionForgotPassword = new Admin\Session\User\ForgotPassword;
 		$sessionFeedback = new Session\Feedback;
 		$modelUser = new Model\User;
 

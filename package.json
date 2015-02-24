@@ -4,7 +4,6 @@
   "version": "0.1.0",
   "devDependencies": {
     "grunt": "latest",
-    "grunt-browserify": "^3.3.0",
     "grunt-contrib-concat": "latest",
     "grunt-contrib-copy": "latest",
     "grunt-contrib-requirejs": "^0.4.4",
@@ -18,15 +17,19 @@
   },
   "browser": {
     "jquery": "./js/vendor/jquery.js",
+    "vendor/jquery": "./js/vendor/jquery.js",
+
     "vendor/tinymce": "./js/vendor/tinymce/tinymce",
     "vendor/jquery/magnificPopup": "./js/vendor/jquery.magnific-popup.js",
     "vendor/jquery/serializeObject": "./js/vendor/jquery.serialize-object.min.js",
     "vendor/mustache": "./js/vendor/mustache.js",
+
     "admin/feedbackStream": "./js/admin/feedbackStream.js",
     "admin/login": "./js/admin/login.js",
     "admin/option/all": "./js/admin/option/all.js",
     "admin/content/single": "./js/admin/content/single.js",
     "admin/content/meta": "./js/admin/content/meta.js",
+    
     "helper": "./js/helper.js",
     "url": "./js/url.js"
   },

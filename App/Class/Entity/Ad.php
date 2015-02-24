@@ -4,7 +4,6 @@ namespace OriginalAppName\Entity;
 
 
 /**
- * @todo finalise
  * @author Martin Wyatt <martin.wyatt@gmail.com> 
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
@@ -26,23 +25,30 @@ class Ad extends \OriginalAppName\Entity
 
 
 	/**
+	 * relative url to featured image / artwork
 	 * @var string
 	 */
 	private $image;
 
 	
 	/**
+	 * relative pointer to content
 	 * @var string
 	 */
 	private $url;
 
 
 	/**
+	 * button which does something to confirm
 	 * @var string
 	 */
 	private $action;
 
 
+	/**
+	 * ties together ads
+	 * @var string
+	 */
 	private $group;
 
 
