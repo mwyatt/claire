@@ -26,7 +26,7 @@ class User extends \OriginalAppName\Controller\Ajax
 
 		// validation
 		if (! isset($_REQUEST['email'])) {
-			return new Response('', 404);
+			throw new Exception;
 		}
 		$email = $_REQUEST['email'];
 

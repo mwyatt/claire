@@ -13,7 +13,11 @@ var helper = require('helper');
  * them on top of one another, then fades away after a period of time
  * @param {object} options 
  */
-var FeedbackStream = function () {};
+var FeedbackStream = function () {
+
+	// possible cache for checking?
+	this.lastMessage;
+};
 
 
 /**

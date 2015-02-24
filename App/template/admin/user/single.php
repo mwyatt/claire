@@ -2,7 +2,7 @@
 
 <div class="page user-single" data-id="<?php echo $user->getId() ?>">
 	<div class="page-actions">
-		<a href="<?php echo $this->url->generate('admin/user/all') ?>" class="page-action-button">Back</a>
+		<a href="<?php echo $this->url->generate('admin/user/all') ?>" class="page-action">Back</a>
 	</div>
 	<h1 class="page-primary-title"><?php echo $user->getId() ? 'Editing' : 'Creating' ?> user <?php echo $user->getNameFull() ? $user->getEmail() : $user->getId() ?></h1>
 	<form class="main" method="post" enctype="multipart/form-data">

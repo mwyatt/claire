@@ -5,6 +5,7 @@
  */
 var $ = require('jquery');
 var contentMeta = require('admin/content/meta');
+var tinymce = require('admin/vendor/content/meta');
 
 
 // wysi

@@ -172,13 +172,23 @@ a.content-action-link {
 .page-actions {
     padding-bottom: 1em;
     margin-bottom: 1em;
-    border-bottom: 1px dotted $color-gray-10;
+    border-bottom: 1px dotted $color-secondary-1-0;
     @include clearfix;
 }
 
-.page-action-button {
-  @include button;
+.page-action {
+    margin-top: 11px;
+    margin-bottom: 11px;
+    
+    &.left {
+        margin-left: 11px;
+    }
+    
+    &.right {
+        margin-right: 11px;
+    }
 }
+
 
 .user-all-table {
 	@extend %table-all;

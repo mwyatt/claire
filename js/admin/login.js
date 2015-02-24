@@ -27,7 +27,9 @@ $('.js-magnific-inline').magnificPopup({
 						data: $(this).closest('form').serializeObject(),
 						success: function(result) {
 							feedbackStream.createMessage(result);
-							$.magnificPopup.close();
+							if (result.type == 'positive') {
+								$.magnificPopup.close();
+							};
 						},
 						error: function(result) {
 							console.log(result);

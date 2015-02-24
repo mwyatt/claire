@@ -1,23 +1,24 @@
 <?php include $this->getTemplatePath('admin/_header') ?>
 
 <div class="page content-single js-content-single" data-id="<?php echo $content->getId() ?>">
-	<div class="page-actions">
-		<a href="<?php echo $this->url->generate('admin/content/all', ['type' => $content->getType()]) ?>" class="page-action-button">Back</a>
+	<form class="main" method="post" enctype="multipart/form-data">
+		<div class="page-actions">
+			<a href="<?php echo $this->url->generate('admin/content/all', ['type' => $contentType]) ?>" class="page-action button-secondary left">Back</a>
 
 <?php if ($content->getId()): ?>
-	
-		<a class="page-action-button button-secondary" href="<?php echo $this->url->generate('admin/content/delete', ['id' => $content->getId()]) ?>">Delete</a>
+		
+			<a class="page-action button-secondary" href="<?php echo $this->url->generate('admin/content/delete', ['id' => $content->getId()]) ?>">Delete</a>
 
 <?php endif ?>
 <?php if ($content->getStatusText() == 'Published'): ?>
-	
-		<a href="<?php echo $this->url->generate('content/single', ['type' => $content->getType(), 'slug' => $content->getSlug()]) ?>" class="button right" target="_blank">View</a>
+		
+			<a href="<?php echo $this->url->generate('content/single', ['type' => $content->getType(), 'slug' => $content->getSlug()]) ?>" class="page-action button-secondary right" target="_blank">View</a>
 
 <?php endif ?>
 
-	</div>
-	<h1 class="page-primary-title"><?php echo $content->getId() ? 'Edit' : 'Create' ?> <?php echo ucfirst($contentType) ?></h1>
-	<form class="main" method="post" enctype="multipart/form-data">
+            <button type="submit" class="page-action button-primary right">Save</button>
+		</div>
+		<h1 class="page-primary-title"><?php echo $content->getId() ? 'Edit' : 'Create' ?> <?php echo ucfirst($contentType) ?></h1>
 	    <div class="block-margins">
         	<label class="form-content-label-title" for="form-content-title">Title</label>
         	<input id="form-content-title" class="required js-input-title" type="text" name="content[title]" maxlength="75" value="<?php echo $content->getTitle() ?>" autofocus="autofocus">
@@ -49,9 +50,6 @@
 <?php endforeach ?>
 
 			</select>
-		</div>
-		<div class="block-clear">
-            <button type="submit" class="form-content-button-save">Save</button>
 		</div>
 	</form>
 </div>

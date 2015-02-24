@@ -38,7 +38,7 @@ header.main.is-fixed-top + .content {
 
 .nav-user-name {
     display: block;
-    padding: 13px 13px 13px 58px;
+    padding: 10px 10px 10px 50px;
 }
 
 .nav-user.nav-main-level1 .nav-user-drop {
@@ -81,8 +81,8 @@ header.main.is-fixed-top + .content {
 }
 
 .nav-user-gravatar {
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
     border-radius: 100%;
     overflow: hidden;
     position: absolute;
@@ -94,8 +94,6 @@ header.main.is-fixed-top + .content {
     position: relative;
     top: 0;
     left: 0;
-    width: 30px;
-    height: 30px;
 }
 
 .header-inner {

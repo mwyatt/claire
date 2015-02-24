@@ -26,13 +26,13 @@ $routes['admin/ajax/user/forgot-password'] = [
 $class = 'OriginalAppName\\Controller\\Admin\\User';
 $routes['admin/user/forgot-password/key'] = [
     'mux/type' => 'get',
-    'mux/path' => '/admin/forgot-password/:key/',
+    'mux/path' => '/admin/user/forgot-password/:key/',
     'mux/controller/method' => [$class, 'forgotPassword'],
     'mux/options' => []
 ];
 $routes[] = [
     'mux/type' => 'post',
-    'mux/path' => '/admin/forgot-password/:key/',
+    'mux/path' => '/admin/user/forgot-password/:key/',
     'mux/controller/method' => [$class, 'forgotPasswordSubmit'],
     'mux/options' => []
 ];

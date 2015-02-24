@@ -1752,7 +1752,7 @@ header.main.is-fixed-top + .content {
 /* line 39, /var/www/html/mvc/app/admin/sass/header */
 .nav-user-name {
   display: block;
-  padding: 13px 13px 13px 58px; }
+  padding: 10px 10px 10px 50px; }
 
 /* line 44, /var/www/html/mvc/app/admin/sass/header */
 .nav-user.nav-main-level1 .nav-user-drop {
@@ -1793,8 +1793,8 @@ header.main.is-fixed-top + .content {
 
 /* line 83, /var/www/html/mvc/app/admin/sass/header */
 .nav-user-gravatar {
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
   border-radius: 100%;
   overflow: hidden;
   position: absolute;
@@ -1805,11 +1805,9 @@ header.main.is-fixed-top + .content {
 .nav-user-gravatar-image {
   position: relative;
   top: 0;
-  left: 0;
-  width: 30px;
-  height: 30px; }
+  left: 0; }
 
-/* line 101, /var/www/html/mvc/app/admin/sass/header */
+/* line 99, /var/www/html/mvc/app/admin/sass/header */
 .header-inner {
   padding-left: 44px; }
 
@@ -2462,7 +2460,7 @@ a.content-action-link {
 .page-actions {
   padding-bottom: 1em;
   margin-bottom: 1em;
-  border-bottom: 1px dotted #e6e6e6; }
+  border-bottom: 1px dotted #FFC32E; }
   /* line 9, /var/www/html/mvc/sass/vendor/bourbon/addons/clearfix */
   .page-actions::after {
     clear: both;
@@ -2470,31 +2468,20 @@ a.content-action-link {
     display: table; }
 
 /* line 179, /var/www/html/mvc/app/admin/sass/misc */
-.page-action-button {
-  -webkit-transition: background-color 100ms linear;
-  -moz-transition: background-color 100ms linear;
-  transition: background-color 100ms linear;
-  font-weight: 600;
-  cursor: pointer;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  text-align: center;
-  line-height: 1;
-  padding: 7px 10px;
-  background-color: black;
-  color: white; }
-  /* line 96, /var/www/html/mvc/sass/mixin */
-  .page-action-button:hover {
-    background-color: #333333; }
-  /* line 100, /var/www/html/mvc/sass/mixin */
-  .page-action-button:active {
-    background-color: black; }
+.page-action {
+  margin-top: 11px;
+  margin-bottom: 11px; }
+  /* line 183, /var/www/html/mvc/app/admin/sass/misc */
+  .page-action.left {
+    margin-left: 11px; }
+  /* line 187, /var/www/html/mvc/app/admin/sass/misc */
+  .page-action.right {
+    margin-right: 11px; }
 
 /**
  * buttons
  */
-/* line 191, /var/www/html/mvc/app/admin/sass/misc */
+/* line 201, /var/www/html/mvc/app/admin/sass/misc */
 .button-primary {
   -webkit-transition: background-color 100ms linear;
   -moz-transition: background-color 100ms linear;
@@ -2516,7 +2503,7 @@ a.content-action-link {
   .button-primary:active {
     background-color: #2588ae; }
 
-/* line 195, /var/www/html/mvc/app/admin/sass/misc */
+/* line 205, /var/www/html/mvc/app/admin/sass/misc */
 .button-secondary {
   -webkit-transition: background-color 100ms linear;
   -moz-transition: background-color 100ms linear;
@@ -2541,7 +2528,7 @@ a.content-action-link {
 /**
  * links
  */
-/* line 203, /var/www/html/mvc/app/admin/sass/misc */
+/* line 213, /var/www/html/mvc/app/admin/sass/misc */
 .link-primary {
   border-bottom-width: 1px;
   border-bottom-style: solid;
@@ -2570,7 +2557,7 @@ a.content-action-link {
       color: #17566e;
       border-bottom-color: #17566e; }
 
-/* line 207, /var/www/html/mvc/app/admin/sass/misc */
+/* line 217, /var/www/html/mvc/app/admin/sass/misc */
 .link-secondary {
   border-bottom-width: 1px;
   border-bottom-style: solid;

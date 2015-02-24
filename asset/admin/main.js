@@ -230,7 +230,11 @@ var helper = require('helper');
  * them on top of one another, then fades away after a period of time
  * @param {object} options 
  */
-var FeedbackStream = function () {};
+var FeedbackStream = function () {
+
+	// possible cache for checking?
+	this.lastMessage;
+};
 
 
 /**
@@ -318,7 +322,9 @@ $('.js-magnific-inline').magnificPopup({
 						data: $(this).closest('form').serializeObject(),
 						success: function(result) {
 							feedbackStream.createMessage(result);
-							$.magnificPopup.close();
+							if (result.type == 'positive') {
+								$.magnificPopup.close();
+							};
 						},
 						error: function(result) {
 							console.log(result);
@@ -340,24 +346,21 @@ $.ajaxSetup({
   cache: false
 });
 feedbackStream.createMessage(feedback);
-var moduleName = $('[data-moduleName]').attr('data-moduleName');
-if (! moduleName) {
+var module = $('.page');
+if (! module) {
   return;
 };
-
-// cant be done with browserify?
-// require(['admin/' + moduleName]);
 
 // replace with sick routing plugin
 // is there a way to pick up where you need to route js based on the url alone?
 // think about login and dashboard, both go to same place
-if (moduleName == 'login') {
+if (module.hasClass('login')) {
   require('admin/login');
 };
-if (moduleName == 'option/all') {
+if (module.hasClass('option-all')) {
   require('admin/option/all');
 };
-if (moduleName == 'content/single') {
+if (module.hasClass('content-single')) {
   require('admin/content/single');
 };
 

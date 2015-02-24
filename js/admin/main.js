@@ -7,23 +7,20 @@ $.ajaxSetup({
   cache: false
 });
 feedbackStream.createMessage(feedback);
-var moduleName = $('[data-moduleName]').attr('data-moduleName');
-if (! moduleName) {
+var module = $('.page');
+if (! module) {
   return;
 };
-
-// cant be done with browserify?
-// require(['admin/' + moduleName]);
 
 // replace with sick routing plugin
 // is there a way to pick up where you need to route js based on the url alone?
 // think about login and dashboard, both go to same place
-if (moduleName == 'login') {
+if (module.hasClass('login')) {
   require('admin/login');
 };
-if (moduleName == 'option/all') {
+if (module.hasClass('option-all')) {
   require('admin/option/all');
 };
-if (moduleName == 'content/single') {
+if (module.hasClass('content-single')) {
   require('admin/content/single');
 };

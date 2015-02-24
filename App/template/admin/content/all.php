@@ -3,7 +3,7 @@
 
 <div class="page content-all">
 	<div class="page-actions">
-		<a class="button right" href="<?php echo $urlCreate ?>" title="Create a new <?php echo ucfirst($contentType) ?>">New</a>
+		<a class="button-primary page-action right" href="<?php echo $urlCreate ?>" title="Create a new <?php echo ucfirst($contentType) ?>">Create</a>
 	</div>
 	<h1 class="page-primary-title"><?php echo ucfirst($contentType) ?>s</h1>
 
