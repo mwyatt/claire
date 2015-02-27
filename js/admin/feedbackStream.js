@@ -40,7 +40,7 @@ FeedbackStream.prototype.createMessage = function(config) {
 			$('.js-feedback-stream-position').prepend(mustache.render(template, config));
 
 			// timeout for removal
-			var timer = setTimeout(function() {
+			setTimeout(function() {
 				$('.js-feedback-stream-single')
 					.first()
 					.addClass('is-removed');

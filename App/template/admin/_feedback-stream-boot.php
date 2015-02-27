@@ -6,7 +6,7 @@
 
 <?php if (isset($feedback)): ?>
 
-	var feedback = {
+	feedback = {
 		message: "<?php echo isset($feedback['message']) ? $feedback['message'] : '' ?>",
 		type: '<?php echo isset($feedback['type']) ? $feedback['type'] : '' ?>'
 	};
