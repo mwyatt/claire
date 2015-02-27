@@ -26,6 +26,7 @@ $registry = OriginalAppName\Registry::getInstance();
 $registry->set('system', new OriginalAppName\System);
 $registry->set('configApp', $configApp);
 $registry->set('configSite', $configSite);
+$ok = new OriginalAppName\Admin\Session\User\ForgotPassword;
 
 
 /**
