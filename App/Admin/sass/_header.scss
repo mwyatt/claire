@@ -1,6 +1,11 @@
 header.main { 
-    box-shadow: 0 0 3px rgba($color-black, .2);
-    height: 44px;
+  background-color: $color-white;
+  box-shadow: 0 0 3px rgba($color-black, .2);
+  height: 44px;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
 }
 
 header.main.is-fixed-top {
@@ -25,6 +30,7 @@ header.main.is-fixed-top + .content {
     overflow: hidden;
     width: auto;
     padding: 10px;
+    color: $color-primary-0;
 }
 
 .nav-main-container {
@@ -39,6 +45,7 @@ header.main.is-fixed-top + .content {
 .nav-user-name {
     display: block;
     padding: 10px 10px 10px 50px;
+    color: $color-primary-0;
 }
 
 .nav-user.nav-main-level1 .nav-user-drop {
@@ -61,18 +68,18 @@ header.main.is-fixed-top + .content {
     display: none;
     position: absolute;
     min-width: 9em;
-    // border: 1px solid $color-gray-10;
     top: 43px;
-    padding: 8px 0;
 }
 
 .nav-main-level2-link {
+    @include transition(200ms);
     display: block;
     padding: 8px 10px;
-    border-top: 1px dotted $color-gray-10;
+    color: $color-primary-0;
 
     &:hover {
-        background: $color-gray-10;
+        color: $color-white;
+        background: $color-primary-0;
     }
 
     &:first-child {
@@ -98,4 +105,19 @@ header.main.is-fixed-top + .content {
 
 .header-inner {
     padding-left: 44px;
+}
+
+.page-actions {
+  background-color: $color-white;
+  border-bottom: 1px solid $color-gray-10;
+  @include clearfix;
+  position: fixed;
+  top: 44px;
+  left: 0;
+  right: 0;
+  box-shadow: 0 0 3px rgba($color-black, .2);
+}
+
+.page-action {
+  margin: 11px;
 }

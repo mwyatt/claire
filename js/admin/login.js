@@ -1,4 +1,4 @@
-var $ = require('jquery');
+var $ = require('vendor/jquery');
 var serializeObject = require('vendor/jquery/serializeObject');
 var magnificPopup = require('vendor/jquery/magnificPopup');
 var helper = require('helper');

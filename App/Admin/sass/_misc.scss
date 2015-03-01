@@ -54,7 +54,10 @@ body {
 }
 
 .page {
-  padding: 1em 5%;
+	padding-bottom: 1em;
+	padding-left: 5%;
+	padding-right: 5%;
+  padding-top: 97 + 20px;
 }
 
 .content.page textarea,
@@ -168,27 +171,6 @@ a.content-action-link {
 #form_html {
 	height: 40em;
 }
-
-.page-actions {
-    padding-bottom: 1em;
-    margin-bottom: 1em;
-    border-bottom: 1px dotted $color-secondary-1-0;
-    @include clearfix;
-}
-
-.page-action {
-    margin-top: 11px;
-    margin-bottom: 11px;
-    
-    &.left {
-        margin-left: 11px;
-    }
-    
-    &.right {
-        margin-right: 11px;
-    }
-}
-
 
 .user-all-table {
 	@extend %table-all;

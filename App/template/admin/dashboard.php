@@ -1,6 +1,6 @@
 <?php include $this->getTemplatePath('admin/_header') ?>
 
-<div id="content" class="dashboard typography">
+<div class="page dashboard typography">
 	<h1>Dashboard</h1>
 	<p>widgets</p>
 	<ul>

@@ -48,7 +48,8 @@ class User extends \OriginalAppName\Controller\Ajax
 		$entityUser = current($modelUser->getData());
 
 		// generate random key and setup session to expect it
-		$key = Helper::getRandomString(20);
+		// lowercased because pux normalises
+		$key = strtolower(Helper::getRandomString(20));
 		$sessionForgotPassword->setForgotPassword($key, $entityUser->getId());
 
 		// view for email

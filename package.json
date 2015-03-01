@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "devDependencies": {
     "grunt": "latest",
+    "browserify": "^8.0.2",
+    "browserify-shim": "^3.8.2",
     "grunt-contrib-concat": "latest",
     "grunt-contrib-copy": "latest",
     "grunt-contrib-requirejs": "^0.4.4",
@@ -14,25 +16,30 @@
     "sass-bourbon": "^4.1.1",
     "time-grunt": "^1.0.0"
   },
+  "browserify": {
+    "transform": [
+      "browserify-shim"
+    ]
+  },
+  "browserify-shim": {
+    "jquery": "$"
+  },
   "browser": {
     "jquery": "./js/vendor/jquery.js",
     "vendor/jquery": "./js/vendor/jquery.js",
-
-    "vendor/tinymce": "./js/vendor/tinymce/tinymce",
     "vendor/jquery/magnificPopup": "./js/vendor/jquery.magnific-popup.js",
     "vendor/jquery/serializeObject": "./js/vendor/jquery.serialize-object.min.js",
     "vendor/mustache": "./js/vendor/mustache.js",
 
     "admin/feedbackStream": "./js/admin/feedbackStream.js",
+    "admin/tinymceConfig": "./js/admin/tinymceConfig.js",
     "admin/login": "./js/admin/login.js",
     "admin/option/all": "./js/admin/option/all.js",
     "admin/content/single": "./js/admin/content/single.js",
     "admin/content/meta": "./js/admin/content/meta.js",
     
     "helper": "./js/helper.js",
+    "menu/hamburger": "./js/menu/hamburger.js",
     "url": "./js/url.js"
-  },
-  "scripts": {
-    "test": "browserify js/admin/main.js -o asset/admin/main.js"
   }
 }

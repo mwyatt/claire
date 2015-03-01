@@ -3,24 +3,13 @@
 /**
  * dependencies
  */
-var $ = require('jquery');
+var $ = require('vendor/jquery');
 var contentMeta = require('admin/content/meta');
-var tinymce = require('admin/vendor/content/meta');
+var url = require('url');
 
 
 // wysi
-tinymce.init({
-  selector: '.js-tinymce',
-  menu: {
-      file: {title : 'File'  , items : 'newdocument'},
-      edit: {title : 'Edit'  , items : 'undo redo | cut copy paste pastetext | selectall'},
-      insert : {title : 'Insert', items : 'link media | template hr | image'},
-      view: {title : 'View'  , items : 'visualaid'},
-      format: {title : 'Format', items : 'bold italic underline strikethrough superscript subscript | formats | removeformat'},
-      table: {title : 'Table' , items : 'inserttable tableprops deletetable | cell row column'},
-      tools: {title : 'Tools' , items : 'spellchecker code'}
-  }
-});
+tinymce.init(require('admin/tinymceConfig'));
 
 // slug
 var timeoutId;
@@ -30,7 +19,7 @@ $('.js-input-title').on('keypress.content-single', function(event) {
   clearTimeout(timeoutId);
   timeoutId = setTimeout(function() {
     $.ajax({
-      url: '../../../ajax/content/generate-slug/',
+      url: url.getUrlBase('admin/ajax/content/generate-slug/'),
       type: 'get',
       dataType: 'json',
       data: {title: $this.val()},
@@ -41,6 +30,5 @@ $('.js-input-title').on('keypress.content-single', function(event) {
         console.log(result);
       }
     });
-    
   }, 500);
 });

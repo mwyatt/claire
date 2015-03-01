@@ -31,7 +31,7 @@ class User extends \OriginalAppName\Controller\Front
 
 		// dependency
 		if (! isset($key)) {
-			$sessionFeedback->setMessage('you need a key', 'negative');
+			$sessionFeedback->setMessage('your key has expired', 'negative');
 			$this->redirect('admin');
 		}
 
@@ -45,19 +45,12 @@ class User extends \OriginalAppName\Controller\Front
 		// validation
 		if (! $sessionForgotPassword->get('key')) {
 			$sessionForgotPassword->delete();
-			$sessionFeedback->setMessage('you need a key', 'negative');
+			$sessionFeedback->setMessage('your key has expired', 'negative');
 			$this->redirect('admin');
 		}
 
 		// key must equal stored one
 		if ($key != $sessionForgotPassword->get('key')) {
-
-			echo '<pre>';
-			var_dump($key);
-			var_dump($sessionForgotPassword->get('key'));
-			echo '</pre>';
-			exit;
-
 			$sessionForgotPassword->delete();
 			$sessionFeedback->setMessage('your key is incorrect', 'negative');
 			$this->redirect('admin');
@@ -104,6 +97,7 @@ class User extends \OriginalAppName\Controller\Front
 		$modelUser->update($entityUser, ['id' => $entityUser->getId()]);
 		if ($modelUser->getRowCount()) {
 			$sessionFeedback->setMessage('password saved', 'positive');
+			$sessionForgotPassword->delete();
 			$this->redirect('admin');
 		}
 

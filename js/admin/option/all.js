@@ -3,7 +3,7 @@
 /**
  * dependencies
  */
-var $ = require('jquery');
+var $ = require('vendor/jquery');
 var helper = require('helper');
 var feedbackStream = require('admin/feedbackStream');
 

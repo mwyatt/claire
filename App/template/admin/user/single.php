@@ -1,11 +1,12 @@
 <?php include $this->getTemplatePath('admin/_header') ?>
 
 <div class="page user-single" data-id="<?php echo $user->getId() ?>">
-	<div class="page-actions">
-		<a href="<?php echo $this->url->generate('admin/user/all') ?>" class="page-action">Back</a>
-	</div>
 	<h1 class="page-primary-title"><?php echo $user->getId() ? 'Editing' : 'Creating' ?> user <?php echo $user->getNameFull() ? $user->getEmail() : $user->getId() ?></h1>
 	<form class="main" method="post" enctype="multipart/form-data">
+		<div class="page-actions">
+			<a href="<?php echo $this->url->generate('admin/user/all') ?>" class="page-action left button-secondary">Back</a>
+			<button type="submit" class="form-user-button-save page-action button-primary right">Save</button>
+		</div>
 	    <div class="block-margins">
         	<label class="form-user-label-title" for="form-user-name-first">First Name</label>
         	<input id="form-user-name-first" class="required js-input-name-first" type="text" name="user[nameFirst]" maxlength="75" value="<?php echo $user->getNameFirst() ?>" autofocus="autofocus">
@@ -24,9 +25,6 @@
         	<label class="form-user-label-title" for="form-user-level">Level</label>
         	<input id="form-user-level" class="required js-input-level" type="text" name="user[level]" maxlength="75" value="<?php echo $user->getLevel() ?>">
 	    </div>
-		<div class="block-clear">
-            <button type="submit" class="form-user-button-save">Save</button>
-		</div>
 	</form>
 </div>
 

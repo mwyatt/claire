@@ -4,7 +4,7 @@
 /**
  * dependencies
  */
-var $ = require('jquery');
+var $ = require('vendor/jquery');
 var helper = require('helper');
 var mustache = require('vendor/mustache');
 var feedbackStream = require('admin/feedbackStream');
@@ -167,29 +167,19 @@ ControllerContentMeta.prototype.getNewRow = function(data) {
  */
 module.exports = new ControllerContentMeta;
 
-},{"admin/feedbackStream":3,"helper":7,"jquery":9,"vendor/mustache":12}],2:[function(require,module,exports){
+},{"admin/feedbackStream":3,"helper":8,"vendor/jquery":10,"vendor/mustache":13}],2:[function(require,module,exports){
 
 
 /**
  * dependencies
  */
-var $ = require('jquery');
+var $ = require('vendor/jquery');
 var contentMeta = require('admin/content/meta');
+var url = require('url');
 
 
 // wysi
-tinymce.init({
-  selector: '.js-tinymce',
-  menu: {
-      file: {title : 'File'  , items : 'newdocument'},
-      edit: {title : 'Edit'  , items : 'undo redo | cut copy paste pastetext | selectall'},
-      insert : {title : 'Insert', items : 'link media | template hr | image'},
-      view: {title : 'View'  , items : 'visualaid'},
-      format: {title : 'Format', items : 'bold italic underline strikethrough superscript subscript | formats | removeformat'},
-      table: {title : 'Table' , items : 'inserttable tableprops deletetable | cell row column'},
-      tools: {title : 'Tools' , items : 'spellchecker code'}
-  }
-});
+tinymce.init(require('admin/tinymceConfig'));
 
 // slug
 var timeoutId;
@@ -199,7 +189,7 @@ $('.js-input-title').on('keypress.content-single', function(event) {
   clearTimeout(timeoutId);
   timeoutId = setTimeout(function() {
     $.ajax({
-      url: '../../../ajax/content/generate-slug/',
+      url: url.getUrlBase('admin/ajax/content/generate-slug/'),
       type: 'get',
       dataType: 'json',
       data: {title: $this.val()},
@@ -210,17 +200,16 @@ $('.js-input-title').on('keypress.content-single', function(event) {
         console.log(result);
       }
     });
-    
   }, 500);
 });
 
-},{"admin/content/meta":1,"jquery":9}],3:[function(require,module,exports){
+},{"admin/content/meta":1,"admin/tinymceConfig":7,"url":9,"vendor/jquery":10}],3:[function(require,module,exports){
 
 
 /**
  * dependencies
  */
-var $ = require('jquery');
+var $ = require('vendor/jquery');
 var mustache = require('vendor/mustache');
 var helper = require('helper');
 
@@ -257,7 +246,7 @@ FeedbackStream.prototype.createMessage = function(config) {
 			$('.js-feedback-stream-position').prepend(mustache.render(template, config));
 
 			// timeout for removal
-			var timer = setTimeout(function() {
+			setTimeout(function() {
 				$('.js-feedback-stream-single')
 					.first()
 					.addClass('is-removed');
@@ -292,8 +281,8 @@ FeedbackStream.prototype.createMessage = function(config) {
  */
 module.exports = new FeedbackStream;
 
-},{"helper":7,"jquery":9,"vendor/mustache":12}],4:[function(require,module,exports){
-var $ = require('jquery');
+},{"helper":8,"vendor/jquery":10,"vendor/mustache":13}],4:[function(require,module,exports){
+var $ = require('vendor/jquery');
 var serializeObject = require('vendor/jquery/serializeObject');
 var magnificPopup = require('vendor/jquery/magnificPopup');
 var helper = require('helper');
@@ -336,8 +325,8 @@ $('.js-magnific-inline').magnificPopup({
 	}
 });
 
-},{"admin/feedbackStream":3,"helper":7,"jquery":9,"url":8,"vendor/jquery/magnificPopup":10,"vendor/jquery/serializeObject":11}],5:[function(require,module,exports){
-var $ = require('jquery');
+},{"admin/feedbackStream":3,"helper":8,"url":9,"vendor/jquery":10,"vendor/jquery/magnificPopup":11,"vendor/jquery/serializeObject":12}],5:[function(require,module,exports){
+var $ = require('vendor/jquery');
 var feedbackStream = require('admin/feedbackStream');
 
 // cont
@@ -364,13 +353,13 @@ if (module.hasClass('content-single')) {
   require('admin/content/single');
 };
 
-},{"admin/content/single":2,"admin/feedbackStream":3,"admin/login":4,"admin/option/all":6,"jquery":9}],6:[function(require,module,exports){
+},{"admin/content/single":2,"admin/feedbackStream":3,"admin/login":4,"admin/option/all":6,"vendor/jquery":10}],6:[function(require,module,exports){
 
 
 /**
  * dependencies
  */
-var $ = require('jquery');
+var $ = require('vendor/jquery');
 var helper = require('helper');
 var feedbackStream = require('admin/feedbackStream');
 
@@ -500,13 +489,45 @@ ControllerOption.prototype.getNewRow = function(data) {
  */
 module.exports = new ControllerOption;
 
-},{"admin/feedbackStream":3,"helper":7,"jquery":9}],7:[function(require,module,exports){
+},{"admin/feedbackStream":3,"helper":8,"vendor/jquery":10}],7:[function(require,module,exports){
+module.exports = {
+    plugins: 'image media code link template table paste autosave',
+    selector: '.js-tinymce',
+    height: 500,
+    content_css: '../../../asset/admin/tinymceContent.css',
+    paste_word_valid_elements: "b,strong,i,em,h1,h2",
+    autosave_interval: "5s",
+    relative_urls: false,
+    image_class_list: [
+        {title: 'None', value: ''},
+        {title: 'left', value: 'left mr1 mb1'},
+        {title: 'right', value: 'right ml1 mb1'}
+    ],
+	menu: {
+        edit: {
+        	title: 'Edit',
+        	items: 'undo redo | cut copy paste pastetext | selectall'
+        },
+        view: {
+        	title: 'View',
+        	items: 'code'
+        },
+        table: {
+        	title: 'Table',
+        	items: 'inserttable tableprops deletetable | cell row column'
+        }
+	},
+	toolbar: 'styleselect | link image media | code',
+	valid_styles: {'*': ''}
+};
+
+},{}],8:[function(require,module,exports){
 
 
 /**
  * dependencies
  */
-var $ = require('jquery');
+var $ = require('vendor/jquery');
 
 
 /**
@@ -578,7 +599,7 @@ Helper.prototype.urlBase = function (append) {
 // return
 module.exports = new Helper;
 
-},{"jquery":9}],8:[function(require,module,exports){
+},{"vendor/jquery":10}],9:[function(require,module,exports){
 
 
 /**
@@ -620,7 +641,9 @@ Url.prototype.redirectAbsolute = function(path) {
 
 module.exports = new Url;
 
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
+(function (global){
+;__browserify_shim_require__=require;(function browserifyShim(module, exports, require, define, browserify_shim__define__module__export__) {
 /*!
  * jQuery JavaScript Library v1.11.1
  * http://jquery.com/
@@ -10930,7 +10953,12 @@ return jQuery;
 
 }));
 
-},{}],10:[function(require,module,exports){
+; browserify_shim__define__module__export__(typeof $ != "undefined" ? $ : window.$);
+
+}).call(global, undefined, undefined, undefined, undefined, function defineExport(ex) { module.exports = ex; });
+
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{}],11:[function(require,module,exports){
 /*! Magnific Popup - v1.0.0 - 2014-12-12
 * http://dimsemenov.com/plugins/magnific-popup/
 * Copyright (c) 2014 Dmitry Semenov; */
@@ -12993,7 +13021,7 @@ $.magnificPopup.registerModule(RETINA_NS, {
 
 /*>>fastclick*/
  _checkInstance(); }));
-},{"jquery":9}],11:[function(require,module,exports){
+},{"jquery":10}],12:[function(require,module,exports){
 /**
  * jQuery serializeObject
  * @copyright 2014, macek <paulmacek@gmail.com>
@@ -13002,7 +13030,7 @@ $.magnificPopup.registerModule(RETINA_NS, {
  * @version 2.4.5
  */
 !function(e,r){if("function"==typeof define&&define.amd)define(["exports","jquery"],function(e,i){return r(e,i)});else if("undefined"!=typeof exports){var i=require("jquery");r(exports,i)}else r(e,e.jQuery||e.Zepto||e.ender||e.$)}(this,function(e,r){function i(e,i){function n(e,r,i){return e[r]=i,e}function a(e,r){for(var i,a=e.match(t.key);void 0!==(i=a.pop());)if(t.push.test(i)){var o=s(e.replace(/\[\]$/,""));r=n([],o,r)}else t.fixed.test(i)?r=n([],i,r):t.named.test(i)&&(r=n({},i,r));return r}function s(e){return void 0===h[e]&&(h[e]=0),h[e]++}function o(e){switch(r('[name="'+e.name+'"]',i).attr("type")){case"checkbox":return"on"===e.value?!0:e.value;default:return e.value}}function u(r){if(!t.validate.test(r.name))return this;var i=a(r.name,o(r));return c=e.extend(!0,c,i),this}function f(r){if(!e.isArray(r))throw new Error("formSerializer.addPairs expects an Array");for(var i=0,t=r.length;t>i;i++)this.addPair(r[i]);return this}function d(){return c}function l(){return JSON.stringify(d())}var c={},h={};this.addPair=u,this.addPairs=f,this.serialize=d,this.serializeJSON=l}var t={validate:/^[a-z_][a-z0-9_]*(?:\[(?:\d*|[a-z0-9_]+)\])*$/i,key:/[a-z0-9_]+|(?=\[\])/gi,push:/^$/,fixed:/^\d+$/,named:/^[a-z0-9_]+$/i};return i.patterns=t,i.serializeObject=function(){return this.length>1?new Error("jquery-serialize-object can only serialize one form at a time"):new i(r,this).addPairs(this.serializeArray()).serialize()},i.serializeJSON=function(){return this.length>1?new Error("jquery-serialize-object can only serialize one form at a time"):new i(r,this).addPairs(this.serializeArray()).serializeJSON()},"undefined"!=typeof r.fn&&(r.fn.serializeObject=i.serializeObject,r.fn.serializeJSON=i.serializeJSON),e.FormSerializer=i,i});
-},{"jquery":9}],12:[function(require,module,exports){
+},{"jquery":10}],13:[function(require,module,exports){
 /*!
  * mustache.js - Logic-less {{mustache}} templates with JavaScript
  * http://github.com/janl/mustache.js

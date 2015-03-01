@@ -3,7 +3,7 @@
 
 <div class="page user-all">
 	<div class="page-actions">
-		<a class="page-action right" href="<?php echo $urlCreate ?>" title="Create a new User">New</a>
+		<a class="page-action button-primary right" href="<?php echo $urlCreate ?>" title="Create a new User">New</a>
 	</div>
 	<h1 class="page-primary-title">Users</h1>
 

@@ -1,0 +1,13 @@
+@import "config";
+
+body {
+  background-color: $color-white;
+  color: $color-secondary-1-0;
+  font-family: 'Open Sans';
+  font-size: 14px;
+  padding: 1em;
+}
+
+p {
+  @extend .block-margins;
+}
