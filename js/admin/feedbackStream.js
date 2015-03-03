@@ -1,8 +1,3 @@
-
-
-/**
- * dependencies
- */
 var $ = require('vendor/jquery');
 var mustache = require('vendor/mustache');
 var helper = require('helper');
@@ -13,11 +8,7 @@ var helper = require('helper');
  * them on top of one another, then fades away after a period of time
  * @param {object} options 
  */
-var FeedbackStream = function () {
-
-	// possible cache for checking?
-	this.lastMessage;
-};
+var FeedbackStream = function () {};
 
 
 /**
@@ -26,51 +17,58 @@ var FeedbackStream = function () {
  * @return {object}        jquery
  */
 FeedbackStream.prototype.createMessage = function(config) {
-	var newMessage;
 
-	// allow null object, but dont display
+	// validate
+	if (typeof config === 'undefined') {
+		return console.warn('FeedbackStream.createMessage', 'config must be passed');
+	};
+	if (! config.hasOwnProperty('message')) {
+		return console.warn('FeedbackStream.createMessage', 'config must have \'message\' property');
+	};
 	if (! config.message) {
 		return;
 	};
+
+	// default type
+	if (! config.hasOwnProperty('type')) {
+		config.type = 'neutral';
+	};
+
+	// resources
+	var newElement;
+	var $this;
+	var data = this;
 
 	// get template
 	helper.getMustacheTemplate({
 		template: 'admin/feedback',
 		success: function (template) {
-			$('.js-feedback-stream-position').prepend(mustache.render(template, config));
+			newElement = $(mustache.render(template, config));
+			$('.js-feedback-stream-position').prepend(newElement);
 
 			// timeout for removal
 			setTimeout(function() {
-				$('.js-feedback-stream-single')
-					.first()
-					.addClass('is-removed');
-
-				// remove single after animation
-				// duplication
-				$('.js-feedback-stream-single').on('animationend webkitAnimationEnd MSAnimationEnd oAnimationEnd', function(event) {
-				    $(this).remove();
-				});
+				newElement.addClass('is-removed');
+				data.removeAfterAnimation(data, newElement);
 			}, 5000);
 
-			// refresh message event
-			$('.js-feedback-stream-single')
-				.off('click.feedback-stream')
-				.on('click.feedback-stream', function(event) {
-					event.preventDefault();
-					$(this).addClass('is-removed');
-					
-					// remove single after animation
-					// duplication
-					$('.js-feedback-stream-single').on('animationend webkitAnimationEnd MSAnimationEnd oAnimationEnd', function(event) {
-					    $(this).remove();
-					});
-				});
+			// click message to remove
+			newElement.on('click.feedback-stream', function() {
+				newElement.addClass('is-removed');
+				data.removeAfterAnimation(data, newElement);
+			});
 		}
 	});
 };
 
 
-/**
- * instance
- */
+FeedbackStream.prototype.removeAfterAnimation = function(data, trigger) {
+
+	// remove after animation
+	trigger.on('animationend webkitAnimationEnd MSAnimationEnd oAnimationEnd', function(event) {
+	    trigger.remove();
+	});
+};
+
+
 module.exports = new FeedbackStream;
