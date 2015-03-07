@@ -4,13 +4,13 @@
 
 .table-crud-input {
 	@extend .input;
-	border-color: $color-white;
+	border-color: #fff;
 	width: 100%;
 	background-color: transparent;
 
 	&:focus,
 	&:hover {
-		background-color: $color-white;
+		background-color: #fff;
 		border-color: $color-primary-0;
 	}
 }
@@ -21,7 +21,7 @@
 }
 
 .table-crud-row {
-	border-color: $color-white;
+	border-color: #fff;
 	border-width: 1px;
 	border-style: solid;
 
@@ -48,5 +48,5 @@
     border: 1px solid;
     cursor: pointer;
     color: red;
-    background-color: $color-white;
+    background-color: #fff;
 }

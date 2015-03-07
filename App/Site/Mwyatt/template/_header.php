@@ -54,3 +54,4 @@
 <?php endif ?>
 
     </header>
+    <div class="page-container">

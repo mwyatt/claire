@@ -76,7 +76,7 @@
 .footer-address {
     margin-bottom: 2em;
     line-height: 1.5;
-    color: $color-white;
+    color: #fff;
 
     @media all and (min-width: 650px) {
         float: left;
@@ -91,14 +91,14 @@
 
 .footer-address a {
     @extend .a;
-    color: $color-white;
-    border-color: $color-white;
+    color: #fff;
+    border-color: #fff;
     font-weight: 600;
 }
 
 .logo-table-tennis-england {
     display: block;
-    background-color: $color-white;
+    background-color: #fff;
     text-align: center;
     padding: 1em;
     overflow: hidden;

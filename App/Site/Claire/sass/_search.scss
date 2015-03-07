@@ -58,7 +58,7 @@
 	.container-header .form-search-query {
 	    background-color: lighten($color-primary, 5%);
 	    border-width: 0;
-	    color: $color-white;
+	    color: #fff;
 	    margin-right: .5em;
 	    padding: 4px 0.6em;
 	}
@@ -66,19 +66,19 @@
 	.container-header {
 
 		::-webkit-input-placeholder {
-		   color: $color-white; 
+		   color: #fff; 
 		}
 
 		:-moz-placeholder { /* Firefox 18- */
-		   color: $color-white;  
+		   color: #fff;  
 		}
 
 		::-moz-placeholder {  /* Firefox 19+ */
-		   color: $color-white;  
+		   color: #fff;  
 		} 
 		 
 		:-ms-input-placeholder {  
-		   color: $color-white;  
+		   color: #fff;  
 		}
 	}
 }

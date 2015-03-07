@@ -6,7 +6,7 @@
  */
 $routes['asset/single'] = [
     'mux/type' => 'get',
-    'mux/path' => '/asset/:type/',
+    'mux/path' => '/asset/:path/',
     'mux/controller/method' => ['OriginalAppName\\Controller\\Asset', 'single'],
     'mux/options' => ['require' => ['path' => '.+']]
 ];

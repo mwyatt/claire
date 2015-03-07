@@ -24,7 +24,7 @@ $heading-font-family: 'Open Sans', 'Arial', 'Sans-serif';
 /**
  * text selection
  */
-@include text-selection($color-white, $color-secondary-2-0); 
+@include text-selection(#fff, $color-secondary-2-0); 
 
 
 /**

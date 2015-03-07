@@ -9,12 +9,12 @@ body {
  */
 
 ::selection {
-    color: $color-white; /* Safari */
+    color: #fff; /* Safari */
 	background: $color-primary; /* Safari */
 }
 
 ::-moz-selection {
-    color: $color-white; /* Firefox */
+    color: #fff; /* Firefox */
 	background: $color-primary; /* Firefox */
 }
 

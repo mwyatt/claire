@@ -1,3 +1,4 @@
+			</div> <!-- .page-container -->
 			<footer class="container-footer clearfix">
 				<div class="footer-inner">
 					<span class="attribution">Created By Martin Wyatt</span>

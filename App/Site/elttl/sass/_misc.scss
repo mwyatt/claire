@@ -3,7 +3,7 @@ html {
 }
 
 html.lt-ie9 {
-    background-color: $color-white;
+    background-color: #fff;
 }
 
 .lt-ie9 .container-site,
@@ -39,7 +39,7 @@ html.lt-ie9 {
     text-align: center;
     padding: 0.3em;
     background-color: $color-primary-0;
-    color: $color-white;
+    color: #fff;
     border-bottom: 1px solid $color-secondary-1-0;
     font-size: 1.4em;
     margin-bottom: 1em;
@@ -78,7 +78,7 @@ html.lt-ie9 {
 .button-base {
     padding: 12px 14px;
     background-color: $color-gray-50;
-    color: $color-white;
+    color: #fff;
 }
 
 .button-primary {
@@ -97,7 +97,7 @@ html.lt-ie9 {
 }
 
 .container-site-inner {
-    background-color: $color-white;
+    background-color: #fff;
 
     @media all and (min-width: 1500px) {
         background-image: image-url('bg.gif');
@@ -137,7 +137,7 @@ html.lt-ie9 {
     text-transform: uppercase;
     font-size: 0.7em;
     background-color: $color-gray-20;
-    color: $color-white;
+    color: #fff;
     line-height: 1;
     padding: 0.3em;
     border-radius: 2px;

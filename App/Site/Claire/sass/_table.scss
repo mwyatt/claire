@@ -32,12 +32,12 @@
 //  tbody tr {
 
 //      &:nth-child(even) {
-//          background: darken($color-white, 2%);
+//          background: darken(#fff, 2%);
 //      }
 
 //      &:hover {
-//          background: darken($color-white, 5%);
-//          // border-bottom: 1px solid darken($color-white, 7%);
+//          background: darken(#fff, 5%);
+//          // border-bottom: 1px solid darken(#fff, 7%);
 //      }
 //  }
 
@@ -46,8 +46,8 @@
 //  }
 
 //  tr:hover {
-//      @include text-shadow(1px 1px 0 $color-white);
-//      background: darken($color-white, 3%);
+//      @include text-shadow(1px 1px 0 #fff);
+//      background: darken(#fff, 3%);
 //  }
 
 //  tr:first-child td {
@@ -56,7 +56,7 @@
 
 //  th {
 //      text-align: left;
-//      background: darken($color-white, 5%);
+//      background: darken(#fff, 5%);
 //  }
     
 //  th,

@@ -1,0 +1,19 @@
+$font-family: 'Open Sans', 'Arial', 'Sans-serif';
+$font-family-heading: 'Open Sans', 'Arial', 'Sans-serif';
+$font-size: 14px;
+$color-body: #000;
+@import "palette";
+@import "../../../../sass/config.scss";
+@import "../../../../sass/vendor/magnific-popup";
+@import "../../../../sass/keyframe";
+
+// common
+@import "config";
+@import "misc";
+@import "header";
+@import "menu-hamburger";
+@import "to-top";
+@import "project";
+@import "home";
+@import "project-single";
+@import "footer";

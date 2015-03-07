@@ -11,16 +11,16 @@
     margin: 4% 0;
     border-radius: 5px;
     padding: 4%;
-    color: $color-white;
+    color: #fff;
     position: relative;
     display: block;
 
     &:hover .project-button-more {
-        border-bottom-color: $color-white;
+        border-bottom-color: #fff;
     }
 
     svg {
-        fill: $color-white;
+        fill: #fff;
     }
 }
 .project-name,
@@ -30,8 +30,8 @@
     display: none;
 }
 // .project-url a {
-//     color: $color-white;
-//     border-bottom: 1px solid $color-white;
+//     color: #fff;
+//     border-bottom: 1px solid #fff;
 // }
 .project-button-more {
     float: right;
@@ -78,6 +78,6 @@
     transition: 200ms ease;
 
     &:hover {
-        color: $color-white;
+        color: #fff;
     }
 }

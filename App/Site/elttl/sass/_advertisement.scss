@@ -13,7 +13,7 @@
 	background-repeat: no-repeat;
 	background-position: bottom right;
 	@extend .block-margins;
-    color: $color-white;
+    color: #fff;
 
     &:nth-child(2n) {
         background-color: $color-secondary-1-0;
@@ -54,10 +54,10 @@
 .advertisement-title {
     @extend .h2;
     margin-top: 0;
-    color: $color-white;
+    color: #fff;
 }
 
 .advertisement-description {
     @extend .p;
-    color: $color-white;
+    color: #fff;
 }

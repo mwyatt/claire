@@ -36,7 +36,7 @@
 	@include clearfix;
 	box-shadow: 0 0 3px $color-black;
 	@include border-radius(3px);
-	background-color: $color-white;
+	background-color: #fff;
 	position: relative;
 	margin: 0 auto;
 	padding: 1em;
@@ -176,12 +176,12 @@
 	cursor: pointer;
 	z-index: 2;
 	border: 1px solid $color-secondary;
-	background-color: $color-white;
+	background-color: #fff;
 
 	&:hover,
 	&:active {
-		color: $color-white;
-		border-color: $color-white;
+		color: #fff;
+		border-color: #fff;
 	}
 
 	&:hover {

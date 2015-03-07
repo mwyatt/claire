@@ -24,13 +24,13 @@ class Asset extends \OriginalAppName\Controller
 	 * @param  array $request 
 	 * @return object          response
 	 */
-	public function single($request)
+	public function single($path)
 	{
 
 		// get request path
 		$pathRequest = '';
-		if (isset($request['path'])) {
-			$pathRequest = $request['path'];
+		if (isset($path)) {
+			$pathRequest = $path;
 		}
 
 		// entity

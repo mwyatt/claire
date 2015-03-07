@@ -1,5 +1,5 @@
 body {
-    background-color: $color-white;
+    background-color: #fff;
 }
 
 .logo {
@@ -83,4 +83,9 @@ svg {
 
 .page {
     @include clearfix;
+}
+
+.page-container {
+    max-width: 1024px;
+    margin: 0 auto;
 }

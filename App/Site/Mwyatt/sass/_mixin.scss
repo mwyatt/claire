@@ -31,14 +31,14 @@
 
     @if $theme == "primary" {
         background-color: $color-primary-0;
-        color: $color-white;
+        color: #fff;
     }
     
     &:hover {
 
         @if $theme == "primary" {
             background-color: lighten($color-primary-0, 10%);
-            color: lighten($color-white, 0%);
+            color: lighten(#fff, 0%);
         }
     }
 
@@ -46,7 +46,7 @@
         
         @if $theme == "primary" {
             background-color: darken($color-primary-0, 10%);
-            color: lighten($color-white, 0%);
+            color: lighten(#fff, 0%);
         }
     }
 }
@@ -55,7 +55,7 @@
 /**
  * allows generation of buttons, this can then be used to set
  */
-@mixin buttonAdmin($color-background: $color-white, $color-text: $color-black) {
+@mixin buttonAdmin($color-background: #fff, $color-text: $color-black) {
     @include background-image(linear-gradient(darken($color-background, 2%), darken($color-background, 4%)));
     @include border-radius(3px);
     @include text-shadow(1px 1px 0 $color-background);
@@ -84,7 +84,7 @@
 .button-base {
     padding: 12px 14px;
     background-color: $color-gray-50;
-    color: $color-white;
+    color: #fff;
 }
 
 .button-primary {

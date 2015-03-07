@@ -69,7 +69,7 @@
     left: 0;
     right: 0;
     z-index: 10;
-    background-color: $color-white;
+    background-color: #fff;
 }
 
 .container-header .form-search {
@@ -84,7 +84,7 @@
         border: 0;
         border-radius: 0;
         background-color: lighten($color-primary-0, 10%);
-        color: $color-white;
+        color: #fff;
 
         &::-webkit-input-placeholder {
             color: lighten($color-primary-0, 20%);
@@ -150,7 +150,7 @@ svg {
     float: right;
 
     .menu-item {
-        color: $color-white;
+        color: #fff;
         float: right;
         padding: 22px 16px;
         font-weight: 600;
@@ -235,7 +235,7 @@ svg {
     position: absolute;
     top: 3em;
     left: 0;
-    background-color: $color-white;
+    background-color: #fff;
     right: 0;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 

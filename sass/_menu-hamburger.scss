@@ -17,14 +17,14 @@
     }
         
     .middle {
-        background-color: $color-white;
+        background-color: #fff;
         display: block;
     }
 
     &:before,
     &:after {
         content: '';
-        background-color: $color-white;
+        background-color: #fff;
         width: 100%;
         position: absolute;
         left: 0;

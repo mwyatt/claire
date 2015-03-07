@@ -73,13 +73,13 @@
     padding-left: 1em;
     padding-bottom: 1em;
     padding-right: 75px;
-    background-color: rgba($color-white, .1);
+    background-color: rgba(#fff, .1);
     box-shadow: 0 0 3px rgba($color-black, .1);
-    color: $color-white;
+    color: #fff;
 }
 
 .project-logo {
-    fill: $color-white;
+    fill: #fff;
     display: block;
     padding: 5%;
     margin: 0 auto;
@@ -125,7 +125,7 @@
 }
 
 .project-button-primary {
-    @include button($color-primary-0, $color-white);
+    @include button($color-primary-0, #fff);
     position: absolute;
     bottom: 12px;
     right: 12px;

@@ -63,11 +63,12 @@ include BASE_PATH . 'vendor' . DS . 'autoload' . EXT;
 /**
  * app configuration
  */
+$package = json_decode(file_get_contents(BASE_PATH . 'package' . '.json'));
 $configApp = json_decode(file_get_contents(APP_PATH . 'config' . '.json'));
-if (! isset($configApp->site)) {
+if (! isset($package->site)) {
 	exit('please specify a app config');
 }
-define('SITE', $configApp->site);
+define('SITE', $package->site);
 
 
 /**

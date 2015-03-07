@@ -5,8 +5,8 @@
 }
 
 body {
-	background: $color-white;
-	color: darken($color-white, 50%);
+	background: #fff;
+	color: darken(#fff, 50%);
 	font-family: $typography-font-family;
 	line-height: 1.5;
 }
@@ -26,15 +26,15 @@ body {
 
 .nothing-yet {
 	// @include border-radius(3px);
-	text-shadow: 0 1px 0 darken($color-white, 0%);
-	background: darken($color-white, 2%);
+	text-shadow: 0 1px 0 darken(#fff, 0%);
+	background: darken(#fff, 2%);
 	text-align: center;
-	border-top: 1px solid darken($color-white, 15%);
-	border-bottom: 1px solid darken($color-white, 15%);
+	border-top: 1px solid darken(#fff, 15%);
+	border-bottom: 1px solid darken(#fff, 15%);
 	padding: 2em;
 
 	p {
-		color: darken($color-white, 40%);
+		color: darken(#fff, 40%);
 		cursor: default;
 		font-weight: 600;
 		margin: 0;
@@ -83,7 +83,7 @@ body {
 .button,
 a.button {
     @include button($color-primary-0);
-    color: $color-white;
+    color: #fff;
 }
 
 a.content-action-link {
@@ -181,11 +181,11 @@ a.content-action-link {
  * buttons
  */
 .button-primary {
-    @include button($color-white, $color-primary-0);
+    @include button(#fff, $color-primary-0);
 }
 
 .button-secondary {
-    @include button($color-white, $color-secondary-1-0);
+    @include button(#fff, $color-secondary-1-0);
 }
 
 

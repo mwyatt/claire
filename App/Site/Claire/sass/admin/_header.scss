@@ -4,7 +4,7 @@ header.main {
 }
 
 header.main.is-fixed-top {
-    background-color: $color-white;
+    background-color: #fff;
     z-index: 2;
 }
 
@@ -56,7 +56,7 @@ header.main.is-fixed-top + .content {
 
 .nav-main-level1-drop {
     box-shadow: 0 0 3px $color-gray-50;
-    background: $color-white;
+    background: #fff;
     display: none;
     position: absolute;
     width: 9em;

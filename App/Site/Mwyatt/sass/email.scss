@@ -15,7 +15,7 @@
 }
 
 .color-gray-30 {
-	color: $color-gray-30;
+	color: $color-secondary-1-0;
 }
 
 .color-text {
@@ -129,8 +129,8 @@
 
 .body {
 	@include email-no-spacing;
-	color: $color-white;
-	border-color: $color-white;	
+	color: #fff;
+	border-color: #fff;	
 	width: 100%;
 	-webkit-text-size-adjust: 100%;
 	-ms-text-size-adjust: 100%;

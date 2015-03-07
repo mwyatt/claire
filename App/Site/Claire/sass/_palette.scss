@@ -13,17 +13,17 @@ $color-denary: black;
 $color-text: #745E56;
 
 // all apps
-$color-white: #ffffff;
-$color-gray-5: darken($color-white, 5%);
-$color-gray-10: darken($color-white, 10%);
-$color-gray-20: darken($color-white, 20%);
-$color-gray-30: darken($color-white, 30%);
-$color-gray-40: darken($color-white, 40%);
-$color-gray-50: darken($color-white, 50%);
-$color-gray-60: darken($color-white, 60%);
-$color-gray-70: darken($color-white, 70%);
-$color-gray-80: darken($color-white, 80%);
-$color-gray-90: darken($color-white, 90%);
+#fff: #ffffff;
+$color-gray-5: darken(#fff, 5%);
+$color-gray-10: darken(#fff, 10%);
+$color-gray-20: darken(#fff, 20%);
+$color-gray-30: darken(#fff, 30%);
+$color-gray-40: darken(#fff, 40%);
+$color-gray-50: darken(#fff, 50%);
+$color-gray-60: darken(#fff, 60%);
+$color-gray-70: darken(#fff, 70%);
+$color-gray-80: darken(#fff, 80%);
+$color-gray-90: darken(#fff, 90%);
 $color-black: #000000;
 $color-secondary-10: lighten($color-secondary, 10%);
 $color-secondary-20: lighten($color-secondary, 20%);

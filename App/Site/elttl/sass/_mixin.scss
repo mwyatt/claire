@@ -26,14 +26,14 @@
 @mixin button($type: 'primary') {
 
 	// determine colors
-	$color-foreground: $color-white;
+	$color-foreground: #fff;
 	$color-background: $color-primary-0;
 	@if $type == 'secondary' {
 		$color-background: $color-secondary-1-0;
 	}
 	@if $type == 'ghost' {
 		$color-foreground: $color-primary-0;
-		$color-background: $color-white;
+		$color-background: #fff;
 	}
 
 	@include transition(background 200ms ease);

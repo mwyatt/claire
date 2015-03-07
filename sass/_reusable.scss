@@ -1,188 +1,165 @@
-
-
-/**
- * visibility
- */
 .block {
-    display: block;
+  display: block;
 }
 
 .hidden {
-    display: none !important;
-    visibility: hidden;
+  display: none !important;
+  visibility: hidden;
 }
 
 .hide {
-    display: none;
+  display: none;
 }
 
 .invisible {
-    visibility: hidden;
+  visibility: hidden;
 }
 
 .visuallyhidden {
-    border: 0;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    width: 1px;
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
 }
 
 .visuallyhidden.focusable:active,
 .visuallyhidden.focusable:focus {
-    clip: auto;
-    height: auto;
-    margin: 0;
-    overflow: visible;
-    position: static;
-    width: auto;
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  width: auto;
 }
 
-
-/**
- * position
- */
 .left {
-    float: left;
+  float: left;
 }
 
 .right {
-    float: right;
+  float: right;
 }
 
-
-/**
- * form?
- */
 .w100 {
-    width: 100%;
+  width: 100%;
 }
 
-
-/**
- * table
- */
 .table-basic {
-    @extend .block-margins;
-    width: 100%;
-
-    th {
-        font-weight: 600;
-        text-align: left;
-        background-color: $color-gray-5;
-    }
-
-    th,
-    td {
-        padding: 0.5em;
-        border: 1px solid $color-secondary-1-0;
-    }
+  @include tableBasic;
 }
 
-
-/**
- * buttons
- */
 .button-primary {
-    @include button(blue);
+  @include button($color-primary-0);
 }
 
 .button-secondary {
-    @include button(gray);
+  @include button($color-secondary-1-0);
 }
 
-
-/**
- * links
- */
 .link-primary {
-    @include link(blue);
+  @include link($color-primary-0);
 }
 
 .link-secondary {
-    @include link(gray);
+  @include link($color-secondary-1-0);
 }
 
-
-/**
- * form
- */
 .label-block {
-    display: block;
-    margin: 1em 0 .5em;
-    font-weight: 600;
+  display: block;
+  margin: 1em 0 .5em;
+  font-weight: 600;
 }
 
 .input-text {
-    @include input;
+  @include input;
 }
 
-
-/**
- * spacing
- */
 .block-clear {
-    @extend .block-margins;
-    @include clearfix;
+  @extend .block-margins;
+  @include clearfix;
 }
 
 .m1 {
-    margin: 1em;
+  margin: 1em;
 }
 
 .mt1 {
-    margin-top: 1em;
+  margin-top: 1em;
 }
 
 .mr1 {
-    margin-right: 1em;
+  margin-right: 1em;
 }
 
 .mb1 {
-    margin-bottom: 1em;
+  margin-bottom: 1em;
 }
 
 .ml1 {
-    margin-left: 1em;
+  margin-left: 1em;
 }
 
 .p1 {
-    padding: 1em;
+  padding: 1em;
 }
 
 .pt1 {
-    padding-top: 1em;
+  padding-top: 1em;
 }
 
 .pr1 {
-    padding-right: 1em;
+  padding-right: 1em;
 }
 
 .pb1 {
-    padding-bottom: 1em;
+  padding-bottom: 1em;
 }
 
 .pl1 {
-    padding-left: 1em;
-}
-
-
-/**
- * print
- */
-.do-print {
-    @extend .hide;
-}
-
-.dont-print {
-    @include dont-print;
+  padding-left: 1em;
 }
 
 .page-break {
-    display: block;
-    page-break-after: always;
-    page-break-inside: avoid;
+  display: block;
+  page-break-after: always;
+  page-break-inside: avoid;
+}
+
+.text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.page-primary-title {
+  margin-top: 0;
+  @extend .h1;
+}
+
+.page-primary-description {
+  @extend .p;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-size-larger {
+  font-size: 1.2em;
+}
+
+.text-size-smaller {
+  font-size: .8em;
 }
