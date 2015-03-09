@@ -24,7 +24,7 @@
 .lightbox-blackout {
 	@include opacity(.7);
 	height: 100%;
-	background: $color-black;
+	background: #000;
 	position: fixed;
 }
 
@@ -34,7 +34,7 @@
 
 .lightbox {
 	@include clearfix;
-	box-shadow: 0 0 3px $color-black;
+	box-shadow: 0 0 3px #000;
 	@include border-radius(3px);
 	background-color: #fff;
 	position: relative;

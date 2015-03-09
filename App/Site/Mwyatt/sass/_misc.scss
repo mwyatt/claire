@@ -6,7 +6,7 @@ body {
     @include transition(200ms ease);
     display: block;
     width: 7em;
-    fill: $color-gray-50;
+    fill: $color-primary-0;
     margin-right: auto;
 
     &:hover {
@@ -23,7 +23,7 @@ svg {
     display: block;
     float: right;
     width: 3em;
-    fill: $color-gray-50;
+    fill: $color-primary-0;
     height: 3em;
 }
 

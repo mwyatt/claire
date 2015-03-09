@@ -1,6 +1,6 @@
 .menu-container {
     @include transition(all 200ms);
-    box-shadow: 0 0 3px rgba($color-black, .3);
+    box-shadow: 0 0 3px rgba(#000, .3);
     position: fixed;
     top: 0;
     width: 180px;

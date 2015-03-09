@@ -9,7 +9,7 @@
 
     <link rel="icon" type="image/png" href="<?php echo $this->getAssetPath('favicon.png') ?>?rev=1">
     <script>var urlBase = '<?php echo $this->url->generate() ?>';</script>
-    <link href="<?php echo $this->getUrlAsset('screen.css') ?>" media="screen, projection, print" rel="stylesheet" type="text/css" />
+    <link href="<?php echo $this->getUrlAsset('common.css') ?>" media="screen, projection, print" rel="stylesheet" type="text/css" />
     <link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800" rel="stylesheet" type="text/css">
     
 <?php include($this->getTemplatePath('header/_google-analytics')) ?>

@@ -1,6 +1,6 @@
 header.main { 
   background-color: #fff;
-  box-shadow: 0 0 3px rgba($color-black, .2);
+  box-shadow: 0 0 3px rgba(#000, .2);
   height: 44px;
   position: fixed;
   left: 0;
@@ -63,7 +63,7 @@ header.main.is-fixed-top + .content {
 }
 
 .nav-main-level1-drop {
-    box-shadow: 0 0 3px rgba($color-black, .4);
+    box-shadow: 0 0 3px rgba(#000, .4);
     background: #fff;
     display: none;
     position: absolute;
@@ -115,7 +115,7 @@ header.main.is-fixed-top + .content {
   top: 44px;
   left: 0;
   right: 0;
-  box-shadow: 0 0 3px rgba($color-black, .2);
+  box-shadow: 0 0 3px rgba(#000, .2);
 }
 
 .page-action {

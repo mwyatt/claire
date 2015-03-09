@@ -55,7 +55,7 @@
 /**
  * allows generation of buttons, this can then be used to set
  */
-@mixin buttonAdmin($color-background: #fff, $color-text: $color-black) {
+@mixin buttonAdmin($color-background: #fff, $color-text: #000) {
     @include background-image(linear-gradient(darken($color-background, 2%), darken($color-background, 4%)));
     @include border-radius(3px);
     @include text-shadow(1px 1px 0 $color-background);

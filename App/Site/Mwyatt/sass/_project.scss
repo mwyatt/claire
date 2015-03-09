@@ -4,7 +4,7 @@
 
 .project {
     @include transition(all 200ms);
-    background-color: $color-gray-20;
+    background-color: $color-primary-0;
     position: relative;
     overflow: hidden;
     display: block;
@@ -74,7 +74,7 @@
     padding-bottom: 1em;
     padding-right: 75px;
     background-color: rgba(#fff, .1);
-    box-shadow: 0 0 3px rgba($color-black, .1);
+    box-shadow: 0 0 3px rgba(#000, .1);
     color: #fff;
 }
 
