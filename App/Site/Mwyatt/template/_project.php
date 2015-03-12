@@ -1,6 +1,6 @@
 <?php if (isset($project)): ?>
 	
-<a href="<?php echo $this->url->generate('content/single', ['type' => $project->getType(), 'slug' => $project->getSlug()]) ?>" class="project is-<?php echo $project->getSlug() ?>">
+<a href="<?php echo $project->getMetaKey('url') ?>" class="project is-<?php echo $project->getSlug() ?>" target="_blank">
 	<span class="project-logo">
 	
 	<?php if ($project->getMetaKey('logo')): ?>
