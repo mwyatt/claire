@@ -42,6 +42,14 @@ class Asset extends \OriginalAppName\Controller
 		if (! $file->getPath()) {
 			return new Response('', 404);
 		}
+
+		// validate has extension
+		$pathInfo = pathinfo($file->getPath());
+		if (! isset($pathInfo['extension'])) {
+			return new Response('', 404);
+		}
+
+		// return success
 		return new Response($this->render());
 	}
 	

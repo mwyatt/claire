@@ -27,6 +27,7 @@ class Index extends \OriginalAppName\Controller\Front
 	public function home() {
 		$serviceContent = new Service\Content;
 		$entitiesProject = $serviceContent->readType('project');
+		shuffle($entitiesProject);
 
 		// template
 		$this

@@ -22,8 +22,20 @@
         @include linear-gradient(tint(#F07818, 10%), #F07818);
     }
 
+    &.is-claire {
+        @include linear-gradient(tint(#ca3566, 10%), #ca3566);
+    }
+
     &.is-brunoco {
         @include linear-gradient(tint(#0b93fe, 10%), #0b93fe);
+    }
+
+    &.is-fisual {
+        @include linear-gradient(tint(#cc2a15, 10%), #cc2a15);
+    }
+
+    &.is-av-distribution {
+        @include linear-gradient(tint(#74a611, 10%), #74a611);
     }
 
     &.is-get-hd-sound {

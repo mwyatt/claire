@@ -81,7 +81,7 @@ $error = new OriginalAppName\Error($configApp->errorReporting);
 /**
  * handy for file includes
  */
-define('SITE_PATH', APP_PATH . 'Site' . DS . SITE . DS);
+define('SITE_PATH', APP_PATH . 'Site' . DS . ucfirst(SITE) . DS);
 
 
 /**
