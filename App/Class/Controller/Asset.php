@@ -81,20 +81,11 @@ class Asset extends \OriginalAppName\Controller
 		$path = '';
 		$pathSite = SITE_PATH . 'asset' . DS . $pathRequest;
 		$pathDefault = BASE_PATH . 'asset' . DS . $pathRequest;
-		echo '<pre>';
-		print_r($pathRequest);
-		echo '<pre>';
-		print_r($pathSite);
-		echo '<pre>';
-		print_r($pathDefault);
-		echo '</pre>';
-		exit;
 		if (file_exists($pathSite)) {
 			$path = $pathSite;
 		} elseif (file_exists($pathDefault)) {
 			$path = $pathDefault;
 		}
-		
 	    return $path;
 	}
 
