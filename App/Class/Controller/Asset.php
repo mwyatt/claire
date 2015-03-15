@@ -79,7 +79,7 @@ class Asset extends \OriginalAppName\Controller
 	 */
 	public function getFilePath($pathRequest) {
 		$path = '';
-		$pathSite = APP_PATH . 'Site' . DS . SITE . DS . 'asset' . DS . $pathRequest;
+		$pathSite = SITE_PATH . 'asset' . DS . $pathRequest;
 		$pathDefault = BASE_PATH . 'asset' . DS . $pathRequest;
 		echo '<pre>';
 		print_r($pathRequest);
