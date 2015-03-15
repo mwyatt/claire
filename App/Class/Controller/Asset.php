@@ -86,6 +86,11 @@ class Asset extends \OriginalAppName\Controller
 		} elseif (file_exists($pathDefault)) {
 			$path = $pathDefault;
 		}
+		echo '<pre>';
+		print_r($path);
+		echo '</pre>';
+		exit;
+		
 	    return $path;
 	}
 
