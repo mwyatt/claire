@@ -1,0 +1,1444 @@
+/**
+ * core include for front and admin
+ */
+/**
+ * charset
+ */
+/**
+ * vendor libraries
+ */
+/* ==========================================================================
+   Normalize.scss settings
+   ========================================================================== */
+/**
+ * Includes legacy browser support IE6/7
+ *
+ * Set to false if you want to drop support for IE6 and IE7
+ */
+/* Base
+   ========================================================================== */
+/**
+ * 1. Set default font family to sans-serif.
+ * 2. Prevent iOS text size adjust after orientation change, without disabling
+ *  user zoom.
+ * 3. Corrects text resizing oddly in IE 6/7 when body `font-size` is set using
+ *  `em` units.
+ */
+/* line 23, /var/www/html/mvc/sass/vendor/normalize/normalize */
+html {
+  font-family: sans-serif;
+  /* 1 */
+  -ms-text-size-adjust: 100%;
+  /* 2 */
+  -webkit-text-size-adjust: 100%;
+  /* 2 */ }
+
+/**
+ * Remove default margin.
+ */
+/* line 36, /var/www/html/mvc/sass/vendor/normalize/normalize */
+body {
+  margin: 0; }
+
+/* HTML5 display definitions
+   ========================================================================== */
+/**
+ * Correct `block` display not defined for any HTML5 element in IE 8/9.
+ * Correct `block` display not defined for `details` or `summary` in IE 10/11 and Firefox.
+ * Correct `block` display not defined for `main` in IE 11.
+ */
+/* line 60, /var/www/html/mvc/sass/vendor/normalize/normalize */
+article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary {
+  display: block; }
+
+/**
+ * 1. Correct `inline-block` display not defined in IE 6/7/8/9 and Firefox 3.
+ * 2. Normalize vertical alignment of `progress` in Chrome, Firefox, and Opera.
+ */
+/* line 72, /var/www/html/mvc/sass/vendor/normalize/normalize */
+audio, canvas, progress, video {
+  display: inline-block;
+  /* 1 */
+  vertical-align: baseline;
+  /* 2 */ }
+
+/**
+ * Prevents modern browsers from displaying `audio` without controls.
+ * Remove excess height in iOS 5 devices.
+ */
+/* line 86, /var/www/html/mvc/sass/vendor/normalize/normalize */
+audio:not([controls]) {
+  display: none;
+  height: 0; }
+
+/**
+ * Address `[hidden]` styling not present in IE 8/9/10.
+ * Hide the `template` element in IE 8/9/11, Safari, and Firefox < 22.
+ */
+/* line 97, /var/www/html/mvc/sass/vendor/normalize/normalize */
+[hidden], template {
+  display: none; }
+
+/* Links
+   ========================================================================== */
+/**
+ * Remove the gray background color from active links in IE 10.
+ */
+/* line 108, /var/www/html/mvc/sass/vendor/normalize/normalize */
+a {
+  background: transparent; }
+
+/**
+ * Improve readability when focused and also mouse hovered in all browsers.
+ */
+/* line 117, /var/www/html/mvc/sass/vendor/normalize/normalize */
+a:active, a:hover {
+  outline: 0; }
+
+/* Text-level semantics
+   ========================================================================== */
+/**
+ * Address styling not present in IE 8/9/10/11, Safari, and Chrome.
+ */
+/* line 129, /var/www/html/mvc/sass/vendor/normalize/normalize */
+abbr[title] {
+  border-bottom: 1px dotted; }
+
+/**
+ * Address style set to `bolder` in Firefox 4+, Safari, and Chrome.
+ */
+/* line 138, /var/www/html/mvc/sass/vendor/normalize/normalize */
+b, strong {
+  font-weight: bold; }
+
+/**
+ * Address styling not present in Safari and Chrome.
+ */
+/* line 152, /var/www/html/mvc/sass/vendor/normalize/normalize */
+dfn {
+  font-style: italic; }
+
+/**
+ * Address variable `h1` font-size and margin within `section` and `article`
+ * contexts in Firefox 4+, Safari, and Chrome.
+ */
+/* line 161, /var/www/html/mvc/sass/vendor/normalize/normalize */
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0; }
+
+/**
+ * Addresses styling not present in IE 8/9.
+ */
+/* line 197, /var/www/html/mvc/sass/vendor/normalize/normalize */
+mark {
+  background: #ff0;
+  color: #000; }
+
+/**
+ * Address inconsistent and variable font size in all browsers.
+ */
+/* line 236, /var/www/html/mvc/sass/vendor/normalize/normalize */
+small {
+  font-size: 80%; }
+
+/**
+ * Prevent `sub` and `sup` affecting `line-height` in all browsers.
+ */
+/* line 245, /var/www/html/mvc/sass/vendor/normalize/normalize */
+sub, sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline; }
+
+/* line 252, /var/www/html/mvc/sass/vendor/normalize/normalize */
+sup {
+  top: -0.5em; }
+
+/* line 256, /var/www/html/mvc/sass/vendor/normalize/normalize */
+sub {
+  bottom: -0.25em; }
+
+/* Embedded content
+   ========================================================================== */
+/**
+ * 1. Remove border when inside `a` element in IE 8/9/10.
+ * 2. Improves image quality when scaled in IE 7.
+ */
+/* line 311, /var/www/html/mvc/sass/vendor/normalize/normalize */
+img {
+  border: 0; }
+
+/**
+ * Correct overflow not hidden in IE 9/10/11.
+ */
+/* line 322, /var/www/html/mvc/sass/vendor/normalize/normalize */
+svg:not(:root) {
+  overflow: hidden; }
+
+/* Grouping content
+   ========================================================================== */
+/**
+ * Address margin not present in IE 8/9 and Safari.
+ */
+/* line 333, /var/www/html/mvc/sass/vendor/normalize/normalize */
+figure {
+  margin: 1em 40px; }
+
+/**
+ * Address differences between Firefox and other browsers.
+ */
+/* line 341, /var/www/html/mvc/sass/vendor/normalize/normalize */
+hr {
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  height: 0; }
+
+/**
+ * Contain overflow in all browsers.
+ */
+/* line 351, /var/www/html/mvc/sass/vendor/normalize/normalize */
+pre {
+  overflow: auto; }
+
+/**
+ * Address odd `em`-unit font size rendering in all browsers.
+ * Correct font family set oddly in IE 6, Safari 4/5, and Chrome.
+ */
+/* line 363, /var/www/html/mvc/sass/vendor/normalize/normalize */
+code, kbd, pre, samp {
+  font-family: monospace, monospace;
+  font-size: 1em; }
+
+/* Forms
+   ========================================================================== */
+/**
+ * Known limitation: by default, Chrome and Safari on OS X allow very limited
+ * styling of `select`, unless a `border` property is set.
+ */
+/**
+ * 1. Correct color not being inherited.
+ *  Known issue: affects color of disabled elements.
+ * 2. Correct font properties not being inherited.
+ * 3. Address margins set differently in Firefox 4+, Safari, and Chrome.
+ * 4. Improves appearance and consistency in all browsers.
+ */
+/* line 391, /var/www/html/mvc/sass/vendor/normalize/normalize */
+button, input, optgroup, select, textarea {
+  color: inherit;
+  /* 1 */
+  font: inherit;
+  /* 2 */
+  margin: 0;
+  /* 3 */ }
+
+/**
+ * Address `overflow` set to `hidden` in IE 8/9/10/11.
+ */
+/* line 405, /var/www/html/mvc/sass/vendor/normalize/normalize */
+button {
+  overflow: visible; }
+
+/**
+ * Address inconsistent `text-transform` inheritance for `button` and `select`.
+ * All other form control elements do not inherit `text-transform` values.
+ * Correct `button` style inheritance in Firefox, IE 8/9/10/11, and Opera.
+ * Correct `select` style inheritance in Firefox.
+ */
+/* line 417, /var/www/html/mvc/sass/vendor/normalize/normalize */
+button, select {
+  text-transform: none; }
+
+/**
+ * 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`
+ *  and `video` controls.
+ * 2. Correct inability to style clickable `input` types in iOS.
+ * 3. Improve usability and consistency of cursor style between image-type
+ *  `input` and others.
+ * 4. Removes inner spacing in IE 7 without affecting normal text inputs.
+ *  Known issue: inner spacing remains in IE 6.
+ */
+/* line 434, /var/www/html/mvc/sass/vendor/normalize/normalize */
+button, html input[type="button"], input[type="reset"], input[type="submit"] {
+  -webkit-appearance: button;
+  /* 2 */
+  cursor: pointer;
+  /* 3 */ }
+
+/**
+ * Re-set default cursor for disabled elements.
+ */
+/* line 447, /var/www/html/mvc/sass/vendor/normalize/normalize */
+button[disabled], html input[disabled] {
+  cursor: default; }
+
+/**
+ * Remove inner padding and border in Firefox 4+.
+ */
+/* line 456, /var/www/html/mvc/sass/vendor/normalize/normalize */
+button::-moz-focus-inner, input::-moz-focus-inner {
+  border: 0;
+  padding: 0; }
+
+/**
+ * Address Firefox 4+ setting `line-height` on `input` using `!important` in
+ * the UA stylesheet.
+ */
+/* line 466, /var/www/html/mvc/sass/vendor/normalize/normalize */
+input {
+  line-height: normal; }
+
+/**
+ * 1. Address box sizing set to `content-box` in IE 8/9/10.
+ * 2. Remove excess padding in IE 8/9/10.
+ *  Known issue: excess padding remains in IE 6.
+ */
+/* line 477, /var/www/html/mvc/sass/vendor/normalize/normalize */
+input[type="checkbox"], input[type="radio"] {
+  box-sizing: border-box;
+  /* 1 */
+  padding: 0;
+  /* 2 */ }
+
+/**
+ * Fix the cursor style for Chrome's increment/decrement buttons. For certain
+ * `font-size` values of the `input`, it causes the cursor style of the
+ * decrement button to change from `default` to `text`.
+ */
+/* line 493, /var/www/html/mvc/sass/vendor/normalize/normalize */
+input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-outer-spin-button {
+  height: auto; }
+
+/**
+ * 1. Address `appearance` set to `searchfield` in Safari and Chrome.
+ * 2. Address `box-sizing` set to `border-box` in Safari and Chrome
+ *  (include `-moz` to future-proof).
+ */
+/* line 503, /var/www/html/mvc/sass/vendor/normalize/normalize */
+input[type="search"] {
+  -webkit-appearance: textfield;
+  /* 1 */
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  /* 2 */
+  box-sizing: content-box; }
+
+/**
+ * Remove inner padding and search cancel button in Safari and Chrome on OS X.
+ * Safari (but not Chrome) clips the cancel button when the search input has
+ * padding (and `textfield` appearance).
+ */
+/* line 517, /var/www/html/mvc/sass/vendor/normalize/normalize */
+input[type="search"]::-webkit-search-cancel-button, input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none; }
+
+/**
+ * Define consistent border, margin, and padding.
+ */
+/* line 525, /var/www/html/mvc/sass/vendor/normalize/normalize */
+fieldset {
+  border: 1px solid #c0c0c0;
+  margin: 0 2px;
+  padding: 0.35em 0.625em 0.75em; }
+
+/**
+ * 1. Correct `color` not being inherited in IE 8/9/10/11.
+ * 2. Remove padding so people aren't caught out if they zero out fieldsets.
+ * 3. Corrects text not wrapping in Firefox 3.
+ * 4. Corrects alignment displayed oddly in IE 6/7.
+ */
+/* line 538, /var/www/html/mvc/sass/vendor/normalize/normalize */
+legend {
+  border: 0;
+  /* 1 */
+  padding: 0;
+  /* 2 */ }
+
+/**
+ * Remove default vertical scrollbar in IE 8/9/10/11.
+ */
+/* line 551, /var/www/html/mvc/sass/vendor/normalize/normalize */
+textarea {
+  overflow: auto; }
+
+/**
+ * Don't inherit the `font-weight` (applied by a rule above).
+ * NOTE: the default cannot safely be changed in Chrome and Safari on OS X.
+ */
+/* line 560, /var/www/html/mvc/sass/vendor/normalize/normalize */
+optgroup {
+  font-weight: bold; }
+
+/* Tables
+   ========================================================================== */
+/**
+ * Remove most spacing between table cells.
+ */
+/* line 571, /var/www/html/mvc/sass/vendor/normalize/normalize */
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+/* line 577, /var/www/html/mvc/sass/vendor/normalize/normalize */
+td, th {
+  padding: 0; }
+
+/**
+ * choose a grid width, the number of columns and the margin between columns.
+ * the result of the following equation has to be an integer, not a fraction:
+ * (width - (columns - 1) * col_margin) / columns = n
+ * @author  http://bjorkoy.com/2010/05/css-grids-with-sass/
+ */
+/**
+ * total with of page
+ * @type {%}
+ */
+/**
+ * number of columns
+ * @type {Number}
+ */
+/**
+ * margin between columns
+ * @type {%}
+ */
+/**
+ * maths
+ * @type {int}
+ */
+/**
+ * maths
+ * @type {int}
+ */
+/**
+ * create row div
+ */
+/**
+ * create a column div
+ * @type {int}
+ */
+/**
+ * make an element span n columns
+ * @type {int}
+ */
+/**
+ * the last column in a row needs this
+ */
+/**
+ * prepend n blank columns
+ * @type {int}
+ */
+/**
+ * append n blank columns
+ * @type {int}
+ */
+/**
+ * global libraries
+ */
+/**
+ * variables and mixins
+ */
+/* LESS - http://lesscss.org style sheet */
+/* Palette color codes */
+/* Palette URL: http://paletton.com/#uid=33n0V0kEcB-lBHnrDEHFjqIIwkS */
+/* Feel free to copy&paste color codes to your application */
+/* MIXINS */
+/* As hex codes */
+/* Main Primary color */
+/* Main Secondary color (1) */
+/* Main Secondary color (2) */
+/* As RGBa codes */
+/* Main Primary color */
+/* Main Secondary color (1) */
+/* Main Secondary color (2) */
+/* Generated by Paletton.com Â© 2002-2014 */
+/* http://paletton.com */
+/**
+ * allows dynamic usage of media queries, here ranges of breakpoints
+ * can be defined then refered to in a friendly way
+ */
+/**
+ * easy to define how text selection should display
+ */
+/**
+ * a drop in grid which goes 2 col then 3 then 4
+ */
+/**
+ * apply this to any element which needs to reach a max stretch
+ * point, good to remove percentage padding to stop infinite madness
+ * @return {null} 
+ */
+/**
+ * allows generation of buttons, this can then be used to set
+ * possible themes
+ *      primary
+ *      secondary
+ */
+/**
+ * allows generation of buttons, this can then be used to set
+ */
+/* line 84, /var/www/html/mvc/app/site/mwyatt/sass/mixin */
+.button-base, .button-primary, .button-secondary {
+  padding: 12px 14px;
+  background-color: gray;
+  color: #ffffff; }
+
+/* line 90, /var/www/html/mvc/app/site/mwyatt/sass/mixin */
+.button-primary {
+  background-color: #E00062; }
+
+/* line 95, /var/www/html/mvc/app/site/mwyatt/sass/mixin */
+.button-secondary {
+  background-color: #FFD700; }
+
+/**
+ * choose a grid width, the number of columns and the margin between columns.
+ * the result of the following equation has to be an integer, not a fraction:
+ * (width - (columns - 1) * col_margin) / columns = n
+ * @author  http://bjorkoy.com/2010/05/css-grids-with-sass/
+ */
+/**
+ * total with of page
+ * @type {%}
+ */
+/**
+ * number of columns
+ * @type {Number}
+ */
+/**
+ * margin between columns
+ * @type {%}
+ */
+/**
+ * maths
+ * @type {int}
+ */
+/**
+ * maths
+ * @type {int}
+ */
+/**
+ * create row div
+ */
+/**
+ * create a column div
+ * @type {int}
+ */
+/**
+ * make an element span n columns
+ * @type {int}
+ */
+/**
+ * the last column in a row needs this
+ */
+/**
+ * prepend n blank columns
+ * @type {int}
+ */
+/**
+ * append n blank columns
+ * @type {int}
+ */
+/**
+ * admin / front settings
+ */
+/* line 1, /var/www/html/mvc/app/site/mwyatt/sass/reusable */
+.block {
+  display: block; }
+
+/* line 5, /var/www/html/mvc/app/site/mwyatt/sass/reusable */
+.hidden {
+  display: none !important;
+  visibility: hidden; }
+
+/* line 10, /var/www/html/mvc/app/site/mwyatt/sass/reusable */
+.hide, .do-print {
+  display: none; }
+
+/* line 14, /var/www/html/mvc/app/site/mwyatt/sass/reusable */
+.invisible {
+  visibility: hidden; }
+
+/* line 18, /var/www/html/mvc/app/site/mwyatt/sass/reusable */
+.visuallyhidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px; }
+
+/* line 30, /var/www/html/mvc/app/site/mwyatt/sass/reusable */
+.visuallyhidden.focusable:active, .visuallyhidden.focusable:focus {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  width: auto; }
+
+/* line 39, /var/www/html/mvc/app/site/mwyatt/sass/reusable */
+.left {
+  float: left; }
+
+/* line 43, /var/www/html/mvc/app/site/mwyatt/sass/reusable */
+.right {
+  float: right; }
+
+/* line 47, /var/www/html/mvc/app/site/mwyatt/sass/reusable */
+.uppercase {
+  text-transform: uppercase; }
+
+/* line 52, /var/www/html/mvc/app/site/mwyatt/sass/reusable */
+.spinner {
+  background: url("asset/ajax.gif") 50% 50% no-repeat; }
+  /* line 55, /var/www/html/mvc/app/site/mwyatt/sass/reusable */
+  .spinner.is-tall {
+    height: 80px; }
+  /* line 59, /var/www/html/mvc/app/site/mwyatt/sass/reusable */
+  .spinner.position-bottom-right {
+    background-position: 99% 91%; }
+
+/* line 64, /var/www/html/mvc/app/site/mwyatt/sass/reusable */
+.current:hover {
+  text-decoration: none; }
+
+/* line 68, /var/www/html/mvc/app/site/mwyatt/sass/reusable */
+label.top {
+  display: block;
+  margin: 0 0 0.8em;
+  font-weight: 600; }
+
+/* line 75, /var/www/html/mvc/app/site/mwyatt/sass/reusable */
+.inner {
+  position: relative;
+  margin: 0 auto; }
+
+/* line 81, /var/www/html/mvc/app/site/mwyatt/sass/reusable */
+.icon {
+  display: block;
+  position: absolute; }
+
+/* line 86, /var/www/html/mvc/app/site/mwyatt/sass/reusable */
+.is-highlighted {
+  font-weight: 600; }
+
+/* line 90, /var/www/html/mvc/app/site/mwyatt/sass/reusable */
+.is-fixed {
+  position: fixed; }
+
+/* line 94, /var/www/html/mvc/app/site/mwyatt/sass/reusable */
+.text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; }
+
+/* line 100, /var/www/html/mvc/app/site/mwyatt/sass/reusable */
+.b0 {
+  border: 0; }
+
+/* line 104, /var/www/html/mvc/app/site/mwyatt/sass/reusable */
+.w100 {
+  width: 100%; }
+
+/* line 108, /var/www/html/mvc/app/site/mwyatt/sass/reusable */
+.position-relative {
+  position: relative; }
+
+/* line 112, /var/www/html/mvc/app/site/mwyatt/sass/reusable */
+.position-absolute {
+  position: absolute; }
+
+/* line 116, /var/www/html/mvc/app/site/mwyatt/sass/reusable */
+.position-fixed {
+  position: fixed; }
+
+/* line 121, /var/www/html/mvc/app/site/mwyatt/sass/reusable */
+.clearfix:before, .block-clear:before, .skills:before, .page:before, .footer-inner:before, .clearfix:after, .block-clear:after, .skills:after, .page:after, .footer-inner:after {
+  content: " ";
+  display: table; }
+
+/* line 126, /var/www/html/mvc/app/site/mwyatt/sass/reusable */
+.clearfix:after, .block-clear:after, .skills:after, .page:after, .footer-inner:after {
+  clear: both; }
+
+/* line 130, /var/www/html/mvc/app/site/mwyatt/sass/reusable */
+.clearfix, .block-clear, .skills, .page, .footer-inner {
+  *zoom: 1; }
+
+/* line 134, /var/www/html/mvc/app/site/mwyatt/sass/reusable */
+.page-break {
+  display: block;
+  page-break-after: always;
+  page-break-inside: avoid; }
+
+/* line 140, /var/www/html/mvc/app/site/mwyatt/sass/reusable */
+.color-primary {
+  color: #666666; }
+
+/* line 144, /var/www/html/mvc/app/site/mwyatt/sass/reusable */
+.color-secondary {
+  color: #FFD700; }
+
+/* line 148, /var/www/html/mvc/app/site/mwyatt/sass/reusable */
+.color-tertiary {
+  color: #E00062; }
+
+/* line 152, /var/www/html/mvc/app/site/mwyatt/sass/reusable */
+.table-basic {
+  width: 100%; }
+  /* line 156, /var/www/html/mvc/app/site/mwyatt/sass/reusable */
+  .table-basic th {
+    font-weight: 600;
+    text-align: left;
+    background-color: #f2f2f2; }
+  /* line 163, /var/www/html/mvc/app/site/mwyatt/sass/reusable */
+  .table-basic th, .table-basic td {
+    padding: 0.5em;
+    border: 1px solid #FFD700; }
+
+@media print {
+  .dont-print {
+    display: none !important; } }
+
+/**
+ * global body color
+ * @type {int}
+ */
+/**
+ * font family for entire site
+ * @type {String}
+ */
+/**
+ * font family for only headings
+ * @type {String}
+ */
+/**
+ * text selection
+ */
+/* line 18, /var/www/html/mvc/sass/mixin */
+::-moz-selection {
+  color: #ffffff;
+  background: #E00062; }
+
+/* line 18, /var/www/html/mvc/sass/mixin */
+::-webkit-selection {
+  color: #ffffff;
+  background: #E00062; }
+
+/* line 18, /var/www/html/mvc/sass/mixin */
+::-o-selection {
+  color: #ffffff;
+  background: #E00062; }
+
+/* line 18, /var/www/html/mvc/sass/mixin */
+::-ms-selection {
+  color: #ffffff;
+  background: #E00062; }
+
+/* line 18, /var/www/html/mvc/sass/mixin */
+::selection {
+  color: #ffffff;
+  background: #E00062; }
+
+/**
+ * placeholder within inputs
+ */
+/* line 8, /var/www/html/mvc/sass/vendor/bourbon/css3/placeholder */
+::-webkit-input-placeholder {
+  color: #E00062; }
+
+/* line 13, /var/www/html/mvc/sass/vendor/bourbon/css3/placeholder */
+:-moz-placeholder {
+  color: #E00062; }
+
+/* line 17, /var/www/html/mvc/sass/vendor/bourbon/css3/placeholder */
+::-moz-placeholder {
+  color: #E00062; }
+
+/* line 22, /var/www/html/mvc/sass/vendor/bourbon/css3/placeholder */
+:-ms-input-placeholder {
+  color: #E00062; }
+
+/**
+ * initial setup of body for typographic purposes
+ */
+/* line 41, /var/www/html/mvc/app/site/mwyatt/sass/typography */
+body {
+  font-size: 16px;
+  font-family: 'Open Sans', 'Arial', 'Sans-serif';
+  color: #666666; }
+
+/**
+ * mini reset
+ */
+/* line 53, /var/www/html/mvc/app/site/mwyatt/sass/typography */
+*, *:before, *:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+
+/* line 58, /var/www/html/mvc/app/site/mwyatt/sass/typography */
+a, a:visited {
+  text-decoration: none; }
+
+/* line 62, /var/www/html/mvc/app/site/mwyatt/sass/typography */
+p {
+  margin: 0; }
+
+/* line 67, /var/www/html/mvc/app/site/mwyatt/sass/typography */
+ul, ol {
+  margin: 0;
+  padding: 0; }
+
+/* line 77, /var/www/html/mvc/app/site/mwyatt/sass/typography */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: normal;
+  font-size: 1em;
+  margin: 0; }
+
+/**
+ * individual typographic classes
+ */
+/* line 92, /var/www/html/mvc/app/site/mwyatt/sass/typography */
+.h1, .page-primary-title, .typography h1, .h2, .typography h2, .panel-heading, .h3, .typography h3, .h4, .typography h4, .h5, .typography h5, .h6, .typography h6 {
+  color: #4d4d4d;
+  font-family: 'Open Sans', 'Arial', 'Sans-serif';
+  font-weight: 400;
+  margin: 1em 0 0.5em; }
+
+/* line 99, /var/www/html/mvc/app/site/mwyatt/sass/typography */
+.h1, .page-primary-title, .typography h1 {
+  font-size: 2em; }
+
+/* line 103, /var/www/html/mvc/app/site/mwyatt/sass/typography */
+.h2, .typography h2, .panel-heading {
+  font-size: 1.5em; }
+
+/* line 107, /var/www/html/mvc/app/site/mwyatt/sass/typography */
+.h3, .typography h3 {
+  font-size: 1.17em; }
+
+/* line 112, /var/www/html/mvc/app/site/mwyatt/sass/typography */
+.h3, .typography h3, .h4, .typography h4 {
+  line-height: 1.3; }
+
+/* line 116, /var/www/html/mvc/app/site/mwyatt/sass/typography */
+.h5, .typography h5 {
+  font-size: 0.83em; }
+
+/* line 120, /var/www/html/mvc/app/site/mwyatt/sass/typography */
+.h6, .typography h6 {
+  font-size: 0.75em; }
+
+/* line 124, /var/www/html/mvc/app/site/mwyatt/sass/typography */
+.p, .page-primary-description, .typography p, .panel-description {
+  line-height: 1.5; }
+
+/* line 129, /var/www/html/mvc/app/site/mwyatt/sass/typography */
+.bold, .typography b, .typography strong {
+  font-weight: 700; }
+
+/* line 133, /var/www/html/mvc/app/site/mwyatt/sass/typography */
+.italic, .typography i, .typography em {
+  font-style: italic; }
+
+/* line 137, /var/www/html/mvc/app/site/mwyatt/sass/typography */
+.underline {
+  text-decoration: underline; }
+
+/* line 141, /var/www/html/mvc/app/site/mwyatt/sass/typography */
+.block-margins, .table-basic, .block-clear, .p, .page-primary-description, .typography p, .panel-description, .unordered-list, .typography ul, .ordered-list, .typography ol, .typography pre, .typography code {
+  margin: 1em 0; }
+
+/* line 145, /var/www/html/mvc/app/site/mwyatt/sass/typography */
+.unordered-list, .typography ul {
+  list-style-type: disc;
+  list-style-position: outside; }
+
+/* line 150, /var/www/html/mvc/app/site/mwyatt/sass/typography */
+.ordered-list, .typography ol {
+  list-style: decimal; }
+
+/* line 155, /var/www/html/mvc/app/site/mwyatt/sass/typography */
+.unordered-list, .typography ul, .ordered-list, .typography ol {
+  margin-left: 1em;
+  padding-left: 1em; }
+
+/* line 166, /var/www/html/mvc/app/site/mwyatt/sass/typography */
+.a, .typography a, .typography a:visited, .footer-menu-link {
+  color: #666666;
+  border-bottom-color: #666666;
+  text-decoration: none;
+  border-bottom-width: 1px;
+  border-bottom-style: solid; }
+
+/* line 174, /var/www/html/mvc/app/site/mwyatt/sass/typography */
+.page-primary-title {
+  margin-top: 0; }
+
+/**
+ * reusable, extendable classes
+ */
+/* line 187, /var/www/html/mvc/app/site/mwyatt/sass/typography */
+.text-left {
+  text-align: left; }
+
+/* line 191, /var/www/html/mvc/app/site/mwyatt/sass/typography */
+.text-center {
+  text-align: center; }
+
+/* line 195, /var/www/html/mvc/app/site/mwyatt/sass/typography */
+.text-right {
+  text-align: right; }
+
+/* line 199, /var/www/html/mvc/app/site/mwyatt/sass/typography */
+.text-size-larger {
+  font-size: 1.2em; }
+
+/* line 203, /var/www/html/mvc/app/site/mwyatt/sass/typography */
+.text-size-smaller {
+  font-size: 0.8em; }
+
+/**
+ * typographic window which allows raw tags to be automatically styled
+ * usually for user inputted content
+ */
+/* line 215, /var/www/html/mvc/app/site/mwyatt/sass/typography */
+.typography a, .typography a:visited {
+  line-height: 1.5;
+  word-break: break-all; }
+/* line 222, /var/www/html/mvc/app/site/mwyatt/sass/typography */
+.typography a:hover, .typography a:focus {
+  color: #E00062;
+  border-bottom-color: #E00062; }
+/* line 227, /var/www/html/mvc/app/site/mwyatt/sass/typography */
+.typography *:focus {
+  outline: none; }
+
+/* line 1, /var/www/html/mvc/app/site/mwyatt/sass/form */
+::-webkit-input-placeholder {
+  color: #b3b3b3; }
+
+/* line 5, /var/www/html/mvc/app/site/mwyatt/sass/form */
+:-moz-placeholder {
+  /* Firefox 18- */
+  color: #b3b3b3; }
+
+/* line 9, /var/www/html/mvc/app/site/mwyatt/sass/form */
+::-moz-placeholder {
+  /* Firefox 19+ */
+  color: #b3b3b3; }
+
+/* line 13, /var/www/html/mvc/app/site/mwyatt/sass/form */
+:-ms-input-placeholder {
+  color: #b3b3b3; }
+
+/* line 17, /var/www/html/mvc/app/site/mwyatt/sass/form */
+.input-reset, .input-submit, .input, .textarea {
+  font-size: 1em; }
+
+/* line 21, /var/www/html/mvc/app/site/mwyatt/sass/form */
+.input-submit {
+  position: absolute;
+  left: -999em;
+  width: 1px;
+  height: 1px; }
+
+/* line 29, /var/www/html/mvc/app/site/mwyatt/sass/form */
+.label-block-above {
+  display: block;
+  margin-bottom: 0.5em; }
+
+/* line 35, /var/www/html/mvc/app/site/mwyatt/sass/form */
+.input, .textarea {
+  -webkit-transition: all 200ms;
+  -moz-transition: all 200ms;
+  transition: all 200ms;
+  color: #025467;
+  font-family: 'Open Sans', 'Arial', 'Sans-serif';
+  border: 1px solid #b3b3b3;
+  color: #025467;
+  padding: 0.4em 0.5em 0.3em;
+  margin: 0; }
+  /* line 45, /var/www/html/mvc/app/site/mwyatt/sass/form */
+  .input:focus, .textarea:focus {
+    box-shadow: 0 0 3px #cccccc;
+    border-color: #b3b3b3;
+    color: #025467; }
+
+/* line 1, /var/www/html/mvc/app/site/mwyatt/sass/misc */
+body {
+  background-color: #ffffff; }
+
+/* line 5, /var/www/html/mvc/app/site/mwyatt/sass/misc */
+.logo {
+  -webkit-transition: 200ms ease;
+  -moz-transition: 200ms ease;
+  transition: 200ms ease;
+  display: block;
+  width: 7em;
+  fill: gray;
+  margin-right: auto; }
+  /* line 12, /var/www/html/mvc/app/site/mwyatt/sass/misc */
+  .logo:hover {
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    transform: scale(1.1); }
+
+/* line 17, /var/www/html/mvc/app/site/mwyatt/sass/misc */
+svg {
+  width: 100%;
+  height: 100%; }
+
+/* line 22, /var/www/html/mvc/app/site/mwyatt/sass/misc */
+.header-button-mobile-menu {
+  display: block;
+  float: right;
+  width: 3em;
+  fill: gray;
+  height: 3em; }
+
+/* line 34, /var/www/html/mvc/app/site/mwyatt/sass/misc */
+.skill {
+  float: left;
+  width: 31%;
+  padding: 1%;
+  margin: 1%;
+  background: #eee;
+  height: 6em;
+  text-align: center;
+  border-radius: 5px; }
+
+/* line 47, /var/www/html/mvc/app/site/mwyatt/sass/misc */
+.heading-home {
+  text-align: center;
+  margin: 5% 0;
+  font-size: 1.5em;
+  font-weight: 400;
+  padding: 1% 0; }
+
+/* line 58, /var/www/html/mvc/app/site/mwyatt/sass/misc */
+.about-me {
+  line-height: 1.7;
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 4%;
+  margin-bottom: 4%; }
+
+/* line 66, /var/www/html/mvc/app/site/mwyatt/sass/misc */
+.header-logo {
+  width: 90px;
+  height: 47px;
+  display: block;
+  margin: 10px;
+  float: left;
+  fill: #666666; }
+
+/* line 75, /var/www/html/mvc/app/site/mwyatt/sass/misc */
+.header-logo-image {
+  width: 100%;
+  height: 100%; }
+
+/* line 80, /var/www/html/mvc/app/site/mwyatt/sass/misc */
+.page {
+  padding-left: 5%;
+  padding-right: 5%;
+  margin: 0 auto; }
+  @media only screen and (min-width: 1024px) {
+    .page {
+      width: 900px;
+      padding: 0; } }
+
+/* line 1, /var/www/html/mvc/app/site/mwyatt/sass/menu-hamburger */
+.menu-hamburger {
+  cursor: pointer;
+  -webkit-transition: all 200ms ease;
+  -moz-transition: all 200ms ease;
+  transition: all 200ms ease;
+  display: block;
+  position: relative;
+  width: 25px;
+  float: right;
+  padding: 9px 0;
+  margin: 23px; }
+  /* line 13, /var/www/html/mvc/app/site/mwyatt/sass/menu-hamburger */
+  .menu-hamburger .menu-hamburger-meat, .menu-hamburger:before, .menu-hamburger:after {
+    -webkit-transition: all 300ms ease;
+    -moz-transition: all 300ms ease;
+    transition: all 300ms ease;
+    -webkit-transform-origin: center center;
+    -moz-transform-origin: center center;
+    -ms-transform-origin: center center;
+    -o-transform-origin: center center;
+    transform-origin: center center;
+    height: 2px;
+    background-color: #666666; }
+  /* line 20, /var/www/html/mvc/app/site/mwyatt/sass/menu-hamburger */
+  .menu-hamburger .menu-hamburger-meat {
+    display: block; }
+  /* line 25, /var/www/html/mvc/app/site/mwyatt/sass/menu-hamburger */
+  .menu-hamburger:before, .menu-hamburger:after {
+    content: '';
+    width: 100%;
+    position: absolute;
+    left: 0; }
+  /* line 32, /var/www/html/mvc/app/site/mwyatt/sass/menu-hamburger */
+  .menu-hamburger:before {
+    top: 0; }
+  /* line 36, /var/www/html/mvc/app/site/mwyatt/sass/menu-hamburger */
+  .menu-hamburger:after {
+    bottom: 0; }
+  @media only screen and (min-width: 600px) {
+    .menu-hamburger {
+      margin: 24px 24px; } }
+
+/* line 47, /var/www/html/mvc/app/site/mwyatt/sass/menu-hamburger */
+.menu-primary-is-active .menu-hamburger .menu-hamburger-meat {
+  opacity: 0; }
+/* line 52, /var/www/html/mvc/app/site/mwyatt/sass/menu-hamburger */
+.menu-primary-is-active .menu-hamburger:before, .menu-primary-is-active .menu-hamburger:after {
+  opacity: 1; }
+/* line 56, /var/www/html/mvc/app/site/mwyatt/sass/menu-hamburger */
+.menu-primary-is-active .menu-hamburger:before {
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  top: 9px; }
+/* line 61, /var/www/html/mvc/app/site/mwyatt/sass/menu-hamburger */
+.menu-primary-is-active .menu-hamburger:after {
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  bottom: 9px; }
+
+/* line 1, /var/www/html/mvc/app/site/mwyatt/sass/menu-primary */
+.menu-primary {
+  -webkit-transition: all 200ms;
+  -moz-transition: all 200ms;
+  transition: all 200ms;
+  position: absolute;
+  top: 67px;
+  right: -200px;
+  width: 200px;
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2); }
+
+/* line 11, /var/www/html/mvc/app/site/mwyatt/sass/menu-primary */
+.menu-primary-is-active .menu-primary {
+  right: 0; }
+
+/* line 16, /var/www/html/mvc/app/site/mwyatt/sass/menu-primary */
+.is-scrolling-down .menu-primary {
+  right: -200px; }
+
+/* line 20, /var/www/html/mvc/app/site/mwyatt/sass/menu-primary */
+.menu-primary-level-1-link {
+  display: block;
+  background-color: white;
+  padding: 11px 14px;
+  font-weight: 600;
+  color: #666666; }
+
+/* line 1, /var/www/html/mvc/app/site/mwyatt/sass/to-top */
+.to-top {
+  -webkit-transition: bottom 200ms;
+  -moz-transition: bottom 200ms;
+  transition: bottom 200ms;
+  position: fixed;
+  bottom: -50px;
+  right: 1em;
+  width: 44px;
+  height: 44px;
+  z-index: 1;
+  background-color: #666666;
+  padding: 12px 11px;
+  border-radius: 5px;
+  fill: #ffffff; }
+  /* line 14, /var/www/html/mvc/app/site/mwyatt/sass/to-top */
+  .to-top:hover {
+    background-color: gray; }
+  /* line 18, /var/www/html/mvc/app/site/mwyatt/sass/to-top */
+  .to-top.is-active {
+    bottom: 1em; }
+  /* line 22, /var/www/html/mvc/app/site/mwyatt/sass/to-top */
+  .to-top svg {
+    width: 20px;
+    height: 20px;
+    position: relative;
+    top: -2px;
+    left: 1px; }
+
+/* line 31, /var/www/html/mvc/app/site/mwyatt/sass/to-top */
+.to-top-image {
+  width: 100%;
+  height: auto; }
+
+/* line 1, /var/www/html/mvc/app/site/mwyatt/sass/project */
+.projects {
+  float: left;
+  width: 100%;
+  *zoom: 1; }
+  /* line 18, /var/www/html/mvc/sass/vendor/bourbon/addons/clearfix */
+  .projects:before, .projects:after {
+    content: " ";
+    display: table; }
+  /* line 23, /var/www/html/mvc/sass/vendor/bourbon/addons/clearfix */
+  .projects:after {
+    clear: both; }
+
+/* line 5, /var/www/html/mvc/app/site/mwyatt/sass/project */
+.project {
+  -webkit-transition: all 200ms;
+  -moz-transition: all 200ms;
+  transition: all 200ms;
+  border-radius: 5px;
+  background-color: #cccccc;
+  position: relative;
+  overflow: hidden;
+  margin-top: 5%; }
+  /* line 13, /var/www/html/mvc/app/site/mwyatt/sass/project */
+  .project:hover .project-description {
+    bottom: 0; }
+  /* line 17, /var/www/html/mvc/app/site/mwyatt/sass/project */
+  .project.is-audio-visual-online {
+    background-color: #74a611; }
+  /* line 21, /var/www/html/mvc/app/site/mwyatt/sass/project */
+  .project.is-brunoco {
+    background-color: #0b93fe; }
+  /* line 25, /var/www/html/mvc/app/site/mwyatt/sass/project */
+  .project.is-get-hd-sound {
+    background-color: #795934; }
+  /* line 29, /var/www/html/mvc/app/site/mwyatt/sass/project */
+  .project.is-simply-stands {
+    background-color: #333333; }
+  @media only screen and (max-width: 699px) {
+    .project {
+      height: 200px; } }
+  @media only screen and (max-width: 399px) {
+    .project {
+      float: left;
+      width: 100%;
+      margin-right: 0;
+      height: 160px; }
+      /* line 41, /var/www/html/mvc/app/site/mwyatt/sass/project */
+      .project:first-child {
+        margin-top: 0; } }
+  @media only screen and (min-width: 400px) and (max-width: 699px) {
+    .project {
+      float: left;
+      width: 47.5%;
+      margin-right: 5%; }
+      /* line 49, /var/www/html/mvc/app/site/mwyatt/sass/project */
+      .project:nth-child(2n) {
+        margin-right: 0; } }
+  @media only screen and (min-width: 700px) {
+    .project {
+      float: left;
+      width: 30%;
+      margin-right: 5%;
+      height: 250px; }
+      /* line 58, /var/www/html/mvc/app/site/mwyatt/sass/project */
+      .project:nth-child(3n) {
+        margin-right: 0; } }
+
+/* line 64, /var/www/html/mvc/app/site/mwyatt/sass/project */
+.project.is-elttl {
+  background-color: #F07818; }
+
+/* line 68, /var/www/html/mvc/app/site/mwyatt/sass/project */
+.touch .project-description {
+  bottom: 0; }
+
+/* line 74, /var/www/html/mvc/app/site/mwyatt/sass/project */
+.no-touch .project:hover {
+  -webkit-transform: scale(1.1);
+  -moz-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  -o-transform: scale(1.1);
+  transform: scale(1.1); }
+/* line 78, /var/www/html/mvc/app/site/mwyatt/sass/project */
+.no-touch .project:active {
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
+  transform: scale(1);
+  opacity: 0.8; }
+
+/* line 84, /var/www/html/mvc/app/site/mwyatt/sass/project */
+.project-description {
+  -webkit-transition: bottom 200ms;
+  -moz-transition: bottom 200ms;
+  transition: bottom 200ms;
+  position: absolute;
+  bottom: -60px;
+  left: 0;
+  right: 0;
+  padding-top: 1em;
+  padding-left: 1em;
+  padding-bottom: 1em;
+  padding-right: 75px;
+  background-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.2); }
+
+/* line 98, /var/www/html/mvc/app/site/mwyatt/sass/project */
+.project-logo {
+  fill: #ffffff;
+  display: block;
+  padding: 5%;
+  margin: 0 auto;
+  padding: 20px; }
+  @media only screen and (max-width: 599px) {
+    .project-logo {
+      height: 106px; } }
+  @media only screen and (min-width: 600px) and (max-width: 699px) {
+    .project-logo {
+      height: 146px; } }
+  @media only screen and (min-width: 700px) {
+    .project-logo {
+      height: 174px; } }
+
+@media only screen and (max-width: 599px) {
+  .no-touch .project-logo {
+    height: 156px; } }
+@media only screen and (min-width: 600px) and (max-width: 699px) {
+  .no-touch .project-logo {
+    height: 196px; } }
+@media only screen and (min-width: 700px) {
+  .no-touch .project-logo {
+    height: 224px; } }
+
+/* line 134, /var/www/html/mvc/app/site/mwyatt/sass/project */
+.project-logo-image {
+  width: auto;
+  height: auto; }
+
+/* line 142, /var/www/html/mvc/app/site/mwyatt/sass/project */
+.project-title {
+  font-weight: 600;
+  display: block;
+  color: #4d4d4d; }
+
+/* line 148, /var/www/html/mvc/app/site/mwyatt/sass/project */
+.project-button-primary {
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  padding: 6px 7px;
+  border-radius: 5px;
+  line-height: 1;
+  background-color: #666666;
+  color: #ffffff;
+  position: absolute;
+  bottom: 1em;
+  right: 1em; }
+  /* line 37, /var/www/html/mvc/app/site/mwyatt/sass/mixin */
+  .project-button-primary:hover {
+    background-color: gray;
+    color: white; }
+  /* line 45, /var/www/html/mvc/app/site/mwyatt/sass/mixin */
+  .project-button-primary:active {
+    background-color: #4d4d4d;
+    color: white; }
+
+/* line 1, /var/www/html/mvc/app/site/mwyatt/sass/home */
+.panel-heading {
+  text-align: center;
+  color: #ccc;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin: 30px 0;
+  border: 1px solid #eee;
+  border-radius: 5px;
+  padding: 8px;
+  line-height: 1; }
+
+/* line 18, /var/www/html/mvc/app/site/mwyatt/sass/home */
+.panel {
+  *zoom: 1;
+  padding-bottom: 20px; }
+  /* line 18, /var/www/html/mvc/sass/vendor/bourbon/addons/clearfix */
+  .panel:before, .panel:after {
+    content: " ";
+    display: table; }
+  /* line 23, /var/www/html/mvc/sass/vendor/bourbon/addons/clearfix */
+  .panel:after {
+    clear: both; }
+
+/* line 5, /var/www/html/mvc/app/site/mwyatt/sass/header/bar */
+.header-bar {
+  -webkit-transition: all 300ms ease;
+  -moz-transition: all 300ms ease;
+  transition: all 300ms ease;
+  background-color: #ffffff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); }
+
+/* line 16, /var/www/html/mvc/app/site/mwyatt/sass/header/bar */
+.header-bar-height {
+  height: 60px; }
+
+/* line 20, /var/www/html/mvc/app/site/mwyatt/sass/header/bar */
+.is-scrolling-down .header-bar {
+  top: -65px; }
+
+/* line 24, /var/www/html/mvc/app/site/mwyatt/sass/header/bar */
+.header-bar-height {
+  height: 60px; }
+  @media only screen and (min-width: 600px) {
+    .header-bar-height {
+      height: 70px; } }
+
+/* line 32, /var/www/html/mvc/app/site/mwyatt/sass/header/bar */
+.is-scrolling-down .header-bar {
+  top: -65px; }
+  @media only screen and (min-width: 600px) {
+    .is-scrolling-down .header-bar {
+      top: -75px; } }
+
+/* line 1, /var/www/html/mvc/app/site/mwyatt/sass/footer */
+.container-footer {
+  border-top: 1px dotted #ccc;
+  padding-bottom: 20%; }
+
+/* line 6, /var/www/html/mvc/app/site/mwyatt/sass/footer */
+.footer-inner {
+  padding-left: 5%;
+  padding-right: 5%;
+  margin: 0 auto; }
+  @media only screen and (min-width: 1024px) {
+    .footer-inner {
+      width: 900px;
+      padding: 0; } }
+
+/* line 13, /var/www/html/mvc/app/site/mwyatt/sass/footer */
+.attribution {
+  display: block;
+  text-align: right;
+  font-style: italic;
+  color: #ccc;
+  padding: 10px 0; }
+
+/* line 21, /var/www/html/mvc/app/site/mwyatt/sass/footer */
+.footer-menu-link {
+  float: left; }
+  @media only screen and (max-width: 499px) {
+    .footer-menu-link {
+      clear: both;
+      margin: 1em 0;
+      line-height: 1; } }
+  @media only screen and (min-width: 500px) {
+    .footer-menu-link {
+      margin: 0 2em 2em 0; } }
