@@ -25,3 +25,5 @@ RewriteRule ^.*$ index.php [L]
     ExpiresByType application/x-icon "access plus 1 year"
 </IfModule>
 # END EXPIRES
+
+ErrorDocument 404 /404.html
