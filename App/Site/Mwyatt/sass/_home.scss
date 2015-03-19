@@ -1,16 +1,14 @@
 .panel-heading {
-    @extend .h2;
-    color: #ccc;
-    font-weight: 100;
-    font-size: 2em;
-    margin: 1em 0 .5em;
+  @extend .h1;
+  margin-top: 0;
+  margin-bottom: .5em;
 }
 
 .panel-description {
-    @extend .p;
+  @extend .p;
 }
 
 .panel {
-	@include clearfix;
-	padding-bottom: 20px;
+  @include clearfix;
+  padding-bottom: 20px;
 }

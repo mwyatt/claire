@@ -1,0 +1,27 @@
+{
+  "site": "mwyatt",
+  "author": "Martin Wyatt",
+  "version": "0.1.0",
+  "devDependencies": {
+    "browserify": "^8.0.2",
+    "browserify-shim": "^3.8.2"
+  },
+  "browserify": {
+    "transform": [
+      "browserify-shim"
+    ]
+  },
+  "browserify-shim": {
+    "jquery": "$"
+  },
+  "browser": {
+    "jquery": "../../../js/vendor/jquery.js",
+    "vendor/jquery": "../../../js/vendor/jquery.js",
+    "vendor/jquery/magnificPopup": "../../../js/vendor/jquery.magnific-popup.js",
+    "url": "../../../js/url.js",
+    "buttonToTop": "../../../js/buttonToTop.js",
+    "smoothScroll": "../../../js/smoothScroll.js",
+    "scrollDirection": "../../../js/scrollDirection.js",
+    "helper": "../../../js/helper.js"
+  }
+}

@@ -16,7 +16,7 @@ class Json extends \OriginalAppName\Data
 	 * folder house for cache
 	 * @var string
 	 */
-	public $path = 'app/json/';
+	public $path = 'json/';
 
 
 	/**
@@ -43,7 +43,7 @@ class Json extends \OriginalAppName\Data
 	 * @return string      
 	 */
 	public function getPath($key) {
-		return BASE_PATH . ($this->getUsePath() ? $this->path : '') . SITE . US . $key . $this->extension;
+		return APP_PATH . ($this->getUsePath() ? $this->path : '') . SITE . US . $key . $this->extension;
 	}
 
 

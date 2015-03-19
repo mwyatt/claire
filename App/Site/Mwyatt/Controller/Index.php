@@ -29,10 +29,16 @@ class Index extends \OriginalAppName\Controller\Front
 		$entitiesProject = $serviceContent->readType('project');
 		shuffle($entitiesProject);
 
+		// skills
+		$json = new Json();
+		$json->read('skills');
+		$skills = $json->getData();
+
 		// template
 		$this
 			->view
 			->setDataKey('templateName', 'home')
+			->setDataKey('skills', $skills)
 			->setDataKey('projects', $entitiesProject);
 		return new Response($this->view->getTemplate('home'));
 	}

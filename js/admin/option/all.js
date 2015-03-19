@@ -4,6 +4,7 @@
  * dependencies
  */
 var $ = require('vendor/jquery');
+var url = require('url');
 var helper = require('helper');
 var feedbackStream = require('admin/feedbackStream');
 
@@ -41,7 +42,7 @@ ControllerOption.prototype.eventsRefresh = function(data) {
     var closestRow = $this.closest('.js-option');
     var id = closestRow.attr('data-id');
     $.ajax({
-      url: helper.urlBase('admin/ajax/option/delete/'),
+      url: url.getUrlBase('admin/ajax/option/delete/'),
       type: 'get',
       dataType: 'json',
       data: {id: id},
@@ -78,7 +79,7 @@ ControllerOption.prototype.changeInput = function(data, trigger) {
 
   // call
   $.ajax({
-    url: helper.urlBase('admin/ajax/option/' + (id ? id : 'create') + '/'),
+    url: url.getUrlBase('admin/ajax/option/' + (id ? id : 'create') + '/'),
     type: 'get',
     dataType: 'json',
     data: {

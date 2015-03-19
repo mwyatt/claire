@@ -1,19 +1,208 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-var what = {foo: 'bar'};
+var buttonToTop = require('buttonToTop');
+var smoothScroll = require('smoothScroll');
+var scrollDirection = require('scrollDirection');
 
 
+$(document).ready(function() {
+	var html = $('html');
 
-module.exports = what;
+	// to top button
+	buttonToTop.init({
+		button: '.to-top'
+	});
 
-},{}],2:[function(require,module,exports){
-var $ = require('./vendor/jquery');
-var foo = require('./foo/bar');
+	// smoothscroll
+	smoothScroll.init({
+		target: '.menu-primary-level-1-link'
+	});
+
+	// scroll direction
+	scrollDirection.init({
+		container: 'html'
+	});
+});
+
+},{"buttonToTop":2,"scrollDirection":3,"smoothScroll":4}],2:[function(require,module,exports){
 
 
+/**
+ * dependencies
+ */
+var $ = require('jquery');
 
-console.log($);
-console.log(foo);
-},{"./foo/bar":1,"./vendor/jquery":3}],3:[function(require,module,exports){
+
+/**
+ * watches the scrollwindow and displays a to top button when moving down
+ * over a threshold
+ * dependancy $
+ */
+var Button_To_Top = function () {};
+
+
+Button_To_Top.prototype.init = function(options) {
+	var defaults = {
+		threshold: 100,
+		button: '.null',
+		classLabel: 'is-active',
+		delay: 200
+	};
+	this.options = $.extend(defaults, options);
+	this.timer;
+	this.events(this);
+};
+
+
+Button_To_Top.prototype.events = function(data) {
+	var button = $(data.options.button);
+	$(window).on('scroll.button-to-top', function(event) {
+		clearTimeout(data.timer);
+		data.timer = setTimeout(function(event) {
+			documentPosition = $(document).scrollTop();
+			if (documentPosition > data.options.threshold) {
+				button.addClass(data.options.classLabel);
+			} else {
+				button.removeClass(data.options.classLabel);
+			}
+		}, data.options.delay);
+	});
+};
+
+
+/**
+ * exports
+ */
+module.exports = new Button_To_Top;
+
+},{"jquery":5}],3:[function(require,module,exports){
+var $ = require('vendor/jquery');
+
+
+var Scroll_Direction = function (options) {};
+
+
+Scroll_Direction.prototype.init = function (options) {
+	var defaults = {
+
+		// css selector eg .example
+		container: ''
+	};
+	this.options = $.extend(defaults, options);
+	this.refreshEvents(this);
+};
+
+
+Scroll_Direction.prototype.refreshEvents = function(data) {
+
+	// resources
+	var theWindow = $(window);
+	var scrollCache = 'up';
+	var scrollPositionPrevious = 0;
+
+	// scroll event
+	theWindow.scroll(function(event) {
+		var scrollPositionNext = $(this).scrollTop();
+		if (scrollPositionNext > scrollPositionPrevious){
+			scrollCache = 'down';
+		} else {
+			scrollCache = 'up';
+		}
+		scrollPositionPrevious = scrollPositionNext;
+
+		// toggle class
+		$(data.options.container)
+			.removeClass('is-scrolling-down')
+			.removeClass('is-scrolling-up')
+			.addClass('is-scrolling-' + scrollCache);
+	});
+};
+
+
+module.exports = new Scroll_Direction;
+
+},{"vendor/jquery":5}],4:[function(require,module,exports){
+
+
+/**
+ * dependencies
+ */
+var $ = require('jquery');
+
+
+/** 
+ * scrolls the page smoothly when a target is clicked
+ * @param {object} options 
+ */
+var Smooth_Scroll = function () {};
+
+
+Smooth_Scroll.prototype.init = function(options) {
+	var defaults = {
+		target: '.js-smooth-scroll',
+
+		// offsets the scroll down if there is a
+		// fixed header for example
+		topOffset: 50,
+		scrollSpeed: 500,
+		activeClass: 'has-smooth-scroll',
+		direct: ''
+	};
+	this.options = $.extend(defaults, options);
+	this.cache = {
+		target: $(this.options.target)
+	};
+	var firstEvent = {};
+	firstEvent.data = this;
+
+	// clicking a targeted item
+	firstEvent.data.cache.target.off('click.smoothScroll').on('click.smoothScroll', firstEvent.data, function(event) {
+		event.preventDefault();
+		firstEvent.data.scrollTo(firstEvent, this.hash);
+	});
+
+	// immediatly scroll to
+	if (firstEvent.data.options.direct) {
+		firstEvent.data.scrollTo(firstEvent, firstEvent.data.options.direct);
+	};
+};
+
+
+/**
+ * takes a clicked button and smooth scrolls to its hash
+ * target is the jquery selector string
+ * @param  {object} event
+ * @param  {string} target
+ */
+Smooth_Scroll.prototype.scrollTo = function(event, target) {
+	var timer = 0;
+	var destination = 0;
+	if ($(target).offset().top > $(document).height() - $(window).height()) {
+		destination = $(document).height() - $(window).height();
+	} else {
+		destination = $(target).offset().top;
+		destination = destination - event.data.options.topOffset;
+	}
+	$('html, body').animate({scrollTop:destination}, event.data.options.scrollSpeed, 'swing');
+
+	// add class to target, remove it after timeout
+	$('.' + event.data.options.activeClass).removeClass(event.data.options.activeClass);
+	clearTimeout(timer);
+	target = $(target);
+	target.addClass(event.data.options.activeClass);
+	timer = setTimeout(function() {
+		target.removeClass(event.data.options.activeClass);
+	}, 1000);
+};
+
+
+/**
+ * exports
+ */
+module.exports = new Smooth_Scroll;
+
+},{"jquery":5}],5:[function(require,module,exports){
+(function (global){
+;__browserify_shim_require__=require;(function browserifyShim(module, exports, require, define, browserify_shim__define__module__export__) {
 /*!
  * jQuery JavaScript Library v1.11.1
  * http://jquery.com/
@@ -10323,4 +10512,9 @@ return jQuery;
 
 }));
 
-},{}]},{},[2]);
+; browserify_shim__define__module__export__(typeof $ != "undefined" ? $ : window.$);
+
+}).call(global, undefined, undefined, undefined, undefined, function defineExport(ex) { module.exports = ex; });
+
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{}]},{},[1]);

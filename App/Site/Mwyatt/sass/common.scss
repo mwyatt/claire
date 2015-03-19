@@ -1,8 +1,8 @@
 $font-family: 'Open Sans', 'Arial', 'Sans-serif';
 $font-family-heading: 'Open Sans', 'Arial', 'Sans-serif';
 $font-size: 14px;
-$color-body: #000;
 @import "palette";
+$color-body: $color-secondary-1-2;
 @import "../../../../sass/config.scss";
 @import "../../../../sass/vendor/magnific-popup";
 @import "../../../../sass/keyframe";

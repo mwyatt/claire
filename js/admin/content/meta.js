@@ -4,6 +4,7 @@
  * dependencies
  */
 var $ = require('vendor/jquery');
+var url = require('url');
 var helper = require('helper');
 var mustache = require('vendor/mustache');
 var feedbackStream = require('admin/feedbackStream');
@@ -27,7 +28,7 @@ ControllerContentMeta.prototype.readAll = function(data) {
 		template: 'admin/content/meta/all',
 		success: function(template) {
 			$.ajax({
-				url: helper.urlBase('admin/ajax/content/meta/'),
+				url: url.getUrlBase('admin/ajax/content/meta/'),
 				type: 'get',
 				dataType: 'json',
 				data: {
@@ -74,7 +75,7 @@ ControllerContentMeta.prototype.eventsRefresh = function(data) {
 		var closestRow = $this.closest('.js-content-meta');
 		var id = closestRow.attr('data-id');
 		$.ajax({
-			url: helper.urlBase('admin/ajax/content/meta/delete/'),
+			url: url.getUrlBase('admin/ajax/content/meta/delete/'),
 			type: 'get',
 			dataType: 'json',
 			data: {id: id},
@@ -110,7 +111,7 @@ ControllerContentMeta.prototype.changeInput = function(data, trigger) {
 
 	// call
 	$.ajax({
-		url: helper.urlBase('admin/ajax/content/meta/' + (id ? id : 'create') + '/'),
+		url: url.getUrlBase('admin/ajax/content/meta/' + (id ? id : 'create') + '/'),
 		type: 'get',
 		dataType: 'json',
 		data: {

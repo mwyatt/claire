@@ -1,50 +1,23 @@
-define(['jquery'], function ($) {
-
-
-  feedbackStream.createMessage(feedback);
-  var moduleName = $('[data-moduleName]').attr('data-moduleName');
-  if (! moduleName) {
-    return;
-  };
-  require(['admin/' + moduleName]);
-});
-
-
+var buttonToTop = require('buttonToTop');
+var smoothScroll = require('smoothScroll');
+var scrollDirection = require('scrollDirection');
 
 
 $(document).ready(function() {
 	var html = $('html');
 
-	// toggle menu primary
-	$('.js-toggle-menu-primary').on('click', function(event) {
-		event.preventDefault();
-		html.toggleClass('menu-primary-is-active');
-	});
-	
-	// remove menu when clicked away
-	$(document).on('click', function(event) {
-		if (! $(event.target).closest('.js-menu-primary').length && ! $(event.target).closest('.js-toggle-menu-primary').length) {
-			html.removeClass('menu-primary-is-active');
-		}
-	});
-
-	// escape key
-	$(document).on('keyup', function(event) {
-		if (event.keyCode == 27) {
-			html.removeClass('menu-primary-is-active');
-		} 
-	});
-
 	// to top button
-	var topButton = new Button_To_Top({
+	buttonToTop.init({
 		button: '.to-top'
 	});
 
 	// smoothscroll
-	var smoothScroll = new Smooth_Scroll();
+	smoothScroll.init({
+		target: '.menu-primary-level-1-link'
+	});
 
 	// scroll direction
-	var scrollDirection = new Scroll_Direction({
+	scrollDirection.init({
 		container: 'html'
 	});
 });

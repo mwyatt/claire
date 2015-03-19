@@ -1,9 +1,20 @@
+
+
+/**
+ * dependencies
+ */
+var $ = require('jquery');
+
+
 /**
  * watches the scrollwindow and displays a to top button when moving down
  * over a threshold
  * dependancy $
  */
-var Button_To_Top = function (options) {
+var Button_To_Top = function () {};
+
+
+Button_To_Top.prototype.init = function(options) {
 	var defaults = {
 		threshold: 100,
 		button: '.null',
@@ -30,3 +41,9 @@ Button_To_Top.prototype.events = function(data) {
 		}, data.options.delay);
 	});
 };
+
+
+/**
+ * exports
+ */
+module.exports = new Button_To_Top;

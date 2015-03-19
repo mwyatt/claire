@@ -59,18 +59,5 @@ Helper.prototype.getMustacheTemplate = function (config) {
 };
 
 
-/**
- * get base url from dom or localStorage and append the passed string
- * @param  {string} append 
- * @return {string}        
- */
-Helper.prototype.urlBase = function (append) {
-	if (! localStorage.getItem('url/base')) {
-    localStorage.setItem('url/base', $('[data-urlBase]').attr('data-urlBase'));
-	};
-  return localStorage.getItem('url/base') + append;
-};
-
-
 // return
 module.exports = new Helper;
