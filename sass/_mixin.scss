@@ -39,7 +39,7 @@ $color-secondary-1-0: #000 !default;
   border-bottom-width: 1px;
   border-bottom-style: solid;
   color: $color;
-  border-bottom-color: rgba(#fff, 0);
+  border-bottom-color: $color;
 
   &:hover { 
     color: shade($color, 20%);
@@ -50,10 +50,6 @@ $color-secondary-1-0: #000 !default;
   &:active {
     color: shade($color, 50%);
     border-bottom-color: shade($color, 50%);
-  }
-
-  @media only screen and (max-width: 1024px) {
-    border-bottom-color: shade($color, 20%);
   }
 }
 

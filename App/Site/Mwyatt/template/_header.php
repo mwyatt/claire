@@ -20,30 +20,27 @@
     <!--[if lt IE 7]>
         <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
     <![endif]-->
+    <!-- 
+         _   _  _ _ _ 
+        | \_/ || | | |
+        | \_/ || V V |
+        |_| |_| \_n_/ 
+
+        Welcome fellow developers!
+
+     -->
 
 <div id="top"></div>
-<a href="#top" class="to-top js-smooth-scroll">
-    
-<?php include $this->getAssetPath('arrow-up.svg') ?>
-
-</a>
+<a href="#top" class="to-top js-smooth-scroll"><span class="to-top-image"><?php include $this->getAssetPath('arrow-up.svg') ?></span></a>
 <div class="site-wrap">
-    <div class="header-bar-height"></div>
     <header class="header header-bar js-header">
-
-	    <!-- logo -->
-	    <a href="<?php echo $this->url->generate() ?>" class="header-logo">
-
-<?php include $this->getAssetPath('logo.svg') ?>
-
-	    </a>
+        <div class="header-logo-container">
+    	    <a href="<?php echo $this->url->generate() ?>" class="header-logo"><?php include $this->getAssetPath('logo.svg') ?></a>
+        </div>
 
 <?php if (isset($menuPrimary)): ?>
 
         <div class="menu-primary-container">
-            <span class="menu-hamburger-container">
-                <span class="menu-hamburger js-toggle-menu-primary"><span class="menu-hamburger-meat"></span></span>
-            </span>
             <nav class="menu-primary js-menu-primary">
 
 	<?php echo $menuPrimary ?>

@@ -1,69 +1,76 @@
 
-// vars
-$header-bar-height: 67px;
-
 .header-bar {
-    @include transition(all 300ms ease);
-    background-color: #fff;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1;
-    box-shadow: 0 0 3px rgba(#000, .1);
-}
-
-.header-bar-height {
-    height: $header-bar-height;
-}
-
-.is-scrolling-down .header-bar {
-    top: -$header-bar-height - 5;
-}
-
-.header-bar-height {
-    height: $header-bar-height;
-
-    @media only screen and (min-width: 600px) {
-        height: 70px;
-    }
-}
-
-.is-scrolling-down .header-bar {
-    top: -$header-bar-height - 5;
-
-    @media only screen and (min-width: 600px) {
-        top: -70 - 5px;
-    }
-}
-
-.menu-primary-container:hover .menu-primary {
-    right: 0;
-}
-
-.menu-primary {
-    @include transition(all 200ms);
-    // display: none;
-    position: absolute;
-    top: 67px;
-    right: -3 + -200px;
-    width: 200px;
-    box-shadow: 0 0 3px rgba(#000, .1);
-}
-
-.menu-primary-is-active .menu-primary {
-    // display: block;
-    right: 0;
-}
-
-.is-scrolling-down .menu-primary {
-    right: -200px;
+    position: relative;
 }
 
 .menu-primary-level-1-link {
-    display: block;
-    background-color: white;
-    padding: 11px 14px;
+    @include link($color-primary-0);
+    border-bottom-width: 2px;
     font-weight: 600;
-    color: $color-primary-0;
+    margin-left: 30px;
+    font-size: 16px;
+
+    &:first-child {
+        margin-left: 0;
+    }
+}
+
+.header-logo-container {
+    position: relative;
+}
+
+.header-logo {
+    display: block;
+    fill: $color-primary-0;
+    margin: 0 auto;
+
+    
+    @media only screen and (max-width: 599px) {
+        width: 90px;
+        height: 47px;
+    }
+
+    @media only screen and (min-width: 600px) {
+      width: 120px;
+        height: 62px;
+    }
+}
+
+.header-logo-image {
+    width: 100%;
+    height: 100%;
+}
+
+.header {
+    
+    @media only screen and (max-width: 599px) {
+      padding: 1em 0;
+    }
+
+    @media only screen and (min-width: 600px) and (max-width: 1199px) {
+      padding: 2em 0;
+    }
+
+    @media only screen and (min-width: 1200px) {
+      padding: 3em 0;
+    }
+}
+
+.header-logo-container {
+
+    @media only screen and (max-width: 599px) {
+      margin-bottom: 1em;
+    }
+
+    @media only screen and (min-width: 600px) and (max-width: 1199px) {
+      margin-bottom: 2em;
+    }
+
+    @media only screen and (min-width: 1200px) {
+      margin-bottom: 3em;
+    }
+}
+
+.menu-primary-container {
+    text-align: center;
 }

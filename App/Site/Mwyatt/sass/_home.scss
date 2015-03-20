@@ -10,5 +10,58 @@
 
 .panel {
   @include clearfix;
-  padding-bottom: 20px;
+
+}
+
+.panel-padded {
+
+  @media only screen and (max-width: 999px) {
+    padding: 5%;
+  }
+
+  @media only screen and (min-width: 1000px) {
+    margin: 3em 0;
+  }
+}
+
+.skills {
+  @include row;
+}
+
+.skill {
+  @include transition(background-color 200ms);
+  background-color: tint($color-primary-0, 80%);
+  color: $color-primary-2;
+  border-radius: 3px;
+  padding: 1em;
+  margin-bottom: 5%;
+
+  &:hover {
+    background-color: tint($color-primary-0, 90%);
+    color: $color-primary-1;
+  }
+
+  @media only screen and (min-width: 600px) and (max-width: 899px) {
+    @include col(6);
+    
+    &:nth-child(2n) {
+      @include last;
+    }
+  }
+
+  @media only screen and (min-width: 900px) and (max-width: 1199px) {
+    @include col(4);
+    
+    &:nth-child(3n) {
+      @include last;
+    }
+  }
+
+  @media only screen and (min-width: 1200px) {
+    @include col(3);
+    
+    &:nth-child(4n) {
+      @include last;
+    }
+  }
 }

@@ -4,37 +4,37 @@
 		"symbol": ".svg"
 	},
 	{
-		"name": "sass"
+		"name": "SASS"
 	},
 	{
-		"name": "less"
+		"name": "LESS"
 	},
 	{
-		"name": "html"
+		"name": "HTML"
 	},
 	{
-		"name": "css"
+		"name": "CSS"
 	},
 	{
-		"name": "sql"
+		"name": "SQL"
 	},
 	{
 		"name": "database design"
 	},
 	{
-		"name": "php"
+		"name": "PHP"
 	},
 	{
-		"name": "pdo"
+		"name": "PDO"
 	},
 	{
-		"name": "mysqli"
+		"name": "MYSQLI"
 	},
 	{
-		"name": "js"
+		"name": "JS"
 	},
 	{
-		"name": "jquery"
+		"name": "JQUERY"
 	},
 	{
 		"name": "google analytics"
@@ -46,16 +46,16 @@
 		"name": "grunt task running"
 	},
 	{
-		"name": "ux / ui design"
+		"name": "UX / UI design"
 	},
 	{
 		"name": "email design"
 	},
 	{
-		"name": "php - object oriented design"
+		"name": "PHP - object oriented design"
 	},
 	{
-		"name": "mvc pattern"
+		"name": "MVC pattern"
 	},
 	{
 		"name": "build dynamic classes"

@@ -10,8 +10,12 @@
     display: block;
     float: left;
 
-    &:hover .project-description {
-        bottom: 0;
+    &:hover {
+        @include transform(scale(.95));
+    }
+
+    &:active {
+        @include transform(scale(.90));
     }
 
     &.is-audio-visual-online {
@@ -35,7 +39,7 @@
     }
 
     &.is-av-distribution {
-        @include linear-gradient(tint(#74a611, 10%), #74a611);
+        @include linear-gradient(shade(#74a611, 20%), shade(#74a611, 30%));
     }
 
     &.is-get-hd-sound {
@@ -48,6 +52,7 @@
 
     @media only screen and (max-width: 699px) {
         height: 200px;
+        width: 100%;
     }
 
     @media only screen and (max-width: 399px) {
@@ -64,30 +69,16 @@
     }
 }
 
-.touch .project-description {
-    bottom: 0;
-}
-
-.no-touch .project {
-
-    &:active {
-        opacity: .8;
-    }
-}
-
 .project-description {
     @include transition(bottom 200ms);
+    @include clearfix;
     position: absolute;
-    bottom: -60px;
     left: 0;
     right: 0;
-    padding-top: 1em;
-    padding-left: 1em;
-    padding-bottom: 1em;
-    padding-right: 75px;
     background-color: rgba(#fff, .1);
-    box-shadow: 0 0 3px rgba(#000, .1);
     color: #fff;
+    padding: 9px 10px 10px;
+    bottom: 0;
 }
 
 .project-logo {
@@ -97,32 +88,16 @@
     margin: 0 auto;
     padding: 20px;
 
-    @media only screen and (max-width: 599px) {
-        height: 106px;
+    @media only screen and (max-width: 399px) {
+        height: 120px;
     }
 
-    @media only screen and (min-width: 600px) and (max-width: 699px) {
-        height: 146px;
-    }
-
-    @media only screen and (min-width: 700px) {
-        height: 174px;
-    }
-}
-
-
-.no-touch .project-logo {
-
-    @media only screen and (max-width: 599px) {
-        height: 106px + 50px;
-    }
-
-    @media only screen and (min-width: 600px) and (max-width: 699px) {
-        height: 146px + 50px;
+    @media only screen and (min-width: 400px) and (max-width: 699px) {
+        height: 160px;
     }
 
     @media only screen and (min-width: 700px) {
-        height: 174px + 50px;
+        height: 210px;
     }
 }
 
@@ -134,11 +109,13 @@
 .project-title {
     font-weight: 600;
     display: block;
+    float: left;
 }
 
 .project-button-primary {
-    @include button($color-primary-0, #fff);
-    position: absolute;
-    bottom: 12px;
-    right: 12px;
+    @include link(#fff);
+    font-weight: 600;
+    border-width: 2px;
+    font-size: 14px;
+    float: right;
 }

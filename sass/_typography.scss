@@ -1,18 +1,20 @@
-$font-family: 'Arial', 'sans-serif' !default;
-$font-size: 16px !default;
-$font-family-heading: 'Arial', 'sans-serif' !default;
-$color-body: #000 !default;
-$color-primary-0: #000 !default;
-$color-secondary-1-0: #000 !default;
-$color-secondary-2-0: #000 !default;
+// $font-family: 'Arial', 'sans-serif' !default;
+// $font-family-heading: 'Arial', 'sans-serif' !default;
+// $font-size: 16px !default;
+// $color-heading: #000 !default;
+// $color-link: #000 !default;
+// $color-link-hover: #000 !default;
+// $color-body: #000 !default;
+// $color-selection: #000 !default;
+// $color-placeholder: #000 !default;
 
 @include selection {
   color: #fff;
-  background-color: $color-primary-0;
+  background-color: $color-selection;
 } 
 
 @include placeholder() {
-  color: $color-secondary-2-0;
+  color: $color-placeholder;
 }
 
 body {
@@ -59,7 +61,7 @@ h6 {
 .h4,
 .h5,
 .h6 {
-  color: $color-secondary-1-0;
+  color: $color-heading;
   font-family: $font-family-heading;
   font-weight: 400;
   margin: 1em 0 0.5em;
@@ -133,7 +135,7 @@ h6 {
 }
 
 .a {
-  @include link($color-primary-0);
+  @include link($color-link);
 }
 
 .typography {
@@ -147,8 +149,8 @@ h6 {
 
   a:hover,
   a:focus { 
-    color: $color-secondary-2-0;
-    border-bottom-color: $color-secondary-2-0;
+    color: $color-link-hover;
+    border-bottom-color: $color-link-hover;
   }
 
   *:focus {

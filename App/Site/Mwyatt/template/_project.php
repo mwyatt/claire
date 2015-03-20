@@ -10,7 +10,7 @@
 	</span>
 	<span class="project-description">
 		<span class="project-title"><?php echo $project->getTitle() ?></span>
-		<span class="project-button-primary">More</span>
+		<span class="project-button-primary">Visit</span>
 	</span>
 </a>
 

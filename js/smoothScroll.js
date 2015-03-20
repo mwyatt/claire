@@ -37,6 +37,12 @@ Smooth_Scroll.prototype.init = function(options) {
 		firstEvent.data.scrollTo(firstEvent, this.hash);
 	});
 
+	// always .js-smooth-scroll
+	$('.js-smooth-scroll').off('click.smoothScroll').on('click.smoothScroll', firstEvent.data, function(event) {
+		event.preventDefault();
+		firstEvent.data.scrollTo(firstEvent, this.hash);
+	});
+
 	// immediatly scroll to
 	if (firstEvent.data.options.direct) {
 		firstEvent.data.scrollTo(firstEvent, firstEvent.data.options.direct);

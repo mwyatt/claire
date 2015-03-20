@@ -92,12 +92,12 @@
 /* line 51, /var/www/html/mvc/sass/_reusable.scss */
 .table-basic {
   width: 100%; }
-  /* line 83, /var/www/html/mvc/sass/_mixin.scss */
+  /* line 79, /var/www/html/mvc/sass/_mixin.scss */
   .table-basic th {
     font-weight: 600;
     text-align: left;
     background-color: rgba(0, 0, 0, 0.05); }
-  /* line 90, /var/www/html/mvc/sass/_mixin.scss */
+  /* line 86, /var/www/html/mvc/sass/_mixin.scss */
   .table-basic th, .table-basic td {
     padding: 0.5em;
     border: 1px solid #FF522E; }
@@ -151,7 +151,7 @@
   border-bottom-width: 1px;
   border-bottom-style: solid;
   color: #2FADDD;
-  border-bottom-color: rgba(255, 255, 255, 0); }
+  border-bottom-color: #2FADDD; }
   /* line 44, /var/www/html/mvc/sass/_mixin.scss */
   .link-primary:hover {
     color: #258ab0;
@@ -160,15 +160,12 @@
   .link-primary:focus, .link-primary:active {
     color: #17566e;
     border-bottom-color: #17566e; }
-  @media only screen and (max-width: 1024px) {
-    .link-primary {
-      border-bottom-color: #258ab0; } }
   /* line 32, /var/www/html/mvc/sass/_mixin.scss */
   .link-primary:visited {
     border-bottom-width: 1px;
     border-bottom-style: solid;
     color: #2FADDD;
-    border-bottom-color: rgba(255, 255, 255, 0); }
+    border-bottom-color: #2FADDD; }
     /* line 44, /var/www/html/mvc/sass/_mixin.scss */
     .link-primary:visited:hover {
       color: #258ab0;
@@ -177,16 +174,13 @@
     .link-primary:visited:focus, .link-primary:visited:active {
       color: #17566e;
       border-bottom-color: #17566e; }
-    @media only screen and (max-width: 1024px) {
-      .link-primary:visited {
-        border-bottom-color: #258ab0; } }
 
 /* line 67, /var/www/html/mvc/sass/_reusable.scss */
 .link-secondary {
   border-bottom-width: 1px;
   border-bottom-style: solid;
   color: #FF522E;
-  border-bottom-color: rgba(255, 255, 255, 0); }
+  border-bottom-color: #FF522E; }
   /* line 44, /var/www/html/mvc/sass/_mixin.scss */
   .link-secondary:hover {
     color: #cc4124;
@@ -195,15 +189,12 @@
   .link-secondary:focus, .link-secondary:active {
     color: #7f2917;
     border-bottom-color: #7f2917; }
-  @media only screen and (max-width: 1024px) {
-    .link-secondary {
-      border-bottom-color: #cc4124; } }
   /* line 32, /var/www/html/mvc/sass/_mixin.scss */
   .link-secondary:visited {
     border-bottom-width: 1px;
     border-bottom-style: solid;
     color: #FF522E;
-    border-bottom-color: rgba(255, 255, 255, 0); }
+    border-bottom-color: #FF522E; }
     /* line 44, /var/www/html/mvc/sass/_mixin.scss */
     .link-secondary:visited:hover {
       color: #cc4124;
@@ -212,9 +203,6 @@
     .link-secondary:visited:focus, .link-secondary:visited:active {
       color: #7f2917;
       border-bottom-color: #7f2917; }
-    @media only screen and (max-width: 1024px) {
-      .link-secondary:visited {
-        border-bottom-color: #cc4124; } }
 
 /* line 71, /var/www/html/mvc/sass/_reusable.scss */
 .label-block {
@@ -234,16 +222,16 @@
   -webkit-transition: all 200ms;
   -moz-transition: all 200ms;
   transition: all 200ms;
-  color: shade(#FF522E, 50%);
+  color: #17566e;
   font-family: 'Open Sans', 'Arial', 'Sans-serif';
   border: 1px solid #FF522E;
   padding: 0.4em 0.5em 0.3em;
   margin: 0; }
-  /* line 72, /var/www/html/mvc/sass/_mixin.scss */
+  /* line 68, /var/www/html/mvc/sass/_mixin.scss */
   .input-text:focus {
     box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
     border-color: #FF522E;
-    color: shade(#FF522E, 50%); }
+    color: #17566e; }
 
 /* line 20, /var/www/html/mvc/sass/vendor/bourbon/addons/_clearfix.scss */
 .block-clear::after {
@@ -330,129 +318,129 @@
 /* line 34, /var/www/html/mvc/sass/vendor/bourbon/css3/_selection.scss */
 ::-moz-selection {
   color: #fff;
-  background-color: #2FADDD; }
+  background-color: #FF522E; }
 
 /* line 38, /var/www/html/mvc/sass/vendor/bourbon/css3/_selection.scss */
 ::selection {
   color: #fff;
-  background-color: #2FADDD; }
+  background-color: #FF522E; }
 
 /* line 4, /var/www/html/mvc/sass/vendor/bourbon/css3/_placeholder.scss */
 ::-webkit-input-placeholder {
-  color: #FFC32E; }
+  color: #FF522E; }
 
 /* line 4, /var/www/html/mvc/sass/vendor/bourbon/css3/_placeholder.scss */
 ::-moz-placeholder {
-  color: #FFC32E; }
+  color: #FF522E; }
 
 /* line 4, /var/www/html/mvc/sass/vendor/bourbon/css3/_placeholder.scss */
 :-moz-placeholder {
-  color: #FFC32E; }
+  color: #FF522E; }
 
 /* line 4, /var/www/html/mvc/sass/vendor/bourbon/css3/_placeholder.scss */
 :-ms-input-placeholder {
-  color: #FFC32E; }
+  color: #FF522E; }
 
-/* line 18, /var/www/html/mvc/sass/_typography.scss */
+/* line 20, /var/www/html/mvc/sass/_typography.scss */
 body {
-  font-size: 14px;
+  font-size: 16px;
   font-family: 'Open Sans', 'Arial', 'Sans-serif';
-  color: shade(#FF522E, 50%); }
+  color: #17566e; }
 
-/* line 26, /var/www/html/mvc/sass/_typography.scss */
+/* line 28, /var/www/html/mvc/sass/_typography.scss */
 *, *:before, *:after {
   box-sizing: border-box; }
 
-/* line 31, /var/www/html/mvc/sass/_typography.scss */
+/* line 33, /var/www/html/mvc/sass/_typography.scss */
 a, a:visited {
   text-decoration: none; }
 
-/* line 35, /var/www/html/mvc/sass/_typography.scss */
+/* line 37, /var/www/html/mvc/sass/_typography.scss */
 p {
   margin: 0; }
 
-/* line 40, /var/www/html/mvc/sass/_typography.scss */
+/* line 42, /var/www/html/mvc/sass/_typography.scss */
 ul, ol {
   margin: 0;
   padding: 0; }
 
-/* line 50, /var/www/html/mvc/sass/_typography.scss */
+/* line 52, /var/www/html/mvc/sass/_typography.scss */
 h1, h2, h3, h4, h5, h6 {
   font-weight: normal;
   font-size: 1em;
   margin: 0; }
 
-/* line 61, /var/www/html/mvc/sass/_typography.scss */
-.h1, .page-primary-title, .typography h1, .panel-heading, .h2, .typography h2, .h3, .typography h3, .h4, .typography h4, .h5, .typography h5, .h6, .typography h6 {
-  color: #FF522E;
+/* line 63, /var/www/html/mvc/sass/_typography.scss */
+.h1, .page-primary-title, .typography h1, .panel-heading, .h2, .typography h2, .footer-profile-greeting, .h3, .typography h3, .h4, .typography h4, .h5, .typography h5, .h6, .typography h6 {
+  color: #17566e;
   font-family: 'Open Sans', 'Arial', 'Sans-serif';
   font-weight: 400;
   margin: 1em 0 0.5em; }
 
-/* line 68, /var/www/html/mvc/sass/_typography.scss */
+/* line 70, /var/www/html/mvc/sass/_typography.scss */
 .h1, .page-primary-title, .typography h1, .panel-heading {
   font-size: 2em; }
 
-/* line 72, /var/www/html/mvc/sass/_typography.scss */
-.h2, .typography h2 {
+/* line 74, /var/www/html/mvc/sass/_typography.scss */
+.h2, .typography h2, .footer-profile-greeting {
   font-size: 1.5em; }
 
-/* line 76, /var/www/html/mvc/sass/_typography.scss */
+/* line 78, /var/www/html/mvc/sass/_typography.scss */
 .h3, .typography h3 {
   font-size: 1.17em; }
 
-/* line 81, /var/www/html/mvc/sass/_typography.scss */
+/* line 83, /var/www/html/mvc/sass/_typography.scss */
 .h3, .typography h3, .h4, .typography h4 {
   line-height: 1.3; }
 
-/* line 85, /var/www/html/mvc/sass/_typography.scss */
+/* line 87, /var/www/html/mvc/sass/_typography.scss */
 .h5, .typography h5 {
   font-size: .83em; }
 
-/* line 89, /var/www/html/mvc/sass/_typography.scss */
+/* line 91, /var/www/html/mvc/sass/_typography.scss */
 .h6, .typography h6 {
   font-size: .75em; }
 
-/* line 93, /var/www/html/mvc/sass/_typography.scss */
+/* line 95, /var/www/html/mvc/sass/_typography.scss */
 .p, .page-primary-description, .typography p, .panel-description {
   line-height: 1.5; }
 
-/* line 98, /var/www/html/mvc/sass/_typography.scss */
+/* line 100, /var/www/html/mvc/sass/_typography.scss */
 .bold, .typography b, .typography strong {
   font-weight: 700; }
 
-/* line 102, /var/www/html/mvc/sass/_typography.scss */
+/* line 104, /var/www/html/mvc/sass/_typography.scss */
 .italic, .typography i, .typography em {
   font-style: italic; }
 
-/* line 106, /var/www/html/mvc/sass/_typography.scss */
+/* line 108, /var/www/html/mvc/sass/_typography.scss */
 .underline {
   text-decoration: underline; }
 
-/* line 110, /var/www/html/mvc/sass/_typography.scss */
+/* line 112, /var/www/html/mvc/sass/_typography.scss */
 .block-margins, .block-clear, .p, .page-primary-description, .typography p, .panel-description, .unordered-list, .typography ul, .ordered-list, .typography ol, .typography pre, .typography code {
   margin: 1em 0; }
 
-/* line 114, /var/www/html/mvc/sass/_typography.scss */
+/* line 116, /var/www/html/mvc/sass/_typography.scss */
 .unordered-list, .typography ul {
   list-style-type: disc;
   list-style-position: outside; }
 
-/* line 119, /var/www/html/mvc/sass/_typography.scss */
+/* line 121, /var/www/html/mvc/sass/_typography.scss */
 .ordered-list, .typography ol {
   list-style: decimal; }
 
-/* line 124, /var/www/html/mvc/sass/_typography.scss */
+/* line 126, /var/www/html/mvc/sass/_typography.scss */
 .unordered-list, .typography ul, .ordered-list, .typography ol {
   margin-left: 1em;
   padding-left: 1em; }
 
-/* line 135, /var/www/html/mvc/sass/_typography.scss */
+/* line 137, /var/www/html/mvc/sass/_typography.scss */
 .a, .typography a, .typography a:visited, .footer-menu-link {
   border-bottom-width: 1px;
   border-bottom-style: solid;
   color: #2FADDD;
-  border-bottom-color: rgba(255, 255, 255, 0); }
+  border-bottom-color: #2FADDD; }
   /* line 44, /var/www/html/mvc/sass/_mixin.scss */
   .a:hover, .typography a:hover, .footer-menu-link:hover {
     color: #258ab0;
@@ -461,15 +449,12 @@ h1, h2, h3, h4, h5, h6 {
   .a:focus, .typography a:focus, .footer-menu-link:focus, .a:active, .typography a:active, .footer-menu-link:active {
     color: #17566e;
     border-bottom-color: #17566e; }
-  @media only screen and (max-width: 1024px) {
-    .a, .typography a, .typography a:visited, .footer-menu-link {
-      border-bottom-color: #258ab0; } }
   /* line 32, /var/www/html/mvc/sass/_mixin.scss */
   .a:visited, .typography a:visited, .footer-menu-link:visited {
     border-bottom-width: 1px;
     border-bottom-style: solid;
     color: #2FADDD;
-    border-bottom-color: rgba(255, 255, 255, 0); }
+    border-bottom-color: #2FADDD; }
     /* line 44, /var/www/html/mvc/sass/_mixin.scss */
     .a:visited:hover, .typography a:visited:hover, .footer-menu-link:visited:hover {
       color: #258ab0;
@@ -478,19 +463,16 @@ h1, h2, h3, h4, h5, h6 {
     .a:visited:focus, .typography a:visited:focus, .footer-menu-link:visited:focus, .a:visited:active, .typography a:visited:active, .footer-menu-link:visited:active {
       color: #17566e;
       border-bottom-color: #17566e; }
-    @media only screen and (max-width: 1024px) {
-      .a:visited, .typography a:visited, .footer-menu-link:visited {
-        border-bottom-color: #258ab0; } }
 
-/* line 142, /var/www/html/mvc/sass/_typography.scss */
+/* line 144, /var/www/html/mvc/sass/_typography.scss */
 .typography a, .typography a:visited {
   line-height: 1.5;
   word-break: break-all; }
-/* line 149, /var/www/html/mvc/sass/_typography.scss */
+/* line 151, /var/www/html/mvc/sass/_typography.scss */
 .typography a:hover, .typography a:focus {
-  color: #FFC32E;
-  border-bottom-color: #FFC32E; }
-/* line 154, /var/www/html/mvc/sass/_typography.scss */
+  color: #17566e;
+  border-bottom-color: #17566e; }
+/* line 156, /var/www/html/mvc/sass/_typography.scss */
 .typography *:focus {
   outline: none; }
 
@@ -1166,11 +1148,48 @@ img.mfp-img {
     -ms-transform: translateY(-20px);
     transform: translateY(-20px); } }
 
+/* line 1, /var/www/html/mvc/sass/_to-top.scss */
+.to-top {
+  -webkit-transition: all 200ms;
+  -moz-transition: all 200ms;
+  transition: all 200ms;
+  position: fixed;
+  bottom: -70px;
+  right: 0;
+  border-radius: 3px 0 0 0;
+  width: 44px;
+  height: 44px;
+  z-index: 1;
+  background-color: #2FADDD; }
+  /* line 12, /var/www/html/mvc/sass/_to-top.scss */
+  .to-top:hover {
+    background-color: #FFC32E; }
+  /* line 16, /var/www/html/mvc/sass/_to-top.scss */
+  .to-top.is-active {
+    bottom: 0; }
+    @media only screen and (min-width: 600px) {
+      .to-top.is-active {
+        bottom: 1em; } }
+  @media only screen and (min-width: 600px) {
+    .to-top {
+      right: 1em;
+      border-radius: 3px; } }
+
+/* line 34, /var/www/html/mvc/sass/_to-top.scss */
+.to-top-image {
+  position: absolute;
+  top: 12px;
+  left: 14px;
+  width: 17px;
+  height: 17px;
+  fill: #fff; }
+
 /* line 1, /var/www/html/mvc/app/site/mwyatt/sass/_misc.scss */
 body {
-  background-color: #fff; }
+  background-color: #fff;
+  margin: 0; }
 
-/* line 5, /var/www/html/mvc/app/site/mwyatt/sass/_misc.scss */
+/* line 6, /var/www/html/mvc/app/site/mwyatt/sass/_misc.scss */
 .logo {
   -webkit-transition: 200ms ease;
   -moz-transition: 200ms ease;
@@ -1179,7 +1198,7 @@ body {
   width: 7em;
   fill: #2FADDD;
   margin-right: auto; }
-  /* line 12, /var/www/html/mvc/app/site/mwyatt/sass/_misc.scss */
+  /* line 13, /var/www/html/mvc/app/site/mwyatt/sass/_misc.scss */
   .logo:hover {
     -webkit-transform: scale(1.1);
     -moz-transform: scale(1.1);
@@ -1187,12 +1206,12 @@ body {
     -o-transform: scale(1.1);
     transform: scale(1.1); }
 
-/* line 17, /var/www/html/mvc/app/site/mwyatt/sass/_misc.scss */
+/* line 18, /var/www/html/mvc/app/site/mwyatt/sass/_misc.scss */
 svg {
   width: 100%;
   height: 100%; }
 
-/* line 22, /var/www/html/mvc/app/site/mwyatt/sass/_misc.scss */
+/* line 23, /var/www/html/mvc/app/site/mwyatt/sass/_misc.scss */
 .header-button-mobile-menu {
   display: block;
   float: right;
@@ -1200,24 +1219,7 @@ svg {
   fill: #2FADDD;
   height: 3em; }
 
-/* line 20, /var/www/html/mvc/sass/vendor/bourbon/addons/_clearfix.scss */
-.skills::after {
-  clear: both;
-  content: "";
-  display: table; }
-
-/* line 34, /var/www/html/mvc/app/site/mwyatt/sass/_misc.scss */
-.skill {
-  float: left;
-  width: 31%;
-  padding: 1%;
-  margin: 1%;
-  background: #eee;
-  height: 6em;
-  text-align: center;
-  border-radius: 5px; }
-
-/* line 47, /var/www/html/mvc/app/site/mwyatt/sass/_misc.scss */
+/* line 31, /var/www/html/mvc/app/site/mwyatt/sass/_misc.scss */
 .heading-home {
   text-align: center;
   margin: 5% 0;
@@ -1225,7 +1227,7 @@ svg {
   font-weight: 400;
   padding: 1% 0; }
 
-/* line 58, /var/www/html/mvc/app/site/mwyatt/sass/_misc.scss */
+/* line 42, /var/www/html/mvc/app/site/mwyatt/sass/_misc.scss */
 .about-me {
   line-height: 1.7;
   margin-left: 0;
@@ -1233,216 +1235,107 @@ svg {
   margin-top: 4%;
   margin-bottom: 4%; }
 
-/* line 66, /var/www/html/mvc/app/site/mwyatt/sass/_misc.scss */
-.header-logo {
-  width: 90px;
-  height: 47px;
-  display: block;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  float: left;
-  fill: #2FADDD;
-  margin-left: 50%;
-  position: relative;
-  left: -45px; }
-
-/* line 79, /var/www/html/mvc/app/site/mwyatt/sass/_misc.scss */
-.header-logo-image {
-  width: 100%;
-  height: 100%; }
-
 /* line 20, /var/www/html/mvc/sass/vendor/bourbon/addons/_clearfix.scss */
 .page::after {
   clear: both;
   content: "";
   display: table; }
 
-/* line 88, /var/www/html/mvc/app/site/mwyatt/sass/_misc.scss */
+/* line 54, /var/www/html/mvc/app/site/mwyatt/sass/_misc.scss */
 .page-container {
-  max-width: 1024px;
+  max-width: 900px;
   margin: 0 auto; }
 
-/* line 5, /var/www/html/mvc/app/site/mwyatt/sass/_header.scss */
+/* line 59, /var/www/html/mvc/app/site/mwyatt/sass/_misc.scss */
+.site-wrap {
+  border-top: 5px solid #2FADDD; }
+
+/* line 2, /var/www/html/mvc/app/site/mwyatt/sass/_header.scss */
 .header-bar {
-  -webkit-transition: all 300ms ease;
-  -moz-transition: all 300ms ease;
-  transition: all 300ms ease;
-  background-color: #fff;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1;
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.1); }
+  position: relative; }
 
-/* line 16, /var/www/html/mvc/app/site/mwyatt/sass/_header.scss */
-.header-bar-height {
-  height: 67px; }
-
-/* line 20, /var/www/html/mvc/app/site/mwyatt/sass/_header.scss */
-.is-scrolling-down .header-bar {
-  top: -72px; }
-
-/* line 24, /var/www/html/mvc/app/site/mwyatt/sass/_header.scss */
-.header-bar-height {
-  height: 67px; }
-  @media only screen and (min-width: 600px) {
-    .header-bar-height {
-      height: 70px; } }
-
-/* line 32, /var/www/html/mvc/app/site/mwyatt/sass/_header.scss */
-.is-scrolling-down .header-bar {
-  top: -72px; }
-  @media only screen and (min-width: 600px) {
-    .is-scrolling-down .header-bar {
-      top: -75px; } }
-
-/* line 40, /var/www/html/mvc/app/site/mwyatt/sass/_header.scss */
-.menu-primary-container:hover .menu-primary {
-  right: 0; }
-
-/* line 44, /var/www/html/mvc/app/site/mwyatt/sass/_header.scss */
-.menu-primary {
-  -webkit-transition: all 200ms;
-  -moz-transition: all 200ms;
-  transition: all 200ms;
-  position: absolute;
-  top: 67px;
-  right: -203px;
-  width: 200px;
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.1); }
-
-/* line 54, /var/www/html/mvc/app/site/mwyatt/sass/_header.scss */
-.menu-primary-is-active .menu-primary {
-  right: 0; }
-
-/* line 59, /var/www/html/mvc/app/site/mwyatt/sass/_header.scss */
-.is-scrolling-down .menu-primary {
-  right: -200px; }
-
-/* line 63, /var/www/html/mvc/app/site/mwyatt/sass/_header.scss */
+/* line 6, /var/www/html/mvc/app/site/mwyatt/sass/_header.scss */
 .menu-primary-level-1-link {
-  display: block;
-  background-color: white;
-  padding: 11px 14px;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  color: #2FADDD;
+  border-bottom-color: #2FADDD;
+  border-bottom-width: 2px;
   font-weight: 600;
-  color: #2FADDD; }
+  margin-left: 30px;
+  font-size: 16px; }
+  /* line 44, /var/www/html/mvc/sass/_mixin.scss */
+  .menu-primary-level-1-link:hover {
+    color: #258ab0;
+    border-bottom-color: #258ab0; }
+  /* line 50, /var/www/html/mvc/sass/_mixin.scss */
+  .menu-primary-level-1-link:focus, .menu-primary-level-1-link:active {
+    color: #17566e;
+    border-bottom-color: #17566e; }
+  /* line 32, /var/www/html/mvc/sass/_mixin.scss */
+  .menu-primary-level-1-link:visited {
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    color: #2FADDD;
+    border-bottom-color: #2FADDD; }
+    /* line 44, /var/www/html/mvc/sass/_mixin.scss */
+    .menu-primary-level-1-link:visited:hover {
+      color: #258ab0;
+      border-bottom-color: #258ab0; }
+    /* line 50, /var/www/html/mvc/sass/_mixin.scss */
+    .menu-primary-level-1-link:visited:focus, .menu-primary-level-1-link:visited:active {
+      color: #17566e;
+      border-bottom-color: #17566e; }
+  /* line 13, /var/www/html/mvc/app/site/mwyatt/sass/_header.scss */
+  .menu-primary-level-1-link:first-child {
+    margin-left: 0; }
 
-/* line 1, /var/www/html/mvc/app/site/mwyatt/sass/_menu-hamburger.scss */
-.menu-hamburger {
-  -webkit-transition: all 200ms ease;
-  -moz-transition: all 200ms ease;
-  transition: all 200ms ease;
+/* line 18, /var/www/html/mvc/app/site/mwyatt/sass/_header.scss */
+.header-logo-container {
+  position: relative; }
+
+/* line 22, /var/www/html/mvc/app/site/mwyatt/sass/_header.scss */
+.header-logo {
   display: block;
-  position: relative;
-  width: 25px;
-  float: right;
-  padding: 9px 0;
-  margin: 23px; }
-  /* line 12, /var/www/html/mvc/app/site/mwyatt/sass/_menu-hamburger.scss */
-  .menu-hamburger .menu-hamburger-meat, .menu-hamburger:before, .menu-hamburger:after {
-    -webkit-transition: all 300ms ease;
-    -moz-transition: all 300ms ease;
-    transition: all 300ms ease;
-    -webkit-transform-origin: center center;
-    -moz-transform-origin: center center;
-    -ms-transform-origin: center center;
-    -o-transform-origin: center center;
-    transform-origin: center center;
-    height: 2px;
-    background-color: #2FADDD; }
-  /* line 19, /var/www/html/mvc/app/site/mwyatt/sass/_menu-hamburger.scss */
-  .menu-hamburger .menu-hamburger-meat {
-    display: block; }
-  /* line 24, /var/www/html/mvc/app/site/mwyatt/sass/_menu-hamburger.scss */
-  .menu-hamburger:before, .menu-hamburger:after {
-    content: '';
-    width: 100%;
-    position: absolute;
-    left: 0; }
-  /* line 31, /var/www/html/mvc/app/site/mwyatt/sass/_menu-hamburger.scss */
-  .menu-hamburger:before {
-    top: 0; }
-  /* line 35, /var/www/html/mvc/app/site/mwyatt/sass/_menu-hamburger.scss */
-  .menu-hamburger:after {
-    bottom: 0; }
+  fill: #2FADDD;
+  margin: 0 auto; }
+  @media only screen and (max-width: 599px) {
+    .header-logo {
+      width: 90px;
+      height: 47px; } }
   @media only screen and (min-width: 600px) {
-    .menu-hamburger {
-      margin: 24px 24px; } }
+    .header-logo {
+      width: 120px;
+      height: 62px; } }
 
-/* line 47, /var/www/html/mvc/app/site/mwyatt/sass/_menu-hamburger.scss */
-.menu-primary-container:hover .menu-hamburger .menu-hamburger-meat, .menu-primary-is-active .menu-hamburger .menu-hamburger-meat {
-  opacity: 0; }
-/* line 52, /var/www/html/mvc/app/site/mwyatt/sass/_menu-hamburger.scss */
-.menu-primary-container:hover .menu-hamburger:before, .menu-primary-container:hover .menu-hamburger:after, .menu-primary-is-active .menu-hamburger:before, .menu-primary-is-active .menu-hamburger:after {
-  opacity: 1; }
-/* line 56, /var/www/html/mvc/app/site/mwyatt/sass/_menu-hamburger.scss */
-.menu-primary-container:hover .menu-hamburger:before, .menu-primary-is-active .menu-hamburger:before {
-  -webkit-transform: rotate(45deg);
-  -moz-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  -o-transform: rotate(45deg);
-  transform: rotate(45deg);
-  top: 9px; }
-/* line 61, /var/www/html/mvc/app/site/mwyatt/sass/_menu-hamburger.scss */
-.menu-primary-container:hover .menu-hamburger:after, .menu-primary-is-active .menu-hamburger:after {
-  -webkit-transform: rotate(-45deg);
-  -moz-transform: rotate(-45deg);
-  -ms-transform: rotate(-45deg);
-  -o-transform: rotate(-45deg);
-  transform: rotate(-45deg);
-  bottom: 9px; }
-
-/* line 67, /var/www/html/mvc/app/site/mwyatt/sass/_menu-hamburger.scss */
-.menu-hamburger {
-  margin: 0;
-  position: relative;
-  top: 3px;
-  right: 5px; }
-
-/* line 74, /var/www/html/mvc/app/site/mwyatt/sass/_menu-hamburger.scss */
-.menu-hamburger-container {
-  padding: 21px;
-  display: block;
-  width: 67px;
-  position: absolute;
-  top: 0;
-  right: 0;
-  height: 67px; }
-
-/* line 1, /var/www/html/mvc/app/site/mwyatt/sass/_to-top.scss */
-.to-top {
-  -webkit-transition: bottom 200ms;
-  -moz-transition: bottom 200ms;
-  transition: bottom 200ms;
-  position: fixed;
-  bottom: -50px;
-  right: 1em;
-  width: 44px;
-  height: 44px;
-  z-index: 1;
-  background-color: #2FADDD;
-  padding: 12px 11px;
-  border-radius: 5px;
-  fill: #fff; }
-  /* line 14, /var/www/html/mvc/app/site/mwyatt/sass/_to-top.scss */
-  .to-top:hover {
-    background-color: #5bbee4; }
-  /* line 18, /var/www/html/mvc/app/site/mwyatt/sass/_to-top.scss */
-  .to-top.is-active {
-    bottom: 1em; }
-  /* line 22, /var/www/html/mvc/app/site/mwyatt/sass/_to-top.scss */
-  .to-top svg {
-    width: 20px;
-    height: 20px;
-    position: relative;
-    top: -2px;
-    left: 1px; }
-
-/* line 31, /var/www/html/mvc/app/site/mwyatt/sass/_to-top.scss */
-.to-top-image {
+/* line 39, /var/www/html/mvc/app/site/mwyatt/sass/_header.scss */
+.header-logo-image {
   width: 100%;
-  height: auto; }
+  height: 100%; }
+
+@media only screen and (max-width: 599px) {
+  .header {
+    padding: 1em 0; } }
+@media only screen and (min-width: 600px) and (max-width: 1199px) {
+  .header {
+    padding: 2em 0; } }
+@media only screen and (min-width: 1200px) {
+  .header {
+    padding: 3em 0; } }
+
+@media only screen and (max-width: 599px) {
+  .header-logo-container {
+    margin-bottom: 1em; } }
+@media only screen and (min-width: 600px) and (max-width: 1199px) {
+  .header-logo-container {
+    margin-bottom: 2em; } }
+@media only screen and (min-width: 1200px) {
+  .header-logo-container {
+    margin-bottom: 3em; } }
+
+/* line 74, /var/www/html/mvc/app/site/mwyatt/sass/_header.scss */
+.menu-primary-container {
+  text-align: center; }
 
 /* line 1, /var/www/html/mvc/app/site/mwyatt/sass/_project.scss */
 .projects {
@@ -1465,51 +1358,63 @@ svg {
   display: block;
   float: left; }
   /* line 13, /var/www/html/mvc/app/site/mwyatt/sass/_project.scss */
-  .project:hover .project-description {
-    bottom: 0; }
+  .project:hover {
+    -webkit-transform: scale(.95);
+    -moz-transform: scale(.95);
+    -ms-transform: scale(.95);
+    -o-transform: scale(.95);
+    transform: scale(.95); }
   /* line 17, /var/www/html/mvc/app/site/mwyatt/sass/_project.scss */
+  .project:active {
+    -webkit-transform: scale(.9);
+    -moz-transform: scale(.9);
+    -ms-transform: scale(.9);
+    -o-transform: scale(.9);
+    transform: scale(.9); }
+  /* line 21, /var/www/html/mvc/app/site/mwyatt/sass/_project.scss */
   .project.is-audio-visual-online {
     background-color: #81ae28;
     background-image: -webkit-linear-gradient(#81ae28, #74a611);
     background-image: linear-gradient(#81ae28, #74a611); }
-  /* line 21, /var/www/html/mvc/app/site/mwyatt/sass/_project.scss */
+  /* line 25, /var/www/html/mvc/app/site/mwyatt/sass/_project.scss */
   .project.is-elttl {
     background-color: #f1852f;
     background-image: -webkit-linear-gradient(#f1852f, #F07818);
     background-image: linear-gradient(#f1852f, #F07818); }
-  /* line 25, /var/www/html/mvc/app/site/mwyatt/sass/_project.scss */
+  /* line 29, /var/www/html/mvc/app/site/mwyatt/sass/_project.scss */
   .project.is-claire {
     background-color: #cf4975;
     background-image: -webkit-linear-gradient(#cf4975, #ca3566);
     background-image: linear-gradient(#cf4975, #ca3566); }
-  /* line 29, /var/www/html/mvc/app/site/mwyatt/sass/_project.scss */
+  /* line 33, /var/www/html/mvc/app/site/mwyatt/sass/_project.scss */
   .project.is-brunoco {
     background-color: #239dfe;
     background-image: -webkit-linear-gradient(#239dfe, #0b93fe);
     background-image: linear-gradient(#239dfe, #0b93fe); }
-  /* line 33, /var/www/html/mvc/app/site/mwyatt/sass/_project.scss */
+  /* line 37, /var/www/html/mvc/app/site/mwyatt/sass/_project.scss */
   .project.is-fisual {
     background-color: #d13f2c;
     background-image: -webkit-linear-gradient(#d13f2c, #cc2a15);
     background-image: linear-gradient(#d13f2c, #cc2a15); }
-  /* line 37, /var/www/html/mvc/app/site/mwyatt/sass/_project.scss */
-  .project.is-av-distribution {
-    background-color: #81ae28;
-    background-image: -webkit-linear-gradient(#81ae28, #74a611);
-    background-image: linear-gradient(#81ae28, #74a611); }
   /* line 41, /var/www/html/mvc/app/site/mwyatt/sass/_project.scss */
+  .project.is-av-distribution {
+    background-color: #5c840d;
+    background-image: -webkit-linear-gradient(#5c840d, #51740b);
+    background-image: linear-gradient(#5c840d, #51740b); }
+  /* line 45, /var/www/html/mvc/app/site/mwyatt/sass/_project.scss */
   .project.is-get-hd-sound {
     background-color: #866948;
     background-image: -webkit-linear-gradient(#866948, #795934);
     background-image: linear-gradient(#866948, #795934); }
-  /* line 45, /var/www/html/mvc/app/site/mwyatt/sass/_project.scss */
+  /* line 49, /var/www/html/mvc/app/site/mwyatt/sass/_project.scss */
   .project.is-simply-stands {
     background-color: #474747;
     background-image: -webkit-linear-gradient(#474747, #333333);
     background-image: linear-gradient(#474747, #333333); }
   @media only screen and (max-width: 699px) {
     .project {
-      height: 200px; } }
+      height: 200px;
+      width: 100%; } }
   @media only screen and (max-width: 399px) {
     .project {
       height: 160px; } }
@@ -1521,106 +1426,151 @@ svg {
       width: 33.3%;
       height: 250px; } }
 
-/* line 67, /var/www/html/mvc/app/site/mwyatt/sass/_project.scss */
-.touch .project-description {
-  bottom: 0; }
-
-/* line 73, /var/www/html/mvc/app/site/mwyatt/sass/_project.scss */
-.no-touch .project:active {
-  opacity: .8; }
-
-/* line 78, /var/www/html/mvc/app/site/mwyatt/sass/_project.scss */
+/* line 72, /var/www/html/mvc/app/site/mwyatt/sass/_project.scss */
 .project-description {
   -webkit-transition: bottom 200ms;
   -moz-transition: bottom 200ms;
   transition: bottom 200ms;
   position: absolute;
-  bottom: -60px;
   left: 0;
   right: 0;
-  padding-top: 1em;
-  padding-left: 1em;
-  padding-bottom: 1em;
-  padding-right: 75px;
   background-color: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
-  color: #fff; }
+  color: #fff;
+  padding: 9px 10px 10px;
+  bottom: 0; }
+  /* line 20, /var/www/html/mvc/sass/vendor/bourbon/addons/_clearfix.scss */
+  .project-description::after {
+    clear: both;
+    content: "";
+    display: table; }
 
-/* line 93, /var/www/html/mvc/app/site/mwyatt/sass/_project.scss */
+/* line 84, /var/www/html/mvc/app/site/mwyatt/sass/_project.scss */
 .project-logo {
   fill: #fff;
   display: block;
   padding: 5%;
   margin: 0 auto;
   padding: 20px; }
-  @media only screen and (max-width: 599px) {
+  @media only screen and (max-width: 399px) {
     .project-logo {
-      height: 106px; } }
-  @media only screen and (min-width: 600px) and (max-width: 699px) {
+      height: 120px; } }
+  @media only screen and (min-width: 400px) and (max-width: 699px) {
     .project-logo {
-      height: 146px; } }
+      height: 160px; } }
   @media only screen and (min-width: 700px) {
     .project-logo {
-      height: 174px; } }
+      height: 210px; } }
 
-@media only screen and (max-width: 599px) {
-  .no-touch .project-logo {
-    height: 156px; } }
-@media only screen and (min-width: 600px) and (max-width: 699px) {
-  .no-touch .project-logo {
-    height: 196px; } }
-@media only screen and (min-width: 700px) {
-  .no-touch .project-logo {
-    height: 224px; } }
-
-/* line 129, /var/www/html/mvc/app/site/mwyatt/sass/_project.scss */
+/* line 104, /var/www/html/mvc/app/site/mwyatt/sass/_project.scss */
 .project-logo-image {
   width: auto;
   height: auto; }
 
-/* line 134, /var/www/html/mvc/app/site/mwyatt/sass/_project.scss */
+/* line 109, /var/www/html/mvc/app/site/mwyatt/sass/_project.scss */
 .project-title {
   font-weight: 600;
-  display: block; }
+  display: block;
+  float: left; }
 
-/* line 139, /var/www/html/mvc/app/site/mwyatt/sass/_project.scss */
+/* line 115, /var/www/html/mvc/app/site/mwyatt/sass/_project.scss */
 .project-button-primary {
-  -webkit-transition: background-color 100ms linear;
-  -moz-transition: background-color 100ms linear;
-  transition: background-color 100ms linear;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  color: #fff;
+  border-bottom-color: #fff;
   font-weight: 600;
-  cursor: pointer;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  text-align: center;
-  line-height: 1;
-  padding: 7px 10px;
-  background-color: #fff;
-  color: #2FADDD;
-  position: absolute;
-  bottom: 12px;
-  right: 12px; }
-  /* line 19, /var/www/html/mvc/sass/_mixin.scss */
+  border-width: 2px;
+  font-size: 14px;
+  float: right; }
+  /* line 44, /var/www/html/mvc/sass/_mixin.scss */
   .project-button-primary:hover {
-    background-color: white; }
-  /* line 23, /var/www/html/mvc/sass/_mixin.scss */
-  .project-button-primary:active {
-    background-color: #c9c9c9; }
+    color: #cccccc;
+    border-bottom-color: #cccccc; }
+  /* line 50, /var/www/html/mvc/sass/_mixin.scss */
+  .project-button-primary:focus, .project-button-primary:active {
+    color: #7f7f7f;
+    border-bottom-color: #7f7f7f; }
+  /* line 32, /var/www/html/mvc/sass/_mixin.scss */
+  .project-button-primary:visited {
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    color: #fff;
+    border-bottom-color: #fff; }
+    /* line 44, /var/www/html/mvc/sass/_mixin.scss */
+    .project-button-primary:visited:hover {
+      color: #cccccc;
+      border-bottom-color: #cccccc; }
+    /* line 50, /var/www/html/mvc/sass/_mixin.scss */
+    .project-button-primary:visited:focus, .project-button-primary:visited:active {
+      color: #7f7f7f;
+      border-bottom-color: #7f7f7f; }
 
 /* line 1, /var/www/html/mvc/app/site/mwyatt/sass/_home.scss */
 .panel-heading {
   margin-top: 0;
   margin-bottom: .5em; }
 
-/* line 11, /var/www/html/mvc/app/site/mwyatt/sass/_home.scss */
-.panel {
-  padding-bottom: 20px; }
+/* line 20, /var/www/html/mvc/sass/vendor/bourbon/addons/_clearfix.scss */
+.panel::after {
+  clear: both;
+  content: "";
+  display: table; }
+
+@media only screen and (max-width: 999px) {
+  .panel-padded {
+    padding: 5%; } }
+@media only screen and (min-width: 1000px) {
+  .panel-padded {
+    margin: 3em 0; } }
+
+/* line 27, /var/www/html/mvc/app/site/mwyatt/sass/_home.scss */
+.skills {
+  float: left;
+  width: 100%; }
   /* line 20, /var/www/html/mvc/sass/vendor/bourbon/addons/_clearfix.scss */
-  .panel::after {
+  .skills::after {
     clear: both;
     content: "";
     display: table; }
+
+/* line 31, /var/www/html/mvc/app/site/mwyatt/sass/_home.scss */
+.skill {
+  -webkit-transition: background-color 200ms;
+  -moz-transition: background-color 200ms;
+  transition: background-color 200ms;
+  background-color: #d5eef8;
+  color: #17566e;
+  border-radius: 3px;
+  padding: 1em;
+  margin-bottom: 5%; }
+  /* line 39, /var/www/html/mvc/app/site/mwyatt/sass/_home.scss */
+  .skill:hover {
+    background-color: #eaf6fb;
+    color: #2381a5; }
+  @media only screen and (min-width: 600px) and (max-width: 899px) {
+    .skill {
+      float: left;
+      width: 47.5%;
+      margin-right: 5%; }
+      /* line 47, /var/www/html/mvc/app/site/mwyatt/sass/_home.scss */
+      .skill:nth-child(2n) {
+        margin-right: 0; } }
+  @media only screen and (min-width: 900px) and (max-width: 1199px) {
+    .skill {
+      float: left;
+      width: 30%;
+      margin-right: 5%; }
+      /* line 55, /var/www/html/mvc/app/site/mwyatt/sass/_home.scss */
+      .skill:nth-child(3n) {
+        margin-right: 0; } }
+  @media only screen and (min-width: 1200px) {
+    .skill {
+      float: left;
+      width: 21.25%;
+      margin-right: 5%; }
+      /* line 63, /var/www/html/mvc/app/site/mwyatt/sass/_home.scss */
+      .skill:nth-child(4n) {
+        margin-right: 0; } }
 
 /* line 1, /var/www/html/mvc/app/site/mwyatt/sass/_project-single.scss */
 .is-audio-visual-online {
@@ -1673,13 +1623,13 @@ svg {
 
 /* line 1, /var/www/html/mvc/app/site/mwyatt/sass/_footer.scss */
 .container-footer {
-  border-top: 1px dotted #ccc;
-  padding-bottom: 20%; }
+  border-top: 1px solid #97d6ee;
+  padding: 5%; }
 
 /* line 6, /var/www/html/mvc/app/site/mwyatt/sass/_footer.scss */
 .footer-inner {
-  padding-left: 5%;
-  padding-right: 5%; }
+  margin: 0 auto;
+  max-width: 900px; }
   /* line 20, /var/www/html/mvc/sass/vendor/bourbon/addons/_clearfix.scss */
   .footer-inner::after {
     clear: both;
@@ -1705,5 +1655,57 @@ svg {
   @media only screen and (min-width: 500px) {
     .footer-menu-link {
       margin: 0 2em 2em 0; } }
+
+/* line 36, /var/www/html/mvc/app/site/mwyatt/sass/_footer.scss */
+.footer-profile-avatar {
+  width: 140px;
+  height: 140px;
+  overflow: hidden;
+  border-radius: 100%;
+  margin: 0 auto;
+  margin-bottom: 2em; }
+  @media only screen and (min-width: 400px) {
+    .footer-profile-avatar {
+      position: absolute;
+      top: 0;
+      left: 0; } }
+
+/* line 51, /var/www/html/mvc/app/site/mwyatt/sass/_footer.scss */
+.footer-profile-avatar-image {
+  width: 100%;
+  height: 100%; }
+
+/* line 56, /var/www/html/mvc/app/site/mwyatt/sass/_footer.scss */
+.footer-profile {
+  margin-bottom: 1em;
+  position: relative;
+  min-height: 140px; }
+  /* line 20, /var/www/html/mvc/sass/vendor/bourbon/addons/_clearfix.scss */
+  .footer-profile::after {
+    clear: both;
+    content: "";
+    display: table; }
+  @media only screen and (min-width: 400px) {
+    .footer-profile {
+      padding-left: 170px; } }
+  @media only screen and (min-width: 700px) {
+    .footer-profile {
+      float: left;
+      width: 58%; } }
+
+/* line 20, /var/www/html/mvc/sass/vendor/bourbon/addons/_clearfix.scss */
+.footer-menu::after {
+  clear: both;
+  content: "";
+  display: table; }
+
+@media only screen and (min-width: 700px) {
+  .footer-contact {
+    float: right;
+    width: 32%; } }
+
+/* line 89, /var/www/html/mvc/app/site/mwyatt/sass/_footer.scss */
+.footer-profile-greeting {
+  margin-top: 0; }
 
 /*# sourceMappingURL=common.css.map */
