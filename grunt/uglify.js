@@ -1,8 +1,8 @@
 module.exports = {
   all: {
     files: {
-      'asset/main.min.js': ['asset/main.min.js'],
-      'asset/admin/main.min.js': ['asset/admin/main.min.js']
+      'asset/main.js': ['asset/main.js'],
+      'asset/admin/main.js': ['asset/admin/main.js']
     }
   }
 };
