@@ -28,7 +28,7 @@
 <?php include $this->getTemplatePath('_require-config') ?>
 
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="<?php echo $this->url->generate() ?>asset/vendor/jquery.js"><\/script>')</script>
-        <script src="<?php echo $this->url->generate() ?>asset/main.js"></script>
+        <script>window.jQuery || document.write('<script src="<?php echo $this->getUrlAsset(\'vendor/jquery.js\') ?>"><\/script>')</script>
+        <script src="<?php echo $this->getUrlAsset('main.js') ?>"></script>
     </body>
 </html>
