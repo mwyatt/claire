@@ -166,18 +166,21 @@ class View extends \OriginalAppName\Data
 
 	/**
 	 * returns an absolute url of the asset complete with asset version
-	 * @param  [type] $url [description]
-	 * @return [type]      [description]
+	 * @param  string $append path to asset
+	 * @return string         url of asset with modified time
 	 */
-	public function getUrlAsset($url)
+	public function getUrlAsset($append)
 	{
-		return $this->url->generate() . 'asset' . US . $url . $this->getAssetVersion();
-	}
 
+		// resource
+		$middle = 'asset' . US . $append;
 
-	public function getAssetVersion()
-	{
-		return '?v=' . ASSET_VERSION;
+		// get file modified time
+		$filePath = BASE_PATH . $middle;
+		$modifiedTime = filemtime($filePath);
+
+		// return url to asset with modified time as query var
+		return $this->url->generate() . $middle . '?' . $modifiedTime;
 	}
 
 
