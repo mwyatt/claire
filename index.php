@@ -85,16 +85,6 @@ define('SITE_PATH', APP_PATH . 'Site' . DS . ucfirst(SITE) . DS);
 
 
 /**
- * site configuration
- */
-$configSite = include SITE_PATH . 'config' . EXT;
-if (! isset($configSite['assetVersion'])) {
-	exit('please specify a site config');
-}
-define('ASSET_VERSION', $configSite['assetVersion']);
-
-
-/**
  * boot
  */
 include APP_PATH . 'ini' . EXT;
