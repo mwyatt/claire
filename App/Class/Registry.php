@@ -28,19 +28,22 @@ class Registry
 
 
 	public function set($key, $value) {
-		if (isset($this->registry[$key])) {
-			throw new \Exception('There is already an entry for key ' . $key);
-		}
 
+		// dont see a need for this
+		// if (isset($this->registry[$key])) {
+		// 	throw new \Exception('There is already an entry for key ' . $key);
+		// }
 		$this->registry[$key] = $value;
 	}
 
+
 	public function get($key) {
 		if (! isset($this->registry[$key])) {
+
+			// this meant that when asking for 'database' there would just be an exception
 			// throw new \Exception('There is no entry for key ' . $key);
 			return;
 		}
-
 		return $this->registry[$key];
 	}
 }

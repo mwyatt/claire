@@ -25,7 +25,8 @@ session_start();
 $registry = OriginalAppName\Registry::getInstance();
 $registry->set('system', new OriginalAppName\System);
 $registry->set('configApp', $configApp);
-$ok = new OriginalAppName\Admin\Session\User\ForgotPassword;
+$url = new OriginalAppName\Url;
+$registry->set('url', $url);
 
 
 /**
@@ -39,7 +40,6 @@ $route->readRoutes();
 /**
  * url must contain a reference to the routes
  */
-$url = new OriginalAppName\Url;
 $url->setRoutes($route->getRoutes());
 $registry->set('url', $url);
 

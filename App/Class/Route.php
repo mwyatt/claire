@@ -112,11 +112,17 @@ class Route extends \OriginalAppName\System
 	public function readRoutes()
 	{
 
+		$registry = Registry::getInstance();
+		$url = $registry->get('url');
+
 		// store all routes here
 		$routes = [];
 
 		// admin first because of global ovverides
-		include APP_PATH . 'Admin' . DS . 'route' . EXT;
+		// admin routes only if there is admin in the url
+		if (in_array('admin', $url->getPath())) {
+			include APP_PATH . 'Admin' . DS . 'route' . EXT;
+		}
 
 		// global
 		include APP_PATH . 'route' . EXT;

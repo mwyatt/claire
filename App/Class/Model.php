@@ -3,6 +3,7 @@
 namespace OriginalAppName;
 
 use \PDO;
+use OriginalAppName\Registry;
 
 
 /**
@@ -46,7 +47,7 @@ abstract class Model extends \OriginalAppName\Data
 	 * \OriginalAppName\Database
 	 */
 	public function __construct() {
-		$registry = \OriginalAppName\Registry::getInstance();
+		$registry = Registry::getInstance();
 
 		// if not in registry connect + create
 		if (! $database = $registry->get('database')) {
