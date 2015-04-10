@@ -1,9 +1,10 @@
 error.txt
 /vendor/
 node_modules/
-app/config.php
-app/cache/
+/app/config.php
+/app/cache/
 config.php
 config.json
 credentials.php
 config.json
+/asset/upload/
