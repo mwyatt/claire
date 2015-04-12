@@ -15,6 +15,51 @@ class Test
 {
 
 
+	public function create()
+	{
+		$user = new Entity\User();
+		$user
+			->setEmail('martin.wyatt@gmail.com')
+			->setPassword('')
+			->setNameFirst('Martin')
+			->setNameLast('Wyatt')
+			->setTimeRegistered(time())
+			->setLevel(10);
+		$entityManager->persist($user);
+		$entityManager->flush();
+	}
+
+
+	public function read()
+	{
+		$repository = $entityManager->getRepository('\OriginalAppName\Entity\User');
+		$users = $repository->findAll();
+
+		// single
+		$user = $entityManager->find('\OriginalAppName\Entity\User', 1);
+		
+	}
+
+
+	public function update()
+	{
+		$user = $entityManager->find('\OriginalAppName\Entity\User', 1);
+		$user->setNameFirst('David');
+		$entityManager->flush();
+
+	}
+
+
+	public function delete()
+	{
+		$user = $entityManager->find('\OriginalAppName\Entity\User', 1);
+		$entityManager->remove($user);
+		$entityManager->flush();
+		
+	}
+
+
+
 	public function run()
 	{
 		$this->json();

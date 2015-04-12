@@ -8,7 +8,7 @@ namespace OriginalAppName\Entity\Log\Admin;
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Unseen extends OriginalAppName\Entity
+class Unseen extends \OriginalAppName\Entity
 {
 
 

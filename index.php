@@ -13,75 +13,19 @@ use OriginalAppName;
 
 
 /**
- * directory seperator
+ * constants defined
  */
-define('DS', DIRECTORY_SEPARATOR);
+include 'constant.php';
 
-
-/**
- * url seperator
- */
-define('US', '/');
-
-
-/**
- * class seperator
- */
-define('CS', '_');
-
-
-/**
- * common extension for classes
- */
-define('EXT', '.php');
-
-
-/**
- * possibly unused?
- */
-define('ENV', getenv('APP_ENV'));
-
-
-/**
- * base filepath
- */
-define('BASE_PATH', (string) (__DIR__ . DS));
-
-
-/**
- * handy for file includes
- */
-define('APP_PATH', BASE_PATH . 'App' . DS);
-
-
-/**
- * composer autoloader
- */
-include BASE_PATH . 'vendor' . DS . 'autoload' . EXT;
-
-
-/**
- * app configuration
- */
-$package = json_decode(file_get_contents(BASE_PATH . 'package' . '.json'));
-$configApp = json_decode(file_get_contents(APP_PATH . 'config' . '.json'));
-if (! isset($package->site)) {
-	exit('please specify a app config');
-}
-define('SITE', $package->site);
+// app config
+$configApp = include APP_PATH . 'config' . EXT;
 
 
 /**
  * get error reporting in asap
  * whether it reports errors is determined by config.json
  */
-$error = new OriginalAppName\Error($configApp->errorReporting);
-
-
-/**
- * handy for file includes
- */
-define('SITE_PATH', APP_PATH . 'Site' . DS . ucfirst(SITE) . DS);
+$error = new OriginalAppName\Error($configApp['errorReporting']);
 
 
 /**

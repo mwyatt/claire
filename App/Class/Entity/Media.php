@@ -4,17 +4,25 @@ namespace OriginalAppName\Entity;
 
 
 /**
+ * @Entity @Table(name="media")
  * @author Martin Wyatt <martin.wyatt@gmail.com> 
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Media extends OriginalAppName\Entity
+class Media extends \OriginalAppName\Entity
 {
 
+
+	/**
+     * @Id @GeneratedValue @Column(type="integer")
+	 * @var int
+	 */
+	protected $id;
 
 
 	/**
 	 * main title for the content
+     * @Column(type="string")
 	 * @var string
 	 */
 	private $title;
@@ -22,6 +30,7 @@ class Media extends OriginalAppName\Entity
 	
 	/**
 	 * little description of the image
+     * @Column(type="string")
 	 * @var string
 	 */
 	private $description;
@@ -29,6 +38,7 @@ class Media extends OriginalAppName\Entity
 	
 	/**
 	 * file path to the image
+     * @Column(type="string")
 	 * @var string
 	 */
 	private $path;
@@ -36,6 +46,7 @@ class Media extends OriginalAppName\Entity
 
 	/**
 	 * the type of content
+     * @Column(type="string", length=50)
 	 * @var string
 	 */
 	private $type;
@@ -54,6 +65,7 @@ class Media extends OriginalAppName\Entity
 
 	/**
 	 * epoch time of when the content was created
+     * @Column(type="integer")
 	 * @var int
 	 */
 	private $timePublished;
@@ -61,6 +73,7 @@ class Media extends OriginalAppName\Entity
 
 	/**
 	 * the id of the user which created this content
+     * @Column(type="integer")
 	 * @var int
 	 */
 	private $userId;

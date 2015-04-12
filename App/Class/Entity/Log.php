@@ -4,23 +4,47 @@ namespace OriginalAppName\Entity;
 
 
 /**
+ * @Entity @Table(name="log")
  * @author Martin Wyatt <martin.wyatt@gmail.com> 
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Log extends OriginalAppName\Entity
+class Log extends \OriginalAppName\Entity
 {
 
 
+	/**
+     * @Id @GeneratedValue @Column(type="integer")
+	 * @var int
+	 */
+	protected $id;
+
+
+	/**
+     * @Column(type="string")
+	 * @var string
+	 */
 	private $message;
 
 
+	/**
+     * @Column(type="integer")
+	 * @var int
+	 */
 	private $time;
 
 
+	/**
+     * @Column(type="string")
+	 * @var string
+	 */
 	private $type;
 
 
+	/**
+     * @Column(type="integer")
+	 * @var int
+	 */
 	private $userId;
 
 

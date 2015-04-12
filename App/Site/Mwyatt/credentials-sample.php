@@ -1,9 +1,9 @@
 <?php 
 
-return array(
+return [
     'host' => '',
     'port' => '',
     'basename' => '',
     'username' => '',
     'password' => ''
-);
+];

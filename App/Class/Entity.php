@@ -12,39 +12,6 @@ abstract class Entity
 {
 
 
-	public $id;
-
-
-	/**
-	 * @return int 
-	 */
-	public function getId() {
-	    return $this->id;
-	}
-	
-	
-	/**
-	 * @param int $id 
-	 */
-	public function setId($id) {
-	    $this->id = $id;
-	    return $this;
-	}
-
-
-	/**
-	 * consumes array on build for convinience
-	 * @param array $array 
-	 */
-	public function __construct($array = [])
-	{
-		if (! $array) {
-			return $this;
-		}
-		return $this->consumeArray($array);
-	}
-
-
 	/**
 	 * takes the url object from the registry and passes back the
 	 * absolute url for the website

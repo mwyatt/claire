@@ -4,6 +4,7 @@ namespace OriginalAppName\Entity;
 
 
 /**
+ * @Entity @Table(name="user")
  * @author Martin Wyatt <martin.wyatt@gmail.com> 
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
@@ -13,7 +14,15 @@ class User extends \OriginalAppName\Entity
 
 
 	/**
+     * @Id @GeneratedValue @Column(type="integer")
+	 * @var int
+	 */
+	protected $id;
+
+
+	/**
 	 * email address for the user, also used for logging in
+     * @Column(type="string")
 	 * @var string
 	 */
 	private $email;
@@ -21,6 +30,7 @@ class User extends \OriginalAppName\Entity
 
 	/**
 	 * password for the user stored as sha5
+     * @Column(type="string", nullable=true)
 	 * @var string
 	 */
 	private $password;
@@ -28,6 +38,7 @@ class User extends \OriginalAppName\Entity
 
 	/**
 	 * first name
+     * @Column(type="string")
 	 * @var string
 	 */
 	private $nameFirst;
@@ -35,6 +46,7 @@ class User extends \OriginalAppName\Entity
 
 	/**
 	 * last name
+     * @Column(type="string")
 	 * @var string
 	 */
 	private $nameLast;
@@ -42,6 +54,7 @@ class User extends \OriginalAppName\Entity
 
 	/**
 	 * epoch time of registering
+	 * @Column(type="integer")
 	 * @var int
 	 */
 	private $timeRegistered;
@@ -49,9 +62,19 @@ class User extends \OriginalAppName\Entity
 
 	/**
 	 * value for determining the permissions
+	 * @Column(type="integer")
 	 * @var int
 	 */
 	private $level;
+
+
+	/**
+	 * @return int 
+	 */
+	public function getId()
+	{
+		return $this->id;
+	}
 
 
 	/**

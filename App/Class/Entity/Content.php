@@ -4,6 +4,7 @@ namespace OriginalAppName\Entity;
 
 
 /**
+ * @Entity @Table(name="content")
  * @author Martin Wyatt <martin.wyatt@gmail.com> 
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
@@ -13,7 +14,15 @@ class Content extends \OriginalAppName\Entity
 
 
 	/**
+     * @Id @GeneratedValue @Column(type="integer")
+	 * @var int
+	 */
+	protected $id;
+
+
+	/**
 	 * main title for the content
+     * @Column(type="string")
 	 * @var string
 	 */
 	protected $title;
@@ -21,6 +30,7 @@ class Content extends \OriginalAppName\Entity
 
 	/**
 	 * foo-bar seperated title, for url
+     * @Column(type="string")
 	 * @var string
 	 */
 	protected $slug;
@@ -28,6 +38,7 @@ class Content extends \OriginalAppName\Entity
 
 	/**
 	 * raw html code for the body of the content
+     * @Column(type="text")
 	 * @var string
 	 */
 	protected $html;
@@ -35,6 +46,7 @@ class Content extends \OriginalAppName\Entity
 	
 	/**
 	 * the type of content
+     * @Column(type="string", length=50)
 	 * @var string
 	 */
 	protected $type;
@@ -52,6 +64,7 @@ class Content extends \OriginalAppName\Entity
 	
 	/**
 	 * epoch time of when the content was created
+     * @Column(type="integer")
 	 * @var int
 	 */
 	protected $timePublished;
@@ -59,6 +72,7 @@ class Content extends \OriginalAppName\Entity
 	
 	/**
 	 * status of the content
+     * @Column(type="integer")
 	 * @var string
 	 */
 	protected $status;
@@ -85,6 +99,7 @@ class Content extends \OriginalAppName\Entity
 
 	/**
 	 * the id of the user which created this content
+     * @Column(type="integer")
 	 * @var int
 	 */
 	protected $userId;
