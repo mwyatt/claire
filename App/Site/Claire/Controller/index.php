@@ -24,6 +24,30 @@ class Index extends \OriginalAppName\Controller\Front
 	public function home() {
 		$entityManager = $this->getEntityManager();
 
+		// $content = new Entity\Content();
+		// $content
+		// 	->setTitle('title')
+		// 	->setSlug('Slug')
+		// 	->setHtml('Html')
+		// 	->setType('Type')
+		// 	->setTimePublished(time())
+		// 	->setUserId(1)
+		// 	->setStatus(Entity\Content::STATUS_UNPUBLISHED);
+		// $entityManager->persist($content);
+		// $entityManager->flush();
+
+		$repository = $entityManager->getRepository('\OriginalAppName\Entity\Content');
+		$content = $repository->findAll();
+echo '<pre>';
+print_r($content);
+echo '</pre>';
+exit;
+
+
+
+
+exit('ok');
+
 		// latest 3 posts
 		$modelContent = new model_content($this);
 		$modelContent->read(array(

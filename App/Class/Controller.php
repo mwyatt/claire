@@ -71,16 +71,13 @@ class Controller
 	{
 
 		// get url from registry and generate string
-		$registry = \OriginalAppName\Registry::getInstance();
+		$registry = Registry::getInstance();
 		$url = $registry->get('url');
 		$url = $url->generate($key, $config);
 
-
-
-// flush em
-
-
-
+		// em
+		$entityManager = $registry->get('entityManager');
+		$entityManager->flush();
 
 		// redirect
 		header('location:' . $url);
@@ -93,9 +90,12 @@ class Controller
 	public function redirectAbsolute($url)
 	{
 
+		// em
+		$registry = Registry::getInstance();
+		$entityManager = $registry->get('entityManager');
+		$entityManager->flush();
 
-// flush em
-
+		// route
 		header('location:' . $url);
 
 		// prevent continuation

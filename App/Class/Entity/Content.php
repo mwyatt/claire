@@ -2,6 +2,8 @@
 
 namespace OriginalAppName\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 
 /**
  * @Entity @Table(name="content")
@@ -80,7 +82,7 @@ class Content extends \OriginalAppName\Entity
 
 	/**
 	 * collection of simple meta keys and values
-	 * @OneToMany(targetEntity="contentMeta", mappedBy="contentId")
+	 * @OneToMany(targetEntity="ContentMeta", mappedBy="contentId")
 	 * @var meta[]
 	 */
 	protected $meta;
@@ -109,7 +111,7 @@ class Content extends \OriginalAppName\Entity
 	/**
      * @ManyToOne(targetEntity="User", inversedBy="id")
 	 */
-	protected $user
+	protected $user;
 
 
 	/**
