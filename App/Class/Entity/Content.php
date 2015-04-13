@@ -80,7 +80,8 @@ class Content extends \OriginalAppName\Entity
 
 	/**
 	 * collection of simple meta keys and values
-	 * @var array foo => bar
+	 * @OneToMany(targetEntity="contentMeta", mappedBy="contentId")
+	 * @var meta[]
 	 */
 	protected $meta;
 	
@@ -103,6 +104,21 @@ class Content extends \OriginalAppName\Entity
 	 * @var int
 	 */
 	protected $userId;
+
+
+	/**
+     * @ManyToOne(targetEntity="User", inversedBy="id")
+	 */
+	protected $user
+
+
+	/**
+	 * init collections
+	 */
+    public function __construct()
+    {
+        $this->meta = new ArrayCollection();
+    }
 
 
 	/**
@@ -258,14 +274,10 @@ class Content extends \OriginalAppName\Entity
 	}
 
 
-	/**
-	 * destructively sets a single meta key
-	 * @param string
-	 * @param all
-	 */
-	public function setMetaKey($key, $value)
+	public function addMeta($meta)
 	{
-		$this->meta[$key] = $value;
+	    $this->meta[] = $meta;
+	    return $this;
 	}
 
 

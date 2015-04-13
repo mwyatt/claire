@@ -4,6 +4,7 @@ namespace OriginalAppName\Entity;
 
 
 /**
+ * @Entity @Table(name="mail")
  * @author Martin Wyatt <martin.wyatt@gmail.com> 
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
@@ -12,18 +13,45 @@ class Mail extends \OriginalAppName\Entity
 {
 
 
+	/**
+     * @Id @GeneratedValue @Column(type="integer")
+	 * @var int
+	 */
+	protected $id;
+
+
+	/**
+     * @Column(type="string")
+	 * @var string
+	 */
 	protected $to;
 
 
+	/**
+     * @Column(type="string")
+	 * @var string
+	 */
 	protected $from;
 
 
+	/**
+     * @Column(type="string")
+	 * @var string
+	 */
 	protected $subject;
 
 
+	/**
+     * @Column(type="text")
+	 * @var string
+	 */
 	protected $body;
 
 
+	/**
+     * @Column(type="integer")
+	 * @var int
+	 */
 	protected $timeSent;
 
 

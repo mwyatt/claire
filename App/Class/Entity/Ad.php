@@ -60,7 +60,7 @@ class Ad extends \OriginalAppName\Entity
 
 	/**
 	 * ties together ads
-     * @Column(type="50")
+     * @Column(type="string", length=50)
 	 * @var string
 	 */
 	private $group;

@@ -13,6 +13,12 @@ class File extends \OriginalAppName\Entity
 
 
 	/**
+	 * @var int
+	 */
+	protected $id;
+
+
+	/**
 	 * foo/bar/file-name.ext
 	 * @var string
 	 */

@@ -75,6 +75,13 @@ class Controller
 		$url = $registry->get('url');
 		$url = $url->generate($key, $config);
 
+
+
+// flush em
+
+
+
+
 		// redirect
 		header('location:' . $url);
 
@@ -85,6 +92,10 @@ class Controller
 
 	public function redirectAbsolute($url)
 	{
+
+
+// flush em
+
 		header('location:' . $url);
 
 		// prevent continuation

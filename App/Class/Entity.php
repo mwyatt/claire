@@ -13,18 +13,6 @@ abstract class Entity
 
 
 	/**
-	 * takes the url object from the registry and passes back the
-	 * absolute url for the website
-	 * @return string 
-	 */
-	public function getUrlAbsolute()
-	{
-		$registry = OriginalAppName\Registry::getInstance();
-		return $registry->get('url')->getCache('base');
-	}
-
-
-	/**
 	 * merges array key => values with that of the entity
 	 * @param  array $array entity property -> value
 	 * @return object        

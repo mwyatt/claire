@@ -1,14 +1,7 @@
 <?php
 
-return array(
-    'assetVersion' => 1,
-    'admin/plugin' => [
-    	'dashboard',
-    	'posts',
-    	'pages',
-    	'media',
-    	'users',
-    	'ads',
-    	'settings'
+return [
+    'doctrine/entity/path' => [
+        APP_PATH . 'Class' . DS . 'Entity'
     ]
-);
+];

@@ -1,9 +1,9 @@
 <?php 
 
 return [
+    'driver' => 'pdo_mysql',
+    'user' => '',
     'host' => '',
-    'port' => '',
-    'basename' => '',
-    'username' => '',
-    'password' => ''
+    'password' => '',
+    'dbname' => ''
 ];

@@ -4,6 +4,7 @@ namespace OriginalAppName\Entity;
 
 
 /**
+ * @Entity @Table(name="menu")
  * @author Martin Wyatt <martin.wyatt@gmail.com> 
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
@@ -13,32 +14,39 @@ class Menu extends \OriginalAppName\Entity
 
 
 	/**
-	 * INT(11) NOT NULL DEFAULT '0'
+     * @Id @GeneratedValue @Column(type="integer")
+	 * @var int
+	 */
+	protected $id;
+
+
+	/**
 	 * id of the parent menu item
+     * @Column(type="integer")
 	 * @var int
 	 */
 	private $idParent;
 
 
 	/**
-	 * VARCHAR(128) NOT NULL DEFAULT
 	 * name of menu item
+     * @Column(type="string", length=128)
 	 * @var string
 	 */
 	private $name;
 
 
 	/**
-	 * VARCHAR(255) NOT NULL DEFAULT
 	 * url append to abs url
+     * @Column(type="string")
 	 * @var string
 	 */
 	private $url;
 
 
 	/**
-	 * VARCHAR(10) NOT NULL DEFAULT
 	 * group key to tie different menus together
+     * @Column(type="string", length=10)
 	 * @var string
 	 */
 	private $keyGroup;
