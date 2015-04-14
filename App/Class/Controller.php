@@ -76,8 +76,9 @@ class Controller
 		$url = $url->generate($key, $config);
 
 		// em
-		$entityManager = $registry->get('entityManager');
-		$entityManager->flush();
+		if ($entityManager = $registry->get('entityManager')) {
+			$entityManager->flush();
+		}
 
 		// redirect
 		header('location:' . $url);
@@ -92,8 +93,9 @@ class Controller
 
 		// em
 		$registry = Registry::getInstance();
-		$entityManager = $registry->get('entityManager');
-		$entityManager->flush();
+		if ($entityManager = $registry->get('entityManager')) {
+			$entityManager->flush();
+		}
 
 		// route
 		header('location:' . $url);
