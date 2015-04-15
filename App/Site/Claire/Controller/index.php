@@ -24,17 +24,17 @@ class Index extends \OriginalAppName\Controller\Front
 	public function home() {
 		$entityManager = $this->getEntityManager();
 
-		// $content = new Entity\Content();
-		// $content
-		// 	->setTitle('title')
-		// 	->setSlug('Slug')
-		// 	->setHtml('Html')
-		// 	->setType('Type')
-		// 	->setTimePublished(time())
-		// 	->setUserId(1)
-		// 	->setStatus(Entity\Content::STATUS_UNPUBLISHED);
-		// $entityManager->persist($content);
-		// $entityManager->flush();
+		$content = new Entity\Content();
+		$content
+			->setTitle('title')
+			->setSlug('Slug')
+			->setHtml('Html')
+			->setType('Type')
+			->setTimePublished(time())
+			->setUserId(1)
+			->setStatus(Entity\Content::STATUS_UNPUBLISHED);
+		$entityManager->persist($content);
+		$entityManager->flush();
 
 		$repository = $entityManager->getRepository('\OriginalAppName\Entity\Content');
 		$content = $repository->findAll();
