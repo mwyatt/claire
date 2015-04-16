@@ -82,7 +82,7 @@ class Content extends \OriginalAppName\Entity
 
 	/**
 	 * collection of simple meta keys and values
-	 * @OneToMany(targetEntity="ContentMeta", mappedBy="contentId")
+     * @ManyToMany(targetEntity="ContentMeta")
 	 * @var meta[]
 	 */
 	protected $meta;
@@ -101,7 +101,6 @@ class Content extends \OriginalAppName\Entity
 
 
 	/**
-	 * the id of the user which created this content
      * @Column(type="integer")
 	 * @var int
 	 */
@@ -109,7 +108,8 @@ class Content extends \OriginalAppName\Entity
 
 
 	/**
-     * @ManyToOne(targetEntity="User", inversedBy="id")
+	 * @OneToOne(targetEntity="User")
+	 * @JoinColumn(name="userId", referencedColumnName="id")
 	 */
 	protected $user;
 
