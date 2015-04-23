@@ -4,6 +4,7 @@ namespace OriginalAppName;
 
 use \PDO;
 use OriginalAppName\Registry;
+use OriginalAppName\Database;
 
 
 /**
@@ -39,19 +40,22 @@ abstract class Model extends \OriginalAppName\Data
 	];
 
 
+	/**
+	 * after creating a row in the database, the insert id is appended
+	 * @var array
+	 */
 	public $lastInsertIds;
 
 
 	/**
 	 * inject dependencies
-	 * \OriginalAppName\Database
 	 */
 	public function __construct() {
 		$registry = Registry::getInstance();
 
 		// if not in registry connect + create
 		if (! $database = $registry->get('database')) {
-			$database = new \OriginalAppName\Database(include SITE_PATH . 'credentials' . EXT);
+			$database = new Database(include SITE_PATH . 'credentials' . EXT);
 			$registry->set('database', $database);
 		}
 		$this->setDatabase($database);
@@ -280,7 +284,7 @@ abstract class Model extends \OriginalAppName\Data
 	 * @param  array  $properties 
 	 * @return int             
 	 */
-	public function delete($where = [])
+	public function delete($ids)
 	{
 
 		// build

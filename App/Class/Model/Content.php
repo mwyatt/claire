@@ -2,9 +2,12 @@
 
 namespace OriginalAppName\Model;
 
+use \PDO;
+use OriginalAppName\Entity;
+
 
 /**
- * responsible for various content types (projects, posts and pages)
+ * responsible for various content types
  * @author Martin Wyatt <martin.wyatt@gmail.com> 
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
@@ -16,10 +19,7 @@ class Content extends \OriginalAppName\Model
 	public $tableName = 'content';
 
 
-	public $entity = '\\OriginalAppName\\Entity\\Content';
-
-
-	public $fields = array(
+	public $fields = [
 		'id',
 		'title',
 		'slug',
@@ -28,7 +28,85 @@ class Content extends \OriginalAppName\Model
 		'timePublished',
 		'status',
 		'userId'
-	);
+	];
+
+
+	/**
+	 * get by type of content
+	 * @param  string $type 
+	 * @return object       
+	 */
+	public function readType($type)
+	{
+		$content = new Entity\Content
+		$sth = $this->database->dbh->prepare("
+			select {$this->getSqlFields()}
+			from {$this->getTableName()}
+			where type = :type
+		");
+	    $sth->bindValue(':type', $type, PDO::PARAM_INT);
+		$sth->setFetchMode(PDO::FETCH_CLASS, Entity\Content);
+		$sth->execute();
+		return $sth->fetchAll();
+	}
+
+
+	/**
+	 * get by unique db id
+	 * do you want to do this for all entities?
+	 * @param  int $id 
+	 * @return object
+	 */
+	public function readId($ids)
+	{
+		$list = explode(', ', $ids);
+		$sth = $this->database->dbh->prepare("
+			select
+				id,
+				title,
+				slug,
+				html,
+				type,
+				timePublished,
+				status,
+				userId
+			from content
+            where id in($list)
+		");
+	    $sth->bindValue(1, , PDO::PARAM_INT);
+
+		$sth->execute();
+		$this->setData($sth->fetchAll());
+
+		return $this;
+
+
+		$sth = $this->database->dbh->prepare("
+			select
+				id,
+				title,
+				slug,
+				html,
+				type,
+				timePublished,
+				status,
+				userId
+			from content
+            where id = ?
+		");
+		$sth->setFetchMode(PDO::FETCH_CLASS, Entity\Content);
+		foreach ($ids as $id) {
+		    $sth->bindValue(1, $id, PDO::PARAM_INT);
+			$sth->execute();
+			while ($result = $sth->fetch()) {
+				$this->appendData($result);
+			}
+		}
+
+		// instance
+		return $this;
+
+	}
 
 
 	/**
@@ -46,10 +124,10 @@ class Content extends \OriginalAppName\Model
 		");
 
 		// mode
-		$sth->setFetchMode(\PDO::FETCH_CLASS, $this->getEntity());
+		$sth->setFetchMode(PDO::FETCH_CLASS, $this->getEntity());
 
 		// bind
-	    $sth->bindValue(':type', $type, \PDO::PARAM_STR);
+	    $sth->bindValue(':type', $type, PDO::PARAM_STR);
 
 	    // execute
 		$sth->execute();
@@ -68,8 +146,8 @@ class Content extends \OriginalAppName\Model
 			{$this->getSqlSelect()}
             where slug = :slug
 		");
-		$sth->setFetchMode(\PDO::FETCH_CLASS, $this->getEntity());
-	    $sth->bindValue(':slug', $slug, \PDO::PARAM_STR);
+		$sth->setFetchMode(PDO::FETCH_CLASS, $this->getEntity());
+	    $sth->bindValue(':slug', $slug, PDO::PARAM_STR);
 		$sth->execute();
 		$this->setData($sth->fetchAll());
 		return $this;
