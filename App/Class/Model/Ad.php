@@ -14,9 +14,6 @@ class Ad extends \OriginalAppName\Model
 
 	public $tableName = 'ad';
 
-
-	public $entity = '\\OriginalAppName\\Entity\\Ad';
-
 	
 	public $fields = array(
 		'id',
@@ -27,4 +24,7 @@ class Ad extends \OriginalAppName\Model
 		'action',
 		'group'
 	);
+
+
+	public $entity = '\\OriginalAppName\\Entity\\Ad';
 }
