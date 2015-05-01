@@ -308,4 +308,10 @@ class Content extends \OriginalAppName\Entity
 	        self::STATUS_PUBLISHED   => 'Published'
 	    ];
 	}
+
+
+	public function getUser()
+	{
+		return $this->user;
+	}
 }

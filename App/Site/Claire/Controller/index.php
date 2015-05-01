@@ -35,12 +35,18 @@ class Index extends \OriginalAppName\Controller\Front
 			->setStatus(Entity\Content::STATUS_UNPUBLISHED);
 		$entityManager->persist($content);
 		$entityManager->flush();
-
+exit;
 		$repository = $entityManager->getRepository('\OriginalAppName\Entity\Content');
 		$content = $repository->findAll();
-echo '<pre>';
-print_r($content);
-echo '</pre>';
+		
+		foreach ($content as $cont) {
+			echo '<pre>';
+			print_r($cont->getUser()->getEmail());
+			echo '</pre>';
+			exit;
+			
+		}
+		
 exit;
 
 
