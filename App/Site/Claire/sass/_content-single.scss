@@ -23,3 +23,12 @@
 .content-single-title-two {
     font-size: 1.2em;
 }
+
+.content-single .content-date {
+    display: none;
+}
+
+.content-single.is-type-post .content-date {
+    display: block;
+    text-align: right;
+}

@@ -5,6 +5,7 @@ namespace OriginalAppName;
 use \PDO;
 use OriginalAppName\Registry;
 use OriginalAppName\Database;
+use OriginalAppName\Entity;
 
 
 /**
@@ -460,7 +461,14 @@ abstract class Model extends \OriginalAppName\Data
 	 * @return string 
 	 */
 	public function getTableName() {
-	    return $this->tableName;
+		if ($this->tableName) {
+			return $this->tableName;
+		}
+
+		// attempt guess
+		// tricky because of namespacing
+		// $name = get_class($this);
+	 //    return $this->tableName;
 	}
 	
 	

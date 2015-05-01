@@ -171,16 +171,18 @@ class View extends \OriginalAppName\Data
 	 */
 	public function getUrlAsset($append)
 	{
+		$path = $this->getAssetPath($append);
 
-		// resource
-		$middle = 'asset' . US . $append;
+		// check actually there
+		if (! file_exists($path)) {
+			return;
+		}
 
-		// get file modified time
-		$filePath = BASE_PATH . $middle;
-		$modifiedTime = filemtime($filePath);
+		// get mod time
+		$modifiedTime = filemtime($path);
 
 		// return url to asset with modified time as query var
-		return $this->url->generate() . $middle . '?' . $modifiedTime;
+		return $this->url->generate() . 'asset' . US . $append . '?' . $modifiedTime;
 	}
 
 

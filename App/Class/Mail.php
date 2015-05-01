@@ -58,7 +58,7 @@ class Mail extends \OriginalAppName\View
 	public function setAppPassword() {
 		$registry = OriginalAppName\Registry::getInstance();
 		$configApp = $registry->get('configApp');
-	    $this->appPassword = $configApp->googleAppPassword;
+	    $this->appPassword = $configApp['googleAppPassword'];
 	    return $this;
 	}
 

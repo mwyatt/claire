@@ -18,9 +18,7 @@
 		<div class="typography">
 			<p class="panel-description">Here are some of the strings to my bow:</p>
 		</div>
-
 		<div class="skills">
-			
 		
 <?php foreach ($skills as $skill): ?>
 		

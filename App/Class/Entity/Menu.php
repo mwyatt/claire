@@ -53,6 +53,14 @@ class Menu extends \OriginalAppName\Entity
 
 
 	/**
+	 * @return int 
+	 */
+	public function getId() {
+	    return $this->id;
+	}
+
+
+	/**
 	 * @return string 
 	 */
 	public function getKeyGroup() {

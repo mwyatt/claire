@@ -65,6 +65,51 @@ class Content extends \OriginalAppName\Model
 	}
 
 
+	/**
+	 * get latest items
+	 * @param  integer $count int
+	 * @return object         
+	 */
+	public function readLatest($settings)
+	{
+		if (
+			empty($settings['type']) ||
+			empty($settings['count'])
+		) {
+			return $this;
+		}
+		$type = $settings['type'];
+		$count = $settings['count'];
+		$status = Entity\Content::STATUS_PUBLISHED;
+
+		// query
+		$sth = $this->database->dbh->prepare("
+			{$this->getSqlSelect()}
+            where type = :type
+            and status = :status
+            order by timePublished desc
+            limit :count
+		");
+
+		// mode
+		$sth->setFetchMode(PDO::FETCH_CLASS, $this->getEntity());
+
+		// bind
+	    $sth->bindValue(':type', $type, PDO::PARAM_STR);
+	    $sth->bindValue(':status', $status, PDO::PARAM_INT);
+	    $sth->bindValue(':count', $count, PDO::PARAM_INT);
+
+	    // execute
+		$sth->execute();
+
+		// fetch
+		$this->setData($sth->fetchAll());
+
+		// instance
+		return $this;
+	}
+
+
 	public function readSlug($slug)
 	{
 		$sth = $this->database->dbh->prepare("

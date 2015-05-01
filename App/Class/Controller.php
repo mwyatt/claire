@@ -75,11 +75,6 @@ class Controller
 		$url = $registry->get('url');
 		$url = $url->generate($key, $config);
 
-		// em
-		if ($entityManager = $registry->get('entityManager')) {
-			$entityManager->flush();
-		}
-
 		// redirect
 		header('location:' . $url);
 
@@ -90,12 +85,6 @@ class Controller
 
 	public function redirectAbsolute($url)
 	{
-
-		// em
-		$registry = Registry::getInstance();
-		if ($entityManager = $registry->get('entityManager')) {
-			$entityManager->flush();
-		}
 
 		// route
 		header('location:' . $url);

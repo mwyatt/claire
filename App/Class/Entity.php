@@ -13,6 +13,15 @@ abstract class Entity
 
 
 	/**
+	 * does this belong here?
+	 * @return int 
+	 */
+	public function getId() {
+	    return $this->id;
+	}
+
+
+	/**
 	 * merges array key => values with that of the entity
 	 * @param  array $array entity property -> value
 	 * @return object        

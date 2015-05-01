@@ -15,12 +15,12 @@ class Meta extends \OriginalAppName\Model
 	public $tableName = 'content_meta';
 
 
-	public $fields = array(
+	public $fields = [
 		'id'
 		, 'contentId'
 		, 'name'
 		, 'value'
-	);
+	];
 
 
 	public $entity = '\\OriginalAppName\\Entity\\Content\\Meta';

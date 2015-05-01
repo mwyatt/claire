@@ -55,6 +55,12 @@ module.exports = {
       {
         expand: true,
         cwd: 'vendor/bower/owlcarousel/owl-carousel/',
+        src: 'owl.carousel.js',
+        dest: 'js/vendor/'
+      },
+      {
+        expand: true,
+        cwd: 'vendor/bower/owlcarousel/owl-carousel/',
         src: '*.css',
         dest: 'sass/vendor/owl-carousel/',
         rename: function(dest, src) {
@@ -71,7 +77,7 @@ module.exports = {
         expand: true,
         cwd: 'vendor/bower/jquery/dist/',
         src: 'jquery.js',
-        dest: 'js/vendor/'
+        dest: 'asset/vendor/'
       }
     ]
   }

@@ -25,6 +25,15 @@ class Pagination extends \OriginalAppName\Data
 
 
 	public $url;
+
+
+	public $previous;
+
+
+	public $next;
+
+
+	public $pages;
 	
 
 	/**
@@ -190,8 +199,8 @@ class Pagination extends \OriginalAppName\Data
     public function urlBuild($key)
     {
     	$url = $this->url->generate();
-    	$current = $url->getCache('current_sans_query');
-    	$query = $url->getQuery();
+    	$current = $this->url->getCache('current_sans_query');
+    	$query = $this->url->getQuery();
 		parse_str($query, $queryParts);
 		$queryParts['page'] = $key;
     	$query = '?' . http_build_query($queryParts);

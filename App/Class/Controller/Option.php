@@ -20,52 +20,10 @@ class Option extends \OriginalAppName\Controller
 {
 
 
-	/**
-	 * doctrine entity manger
-	 * @var object
-	 */
-	public $entityManager;
-
-
 	public function __construct()
 	{
 		parent::__construct();
-		$this->databaseConnect();
-		// $this->readOptions();
-	}
-
-
-	/**
-	 * connect to db and store entity manager
-	 * @return null 
-	 */
-	public function databaseConnect()
-	{
-
-		// get ent manager and connect to db
-		$entityManager = include APP_PATH . 'database-connect' . EXT;
-
-		// store
-		$registry = Registry::getInstance();
-		$registry->set('entityManager', $entityManager);
-		$this->setEntityManager($entityManager);
-	}
-
-
-	/**
-	 * @return object doctrine
-	 */
-	public function getEntityManager() {
-	    return $this->entityManager;
-	}
-	
-	
-	/**
-	 * @param object $entityManager Doctrine
-	 */
-	public function setEntityManager($entityManager) {
-	    $this->entityManager = $entityManager;
-	    return $this;
+		$this->readOptions();
 	}
 
 

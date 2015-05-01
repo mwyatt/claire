@@ -1,0 +1,1940 @@
+/* ==========================================================================
+   Normalize.scss settings
+   ========================================================================== */
+/**
+ * Includes legacy browser support IE6/7
+ *
+ * Set to false if you want to drop support for IE6 and IE7
+ */
+/* Base
+   ========================================================================== */
+/**
+ * 1. Set default font family to sans-serif.
+ * 2. Prevent iOS text size adjust after orientation change, without disabling
+ *  user zoom.
+ * 3. Corrects text resizing oddly in IE 6/7 when body `font-size` is set using
+ *  `em` units.
+ */
+/* line 23, /var/www/html/mvc/sass/vendor/_normalize.scss */
+html {
+  font-family: sans-serif;
+  /* 1 */
+  -ms-text-size-adjust: 100%;
+  /* 2 */
+  -webkit-text-size-adjust: 100%;
+  /* 2 */ }
+
+/**
+ * Remove default margin.
+ */
+/* line 36, /var/www/html/mvc/sass/vendor/_normalize.scss */
+body {
+  margin: 0; }
+
+/* HTML5 display definitions
+   ========================================================================== */
+/**
+ * Correct `block` display not defined for any HTML5 element in IE 8/9.
+ * Correct `block` display not defined for `details` or `summary` in IE 10/11 and Firefox.
+ * Correct `block` display not defined for `main` in IE 11.
+ */
+/* line 60, /var/www/html/mvc/sass/vendor/_normalize.scss */
+article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary {
+  display: block; }
+
+/**
+ * 1. Correct `inline-block` display not defined in IE 6/7/8/9 and Firefox 3.
+ * 2. Normalize vertical alignment of `progress` in Chrome, Firefox, and Opera.
+ */
+/* line 72, /var/www/html/mvc/sass/vendor/_normalize.scss */
+audio, canvas, progress, video {
+  display: inline-block;
+  /* 1 */
+  vertical-align: baseline;
+  /* 2 */ }
+
+/**
+ * Prevents modern browsers from displaying `audio` without controls.
+ * Remove excess height in iOS 5 devices.
+ */
+/* line 86, /var/www/html/mvc/sass/vendor/_normalize.scss */
+audio:not([controls]) {
+  display: none;
+  height: 0; }
+
+/**
+ * Address `[hidden]` styling not present in IE 8/9/10.
+ * Hide the `template` element in IE 8/9/11, Safari, and Firefox < 22.
+ */
+/* line 97, /var/www/html/mvc/sass/vendor/_normalize.scss */
+[hidden], template {
+  display: none; }
+
+/* Links
+   ========================================================================== */
+/**
+ * Remove the gray background color from active links in IE 10.
+ */
+/* line 108, /var/www/html/mvc/sass/vendor/_normalize.scss */
+a {
+  background: transparent; }
+
+/**
+ * Improve readability when focused and also mouse hovered in all browsers.
+ */
+/* line 117, /var/www/html/mvc/sass/vendor/_normalize.scss */
+a:active, a:hover {
+  outline: 0; }
+
+/* Text-level semantics
+   ========================================================================== */
+/**
+ * Address styling not present in IE 8/9/10/11, Safari, and Chrome.
+ */
+/* line 129, /var/www/html/mvc/sass/vendor/_normalize.scss */
+abbr[title] {
+  border-bottom: 1px dotted; }
+
+/**
+ * Address style set to `bolder` in Firefox 4+, Safari, and Chrome.
+ */
+/* line 138, /var/www/html/mvc/sass/vendor/_normalize.scss */
+b, strong {
+  font-weight: bold; }
+
+/**
+ * Address styling not present in Safari and Chrome.
+ */
+/* line 152, /var/www/html/mvc/sass/vendor/_normalize.scss */
+dfn {
+  font-style: italic; }
+
+/**
+ * Address variable `h1` font-size and margin within `section` and `article`
+ * contexts in Firefox 4+, Safari, and Chrome.
+ */
+/* line 161, /var/www/html/mvc/sass/vendor/_normalize.scss */
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0; }
+
+/**
+ * Addresses styling not present in IE 8/9.
+ */
+/* line 197, /var/www/html/mvc/sass/vendor/_normalize.scss */
+mark {
+  background: #ff0;
+  color: #000; }
+
+/**
+ * Address inconsistent and variable font size in all browsers.
+ */
+/* line 236, /var/www/html/mvc/sass/vendor/_normalize.scss */
+small {
+  font-size: 80%; }
+
+/**
+ * Prevent `sub` and `sup` affecting `line-height` in all browsers.
+ */
+/* line 245, /var/www/html/mvc/sass/vendor/_normalize.scss */
+sub, sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline; }
+
+/* line 252, /var/www/html/mvc/sass/vendor/_normalize.scss */
+sup {
+  top: -0.5em; }
+
+/* line 256, /var/www/html/mvc/sass/vendor/_normalize.scss */
+sub {
+  bottom: -0.25em; }
+
+/* Embedded content
+   ========================================================================== */
+/**
+ * 1. Remove border when inside `a` element in IE 8/9/10.
+ * 2. Improves image quality when scaled in IE 7.
+ */
+/* line 311, /var/www/html/mvc/sass/vendor/_normalize.scss */
+img {
+  border: 0; }
+
+/**
+ * Correct overflow not hidden in IE 9/10/11.
+ */
+/* line 322, /var/www/html/mvc/sass/vendor/_normalize.scss */
+svg:not(:root) {
+  overflow: hidden; }
+
+/* Grouping content
+   ========================================================================== */
+/**
+ * Address margin not present in IE 8/9 and Safari.
+ */
+/* line 333, /var/www/html/mvc/sass/vendor/_normalize.scss */
+figure {
+  margin: 1em 40px; }
+
+/**
+ * Address differences between Firefox and other browsers.
+ */
+/* line 341, /var/www/html/mvc/sass/vendor/_normalize.scss */
+hr {
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  height: 0; }
+
+/**
+ * Contain overflow in all browsers.
+ */
+/* line 351, /var/www/html/mvc/sass/vendor/_normalize.scss */
+pre {
+  overflow: auto; }
+
+/**
+ * Address odd `em`-unit font size rendering in all browsers.
+ * Correct font family set oddly in IE 6, Safari 4/5, and Chrome.
+ */
+/* line 363, /var/www/html/mvc/sass/vendor/_normalize.scss */
+code, kbd, pre, samp {
+  font-family: monospace, monospace;
+  font-size: 1em; }
+
+/* Forms
+   ========================================================================== */
+/**
+ * Known limitation: by default, Chrome and Safari on OS X allow very limited
+ * styling of `select`, unless a `border` property is set.
+ */
+/**
+ * 1. Correct color not being inherited.
+ *  Known issue: affects color of disabled elements.
+ * 2. Correct font properties not being inherited.
+ * 3. Address margins set differently in Firefox 4+, Safari, and Chrome.
+ * 4. Improves appearance and consistency in all browsers.
+ */
+/* line 391, /var/www/html/mvc/sass/vendor/_normalize.scss */
+button, input, optgroup, select, textarea {
+  color: inherit;
+  /* 1 */
+  font: inherit;
+  /* 2 */
+  margin: 0;
+  /* 3 */ }
+
+/**
+ * Address `overflow` set to `hidden` in IE 8/9/10/11.
+ */
+/* line 405, /var/www/html/mvc/sass/vendor/_normalize.scss */
+button {
+  overflow: visible; }
+
+/**
+ * Address inconsistent `text-transform` inheritance for `button` and `select`.
+ * All other form control elements do not inherit `text-transform` values.
+ * Correct `button` style inheritance in Firefox, IE 8/9/10/11, and Opera.
+ * Correct `select` style inheritance in Firefox.
+ */
+/* line 417, /var/www/html/mvc/sass/vendor/_normalize.scss */
+button, select {
+  text-transform: none; }
+
+/**
+ * 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`
+ *  and `video` controls.
+ * 2. Correct inability to style clickable `input` types in iOS.
+ * 3. Improve usability and consistency of cursor style between image-type
+ *  `input` and others.
+ * 4. Removes inner spacing in IE 7 without affecting normal text inputs.
+ *  Known issue: inner spacing remains in IE 6.
+ */
+/* line 434, /var/www/html/mvc/sass/vendor/_normalize.scss */
+button, html input[type="button"], input[type="reset"], input[type="submit"] {
+  -webkit-appearance: button;
+  /* 2 */
+  cursor: pointer;
+  /* 3 */ }
+
+/**
+ * Re-set default cursor for disabled elements.
+ */
+/* line 447, /var/www/html/mvc/sass/vendor/_normalize.scss */
+button[disabled], html input[disabled] {
+  cursor: default; }
+
+/**
+ * Remove inner padding and border in Firefox 4+.
+ */
+/* line 456, /var/www/html/mvc/sass/vendor/_normalize.scss */
+button::-moz-focus-inner, input::-moz-focus-inner {
+  border: 0;
+  padding: 0; }
+
+/**
+ * Address Firefox 4+ setting `line-height` on `input` using `!important` in
+ * the UA stylesheet.
+ */
+/* line 466, /var/www/html/mvc/sass/vendor/_normalize.scss */
+input {
+  line-height: normal; }
+
+/**
+ * 1. Address box sizing set to `content-box` in IE 8/9/10.
+ * 2. Remove excess padding in IE 8/9/10.
+ *  Known issue: excess padding remains in IE 6.
+ */
+/* line 477, /var/www/html/mvc/sass/vendor/_normalize.scss */
+input[type="checkbox"], input[type="radio"] {
+  box-sizing: border-box;
+  /* 1 */
+  padding: 0;
+  /* 2 */ }
+
+/**
+ * Fix the cursor style for Chrome's increment/decrement buttons. For certain
+ * `font-size` values of the `input`, it causes the cursor style of the
+ * decrement button to change from `default` to `text`.
+ */
+/* line 493, /var/www/html/mvc/sass/vendor/_normalize.scss */
+input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-outer-spin-button {
+  height: auto; }
+
+/**
+ * 1. Address `appearance` set to `searchfield` in Safari and Chrome.
+ * 2. Address `box-sizing` set to `border-box` in Safari and Chrome
+ *  (include `-moz` to future-proof).
+ */
+/* line 503, /var/www/html/mvc/sass/vendor/_normalize.scss */
+input[type="search"] {
+  -webkit-appearance: textfield;
+  /* 1 */
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  /* 2 */
+  box-sizing: content-box; }
+
+/**
+ * Remove inner padding and search cancel button in Safari and Chrome on OS X.
+ * Safari (but not Chrome) clips the cancel button when the search input has
+ * padding (and `textfield` appearance).
+ */
+/* line 517, /var/www/html/mvc/sass/vendor/_normalize.scss */
+input[type="search"]::-webkit-search-cancel-button, input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none; }
+
+/**
+ * Define consistent border, margin, and padding.
+ */
+/* line 525, /var/www/html/mvc/sass/vendor/_normalize.scss */
+fieldset {
+  border: 1px solid #c0c0c0;
+  margin: 0 2px;
+  padding: 0.35em 0.625em 0.75em; }
+
+/**
+ * 1. Correct `color` not being inherited in IE 8/9/10/11.
+ * 2. Remove padding so people aren't caught out if they zero out fieldsets.
+ * 3. Corrects text not wrapping in Firefox 3.
+ * 4. Corrects alignment displayed oddly in IE 6/7.
+ */
+/* line 538, /var/www/html/mvc/sass/vendor/_normalize.scss */
+legend {
+  border: 0;
+  /* 1 */
+  padding: 0;
+  /* 2 */ }
+
+/**
+ * Remove default vertical scrollbar in IE 8/9/10/11.
+ */
+/* line 551, /var/www/html/mvc/sass/vendor/_normalize.scss */
+textarea {
+  overflow: auto; }
+
+/**
+ * Don't inherit the `font-weight` (applied by a rule above).
+ * NOTE: the default cannot safely be changed in Chrome and Safari on OS X.
+ */
+/* line 560, /var/www/html/mvc/sass/vendor/_normalize.scss */
+optgroup {
+  font-weight: bold; }
+
+/* Tables
+   ========================================================================== */
+/**
+ * Remove most spacing between table cells.
+ */
+/* line 571, /var/www/html/mvc/sass/vendor/_normalize.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+/* line 577, /var/www/html/mvc/sass/vendor/_normalize.scss */
+td, th {
+  padding: 0; }
+
+/* Magnific Popup CSS */
+/* line 2, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+.mfp-bg {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1042;
+  overflow: hidden;
+  position: fixed;
+  background: #0b0b0b;
+  opacity: 0.8;
+  filter: alpha(opacity=80); }
+
+/* line 14, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+.mfp-wrap {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1043;
+  position: fixed;
+  outline: none !important;
+  -webkit-backface-visibility: hidden; }
+
+/* line 24, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+.mfp-container {
+  text-align: center;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  padding: 0 8px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+
+/* line 36, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+.mfp-container:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle; }
+
+/* line 42, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+.mfp-align-top .mfp-container:before {
+  display: none; }
+
+/* line 45, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+.mfp-content {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 auto;
+  text-align: left;
+  z-index: 1045; }
+
+/* line 53, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+.mfp-inline-holder .mfp-content, .mfp-ajax-holder .mfp-content {
+  width: 100%;
+  cursor: auto; }
+
+/* line 57, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+.mfp-ajax-cur {
+  cursor: progress; }
+
+/* line 60, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+.mfp-zoom-out-cur, .mfp-zoom-out-cur .mfp-image-holder .mfp-close {
+  cursor: -moz-zoom-out;
+  cursor: -webkit-zoom-out;
+  cursor: zoom-out; }
+
+/* line 65, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+.mfp-zoom {
+  cursor: pointer;
+  cursor: -webkit-zoom-in;
+  cursor: -moz-zoom-in;
+  cursor: zoom-in; }
+
+/* line 71, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+.mfp-auto-cursor .mfp-content {
+  cursor: auto; }
+
+/* line 74, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+.mfp-close, .mfp-arrow, .mfp-preloader, .mfp-counter {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none; }
+
+/* line 79, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+.mfp-loading.mfp-figure {
+  display: none; }
+
+/* line 82, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+.mfp-hide {
+  display: none !important; }
+
+/* line 85, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+.mfp-preloader {
+  color: #cccccc;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  text-align: center;
+  margin-top: -0.8em;
+  left: 8px;
+  right: 8px;
+  z-index: 1044; }
+
+/* line 95, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+.mfp-preloader a {
+  color: #cccccc; }
+
+/* line 97, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+.mfp-preloader a:hover {
+  color: white; }
+
+/* line 100, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+.mfp-s-ready .mfp-preloader {
+  display: none; }
+
+/* line 103, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+.mfp-s-error .mfp-content {
+  display: none; }
+
+/* line 106, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+button.mfp-close, button.mfp-arrow {
+  overflow: visible;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  -webkit-appearance: none;
+  display: block;
+  outline: none;
+  padding: 0;
+  z-index: 1046;
+  -webkit-box-shadow: none;
+  box-shadow: none; }
+
+/* line 118, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+button::-moz-focus-inner {
+  padding: 0;
+  border: 0; }
+
+/* line 122, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+.mfp-close {
+  width: 44px;
+  height: 44px;
+  line-height: 44px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  text-decoration: none;
+  text-align: center;
+  opacity: 0.65;
+  filter: alpha(opacity=65);
+  padding: 0 0 18px 10px;
+  color: white;
+  font-style: normal;
+  font-size: 28px;
+  font-family: Arial, Baskerville, monospace; }
+
+/* line 138, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+.mfp-close:hover, .mfp-close:focus {
+  opacity: 1;
+  filter: alpha(opacity=100); }
+
+/* line 141, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+.mfp-close:active {
+  top: 1px; }
+
+/* line 144, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+.mfp-close-btn-in .mfp-close {
+  color: #333333; }
+
+/* line 147, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+.mfp-image-holder .mfp-close, .mfp-iframe-holder .mfp-close {
+  color: white;
+  right: -6px;
+  text-align: right;
+  padding-right: 6px;
+  width: 100%; }
+
+/* line 154, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+.mfp-counter {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #cccccc;
+  font-size: 12px;
+  line-height: 18px;
+  white-space: nowrap; }
+
+/* line 163, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+.mfp-arrow {
+  position: absolute;
+  opacity: 0.65;
+  filter: alpha(opacity=65);
+  margin: 0;
+  top: 50%;
+  margin-top: -55px;
+  padding: 0;
+  width: 90px;
+  height: 110px;
+  -webkit-tap-highlight-color: transparent; }
+
+/* line 174, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+.mfp-arrow:active {
+  margin-top: -54px; }
+
+/* line 176, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+.mfp-arrow:hover, .mfp-arrow:focus {
+  opacity: 1;
+  filter: alpha(opacity=100); }
+
+/* line 179, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+.mfp-arrow:before, .mfp-arrow:after, .mfp-arrow .mfp-b, .mfp-arrow .mfp-a {
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin-top: 35px;
+  margin-left: 35px;
+  border: medium inset transparent; }
+
+/* line 190, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+.mfp-arrow:after, .mfp-arrow .mfp-a {
+  border-top-width: 13px;
+  border-bottom-width: 13px;
+  top: 8px; }
+
+/* line 194, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+.mfp-arrow:before, .mfp-arrow .mfp-b {
+  border-top-width: 21px;
+  border-bottom-width: 21px;
+  opacity: 0.7; }
+
+/* line 199, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+.mfp-arrow-left {
+  left: 0; }
+
+/* line 201, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+.mfp-arrow-left:after, .mfp-arrow-left .mfp-a {
+  border-right: 17px solid white;
+  margin-left: 31px; }
+
+/* line 204, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+.mfp-arrow-left:before, .mfp-arrow-left .mfp-b {
+  margin-left: 25px;
+  border-right: 27px solid #3f3f3f; }
+
+/* line 208, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+.mfp-arrow-right {
+  right: 0; }
+
+/* line 210, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+.mfp-arrow-right:after, .mfp-arrow-right .mfp-a {
+  border-left: 17px solid white;
+  margin-left: 39px; }
+
+/* line 213, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+.mfp-arrow-right:before, .mfp-arrow-right .mfp-b {
+  border-left: 27px solid #3f3f3f; }
+
+/* line 216, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+.mfp-iframe-holder {
+  padding-top: 40px;
+  padding-bottom: 40px; }
+
+/* line 219, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+.mfp-iframe-holder .mfp-content {
+  line-height: 0;
+  width: 100%;
+  max-width: 900px; }
+
+/* line 223, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+.mfp-iframe-holder .mfp-close {
+  top: -40px; }
+
+/* line 226, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+.mfp-iframe-scaler {
+  width: 100%;
+  height: 0;
+  overflow: hidden;
+  padding-top: 56.25%; }
+
+/* line 231, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+.mfp-iframe-scaler iframe {
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+  background: black; }
+
+/* Main image in popup */
+/* line 242, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+img.mfp-img {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  line-height: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 40px 0 40px;
+  margin: 0 auto; }
+
+/* The shadow behind the image */
+/* line 255, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+.mfp-figure {
+  line-height: 0; }
+
+/* line 257, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+.mfp-figure:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 40px;
+  bottom: 40px;
+  display: block;
+  right: 0;
+  width: auto;
+  height: auto;
+  z-index: -1;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+  background: #444444; }
+
+/* line 270, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+.mfp-figure small {
+  color: #bdbdbd;
+  display: block;
+  font-size: 12px;
+  line-height: 14px; }
+
+/* line 275, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+.mfp-figure figure {
+  margin: 0; }
+
+/* line 278, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+.mfp-bottom-bar {
+  margin-top: -36px;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  cursor: auto; }
+
+/* line 286, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+.mfp-title {
+  text-align: left;
+  line-height: 18px;
+  color: #f3f3f3;
+  word-wrap: break-word;
+  padding-right: 36px; }
+
+/* line 293, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+.mfp-image-holder .mfp-content {
+  max-width: 100%; }
+
+/* line 296, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+.mfp-gallery .mfp-image-holder .mfp-figure {
+  cursor: pointer; }
+
+@media screen and (max-width: 800px) and (orientation: landscape), screen and (max-height: 300px) {
+  /**
+       * Remove all paddings around the image on small screen
+       */
+  /* line 303, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+  .mfp-img-mobile .mfp-image-holder {
+    padding-left: 0;
+    padding-right: 0; }
+  /* line 306, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+  .mfp-img-mobile img.mfp-img {
+    padding: 0; }
+  /* line 308, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+  .mfp-img-mobile .mfp-figure:after {
+    top: 0;
+    bottom: 0; }
+  /* line 311, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+  .mfp-img-mobile .mfp-figure small {
+    display: inline;
+    margin-left: 5px; }
+  /* line 314, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+  .mfp-img-mobile .mfp-bottom-bar {
+    background: rgba(0, 0, 0, 0.6);
+    bottom: 0;
+    margin: 0;
+    top: auto;
+    padding: 3px 5px;
+    position: fixed;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box; }
+  /* line 324, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+  .mfp-img-mobile .mfp-bottom-bar:empty {
+    padding: 0; }
+  /* line 326, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+  .mfp-img-mobile .mfp-counter {
+    right: 5px;
+    top: 3px; }
+  /* line 329, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+  .mfp-img-mobile .mfp-close {
+    top: 0;
+    right: 0;
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
+    background: rgba(0, 0, 0, 0.6);
+    position: fixed;
+    text-align: center;
+    padding: 0; } }
+
+@media all and (max-width: 900px) {
+  /* line 341, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+  .mfp-arrow {
+    -webkit-transform: scale(0.75);
+    transform: scale(0.75); }
+  /* line 344, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+  .mfp-arrow-left {
+    -webkit-transform-origin: 0;
+    transform-origin: 0; }
+  /* line 347, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+  .mfp-arrow-right {
+    -webkit-transform-origin: 100%;
+    transform-origin: 100%; }
+  /* line 350, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+  .mfp-container {
+    padding-left: 6px;
+    padding-right: 6px; } }
+
+/* line 354, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+.mfp-ie7 .mfp-img {
+  padding: 0; }
+
+/* line 356, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+.mfp-ie7 .mfp-bottom-bar {
+  width: 600px;
+  left: 50%;
+  margin-left: -300px;
+  margin-top: 5px;
+  padding-bottom: 5px; }
+
+/* line 362, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+.mfp-ie7 .mfp-container {
+  padding: 0; }
+
+/* line 364, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+.mfp-ie7 .mfp-content {
+  padding-top: 44px; }
+
+/* line 366, /var/www/html/mvc/sass/vendor/_magnific-popup.scss */
+.mfp-ie7 .mfp-close {
+  top: 0;
+  right: 0;
+  padding-top: 0; }
+
+/**
+ * allows dynamic usage of media queries, here ranges of breakpoints
+ * can be defined then refered to in a friendly way
+ * usage:
+ *      @include breakpoint(papa-bear) { width: 60%; }
+ *      midget
+ *      dwarf
+ *      orc
+ *      human
+ *      giant
+ */
+/**
+ * Formal syntax: <single-animation-name> || <time> || <timing-function> || <time> || <single-animation-iteration-count> || <single-animation-direction> || <single-animation-fill-mode>
+ */
+/* line 1, /var/www/html/mvc/app/site/claire/sass/_reusable.scss */
+.block {
+  display: block; }
+
+/* line 5, /var/www/html/mvc/app/site/claire/sass/_reusable.scss */
+.hidden {
+  display: none !important;
+  visibility: hidden; }
+
+/* line 10, /var/www/html/mvc/app/site/claire/sass/_reusable.scss */
+.hide, .do-print {
+  display: none; }
+
+/* line 14, /var/www/html/mvc/app/site/claire/sass/_reusable.scss */
+.invisible {
+  visibility: hidden; }
+
+/* line 18, /var/www/html/mvc/app/site/claire/sass/_reusable.scss */
+.visuallyhidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px; }
+
+/* line 30, /var/www/html/mvc/app/site/claire/sass/_reusable.scss */
+.visuallyhidden.focusable:active, .visuallyhidden.focusable:focus {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  width: auto; }
+
+/* line 39, /var/www/html/mvc/app/site/claire/sass/_reusable.scss */
+.text-left {
+  text-align: left; }
+
+/* line 43, /var/www/html/mvc/app/site/claire/sass/_reusable.scss */
+.text-center {
+  text-align: center; }
+
+/* line 47, /var/www/html/mvc/app/site/claire/sass/_reusable.scss */
+.text-right {
+  text-align: right; }
+
+/* line 51, /var/www/html/mvc/app/site/claire/sass/_reusable.scss */
+.text-size-larger {
+  font-size: 1.2em; }
+
+/* line 55, /var/www/html/mvc/app/site/claire/sass/_reusable.scss */
+.text-size-smaller {
+  font-size: .8em; }
+
+/* line 59, /var/www/html/mvc/app/site/claire/sass/_reusable.scss */
+.left {
+  float: left; }
+
+/* line 63, /var/www/html/mvc/app/site/claire/sass/_reusable.scss */
+.right {
+  float: right; }
+
+/* line 67, /var/www/html/mvc/app/site/claire/sass/_reusable.scss */
+.uppercase {
+  text-transform: uppercase; }
+
+/* line 72, /var/www/html/mvc/app/site/claire/sass/_reusable.scss */
+.spinner {
+  background: url("asset/ajax.gif") 50% 50% no-repeat; }
+  /* line 75, /var/www/html/mvc/app/site/claire/sass/_reusable.scss */
+  .spinner.is-tall {
+    height: 80px; }
+  /* line 79, /var/www/html/mvc/app/site/claire/sass/_reusable.scss */
+  .spinner.position-bottom-right {
+    background-position: 99% 91%; }
+
+/* line 84, /var/www/html/mvc/app/site/claire/sass/_reusable.scss */
+.current:hover {
+  text-decoration: none; }
+
+/* line 88, /var/www/html/mvc/app/site/claire/sass/_reusable.scss */
+label.top {
+  display: block;
+  margin: 0 0 0.8em;
+  font-weight: 600; }
+
+/* line 95, /var/www/html/mvc/app/site/claire/sass/_reusable.scss */
+.inner {
+  position: relative;
+  margin: 0 auto; }
+
+/* line 101, /var/www/html/mvc/app/site/claire/sass/_reusable.scss */
+.icon {
+  display: block;
+  position: absolute; }
+
+/* line 106, /var/www/html/mvc/app/site/claire/sass/_reusable.scss */
+.is-highlighted {
+  font-weight: 600; }
+
+/* line 110, /var/www/html/mvc/app/site/claire/sass/_reusable.scss */
+.is-fixed {
+  position: fixed; }
+
+/* line 114, /var/www/html/mvc/app/site/claire/sass/_reusable.scss */
+.text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; }
+
+/* line 120, /var/www/html/mvc/app/site/claire/sass/_reusable.scss */
+.b0 {
+  border: 0; }
+
+/* line 124, /var/www/html/mvc/app/site/claire/sass/_reusable.scss */
+.w100 {
+  width: 100%; }
+
+/* line 128, /var/www/html/mvc/app/site/claire/sass/_reusable.scss */
+.position-relative {
+  position: relative; }
+
+/* line 132, /var/www/html/mvc/app/site/claire/sass/_reusable.scss */
+.position-absolute {
+  position: absolute; }
+
+/* line 136, /var/www/html/mvc/app/site/claire/sass/_reusable.scss */
+.position-fixed {
+  position: fixed; }
+
+/* line 141, /var/www/html/mvc/app/site/claire/sass/_reusable.scss */
+.clearfix:before, .clearfix:after {
+  content: " ";
+  display: table; }
+
+/* line 146, /var/www/html/mvc/app/site/claire/sass/_reusable.scss */
+.clearfix:after {
+  clear: both; }
+
+/* line 150, /var/www/html/mvc/app/site/claire/sass/_reusable.scss */
+.clearfix {
+  *zoom: 1; }
+
+/* line 154, /var/www/html/mvc/app/site/claire/sass/_reusable.scss */
+.page-break {
+  display: block;
+  page-break-after: always;
+  page-break-inside: avoid; }
+
+/* line 160, /var/www/html/mvc/app/site/claire/sass/_reusable.scss */
+.color-primary {
+  color: #ca3566; }
+
+/* line 164, /var/www/html/mvc/app/site/claire/sass/_reusable.scss */
+.color-secondary {
+  color: #E5673C; }
+
+/* line 168, /var/www/html/mvc/app/site/claire/sass/_reusable.scss */
+.color-tertiary {
+  color: #2A9F67; }
+
+/* line 172, /var/www/html/mvc/app/site/claire/sass/_reusable.scss */
+.table-basic {
+  width: 100%; }
+  /* line 176, /var/www/html/mvc/app/site/claire/sass/_reusable.scss */
+  .table-basic th {
+    font-weight: 600;
+    text-align: left;
+    background-color: #f2f2f2; }
+  /* line 183, /var/www/html/mvc/app/site/claire/sass/_reusable.scss */
+  .table-basic th, .table-basic td {
+    padding: 0.5em;
+    border: 1px solid #E5673C; }
+
+/* line 1, /var/www/html/mvc/app/site/claire/sass/_typography.scss */
+body {
+  font-size: 16px;
+  color: #745E56;
+  font-family: 'Open Sans', 'Sans-serif'; }
+
+/**
+ * selection
+ */
+/* line 11, /var/www/html/mvc/app/site/claire/sass/_typography.scss */
+::selection {
+  color: #fff;
+  /* Safari */
+  background: #ca3566;
+  /* Safari */ }
+
+/* line 16, /var/www/html/mvc/app/site/claire/sass/_typography.scss */
+::-moz-selection {
+  color: #fff;
+  /* Firefox */
+  background: #ca3566;
+  /* Firefox */ }
+
+/**
+ * links
+ */
+/* line 26, /var/www/html/mvc/app/site/claire/sass/_typography.scss */
+a, a:visited {
+  color: #ca3566;
+  text-decoration: none; }
+
+/* line 32, /var/www/html/mvc/app/site/claire/sass/_typography.scss */
+a:hover, a:focus {
+  color: #e87952; }
+
+/* line 38, /var/www/html/mvc/app/site/claire/sass/_typography.scss */
+a:active {
+  color: #e25525; }
+
+/* line 42, /var/www/html/mvc/app/site/claire/sass/_typography.scss */
+a:link {
+  -webkit-tap-highlight-color: #E5673C; }
+
+/* line 46, /var/www/html/mvc/app/site/claire/sass/_typography.scss */
+*:focus {
+  outline: none; }
+
+/* line 50, /var/www/html/mvc/app/site/claire/sass/_typography.scss */
+p {
+  margin: 0; }
+
+/**
+ * headings, spacing
+ */
+/* line 68, /var/www/html/mvc/app/site/claire/sass/_typography.scss */
+h1, h2, h3, h4, h5, h6, .h1, .typography h1, .h2, .typography h2, .h3, .typography h3, .h4, .typography h4, .search-result-description, .h5, .typography h5, .h6, .typography h6 {
+  font-family: 'Open Sans', 'Sans-serif';
+  font-weight: 600;
+  margin: 0; }
+
+/* line 75, /var/www/html/mvc/app/site/claire/sass/_typography.scss */
+.h1, .typography h1, .h2, .typography h2 {
+  line-height: 1.1; }
+
+/* line 79, /var/www/html/mvc/app/site/claire/sass/_typography.scss */
+.h3, .typography h3, .h4, .typography h4, .search-result-description {
+  line-height: 1.3; }
+
+/* line 83, /var/www/html/mvc/app/site/claire/sass/_typography.scss */
+.h1, .typography h1 {
+  font-size: 400%; }
+
+/* line 87, /var/www/html/mvc/app/site/claire/sass/_typography.scss */
+.h2, .typography h2 {
+  font-size: 250%; }
+
+/* line 91, /var/www/html/mvc/app/site/claire/sass/_typography.scss */
+.h3, .typography h3 {
+  font-size: 200%; }
+
+/* line 95, /var/www/html/mvc/app/site/claire/sass/_typography.scss */
+.h4, .typography h4, .search-result-description {
+  font-size: 180%; }
+
+/* line 99, /var/www/html/mvc/app/site/claire/sass/_typography.scss */
+.h5, .typography h5 {
+  font-size: 130%; }
+
+/* line 103, /var/www/html/mvc/app/site/claire/sass/_typography.scss */
+.fixed, .typography pre, .typography code {
+  font-weight: inherit; }
+
+/* line 108, /var/www/html/mvc/app/site/claire/sass/_typography.scss */
+.quiet {
+  font-weight: inherit; }
+
+/* line 112, /var/www/html/mvc/app/site/claire/sass/_typography.scss */
+.loud, .bold, .typography b, .typography strong {
+  font-weight: inherit; }
+
+/* line 116, /var/www/html/mvc/app/site/claire/sass/_typography.scss */
+.italic, .typography i, .typography em {
+  font-style: italic; }
+
+/* line 120, /var/www/html/mvc/app/site/claire/sass/_typography.scss */
+.bold, .typography b, .typography strong {
+  font-weight: 700; }
+
+/* line 125, /var/www/html/mvc/app/site/claire/sass/_typography.scss */
+.block-margins, .table-basic, .typography p, .typography ul, .typography ol, .typography pre, .container-footer .menu, .footer-socials {
+  margin: 1em 0; }
+  /* line 20, /var/www/html/mvc/sass/vendor/bourbon/addons/_clearfix.scss */
+  .block-margins::after, .table-basic::after, .typography p::after, .typography ul::after, .typography ol::after, .typography pre::after, .container-footer .menu::after, .footer-socials::after {
+    clear: both;
+    content: "";
+    display: table; }
+
+/* line 130, /var/www/html/mvc/app/site/claire/sass/_typography.scss */
+.unordered-list, .typography ul {
+  list-style-type: disc; }
+
+/* line 134, /var/www/html/mvc/app/site/claire/sass/_typography.scss */
+.ordered-list, .typography ol {
+  list-style: decimal; }
+
+/* line 149, /var/www/html/mvc/app/site/claire/sass/_typography.scss */
+.typography h1 {
+  margin: 1em 0 0.5em; }
+/* line 154, /var/www/html/mvc/app/site/claire/sass/_typography.scss */
+.typography h2 {
+  margin: 1em 0 0.5em; }
+/* line 159, /var/www/html/mvc/app/site/claire/sass/_typography.scss */
+.typography h3 {
+  margin: 1em 0 0.5em; }
+/* line 164, /var/www/html/mvc/app/site/claire/sass/_typography.scss */
+.typography h4 {
+  margin: 1em 0 0.5em; }
+/* line 169, /var/www/html/mvc/app/site/claire/sass/_typography.scss */
+.typography h5 {
+  margin: 1em 0 0.5em; }
+/* line 174, /var/www/html/mvc/app/site/claire/sass/_typography.scss */
+.typography h6 {
+  margin: 1em 0 0.5em; }
+/* line 182, /var/www/html/mvc/app/site/claire/sass/_typography.scss */
+.typography p, .typography ul, .typography ol, .typography pre {
+  line-height: 1.5; }
+
+/* line 1, /var/www/html/mvc/app/site/claire/sass/_form.scss */
+::-webkit-input-placeholder {
+  color: #b3b3b3; }
+
+/* line 5, /var/www/html/mvc/app/site/claire/sass/_form.scss */
+:-moz-placeholder {
+  /* Firefox 18- */
+  color: #b3b3b3; }
+
+/* line 9, /var/www/html/mvc/app/site/claire/sass/_form.scss */
+::-moz-placeholder {
+  /* Firefox 19+ */
+  color: #b3b3b3; }
+
+/* line 13, /var/www/html/mvc/app/site/claire/sass/_form.scss */
+:-ms-input-placeholder {
+  color: #b3b3b3; }
+
+/* line 17, /var/www/html/mvc/app/site/claire/sass/_form.scss */
+.input-reset, .input-submit, .input, .form-search-query, .textarea {
+  font-size: 1em; }
+
+/* line 21, /var/www/html/mvc/app/site/claire/sass/_form.scss */
+.input-submit {
+  position: absolute;
+  left: -999em;
+  width: 1px;
+  height: 1px; }
+
+/* line 29, /var/www/html/mvc/app/site/claire/sass/_form.scss */
+.label-block-above {
+  display: block;
+  margin-bottom: .5em; }
+
+/* line 35, /var/www/html/mvc/app/site/claire/sass/_form.scss */
+.input, .form-search-query, .textarea {
+  -webkit-transition: all 200ms;
+  -moz-transition: all 200ms;
+  transition: all 200ms;
+  color: #745E56;
+  font-family: 'Open Sans', 'Sans-serif';
+  border: 1px solid #b3b3b3;
+  color: #745E56;
+  padding: 0.4em 0.5em 0.3em;
+  margin: 0; }
+  /* line 45, /var/www/html/mvc/app/site/claire/sass/_form.scss */
+  .input:focus, .form-search-query:focus, .textarea:focus {
+    box-shadow: 0 0 3px #cccccc;
+    border-color: #b3b3b3;
+    color: #745E56; }
+
+/* line 9, /var/www/html/mvc/app/site/claire/sass/_misc.scss */
+.to-top {
+  border: 1px solid #fff;
+  -webkit-transition: all 200ms ease;
+  -moz-transition: all 200ms ease;
+  transition: all 200ms ease;
+  position: fixed;
+  bottom: 1em;
+  z-index: 1;
+  fill: #fff;
+  right: -4em;
+  width: 2em;
+  height: 2em;
+  padding: 0.5em;
+  background-color: #2A9F67;
+  border-radius: 99em; }
+  /* line 23, /var/www/html/mvc/app/site/claire/sass/_misc.scss */
+  .to-top:active {
+    bottom: .5em;
+    opacity: .8; }
+  /* line 28, /var/www/html/mvc/app/site/claire/sass/_misc.scss */
+  .to-top.is-active {
+    display: block;
+    right: 1em; }
+
+/* line 34, /var/www/html/mvc/app/site/claire/sass/_misc.scss */
+.core-h1 {
+  text-shadow: 1px 1px #745E56;
+  text-align: center;
+  padding: 0.3em;
+  background-color: #ca3566;
+  color: #fff;
+  border-bottom: 1px solid #E5673C;
+  font-size: 1.4em;
+  margin-bottom: 1em; }
+
+/* line 45, /var/www/html/mvc/app/site/claire/sass/_misc.scss */
+.search-result-description {
+  margin-bottom: 1em; }
+
+/* line 50, /var/www/html/mvc/app/site/claire/sass/_misc.scss */
+.page {
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-top: 85px;
+  padding-bottom: 61px; }
+
+/* line 59, /var/www/html/mvc/app/site/claire/sass/_misc.scss */
+.container-footer-inner, .container-header-inner, .page {
+  max-width: 50em;
+  margin: 0 auto; }
+
+/* line 20, /var/www/html/mvc/sass/vendor/bourbon/addons/_clearfix.scss */
+.container-header-inner::after {
+  clear: both;
+  content: "";
+  display: table; }
+
+/* line 68, /var/www/html/mvc/app/site/claire/sass/_misc.scss */
+.button-base, .button-primary, .form-search-submit, .button-secondary {
+  padding: 12px 14px;
+  background-color: gray;
+  color: #fff; }
+
+/* line 74, /var/www/html/mvc/app/site/claire/sass/_misc.scss */
+.button-primary, .form-search-submit {
+  background-color: #ca3566; }
+
+/* line 79, /var/www/html/mvc/app/site/claire/sass/_misc.scss */
+.button-secondary {
+  background-color: #E5673C; }
+
+@media only screen and (min-width: 600px) {
+  /* line 86, /var/www/html/mvc/app/site/claire/sass/_misc.scss */
+  .page {
+    padding-top: 6em; } }
+
+@media only screen and (min-width: 1300px) {
+  /* line 93, /var/www/html/mvc/app/site/claire/sass/_misc.scss */
+  html {
+    background: url("asset/lightpaperfibers.png") repeat; } }
+
+@media only screen and (min-width: 1500px) {
+  /* line 108, /var/www/html/mvc/app/site/claire/sass/_misc.scss */
+  .container-site {
+    background: url("asset/floral-left.png") top left no-repeat; }
+  /* line 112, /var/www/html/mvc/app/site/claire/sass/_misc.scss */
+  .container-site-inner {
+    background: url("asset/floral-right.png") top right no-repeat; } }
+
+/* line 1, /var/www/html/mvc/app/site/claire/sass/_header.scss */
+.logo-image {
+  width: 100%;
+  height: auto; }
+
+/* line 6, /var/www/html/mvc/app/site/claire/sass/_header.scss */
+.header-button-mobile-image {
+  width: 100%;
+  height: auto; }
+
+/* line 11, /var/www/html/mvc/app/site/claire/sass/_header.scss */
+.to-top-image {
+  width: 100%;
+  height: auto; }
+
+/* line 16, /var/www/html/mvc/app/site/claire/sass/_header.scss */
+.container-header {
+  -webkit-transition: all 300ms ease;
+  -moz-transition: all 300ms ease;
+  transition: all 300ms ease;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  background-color: rgba(202, 53, 102, 0.8); }
+
+/* line 26, /var/www/html/mvc/app/site/claire/sass/_header.scss */
+.container-header .form-search {
+  float: left;
+  margin-left: 3%;
+  width: 35%;
+  margin: 14px 0 0 5%; }
+  /* line 32, /var/www/html/mvc/app/site/claire/sass/_header.scss */
+  .container-header .form-search .form-search-query {
+    width: 50%;
+    float: left;
+    border: 0;
+    border-radius: 0;
+    background-color: #d55d85;
+    color: #fff; }
+    /* line 40, /var/www/html/mvc/app/site/claire/sass/_header.scss */
+    .container-header .form-search .form-search-query::-webkit-input-placeholder {
+      color: #df86a3; }
+    /* line 44, /var/www/html/mvc/app/site/claire/sass/_header.scss */
+    .container-header .form-search .form-search-query:-moz-placeholder {
+      /* Firefox 18- */
+      color: #df86a3; }
+    /* line 48, /var/www/html/mvc/app/site/claire/sass/_header.scss */
+    .container-header .form-search .form-search-query::-moz-placeholder {
+      /* Firefox 19+ */
+      color: #df86a3; }
+    /* line 52, /var/www/html/mvc/app/site/claire/sass/_header.scss */
+    .container-header .form-search .form-search-query:-ms-input-placeholder {
+      color: #df86a3; }
+  /* line 57, /var/www/html/mvc/app/site/claire/sass/_header.scss */
+  .container-header .form-search .form-search-submit {
+    float: left;
+    height: auto;
+    margin-left: 13px;
+    padding-left: 0.6em;
+    padding-right: 0.6em;
+    border-radius: 0;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    margin: 0 0 0 1em;
+    padding: 6px 13px;
+    background-color: #d55d85;
+    color: #eaaec2;
+    cursor: pointer; }
+
+/* line 76, /var/www/html/mvc/app/site/claire/sass/_header.scss */
+.container-header .menu-primary-container, .container-header .form-search {
+  display: none; }
+
+/* line 80, /var/www/html/mvc/app/site/claire/sass/_header.scss */
+svg {
+  max-width: 100%;
+  max-height: 100%; }
+
+/* line 85, /var/www/html/mvc/app/site/claire/sass/_header.scss */
+.logo {
+  height: 46px;
+  display: block;
+  float: left;
+  width: 6.8em;
+  margin: 10px; }
+
+/* line 93, /var/www/html/mvc/app/site/claire/sass/_header.scss */
+.container-header .menu-primary-container {
+  display: none; }
+
+/* line 97, /var/www/html/mvc/app/site/claire/sass/_header.scss */
+.header-button-mobile {
+  margin: 1em 1em 0 0;
+  cursor: pointer;
+  display: block;
+  float: right;
+  width: 2em;
+  height: 2em; }
+
+/* line 106, /var/www/html/mvc/app/site/claire/sass/_header.scss */
+.container-header .menu-primary-container {
+  float: right; }
+  /* line 109, /var/www/html/mvc/app/site/claire/sass/_header.scss */
+  .container-header .menu-primary-container .menu-primary-level-1-link {
+    color: #fff;
+    float: right;
+    padding: 22px 16px;
+    font-weight: 600;
+    line-height: 1; }
+
+@media only screen and (min-width: 700px) {
+  /* line 120, /var/www/html/mvc/app/site/claire/sass/_header.scss */
+  .header-button-mobile {
+    display: none; }
+  /* line 125, /var/www/html/mvc/app/site/claire/sass/_header.scss */
+  .container-header .form-search, .container-header .menu-primary-container {
+    display: block; } }
+
+@media only screen and (min-width: 900px) {
+  /* line 132, /var/www/html/mvc/app/site/claire/sass/_header.scss */
+  .header-button-mobile {
+    display: none; } }
+
+/* line 1, /var/www/html/mvc/app/site/claire/sass/_home.scss */
+.content.home .home-all-posts {
+  display: block; }
+
+/* line 1, /var/www/html/mvc/app/site/claire/sass/_search.scss */
+.form-search-label {
+  display: none; }
+
+@media only screen and (min-width: 0 899pxpx) {
+  /* line 17, /var/www/html/mvc/app/site/claire/sass/_search.scss */
+  .container-header .form-search {
+    display: none; }
+  /* line 21, /var/www/html/mvc/app/site/claire/sass/_search.scss */
+  .container-footer .form-search {
+    margin: 1em 0; }
+  /* line 27, /var/www/html/mvc/app/site/claire/sass/_search.scss */
+  .container-footer .form-search-query {
+    width: 70%; }
+  /* line 31, /var/www/html/mvc/app/site/claire/sass/_search.scss */
+  .container-footer .submit.button {
+    float: right;
+    width: 27%;
+    padding: 4px; } }
+
+@media only screen and (min-width: 900pxpx) {
+  /* line 41, /var/www/html/mvc/app/site/claire/sass/_search.scss */
+  .container-header .form-search {
+    float: right;
+    margin-top: 0.3em; }
+  /* line 46, /var/www/html/mvc/app/site/claire/sass/_search.scss */
+  .is-scrolling .form-search {
+    margin-top: 0; }
+  /* line 50, /var/www/html/mvc/app/site/claire/sass/_search.scss */
+  .container-footer .form-search {
+    display: none; }
+  /* line 54, /var/www/html/mvc/app/site/claire/sass/_search.scss */
+  .container-header .form-search-submit {
+    border-radius: 3px; }
+  /* line 58, /var/www/html/mvc/app/site/claire/sass/_search.scss */
+  .container-header .form-search-query {
+    background-color: #cf4975;
+    border-width: 0;
+    color: #fff;
+    margin-right: .5em;
+    padding: 4px 0.6em; }
+  /* line 68, /var/www/html/mvc/app/site/claire/sass/_search.scss */
+  .container-header ::-webkit-input-placeholder {
+    color: #fff; }
+  /* line 72, /var/www/html/mvc/app/site/claire/sass/_search.scss */
+  .container-header :-moz-placeholder {
+    /* Firefox 18- */
+    color: #fff; }
+  /* line 76, /var/www/html/mvc/app/site/claire/sass/_search.scss */
+  .container-header ::-moz-placeholder {
+    /* Firefox 19+ */
+    color: #fff; }
+  /* line 80, /var/www/html/mvc/app/site/claire/sass/_search.scss */
+  .container-header :-ms-input-placeholder {
+    color: #fff; } }
+
+/* line 1, /var/www/html/mvc/app/site/claire/sass/_content.scss */
+.content-date {
+  color: #AC8E98; }
+
+/* line 5, /var/www/html/mvc/app/site/claire/sass/_content.scss */
+.content.element .medium {
+  display: none; }
+
+/* line 20, /var/www/html/mvc/sass/vendor/bourbon/addons/_clearfix.scss */
+.contents::after {
+  clear: both;
+  content: "";
+  display: table; }
+
+/* line 14, /var/www/html/mvc/app/site/claire/sass/_content.scss */
+.content-status, .content.element .content-html {
+  display: none; }
+
+/* line 18, /var/www/html/mvc/app/site/claire/sass/_content.scss */
+.content-title {
+  font-size: 32px;
+  font-weight: 100;
+  line-height: 1.2;
+  margin: 0; }
+
+/* line 25, /var/www/html/mvc/app/site/claire/sass/_content.scss */
+.content-thumb-background {
+  background-size: cover;
+  height: 13em;
+  margin-bottom: 1em; }
+
+/* line 33, /var/www/html/mvc/app/site/claire/sass/_content.scss */
+.content.element .tags {
+  display: none; }
+
+/* line 37, /var/www/html/mvc/app/site/claire/sass/_content.scss */
+.tags {
+  margin: 1em 0; }
+
+/* line 41, /var/www/html/mvc/app/site/claire/sass/_content.scss */
+a.tag {
+  font-size: 0.9em;
+  margin-right: 15px;
+  margin-bottom: 15px;
+  color: #E5673C;
+  padding: 0 0 3px;
+  float: left;
+  line-height: 1.1;
+  border-bottom: 1px solid #e6e6e6; }
+
+/* line 52, /var/www/html/mvc/app/site/claire/sass/_content.scss */
+.content.element {
+  position: relative;
+  padding: 1em; }
+
+/* line 57, /var/www/html/mvc/app/site/claire/sass/_content.scss */
+.content-author {
+  font-size: 0.9em;
+  float: right; }
+
+@media only screen and (min-width: 900px) {
+  /* line 66, /var/www/html/mvc/app/site/claire/sass/_content.scss */
+  .content.element {
+    padding: 3%; } }
+
+/* line 71, /var/www/html/mvc/app/site/claire/sass/_content.scss */
+.content-html-snippet {
+  display: none;
+  margin-top: 1em; }
+
+/* line 76, /var/www/html/mvc/app/site/claire/sass/_content.scss */
+a.content-html-snippet-more {
+  float: right;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  text-align: center;
+  line-height: 1;
+  padding: 5px 8px;
+  background-color: #E5673C;
+  border: 1px solid;
+  color: #fff;
+  display: inline-block;
+  border-color: #E5673C; }
+  /* line 107, /var/www/html/mvc/app/site/claire/sass/_mixin.scss */
+  a.content-html-snippet-more:hover {
+    background-color: #ea8563;
+    border-color: #ea8563; }
+  /* line 118, /var/www/html/mvc/app/site/claire/sass/_mixin.scss */
+  a.content-html-snippet-more:active {
+    background-color: #b75230;
+    border-color: #b75230; }
+  /* line 129, /var/www/html/mvc/app/site/claire/sass/_mixin.scss */
+  a.content-html-snippet-more:focus {
+    border-color: #ca3566; }
+  /* line 134, /var/www/html/mvc/app/site/claire/sass/_mixin.scss */
+  a.content-html-snippet-more.disabled, a.content-html-snippet-more:disabled {
+    cursor: default;
+    background-color: #f2b39d;
+    border-color: #f2b39d; }
+
+/* line 1, /var/www/html/mvc/app/site/claire/sass/_content-single.scss */
+.content-single-title {
+  font-size: 2.2em;
+  margin-bottom: 0.6em; }
+
+/* line 6, /var/www/html/mvc/app/site/claire/sass/_content-single.scss */
+.content-single .content-post-html {
+  margin: 1em 0; }
+
+/* line 10, /var/www/html/mvc/app/site/claire/sass/_content-single.scss */
+.content-single .content-post-author {
+  float: left; }
+
+/* line 14, /var/www/html/mvc/app/site/claire/sass/_content-single.scss */
+.content-single .content-date {
+  margin: 1em 0;
+  float: right; }
+
+/* line 19, /var/www/html/mvc/app/site/claire/sass/_content-single.scss */
+.content-single .content-html {
+  margin-bottom: 4em; }
+
+/* line 23, /var/www/html/mvc/app/site/claire/sass/_content-single.scss */
+.content-single-title-two {
+  font-size: 1.2em; }
+
+/* line 27, /var/www/html/mvc/app/site/claire/sass/_content-single.scss */
+.content-single .content-date {
+  display: none; }
+
+/* line 31, /var/www/html/mvc/app/site/claire/sass/_content-single.scss */
+.content-single.is-type-post .content-date {
+  display: block;
+  text-align: right; }
+
+/* line 1, /var/www/html/mvc/app/site/claire/sass/_content-tag.scss */
+.content-tags {
+  margin: 0 0 1em; }
+  /* line 20, /var/www/html/mvc/sass/vendor/bourbon/addons/_clearfix.scss */
+  .content-tags::after {
+    clear: both;
+    content: "";
+    display: table; }
+
+/* line 6, /var/www/html/mvc/app/site/claire/sass/_content-tag.scss */
+a.content-tag {
+  float: left;
+  line-height: 0;
+  font-family: "Arial, sans-serif";
+  border: 1px solid #DFDFDF;
+  background: #F3F3F3;
+  color: #9B9B9B;
+  font-size: 12px;
+  padding: 1em 0.5em;
+  margin: 0 0.6em 0.6em 0; }
+
+/* line 21, /var/www/html/mvc/app/site/claire/sass/_content-tag.scss */
+.content-tags-all a.content-tag {
+  font-size: 1em;
+  margin: 0 0.3em 0.3em 0;
+  padding: 0.7em 0.5em; }
+
+/* line 1, /var/www/html/mvc/app/site/claire/sass/_medium.scss */
+.medium-thumb-image {
+  max-width: 100%;
+  max-height: 100%; }
+
+/* line 13, /var/www/html/mvc/app/site/claire/sass/_medium.scss */
+.medium-date-published, .medium-tick, .medium-delete, .medium-title {
+  display: none; }
+
+/* line 1, /var/www/html/mvc/app/site/claire/sass/_month.scss */
+.months {
+  margin: 0 0 1em 0;
+  padding: 0;
+  list-style: none; }
+  /* line 6, /var/www/html/mvc/app/site/claire/sass/_month.scss */
+  .months .month-total {
+    border: 1px solid #bdbdbd;
+    border-radius: 99em;
+    width: 2em;
+    height: inherit;
+    display: block;
+    position: absolute;
+    top: 0.5em;
+    right: 0;
+    font-size: 0.7em;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 1em;
+    padding: 0.5em 0;
+    cursor: default;
+    background: #F1F1F1;
+    color: #979797; }
+  /* line 25, /var/www/html/mvc/app/site/claire/sass/_month.scss */
+  .months .month {
+    position: relative; }
+  /* line 29, /var/www/html/mvc/app/site/claire/sass/_month.scss */
+  .months .month-link {
+    font-size: 0.8em;
+    border-top: 1px solid #d5d5d5;
+    padding: 0.4em 0;
+    display: block; }
+  @media screen and (max-width: 450px) {
+    /* line 38, /var/www/html/mvc/app/site/claire/sass/_month.scss */
+    .months .month:first-of-type .month-link {
+      border-top: none; } }
+  @media screen and (min-width: 450px) {
+    .months {
+      margin: 0; }
+      /* line 46, /var/www/html/mvc/app/site/claire/sass/_month.scss */
+      .months .month-total {
+        top: 1em;
+        right: 1em; }
+      /* line 51, /var/www/html/mvc/app/site/claire/sass/_month.scss */
+      .months .month-link {
+        background: #fff;
+        border: none;
+        float: left;
+        width: 44.9%;
+        margin: 0.3em;
+        border: 1px solid;
+        padding: 0.4em;
+        position: relative; } }
+
+/* line 1, /var/www/html/mvc/app/site/claire/sass/_pagination.scss */
+.pagination-text {
+  display: none; }
+
+/* line 5, /var/www/html/mvc/app/site/claire/sass/_pagination.scss */
+.pagination-summary {
+  text-align: center;
+  color: gray;
+  line-height: 2; }
+
+/* line 11, /var/www/html/mvc/app/site/claire/sass/_pagination.scss */
+.pagination {
+  margin: 1em 0; }
+  /* line 14, /var/www/html/mvc/app/site/claire/sass/_pagination.scss */
+  .pagination a.pagination-page {
+    display: none;
+    border: 1px solid #ca3566;
+    margin-right: 0.6em;
+    margin-bottom: 0.6em;
+    font-family: Arial, sans-serif;
+    font-size: 1em;
+    float: left;
+    text-align: center;
+    width: 13%;
+    line-height: 1.6; }
+  /* line 27, /var/www/html/mvc/app/site/claire/sass/_pagination.scss */
+  .pagination a.is-current {
+    cursor: default;
+    color: #E5673C;
+    border-color: #E5673C;
+    background: transparent; }
+
+/* line 38, /var/www/html/mvc/app/site/claire/sass/_pagination.scss */
+a.pagination-next, a.pagination-previous {
+  width: 2.5em;
+  height: 2.5em;
+  fill: #E5673C; }
+  /* line 43, /var/www/html/mvc/app/site/claire/sass/_pagination.scss */
+  a.pagination-next.is-disabled, a.pagination-previous.is-disabled {
+    fill: #cccccc; }
+
+/* line 48, /var/www/html/mvc/app/site/claire/sass/_pagination.scss */
+.pagination-previous {
+  float: left;
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  transform: rotate(180deg); }
+
+/* line 53, /var/www/html/mvc/app/site/claire/sass/_pagination.scss */
+.pagination-next {
+  float: right;
+  text-align: right; }
+
+/* line 58, /var/www/html/mvc/app/site/claire/sass/_pagination.scss */
+.pagination-title {
+  display: none; }
+
+@media only screen and (min-width: 600pxpx) {
+  /* line 65, /var/www/html/mvc/app/site/claire/sass/_pagination.scss */
+  a.pagination-next, a.pagination-previous {
+    width: 15%; } }
+
+/* line 1, /var/www/html/mvc/app/site/claire/sass/_footer.scss */
+.container-footer .form-search-query {
+  width: 58%;
+  float: left; }
+
+/* line 6, /var/www/html/mvc/app/site/claire/sass/_footer.scss */
+.container-footer .form-search-submit {
+  float: right;
+  padding: 6px 0;
+  width: 28%;
+  text-align: center; }
+
+/* line 20, /var/www/html/mvc/sass/vendor/bourbon/addons/_clearfix.scss */
+.container-footer .form-search::after {
+  clear: both;
+  content: "";
+  display: table; }
+
+/* line 19, /var/www/html/mvc/app/site/claire/sass/_footer.scss */
+.container-footer .propos-portrait {
+  width: 30%; }
+/* line 23, /var/www/html/mvc/app/site/claire/sass/_footer.scss */
+.container-footer img {
+  width: 100%; }
+
+/* line 28, /var/www/html/mvc/app/site/claire/sass/_footer.scss */
+.container-footer .propos {
+  margin: 0 0 1em;
+  padding: 0 0 0 36%;
+  position: relative; }
+  /* line 35, /var/www/html/mvc/app/site/claire/sass/_footer.scss */
+  .container-footer .propos .propos-description {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; }
+
+/* line 44, /var/www/html/mvc/app/site/claire/sass/_footer.scss */
+.container-footer .menu {
+  margin-bottom: 0; }
+  /* line 48, /var/www/html/mvc/app/site/claire/sass/_footer.scss */
+  .container-footer .menu .menu-item {
+    -webkit-transition: all 200ms ease;
+    -moz-transition: all 200ms ease;
+    transition: all 200ms ease;
+    display: block;
+    text-align: center;
+    padding: 1em;
+    background-color: #2A9F67;
+    color: #fff; }
+    /* line 56, /var/www/html/mvc/app/site/claire/sass/_footer.scss */
+    .container-footer .menu .menu-item:active {
+      opacity: .5; }
+  /* line 61, /var/www/html/mvc/app/site/claire/sass/_footer.scss */
+  .container-footer .menu .menu-item:first-child {
+    border: 0; }
+
+/* line 68, /var/www/html/mvc/app/site/claire/sass/_footer.scss */
+.container-footer .calling-card {
+  margin: 1em 0; }
+/* line 72, /var/www/html/mvc/app/site/claire/sass/_footer.scss */
+.container-footer .calling-card-portrait {
+  float: left;
+  margin-right: 1em;
+  margin-bottom: 1em;
+  width: 9em;
+  border-radius: 99em;
+  overflow: hidden;
+  height: 9em; }
+/* line 82, /var/www/html/mvc/app/site/claire/sass/_footer.scss */
+.container-footer .calling-card-content-title {
+  font-size: 1.3em; }
+/* line 86, /var/www/html/mvc/app/site/claire/sass/_footer.scss */
+.container-footer .calling-card-content-button.button.primary {
+  float: left; }
+/* line 90, /var/www/html/mvc/app/site/claire/sass/_footer.scss */
+.container-footer .calling-card-content-description {
+  margin-bottom: 1em; }
+
+/* line 95, /var/www/html/mvc/app/site/claire/sass/_footer.scss */
+.footer-social {
+  width: 3em;
+  height: 3em;
+  float: left;
+  fill: #E5673C;
+  margin-right: 7px; }
+  /* line 102, /var/www/html/mvc/app/site/claire/sass/_footer.scss */
+  .footer-social:active {
+    opacity: .5; }
+
+/* line 107, /var/www/html/mvc/app/site/claire/sass/_footer.scss */
+.footer-socials {
+  margin-top: 0; }
+  /* line 20, /var/www/html/mvc/sass/vendor/bourbon/addons/_clearfix.scss */
+  .footer-socials::after {
+    clear: both;
+    content: "";
+    display: table; }
+
+/* line 113, /var/www/html/mvc/app/site/claire/sass/_footer.scss */
+.container-footer-inner {
+  padding: 5%; }
+  /* line 20, /var/www/html/mvc/sass/vendor/bourbon/addons/_clearfix.scss */
+  .container-footer-inner::after {
+    clear: both;
+    content: "";
+    display: table; }
+
+/* line 118, /var/www/html/mvc/app/site/claire/sass/_footer.scss */
+.container-footer {
+  border-top: 1px solid #EBD7DE; }
+
+@media only screen and (min-width: 600px) {
+  /* line 124, /var/www/html/mvc/app/site/claire/sass/_footer.scss */
+  .container-footer .menu {
+    margin: 1em 0;
+    float: left;
+    clear: left; }
+  /* line 130, /var/www/html/mvc/app/site/claire/sass/_footer.scss */
+  .container-footer .menu .menu-item {
+    float: left;
+    background-color: transparent;
+    color: #ca3566;
+    margin-right: 2em;
+    padding: 0; }
+  /* line 138, /var/www/html/mvc/app/site/claire/sass/_footer.scss */
+  .container-footer .form-search {
+    float: right;
+    width: 50%; }
+  /* line 143, /var/www/html/mvc/app/site/claire/sass/_footer.scss */
+  .footer-socials {
+    float: left;
+    width: 50%; } }
+
+@media only screen and (min-width: 1300px) {
+  /* line 151, /var/www/html/mvc/app/site/claire/sass/_footer.scss */
+  .container-footer {
+    background: url("asset/bordeaux-right.png") bottom right no-repeat;
+    min-height: 30em; } }
+
+/* line 157, /var/www/html/mvc/app/site/claire/sass/_footer.scss */
+.footer-main {
+  display: none; }
+
+/*# sourceMappingURL=screen.css.map */

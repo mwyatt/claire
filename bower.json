@@ -14,8 +14,5 @@
     "magnific-popup": "~1.0.0",
     "jquery-serialize-object": "~2.4.3"
   },
-  "private": true,
-  "devDependencies": {
-    "handlebars": "~3.0.0"
-  }
+  "private": true
 }

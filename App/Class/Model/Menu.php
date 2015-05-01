@@ -15,15 +15,15 @@ class Menu extends \OriginalAppName\Model
 
 	public $tableName = 'menu';
 
-
-	public $entity = '\\OriginalAppName\\Entity\\Menu';
-
 	
 	public $fields = [
-		'id'
-		, 'idParent'
-		, 'name'
-		, 'url'
-		, 'keyGroup'
+		'id',
+		'idParent',
+		'name',
+		'url',
+		'keyGroup'
 	];
+
+
+	public $entity = '\\OriginalAppName\\Entity\\Menu';
 }

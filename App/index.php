@@ -2,7 +2,6 @@
 
 namespace OriginalAppName;
 
-
 use OriginalAppName;
 
 

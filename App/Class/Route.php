@@ -95,11 +95,6 @@ exit;
 		// the response, the only echo :(
 		$response = $this->getResponse();
 
-		// em flush
-		if ($entityManager = $registry->get('entityManager')) {
-			$entityManager->flush();
-		}
-
 		// output
 		echo $response->getContent();
 	}

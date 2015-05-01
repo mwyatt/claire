@@ -2,8 +2,6 @@
 
 namespace OriginalAppName\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-
 
 /**
  * @Entity @Table(name="content")
@@ -53,16 +51,6 @@ class Content extends \OriginalAppName\Entity
 	 */
 	protected $type;
 
-
-	/**
-	 * possible type options
-	 * @var array
-	 */
-	protected $typePossible = array(
-		'post',
-		'page'
-	);
-
 	
 	/**
 	 * epoch time of when the content was created
@@ -78,6 +66,23 @@ class Content extends \OriginalAppName\Entity
 	 * @var string
 	 */
 	protected $status;
+
+
+	/**
+     * @Column(type="integer")
+	 * @var int
+	 */
+	protected $userId;
+
+
+	/**
+	 * possible type options
+	 * @var array
+	 */
+	protected $typePossible = array(
+		'post',
+		'page'
+	);
 
 
 	/**
@@ -101,26 +106,10 @@ class Content extends \OriginalAppName\Entity
 
 
 	/**
-     * @Column(type="integer")
-	 * @var int
-	 */
-	protected $userId;
-
-
-	/**
 	 * @OneToOne(targetEntity="User")
 	 * @JoinColumn(name="userId", referencedColumnName="id")
 	 */
 	protected $user;
-
-
-	/**
-	 * init collections
-	 */
-    public function __construct()
-    {
-        $this->meta = new ArrayCollection();
-    }
 
 
 	/**
@@ -276,10 +265,25 @@ class Content extends \OriginalAppName\Entity
 	}
 
 
+	/**
+	 * unused?
+	 * @param object $meta Entity\Content\Meta
+	 */
 	public function addMeta($meta)
 	{
 	    $this->meta[] = $meta;
 	    return $this;
+	}
+
+
+	/**
+	 * destructively sets a single meta key
+	 * @param string
+	 * @param all
+	 */
+	public function setMetaKey($key, $value)
+	{
+		$this->meta[$key] = $value;
 	}
 
 

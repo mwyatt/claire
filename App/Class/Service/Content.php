@@ -35,7 +35,7 @@ class Content extends \OriginalAppName\Service
 		$modelContentMeta = new Model\Content\Meta();
 		$modelContentMeta->readId($modelContent->getDataProperty('id'), 'contentId');
 		if (! $modelContentMeta->getData()) {
-			return $this->getData();
+			return $this->setData($modelContent->getData());
 		}
 
 		// bind each content with its meta

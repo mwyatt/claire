@@ -1,25 +1,32 @@
 <?php
 
+namespace OriginalAppName\Model;
+
 
 /**
  * @author 	Martin Wyatt <martin.wyatt@gmail.com> 
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */ 
-class Model_Media extends Model
+class Media extends \OriginalAppName\Model
 {
 	
 
-	public $fields = array(
-		'id'
-		, 'title'
-		, 'description'
-		, 'path'
-		, 'type'
-		, 'time_published'
-		, 'user_id'
-	);
+	public $tableName = 'media';
 
+
+	public $fields = [
+		'id',
+		'title',
+		'description',
+		'path',
+		'type',
+		'timePublished',
+		'userId'
+	];
+
+
+	public $entity = '\\OriginalAppName\\Entity\\Media';
 
 
 	/**

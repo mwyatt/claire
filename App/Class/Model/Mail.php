@@ -15,17 +15,17 @@ class Mail extends \OriginalAppName\Model
 	public $tableName = 'mail';
 
 
-	public $entity = '\\OriginalAppName\\Entity\\Mail';
-
-
-	public $fields = array(
+	public $fields = [
 		'id',
 		'to',
 		'from',
 		'subject',
 		'body',
 		'timeSent'
-	);
+	];
+
+
+	public $entity = '\\OriginalAppName\\Entity\\Mail';
 	
 
 	/**

@@ -12,14 +12,14 @@ class Option extends \OriginalAppName\Model
 {	
 
 
+	public $tableName = 'options';
+
+
 	public $fields = array(
 		'id'
 		, 'name'
 		, 'value'
 	);
-
-
-	public $tableName = 'options';
 
 
 	public $entity = '\\OriginalAppName\\Entity\\Option';

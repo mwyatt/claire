@@ -14,17 +14,17 @@ class User extends \OriginalAppName\Model
 
 	public $tableName = 'user';
 
+	
+	public $fields = [
+		'id',
+		'email',
+		'password',
+		'nameFirst',
+		'nameLast',
+		'timeRegistered',
+		'level'
+	];
+
 
 	public $entity = '\\OriginalAppName\\Entity\\User';
-
-	
-	public $fields = array(
-		'id'
-		, 'email'
-		, 'password'
-		, 'nameFirst'
-		, 'nameLast'
-		, 'timeRegistered'
-		, 'level'
-	);
 }

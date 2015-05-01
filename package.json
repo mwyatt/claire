@@ -14,7 +14,6 @@
     "grunt-sass": "latest",
     "load-grunt-config": "^0.16.0",
     "load-grunt-tasks": "^3.0.0",
-    "sass-bourbon": "^4.1.1",
     "time-grunt": "^1.0.0"
   },
   "browserify": {
@@ -31,6 +30,7 @@
     "vendor/jquery/magnificPopup": "./js/vendor/jquery.magnific-popup.js",
     "vendor/jquery/serializeObject": "./js/vendor/jquery.serialize-object.min.js",
     "vendor/mustache": "./js/vendor/mustache.js",
+    "vendor/jquery/owlCarousel": "./js/vendor/owl.carousel.js",
 
     "admin/feedbackStream": "./js/admin/feedbackStream.js",
     "admin/tinymceConfig": "./js/admin/tinymceConfig.js",

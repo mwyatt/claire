@@ -19,14 +19,22 @@ class Common extends \OriginalAppName\Service
 	public function read()
 	{
 
-		// main nav
-		$json = new Json();
-		$json->read('main-menu');
+		// menu primary
+		$modelMenu = new Model\Menu;
+		$modelMenu->readColumn('keyGroup', 'primary');
+		$menu = new Menu;
+		$menu->buildTree($modelMenu->getData());
 
 		// template
 		return [
-			'googleAnalyticsTrackingId' => '?',
-			'mainMenu' => $json->getData(),
+			'googleAnalyticsTrackingId' => 'UA-43311305-1',
+			'socials' => [
+				'twitter' => 'https://twitter.com/clmruth',
+				'facebook' => 'https://www.facebook.com/clurrrpoof',
+				'pinterest' => 'http://www.pinterest.com/clmruth26/',
+				'google' => 'https://plus.google.com/100076113648548258052'
+			],
+			'menuPrimary' => $menu->getData(),
 			'campaign' => new Analytics\Campaign
 		];
 	}

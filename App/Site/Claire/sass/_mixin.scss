@@ -81,3 +81,65 @@
       }
    }
 }
+
+
+
+
+// builds a button with a custom color and background color
+@mixin button($color: $color-primary, $background-color: transparent) {
+  font-weight: 600;
+  cursor: pointer; 
+  border: none;
+  text-align: center;
+  line-height: 1;
+  padding: 5px 8px;
+  background-color: $background-color;
+  border: 1px solid;
+  color: $color;
+  display: inline-block;
+
+  @if $background-color == transparent {
+    border-color: $color;
+  } @else {
+    border-color: $background-color;
+  }
+
+  &:hover {
+
+    @if $background-color == transparent {
+      color: mix(#fff, $color, 20%);
+      border-color: mix(#fff, $color, 20%);
+    } @else {
+      background-color: mix(#fff, $background-color, 20%);
+      border-color: mix(#fff, $background-color, 20%);
+    }
+  }
+
+  &:active {
+
+    @if $background-color == transparent {
+      color: mix(#000, $color, 20%);
+      border-color: mix(#000, $color, 20%);
+    } @else {
+      background-color: mix(#000, $background-color, 20%);
+      border-color: mix(#000, $background-color, 20%);
+    }
+  }
+
+  &:focus {
+    border-color: $color-primary;
+  }
+
+  &.disabled,
+  &:disabled {
+    cursor: default;
+
+    @if $background-color == '' {
+      color: mix(#fff, $color, 50%);
+      border-color: mix(#fff, $color, 50%);
+    } @else {
+      background-color: mix(#fff, $background-color, 50%);
+      border-color: mix(#fff, $background-color, 50%);
+    }
+  }
+}

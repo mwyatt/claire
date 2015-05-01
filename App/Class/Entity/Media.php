@@ -53,17 +53,6 @@ class Media extends \OriginalAppName\Entity
 
 
 	/**
-	 * possible type options
-	 * @todo correct mimes?
-	 * @var array
-	 */
-	private $typePossible = array(
-		'png',
-		'jpg'
-	);
-
-
-	/**
 	 * epoch time of when the content was created
      * @Column(type="integer")
 	 * @var int
@@ -77,6 +66,17 @@ class Media extends \OriginalAppName\Entity
 	 * @var int
 	 */
 	private $userId;
+
+
+	/**
+	 * possible type options
+	 * @todo correct mimes?
+	 * @var array
+	 */
+	private $typePossible = array(
+		'png',
+		'jpg'
+	);
 
 
 	/**

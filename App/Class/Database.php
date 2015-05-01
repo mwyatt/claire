@@ -80,7 +80,7 @@ class Database
 
 			// set data source name
 			$dataSourceName = 'mysql:host=' . $credentials['host']
-				 . ';dbname=' . $credentials['basename'];
+				 . ';dbname=' . $credentials['basename'] . ';charset=utf8';
 			
 			// connect
 			$this->dbh = new PDO(
