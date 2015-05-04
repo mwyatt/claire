@@ -2,6 +2,7 @@
 
 namespace OriginalAppName\Controller;
 
+use OriginalAppName\Registry;
 use OriginalAppName\Response;
 use Intervention\Image\ImageManagerStatic;
 use OriginalAppName\Entity;
@@ -127,7 +128,7 @@ class Asset extends \OriginalAppName\Controller
 
 		// redirect to same url after creation
 		// messy but is this the only redirect which will go to a asset?
-		$registry = \OriginalAppName\Registry::getInstance();
+		$registry = Registry::getInstance();
 		$url = $registry->get('url');
 		$url = $url->generate('asset/single', ['path' => $pathRequest]);
 		$this->redirectAbsolute(rtrim($url, US));
