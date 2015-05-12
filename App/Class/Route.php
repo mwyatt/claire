@@ -77,14 +77,21 @@ class Route extends \OriginalAppName\System
 			// attempt execution of route
 		    $response = Executor::execute($route);
 		} catch (Exception $exception) {
+
+// here could be the rendering of a simple page with typography
+// 1. 404 not found
+// 2. error
 			
+			500 Internal Server Error
+			The server encountered an unexpected condition which prevented it from fulfilling the request.
+
 echo '<pre>';
 print_r($exception);
 echo '</pre>';
 exit;
 
 			// 404
-		    $response = $controller->notFound();
+		    // $response = $controller->notFound();
 		}
 
 		// headers
