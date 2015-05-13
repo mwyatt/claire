@@ -77,21 +77,11 @@ class Route extends \OriginalAppName\System
 			// attempt execution of route
 		    $response = Executor::execute($route);
 		} catch (Exception $exception) {
-
-// here could be the rendering of a simple page with typography
-// 1. 404 not found
-// 2. error
-			
-			500 Internal Server Error
-			The server encountered an unexpected condition which prevented it from fulfilling the request.
-
-echo '<pre>';
-print_r($exception);
-echo '</pre>';
-exit;
-
-			// 404
-		    // $response = $controller->notFound();
+		    $response = new Response('500 Internal Server Error
+			The server encountered an unexpected condition which prevented it from fulfilling the request.', 500);
+			echo '<pre>';
+			print_r($exception);
+			echo '</pre>';
 		}
 
 		// headers
@@ -130,7 +120,7 @@ exit;
 		// store all routes here
 		$routes = [];
 
-		// admin first because of global ovverides
+		// admin first because of global overrides
 		// admin routes only if there is admin in the url
 		if (in_array('admin', $url->getPath())) {
 			include APP_PATH . 'Admin' . DS . 'route' . EXT;
@@ -141,10 +131,9 @@ exit;
 
 		// site specific
 		$siteRoutePath = SITE_PATH . 'route' . EXT;
-		if (! file_exists($siteRoutePath)) {
-		    exit('site \'' . SITE . '\' must have routes configured');
+		if (file_exists($siteRoutePath)) {
+			include $siteRoutePath;
 		}
-		include $siteRoutePath;
 
 		// return all routes
 		// store also

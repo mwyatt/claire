@@ -1,46 +1,41 @@
 {
-  "site": "claire",
+  "site": "codex",
   "author": "Martin Wyatt",
   "version": "0.1.0",
   "devDependencies": {
-    "grunt": "latest",
     "browserify": "^8.0.2",
     "browserify-shim": "^3.8.2",
-    "grunt-contrib-concat": "latest",
+    "grunt": "latest",
     "grunt-contrib-copy": "latest",
-    "grunt-contrib-requirejs": "^0.4.4",
     "grunt-contrib-uglify": "latest",
-    "grunt-contrib-watch": "latest",
     "grunt-sass": "latest",
+    "gulp": "^3.8.11",
     "load-grunt-config": "^0.16.0",
     "load-grunt-tasks": "^3.0.0",
     "time-grunt": "^1.0.0"
   },
   "browserify": {
+    "basedir": "./",
     "transform": [
       "browserify-shim"
     ]
   },
   "browserify-shim": {
-    "jquery": "$"
+    "jquery": "global:jQuery"
   },
   "browser": {
-    "jquery": "./js/vendor/jquery.js",
-    "vendor/jquery": "./js/vendor/jquery.js",
-    "vendor/jquery/magnificPopup": "./js/vendor/jquery.magnific-popup.js",
-    "vendor/jquery/serializeObject": "./js/vendor/jquery.serialize-object.min.js",
-    "vendor/mustache": "./js/vendor/mustache.js",
-    "vendor/jquery/owlCarousel": "./js/vendor/owl.carousel.js",
-
+    "magnificPopup": "./vendor/bower/magnific-popup/dist/jquery.magnific-popup.js",
+    "serializeObject": "./vendor/bower/jquery-serialize-object/dist/jquery.serialize-object.min.js",
+    "mustache": "./vendor/bower/mustache/mustache.js",
+    "owlCarousel": "./vendor/bower/owlcarousel/owl-carousel/owl.carousel.js",
+    "rainbow": "./vendor/bower/rainbow/js/rainbow.js",
     "admin/feedbackStream": "./js/admin/feedbackStream.js",
     "admin/tinymceConfig": "./js/admin/tinymceConfig.js",
     "admin/login": "./js/admin/login.js",
     "admin/option/all": "./js/admin/option/all.js",
     "admin/content/single": "./js/admin/content/single.js",
     "admin/content/meta": "./js/admin/content/meta.js",
-    
-    "helper": "./js/helper.js",
     "menu/hamburger": "./js/menu/hamburger.js",
-    "url": "./js/url.js"
+    "url": "./App/Site/Codex/js/url.js"
   }
 }

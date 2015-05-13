@@ -3,7 +3,7 @@
 /**
  * dependencies
  */
-var $ = require('vendor/jquery');
+var $ = require('jquery');
 
 
 /**

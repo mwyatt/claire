@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "dependencies": {
     "bourbon": "latest",
+    "rainbow": "latest",
     "modernizr": "latest",
     "tinymce": "4.1.6",
     "jquery": "1.11.1",

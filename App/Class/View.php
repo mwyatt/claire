@@ -238,8 +238,14 @@ class View extends \OriginalAppName\Data
 	public function setMeta() {		
 		$data = $this->getData();
 
-		// depends on option
+		// validate options
 		if (! isset($data['option'])) {
+			return $this;
+		}
+		if (! isset($data['option']['meta_title'])) {
+			return $this;
+		}
+		if (! isset($data['option']['meta_description'])) {
 			return $this;
 		}
 
@@ -258,9 +264,10 @@ class View extends \OriginalAppName\Data
 		}
 
 		// keywords
-		if (! isset($data['metaKeywords'])) {
-			$data['metaKeywords'] = $data['option']['meta_keywords']->getValue();
-		}
+		// needed?
+		// if (! isset($data['metaKeywords'])) {
+		// 	$data['metaKeywords'] = $data['option']['meta_keywords']->getValue();
+		// }
 
 		// commit data
 		$this->setData($data);
@@ -298,5 +305,32 @@ class View extends \OriginalAppName\Data
 	 */
 	public function getPathMediaUpload($path) { 
 		return $this->url->getCache('base') . 'media/upload/' . $path;
+	}
+
+
+	/**
+	 * needed for mustache, js and css asset register
+	 * @param  string $key   mustache, css, js
+	 * @param  string $value path
+	 * @return object
+	 */
+	public function appendAsset($key, $value)
+	{
+
+		// validate
+		if (! in_array($key, ['mustache', 'css', 'js'])) {
+			return $this;
+		}
+
+		// set
+		$rootKey = 'asset';
+		if (! isset($this->data[$rootKey])) {
+			$this->data[$rootKey] = [];
+		}
+		if (! isset($this->data[$rootKey][$key])) {
+			$this->data[$rootKey][$key] = [];
+		}
+		$this->data[$rootKey][$key][] = $value;
+		return $this;
 	}
 } 

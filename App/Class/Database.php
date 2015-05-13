@@ -48,7 +48,7 @@ class Database
 			'password'
 		);
 		if (! Helper::arrayKeyExists($expected, $this->getCredentials())) {
-			exit('database validateCredentials failed');
+			exit('database validate -> Credentials failed');
 		}
 	}
 

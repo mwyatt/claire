@@ -38,6 +38,9 @@ class Front extends \OriginalAppName\Controller\Option
 	public function defaultGlobalSite()
 	{
 		$className = '\\OriginalAppName\\Site\\' . ucfirst(SITE) . '\\Service\\Common';
+		if (! class_exists($className)) {
+			return;
+		}
 		$serviceCommon = new $className;
 		$this
 			->view
