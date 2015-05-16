@@ -840,6 +840,48 @@ img.mfp-img {
   padding-top: 0; }
 
 /**
+ * total with of page
+ * @type {%}
+ */
+/**
+ * number of columns
+ * @type {Number}
+ */
+/**
+ * margin between columns
+ * @type {%}
+ */
+/**
+ * maths
+ * @type {int}
+ */
+/**
+ * maths
+ * @type {int}
+ */
+/**
+ * create row div
+ */
+/**
+ * create a column div
+ * @type {int}
+ */
+/**
+ * make an element span n columns
+ * @type {int}
+ */
+/**
+ * the last column in a row needs this
+ */
+/**
+ * prepend n blank columns
+ * @type {int}
+ */
+/**
+ * append n blank columns
+ * @type {int}
+ */
+/**
  * allows dynamic usage of media queries, here ranges of breakpoints
  * can be defined then refered to in a friendly way
  * usage:
@@ -1139,10 +1181,10 @@ h1, h2, h3, h4, h5, h6, .h1, .typography h1, .h2, .typography h2, .h3, .typograp
   font-weight: 700; }
 
 /* line 125, /var/www/html/mvc/app/site/claire/sass/_typography.scss */
-.block-margins, .table-basic, .typography p, .typography ul, .typography ol, .typography pre, .container-footer .menu, .footer-socials {
+.block-margins, .table-basic, .typography p, .typography ul, .typography ol, .typography pre, .container-footer .menu-primary-container, .footer-socials {
   margin: 1em 0; }
   /* line 20, /var/www/html/mvc/sass/vendor/bourbon/addons/_clearfix.scss */
-  .block-margins::after, .table-basic::after, .typography p::after, .typography ul::after, .typography ol::after, .typography pre::after, .container-footer .menu::after, .footer-socials::after {
+  .block-margins::after, .table-basic::after, .typography p::after, .typography ul::after, .typography ol::after, .typography pre::after, .container-footer .menu-primary-container::after, .footer-socials::after {
     clear: both;
     content: "";
     display: table; }
@@ -1270,12 +1312,12 @@ h1, h2, h3, h4, h5, h6, .h1, .typography h1, .h2, .typography h2, .h3, .typograp
 
 /* line 50, /var/www/html/mvc/app/site/claire/sass/_misc.scss */
 .page {
-  padding-left: 5%;
-  padding-right: 5%;
   padding-top: 85px;
-  padding-bottom: 61px; }
+  padding-bottom: 25px;
+  padding-left: 5%;
+  padding-right: 5%; }
 
-/* line 59, /var/www/html/mvc/app/site/claire/sass/_misc.scss */
+/* line 60, /var/www/html/mvc/app/site/claire/sass/_misc.scss */
 .container-footer-inner, .container-header-inner, .page {
   max-width: 50em;
   margin: 0 auto; }
@@ -1286,35 +1328,35 @@ h1, h2, h3, h4, h5, h6, .h1, .typography h1, .h2, .typography h2, .h3, .typograp
   content: "";
   display: table; }
 
-/* line 68, /var/www/html/mvc/app/site/claire/sass/_misc.scss */
+/* line 69, /var/www/html/mvc/app/site/claire/sass/_misc.scss */
 .button-base, .button-primary, .form-search-submit, .button-secondary {
   padding: 12px 14px;
   background-color: gray;
   color: #fff; }
 
-/* line 74, /var/www/html/mvc/app/site/claire/sass/_misc.scss */
+/* line 75, /var/www/html/mvc/app/site/claire/sass/_misc.scss */
 .button-primary, .form-search-submit {
   background-color: #ca3566; }
 
-/* line 79, /var/www/html/mvc/app/site/claire/sass/_misc.scss */
+/* line 80, /var/www/html/mvc/app/site/claire/sass/_misc.scss */
 .button-secondary {
   background-color: #E5673C; }
 
 @media only screen and (min-width: 600px) {
-  /* line 86, /var/www/html/mvc/app/site/claire/sass/_misc.scss */
+  /* line 87, /var/www/html/mvc/app/site/claire/sass/_misc.scss */
   .page {
     padding-top: 6em; } }
 
 @media only screen and (min-width: 1300px) {
-  /* line 93, /var/www/html/mvc/app/site/claire/sass/_misc.scss */
+  /* line 94, /var/www/html/mvc/app/site/claire/sass/_misc.scss */
   html {
     background: url("asset/lightpaperfibers.png") repeat; } }
 
 @media only screen and (min-width: 1500px) {
-  /* line 108, /var/www/html/mvc/app/site/claire/sass/_misc.scss */
+  /* line 109, /var/www/html/mvc/app/site/claire/sass/_misc.scss */
   .container-site {
     background: url("asset/floral-left.png") top left no-repeat; }
-  /* line 112, /var/www/html/mvc/app/site/claire/sass/_misc.scss */
+  /* line 113, /var/www/html/mvc/app/site/claire/sass/_misc.scss */
   .container-site-inner {
     background: url("asset/floral-right.png") top right no-repeat; } }
 
@@ -1413,17 +1455,18 @@ svg {
 
 /* line 97, /var/www/html/mvc/app/site/claire/sass/_header.scss */
 .header-button-mobile {
-  margin: 1em 1em 0 0;
+  padding: 17px 23px 17px;
+  border-left: 1px solid #ca3566;
   cursor: pointer;
   display: block;
   float: right;
   width: 2em;
   height: 2em; }
 
-/* line 106, /var/www/html/mvc/app/site/claire/sass/_header.scss */
+/* line 107, /var/www/html/mvc/app/site/claire/sass/_header.scss */
 .container-header .menu-primary-container {
   float: right; }
-  /* line 109, /var/www/html/mvc/app/site/claire/sass/_header.scss */
+  /* line 110, /var/www/html/mvc/app/site/claire/sass/_header.scss */
   .container-header .menu-primary-container .menu-primary-level-1-link {
     color: #fff;
     float: right;
@@ -1432,21 +1475,49 @@ svg {
     line-height: 1; }
 
 @media only screen and (min-width: 700px) {
-  /* line 120, /var/www/html/mvc/app/site/claire/sass/_header.scss */
+  /* line 121, /var/www/html/mvc/app/site/claire/sass/_header.scss */
   .header-button-mobile {
     display: none; }
-  /* line 125, /var/www/html/mvc/app/site/claire/sass/_header.scss */
+  /* line 126, /var/www/html/mvc/app/site/claire/sass/_header.scss */
   .container-header .form-search, .container-header .menu-primary-container {
     display: block; } }
 
 @media only screen and (min-width: 900px) {
-  /* line 132, /var/www/html/mvc/app/site/claire/sass/_header.scss */
+  /* line 133, /var/www/html/mvc/app/site/claire/sass/_header.scss */
   .header-button-mobile {
     display: none; } }
 
 /* line 1, /var/www/html/mvc/app/site/claire/sass/_home.scss */
 .content.home .home-all-posts {
   display: block; }
+
+/* line 20, /var/www/html/mvc/sass/vendor/bourbon/addons/_clearfix.scss */
+.page.home::after {
+  clear: both;
+  content: "";
+  display: table; }
+@media only screen and (min-width: 900px) {
+  .page.home {
+    padding: 9em 1em; } }
+
+/* line 13, /var/www/html/mvc/app/site/claire/sass/_home.scss */
+.home .contents {
+  float: left;
+  width: 100%; }
+  /* line 20, /var/www/html/mvc/sass/vendor/bourbon/addons/_clearfix.scss */
+  .home .contents::after {
+    clear: both;
+    content: "";
+    display: table; }
+
+@media only screen and (min-width: 900px) {
+  .home .content {
+    float: left;
+    width: 30%;
+    margin-right: 5%; }
+    /* line 22, /var/www/html/mvc/app/site/claire/sass/_home.scss */
+    .home .content:nth-child(3n) {
+      margin-right: 0; } }
 
 /* line 1, /var/www/html/mvc/app/site/claire/sass/_search.scss */
 .form-search-label {
@@ -1557,24 +1628,19 @@ a.tag {
 /* line 52, /var/www/html/mvc/app/site/claire/sass/_content.scss */
 .content.element {
   position: relative;
-  padding: 1em; }
+  padding: 1em 0; }
 
 /* line 57, /var/www/html/mvc/app/site/claire/sass/_content.scss */
 .content-author {
   font-size: 0.9em;
   float: right; }
 
-@media only screen and (min-width: 900px) {
-  /* line 66, /var/www/html/mvc/app/site/claire/sass/_content.scss */
-  .content.element {
-    padding: 3%; } }
-
-/* line 71, /var/www/html/mvc/app/site/claire/sass/_content.scss */
+/* line 62, /var/www/html/mvc/app/site/claire/sass/_content.scss */
 .content-html-snippet {
   display: none;
   margin-top: 1em; }
 
-/* line 76, /var/www/html/mvc/app/site/claire/sass/_content.scss */
+/* line 67, /var/www/html/mvc/app/site/claire/sass/_content.scss */
 a.content-html-snippet-more {
   float: right;
   font-weight: 600;
@@ -1620,25 +1686,15 @@ a.content-html-snippet-more {
 
 /* line 14, /var/www/html/mvc/app/site/claire/sass/_content-single.scss */
 .content-single .content-date {
-  margin: 1em 0;
-  float: right; }
+  margin-bottom: 4px; }
 
-/* line 19, /var/www/html/mvc/app/site/claire/sass/_content-single.scss */
+/* line 18, /var/www/html/mvc/app/site/claire/sass/_content-single.scss */
 .content-single .content-html {
   margin-bottom: 4em; }
 
-/* line 23, /var/www/html/mvc/app/site/claire/sass/_content-single.scss */
+/* line 22, /var/www/html/mvc/app/site/claire/sass/_content-single.scss */
 .content-single-title-two {
   font-size: 1.2em; }
-
-/* line 27, /var/www/html/mvc/app/site/claire/sass/_content-single.scss */
-.content-single .content-date {
-  display: none; }
-
-/* line 31, /var/www/html/mvc/app/site/claire/sass/_content-single.scss */
-.content-single.is-type-post .content-date {
-  display: block;
-  text-align: right; }
 
 /* line 1, /var/www/html/mvc/app/site/claire/sass/_content-tag.scss */
 .content-tags {
@@ -1731,19 +1787,15 @@ a.content-tag {
         position: relative; } }
 
 /* line 1, /var/www/html/mvc/app/site/claire/sass/_pagination.scss */
-.pagination-text {
-  display: none; }
-
-/* line 5, /var/www/html/mvc/app/site/claire/sass/_pagination.scss */
 .pagination-summary {
   text-align: center;
   color: gray;
   line-height: 2; }
 
-/* line 11, /var/www/html/mvc/app/site/claire/sass/_pagination.scss */
+/* line 7, /var/www/html/mvc/app/site/claire/sass/_pagination.scss */
 .pagination {
   margin: 1em 0; }
-  /* line 14, /var/www/html/mvc/app/site/claire/sass/_pagination.scss */
+  /* line 10, /var/www/html/mvc/app/site/claire/sass/_pagination.scss */
   .pagination a.pagination-page {
     display: none;
     border: 1px solid #ca3566;
@@ -1755,23 +1807,23 @@ a.content-tag {
     text-align: center;
     width: 13%;
     line-height: 1.6; }
-  /* line 27, /var/www/html/mvc/app/site/claire/sass/_pagination.scss */
+  /* line 23, /var/www/html/mvc/app/site/claire/sass/_pagination.scss */
   .pagination a.is-current {
     cursor: default;
     color: #E5673C;
     border-color: #E5673C;
     background: transparent; }
 
-/* line 38, /var/www/html/mvc/app/site/claire/sass/_pagination.scss */
+/* line 34, /var/www/html/mvc/app/site/claire/sass/_pagination.scss */
 a.pagination-next, a.pagination-previous {
   width: 2.5em;
   height: 2.5em;
   fill: #E5673C; }
-  /* line 43, /var/www/html/mvc/app/site/claire/sass/_pagination.scss */
+  /* line 39, /var/www/html/mvc/app/site/claire/sass/_pagination.scss */
   a.pagination-next.is-disabled, a.pagination-previous.is-disabled {
     fill: #cccccc; }
 
-/* line 48, /var/www/html/mvc/app/site/claire/sass/_pagination.scss */
+/* line 44, /var/www/html/mvc/app/site/claire/sass/_pagination.scss */
 .pagination-previous {
   float: left;
   -webkit-transform: rotate(180deg);
@@ -1780,17 +1832,17 @@ a.pagination-next, a.pagination-previous {
   -o-transform: rotate(180deg);
   transform: rotate(180deg); }
 
-/* line 53, /var/www/html/mvc/app/site/claire/sass/_pagination.scss */
+/* line 49, /var/www/html/mvc/app/site/claire/sass/_pagination.scss */
 .pagination-next {
   float: right;
   text-align: right; }
 
-/* line 58, /var/www/html/mvc/app/site/claire/sass/_pagination.scss */
+/* line 54, /var/www/html/mvc/app/site/claire/sass/_pagination.scss */
 .pagination-title {
   display: none; }
 
 @media only screen and (min-width: 600pxpx) {
-  /* line 65, /var/www/html/mvc/app/site/claire/sass/_pagination.scss */
+  /* line 61, /var/www/html/mvc/app/site/claire/sass/_pagination.scss */
   a.pagination-next, a.pagination-previous {
     width: 15%; } }
 
@@ -1831,10 +1883,10 @@ a.pagination-next, a.pagination-previous {
     white-space: nowrap; }
 
 /* line 44, /var/www/html/mvc/app/site/claire/sass/_footer.scss */
-.container-footer .menu {
+.container-footer .menu-primary-container {
   margin-bottom: 0; }
   /* line 48, /var/www/html/mvc/app/site/claire/sass/_footer.scss */
-  .container-footer .menu .menu-item {
+  .container-footer .menu-primary-container .menu-primary-level-1-link {
     -webkit-transition: all 200ms ease;
     -moz-transition: all 200ms ease;
     transition: all 200ms ease;
@@ -1844,10 +1896,10 @@ a.pagination-next, a.pagination-previous {
     background-color: #2A9F67;
     color: #fff; }
     /* line 56, /var/www/html/mvc/app/site/claire/sass/_footer.scss */
-    .container-footer .menu .menu-item:active {
+    .container-footer .menu-primary-container .menu-primary-level-1-link:active {
       opacity: .5; }
   /* line 61, /var/www/html/mvc/app/site/claire/sass/_footer.scss */
-  .container-footer .menu .menu-item:first-child {
+  .container-footer .menu-primary-container .menu-primary-level-1-link:first-child {
     border: 0; }
 
 /* line 68, /var/www/html/mvc/app/site/claire/sass/_footer.scss */
@@ -1877,7 +1929,7 @@ a.pagination-next, a.pagination-previous {
   width: 3em;
   height: 3em;
   float: left;
-  fill: #E5673C;
+  fill: #EBD7DE;
   margin-right: 7px; }
   /* line 102, /var/www/html/mvc/app/site/claire/sass/_footer.scss */
   .footer-social:active {
@@ -1907,12 +1959,12 @@ a.pagination-next, a.pagination-previous {
 
 @media only screen and (min-width: 600px) {
   /* line 124, /var/www/html/mvc/app/site/claire/sass/_footer.scss */
-  .container-footer .menu {
+  .container-footer .menu-primary {
     margin: 1em 0;
     float: left;
     clear: left; }
   /* line 130, /var/www/html/mvc/app/site/claire/sass/_footer.scss */
-  .container-footer .menu .menu-item {
+  .container-footer .menu-primary .menu-primary-level-1-link {
     float: left;
     background-color: transparent;
     color: #ca3566;

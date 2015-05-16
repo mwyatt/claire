@@ -12,8 +12,7 @@
 }
 
 .content-single .content-date {
-    margin: 1em 0;
-    float: right;
+    margin-bottom: 4px;
 }
 
 .content-single .content-html {
@@ -22,13 +21,4 @@
 
 .content-single-title-two {
     font-size: 1.2em;
-}
-
-.content-single .content-date {
-    display: none;
-}
-
-.content-single.is-type-post .content-date {
-    display: block;
-    text-align: right;
 }

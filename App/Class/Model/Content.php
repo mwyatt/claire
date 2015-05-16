@@ -369,10 +369,10 @@ class Content extends \OriginalAppName\Model
 
 		// execute
 		$this->tryExecute(__METHOD__, $sth);
-		$molds = $sth->fetchAll(PDO::FETCH_CLASS, $this->getMoldName());
+		$molds = $sth->fetchAll(PDO::FETCH_CLASS, $this->getEntity());
 		$visibleMolds = array();
 		foreach ($molds as $mold) {
-			if ($mold->status == 'visible') {
+			if ($mold->getStatus() == Entity\Content::STATUS_PUBLISHED) {
 				$visibleMolds[] = $mold;
 			}
 		}

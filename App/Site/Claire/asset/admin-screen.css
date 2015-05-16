@@ -840,6 +840,48 @@ img.mfp-img {
   padding-top: 0; }
 
 /**
+ * total with of page
+ * @type {%}
+ */
+/**
+ * number of columns
+ * @type {Number}
+ */
+/**
+ * margin between columns
+ * @type {%}
+ */
+/**
+ * maths
+ * @type {int}
+ */
+/**
+ * maths
+ * @type {int}
+ */
+/**
+ * create row div
+ */
+/**
+ * create a column div
+ * @type {int}
+ */
+/**
+ * make an element span n columns
+ * @type {int}
+ */
+/**
+ * the last column in a row needs this
+ */
+/**
+ * prepend n blank columns
+ * @type {int}
+ */
+/**
+ * append n blank columns
+ * @type {int}
+ */
+/**
  * allows dynamic usage of media queries, here ranges of breakpoints
  * can be defined then refered to in a friendly way
  * usage:

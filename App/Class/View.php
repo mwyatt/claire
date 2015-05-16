@@ -265,9 +265,9 @@ class View extends \OriginalAppName\Data
 
 		// keywords
 		// needed?
-		// if (! isset($data['metaKeywords'])) {
-		// 	$data['metaKeywords'] = $data['option']['meta_keywords']->getValue();
-		// }
+		if (! isset($data['metaKeywords'])) {
+			$data['metaKeywords'] = $data['option']['meta_keywords']->getValue();
+		}
 
 		// commit data
 		$this->setData($data);

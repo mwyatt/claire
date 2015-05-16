@@ -51,21 +51,12 @@ a.tag {
 
 .content.element {
     position: relative;
-    padding: 1em;
+    padding: 1em 0;
 }
 
 .content-author {
     font-size: 0.9em;
     float: right;
-}
-
-@include breakpoint(600) {}
-
-@include breakpoint(900) {
-
-    .content.element {
-        padding: 3%;
-    }
 }
 
 .content-html-snippet {

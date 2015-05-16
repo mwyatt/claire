@@ -126,14 +126,15 @@ class Route extends \OriginalAppName\System
 			include APP_PATH . 'Admin' . DS . 'route' . EXT;
 		}
 
-		// global
-		include APP_PATH . 'route' . EXT;
-
 		// site specific
 		$siteRoutePath = SITE_PATH . 'route' . EXT;
 		if (file_exists($siteRoutePath)) {
 			include $siteRoutePath;
 		}
+
+		// global
+		// last because it was overriding site specific
+		include APP_PATH . 'route' . EXT;
 
 		// return all routes
 		// store also

@@ -41,11 +41,11 @@
     .propos-button.button.primary {}
 }
 
-.container-footer .menu {
+.container-footer .menu-primary-container {
     @extend .block-margins;
     margin-bottom: 0;
 
-    .menu-item {
+    .menu-primary-level-1-link {
         @include transition(all 200ms ease);
         display: block;
         text-align: center;
@@ -58,7 +58,7 @@
         }
     }
     
-    .menu-item:first-child {
+    .menu-primary-level-1-link:first-child {
         border: 0;
     }
 }
@@ -96,7 +96,7 @@
     width: 3em;
     height: 3em;
     float: left;
-    fill: $color-secondary;
+    fill: $color-senary;
     margin-right: 7px;
 
     &:active {
@@ -121,13 +121,13 @@
 
 @include breakpoint(600) {
     
-    .container-footer .menu {
+    .container-footer .menu-primary {
         margin: 1em 0;
         float: left;
         clear: left;
     }
 
-    .container-footer .menu .menu-item {
+    .container-footer .menu-primary .menu-primary-level-1-link {
         float: left;
         background-color: transparent;
         color: $color-primary;

@@ -36,7 +36,6 @@
             <a href="#search" class="js-smooth-scroll header-button-mobile header-button-mobile-search js-header-button-mobile-search"><?php include $this->getAssetPath('search.svg') ?></a>
     
     <?php include $this->getTemplatePath('_menu-primary') ?>
-    <?php include $this->getTemplatePath('_search') ?>
 
         </div>
     </header>
