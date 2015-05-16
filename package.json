@@ -36,6 +36,7 @@
     "admin/content/single": "./js/admin/content/single.js",
     "admin/content/meta": "./js/admin/content/meta.js",
     "menu/hamburger": "./js/menu/hamburger.js",
+    "scrollTop": "./App/Site/Codex/js/scrollTop.js",
     "url": "./App/Site/Codex/js/url.js"
   }
 }
