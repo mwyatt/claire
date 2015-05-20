@@ -1,0 +1,22 @@
+<div class="dialogue js-dialogue">
+	<span class="dialogue-close icon-cross js-dialogue-close">&times;</span>
+	<h6 class="dialogue-title">{{title}}</h6>
+
+{{#description}}
+
+	<p class="dialogue-description js-dialogue-header">{{description}}</p>
+
+{{/description}}
+
+	<div class="dialogue-actions">
+
+{{#actions}}
+
+
+	{{key}}
+	{{value}}
+
+{{/actions}}
+
+	</div>
+</div>

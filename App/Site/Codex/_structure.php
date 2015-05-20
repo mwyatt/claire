@@ -53,6 +53,7 @@ return [
 		'url',
 		'scrollTop',
 		'smoothScroll',
-		'keycode'
+		'keycode',
+		'dialogue'
 	]
 ];
