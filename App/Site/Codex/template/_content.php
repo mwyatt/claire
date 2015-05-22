@@ -60,6 +60,7 @@
 
 		</div>
 	</div>
+    <script src="<?php echo $this->getUrlAsset('vendor/jquery.js') ?>"></script>
     <script src="<?php echo $this->getUrlAsset('vendor/rainbow.min.js') ?>"></script>
 	<script src="<?php echo $this->getUrlAsset('vendor/rainbow/language/generic.js') ?>"></script>
 	<script src="<?php echo $this->getUrlAsset('vendor/rainbow/language/html.js') ?>"></script>

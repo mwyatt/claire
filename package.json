@@ -37,6 +37,8 @@
     "admin/content/meta": "./js/admin/content/meta.js",
     "menu/hamburger": "./js/menu/hamburger.js",
     "scrollTop": "./App/Site/Codex/js/scrollTop.js",
-    "url": "./App/Site/Codex/js/url.js"
+    "keycode": "./App/Site/Codex/js/keycode.js",
+    "url": "./App/Site/Codex/js/url.js",
+    "dialogue": "./App/Site/Codex/js/dialogue.js"
   }
 }

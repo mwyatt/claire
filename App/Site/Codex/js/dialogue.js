@@ -1,4 +1,12 @@
 var mustache = require('mustache');
+var keycode = require('keycode');
+var data;
+var $dialogue;
+var $positionTo;
+var intTargetLeftOffset;
+var calculatedLeft;
+var intPopWidth;
+var intWindowWidth;
 
 
 /**
@@ -9,79 +17,98 @@ var mustache = require('mustache');
  * can be ok / cancel with callback
  * 
  */
-var Dialogue = function () {
-	this.cache = {
-		core: $('.js-pop-over'),
-		close: $('.js-pop-over-close'),
-		header: $('.js-pop-over-header'),
-		title: $('.js-pop-over-header-title'),
-		content: $('.js-pop-over-content')
-	};
-	this.data = this;
-};
+var Dialogue = function () {};
 
 
+/**
+ * render, bind events, and position new dialogue
+ * @param  {object} options 
+ * @return {null}         
+ */
 Dialogue.prototype.create = function(options) {
 	var defaults = {
-		positionTo: $(''),
+		className: 'foo-bar',
+		positionTo: '.selector',
+		width: 150,
 		title: '',
-		content: '',
+		description: '',
+		actions: [
+		  {name: 'Cancel', action: function() {
+		    console.log('Cancel');
+		  }},
+		  {name: 'Ok', action: function() {
+		    console.log('Ok');
+		  }}
+		],
 		onComplete: function() {},
-		width: 200
+		onClose: function() {}
 	};
 	this.options = $.extend(defaults, options);
-	$(this.cache.close).off('click.pop-over').on('click.pop-over', this, this.close);
-	$(this.cache.core).off('click.pop-over').on('click.pop-over', function(event) {
+	$positionTo = $(this.options.positionTo);
+	data = this;
+
+	// render
+	$('body').append(mustache.render($('#foo-bar').html(), data.options));
+
+	// events
+	$('.js-dialogue-close').on('click.dialogue', function() {
+		data.close(data);
+	});
+	$dialogue = $('.js-dialogue');
+	$dialogue.on('click.dialogue', function(event) {
 		event.stopPropagation();
 	});
-
-	// escape key
-	$(document).off('keyup.pop-over').on('keyup.pop-over', this, function(event) {
-		if (event.keyCode == 27) {
-			event.data.close(event);
+	$(document).off('keyup.dialogue').on('keyup.dialogue', function(event) {
+		if (event.which == keycode.esc) {
+			data.close(data);
 		} 
 	});
-
-	// document click
-	$(document).off('mouseup.pop-over').on('mouseup.pop-over', this, function(event) {
-		if (! $(event.target).closest('.pop-over').length) {
-			event.data.close(event);
+	$(document).off('mouseup.dialogue').on('mouseup.dialogue', function(event) {
+		if (! $(event.target).closest('.js-dialogue').length) {
+			data.close(data);
 		}
 	});
 
-	// paint
-	this.cache.title.html(this.options.title);
-	this.cache.content.html(this.options.content);
-	var intTargetLeftOffset = parseInt(this.options.positionTo.offset().left);
-	var calculatedLeft = intTargetLeftOffset;
-	var intPopWidth = parseInt(this.options.width);
+	// events - actions
+	for (var index = data.options.actions.length - 1; index >= 0; index--) {
+		$dialogue
+			.find('.js-dialogue-action-' + data.options.actions[index]['name']).on('click.dialogue', function() {
+				data.options.actions[index]['action'].call();
+			});
+	};
+
+	// position
+	intTargetLeftOffset = parseInt($positionTo.offset().left);
+	calculatedLeft = intTargetLeftOffset;
+	intPopWidth = parseInt(this.options.width);
 
 	// out of viewport, move just inside
-	var intWindowWidth = parseInt($(window).width());
+	intWindowWidth = parseInt($(window).width());
 	if ((intTargetLeftOffset + intPopWidth) > (intWindowWidth - 20)) {
 		calculatedLeft = intWindowWidth - 50;
 		calculatedLeft = calculatedLeft - intPopWidth;
 	};
 
 	// position
-	this.cache.core.css({
-		display: 'block',
+	$dialogue.css({
 		width: this.options.width,
-		top: this.options.positionTo.offset().top + 20,
+		top: $positionTo.offset().top + 20,
 		left: calculatedLeft
 	});
 
-	// call custom fun
+	// completed build
 	this.options.onComplete.call();
 };
 
 
-Dialogue.prototype.close = function(event) {
-	event.data.cache.core.css({
-		display: 'none',
-		top: '-999em',
-		left: '-999em'
-	});
+/**
+ * call onclose and remove
+ * @param  {object} data 
+ * @return {null}      
+ */
+Dialogue.prototype.close = function(data) {
+	data.options.onClose.call();
+	$dialogue.remove();
 };
 
 
