@@ -60,6 +60,9 @@
 
 		</div>
 	</div>
+
+<?php include $this->getTemplatePath('footer/_mustache') ?>
+
     <script src="<?php echo $this->getUrlAsset('vendor/jquery.js') ?>"></script>
     <script src="<?php echo $this->getUrlAsset('vendor/rainbow.min.js') ?>"></script>
 	<script src="<?php echo $this->getUrlAsset('vendor/rainbow/language/generic.js') ?>"></script>
