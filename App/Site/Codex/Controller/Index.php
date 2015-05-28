@@ -17,7 +17,7 @@ class Index extends \OriginalAppName\Controller\Front
 	public function home() {
 		$this
 			->view
-			->appendAsset('mustache', 'ok/google')
+			->appendAsset('mustache', 'admin/dialogue')
 			->setDataKey('pathSite', SITE_PATH)
 			->setDataKey('structure', include SITE_PATH . '_structure' . EXT);
 		return new Response($this->view->getTemplate('_content'));

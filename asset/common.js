@@ -66,7 +66,7 @@ Dialogue.prototype.create = function(options) {
 	data = this;
 
 	// render
-	$('body').append(mustache.render($('#foo-bar').html(), data.options));
+	$('body').append(mustache.render($('#admin-dialogue').html(), data.options));
 
 	// events
 	$('.js-dialogue-close').on('click.dialogue', function() {
