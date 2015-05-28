@@ -8,3 +8,4 @@ config.json
 credentials.php
 config.json
 /asset/upload/
+npm-debug.log

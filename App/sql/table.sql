@@ -1,18 +1,18 @@
-CREATE TABLE IF NOT EXISTS `options` (
+CREATE TABLE `options` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL DEFAULT '',
   `value` varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS `tag` (
+CREATE TABLE `tag` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(500) NOT NULL,
   `description` text NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS `content` (
+CREATE TABLE `content` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL DEFAULT '',
   `slug` varchar(255) NOT NULL,
@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS `content` (
   KEY `user_id` (`userId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS `content_meta` (
+CREATE TABLE `content_meta` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `contentId` int(10) unsigned NOT NULL,
   `name` varchar(255) NOT NULL DEFAULT '',
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `content_meta` (
   KEY `content_id` (`contentId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS `ad` (
+CREATE TABLE `ad` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
   `description` varchar(255) NOT NULL,
@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `ad` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS `log` (
+CREATE TABLE `log` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `message` varchar(8000) NOT NULL,
   `time` int(12) NOT NULL,
@@ -54,14 +54,14 @@ CREATE TABLE IF NOT EXISTS `log` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-CREATE TABLE IF NOT EXISTS `log_admin_unseen` (
+CREATE TABLE `log_admin_unseen` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `logId` int(10) NOT NULL,
   `userId` int(10) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS `media` (
+CREATE TABLE `media` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(500) NOT NULL,
   `description` varchar(500) NOT NULL,
@@ -73,7 +73,7 @@ CREATE TABLE IF NOT EXISTS `media` (
   KEY `user_id` (`userId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS `user` (
+CREATE TABLE `user` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `email` varchar(50) NOT NULL DEFAULT '',
   `password` varchar(255) NOT NULL DEFAULT '',
@@ -84,7 +84,15 @@ CREATE TABLE IF NOT EXISTS `user` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS `menu` (
+CREATE TABLE `user_permission` (
+  `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `userId` INT(10) UNSIGNED NOT NULL,
+  `name` VARCHAR(50) NOT NULL,
+  `ability` VARCHAR(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+CREATE TABLE `menu` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `idParent` INT NULL,
   `url` VARCHAR(255) NULL,
