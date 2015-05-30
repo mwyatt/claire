@@ -21,7 +21,7 @@ class Index extends \OriginalAppName\Controller\Front
 	public function home() {
 		$modelContent = new Model\Content;
 		$modelContent->readLatest([
-			'count' => 3,
+			'count' => 10,
 			'type' => 'post'
 		]);
 		$this->view->setDataKey('contents', $modelContent->getData());

@@ -1,0 +1,122 @@
+
+html {}
+
+body {}
+
+.container {
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 0 2em;
+}
+
+@mixin clearfix .container;
+
+.content-container {
+  float: right;
+  width: 70%;
+}
+
+.menu-container {
+  float: left;
+  width: 25%;
+}
+
+.rainbow-pre {
+  padding: 1em;
+}
+
+.rainbow {
+  font-size: $font-size-body;
+}
+
+.site-heading {
+  text-align: center;
+  margin: 0 0 1em;
+  font-size: 2em;
+  text-transform: uppercase;
+  padding: 20px;
+  font-size: 3em;
+  color: color(#fff shade(50%));
+  border-radius: 0 0 3px 3px;
+  border: 1px solid #ccc;
+  background-color: #f8f8f8;
+}
+
+.heading-primary {
+  @mixin typography-heading 2em;
+}
+
+.heading-secondary {
+  @mixin typography-heading 1.5em;
+}
+
+.example-code + .rainbow-pre {
+  margin-top: 0;
+  border-radius: 0 0 3px 3px;
+}
+
+@mixin clearfix .example-code;
+
+.example-code {
+  padding: 1em;
+  border: 1px solid #ccc;
+  border-bottom: none;
+  border-radius: 3px 3px 0 0;
+  background-color: #fff;
+}
+
+/*.cols {
+  @include row;
+}
+
+.col-six {
+  @include col(6);
+
+  &:nth-child(2n) {
+    @include last;
+  }
+}
+
+.col-four {
+  @include col(4);
+
+  &:nth-child(3n) {
+    @include last;
+  }
+}*/
+
+@mixin clearfix .color-palette-container;
+
+/*.color-palette-column {
+  @include col(4);
+
+  &:nth-child(3n) {
+    @include last;
+  }
+}*/
+
+.color-palette-heading {
+  @mixin typography-heading 1.17em;
+}
+
+.color-palette-color {
+  padding: 10px;
+  margin-top: 12px;
+  color: #fff;
+}
+
+.color-primary-0 { background-color: $color-primary-0; }
+.color-primary-1 { background-color: $color-primary-1; }
+.color-primary-2 { background-color: $color-primary-2; }
+.color-primary-3 { background-color: $color-primary-3; }
+.color-primary-4 { background-color: $color-primary-4; }
+.color-secondary-1-0 { background-color: $color-secondary-1-0; }
+.color-secondary-1-1 { background-color: $color-secondary-1-1; }
+.color-secondary-1-2 { background-color: $color-secondary-1-2; }
+.color-secondary-1-3 { background-color: $color-secondary-1-3; }
+.color-secondary-1-4 { background-color: $color-secondary-1-4; }
+.color-secondary-2-0 { background-color: $color-secondary-2-0; }
+.color-secondary-2-1 { background-color: $color-secondary-2-1; }
+.color-secondary-2-2 { background-color: $color-secondary-2-2; }
+.color-secondary-2-3 { background-color: $color-secondary-2-3; }
+.color-secondary-2-4 { background-color: $color-secondary-2-4; }

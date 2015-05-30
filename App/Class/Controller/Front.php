@@ -44,6 +44,7 @@ class Front extends \OriginalAppName\Controller\Option
 		$serviceCommon = new $className;
 		$this
 			->view
-			->mergeData($serviceCommon->read());
+			->mergeData($serviceCommon->read())
+			->appendAsset('css', 'common');
 	}
 }

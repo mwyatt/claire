@@ -1,0 +1,60 @@
+$selector: .form label;
+@mixin form-label $selector;
+@mixin form-input .form-input;
+@mixin form-input .form-input;
+
+.form label > input[type="checkbox"],
+.form label > input[type="radio"] {
+  margin-right: 10px;
+}
+
+$selector: .form input[type="url"];
+@mixin form-input $selector;
+$selector: .form input[type="email"];
+@mixin form-input $selector;
+$selector: .form input[type="tel"];
+@mixin form-input $selector;
+$selector: .form input[type="password"];
+@mixin form-input $selector;
+$selector: .form input[type="text"];
+@mixin form-input $selector;
+
+$selector: .form button[type="submit"];
+@mixin button $selector, #fff, $color-primary-0;
+
+$selector: .form textarea;
+@mixin form-input $selector;
+
+@mixin form-label .form-label;
+@mixin form-input .form-textarea;
+
+@media only screen and (min-width: 200px) {
+  color: red;
+}
+
+.form-select {
+  font-size: 1em;
+  box-sizing: border-box;
+  color: $color-body;
+  font-family: $font-family-body;
+  border: 1px solid $color-secondary-1-0;
+  padding: 1px 2px;
+  margin: 0;
+  border-radius: $border-radius;
+}
+
+.form-select:focus {
+  box-shadow: 0 0 3px rgba(#000, .2);
+  border-color: $color-secondary-1-0;
+  color: $color-body;
+}
+
+@mixin clearfix .form-action;
+
+.form-action .left {
+  margin-right: 1em;
+}
+
+.form-action .right {
+  margin-left: 1em;
+}

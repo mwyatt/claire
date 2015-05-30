@@ -1,0 +1,149 @@
+.container-footer .form-search-query {
+  width: 58%;
+  float: left;
+}
+
+.container-footer .form-search-submit {
+  float: right;
+  padding: 6px 0;
+  width: 28%;
+  text-align: center;
+}
+
+$selector: .container-footer .form-search;
+@include clearfix $selector;
+
+.container-footer .propos-portrait {
+  width: 30%;
+}
+
+.container-footer img {
+  width: 100%;
+}
+
+.container-footer .propos {
+  margin: 0 0 1em;
+  padding: 0 0 0 36%;
+  position: relative;
+}
+
+.propos-description {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.propos-button.button.primary {}
+
+.container-footer .menu-primary-container {
+  margin: 1em 0;
+  margin-bottom: 0;
+}
+
+.menu-primary-level-1-link {
+  display: block;
+  padding: 1em;
+  color: #fff;
+  background-color: $color-primary-0;
+}
+
+.menu-primary-level-1-link:active {
+  opacity: .5;
+}
+
+.menu-primary-level-1-link:first-child {
+  border: 0;
+}
+
+.calling-card {
+  margin: 1em 0;
+}
+
+.calling-card-portrait {
+  float: left;
+  margin-right: 1em;
+  margin-bottom: 1em;
+  width: 9em;
+  border-radius: 99em;
+  overflow: hidden;
+  height: 9em;
+}
+
+.calling-card-content-title {
+  font-size: 1.3em;
+}
+
+.calling-card-content-button.button.primary {
+  float: left;
+}
+
+.calling-card-content-description {
+  margin-bottom: 1em;
+}
+
+.footer-social {
+  width: 3em;
+  height: 3em;
+  float: left;
+  fill: $color-senary;
+  margin-right: 7px;
+}
+
+.footer-social:active {
+  opacity: .5;
+}
+
+@include clearfix .footer-socials;
+
+.footer-socials {
+  margin: 1em 0;
+  margin-top: 0;
+}
+
+@include clearfix .container-footer-inner;
+
+.container-footer-inner {
+  padding: 5%;
+}
+
+.container-footer {
+  border-top: 1px solid $color-senary;
+}
+
+@media (min-width: 600px) {
+  
+  .container-footer .menu-primary {
+    margin: 1em 0;
+    float: left;
+    clear: left;
+  }
+
+  .container-footer .menu-primary .menu-primary-level-1-link {
+    float: left;
+    background-color: transparent;
+    color: $color-primary-0;
+    margin-right: 2em;
+    padding: 0;
+  }
+
+  .container-footer .form-search {
+    float: right;
+    width: 50%;
+  }
+
+  .footer-socials {
+    float: left;
+    width: 50%;
+  }
+}
+
+@media (min-width: 1300px) {
+
+  .container-footer {
+    min-height: 30em;
+  }
+}
+
+.footer-main {
+  display: none;
+}

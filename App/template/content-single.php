@@ -1,6 +1,6 @@
 <?php require_once($this->getTemplatePath('_header')) ?>
 
-<div class="page">
+<div class="page content-single">
 
 <?php if ($contents): ?>
 	<?php foreach ($contents as $content): ?>

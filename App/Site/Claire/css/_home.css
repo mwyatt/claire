@@ -1,0 +1,5 @@
+.content.home .home-all-posts {
+  display: block;
+}
+
+@mixin clearfix .page.home;

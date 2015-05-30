@@ -1,3 +1,4 @@
+<?php $html = strip_tags($content->getHtml()) ?>
 <?php $theDate = date('jS', $content->getTimePublished()) . ' of ' . date('F o', $content->getTimePublished()) ?>
 <?php $theUrl = $this->url->build(array($content->getType(), $content->getSlug())) ?>
 
@@ -11,7 +12,8 @@
 
 	<div class="content-date" title="<?php echo $theDate ?>"><?php echo $theDate ?></div>
 	<h2 class="content-title"><a href="<?php echo $theUrl ?>" class="content-link"><?php echo $content->getTitle() ?></a></h2>
-	<div class="content-html-snippet"><?php echo substr($content->getHtml(), 0, 90) ?> ... <a href="<?php echo $theUrl ?>" class="content-html-snippet-more">Read More</a></div>
+	<div class="content-html-snippet"><?php echo substr($html, 0, 90) ?> ... </div>
+	<a href="<?php echo $theUrl ?>" class="link content-html-snippet-more">Read More</a>
 	<div class="content-html">
 
 <?php echo $content->getHtml() ?>

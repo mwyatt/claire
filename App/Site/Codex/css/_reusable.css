@@ -1,0 +1,124 @@
+@mixin clearfix .example-code;
+@mixin clearfix .block-clear;
+@mixin button .button, #fff, $color-primary-0;
+@mixin button .button-primary, #fff, $color-primary-0;
+@mixin button .button-secondary, #fff, $color-secondary-1-0;
+@mixin table .table;
+
+.block {
+  display: block;
+}
+
+.hidden {
+  display: none !important;
+  visibility: hidden;
+}
+
+.text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.hide {
+  display: none;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+.block-margins {
+  margin: 1em 0;
+}
+
+.visuallyhidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+.visuallyhidden.focusable:active,
+.visuallyhidden.focusable:focus {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  width: auto;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+.w100 {
+  width: 100%;
+}
+
+.block-clear {
+  margin: 1em 0;
+}
+
+.m1 {
+  margin: 1em;
+}
+
+.mt1 {
+  margin-top: 1em;
+}
+
+.mr1 {
+  margin-right: 1em;
+}
+
+.mb1 {
+  margin-bottom: 1em;
+}
+
+.ml1 {
+  margin-left: 1em;
+}
+
+.p1 {
+  padding: 1em;
+}
+
+.pt1 {
+  padding-top: 1em;
+}
+
+.pr1 {
+  padding-right: 1em;
+}
+
+.pb1 {
+  padding-bottom: 1em;
+}
+
+.pl1 {
+  padding-left: 1em;
+}
+
+.page-break {
+  display: block;
+  page-break-after: always;
+  page-break-inside: avoid;
+}
+
+.button-smaller {
+  font-size: 75%;
+}
+
+.button-larger {
+  font-size: 125%;
+}

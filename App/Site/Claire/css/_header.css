@@ -1,0 +1,152 @@
+@media (max-width: 649px) {
+ 
+  .header-container {
+    margin-bottom: 1em;
+  }
+
+  .header-socials-container,
+  .header-menu-primary-container,
+  .profile-container {
+    display: none;
+  }
+
+  .logo {
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 650px) {
+  
+  .header-container {
+    float: left;
+    width: 225px;
+    padding: 1em 0 0 1em;
+  }
+
+  .logo-container {
+    margin-bottom: 1em;
+  }
+}
+
+.profile-image-container {
+  text-align: center;
+  margin-bottom: 9px;
+}
+
+.logo-image {
+  width: 100%;
+  height: auto;
+}
+
+.header-button-mobile-image {
+  width: 100%;
+  height: auto;
+}
+
+.to-top-image {
+  width: 100%;
+  height: auto;
+}
+
+.form-search-query {
+  width: 50%;
+  float: left;
+  border: 0;
+  border-radius: 0;
+  background-color: color($color-primary-0 tint(10%));
+  color: #fff;
+}
+
+.form-search-query::-webkit-input-placeholder {
+  color: color($color-primary-0 tint(20%));
+}
+
+.form-search-query:-moz-placeholder { /* Firefox 18- */
+  color: color($color-primary-0 tint(20%));
+}
+
+.form-search-query::-moz-placeholder {  /* Firefox 19+ */
+  color: color($color-primary-0 tint(20%));
+} 
+
+.form-search-query:-ms-input-placeholder {  
+  color: color($color-primary-0 tint(20%));
+}
+
+.form-search-submit {
+  float: left;
+  height: auto;
+  margin-left: 13px;
+  padding-left: 0.6em;
+  padding-right: 0.6em;
+  border-radius: 0;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  margin: 0 0 0 1em;
+  padding: 6px 13px;
+  background-color: color($color-primary-0 tint(10%));
+  color: color($color-primary-0 tint(30%));
+  cursor: pointer;
+}
+
+.container-header .menu-primary-container,
+.container-header .form-search {
+  display: none;
+}
+
+.logo-container {
+  margin-top: 1em;
+}
+
+.logo {
+  display: block;
+  width: 180px;
+  height: 60px;
+  opacity: .7;
+}
+
+.container-header .menu-primary-container {
+  display: none;
+}
+
+.header-button-mobile {
+  padding: 17px 23px 17px;
+  border-left: 1px solid $color-primary-0;
+  cursor: pointer;
+  display: block;
+  float: right;
+  width: 2em;
+  height: 2em;
+}
+
+.container-header .menu-primary-container {
+  float: right;
+}
+
+.container-header .menu-primary-container .menu-primary-level-1-link {
+  color: #fff;
+  float: right;
+  padding: 22px 16px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+@media (min-width: 700px) {
+
+  .header-button-mobile {
+    display: none;
+  }
+
+  .container-header .form-search,
+  .container-header .menu-primary-container {
+    display: block;
+  }
+}
+
+@media (min-width: 900px) {
+
+  .header-button-mobile {
+    display: none;
+  }
+}

@@ -1,0 +1,25 @@
+.content-single-title {
+  font-size: 2.2em;
+  margin: 10px 0;
+  line-height: 1.3;
+}
+
+.content-single .content-post-html {
+  margin: 1em 0;
+}
+
+.content-single .content-post-author {
+  float: left;
+}
+
+.content-single .content-html {
+  margin-bottom: 4em;
+}
+
+.content-single-title-two {
+  font-size: 1.2em;
+}
+
+.page.content-single {
+  background-color: color(#fff a(80%));
+}

@@ -1,0 +1,57 @@
+.content-date {
+  color: #8B7E82;
+}
+
+.content.element .medium {
+  display: none;
+}
+
+@mixin clearfix .contents;
+
+.content-status,
+.content.element .content-html {
+  display: none;
+}
+
+.content-title {
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: 10px;
+}
+
+.content-thumb-background {
+  background-size: cover;
+  height: 13em;
+  margin-bottom: 1em;
+}
+
+@mixin clearfix .content;
+
+.content {
+  min-height: 130px;
+  position: relative;
+  background-color: color(#fff a(80%));
+  border-radius: $border-radius;
+  margin-bottom: 1em;
+  padding: 1em;
+  border: 1px solid #fff;
+  box-shadow: 0 0 3px #989898;
+}
+
+.content-author {
+  font-size: 0.9em;
+  float: right;
+}
+
+.content-html-snippet {
+  margin: 1em 0;
+}
+
+.content-html-snippet-more {
+  float: right;
+}
+
+.content-link {
+  color: $color-primary-0;
+}

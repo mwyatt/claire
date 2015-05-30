@@ -1,0 +1,161 @@
+$selector: .typography a;
+@mixin link $selector, $color-primary-0;
+$selector {
+  line-height: $font-line-height-common;
+  word-break: break-all;
+}
+$(selector):hover,
+$(selector):focus { 
+  color: $color-link-hover;
+  border-bottom-color: $color-link-hover;
+}
+
+.typography *:focus {
+  outline: none;
+}
+
+.typography i,
+.typography em {
+  font-style: italic;
+}
+
+.typography b,
+.typography strong {
+  font-weight: 700;
+}
+
+.typography h1 {
+  @mixin typography-heading 2em;
+}
+
+.typography h2 {
+  @mixin typography-heading 1.5em;
+}
+
+.typography h3 {
+  @mixin typography-heading 1.17em;
+}
+
+.typography h3,
+.typography h4 {
+  @mixin typography-heading 1em;
+  line-height: 1.3;
+}
+
+.typography h5 {
+  @mixin typography-heading .83em;
+}
+
+.typography h6 {
+  @mixin typography-heading .75em;
+}
+
+.typography p {
+  margin: 1em 0;
+  line-height: $font-line-height-common;
+}
+
+.typography p.lead {
+  font-size: 20px;
+  color: color($color-body tint(20%));
+}
+
+.typography ul {
+  margin: 1em 0;
+  margin-left: 1em;
+  padding-left: 1em;
+  list-style-type: disc;
+  list-style-position: outside;
+}
+
+.typography ol {
+  margin: 1em 0;
+  margin-left: 1em;
+  padding-left: 1em;
+  list-style: decimal;
+}
+
+.typography pre,
+.typography code {
+  margin: 1em 0;
+}
+
+.typography mark {
+  background-color: $color-primary-0;
+  color: #fff;
+}
+
+.page-primary-title {
+  @mixin typography-heading 2em;
+  margin-top: 0;
+}
+
+.page-primary-description {
+  margin: 1em 0;
+  line-height: $font-line-height-common;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-size-larger {
+  font-size: 1.2em;
+}
+
+.text-size-smaller {
+  font-size: .8em;
+}
+
+.h1 {
+  @mixin typography-heading 2em;
+}
+
+.h2 {
+  @mixin typography-heading 1.5em;
+}
+
+.h3 {
+  @mixin typography-heading 1.17em;
+}
+
+.h3,
+.h4 {
+  @mixin typography-heading 1em;
+  line-height: 1.3;
+}
+
+.h5 {
+  @mixin typography-heading .83em;
+}
+
+.h6 {
+  @mixin typography-heading .75em;
+}
+
+.p {
+  margin: 1em 0;
+  line-height: $font-line-height-common;
+}
+
+.blockquote {
+  border-left: 2px solid color($color-body tint(50%));
+  padding: 1em 1em 1em 1.5em;
+  margin: 0;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+@mixin link .a, $color-primary-0;
+@mixin link .link, $color-primary-0;
+@mixin link .link-secondary, $color-secondary-1-0;

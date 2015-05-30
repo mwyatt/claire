@@ -11,7 +11,9 @@
     <meta name="description" content="<?php echo $metaDescription ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800" rel="stylesheet" type="text/css">
-    <link href="<?php echo $this->getUrlAsset('screen.css') ?>" media="screen, projection" rel="stylesheet" type="text/css" />
+
+<?php include $this->getTemplatePath('header/_css') ?>
+
     <script src="<?php echo $this->getUrlAsset('vendor/modernizr.js') ?>"></script>
     <script>var urlBase = '<?php echo $this->url->generate() ?>';</script>
 
@@ -25,17 +27,29 @@
 
 <div id="top"></div>
 <div class="container container-site">
-<div class="container-site-inner">
-    <a href="#top" class="to-top js-smooth-scroll"><?php include $this->getAssetPath('arrow-up.svg') ?></a>
-    <header class="container-header row js-container-header clearfix js-fixed-bar">
-        <div class="container-header-inner">
-    
-    <?php include $this->getTemplatePath('_logo') ?>
+    <div class="header-page-container">
+        <a href="#top" class="to-top js-smooth-scroll"><?php include $this->getAssetPath('arrow-up.svg') ?></a>
+        <div class="header-container">
+            <div class="profile-container">
+                <div class="profile-image-container">
+                    <img src="<?php echo $this->getUrlAsset('portrait-138.jpg') ?>" alt="Claire Ruths portrait" class="profile-img">
+                </div>
+                <p class="portrait-description">Claire is a good person.</p>
+            </div>
+            <div class="logo-container">
 
-            <a href="#menu" class="js-smooth-scroll header-button-mobile header-button-mobile-menu js-header-button-mobile-menu"><?php include $this->getAssetPath('menu.svg') ?></a>
-            <a href="#search" class="js-smooth-scroll header-button-mobile header-button-mobile-search js-header-button-mobile-search"><?php include $this->getAssetPath('search.svg') ?></a>
-    
-    <?php include $this->getTemplatePath('_menu-primary') ?>
+<?php include $this->getTemplatePath('_logo') ?>
+                
+            </div>
+            <div class="header-menu-primary-container">
+                
+<?php include $this->getTemplatePath('_menu-primary') ?>
 
+            </div>
+            <div class="header-socials-container">
+                <div class="header-social">
+                    <div class="header-social-icon"><?php include $this->getAssetPath('pinterest.svg') ?></div>
+                    <h6 class="header-social-title">Pinterest</h6>
+                </div>
+            </div>
         </div>
-    </header>
