@@ -10,7 +10,9 @@
 	<meta name="keywords" content="<?php echo $metaKeywords ?>">
 	<meta name="description" content="<?php echo $metaDescription ?>">
 	<meta name="viewport" content="width=device-width">
-    <link href="<?php echo $this->getUrlAsset('admin/screen.css') ?>" media="screen, projection" rel="stylesheet" type="text/css" />
+
+<?php include $this->getTemplatePath('header/_css') ?>
+    
     <script type="text/javascript">var urlBase = '<?php echo $this->url->generate() ?>';</script>
 </head>
 <body>

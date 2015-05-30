@@ -25,6 +25,7 @@ class Admin extends \OriginalAppName\Admin\Controller\Feedback
 	{
 		parent::__construct();
 		$this->defaultGlobalAdmin();
+		$this->view->appendAsset('css', 'admin/common');
 	}
 
 

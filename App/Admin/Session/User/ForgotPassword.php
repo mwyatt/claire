@@ -15,7 +15,6 @@ class ForgotPassword extends \OriginalAppName\Session\Expire
 	protected $scope = 'OriginalAppName\Admin\Session\User\ForgotPassword';
 	
 
-
 	/**
 	 * setup password reset interface
 	 * expiry and randomised key to match

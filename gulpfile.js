@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var pkg = require('./package.json');
 var postcss = require('gulp-postcss');
+var minmax = require('postcss-media-minmax');
 var autoprefixer = require('autoprefixer-core');
 var cssadmin = ['app/admin/css/**/*.css', '!app/admin/css/**/_*.css'];
 var cssfront = ['app/site/' + pkg.site + '/css/**/*.css', '!app/site/' + pkg.site + '/css/**/_*.css'];
@@ -9,6 +10,7 @@ var processes = [
   require('postcss-import'),
   require('postcss-mixins'),
   require('postcss-simple-vars'),
+  minmax(),
   colorFunction(),
   autoprefixer({browsers: ['last 1 version']})
 ];

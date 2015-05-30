@@ -238,6 +238,12 @@ class View extends \OriginalAppName\Data
 	public function setMeta() {		
 		$data = $this->getData();
 
+		// set defaults to remove output errors
+		$this
+			->setDataKey('metaTitle', '')
+			->setDataKey('metaDescription', '')
+			->setDataKey('metaKeywords', '');
+
 		// validate options
 		if (! isset($data['option'])) {
 			return $this;
