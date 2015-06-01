@@ -10,6 +10,7 @@ use OriginalAppName\Admin\Session as AdminSession;
 use OriginalAppName\View;
 use OriginalAppName\Service;
 use OriginalAppName\Response;
+use OriginalAppName\Entity;
 
 
 /**
@@ -76,12 +77,24 @@ class Admin extends \OriginalAppName\Admin\Controller\Feedback
 
 	public function readMenu()
 	{
-	
-		// menu primary
-		$modelMenu = new Model\Menu;
-		$modelMenu->readColumn('keyGroup', 'admin');
+		$this
+			->view
+			->setDataKey('menu', []);
+		$config = include SITE_PATH . 'config' . EXT;
+		if (empty($config['admin/menu'])) {
+			return;
+		}
+		$items = [];
+		foreach ($config['admin/menu'] as $item) {
+			$entity = new Entity\Menu;
+			$entity->idParent = 0;
+			$entity->keyGroup = 'admin';
+			$entity->name = $item['name'];
+			$entity->url = 'admin/' . $item['url'];
+			$items[] = $entity;
+		}
 		$menu = new OriginalAppName\Menu;
-		$menu->buildTree($modelMenu->getData());
+		$menu->buildTree($items);
 		$this
 			->view
 			->setDataKey('menu', $menu->getData());

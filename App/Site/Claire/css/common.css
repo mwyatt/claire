@@ -1,12 +1,12 @@
 @import "_settings.css";
-@import "../../Codex/css/_dependencies.css";
+@import "../../codex/css/_dependencies.css";
 @import "../../../../vendor/bower/normalize-css/normalize.css";
-@import "../../Codex/css/_reset.css";
-@import "../../Codex/css/_reusable.css";
-@import "../../Codex/css/_form.css";
-@import "../../Codex/css/_typography.css";
-@import "../../Codex/css/_alert.css";
-@import "../../Codex/css/_blankslate.css";
+@import "../../codex/css/_reset.css";
+@import "../../codex/css/_reusable.css";
+@import "../../codex/css/_form.css";
+@import "../../codex/css/_typography.css";
+@import "../../codex/css/_alert.css";
+@import "../../codex/css/_blankslate.css";
 
 /* site-specific */
 @import "_content-single.css";
@@ -56,15 +56,17 @@ body {
   margin-bottom: 1em;
 }
 
-.page {
-  padding: 5%;
+@media (max-width: 649px) {
+
+  .page {
+    padding: 5%;
+  }
 }
 
 @media (min-width: 650px) {
   
   .page {
     float: right;
-    padding: 1em;
   }
 
   .header-page-container {
@@ -133,3 +135,34 @@ svg {
 }
 
 @mixin clearfix .header-page-container;
+
+.header-socials-container {
+  margin: 1em 0;
+}
+
+.header-social-icon {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  width: 30px;
+  height: 30px;
+}
+
+.header-social {
+  display: block;
+  position: relative;
+  padding: 10px 10px 10px 45px;
+  background-color: $color-pinterest-primary;
+  border-radius: $border-radius;
+}
+
+.header-social-icon svg {
+  width: 100%;
+  height: 100%;
+  fill: #fff;
+}
+
+.header-social-title {
+  font-weight: 600;
+  color: #fff;
+}

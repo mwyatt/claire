@@ -64,6 +64,8 @@ class User extends \OriginalAppName\Controller\Front
 		$entityUser = current($modelUser->getData());
 		$this
 			->view
+			->appendAsset('css', 'admin/common')
+			->appendAsset('css', 'admin/login')
 			->setDataKey('feedback', $sessionFeedback->pull())
 			->setDataKey('userEmail', $entityUser->getEmail());
 		return new Response($this->view->getTemplate('admin/forgot-password'));

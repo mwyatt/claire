@@ -10,6 +10,7 @@
 	<meta name="keywords" content="<?php echo $metaKeywords ?>">
 	<meta name="description" content="<?php echo $metaDescription ?>">
 	<meta name="viewport" content="width=device-width">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800" rel="stylesheet" type="text/css">
 
 <?php include $this->getTemplatePath('header/_css') ?>
     

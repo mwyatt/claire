@@ -150,3 +150,30 @@
     display: none;
   }
 }
+
+$selector: .header-container .menu-primary-container;
+@mixin clearfix $selector;
+
+.header-container .menu-primary {
+  margin: 1em 0;
+  border-radius: $border-radius;
+  border: 1px solid $color-primary-0;
+}
+
+.header-container .menu-primary-level-1-link {
+  display: block;
+  padding: 1em;
+  color: $color-primary-0;
+  border-width: 1px;
+  border-top-style: solid;
+  border-color: $color-primary-0;
+  background-color: color(#fff a(80%));
+}
+
+.header-container .menu-primary-level-1-link:active {
+  opacity: .5;
+}
+
+.header-container .menu-primary-level-1-link:first-child {
+  border-top: 0;
+}

@@ -73,7 +73,7 @@
   }
 }
 
-@keyframes fadeOutTop {
+@keyframes fadeInTop {
   25% {
     transform: translateY(-5px);
     opacity: 0;
@@ -89,6 +89,25 @@
   100% {
     transform: translateY(0);
     opacity: 1;
+  }
+}
+
+@keyframes fadeOutTop {
+  25% {
+    transform: translateY(-5px);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(20px);
+    opacity: 1;
+  }
+  75% {
+    transform: translateY(5px);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 0;
   }
 }
 

@@ -102,6 +102,8 @@
 
   $(selector).block {
     margin-bottom: 6px;
+    margin-right: 0;
+    line-height: 1.5;
   }
 }
 
@@ -114,7 +116,7 @@
     color: $color-body;
     font-family: $font-family-body;
     border: 1px solid $color-secondary-1-0;
-    padding: 2px 3px;
+    padding: 5px;
     margin: 0;
     border-radius: $border-radius;
   }

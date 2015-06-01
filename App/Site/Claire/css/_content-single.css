@@ -20,6 +20,30 @@
   font-size: 1.2em;
 }
 
-.page.content-single {
-  background-color: color(#fff a(80%));
+.page-content-single {
+  padding-left: 1em; 
+}
+
+.content-single {
+  background-color: #fff;
+}
+
+@media (max-width: 649px) {
+
+  .page-content-single {
+    background-color: #fff;
+  }
+}
+
+@media (min-width: 650px) {
+
+  .content-single {
+    padding: 1em;
+    border-top-left-radius: $border-radius;
+    border-top-right-radius: $border-radius;
+  }
+
+  .page-content-single {
+    padding-top: 1em;
+  }
 }

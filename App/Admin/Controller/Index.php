@@ -84,6 +84,7 @@ class Index extends \OriginalAppName\Controller\Admin
 		$this
 			->view
 			->setDataKey('moduleName', 'login')
+			->appendAsset('css', 'admin/login')
 			->setDataKey('sessionForm', $sessionForm->pull('admin\login'));
 		return new Response($this->view->getTemplate('admin/login'));
 	}

@@ -39,7 +39,7 @@ $routes[] = [
 
 // classic crud(s)
 // quick way to build route for simple cruds
-foreach (['user', 'ad'] as $entity) {
+foreach (['user'] as $entity) {
     $class = "OriginalAppName\\Admin\\Controller\\" . ucfirst($entity);
     $routes["admin/$entity/create"] = [
         'mux/type' => 'get',

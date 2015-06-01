@@ -2,7 +2,7 @@ module.exports = {
     plugins: 'image media code link template table paste autosave',
     selector: '.js-tinymce',
     height: 500,
-    content_css: '../../../asset/admin/tinymceContent.css',
+    content_css: '../../../asset/admin/tinymce-content.css',
     paste_word_valid_elements: "b,strong,i,em,h1,h2",
     autosave_interval: "5s",
     relative_urls: false,

@@ -47,9 +47,9 @@
 
             </div>
             <div class="header-socials-container">
-                <div class="header-social">
-                    <div class="header-social-icon"><?php include $this->getAssetPath('pinterest.svg') ?></div>
-                    <h6 class="header-social-title">Pinterest</h6>
-                </div>
+                <a href="http://www.pinterest.com/clmruth26/" class="header-social">
+                    <span class="header-social-icon"><?php include $this->getAssetPath('pinterest.svg') ?></span>
+                    <span class="header-social-title">Pinterest</span>
+                </a>
             </div>
         </div>

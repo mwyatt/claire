@@ -14,12 +14,13 @@ var processes = [
   colorFunction(),
   autoprefixer({browsers: ['last 1 version']})
 ];
+var cssDest = 'asset';
 
 var action = {
   postcss: function(src) {
     return gulp.src(src)
       .pipe(postcss(processes))
-      .pipe(gulp.dest('asset'));
+      .pipe(gulp.dest(cssDest));
   }
 }
 
@@ -28,10 +29,12 @@ gulp.task('css', function () {
 });
 
 gulp.task('cssa', function () {
+  cssDest = 'asset/admin';
   return action.postcss(cssadmin);
 });
 
 gulp.task('cssam', function () {
+  cssDest = 'asset/admin';
   processes.push(require('csswring'));
   return action.postcss(cssadmin);
 });

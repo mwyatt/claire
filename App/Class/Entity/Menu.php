@@ -25,7 +25,7 @@ class Menu extends \OriginalAppName\Entity
      * @Column(type="integer")
 	 * @var int
 	 */
-	private $idParent;
+	public $idParent;
 
 
 	/**
@@ -33,7 +33,7 @@ class Menu extends \OriginalAppName\Entity
      * @Column(type="string", length=128)
 	 * @var string
 	 */
-	private $name;
+	public $name;
 
 
 	/**
@@ -41,7 +41,7 @@ class Menu extends \OriginalAppName\Entity
      * @Column(type="string")
 	 * @var string
 	 */
-	private $url;
+	public $url;
 
 
 	/**
@@ -49,7 +49,7 @@ class Menu extends \OriginalAppName\Entity
      * @Column(type="string", length=10)
 	 * @var string
 	 */
-	private $keyGroup;
+	public $keyGroup;
 
 
 	/**

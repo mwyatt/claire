@@ -1,15 +1,95 @@
-@import "config";
-@import "header";
-@import "content";
-@import "menu";
-@import "menu-hamburger";
-@import "form";
-@import "list"; 
-@import "media/browser";
-@import "footer";
-@import "login";
-@import "tag";
-@import "feedback";
-@import "feedback-stream";
-@import "table-crud";
-@import "misc";
+@import "_settings.css";
+@import "../../site/codex/css/_dependencies.css";
+@import "../../../vendor/bower/normalize-css/normalize.css";
+@import "../../../vendor/bower/magnific-popup/dist/magnific-popup.css";
+@import "../../site/codex/css/_reset.css";
+@import "../../site/codex/css/_reusable.css";
+@import "../../site/codex/css/_keyframe.css";
+@import "../../site/codex/css/_form.css";
+@import "../../site/codex/css/_typography.css";
+@import "../../site/codex/css/_alert.css";
+@import "../../site/codex/css/_blankslate.css";
+
+/* admin specific */
+@import "_header.css";
+@import "_feedback-stream.css";
+
+.content-all-table {
+	transition: all 200ms;
+	width: 100%;
+	table-layout: fixed;
+}
+
+.content-all-table tr:hover {
+	background-color: rgba(#ccc, .1);
+}
+
+.content-all-table th {
+  text-align: left;
+	background-color: rgba(#ccc, .1);
+}
+
+.content-all-table td {
+	border: 1px solid green;
+}
+
+.content-all-table td, .content-all-table th {
+  padding: 5px 11px;
+  border: 1px solid rgba(#ccc, .1)
+}
+
+footer.main {
+  border-top: 1px solid #ccc;
+  padding: 1em 0;
+  margin-top: 2em;
+}
+
+.feedback-container {
+  box-shadow: 0 1px 3px green;
+  margin: 1em auto;
+  border: 1px solid;
+  padding: 0.5em 0.8em;
+  background: color(green tint(50%));
+  border-color: color(green tint(10%));
+  color: green;
+  cursor: default;
+}
+
+.feedback-container:hover {
+  opacity: .5;
+}
+
+.feedback-description {
+  margin: 0;
+}
+
+.menu-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 44px;
+  background-color: #eee;
+  z-index: 1;
+}
+
+.menu-container {
+  transition: .5s;
+}
+
+.menu-container:hover {
+  width: 150px;
+}
+
+.menu-primary-level-1-link {
+  display: block;
+  width: 44px;
+  height: 44px;
+  border-top: 1px solid #ccc;
+}
+
+.page {
+  margin-left: 44px;
+  padding: 1em;
+  margin-top: 97px;
+}

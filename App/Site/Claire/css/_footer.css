@@ -11,49 +11,9 @@
 }
 
 $selector: .container-footer .form-search;
-@include clearfix $selector;
+@mixin clearfix $selector;
 
-.container-footer .propos-portrait {
-  width: 30%;
-}
 
-.container-footer img {
-  width: 100%;
-}
-
-.container-footer .propos {
-  margin: 0 0 1em;
-  padding: 0 0 0 36%;
-  position: relative;
-}
-
-.propos-description {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.propos-button.button.primary {}
-
-.container-footer .menu-primary-container {
-  margin: 1em 0;
-  margin-bottom: 0;
-}
-
-.menu-primary-level-1-link {
-  display: block;
-  padding: 1em;
-  color: #fff;
-  background-color: $color-primary-0;
-}
-
-.menu-primary-level-1-link:active {
-  opacity: .5;
-}
-
-.menu-primary-level-1-link:first-child {
-  border: 0;
-}
 
 .calling-card {
   margin: 1em 0;
@@ -93,14 +53,14 @@ $selector: .container-footer .form-search;
   opacity: .5;
 }
 
-@include clearfix .footer-socials;
+@mixin clearfix .footer-socials;
 
 .footer-socials {
   margin: 1em 0;
   margin-top: 0;
 }
 
-@include clearfix .container-footer-inner;
+@mixin clearfix .container-footer-inner;
 
 .container-footer-inner {
   padding: 5%;
@@ -146,4 +106,9 @@ $selector: .container-footer .form-search;
 
 .footer-main {
   display: none;
+}
+
+.container-footer .menu-primary-container {
+  margin: 1em 0;
+  margin-bottom: 0;
 }
