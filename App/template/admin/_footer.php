@@ -5,10 +5,10 @@
 			</footer>
 			
 <?php endif ?>
+<?php include $this->getTemplatePath('footer/_mustache') ?>
 <?php include $this->getTemplatePath('admin/_feedback-stream-boot') ?>
+<?php include $this->getTemplatePath('footer/_js') ?>
 
-		    <script src="<?php echo $this->getUrlAsset('vendor/tinymce/tinymce.js') ?>"></script>
-		    <script src="<?php echo $this->getUrlAsset('admin/main.js') ?>"></script>
 		</div>
     </body>
 </html>

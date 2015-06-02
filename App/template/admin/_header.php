@@ -25,7 +25,6 @@
 
 <?php include $this->getTemplatePath('admin/_feedback-stream') ?>
 <?php if (isset($adminUser)): ?>
-	<?php include $this->getTemplatePath('admin/header/_menu') ?>
 	
     <header class="main js-header-main">
     	<div class="header-inner">
@@ -34,8 +33,11 @@
 
 	<?php include $this->getTemplatePath('admin/header/_user') ?>
 	<?php include $this->getTemplatePath('admin/header/_notify') ?>
+	<?php include $this->getTemplatePath('admin/header/_menu') ?>
 
 			</div>
+
+	
 		</div>
 	</header>
 

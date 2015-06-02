@@ -1,6 +1,6 @@
 <?php include($this->getTemplatePath('_header')) ?>
 
-<div class="page <?php echo $contentSingle->getType() ?>">
+<div class="page <?php echo $contentSingle->getType() ?>-all">
 
 <?php include($this->getTemplatePath('_pagination')) ?>
 <?php include($this->getTemplatePath('_contents')) ?>

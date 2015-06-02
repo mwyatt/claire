@@ -34,7 +34,7 @@
                 <div class="profile-image-container">
                     <img src="<?php echo $this->getUrlAsset('portrait-138.jpg') ?>" alt="Claire Ruths portrait" class="profile-img">
                 </div>
-                <p class="portrait-description">Claire is a good person.</p>
+                <p class="portrait-description">Language and literature enthusiast based in the North West of England.</p>
             </div>
             <div class="logo-container">
 

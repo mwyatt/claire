@@ -78,10 +78,11 @@ ControllerOption.prototype.changeInput = function(data, trigger) {
 
   // call
   $.ajax({
-    url: url.getUrlBase('admin/ajax/option/' + (id ? id : 'create') + '/'),
+    url: url.getUrlBase('admin/ajax/option/' + (id ? 'update' : 'create') + '/'),
     type: 'get',
     dataType: 'json',
     data: {
+      id: id,
       name: inputName.val(),
       value: inputValue.val()
     },
@@ -91,6 +92,10 @@ ControllerOption.prototype.changeInput = function(data, trigger) {
     success: function(option) {
       closestRow.attr('data-id', option.id);
       data.eventsRefresh(data);
+      feedbackStream.createMessage({
+        message: 'Saved!',
+        type: 'positive'
+      });
     },
     error: function(result) {
       feedbackStream.createMessage({

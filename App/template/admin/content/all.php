@@ -9,7 +9,7 @@
 
 <?php if ($contents): ?>
 
-<table class="content-all-table">
+<table class="table">
 	<tr>
 		<th>Title</th>
 		<th>Url</th>
@@ -36,7 +36,7 @@
 
 <?php else: ?>
 	
-	<div class="nothing-yet">
+	<div class="blankslate typography">
 		<p>No <?php echo ucfirst($contentType) ?> have been created yet, why not <a href="<?php echo $urlCreate ?>">create</a> one now?</p>
 	</div>
 	

@@ -5,7 +5,7 @@
 
 <?php if ($options): ?>
 
-<table class="options-all-table js-options">
+<table class="table js-options">
 	<tr>
 		<th>Name</th>
 		<th>Value</th>
@@ -15,10 +15,10 @@
 	<?php foreach($options as $option): ?>
 
 	<tr class="option js-option" data-id="<?php echo $option->getId() ?>">
-		<td><input type="text" class="js-option-input-name" value="<?php echo $option->getName() ?>"></td>
-		<td><input type="text" class="js-option-input-value" value="<?php echo $option->getValue() ?>"></td>
+		<td><input type="text" class="form-input js-option-input-name" value="<?php echo $option->getName() ?>"></td>
+		<td><input type="text" class="form-input js-option-input-value" value="<?php echo $option->getValue() ?>"></td>
 		<td>
-			<span class="button-delete js-delete">Delete</span>
+			<span class="button-secondary right js-delete">Delete</span>
 		</td>
 	</tr>
 

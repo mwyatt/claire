@@ -39,8 +39,7 @@
 
   .content-single {
     padding: 1em;
-    border-top-left-radius: $border-radius;
-    border-top-right-radius: $border-radius;
+    border-radius: $border-radius;
   }
 
   .page-content-single {

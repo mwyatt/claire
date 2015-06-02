@@ -84,6 +84,10 @@ class Route extends \OriginalAppName\System
 			echo '</pre>';
 		}
 
+		if ($response->getStatusCode() == 404 && ! $response->getContent()) {
+			$response->setContent('404 Page not found.');
+		}
+
 		// headers
 		// code is returned in response object
 		$this->setResponse($response);

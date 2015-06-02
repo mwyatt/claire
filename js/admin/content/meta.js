@@ -5,7 +5,6 @@
  */
 var $ = require('jquery');
 var url = require('url');
-var helper = require('helper');
 var mustache = require('mustache');
 var feedbackStream = require('admin/feedbackStream');
 
@@ -24,27 +23,22 @@ var ControllerContentMeta = function () {
  * @return {null}      
  */
 ControllerContentMeta.prototype.readAll = function(data) {
-	helper.getMustacheTemplate({
-		template: 'admin/content/meta/all',
-		success: function(template) {
-			$.ajax({
-				url: url.getUrlBase('admin/ajax/content/meta/'),
-				type: 'get',
-				dataType: 'json',
-				data: {
-					contentId: data.contentId
-				},
-				success: function(metas) {
-					$('.js-content-meta-container').html(mustache.render(template, {metas: metas}));
-					data.eventsRefresh(data);
-					data.getNewRow(data);
-				},
-				error: function(result) {
-					feedbackStream.createMessage({
-					  message: 'Network error.',
-					  type: 'negative'
-					});
-				}
+	$.ajax({
+		url: url.getUrlBase('admin/ajax/content/meta/'),
+		type: 'get',
+		dataType: 'json',
+		data: {
+			contentId: data.contentId
+		},
+		success: function(metas) {
+			$('.js-content-meta-container').html(mustache.render($('#admin-content-meta-all').html(), {metas: metas}));
+			data.eventsRefresh(data);
+			data.getNewRow(data);
+		},
+		error: function(result) {
+			feedbackStream.createMessage({
+			  message: 'Network error.',
+			  type: 'negative'
 			});
 		}
 	});

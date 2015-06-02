@@ -3,13 +3,13 @@
 
 <div class="page user-all">
 	<div class="page-actions">
-		<a class="page-action button-primary right" href="<?php echo $urlCreate ?>" title="Create a new User">New</a>
+		<a class="page-action button-primary right" href="<?php echo $urlCreate ?>" title="Create a new User">Create</a>
 	</div>
 	<h1 class="page-primary-title">Users</h1>
 
 <?php if ($users): ?>
 
-<table class="user-all-table">
+<table class="table">
 	<tr>
 		<th>Name</th>
 		<th>Email</th>
@@ -38,7 +38,7 @@
 
 <?php else: ?>
 	
-	<div class="nothing-yet">
+	<div class="blankslate typography">
 		<p>No users have been created yet, why not <a href="<?php echo $urlCreate ?>">create</a> one now?</p>
 	</div>
 	

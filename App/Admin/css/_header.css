@@ -1,11 +1,12 @@
 header.main { 
+  z-index: 1;
   background-color: #fff;
-  box-shadow: 0 0 3px rgba(#000, .2);
   height: 44px;
   position: fixed;
-  left: 44px;
+  left: 0;
   right: 0;
   top: 0;
+  box-shadow: 0 0 3px color(#000 a(20%));
 }
 
 header.main.is-fixed-top {
@@ -27,8 +28,8 @@ header.main.is-fixed-top + .content {
   text-overflow: ellipsis;
   overflow: hidden;
   width: auto;
-  padding: 10px;
-  color: $color-primary-0;
+  padding: 11px 14px;
+  color: $color-secondary-1-0;
 }
 
 .nav-main-container {
@@ -42,7 +43,7 @@ header.main.is-fixed-top + .content {
 
 .nav-user-name {
   display: block;
-  padding: 10px 10px 10px 50px;
+  padding: 11px 14px 11px 50px;
   color: $color-primary-0;
 }
 
@@ -56,12 +57,15 @@ header.main.is-fixed-top + .content {
 }
 
 .nav-main-level1:hover .nav-main-level1-drop {
-  animation: fadeInDown 200ms ease both;
+  animation-name: fadeInTop;
+  animation-duration: .2s;
+  animation-timing-function: linear;
+  will-change: transform, opacity;
 	display: block;
 }
 
 .nav-main-level1-drop {
-  box-shadow: 0 0 3px rgba(#000, .4);
+  box-shadow: 0 0 3px color(#000 a(20%));
   background: #fff;
   display: none;
   position: absolute;
@@ -104,15 +108,26 @@ header.main.is-fixed-top + .content {
 @mixin clearfix .page-actions;
 
 .page-actions {
+  box-shadow: 0 0 3px color(#000 a(20%));
   background-color: #fff;
   border-bottom: 1px solid #eee;
   position: fixed;
   top: 44px;
-  left: 44px;
+  left: 0;
   right: 0;
-  box-shadow: 0 0 3px rgba(#000, .2);
 }
 
 .page-action {
   margin: 11px;
+}
+
+.menu-container {
+  float: left;
+}
+
+.menu-primary-level-1-link {
+  color: $color-primary-0;
+  float: left;
+  padding: 11px 14px;
+  margin-right: 1em;
 }

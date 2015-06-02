@@ -607,7 +607,7 @@ fieldset {
 .table th,
   .table td{
   padding: .5em;
-  border: 1px solid ;
+  border: 1px solid #E5673C;
 }
 
 .block {
@@ -1379,8 +1379,7 @@ fieldset {
 
   .content-single {
     padding: 1em;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
+    border-radius: 5px;
   }
 
   .page-content-single {
@@ -1527,28 +1526,29 @@ fieldset {
 }
 
 .container-footer-inner {
-  padding: 5%;
+  padding: 1em;
 }
 
 .container-footer {
-  border-top: 1px solid #EBD7DE;
+  margin-top: 50px;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.container-footer .menu-primary {
+  margin: 1em 0;
+}
+
+.container-footer .menu-primary .menu-primary-level-1-link {
+  float: left;
+  background-color: transparent;
+  color: #fff;
+  margin-right: 2em;
+  padding: 0;
 }
 
 @media (min-width: 600px) {
   
-  .container-footer .menu-primary {
-    margin: 1em 0;
-    float: left;
-    clear: left;
-  }
 
-  .container-footer .menu-primary .menu-primary-level-1-link {
-    float: left;
-    background-color: transparent;
-    color: #ca3566;
-    margin-right: 2em;
-    padding: 0;
-  }
 
   .container-footer .form-search {
     float: right;
@@ -1576,6 +1576,20 @@ fieldset {
   margin: 1em 0;
   margin-bottom: 0;
 }
+
+.footer-copy {
+  color: #fff;
+}
+.logo-container {
+  margin-top: 1em;
+}
+
+.logo {
+  display: block;
+  width: 180px;
+  height: 60px;
+}
+
 @media (max-width: 649px) {
  
   .header-container {
@@ -1673,17 +1687,6 @@ fieldset {
   display: none;
 }
 
-.logo-container {
-  margin-top: 1em;
-}
-
-.logo {
-  display: block;
-  width: 180px;
-  height: 60px;
-  opacity: .7;
-}
-
 .container-header .menu-primary-container {
   display: none;
 }
@@ -1738,6 +1741,7 @@ fieldset {
   margin: 1em 0;
   border-radius: 5px;
   border: 1px solid #ca3566;
+  overflow: hidden;
 }
 
 .header-container .menu-primary-level-1-link {
@@ -1775,7 +1779,7 @@ fieldset {
 }
 .pagination-summary {
   text-align: center;
-  color: #ccc;
+  color: #fff;
   line-height: 2;
 }
 
@@ -1817,8 +1821,10 @@ a.pagination-previous.is-disabled {
 
 .pagination-previous {
   float: left;
-  -webkit-transform: rotate(180deg);
-          transform: rotate(180deg);
+}
+
+.pagination-text {
+  color: #ca3566;
 }
 
 .pagination-next {
@@ -1839,6 +1845,7 @@ a.pagination-previous.is-disabled {
 }
 
 body {
+  background-color: #eee;
   background-image: url('bordeaux-pont-de-pierre.gif');
   background-size: cover;
 }
@@ -1932,7 +1939,7 @@ body {
 .container-footer-inner,
 .container-header-inner,
 .page {
-  max-width: 50em;
+  max-width: 850px;
   margin: 0 auto;
 }
 
@@ -1950,6 +1957,15 @@ svg {
 .profile-img {
   max-width: 100%;
   max-height: 100%;
+  display: none;
+}
+
+.profile-image-container {
+  background-image: url('portrait-138.jpg');
+  height: 140px;
+  background-position: center center;
+  background-size: cover;
+  border-radius: 5px;
 }
 
 .profile-container {
@@ -1964,10 +1980,6 @@ svg {
   clear: both;
   content: "";
   display: table;
-}
-
-.header-socials-container {
-  margin: 1em 0;
 }
 
 .header-social-icon {
@@ -1995,4 +2007,8 @@ svg {
 .header-social-title {
   font-weight: 600;
   color: #fff;
+}
+
+.page.post-all {
+  padding: 1em;
 }

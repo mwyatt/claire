@@ -289,27 +289,24 @@ abstract class Model extends \OriginalAppName\Data
 	{
 
 		// build
+		$rowCount = 0;
 		$statement = [];
 		$statement[] = 'delete from';
 		$statement[] = $this->getTableName();
-		$statement[] = $this->getSqlWhere($where);
+		$statement[] = 'where id = ?';
 
 		// prepare
 		$sth = $this->database->dbh->prepare(implode(' ', $statement));
 
 		// bind
-		foreach ($where as $key => $value) {
-			$this->bindValue($sth, 'where' . ucfirst($key), $value);
+		foreach ($ids as $id) {
+		    $sth->bindValue(1, $id, PDO::PARAM_INT);
+			$sth->execute();
+			$rowCount += $sth->rowCount();
 		}
 
-		// mode
-		$sth->setFetchMode(PDO::FETCH_CLASS, $this->getEntity());
-
-	    // execute
-		$sth->execute();
-
 		// return
-		$this->setRowCount($sth->rowCount());
+		$this->setRowCount($rowCount);
         return $this;
 	}
 

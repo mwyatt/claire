@@ -63,28 +63,29 @@ $selector: .container-footer .form-search;
 @mixin clearfix .container-footer-inner;
 
 .container-footer-inner {
-  padding: 5%;
+  padding: 1em;
 }
 
 .container-footer {
-  border-top: 1px solid $color-senary;
+  margin-top: 50px;
+  background-color: color(#000 a(50%));
+}
+
+.container-footer .menu-primary {
+  margin: 1em 0;
+}
+
+.container-footer .menu-primary .menu-primary-level-1-link {
+  float: left;
+  background-color: transparent;
+  color: #fff;
+  margin-right: 2em;
+  padding: 0;
 }
 
 @media (min-width: 600px) {
   
-  .container-footer .menu-primary {
-    margin: 1em 0;
-    float: left;
-    clear: left;
-  }
 
-  .container-footer .menu-primary .menu-primary-level-1-link {
-    float: left;
-    background-color: transparent;
-    color: $color-primary-0;
-    margin-right: 2em;
-    padding: 0;
-  }
 
   .container-footer .form-search {
     float: right;
@@ -111,4 +112,8 @@ $selector: .container-footer .form-search;
 .container-footer .menu-primary-container {
   margin: 1em 0;
   margin-bottom: 0;
+}
+
+.footer-copy {
+  color: #fff;
 }

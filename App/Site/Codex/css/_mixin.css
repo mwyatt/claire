@@ -79,7 +79,7 @@
   $(selector) th,
   $(selector) td {
     padding: .5em;
-    border: 1px solid $colorBorder;
+    border: 1px solid $color-secondary-1-0;
   }
 }
 

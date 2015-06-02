@@ -17,6 +17,7 @@
 @import "_pagination.css";
 
 body {
+  background-color: #eee;
   background-image: url('bordeaux-pont-de-pierre.gif');
   background-size: cover;
 }
@@ -110,7 +111,7 @@ body {
 .container-footer-inner,
 .container-header-inner,
 .page {
-  max-width: 50em;
+  max-width: 850px;
   margin: 0 auto;
 }
 
@@ -124,6 +125,15 @@ svg {
 .profile-img {
   max-width: 100%;
   max-height: 100%;
+  display: none;
+}
+
+.profile-image-container {
+  background-image: url('portrait-138.jpg');
+  height: 140px;
+  background-position: center center;
+  background-size: cover;
+  border-radius: $border-radius;
 }
 
 .profile-container {
@@ -135,10 +145,6 @@ svg {
 }
 
 @mixin clearfix .header-page-container;
-
-.header-socials-container {
-  margin: 1em 0;
-}
 
 .header-social-icon {
   position: absolute;
@@ -165,4 +171,8 @@ svg {
 .header-social-title {
   font-weight: 600;
   color: #fff;
+}
+
+.page.post-all {
+  padding: 1em;
 }

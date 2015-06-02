@@ -1,6 +1,5 @@
 var $ = require('jquery');
 var mustache = require('mustache');
-var helper = require('helper');
 
 
 /**
@@ -40,24 +39,19 @@ FeedbackStream.prototype.createMessage = function(config) {
 	var data = this;
 
 	// get template
-	helper.getMustacheTemplate({
-		template: 'admin/feedback',
-		success: function (template) {
-			newElement = $(mustache.render(template, config));
-			$('.js-feedback-stream-position').prepend(newElement);
+	newElement = $(mustache.render($('#admin-feedback').html(), config));
+	$('.js-feedback-stream-position').prepend(newElement);
 
-			// timeout for removal
-			setTimeout(function() {
-				newElement.addClass('is-removed');
-				data.removeAfterAnimation(data, newElement);
-			}, 5000);
+	// timeout for removal
+	setTimeout(function() {
+		newElement.addClass('is-removed');
+		data.removeAfterAnimation(data, newElement);
+	}, 5000);
 
-			// click message to remove
-			newElement.on('click.feedback-stream', function() {
-				newElement.addClass('is-removed');
-				data.removeAfterAnimation(data, newElement);
-			});
-		}
+	// click message to remove
+	newElement.on('click.feedback-stream', function() {
+		newElement.addClass('is-removed');
+		data.removeAfterAnimation(data, newElement);
 	});
 };
 

@@ -1,6 +1,6 @@
 .pagination-summary {
   text-align: center;
-  color: #ccc;
+  color: #fff;
   line-height: 2;
 }
 
@@ -42,7 +42,10 @@ a.pagination-previous.is-disabled {
 
 .pagination-previous {
   float: left;
-  transform: rotate(180deg);
+}
+
+.pagination-text {
+  color: $color-primary-0;
 }
 
 .pagination-next {

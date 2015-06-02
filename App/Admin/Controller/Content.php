@@ -49,7 +49,9 @@ class Content extends \OriginalAppName\Controller\Admin
 		
 		// resource
 		$modelContent = new Model\Content;
-		$modelContent->readColumn('type', $type);
+		$modelContent
+			->readColumn('type', $type)
+			->orderByProperty('timePublished', 'desc');
 
 		// render
 		$this
@@ -75,6 +77,7 @@ class Content extends \OriginalAppName\Controller\Admin
 		$this
 			->view
 			->setDataKey('contentType', $type)
+			->appendAsset('mustache', 'admin/content/meta/all')
 			->setDataKey('content', $entityContent ? $entityContent : new Entity\Content);
 		return new Response($this->view->getTemplate('admin/content/single'));
 	}
@@ -129,7 +132,7 @@ class Content extends \OriginalAppName\Controller\Admin
 		}
 
 		// delete it
-		$modelContent->delete(['id' => $id]);
+		$modelContent->delete([$id]);
 
 		// prove it
 		if ($modelContent->getRowCount()) {

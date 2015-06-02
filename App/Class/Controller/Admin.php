@@ -26,7 +26,13 @@ class Admin extends \OriginalAppName\Admin\Controller\Feedback
 	{
 		parent::__construct();
 		$this->defaultGlobalAdmin();
-		$this->view->appendAsset('css', 'admin/common');
+		$this
+			->view
+			->appendAsset('mustache', 'admin/feedback')
+			->appendAsset('js', 'vendor/jquery')
+			->appendAsset('js', 'vendor/tinymce/tinymce')
+			->appendAsset('js', 'admin/common')
+			->appendAsset('css', 'admin/common');
 	}
 
 

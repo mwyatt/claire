@@ -968,7 +968,7 @@ fieldset {
 .table th,
   .table td{
   padding: .5em;
-  border: 1px solid ;
+  border: 1px solid #424B4F;
 }
 
 .block {
@@ -1260,6 +1260,7 @@ fieldset {
 }
 
 @-webkit-keyframes fadeInTop {
+  0%,
   25% {
     -webkit-transform: translateY(-5px);
             transform: translateY(-5px);
@@ -1283,6 +1284,7 @@ fieldset {
 }
 
 @keyframes fadeInTop {
+  0%,
   25% {
     -webkit-transform: translateY(-5px);
             transform: translateY(-5px);
@@ -2476,13 +2478,14 @@ fieldset {
 
 /* admin specific */
 header.main { 
+  z-index: 1;
   background-color: #fff;
-  box-shadow: 0 0 3px rgba(#000, .2);
   height: 44px;
   position: fixed;
-  left: 44px;
+  left: 0;
   right: 0;
   top: 0;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
 }
 
 header.main.is-fixed-top {
@@ -2508,8 +2511,8 @@ header.main.is-fixed-top + .content {
   text-overflow: ellipsis;
   overflow: hidden;
   width: auto;
-  padding: 10px;
-  color: #2faddd;
+  padding: 11px 14px;
+  color: #424B4F;
 }
 
 .nav-main-container {
@@ -2523,7 +2526,7 @@ header.main.is-fixed-top + .content {
 
 .nav-user-name {
   display: block;
-  padding: 10px 10px 10px 50px;
+  padding: 11px 14px 11px 50px;
   color: #2faddd;
 }
 
@@ -2537,13 +2540,18 @@ header.main.is-fixed-top + .content {
 }
 
 .nav-main-level1:hover .nav-main-level1-drop {
-  -webkit-animation: fadeInDown 200ms ease both;
-          animation: fadeInDown 200ms ease both;
+  -webkit-animation-name: fadeInTop;
+          animation-name: fadeInTop;
+  -webkit-animation-duration: .2s;
+          animation-duration: .2s;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+  will-change: transform, opacity;
 	display: block;
 }
 
 .nav-main-level1-drop {
-  box-shadow: 0 0 3px rgba(#000, .4);
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
   background: #fff;
   display: none;
   position: absolute;
@@ -2590,17 +2598,28 @@ header.main.is-fixed-top + .content {
 }
 
 .page-actions {
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
   background-color: #fff;
   border-bottom: 1px solid #eee;
   position: fixed;
   top: 44px;
-  left: 44px;
+  left: 0;
   right: 0;
-  box-shadow: 0 0 3px rgba(#000, .2);
 }
 
 .page-action {
   margin: 11px;
+}
+
+.menu-container {
+  float: left;
+}
+
+.menu-primary-level-1-link {
+  color: #2faddd;
+  float: left;
+  padding: 11px 14px;
+  margin-right: 1em;
 }
 .feedback-stream {
   position: relative;
@@ -2697,28 +2716,10 @@ header.main.is-fixed-top + .content {
 	table-layout: fixed;
 }
 
-.content-all-table tr:hover {
-	background-color: rgba(#ccc, .1);
-}
-
-.content-all-table th {
-  text-align: left;
-	background-color: rgba(#ccc, .1);
-}
-
-.content-all-table td {
-	border: 1px solid green;
-}
-
-.content-all-table td, .content-all-table th {
-  padding: 5px 11px;
-  border: 1px solid rgba(#ccc, .1)
-}
-
 footer.main {
-  border-top: 1px solid #ccc;
-  padding: 1em 0;
-  margin-top: 2em;
+  padding: 11px 14px;
+  border-top: 1px solid rgb(217, 219, 220);
+  margin-top: 50px;
 }
 
 .feedback-container {
@@ -2740,33 +2741,23 @@ footer.main {
   margin: 0;
 }
 
-.menu-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  width: 44px;
-  background-color: #eee;
-  z-index: 1;
-}
-
-.menu-container {
-  transition: .5s;
-}
-
-.menu-container:hover {
-  width: 150px;
-}
-
-.menu-primary-level-1-link {
-  display: block;
-  width: 44px;
-  height: 44px;
-  border-top: 1px solid #ccc;
-}
-
 .page {
-  margin-left: 44px;
   padding: 1em;
   margin-top: 97px;
+  max-width: 1024px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.table a {
+  color: #2faddd;
+}
+
+.table th {
+  background-color: rgb(246, 246, 246);
+}
+
+.table th,
+.table td {
+  border: 1px solid rgb(217, 219, 220);
 }
