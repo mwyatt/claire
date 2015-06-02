@@ -1,4 +1,5 @@
 var gulp = require('gulp');
+var browserify = require('gulp-browserify');
 var pkg = require('./package.json');
 var postcss = require('gulp-postcss');
 var minmax = require('postcss-media-minmax');
@@ -43,12 +44,28 @@ gulp.task('cssm', function () {
   processes.push(require('csswring'));
   return action.postcss(cssfront);
 });
-
-gulp.task('jsm', function() {
-  return gulp.src('asset/**/*.js')
-    .pipe(require('gulp-uglify'))
+ 
+gulp.task('js', function() {
+  gulp.src('app/site/' + pkg.site + '/js/common.js')
+    .pipe(browserify({
+      paths: ['node_modules','js/']
+    }))
     .pipe(gulp.dest('asset'));
 });
+
+gulp.task('jsa', function() {
+  gulp.src('js/admin/common.js')
+    .pipe(browserify({
+      paths: ['node_modules','js/']
+    }))
+    .pipe(gulp.dest('asset/admin'));
+});
+
+// gulp.task('jsm', function() {
+//   return gulp.src('asset/**/*.js')
+//     .pipe(require('gulp-uglify'))
+//     .pipe(gulp.dest('asset'));
+// });
 
 // gulp.task('imagemin', function () {
 //   return gulp.src('media/*')
