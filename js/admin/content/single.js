@@ -1,9 +1,3 @@
-
-
-/**
- * dependencies
- */
-var $ = require('jquery');
 var contentMeta = require('admin/content/meta');
 var url = require('url');
 

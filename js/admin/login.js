@@ -1,4 +1,3 @@
-var $ = require('jquery');
 var serializeObject = require('serializeObject');
 var magnificPopup = require('magnificPopup');
 var feedbackStream = require('admin/feedbackStream');

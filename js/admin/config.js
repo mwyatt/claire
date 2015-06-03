@@ -1,6 +1,0 @@
-
-
-/**
- * config
- */
-requirejs.config({});

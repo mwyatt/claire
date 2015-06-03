@@ -48,14 +48,21 @@ gulp.task('cssm', function () {
 gulp.task('js', function() {
   gulp.src('app/site/' + pkg.site + '/js/common.js')
     .pipe(browserify({
+      insertGlobals : true,
       paths: ['node_modules','js/']
     }))
     .pipe(gulp.dest('asset'));
 });
-
+http://192.168.1.24/mvc/asset/vendor/jquery.js?1398966146
 gulp.task('jsa', function() {
   gulp.src('js/admin/common.js')
     .pipe(browserify({
+      shim: {
+        jquery: {
+          path: 'vendor/bower/jquery/dist/jquery.js',
+          exports: '$'
+        }
+      },
       paths: ['node_modules','js/']
     }))
     .pipe(gulp.dest('asset/admin'));

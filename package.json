@@ -5,7 +5,6 @@
   "devDependencies": {
     "autoprefixer-core": "^5.1.11",
     "browserify": "^8.0.2",
-    "browserify-shim": "^3.8.2",
     "csswring": "^3.0.5",
     "grunt": "latest",
     "gulp-browserify": "^0.5.1",
@@ -25,15 +24,6 @@
     "postcss-simple-vars": "^0.3.0",
     "postcss-url": "^3.2.0",
     "time-grunt": "^1.0.0"
-  },
-  "browserify": {
-    "basedir": "./",
-    "transform": [
-      "browserify-shim"
-    ]
-  },
-  "browserify-shim": {
-    "jquery": "global:jQuery"
   },
   "browser": {
     "magnificPopup": "./vendor/bower/magnific-popup/dist/jquery.magnific-popup.js",

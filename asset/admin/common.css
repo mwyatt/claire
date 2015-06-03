@@ -2578,7 +2578,6 @@ header.main.is-fixed-top + .content {
 .nav-user-gravatar {
   width: 25px;
   height: 25px;
-  border-radius: 100%;
   overflow: hidden;
   position: absolute;
   top: 10px;

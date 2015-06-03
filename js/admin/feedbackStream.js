@@ -1,4 +1,3 @@
-var $ = require('jquery');
 var mustache = require('mustache');
 
 

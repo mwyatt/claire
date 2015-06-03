@@ -3,7 +3,7 @@ error.txt
 node_modules/
 /app/config.php
 /app/cache/
-config.php
+app/config.php
 config.json
 credentials.php
 config.json
