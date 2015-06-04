@@ -6,6 +6,7 @@ var minmax = require('postcss-media-minmax');
 var autoprefixer = require('autoprefixer-core');
 var cssadmin = ['app/admin/css/**/*.css', '!app/admin/css/**/_*.css'];
 var cssfront = ['app/site/' + pkg.site + '/css/**/*.css', '!app/site/' + pkg.site + '/css/**/_*.css'];
+var css = ['css/**/*.css'];
 var colorFunction = require('postcss-color-function');
 var processes = [
   require('postcss-import'),
@@ -24,6 +25,10 @@ var action = {
       .pipe(gulp.dest(cssDest));
   }
 }
+
+gulp.task('cssg', function () {
+  return action.postcss(css);
+});
 
 gulp.task('css', function () {
   return action.postcss(cssfront);

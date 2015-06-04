@@ -257,7 +257,7 @@ class View extends \OriginalAppName\Data
 
 		// title
 		if (isset($data['metaTitle'])) {
-			$data['metaTitle'] = $data['metaTitle'] . ' | ' . $data['option']['meta_title']->getValue();
+			$data['metaTitle'] = $data['option']['meta_title']->getValue() . ' - ' . $data['metaTitle'];
 		} else {
 			if (isset($data['option']['meta_title'])) {
 				$data['metaTitle'] = $data['option']['meta_title']->getValue();

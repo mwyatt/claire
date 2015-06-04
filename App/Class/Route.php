@@ -77,15 +77,16 @@ class Route extends \OriginalAppName\System
 			// attempt execution of route
 		    $response = Executor::execute($route);
 		} catch (Exception $exception) {
-		    $response = new Response('500 Internal Server Error
-			The server encountered an unexpected condition which prevented it from fulfilling the request.', 500);
-			echo '<pre>';
-			print_r($exception);
-			echo '</pre>';
+			$controller = new Controller;
+			$response = $controller->error500();
+			// echo '<pre>';
+			// print_r($exception);
+			// echo '</pre>';
 		}
 
 		if ($response->getStatusCode() == 404 && ! $response->getContent()) {
-			$response->setContent('404 Page not found.');
+			$controller = new Controller\Front;
+			$response = $controller->notFound();
 		}
 
 		// headers
