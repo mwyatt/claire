@@ -5,13 +5,6 @@ CREATE TABLE `options` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-CREATE TABLE `tag` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `title` varchar(500) NOT NULL,
-  `description` text NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
 CREATE TABLE `content` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL DEFAULT '',
@@ -25,7 +18,7 @@ CREATE TABLE `content` (
   KEY `user_id` (`userId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-CREATE TABLE `content_meta` (
+CREATE TABLE `contentMeta` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `contentId` int(10) unsigned NOT NULL,
   `name` varchar(255) NOT NULL DEFAULT '',
@@ -52,9 +45,9 @@ CREATE TABLE `log` (
   `userId` int(12) NOT NULL,
   `type` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `log_admin_unseen` (
+CREATE TABLE `logAdminUnseen` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `logId` int(10) NOT NULL,
   `userId` int(10) NOT NULL,
@@ -84,7 +77,7 @@ CREATE TABLE `user` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-CREATE TABLE `user_permission` (
+CREATE TABLE `userPermission` (
   `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `userId` INT(10) UNSIGNED NOT NULL,
   `name` VARCHAR(50) NOT NULL,
