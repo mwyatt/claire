@@ -47,4 +47,15 @@ class Front extends \OriginalAppName\Controller\Option
 			->mergeData($serviceCommon->read())
 			->appendAsset('css', 'common');
 	}
+
+	
+	public function notFound()
+	{
+
+		// template
+		$this
+			->view
+			->setDataKey('metaTitle', 'Not found');
+		return new Response($this->view->getTemplate('not-found'), 404);
+	}
 }

@@ -1,0 +1,20 @@
+@import "../app/site/claire/css/_settings.css";
+@import "../app/site/codex/css/_dependencies.css";
+@import "../vendor/bower/normalize-css/normalize.css";
+@import "../app/site/codex/css/_reset.css";
+@import "../app/site/codex/css/_reusable.css";
+@import "../app/site/codex/css/_form.css";
+@import "../app/site/codex/css/_typography.css";
+@import "../app/site/codex/css/_alert.css";
+@import "../app/site/codex/css/_blankslate.css";
+
+body {
+  background-color: #eee;
+}
+
+.page {
+  margin: 70px auto;
+  width: 570px;
+  padding: 30px;
+  background-color: #fff;
+}
