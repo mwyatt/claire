@@ -180,3 +180,7 @@ svg {
 .page.not-found {
   padding: 3em;
 }
+
+.page-about-me .content-date {
+  display: none;
+}

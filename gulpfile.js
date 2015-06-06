@@ -58,7 +58,7 @@ gulp.task('js', function() {
     }))
     .pipe(gulp.dest('asset'));
 });
-http://192.168.1.24/mvc/asset/vendor/jquery.js?1398966146
+
 gulp.task('jsa', function() {
   gulp.src('js/admin/common.js')
     .pipe(browserify({
