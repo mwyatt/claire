@@ -1,9 +1,8 @@
 error.txt
 /vendor/
 node_modules/
-/app/config.php
-/app/cache/
-app/config.php
+/App/config.php
+/App/cache/
 config.json
 credentials.php
 config.json

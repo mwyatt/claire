@@ -79,9 +79,9 @@ class Route extends \OriginalAppName\System
 		} catch (Exception $exception) {
 			$controller = new Controller;
 			$response = $controller->error500();
-			// echo '<pre>';
-			// print_r($exception);
-			// echo '</pre>';
+			echo '<pre>';
+			print_r($exception);
+			echo '</pre>';
 		}
 
 		if ($response->getStatusCode() == 404 && ! $response->getContent()) {
