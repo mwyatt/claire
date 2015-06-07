@@ -1,0 +1,22 @@
+[
+	{
+		"name": "ETTA membership renewal",
+		"description": "Please ensure you have renewed your registration with the ETTA.",
+		"image": "cover/renewal.png",
+		"url": "press/etta-membership-renewal/",
+		"button": "More information"
+	},
+	{
+		"name": "Doubles merit",
+		"description": "Introducing the new doubles merit table, see which teams perform the best in doubles.",
+		"url": "archive/2013/result/",
+		"button": "Select division"
+	},
+	{
+		"name": "Results archive",
+		"description": "See the stats for previous seasons.",
+		"image": "cover/time.png",
+		"url": "archive/",
+		"button": "Vist the archive"
+	}
+]

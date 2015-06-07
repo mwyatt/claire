@@ -12,7 +12,7 @@ CREATE TABLE `content` (
   `html` longtext,
   `type` varchar(50) NOT NULL DEFAULT '',
   `timePublished` int(10) unsigned DEFAULT '0',
-  `status` varchar(50) NOT NULL DEFAULT 'hidden',
+  `status` INT(11) NOT NULL DEFAULT '0',
   `userId` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`userId`)
@@ -24,7 +24,7 @@ CREATE TABLE `contentMeta` (
   `name` varchar(255) NOT NULL DEFAULT '',
   `value` varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`),
-  KEY `content_id` (`contentId`)
+  KEY `contentId` (`contentId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 CREATE TABLE `ad` (
@@ -45,13 +45,16 @@ CREATE TABLE `log` (
   `userId` int(12) NOT NULL,
   `type` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  KEY `userId` (`userId`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 CREATE TABLE `logAdminUnseen` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `logId` int(10) NOT NULL,
   `userId` int(10) NOT NULL,
   PRIMARY KEY (`id`)
+  KEY `logId` (`logId`)
+  KEY `userId` (`userId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 CREATE TABLE `media` (
@@ -63,7 +66,7 @@ CREATE TABLE `media` (
   `timePublished` int(10) unsigned DEFAULT '0',
   `userId` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `user_id` (`userId`)
+  KEY `userId` (`userId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 CREATE TABLE `user` (
@@ -82,7 +85,8 @@ CREATE TABLE `userPermission` (
   `userId` INT(10) UNSIGNED NOT NULL,
   `name` VARCHAR(50) NOT NULL,
   `ability` VARCHAR(50) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `userId` (`userId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 CREATE TABLE `menu` (
@@ -91,7 +95,8 @@ CREATE TABLE `menu` (
   `url` VARCHAR(255) NULL,
   `name` VARCHAR(150) NULL,
   `keyGroup` VARCHAR(45) NULL,
-  PRIMARY KEY (`id`));
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 CREATE TABLE `mail` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,

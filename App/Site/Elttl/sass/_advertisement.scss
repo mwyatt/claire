@@ -1,0 +1,63 @@
+.advertisements {
+	@include clearfix;
+	@extend .block-margins;
+}
+
+.advertisement {
+    display: block;
+	background-color: $color-primary-0;
+    height: 12em;
+	padding: 1em;
+	border-radius: 2px;
+	background-image: image-url('table-lip.png');
+	background-repeat: no-repeat;
+	background-position: bottom right;
+	@extend .block-margins;
+    color: #fff;
+
+    &:nth-child(2n) {
+        background-color: $color-secondary-1-0;
+    }
+
+    @media all and (min-width: 400px) {
+        float: left;
+    }
+
+    @media all and (min-width: 400px) and (max-width: 699px) {
+        width: 47%;
+        margin-right: 2%;
+        height: 17em;
+
+        &:nth-child(2n) {
+            float: right;
+            margin-right: 0;
+        }
+    }
+
+    @media all and (min-width: 700px) {
+        width: 30%;
+        margin-right: 5%;
+        height: 17em;
+        padding: 1em;
+
+        &:nth-child(3n) {
+            float: right;
+            margin-right: 0;
+        }
+    }
+
+    @media all and (min-width: 900px) {
+        height: 14em;
+    }
+}
+
+.advertisement-title {
+    @extend .h2;
+    margin-top: 0;
+    color: #fff;
+}
+
+.advertisement-description {
+    @extend .p;
+    color: #fff;
+}

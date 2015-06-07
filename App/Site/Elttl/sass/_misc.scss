@@ -1,0 +1,151 @@
+html {
+    background-color: $color-primary-4;
+}
+
+html.lt-ie9 {
+    background-color: #fff;
+}
+
+.lt-ie9 .container-site,
+.lt-ie9 .container-footer {
+    display: none;
+}
+
+.to-top {
+    @include button;
+    @include transition(all 300ms ease);
+    border-radius: 2px;
+    position: fixed;
+    bottom: -4em;
+    right: 1em;
+    z-index: 1;
+    width: 2.3em;
+    height: 2.3em;
+    padding: 0.5em;
+    background-color: $color-primary-0;
+    display: block;
+
+    &:active {
+        @include transform(translate3d(0, 2px, 0) scale(.95));
+    }
+
+    &.is-active {
+        bottom: 1em;
+    }
+}
+
+.core-h1 {
+    text-shadow: 1px 1px $color-primary-4;
+    text-align: center;
+    padding: 0.3em;
+    background-color: $color-primary-0;
+    color: #fff;
+    border-bottom: 1px solid $color-secondary-1-0;
+    font-size: 1.4em;
+    margin-bottom: 1em;
+}
+
+.search-result-description {
+    @extend .h4;
+    margin-bottom: 1em;
+}
+
+.page {
+    @include clearfix;
+    max-width: 90em;
+    margin: 0 auto;
+    padding: 10%;
+}
+
+.page {
+    padding-top: 4.7em;
+    padding-bottom: 60px;
+
+    @media all and (min-width: 450px) {
+        padding-top: 5.7em;
+    }
+
+    @media all and (min-width: 650px) {
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+}
+
+.container-header-inner {
+    @include clearfix;
+}
+
+.button-base {
+    padding: 12px 14px;
+    background-color: $color-gray-50;
+    color: #fff;
+}
+
+.button-primary {
+    @include button('primary');
+}
+
+.button-secondary {
+    @extend .button-base;
+    background-color: $color-secondary-1-0;
+}
+
+.team-single-secretary-telephone-mobile,
+.team-single-secretary-telephone-landline {
+    display: block;
+    margin: 1em 0;
+}
+
+.container-site-inner {
+    background-color: #fff;
+
+    @media all and (min-width: 1500px) {
+        background-image: image-url('bg.gif');
+        background-position: center top;
+        background-repeat: no-repeat;
+    }
+}
+
+.is-archive {
+    padding-top: 33px;
+}
+
+.google-map {
+    border: 0;
+    width: 100%;
+    height: 15em;
+    margin-top: 3em;
+}
+
+.menu-tables-option {
+    @include clearfix;
+    @include dont-print;
+    @include button('primary');
+    @extend .block-margins;
+    display: block;
+    text-align: center;
+
+    @media all and (min-width: 500px) {
+        float: left;
+        margin-right: 1em;
+    }
+}
+
+.header-sticker-beta {
+    @include dont-print;
+    float: left;
+    text-transform: uppercase;
+    font-size: 0.7em;
+    background-color: $color-gray-20;
+    color: #fff;
+    line-height: 1;
+    padding: 0.3em;
+    border-radius: 2px;
+    position: relative;
+    top: 16px;
+    left: 6px;
+
+    &:hover {
+        background-color: $color-gray-30;
+    }
+}

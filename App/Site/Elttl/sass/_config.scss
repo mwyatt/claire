@@ -1,0 +1,41 @@
+/**
+ * core include for front and admin
+ */
+
+
+/**
+ * charset
+ */
+@charset "utf-8";
+
+
+/**
+ * vendor libraries
+ */
+@import "sass/vendor/normalize/normalize";
+@import "sass/vendor/bourbon/bourbon";
+@import "sass/vendor/animate/animate";
+@import "sass/grid";
+
+
+/**
+ * global libraries
+ */
+@import "../../../../sass/placeholder";
+
+
+/**
+ * variables and mixins
+ */
+@import "palette";
+@import "mixin";
+@import "keyframes";
+
+
+/**
+ * admin / front settings
+ */
+@import "reusable";
+@import "typography";
+@import "form";
+@import "button";

@@ -1,0 +1,57 @@
+.magnific-content {
+    @include animation-name(fadeInBulge);
+    @include animation-fill-mode(forwards);
+    @include animation-duration(300ms);
+    @include animation-timing-function(ease);
+    @include animation-iteration-count(1);
+    @include clearfix;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+    position: relative;
+    margin: 0 auto;
+    padding: 1em;
+    width: 90%;
+    border-radius: 2px;
+    padding-top: 1em;
+    max-width: 40em;
+
+    @media all and (min-width: 600px) {
+        padding: 5%;
+    }
+
+    @media all and (min-width: 712px) {
+        padding: 35px;
+    }
+}
+
+// .mfp-content .magnific-content {
+//     display: block;
+// }
+
+
+/**
+ * plugin overrides
+ */
+.mfp-figure:after {
+    box-shadow: 0 1px 3px rgba(#000, .5);
+    top: 0;
+    bottom: 0;
+    border-radius: 2px;
+    background-color: #fff
+}
+.mfp-image-holder .mfp-close, .mfp-iframe-holder .mfp-close {
+    right: 0;
+    top: 0;
+    padding: 13px 14px;
+    width: auto;
+    line-height: 0;
+    background: $color-primary-0;
+    opacity: 1;
+    border-radius: 0 2px 0 2px;
+}
+figure {
+    margin: 1em;
+}
+img.mfp-img {
+    padding: 0;
+}
