@@ -78,10 +78,7 @@ class Route extends \OriginalAppName\System
 		    $response = Executor::execute($route);
 		} catch (Exception $exception) {
 			$controller = new Controller;
-			$response = $controller->error500();
-			echo '<pre>';
-			print_r($exception);
-			echo '</pre>';
+			$response = $controller->error500($exception);
 		}
 
 		if ($response->getStatusCode() == 404 && ! $response->getContent()) {
@@ -128,6 +125,13 @@ class Route extends \OriginalAppName\System
 		// admin first because of global overrides
 		// admin routes only if there is admin in the url
 		if (in_array('admin', $url->getPath())) {
+
+			// site specific
+			$siteAdminRoutePath = SITE_PATH . 'Admin' . DS . 'route' . EXT;
+			if (file_exists($siteAdminRoutePath)) {
+				include $siteAdminRoutePath;
+			}
+
 			include APP_PATH . 'Admin' . DS . 'route' . EXT;
 		}
 

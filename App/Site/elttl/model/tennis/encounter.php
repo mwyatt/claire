@@ -8,27 +8,29 @@ namespace OriginalAppName\Site\Elttl\Model\Tennis;
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Encounter extends \OriginalAppName\Site\Elttl\Model\Tennis\Archive
+class Encounter extends \OriginalAppName\Model
 {	
 
 
-	public $tableName = 'tennis_encounter';
+	public $tableName = 'tennisEncounter';
 
 
 	public $entity = '\\OriginalAppName\\Site\\Elttl\\Entity\\Tennis\\Encounter';
 
 
-	public $fields = array(
+	public $fields = [
 		'id',
-		'fixtureArchiveId',
+		'yearId',
+		'fixtureId',
+		'playerIdLeft',
+		'playerIdRight',
 		'scoreLeft',
 		'scoreRight',
-		'playerArchiveIdLeft',
-		'playerArchiveIdRight',
 		'playerRankChangeLeft',
 		'playerRankChangeRight',
+		'fixtureId',
 		'status'
-	);
+	];
 
 
 	public function filterStatus($status = array())

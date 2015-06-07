@@ -34,9 +34,12 @@ class Option extends \OriginalAppName\Controller
 	 */
 	public function readOptions()
 	{
+		$registry = Registry::getInstance();
 		$serviceOption = new OriginalAppName\Service\Option();
+		$options = $serviceOption->read();
+		$registry->set('database/options', $options);
 		$this
 			->view
-			->setDataKey('option', $serviceOption->read());
+			->setDataKey('option', $serviceOption->getData());
 	}
 }

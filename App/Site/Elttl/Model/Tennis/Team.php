@@ -8,8 +8,35 @@ namespace OriginalAppName\Site\Elttl\Model\Tennis;
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Archive extends \OriginalAppName\Model
+class Team extends \OriginalAppName\Model
 {	
+
+
+	public $tableName = 'tennisTeam';
+
+
+	public $entity = '\\OriginalAppName\\Site\\Elttl\\Entity\\Tennis\\Team';
+
+
+	public $fields = array(
+		'id',
+		'yearId',
+		'name',
+		'slug',
+		'homeWeekday',
+		'secretaryId',
+		'venueId',
+		'divisionId'
+	);
+
+
+	public $weekdays = array(
+		1 => 'Monday',
+		2 => 'Tuesday',
+		3 => 'Wednesday',
+		4 => 'Thursday',
+		5 => 'Friday'
+	);
 
 
 	/**
@@ -19,12 +46,12 @@ class Archive extends \OriginalAppName\Model
 	 * @param  int $archiveId 
 	 * @return object            
 	 */
-	public function readYearArchive($yearId, $archiveId)
+	public function readDivisionId($yearId, $divisionArchiveId)
 	{
 echo '<pre>';
 print_r($yearId);
 echo '<pre>';
-print_r($archiveId);
+print_r($divisionArchiveId);
 echo '</pre>';
 exit;
 
@@ -51,5 +78,31 @@ exit;
 
 		// instance
 		return $this;
+	}
+
+
+	/**
+	 * @return array 
+	 */
+	public function getWeekdays() {
+	    return $this->weekdays;
+	}
+	
+	
+	/**
+	 * @param array $weekdays 
+	 */
+	public function setWeekdays($weekdays) {
+	    $this->weekdays = $weekdays;
+	    return $this;
+	}
+
+
+	public function getWeekday($key)
+	{
+		$weekdays = $this->getWeekdays();
+		if (array_key_exists($key, $weekdays)) {
+			return $weekdays[$key];
+		}
 	}
 }

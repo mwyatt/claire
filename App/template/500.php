@@ -19,6 +19,7 @@
         <div class="page">
         	<div class="content-single">
         		<h1 class="page-primary-title">Internal Server Error</h1>
+                <p class="p"><?php echo $exceptionMessage ?></p>
         		<p class="p">The server encountered an unexpected condition which prevented it from fulfilling the request. Please go <a class="a" href="<?php echo $this->url->generate('home') ?>">home</a>.</p>
         	</div>
         </div>

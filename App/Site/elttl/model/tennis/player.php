@@ -8,11 +8,11 @@ namespace OriginalAppName\Site\Elttl\Model\Tennis;
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Player extends \OriginalAppName\Site\Elttl\Model\Tennis\Archive
+class Player extends \OriginalAppName\Model
 {	
 
 
-	public $tableName = 'tennis_player';
+	public $tableName = 'tennisPlayer';
 
 
 	public $entity = '\\OriginalAppName\\Site\\Elttl\\Entity\\Tennis\\Player';
@@ -20,12 +20,13 @@ class Player extends \OriginalAppName\Site\Elttl\Model\Tennis\Archive
 
 	public $fields = array(
 		'id',
-		'teamArchiveId',
 		'nameFirst',
 		'nameLast',
+		'slug',
 		'rank',
 		'phoneLandline',
 		'phoneMobile',
-		'ettaLicenseNumber'
+		'ettaLicenseNumber',
+		'teamId'
 	);
 }

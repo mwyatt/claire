@@ -8,11 +8,11 @@ namespace OriginalAppName\Site\Elttl\Model\Tennis;
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Venue extends \OriginalAppName\Site\Elttl\Model\Tennis\Archive
+class Venue extends \OriginalAppName\Model
 {	
 
 
-	public $tableName = 'tennis_venue';
+	public $tableName = 'tennisVenue';
 
 
 	public $entity = '\\OriginalAppName\\Site\\Elttl\\Entity\\Tennis\\Venue';
@@ -20,7 +20,9 @@ class Venue extends \OriginalAppName\Site\Elttl\Model\Tennis\Archive
 
 	public $fields = array(
 		'id',
+		'yearId',
 		'name',
+		'slug',
 		'location'
 	);
 }

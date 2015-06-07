@@ -8,11 +8,11 @@ namespace OriginalAppName\Site\Elttl\Model\Tennis;
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Team extends \OriginalAppName\Site\Elttl\Model\Tennis\Archive
+class Team extends \OriginalAppName\Model
 {	
 
 
-	public $tableName = 'tennis_team';
+	public $tableName = 'tennisTeam';
 
 
 	public $entity = '\\OriginalAppName\\Site\\Elttl\\Entity\\Tennis\\Team';
@@ -20,11 +20,13 @@ class Team extends \OriginalAppName\Site\Elttl\Model\Tennis\Archive
 
 	public $fields = array(
 		'id',
-		'divisionArchiveId',
-		'venueArchiveId',
-		'secretaryId',
+		'yearId',
 		'name',
-		'homeWeekday'
+		'slug',
+		'homeWeekday',
+		'secretaryId',
+		'venueId',
+		'divisionId'
 	);
 
 

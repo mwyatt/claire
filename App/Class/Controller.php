@@ -32,8 +32,9 @@ class Controller
 	}
 
 
-	public function error500()
+	public function error500($exception)
 	{
+		$this->view->setDataKey('exceptionMessage', $exception->getMessage());
 		return new Response($this->view->getTemplate('500'), 500);
 	}
 

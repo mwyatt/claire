@@ -12,7 +12,7 @@ class Year extends \OriginalAppName\Model
 {	
 
 
-	public $tableName = 'tennis_year';
+	public $tableName = 'tennisYear';
 
 
 	public $entity = '\\OriginalAppName\\Site\\Elttl\\Entity\\Tennis\\Year';
