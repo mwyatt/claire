@@ -29,12 +29,7 @@ class Division extends \OriginalAppName\Model
 
 	public function read()
 	{
-		$registry = Registry::getInstance();
-		foreach ($registry->get('database/options') as $name => $entity) {
-			if ($name == 'year_id') {
-				$year = $entity;
-			}
-		}
+
 		$sth = $this->database->dbh->prepare("
 			{$this->getSqlSelect()}
             where {$column} = :id

@@ -114,7 +114,7 @@ class View extends \OriginalAppName\Data
 	public function getTemplatePath($append) {
 
 		// appending
-		$end = 'template' . DS . $append . EXT;
+		$end = 'template' . DS . strtolower($append) . EXT;
 
 		// site-specific
 		$path = SITE_PATH . $end;

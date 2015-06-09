@@ -39,7 +39,20 @@ class Option extends \OriginalAppName\Controller
 		$options = $serviceOption->read();
 		$registry->set('database/options', $options);
 		$this
+			->storeYearId()
 			->view
 			->setDataKey('option', $serviceOption->getData());
+	}
+
+
+	public function storeYearId()
+	{
+		$registry = Registry::getInstance();
+		foreach ($registry->get('database/options') as $name => $entity) {
+			if ($name == 'year_id') {
+				$registry->set('database/options/yearId', $entity->value);
+			}
+		}
+		return $this;
 	}
 }

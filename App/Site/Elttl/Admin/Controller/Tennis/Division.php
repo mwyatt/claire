@@ -3,6 +3,7 @@
 namespace OriginalAppName\Site\Elttl\Admin\Controller\Tennis;
 
 use OriginalAppName\Response;
+use OriginalAppName\Registry;
 use OriginalAppName\Site\Elttl\Model;
 use OriginalAppName\Site\Elttl\Entity;
 use OriginalAppName\Session;
@@ -18,36 +19,41 @@ class Division extends \OriginalAppName\Controller\Admin
 {
 
 
+	public function __construct()
+	{
+		Parent::__construct();
+		$singular = 'division';
+		$this
+			->view
+			->setDataKey('pageSingular', $singular)
+			->setDataKey('pagePlural', $singular . 's')
+			->setDataKey('urlCreate', $this->url->generate('admin/tennis/' . $singular . '/create'));
+	}
+
+
 	public function create()
 	{
-		
+	echo '<pre>';
+		print_r('variable');
+		echo '</pre>';
+		exit;
+			
 		// resource
-		$entityUser = new Entity\User;
-		$modelUser = new Model\User;
+		$entityDivision = new Entity\Tennis\Division;
+		$modelDivision = new Model\Tennis\Division;
 
-		// create new User
-		$entityUser
-			->setTimeRegistered(time());
-		$modelUser->create([$entityUser]);
+		// create new Division
+		$modelDivision->create([$entityDivision]);
 
 		// update
-		$this->update(current($modelUser->getLastInsertIds()));
+		$this->update(current($modelDivision->getLastInsertIds()));
 	}
 
 
 	public function all() {
+		$registry = Registry::getInstance();
 		$modelDivision = new Model\Tennis\Division;
-
-		// get divisions
-		$modelDivision->read();
-
-echo '<pre>';
-print_r($modelDivision);
-echo '</pre>';
-exit;
-
-
-		// render
+		$modelDivision->readColumn('yearId', $registry->get('database/options/yearId'));
 		$this
 			->view
 			->setDataKey('divisions', $modelDivision->getData());
@@ -59,18 +65,18 @@ exit;
 	{
 
 		// resource
-		$modelUser = new Model\User;
+		$modelDivision = new Model\Tennis\Division;
 
 		// read single
-		$entityUser = $modelUser
+		$entityDivision = $modelDivision
 			->readId([$id])
 			->getDataFirst();
 
 		// render
 		$this
 			->view
-			->setDataKey('user', $entityUser ? $entityUser : new Entity\User);
-		return new Response($this->view->getTemplate('admin/user/single'));
+			->setDataKey('division', $entityDivision ? $entityDivision : new Entity\Tennis\Division);
+		return new Response($this->view->getTemplate('admin/tennis/division/single'));
 	}
 
 
@@ -79,39 +85,39 @@ exit;
 
 		// resources
 		$sessionFeedback = new Session\Feedback;
-		$modelUser = new Model\User;
+		$modelDivision = new Model\Tennis\Division;
 
 		// load 1
-		$entityUser = $modelUser
+		$entityDivision = $modelDivision
 			->readId([$id])
 			->getDataFirst();
 
 		// does not exist
-		if (! $entityUser) {
-			$this->redirect('admin/user/all');
+		if (! $entityDivision) {
+			$this->redirect('admin/Division/all');
 		}
 
 		// consume post
-		$entityUser
-			->setEmail($_POST['user']['email'])
-			->setNameFirst($_POST['user']['nameFirst'])
-			->setNameLast($_POST['user']['nameLast'])
-			->setLevel($_POST['user']['level']);
+		$entityDivision
+			->setEmail($_POST['Division']['email'])
+			->setNameFirst($_POST['Division']['nameFirst'])
+			->setNameLast($_POST['Division']['nameLast'])
+			->setLevel($_POST['Division']['level']);
 
 		// optional
-		if (! $entityUser->getTimeRegistered()) {
-			$entityUser->setTimeRegistered(time());
+		if (! $entityDivision->getTimeRegistered()) {
+			$entityDivision->setTimeRegistered(time());
 		}
-		if ($_POST['user']['password']) {
-			$entityUser->setPassword($_POST['user']['password']);
+		if ($_POST['Division']['password']) {
+			$entityDivision->setPassword($_POST['Division']['password']);
 		}
 
 		// save
-		$modelUser->update($entityUser, ['id' => $entityUser->getId()]);
+		$modelDivision->update($entityDivision, ['id' => $entityDivision->getId()]);
 
 		// feedback / route
-		$sessionFeedback->setMessage("user $id saved", 'positive');
-		$this->redirect('admin/user/single', ['id' => $entityUser->getId()]);
+		$sessionFeedback->setMessage("Division $id saved", 'positive');
+		$this->redirect('admin/tennis/division/single', ['id' => $entityDivision->getId()]);
 	}
 
 
@@ -119,26 +125,26 @@ exit;
 	{
 		
 		// resources
-		$modelUser = new Model\User;
+		$modelDivision = new Model\Tennis\Division;
 		$sessionFeedback = new Session\Feedback;
 
 		// load 1
-		$entityUser = $modelUser
+		$entityDivision = $modelDivision
 			->readId([$id])
 			->getDataFirst();
 
 		// does not exist
-		if (! $entityUser) {
-			$this->redirect('admin/user/all');
+		if (! $entityDivision) {
+			$this->redirect('admin/tennis/division/all');
 		}
 
 		// delete it
-		$modelUser->delete(['id' => $id]);
+		$modelDivision->delete(['id' => $id]);
 
 		// prove it
-		if ($modelUser->getRowCount()) {
-			$sessionFeedback->setMessage("user $id deleted");
-			$this->redirect('admin/user/all');
+		if ($modelDivision->getRowCount()) {
+			$sessionFeedback->setMessage("Division $id deleted");
+			$this->redirect('admin/Division/all');
 		} else {
 			$sessionFeedback->setMessage("unable to delete $id");
 		}
