@@ -9,7 +9,6 @@
     ],
     "require": {
         "intervention/image": "dev-master",
-        "doctrine/orm": "2.6.*@dev",
         "corneltek/pux": "~1.5",
         "swiftmailer/swiftmailer": "5.3.*@dev",
         "guzzlehttp/guzzle": "5.0.*@dev"
