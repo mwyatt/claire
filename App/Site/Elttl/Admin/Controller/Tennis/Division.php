@@ -35,21 +35,24 @@ class Division extends \OriginalAppName\Controller\Admin
 	{
 		Parent::__construct();
 		$this->namePlural = $this->nameSingular . 's';
-		$this->nsEntity = 'Entity\\Tennis\\' . ucfirst($this->nameSingular);
-		$this->model = new 'Model\\Tennis\\' . ucfirst($this->nameSingular);
+		$this->nsEntity = 'OriginalAppName\\Site\\Elttl\\Entity\\Tennis\\' . ucfirst($this->nameSingular);
+		$class = 'OriginalAppName\\Site\\Elttl\\Model\\Tennis\\' . ucfirst($this->nameSingular);
+		$this->model = new $class;
 		$this
 			->view
 			->setDataKey('nameSingular', $this->nameSingular)
 			->setDataKey('namePlural', $this->namePlural)
-			->setDataKey('urlCreate', $this->url->generate('admin/tennis/' . $singular . '/create'));
+			->setDataKey('urlCreate', $this->url->generate('admin/tennis/' . $this->nameSingular . '/create'));
 	}
 
 
 	public function create()
 	{
-			
-		// resource
+		$registry = Registry::getInstance();
+
+		// new entity
 		$entity = new $this->nsEntity;
+		$entity->yearId = $registry->get('database/options/yearId');
 
 		// create new Division
 		$this->model->create([$entity]);
@@ -65,7 +68,7 @@ class Division extends \OriginalAppName\Controller\Admin
 		$this
 			->view
 			->setDataKey($this->namePlural, $this->model->getData());
-		return new Response($this->view->getTemplate('admin/tennis/{$this->nameSingular}/all'));
+		return new Response($this->view->getTemplate("admin/tennis/{$this->nameSingular}/all"));
 	}
 
 
@@ -81,7 +84,7 @@ class Division extends \OriginalAppName\Controller\Admin
 		$this
 			->view
 			->setDataKey('division', $entity ? $entity : new $this->nsEntity);
-		return new Response($this->view->getTemplate('admin/tennis/{$this->nameSingular}/single'));
+		return new Response($this->view->getTemplate("admin/tennis/{$this->nameSingular}/single"));
 	}
 
 
@@ -98,30 +101,18 @@ class Division extends \OriginalAppName\Controller\Admin
 
 		// does not exist
 		if (! $entity) {
-			$this->redirect('admin/Division/all');
+			$this->redirect("admin/tennis/{$this->nameSingular}/all");
 		}
 
 		// consume post
-		$entity
-			->setEmail($_POST['entity']['email'])
-			->setNameFirst($_POST['entity']['nameFirst'])
-			->setNameLast($_POST['entity']['nameLast'])
-			->setLevel($_POST['entity']['level']);
-
-		// optional
-		if (! $entity->getTimeRegistered()) {
-			$entity->setTimeRegistered(time());
-		}
-		if ($_POST['entity']['password']) {
-			$entity->setPassword($_POST['entity']['password']);
-		}
+		$entity->name = $_POST['entity']['name'];
 
 		// save
 		$this->model->update($entity, ['id' => $entity->getId()]);
 
 		// feedback / route
 		$sessionFeedback->setMessage("Division $id saved", 'positive');
-		$this->redirect('admin/tennis/{$this->nameSingular}/single', ['id' => $entity->getId()]);
+		$this->redirect("admin/tennis/{$this->nameSingular}/single", ['id' => $entity->getId()]);
 	}
 
 
@@ -138,7 +129,7 @@ class Division extends \OriginalAppName\Controller\Admin
 
 		// does not exist
 		if (! $entityDivision) {
-			$this->redirect('admin/tennis/{$this->nameSingular}/all');
+			$this->redirect("admin/tennis/{$this->nameSingular}/all");
 		}
 
 		// delete it
@@ -146,8 +137,8 @@ class Division extends \OriginalAppName\Controller\Admin
 
 		// prove it
 		if ($this->model->getRowCount()) {
-			$sessionFeedback->setMessage("Division $id deleted");
-			$this->redirect('admin/Division/all');
+			$sessionFeedback->setMessage("{$this->nameSingular} $id deleted");
+			$this->redirect("admin/{$this->nameSingular}/all");
 		} else {
 			$sessionFeedback->setMessage("unable to delete $id");
 		}

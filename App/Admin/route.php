@@ -49,7 +49,7 @@ foreach (['user'] as $entity) {
     ];
     $routes[] = [
         'mux/type' => 'post',
-        'mux/path' => '/admin/$entity/create/',
+        'mux/path' => "/admin/$entity/create/",
         'mux/controller/method' => [$class, 'create'],
         'mux/options' => []
     ];
@@ -67,13 +67,13 @@ foreach (['user'] as $entity) {
     ];
     $routes[] = [
         'mux/type' => 'post',
-        'mux/path' => '/admin/$entity/:id/',
+        'mux/path' => "/admin/$entity/:id/",
         'mux/controller/method' => [$class, 'update'],
         'mux/options' => []
     ];
     $routes[] = [
         'mux/type' => 'delete',
-        'mux/path' => '/admin/$entity/:id/',
+        'mux/path' => "/admin/$entity/:id/",
         'mux/controller/method' => [$class, 'delete'],
         'mux/options' => []
     ];

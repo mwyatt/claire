@@ -10,7 +10,7 @@ foreach (['division'] as $entity) {
     ];
     $routes[] = [
         'mux/type' => 'post',
-        'mux/path' => '/admin/tennis/$entity/create/',
+        'mux/path' => "/admin/tennis/$entity/create/",
         'mux/controller/method' => [$class, 'create'],
         'mux/options' => []
     ];
@@ -28,16 +28,24 @@ foreach (['division'] as $entity) {
     ];
     $routes[] = [
         'mux/type' => 'post',
-        'mux/path' => '/admin/tennis/$entity/:id/',
+        'mux/path' => "/admin/tennis/$entity/:id/",
         'mux/controller/method' => [$class, 'update'],
         'mux/options' => []
     ];
     $routes[] = [
         'mux/type' => 'delete',
-        'mux/path' => '/admin/tennis/$entity/:id/',
+        'mux/path' => "/admin/tennis/$entity/:id/",
         'mux/controller/method' => [$class, 'delete'],
         'mux/options' => []
     ];
+
+    $routes["admin/tennis/$entity/delete"] = [
+        'mux/type' => 'get',
+        'mux/path' => '/admin/content/delete/:id/',
+        'mux/controller/method' => [$class, 'delete'],
+        'mux/options' => []
+    ];
+
 }
 
 $routes['admin/tennis/year/all'] = [

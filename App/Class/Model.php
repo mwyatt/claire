@@ -380,11 +380,10 @@ abstract class Model extends \OriginalAppName\Data
 	{
 		$excecuteData = [];
 		foreach ($this->fields as $field) {
-			$method = 'get' . ucfirst($field);
 			if ($this->isFieldNonWritable($field)) {
 				continue;
 			}
-			$excecuteData[] = $entity->$method();
+			$excecuteData[] = $entity->$field;
 		}
 		return $excecuteData;
 	}
@@ -397,7 +396,7 @@ abstract class Model extends \OriginalAppName\Data
 			if ($this->isFieldNonWritable($field)) {
 				continue;
 			}
-			$excecuteData[':' . $field] = $mold->{'get' . ucfirst($field)}();
+			$excecuteData[':' . $field] = $mold->$field;
 		}
 		return $excecuteData;
 	}
