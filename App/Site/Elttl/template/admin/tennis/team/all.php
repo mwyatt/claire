@@ -17,6 +17,7 @@
 	<table class="table">
 		<tr>
 			<th>Name</th>
+			<th>Division</th>
 			<th></th>
 		</tr>
 
@@ -24,6 +25,7 @@
 
 		<tr>
 			<td><?php echo $$nameSingular->name ?></td>
+			<td><?php echo $divisions[$$nameSingular->divisionId]->name ?></td>
 			<td>
 				<a class="button-edit" href="<?php echo $this->url->generate("admin/tennis/{$nameSingular}/single", ['id' => $$nameSingular->id]) ?>">Edit</a>
 			</td>

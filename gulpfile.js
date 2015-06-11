@@ -26,7 +26,7 @@ var action = {
   }
 }
 
-gulp.task('cssg', function () {
+gulp.task('css/g', function () {
   return action.postcss(css);
 });
 
@@ -34,18 +34,18 @@ gulp.task('css', function () {
   return action.postcss(cssfront);
 });
 
-gulp.task('cssa', function () {
+gulp.task('css/a', function () {
   cssDest = 'asset/admin';
   return action.postcss(cssadmin);
 });
 
-gulp.task('cssam', function () {
+gulp.task('css/a/m', function () {
   cssDest = 'asset/admin';
   processes.push(require('csswring'));
   return action.postcss(cssadmin);
 });
 
-gulp.task('cssm', function () {
+gulp.task('css/m', function () {
   processes.push(require('csswring'));
   return action.postcss(cssfront);
 });
@@ -54,24 +54,36 @@ gulp.task('js', function() {
   gulp.src('app/site/' + pkg.site + '/js/common.js')
     .pipe(browserify({
       insertGlobals : true,
-      paths: ['node_modules','js/']
+      paths: ['node_modules', 'js/', 'app/site/' + pkg.site + '/js/**/*.js']
     }))
     .pipe(gulp.dest('asset'));
 });
 
-gulp.task('jsa', function() {
+var shimSettings = {
+  jquery: {
+    path: 'vendor/bower/jquery/dist/jquery.js',
+    exports: '$'
+  }
+};
+
+gulp.task('js/a', function() {
   gulp.src('js/admin/common.js')
     .pipe(browserify({
-      shim: {
-        jquery: {
-          path: 'vendor/bower/jquery/dist/jquery.js',
-          exports: '$'
-        }
-      },
-      paths: ['node_modules','js/']
+      paths: ['node_modules', 'js/']
     }))
     .pipe(gulp.dest('asset/admin'));
 });
+
+// how do i make this good?
+gulp.task('js/a/tennis', function() {
+  gulp.src('app/site/elttl/js/admin/tennis/common.js')
+    .pipe(browserify({
+      paths: ['node_modules', 'js/', 'app/site/elttl/js/admin/tennis/common.js']
+    }))
+    .pipe(gulp.dest('asset/admin/tennis'));
+});
+
+
 
 // gulp.task('jsm', function() {
 //   return gulp.src('asset/**/*.js')

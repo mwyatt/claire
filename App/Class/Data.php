@@ -145,12 +145,11 @@ class Data extends \OriginalAppName\System
 		}
 		$newOrder = array();
 		$dataSample = current($data);
-		$method = 'get' . ucfirst($property);
-		if (! method_exists($dataSample, $method)) {
+		if (! property_exists($dataSample, $property)) {
 			return;
 		}
 		foreach ($data as $mold) {
-			$newOrder[$mold->$method()] = $mold;
+			$newOrder[$mold->$property] = $mold;
 		}
 		$this->setData($newOrder);
 		return $this;

@@ -26,4 +26,10 @@ class Feedback extends \OriginalAppName\Session
 			->set('message', ucfirst($message) . '.')
 			->set('type', $type);
 	}
+
+
+	public function getMessage()
+	{
+		return ['message' => $this->get('message'), 'type' => $this->get('type')];
+	}
 }

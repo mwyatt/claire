@@ -3,8 +3,8 @@
 namespace OriginalAppName\Site\Elttl\Admin\Controller\Tennis;
 
 use OriginalAppName\Response;
-use OriginalAppName\Registry;
 use OriginalAppName\Session;
+use OriginalAppName\Site\Elttl\Model;
 
 
 /**
@@ -12,7 +12,7 @@ use OriginalAppName\Session;
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Division extends \OriginalAppName\Site\Elttl\Admin\Controller\Tennis\Crud
+class Team extends \OriginalAppName\Site\Elttl\Admin\Controller\Tennis\Crud
 {
 
 
@@ -20,19 +20,24 @@ class Division extends \OriginalAppName\Site\Elttl\Admin\Controller\Tennis\Crud
 	{
 		$entity = new $this->nsEntity;
 		$entity->yearId = $this->yearId;
-
-		// create new Division
 		$this->model->create([$entity]);
-
-		// update
 		$this->update(current($this->model->getLastInsertIds()));
 	}
 
 
 	public function all() {
-		$this->model->readColumn('yearId', $this->yearId);
+		$division = new Model\Tennis\Division;
+		$division
+			->readColumn('yearId', $this->yearId)
+			->keyDataByProperty('id');
+		$this
+			->model
+			->readColumn('yearId', $this->yearId)
+			->orderByProperty('name')
+			->orderByProperty('divisionId');
 		$this
 			->view
+			->setDataKey('divisions', $division->getData())
 			->setDataKey($this->namePlural, $this->model->getData());
 		return new Response($this->view->getTemplate("admin/tennis/{$this->nameSingular}/all"));
 	}
@@ -43,8 +48,8 @@ class Division extends \OriginalAppName\Site\Elttl\Admin\Controller\Tennis\Crud
 		$entity = $this->model
 			->readId([$id])
 			->getDataFirst();
-
-		// render
+		$division = new Model\Tennis\Division;
+		$division->readColumn('yearId', $this->yearId);
 		$this
 			->view
 			->setDataKey('division', $entity ? $entity : new $this->nsEntity);

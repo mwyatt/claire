@@ -1,8 +1,8 @@
 var url = require('url');
 
-$('.js-division-delete').on('click', function() {
+$('.js-tennis-delete-single').on('click', function() {
   $.ajax({
-    url: url.getUrlBase('admin/division/1/'),
+    url: url.getUrlBase('admin/division/' +  + '/'),
     type: 'delete',
     dataType: 'json',
     data: data,

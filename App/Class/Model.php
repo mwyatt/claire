@@ -493,11 +493,10 @@ abstract class Model extends \OriginalAppName\Data
 	{
 		$data = $this->getData();
 		$dataSingle = current($data);
-		$method = 'get' . ucfirst($property);
-		if (! method_exists($dataSingle, $method)) {
+		if (! property_exists($dataSingle, $property)) {
 			return;
 		}
-		$sampleValue = $dataSingle->$method();
+		$sampleValue = $dataSingle->$property;
 		if (is_string($sampleValue)) {
 			$type = 'string';
 		}
@@ -506,25 +505,25 @@ abstract class Model extends \OriginalAppName\Data
 		}
 
 		// sort
-		uasort($data, function($a, $b) use ($method, $type, $order) {
+		uasort($data, function($a, $b) use ($property, $type, $order) {
 			if ($type == 'string') {
 				if ($order == 'asc') {
-					return strcasecmp($a->$method(), $b->$method());
+					return strcasecmp($a->$property, $b->$property);
 				} else {
-					return strcasecmp($b->$method(), $a->$method());
+					return strcasecmp($b->$property, $a->$property);
 				}
 			}
 			if ($type == 'integer') {
 				if ($order == 'asc') {
-					if ($a->$method() == $b->$method()) {
+					if ($a->$property == $b->$property) {
 						return 0;
 					}
-					return $a->$method() < $b->$method() ? -1 : 1;
+					return $a->$property < $b->$property ? -1 : 1;
 				} else {
-					if ($a->$method() == $b->$method()) {
+					if ($a->$property == $b->$property) {
 						return 0;
 					}
-					return $a->$method() > $b->$method() ? -1 : 1;
+					return $a->$property > $b->$property ? -1 : 1;
 				}
 			}
 

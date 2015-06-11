@@ -5,7 +5,13 @@
 	<form class="main" method="post" enctype="multipart/form-data">
 		<div class="page-actions">
 			<a href="<?php echo $this->url->generate('admin/tennis/' . $nameSingular . '/all') ?>" class="page-action left button-secondary">Back</a>
-			<a class="button-delete" href="<?php echo $this->url->generate("admin/tennis/$nameSingular/all", ['delete' => $$nameSingular->id]) ?>">Delete</a>
+
+<?php if ($$nameSingular->id): ?>
+
+			<span class="page-action button-secondary left js-tennis-delete-single" data-singular="<?php echo $nameSingular ?>" data-id="<?php echo $$nameSingular->id ?>">Delete</span>
+
+<?php endif ?>
+
 			<button type="submit" class="form-user-button-save page-action button-primary right">Save</button>
 		</div>
 	    <div class="block-margins">

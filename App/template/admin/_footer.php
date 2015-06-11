@@ -1,4 +1,4 @@
-<?php if (isset($user)): ?>
+<?php if (isset($adminUser)): ?>
 
 			<footer class="main clearfix">
 				<p class="footer-site-title"><?php echo $metaTitle . ' ' . date('Y') ?></p>
