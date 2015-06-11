@@ -2,6 +2,8 @@
 
 namespace OriginalAppName\Site\Elttl\Admin\Controller\Tennis;
 
+use OriginalAppName\Registry;
+
 
 /**
  * @author Martin Wyatt <martin.wyatt@gmail.com> 
