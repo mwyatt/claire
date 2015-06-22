@@ -87,6 +87,14 @@ $routes['admin/option/all'] = [
     'mux/options' => []
 ];
 
+// system
+$routes['admin/system/upgrade/all'] = [
+    'mux/type' => 'get',
+    'mux/path' => '/admin/system/upgrade/',
+    'mux/controller/method' => ['OriginalAppName\\Admin\\Controller\\System', 'upgradeAll'],
+    'mux/options' => []
+];
+
 // ajax-option
 $class = 'OriginalAppName\\Admin\\Controller\\Ajax\\Option';
 $routes['admin/ajax/option/all'] = [
