@@ -3,6 +3,7 @@
 namespace OriginalAppName\Site\Elttl\Admin\Controller\Tennis;
 
 use OriginalAppName\Response;
+use OriginalAppName\Registry;
 use OriginalAppName\Session;
 use OriginalAppName\Site\Elttl\Model;
 
@@ -12,23 +13,17 @@ use OriginalAppName\Site\Elttl\Model;
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Team extends \OriginalAppName\Site\Elttl\Admin\Controller\Tennis\Crud
+class Player extends \OriginalAppName\Site\Elttl\Admin\Controller\Tennis\Crud
 {
 
 
 	public function all() {
-		$division = new Model\Tennis\Division;
-		$division
-			->readColumn('yearId', $this->yearId)
-			->keyDataByProperty('id');
 		$this
 			->model
 			->readColumn('yearId', $this->yearId)
-			->orderByProperty('name')
-			->orderByProperty('divisionId');
+			->orderByProperty('nameLast');
 		$this
 			->view
-			->setDataKey('divisions', $division->getData())
 			->setDataKey($this->namePlural, $this->model->getData());
 		return new Response($this->view->getTemplate("admin/tennis/{$this->nameSingular}/all"));
 	}
@@ -39,32 +34,22 @@ class Team extends \OriginalAppName\Site\Elttl\Admin\Controller\Tennis\Crud
 		$entity = $this->model
 			->readId([$id])
 			->getDataFirst();
-		$modelPlayer = new Model\Tennis\Player;
-		$modelPlayer
-			->readColumn('yearId', $this->yearId)
-			->orderByProperty('nameLast');
-		$modelVenue = new Model\Tennis\Venue;
-		$modelVenue
+		$modelTeam = new Model\Tennis\Team;
+		$modelTeam
 			->readColumn('yearId', $this->yearId)
 			->orderByProperty('name');
-		$modelDivision = new Model\Tennis\Division;
-		$modelDivision
-			->readColumn('yearId', $this->yearId);
 
 		// render
 		$this
 			->view
-			->setDataKey('divisions', $modelDivision->getData())
-			->setDataKey('venues', $modelVenue->getData())
-			->setDataKey('players', $modelPlayer->getData())
-			->setDataKey('weekdays', $this->model->getWeekdays())
+			->setDataKey('teams', $modelTeam->getData())
 			->setDataKey($this->nameSingular, $entity ? $entity : new $this->nsEntity);
 		return new Response($this->view->getTemplate("admin/tennis/{$this->nameSingular}/single"));
 	}
 
 
 	public function update($id)
-	{	
+	{
 		$sessionFeedback = new Session\Feedback;
 
 		// load 1
@@ -78,18 +63,21 @@ class Team extends \OriginalAppName\Site\Elttl\Admin\Controller\Tennis\Crud
 		}
 
 		// consume post
-		$entity->name = $_POST['entity']['name'];
+		$entity->nameFirst = $_POST['entity']['nameFirst'];
+		$entity->nameLast = $_POST['entity']['nameLast'];
 		$entity->slug = $_POST['entity']['slug'];
-		$entity->homeWeekday = $_POST['entity']['homeWeekday'];
-		$entity->secretaryId = $_POST['entity']['secretaryId'];
-		$entity->venueId = $_POST['entity']['venueId'];
-		$entity->divisionId = $_POST['entity']['divisionId'];
+		$entity->rank = $_POST['entity']['rank'];
+		$entity->phoneLandline = $_POST['entity']['phoneLandline'];
+		$entity->phoneMobile = $_POST['entity']['phoneMobile'];
+		$entity->ettaLicenseNumber = $_POST['entity']['ettaLicenseNumber'];
+		$entity->teamId = $_POST['entity']['teamId'];
 
 		// save
 		$this->model->update($entity, ['id' => $entity->getId()]);
 
 		// feedback / route
-		$sessionFeedback->setMessage("$this->nameSingular $id saved", 'positive');
+		$ucName = ucfirst($this->nameSingular);
+		$sessionFeedback->setMessage("$ucName $id saved", 'positive');
 		$this->redirect("admin/tennis/{$this->nameSingular}/single", ['id' => $entity->getId()]);
 	}
 }

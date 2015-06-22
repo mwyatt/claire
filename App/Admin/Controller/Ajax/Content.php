@@ -7,6 +7,7 @@ use OriginalAppName\Helper;
 use OriginalAppName\Admin\Service;
 use OriginalAppName\Session;
 use OriginalAppName\Model;
+use OriginalAppName\Site\Elttl\Model\Tennis as TennisModel;
 use OriginalAppName\Response;
 use \Exception;
 
@@ -40,5 +41,22 @@ class Content extends \OriginalAppName\Admin\Controller\Ajax
 
 		// output
 		return new Response(json_encode($friendlyTitle));
+	}
+
+
+	public function generateTableSlugs()
+	{
+		exit('take the safety off first');
+		$model = new TennisModel\Player;
+		$model->read();
+		foreach ($model->getData() as $entity) {
+
+			// needs to be unfilled
+			if (! $entity->slug) {
+				$entity->slug = Helper::slugify($entity->nameFirst . '-' . $entity->nameLast);
+				$model->update($entity, ['id' => $entity->id]);
+			}
+		}
+		exit('updated all table slugs');
 	}
 }

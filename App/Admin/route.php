@@ -148,6 +148,12 @@ $routes[] = [
     'mux/controller/method' => ['OriginalAppName\\Admin\\Controller\\Ajax\\Content', 'generateSlug'],
     'mux/options' => []
 ];
+$routes[] = [
+    'mux/type' => 'get',
+    'mux/path' => '/admin/ajax/content/generate-table-slugs/',
+    'mux/controller/method' => ['OriginalAppName\\Admin\\Controller\\Ajax\\Content', 'generateTableSlugs'],
+    'mux/options' => []
+];
 
 // crud content
 // must be lower down because it will match things it shouldnt

@@ -17,7 +17,7 @@ class Content extends \OriginalAppName\Entity
      * @Id @GeneratedValue @Column(type="integer")
 	 * @var int
 	 */
-	protected $id;
+	public $id;
 
 
 	/**
@@ -25,7 +25,7 @@ class Content extends \OriginalAppName\Entity
      * @Column(type="string")
 	 * @var string
 	 */
-	protected $title;
+	public $title;
 
 
 	/**
@@ -33,7 +33,7 @@ class Content extends \OriginalAppName\Entity
      * @Column(type="string")
 	 * @var string
 	 */
-	protected $slug;
+	public $slug;
 
 
 	/**
@@ -41,7 +41,7 @@ class Content extends \OriginalAppName\Entity
      * @Column(type="text")
 	 * @var string
 	 */
-	protected $html;
+	public $html;
 
 	
 	/**
@@ -49,7 +49,7 @@ class Content extends \OriginalAppName\Entity
      * @Column(type="string", length=50)
 	 * @var string
 	 */
-	protected $type;
+	public $type;
 
 	
 	/**
@@ -57,7 +57,7 @@ class Content extends \OriginalAppName\Entity
      * @Column(type="integer")
 	 * @var int
 	 */
-	protected $timePublished;
+	public $timePublished;
 
 	
 	/**
@@ -65,21 +65,21 @@ class Content extends \OriginalAppName\Entity
      * @Column(type="integer")
 	 * @var string
 	 */
-	protected $status;
+	public $status;
 
 
 	/**
      * @Column(type="integer")
 	 * @var int
 	 */
-	protected $userId;
+	public $userId;
 
 
 	/**
 	 * possible type options
 	 * @var array
 	 */
-	protected $typePossible = array(
+	public $typePossible = array(
 		'post',
 		'page'
 	);
@@ -90,7 +90,7 @@ class Content extends \OriginalAppName\Entity
      * @ManyToMany(targetEntity="ContentMeta")
 	 * @var meta[]
 	 */
-	protected $meta;
+	public $meta;
 	
 
 	/**
@@ -109,7 +109,7 @@ class Content extends \OriginalAppName\Entity
 	 * @OneToOne(targetEntity="User")
 	 * @JoinColumn(name="userId", referencedColumnName="id")
 	 */
-	protected $user;
+	public $user;
 
 
 	/**

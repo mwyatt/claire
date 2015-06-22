@@ -1,6 +1,6 @@
 <?php
 
-foreach (['division', 'team'] as $entity) {
+foreach (['division', 'team', 'player'] as $entity) {
     $class = "OriginalAppName\\Site\\Elttl\\Admin\\Controller\\Tennis\\" . ucfirst($entity);
     $routes["admin/tennis/$entity/create"] = [
         'mux/type' => 'get',
@@ -38,16 +38,9 @@ foreach (['division', 'team'] as $entity) {
         'mux/controller/method' => [$class, 'delete'],
         'mux/options' => []
     ];
-
-    $routes["admin/tennis/$entity/delete"] = [
-        'mux/type' => 'get',
-        'mux/path' => '/admin/content/delete/:id/',
-        'mux/controller/method' => [$class, 'delete'],
-        'mux/options' => []
-    ];
-
 }
 
+// just all for now
 $routes['admin/tennis/year/all'] = [
     'mux/type' => 'get',
     'mux/path' => '/admin/tennis/year/',

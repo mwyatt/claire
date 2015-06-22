@@ -497,6 +497,7 @@ abstract class Model extends \OriginalAppName\Data
 			return;
 		}
 		$sampleValue = $dataSingle->$property;
+		$type = 'integer';
 		if (is_string($sampleValue)) {
 			$type = 'string';
 		}

@@ -12,17 +12,17 @@ class Venue extends \OriginalAppName\Entity
 {
 
 
-	private $id;
+	public $id;
 
 
-	private $yearId;
+	public $yearId;
 
 
-	private $name;
+	public $name;
 
 
-	private $slug;
+	public $slug;
 
 
-	private $location;
+	public $location;
 }

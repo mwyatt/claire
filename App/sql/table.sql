@@ -7,13 +7,13 @@ CREATE TABLE `options` (
 
 CREATE TABLE `content` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) NOT NULL DEFAULT '',
-  `slug` varchar(255) NOT NULL,
+  `title` varchar(255) NULL DEFAULT NULL,
+  `slug` varchar(255) NULL DEFAULT NULL,
   `html` longtext,
-  `type` varchar(50) NOT NULL DEFAULT '',
-  `timePublished` int(10) unsigned DEFAULT '0',
-  `status` INT(11) NOT NULL DEFAULT '0',
-  `userId` int(10) unsigned NOT NULL,
+  `type` varchar(50) NULL DEFAULT NULL,
+  `timePublished` int(10) NULL DEFAULT NULL,
+  `status` INT(11) NULL DEFAULT NULL,
+  `userId` int(10) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`userId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
