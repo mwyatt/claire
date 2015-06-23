@@ -7,7 +7,7 @@ CREATE TABLE `options` (
 
 CREATE TABLE `systemVersion` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL DEFAULT '',
+  `name` varchar(255) NULL DEFAULT NULL,
   `timePatched` int(10) NULL DEFAULT NULL,
   `userId` int(10) NULL DEFAULT NULL,
   PRIMARY KEY (`id`)

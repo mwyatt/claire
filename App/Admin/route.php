@@ -91,7 +91,7 @@ $routes['admin/option/all'] = [
 $routes['admin/system/upgrade/all'] = [
     'mux/type' => 'get',
     'mux/path' => '/admin/system/upgrade/',
-    'mux/controller/method' => ['OriginalAppName\\Admin\\Controller\\System', 'upgradeAll'],
+    'mux/controller/method' => ['OriginalAppName\\Admin\\Controller\\System\\Upgrade', 'all'],
     'mux/options' => []
 ];
 
