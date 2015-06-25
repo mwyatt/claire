@@ -1,6 +1,6 @@
 <?php
 
-foreach (['division', 'team', 'player'] as $entity) {
+foreach (['division', 'team', 'player', 'venue'] as $entity) {
     $class = "OriginalAppName\\Site\\Elttl\\Admin\\Controller\\Tennis\\" . ucfirst($entity);
     $routes["admin/tennis/$entity/create"] = [
         'mux/type' => 'get',

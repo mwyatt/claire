@@ -20,6 +20,7 @@ class Player extends \OriginalAppName\Model
 
 	public $fields = array(
 		'id',
+		'yearId',
 		'nameFirst',
 		'nameLast',
 		'slug',
