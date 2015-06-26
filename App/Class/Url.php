@@ -20,62 +20,62 @@ class Url
 	 * {http://}
 	 * @var string
 	 */
-	private $protocol;
+	public $protocol;
 
 
-	private $subdomain;
+	public $subdomain;
 
 
-	private $domain;
+	public $domain;
 
 
-	private $topLevelDomain;
+	public $topLevelDomain;
 
 	
 
-	private $anchor;
+	public $anchor;
 
 
 	/**
 	 * foo.co.uk/
 	 * @var string
 	 */
-	private $host;
+	public $host;
 
 
 	/**
 	 * foo, bar
 	 * @var array
 	 */
-	private $path;
+	public $path;
 
 
 	/**
 	 * ?foo=bar
 	 * @var string
 	 */
-	private $query;
+	public $query;
 
 
 	/**
 	 * #foo
 	 * @var string
 	 */
-	private $hash;
+	public $hash;
 
 
 	/**
 	 * filled with handy urls which are required in many places
 	 * @var array
 	 */
-	private $cache;
+	public $cache;
 
 
 	/**
 	 * segmented path for controller use
 	 * @var array
 	 */
-	private $parsed;
+	public $parsed;
 
 
 	/**
@@ -83,7 +83,7 @@ class Url
 	 * used to build urls later on
 	 * @var array
 	 */
-	private $routes;
+	public $routes;
 
 
 	/**

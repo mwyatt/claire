@@ -6,10 +6,11 @@ use OriginalAppName;
 use OriginalAppName\Entity;
 use OriginalAppName\Model;
 use OriginalAppName\Session;
-use OriginalAppName\Admin\Session as AdminSession;
 use OriginalAppName\View;
 use OriginalAppName\Service;
 use OriginalAppName\Response;
+use OriginalAppName\Admin\Session as AdminSession;
+use OriginalAppName\Admin\Service as AdminService;
 
 
 /**
@@ -69,6 +70,14 @@ class User extends \OriginalAppName\Controller\Admin
 		$entityUser = $modelUser
 			->readId([$id])
 			->getDataFirst();
+
+		// permissions
+		// !
+		$modelPermission = new Model\User\Permission;
+		$servicePermission = new AdminService\User\Permission;
+		$sessionUser = new AdminSession\User;
+		$modelPermission->readColumn('userId', $sessionUser->get('id'));
+		$adminRoutes = $servicePermission->getAdminRoutes();
 
 		// render
 		$this

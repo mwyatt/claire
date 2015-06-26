@@ -5,7 +5,7 @@ CREATE TABLE `options` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-CREATE TABLE `systemVersion` (
+CREATE TABLE `databaseVersion` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NULL DEFAULT NULL,
   `timePatched` int(10) NULL DEFAULT NULL,
@@ -92,7 +92,6 @@ CREATE TABLE `userPermission` (
   `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `userId` INT(10) UNSIGNED NOT NULL,
   `name` VARCHAR(50) NOT NULL,
-  `ability` VARCHAR(50) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `userId` (`userId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;

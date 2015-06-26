@@ -1,6 +1,6 @@
 <?php
 
-namespace OriginalAppName\Entity\System;
+namespace OriginalAppName\Entity\Database;
 
 
 /**

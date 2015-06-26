@@ -20,7 +20,7 @@ class Venue extends \OriginalAppName\Site\Elttl\Admin\Controller\Tennis\Crud
 	public function single($id = 0)
 	{
 		$entity = $this->model
-			->readId([$id])
+			->readYearColumn('id', $id)
 			->getDataFirst();
 		$modelTeam = new Model\Tennis\Team;
 		$modelTeam
@@ -42,7 +42,7 @@ class Venue extends \OriginalAppName\Site\Elttl\Admin\Controller\Tennis\Crud
 
 		// load 1
 		$entity = $this->model
-			->readId([$id])
+			->readYearColumn('id', $id)
 			->getDataFirst();
 
 		// does not exist

@@ -11,6 +11,12 @@ return [
         ['name' => 'Teams', 'url' => 'tennis/team/'],
         ['name' => 'Players', 'url' => 'tennis/player/'],
         ['name' => 'Venues', 'url' => 'tennis/venue/'],
-        ['name' => 'Settings', 'url' => 'settings/']
+        ['name' => 'System', 'url' => 'system/',
+            'children' => [
+                ['name' => 'Settings', 'url' => 'system/settings/'],
+                ['name' => 'Database', 'url' => 'system/database/'],
+                ['name' => 'Tennis', 'url' => 'system/tennis/']
+            ]
+        ]
     ]
 ];

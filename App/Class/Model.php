@@ -171,14 +171,14 @@ abstract class Model extends \OriginalAppName\Data
 		$statement[] = $this->getTableName();
 		$statement[] = '(' . $this->getSqlFieldsWriteable() . ')';
 		$statement[] = 'values';
-		$statement[] = '(' . $this->getSqlPositionalPlaceholders() . ')';
+		$statement[] = '(' . $this->getSqlPositionalPlaceholdersWriteable() . ')';
 
 		// prepare
 		$sth = $this->database->dbh->prepare(implode(' ', $statement));
 
 		// execute
         foreach ($entities as $entity) {
-			$sth->execute($this->getSthExecutePositional($entity));
+			$sth->execute($this->getSthExecutePositionalWriteable($entity));
 			if ($sth->rowCount()) {
 				$lastInsertIds[] = intval($this->database->dbh->lastInsertId());
 			}
@@ -348,9 +348,22 @@ abstract class Model extends \OriginalAppName\Data
 
 
 	/**
-	 * @return string ?, ?, ? of all writable fields
+	 * @return string ?, ?, ? of all fields
 	 */
 	public function getSqlPositionalPlaceholders()
+	{
+		$placeholders = [];
+		foreach ($this->fields as $field) {
+			$placeholders[] = '?';
+		}
+		return implode(', ', $placeholders);
+	}
+
+
+	/**
+	 * @return string ?, ?, ? of all writable fields
+	 */
+	public function getSqlPositionalPlaceholdersWriteable()
 	{
 		$placeholders = [];
 		foreach ($this->fields as $field) {
@@ -377,6 +390,23 @@ abstract class Model extends \OriginalAppName\Data
 	 * @return array       
 	 */
 	public function getSthExecutePositional($entity)
+	{
+		$excecuteData = [];
+		foreach ($this->fields as $field) {
+			$excecuteData[] = $entity->$field;
+		}
+		return $excecuteData;
+	}
+
+
+	/**
+	 * uses a entity to build sth execute data
+	 * if 'time' involved assume that time needs to be inserted, could be
+	 * a bad idea
+	 * @param  object $entity instance of entity
+	 * @return array       
+	 */
+	public function getSthExecutePositionalWriteable($entity)
 	{
 		$excecuteData = [];
 		foreach ($this->fields as $field) {

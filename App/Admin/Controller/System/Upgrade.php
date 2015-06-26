@@ -4,8 +4,11 @@ namespace OriginalAppName\Admin\Controller\System;
 
 use OriginalAppName;
 use OriginalAppName\Response;
+use OriginalAppName\Entity;
 use OriginalAppName\Model;
 use OriginalAppName\Admin\Service;
+use OriginalAppName\Session;
+use OriginalAppName\Admin\Session as AdminSession;
 
 
 /**
@@ -21,39 +24,38 @@ class Upgrade extends \OriginalAppName\Controller\Admin
 	 * @return object Response
 	 */
 	public function all() {
-
-		// get possible versions
-		$versionsPossible = [];
-		$paths = glob(APP_PATH . 'sql' . DS . 'patch' . DS . '*.sql');
-		foreach ($paths as $path) {
-			$pathinfo = pathinfo($path);
-			$pathinfo['path'] = $path;
-			if (! empty($pathinfo['filename'])) {
-				$versionsPossible[$pathinfo['filename']] = $pathinfo;
-			}
+		if (!empty($_GET['update'])) {
+			$this->update();
 		}
-
-		// get patched versions
-		$modelSystemVersion = new Model\System\Version;
-		$modelSystemVersion->read();
-
-		// subtract patched from possible to get unpatched
-		$versionsUnpatched = $versionsPossible;
-		foreach ($modelSystemVersion->getData() as $entitySystemVersion) {
-			if (array_key_exists($entitySystemVersion->name, $versionsPossible)) {
-				unset($versionsUnpatched[$entitySystemVersion->name]);
-			}
-		}
-		$this
-			->view
-			->setDataKey('versionsUnpatched', $versionsUnpatched)
-			->setDataKey('versionsPossible', $versionsPossible);
+		$serviceUpgrade = new Service\System\Upgrade;
+		$serviceUpgrade->getVersionsPossible();
+		$this->view->setDataKey('versionsPossible', $serviceUpgrade->getData());
+		$serviceUpgrade->getVersionsUnpatched($serviceUpgrade->getData());
+		$this->view->setDataKey('versionsUnpatched', $serviceUpgrade->getData());
 		return new Response($this->view->getTemplate('admin/system/upgrade/all'));
 	}
 
 
-	public function patch()
+	public function update()
 	{
-		
+		$feedback = new Session\Feedback;
+		$user = new AdminSession\User;
+		$serviceUpgrade = new Service\System\Upgrade;
+		$serviceUpgrade->getVersionsPossible();
+		$serviceUpgrade->getVersionsUnpatched($serviceUpgrade->getData());
+		foreach ($serviceUpgrade->getData() as $patch) {
+			$entity = new Entity\Database\Version;
+			$model = new Model\Database\Version;
+			$model->applyPatch(trim(file_get_contents($patch['path'])));
+
+			// create entry
+			$entity = new $model->entity;
+			$entity->name = $patch['filename'];
+			$entity->timePatched = time();
+			$entity->userId = $user->get('id');
+			$model->create([$entity]);
+		}
+		$feedback->setMessage('upgrade may have been ok' , 'positive');
+		$this->redirect('admin/system/upgrade');
 	}
 }

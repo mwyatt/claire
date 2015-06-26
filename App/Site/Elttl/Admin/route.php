@@ -47,3 +47,10 @@ $routes['admin/tennis/year/all'] = [
     'mux/controller/method' => ['OriginalAppName\\Site\\Elttl\\Admin\\Controller\\Tennis\\Year', 'all'],
     'mux/options' => []
 ];
+
+$routes['admin/system/tennis'] = [
+    'mux/type' => 'get',
+    'mux/path' => '/admin/system/tennis/',
+    'mux/controller/method' => ['OriginalAppName\\Site\\Elttl\\Admin\\Controller\\System\\Tennis', 'all'],
+    'mux/options' => []
+];

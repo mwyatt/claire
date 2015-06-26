@@ -17,7 +17,7 @@ class Option extends \OriginalAppName\Entity
      * @Id @GeneratedValue @Column(type="integer")
 	 * @var int
 	 */
-	protected $id;
+	public $id;
 
 
 	/**

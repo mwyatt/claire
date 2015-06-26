@@ -59,7 +59,7 @@ class Mail extends \OriginalAppName\Model
 		$statement[] = $this->getTableName();
 		$statement[] = '(' . $this->getSqlFieldsWriteable() . ')';
 		$statement[] = 'values';
-		$statement[] = '(' . $this->getSqlPositionalPlaceholders() . ')';
+		$statement[] = '(' . $this->getSqlPositionalPlaceholdersWriteable() . ')';
 
 
 		$placeholders = array();
@@ -103,7 +103,7 @@ echo '</pre>';
 // exit;
 
         	echo '<pre>';
-        	print_r($this->getSthExecutePositional($entity));
+        	print_r($this->getSthExecutePositionalWriteable($entity));
         	echo '</pre>';
         	exit;
         	

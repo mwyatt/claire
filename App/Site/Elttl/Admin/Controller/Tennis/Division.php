@@ -18,11 +18,12 @@ class Division extends \OriginalAppName\Site\Elttl\Admin\Controller\Tennis\Crud
 
 	public function update($id)
 	{
+		$registry = Registry::getInstance();
 		$sessionFeedback = new Session\Feedback;
 
 		// load 1
 		$entity = $this->model
-			->readId([$id])
+			->readYearColumn('id', $id)
 			->getDataFirst();
 
 		// does not exist
@@ -34,10 +35,10 @@ class Division extends \OriginalAppName\Site\Elttl\Admin\Controller\Tennis\Crud
 		$entity->name = $_POST['entity']['name'];
 
 		// save
-		$this->model->update($entity, ['id' => $entity->getId()]);
+		$this->model->update($entity, ['id' => $entity->getId(), 'yearId' => $registry->get('database/options/yearId')]);
 
 		// feedback / route
-		$sessionFeedback->setMessage("{ucfirst($this->nameSingular)} $id saved", 'positive');
+		$sessionFeedback->setMessage(ucfirst($this->nameSingular) . " $id saved", 'positive');
 		$this->redirect("admin/tennis/{$this->nameSingular}/single", ['id' => $entity->getId()]);
 	}
 }

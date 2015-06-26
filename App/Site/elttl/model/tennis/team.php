@@ -8,7 +8,7 @@ namespace OriginalAppName\Site\Elttl\Model\Tennis;
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Team extends \OriginalAppName\Model
+class Team extends \OriginalAppName\Site\Elttl\Model\Tennis
 {	
 
 
