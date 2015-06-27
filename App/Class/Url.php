@@ -93,7 +93,7 @@ class Url
 	public function __construct() {
 
 		// server validation
-		$keys = array('HTTP_HOST', 'SCRIPT_NAME', 'HTTP_HOST', 'REQUEST_URI', 'SERVER_PORT');
+		$keys = array('HTTP_HOST', 'SCRIPT_NAME', 'REQUEST_URI', 'SERVER_PORT');
 		if (! Helper::arrayKeyExists($keys, $_SERVER)) {
 			exit('a required server key is missing to build the url');
 		}
