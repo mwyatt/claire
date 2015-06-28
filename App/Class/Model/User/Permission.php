@@ -2,6 +2,8 @@
 
 namespace OriginalAppName\Model\User;
 
+use \PDO;
+
 
 /**
  * @author Martin Wyatt <martin.wyatt@gmail.com> 
@@ -23,4 +25,24 @@ class Permission extends \OriginalAppName\Model
 
 
 	public $entity = '\\OriginalAppName\\Entity\\User\\Permission';
+
+
+	public function deleteUserId($userId)
+	{
+		$statement = [];
+		$statement[] = 'delete from';
+		$statement[] = $this->getTableName();
+		$statement[] = 'where userId = ?';
+
+		// prepare
+		$sth = $this->database->dbh->prepare(implode(' ', $statement));
+
+		// bind
+	    $sth->bindValue(1, $userId, PDO::PARAM_INT);
+		$sth->execute();
+
+		// return
+		$this->setRowCount($sth->rowCount());
+        return $this;
+	}
 }

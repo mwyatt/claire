@@ -25,6 +25,18 @@
         	<label class="form-label block form-user-label-title" for="form-user-level">Level</label>
         	<input id="form-user-level" class="form-input w100 required js-input-level" type="text" name="user[level]" maxlength="75" value="<?php echo $user->getLevel() ?>">
 	    </div>
+	    <div class="block-margins">
+
+<?php foreach ($permissionRoutes as $key => $route): ?>
+
+			<div class="block-margins">
+				<input id="form-user-permission-<?php echo $key ?>" name="user[permission][]" type="checkbox" value="<?php echo $route ?>" class="mr1" <?php echo empty($permissions[$route]) ? '' : 'checked' ?>>
+				<label for="form-user-permission-<?php echo $key ?>"><?php echo $route ?></label>
+			</div>
+
+<?php endforeach ?>
+
+	    </div>
 	</form>
 </div>
 

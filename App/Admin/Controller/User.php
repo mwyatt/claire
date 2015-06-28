@@ -72,16 +72,18 @@ class User extends \OriginalAppName\Controller\Admin
 			->getDataFirst();
 
 		// permissions
-		// !
 		$modelPermission = new Model\User\Permission;
 		$servicePermission = new AdminService\User\Permission;
-		$sessionUser = new AdminSession\User;
-		$modelPermission->readColumn('userId', $sessionUser->get('id'));
+		$modelPermission
+			->readColumn('userId', $id)
+			->keyDataByProperty('name');
 		$adminRoutes = $servicePermission->getAdminRoutes();
 
 		// render
 		$this
 			->view
+			->setDataKey('permissionRoutes', $adminRoutes)
+			->setDataKey('permissions', $modelPermission->getData())
 			->setDataKey('user', $entityUser ? $entityUser : new Entity\User);
 		return new Response($this->view->getTemplate('admin/user/single'));
 	}
@@ -110,6 +112,20 @@ class User extends \OriginalAppName\Controller\Admin
 			->setNameFirst($_POST['user']['nameFirst'])
 			->setNameLast($_POST['user']['nameLast'])
 			->setLevel($_POST['user']['level']);
+
+		// remove all permissions then add the ones selected
+		$modelPermission = new Model\User\Permission;
+		$modelPermission->deleteUserId($id);
+		$entitiesPermission = [];
+		if (! empty($_POST['user']['permission'])) {
+			foreach ($_POST['user']['permission'] as $route) {
+				$entityPermission = new Entity\User\Permission;
+				$entityPermission->userId = $id;
+				$entityPermission->name = $route;
+				$entitiesPermission[] = $entityPermission;
+			}
+			$modelPermission->create($entitiesPermission);
+		}
 
 		// optional
 		if (! $entityUser->getTimeRegistered()) {
