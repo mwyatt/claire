@@ -82,7 +82,6 @@ CREATE TABLE `user` (
   `email` varchar(50) NOT NULL DEFAULT '',
   `password` varchar(255) NOT NULL DEFAULT '',
   `timeRegistered` int(10) unsigned DEFAULT NULL,
-  `level` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `nameFirst` varchar(75) NOT NULL DEFAULT '',
   `nameLast` varchar(75) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
