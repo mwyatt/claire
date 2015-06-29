@@ -63,13 +63,17 @@ class Route extends \OriginalAppName\System
 		$routes = $this->getRoutes();
 
 		// store routes in mux
-		foreach ($routes as $route) {
+		foreach ($routes as $key => $route) {
+			$route['mux/options']['martin'] = $key;
 			$mux->$route['mux/type']($route['mux/path'], $route['mux/controller/method'], $route['mux/options']);
 		}
 
 		// get match
 		// needs / prepending for mux
 		$route = $mux->dispatch(US . $url->getPathString());
+
+		// store route for permissions /admin
+		$registry->set('route/current', $route[3]['martin']);
 
 		// if route not ok will be caught
 		try {

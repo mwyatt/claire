@@ -17,7 +17,7 @@ class User extends \OriginalAppName\Entity
      * @Id @GeneratedValue @Column(type="integer")
 	 * @var int
 	 */
-	protected $id;
+	public $id;
 
 
 	/**
@@ -25,7 +25,7 @@ class User extends \OriginalAppName\Entity
      * @Column(type="string")
 	 * @var string
 	 */
-	private $email;
+	public $email;
 
 
 	/**
@@ -33,7 +33,7 @@ class User extends \OriginalAppName\Entity
      * @Column(type="string", nullable=true)
 	 * @var string
 	 */
-	private $password;
+	public $password;
 
 
 	/**
@@ -41,7 +41,7 @@ class User extends \OriginalAppName\Entity
      * @Column(type="string")
 	 * @var string
 	 */
-	private $nameFirst;
+	public $nameFirst;
 
 
 	/**
@@ -49,7 +49,7 @@ class User extends \OriginalAppName\Entity
      * @Column(type="string")
 	 * @var string
 	 */
-	private $nameLast;
+	public $nameLast;
 
 
 	/**
@@ -57,7 +57,7 @@ class User extends \OriginalAppName\Entity
 	 * @Column(type="integer")
 	 * @var int
 	 */
-	private $timeRegistered;
+	public $timeRegistered;
 
 
 	/**
@@ -65,7 +65,7 @@ class User extends \OriginalAppName\Entity
 	 * @Column(type="integer")
 	 * @var int
 	 */
-	private $level;
+	public $level;
 
 
 	/**

@@ -3,6 +3,7 @@
 namespace OriginalAppName\Controller;
 
 use OriginalAppName;
+use OriginalAppName\Registry;
 use OriginalAppName\Model;
 use OriginalAppName\Json;
 use OriginalAppName\Session;
@@ -22,9 +23,14 @@ class Admin extends \OriginalAppName\Admin\Controller\Feedback
 {
 
 
+	public $permissions = [];
+
+
 	public function __construct()
 	{
 		parent::__construct();
+		$this->setPermissions();
+		$this->getPermission();
 		$this->defaultGlobalAdmin();
 		$this
 			->view
@@ -33,6 +39,33 @@ class Admin extends \OriginalAppName\Admin\Controller\Feedback
 			->appendAsset('js', 'vendor/tinymce/tinymce')
 			->appendAsset('js', 'admin/common')
 			->appendAsset('css', 'admin/common');
+	}
+
+
+	public function getPermission()
+	{
+		$registry = Registry::getInstance();
+		$sessionFeedback = new Session\Feedback;
+
+		// prevent neverending loop
+		if ($registry->get('route/current') == 'admin') {
+			return;
+		}
+		if (! array_key_exists($registry->get('route/current'), $this->permissions)) {
+			$sessionFeedback->setMessage('you do not have permission to access that area');
+			$this->redirect('admin');
+		}
+	}
+
+
+	public function setPermissions()
+	{
+		$modelPermission = new Model\User\Permission;
+		$sessionUser = new AdminSession\User;
+		$modelPermission
+			->readColumn('userId', $sessionUser->get('id'))
+			->keyDataByProperty('name');
+		return $this->permissions = $modelPermission->getData();
 	}
 
 
