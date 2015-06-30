@@ -61,14 +61,6 @@ class User extends \OriginalAppName\Entity
 
 
 	/**
-	 * value for determining the permissions
-	 * @Column(type="integer")
-	 * @var int
-	 */
-	public $level;
-
-
-	/**
 	 * @return int 
 	 */
 	public function getId()
@@ -159,23 +151,6 @@ class User extends \OriginalAppName\Entity
 	 */
 	public function setTimeRegistered($timeRegistered) {
 	    $this->timeRegistered = $timeRegistered;
-	    return $this;
-	}
-
-
-	/**
-	 * @return int 
-	 */
-	public function getLevel() {
-	    return $this->level;
-	}
-	
-	
-	/**
-	 * @param int $level 
-	 */
-	public function setLevel($level) {
-	    $this->level = $level;
 	    return $this;
 	}
 

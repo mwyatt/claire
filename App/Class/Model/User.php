@@ -21,8 +21,7 @@ class User extends \OriginalAppName\Model
 		'password',
 		'nameFirst',
 		'nameLast',
-		'timeRegistered',
-		'level'
+		'timeRegistered'
 	];
 
 

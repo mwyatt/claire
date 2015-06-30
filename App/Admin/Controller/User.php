@@ -110,8 +110,7 @@ class User extends \OriginalAppName\Controller\Admin
 		$entityUser
 			->setEmail($_POST['user']['email'])
 			->setNameFirst($_POST['user']['nameFirst'])
-			->setNameLast($_POST['user']['nameLast'])
-			->setLevel($_POST['user']['level']);
+			->setNameLast($_POST['user']['nameLast']);
 
 		// remove all permissions then add the ones selected
 		$modelPermission = new Model\User\Permission;

@@ -22,10 +22,6 @@
         	<input id="form-user-password" class="form-input w100 required js-input-password" type="text" name="user[password]" maxlength="75" value="">
 	    </div>
 	    <div class="block-margins">
-        	<label class="form-label block form-user-label-title" for="form-user-level">Level</label>
-        	<input id="form-user-level" class="form-input w100 required js-input-level" type="text" name="user[level]" maxlength="75" value="<?php echo $user->getLevel() ?>">
-	    </div>
-	    <div class="block-margins">
 
 <?php foreach ($permissionRoutes as $key => $route): ?>
 

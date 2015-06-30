@@ -23,6 +23,9 @@ class Admin extends \OriginalAppName\Admin\Controller\Feedback
 {
 
 
+	public $user;
+
+
 	public $permissions = [];
 
 
@@ -32,6 +35,7 @@ class Admin extends \OriginalAppName\Admin\Controller\Feedback
 		$this->setPermissions();
 		$this->getPermission();
 		$this->defaultGlobalAdmin();
+		
 		$this
 			->view
 			->appendAsset('mustache', 'admin/feedback')
@@ -42,22 +46,40 @@ class Admin extends \OriginalAppName\Admin\Controller\Feedback
 	}
 
 
+	/**
+	 * obtain permission from loaded permissions
+	 * or redirect
+	 * @return null 
+	 */
 	public function getPermission()
 	{
-		$registry = Registry::getInstance();
-		$sessionFeedback = new Session\Feedback;
+		$sessionUser = new AdminSession\User;
 
-		// prevent neverending loop
-		if ($registry->get('route/current') == 'admin') {
+		// must be logged in
+		if (! $sessionUser->isLogged()) {
 			return;
 		}
-		if (! array_key_exists($registry->get('route/current'), $this->permissions)) {
+		$registry = Registry::getInstance();
+		$sessionFeedback = new Session\Feedback;
+		$currentRoute = $registry->get('route/current');
+		$entityUser = $this->getUser();
+
+		// always allow /admin/ and unkeyed
+		if ($currentRoute == 'admin' || ($currentRoute + 0) > 0 || $entityUser->email == 'martin.wyatt@gmail.com') {
+			return;
+		}
+
+		// check for permission
+		if (! array_key_exists($currentRoute, $this->permissions)) {
 			$sessionFeedback->setMessage('you do not have permission to access that area');
 			$this->redirect('admin');
 		}
 	}
 
 
+	/**
+	 * store permissions based on logged user
+	 */
 	public function setPermissions()
 	{
 		$modelPermission = new Model\User\Permission;
@@ -94,13 +116,18 @@ class Admin extends \OriginalAppName\Admin\Controller\Feedback
 		// more resource
 		if ($sessionUser->isLogged()) {
 			$this->readMenu();
-			$this->readUser();
+			$this
+				->view
+				->setDataKey('adminUser', $this->getUser());
 		}
 	}
 
 
-	public function readUser()
+	public function getUser()
 	{
+		if ($this->user) {
+			return $this->user;
+		}
 		$sessionUser = new AdminSession\User;
 		$modelUser = new Model\User;
 		$modelUser->readId([$sessionUser->get('id')]);
@@ -108,9 +135,8 @@ class Admin extends \OriginalAppName\Admin\Controller\Feedback
 			$sessionUser->delete();
 			$this->redirect('admin');
 		}
-		$this
-			->view
-			->setDataKey('adminUser', $entityUser);
+		$this->user = $entityUser;
+		return $this->user;
 	}
 
 
