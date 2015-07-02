@@ -109,4 +109,49 @@ class Tennis extends \OriginalAppName\Model
 		$this->setRowCount($rowCount);
         return $this;
 	}
+
+
+	/**
+	 * update multiple entities by year
+	 * @param  array $entities 
+	 * @return bool           true if same amount passed are updated
+	 */
+	public function updateYear($entities)
+	{
+		
+		// statement
+		$statement = [];
+		$statement[] = 'update';
+		$statement[] = $this->getTableName();
+		$statement[] = 'set';
+		$updateTotalExpected = count($entities);
+		$updateTotalActual = 0;
+
+		// col = :col
+		$named = [];
+		foreach ($this->getFields() as $field) {
+			$named[] = $field . ' = :' . $field;
+		}
+		$statement[] = implode(', ', $named);
+
+		// where
+		$statement[] = 'where id = :id and yearId = :yearId';
+		
+		// prepare
+		$sth = $this->database->dbh->prepare(implode(' ', $statement));
+
+		// persist
+		foreach ($entities as $entity) {
+			foreach ($this->getSthExecuteNamed($entity) as $key => $value) {
+				$this->bindValue($sth, $key, $value);
+			}
+			$sth->setFetchMode(PDO::FETCH_CLASS, $this->getEntity());
+			$sth->execute();
+			$updateTotalActual += $sth->rowCount();
+		}
+
+		// show results
+		$this->setRowCount($updateTotalActual);
+        return $updateTotalExpected == $updateTotalActual;
+	}
 }
