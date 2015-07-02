@@ -14,7 +14,6 @@
 		<th>Name</th>
 		<th>Email</th>
 		<th>Registered</th>
-		<th>Level</th>
 		<th>Action</th>
 	</tr>
 
@@ -25,7 +24,6 @@
 		<td><a href="<?php echo $urlEdit ?>"><?php echo $user->getNameFull() ?></a></td>
 		<td><a href="mailto:<?php echo $user->getEmail() ?>"><?php echo $user->getEmail() ?></a></td>
 		<td><?php echo $user->getTimeRegistered() ?></td>
-		<td><?php echo $user->getLevel() ?></td>
 		<td>
 			<a class="button-edit" href="<?php echo $urlEdit ?>">Edit</a>
 			<a class="button-delete" href="<?php echo $this->url->generate('admin/user/all', ['delete' => $user->getId()]) ?>">Delete</a>
