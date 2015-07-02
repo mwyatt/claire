@@ -65,7 +65,11 @@ class Route extends \OriginalAppName\System
 		// store routes in mux
 		foreach ($routes as $key => $route) {
 			$route['mux/options']['martin'] = $key;
-			$mux->$route['mux/type']($route['mux/path'], $route['mux/controller/method'], $route['mux/options']);
+			$mux->$route['mux/type'](
+				$route['mux/path'],
+				$route['mux/controller/method'],
+				$route['mux/options']
+			);
 		}
 
 		// get match
