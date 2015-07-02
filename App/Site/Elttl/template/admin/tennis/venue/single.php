@@ -16,11 +16,11 @@
 		</div>
 	    <div class="block-margins">
         	<label class="form-label block" for="form-name">Name</label>
-        	<input id="form-name" class="form-input w100" type="text" name="entity[name]" value="<?php echo $$nameSingular->name ?>" required>
+        	<input id="form-name" class="form-input w100 js-slugify-title" type="text" name="entity[name]" value="<?php echo $$nameSingular->name ?>" required>
 	    </div>
 	    <div class="block-margins">
         	<label class="form-label block" for="form-slug">Slug</label>
-        	<input id="form-slug" class="form-input w100" type="text" name="entity[slug]" value="<?php echo $$nameSingular->slug ?>" required>
+        	<input id="form-slug" class="form-input w100 js-slugify-slug" type="text" name="entity[slug]" value="<?php echo $$nameSingular->slug ?>" required>
 	    </div>
 	    <div class="block-margins">
         	<label class="form-label block" for="form-location">Location</label>
