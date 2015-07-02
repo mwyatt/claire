@@ -79,6 +79,10 @@ class Tennis extends \OriginalAppName\Controller\Admin
 	}
 
 
+	/**
+	 * todo
+	 * @return [type] [description]
+	 */
 	public function newSeasonRevert()
 	{
 		// get current year and next one
@@ -111,5 +115,68 @@ class Tennis extends \OriginalAppName\Controller\Admin
 		$modelOption->update($entity, ['id' => $entity->id]);
 		$feedback->setMessage("new season {$entityYear->name} created, divisions, teams, players and venues copied over" , 'positive');
 		$this->redirect('admin/system/tennis');
+	}
+
+
+	/**
+	 * todo
+	 * @return [type] [description]
+	 */
+	public function generateFixtures()
+	{
+
+		// clear all fixtures
+		$sth = $this->database->dbh->query("	
+			delete from
+				tennis_fixture
+			where id != 0
+		");
+
+		// clear all encounters
+		$sth = $this->database->dbh->query("	
+			delete from
+				tennis_encounter
+			where id != 0
+		");
+
+		// select all divisions
+		$sth = $this->database->dbh->query("	
+			SELECT
+				tennis_division.id as division_id
+				, tennis_team.id as team_id
+			FROM
+				tennis_division				
+			LEFT JOIN tennis_team ON tennis_division.id = tennis_team.division_id
+		");
+		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {	
+			$this->data[$row['division_id']][] = $row['team_id'];
+		}						
+		$sth = $this->database->dbh->prepare("
+			INSERT INTO
+				tennis_fixture
+				(team_id_left, team_id_right)
+			VALUES
+				(:team_id_left, :team_id_right)
+		");				
+				
+		// loop to set team vs team fixtures
+		foreach ($this->data as $division) {
+			foreach ($division as $key => $homeTeam) {
+				foreach ($division as $key => $awayTeam) {
+					if ($homeTeam !== $awayTeam) {
+						$sth->execute(array(
+							':team_id_left' => $homeTeam
+							, ':team_id_right' => $awayTeam
+						));					
+					}
+				}
+			}
+		}
+
+		// feedback
+		echo '<pre>';
+		print_r('all fixtures and encounters removed, and fixtures re-generated using current team configuration');
+		echo '</pre>';
+		exit;
 	}
 }

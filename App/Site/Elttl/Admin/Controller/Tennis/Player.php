@@ -73,7 +73,7 @@ class Player extends \OriginalAppName\Site\Elttl\Admin\Controller\Tennis\Crud
 		$entity->teamId = $_POST['entity']['teamId'];
 
 		// save
-		$this->model->update($entity, ['id' => $entity->getId()]);
+		$this->model->updateYear([$entity]);
 
 		// feedback / route
 		$ucName = ucfirst($this->nameSingular);

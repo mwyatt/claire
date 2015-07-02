@@ -69,7 +69,8 @@ var shimSettings = {
 gulp.task('js/a', function() {
   gulp.src('js/admin/common.js')
     .pipe(browserify({
-      paths: ['node_modules', 'js/']
+      paths: ['node_modules', 'js/'],
+      shim: shimSettings
     }))
     .pipe(gulp.dest('asset/admin'));
 });

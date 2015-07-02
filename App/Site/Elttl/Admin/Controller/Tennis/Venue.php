@@ -51,17 +51,12 @@ class Venue extends \OriginalAppName\Site\Elttl\Admin\Controller\Tennis\Crud
 		}
 
 		// consume post
-		$entity->nameFirst = $_POST['entity']['nameFirst'];
-		$entity->nameLast = $_POST['entity']['nameLast'];
+		$entity->name = $_POST['entity']['name'];
 		$entity->slug = $_POST['entity']['slug'];
-		$entity->rank = $_POST['entity']['rank'];
-		$entity->phoneLandline = $_POST['entity']['phoneLandline'];
-		$entity->phoneMobile = $_POST['entity']['phoneMobile'];
-		$entity->ettaLicenseNumber = $_POST['entity']['ettaLicenseNumber'];
-		$entity->teamId = $_POST['entity']['teamId'];
+		$entity->location = $_POST['entity']['location'];
 
 		// save
-		$this->model->update($entity, ['id' => $entity->getId()]);
+		$this->model->updateYear([$entity]);
 
 		// feedback / route
 		$ucName = ucfirst($this->nameSingular);

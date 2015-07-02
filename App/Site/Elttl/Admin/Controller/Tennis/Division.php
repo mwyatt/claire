@@ -35,7 +35,7 @@ class Division extends \OriginalAppName\Site\Elttl\Admin\Controller\Tennis\Crud
 		$entity->name = $_POST['entity']['name'];
 
 		// save
-		$this->model->update($entity, ['id' => $entity->getId(), 'yearId' => $registry->get('database/options/yearId')]);
+		$this->model->updateYear([$entity]);
 
 		// feedback / route
 		$sessionFeedback->setMessage(ucfirst($this->nameSingular) . " $id saved", 'positive');

@@ -218,7 +218,7 @@ abstract class Model extends \OriginalAppName\Data
 
 
 	/**
-	 * uses the passes properties to build named prepared statement
+	 * uses the passed properties to build named prepared statement
 	 * @todo how to return a value which can mark success?
 	 * @param  array  $molds 
 	 * @param  string $by    defines the column to update by
@@ -255,7 +255,7 @@ abstract class Model extends \OriginalAppName\Data
 				$this->bindValue($sth, 'where' . ucfirst($key), $value);
 			}
 		}
-		foreach ($this->getSthExecuteNamed($mold) as $key => $value) {
+		foreach ($this->getSthExecuteNamedWriteable($mold) as $key => $value) {
 			$this->bindValue($sth, $key, $value);
 		}
 
@@ -376,7 +376,7 @@ abstract class Model extends \OriginalAppName\Data
 	}
 
 
-	public function isFieldNonWritable($field)
+	public function isFieldNonWriteable($field)
 	{
 		return in_array($field, $this->fieldsNonWriteable);
 	}
@@ -410,10 +410,23 @@ abstract class Model extends \OriginalAppName\Data
 	{
 		$excecuteData = [];
 		foreach ($this->fields as $field) {
-			if ($this->isFieldNonWritable($field)) {
+			if ($this->isFieldNonWriteable($field)) {
 				continue;
 			}
 			$excecuteData[] = $entity->$field;
+		}
+		return $excecuteData;
+	}
+
+
+	public function getSthExecuteNamedWriteable($mold)
+	{
+		$excecuteData = [];
+		foreach ($this->getFields() as $field) {
+			if ($this->isFieldNonWriteable($field)) {
+				continue;
+			}
+			$excecuteData[':' . $field] = $mold->$field;
 		}
 		return $excecuteData;
 	}
@@ -423,9 +436,6 @@ abstract class Model extends \OriginalAppName\Data
 	{
 		$excecuteData = [];
 		foreach ($this->getFields() as $field) {
-			if ($this->isFieldNonWritable($field)) {
-				continue;
-			}
 			$excecuteData[':' . $field] = $mold->$field;
 		}
 		return $excecuteData;
