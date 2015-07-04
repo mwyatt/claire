@@ -2,6 +2,10 @@
 
 namespace OriginalAppName\Site\Elttl\Model\Tennis;
 
+use \PDO;
+use OriginalAppName\Registry;
+use OriginalAppName\Site\Elttl\Model\Tennis as ModelTennis;
+
 
 /**
  * @author Martin Wyatt <martin.wyatt@gmail.com> 
@@ -44,10 +48,6 @@ class Fixture extends \OriginalAppName\Model
 		array(2, 2),
 		array(1, 1)
 	);
-
-
-
-
 
 
 	/**
@@ -143,59 +143,78 @@ class Fixture extends \OriginalAppName\Model
 	 * @return null
 	 */
 	public function generate() {
+		$registry = Registry::getInstance();
+		$yearId = $registry->get('database/options/yearId');
+		$divisions = [];
 
-		// clear all fixtures
+		// delete all fixtures
 		$sth = $this->database->dbh->query("	
 			delete from
-				tennis_fixture
-			where id != 0
+				tennisFixture
+			where id != 0 and yearId = $yearId
 		");
 
-		// clear all encounters
+		// delete all encounters
 		$sth = $this->database->dbh->query("	
 			delete from
-				tennis_encounter
-			where id != 0
+				tennisEncounter
+			where id != 0 and yearId = $yearId
 		");
 
 		// select all divisions
-		$sth = $this->database->dbh->query("	
-			SELECT
-				tennis_division.id as division_id
-				, tennis_team.id as team_id
-			FROM
-				tennis_division				
-			LEFT JOIN tennis_team ON tennis_division.id = tennis_team.division_id
-		");
-		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {	
-			$this->data[$row['division_id']][] = $row['team_id'];
-		}						
+		$modelDivision = new ModelTennis\Division;
+		$modelDivision
+			->readColumn('yearId', $yearId)
+			->keyDataByProperty('id');
+
+		// select all teams
+		$modelTeam = new ModelTennis\Team;
+		$modelTeam
+			->readColumn('yearId', $yearId)
+			->keyDataByProperty('id');
+
+		// bind teams with divisions
+		foreach ($modelDivision->getData() as $division) {
+			if (empty($divisions[$division->id])) {
+				$divisions[$division->id] = [];
+			}
+			foreach ($modelTeam->getData() as $team) {
+				if ($team->divisionId == $division->id) {
+					$divisions[$division->id][$team->id] = $team;
+				}
+			}
+		}
+
+		// prepare insert
 		$sth = $this->database->dbh->prepare("
-			INSERT INTO
-				tennis_fixture
-				(team_id_left, team_id_right)
-			VALUES
-				(:team_id_left, :team_id_right)
+			insert into
+				tennisFixture
+				(
+					yearId,
+					teamIdLeft,
+					teamIdRight
+				)
+			values
+				(
+					$yearId,
+					:teamIdLeft,
+					:teamIdRight
+				)
 		");				
 				
 		// loop to set team vs team fixtures
-		foreach ($this->data as $division) {
-			foreach ($division as $key => $homeTeam) {
-				foreach ($division as $key => $awayTeam) {
-					if ($homeTeam !== $awayTeam) {
+		foreach ($divisions as $teams) {
+			foreach ($teams as $homeTeam) {
+				foreach ($teams as $awayTeam) {
+					if ($homeTeam->id !== $awayTeam->id) {
 						$sth->execute(array(
-							':team_id_left' => $homeTeam
-							, ':team_id_right' => $awayTeam
+							':teamIdLeft' => $homeTeam->id,
+							':teamIdRight' => $awayTeam->id
 						));					
 					}
 				}
 			}
 		}
-
-		// feedback
-		echo '<pre>';
-		print_r('all fixtures and encounters removed, and fixtures re-generated using current team configuration');
-		echo '</pre>';
-		exit;
+		return true;
 	}
 }
