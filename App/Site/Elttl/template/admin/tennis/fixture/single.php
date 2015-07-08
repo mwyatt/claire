@@ -1,5 +1,4 @@
 <?php require_once($this->getTemplatePath('admin/_header')) ?>
-<?php $sides = array('left', 'right') ?>
 
 <script>
 	var pageTennisFixtureSingleResource = {
@@ -15,7 +14,7 @@
 <div class="page tennis-fixture-single js-tennis-fixture-single">
 	<h1 class="page-primary-title"><?php echo ($isFilled ? 'Update' : 'Fulfill') ?> scorecard</h1>
 	<form class="main" method="post" class="fixture-single-form">
-		<!-- <input name="debug" type="hidden" value="Tennis_Fulfill"> -->
+		<input name="debug" type="hidden" value="Tennis_Fulfill">
 
 <?php if ($isFilled): ?>
 	
@@ -30,7 +29,7 @@
 				 
 	<?php foreach ($divisions as $division): ?>
 		
-				<option value="<?php echo $division->getId() ?>"><?php echo $division->getName() ?></option>
+				<option value="<?php echo $division->id ?>"><?php echo $division->name ?></option>
 
 	<?php endforeach ?>
 

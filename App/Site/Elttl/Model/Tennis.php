@@ -50,6 +50,40 @@ class Tennis extends \OriginalAppName\Model
 
 
 	/**
+	 * @param  array $ids
+	 * @return object
+	 */
+	public function readYearId($ids, $column = 'id')
+	{
+		$registry = Registry::getInstance();
+
+		// query
+		$sth = $this->database->dbh->prepare("
+			{$this->getSqlSelect()}
+            where {$column} = :id
+            and yearId = :yearId
+		");
+		$entity = $this->getEntity();
+
+		// mode
+		$sth->setFetchMode(PDO::FETCH_CLASS, $this->getEntity());
+	    $sth->bindValue(':yearId', $registry->get('database/options/yearId'), PDO::PARAM_INT);
+
+		// loop prepared statement
+		foreach ($ids as $id) {
+		    $sth->bindValue(':id', $id, PDO::PARAM_INT);
+			$sth->execute();
+			while ($result = $sth->fetch()) {
+				$this->appendData($result);
+			}
+		}
+
+		// instance
+		return $this;
+	}
+
+
+	/**
 	 * reads where column == value
 	 * @param  string $column table column
 	 * @param  any $value  to match

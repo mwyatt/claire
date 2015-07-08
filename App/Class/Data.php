@@ -89,14 +89,9 @@ class Data extends \OriginalAppName\System
 		if (! $data = $this->getData()) {
 			return;
 		}
-		$method = 'get' . ucfirst($property);
-		$dataSample = current($data);
-		if (! method_exists($dataSample, $method)) {
-			return;
-		}
 		$collection = [];
 		foreach ($data as $entity) {
-			$collection[] = $entity->$method();
+			$collection[] = $entity->$property;
 		}
 		return $collection;
 	}

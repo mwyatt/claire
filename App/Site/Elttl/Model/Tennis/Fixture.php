@@ -36,18 +36,18 @@ class Fixture extends \OriginalAppName\Model
 	 * table tennis league match
 	 * @var array
 	 */
-	public $encounterStructure = array(
-		array(1, 2),
-		array(3, 1),
-		array(2, 3),
-		array(3, 2),
-		array(1, 3),
-		array('doubles', 'doubles'),
-		array(2, 1),
-		array(3, 3),
-		array(2, 2),
-		array(1, 1)
-	);
+	public $encounterStructure = [
+		[1, 2],
+		[3, 1],
+		[2, 3],
+		[3, 2],
+		[1, 3],
+		['doubles', 'doubles'],
+		[2, 1],
+		[3, 3],
+		[2, 2],
+		[1, 1]
+	];
 
 
 	/**

@@ -41,74 +41,64 @@ class Fixture extends \OriginalAppName\Site\Elttl\Admin\Controller\Tennis\Crud
 
 	public function single($id = 0)
 	{
-		
-		// flag to mark if the fixture has been filled
-		$modelTennisEncounter = new model_tennis_encounter($this);
-		$modelTennisEncounter->read(array(
-			'where' => array('fixture_id' => $this->getFixtureId()),
-			'order_by' => 'id'
-		));
+
+		// flag to know if filled, why?
 		$isFilled = false;
+
+		// get single fixture
+		$modelTennisFixture = new Model\Tennis\Fixture;
+		$modelTennisFixture->readYearColumn('id', $id);
+		$fixture = $modelTennisFixture->getDataFirst();
+		
+		// find out if the fixture has been filled
+		$modelTennisEncounter = new Model\Tennis\Encounter;
+		$modelTennisEncounter->readYearColumn('fixtureId', $this->getFixtureId());
 		if ($modelTennisEncounter->getData()) {
+			$modelTennisEncounter->orderByProperty('id');
 			$isFilled = true;
 		}
 
-		// fixtures
-		$modelTennisFixture = new model_tennis_Fixture($this);
-		if ($isFilled) {
-			$modelTennisFixture->read(array(
-				'where' => array('id' => $this->getFixtureId())
-			));
-		}
-		$fixture = $modelTennisFixture->getDataFirst();
-
 		// teams
-		$modelTennisTeam = new model_tennis_team($this);
+		$modelTennisTeam = new Model\Tennis\Team;
 		if ($isFilled) {
-			$modelTennisTeam->read(array(
-				'where' => array('id' => array(
-					$fixture->getTeamIdLeft(),
-					$fixture->getTeamIdRight()
-				))
-			));
+			$modelTennisTeam->readYearId([$fixture->teamIdLeft, $fixture->teamIdRight]);
  		} else {
-			$modelTennisTeam->read();
+			$modelTennisTeam->readColumn('yearId', $this->yearId);
 		}
 
 		// divisions
-		$modelTennisDivision = new model_tennis_Division($this);
+		$modelTennisDivision = new Model\Tennis\Division;
 		if ($isFilled) {
-			$modelTennisDivision->read(array(
-				'where' => array('id' => $modelTennisTeam->getDataProperty('division_id'))
-			));
+			$modelTennisDivision->readYearId($modelTennisTeam->getDataProperty('divisionId'));
 		} else {
-			$modelTennisDivision->read();
+			$modelTennisDivision->readColumn('yearId', $this->yearId);
 		}
 
 		// player
-		$modelTennisPlayer = new model_tennis_Player($this);
+		$modelTennisPlayer = new Model\Tennis\Player;
 		if ($isFilled) {
 			$modelTennisPlayer
-				->read(array(
-					'where' => array('team_id' => $modelTennisTeam->getDataProperty('id'))
-				))
-				->orderByPropertyIntAsc('rank');
+				->readYearId($modelTennisTeam->getDataProperty('id'), 'teamId');
+				->orderByProperty('rank');
 		} else {
 			$modelTennisPlayer
-				->read()
-				->orderByPropertyStringDesc('name_last');
+				->readColumn('yearId', $this->yearId)
+				->orderByProperty('nameLast', 'desc');
 		}
+
+		// reindex array, needed?
 		$modelTennisPlayer->setData(array_values($modelTennisPlayer->getData()));
 
 		// template
 		$this->view
+			->setDataKey('sides', ['left', 'right'])
 			->setDataKey('isFilled', $isFilled)
-			->setDataKey('divisions', $modelTennisDivision)
-			->setDataKey('players', $modelTennisPlayer)
-			->setDataKey('encounters', $modelTennisEncounter)
 			->setDataKey('fixture', $fixture)
+			->setDataKey('divisions', $modelTennisDivision->getData())
+			->setDataKey('teams', $modelTennisTeam->getData())
+			->setDataKey('players', $modelTennisPlayer->getData())
+			->setDataKey('encounters', $modelTennisEncounter->getData())
 			->setDataKey('encounterStructure', $modelTennisFixture->getEncounterStructure())
-			->setDataKey('teams', $modelTennisTeam)
 			->getTemplate('admin/tennis/fixture/single');
 	}
 }
