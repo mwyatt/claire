@@ -3,6 +3,7 @@
 <script>
 	var pageTennisFixtureSingleResource = {
 		isFilled: <?php echo json_encode($isFilled) ?>,
+		sides: <?php echo json_encode($sides) ?>,
 		fixture: <?php echo json_encode($fixture) ?>,
 		encounters: <?php echo json_encode($encounters) ?>,
 		divisions: <?php echo json_encode($divisions) ?>,

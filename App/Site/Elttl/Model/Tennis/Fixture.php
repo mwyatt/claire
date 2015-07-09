@@ -12,7 +12,7 @@ use OriginalAppName\Site\Elttl\Model\Tennis as ModelTennis;
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Fixture extends \OriginalAppName\Model
+class Fixture extends \OriginalAppName\Site\Elttl\Model\Tennis
 {	
 
 

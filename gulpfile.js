@@ -84,6 +84,15 @@ gulp.task('js/a/tennis', function() {
     .pipe(gulp.dest('asset/admin/tennis'));
 });
 
+// this will get out of control
+gulp.task('js/a/tennis/fixture/single', function() {
+  gulp.src('app/site/elttl/js/admin/tennis/fixture/single.js')
+    .pipe(browserify({
+      paths: ['node_modules', 'js/']
+    }))
+    .pipe(gulp.dest('asset/admin/tennis/fixture'));
+});
+
 
 
 // gulp.task('jsm', function() {

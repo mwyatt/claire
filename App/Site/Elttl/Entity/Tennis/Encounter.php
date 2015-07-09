@@ -18,9 +18,6 @@ class Encounter extends \OriginalAppName\Entity
 	public $yearId;
 
 
-	public $fixtureId;
-
-	
 	public $playerIdLeft;
 
 	

@@ -53,7 +53,7 @@ Page_Tennis_Fixture_Single.prototype.formFill = function(data) {
 	var players = resource.players;
 	var player;
 	var html = '';
-	var sides = data.getSides();
+	var sides = resource.sides;
 	var side;
 	var position;
 
@@ -82,7 +82,7 @@ Page_Tennis_Fixture_Single.prototype.formFill = function(data) {
 		for (var b = players.length - 1; b >= 0; b--) {
 			player = players[b];
 			if (player.team_id == teamId) {
-				html += data.getOption(player.name_first + ' ' + player.name_last, player.id);
+				html += data.getOption(player.nameFirst + ' ' + player.nameLast, player.id);
 			};
 		};
 		$('.js-fixture-single-player[data-side="' + side + '"]').html(html);
@@ -99,7 +99,7 @@ Page_Tennis_Fixture_Single.prototype.formFill = function(data) {
 			encounterStructureRow = encounterStructure[position - 1];
 			encounterStructurePart = encounterStructureRow[side == 'left' ? 0 : 1];
 			encounter = encounters[position - 1];
-			playerId = encounter['player_id_' + side];
+			playerId = encounter['playerId' + side];
 			options = $('.js-fixture-single-player[data-side="' + side + '"][data-position="' + encounterStructurePart + '"]').find('option');
 			for (var o = options.length - 1; o >= 0; o--) {
 				joption = $(options[o]);
@@ -447,3 +447,6 @@ Page_Tennis_Fixture_Single.prototype.setIsFilled = function(isFilled) {
 	this.isFilled = isFilled;
 	return this;
 };
+
+
+var doit = new Page_Tennis_Fixture_Single;

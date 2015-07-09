@@ -52,7 +52,7 @@ class Fixture extends \OriginalAppName\Site\Elttl\Admin\Controller\Tennis\Crud
 		
 		// find out if the fixture has been filled
 		$modelTennisEncounter = new Model\Tennis\Encounter;
-		$modelTennisEncounter->readYearColumn('fixtureId', $this->getFixtureId());
+		$modelTennisEncounter->readYearColumn('fixtureId', $id);
 		if ($modelTennisEncounter->getData()) {
 			$modelTennisEncounter->orderByProperty('id');
 			$isFilled = true;
@@ -78,7 +78,7 @@ class Fixture extends \OriginalAppName\Site\Elttl\Admin\Controller\Tennis\Crud
 		$modelTennisPlayer = new Model\Tennis\Player;
 		if ($isFilled) {
 			$modelTennisPlayer
-				->readYearId($modelTennisTeam->getDataProperty('id'), 'teamId');
+				->readYearId($modelTennisTeam->getDataProperty('id'), 'teamId')
 				->orderByProperty('rank');
 		} else {
 			$modelTennisPlayer
@@ -91,6 +91,7 @@ class Fixture extends \OriginalAppName\Site\Elttl\Admin\Controller\Tennis\Crud
 
 		// template
 		$this->view
+			->appendAsset('js', 'admin/tennis/fixture/single')
 			->setDataKey('sides', ['left', 'right'])
 			->setDataKey('isFilled', $isFilled)
 			->setDataKey('fixture', $fixture)
@@ -98,7 +99,7 @@ class Fixture extends \OriginalAppName\Site\Elttl\Admin\Controller\Tennis\Crud
 			->setDataKey('teams', $modelTennisTeam->getData())
 			->setDataKey('players', $modelTennisPlayer->getData())
 			->setDataKey('encounters', $modelTennisEncounter->getData())
-			->setDataKey('encounterStructure', $modelTennisFixture->getEncounterStructure())
-			->getTemplate('admin/tennis/fixture/single');
+			->setDataKey('encounterStructure', $modelTennisFixture->getEncounterStructure());
+		return new Response($this->view->getTemplate('admin/tennis/fixture/single'));
 	}
 }
