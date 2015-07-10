@@ -4,8 +4,15 @@ var pkg = require('./package.json');
 var postcss = require('gulp-postcss');
 var minmax = require('postcss-media-minmax');
 var autoprefixer = require('autoprefixer-core');
-var cssadmin = ['app/admin/css/**/*.css', '!app/admin/css/**/_*.css'];
-var cssfront = ['app/site/' + pkg.site + '/css/**/*.css', '!app/site/' + pkg.site + '/css/**/_*.css'];
+var cssadmin = [
+  'app/admin/css/**/*.css',
+  'app/site/' + pkg.site + '/admin/css/**/*.css',
+  '!app/admin/css/**/_*.css'
+];
+var cssfront = [
+  'app/site/' + pkg.site + '/css/**/*.css',
+  '!app/site/' + pkg.site + '/css/**/_*.css'
+];
 var css = ['css/**/*.css'];
 var colorFunction = require('postcss-color-function');
 var processes = [

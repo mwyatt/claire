@@ -141,25 +141,28 @@ class Admin extends \OriginalAppName\Admin\Controller\Feedback
 
 
 	public function readMenu()
-	{
-		$this
-			->view
-			->setDataKey('menu', []);
+	{	
 		$config = include SITE_PATH . 'config' . EXT;
 		if (empty($config['admin/menu'])) {
 			return;
 		}
 		$items = [];
 		foreach ($config['admin/menu'] as $item) {
-			$entity = new Entity\Menu;
-			$entity->idParent = 0;
-			$entity->keyGroup = 'admin';
-			$entity->name = $item['name'];
-			$entity->url = 'admin/' . $item['url'];
-			$items[] = $entity;
+
+			// has permission
+			if (isset($this->permissions[$item['route']])) {
+				$entity = new Entity\Menu;
+				$entity->idParent = 0;
+				$entity->keyGroup = 'admin';
+				$entity->name = $item['name'];
+				$entity->url = $this->view->url->generate($item['route']);
+				$items[] = $entity;
+			}
 		}
 		$menu = new OriginalAppName\Menu;
-		$menu->buildTree($items);
+		$menu
+			->setUrlAbsolute()
+			->buildTree($items);
 		$this
 			->view
 			->setDataKey('menu', $menu->getData());

@@ -37,6 +37,9 @@ class Menu extends \OriginalAppName\View
     protected $templateSingleLink = '_menu/link';
 
 
+    public $relative = true;
+
+
     /**
      * builds a tree using categories array
      * @param  array $categories 
@@ -45,6 +48,13 @@ class Menu extends \OriginalAppName\View
     public function buildTree($categories)
     {
         $this->setData($this->recurse(['categories' => $categories]));
+        return $this;
+    }
+
+
+    public function setUrlAbsolute()
+    {
+        $this->relative = false;
         return $this;
     }
 
@@ -104,7 +114,7 @@ class Menu extends \OriginalAppName\View
             if ($hasChildren) {
                 $output .= '<' . $element . ' class="menu' . $classPartLabel . '-level-' . $config['level'] . ' js-menu' . $classPartLabel . '-level-' . $config['level'] . '">';
             }
-            $output .= '<a href="' . $this->url->generate('home') . $category->getUrl() . '" class="menu' . $classPartLabel . '-level-' . $config['level'] . '-link">' . $category->getName() . '</a>';
+            $output .= '<a href="' . ($this->relative ? $this->url->generate('home') : null) . $category->getUrl() . '" class="menu' . $classPartLabel . '-level-' . $config['level'] . '-link">' . $category->getName() . '</a>';
 
             // recurse to children
             if ($hasChildren) {

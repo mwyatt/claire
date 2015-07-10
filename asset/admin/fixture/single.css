@@ -1,0 +1,108 @@
+/* main secondary color (2) */
+@charset "utf-8";
+
+.fixture-single-section::after{
+  clear: both;
+  content: "";
+  display: table;
+}
+
+.fixture-single-section {
+  text-align: center;
+  margin: 2em 0;
+}
+
+.fixture-single-team {
+  margin: 0 1em;
+}
+
+.fixture-single-player-row {
+  margin: 1em 0;
+  width: 48%;
+}
+
+.fixture-single-player-row.is-left {
+  float: left;
+  clear: left;
+  text-align: right;
+}
+
+.fixture-single-player-row.is-right {
+  float: right;
+  clear: right;
+  text-align: left;
+}
+
+.fixture-single-button-play-up-right {
+  float: right;
+}
+
+.fixture-single-button-play-up-left {
+  float: left;
+}
+
+.fixture-single-score-row-exclude {
+  float: left;
+  position: absolute;
+  top: 1.5em;
+  left: 1em;
+}
+
+.fixture-single-score-row {
+  padding: 1em 0;
+  position: relative;
+}
+
+.fixture-single-score-row.is-excluded {
+  opacity: .5;
+}
+
+.fixture-single-encounter-input {
+  font-size: 1.6em;
+  margin: 0 1em;
+  text-align: center;
+}
+
+.fixture-single-section {
+  padding: 1em 0;
+  border-top: 1px solid #eee;
+  margin: 1em 0;
+}
+
+.fixture-single-score-row-encounter-label {
+  position: absolute;
+  top: 1.5em;
+  width: 11em;
+}
+
+.fixture-single-score-row-encounter-label-left {
+  left: 9em;
+  text-align: right;
+  top: 1.5em;
+}
+
+.fixture-single-score-row-encounter-label-right {
+  right: 9em;
+  text-align: left;
+}
+
+.fixture-single-score-row:hover {
+  background: #eee;
+}
+
+.fixture-single-score-row-exclude-checkbox {
+  margin-left: 6px;
+}
+
+.fixture-single-total-right,
+.fixture-single-total-left {
+  font-size: 3em;
+  margin: 0 1em;
+}
+
+.admin-button-primary-delete {
+  float: right;
+  cursor: pointer;
+  top: -54px;
+  position: relative;
+}

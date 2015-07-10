@@ -1,5 +1,4 @@
 <?php
-
 namespace OriginalAppName\Site\Elttl\Admin\Controller\Tennis;
 
 use OriginalAppName\Response;
@@ -91,6 +90,7 @@ class Fixture extends \OriginalAppName\Site\Elttl\Admin\Controller\Tennis\Crud
 
 		// template
 		$this->view
+			->appendAsset('css', 'admin/tennis/fixture/single')
 			->appendAsset('js', 'admin/tennis/fixture/single')
 			->setDataKey('sides', ['left', 'right'])
 			->setDataKey('isFilled', $isFilled)
@@ -101,5 +101,11 @@ class Fixture extends \OriginalAppName\Site\Elttl\Admin\Controller\Tennis\Crud
 			->setDataKey('encounters', $modelTennisEncounter->getData())
 			->setDataKey('encounterStructure', $modelTennisFixture->getEncounterStructure());
 		return new Response($this->view->getTemplate('admin/tennis/fixture/single'));
+	}
+
+
+	public function update($id)
+	{
+		
 	}
 }

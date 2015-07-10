@@ -2,20 +2,20 @@
 
 return [
     'admin/menu' => [
-        ['name' => 'Pages', 'url' => 'page/'],
-        ['name' => 'Press', 'url' => 'press/'],
-        ['name' => 'Users', 'url' => 'user/'],
-        ['name' => 'Years', 'url' => 'tennis/year/'],
-        ['name' => 'Divisions', 'url' => 'tennis/division/'],
-        ['name' => 'Fixtures', 'url' => 'tennis/fixture/'],
-        ['name' => 'Teams', 'url' => 'tennis/team/'],
-        ['name' => 'Players', 'url' => 'tennis/player/'],
-        ['name' => 'Venues', 'url' => 'tennis/venue/'],
-        ['name' => 'System', 'url' => 'system/',
+        ['name' => 'Pages', 'route' => 'admin/page/all'],
+        ['name' => 'Press', 'route' => 'admin/press/all'],
+        ['name' => 'Users', 'route' => 'admin/user/all'],
+        ['name' => 'Years', 'route' => 'admin/tennis/year/all'],
+        ['name' => 'Divisions', 'route' => 'admin/tennis/division/all'],
+        ['name' => 'Fixtures', 'route' => 'admin/tennis/fixture/all'],
+        ['name' => 'Teams', 'route' => 'admin/tennis/team/all'],
+        ['name' => 'Players', 'route' => 'admin/tennis/player/all'],
+        ['name' => 'Venues', 'route' => 'admin/tennis/venue/all'],
+        ['name' => 'System', 'route' => 'admin/system/all',
             'children' => [
-                ['name' => 'Settings', 'url' => 'system/settings/'],
-                ['name' => 'Database', 'url' => 'system/database/'],
-                ['name' => 'Tennis', 'url' => 'system/tennis/']
+                ['name' => 'Settings', 'route' => 'admin/system/settings/'],
+                ['name' => 'Database', 'route' => 'admin/system/database/'],
+                ['name' => 'Tennis', 'route' => 'admin/system/tennis/']
             ]
         ]
     ]
