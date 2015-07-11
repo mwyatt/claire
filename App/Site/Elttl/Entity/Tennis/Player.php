@@ -63,10 +63,10 @@ class Player extends \OriginalAppName\Entity
 		// echo '<pre>';
 		// printR(['current' => $this->getRank(), 'change' => $modifier]);
 		if ($reverse) {
-			$this->setRank($this->getRank() - $modifier);
+			$this->rank = $this->rank - $modifier;
 			// printR(['new' => $this->getRank() - $modifier]);
 		} else {
-			$this->setRank($this->getRank() + $modifier);
+			$this->rank = $this->rank + $modifier;
 			// printR(['new' => $this->getRank() + $modifier]);
 		}
 		// echo '</pre>';

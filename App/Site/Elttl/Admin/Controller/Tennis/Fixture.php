@@ -16,6 +16,12 @@ class Fixture extends \OriginalAppName\Site\Elttl\Admin\Controller\Tennis\Crud
 {
 
 
+	public function create()
+	{
+		$this->update(null);
+	}
+
+
 	/**
 	 * @return object 
 	 */
@@ -106,6 +112,7 @@ class Fixture extends \OriginalAppName\Site\Elttl\Admin\Controller\Tennis\Crud
 
 	public function update($id)
 	{
-		
+		$service = new \OriginalAppName\Site\Elttl\Admin\Service\Tennis\Fixture\Fulfill;
+		$service->boot();
 	}
 }

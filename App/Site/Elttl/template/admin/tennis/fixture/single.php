@@ -15,7 +15,7 @@
 <div class="page tennis-fixture-single js-tennis-fixture-single">
 	<h1 class="page-primary-title"><?php echo ($isFilled ? 'Update' : 'Fulfill') ?> scorecard</h1>
 	<form class="main" method="post" class="fixture-single-form">
-		<input name="debug" type="hidden" value="Tennis_Fulfill">
+		<input name="debug" type="hidden" value="Fulfill">
 
 <?php if ($isFilled): ?>
 	
@@ -113,7 +113,7 @@
 
 		</section>
 		<section class="fixture-single-section">
-			<span class="admin-button-primary js-form-button-submit"><?php echo ($isFilled ? 'Update' : 'Fulfill') ?></span>
+			<button class="admin-button-primary"><?php echo ($isFilled ? 'Update' : 'Fulfill') ?></button>
 		</section>
 	</form>
 </div>

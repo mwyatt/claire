@@ -2,7 +2,7 @@
 namespace OriginalAppName\Site\Elttl\Admin\Service\Tennis\Fixture;
 
 
-class Fulfill
+class Fulfill extends \OriginalAppName\Site\Elttl\Model\Tennis
 {
 
 
@@ -41,16 +41,16 @@ class Fulfill
     /**
      * validate and determine whether to clear first
      */
-    public function run()
+    public function boot()
     {
         $sessionFeedback = new \OriginalAppName\Session\Feedback;
         $this->outputDebugBlock('running fixture fulfillment procedure');    
-        if (! $this->validate()) {
-            $sessionFeedback->set('something is wrong with the input');
+        if (!$this->validate()) {
+            $sessionFeedback->setMessage('something is wrong with the input', 'negative');
             return;
         }
-        if (! $this->readFixture()) {
-            $sessionFeedback->set('fixture does not exist');
+        if (!$this->readFixture()) {
+            $sessionFeedback->setMessage('fixture does not exist', 'negative');
             return;
         }
         if ($this->isFilled()) {
@@ -59,8 +59,8 @@ class Fulfill
 
         // if delete is flagged, dont refulfill
         if ($this->isDelete()) {
-            $sessionFeedback->set('fixture deleted');
-            $this->redirect('current');
+            $sessionFeedback->setMessage('fixture deleted', 'positive');
+            $this->redirect('admin/tennis/fixture/all');
         }
 
         // fulfill the fixture
@@ -74,7 +74,7 @@ class Fulfill
 
     public function isDelete()
     {
-        if (! empty($_REQUEST['delete'])) {
+        if (!empty($_REQUEST['delete'])) {
             return true;
         }
     }
@@ -87,7 +87,7 @@ class Fulfill
     public function isFilled()
     {
         $fixture = $this->getFixture();
-        return $fixture->getTimeFulfilled();
+        return $fixture->timeFulfilled;
     }
 
 
@@ -142,7 +142,8 @@ class Fulfill
             }
 
             // build mold
-            $moldEncounter->fixtureId = $fixture->getId();
+            $moldEncounter->yearId = $this->yearId;
+            $moldEncounter->fixtureId = $fixture->id;
             $moldEncounter->scoreLeft = $inputEncounter['left'];
             $moldEncounter->scoreRight = $inputEncounter['right'];
             $moldEncounter->playerIdLeft = $inputPlayerIdLeft;
@@ -151,11 +152,11 @@ class Fulfill
 
             // obtain rank changes for the two players
             $config = (object) [
-                'idLeft' => $moldEncounter->playerIdLeft(),
-                'idRight' => $moldEncounter->playerIdRight(),
-                'scoreLeft' => $moldEncounter->scoreLeft(),
-                'scoreRight' => $moldEncounter->scoreRight(),
-                'status' => $moldEncounter->status()
+                'idLeft' => $moldEncounter->playerIdLeft,
+                'idRight' => $moldEncounter->playerIdRight,
+                'scoreLeft' => $moldEncounter->scoreLeft,
+                'scoreRight' => $moldEncounter->scoreRight,
+                'status' => $moldEncounter->status
             ];
             $rankChanges = $this->calculatePlayerRankChanges($config);
 
@@ -165,7 +166,7 @@ class Fulfill
             $this->outputDebugBlock($moldEncounter);
 
             // store encounters
-            if (! $this->isDebug($this)) {
+            if (!$this->isDebug($this)) {
                 $modelEncounter->create([$moldEncounter]);
             }
         }
@@ -194,11 +195,11 @@ class Fulfill
         // update fixture fulfill time
         $fixture->timeFulfilled = time();
         $this->outputDebugBlock($fixture);
-        if (! $this->isDebug($this)) {
+        if (!$this->isDebug($this)) {
             $modelFixture->updateYear([$fixture]);
         }
-        $sessionFeedback->set('fixture fulfilled sucessfully');
-        $this->redirect('current', 'fixture_id=' . $fixture->id);
+        $sessionFeedback->setMessage('fixture fulfilled sucessfully', 'positive');
+        $this->redirect('admin/tennis/fixture/single', ['id' => $fixture->id]);
     }
 
 
@@ -282,9 +283,6 @@ class Fulfill
      */
     public function readFixture()
     {
-
-here here
-
         
         // teams
         $modelTeam = new \OriginalAppName\Site\Elttl\Model\Tennis\Team;
@@ -298,18 +296,17 @@ here here
         
         // find fixture based on teams
         $modelFixture = new \OriginalAppName\Site\Elttl\Model\Tennis\Fixture;
-        $modelFixture->read(array(
-            'where' => array(
-                'team_id_left' => $teamLeft->getId(),
-                'team_id_right' => $teamRight->getId()
-            )
-        ));
-        $this->outputDebugBlock($modelFixture->getData());
-        if (! $data = $modelFixture->getDataFirst()) {
-            // $this->session->set('feedback', 'This fixture does not exist');
+        $modelFixture->readYearColumn('teamIdLeft', $teamLeft->id);
+        foreach ($modelFixture->getData() as $entityFixture) {
+            if ($entityFixture->teamIdRight == $teamRight->id) {
+                $fixture = $entityFixture;
+            }
+        }
+        $this->outputDebugBlock($fixture);
+        if (empty($fixture)) {
             return;
         }
-        return $this->setFixture($data);
+        return $this->setFixture($fixture);
     }
 
 
@@ -343,7 +340,7 @@ here here
             'player',
             'encounter'
         );
-        if (! Helper::arrayKeyExists($required, $_REQUEST)) {
+        if (!\OriginalAppName\Helper::arrayKeyExists($required, $_REQUEST)) {
             $this->session->set('feedback', 'Please fill all required fields');
             return false;
         }
@@ -394,7 +391,7 @@ here here
         }
 
         // a player missing from one side means dont change
-        if (! $config->idLeft || ! $config->idRight) {
+        if (!$config->idLeft || !$config->idRight) {
             return $changes;
         }
 
@@ -402,8 +399,8 @@ here here
         $players = $this->getPlayers();
         $playerLeft = $players[$config->idLeft];
         $playerRight = $players[$config->idRight];
-        $rankLeft = $playerLeft->getRank();
-        $rankRight = $playerRight->getRank();
+        $rankLeft = $playerLeft->rank;
+        $rankRight = $playerRight->rank;
 
         // find rank difference
         $difference = $rankLeft > $rankRight ? $rankLeft - $rankRight : $rankRight - $rankLeft;

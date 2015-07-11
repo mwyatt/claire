@@ -15,6 +15,17 @@ class Tennis extends \OriginalAppName\Model
 {
 
 
+	public $yearId;
+
+
+	public function __construct()
+	{
+		parent::__construct();
+		$registry = Registry::getInstance();
+		$this->yearId = $registry->get('database/options/yearId');
+	}
+
+
 	/**
 	 * take passed entities and create using even the id
 	 * @param  array $entities 
@@ -55,7 +66,6 @@ class Tennis extends \OriginalAppName\Model
 	 */
 	public function readYearId($ids, $column = 'id')
 	{
-		$registry = Registry::getInstance();
 
 		// query
 		$sth = $this->database->dbh->prepare("
@@ -67,7 +77,7 @@ class Tennis extends \OriginalAppName\Model
 
 		// mode
 		$sth->setFetchMode(PDO::FETCH_CLASS, $this->getEntity());
-	    $sth->bindValue(':yearId', $registry->get('database/options/yearId'), PDO::PARAM_INT);
+	    $sth->bindValue(':yearId', $this->yearId, PDO::PARAM_INT);
 
 		// loop prepared statement
 		foreach ($ids as $id) {
@@ -91,7 +101,6 @@ class Tennis extends \OriginalAppName\Model
 	 */
 	public function readYearColumn($column, $value)
 	{
-		$registry = Registry::getInstance();
 
 		// query
 		$sth = $this->database->dbh->prepare("
@@ -102,7 +111,7 @@ class Tennis extends \OriginalAppName\Model
 		// mode
 		$sth->setFetchMode(PDO::FETCH_CLASS, $this->getEntity());
 	    $this->bindValue($sth, ':value', $value);
-    	$this->bindValue($sth, ':yearId', $registry->get('database/options/yearId'));
+    	$this->bindValue($sth, ':yearId', $this->yearId);
 		$sth->execute();
 		$this->setData($sth->fetchAll());
 
@@ -118,7 +127,6 @@ class Tennis extends \OriginalAppName\Model
 	 */
 	public function deleteYear($ids)
 	{
-		$registry = Registry::getInstance();
 
 		// build
 		$rowCount = 0;
@@ -134,7 +142,7 @@ class Tennis extends \OriginalAppName\Model
 		// bind
 		foreach ($ids as $id) {
 		    $sth->bindValue(1, $id, PDO::PARAM_INT);
-		    $sth->bindValue(2, $registry->get('database/options/yearId'), PDO::PARAM_INT);
+		    $sth->bindValue(2, $this->yearId, PDO::PARAM_INT);
 			$sth->execute();
 			$rowCount += $sth->rowCount();
 		}
