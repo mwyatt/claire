@@ -114,5 +114,6 @@ class Fixture extends \OriginalAppName\Site\Elttl\Admin\Controller\Tennis\Crud
 	{
 		$service = new \OriginalAppName\Site\Elttl\Admin\Service\Tennis\Fixture\Fulfill;
 		$service->boot();
+        $this->redirect('admin/tennis/fixture/create');
 	}
 }

@@ -82,6 +82,7 @@ class User extends \OriginalAppName\Controller\Admin
 		// render
 		$this
 			->view
+			->appendAsset('js', 'admin/user/single')
 			->setDataKey('permissionRoutes', $adminRoutes)
 			->setDataKey('permissions', $modelPermission->getData())
 			->setDataKey('user', $entityUser ? $entityUser : new Entity\User);

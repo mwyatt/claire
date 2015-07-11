@@ -30,7 +30,7 @@
 				
 				<?php if ($fixture->timeFulfilled): ?>
 						
-				<a href="<?php echo $this->url->generate('current_sans_query') ?>?fixture_id=<?php echo $fixture->id ?>" class="button-edit">Edit</a>
+				<a href="<?php echo $this->url->generate('admin/tennis/fixture/single', ['id' => $fixture->id]) ?>" class="button-edit">Edit</a>
 
 				<?php endif ?>
 

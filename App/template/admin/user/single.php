@@ -22,6 +22,7 @@
         	<input id="form-user-password" class="form-input w100 required js-input-password" type="text" name="user[password]" maxlength="75" value="">
 	    </div>
 	    <div class="block-margins">
+	    	<span class="button-secondary js-toggle-all-permissions">Toggle All Permissions</span>
 
 <?php foreach ($permissionRoutes as $key => $route): ?>
 

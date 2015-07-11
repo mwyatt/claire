@@ -28,7 +28,6 @@ class Encounter extends \OriginalAppName\Site\Elttl\Model\Tennis
 		'scoreRight',
 		'playerRankChangeLeft',
 		'playerRankChangeRight',
-		'fixtureId',
 		'status'
 	];
 

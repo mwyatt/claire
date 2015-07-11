@@ -80,6 +80,12 @@ gulp.task('js/a', function() {
       shim: shimSettings
     }))
     .pipe(gulp.dest('asset/admin'));
+  gulp.src('js/admin/user/single.js')
+    .pipe(browserify({
+      paths: ['node_modules', 'js/'],
+      shim: shimSettings
+    }))
+    .pipe(gulp.dest('asset/admin/user'));
 });
 
 // how do i make this good?

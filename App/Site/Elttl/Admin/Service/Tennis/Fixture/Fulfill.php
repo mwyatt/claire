@@ -7,15 +7,42 @@ class Fulfill extends \OriginalAppName\Site\Elttl\Model\Tennis
 
 
     /**
+     * \OriginalAppName\Controller
      * @var object
      */
-    public $fixture;
+    private $controller;
+
+
+    /**
+     * @var object
+     */
+    private $fixture;
 
 
     /**
      * @var array
      */
-    public $players;
+    private $players;
+
+
+    /**
+     * sort out controller for redirect
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->controller = new \OriginalAppName\Controller;
+    }
+
+
+    /**
+     * debug mode is set
+     * @return boolean true if debug on
+     */
+    public function isDebug($compat = null)
+    {
+        return isset($_REQUEST['debug']);
+    }
 
 
     /**
@@ -23,9 +50,9 @@ class Fulfill extends \OriginalAppName\Site\Elttl\Model\Tennis
      * @param  string|array $message 
      * @return null          
      */
-    public function outputDebugBlock($message)
+    private function outputDebugBlock($message)
     {       
-        if ($this->isDebug($this)) {
+        if ($this->isDebug()) {
             echo '<pre>';
             if (is_array($message) || is_object($message)) {
                 print_r($message);
@@ -60,7 +87,7 @@ class Fulfill extends \OriginalAppName\Site\Elttl\Model\Tennis
         // if delete is flagged, dont refulfill
         if ($this->isDelete()) {
             $sessionFeedback->setMessage('fixture deleted', 'positive');
-            $this->redirect('admin/tennis/fixture/all');
+            $this->controller->redirect('admin/tennis/fixture/all');
         }
 
         // fulfill the fixture
@@ -72,7 +99,7 @@ class Fulfill extends \OriginalAppName\Site\Elttl\Model\Tennis
     }
 
 
-    public function isDelete()
+    private function isDelete()
     {
         if (!empty($_REQUEST['delete'])) {
             return true;
@@ -84,7 +111,7 @@ class Fulfill extends \OriginalAppName\Site\Elttl\Model\Tennis
      * test for fixture fulfillment
      * @return boolean 
      */
-    public function isFilled()
+    private function isFilled()
     {
         $fixture = $this->getFixture();
         return $fixture->timeFulfilled;
@@ -97,7 +124,7 @@ class Fulfill extends \OriginalAppName\Site\Elttl\Model\Tennis
      * @param  array $playerIds 
      * @return null            
      */
-    public function readPlayersById($playerIds)
+    private function readPlayersById($playerIds)
     {
         $modelPlayer = new \OriginalAppName\Site\Elttl\Model\Tennis\Player;
         $modelPlayer
@@ -113,7 +140,7 @@ class Fulfill extends \OriginalAppName\Site\Elttl\Model\Tennis
      * taking into account the exclusion and rank changes for players
      * @return null 
      */
-    public function encounters()
+    private function encounters()
     {
 
         // load player resource
@@ -166,7 +193,7 @@ class Fulfill extends \OriginalAppName\Site\Elttl\Model\Tennis
             $this->outputDebugBlock($moldEncounter);
 
             // store encounters
-            if (!$this->isDebug($this)) {
+            if (!$this->isDebug()) {
                 $modelEncounter->create([$moldEncounter]);
             }
         }
@@ -181,7 +208,7 @@ class Fulfill extends \OriginalAppName\Site\Elttl\Model\Tennis
      * committing the player rank changes
      * @return null 
      */
-    public function finalise()
+    private function finalise()
     {
 
         // resource
@@ -195,11 +222,11 @@ class Fulfill extends \OriginalAppName\Site\Elttl\Model\Tennis
         // update fixture fulfill time
         $fixture->timeFulfilled = time();
         $this->outputDebugBlock($fixture);
-        if (!$this->isDebug($this)) {
+        if (!$this->isDebug()) {
             $modelFixture->updateYear([$fixture]);
         }
         $sessionFeedback->setMessage('fixture fulfilled sucessfully', 'positive');
-        $this->redirect('admin/tennis/fixture/single', ['id' => $fixture->id]);
+        $this->controller->redirect('admin/tennis/fixture/single', ['id' => $fixture->id]);
     }
 
 
@@ -207,11 +234,11 @@ class Fulfill extends \OriginalAppName\Site\Elttl\Model\Tennis
      * iterates through all stored players and updates them
      * @return null 
      */
-    public function updatePlayerRanks()
+    private function updatePlayerRanks()
     {
         $this->outputDebugBlock('player ranks would be updated here');
         $this->outputDebugBlock($this->getPlayers());
-        if ($this->isDebug($this)) {
+        if ($this->isDebug()) {
             return;
         }
         $modelPlayer = new \OriginalAppName\Site\Elttl\Model\Tennis\Player;
@@ -226,7 +253,7 @@ class Fulfill extends \OriginalAppName\Site\Elttl\Model\Tennis
      * @param  array $inputEncounter 
      * @return string                 
      */
-    public function getInputStatus($inputEncounter)
+    private function getInputStatus($inputEncounter)
     {
         if (array_key_exists('status', $inputEncounter)) {
             return $inputEncounter['status'];
@@ -239,16 +266,26 @@ class Fulfill extends \OriginalAppName\Site\Elttl\Model\Tennis
      * revert existing filled fixture
      * @return null 
      */
-    public function clear()
+    private function clear()
     {
         $this->outputDebugBlock('clearing existing fixture...');
+        $modelFixture = new \OriginalAppName\Site\Elttl\Model\Tennis\Fixture;
 
-        // fixture
+        // fixture reset time
         $fixture = $this->getFixture();
+        $fixture->timeFulfilled = null;
+        $modelFixture->updateYear([$fixture]);
         
         // encounter
         $modelEncounter = new \OriginalAppName\Site\Elttl\Model\Tennis\Encounter;
         $modelEncounter->readYearId([$fixture->id]);
+        
+        // no encounters means fixture with date fulfilled only
+        if (!$modelEncounter->getData()) {
+            return;
+        }
+        
+        // get players
         $this->readPlayersById(array_merge($modelEncounter->getDataProperty('playerIdLeft'), $modelEncounter->getDataProperty('playerIdRight')));
         $players = $this->getPlayers();
 
@@ -270,9 +307,6 @@ class Fulfill extends \OriginalAppName\Site\Elttl\Model\Tennis
         $modelEncounter->deleteYear($modelEncounter->getDataProperty('id'));
 
         // clear fixture date
-        $modelFixture = new \OriginalAppName\Site\Elttl\Model\Tennis\Fixture;
-        $fixture->setTimeFulfilled(0);
-        $modelFixture->updateYear($fixture);
         $this->outputDebugBlock('existing fixture cleared');
     }
 
@@ -281,12 +315,17 @@ class Fulfill extends \OriginalAppName\Site\Elttl\Model\Tennis
      * retrieve fixture by looking at the teams selected
      * @return bool  
      */
-    public function readFixture()
+    private function readFixture()
     {
         
         // teams
         $modelTeam = new \OriginalAppName\Site\Elttl\Model\Tennis\Team;
         $modelTeam->readYearId([$_REQUEST['team']['left'], $_REQUEST['team']['right']]);
+        echo '<pre>';
+        print_r($modelTeam);
+        echo '</pre>';
+        exit;
+        
         if (count($modelTeam->getData()) != 2) {
             return;
         }
@@ -313,7 +352,7 @@ class Fulfill extends \OriginalAppName\Site\Elttl\Model\Tennis
     /**
      * @return object mold_fixture
      */
-    public function getFixture() {
+    private function getFixture() {
         return $this->fixture;
     }
     
@@ -321,7 +360,7 @@ class Fulfill extends \OriginalAppName\Site\Elttl\Model\Tennis
     /**
      * @param object $fixture Mold_fixture
      */
-    public function setFixture($fixture) {
+    private function setFixture($fixture) {
         $this->fixture = $fixture;
         return $this;
     }
@@ -332,7 +371,7 @@ class Fulfill extends \OriginalAppName\Site\Elttl\Model\Tennis
      * error msg
      * @return bool
      */
-    public function validate()
+    private function validate()
     {
         $required = array(
             'division_id',
@@ -351,7 +390,7 @@ class Fulfill extends \OriginalAppName\Site\Elttl\Model\Tennis
     /**
      * @return array 
      */
-    public function getPlayers() {
+    private function getPlayers() {
         return $this->players;
     }
     
@@ -359,7 +398,7 @@ class Fulfill extends \OriginalAppName\Site\Elttl\Model\Tennis
     /**
      * @param array $players 
      */
-    public function setPlayers($players) {
+    private function setPlayers($players) {
         $this->players = $players;
         return $this;
     }
@@ -376,7 +415,7 @@ class Fulfill extends \OriginalAppName\Site\Elttl\Model\Tennis
      * @param  [type] $config [description]
      * @return [type]         [description]
      */
-    public function calculatePlayerRankChanges($config)
+    private function calculatePlayerRankChanges($config)
     {
 
         // record changes
