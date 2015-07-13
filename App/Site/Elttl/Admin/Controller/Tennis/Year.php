@@ -1,10 +1,5 @@
 <?php
-
 namespace OriginalAppName\Site\Elttl\Admin\Controller\Tennis;
-
-use OriginalAppName\Response;
-use OriginalAppName\Site\Elttl\Model;
-
 
 /**
  * @author Martin Wyatt <martin.wyatt@gmail.com> 
@@ -16,13 +11,17 @@ class Year extends \OriginalAppName\Controller\Admin
 
 
 	public function all() {
-		$modelYear = new Model\Tennis\Year;
+		$modelYear = new \OriginalAppName\Site\Elttl\Model\Tennis\Year;
 		$modelYear->read();
+
+		// current
+		$registry = \OriginalAppName\Registry::getInstance();
 
 		// render
 		$this
 			->view
+			->setDataKey('currentYearId', $registry->get('database/options/yearId'))
 			->setDataKey('years', $modelYear->getData());
-		return new Response($this->view->getTemplate('admin/tennis/year/all'));
+		return new \OriginalAppName\Response($this->view->getTemplate('admin/tennis/year/all'));
 	}
 }

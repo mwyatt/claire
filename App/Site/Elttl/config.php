@@ -2,6 +2,7 @@
 
 return [
     'admin/menu' => [
+        ['name' => 'Ads', 'route' => 'admin/ad/all'],
         ['name' => 'Pages', 'route' => 'admin/page/all'],
         ['name' => 'Press', 'route' => 'admin/press/all'],
         ['name' => 'Users', 'route' => 'admin/user/all'],

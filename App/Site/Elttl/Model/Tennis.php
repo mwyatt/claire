@@ -66,6 +66,10 @@ class Tennis extends \OriginalAppName\Model
 	 */
 	public function readYearId($ids, $column = 'id')
 	{
+		$uniqueIds = [];
+		foreach ($ids as $id) {
+			$uniqueIds[$id] = $id;
+		}
 
 		// query
 		$sth = $this->database->dbh->prepare("
@@ -80,7 +84,7 @@ class Tennis extends \OriginalAppName\Model
 	    $sth->bindValue(':yearId', $this->yearId, PDO::PARAM_INT);
 
 		// loop prepared statement
-		foreach ($ids as $id) {
+		foreach ($uniqueIds as $id) {
 		    $sth->bindValue(':id', $id, PDO::PARAM_INT);
 			$sth->execute();
 			while ($result = $sth->fetch()) {

@@ -19,7 +19,16 @@
 	<?php foreach($years as $year): ?>
 
 		<tr>
-			<td><?php echo $year->name ?></td>
+			<td>
+
+		<?php echo $year->name ?>
+		<?php if ($year->id == $currentYearId): ?>
+			
+				<span class="right">(Current)</span>
+
+		<?php endif ?>
+
+			</td>
 		</tr>
 
 	<?php endforeach ?>
