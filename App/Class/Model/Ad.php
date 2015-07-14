@@ -22,7 +22,7 @@ class Ad extends \OriginalAppName\Model
 		'image',
 		'url',
 		'action',
-		'group'
+		'\'group\''
 	);
 
 
