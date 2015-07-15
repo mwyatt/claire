@@ -10,6 +10,11 @@
     "require-dev": {
         "squizlabs/php_codesniffer": "^2.3"
     },
+    "scripts": {
+        "post-install-cmd": [
+            "bash contrib/setup.sh"
+        ]
+    },
     "require": {
         "intervention/image": "dev-master",
         "corneltek/pux": "~1.5",
