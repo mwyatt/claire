@@ -7,7 +7,7 @@ use OriginalAppName\Service;
 use OriginalAppName\Registry;
 use OriginalAppName\Response;
 
-/**
+/*
  * @author Martin Wyatt <martin.wyatt@gmail.com>
  * @version     0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
@@ -22,7 +22,8 @@ class Controller
     public $url;
 
 
-    public function __construct()  {
+    public function __construct()
+    {
         $registry = Registry::getInstance();
         $this
             ->setUrl($registry->get('url'))
@@ -30,7 +31,7 @@ class Controller
     }
 
 
-    public function error500($exception )
+    public function error500($exception)
     {
         $this->view->setDataKey('exceptionMessage', $exception->getMessage());
         return new Response($this->view->getTemplate('500'), 500);
