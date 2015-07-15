@@ -15,6 +15,7 @@ use OriginalAppName\Response;
 class Controller
 {
 
+
     public $view;
 
 
