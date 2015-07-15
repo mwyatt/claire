@@ -4,6 +4,7 @@ namespace OriginalAppName;
 
 
 /**
+ * can remove this?
  * boilerplate for all objects in the app. responsible for how each object
  * should be implemented
  * @author Martin Wyatt <martin.wyatt@gmail.com> 
