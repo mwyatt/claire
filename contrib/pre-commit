@@ -28,8 +28,10 @@ done
  
 if [ "$FILES" != "" ]
 then
-	echo "Running Code Sniffer..."
-	./vendor/bin/phpcs --standard=PSR1 --encoding=utf-8 -n -p $FILES
+    echo "Running Code Sniffer - Automatic Correction ..."
+	./vendor/bin/phpcbf --standard=PSR1,PSR2 --encoding=utf-8 -n -p $FILES
+    echo "Running Code Sniffer - Manual Correction ..."
+	./vendor/bin/phpcs --standard=PSR1,PSR2 --encoding=utf-8 -n -p $FILES
 	if [ $? != 0 ]
 	then
 		echo "Fix the error before commit."
