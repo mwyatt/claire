@@ -8,3 +8,5 @@ credentials.php
 config.json
 /asset/upload/
 npm-debug.log
+bower_components
+/temporary/

@@ -1,14 +1,15 @@
+@import "../_dependencies.css";
+@mixin link $selector, $color-secondary-1-0;
 @import "_settings.css";
-@import "../../site/codex/css/_dependencies.css";
-@import "../../../vendor/bower/normalize-css/normalize.css";
-@import "../../../vendor/bower/magnific-popup/dist/magnific-popup.css";
-@import "../../site/codex/css/_reset.css";
-@import "../../site/codex/css/_reusable.css";
-@import "../../site/codex/css/_keyframe.css";
-@import "../../site/codex/css/_form.css";
-@import "../../site/codex/css/_typography.css";
-@import "../../site/codex/css/_alert.css";
-@import "../../site/codex/css/_blankslate.css";
+@import "../bower_components/normalize-css/normalize.css";
+@import "../bower_components/magnific-popup/dist/magnific-popup.css";
+@import "../_reset.css";
+@import "../_reusable.css";
+@import "../_keyframe.css";
+@import "../_form.css";
+@import "../_typography.css";
+@import "../_alert.css";
+@import "../_blankslate.css";
 
 /* admin specific */
 @import "_header.css";

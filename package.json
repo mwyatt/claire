@@ -3,30 +3,26 @@
   "author": "Martin Wyatt",
   "version": "1.0.0",
   "devDependencies": {
-    "autoprefixer-core": "^5.1.11",
-    "browserify": "^8.0.2",
-    "csswring": "^3.0.5",
-    "gulp-browserify": "^0.5.1",
     "gulp": "^3.8.11",
-    "gulp-postcss": "^5.1.8",
+    "gulp-util": "^3.0.6",
     "gulp-uglify": "^1.2.0",
+    "gulp-postcss": "^5.1.8",
+    "gulp-clean": "^0.3.1",
+    "autoprefixer-core": "^5.1.11",
     "postcss-assets": "^2.1.2",
     "postcss-color-function": "^1.2.0",
     "postcss-import": "^5.2.2",
     "postcss-media-minmax": "^1.1.0",
     "postcss-mixins": "^0.3.0",
     "postcss-simple-vars": "^0.3.0",
-    "postcss-url": "^3.2.0"
-  },
-  "browser": {
-    "magnificPopup": "./vendor/bower/magnific-popup/dist/jquery.magnific-popup.js",
-    "serializeObject": "./vendor/bower/jquery-serialize-object/dist/jquery.serialize-object.min.js",
-    "mustache": "./vendor/bower/mustache/mustache.js",
-    "owlCarousel": "./vendor/bower/owlcarousel/owl-carousel/owl.carousel.js",
-    "rainbow": "./vendor/bower/rainbow/js/rainbow.js",
-    "scrollTop": "./App/Site/Codex/js/scrollTop.js",
-    "keycode": "./App/Site/Codex/js/keycode.js",
-    "url": "./App/Site/Codex/js/url.js",
-    "dialogue": "./App/Site/Codex/js/dialogue.js"
+    "postcss-url": "^3.2.0",
+    "browserify": "^10.2.6",
+    "jquery": "^2.1.4",
+    "mustache": "^2.1.2",
+    "csswring": "^3.0.5",
+    "event-stream": "^3.3.1",
+    "run-sequence": "^1.1.1",
+    "glob": "^5.0.14",
+    "vinyl-source-stream": "^1.1.0"
   }
 }
