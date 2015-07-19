@@ -40,13 +40,13 @@ var postcss = require('gulp-postcss');
 var minmax = require('postcss-media-minmax');
 var autoprefixer = require('autoprefixer-core');
 var cssadmin = [
-  'app/admin/css/**/*.css',
-  'app/site/' + pkg.site + '/admin/css/**/*.css',
-  '!app/admin/css/**/_*.css'
+  'temporary/admin/**/*.css',
+  '!temporary/**/_*.css'
 ];
 var cssfront = [
-  'app/site/' + pkg.site + '/css/**/*.css',
-  '!app/site/' + pkg.site + '/css/**/_*.css'
+  'temporary/**/*.css',
+  '!temporary/admin/**/*.css',
+  '!temporary/**/_*.css'
 ];
 var css = ['css/**/*.css'];
 var colorFunction = require('postcss-color-function');
@@ -76,31 +76,37 @@ gulp.task('css/copy/site', function() {
     .pipe(gulp.dest('temporary'));
 });
 
+gulp.task('css/copy/site/admin', function() {
+  return gulp.src('app/site/' + pkg.name + '/admin/css/**/**.css')
+    .pipe(gulp.dest('temporary'));
+});
+
 gulp.task('css/copy/codex', function() {
   return gulp.src('app/site/codex/css/**/**.css')
     .pipe(gulp.dest('temporary'));
 });
 
-gulp.task('css/g', function () {
+gulp.task('css/global', function () {
   return actionCss.postcss('temporary/**/**.css');
 });
 
-gulp.task('css/f', function () {
+gulp.task('css/front', function () {
   return actionCss.postcss(cssfront);
 });
 
-gulp.task('css/a', function () {
-  dest = 'asset/admin';
-  return actionCss.postcss(cssadmin);
+gulp.task('css/admin', function () {
+  return gulp.src(cssadmin)
+    .pipe(postcss(processes))
+    .pipe(gulp.dest('asset/admin'));
 });
 
-gulp.task('css/a/m', function () {
+gulp.task('css/admin/minify', function () {
   dest = 'asset/admin';
   processes.push(require('csswring'));
   return actionCss.postcss(cssadmin);
 });
 
-gulp.task('css/m', function () {
+gulp.task('css/minify', function () {
   processes.push(require('csswring'));
   return actionCss.postcss(cssfront);
 });
@@ -113,12 +119,10 @@ gulp.task('css/uglify', function() {
 
 gulp.task('css', function() {
   runSequence(
-    'clean/asset',
-    'clean/temporary',
     'css/copy/codex',
     'css/copy/admin',
     'css/copy/site',
-    'css/g',
+    'css/global',
     'clean/temporary'
   );
 });

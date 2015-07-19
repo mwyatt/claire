@@ -1,6 +1,6 @@
 @import "_settings.css";
 @import "_dependencies.css";
-@import "../../../../vendor/bower/normalize-css/normalize.css";
+@import "../bower_components/normalize-css/normalize.css";
 @import "_reset.css";
 @import "_reusable.css";
 @import "_form.css";
