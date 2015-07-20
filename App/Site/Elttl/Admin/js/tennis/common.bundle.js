@@ -1,6 +1,5 @@
 var feedbackStream = require('admin/feedbackStream');
 var url = require('url');
-require('admin/helper/slugify');
 
 
 // delete single tennis thing

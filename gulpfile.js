@@ -92,7 +92,7 @@ gulp.task('css/admin', function () {
 gulp.task('css/admin/minify', function () {
   processes.push(require('csswring'));
   return gulp.src(cssadmin)
-    .pipe(postcss(processes))
+  .pipe(postcss(processes))
     .pipe(gulp.dest('asset/admin'));
 });
 
@@ -147,6 +147,11 @@ gulp.task('js/copy/site', function() {
     .pipe(gulp.dest('temporary'));
 });
 
+gulp.task('js/copy/site/admin', function() {
+  return gulp.src('app/site/' + pkg.site + '/admin/js/**/**.js')
+    .pipe(gulp.dest('temporary/admin'));
+});
+
 gulp.task('js/copy/codex', function() {
   return gulp.src('app/site/codex/js/**/**.js')
     .pipe(gulp.dest('temporary'));
@@ -183,6 +188,7 @@ gulp.task('js', function() {
     'js/copy/codex',
     'js/copy/admin',
     'js/copy/site',
+    'js/copy/site/admin',
     'js/browserify'
     // 'clean/temporary'
   );
