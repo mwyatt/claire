@@ -163,7 +163,7 @@ gulp.task('js/uglify', function() {
     .pipe(gulp.dest('asset'));
 });
 
-gulp.task('js/browserify', function(done) {
+gulp.task('js', function(done) {
   glob('temporary/**/**.bundle.js', function(err, files) {
     if (err) {
       done(err);
@@ -171,7 +171,13 @@ gulp.task('js/browserify', function(done) {
     var tasks = files.map(function(entry) {
       return browserify({
         entries: [entry],
-        paths: ['node_modules', 'bower_components', 'temporary']
+        paths: [
+          'node_modules',
+          'bower_components',
+          'js',
+          'app/site/codex/js',
+          'app/site/' + pkg.site + '/js'
+        ]
       })
       .bundle()
       .pipe(source(entry.replace('temporary/', '')))
@@ -181,17 +187,6 @@ gulp.task('js/browserify', function(done) {
     // create a merged stream
     es.merge(tasks).on('end', done);
   });
-});
-
-gulp.task('js', function() {
-  runSequence(
-    'js/copy/codex',
-    'js/copy/admin',
-    'js/copy/site',
-    'js/copy/site/admin',
-    'js/browserify'
-    // 'clean/temporary'
-  );
 });
 
 
