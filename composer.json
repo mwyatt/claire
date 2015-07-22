@@ -23,7 +23,9 @@
     },
     "autoload": {
         "psr-4": {
-            "OriginalAppName\\": ["App/Class/", "App/Admin/", "App/Site/"]
+            "OriginalAppName\\": "App/Class/",
+            "OriginalAppName\\Admin\\": "App/Admin/",
+            "OriginalAppName\\Site\\": "App/Site/"
         }
     }
 }

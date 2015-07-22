@@ -51,6 +51,11 @@ var processes = [
   autoprefixer({browsers: ['last 1 version']})
 ];
 
+gulp.task('css/copy/global', function() {
+  return gulp.src('css/**/**.css')
+    .pipe(gulp.dest('temporary'));
+});
+
 gulp.task('css/copy/admin', function() {
   return gulp.src('app/admin/css/**/**.css')
     .pipe(gulp.dest('temporary/admin'));
@@ -111,6 +116,7 @@ gulp.task('css/uglify', function() {
 
 gulp.task('css', function() {
   runSequence(
+    'css/copy/global',
     'css/copy/codex',
     'css/copy/admin',
     'css/copy/site',
@@ -164,7 +170,7 @@ gulp.task('js/uglify', function() {
 });
 
 gulp.task('js', function(done) {
-  glob('temporary/**/**.bundle.js', function(err, files) {
+  glob('**/**.bundle.js', function(err, files) {
     if (err) {
       done(err);
     };
@@ -180,7 +186,7 @@ gulp.task('js', function(done) {
         ]
       })
       .bundle()
-      .pipe(source(entry.replace('temporary/', '')))
+      .pipe(source(entry.replace('js/', '').replace('.bundle', '')))
       .pipe(gulp.dest('asset'));
     });
 

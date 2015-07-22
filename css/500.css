@@ -1,12 +1,12 @@
-@import "../app/site/claire/css/_settings.css";
-@import "../app/site/codex/css/_dependencies.css";
-@import "../vendor/bower/normalize-css/normalize.css";
-@import "../app/site/codex/css/_reset.css";
-@import "../app/site/codex/css/_reusable.css";
-@import "../app/site/codex/css/_form.css";
-@import "../app/site/codex/css/_typography.css";
-@import "../app/site/codex/css/_alert.css";
-@import "../app/site/codex/css/_blankslate.css";
+@import "_settings.css";
+@import "_dependencies.css";
+@import "../bower_components/normalize-css/normalize.css";
+@import "_reset.css";
+@import "_reusable.css";
+@import "_form.css";
+@import "_typography.css";
+@import "_alert.css";
+@import "_blankslate.css";
 
 body {
   background-color: #eee;
