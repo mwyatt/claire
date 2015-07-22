@@ -20,6 +20,13 @@ gulp.task('default', function() {
   );
 });
 
+gulp.task('min', function() {
+  runSequence(
+    'css/min',
+    'js/min'
+  );
+});
+
 
 /**
  * css
@@ -101,16 +108,10 @@ gulp.task('css/admin/minify', function () {
     .pipe(gulp.dest('asset/admin'));
 });
 
-gulp.task('css/minify', function () {
+gulp.task('css/min', function () {
   processes.push(require('csswring'));
   return gulp.src(cssfront)
     .pipe(postcss(processes))
-    .pipe(gulp.dest('asset'));
-});
-
-gulp.task('css/uglify', function() {
-  gulp.src('asset/**/**.css')
-    .pipe(uglify())
     .pipe(gulp.dest('asset'));
 });
 
@@ -120,8 +121,7 @@ gulp.task('css', function() {
     'css/copy/codex',
     'css/copy/admin',
     'css/copy/site',
-    'css/global',
-    'clean/temporary'
+    'css/global'
   );
 });
 
@@ -148,6 +148,11 @@ gulp.task('js/copy/admin', function() {
     .pipe(gulp.dest('temporary/admin'));
 });
 
+gulp.task('js/copy/codex', function() {
+  return gulp.src('app/site/codex/js/**/**.js')
+    .pipe(gulp.dest('temporary'));
+});
+
 gulp.task('js/copy/site', function() {
   return gulp.src('app/site/' + pkg.site + '/js/**/**.js')
     .pipe(gulp.dest('temporary'));
@@ -158,19 +163,14 @@ gulp.task('js/copy/site/admin', function() {
     .pipe(gulp.dest('temporary/admin'));
 });
 
-gulp.task('js/copy/codex', function() {
-  return gulp.src('app/site/codex/js/**/**.js')
-    .pipe(gulp.dest('temporary'));
-});
-
-gulp.task('js/uglify', function() {
+gulp.task('js/min', function() {
   gulp.src('asset/**/**.js')
     .pipe(uglify())
     .pipe(gulp.dest('asset'));
 });
 
-gulp.task('js', function(done) {
-  glob('**/**.bundle.js', function(err, files) {
+gulp.task('js/build', function(done) {
+  glob('temporary/**/**.bundle.js', function(err, files) {
     if (err) {
       done(err);
     };
@@ -180,13 +180,11 @@ gulp.task('js', function(done) {
         paths: [
           'node_modules',
           'bower_components',
-          'js',
-          'app/site/codex/js',
-          'app/site/' + pkg.site + '/js'
+          'temporary'
         ]
       })
       .bundle()
-      .pipe(source(entry.replace('js/', '').replace('.bundle', '')))
+      .pipe(source(entry.replace('temporary/', '').replace('.bundle', '')))
       .pipe(gulp.dest('asset'));
     });
 
@@ -195,9 +193,31 @@ gulp.task('js', function(done) {
   });
 });
 
+gulp.task('js', function() {
+  runSequence(
+    'js/copy/admin',
+    'js/copy/codex',
+    'js/copy/site',
+    'js/copy/site/admin',
+    'js/build'
+  );
+});
+
 
 /**
  * images and svgs
  * compress and save them in asset/
  * asset/ not stored in git repo at all
  */
+// var imagemin = require('gulp-imagemin');
+// var pngquant = require('imagemin-pngquant');
+ 
+// gulp.task('image/copy', function () {
+//   gulp.src('app/site/' + pkg.site + '/media/**/*')
+//     .pipe(imagemin({
+//       progressive: true,
+//       svgoPlugins: [{removeViewBox: false}],
+//       use: [pngquant()]
+//     }))
+//     .pipe(gulp.dest('asset'));
+// });
