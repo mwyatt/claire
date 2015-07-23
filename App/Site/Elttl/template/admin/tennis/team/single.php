@@ -6,7 +6,7 @@
 		<div class="page-actions">
 			<a href="<?php echo $this->url->generate('admin/tennis/' . $nameSingular . '/all') ?>" class="page-action left button-secondary">Back</a>
 
-<?php if ($$nameSingular->id): ?>
+<?php if ($$nameSingular->id) : ?>
 
 			<span class="page-action button-secondary left js-tennis-delete-single" data-singular="<?php echo $nameSingular ?>" data-id="<?php echo $$nameSingular->id ?>">Delete</span>
 
@@ -26,7 +26,7 @@
         	<label class="form-label block" for="form-home-weekday">Home night</label>
 			<select id="form-home-weekday" name="entity[homeWeekday]">
 
-<?php foreach ($weekdays as $weekdayId => $weekday): ?>
+<?php foreach ($weekdays as $weekdayId => $weekday) : ?>
 		
 				<option value="<?php echo $weekdayId ?>" <?php echo $team->homeWeekday == $weekdayId ? 'selected' : '' ?>><?php echo $weekday ?></option>
 
@@ -39,7 +39,7 @@
 			<select id="form-secretary" name="entity[secretaryId]">
 				<option value="">None</option>
 
-<?php foreach ($players as $player): ?>
+<?php foreach ($players as $player) : ?>
 		
 				<option value="<?php echo $player->id ?>" <?php echo $player->id == $team->secretaryId ? 'selected' : '' ?>><?php echo $player->getNameFull() ?></option>
 
@@ -51,7 +51,7 @@
         	<label class="form-label block" for="form-venue">venue</label>
 			<select id="form-venue" name="entity[venueId]">
 
-<?php foreach ($venues as $venue): ?>
+<?php foreach ($venues as $venue) : ?>
 		
 				<option value="<?php echo $venue->id ?>" <?php echo $venue->id == $team->venueId ? 'selected' : '' ?>><?php echo $venue->name ?></option>
 
@@ -63,7 +63,7 @@
         	<label class="form-label block" for="form-division">division</label>
 			<select id="form-division" name="entity[divisionId]">
 
-<?php foreach ($divisions as $division): ?>
+<?php foreach ($divisions as $division) : ?>
 		
 				<option value="<?php echo $division->id ?>" <?php echo $division->id == $team->divisionId ? 'selected' : '' ?>><?php echo $division->name ?></option>
 

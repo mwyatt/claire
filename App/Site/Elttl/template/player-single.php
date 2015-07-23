@@ -16,7 +16,7 @@
 				<td class="elttl-table-cell"><?php echo $player->getRank() ?></td>
 			</tr>
 
-<?php if ($player->getPhoneLandline()): ?>
+<?php if ($player->getPhoneLandline()) : ?>
 
 			<tr class="elttl-table-row">
 				<th class="elttl-table-cell elttl-table-heading">Landline</th>
@@ -24,7 +24,7 @@
 			</tr>
 
 <?php endif ?>
-<?php if ($player->getPhoneMobile()): ?>
+<?php if ($player->getPhoneMobile()) : ?>
 
 			<tr class="elttl-table-row">
 				<th class="elttl-table-cell elttl-table-heading">Mobile</th>
@@ -36,7 +36,7 @@
 		</table>
 	</div>
 
-<?php if ($fixtures && $fixtureResults && $teams): ?>
+<?php if ($fixtures && $fixtureResults && $teams) : ?>
 
 	<div class="block-margins">
 		<h2 class="player-single-secondary-title">Fixtures</h2>
@@ -46,7 +46,7 @@
 	</div>
 
 <?php endif ?>
-<?php if ($encounters): ?>
+<?php if ($encounters) : ?>
 
 	<div class="block-margins">
 		<h2 class="player-single-secondary-title">Performance</h2>

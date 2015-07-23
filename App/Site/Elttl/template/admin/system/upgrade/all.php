@@ -3,7 +3,7 @@
 <div class="page">
 	<h1 class="page-primary-title">System/Upgrade</h1>
 
-<?php if (!empty($versionsUnpatched)): ?>
+<?php if (!empty($versionsUnpatched)) : ?>
 
 	<div class="typography">
 		<h2>Upgrade Available</h2>
@@ -11,20 +11,21 @@
 	</div>
 	<table class="table mb1">
 
-	<?php foreach ($versionsUnpatched as $patch): ?>
+	<?php foreach ($versionsUnpatched as $patch) : ?>
 		
 		<tr>
 			<td><?php echo $patch['filename'] ?></td>
 		</tr>
 
-	<?php endforeach ?>
+	<?php
+endforeach ?>
 
 	</table>
 	<form>
 		<button name="update" value="true" class="button-primary">Upgrade</button>
 	</form>
 
-<?php else: ?>
+<?php else : ?>
 
 	<div class="blankslate">
 		<p>No upgrades currently.</p>

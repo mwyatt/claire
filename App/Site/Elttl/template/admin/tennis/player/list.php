@@ -16,8 +16,8 @@
 		</tr>
 		<tr class="js-grid-create-target"></tr>
 
-<?php if ($players): ?>
-	<?php foreach ($players as $player): ?>
+<?php if ($players) : ?>
+	<?php foreach ($players as $player) : ?>
 
 		<tr class="table-crud-row js-table-crud-row">
 			<td class="table-crud-cell js-table-crud-cell">
@@ -41,20 +41,22 @@
 			</td>
 			<td class="table-crud-cell js-table-crud-cell">
 				
-		<?php if ($teams): ?>
+		<?php if ($teams) : ?>
 
 				<select class="table-crud-select js-grid-cell" name="team_id">
 
-			<?php foreach ($teams as $team): ?>
+			<?php foreach ($teams as $team) : ?>
 				<?php $isSelected = $player->getTeamId() == $team->getId() ?>
 				
 					<option value="<?php echo $team->getId() ?>" <?php echo $isSelected ? 'selected="selected"' : '' ?>><?php echo $team->getName() ?></option>
 
-			<?php endforeach ?>
+			<?php
+endforeach ?>
 
 				</select>
 
-		<?php endif ?>
+		<?php
+endif ?>
 
 			</td>
 			<td>
@@ -63,7 +65,8 @@
 			</td>
 		</tr>
 
-	<?php endforeach ?>
+	<?php
+endforeach ?>
 <?php endif ?>
 		
 	</table>

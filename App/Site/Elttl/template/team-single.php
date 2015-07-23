@@ -18,7 +18,7 @@
 				<td class="elttl-table-cell"><?php echo $venue->getName() ?></td>
 			</tr>
 
-<?php if ($secretary): ?>
+<?php if ($secretary) : ?>
 	
 			<tr class="elttl-table-row">
 				<th class="elttl-table-cell elttl-table-heading">Secretary</th>
@@ -26,18 +26,20 @@
 					<div class="team-single-secretary">
 						<a class="team-single-secretary-name" href="<?php echo $this->buildArchiveUrl(array('player', $secretary->getNameFull())) ?>"><?php echo $secretary->getNameFull() ?></a>
 
-	<?php if ($secretary->getPhoneLandline()): ?>
+	<?php if ($secretary->getPhoneLandline()) : ?>
 
 						<span class="team-single-secretary-telephone-landline">
 							<strong>Landline:</strong> <?php echo $secretary->getPhoneLandline() ?></span>
 							
-	<?php endif ?>
-	<?php if ($secretary->getPhoneMobile()): ?>
+	<?php
+endif ?>
+	<?php if ($secretary->getPhoneMobile()) : ?>
 
 						<span class="team-single-secretary-telephone-mobile">
 							<strong>Mobile:</strong> <?php echo $secretary->getPhoneMobile() ?></span>
 							
-	<?php endif ?>
+	<?php
+endif ?>
 
 					</div>
 				</td>
@@ -48,13 +50,13 @@
 		</table>
 	</div>
 
-<?php if ($players): ?>
+<?php if ($players) : ?>
 
 	<div class="block-margins">
 		<h2 class="team-single-secondary-title">Registered players</h2>
 		<table class="elttl-table is-general">
 		
-	<?php foreach ($players as $player): ?>
+	<?php foreach ($players as $player) : ?>
 		
 			<tr class="elttl-table-row">
 				<td class="elttl-table-cell">
@@ -62,13 +64,14 @@
 				</td>
 			</tr>
 
-	<?php endforeach ?>
+	<?php
+endforeach ?>
 
 		</table>
 	</div>
 
 <?php endif ?>
-<?php if ($fixtures && $fixtureResults && $teams): ?>
+<?php if ($fixtures && $fixtureResults && $teams) : ?>
 	
 	<div class="block-margins">
 		<h2 class="team-single-secondary-title">Fixtures</h2>

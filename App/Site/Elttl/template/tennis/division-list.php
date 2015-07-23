@@ -4,19 +4,20 @@
 	<h1 class="page-primary-title">Divisions</h1>
 	<p>Here are all the divisions in season <?php echo $yearSingle->getNameFull() ?>.</p>
 
-<?php if ($divisions): ?>
+<?php if ($divisions) : ?>
 
 	<div class="divisions">
 
-	<?php foreach ($divisions as $division): ?>
+	<?php foreach ($divisions as $division) : ?>
 		
 		<a href="<?php echo $division->getUrl($yearSingle) ?>" class="division"><?php echo $division->getName() ?></a>
 
-	<?php endforeach ?>
+	<?php
+endforeach ?>
 
 	</div>
 
-<?php else: ?>
+<?php else : ?>
 	
 	<p>No divisions, not good!</p>
 

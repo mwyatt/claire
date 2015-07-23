@@ -3,35 +3,37 @@
 <div class="page">
 	<h1 class="page-primary-title">Years</h1>
 
-<?php if (empty($years)): ?>
+<?php if (empty($years)) : ?>
 
 	<div class="blankslate typography">
 		<p>No years have been created yet.</p>
 	</div>
 
-<?php else: ?>
+<?php else : ?>
 	
 	<table class="table">
 		<tr>
 			<th>Name</th>
 		</tr>
 
-	<?php foreach($years as $year): ?>
+	<?php foreach ($years as $year) : ?>
 
 		<tr>
 			<td>
 
 		<?php echo $year->name ?>
-		<?php if ($year->id == $currentYearId): ?>
+		<?php if ($year->id == $currentYearId) : ?>
 			
 				<span class="right">(Current)</span>
 
-		<?php endif ?>
+		<?php
+endif ?>
 
 			</td>
 		</tr>
 
-	<?php endforeach ?>
+	<?php
+endforeach ?>
 
 	</table>
 	

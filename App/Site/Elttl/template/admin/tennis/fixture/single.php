@@ -17,22 +17,23 @@
 	<form class="main" method="post" class="fixture-single-form">
 		<!-- <input name="debug" type="hidden" value="Fulfill"> -->
 
-<?php if ($isFilled): ?>
+<?php if ($isFilled) : ?>
 	
 		<span class="admin-button-primary-delete js-form-button-submit js-form-button-fixture-delete">Delete Fixture</span>
 
 <?php endif ?>
-<?php if ($divisions): ?>
+<?php if ($divisions) : ?>
 
 		<section class="fixture-single-section">
 			<select id="division_id" name="division_id" class="fixture-single-select fixture-single-division js-fixture-single-division">
 				<option value="0"></option>
 				 
-	<?php foreach ($divisions as $division): ?>
+	<?php foreach ($divisions as $division) : ?>
 		
 				<option value="<?php echo $division->id ?>"><?php echo $division->name ?></option>
 
-	<?php endforeach ?>
+	<?php
+endforeach ?>
 
 			</select>
 		</section>
@@ -41,7 +42,7 @@
 
 		<section class="fixture-single-section">
 
-<?php foreach ($sides as $side): ?>
+<?php foreach ($sides as $side) : ?>
 	
 			<select id="team_<?php echo $side ?>" name="team[<?php echo $side ?>]" class="fixture-single-select fixture-single-team js-fixture-single-team" data-side="<?php echo $side ?>">
 				<option value="0"><?php echo ucfirst($side) ?> team</option>
@@ -52,8 +53,8 @@
 		</section>
 		<section class="fixture-single-section">
 
-<?php foreach (array('1', '2', '3') as $playerPosition): ?>
-	<?php foreach ($sides as $side): ?>
+<?php foreach (array('1', '2', '3') as $playerPosition) : ?>
+	<?php foreach ($sides as $side) : ?>
 	
 			<div class="fixture-single-player-row is-<?php echo $side ?>">
 				<span class="fixture-single-button-play-up fixture-single-button-play-up-<?php echo $side ?> js-fixture-single-button-play-up" data-side="<?php echo $side ?>" data-position="<?php echo $playerPosition ?>">Play up</span>
@@ -62,12 +63,13 @@
 				</select>
 			</div>
 			
-	<?php endforeach ?>
+	<?php
+endforeach ?>
 <?php endforeach ?>
 
 		</section>
 
-<?php if ($encounterStructure): ?>
+<?php if ($encounterStructure) : ?>
 		
 		<section class="fixture-single-section">
 
@@ -75,29 +77,33 @@
 
 			<div class="fixture-single-score-row js-fixture-single-score-row" data-row="<?php echo $row ?>">
 			
-		<?php if (! in_array('doubles', $playerPositions)): ?>
+		<?php if (! in_array('doubles', $playerPositions)) : ?>
 			
 				<div class="fixture-single-score-row-exclude">
 					<label for="exclude_<?php echo $row ?>" class="fixture-single-score-row-exclude-label">Exclude</label>
 					<input id="exclude_<?php echo $row ?>" type="checkbox" name="encounter[<?php echo $row ?>][status]" class="fixture-single-score-row-exclude-checkbox js-fixture-single-score-row-exclude-checkbox" data-row="<?php echo $row ?>" value="exclude">
 				</div>
 
-		<?php else: ?>
+		<?php
+else : ?>
 
 				<input name="encounter[<?php echo $row ?>][status]" type="hidden" value="doubles">
 
-		<?php endif ?>
-		<?php foreach ($sides as $side): ?>
+		<?php
+endif ?>
+		<?php foreach ($sides as $side) : ?>
 			<?php $playerPosition = $playerPositions[$side == 'left' ? 0 : 1] ?>
 
 				<label for="encounter_<?php echo $row ?>_<?php echo $side ?>" class="fixture-single-score-row-encounter-label js-fixture-single-score-row-encounter-label fixture-single-score-row-encounter-label-<?php echo $side ?>" data-position="<?php echo $playerPosition ?>" data-side="<?php echo $side ?>"></label>
 				<input id="encounter_<?php echo $row ?>_<?php echo $side ?>" name="encounter[<?php echo $row ?>][<?php echo $side ?>]" class="fixture-single-encounter-input js-fixture-single-encounter-input" type="text" size="1" maxlength="1" value="" data-row="<?php echo $row ?>" data-side="<?php echo $side ?>">
 			
-		<?php endforeach ?>
+		<?php
+endforeach ?>
 
 			</div>
 		
-	<?php endforeach ?>
+	<?php
+endforeach ?>
 
 		</section>
 
@@ -105,7 +111,7 @@
 		
 		<section class="fixture-single-section">
 
-<?php foreach ($sides as $side): ?>
+<?php foreach ($sides as $side) : ?>
 	
 			<span class="fixture-single-total-<?php echo $side ?> js-fixture-single-total" data-side="<?php echo $side ?>"></span>
 	

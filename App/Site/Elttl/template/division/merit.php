@@ -3,7 +3,7 @@
 <div class="page division-merit js-page-division-merit">
 	<h1 class="page-primary-title"><?php echo $division->getName() ?> division merit table</h1>
 
-<?php if ($meritStats): ?>
+<?php if ($meritStats) : ?>
 
 	<p class="p dont-print">This is the merit table for the <?php echo $division->getName() ?> division.</p>
 
@@ -19,8 +19,8 @@
 			<th class="elttl-table-cell elttl-table-heading is-average">Average</th>
 		</tr>
 
-	<?php foreach ($meritStats as $playerId => $meritStat): ?>
-		<?php if (array_key_exists($playerId, $players)): ?>
+	<?php foreach ($meritStats as $playerId => $meritStat) : ?>
+		<?php if (array_key_exists($playerId, $players)) : ?>
 			<?php $player = $players[$playerId] ?>
 			<?php $team = $teams[$player->getTeamId()] ?>
 
@@ -37,12 +37,14 @@
 			<td class="elttl-table-cell is-average"><?php echo $meritStat->average ?>%</td>
 		</tr>
 
-		<?php endif ?>
-	<?php endforeach ?>
+		<?php
+endif ?>
+	<?php
+endforeach ?>
 
 	</table>
 
-<?php else: ?>
+<?php else : ?>
 	
 	<p>No fixtures have been fulfilled yet.</p>
 

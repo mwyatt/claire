@@ -3,7 +3,7 @@
 <div class="page division-league js-page-division-league">
 	<h1 class="page-primary-title"><?php echo $division->getName() ?> division <?php echo $tableName ?> table</h1>
 
-<?php if ($leagueStats): ?>
+<?php if ($leagueStats) : ?>
 	<p class="page-primary-description">This is the <?php echo $tableName ?> table for the <?php echo $division->getName() ?> division.</p>
 
 	<?php include($this->getTemplatePath('division/_menu-tables')) ?>
@@ -18,8 +18,8 @@
 			<th class="elttl-table-cell elttl-table-heading is-points">Points</th>
 		</tr>
 
-	<?php foreach ($leagueStats as $teamId => $leagueStat): ?>
-		<?php if (array_key_exists($teamId, $teams)): ?>
+	<?php foreach ($leagueStats as $teamId => $leagueStat) : ?>
+		<?php if (array_key_exists($teamId, $teams)) : ?>
 			<?php $team = $teams[$teamId] ?>
 
 		<tr class="elttl-table-row">
@@ -33,12 +33,14 @@
 			<td class="elttl-table-cell is-points"><?php echo $leagueStat->points ?></td>
 		</tr>
 
-		<?php endif ?>
-	<?php endforeach ?>
+		<?php
+endif ?>
+	<?php
+endforeach ?>
 
 	</table>
 
-<?php else: ?>
+<?php else : ?>
 	
 	<p>No fixtures have been fulfilled yet.</p>
 

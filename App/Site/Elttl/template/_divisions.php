@@ -1,10 +1,11 @@
-<?php if ($divisions): ?>
+<?php if ($divisions) : ?>
 	
 	<div class="divisions js-divisions">
 
-	<?php foreach ($divisions as $division): ?>
+	<?php foreach ($divisions as $division) : ?>
 		<?php require($this->getTemplatePath('_division')) ?>
-	<?php endforeach ?>
+	<?php
+endforeach ?>
 		
 	</div>
 

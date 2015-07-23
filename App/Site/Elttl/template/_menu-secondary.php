@@ -1,12 +1,13 @@
-<?php if ($menu): ?>
+<?php if ($menu) : ?>
 	
 <nav class="menu-secondary">
 
-	<?php foreach ($menu as $menuItem): ?>
+	<?php foreach ($menu as $menuItem) : ?>
 
 	<a href="<?php echo $this->url->generate() . $menuItem->url ?>" class="menu-secondary-item"><?php echo $menuItem->name ?></a>
 
-	<?php endforeach ?>
+	<?php
+endforeach ?>
 	
 </nav>
 

@@ -3,34 +3,36 @@
 <div class="page home js-page-home">
 	<div class="banner-and-press">
 
-<?php if (isset($covers)): ?>
+<?php if (isset($covers)) : ?>
 
 		<div class="banner-primary js-home-cover">
 	
 	<?php $campaign->setSource('home cover banners') ?>
 	<?php $campaign->setMedium('referral') ?>
-	<?php foreach ($covers as $cover): ?>
+	<?php foreach ($covers as $cover) : ?>
 		<?php $campaign->setCampaign($cover->name) ?>
 	
 			<a href="<?php echo $campaign->get($cover->url) ?>" class="cover">
 				<h2 class="cover-primary-title"><?php echo $cover->name ?></h2>
 				<p class="cover-description"><?php echo $cover->description ?></p>
 
-		<?php if (isset($cover->image)): ?>
+		<?php if (isset($cover->image)) : ?>
 		
 				<img class="cover-image" src="<?php echo $this->getAssetPath($cover->image) ?>" alt="<?php echo $cover->name ?>">
 				
-		<?php endif ?>
+		<?php
+endif ?>
 
 				<span class="cover-button"><?php echo $cover->button ?></span>
 			</a>
 
-	<?php endforeach ?>
+	<?php
+endforeach ?>
 
 		</div>
 
 <?php endif ?>
-<?php if (isset($contents)): ?>
+<?php if (isset($contents)) : ?>
 
 		<div class="home-press">
 			<h1 class="home-press-heading">
@@ -46,7 +48,7 @@
 
 	</div>
 
-<?php if (isset($galleryPaths)): ?>
+<?php if (isset($galleryPaths)) : ?>
 
 	<div class="gallery">
 		<h1 class="home-press-heading">
@@ -54,17 +56,18 @@
 		</h1>
 		<div class="js-gallery">
 			
-	<?php foreach ($galleryPaths as $key => $path): ?>
+	<?php foreach ($galleryPaths as $key => $path) : ?>
 	
 			<a class="gallery-link js-magnific-gallery" href="<?php echo $this->url->generate() . $path ?>"><img class="gallery-image" src="<?php echo $path ?>" alt=""></a>
 
-	<?php endforeach ?>
+	<?php
+endforeach ?>
 
 		</div>
 	</div>
 
 <?php endif ?>
-<?php if (isset($divisions)): ?>
+<?php if (isset($divisions)) : ?>
 
 	<div class="home-divisions">
 		<h1 class="home-press-heading">

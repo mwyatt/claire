@@ -4,21 +4,22 @@
 	<h1 class="page-primary-title">Results by Season</h1>
 	<p>Here are all the seasons past and present.</p>
 
-<?php if ($years): ?>
+<?php if ($years) : ?>
 
 	<div class="years">
 
-	<?php foreach ($years as $year): ?>
+	<?php foreach ($years as $year) : ?>
 		
 		<a href="<?php echo $year->getUrl() ?>" class="year"><?php echo $year->getNameFull() ?></a>
 
-	<?php endforeach ?>
+	<?php
+endforeach ?>
 
 		<!-- older -->
 		<a href="/archive-older/" class="year">Older</a>
 	</div>
 
-<?php else: ?>
+<?php else : ?>
 	
 	<p>No years, not good!</p>
 

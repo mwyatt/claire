@@ -1,10 +1,11 @@
-<?php if ($fixtures && $fixtureResults && $teams): ?>
+<?php if ($fixtures && $fixtureResults && $teams) : ?>
 	
 <div class="fixtures">
 
-	<?php foreach ($fixtures as $fixture): ?>
+	<?php foreach ($fixtures as $fixture) : ?>
 		<?php include($this->getTemplatePath('_fixture')) ?>
-	<?php endforeach ?>
+	<?php
+endforeach ?>
 		
 </div>
 

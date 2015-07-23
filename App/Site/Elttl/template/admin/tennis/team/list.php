@@ -14,8 +14,8 @@
 		</tr>
 		<tr class="js-grid-create-target"></tr>
 
-<?php if ($teams): ?>
-	<?php foreach ($teams as $team): ?>
+<?php if ($teams) : ?>
+	<?php foreach ($teams as $team) : ?>
 
 		<tr class="table-crud-row js-table-crud-row">
 			<td class="table-crud-cell js-table-crud-cell">
@@ -24,74 +24,82 @@
 			</td>
 			<td class="table-crud-cell js-table-crud-cell">
 				
-		<?php if ($weekdays): ?>
+		<?php if ($weekdays) : ?>
 
 				<select class="table-crud-select js-grid-cell" name="home_weekday">
 
-			<?php foreach ($weekdays as $weekdayId => $weekday): ?>
+			<?php foreach ($weekdays as $weekdayId => $weekday) : ?>
 				<?php $isSelected = $team->getHomeWeekday() == $weekdayId ?>
 				
 					<option value="<?php echo $weekdayId ?>" <?php echo $isSelected ? 'selected="selected"' : '' ?>><?php echo $weekday ?></option>
 
-			<?php endforeach ?>
+			<?php
+endforeach ?>
 
 				</select>
 
-		<?php endif ?>
+		<?php
+endif ?>
 
 			</td>
 			<td class="table-crud-cell js-table-crud-cell">
 				
-		<?php if ($players): ?>
+		<?php if ($players) : ?>
 
 				<select class="table-crud-select js-grid-cell" name="secretary_id">
 
-			<?php foreach ($players as $player): ?>
+			<?php foreach ($players as $player) : ?>
 				<?php $isSelected = $player->getId() == $team->getSecretaryId() ?>
 				
 					<option value="<?php echo $player->getId() ?>" <?php echo $isSelected ? 'selected="selected"' : '' ?>><?php echo $player->getNameFull() ?></option>
 
-			<?php endforeach ?>
+			<?php
+endforeach ?>
 
 				</select>
 
-		<?php endif ?>
+		<?php
+endif ?>
 
 			</td>
 			<td class="table-crud-cell js-table-crud-cell">
 				
-		<?php if ($venues): ?>
+		<?php if ($venues) : ?>
 
 				<select class="table-crud-select js-grid-cell" name="venue_id">
 
-			<?php foreach ($venues as $venue): ?>
+			<?php foreach ($venues as $venue) : ?>
 				<?php $isSelected = $venue->getId() == $team->getVenueId() ?>
 				
 					<option value="<?php echo $venue->getId() ?>" <?php echo $isSelected ? 'selected="selected"' : '' ?>><?php echo $venue->getName() ?></option>
 
-			<?php endforeach ?>
+			<?php
+endforeach ?>
 
 				</select>
 
-		<?php endif ?>
+		<?php
+endif ?>
 
 			</td>
 			<td class="table-crud-cell js-table-crud-cell">
 				
-		<?php if ($divisions): ?>
+		<?php if ($divisions) : ?>
 
 				<select class="table-crud-select js-grid-cell" name="division_id">
 
-			<?php foreach ($divisions as $division): ?>
+			<?php foreach ($divisions as $division) : ?>
 				<?php $isSelected = $division->getId() == $team->getDivisionId() ?>
 				
 					<option value="<?php echo $division->getId() ?>" <?php echo $isSelected ? 'selected="selected"' : '' ?>><?php echo $division->getName() ?></option>
 
-			<?php endforeach ?>
+			<?php
+endforeach ?>
 
 				</select>
 
-		<?php endif ?>
+		<?php
+endif ?>
 
 			</td>
 			<td>
@@ -100,7 +108,8 @@
 			</td>
 		</tr>
 
-	<?php endforeach ?>
+	<?php
+endforeach ?>
 <?php endif ?>
 		
 	</table>

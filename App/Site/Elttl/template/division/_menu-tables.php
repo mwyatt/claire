@@ -1,4 +1,4 @@
-<?php if (isset($division)): ?>
+<?php if (isset($division)) : ?>
 
 <div class="block-clear menu-tables">
 	<a href="<?php echo $this->buildArchiveUrl(array('result', $division->getName(), 'league')) ?>" class="menu-tables-option">League</a>

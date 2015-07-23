@@ -6,7 +6,7 @@
 		<div class="page-actions">
 			<a href="<?php echo $this->url->generate('admin/tennis/' . $nameSingular . '/all') ?>" class="page-action left button-secondary">Back</a>
 
-<?php if ($$nameSingular->id): ?>
+<?php if ($$nameSingular->id) : ?>
 
 			<span class="page-action button-secondary left js-tennis-delete-single" data-singular="<?php echo $nameSingular ?>" data-id="<?php echo $$nameSingular->id ?>">Delete</span>
 

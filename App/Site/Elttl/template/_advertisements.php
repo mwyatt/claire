@@ -2,7 +2,7 @@
 
 <?php $campaign->setSource('advertisements') ?>
 <?php $campaign->setMedium('referral') ?>
-<?php foreach ($ads as $ad): ?>
+<?php foreach ($ads as $ad) : ?>
 	<?php $campaign->setCampaign($ad->name) ?>
 
 	<a href="<?php echo $campaign->get($ad->url) ?>" class="advertisement">

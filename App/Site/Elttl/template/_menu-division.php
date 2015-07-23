@@ -1,4 +1,4 @@
-<?php if ($divisions): ?>
+<?php if ($divisions) : ?>
 	
 <nav class="menu-primary menu-primary-division js-menu-primary-container">
 	<span class="menu-primary-reduced-trigger js-menu-primary-toggle">
@@ -11,19 +11,21 @@
 			<img class="menu-primary-level-1-link-image" src="<?php echo $this->getAssetPath('arrow-down.svg') ?>" onerror="this.src=''; this.onerror=null;">
 		</a>
 
-		<?php if ($children = $divisions): ?>
+		<?php if ($children = $divisions) : ?>
 
 		<div class="menu-primary-level-2">
 
-			<?php foreach ($children as $child): ?>
+			<?php foreach ($children as $child) : ?>
 
 			<a href="<?php echo $this->url->build(array('result', $child->getName())) ?>" class="menu-primary-level-2-link"><?php echo $child->getName() ?></a>
 				
-			<?php endforeach ?>
+			<?php
+endforeach ?>
 	
 		</div>
 
-		<?php endif ?>
+		<?php
+endif ?>
 
 	</div>
 </nav>

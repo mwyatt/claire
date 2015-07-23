@@ -6,12 +6,12 @@
 			<a href="<?php echo $this->url->generate('admin/content/all', ['type' => $contentType]) ?>" class="page-action button-secondary left">Back</a>
             <button type="submit" class="page-action button-primary right">Save</button>
 
-<?php if ($content->getStatusText() == 'Published'): ?>
+<?php if ($content->getStatusText() == 'Published') : ?>
 		
 			<a href="<?php echo $this->url->generate('content/single', ['type' => $content->getType(), 'slug' => $content->getSlug()]) ?>" class="page-action button-secondary right" target="_blank">View</a>
 
 <?php endif ?>
-<?php if ($content->getId()): ?>
+<?php if ($content->getId()) : ?>
 		
 			<a class="page-action button-secondary right" href="<?php echo $this->url->generate('admin/content/delete', ['id' => $content->getId()]) ?>">Delete</a>
 
@@ -43,7 +43,7 @@
 			<label for="form-content-status" class="form-label block">Status</label>
 			<select name="content[status]" id="form-content-status">
 				
-<?php foreach ($content->getStatuses() as $key => $status): ?>
+<?php foreach ($content->getStatuses() as $key => $status) : ?>
 	
 				<option value="<?php echo $key ?>" <?php echo $content->getStatus() == $key ? 'selected' : '' ?>><?php echo $status ?></option>
 
