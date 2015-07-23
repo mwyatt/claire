@@ -2,20 +2,8 @@
 
 namespace OriginalAppName\Site\Elttl\Controller;
 
-use OriginalAppName\Response;
-use OriginalAppName\Json;
-use OriginalAppName\Site\Elttl\Model\Tennis\Division;
-use OriginalAppName\Google\Analytics\Campaign;
-use OriginalAppName\Model;
-use OriginalAppName\View;
-
-
 
 /**
- * Controller
- *
- * PHP version 5
- * 
  * @author Martin Wyatt <martin.wyatt@gmail.com> 
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
@@ -31,12 +19,13 @@ echo '</pre>';
 exit;
 
 		// ads
+		// replace with db version?
 		$json = new Json();
 		$json->read('ads');
 		$ads = $json->getData();
 
 		// 3 content
-		$modelContent = new Model\Content();
+		$modelContent = new \OriginalAppName\Model\Content;
 		$modelContent
 			->readType('press')
 			->filterStatus('visible')
@@ -44,6 +33,7 @@ exit;
 			->limitData([0, 3]);
 
 		// cover
+		// replace with db version?
 		$json = new Json();
 		$json->read('home-cover');
 		$covers = $json->getData();

@@ -1,4 +1,4 @@
-<?php include($this->getTemplatePath('_header')) ?>
+<?php include $this->getTemplatePath('_header') ?>
 
 <div class="page <?php echo $contentSingle->getType() ?>-all">
 
@@ -8,4 +8,4 @@
 
 </div>
 
-<?php include($this->getTemplatePath('_footer')) ?>
+<?php include $this->getTemplatePath('_footer') ?>

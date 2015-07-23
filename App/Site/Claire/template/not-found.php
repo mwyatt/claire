@@ -1,4 +1,4 @@
-<?php include($this->getTemplatePath('_header')) ?>
+<?php include $this->getTemplatePath('_header') ?>
 
 <div class="page page-content-single js-page-not-found">
 	<div class="content-single">
@@ -7,4 +7,4 @@
 	</div>
 </div>
 
-<?php include($this->getTemplatePath('_footer')) ?>
+<?php include $this->getTemplatePath('_footer') ?>

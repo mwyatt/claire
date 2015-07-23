@@ -1,4 +1,4 @@
-<?php include($this->getTemplatePath('_header')) ?>
+<?php include $this->getTemplatePath('_header') ?>
 
 <div class="page home">
 
@@ -7,4 +7,4 @@
 	<!-- <a href="<?php echo $this->url->generate() ?>post/" class="button primary home-all-posts">View More Posts</a> -->
 </div>
 
-<?php include($this->getTemplatePath('_footer')) ?>
+<?php include $this->getTemplatePath('_footer') ?>

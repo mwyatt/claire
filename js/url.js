@@ -4,10 +4,13 @@
  * urlBase must be defined
  */
 var Url = function () {
-  if (typeof urlBase === 'undefined') {
-    return console.warn('variable urlBase must be defined');
+  if (! localStorage.getItem('url/base')) {
+    if (typeof urlBase === 'undefined') {
+      return console.warn('variable urlBase must be defined');
+    };
+    localStorage.setItem('url/base', urlBase);
   };
-	this.urlBase = urlBase;
+	this.urlBase = localStorage.getItem('url/base');
 };
 
 

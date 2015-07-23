@@ -1,4 +1,4 @@
-<?php include($this->getTemplatePath('_header')) ?>
+<?php include $this->getTemplatePath('_header') ?>
 
 <div class="page content tag">
 	<h1 class="content-single-title"><?php echo $totalContents ?> <?php echo $contentSingle->getType() . $this->pluralise($contents) ?> tagged '<?php echo $tagCurrent->title ?>'</h1>
@@ -9,4 +9,4 @@
 
 </div>
 
-<?php include($this->getTemplatePath('_footer')) ?>
+<?php include $this->getTemplatePath('_footer') ?>

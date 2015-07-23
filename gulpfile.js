@@ -209,15 +209,13 @@ gulp.task('js', function() {
  * compress and save them in asset/
  * asset/ not stored in git repo at all
  */
-// var imagemin = require('gulp-imagemin');
-// var pngquant = require('imagemin-pngquant');
+var imagemin = require('gulp-imagemin');
  
-// gulp.task('image/copy', function () {
-//   gulp.src('app/site/' + pkg.site + '/media/**/*')
-//     .pipe(imagemin({
-//       progressive: true,
-//       svgoPlugins: [{removeViewBox: false}],
-//       use: [pngquant()]
-//     }))
-//     .pipe(gulp.dest('asset'));
-// });
+gulp.task('image/copy', function () {
+  gulp.src('app/site/' + pkg.site + '/media/**')
+    .pipe(imagemin({
+      progressive: true,
+      svgoPlugins: [{removeViewBox: false}]
+    }))
+    .pipe(gulp.dest('asset'));
+});
