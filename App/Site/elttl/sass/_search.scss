@@ -12,7 +12,7 @@
 }
 
 
-@include breakpoint(0 899px) {
+@media (min-width: 0 899pxpx) {
 
 	.container-header .form-search {
 	    display: none;
@@ -36,7 +36,7 @@
 	}
 }
 
-@include breakpoint(900px) {
+@media (min-width: 900pxpx) {
 	
 	.container-header .form-search {
 	    float: right;

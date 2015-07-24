@@ -15,8 +15,7 @@
 }
 
 .container-footer {
-    @include dont-print;
-    background-color: $color-primary-4;
+        background-color: $color-primary-4;
 }
 
 .footer-social {
@@ -33,7 +32,7 @@
 
 .footer-socials {
     @include clearfix;
-    @extend .block-margins;
+    margin: 1em 0;
     margin-top: 0;
 }
 
@@ -46,13 +45,13 @@
     border-radius: 2px;
     overflow: hidden;
 
-    @media all and (min-width: 650px) {
+    @media (min-width: 650px) {
         float: right;
         margin-left: 5%;
         width: 25%;
     }
 
-    @media all and (min-width: 950px) {
+    @media (min-width: 950px) {
         float: left;
         margin: 0 5% 0 0;
         width: 22%;
@@ -78,12 +77,12 @@
     line-height: 1.5;
     color: #fff;
 
-    @media all and (min-width: 650px) {
+    @media (min-width: 650px) {
         float: left;
         width: 40%;
     }
 
-    @media all and (min-width: 950px) {
+    @media (min-width: 950px) {
         width: 20%;
         margin-right: 5%;
     }
@@ -104,12 +103,12 @@
     overflow: hidden;
     border-radius: 2px;
 
-    @media all and (min-width: 650px) {
+    @media (min-width: 650px) {
         float: left;
         width: 30%;
     }
 
-    @media all and (min-width: 950px) {
+    @media (min-width: 950px) {
         width: 20%;
         margin: 0;
         float: right;
@@ -130,7 +129,7 @@
     padding-right: 10%;
     padding-bottom: 3em;
 
-    @media all and (min-width: 650px) {
+    @media (min-width: 650px) {
         padding-left: 5%;
         padding-right: 5%;
     }

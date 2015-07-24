@@ -1,0 +1,188 @@
+@import "_settings.css";
+@import "../../codex/css/_dependencies.css";
+@import "../../../../vendor/bower/normalize-css/normalize.css";
+@import "../../codex/css/_reset.css";
+@import "../../codex/css/_reusable.css";
+@import "../../codex/css/_form.css";
+@import "../../codex/css/_typography.css";
+@import "../../codex/css/_alert.css";
+@import "../../codex/css/_blankslate.css";
+
+/* site-specific */
+@import "_elttl-table.css";
+@import "_division/overview.css";
+
+/*module to do*/
+@import "_fixture/single.css";
+@import "_fixture/card.css";
+@import "_player/single.css";
+@import "_year/list.css";
+@import "_cover.css";
+@import "_header.css";
+@import "_home.css";
+@import "_advertisement.css";
+@import "_content.css";
+@import "_content-single.css";
+@import "_content-tag.css";
+@import "_pagination.css";
+@import "_magnific-popup.css";
+@import "_footer.css";
+@import "_print.css";
+
+@media print {
+
+  .menu-tables-option,
+  .header-sticker-beta,
+  .container-footer,
+  .menu-primary,
+  .menu-tables-option,
+  .header-sticker-beta,
+  .dont-print {
+    display: none !important;
+  }
+}
+
+html {
+  background-color: $color-primary-4;
+}
+
+html.lt-ie9 {
+  background-color: #fff;
+}
+
+.lt-ie9 .container-site,
+.lt-ie9 .container-footer {
+  display: none;
+}
+
+.to-top {
+  transition: all 300ms ease;
+  border-radius: 2px;
+  position: fixed;
+  bottom: -4em;
+  right: 1em;
+  z-index: 1;
+  width: 2.3em;
+  height: 2.3em;
+  padding: 0.5em;
+  background-color: $color-primary-0;
+  display: block;
+}
+
+.to-top:active {
+  transform: translate3d(0, 2px, 0) scale(.95);
+}
+
+.to-top.is-active {
+  bottom: 1em;
+}
+
+.core-h1 {
+  text-shadow: 1px 1px $color-primary-4;
+  text-align: center;
+  padding: 0.3em;
+  background-color: $color-primary-0;
+  color: #fff;
+  border-bottom: 1px solid $color-secondary-1-0;
+  font-size: 1.4em;
+  margin-bottom: 1em;
+}
+
+.search-result-description {
+  margin-bottom: 1em;
+}
+
+@mixin clearfix .page;
+
+.page {
+  max-width: 90em;
+  margin: 0 auto;
+  padding: 10%;
+}
+
+.page {
+  padding-top: 4.7em;
+  padding-bottom: 60px;
+
+}
+
+@media (min-width: 450px) {
+
+  .page {
+    padding-top: 5.7em;
+  }
+}
+
+@media (min-width: 650px) {
+
+  .page {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+}
+
+@mixin clearfix .container-header-inner;
+
+.team-single-secretary-telephone-mobile,
+.team-single-secretary-telephone-landline {
+  display: block;
+  margin: 1em 0;
+}
+
+.container-site-inner {
+  background-color: #fff;
+}
+
+@media (min-width: 1500px) {
+  
+  .container-site-inner {
+    background-image: url('bg.gif');
+    background-position: center top;
+    background-repeat: no-repeat;
+  }
+}
+
+.is-archive {
+  padding-top: 33px;
+}
+
+.google-map {
+  border: 0;
+  width: 100%;
+  height: 15em;
+  margin-top: 3em;
+}
+
+@mixin clearfix .menu-tables-option;
+
+.menu-tables-option {
+  margin: 1em 0;
+  display: block;
+  text-align: center;
+}
+
+@media (min-width: 500px) {
+  
+  .menu-tables-option {
+    float: left;
+    margin-right: 1em;
+  }
+}
+
+.header-sticker-beta {
+  float: left;
+  text-transform: uppercase;
+  font-size: 0.7em;
+  background-color: $color-gray-20;
+  color: #fff;
+  line-height: 1;
+  padding: 0.3em;
+  border-radius: 2px;
+  position: relative;
+  top: 16px;
+  left: 6px;
+}
+
+.header-sticker-beta:hover {
+  background-color: $color-gray-30;
+}

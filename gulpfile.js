@@ -230,6 +230,7 @@ gulp.task('js/build', function(done) {
 
 gulp.task('js', function() {
   runSequence(
+    'js/copy/vendor',
     'js/copy/unsorted',
     'js/copy/admin',
     'js/copy/codex',

@@ -1,7 +1,7 @@
 .divisions,
 .years {
 	@include clearfix;
-	@extend .block-margins;
+	margin: 1em 0;
 }
 
 .division,

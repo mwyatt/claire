@@ -14,14 +14,14 @@
 
 .banner-primary {
 
-	@media all and (min-width: 700px) {
+	@media (min-width: 700px) {
 		@include col(6);
 	}
 }
 
 .home-press {
 	
-	@media all and (min-width: 700px) {
+	@media (min-width: 700px) {
         @include col(6);
         @include last;
 	}
@@ -36,8 +36,8 @@
 }
 
 .gallery-link {
-    @include transition(all 300ms ease);
-    @include transform(rotate(-2deg));
+    transition: all 300ms ease;
+    transform: rotate(-2deg);
     border-radius: 2px;
     display: block;
     margin: 1em auto;
@@ -47,16 +47,16 @@
     height: 8.7em;
 
     &:hover {
-	    @include transform(rotate(1deg));
+	    transform: rotate(1deg);
     }
 
     &:hover .gallery-image {
-        @include transform(scale(1.2));
+        transform: scale(1.2);
     }
 }
 
 .gallery-image {
-    @include transition(all 5s ease);
+    transition: all 5s ease;
     max-width: 100%;
     height: auto;
 }
@@ -71,18 +71,18 @@
     background-color: #FFF7E0;
     border: 1px solid #FAE8B4;
 
-    @media all and (max-width: 399px) {
+    @media (max-width: 399px) {
 
         &:first-child {
             margin-top: 0;
         }
     }
 
-    @media all and (min-width: 400px) {
+    @media (min-width: 400px) {
         float: left;
     }
 
-    @media all and (min-width: 400px) and (max-width: 949px) {
+    @media (min-width: 400px) and (max-width: 949px) {
         width: 47%;
         margin: 3% 0;
         margin-right: 3%;
@@ -93,7 +93,7 @@
         }
     }
 
-    @media all and (min-width: 950px) {
+    @media (min-width: 950px) {
         float: left;
         margin-left: 4%;
         width: 22%;
@@ -106,7 +106,7 @@
 }
 
 .home .divisions {
-    @extend .block-margins;
+    margin: 1em 0;
 }
 
 .home .division-image {

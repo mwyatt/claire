@@ -1,6 +1,6 @@
 .advertisements {
 	@include clearfix;
-	@extend .block-margins;
+	margin: 1em 0;
 }
 
 .advertisement {
@@ -9,21 +9,21 @@
     height: 12em;
 	padding: 1em;
 	border-radius: 2px;
-	background-image: image-url('table-lip.png');
+	background-image: url('table-lip.png');
 	background-repeat: no-repeat;
 	background-position: bottom right;
-	@extend .block-margins;
+	margin: 1em 0;
     color: #fff;
 
     &:nth-child(2n) {
         background-color: $color-secondary-1-0;
     }
 
-    @media all and (min-width: 400px) {
+    @media (min-width: 400px) {
         float: left;
     }
 
-    @media all and (min-width: 400px) and (max-width: 699px) {
+    @media (min-width: 400px) and (max-width: 699px) {
         width: 47%;
         margin-right: 2%;
         height: 17em;
@@ -34,7 +34,7 @@
         }
     }
 
-    @media all and (min-width: 700px) {
+    @media (min-width: 700px) {
         width: 30%;
         margin-right: 5%;
         height: 17em;
@@ -46,7 +46,7 @@
         }
     }
 
-    @media all and (min-width: 900px) {
+    @media (min-width: 900px) {
         height: 14em;
     }
 }

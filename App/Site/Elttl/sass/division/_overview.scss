@@ -1,19 +1,19 @@
 .division-overview-options {
 	@include clearfix;
 
-	@include breakpoint(400) {
-		@extend .block-margins;
+	@media (min-width: 400px) {
+		margin: 1em 0;
 	}
 }
 
 .division-overview-option {
 	@include clearfix;
     @include button('primary');
-	@extend .block-margins;
+	margin: 1em 0;
 	display: block;
 	text-align: center;
 
-	@media all and (min-width: 400px) {
+	@media (min-width: 400px) {
 		float: left;
 		margin-right: 1em;
 	}
@@ -21,7 +21,7 @@
 
 .division-overview-fixture-table {
 
-	@media all and (max-width: 749px) {
+	@media (max-width: 749px) {
 	    display: none;
 	}
 }

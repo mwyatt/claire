@@ -21,7 +21,7 @@
 .header-logo-text-full {
     display: none;
 
-    @include breakpoint(780) {
+    @media (min-width: 780px) {
         display: block;
         font-size: 1.3em;
         font-weight: 600;
@@ -38,7 +38,7 @@
     font-weight: 600;
     font-size: 28px;
 
-    @include breakpoint(780) {
+    @media (min-width: 780px) {
         display: none;
     }
 }
@@ -62,7 +62,7 @@
 }
 
 .container-header {
-    @include transition(all 300ms ease);
+    transition: all 300ms ease;
     box-shadow: 0 1px 3px rgba(0, 0, 0, .2);
     position: fixed;
     top: 0;
@@ -158,7 +158,7 @@ svg {
     }
 }
 
-@include breakpoint(700) {
+@media (min-width: 700px) {
 
     .header-button-mobile {
         display: none;
@@ -170,7 +170,7 @@ svg {
     }
 }
 
-@include breakpoint(900) {
+@media (min-width: 900px) {
 
     .header-button-mobile {
         display: none;
@@ -178,10 +178,9 @@ svg {
 }
 
 .menu-primary {
-    @include dont-print;
-    float: right;
+        float: right;
 
-    @include breakpoint(600) {
+    @media (min-width: 600px) {
         font-size: 16px;
     }
 }
@@ -189,7 +188,7 @@ svg {
 .menu-primary-level-1-link {
     display: none;
 
-    @media all and (min-width: 450px) {
+    @media (min-width: 450px) {
         @extend .a;
         display: block;
         float: right;
@@ -203,7 +202,7 @@ svg {
 }
 
 .menu-primary-level-1-link-image {
-    @include transition(all 200ms ease);
+    transition: all 200ms ease;
     width: 0.7em;
     height: 0.7em;
     position: absolute;
@@ -223,7 +222,7 @@ svg {
     display: block;
     border-left: 1px solid $color-gray-10;
 
-    @media all and (min-width: 450px) {
+    @media (min-width: 450px) {
         display: none;
     }
 }
@@ -231,7 +230,7 @@ svg {
 .menu-primary-level-2 {
     z-index: 1;
     display: none;
-    @include transition(all 200ms ease);
+    transition: all 200ms ease;
     position: absolute;
     top: 3em;
     left: 0;
@@ -239,7 +238,7 @@ svg {
     right: 0;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 
-    @media all and (min-width: 440px) {
+    @media (min-width: 440px) {
         display: none;
     }
 }
@@ -263,7 +262,7 @@ svg {
     }
 
     .menu-primary-level-1-link-image {
-        @include transform(rotate(180deg));
+        transform: rotate(180deg);
     }
 }
 
@@ -277,7 +276,7 @@ svg {
 
 .menu-primary-level-1 {
 
-    @media all and (min-width: 450px) {
+    @media (min-width: 450px) {
         position: relative;
     }
 }

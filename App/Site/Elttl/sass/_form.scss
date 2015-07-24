@@ -34,7 +34,7 @@
 .input,
 .textarea {
     @extend .input-reset;
-    @include transition(all 200ms); 
+    transition: all 200ms; 
     color: $color-primary-4;
     font-family: $font-family;
     border: 1px solid $color-gray-30;

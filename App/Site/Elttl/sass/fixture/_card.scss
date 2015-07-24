@@ -3,7 +3,7 @@
 
     .fixtures {
         @include clearfix;
-        @extend .block-margins;
+        margin: 1em 0;
     }
 
     .fixture {
@@ -15,11 +15,11 @@
         border-radius: 2px;
         @extend .a;
 
-        @media all and (min-width: 400px) {
+        @media (min-width: 400px) {
             float: left;
         }
 
-        @media all and (min-width: 400px) and (max-width: 699px) {
+        @media (min-width: 400px) and (max-width: 699px) {
             width: 47%;
             margin-right: 2%;
 
@@ -29,7 +29,7 @@
             }
         }
 
-        @media all and (min-width: 700px) {
+        @media (min-width: 700px) {
             width: 30%;
             margin-right: 5%;
             padding: 1em;

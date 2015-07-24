@@ -46,7 +46,7 @@ a.pagination-previous {
 
 .pagination-previous {
     float: left;
-    @include transform(rotate(180deg));
+    transform: rotate(180deg);
 }
 
 .pagination-next {
@@ -58,7 +58,7 @@ a.pagination-previous {
     display: none;
 }
 
-@include breakpoint(600px) {
+@media (min-width: 600pxpx) {
 
     a.pagination-next,
     a.pagination-previous {
