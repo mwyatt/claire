@@ -1,9 +1,9 @@
-<?php if ($divisions) : ?>
+<?php if (!empty($divisions)) : ?>
 	
 	<div class="divisions js-divisions">
 
 	<?php foreach ($divisions as $division) : ?>
-		<?php require($this->getTemplatePath('_division')) ?>
+		<?php include $this->getTemplatePath('_division') ?>
 	<?php
 endforeach ?>
 		

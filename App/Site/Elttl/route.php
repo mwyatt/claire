@@ -10,43 +10,44 @@ $routes['home'] = [
     'mux/options' => []
 ];
 
+$routes['result/year/all'] = [
+    'mux/type' => 'get',
+    'mux/path' => '/result/',
+    'mux/controller/method' => ['OriginalAppName\\Site\\Elttl\\Controller\\Result', 'yearAll'],
+    'mux/options' => []
+];
 
-// $routes->add('home', new Symfony\Component\Routing\Route(
-// 	'/',
-// 	['controller' => 'OriginalAppName\\Site\\Elttl\\Controller\\Index']
-// ));
+$routes['result/year/single'] = [
+    'mux/type' => 'get',
+    'mux/path' => '/result/:yearName/',
+    'mux/controller/method' => ['OriginalAppName\\Site\\Elttl\\Controller\\Result', 'yearSingle'],
+    'mux/options' => []
+];
 
-// $routes->add('search', new Symfony\Component\Routing\Route(
-// 	'/search/',
-// 	['controller' => 'OriginalAppName\\Site\\Elttl\\Controller\\Index']
-// ));
+$routes['result/year/division/single'] = [
+    'mux/type' => 'get',
+    'mux/path' => '/result/:yearName/:divisionName/',
+    'mux/controller/method' => ['OriginalAppName\\Site\\Elttl\\Controller\\Result', 'yearDivisionSingle'],
+    'mux/options' => []
+];
 
-// $routes->add('resultAll', new Symfony\Component\Routing\Route(
-// 	'/result/',
-// 	['controller' => 'OriginalAppName\\Site\\Elttl\\Controller\\Result']
-// ));
+$routes['result/year/division/league'] = [
+    'mux/type' => 'get',
+    'mux/path' => '/result/:yearName/:divisionName/league/',
+    'mux/controller/method' => ['OriginalAppName\\Site\\Elttl\\Controller\\Result', 'yearDivisionLeague'],
+    'mux/options' => []
+];
 
-// $routes->add('resultYear', new Symfony\Component\Routing\Route(
-// 	'/result/{year}/',
-// 	['controller' => 'OriginalAppName\\Site\\Elttl\\Controller\\Result']
-// ));
+$routes['result/year/division/merit'] = [
+    'mux/type' => 'get',
+    'mux/path' => '/result/:yearName/:divisionName/merit/',
+    'mux/controller/method' => ['OriginalAppName\\Site\\Elttl\\Controller\\Result', 'yearDivisionMerit'],
+    'mux/options' => []
+];
 
-// $routes->add('resultYearDivision', new Symfony\Component\Routing\Route(
-// 	'/result/{year}/{division}/',
-// 	['controller' => 'OriginalAppName\\Site\\Elttl\\Controller\\Result']
-// ));
-
-// $routes->add('resultYearDivisionMerit', new Symfony\Component\Routing\Route(
-// 	'/result/{year}/{division}/merit/',
-// 	['controller' => 'OriginalAppName\\Site\\Elttl\\Controller\\Result']
-// ));
-
-// $routes->add('resultYearDivisionLeague', new Symfony\Component\Routing\Route(
-// 	'/result/{year}/{division}/league/',
-// 	['controller' => 'OriginalAppName\\Site\\Elttl\\Controller\\Result']
-// ));
-
-// $routes->add('resultYearDivisionMeritDouble', new Symfony\Component\Routing\Route(
-// 	'/result/{year}/{division}/merit-double/',
-// 	['controller' => 'OriginalAppName\\Site\\Elttl\\Controller\\Result']
-// ));
+$routes['result/year/division/merit-doubles'] = [
+    'mux/type' => 'get',
+    'mux/path' => '/result/:yearName/:divisionName/merit-doubles/',
+    'mux/controller/method' => ['OriginalAppName\\Site\\Elttl\\Controller\\Result', 'yearDivisionMeritDoubles'],
+    'mux/options' => []
+];

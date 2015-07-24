@@ -1,15 +1,6 @@
 
 
-var Menu_Primary = function (options) {
-	// var defaults = {
-	// 	threshold: 100,
-	// 	button: '.null',
-	// 	classLabel: 'is-active',
-	// 	delay: 200
-	// };
-	// this.options = $.extend(defaults, options);
-	this.events(this);
-};
+var Menu_Primary = function () {};
 
 
 Menu_Primary.prototype.events = function(data) {
@@ -34,3 +25,6 @@ Menu_Primary.prototype.events = function(data) {
 		}
 	});
 };
+
+
+module.exports = new Menu_Primary;

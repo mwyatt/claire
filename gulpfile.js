@@ -1,3 +1,4 @@
+var environment = 'sandbox';
 var gulp = require('gulp');
 var clean = require('gulp-clean');
 var uglify = require('gulp-uglify');
@@ -127,6 +128,30 @@ gulp.task('css', function() {
 
 
 /**
+ * sass
+ */
+var sass = require('gulp-sass');
+var autoprefixer = require('gulp-autoprefixer');
+var sourcemaps = require('gulp-sourcemaps');
+
+gulp.task('sass', function () {
+  if (environment == 'sandbox') {
+    gulp.src('app/site/' + pkg.site + '/sass/**/**.scss')
+      .pipe(sourcemaps.init())
+      .pipe(sass().on('error', sass.logError))
+      .pipe(autoprefixer())
+      .pipe(sourcemaps.write())
+      .pipe(gulp.dest('asset'));
+  } else {
+    gulp.src('app/site/' + pkg.site + '/sass/**/**.scss')
+      .pipe(sass().on('error', sass.logError))
+      .pipe(autoprefixer())
+      .pipe(gulp.dest('asset'));
+  };
+});
+
+
+/**
  * js
  */
 var browserify = require('browserify');
@@ -142,6 +167,16 @@ var actionJs = {
       .pipe(gulp.dest('asset'));
   }
 };
+
+gulp.task('js/copy/vendor', function() {
+  gulp.src('bower_components/modernizr/modernizr.js')
+    .pipe(gulp.dest('asset/vendor/'));
+});
+
+gulp.task('js/copy/unsorted', function() {
+  return gulp.src('js/**/**.js')
+    .pipe(gulp.dest('temporary'));
+});
 
 gulp.task('js/copy/admin', function() {
   return gulp.src('app/admin/js/**/**.js')
@@ -195,6 +230,7 @@ gulp.task('js/build', function(done) {
 
 gulp.task('js', function() {
   runSequence(
+    'js/copy/unsorted',
     'js/copy/admin',
     'js/copy/codex',
     'js/copy/site',
@@ -209,13 +245,7 @@ gulp.task('js', function() {
  * compress and save them in asset/
  * asset/ not stored in git repo at all
  */
-var imagemin = require('gulp-imagemin');
- 
 gulp.task('image/copy', function () {
-  gulp.src('app/site/' + pkg.site + '/media/**')
-    .pipe(imagemin({
-      progressive: true,
-      svgoPlugins: [{removeViewBox: false}]
-    }))
+  return gulp.src('app/site/' + pkg.site + '/media/**')
     .pipe(gulp.dest('asset'));
 });

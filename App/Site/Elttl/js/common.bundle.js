@@ -1,23 +1,33 @@
+var buttonToTop = require('buttonToTop');
+var smoothScroll = require('smoothScroll');
+var scrollDirection = require('scrollDirection');
+var equalHeight = require('equalHeight');
+var scrollDirection = require('scrollDirection');
+var menuPrimary = require('menuPrimary');
+require('owlcarousel/owl-carousel/owl.carousel.min');
+
+
 $(document).ready(function() {  
 
 	// tell me your there
 	console.log('main.js -> document ready'); 
 
-	// system objects
-	var system = new System();
-	var form = new Form();
+	// scroll direction
+	scrollDirection.init({
+		container: 'html'
+	});
 
 	// things
-	var menuPrimary = new Menu_Primary();
+	menuPrimary.events();
 
 	// to top button
-	var topButton = new Button_To_Top({
+	buttonToTop.init({
 		button: '.to-top'
 	});
 
-	// smooth scrolling when clicked
-	var smoothScroll = new Smooth_Scroll({
-		target: '.js-smooth-scroll',
+	// smoothscroll
+	smoothScroll.init({
+		target: '.menu-primary-level-1-link',
 		topOffset: 75,
 		scrollSpeed: 500
 	});
@@ -28,9 +38,9 @@ $(document).ready(function() {
 	});
 
 	// equalheight
-	equalheight('.js-content');
+	equalHeight('.js-content');
 	$(window).resize(function(){
-		equalheight('.js-content');
+		equalHeight('.js-content');
 	});
 
 	// product single carousel
@@ -47,7 +57,7 @@ $(document).ready(function() {
 	});
 
 	// scroll direction
-	var scrollDirection = new Scroll_Direction({
+	scrollDirection.init({
 		container: 'html'
 	});
 

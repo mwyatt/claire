@@ -3,7 +3,7 @@
 <div class="page home js-page-home">
 	<div class="banner-and-press">
 
-<?php if (isset($covers)) : ?>
+<?php if (!empty($covers)) : ?>
 
 		<div class="banner-primary js-home-cover">
 	
@@ -16,7 +16,7 @@
 				<h2 class="cover-primary-title"><?php echo $cover->name ?></h2>
 				<p class="cover-description"><?php echo $cover->description ?></p>
 
-		<?php if (isset($cover->image)) : ?>
+		<?php if (!empty($cover->image)) : ?>
 		
 				<img class="cover-image" src="<?php echo $this->getAssetPath($cover->image) ?>" alt="<?php echo $cover->name ?>">
 				
@@ -32,7 +32,7 @@ endforeach ?>
 		</div>
 
 <?php endif ?>
-<?php if (isset($contents)) : ?>
+<?php if (!empty($contents)) : ?>
 
 		<div class="home-press">
 			<h1 class="home-press-heading">
@@ -48,7 +48,7 @@ endforeach ?>
 
 	</div>
 
-<?php if (isset($galleryPaths)) : ?>
+<?php if (!empty($galleryPaths)) : ?>
 
 	<div class="gallery">
 		<h1 class="home-press-heading">
@@ -67,7 +67,7 @@ endforeach ?>
 	</div>
 
 <?php endif ?>
-<?php if (isset($divisions)) : ?>
+<?php if (!empty($divisions)) : ?>
 
 	<div class="home-divisions">
 		<h1 class="home-press-heading">

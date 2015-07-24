@@ -1,7 +1,7 @@
-<?php if ($year) : ?>
+<?php if (!empty($year)) : ?>
 
 <div class="header-year">
-	Archived season <strong><?php echo $year->getName() ?> - <?php echo $year->getName() + 1 ?></strong>
+	Archived season <strong><?php echo $year->getNameFull() ?> ?></strong>
 </div>
 
 <?php endif ?>

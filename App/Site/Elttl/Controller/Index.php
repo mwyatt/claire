@@ -13,35 +13,29 @@ class Index extends \OriginalAppName\Controller\Front
 
     public function home()
     {
-        echo '<pre>';
-        print_r('home');
-        echo '</pre>';
-        exit;
+        $modelAd = new \OriginalAppName\Model\Ad;
+        $modelAd->readColumn('\'group\'', 'small');
+        $this->view->setDataKey('ads', $modelAd->getData());
+        $modelAd->readColumn('\'group\'', 'home-cover');
+        $this->view->setDataKey('covers', $modelAd->getData());
 
-        // ads
-        // replace with db version?
-        $json = new Json();
-        $json->read('ads');
-        $ads = $json->getData();
-
-        // 3 content
+        // content
         $modelContent = new \OriginalAppName\Model\Content;
         $modelContent
             ->readType('press')
-            ->filterStatus('visible')
+            ->filterStatus(\OriginalAppName\Entity\Content::STATUS_PUBLISHED)
             ->orderByProperty('timePublished', 'desc')
             ->limitData([0, 3]);
 
-        // cover
-        // replace with db version?
-        $json = new Json();
-        $json->read('home-cover');
-        $covers = $json->getData();
-        shuffle($covers);
+        // year
+        $registry = \OriginalAppName\Registry::getInstance();
+        $modelYear = new \OriginalAppName\Site\Elttl\Model\Tennis\Year;
+        $modelYear->readId([$registry->get('database/options/yearId')]);
+        $this->view->setDataKey('year', $modelYear->getDataFirst());
 
         // gallery
         $folder = glob(SITE_PATH . 'asset' . DS . 'media' . DS . 'thumb' . DS . '*');
-        $files = array();
+        $files = [];
         foreach ($folder as $filePath) {
             $filePath = str_replace(BASE_PATH, '', $filePath);
             $files[] = str_replace(DS, US, $filePath);
@@ -50,19 +44,8 @@ class Index extends \OriginalAppName\Controller\Front
         // template
         $this
             ->view
-            ->setDataKey('ads', $ads)
-            ->setDataKey('covers', $covers)
             ->setDataKey('galleryPaths', $files)
             ->setDataKey('contents', $modelContent->getData());
-        return new Response($this->view->getTemplate('home'));
-    }
-
-
-    public function search()
-    {
-        if (! isset($_REQUEST['query'])) {
-            return new Response('', 404);
-        }
-        return new Response('you are searching for: ' . $_REQUEST['query']);
+        return new \OriginalAppName\Response($this->view->getTemplate('home'));
     }
 }

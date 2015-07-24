@@ -1,8 +1,8 @@
-<?php $theDate = date('jS', $content->getTimePublished()) . ' of ' . date('F o', $content->getTimePublished()) ?>
+<?php $theDate = date('jS', $content->timePublished) . ' of ' . date('F o', $content->timePublished) ?>
 
-<div class="content element is-type-<?php echo $content->getType() ?> js-content" data-id="<?php echo $content->getId() ?>">
+<div class="content element is-type-<?php echo $content->type ?> js-content" data-id="<?php echo $content->id ?>">
 
-<?php if (isset($medium)): ?>
+<?php if (isset($medium)) : ?>
 	
 	<div class="content-thumb-background" style="background-image: url(<?php echo $this->getPathMediaUpload($medium->path) ?>); background-repeat: no-repeat; background-position: center center;"></div>
 
@@ -10,20 +10,20 @@
 <?php include($this->getTemplatePath('_medium')) ?>
 
 	<div class="content-date" title="<?php echo $theDate ?>"><?php echo $theDate ?></div>
-	<h2 class="content-title"><a href="<?php echo $content->getUrl() ?>" class="content-link"><?php echo $content->getTitle() ?></a></h2>
+	<h2 class="content-title"><a href="<?php echo $this->url->generate('content/single', ['type' => $content->type, 'slug' => $content->slug]) ?>" class="content-link"><?php echo $content->title ?></a></h2>
 	<div class="content-status">
 
-<?php echo ucfirst($content->getStatus()) ?>
+<?php echo ucfirst($content->status) ?>
 
 	</div>
 
 <?php include $this->getTemplatePath('_tags') ?>
-<?php if ($this->isAdmin()): ?>
+<?php if ($this->isAdmin()) : ?>
 	
 	<div class="content-action">
-		<!-- <a class="content-action-link" href="<?php echo $content->getUrl() ?>" title="View <?php echo $content->getTitle() ?> online" target="blank">View</a> -->
-		<a class="content-action-link" href="<?php echo $this->url->generate('current_noquery') ?>?edit=<?php echo $content->getId() ?>" title="Edit <?php echo $content->getTitle() ?>" class="edit">Edit</a>
-		<!-- <a class="content-action-link" href="<?php echo $this->url->generate('current_noquery') ?>?<?php echo ($content->getStatus() == 'archive' ? 'delete' : 'archive') ?>=<?php echo $content->getId() ?>" title="<?php echo ($content->getStatus() == 'archive' ? 'Delete' : 'Archive') ?> <?php echo $content->getTitle() ?>" class="archive"><?php echo ($content->getStatus() == 'archive' ? 'Delete' : 'Archive') ?></a> -->
+		<!-- <a class="content-action-link" href="<?php echo $this->url->generate('content/single', ['type' => $content->type, 'slug' => $content->slug]) ?>" title="View <?php echo $content->title ?> online" target="blank">View</a> -->
+		<a class="content-action-link" href="<?php echo $this->url->generate('current_noquery') ?>?edit=<?php echo $content->id ?>" title="Edit <?php echo $content->title ?>" class="edit">Edit</a>
+		<!-- <a class="content-action-link" href="<?php echo $this->url->generate('current_noquery') ?>?<?php echo ($content->status == 'archive' ? 'delete' : 'archive') ?>=<?php echo $content->id ?>" title="<?php echo ($content->status == 'archive' ? 'Delete' : 'Archive') ?> <?php echo $content->title ?>" class="archive"><?php echo ($content->status == 'archive' ? 'Delete' : 'Archive') ?></a> -->
 	</div>
 
 <?php endif ?>
