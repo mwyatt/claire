@@ -13,10 +13,9 @@
 @import "_division/overview.css";
 
 /*module to do*/
-@import "_fixture/single.css";
-@import "_fixture/card.css";
-@import "_player/single.css";
-@import "_year/list.css";
+@import "fixture/_card.css";
+@import "player/_single.css";
+@import "year/_list.css";
 @import "_cover.css";
 @import "_header.css";
 @import "_home.css";
@@ -185,4 +184,8 @@ html.lt-ie9 {
 
 .header-sticker-beta:hover {
   background-color: $color-gray-30;
+}
+
+.fixture-single-time {
+  color: $color-gray-30;
 }

@@ -1,0 +1,82 @@
+$selector: .page.player-single .fixtures;
+@mixin clearfix $selector;
+$selector: .page.team-single .fixtures;
+@mixin clearfix $selector;
+
+.page.player-single .fixtures,
+.page.team-single .fixtures {
+    margin: 1em 0;
+}
+
+.page.player-single .fixture,
+.page.team-single .fixture {
+    margin: 1em 0;
+}
+
+
+
+
+.page.player-single,
+.page.team-single {
+
+    .fixture {
+        @include clearfix;
+        border: 1px solid;
+        margin: 1em 0;
+        display: block;
+        padding: .6em;
+        border-radius: 2px;
+        @extend .a;
+
+        @media (min-width: 400px) {
+            float: left;
+        }
+
+        @media (min-width: 400px) and (max-width: 699px) {
+            width: 47%;
+            margin-right: 2%;
+
+            &:nth-child(2n) {
+                float: right;
+                margin-right: 0;
+            }
+        }
+
+        @media (min-width: 700px) {
+            width: 30%;
+            margin-right: 5%;
+            padding: 1em;
+
+            &:nth-child(3n) {
+                float: right;
+                margin-right: 0;
+            }
+        }
+    }
+
+    .fixture-score-left {
+        clear: left;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: 80%;
+    }
+
+    .fixture [class^="fixture-"] {
+        float: left;
+    }
+
+    .fixture [class^="fixture-score"] {
+        width: 20%;
+        text-align: right;
+        float: right;
+    }
+
+    .fixture [class^="fixture-team"] {
+        clear: left;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: 80%;
+    }
+}
