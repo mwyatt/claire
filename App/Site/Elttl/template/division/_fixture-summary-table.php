@@ -10,7 +10,8 @@
 			<a href="<?php echo $this->buildArchiveUrl(array('team', $teamRight->getName())) ?>"><?php echo $teamRight->getName() ?></a>
 		</th>
 
-	<?php endforeach ?>
+	<?php
+endforeach ?>
 
 	</tr>
 
@@ -36,17 +37,20 @@ else : ?>
 					<?php include($this->getTemplatePath('_fixture')) ?>
 				<?php
 endif ?>
-			<?php endforeach ?>
+			<?php
+endforeach ?>
 
 		</td>
 
 			<?php
 endif ?>
-		<?php endforeach ?>
+		<?php
+endforeach ?>
 		
 	</tr>
 
-	<?php endforeach ?>
+	<?php
+endforeach ?>
 
 </table>
 

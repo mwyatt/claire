@@ -24,7 +24,8 @@
 
 			<a href="<?php echo $this->url->generate() . $child->url ?>" class="menu-primary-level-2-link"><?php echo $child->name ?></a>
 				
-			<?php endforeach ?>
+			<?php
+endforeach ?>
 	
 		</div>
 
@@ -33,7 +34,8 @@ endif ?>
 
 	</div>
 
-	<?php endforeach ?>
+	<?php
+endforeach ?>
 	
 </nav>
 

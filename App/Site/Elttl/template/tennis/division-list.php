@@ -12,7 +12,8 @@
 		
 		<a href="<?php echo $division->getUrl($yearSingle) ?>" class="division"><?php echo $division->getName() ?></a>
 
-	<?php endforeach ?>
+	<?php
+endforeach ?>
 
 	</div>
 
