@@ -11,7 +11,7 @@
 }
 
 .container-footer .form-search {
-    @include clearfix;
+    @mixin clearfix;
 }
 
 .container-footer {
@@ -31,7 +31,7 @@
 }
 
 .footer-socials {
-    @include clearfix;
+    @mixin clearfix;
     margin: 1em 0;
     margin-top: 0;
 }
@@ -121,7 +121,7 @@
 }
 
 .container-footer-inner {
-    @include clearfix;
+    @mixin clearfix;
     max-width: 90em;
     margin: 0 auto;
     padding-top: 3em;

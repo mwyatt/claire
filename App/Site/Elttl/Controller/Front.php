@@ -12,11 +12,22 @@ class Front extends \OriginalAppName\Controller\Front
 {
 
 
-    public $yearId;
+    public $year;
 
 
     public function __construct()
     {
         parent::__construct();
+        $this->readYear();
+    }
+
+
+    public function readYear()
+    {
+    	$registry = \OriginalAppName\Registry::getInstance();
+    	$modelYear = new \OriginalAppName\Site\Elttl\Model\Tennis\Year;
+    	$modelYear->readId([$registry->get('database/options/yearId')]);
+    	$this->view->setDataKey('year', $modelYear->getDataFirst());
+    	$this->year = $modelYear->getDataFirst();
     }
 }

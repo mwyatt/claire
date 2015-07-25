@@ -56,7 +56,7 @@
 	}
 
 	.container-header .form-search-query {
-	    background-color: lighten($color-primary-0, 5%);
+	    background-color: color($color-primary-0 tint(5%));
 	    border-width: 0;
 	    color: #fff;
 	    margin-right: .5em;

@@ -1,0 +1,20 @@
+@mixin clearfix .divisions;
+@mixin clearfix .years;
+
+.divisions,
+.years {
+  margin: 1em 0;
+}
+
+.division,
+.year {
+  display: block;
+  padding: 1em 0;
+  border-top: 1px solid $color-secondary-1-0;
+  border-bottom: none;
+}
+
+.division:first-child,
+.year:first-child {
+  border: none;
+}

@@ -1,5 +1,5 @@
 .cover {
-	@include clearfix;
+	@mixin clearfix;
     display: block;
     background-color: $color-primary-0;
     padding: 1em;

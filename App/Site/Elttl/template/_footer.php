@@ -14,6 +14,7 @@
 			<a href="http://tabletennisengland.co.uk/" target="_blank" class="logo-table-tennis-england"><img class="logo-table-tennis-england-image" src="<?php echo $this->getUrlAsset('logo-table-tennis-england.gif') ?>" alt="Table Tennis England Logo"></a>
         </div>
     </footer>
+    <script src="<?php echo $this->getUrlAsset('vendor/jquery.min.js') ?>"></script>
     <script src="<?php echo $this->getUrlAsset('common.js') ?>"></script>
 </body>
 </html>

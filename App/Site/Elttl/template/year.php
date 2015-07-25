@@ -10,10 +10,9 @@
 
 	<?php foreach ($years as $year) : ?>
 		
-		<a href="<?php echo $year->getUrl() ?>" class="year"><?php echo $year->getNameFull() ?></a>
+		<a href="<?php echo $this->url->generate('result/year/single', ['yearName' => $year->name]) ?>" class="year"><?php echo $year->getNameFull() ?></a>
 
-	<?php
-endforeach ?>
+	<?php endforeach ?>
 
 		<!-- older -->
 		<a href="/archive-older/" class="year">Older</a>

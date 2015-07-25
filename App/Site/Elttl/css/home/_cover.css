@@ -1,0 +1,55 @@
+@mixin clearfix .cover;
+
+.cover {
+  display: block;
+  background-color: $color-primary-0;
+  padding: 1em;
+  border-radius: 2px;
+  background-image: url('glow.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  min-height: 20em;
+  position: relative;
+}
+
+.owl-item:nth-child(2n) .cover {
+  background-color: $color-secondary-1-0;
+}
+
+.owl-item:nth-child(3n) .cover {
+  background-color: $color-secondary-2-0;
+}
+
+.cover-primary-title {
+  margin-top: 0;
+  line-height: 1.1;
+  font-weight: 600;
+  color: #fff;
+}
+
+.cover-description {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.banner-primary {
+  margin-bottom: 1em;
+}
+
+.cover-button {
+  position: absolute;
+  bottom: 1em;
+  right: 1em;
+  font-weight: 600;
+}
+
+.owl-theme .owl-controls .owl-page span {
+  background-color: $color-primary-0;
+}
+
+.cover-image {
+  position: absolute;
+  bottom: -7em;
+  left: 50%;
+  margin-left: -256.5px;
+  z-index: 0;
+}

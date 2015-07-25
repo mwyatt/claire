@@ -1,0 +1,74 @@
+@mixin clearfix .advertisements;
+
+.advertisements {
+margin: 1em 0;
+}
+
+.advertisement {
+  display: block;
+  background-color: $color-primary-0;
+  height: 12em;
+  padding: 1em;
+  border-radius: 2px;
+  background-image: url('table-lip.png');
+  background-repeat: no-repeat;
+  background-position: bottom right;
+  margin: 1em 0;
+  color: #fff;
+}
+
+.advertisement:nth-child(2n) {
+  background-color: $color-secondary-1-0;
+}
+
+@media (min-width: 400px) {
+
+  .advertisement {
+    float: left;
+  }
+}
+
+@media (min-width: 400px) and (max-width: 699px) {
+
+  .advertisement {  
+    width: 47%;
+    margin-right: 2%;
+    height: 17em;
+  }
+
+  .advertisement:nth-child(2n) {
+    float: right;
+    margin-right: 0;
+  }
+}
+
+@media (min-width: 700px) {
+
+  .advertisement {
+    width: 30%;
+    margin-right: 5%;
+    height: 17em;
+    padding: 1em;    
+  }
+
+  .advertisement:nth-child(3n) {
+    float: right;
+    margin-right: 0;
+  }
+}
+
+@media (min-width: 900px) {
+  
+  .advertisement {
+    height: 14em;
+  }
+}
+
+.advertisement-title {
+  margin-top: 0;
+  color: #fff;
+}
+
+.advertisement-description {
+  color: #fff;
+}

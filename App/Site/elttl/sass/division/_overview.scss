@@ -1,5 +1,5 @@
 .division-overview-options {
-	@include clearfix;
+	@mixin clearfix;
 
 	@media (min-width: 400px) {
 		margin: 1em 0;
@@ -7,7 +7,7 @@
 }
 
 .division-overview-option {
-	@include clearfix;
+	@mixin clearfix;
     @include button('primary');
 	margin: 1em 0;
 	display: block;

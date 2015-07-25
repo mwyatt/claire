@@ -1,30 +1,26 @@
 @import "_settings.css";
-@import "../../codex/css/_dependencies.css";
-@import "../../../../vendor/bower/normalize-css/normalize.css";
-@import "../../codex/css/_reset.css";
-@import "../../codex/css/_reusable.css";
-@import "../../codex/css/_form.css";
-@import "../../codex/css/_typography.css";
-@import "../../codex/css/_alert.css";
-@import "../../codex/css/_blankslate.css";
+@import "_dependencies.css";
+@import "../bower_components/normalize-css/normalize.css";
+@import "../bower_components/magnific-popup/dist/magnific-popup.css";
+@import "_reset.css";
+@import "_reusable.css";
+@import "_form.css";
+@import "_typography.css";
+@import "_alert.css";
+@import "_blankslate.css";
 
 /* site-specific */
 @import "_elttl-table.css";
-@import "_division/overview.css";
-
-/*module to do*/
+@import "division/_overview.css";
 @import "fixture/_card.css";
-@import "player/_single.css";
-@import "year/_list.css";
-@import "_cover.css";
+@import "year/_all.css";
+@import "home/_cover.css";
 @import "_header.css";
 @import "_home.css";
-@import "_advertisement.css";
+@import "_ad.css";
 @import "_content.css";
 @import "_content-single.css";
-@import "_content-tag.css";
 @import "_pagination.css";
-@import "_magnific-popup.css";
 @import "_footer.css";
 @import "_print.css";
 
@@ -172,7 +168,7 @@ html.lt-ie9 {
   float: left;
   text-transform: uppercase;
   font-size: 0.7em;
-  background-color: $color-gray-20;
+  background-color: #ccc;
   color: #fff;
   line-height: 1;
   padding: 0.3em;
@@ -183,9 +179,14 @@ html.lt-ie9 {
 }
 
 .header-sticker-beta:hover {
-  background-color: $color-gray-30;
+  background-color: #ccc;
 }
 
 .fixture-single-time {
-  color: $color-gray-30;
+  color: #ccc;
+}
+
+.team-single-secondary-title,
+.player-single-secondary-title {
+  /*@extend .h2;*/
 }

@@ -47,6 +47,5 @@ endif ?>
 	</td>
 </tr>
 
-	<?php
-endforeach ?>
+	<?php endforeach ?>
 <?php endif ?>

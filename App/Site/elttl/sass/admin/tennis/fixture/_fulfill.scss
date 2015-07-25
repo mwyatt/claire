@@ -1,5 +1,5 @@
 .fixture-single-section {
-	@include clearfix;
+	@mixin clearfix;
     text-align: center;
     margin: 2em 0;
 }

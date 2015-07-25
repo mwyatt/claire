@@ -1,5 +1,5 @@
 .advertisements {
-	@include clearfix;
+	@mixin clearfix;
 	margin: 1em 0;
 }
 

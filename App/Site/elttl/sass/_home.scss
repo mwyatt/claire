@@ -9,7 +9,7 @@
 }
 
 .home-press-heading {
-	@include clearfix;
+	@mixin clearfix;
 }
 
 .banner-primary {

@@ -4,8 +4,7 @@
 
 	<?php foreach ($fixtures as $fixture) : ?>
 		<?php include($this->getTemplatePath('_fixture')) ?>
-	<?php
-endforeach ?>
+	<?php endforeach ?>
 		
 </div>
 

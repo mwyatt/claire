@@ -4,7 +4,7 @@
  * coore body color
  * @type {hex}
  */
-$typography-color-body: lighten($color-primary-4, 20%);
+$typography-color-body: color($color-primary-4 tint(20%));
 
 
 /**

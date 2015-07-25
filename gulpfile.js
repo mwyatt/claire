@@ -171,6 +171,8 @@ var actionJs = {
 gulp.task('js/copy/vendor', function() {
   gulp.src('bower_components/modernizr/modernizr.js')
     .pipe(gulp.dest('asset/vendor/'));
+  gulp.src('bower_components/jquery/dist/jquery.min.js')
+    .pipe(gulp.dest('asset/vendor'));
 });
 
 gulp.task('js/copy/unsorted', function() {

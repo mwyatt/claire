@@ -83,23 +83,23 @@
         float: left;
         border: 0;
         border-radius: 0;
-        background-color: lighten($color-primary-0, 10%);
+        background-color: color($color-primary-0 tint(10%));
         color: #fff;
 
         &::-webkit-input-placeholder {
-            color: lighten($color-primary-0, 20%);
+            color: color($color-primary-0 tint(20%));
         }
 
         &:-moz-placeholder { /* Firefox 18- */
-            color: lighten($color-primary-0, 20%);
+            color: color($color-primary-0 tint(20%));
         }
 
         &::-moz-placeholder {  /* Firefox 19+ */
-            color: lighten($color-primary-0, 20%);
+            color: color($color-primary-0 tint(20%));
         } 
          
         &:-ms-input-placeholder {  
-            color: lighten($color-primary-0, 20%);
+            color: color($color-primary-0 tint(20%));
         }
     }
 
@@ -116,8 +116,8 @@
         padding: 0;
         margin: 0 0 0 1em;
         padding: 6px 13px;
-        background-color: lighten($color-primary-0, 10%);
-        color: lighten($color-primary-0, 30%);
+        background-color: color($color-primary-0 tint(10%));
+        color: color($color-primary-0 tint(30%));
         cursor: pointer;
     }
 }

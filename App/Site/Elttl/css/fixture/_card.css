@@ -8,75 +8,85 @@ $selector: .page.team-single .fixtures;
     margin: 1em 0;
 }
 
+$selector: .page.player-single .fixture;
+@mixin clearfix $selector;
+$selector: .page.team-single .fixture;
+@mixin clearfix $selector;
+
 .page.player-single .fixture,
 .page.team-single .fixture {
-    margin: 1em 0;
+  border: 1px solid;
+  margin: 1em 0;
+  display: block;
+  padding: .6em;
+  border-radius: 2px;
 }
 
+@media (min-width: 400px) {
 
+  .page.player-single .fixture,
+  .page.team-single .fixture {
+    float: left;
+  }
+}
 
+@media (min-width: 400px) and (max-width: 699px) {
 
-.page.player-single,
-.page.team-single {
+  .page.player-single .fixture,
+  .page.team-single .fixture {
+    width: 47%;
+    margin-right: 2%;
+  }
 
-    .fixture {
-        @include clearfix;
-        border: 1px solid;
-        margin: 1em 0;
-        display: block;
-        padding: .6em;
-        border-radius: 2px;
-        @extend .a;
+  .page.player-single .fixture:nth-child(2n),
+  .page.team-single .fixture:nth-child(2n) {
+    float: right;
+    margin-right: 0;
+  }
+}
 
-        @media (min-width: 400px) {
-            float: left;
-        }
+@media (min-width: 700px) {
 
-        @media (min-width: 400px) and (max-width: 699px) {
-            width: 47%;
-            margin-right: 2%;
+  .page.player-single .fixture,
+  .page.team-single .fixture {
+    width: 30%;
+    margin-right: 5%;
+    padding: 1em;
+  }
 
-            &:nth-child(2n) {
-                float: right;
-                margin-right: 0;
-            }
-        }
+  .page.player-single .fixture:nth-child(3n),
+  .page.team-single .fixture:nth-child(3n) {
+    float: right;
+    margin-right: 0;
+  }
+}
 
-        @media (min-width: 700px) {
-            width: 30%;
-            margin-right: 5%;
-            padding: 1em;
+.page.player-single .fixture-score-left,
+.page.team-single .fixture-score-left {
+  clear: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 80%;
+}
 
-            &:nth-child(3n) {
-                float: right;
-                margin-right: 0;
-            }
-        }
-    }
+.page.player-single .fixture [class^="fixture-"],
+.page.team-single .fixture [class^="fixture-"] {
+  float: left;
+}
 
-    .fixture-score-left {
-        clear: left;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        width: 80%;
-    }
+.page.player-single .fixture [class^="fixture-score"],
+.page.team-single .fixture [class^="fixture-score"] {
+  width: 20%;
+  text-align: right;
+  float: right;
+}
 
-    .fixture [class^="fixture-"] {
-        float: left;
-    }
-
-    .fixture [class^="fixture-score"] {
-        width: 20%;
-        text-align: right;
-        float: right;
-    }
-
-    .fixture [class^="fixture-team"] {
-        clear: left;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        width: 80%;
-    }
+.page.player-single .fixture [class^="fixture-team"],
+.page.team-single .fixture [class^="fixture-team"] {
+  clear: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 80%;
 }

@@ -7,7 +7,7 @@
 	}
 }
 
-@include clearfix .division-overview-option;
+@mixin clearfix .division-overview-option;
 
 .division-overview-option {
 	margin: 1em 0;

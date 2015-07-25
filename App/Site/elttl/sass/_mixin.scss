@@ -45,7 +45,7 @@
 	cursor: pointer;
 	
 	&:hover {
-		background-color: lighten($color-background, 5%);
+		background-color: color($color-background tint(5%));
 	}
 
 	&:active {

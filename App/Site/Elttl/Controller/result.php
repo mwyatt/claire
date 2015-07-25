@@ -2,12 +2,6 @@
 
 namespace OriginalAppName\Site\Elttl\Controller;
 
-use OriginalAppName\Response;
-use Symfony\Component\Routing\Exception\ResourceNotFoundException as SymfonyResourceNotFound;
-use OriginalAppName\Model;
-use OriginalAppName\View;
-use OriginalAppName\Site\Elttl;
-
 /**
  * @author Martin Wyatt <martin.wyatt@gmail.com>
  * @version     0.1
@@ -17,46 +11,21 @@ class Result extends \OriginalAppName\Site\Elttl\Controller\Front
 {
 
 
-    public $year;
-
-
     public $division;
-
-
-    /**
-     * requests and stores single year and division entities for
-     * reference in controllers
-     * @param null $request
-     */
-    public function __construct($request)
-    {
-        if (isset($request['year'])) {
-            $serviceYear = new Elttl\Service\Tennis\Year();
-            $this->setYear($serviceYear->readName($request['year']));
-        }
-        if (isset($request['division']) && $yearSingle = $this->getYear()) {
-            $serviceDivision = new Elttl\Service\Tennis\Division();
-            $entityDivision = $serviceDivision->readYearIdName($yearSingle->getId(), $request['division']);
-            $this->setDivision($entityDivision);
-        }
-        \OriginalAppName\Controller::__construct();
-    }
 
 
     /**
      * every year past and present for the league
      * @return object
      */
-    public function resultAll($request)
+    public function yearAll()
     {
-        $serviceYear = new Elttl\Service\Tennis\Year();
-
-        // template
+        $serviceYear = new \OriginalAppName\Site\Elttl\Service\Tennis\Year;
         $this
             ->view
             ->setDataKey('metaTitle', 'All seasons')
             ->setDataKey('years', $serviceYear->read());
-        return new Response($this->view->getTemplate('year'));
+        return new \OriginalAppName\Response($this->view->getTemplate('year'));
     }
 
 
@@ -64,21 +33,22 @@ class Result extends \OriginalAppName\Site\Elttl\Controller\Front
      * list of all divisions for current year
      * @return null
      */
-    public function resultYear($request)
+    public function yearSingle($yearName)
     {
-        $yearSingle = $this->getYear();
+        $serviceYear = new \OriginalAppName\Site\Elttl\Service\Tennis\Year;
+        $entityYear = $serviceYear->readName($yearName);
 
         // division
-        $modelDivision = new Elttl\Model\Tennis\Division();
+        $modelDivision = new \OriginalAppName\Site\Elttl\Model\Tennis\Division;
         $modelDivision->readId([$yearSingle->getId()], 'yearId');
 
         // template
         $this
             ->view
-            ->setDataKey('metaTitle', 'Divisions in season ' . $yearSingle->getNameFull())
+            ->setDataKey('metaTitle', 'Divisions in season ' . $entityYear->getNameFull())
             ->setDataKey('divisions', $modelDivision->getData())
-            ->setDataKey('yearSingle', $yearSingle);
-        return new Response($this->view->getTemplate('tennis/division-list'));
+            ->setDataKey('yearSingle', $entityYear);
+        return new \OriginalAppName\Response($this->view->getTemplate('tennis/division-list'));
     }
 
 
@@ -104,7 +74,7 @@ class Result extends \OriginalAppName\Site\Elttl\Controller\Front
         $entityDivision = $this->getDivision();
         
         // fixture summary table
-        $serviceFixture = new Elttl\Service\Tennis\Fixture();
+        $serviceFixture = new \OriginalAppName\Site\Elttl\Service\Tennis\Fixture();
         $serviceFixture->readSummaryTable($entityYear, $entityDivision);
 
         // single division view
@@ -274,7 +244,7 @@ class Result extends \OriginalAppName\Site\Elttl\Controller\Front
 
 
     /**
-     * @return object OriginalAppName\Elttl\Entity\Tennis\Division
+     * @return object OriginalAppName\\OriginalAppName\Site\Elttl\Entity\Tennis\Division
      */
     public function getDivision()
     {
@@ -283,7 +253,7 @@ class Result extends \OriginalAppName\Site\Elttl\Controller\Front
     
     
     /**
-     * @param object $year OriginalAppName\Elttl\Entity\Tennis\Division
+     * @param object $year OriginalAppName\\OriginalAppName\Site\Elttl\Entity\Tennis\Division
      */
     public function setDivision($division)
     {
@@ -293,7 +263,7 @@ class Result extends \OriginalAppName\Site\Elttl\Controller\Front
 
 
     /**
-     * @return object OriginalAppName\Elttl\Entity\Tennis\Year
+     * @return object OriginalAppName\\OriginalAppName\Site\Elttl\Entity\Tennis\Year
      */
     public function getYear()
     {
@@ -302,7 +272,7 @@ class Result extends \OriginalAppName\Site\Elttl\Controller\Front
     
     
     /**
-     * @param object $year OriginalAppName\Elttl\Entity\Tennis\Year
+     * @param object $year OriginalAppName\\OriginalAppName\Site\Elttl\Entity\Tennis\Year
      */
     public function setYear($year)
     {

@@ -2,12 +2,12 @@
 .page.team-single {
 
     .fixtures {
-        @include clearfix;
+        @mixin clearfix;
         margin: 1em 0;
     }
 
     .fixture {
-        @include clearfix;
+        @mixin clearfix;
         border: 1px solid;
         margin: 1em 0;
         display: block;

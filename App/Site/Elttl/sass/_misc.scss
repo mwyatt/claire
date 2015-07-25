@@ -51,7 +51,7 @@ html.lt-ie9 {
 }
 
 .page {
-    @include clearfix;
+    @mixin clearfix;
     max-width: 90em;
     margin: 0 auto;
     padding: 10%;
@@ -72,7 +72,7 @@ html.lt-ie9 {
 }
 
 .container-header-inner {
-    @include clearfix;
+    @mixin clearfix;
 }
 
 .button-base {
@@ -118,7 +118,7 @@ html.lt-ie9 {
 }
 
 .menu-tables-option {
-    @include clearfix;
+    @mixin clearfix;
         @include button('primary');
     margin: 1em 0;
     display: block;

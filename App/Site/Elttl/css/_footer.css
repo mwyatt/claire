@@ -1,0 +1,158 @@
+.container-footer .form-search-query {
+  width: 58%;
+  float: left;
+}
+
+.container-footer .form-search-submit {
+  float: right;
+  padding: 6px 0;
+  width: 28%;
+  text-align: center;
+}
+
+$selector: .container-footer .form-search;
+@mixin clearfix $selector;
+
+.container-footer {
+  background-color: $color-primary-4;
+}
+
+.footer-social {
+  width: 3em;
+  height: 3em;
+  float: left;
+  fill: $color-secondary-1-0;
+  margin-right: 7px;
+}
+
+.footer-social:active {
+  opacity: .5;
+}
+
+@mixin clearfix .footer-socials;
+
+.footer-socials {
+  margin: 1em 0;
+  margin-top: 0;
+}
+
+.footer-main {
+  display: none;
+}
+
+.menu-secondary {
+  margin-bottom: 2em;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+@media (min-width: 650px) {
+  
+  .menu-secondary {
+    float: right;
+    margin-left: 5%;
+    width: 25%;
+  }
+}
+
+@media (min-width: 950px) {
+  
+  .menu-secondary {
+    float: left;
+    margin: 0 5% 0 0;
+    width: 22%;
+  }
+}
+
+.menu-secondary-item {
+  display: block;
+  color: $color-primary-1;
+  border-color: rgba(255, 255, 255, 0.2);
+  border-top: 1px solid;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 1em;
+}
+
+.menu-secondary-item:first-child {
+  border-top: none;
+}
+
+.footer-address {
+  margin-bottom: 2em;
+  line-height: 1.5;
+  color: #fff;
+
+}
+
+@media (min-width: 650px) {
+
+  .footer-address {
+    float: left;
+    width: 40%;
+  }
+}
+
+@media (min-width: 950px) {
+
+  .footer-address {
+    width: 20%;
+    margin-right: 5%;
+  }
+}
+
+.footer-address a {
+  color: #fff;
+  border-color: #fff;
+  font-weight: 600;
+}
+
+.logo-table-tennis-england {
+  display: block;
+  background-color: #fff;
+  text-align: center;
+  padding: 1em;
+  overflow: hidden;
+  border-radius: 2px;
+
+}
+
+@media (min-width: 650px) {
+
+  .logo-table-tennis-england {
+    float: left;
+    width: 30%;
+  }
+}
+
+@media (min-width: 950px) {
+
+  .logo-table-tennis-england {
+    width: 20%;
+    margin: 0;
+    float: right;
+  }
+}
+
+.logo-table-tennis-england-image {
+  max-width: 100%;
+  height: auto;
+}
+
+@mixin clearfix .container-footer-inner;
+
+.container-footer-inner {
+  max-width: 90em;
+  margin: 0 auto;
+  padding-top: 3em;
+  padding-left: 10%;
+  padding-right: 10%;
+  padding-bottom: 3em;
+}
+
+@media (min-width: 650px) {
+
+  .container-footer-inner {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+}

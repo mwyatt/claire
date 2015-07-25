@@ -12,8 +12,7 @@
 		
 		<a href="<?php echo $division->getUrl($yearSingle) ?>" class="division"><?php echo $division->getName() ?></a>
 
-	<?php
-endforeach ?>
+	<?php endforeach ?>
 
 	</div>
 
@@ -23,3 +22,6 @@ endforeach ?>
 
 <?php endif ?>
 <?php include $this->getTemplatePath('_footer') ?>
+
+
+<?php echo $this->url->generate('result/year/division/single', ['yearName' => $year->name, 'divisionName' => strtolower($division->name)]) ?>

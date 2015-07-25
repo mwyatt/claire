@@ -17,8 +17,7 @@
 			<td><?php echo $patch['filename'] ?></td>
 		</tr>
 
-	<?php
-endforeach ?>
+	<?php endforeach ?>
 
 	</table>
 	<form>
