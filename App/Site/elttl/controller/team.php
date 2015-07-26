@@ -1,62 +1,35 @@
 <?php
 
+namespace OriginalAppName\Site\Elttl\Controller;
 
 /**
- * @author Martin Wyatt <martin.wyatt@gmail.com> 
- * @version	0.1
+ * @author Martin Wyatt <martin.wyatt@gmail.com>
+ * @version     0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Controller_Team extends Controller_Archive
+class Team extends \OriginalAppName\Site\Elttl\Controller\Front
 {
 
 
-	public $team;
-
-
-	/**
-	 * @return object 
-	 */
-	public function getTeam() {
-	    return $this->team;
-	}
-	
-	
-	/**
-	 * @param object $team 
-	 */
-	public function setTeam($team) {
-	    $this->team = $team;
-	    return $this;
-	}
-
-
-	public function run()
+	public function single($yearName, $teamSlug)
 	{
-		$this->readYear();
-
-		// team/burnley-boys-club/
-		if ($this->getArchivePathPart(1)) {
-			return $this->single();
+		$serviceYear = new \OriginalAppName\Site\Elttl\Service\Tennis\Year;
+		if (!$entityYear = $serviceYear->readName($yearName)) {
+		    return new \OriginalAppName\Response('', 404);
 		}
-		$this->redirect('base');
-	}
-
-
-	public function single()
-	{
 
 		// team
-		$className = $this->getArchiveClassName('model_tennis_Team');
-		$modelTennisTeam = new $className($this);
-		$modelTennisTeam->read($this->getArchiveWhere(array(
-			'where' => array(
-				'name' => str_replace('-', ' ', $this->getArchivePathPart(1))
-			)
-		)));
+		$modelTennisTeam = new \OriginalAppName\Site\Elttl\Model\Tennis\Team;
+		$modelTennisTeam->readYearColumn($entityYear->id, 'slug', $teamSlug);
 		if (! $team = $modelTennisTeam->getDataFirst()) {
-			$this->redirect('base');
+		    return new \OriginalAppName\Response('', 404);
 		}
-		$this->setTeam($team);
+
+echo '<pre>';
+print_r($team);
+echo '</pre>';
+exit;
+
 
 		// players
 		$className = $this->getArchiveClassName('model_tennis_player');
