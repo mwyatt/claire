@@ -39,13 +39,11 @@ endif ?>
 
 			<?php
 endif ?>
-		<?php
-endforeach ?>
+		<?php endforeach ?>
 
 	</table>
 
-	<?php
-endforeach ?>
+	<?php endforeach ?>
 <?php else : ?>
 
 	<div class="message">There are no fixtures currently for this season.</div>

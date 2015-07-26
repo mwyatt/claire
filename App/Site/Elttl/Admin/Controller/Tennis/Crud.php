@@ -146,7 +146,7 @@ abstract class Crud extends \OriginalAppName\Controller\Admin
 
 		// load 1
 		$entity = $this->model
-			->readYearColumn('id', $id)
+			->readYearColumn(null, 'id', $id)
 			->getDataFirst();
 
 		// does not exist
@@ -155,7 +155,7 @@ abstract class Crud extends \OriginalAppName\Controller\Admin
 		}
 
 		// delete it
-		$this->model->deleteYear([$id]);
+		$this->model->deleteYear(null, [$id]);
 
 		// prove it
 		if ($this->model->getRowCount()) {

@@ -46,12 +46,12 @@ class Fixture extends \OriginalAppName\Site\Elttl\Admin\Controller\Tennis\Crud
 
 		// get single fixture
 		$modelTennisFixture = new \OriginalAppName\Site\Elttl\Model\Tennis\Fixture;
-		$modelTennisFixture->readYearColumn('id', $id);
+		$modelTennisFixture->readYearColumn(null, 'id', $id);
 		$fixture = $modelTennisFixture->getDataFirst();
 		
 		// find out if the fixture has been filled
 		$modelTennisEncounter = new \OriginalAppName\Site\Elttl\Model\Tennis\Encounter;
-		$modelTennisEncounter->readYearColumn('fixtureId', $id);
+		$modelTennisEncounter->readYearColumn(null, 'fixtureId', $id);
 		if ($modelTennisEncounter->getData()) {
 			$modelTennisEncounter->orderByProperty('id');
 			$isFilled = true;
@@ -60,7 +60,7 @@ class Fixture extends \OriginalAppName\Site\Elttl\Admin\Controller\Tennis\Crud
 		// teams
 		$modelTennisTeam = new \OriginalAppName\Site\Elttl\Model\Tennis\Team;
 		if ($isFilled) {
-			$modelTennisTeam->readYearId([$fixture->teamIdLeft, $fixture->teamIdRight]);
+			$modelTennisTeam->readYearId(null, [$fixture->teamIdLeft, $fixture->teamIdRight]);
  		} else {
 			$modelTennisTeam->readColumn('yearId', $this->yearId);
 		}
@@ -68,7 +68,7 @@ class Fixture extends \OriginalAppName\Site\Elttl\Admin\Controller\Tennis\Crud
 		// divisions
 		$modelTennisDivision = new \OriginalAppName\Site\Elttl\Model\Tennis\Division;
 		if ($isFilled) {
-			$modelTennisDivision->readYearId($modelTennisTeam->getDataProperty('divisionId'));
+			$modelTennisDivision->readYearId(null, $modelTennisTeam->getDataProperty('divisionId'));
 		} else {
 			$modelTennisDivision->readColumn('yearId', $this->yearId);
 		}
@@ -77,7 +77,7 @@ class Fixture extends \OriginalAppName\Site\Elttl\Admin\Controller\Tennis\Crud
 		$modelTennisPlayer = new \OriginalAppName\Site\Elttl\Model\Tennis\Player;
 		if ($isFilled) {
 			$modelTennisPlayer
-				->readYearId($modelTennisTeam->getDataProperty('id'), 'teamId')
+				->readYearId(null, $modelTennisTeam->getDataProperty('id'), 'teamId')
 				->orderByProperty('rank');
 		} else {
 			$modelTennisPlayer

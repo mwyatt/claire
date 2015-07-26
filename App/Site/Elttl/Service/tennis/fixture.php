@@ -2,9 +2,6 @@
 
 namespace OriginalAppName\Site\Elttl\Service\Tennis;
 
-use OriginalAppName\Site\Elttl\Model;
-
-
 /**
  * services group up controller commands
  * making the controllers more readable and tidy
@@ -17,42 +14,28 @@ class Fixture extends \OriginalAppName\Service
 	{
 
 		// teams in division keyed by teamId
-		$modelTeam = new Model\Tennis\Team($this);
+		$modelTeam = new \OriginalAppName\Site\Elttl\Model\Tennis\Team;
 		$modelTeam
-			->readDivisionId($entityYear->getId(), $entityDivision->getArchiveId())
-			->keyDataByProperty('id')
-			->getData();
-
-echo '<pre>';
-print_r($modelTeam);
-echo '</pre>';
-exit;
-
+			->readColumn('yearId', $entityYear->id)
+			->keyDataByProperty('id');
 
 		// fixtures teams have played in
 		// only need left side
-		$modelFixture = new Model\Tennis\Fixture($this);
-		$modelFixture->readId($modelTeam->getDataProperty('id'), 'teamIdLeft');
+		$modelFixture = new \OriginalAppName\Site\Elttl\Model\Tennis\Fixture;
+		$modelFixture->readYearId($entityYear->id, $modelTeam->getDataProperty('id'), 'teamIdLeft');
 
 		// encounters based on fixtures
-		$modelEncounter = new Model\Tennis\Encounter($this);
-		$modelEncounter->readId($modelFixture->getDataProperty('id'), 'fixtureId');
+		$modelEncounter = new \OriginalAppName\Site\Elttl\Model\Tennis\Encounter;
+		$modelEncounter->readYearId($entityYear->id, $modelFixture->getDataProperty('id'), 'fixtureId');
 
-
-		echo '<pre>';
-		print_r($modelEncounter);
-		echo '</pre>';
-		exit;
-		
-
-		$modelEncounter->convertToFixtureResults();
-		$fixtureResults = $modelEncounter->getData();
+		$serviceResult = new \OriginalAppName\Site\Elttl\Service\Tennis\Result;
+		$fixtureResults = $serviceResult->getFixture($modelFixture->getData(), $modelEncounter->getData());
 
 		// template
 		$this
 			->view
 			->setDataKey('fixtureResults', $fixtureResults)
-			->setDataKey('fixtures', $fixtures)
-			->setDataKey('teams', $teams);
+			->setDataKey('fixtures', $modelFixture->getData())
+			->setDataKey('teams', $modelTeam->getData());
 	}
 }

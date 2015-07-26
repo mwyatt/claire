@@ -23,7 +23,7 @@ class Division extends \OriginalAppName\Site\Elttl\Admin\Controller\Tennis\Crud
 
 		// load 1
 		$entity = $this->model
-			->readYearColumn('id', $id)
+			->readYearColumn(null, 'id', $id)
 			->getDataFirst();
 
 		// does not exist
@@ -35,7 +35,7 @@ class Division extends \OriginalAppName\Site\Elttl\Admin\Controller\Tennis\Crud
 		$entity->name = $_POST['entity']['name'];
 
 		// save
-		$this->model->updateYear([$entity]);
+		$this->model->updateYear(null, [$entity]);
 
 		// feedback / route
 		$sessionFeedback->setMessage(ucfirst($this->nameSingular) . " $id saved", 'positive');

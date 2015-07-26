@@ -50,8 +50,7 @@
 				
 					<option value="<?php echo $team->getId() ?>" <?php echo $isSelected ? 'selected="selected"' : '' ?>><?php echo $team->getName() ?></option>
 
-			<?php
-endforeach ?>
+			<?php endforeach ?>
 
 				</select>
 
@@ -65,8 +64,7 @@ endif ?>
 			</td>
 		</tr>
 
-	<?php
-endforeach ?>
+	<?php endforeach ?>
 <?php endif ?>
 		
 	</table>

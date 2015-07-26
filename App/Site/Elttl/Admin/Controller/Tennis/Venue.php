@@ -20,7 +20,7 @@ class Venue extends \OriginalAppName\Site\Elttl\Admin\Controller\Tennis\Crud
 	public function single($id = 0)
 	{
 		$entity = $this->model
-			->readYearColumn('id', $id)
+			->readYearColumn(null, 'id', $id)
 			->getDataFirst();
 		$modelTeam = new Model\Tennis\Team;
 		$modelTeam
@@ -42,7 +42,7 @@ class Venue extends \OriginalAppName\Site\Elttl\Admin\Controller\Tennis\Crud
 
 		// load 1
 		$entity = $this->model
-			->readYearColumn('id', $id)
+			->readYearColumn(null, 'id', $id)
 			->getDataFirst();
 
 		// does not exist
@@ -56,7 +56,7 @@ class Venue extends \OriginalAppName\Site\Elttl\Admin\Controller\Tennis\Crud
 		$entity->location = $_POST['entity']['location'];
 
 		// save
-		$this->model->updateYear([$entity]);
+		$this->model->updateYear(null, [$entity]);
 
 		// feedback / route
 		$ucName = ucfirst($this->nameSingular);

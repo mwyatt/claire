@@ -37,7 +37,7 @@ class Team extends \OriginalAppName\Site\Elttl\Admin\Controller\Tennis\Crud
 	public function single($id = 0)
 	{
 		$entity = $this->model
-			->readYearColumn('id', $id)
+			->readYearColumn(null, 'id', $id)
 			->getDataFirst();
 		$modelPlayer = new Model\Tennis\Player;
 		$modelPlayer
@@ -69,7 +69,7 @@ class Team extends \OriginalAppName\Site\Elttl\Admin\Controller\Tennis\Crud
 
 		// load 1
 		$entity = $this->model
-			->readYearColumn('id', $id)
+			->readYearColumn(null, 'id', $id)
 			->getDataFirst();
 
 		// does not exist
@@ -86,7 +86,7 @@ class Team extends \OriginalAppName\Site\Elttl\Admin\Controller\Tennis\Crud
 		$entity->divisionId = $_POST['entity']['divisionId'];
 
 		// save
-		$this->model->updateYear([$entity]);
+		$this->model->updateYear(null, [$entity]);
 
 		// feedback / route
 		$sessionFeedback->setMessage("$this->nameSingular $id saved", 'positive');

@@ -13,7 +13,6 @@ class Encounter extends \OriginalAppName\Service
 {
 
 
-
 	public function convertToFixtureResults()
 	{
 		if (! $molds = $this->getData()) {

@@ -128,7 +128,7 @@ class Fulfill extends \OriginalAppName\Site\Elttl\Model\Tennis
     {
         $modelPlayer = new \OriginalAppName\Site\Elttl\Model\Tennis\Player;
         $modelPlayer
-            ->readYearId($playerIds)
+            ->readYearId(null, $playerIds)
             ->orderByProperty('rank')
             ->keyDataByProperty('id');
         $this->setPlayers($modelPlayer->getData());
@@ -223,7 +223,7 @@ class Fulfill extends \OriginalAppName\Site\Elttl\Model\Tennis
         $fixture->timeFulfilled = time();
         $this->outputDebugBlock($fixture);
         if (!$this->isDebug()) {
-            $modelFixture->updateYear([$fixture]);
+            $modelFixture->updateYear(null, [$fixture]);
         }
         $sessionFeedback->setMessage('fixture fulfilled sucessfully', 'positive');
         $this->controller->redirect('admin/tennis/fixture/single', ['id' => $fixture->id]);
@@ -243,7 +243,7 @@ class Fulfill extends \OriginalAppName\Site\Elttl\Model\Tennis
         }
         $modelPlayer = new \OriginalAppName\Site\Elttl\Model\Tennis\Player;
         foreach ($this->getPlayers() as $playerId => $player) {
-            $modelPlayer->updateYear([$player]);
+            $modelPlayer->updateYear(null, [$player]);
         }
     }
 
@@ -274,11 +274,11 @@ class Fulfill extends \OriginalAppName\Site\Elttl\Model\Tennis
         // fixture reset time
         $fixture = $this->getFixture();
         $fixture->timeFulfilled = null;
-        $modelFixture->updateYear([$fixture]);
+        $modelFixture->updateYear(null, [$fixture]);
         
         // encounter
         $modelEncounter = new \OriginalAppName\Site\Elttl\Model\Tennis\Encounter;
-        $modelEncounter->readYearId([$fixture->id]);
+        $modelEncounter->readYearId(null, [$fixture->id]);
         
         // no encounters means fixture with date fulfilled only
         if (!$modelEncounter->getData()) {
@@ -304,7 +304,7 @@ class Fulfill extends \OriginalAppName\Site\Elttl\Model\Tennis
         $this->updatePlayerRanks();
 
         // delete encounters
-        $modelEncounter->deleteYear($modelEncounter->getDataProperty('id'));
+        $modelEncounter->deleteYear(null, $modelEncounter->getDataProperty('id'));
 
         // clear fixture date
         $this->outputDebugBlock('existing fixture cleared');
@@ -320,7 +320,7 @@ class Fulfill extends \OriginalAppName\Site\Elttl\Model\Tennis
         
         // teams
         $modelTeam = new \OriginalAppName\Site\Elttl\Model\Tennis\Team;
-        $modelTeam->readYearId([$_REQUEST['team']['left'], $_REQUEST['team']['right']]);
+        $modelTeam->readYearId(null, [$_REQUEST['team']['left'], $_REQUEST['team']['right']]);
         echo '<pre>';
         print_r($modelTeam);
         echo '</pre>';
@@ -335,7 +335,7 @@ class Fulfill extends \OriginalAppName\Site\Elttl\Model\Tennis
         
         // find fixture based on teams
         $modelFixture = new \OriginalAppName\Site\Elttl\Model\Tennis\Fixture;
-        $modelFixture->readYearColumn('teamIdLeft', $teamLeft->id);
+        $modelFixture->readYearColumn(null, 'teamIdLeft', $teamLeft->id);
         foreach ($modelFixture->getData() as $entityFixture) {
             if ($entityFixture->teamIdRight == $teamRight->id) {
                 $fixture = $entityFixture;

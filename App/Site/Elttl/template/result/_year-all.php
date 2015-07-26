@@ -12,8 +12,7 @@
 		
 		<a href="<?php echo $this->url->generate('result/year/single', ['yearName' => $year->name]) ?>" class="year"><?php echo $year->getNameFull() ?></a>
 
-	<?php
-endforeach ?>
+	<?php endforeach ?>
 
 		<!-- older -->
 		<a href="/archive-older/" class="year">Older</a>

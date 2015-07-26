@@ -25,7 +25,7 @@ class Result extends \OriginalAppName\Site\Elttl\Controller\Front
             ->view
             ->setDataKey('metaTitle', 'All seasons')
             ->setDataKey('years', $serviceYear->read());
-        return new \OriginalAppName\Response($this->view->getTemplate('year'));
+        return new \OriginalAppName\Response($this->view->getTemplate('result/_year-all'));
     }
 
 
@@ -40,7 +40,7 @@ class Result extends \OriginalAppName\Site\Elttl\Controller\Front
 
         // division
         $modelDivision = new \OriginalAppName\Site\Elttl\Model\Tennis\Division;
-        $modelDivision->readId([$yearSingle->getId()], 'yearId');
+        $modelDivision->readColumn('yearId', $entityYear->id);
 
         // template
         $this
@@ -48,34 +48,31 @@ class Result extends \OriginalAppName\Site\Elttl\Controller\Front
             ->setDataKey('metaTitle', 'Divisions in season ' . $entityYear->getNameFull())
             ->setDataKey('divisions', $modelDivision->getData())
             ->setDataKey('yearSingle', $entityYear);
-        return new \OriginalAppName\Response($this->view->getTemplate('tennis/division-list'));
+        return new \OriginalAppName\Response($this->view->getTemplate('result/_year-single'));
     }
 
 
     /**
-     * initialises the division which is in the current url path
-     * and stores in the division property
-     * moves to merit || league from here
-     * @return null
+     * options for merit, league etc
+     * @return object
      */
-    public function resultYearDivision($request)
+    public function yearDivisionSingle($yearName, $divisionName)
     {
+        $serviceYear = new \OriginalAppName\Site\Elttl\Service\Tennis\Year;
+        $entityYear = $serviceYear->readName($yearName);
 
-        // possible table request ?table=
-        if (isset($_REQUEST['table'])) {
-            $method = 'resultYearDivision' . ucfirst($_REQUEST['table']);
-            if (method_exists($this, $method)) {
-                return $this->$method();
-            }
-        }
+        // division
+        $modelDivision = new \OriginalAppName\Site\Elttl\Model\Tennis\Division;
+        $modelDivision->readYearColumn(null, 'name', $divisionName);
+        $entityDivision = $modelDivision->getDataFirst();
 
-        // resource
-        $entityYear = $this->getYear();
-        $entityDivision = $this->getDivision();
-        
         // fixture summary table
-        $serviceFixture = new \OriginalAppName\Site\Elttl\Service\Tennis\Fixture();
+        $serviceFixture = new \OriginalAppName\Site\Elttl\Service\Tennis\Fixture;
         $serviceFixture->readSummaryTable($entityYear, $entityDivision);
+echo '<pre>';
+print_r($serviceFixture);
+echo '</pre>';
+exit;
 
         // single division view
         $this->view
@@ -84,6 +81,7 @@ class Result extends \OriginalAppName\Site\Elttl\Controller\Front
             ))
             ->setDataKey('division', $division)
             ->getTemplate('division/overview');
+        return new \OriginalAppName\Response($this->view->getTemplate('tennis/division-list'));
     }
 
 
@@ -258,25 +256,6 @@ class Result extends \OriginalAppName\Site\Elttl\Controller\Front
     public function setDivision($division)
     {
         $this->division = $division;
-        return $this;
-    }
-
-
-    /**
-     * @return object OriginalAppName\\OriginalAppName\Site\Elttl\Entity\Tennis\Year
-     */
-    public function getYear()
-    {
-        return $this->year;
-    }
-    
-    
-    /**
-     * @param object $year OriginalAppName\\OriginalAppName\Site\Elttl\Entity\Tennis\Year
-     */
-    public function setYear($year)
-    {
-        $this->year = $year;
         return $this;
     }
 }

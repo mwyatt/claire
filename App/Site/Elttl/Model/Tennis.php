@@ -64,8 +64,11 @@ class Tennis extends \OriginalAppName\Model
 	 * @param  array $ids
 	 * @return object
 	 */
-	public function readYearId($ids, $column = 'id')
+	public function readYearId($yearId, $ids, $column = 'id')
 	{
+		if ($yearId) {
+			$this->yearId = $yearId;
+		}
 		$uniqueIds = [];
 		foreach ($ids as $id) {
 			$uniqueIds[$id] = $id;
@@ -103,8 +106,11 @@ class Tennis extends \OriginalAppName\Model
 	 * @param  any $value  to match
 	 * @return object         
 	 */
-	public function readYearColumn($column, $value)
+	public function readYearColumn($yearId, $column, $value)
 	{
+		if ($yearId) {
+			$this->yearId = $yearId;
+		}
 
 		// query
 		$sth = $this->database->dbh->prepare("
@@ -129,8 +135,11 @@ class Tennis extends \OriginalAppName\Model
 	 * @param  array  $properties 
 	 * @return int             
 	 */
-	public function deleteYear($ids)
+	public function deleteYear($yearId, $ids)
 	{
+		if ($yearId) {
+			$this->yearId = $yearId;
+		}
 
 		// build
 		$rowCount = 0;
@@ -162,8 +171,11 @@ class Tennis extends \OriginalAppName\Model
 	 * @param  array $entities 
 	 * @return bool           true if same amount passed are updated
 	 */
-	public function updateYear($entities)
+	public function updateYear($yearId, $entities)
 	{
+		if ($yearId) {
+			$this->yearId = $yearId;
+		}
 		
 		// statement
 		$statement = [];
