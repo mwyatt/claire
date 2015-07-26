@@ -1,10 +1,10 @@
-<?php //include($this->getTemplatePath('_header')) ?>
-
-<!-- include a stylesheet here -->
+<?php require_once($this->getTemplatePath('_header')) ?>
 
 <div class="page not-found js-page-not-found">
-	<h1 class="page-heading-first">Not Found</h1>
-	<p class="p">The page requested could not be found. Please go <a href="<?php echo $this->url->generate('home') ?>">home</a>.</p>
+	<h1 class="page-primary-title">404 Not Found</h1>
+	<div class="typography">
+		<p>The page requested could not be found. Please go <a href="<?php echo $this->url->generate('home') ?>">home</a>.</p>
+	</div>
 </div>
 
-<?php //include($this->getTemplatePath('_footer')) ?>
+<?php require_once($this->getTemplatePath('_footer')) ?>

@@ -1,4 +1,4 @@
-<?php if (isset($teams) && isset($fixtures) && isset($fixtureResults)) : ?>
+<?php if (!empty($fixtures) && !empty($teams) && !empty($fixtureResults)) : ?>
 
 <table class="elttl-table division-overview-fixture-table">
 	<tr class="elttl-table-row">
@@ -6,8 +6,8 @@
 
 	<?php foreach ($teams as $teamRight) : ?>
 		
-		<th class="elttl-table-cell elttl-table-heading" title="<?php echo $teamRight->getName() ?>">
-			<a href="<?php echo $this->buildArchiveUrl(array('team', $teamRight->getName())) ?>"><?php echo $teamRight->getName() ?></a>
+		<th class="elttl-table-cell elttl-table-heading" title="<?php echo $teamRight->name ?>">
+			<a href="<?php echo $this->url->generate('team/single', ['yearName' => $year->name, 'teamSlug' => $teamRight->slug]) ?>"><?php echo $teamRight->name ?></a>
 		</th>
 
 	<?php
@@ -18,22 +18,22 @@ endforeach ?>
 	<?php foreach ($teams as $teamLeft) : ?>
 		
 	<tr class="elttl-table-row">
-		<th class="elttl-table-cell elttl-table-heading" title="<?php echo $teamLeft->getName() ?>">
-			<a href="<?php echo $this->buildArchiveUrl(array('team', $teamLeft->getName())) ?>"><?php echo $teamLeft->getName() ?></a>
+		<th class="elttl-table-cell elttl-table-heading" title="<?php echo $teamLeft->name ?>">
+			<a href="<?php echo $this->url->generate('team/single', ['yearName' => $year->name, 'teamSlug' => $teamLeft->slug]) ?>"><?php echo $teamLeft->name ?></a>
 		</th>
 		
 		<?php foreach ($teams as $teamRight) : ?>
-			<?php if ($teamLeft->getId() == $teamRight->getId()) : ?>
+			<?php if ($teamLeft->id == $teamRight->id) : ?>
 			
 		<td class="elttl-table-cell is-blank"></td>
 
 			<?php
 else : ?>
 
-		<td class="elttl-table-cell" title="<?php echo $teamLeft->getName() . ' vs ' . $teamRight->getName() ?>">
+		<td class="elttl-table-cell" title="<?php echo $teamLeft->name . ' vs ' . $teamRight->name ?>">
 
 			<?php foreach ($fixtures as $fixture) : ?>
-				<?php if ($fixture->getTeamIdLeft() == $teamLeft->getId() && $fixture->getTeamIdRight() == $teamRight->getId()) : ?>
+				<?php if ($fixture->teamIdLeft == $teamLeft->id && $fixture->teamIdRight == $teamRight->id) : ?>
 					<?php include($this->getTemplatePath('_fixture')) ?>
 				<?php
 endif ?>

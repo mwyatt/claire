@@ -3,6 +3,11 @@
 <div class="page">
 	<h1 class="page-primary-title">System/Tennis</h1>
 	<form class="block-margins">
+		<p>Builds all slugs for specified table name</p>
+		<input type="text" name="tableName" placeholder="e.g. Player">
+		<button name="generateTableSlugs" value="true" class="button-primary">Generate Slugs</button>
+	</form>
+	<form class="block-margins">
 		<p>Creates a copy of previous year except for fixtures, encounters and moves the year forwards 1.</p>
 		<button name="newSeason" value="true" class="button-primary">Create New Season</button>
 	</form>

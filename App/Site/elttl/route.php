@@ -1,6 +1,5 @@
 <?php
 
-
 $routes['home'] = [
     'mux/type' => 'get',
 
@@ -49,5 +48,19 @@ $routes['result/year/division/merit-doubles'] = [
     'mux/type' => 'get',
     'mux/path' => '/result/:yearName/:divisionName/merit-doubles/',
     'mux/controller/method' => ['OriginalAppName\\Site\\Elttl\\Controller\\Result', 'yearDivisionMeritDoubles'],
+    'mux/options' => []
+];
+
+$routes['team/single'] = [
+    'mux/type' => 'get',
+    'mux/path' => '/:yearName/team/:teamSlug/',
+    'mux/controller/method' => ['OriginalAppName\\Site\\Elttl\\Controller\\Team', 'single'],
+    'mux/options' => []
+];
+
+$routes['fixture/single'] = [
+    'mux/type' => 'get',
+    'mux/path' => '/:yearName/fixture/:teamLeftSlug/:teamRightSlug/',
+    'mux/controller/method' => ['OriginalAppName\\Site\\Elttl\\Controller\\Fixture', 'single'],
     'mux/options' => []
 ];

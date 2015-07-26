@@ -4,6 +4,7 @@
 	<h1 class="page-primary-title">Divisions</h1>
 	<p>Here are all the divisions in season <?php echo $yearSingle->getNameFull() ?>.</p>
 
+<?php $year = $yearSingle ?>
 <?php if (!empty($divisions)) : ?>
 	<?php include $this->getTemplatePath('_divisions') ?>
 <?php else : ?>
@@ -12,6 +13,3 @@
 
 <?php endif ?>
 <?php include $this->getTemplatePath('_footer') ?>
-
-
-<?php echo $this->url->generate('result/year/division/single', ['yearName' => $year->name, 'divisionName' => strtolower($division->name)]) ?>

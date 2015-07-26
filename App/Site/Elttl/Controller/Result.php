@@ -36,7 +36,9 @@ class Result extends \OriginalAppName\Site\Elttl\Controller\Front
     public function yearSingle($yearName)
     {
         $serviceYear = new \OriginalAppName\Site\Elttl\Service\Tennis\Year;
-        $entityYear = $serviceYear->readName($yearName);
+        if (!$entityYear = $serviceYear->readName($yearName)) {
+            return new \OriginalAppName\Response('', 404);
+        }
 
         // division
         $modelDivision = new \OriginalAppName\Site\Elttl\Model\Tennis\Division;
@@ -59,29 +61,29 @@ class Result extends \OriginalAppName\Site\Elttl\Controller\Front
     public function yearDivisionSingle($yearName, $divisionName)
     {
         $serviceYear = new \OriginalAppName\Site\Elttl\Service\Tennis\Year;
-        $entityYear = $serviceYear->readName($yearName);
+        if (!$entityYear = $serviceYear->readName($yearName)) {
+            return new \OriginalAppName\Response('', 404);
+        }
 
         // division
         $modelDivision = new \OriginalAppName\Site\Elttl\Model\Tennis\Division;
-        $modelDivision->readYearColumn(null, 'name', $divisionName);
-        $entityDivision = $modelDivision->getDataFirst();
+        $modelDivision->readYearColumn($entityYear->id, 'name', $divisionName);
+        if (!$entityDivision = $modelDivision->getDataFirst()) {
+            return new \OriginalAppName\Response('', 404);
+        }
 
         // fixture summary table
-        $serviceFixture = new \OriginalAppName\Site\Elttl\Service\Tennis\Fixture;
-        $serviceFixture->readSummaryTable($entityYear, $entityDivision);
-        echo '<pre>';
-        print_r($serviceFixture);
-        echo '</pre>';
-        exit;
+        $serviceResult = new \OriginalAppName\Site\Elttl\Service\Tennis\Result;
+        $summaryTableParts = $serviceResult->getSummaryTable($entityYear, $entityDivision);
 
         // single division view
         $this->view
-            ->setMeta(array(
-                'title' => $division->getName() . ' division overview'
-            ))
-            ->setDataKey('division', $division)
-            ->getTemplate('division/overview');
-        return new \OriginalAppName\Response($this->view->getTemplate('tennis/division-list'));
+            ->setDataKey('metaTitle', $entityDivision->name . ' division overview')
+            ->setDataKey('fixtureResults', $summaryTableParts['fixtureResults'])
+            ->setDataKey('teams', $summaryTableParts['entTeams'])
+            ->setDataKey('fixtures', $summaryTableParts['entFixtures'])
+            ->setDataKey('division', $entityDivision);
+        return new \OriginalAppName\Response($this->view->getTemplate('result/_division-single'));
     }
 
 
