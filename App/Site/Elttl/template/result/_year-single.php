@@ -4,9 +4,9 @@
 	<h1 class="page-primary-title">Divisions</h1>
 	<p>Here are all the divisions in season <?php echo $yearSingle->getNameFull() ?>.</p>
 
-<?php if (!empty($divisions)): ?>
+<?php if (!empty($divisions)) : ?>
 	<?php include $this->getTemplatePath('_divisions') ?>
-<?php else: ?>
+<?php else : ?>
 	
 	<p>No divisions, not good!</p>
 

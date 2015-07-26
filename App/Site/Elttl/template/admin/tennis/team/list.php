@@ -33,7 +33,8 @@
 				
 					<option value="<?php echo $weekdayId ?>" <?php echo $isSelected ? 'selected="selected"' : '' ?>><?php echo $weekday ?></option>
 
-			<?php endforeach ?>
+			<?php
+endforeach ?>
 
 				</select>
 
@@ -52,7 +53,8 @@ endif ?>
 				
 					<option value="<?php echo $player->getId() ?>" <?php echo $isSelected ? 'selected="selected"' : '' ?>><?php echo $player->getNameFull() ?></option>
 
-			<?php endforeach ?>
+			<?php
+endforeach ?>
 
 				</select>
 
@@ -71,7 +73,8 @@ endif ?>
 				
 					<option value="<?php echo $venue->getId() ?>" <?php echo $isSelected ? 'selected="selected"' : '' ?>><?php echo $venue->getName() ?></option>
 
-			<?php endforeach ?>
+			<?php
+endforeach ?>
 
 				</select>
 
@@ -90,7 +93,8 @@ endif ?>
 				
 					<option value="<?php echo $division->getId() ?>" <?php echo $isSelected ? 'selected="selected"' : '' ?>><?php echo $division->getName() ?></option>
 
-			<?php endforeach ?>
+			<?php
+endforeach ?>
 
 				</select>
 
@@ -104,7 +108,8 @@ endif ?>
 			</td>
 		</tr>
 
-	<?php endforeach ?>
+	<?php
+endforeach ?>
 <?php endif ?>
 		
 	</table>

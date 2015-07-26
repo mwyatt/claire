@@ -26,7 +26,8 @@ endif ?>
 				<span class="cover-button"><?php echo $cover->button ?></span>
 			</a>
 
-	<?php endforeach ?>
+	<?php
+endforeach ?>
 
 		</div>
 
@@ -59,7 +60,8 @@ endif ?>
 	
 			<a class="gallery-link js-magnific-gallery" href="<?php echo $this->url->generate() . $path ?>"><img class="gallery-image" src="<?php echo $path ?>" alt=""></a>
 
-	<?php endforeach ?>
+	<?php
+endforeach ?>
 
 		</div>
 	</div>

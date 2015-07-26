@@ -32,7 +32,8 @@
 		
 				<option value="<?php echo $division->id ?>"><?php echo $division->name ?></option>
 
-	<?php endforeach ?>
+	<?php
+endforeach ?>
 
 			</select>
 		</section>
@@ -62,7 +63,8 @@
 				</select>
 			</div>
 			
-	<?php endforeach ?>
+	<?php
+endforeach ?>
 <?php endforeach ?>
 
 		</section>
@@ -95,11 +97,13 @@ endif ?>
 				<label for="encounter_<?php echo $row ?>_<?php echo $side ?>" class="fixture-single-score-row-encounter-label js-fixture-single-score-row-encounter-label fixture-single-score-row-encounter-label-<?php echo $side ?>" data-position="<?php echo $playerPosition ?>" data-side="<?php echo $side ?>"></label>
 				<input id="encounter_<?php echo $row ?>_<?php echo $side ?>" name="encounter[<?php echo $row ?>][<?php echo $side ?>]" class="fixture-single-encounter-input js-fixture-single-encounter-input" type="text" size="1" maxlength="1" value="" data-row="<?php echo $row ?>" data-side="<?php echo $side ?>">
 			
-		<?php endforeach ?>
+		<?php
+endforeach ?>
 
 			</div>
 		
-	<?php endforeach ?>
+	<?php
+endforeach ?>
 
 		</section>
 

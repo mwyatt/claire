@@ -69,10 +69,10 @@ class Result extends \OriginalAppName\Site\Elttl\Controller\Front
         // fixture summary table
         $serviceFixture = new \OriginalAppName\Site\Elttl\Service\Tennis\Fixture;
         $serviceFixture->readSummaryTable($entityYear, $entityDivision);
-echo '<pre>';
-print_r($serviceFixture);
-echo '</pre>';
-exit;
+        echo '<pre>';
+        print_r($serviceFixture);
+        echo '</pre>';
+        exit;
 
         // single division view
         $this->view

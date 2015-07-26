@@ -1,7 +1,6 @@
 <?php
 namespace OriginalAppName\Site\Elttl\Admin\Service\Tennis\Fixture;
 
-
 class Fulfill extends \OriginalAppName\Site\Elttl\Model\Tennis
 {
 
@@ -47,11 +46,11 @@ class Fulfill extends \OriginalAppName\Site\Elttl\Model\Tennis
 
     /**
      * prints r and echos message if debugging mode on
-     * @param  string|array $message 
-     * @return null          
+     * @param  string|array $message
+     * @return null
      */
     private function outputDebugBlock($message)
-    {       
+    {
         if ($this->isDebug()) {
             echo '<pre>';
             if (is_array($message) || is_object($message)) {
@@ -71,7 +70,7 @@ class Fulfill extends \OriginalAppName\Site\Elttl\Model\Tennis
     public function boot()
     {
         $sessionFeedback = new \OriginalAppName\Session\Feedback;
-        $this->outputDebugBlock('running fixture fulfillment procedure');    
+        $this->outputDebugBlock('running fixture fulfillment procedure');
         if (!$this->validate()) {
             $sessionFeedback->setMessage('something is wrong with the input', 'negative');
             return;
@@ -109,7 +108,7 @@ class Fulfill extends \OriginalAppName\Site\Elttl\Model\Tennis
 
     /**
      * test for fixture fulfillment
-     * @return boolean 
+     * @return boolean
      */
     private function isFilled()
     {
@@ -121,8 +120,8 @@ class Fulfill extends \OriginalAppName\Site\Elttl\Model\Tennis
     /**
      * retrieve passed player ids for players
      * players stored in player property
-     * @param  array $playerIds 
-     * @return null            
+     * @param  array $playerIds
+     * @return null
      */
     private function readPlayersById($playerIds)
     {
@@ -138,7 +137,7 @@ class Fulfill extends \OriginalAppName\Site\Elttl\Model\Tennis
     /**
      * goes through encounter structure and stores each row
      * taking into account the exclusion and rank changes for players
-     * @return null 
+     * @return null
      */
     private function encounters()
     {
@@ -155,7 +154,6 @@ class Fulfill extends \OriginalAppName\Site\Elttl\Model\Tennis
 
         // encounter structure
         foreach ($modelFixture->getEncounterStructure() as $structureRow => $playerPositions) {
-
             // resource
             $moldEncounter = new \OriginalAppName\Site\Elttl\Entity\Tennis\Encounter;
 
@@ -187,7 +185,7 @@ class Fulfill extends \OriginalAppName\Site\Elttl\Model\Tennis
             ];
             $rankChanges = $this->calculatePlayerRankChanges($config);
 
-            // set rank changes and store mold            
+            // set rank changes and store mold
             $moldEncounter->playerRankChangeLeft = $rankChanges->left;
             $moldEncounter->playerRankChangeRight = $rankChanges->right;
             $this->outputDebugBlock($moldEncounter);
@@ -206,7 +204,7 @@ class Fulfill extends \OriginalAppName\Site\Elttl\Model\Tennis
     /**
      * final fulfill operations such as flagging the fixture as filled and
      * committing the player rank changes
-     * @return null 
+     * @return null
      */
     private function finalise()
     {
@@ -232,7 +230,7 @@ class Fulfill extends \OriginalAppName\Site\Elttl\Model\Tennis
 
     /**
      * iterates through all stored players and updates them
-     * @return null 
+     * @return null
      */
     private function updatePlayerRanks()
     {
@@ -250,8 +248,8 @@ class Fulfill extends \OriginalAppName\Site\Elttl\Model\Tennis
 
     /**
      * gets the status value from an input array
-     * @param  array $inputEncounter 
-     * @return string                 
+     * @param  array $inputEncounter
+     * @return string
      */
     private function getInputStatus($inputEncounter)
     {
@@ -264,7 +262,7 @@ class Fulfill extends \OriginalAppName\Site\Elttl\Model\Tennis
 
     /**
      * revert existing filled fixture
-     * @return null 
+     * @return null
      */
     private function clear()
     {
@@ -313,7 +311,7 @@ class Fulfill extends \OriginalAppName\Site\Elttl\Model\Tennis
 
     /**
      * retrieve fixture by looking at the teams selected
-     * @return bool  
+     * @return bool
      */
     private function readFixture()
     {
@@ -352,7 +350,8 @@ class Fulfill extends \OriginalAppName\Site\Elttl\Model\Tennis
     /**
      * @return object mold_fixture
      */
-    private function getFixture() {
+    private function getFixture()
+    {
         return $this->fixture;
     }
     
@@ -360,7 +359,8 @@ class Fulfill extends \OriginalAppName\Site\Elttl\Model\Tennis
     /**
      * @param object $fixture Mold_fixture
      */
-    private function setFixture($fixture) {
+    private function setFixture($fixture)
+    {
         $this->fixture = $fixture;
         return $this;
     }
@@ -388,17 +388,19 @@ class Fulfill extends \OriginalAppName\Site\Elttl\Model\Tennis
 
 
     /**
-     * @return array 
+     * @return array
      */
-    private function getPlayers() {
+    private function getPlayers()
+    {
         return $this->players;
     }
     
     
     /**
-     * @param array $players 
+     * @param array $players
      */
-    private function setPlayers($players) {
+    private function setPlayers($players)
+    {
         $this->players = $players;
         return $this;
     }

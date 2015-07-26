@@ -39,7 +39,8 @@
 
 		<?php
 endif ?>
-	<?php endforeach ?>
+	<?php
+endforeach ?>
 
 	</table>
 

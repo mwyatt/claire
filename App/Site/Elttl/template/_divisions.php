@@ -4,7 +4,8 @@
 
 	<?php foreach ($divisions as $division) : ?>
 		<?php include $this->getTemplatePath('_division') ?>
-	<?php endforeach ?>
+	<?php
+endforeach ?>
 		
 	</div>
 
