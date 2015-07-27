@@ -41,12 +41,6 @@ class Player extends \OriginalAppName\Site\Elttl\Controller\Front
         }
 
 
-// here
-// 
-// 
-// 
-// 
-
         // merit
         $this->getMeritStats();
 
