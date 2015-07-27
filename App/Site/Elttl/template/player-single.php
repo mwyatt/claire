@@ -1,4 +1,4 @@
-<?php require_once($this->getTemplatePath('_header')) ?>
+<?php include $this->getTemplatePath('_header') ?>
 
 <div class="page player-single js-page-player-single">
 	<h1 class="page-primary-title"><?php echo $player->getNameFull() ?></h1>
@@ -8,27 +8,27 @@
 			<tr class="elttl-table-row">
 				<th class="elttl-table-cell elttl-table-heading">Team</th>
 				<td class="elttl-table-cell">
-					<a href="<?php echo $this->buildArchiveUrl(array('team', $team->getName())) ?>"><?php echo $team->getName() ?></a>
+					<a href="<?php echo $this->url->generate('team/single', ['yearName' => $year->name, 'teamSlug' => $team->slug]) ?>"><?php echo $team->name ?></a>
 				</td>
 			</tr>
 			<tr class="elttl-table-row">
 				<th class="elttl-table-cell elttl-table-heading">Rank</th>
-				<td class="elttl-table-cell"><?php echo $player->getRank() ?></td>
+				<td class="elttl-table-cell"><?php echo $player->rank ?></td>
 			</tr>
 
-<?php if ($player->getPhoneLandline()) : ?>
+<?php if ($player->phoneLandline) : ?>
 
 			<tr class="elttl-table-row">
 				<th class="elttl-table-cell elttl-table-heading">Landline</th>
-				<td class="elttl-table-cell"><?php echo $player->getPhoneLandline() ?></td>
+				<td class="elttl-table-cell"><?php echo $player->phoneLandline ?></td>
 			</tr>
 
 <?php endif ?>
-<?php if ($player->getPhoneMobile()) : ?>
+<?php if ($player->phoneMobile) : ?>
 
 			<tr class="elttl-table-row">
 				<th class="elttl-table-cell elttl-table-heading">Mobile</th>
-				<td class="elttl-table-cell"><?php echo $player->getPhoneMobile() ?></td>
+				<td class="elttl-table-cell"><?php echo $player->phoneMobile ?></td>
 			</tr>
 
 <?php endif ?>
@@ -41,7 +41,7 @@
 	<div class="block-margins">
 		<h2 class="player-single-secondary-title">Fixtures</h2>
 
-<?php include($this->getTemplatePath('_fixtures')) ?>
+<?php include $this->getTemplatePath('_fixtures') ?>
 
 	</div>
 
@@ -52,7 +52,7 @@
 		<h2 class="player-single-secondary-title">Performance</h2>
 		<table class="elttl-table is-encounter">
 
-	<?php include($this->getTemplatePath('_encounters')) ?>
+	<?php include $this->getTemplatePath('_encounters') ?>
 
 		</table>
 	</div>
@@ -61,4 +61,4 @@
 
 </div>
 
-<?php require_once($this->getTemplatePath('_footer')) ?>
+<?php include $this->getTemplatePath('_footer') ?>

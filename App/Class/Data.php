@@ -190,4 +190,58 @@ class Data extends \OriginalAppName\System
 		$this->setData(array_merge($data, $dataRows));
 		return $this;
 	}
+
+
+	/**
+	 * order by a property
+	 * @todo try and make more readable
+	 * @param  string $property database table column name
+	 * @param  string $order    asc|desc
+	 * @return object
+	 */
+	public function orderByProperty($property, $order = 'asc')
+	{
+	    if (!$data = $this->getData()) {
+	        return $this;
+	    }
+	    $dataSingle = current($data);
+	    if (! property_exists($dataSingle, $property)) {
+	        return;
+	    }
+	    $sampleValue = $dataSingle->$property;
+	    $type = 'integer';
+	    if (is_string($sampleValue)) {
+	        $type = 'string';
+	    }
+	    if (is_int($sampleValue)) {
+	        $type = 'integer';
+	    }
+
+	    // sort
+	    uasort($data, function ($a, $b) use ($property, $type, $order) {
+	        if ($type == 'string') {
+	            if ($order == 'asc') {
+	                return strcasecmp($a->$property, $b->$property);
+	            } else {
+	                return strcasecmp($b->$property, $a->$property);
+	            }
+	        }
+	        if ($type == 'integer') {
+	            if ($order == 'asc') {
+	                if ($a->$property == $b->$property) {
+	                    return 0;
+	                }
+	                return $a->$property < $b->$property ? -1 : 1;
+	            } else {
+	                if ($a->$property == $b->$property) {
+	                    return 0;
+	                }
+	                return $a->$property > $b->$property ? -1 : 1;
+	            }
+	        }
+
+	    });
+	    $this->setData($data);
+	    return $this;
+	}
 }

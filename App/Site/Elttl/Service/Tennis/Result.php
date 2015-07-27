@@ -67,12 +67,12 @@ class Result extends \OriginalAppName\Service
     public function getLeague($modelFixture, $modelEncounter)
     {
         $modelFixture->keyDataByProperty('id');
-        if (! $entitiesFixture = $modelFixture->getData()) {
+        if (!$entitiesFixture = $modelFixture->getData()) {
             return [];
         }
         $collection = [];
         foreach ($modelEncounter->getData() as $key => $fixtureScore) {
-            if (! array_key_exists($key, $entitiesFixture)) {
+            if (!array_key_exists($key, $entitiesFixture)) {
                 return $modelFixture;
             }
             foreach (array('left', 'right') as $side) {
@@ -80,7 +80,7 @@ class Result extends \OriginalAppName\Service
                 $scores = $modelEncounter->getData($key);
 
                 // init key for team
-                if (! array_key_exists($teamId, $collection)) {
+                if (!array_key_exists($teamId, $collection)) {
                     $collection[$teamId] = (object) array(
                         'won' => 0,
                         'draw' => 0,
@@ -92,7 +92,7 @@ class Result extends \OriginalAppName\Service
 
                 // get scores
                 $score = $scores->{'score_' . $side};
-                $opposingScore = $scores->{'score_' . $modelFixture->getOtherSide($side)};
+                $opposingScore = $scores->{'score_' . \OriginalAppName\Site\Elttl\Helper\Tennis::getOtherSide($side)};
 
                 // calculate won, loss, played, points
                 $collection[$teamId]->played ++;
@@ -117,5 +117,42 @@ class Result extends \OriginalAppName\Service
         }
         $modelFixture->setData($collection);
         return $this;
+    }
+
+
+    /**
+     * retreive merit objects based on entities passed
+     * @param  array $entEncounters 
+     * @return array                
+     */
+    public function getMerit($entEncounters)
+    {
+        $results = [];
+        foreach ($entEncounters as $entEncounter) {
+            foreach (array('Left', 'Right') as $side) {
+
+                // create object entry for player if not exist
+                $playerId = $entEncounter->{'playerId' . $side};
+                if (empty($results[$playerId])) {
+                    $results[$playerId] = new \OriginalAppName\Site\Elttl\Entity\Tennis\Result\Merit;
+                }
+
+                // get scores
+                $score = $entEncounter->{'score' . $side};
+                $opposingScore = $entEncounter->{'score' . ucfirst(\OriginalAppName\Site\Elttl\Helper\Tennis::getOtherSide($side))};
+
+                // adding only your points
+                $results[$playerId]->won += $score;
+
+                // totaling win and other side score
+                $results[$playerId]->played += ($score + $opposingScore);
+            }
+        }
+
+        // inject average
+        foreach ($results as $key => $result) {
+            $results[$key]->average = \OriginalAppName\Helper::calcAverage($result->won, $result->played);
+        }
+        return $results;
     }
 }

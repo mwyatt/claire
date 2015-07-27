@@ -46,42 +46,5 @@ class Encounter extends \OriginalAppName\Service
      * @return object
      */
     public function convertToMerit()
-    {
-        if (! $molds = $this->getData()) {
-            return $this;
-        }
-        $collection = array();
-        foreach ($molds as $mold) {
-            foreach (array('left', 'right') as $side) {
-                // create object entry for player if not exist
-                $playerId = $mold->{'player_id_' . $side};
-                if (! array_key_exists($playerId, $collection)) {
-                    $collection[$playerId] = (object) array(
-                        'won' => 0,
-                        'played' => 0,
-                        'average' => null
-                    );
-                }
-
-                // get scores
-                $score = $mold->{'score_' . $side};
-                $opposingScore = $mold->{'score_' . $this->getOtherSide($side)};
-
-                // adding only your points
-                $collection[$playerId]->won += $score;
-
-                // totaling win and other side score
-                $collection[$playerId]->played += ($score + $opposingScore);
-            }
-        }
-
-        // inject average
-        foreach ($collection as $key => $singleCurated) {
-            $collection[$key]->average = $this->calcAverage($singleCurated->won, $singleCurated->played);
-        }
-
-        // return [playerid], won, played, average objects
-        $this->setData($collection);
-        return $this;
-    }
+    {}
 }

@@ -151,4 +151,23 @@ class Helper
 	{
 		return count($group) > 1 ? 's' : '';
 	}
+
+
+	/**
+	 * calculates the average 0 to 100
+	 * @param  int $small    
+	 * @param  int $big 
+	 * @return int         
+	 */
+	public static function calcAverage($small, $big) {
+		$average = 0;
+		if ( $big != 0 ) {
+			$x = 0; $y = 0; $average = 0;			
+			$x = $small / $big;
+			$y = $x * 100;
+			// $average = round($y); // converts to 65%
+			$average = number_format((float)$y, 2, '.', '');
+		}
+	    return $average;
+	} 
 }

@@ -95,7 +95,7 @@ class Fixture extends \OriginalAppName\Site\Elttl\Model\Tennis
 
 				// get scores
 				$score = $scores->{'score_' . $side};
-				$opposingScore = $scores->{'score_' . $this->getOtherSide($side)};
+				$opposingScore = $scores->{'score_' . \OriginalAppName\Site\Elttl\Helper\Tennis::getOtherSide($side)};
 
 				// calculate won, loss, played, points
 				$collection[$teamId]->played ++;
