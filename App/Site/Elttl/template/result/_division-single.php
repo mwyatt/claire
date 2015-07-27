@@ -4,6 +4,7 @@
 	<h1 class="page-primary-title"><?php echo $division->name ?> division</h1>
 	<p class="p">This is an overview for the <?php echo $division->name ?> division.</p>
 
+<?php $year = $yearSingle ?>
 <?php include $this->getTemplatePath('division/_menu-tables') ?>
 <?php include $this->getTemplatePath('division/_fixture-summary-table') ?>
 <?php include $this->getTemplatePath('_footer') ?>

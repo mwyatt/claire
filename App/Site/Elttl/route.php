@@ -51,6 +51,13 @@ $routes['result/year/division/merit-doubles'] = [
     'mux/options' => []
 ];
 
+$routes['player/single'] = [
+    'mux/type' => 'get',
+    'mux/path' => '/:yearName/player/:playerSlug/',
+    'mux/controller/method' => ['OriginalAppName\\Site\\Elttl\\Controller\\Player', 'single'],
+    'mux/options' => []
+];
+
 $routes['team/single'] = [
     'mux/type' => 'get',
     'mux/path' => '/:yearName/team/:teamSlug/',

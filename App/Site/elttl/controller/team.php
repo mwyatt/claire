@@ -13,6 +13,7 @@ class Team extends \OriginalAppName\Site\Elttl\Controller\Front
 
     public function single($yearName, $teamSlug)
     {
+        $serviceResult = new \OriginalAppName\Site\Elttl\Service\Tennis\Result;
         $serviceYear = new \OriginalAppName\Site\Elttl\Service\Tennis\Year;
         if (!$entityYear = $serviceYear->readName($yearName)) {
             return new \OriginalAppName\Response('', 404);
@@ -21,85 +22,57 @@ class Team extends \OriginalAppName\Site\Elttl\Controller\Front
         // team
         $modelTennisTeam = new \OriginalAppName\Site\Elttl\Model\Tennis\Team;
         $modelTennisTeam->readYearColumn($entityYear->id, 'slug', $teamSlug);
-        if (! $team = $modelTennisTeam->getDataFirst()) {
+        if (!$team = $modelTennisTeam->getDataFirst()) {
             return new \OriginalAppName\Response('', 404);
         }
 
-        echo '<pre>';
-        print_r($team);
-        echo '</pre>';
-        exit;
-
-
         // players
-        $className = $this->getArchiveClassName('model_tennis_player');
-        $modelTennisPlayer = new $className($this);
-        $modelTennisPlayer->read($this->getArchiveWhere(array(
-            'where' => array('team_id' => $team->getId())
-        )));
-        $modelTennisPlayer->keyDataByProperty('id');
-        $players = $modelTennisPlayer->getData();
+        $modelTennisPlayer = new \OriginalAppName\Site\Elttl\Model\Tennis\Player;
+        $modelTennisPlayer->readYearId($entityYear->id, $modelTennisTeam->getDataProperty('id'), 'teamId');
+        if (!$players = $modelTennisPlayer->getData()) {
+            return new \OriginalAppName\Response('', 404);
+        }
 
         // secretary
-        $modelTennisPlayer->read($this->getArchiveWhere(array(
-            'where' => array('id' => $team->getSecretaryId())
-        )));
+        $modelTennisPlayer->readYearId($entityYear->id, [$team->secretaryId]);
         $secretary = $modelTennisPlayer->getDataFirst();
 
         // division
-        $className = $this->getArchiveClassName('model_tennis_division');
-        $modelTennisDivision = new $className($this);
-        $modelTennisDivision->read($this->getArchiveWhere(array(
-            'where' => array(
-                'id' => $team->getDivisionId()
-            )
-        )));
+        $modelTennisDivision = new \OriginalAppName\Site\Elttl\Model\Tennis\Division;
+        $modelTennisDivision->readYearId($entityYear->id, [$team->divisionId]);
 
         // fixture
-        $className = $this->getArchiveClassName('model_tennis_fixture');
-        $modelTennisFixture = new $className($this);
-        $modelTennisFixture->read($this->getArchiveWhere(array(
-            'where' => array('team_id_left' => $team->getId())
-        )));
+        $modelTennisFixture = new \OriginalAppName\Site\Elttl\Model\Tennis\Fixture;
+        $modelTennisFixture->readYearId($entityYear->id, [$team->id], 'teamIdLeft');
         $fixturesLeft = $modelTennisFixture->getData();
-        $modelTennisFixture->read($this->getArchiveWhere(array(
-            'where' => array('team_id_right' => $team->getId())
-        )));
+        $modelTennisFixture->readYearId($entityYear->id, [$team->id], 'teamIdRight');
         $fixturesRight = $modelTennisFixture->getData();
         $fixtures = array_merge($fixturesLeft, $fixturesRight);
         $modelTennisFixture->setData($fixtures);
 
         // teams
+        $modelTennisTeam = new \OriginalAppName\Site\Elttl\Model\Tennis\Team;
         $modelTennisTeam
-            ->read($this->getArchiveWhere(array(
-                'where' => array(
-                    'id' => array_merge($modelTennisFixture->getDataProperty('team_id_left'), $modelTennisFixture->getDataProperty('team_id_right'))
-                )
-            )))
+            ->readYearId($entityYear->id, array_merge($modelTennisFixture->getDataProperty('teamIdLeft'), $modelTennisFixture->getDataProperty('teamIdRight')))
             ->keyDataByProperty('id');
-        $teams = $modelTennisTeam->getData();
+        if (!$teams = $modelTennisTeam->getData()) {
+            return new \OriginalAppName\Response('', 404);
+        }
 
-        // all fixtures played in encounters
-        $className = $this->getArchiveClassName('model_tennis_encounter');
-        $modelTennisEncounter = new $className($this);
-        $modelTennisEncounter->read($this->getArchiveWhere(array(
-            'where' => array('fixture_id' => $modelTennisFixture->getDataProperty('id'))
-        )));
-        $modelTennisEncounter->convertToFixtureResults();
-        $fixtureResults = $modelTennisEncounter->getData();
+        // fixture results
+        $modelTennisEncounter = new \OriginalAppName\Site\Elttl\Model\Tennis\Encounter;
+        $modelTennisEncounter->readYearId($entityYear->id, $modelTennisFixture->getDataProperty('id'), 'fixtureId');
+        $fixtureResults = $serviceResult->getFixture($modelTennisFixture->getData(), $modelTennisEncounter->getData());
 
         // venue
-        $className = $this->getArchiveClassName('model_tennis_venue');
-        $modelTennisVenue = new $className($this);
-        $modelTennisVenue->read($this->getArchiveWhere(array(
-            'where' => array('id' => $team->getVenueId())
-        )));
+        $modelTennisVenue = new \OriginalAppName\Site\Elttl\Model\Tennis\Venue;
+        $modelTennisVenue->readYearId($entityYear->id, [$team->venueId]);
         $venue = $modelTennisVenue->getDataFirst();
 
         // template
         $this->view
             ->setMeta(array(
-                'title' => $team->getName()
+                'title' => $team->name
             ))
             ->setDataKey('team', $team)
             ->setDataKey('teams', $teams)
@@ -108,7 +81,7 @@ class Team extends \OriginalAppName\Site\Elttl\Controller\Front
             ->setDataKey('secretary', $secretary)
             ->setDataKey('fixtures', $modelTennisFixture->getData())
             ->setDataKey('fixtureResults', $fixtureResults)
-            ->setDataKey('players', $players)
-            ->getTemplate('team-single');
+            ->setDataKey('players', $players);
+        return new \OriginalAppName\Response($this->view->getTemplate('team-single'));
     }
 }

@@ -60,8 +60,8 @@ class Team extends \OriginalAppName\Entity
 	public function getHomeWeekdayName()
 	{
 		$weekdays = $this->getWeekdays();
-		$key = $this->getHomeWeekday();
-		if (arrayKeyExists($key, $weekdays)) {
+		$key = $this->homeWeekday;
+		if (\OriginalAppName\Helper::arrayKeyExists([$key], $weekdays)) {
 			return $weekdays[$key];
 		}
 	}

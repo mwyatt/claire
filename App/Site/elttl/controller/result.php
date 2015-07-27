@@ -82,6 +82,8 @@ class Result extends \OriginalAppName\Site\Elttl\Controller\Front
             ->setDataKey('fixtureResults', $summaryTableParts['fixtureResults'])
             ->setDataKey('teams', $summaryTableParts['entTeams'])
             ->setDataKey('fixtures', $summaryTableParts['entFixtures'])
+            ->setDataKey('fixtures', $summaryTableParts['entFixtures'])
+            ->setDataKey('yearSingle', $entityYear)
             ->setDataKey('division', $entityDivision);
         return new \OriginalAppName\Response($this->view->getTemplate('result/_division-single'));
     }

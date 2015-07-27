@@ -1,103 +1,51 @@
 <?php
 
+namespace OriginalAppName\Site\Elttl\Controller;
 
 /**
- * @author Martin Wyatt <martin.wyatt@gmail.com> 
- * @version	0.1
+ * @author Martin Wyatt <martin.wyatt@gmail.com>
+ * @version     0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Controller_Player extends Controller_Archive
+class Player extends \OriginalAppName\Site\Elttl\Controller\Front
 {
 
 
-	public $player;
-
-
-	public $personalEncounters;
-
-
-	/**
-	 * @return object 
-	 */
-	public function getPlayer() {
-	    return $this->player;
-	}
-	
-	
-	/**
-	 * @param object $player 
-	 */
-	public function setPlayer($player) {
-	    $this->player = $player;
-	    return $this;
-	}
-
-
-	/**
-	 * @return array 
-	 */
-	public function getPersonalEncounters() {
-	    return $this->personalEncounters;
-	}
-	
-	
-	/**
-	 * @param array $personalEncounters 
-	 */
-	public function setPersonalEncounters($personalEncounters) {
-	    $this->personalEncounters = $personalEncounters;
-	    return $this;
-	}
-
-
-	public function run()
+	public function single($yearName, $playerSlug)
 	{
-		$this->readYear();
-
-		// player/martin-wyatt/
-		if ($this->getArchivePathPart(1)) {
-			$this->single();
+		$serviceResult = new \OriginalAppName\Site\Elttl\Service\Tennis\Result;
+		$serviceYear = new \OriginalAppName\Site\Elttl\Service\Tennis\Year;
+		if (!$entityYear = $serviceYear->readName($yearName)) {
+		    return new \OriginalAppName\Response('', 404);
 		}
-	}
-
-
-	public function single()
-	{
 
 		// player
-		$names = $this->getArchivePathPart(1);
-		$names = explode('-', $names);
-		$className = $this->getArchiveClassName('model_tennis_player');
-		$modelTennisPlayer = new $className($this);
-		$modelTennisPlayer->read($this->getArchiveWhere(array(
-			'where' => array(
-				'name_first' => reset($names),
-				'name_last' => end($names)
-			)
-		)));
-		if (! $player = $modelTennisPlayer->getDataFirst()) {
-			$this->redirect('base');
+		$modelTennisPlayer = new \OriginalAppName\Site\Elttl\Model\Tennis\Player;
+		$modelTennisPlayer->readYearColumn($entityYear->id, 'slug', $playerSlug);
+		if (!$player = $modelTennisPlayer->getDataFirst()) {
+		    return new \OriginalAppName\Response('', 404);
 		}
-		$this->setPlayer($player);
 
 		// team
-		$className = $this->getArchiveClassName('model_tennis_team');
-		$modelTennisTeam = new $className($this);
-		$modelTennisTeam->read($this->getArchiveWhere(array(
-			'where' => array(
-				'id' => $player->getTeamId()
-			)
-		)));
-		$team = $modelTennisTeam->getDataFirst();
+		$modelTennisTeam = new \OriginalAppName\Site\Elttl\Model\Tennis\Team;
+		$modelTennisTeam->readYearId($entityYear->id, [$player->teamId]);
+		if (!$team = $modelTennisTeam->getDataFirst()) {
+		    return new \OriginalAppName\Response('', 404);
+		}
 
 		// division
-		$className = $this->getArchiveClassName('model_tennis_division');
-		$modelTennisDivision = new $className($this);
-		$modelTennisDivision->read($this->getArchiveWhere(array(
-			'where' => array(
-				'id' => $team->getDivisionId()
-			)
-		)));
+		$modelTennisDivision = new \OriginalAppName\Site\Elttl\Model\Tennis\Division;
+		$modelTennisDivision->readYearId($entityYear->id, [$team->divisionId]);
+		if (!$division = $modelTennisDivision->getDataFirst()) {
+		    return new \OriginalAppName\Response('', 404);
+		}
+
+
+// here
+// 
+// 
+// 
+// 
 
 		// merit
 		$this->getMeritStats();

@@ -1,13 +1,13 @@
-<?php require_once($this->getTemplatePath('_header')) ?>
+<?php include $this->getTemplatePath('_header') ?>
 
 <div class="page team-single js-page-team-single">
-	<h1 class="page-primary-title"><?php echo $team->getName() ?></h1>
+	<h1 class="page-primary-title"><?php echo $team->name ?></h1>
 	<div class="block-margins">
 		<h2 class="team-single-secondary-title">General information</h2>
 		<table class="elttl-table is-general">
 			<tr class="elttl-table-row">
 				<th class="elttl-table-cell elttl-table-heading">Division</th>
-				<td class="elttl-table-cell"><?php echo $division->getName() ?></td>
+				<td class="elttl-table-cell"><?php echo $division->name ?></td>
 			</tr>
 			<tr class="elttl-table-row">
 				<th class="elttl-table-cell elttl-table-heading">Home night</th>
@@ -15,7 +15,7 @@
 			</tr>
 			<tr class="elttl-table-row">
 				<th class="elttl-table-cell elttl-table-heading">Venue</th>
-				<td class="elttl-table-cell"><?php echo $venue->getName() ?></td>
+				<td class="elttl-table-cell"><?php echo $venue->name ?></td>
 			</tr>
 
 <?php if ($secretary) : ?>
@@ -24,19 +24,19 @@
 				<th class="elttl-table-cell elttl-table-heading">Secretary</th>
 				<td class="elttl-table-cell">
 					<div class="team-single-secretary">
-						<a class="team-single-secretary-name" href="<?php echo $this->buildArchiveUrl(array('player', $secretary->getNameFull())) ?>"><?php echo $secretary->getNameFull() ?></a>
+						<a class="team-single-secretary-name" href="<?php echo $this->url->generate('player/single', ['yearName' => $year->name, 'playerSlug' => $secretary->slug]) ?>"><?php echo $secretary->getNameFull() ?></a>
 
-	<?php if ($secretary->getPhoneLandline()) : ?>
+	<?php if ($secretary->phoneLandline) : ?>
 
 						<span class="team-single-secretary-telephone-landline">
-							<strong>Landline:</strong> <?php echo $secretary->getPhoneLandline() ?></span>
+							<strong>Landline:</strong> <?php echo $secretary->phoneLandline ?></span>
 							
 	<?php
 endif ?>
-	<?php if ($secretary->getPhoneMobile()) : ?>
+	<?php if ($secretary->phoneMobile) : ?>
 
 						<span class="team-single-secretary-telephone-mobile">
-							<strong>Mobile:</strong> <?php echo $secretary->getPhoneMobile() ?></span>
+							<strong>Mobile:</strong> <?php echo $secretary->phoneMobile ?></span>
 							
 	<?php
 endif ?>
@@ -60,7 +60,7 @@ endif ?>
 		
 			<tr class="elttl-table-row">
 				<td class="elttl-table-cell">
-					<a class="player" href="<?php echo $this->buildArchiveUrl(array('player', $player->getNameFull())) ?>"><?php echo $player->getNameFull() ?></a>
+					<a class="player" href="<?php echo $this->url->generate('player/single', ['yearName' => $year->name, 'playerSlug' => $player->slug]) ?>"><?php echo $player->getNameFull() ?></a>
 				</td>
 			</tr>
 
@@ -76,7 +76,7 @@ endforeach ?>
 	<div class="block-margins">
 		<h2 class="team-single-secondary-title">Fixtures</h2>
 
-	<?php include($this->getTemplatePath('_fixtures')) ?>
+	<?php include $this->getTemplatePath('_fixtures') ?>
 
 	</div>
 
@@ -84,4 +84,4 @@ endforeach ?>
 
 </div>
 
-<?php require_once($this->getTemplatePath('_footer')) ?>
+<?php include $this->getTemplatePath('_footer') ?>
