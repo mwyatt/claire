@@ -122,15 +122,14 @@ class Result extends \OriginalAppName\Service
 
     /**
      * retreive merit objects based on entities passed
-     * @param  array $entEncounters 
-     * @return array                
+     * @param  array $entEncounters
+     * @return array
      */
     public function getMerit($entEncounters)
     {
         $results = [];
         foreach ($entEncounters as $entEncounter) {
             foreach (array('Left', 'Right') as $side) {
-
                 // create object entry for player if not exist
                 $playerId = $entEncounter->{'playerId' . $side};
                 if (empty($results[$playerId])) {

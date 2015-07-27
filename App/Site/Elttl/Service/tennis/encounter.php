@@ -46,5 +46,6 @@ class Encounter extends \OriginalAppName\Service
      * @return object
      */
     public function convertToMerit()
-    {}
+    {
+    }
 }
