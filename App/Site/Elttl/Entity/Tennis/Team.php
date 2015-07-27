@@ -2,67 +2,67 @@
 
 namespace OriginalAppName\Site\Elttl\Entity\Tennis;
 
-
 /**
- * @author Martin Wyatt <martin.wyatt@gmail.com> 
- * @version	0.1
+ * @author Martin Wyatt <martin.wyatt@gmail.com>
+ * @version     0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
 class Team extends \OriginalAppName\Entity
 {
 
-	
-	public $id;
+    
+    public $id;
 
 
-	public $yearId;
+    public $yearId;
 
-	
-	public $name;
-
-
-	public $slug;
-
-	
-	public $homeWeekday;
-
-	
-	public $secretaryId;
+    
+    public $name;
 
 
-	public $venueId;
+    public $slug;
+
+    
+    public $homeWeekday;
+
+    
+    public $secretaryId;
 
 
-	public $divisionId;
+    public $venueId;
 
 
-	public $weekdays;
+    public $divisionId;
 
 
-	/**
-	 * @return array 
-	 */
-	public function getWeekdays() {
-	    return array(
-			1 => 'Monday',
-			2 => 'Tuesday',
-			3 => 'Wednesday',
-			4 => 'Thursday',
-			5 => 'Friday'
-		);
-	}
+    public $weekdays;
 
 
-	/**
-	 * weekday as string
-	 * @return string 
-	 */
-	public function getHomeWeekdayName()
-	{
-		$weekdays = $this->getWeekdays();
-		$key = $this->homeWeekday;
-		if (\OriginalAppName\Helper::arrayKeyExists([$key], $weekdays)) {
-			return $weekdays[$key];
-		}
-	}
+    /**
+     * @return array
+     */
+    public function getWeekdays()
+    {
+        return array(
+            1 => 'Monday',
+            2 => 'Tuesday',
+            3 => 'Wednesday',
+            4 => 'Thursday',
+            5 => 'Friday'
+        );
+    }
+
+
+    /**
+     * weekday as string
+     * @return string
+     */
+    public function getHomeWeekdayName()
+    {
+        $weekdays = $this->getWeekdays();
+        $key = $this->homeWeekday;
+        if (\OriginalAppName\Helper::arrayKeyExists([$key], $weekdays)) {
+            return $weekdays[$key];
+        }
+    }
 }
