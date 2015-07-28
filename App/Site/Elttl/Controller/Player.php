@@ -61,7 +61,7 @@ class Player extends \OriginalAppName\Site\Elttl\Controller\Front
         // fixtures
         $fixtureIds = $modPersonalEncounters->getDataProperty('fixtureId');
         $modFixture = new \OriginalAppName\Site\Elttl\Model\Tennis\Fixture;
-        $modFixture->readYearId($entityYear->id, [$fixtureIds]);
+        $modFixture->readYearId($entityYear->id, $fixtureIds);
         $fixtures = $modFixture->getData();
 
         // players within fixtures
@@ -81,13 +81,8 @@ class Player extends \OriginalAppName\Site\Elttl\Controller\Front
         $teams = $modTeam->getData();
 
         // all fixtures played in encounters
-        $className = $this->getArchiveClassName('model_tennis_encounter');
-        $modEncounter = new $className($this);
-        $modEncounter->read($this->getArchiveWhere(array(
-                    'where' => array('fixture_id' => $fixtureIds)
-                )));
-        $modEncounter->convertToFixtureResults();
-        $fixtureResults = $modEncounter->getData();
+        $modEncounter->readYearId($entityYear->id, $fixtureIds, 'fixtureId');
+        $fixtureResults = $serviceResult->getFixture($modFixture->getData(), $modEncounter->getData());
 
         // template
         $this->view
@@ -101,10 +96,10 @@ class Player extends \OriginalAppName\Site\Elttl\Controller\Front
             ->setDataKey('team', $team)
             ->setDataKey('teams', $teams)
             ->setDataKey('acquaintances', $acquaintances)
-            ->setDataKey('year', $year)
+            ->setDataKey('year', $entityYear)
             ->setDataKey('fixtures', $fixtures)
             ->setDataKey('fixtureResults', $fixtureResults)
-            ->setDataKey('encounters', $modPersonalEncounters->getData())
-            ->getTemplate('player-single');
+            ->setDataKey('encounters', $modPersonalEncounters->getData());
+        return new \OriginalAppName\Response($this->view->getTemplate('player-single'));
     }
 }

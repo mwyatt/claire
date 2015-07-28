@@ -14,7 +14,7 @@ class Result extends \OriginalAppName\Service
      * @param  array $entEncounters
      * @return array
      */
-    public function getFixture($entFixtures, $entEncounters)
+    public function getFixture(Array $entFixtures, Array $entEncounters)
     {
         $results = [];
         foreach ($entEncounters as $entEncounter) {
@@ -31,7 +31,7 @@ class Result extends \OriginalAppName\Service
     }
 
 
-    public function getSummaryTable($entityYear, $entityDivision)
+    public function getSummaryTable(\OriginalAppName\Site\Elttl\Entity\Tennis\Year $entityYear, \OriginalAppName\Site\Elttl\Entity\Tennis\Division $entityDivision)
     {
 
         // teams in division keyed by teamId
@@ -64,7 +64,7 @@ class Result extends \OriginalAppName\Service
     /**
      * work in progress
      */
-    public function getLeague($modelFixture, $modelEncounter)
+    public function getLeague(\OriginalAppName\Site\Elttl\Model\Tennis\Fixture $modelFixture, \OriginalAppName\Site\Elttl\Model\Tennis\Encounter $modelEncounter)
     {
         $modelFixture->keyDataByProperty('id');
         if (!$entitiesFixture = $modelFixture->getData()) {
