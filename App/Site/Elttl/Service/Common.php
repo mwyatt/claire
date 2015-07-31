@@ -34,12 +34,11 @@ class Common extends \OriginalAppName\Service
 
 		// divisions
 		$modelTennisDivision = new ModelTennis\Division();
-		$modelTennisDivision->read();
+		$modelTennisDivision->readYearId();
 
 		// template
 		return [
 			'googleAnalyticsTrackingId' => 'UA-35261063-1',
-			'year' => 0,
 			'divisions' => $modelTennisDivision->getData(),
 			'menuPrimary' => $menuPrimary,
 			'menuSecondary' => $menuSecondary,

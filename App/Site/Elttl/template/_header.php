@@ -36,7 +36,7 @@
         <?php $menu = $menuPrimary; ?>
         <?php include($this->getTemplatePath('_menu-primary')) ?>
         <?php include($this->getTemplatePath('_menu-division')) ?>
-        <?php include $this->getTemplatePath('header/_year') ?>
+        <?php // include $this->getTemplatePath('header/_year') ?>
 
             </div>
         </header>
