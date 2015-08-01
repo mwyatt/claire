@@ -28,7 +28,7 @@
 	    <div class="block-margins">
 	    	<span class="button-secondary js-toggle-all-permissions">Toggle All Permissions</span>
 
-<?php foreach ($permissionRoutes as $key => $route): ?>
+<?php foreach ($permissionRoutes as $key => $route) : ?>
 
 			<div class="block-margins">
 				<input id="form-ad-permission-<?php echo $key ?>" name="ad[permission][]" type="checkbox" value="<?php echo $route ?>" class="mr1" <?php echo empty($permissions[$route]) ? '' : 'checked' ?>>

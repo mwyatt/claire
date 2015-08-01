@@ -2,7 +2,6 @@
 
 namespace OriginalAppName\Site\Elttl\Service;
 
-
 /**
  * services group up controller commands
  * making the controllers more readable and tidy
