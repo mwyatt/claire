@@ -17,21 +17,21 @@ class Ad extends \OriginalAppName\Entity
      * @Id @GeneratedValue @Column(type="integer")
 	 * @var int
 	 */
-	protected $id;
+	public $id;
 
 
 	/**
      * @Column(type="string")
 	 * @var string
 	 */
-	private $title;
+	public $title;
 
 
 	/**
      * @Column(type="string")
 	 * @var string
 	 */
-	private $description;
+	public $description;
 
 
 	/**
@@ -39,7 +39,7 @@ class Ad extends \OriginalAppName\Entity
      * @Column(type="string")
 	 * @var string
 	 */
-	private $image;
+	public $image;
 
 	
 	/**
@@ -47,7 +47,7 @@ class Ad extends \OriginalAppName\Entity
      * @Column(type="string")
 	 * @var string
 	 */
-	private $url;
+	public $url;
 
 
 	/**
@@ -55,7 +55,7 @@ class Ad extends \OriginalAppName\Entity
      * @Column(type="string", length=50)
 	 * @var string
 	 */
-	private $action;
+	public $action;
 
 
 	/**
@@ -63,5 +63,5 @@ class Ad extends \OriginalAppName\Entity
      * @Column(type="string", length=50)
 	 * @var string
 	 */
-	private $group;
+	public $group;
 }

@@ -2,9 +2,6 @@
 
 namespace OriginalAppName\Site\Elttl\Service;
 
-use OriginalAppName\Site\Elttl\Model\Tennis as ModelTennis;
-use OriginalAppName\Json;
-use OriginalAppName\Google\Analytics;
 
 /**
  * services group up controller commands
@@ -18,23 +15,24 @@ class Common extends \OriginalAppName\Service
     {
         
         // menu primary
-        $json = new Json();
+        $json = new \OriginalAppName\Json;
         $json->read('menu-primary');
         $menuPrimary = $json->getData();
 
         // menu Secondary
-        $json = new Json();
+        $json = new \OriginalAppName\Json;
         $json->read('menu-secondary');
         $menuSecondary = $json->getData();
 
         // menu Tertiary
-        $json = new Json();
+        $json = new \OriginalAppName\Json;
         $json->read('menu-tertiary');
         $menuTertiary = $json->getData();
 
         // divisions
-        $modelTennisDivision = new ModelTennis\Division();
-        $modelTennisDivision->readYearId();
+        $modelTennisDivision = new \OriginalAppName\Site\Elttl\Model\Tennis\Division;
+        $registry = \OriginalAppName\Registry::getInstance();
+        $modelTennisDivision->readColumn('yearId', $registry->get('database/options/yearId'));
 
         // template
         return [
@@ -42,7 +40,7 @@ class Common extends \OriginalAppName\Service
             'divisions' => $modelTennisDivision->getData(),
             'menuPrimary' => $menuPrimary,
             'menuSecondary' => $menuSecondary,
-            'campaign' => new Analytics\Campaign(),
+            'campaign' => new \OriginalAppName\Google\Analytics\Campaign,
             'menuTertiary' => $menuTertiary
         ];
     }

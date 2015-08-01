@@ -2,17 +2,6 @@
 
 namespace OriginalAppName\Admin\Controller;
 
-use OriginalAppName;
-use OriginalAppName\Entity;
-use OriginalAppName\Model;
-use OriginalAppName\Session;
-use OriginalAppName\View;
-use OriginalAppName\Service;
-use OriginalAppName\Response;
-use OriginalAppName\Admin\Session as AdminSession;
-use OriginalAppName\Admin\Service as AdminService;
-
-
 /**
  * @author Martin Wyatt <martin.wyatt@gmail.com> 
  * @version	0.1
@@ -26,8 +15,8 @@ class User extends \OriginalAppName\Controller\Admin
 	{
 		
 		// resource
-		$entityUser = new Entity\User;
-		$modelUser = new Model\User;
+		$entityUser = new \OriginalAppName\Entity\User;
+		$modelUser = new \OriginalAppName\Model\User;
 
 		// create new User
 		$entityUser
@@ -46,8 +35,8 @@ class User extends \OriginalAppName\Controller\Admin
 	public function all() {
 		
 		// resource
-		$modelUser = new Model\User;
-		$sessionFeedback = new Session\Feedback;
+		$modelUser = new \OriginalAppName\Model\User;
+		$sessionFeedback = new \OriginalAppName\Session\Feedback;
 
 		// get users
 		$modelUser->read();
@@ -56,7 +45,7 @@ class User extends \OriginalAppName\Controller\Admin
 		$this
 			->view
 			->setDataKey('users', $modelUser->getData());
-		return new Response($this->view->getTemplate('admin/user/all'));
+		return new \OriginalAppName\Response($this->view->getTemplate('admin/user/all'));
 	}
 
 
@@ -64,7 +53,7 @@ class User extends \OriginalAppName\Controller\Admin
 	{
 
 		// resource
-		$modelUser = new Model\User;
+		$modelUser = new \OriginalAppName\Model\User;
 
 		// read single
 		$entityUser = $modelUser
@@ -72,8 +61,8 @@ class User extends \OriginalAppName\Controller\Admin
 			->getDataFirst();
 
 		// permissions
-		$modelPermission = new Model\User\Permission;
-		$servicePermission = new AdminService\User\Permission;
+		$modelPermission = new \OriginalAppName\Model\User\Permission;
+		$servicePermission = new \OriginalAppName\Admin\Service\User\Permission;
 		$modelPermission
 			->readColumn('userId', $id)
 			->keyDataByProperty('name');
@@ -85,8 +74,8 @@ class User extends \OriginalAppName\Controller\Admin
 			->appendAsset('js', 'admin/user/single')
 			->setDataKey('permissionRoutes', $adminRoutes)
 			->setDataKey('permissions', $modelPermission->getData())
-			->setDataKey('user', $entityUser ? $entityUser : new Entity\User);
-		return new Response($this->view->getTemplate('admin/user/single'));
+			->setDataKey('user', $entityUser ? $entityUser : new \OriginalAppName\Entity\User);
+		return new \OriginalAppName\Response($this->view->getTemplate('admin/user/single'));
 	}
 
 
@@ -94,8 +83,8 @@ class User extends \OriginalAppName\Controller\Admin
 	{
 
 		// resources
-		$sessionFeedback = new Session\Feedback;
-		$modelUser = new Model\User;
+		$sessionFeedback = new \OriginalAppName\Session\Feedback;
+		$modelUser = new \OriginalAppName\Model\User;
 
 		// load 1
 		$entityUser = $modelUser
@@ -114,12 +103,12 @@ class User extends \OriginalAppName\Controller\Admin
 			->setNameLast($_POST['user']['nameLast']);
 
 		// remove all permissions then add the ones selected
-		$modelPermission = new Model\User\Permission;
+		$modelPermission = new \OriginalAppName\Model\User\Permission;
 		$modelPermission->deleteUserId($id);
 		$entitiesPermission = [];
 		if (! empty($_POST['user']['permission'])) {
 			foreach ($_POST['user']['permission'] as $route) {
-				$entityPermission = new Entity\User\Permission;
+				$entityPermission = new \OriginalAppName\Entity\User\Permission;
 				$entityPermission->userId = $id;
 				$entityPermission->name = $route;
 				$entitiesPermission[] = $entityPermission;
@@ -148,8 +137,8 @@ class User extends \OriginalAppName\Controller\Admin
 	{
 		
 		// resources
-		$modelUser = new Model\User;
-		$sessionFeedback = new Session\Feedback;
+		$modelUser = new \OriginalAppName\Model\User;
+		$sessionFeedback = new \OriginalAppName\Session\Feedback;
 
 		// load 1
 		$entityUser = $modelUser
