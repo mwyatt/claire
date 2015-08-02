@@ -49,7 +49,7 @@
 			<label for="form-label block form-ad-label-status" class="form-ad-status">Status</label>
 			<select name="ad[status]" id="form-ad-status">
 				
-<?php foreach ($ad->getStatuses() as $key => $status): ?>
+<?php foreach ($ad->getStatuses() as $key => $status) : ?>
 	
 				<option value="<?php echo $key ?>" <?php echo $ad->status == $key ? 'selected' : '' ?>><?php echo $status ?></option>
 
