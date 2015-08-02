@@ -18,8 +18,7 @@ class Ad extends \OriginalAppName\Controller\Admin
 		$modelAd = new \OriginalAppName\Model\Ad;
 
 		// create new Ad
-		$entityAd
-			->setTimeRegistered(time());
+		$entityAd->timeCreated = time();
 		$modelAd->create([$entityAd]);
 
 		// update
@@ -86,32 +85,13 @@ class Ad extends \OriginalAppName\Controller\Admin
 		}
 
 		// consume post
-		$entityAd
-			->setEmail($_POST['ad']['email'])
-			->setNameFirst($_POST['ad']['nameFirst'])
-			->setNameLast($_POST['ad']['nameLast']);
-
-		// remove all permissions then add the ones selected
-		$modelPermission = new \OriginalAppName\Model\Ad\Permission;
-		$modelPermission->deleteAdId($id);
-		$entitiesPermission = [];
-		if (! empty($_POST['ad']['permission'])) {
-			foreach ($_POST['ad']['permission'] as $route) {
-				$entityPermission = new \OriginalAppName\Entity\Ad\Permission;
-				$entityPermission->adId = $id;
-				$entityPermission->name = $route;
-				$entitiesPermission[] = $entityPermission;
-			}
-			$modelPermission->create($entitiesPermission);
-		}
-
-		// optional
-		if (! $entityAd->getTimeRegistered()) {
-			$entityAd->setTimeRegistered(time());
-		}
-		if ($_POST['ad']['password']) {
-			$entityAd->setPassword($_POST['ad']['password']);
-		}
+		$entityAd->title = $_POST['ad']['title'];
+		$entityAd->description = $_POST['ad']['description'];
+		$entityAd->image = $_POST['ad']['image'];
+		$entityAd->url = $_POST['ad']['url'];
+		$entityAd->action = $_POST['ad']['action'];
+		$entityAd->group = $_POST['ad']['group'];
+		$entityAd->status = $_POST['ad']['status'];
 
 		// save
 		$modelAd->update($entityAd, ['id' => $entityAd->getId()]);

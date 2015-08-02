@@ -58,9 +58,51 @@ class Ad extends \OriginalAppName\Entity
 
 
     /**
+     * time the ad was created epoch
+     * @var int
+     */
+    public $timeCreated;
+
+
+    /**
      * ties together ads
      * @Column(type="string", length=50)
      * @var string
      */
     public $group;
+
+
+    /**
+     * @var int
+     */
+    public $status = self::STATUS_HIDDEN;
+
+
+    /**
+     * do not show on frontend
+     */
+    const STATUS_HIDDEN = 0;
+
+
+    /**
+     * show on frontend
+     */
+    const STATUS_PUBLISHED = 1;
+
+
+    public function getStatusText()
+    {
+        $statuses = self::getStatuses();
+        $status = $this->status;
+        return isset($statuses[$status]) ? $statuses[$status] : 'Unknown';
+    }
+
+
+    public static function getStatuses()
+    {
+        return [
+            self::STATUS_HIDDEN => 'Hidden',
+            self::STATUS_PUBLISHED   => 'Published'
+        ];
+    }
 }

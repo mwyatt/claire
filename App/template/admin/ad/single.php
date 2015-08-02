@@ -22,22 +22,42 @@
 
 		<!-- image -->
 	    <div class="block-margins">
-        	<label class="form-label block form-ad-label-title" for="form-ad-image">Description</label>
+        	<label class="form-label block form-ad-label-title" for="form-ad-image">Image</label>
         	<input id="form-ad-image" class="form-input w100 required js-input-image" type="text" name="ad[image]" maxlength="75" value="<?php echo $ad->image ?>">
 	    </div>
+
+		<!-- url -->
 	    <div class="block-margins">
-	    	<span class="button-secondary js-toggle-all-permissions">Toggle All Permissions</span>
+        	<label class="form-label block form-ad-label-title" for="form-ad-url">Url</label>
+        	<input id="form-ad-url" class="form-input w100 required js-input-url" type="text" name="ad[url]" maxlength="75" value="<?php echo $ad->url ?>">
+	    </div>
 
-<?php foreach ($permissionRoutes as $key => $route) : ?>
+		<!-- action -->
+	    <div class="block-margins">
+        	<label class="form-label block form-ad-label-title" for="form-ad-action">Action</label>
+        	<input id="form-ad-action" class="form-input w100 required js-input-action" type="text" name="ad[action]" maxlength="75" value="<?php echo $ad->action ?>">
+	    </div>
 
-			<div class="block-margins">
-				<input id="form-ad-permission-<?php echo $key ?>" name="ad[permission][]" type="checkbox" value="<?php echo $route ?>" class="mr1" <?php echo empty($permissions[$route]) ? '' : 'checked' ?>>
-				<label for="form-ad-permission-<?php echo $key ?>"><?php echo $route ?></label>
-			</div>
+		<!-- group -->
+	    <div class="block-margins">
+        	<label class="form-label block form-ad-label-title" for="form-ad-group">Group</label>
+        	<input id="form-ad-group" class="form-input w100 required js-input-group" type="text" name="ad[group]" maxlength="75" value="<?php echo $ad->group ?>">
+	    </div>
+
+	    <!-- status -->
+		<div class="block-margins">
+			<label for="form-label block form-ad-label-status" class="form-ad-status">Status</label>
+			<select name="ad[status]" id="form-ad-status">
+				
+<?php foreach ($ad->getStatuses() as $key => $status): ?>
+	
+				<option value="<?php echo $key ?>" <?php echo $ad->status == $key ? 'selected' : '' ?>><?php echo $status ?></option>
 
 <?php endforeach ?>
 
-	    </div>
+			</select>
+		</div>
+
 	</form>
 </div>
 

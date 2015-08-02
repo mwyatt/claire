@@ -42,6 +42,8 @@ CREATE TABLE `ad` (
   `image` varchar(255) NOT NULL,
   `url` varchar(255) NOT NULL,
   `action` varchar(50) NOT NULL,
+  `timeCreated` int(10) NULL DEFAULT NULL,
+  `status` INT(11) NULL DEFAULT NULL,
   `group` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
