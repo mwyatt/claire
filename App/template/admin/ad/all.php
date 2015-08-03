@@ -7,7 +7,7 @@
 	</div>
 	<h1 class="page-primary-title">Ads</h1>
 
-<?php if ($ads): ?>
+<?php if ($ads) : ?>
 
 <table class="table">
 	<tr>
@@ -18,7 +18,7 @@
 		<th></th>
 	</tr>
 
-	<?php foreach($ads as $ad): ?>
+	<?php foreach ($ads as $ad) : ?>
 		<?php $urlEdit = $this->url->generate('admin/ad/single', ['id' => $ad->id]) ?>
 
 	<tr class="ad js-ad">
@@ -32,11 +32,12 @@
 		</td>
 	</tr>
 
-	<?php endforeach; ?>
+	<?php
+endforeach; ?>
 
 </table>
 
-<?php else: ?>
+<?php else : ?>
 	
 	<div class="blankslate typography">
 		<p>No ads have been created yet, why not <a href="<?php echo $urlCreate ?>">create</a> one now?</p>
