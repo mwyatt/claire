@@ -69,7 +69,7 @@ class Ad extends \OriginalAppName\Entity
      * @Column(type="string", length=50)
      * @var string
      */
-    public $group;
+    public $groupKey;
 
 
     /**

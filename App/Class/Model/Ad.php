@@ -19,10 +19,12 @@ class Ad extends \OriginalAppName\Model
 		'id',
 		'title',
 		'description',
-		'image',
 		'url',
 		'action',
-		'\'group\''
+		'timeCreated',
+		'status',
+		'image',
+		'groupKey'
 	);
 
 

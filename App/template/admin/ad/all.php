@@ -11,22 +11,24 @@
 
 <table class="table">
 	<tr>
-		<th>Name</th>
-		<th>Email</th>
-		<th>Registered</th>
-		<th>Action</th>
+		<th>Title</th>
+		<th>Description</th>
+		<th>Status</th>
+		<th>Group</th>
+		<th></th>
 	</tr>
 
 	<?php foreach($ads as $ad): ?>
-		<?php $urlEdit = $this->url->generate('admin/ad/single', ['id' => $ad->getId()]) ?>
+		<?php $urlEdit = $this->url->generate('admin/ad/single', ['id' => $ad->id]) ?>
 
 	<tr class="ad js-ad">
-		<td><a href="<?php echo $urlEdit ?>"><?php echo $ad->getNameFull() ?></a></td>
-		<td><a href="mailto:<?php echo $ad->getEmail() ?>"><?php echo $ad->getEmail() ?></a></td>
-		<td><?php echo $ad->getTimeRegistered() ?></td>
+		<td><a href="<?php echo $urlEdit ?>"><?php echo $ad->title ?></a></td>
+		<td><?php echo $ad->description ?></td>
+		<td><?php echo $ad->getStatusText() ?></td>
+		<td><?php echo $ad->groupKey ?></td>
 		<td>
 			<a class="button-edit" href="<?php echo $urlEdit ?>">Edit</a>
-			<a class="button-delete" href="<?php echo $this->url->generate('admin/ad/all', ['delete' => $ad->getId()]) ?>">Delete</a>
+			<a class="button-delete js-tennis-delete-single" href="<?php echo $this->url->generate('admin/ad/all', ['delete' => $ad->id]) ?>">Delete</a>
 		</td>
 	</tr>
 

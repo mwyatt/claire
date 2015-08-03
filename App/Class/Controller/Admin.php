@@ -35,11 +35,10 @@ class Admin extends \OriginalAppName\Admin\Controller\Feedback
 		$this->setPermissions();
 		$this->getPermission();
 		$this->defaultGlobalAdmin();
-		
 		$this
 			->view
 			->appendAsset('mustache', 'admin/feedback')
-			->appendAsset('js', 'vendor/jquery')
+			->appendAsset('js', 'vendor/jquery.min')
 			->appendAsset('js', 'vendor/tinymce/tinymce')
 			->appendAsset('js', 'admin/common')
 			->appendAsset('css', 'admin/common');

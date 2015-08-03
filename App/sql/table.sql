@@ -37,14 +37,14 @@ CREATE TABLE `contentMeta` (
 
 CREATE TABLE `ad` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) NOT NULL,
-  `description` varchar(255) NOT NULL,
-  `image` varchar(255) NOT NULL,
-  `url` varchar(255) NOT NULL,
-  `action` varchar(50) NOT NULL,
+  `title` varchar(255) NULL DEFAULT NULL,
+  `description` varchar(255) NULL DEFAULT NULL,
+  `url` varchar(255) NULL DEFAULT NULL,
+  `action` varchar(50) NULL DEFAULT NULL,
   `timeCreated` int(10) NULL DEFAULT NULL,
-  `status` INT(11) NULL DEFAULT NULL,
-  `group` int(11) NOT NULL DEFAULT '1',
+  `status` int(11) NULL DEFAULT NULL,
+  `image` varchar(255) NULL DEFAULT NULL,
+  `groupKey` varchar(255) NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 

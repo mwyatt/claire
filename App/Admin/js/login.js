@@ -1,7 +1,7 @@
 var serializeObject = require('jquery-serialize-object/jquery.serialize-object');
 var magnificPopup = require('magnific-popup/dist/jquery.magnific-popup');
 var feedbackStream = require('admin/feedbackStream');
-var url = require('url');
+var url = require('utility/url');
 
 
 /**

@@ -1,4 +1,4 @@
-var url = require('url');
+var url = require('utility/url');
 var mustache = require('mustache');
 var feedbackStream = require('admin/feedbackStream');
 

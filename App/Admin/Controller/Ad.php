@@ -91,7 +91,7 @@ class Ad extends \OriginalAppName\Controller\Admin
         $entityAd->image = $_POST['ad']['image'];
         $entityAd->url = $_POST['ad']['url'];
         $entityAd->action = $_POST['ad']['action'];
-        $entityAd->group = $_POST['ad']['group'];
+        $entityAd->groupKey = $_POST['ad']['groupKey'];
         $entityAd->status = $_POST['ad']['status'];
 
         // save

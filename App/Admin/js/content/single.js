@@ -1,5 +1,5 @@
 var contentMeta = require('admin/content/meta');
-var url = require('url');
+var url = require('utility/url');
 
 
 // wysi

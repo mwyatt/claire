@@ -1,4 +1,4 @@
-var url = require('url');
+var url = require('utility/url');
 
 $('.js-tennis-delete-single').on('click', function() {
   $.ajax({

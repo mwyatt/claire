@@ -1,7 +1,7 @@
 <?php include $this->getTemplatePath('admin/_header') ?>
 
 <div class="page ad-single" data-id="<?php echo $ad->getId() ?>">
-	<h1 class="page-primary-title"><?php echo $ad->id ? 'Editing' : 'Creating' ?> ad <?php echo $ad->title ? $ad->email : $ad->id ?></h1>
+	<h1 class="page-primary-title"><?php echo $ad->id ? 'Editing' : 'Creating' ?> ad <?php echo $ad->title ?></h1>
 	<form class="main" method="post" enctype="multipart/form-data">
 		<div class="page-actions">
 			<a href="<?php echo $this->url->generate('admin/ad/all') ?>" class="page-action left button-secondary">Back</a>
@@ -38,10 +38,10 @@
         	<input id="form-ad-action" class="form-input w100 required js-input-action" type="text" name="ad[action]" maxlength="75" value="<?php echo $ad->action ?>">
 	    </div>
 
-		<!-- group -->
+		<!-- groupKey -->
 	    <div class="block-margins">
-        	<label class="form-label block form-ad-label-title" for="form-ad-group">Group</label>
-        	<input id="form-ad-group" class="form-input w100 required js-input-group" type="text" name="ad[group]" maxlength="75" value="<?php echo $ad->group ?>">
+        	<label class="form-label block form-ad-label-title" for="form-ad-groupKey">Group</label>
+        	<input id="form-ad-groupKey" class="form-input w100 required js-input-groupKey" type="text" name="ad[groupKey]" maxlength="75" value="<?php echo $ad->groupKey ?>">
 	    </div>
 
 	    <!-- status -->
