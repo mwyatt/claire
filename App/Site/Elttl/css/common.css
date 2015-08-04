@@ -92,28 +92,7 @@ html.lt-ie9 {
 .page {
   max-width: 90em;
   margin: 0 auto;
-  padding: 10%;
-}
-
-.page {
-  padding-top: 4.7em;
-  padding-bottom: 60px;
-
-}
-
-@media (min-width: 450px) {
-
-  .page {
-    padding-top: 5.7em;
-  }
-}
-
-@media (min-width: 650px) {
-
-  .page {
-    padding-left: 5%;
-    padding-right: 5%;
-  }
+  padding: 64px 20px 20px; /*44+20*/
 }
 
 @mixin clearfix .container-header-inner;

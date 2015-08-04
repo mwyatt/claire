@@ -31,7 +31,7 @@
 
         <?php include($this->getTemplatePath('header/_logo')) ?>
 
-                <a href="mailto:martin.wyatt@gmail.com" class="header-sticker-beta" title="This website is still actively under development. If you notice any bugs or have any improvements please email me: martin.wyatt@gmail.com">Beta</a>
+                <!-- <a href="mailto:martin.wyatt@gmail.com" class="header-sticker-beta" title="This website is still actively under development. If you notice any bugs or have any improvements please email me: martin.wyatt@gmail.com">Beta</a> -->
 
         <?php $menu = $menuPrimary; ?>
         <?php include($this->getTemplatePath('_menu-primary')) ?>

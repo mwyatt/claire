@@ -17,7 +17,7 @@
 
 			<?php foreach ($children as $child) : ?>
 
-			<a href="<?php echo $this->url->build(array('result', $child->name)) ?>" class="menu-primary-level-2-link"><?php echo $child->name ?></a>
+			<a href="<?php echo $this->url->generate('result/year/division/single', ['yearName' => $year->name, 'divisionName' => strtolower($child->name)]) ?>" class="menu-primary-level-2-link"><?php echo $child->name ?></a>
 				
 			<?php
 endforeach ?>
