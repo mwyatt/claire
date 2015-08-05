@@ -62,7 +62,7 @@ class Result extends \OriginalAppName\Service
 
 
     /**
-     * compiles fixtures and encounters to create a collection of 
+     * compiles fixtures and encounters to create a collection of
      */
     public function getLeague(\OriginalAppName\Site\Elttl\Model\Tennis\Fixture $modelFixture, \OriginalAppName\Site\Elttl\Model\Tennis\Encounter $modelEncounter)
     {
