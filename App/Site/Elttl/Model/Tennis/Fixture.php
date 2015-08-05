@@ -69,62 +69,6 @@ class Fixture extends \OriginalAppName\Site\Elttl\Model\Tennis
     }
 
 
-    public function convertToLeague($fixtureScores)
-    {
-        $this->keyDataByProperty('id');
-        if (! $fixtureMolds = $this->getData()) {
-            return $this;
-        }
-        $collection = array();
-        foreach ($fixtureScores as $key => $fixtureScore) {
-            if (! array_key_exists($key, $fixtureMolds)) {
-                return $this;
-            }
-            foreach (array('left', 'right') as $side) {
-                $teamId = $fixtureMolds[$key]->{'team_id_' . $side};
-                $scores = $fixtureScores[$key];
-
-                // init key for team
-                if (! array_key_exists($teamId, $collection)) {
-                    $collection[$teamId] = (object) array(
-                        'won' => 0,
-                        'draw' => 0,
-                        'loss' => 0,
-                        'played' => 0,
-                        'points' => 0
-                    );
-                }
-
-                // get scores
-                $score = $scores->{'score_' . $side};
-                $opposingScore = $scores->{'score_' . \OriginalAppName\Site\Elttl\Helper\Tennis::getOtherSide($side)};
-
-                // calculate won, loss, played, points
-                $collection[$teamId]->played ++;
-                $collection[$teamId]->points += $score;
-
-                // draw
-                if ($score == $opposingScore) {
-                    $collection[$teamId]->draw ++;
-                    continue;
-                }
-
-                // won
-                if ($score > $opposingScore) {
-                    $collection[$teamId]->won ++;
-                    continue;
-
-                // loss
-                } else {
-                    $collection[$teamId]->loss ++;
-                }
-            }
-        }
-        $this->setData($collection);
-        return $this;
-    }
-
-
     public function orderByHighestPoints()
     {
         $data = $this->getData();

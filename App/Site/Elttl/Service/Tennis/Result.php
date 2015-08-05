@@ -62,37 +62,36 @@ class Result extends \OriginalAppName\Service
 
 
     /**
-     * work in progress
+     * compiles fixtures and encounters to create a collection of 
      */
     public function getLeague(\OriginalAppName\Site\Elttl\Model\Tennis\Fixture $modelFixture, \OriginalAppName\Site\Elttl\Model\Tennis\Encounter $modelEncounter)
     {
         $modelFixture->keyDataByProperty('id');
+        $modelEncounter->keyDataByProperty('fixtureId');
         if (!$entitiesFixture = $modelFixture->getData()) {
             return [];
         }
         $collection = [];
-        foreach ($modelEncounter->getData() as $key => $fixtureScore) {
-            if (!array_key_exists($key, $entitiesFixture)) {
-                return $modelFixture;
+        foreach ($modelEncounter->getData() as $key => $entEncounter) {
+            if (empty($entitiesFixture[$key])) {
+                return [];
             }
             foreach (array('left', 'right') as $side) {
-                $teamId = $entitiesFixture[$key]->{'team_id_' . $side};
-                $scores = $modelEncounter->getData($key);
+                $teamId = $entitiesFixture[$key]->{'teamId' . ucfirst($side)};
 
                 // init key for team
                 if (!array_key_exists($teamId, $collection)) {
-                    $collection[$teamId] = (object) array(
-                        'won' => 0,
-                        'draw' => 0,
-                        'loss' => 0,
-                        'played' => 0,
-                        'points' => 0
-                    );
+                    $collection[$teamId] = new \OriginalAppName\Site\Elttl\Entity\Tennis\Result\League;
+                    $collection[$teamId]->won = 0;
+                    $collection[$teamId]->draw = 0;
+                    $collection[$teamId]->loss = 0;
+                    $collection[$teamId]->played = 0;
+                    $collection[$teamId]->points = 0;
                 }
 
                 // get scores
-                $score = $scores->{'score_' . $side};
-                $opposingScore = $scores->{'score_' . \OriginalAppName\Site\Elttl\Helper\Tennis::getOtherSide($side)};
+                $score = $entEncounter->{'score' . ucfirst($side)};
+                $opposingScore = $entEncounter->{'score' . \OriginalAppName\Site\Elttl\Helper\Tennis::getOtherSide(ucfirst($side))};
 
                 // calculate won, loss, played, points
                 $collection[$teamId]->played ++;
@@ -101,13 +100,10 @@ class Result extends \OriginalAppName\Service
                 // draw
                 if ($score == $opposingScore) {
                     $collection[$teamId]->draw ++;
-                    continue;
-                }
 
                 // won
-                if ($score > $opposingScore) {
+                } elseif ($score > $opposingScore) {
                     $collection[$teamId]->won ++;
-                    continue;
 
                 // loss
                 } else {
@@ -115,8 +111,7 @@ class Result extends \OriginalAppName\Service
                 }
             }
         }
-        $modelFixture->setData($collection);
-        return $this;
+        return $collection;
     }
 
 
