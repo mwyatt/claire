@@ -18,10 +18,10 @@ class Tennis
     public static function getOtherSide($side = '')
     {
 
-    	// normalise
-    	$side = strtolower($side);
+        // normalise
+        $side = strtolower($side);
 
-    	// switch
+        // switch
         return $side == 'left' ? 'right' : 'left';
     }
 }

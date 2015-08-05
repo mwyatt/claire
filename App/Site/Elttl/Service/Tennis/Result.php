@@ -21,7 +21,6 @@ class Result extends \OriginalAppName\Service
 
         // build fixture array
         foreach ($entFixtures as $entFixture) {
-
             // good idea?
             if (!$entFixture->timeFulfilled) {
                 continue;

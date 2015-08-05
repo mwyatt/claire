@@ -11,10 +11,10 @@ class Fixture extends \OriginalAppName\Entity
 {
 
 
-	public $teamIdLeft;
+    public $teamIdLeft;
 
-	
-	public $teamIdRight;
+    
+    public $teamIdRight;
 
 
     public $scoreLeft;
