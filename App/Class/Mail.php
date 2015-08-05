@@ -2,9 +2,6 @@
 
 namespace OriginalAppName;
 
-use OriginalAppName;
-
-
 /**
  * @author Martin Wyatt <martin.wyatt@gmail.com> 
  * @version	0.1
@@ -56,7 +53,7 @@ class Mail extends \OriginalAppName\View
 	 * @param string $appPassword 
 	 */
 	public function setAppPassword() {
-		$registry = OriginalAppName\Registry::getInstance();
+		$registry = \OriginalAppName\Registry::getInstance();
 		$configApp = $registry->get('configApp');
 	    $this->appPassword = $configApp['googleAppPassword'];
 	    return $this;
