@@ -1,10 +1,10 @@
 <?php include $this->getTemplatePath('_header') ?>
 
 <div class="page division-league js-page-division-league">
-	<h1 class="page-primary-title"><?php echo $division->getName() ?> division <?php echo $tableName ?> table</h1>
+	<h1 class="page-primary-title"><?php echo $division->name ?> division <?php echo $tableName ?> table</h1>
 
 <?php if ($leagueStats) : ?>
-	<p class="page-primary-description">This is the <?php echo $tableName ?> table for the <?php echo $division->getName() ?> division.</p>
+	<p class="page-primary-description">This is the <?php echo $tableName ?> table for the <?php echo $division->name ?> division.</p>
 
 	<?php include($this->getTemplatePath('division/_menu-tables')) ?>
 	
@@ -24,7 +24,7 @@
 
 		<tr class="elttl-table-row">
 			<td class="elttl-table-cell is-name">
-				<a href="<?php echo $this->buildArchiveUrl(array('team', $team->getName())) ?>"><?php echo $team->getName() ?></a>
+				<a href="<?php echo $this->url->generate('team/single', ['yearName' => $year->name, 'teamSlug' => $team->slug]) ?>"><?php echo $team->name ?></a>
 			</td>
 			<td class="elttl-table-cell is-won"><?php echo $leagueStat->won ?></td>
 			<td class="elttl-table-cell is-draw"><?php echo $leagueStat->draw ?></td>

@@ -23,8 +23,5 @@ class League extends \OriginalAppName\Entity
     public $played;
 
 
-    public $average;
-
-
     public $points;
 }

@@ -10,6 +10,7 @@ class Result extends \OriginalAppName\Service
 
     /**
      * convert fixtures and encounters to fixture results
+     * always keyed by fixtureId
      * @param  array $entFixtures
      * @param  array $entEncounters
      * @return array
@@ -17,15 +18,25 @@ class Result extends \OriginalAppName\Service
     public function getFixture(Array $entFixtures, Array $entEncounters)
     {
         $results = [];
-        foreach ($entEncounters as $entEncounter) {
-            $fixtureId = $entEncounter->fixtureId;
-            if (empty($results[$fixtureId])) {
-                $results[$fixtureId] = new \OriginalAppName\Site\Elttl\Entity\Tennis\Result\Fixture;
-            }
 
-            // get scores
-            $results[$fixtureId]->scoreLeft += $entEncounter->scoreLeft;
-            $results[$fixtureId]->scoreRight += $entEncounter->scoreRight;
+        // build fixture array
+        foreach ($entFixtures as $entFixture) {
+
+            // good idea?
+            if (!$entFixture->timeFulfilled) {
+                continue;
+            }
+            if (empty($results[$entFixture->id])) {
+                $results[$entFixture->id] = new \OriginalAppName\Site\Elttl\Entity\Tennis\Result\Fixture;
+            }
+            $results[$entFixture->id]->teamIdLeft = $entFixture->teamIdLeft;
+            $results[$entFixture->id]->teamIdRight = $entFixture->teamIdRight;
+        }
+
+        // fill with scores
+        foreach ($entEncounters as $entEncounter) {
+            $results[$entEncounter->fixtureId]->scoreLeft += $entEncounter->scoreLeft;
+            $results[$entEncounter->fixtureId]->scoreRight += $entEncounter->scoreRight;
         }
         return $results;
     }
@@ -63,24 +74,21 @@ class Result extends \OriginalAppName\Service
 
     /**
      * compiles fixtures and encounters to create a collection of
+     * keyed by teamId always
      */
-    public function getLeague(\OriginalAppName\Site\Elttl\Model\Tennis\Fixture $modelFixture, \OriginalAppName\Site\Elttl\Model\Tennis\Encounter $modelEncounter)
+    public function getLeague(Array $fixtureResults)
     {
-        $modelFixture->keyDataByProperty('id');
-        $modelEncounter->keyDataByProperty('fixtureId');
-        if (!$entitiesFixture = $modelFixture->getData()) {
-            return [];
-        }
+
+        // collect
         $collection = [];
-        foreach ($modelEncounter->getData() as $key => $entEncounter) {
-            if (empty($entitiesFixture[$key])) {
-                return [];
-            }
-            foreach (array('left', 'right') as $side) {
-                $teamId = $entitiesFixture[$key]->{'teamId' . ucfirst($side)};
+
+        // loop
+        foreach ($fixtureResults as $fixtureId => $fixtureResult) {
+            foreach (array('Left', 'Right') as $side) {
+                $teamId = $fixtureResult->{'teamId' . $side};
 
                 // init key for team
-                if (!array_key_exists($teamId, $collection)) {
+                if (empty($collection[$teamId])) {
                     $collection[$teamId] = new \OriginalAppName\Site\Elttl\Entity\Tennis\Result\League;
                     $collection[$teamId]->won = 0;
                     $collection[$teamId]->draw = 0;
@@ -90,11 +98,11 @@ class Result extends \OriginalAppName\Service
                 }
 
                 // get scores
-                $score = $entEncounter->{'score' . ucfirst($side)};
-                $opposingScore = $entEncounter->{'score' . \OriginalAppName\Site\Elttl\Helper\Tennis::getOtherSide(ucfirst($side))};
+                $score = $fixtureResult->{'score' . $side};
+                $opposingScore = $fixtureResult->{'score' . ucfirst(\OriginalAppName\Site\Elttl\Helper\Tennis::getOtherSide($side))};
 
                 // calculate won, loss, played, points
-                $collection[$teamId]->played ++;
+                $collection[$teamId]->played++;
                 $collection[$teamId]->points += $score;
 
                 // draw

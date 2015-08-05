@@ -92,6 +92,7 @@ class Result extends \OriginalAppName\Site\Elttl\Controller\Front
     public function yearDivisionLeague($yearName, $divisionName)
     {
         $serviceResult = new \OriginalAppName\Site\Elttl\Service\Tennis\Result;
+        $vessel = new \OriginalAppName\Data;
         $serviceYear = new \OriginalAppName\Site\Elttl\Service\Tennis\Year;
         if (!$entityYear = $serviceYear->readName($yearName)) {
             return new \OriginalAppName\Response('', 404);
@@ -116,76 +117,24 @@ class Result extends \OriginalAppName\Site\Elttl\Controller\Front
         // encounter
         $modelTennisEncounter = new \OriginalAppName\Site\Elttl\Model\Tennis\Encounter;
         $modelTennisEncounter->readYearId($entityYear->id, $modelTennisFixture->getDataProperty('id'), 'fixtureId');
-        
+                
         // league table
-        echo '<pre>';
-        print_r($serviceResult->getLeague($modelTennisFixture, $modelTennisEncounter));
-        echo '</pre>';
-        exit;
-        
-        // orderByProperty
+        $fixtureResults = $serviceResult->getFixture($modelTennisFixture->getData(), $modelTennisEncounter->getData());
+        $leagueStats = $serviceResult->getLeague($fixtureResults);
+        $vessel
+            ->setData($leagueStats)
+            ->orderByProperty('points', 'desc');
 
         // template
         $this->view
             ->setMeta(array(
-                'title' => $division->getName() . ' League'
+                'title' => $division->name . ' League'
             ))
             ->setDataKey('division', $division)
             ->setDataKey('teams', $modelTeam->getData())
             ->setDataKey('tableName', 'league')
-            ->setDataKey('leagueStats', $modelTennisFixture->getData())
-            ->getTemplate('division/league');
-    }
-
-
-    public function resultYearDivisionMeritDoubles()
-    {
-        
-        // resource
-        $division = $this->getDivision();
-
-        // team
-        $className = $this->getArchiveClassName('model_tennis_team');
-        $modelTennisTeam = new $className($this);
-        $modelTennisTeam->read($this->getArchiveWhere(array(
-            'where' => array('division_id' => $division->getId())
-        )));
-        $modelTennisTeam->keyDataByProperty('id');
-
-        // fixture
-        $className = $this->getArchiveClassName('model_tennis_fixture');
-        $modelTennisFixture = new $className($this);
-        $modelTennisFixture->read($this->getArchiveWhere(array(
-            'where' => array('team_id_left' => $modelTennisTeam->getDataProperty('id'))
-        )));
-
-        // encounter
-        $className = $this->getArchiveClassName('model_tennis_encounter');
-        $modelTennisEncounter = new $className($this);
-        $modelTennisEncounter->read($this->getArchiveWhere(array(
-            'where' => array('fixture_id' => $modelTennisFixture->getDataProperty('id'))
-        )));
-
-        // convert encounters to merit results
-        $modelTennisEncounter
-            ->filterStatus(array('', 'exclude'))
-            ->convertToFixtureResults();
-
-        // convert encounter conversion, keyed by team id
-        $modelTennisFixture
-            ->convertToLeague($modelTennisEncounter->getData())
-            ->orderByHighestPoints();
-
-        // template
-        $this->view
-            ->setMeta(array(
-                'title' => $division->getName() . ' doubles merit'
-            ))
-            ->setDataKey('division', $division)
-            ->setDataKey('tableName', 'doubles merit')
-            ->setDataKey('teams', $modelTennisTeam->getData())
-            ->setDataKey('leagueStats', $modelTennisFixture->getData())
-            ->getTemplate('division/league');
+            ->setDataKey('leagueStats', $vessel->getData());
+        return new \OriginalAppName\Response($this->view->getTemplate('division/league'));
     }
 
 
@@ -244,6 +193,57 @@ class Result extends \OriginalAppName\Site\Elttl\Controller\Front
             ->setDataKey('players', $modelTennisPlayer->getData())
             ->setDataKey('meritStats', $modelTennisEncounter->getData())
             ->getTemplate('division/merit');
+    }
+
+
+    public function resultYearDivisionMeritDoubles()
+    {
+        
+        // resource
+        $division = $this->getDivision();
+
+        // team
+        $className = $this->getArchiveClassName('model_tennis_team');
+        $modelTennisTeam = new $className($this);
+        $modelTennisTeam->read($this->getArchiveWhere(array(
+            'where' => array('division_id' => $division->getId())
+        )));
+        $modelTennisTeam->keyDataByProperty('id');
+
+        // fixture
+        $className = $this->getArchiveClassName('model_tennis_fixture');
+        $modelTennisFixture = new $className($this);
+        $modelTennisFixture->read($this->getArchiveWhere(array(
+            'where' => array('team_id_left' => $modelTennisTeam->getDataProperty('id'))
+        )));
+
+        // encounter
+        $className = $this->getArchiveClassName('model_tennis_encounter');
+        $modelTennisEncounter = new $className($this);
+        $modelTennisEncounter->read($this->getArchiveWhere(array(
+            'where' => array('fixture_id' => $modelTennisFixture->getDataProperty('id'))
+        )));
+
+        // convert encounters to merit results
+        $modelTennisEncounter
+            ->filterStatus(array('', 'exclude'))
+            ->convertToFixtureResults();
+
+        // convert encounter conversion, keyed by team id
+        $modelTennisFixture
+            ->convertToLeague($modelTennisEncounter->getData())
+            ->orderByHighestPoints();
+
+        // template
+        $this->view
+            ->setMeta(array(
+                'title' => $division->getName() . ' doubles merit'
+            ))
+            ->setDataKey('division', $division)
+            ->setDataKey('tableName', 'doubles merit')
+            ->setDataKey('teams', $modelTennisTeam->getData())
+            ->setDataKey('leagueStats', $modelTennisFixture->getData())
+            ->getTemplate('division/league');
     }
 
 
