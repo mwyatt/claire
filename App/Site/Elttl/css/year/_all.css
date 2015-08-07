@@ -1,7 +1,7 @@
 @mixin clearfix .divisions;
 @mixin clearfix .years;
 
-.divisions,
+/*.divisions,*/
 .years {
   margin: 1em 0;
 }

@@ -5,30 +5,32 @@
 
 <?php if (!empty($covers)) : ?>
 
-		<div class="banner-primary js-home-cover">
+		<div class="banner-primary-container">
+			<div class="banner-primary js-home-cover">
 	
 	<?php $campaign->setSource('home cover banners') ?>
 	<?php $campaign->setMedium('referral') ?>
 	<?php foreach ($covers as $ad) : ?>
 		<?php $campaign->setCampaign($ad->title) ?>
 	
-			<a href="<?php echo $campaign->get($ad->url) ?>" class="cover">
-				<h2 class="cover-primary-title"><?php echo $ad->title ?></h2>
-				<p class="cover-description"><?php echo $ad->description ?></p>
+				<a href="<?php echo $campaign->get($ad->url) ?>" class="cover">
+					<h2 class="cover-primary-title"><?php echo $ad->title ?></h2>
+					<p class="cover-description"><?php echo $ad->description ?></p>
 
 		<?php if (!empty($ad->image)) : ?>
 		
-				<img class="cover-image" src="<?php echo $this->getAssetPath($ad->image) ?>" alt="<?php echo $ad->title ?>">
+					<img class="cover-image" src="<?php echo $this->getAssetPath($ad->image) ?>" alt="<?php echo $ad->title ?>">
 				
 		<?php
 endif ?>
 
-				<span class="button-secondary cover-button"><?php echo $ad->action ?></span>
-			</a>
+					<span class="button-secondary cover-button"><?php echo $ad->action ?></span>
+				</a>
 
 	<?php
 endforeach ?>
 
+			</div>
 		</div>
 
 <?php endif ?>

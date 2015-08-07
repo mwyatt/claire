@@ -10,7 +10,7 @@
 <?php include($this->getTemplatePath('_medium')) ?>
 
 	<div class="content-date" title="<?php echo $theDate ?>"><?php echo $theDate ?></div>
-	<h2 class="content-title"><a href="<?php echo $this->url->generate('content/single', ['type' => $content->type, 'slug' => $content->slug]) ?>" class="content-link"><?php echo $content->title ?></a></h2>
+	<h2 class="content-title"><a href="<?php echo $this->url->generate('content/single', ['type' => $content->type, 'slug' => $content->slug]) ?>" class="link-primary content-link"><?php echo $content->title ?></a></h2>
 	<div class="content-status">
 
 <?php echo ucfirst($content->status) ?>

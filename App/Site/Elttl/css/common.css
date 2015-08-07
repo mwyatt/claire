@@ -30,7 +30,7 @@
 .button-primary,
 .button-secondary {
   padding: 9px 11px;
-  border-radius: 2px;
+  border-radius: $border-radius;
 }
 
 @media print {
@@ -60,25 +60,39 @@ html.lt-ie9 {
 }
 
 .to-top {
-  transition: all 300ms ease;
-  border-radius: 2px;
+  transition: all 200ms ease;
   position: fixed;
-  bottom: -4em;
-  right: 1em;
   z-index: 1;
-  width: 2.3em;
-  height: 2.3em;
   padding: 0.5em;
   background-color: $color-primary-0;
   display: block;
+  width: 44px;
+  height: 44px;
+  bottom: -44px;
 }
 
-.to-top:active {
-  transform: translate3d(0, 2px, 0) scale(.95);
+@media only screen and (max-width: 499px) {
+  
+  .to-top {
+    border-top-left-radius: $border-radius;
+    right: 0;
+  }
+
+  .to-top.is-active {
+    bottom: 0;
+  }
 }
 
-.to-top.is-active {
-  bottom: 1em;
+@media only screen and (min-width: 499px) {
+  
+  .to-top {
+    border-radius: $border-radius;
+    right: $grid-gutter;
+  }
+
+  .to-top.is-active {
+    bottom: $grid-gutter;
+  }
 }
 
 .core-h1 {
@@ -98,12 +112,26 @@ html.lt-ie9 {
 
 @mixin clearfix .page;
 
+.container-footer-inner,
 .page {
-  max-width: 90em;
+  max-width: 1280px;
   margin: 0 auto;
-  /*padding: 64px 20px 20px; /*44+20*/
-  padding-top: 44px; /*clears header bar*/
 }
+
+@media only screen and (max-width: 699px) {
+  
+  .page {
+    padding-top: 44px; /*clears header bar*/
+  }
+}
+
+@media only screen and (min-width: 700px) {
+  
+  .page {
+    padding: 64px 20px 20px; /*44+20*/
+  }
+}
+
 
 @mixin clearfix .container-header-inner;
 

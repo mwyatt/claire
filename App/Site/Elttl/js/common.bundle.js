@@ -47,15 +47,11 @@ $(document).ready(function() {
 	$('.js-home-cover').owlCarousel({
 		slideSpeed: 200,
 		paginationSpeed: 200,
+		autoPlayHoverPause: true,
+		autoPlay: true,
 		singleItem: true
 	});
-
-	// gallery
-	$('.js-gallery').owlCarousel({
-		slideSpeed: 200,
-		paginationSpeed: 200
-	});
-
+	
 	// scroll direction
 	scrollDirection.init({
 		container: 'html'

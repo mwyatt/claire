@@ -1,14 +1,20 @@
+@mixin clearfix .banner-and-press;
+@mixin clearfix .home-heading;
+
 .home-button-all-posts {
-	float: right;
+  float: right;
 }
 
-@mixin clearfix .home-heading;
+.home-heading-text {
+  font-size: 26px;
+}
 
 @media (min-width: 700px) {
   
-  .banner-primary {
+  .banner-primary-container {
     width: 50%;
     float: left;
+    padding-right: $grid-gutter;
   }
 }
   
@@ -17,6 +23,14 @@
   .home-press {
     width: 50%;
     float: right;
+  }
+}
+
+@media only screen and (max-width: 699px) {
+  
+  .home-divisions,
+  .home-press {
+    margin: 0 $grid-gutter;
   }
 }
 
@@ -50,71 +64,68 @@
   height: auto;
 }
 
+.home .division-container {
+  padding-top: $grid-gutter;
+}
+
+@media only screen and (min-width: 350px) {
+
+  .home .division-container {
+    float: left;
+    padding-right: $grid-gutter;  
+  }
+}
+
+@media only screen and (min-width: 350px) and (max-width: 649px) {
+  
+  .home .division-container {
+    width: 50%;
+  }
+
+  .home .division-container:nth-child(2n) {
+    padding-right: 0;
+  }
+}
+
+@media only screen and (min-width: 650px) and (max-width: 949px) {
+  
+  .home .division-container {
+    width: 33.3%;
+  }
+
+  .home .division-container:nth-child(3n) {
+    padding-right: 0;
+  }
+}
+
+@media only screen and (min-width: 950px) {
+  
+  .home .division-container {
+    width: 25%;
+  }
+
+  .home .division-container:nth-child(4n) {
+    padding-right: 0;
+  }
+}
+
 .home .division {
-  display: block;
-  border: 0;
-  position: relative;
-  padding: 1em 1em 1em 3.5em;
-  border-radius: 2px;
-  margin-top: 1em;
-  background-color: #FFF7E0;
-  border: 1px solid #FAE8B4;
+  line-height: 1;
+  padding: 12px;
+  border-radius: $border-radius;
+  border: 1px solid $color-primary-0;
 }
 
-@media (max-width: 399px) {
-
-  .home .division:first-child {
-      margin-top: 0;
-  }
-}
-
-@media (min-width: 400px) {
-
-  .home .division {
-    float: left;
-  }
-}
-
-@media (min-width: 400px) and (max-width: 949px) {
-
-  .home .division {
-    width: 47%;
-    margin: 3% 0;
-    margin-right: 3%;    
-  }
-
-  .home .division:nth-child(2n) {
-    float: right;
-    margin-right: 0;
-  }
-}
-
-@media (min-width: 950px) {
-  
-  .home .division {  
-    float: left;
-    margin-left: 4%;
-    width: 22%;
-  }
-  
-  .home .division:first-child {
-    float: left;
-    margin-left: 0;
-  }
-}
-
-.home .divisions {
-  margin: 1em 0;
-}
 
 .home .division-image {
-  width: 1.5em;
+  display: none;
+  /*width: 1.5em;
   position: absolute;
   top: 1.2em;
-  left: 1em;
+  left: 1em;*/
 }
 
 .home .division-name {
-  font-size: 1.4em;
-  font-weight: 600;
+  font-size: 18px;
+  color: $color-primary-0;
 }

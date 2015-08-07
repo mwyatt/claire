@@ -13,10 +13,6 @@
 $selector: .container-footer .form-search;
 @mixin clearfix $selector;
 
-.container-footer {
-  background-color: $color-primary-4;
-}
-
 .footer-social {
   width: 3em;
   height: 3em;
@@ -141,18 +137,9 @@ $selector: .container-footer .form-search;
 @mixin clearfix .container-footer-inner;
 
 .container-footer-inner {
-  max-width: 90em;
-  margin: 0 auto;
-  padding-top: 3em;
-  padding-left: 10%;
-  padding-right: 10%;
-  padding-bottom: 3em;
+  padding: 20px;
 }
 
-@media (min-width: 650px) {
-
-  .container-footer-inner {
-    padding-left: 5%;
-    padding-right: 5%;
-  }
+.container-footer {
+  background-color: $color-primary-0;
 }
