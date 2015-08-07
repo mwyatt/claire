@@ -173,6 +173,8 @@ gulp.task('js/copy/vendor', function() {
     .pipe(gulp.dest('asset/vendor/'));
   gulp.src('bower_components/jquery/dist/jquery.min.js')
     .pipe(gulp.dest('asset/vendor'));
+  gulp.src('bower_components/magnific-popup/dist/jquery.magnific-popup.min.js')
+    .pipe(gulp.dest('asset/vendor'));
   gulp.src('bower_components/tinymce/**')
     .pipe(gulp.dest('asset/vendor/tinymce'));
 });

@@ -30,6 +30,7 @@ class Result extends \OriginalAppName\Service
             }
             $results[$entFixture->id]->teamIdLeft = $entFixture->teamIdLeft;
             $results[$entFixture->id]->teamIdRight = $entFixture->teamIdRight;
+            $results[$entFixture->id]->timeFulfilled = $entFixture->timeFulfilled + 0; // need to rectify this typing
         }
 
         // fill with scores
@@ -37,6 +38,8 @@ class Result extends \OriginalAppName\Service
             $results[$entEncounter->fixtureId]->scoreLeft += $entEncounter->scoreLeft;
             $results[$entEncounter->fixtureId]->scoreRight += $entEncounter->scoreRight;
         }
+
+        // data
         return $results;
     }
 
@@ -124,18 +127,21 @@ class Result extends \OriginalAppName\Service
 
     /**
      * retreive merit objects based on entities passed
+     * always keyed by playerId
      * @param  array $entEncounters
      * @return array
      */
-    public function getMerit($entEncounters)
+    public function getMerit(Array $entEncounters)
     {
-        $results = [];
+        $collection = [];
         foreach ($entEncounters as $entEncounter) {
             foreach (array('Left', 'Right') as $side) {
+
                 // create object entry for player if not exist
                 $playerId = $entEncounter->{'playerId' . $side};
-                if (empty($results[$playerId])) {
-                    $results[$playerId] = new \OriginalAppName\Site\Elttl\Entity\Tennis\Result\Merit;
+                if (empty($collection[$playerId])) {
+                    $collection[$playerId] = new \OriginalAppName\Site\Elttl\Entity\Tennis\Result\Merit;
+                    $collection[$playerId]->encounter = 0;
                 }
 
                 // get scores
@@ -143,17 +149,20 @@ class Result extends \OriginalAppName\Service
                 $opposingScore = $entEncounter->{'score' . ucfirst(\OriginalAppName\Site\Elttl\Helper\Tennis::getOtherSide($side))};
 
                 // adding only your points
-                $results[$playerId]->won += $score;
+                $collection[$playerId]->won += $score;
 
                 // totaling win and other side score
-                $results[$playerId]->played += ($score + $opposingScore);
+                $collection[$playerId]->played += ($score + $opposingScore);
+
+                // actual encounter
+                $collection[$playerId]->encounter++;
             }
         }
 
         // inject average
-        foreach ($results as $key => $result) {
-            $results[$key]->average = \OriginalAppName\Helper::calcAverage($result->won, $result->played);
+        foreach ($collection as $key => $result) {
+            $collection[$key]->average = \OriginalAppName\Helper::calcAverage($result->won, $result->played);
         }
-        return $results;
+        return $collection;
     }
 }

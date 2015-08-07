@@ -49,6 +49,7 @@ class Team extends \OriginalAppName\Site\Elttl\Controller\Front
         $fixturesRight = $modelTennisFixture->getData();
         $fixtures = array_merge($fixturesLeft, $fixturesRight);
         $modelTennisFixture->setData($fixtures);
+        $modelTennisFixture->orderByProperty('timeFulfilled', 'desc');
 
         // teams
         $modelTennisTeam = new \OriginalAppName\Site\Elttl\Model\Tennis\Team;
@@ -69,13 +70,18 @@ class Team extends \OriginalAppName\Site\Elttl\Controller\Front
         $modelTennisVenue->readYearId($entityYear->id, [$team->venueId]);
         $venue = $modelTennisVenue->getDataFirst();
 
+        // team members merit
+        $meritStats = $serviceResult->getMerit($modelTennisEncounter->getData());
+
         // template
         $this->view
             ->setMeta(array(
                 'title' => $team->name
             ))
+            ->setDataKey('yearSingle', $entityYear)
             ->setDataKey('team', $team)
             ->setDataKey('teams', $teams)
+            ->setDataKey('meritStats', $meritStats)
             ->setDataKey('venue', $venue)
             ->setDataKey('division', $modelTennisDivision->getDataFirst())
             ->setDataKey('secretary', $secretary)

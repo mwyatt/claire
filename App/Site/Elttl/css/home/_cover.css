@@ -8,8 +8,8 @@
   background-image: url('glow.png');
   background-repeat: no-repeat;
   background-position: center center;
-  min-height: 20em;
   position: relative;
+  min-height: 260px;
 }
 
 .owl-item:nth-child(2n) .cover {
@@ -25,10 +25,14 @@
   line-height: 1.1;
   font-weight: 600;
   color: #fff;
+  font-size: 32px;
+  line-height: 1.3;
 }
 
 .cover-description {
   color: rgba(255, 255, 255, 0.8);
+  margin: 1em 0;
+  line-height: 1.5;
 }
 
 .banner-primary {

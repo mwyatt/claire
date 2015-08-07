@@ -36,6 +36,11 @@ class Data extends \OriginalAppName\System
      */
     public function setDataKey($key, $value)
     {
+        // echo '<pre>';
+        // var_dump($key);
+        // var_dump($value);
+        // echo '</pre>';
+        
         $this->data[$key] = $value;
         return $this;
     }

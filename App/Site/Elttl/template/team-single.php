@@ -24,7 +24,7 @@
 				<th class="elttl-table-cell elttl-table-heading">Secretary</th>
 				<td class="elttl-table-cell">
 					<div class="team-single-secretary">
-						<a class="team-single-secretary-name" href="<?php echo $this->url->generate('player/single', ['yearName' => $year->name, 'playerSlug' => $secretary->slug]) ?>"><?php echo $secretary->getNameFull() ?></a>
+						<a class="team-single-secretary-name" href="<?php echo $this->url->generate('player/single', ['yearName' => $yearSingle->name, 'playerSlug' => $secretary->slug]) ?>"><?php echo $secretary->getNameFull() ?></a>
 
 	<?php if ($secretary->phoneLandline) : ?>
 
@@ -56,16 +56,25 @@ endif ?>
 		<h2 class="team-single-secondary-title">Registered players</h2>
 		<table class="elttl-table is-general">
 		
-	<?php foreach ($players as $player) : ?>
-		
+	<?php if (!empty($meritStats)): ?>
+		<?php foreach ($meritStats as $playerId => $meritStat): ?>
+			<?php if (!empty($players[$playerId])) : ?>
+				<?php $player = $players[$playerId] ?>
+
 			<tr class="elttl-table-row">
-				<td class="elttl-table-cell">
-					<a class="player" href="<?php echo $this->url->generate('player/single', ['yearName' => $year->name, 'playerSlug' => $player->slug]) ?>"><?php echo $player->getNameFull() ?></a>
+				<td class="elttl-table-cell is-name">
+					<a href="<?php echo $this->url->generate('player/single', ['yearName' => $yearSingle->name, 'playerSlug' => $player->slug]) ?>"><?php echo $player->getNameFull() ?></a>
 				</td>
+				<td class="elttl-table-cell is-rank"><?php echo $player->rank ?></td>
+				<td class="elttl-table-cell is-won"><?php echo $meritStat->won ?></td>
+				<td class="elttl-table-cell is-played"><?php echo $meritStat->played ?></td>
+				<td class="elttl-table-cell is-average"><?php echo $meritStat->average ?>%</td>
+				<td class="elttl-table-cell is-encounter"><?php echo $meritStat->encounter ?></td>
 			</tr>
 
-	<?php
-endforeach ?>
+			<?php endif ?>
+		<?php endforeach ?>
+	<?php endif ?>
 
 		</table>
 	</div>

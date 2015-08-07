@@ -27,7 +27,7 @@ else : ?>
 			<?php
 endif ?>
 	
-		<a href="<?php echo $this->url->generate('player/single', ['yearName' => $year->name, 'playerSlug' => $playerLeft->slug]) ?>"><?php echo $playerLeft->getNameFull() ?></a>
+		<a href="<?php echo $this->url->generate('player/single', ['yearName' => $yearSingle->name, 'playerSlug' => $playerLeft->slug]) ?>"><?php echo $playerLeft->getNameFull() ?></a>
 		<?php
 endif ?>
 
@@ -43,7 +43,7 @@ endif ?>
 		<?php
 endif ?>
 		
-		<a href="<?php echo $this->url->generate('player/single', ['yearName' => $year->name, 'playerSlug' => $playerRight->slug]) ?>"><?php echo $playerRight->getNameFull() ?></a>
+		<a href="<?php echo $this->url->generate('player/single', ['yearName' => $yearSingle->name, 'playerSlug' => $playerRight->slug]) ?>"><?php echo $playerRight->getNameFull() ?></a>
 	</td>
 </tr>
 

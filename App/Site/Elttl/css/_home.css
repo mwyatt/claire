@@ -2,7 +2,7 @@
 	float: right;
 }
 
-@mixin clearfix .home-press-heading;
+@mixin clearfix .home-heading;
 
 @media (min-width: 700px) {
   
@@ -18,10 +18,6 @@
     width: 50%;
     float: right;
   }
-}
-
-.banner-and-press {
-	float: left;
 }
 
 .gallery {

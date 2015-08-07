@@ -2,6 +2,9 @@
 @import "_dependencies.css";
 @import "../bower_components/normalize-css/normalize.css";
 @import "../bower_components/magnific-popup/dist/magnific-popup.css";
+@import "../bower_components/magnific-popup/dist/magnific-popup.css";
+@import "../bower_components/owlcarousel/owl-carousel/owl.theme.css";
+@import "../bower_components/owlcarousel/owl-carousel/owl.carousel.css";
 @import "_reset.css";
 @import "_reusable.css";
 @import "_form.css";
@@ -23,6 +26,12 @@
 @import "_pagination.css";
 @import "_footer.css";
 @import "_print.css";
+
+.button-primary,
+.button-secondary {
+  padding: 9px 11px;
+  border-radius: 2px;
+}
 
 @media print {
 
@@ -92,7 +101,8 @@ html.lt-ie9 {
 .page {
   max-width: 90em;
   margin: 0 auto;
-  padding: 64px 20px 20px; /*44+20*/
+  /*padding: 64px 20px 20px; /*44+20*/
+  padding-top: 44px; /*clears header bar*/
 }
 
 @mixin clearfix .container-header-inner;

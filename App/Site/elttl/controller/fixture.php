@@ -66,6 +66,7 @@ class Fixture extends \OriginalAppName\Site\Elttl\Controller\Front
         // encounter
         $modEncounter = new \OriginalAppName\Site\Elttl\Model\Tennis\Encounter;
         $modEncounter->readYearId($entityYear->id, [$fixture->id], 'fixtureId');
+        $modEncounter->orderByProperty('id');
         $encounters = $modEncounter->getData();
 
         // fixture results
@@ -77,6 +78,7 @@ class Fixture extends \OriginalAppName\Site\Elttl\Controller\Front
             ->setMeta(array(
                 'title' => $teamLeft->name . ' vs ' . $teamRight->name
             ))
+            ->setDataKey('yearSingle', $entityYear)
             ->setDataKey('teamLeft', $teamLeft)
             ->setDataKey('teamRight', $teamRight)
             ->setDataKey('division', $modDivision->getDataFirst())

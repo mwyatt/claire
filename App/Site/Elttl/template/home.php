@@ -9,21 +9,21 @@
 	
 	<?php $campaign->setSource('home cover banners') ?>
 	<?php $campaign->setMedium('referral') ?>
-	<?php foreach ($covers as $cover) : ?>
-		<?php $campaign->setCampaign($cover->name) ?>
+	<?php foreach ($covers as $ad) : ?>
+		<?php $campaign->setCampaign($ad->title) ?>
 	
-			<a href="<?php echo $campaign->get($cover->url) ?>" class="cover">
-				<h2 class="cover-primary-title"><?php echo $cover->name ?></h2>
-				<p class="cover-description"><?php echo $cover->description ?></p>
+			<a href="<?php echo $campaign->get($ad->url) ?>" class="cover">
+				<h2 class="cover-primary-title"><?php echo $ad->title ?></h2>
+				<p class="cover-description"><?php echo $ad->description ?></p>
 
-		<?php if (!empty($cover->image)) : ?>
+		<?php if (!empty($ad->image)) : ?>
 		
-				<img class="cover-image" src="<?php echo $this->getAssetPath($cover->image) ?>" alt="<?php echo $cover->name ?>">
+				<img class="cover-image" src="<?php echo $this->getAssetPath($ad->image) ?>" alt="<?php echo $ad->title ?>">
 				
 		<?php
 endif ?>
 
-				<span class="cover-button"><?php echo $cover->button ?></span>
+				<span class="button-secondary cover-button"><?php echo $ad->action ?></span>
 			</a>
 
 	<?php
@@ -35,9 +35,9 @@ endforeach ?>
 <?php if (!empty($contents)) : ?>
 
 		<div class="home-press">
-			<h1 class="home-press-heading">
+			<h1 class="home-heading">
 				<a href="<?php echo $this->url->generate() ?>press/" class="home-button-all-posts">View all</a>
-				<span class="home-press-heading-text">Press releases</span>
+				<span class="home-heading-text">Press releases</span>
 			</h1>
 		
 	<?php include($this->getTemplatePath('_contents')) ?>
@@ -51,8 +51,8 @@ endforeach ?>
 <?php if (!empty($galleryPaths)) : ?>
 
 	<div class="gallery">
-		<h1 class="home-press-heading">
-			<span class="home-press-heading-text">Gallery</span>
+		<h1 class="home-heading">
+			<span class="home-heading-text">Gallery</span>
 		</h1>
 		<div class="js-gallery">
 			
@@ -70,8 +70,8 @@ endforeach ?>
 <?php if (!empty($divisions)) : ?>
 
 	<div class="home-divisions">
-		<h1 class="home-press-heading">
-			<span class="home-press-heading-text">Divisions</span>
+		<h1 class="home-heading">
+			<span class="home-heading-text">Divisions</span>
 		</h1>
 
 	<?php include($this->getTemplatePath('_divisions')) ?>

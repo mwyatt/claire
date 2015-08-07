@@ -7,11 +7,8 @@ namespace OriginalAppName\Site\Elttl\Controller;
  * @version     0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Result extends \OriginalAppName\Site\Elttl\Controller\Front
+class Result extends \OriginalAppName\Controller\Front
 {
-
-
-    public $division;
 
 
     /**
@@ -92,7 +89,7 @@ class Result extends \OriginalAppName\Site\Elttl\Controller\Front
     public function yearDivisionLeague($yearName, $divisionName)
     {
         $serviceResult = new \OriginalAppName\Site\Elttl\Service\Tennis\Result;
-        $vessel = new \OriginalAppName\Data;
+        $dataContainer = new \OriginalAppName\Data;
         $serviceYear = new \OriginalAppName\Site\Elttl\Service\Tennis\Year;
         if (!$entityYear = $serviceYear->readName($yearName)) {
             return new \OriginalAppName\Response('', 404);
@@ -121,147 +118,125 @@ class Result extends \OriginalAppName\Site\Elttl\Controller\Front
         // league table
         $fixtureResults = $serviceResult->getFixture($modelTennisFixture->getData(), $modelTennisEncounter->getData());
         $leagueStats = $serviceResult->getLeague($fixtureResults);
-        $vessel
+        $dataContainer
             ->setData($leagueStats)
             ->orderByProperty('points', 'desc');
 
         // template
         $this->view
-            ->setMeta(array(
-                'title' => $division->name . ' League'
-            ))
+            ->setDataKey('metaTitle', $division->name . ' League')
+            ->setDataKey('yearSingle', $entityYear)
             ->setDataKey('division', $division)
             ->setDataKey('teams', $modelTeam->getData())
             ->setDataKey('tableName', 'league')
-            ->setDataKey('leagueStats', $vessel->getData());
+            ->setDataKey('leagueStats', $dataContainer->getData());
         return new \OriginalAppName\Response($this->view->getTemplate('division/league'));
     }
 
 
-    public function resultYearDivisionMerit()
+    public function yearDivisionMerit($yearName, $divisionName)
     {
-        if ($this->getArchivePathPart(3) == 'doubles') {
-            return $this->meritDoubles();
+        $serviceResult = new \OriginalAppName\Site\Elttl\Service\Tennis\Result;
+        $dataContainer = new \OriginalAppName\Data;
+        $serviceYear = new \OriginalAppName\Site\Elttl\Service\Tennis\Year;
+        if (!$entityYear = $serviceYear->readName($yearName)) {
+            return new \OriginalAppName\Response('', 404);
         }
 
-        // resource
-        $division = $this->getDivision();
+        // division
+        $modelDivision = new \OriginalAppName\Site\Elttl\Model\Tennis\Division;
+        $modelDivision->readYearColumn($entityYear->id, 'name', $divisionName);
+        if (!$division = $modelDivision->getDataFirst()) {
+            return new \OriginalAppName\Response('', 404);
+        }
 
         // team
-        $className = $this->getArchiveClassName('model_tennis_team');
-        $modelTennisTeam = new $className($this);
-        $modelTennisTeam->read($this->getArchiveWhere(array(
-            'where' => array('division_id' => $division->getId())
-        )));
-        $modelTennisTeam->keyDataByProperty('id');
+        $modelTeam = new \OriginalAppName\Site\Elttl\Model\Tennis\Team;
+        $modelTeam->readYearColumn($entityYear->id, 'divisionId', $division->id);
+        $modelTeam->keyDataByProperty('id');
 
         // players
-        $className = $this->getArchiveClassName('model_tennis_player');
-        $modelTennisPlayer = new $className($this);
-        $modelTennisPlayer->read($this->getArchiveWhere(array(
-            'where' => array('team_id' => $modelTennisTeam->getDataProperty('id'))
-        )));
-        $modelTennisPlayer->keyDataByProperty('id');
+        $modelPlayer = new \OriginalAppName\Site\Elttl\Model\Tennis\Player;
+        $modelPlayer->readYearId($entityYear->id, $modelTeam->getDataProperty('id'), 'teamId');
+        $modelPlayer->keyDataByProperty('id');
 
         // fixture
-        $className = $this->getArchiveClassName('model_tennis_fixture');
-        $modelTennisFixture = new $className($this);
-        $modelTennisFixture->read($this->getArchiveWhere(array(
-            'where' => array('team_id_left' => $modelTennisTeam->getDataProperty('id'))
-        )));
+        $modelTennisFixture = new \OriginalAppName\Site\Elttl\Model\Tennis\Fixture;
+        $modelTennisFixture->readYearId($entityYear->id, $modelTeam->getDataProperty('id'), 'teamIdLeft');
 
         // encounter
-        $className = $this->getArchiveClassName('model_tennis_encounter');
-        $modelTennisEncounter = new $className($this);
-        $modelTennisEncounter->read($this->getArchiveWhere(array(
-            'where' => array('fixture_id' => $modelTennisFixture->getDataProperty('id'))
-        )));
+        $modelTennisEncounter = new \OriginalAppName\Site\Elttl\Model\Tennis\Encounter;
+        $modelTennisEncounter->readYearId($entityYear->id, $modelTennisFixture->getDataProperty('id'), 'fixtureId');
+        $modelTennisEncounter->filterStatus(['doubles', 'exclude']);
+        $encounters = $modelTennisEncounter->getData();
 
-        // convert encounters to merit results
-        $modelTennisEncounter
-            ->filterStatus(array('doubles', 'exclude'))
-            ->convertToMerit()
-            ->orderByHighestAverage();
+        // league table
+        $fixtureResults = $serviceResult->getFixture($modelTennisFixture->getData(), $modelTennisEncounter->getData());
+        $meritStats = $serviceResult->getMerit($encounters);
+        $dataContainer
+            ->setData($meritStats)
+            ->orderByProperty('average', 'desc');
+        $meritStats = $dataContainer->getData();
 
         // template
         $this->view
-            ->setMeta(array(
-                'title' => $division->getName() . ' Merit'
-            ))
+            ->setDataKey('metaTitle', $division->name . ' Merit')
+            ->setDataKey('yearSingle', $entityYear)
             ->setDataKey('division', $division)
-            ->setDataKey('teams', $modelTennisTeam->getData())
-            ->setDataKey('players', $modelTennisPlayer->getData())
-            ->setDataKey('meritStats', $modelTennisEncounter->getData())
-            ->getTemplate('division/merit');
+            ->setDataKey('teams', $modelTeam->getData())
+            ->setDataKey('players', $modelPlayer->getData())
+            ->setDataKey('meritStats', $meritStats);
+        return new \OriginalAppName\Response($this->view->getTemplate('division/merit'));
     }
 
 
-    public function resultYearDivisionMeritDoubles()
+    public function yearDivisionMeritDoubles($yearName, $divisionName)
     {
-        
-        // resource
-        $division = $this->getDivision();
+        $serviceResult = new \OriginalAppName\Site\Elttl\Service\Tennis\Result;
+        $dataContainer = new \OriginalAppName\Data;
+        $serviceYear = new \OriginalAppName\Site\Elttl\Service\Tennis\Year;
+        if (!$entityYear = $serviceYear->readName($yearName)) {
+            return new \OriginalAppName\Response('', 404);
+        }
+
+        // division
+        $modelDivision = new \OriginalAppName\Site\Elttl\Model\Tennis\Division;
+        $modelDivision->readYearColumn($entityYear->id, 'name', $divisionName);
+        if (!$division = $modelDivision->getDataFirst()) {
+            return new \OriginalAppName\Response('', 404);
+        }
 
         // team
-        $className = $this->getArchiveClassName('model_tennis_team');
-        $modelTennisTeam = new $className($this);
-        $modelTennisTeam->read($this->getArchiveWhere(array(
-            'where' => array('division_id' => $division->getId())
-        )));
-        $modelTennisTeam->keyDataByProperty('id');
+        $modelTeam = new \OriginalAppName\Site\Elttl\Model\Tennis\Team;
+        $modelTeam->readYearColumn($entityYear->id, 'divisionId', $division->id);
+        $modelTeam->keyDataByProperty('id');
 
         // fixture
-        $className = $this->getArchiveClassName('model_tennis_fixture');
-        $modelTennisFixture = new $className($this);
-        $modelTennisFixture->read($this->getArchiveWhere(array(
-            'where' => array('team_id_left' => $modelTennisTeam->getDataProperty('id'))
-        )));
+        $modelTennisFixture = new \OriginalAppName\Site\Elttl\Model\Tennis\Fixture;
+        $modelTennisFixture->readYearId($entityYear->id, $modelTeam->getDataProperty('id'), 'teamIdLeft');
 
         // encounter
-        $className = $this->getArchiveClassName('model_tennis_encounter');
-        $modelTennisEncounter = new $className($this);
-        $modelTennisEncounter->read($this->getArchiveWhere(array(
-            'where' => array('fixture_id' => $modelTennisFixture->getDataProperty('id'))
-        )));
+        $modelTennisEncounter = new \OriginalAppName\Site\Elttl\Model\Tennis\Encounter;
+        $modelTennisEncounter->readYearId($entityYear->id, $modelTennisFixture->getDataProperty('id'), 'fixtureId');
+        $modelTennisEncounter->filterStatus(['', 'exclude']);
+        $encounters = $modelTennisEncounter->getData();
 
-        // convert encounters to merit results
-        $modelTennisEncounter
-            ->filterStatus(array('', 'exclude'))
-            ->convertToFixtureResults();
-
-        // convert encounter conversion, keyed by team id
-        $modelTennisFixture
-            ->convertToLeague($modelTennisEncounter->getData())
-            ->orderByHighestPoints();
+        // league table
+        $fixtureResults = $serviceResult->getFixture($modelTennisFixture->getData(), $modelTennisEncounter->getData());
+        $leagueStats = $serviceResult->getLeague($fixtureResults);
+        $dataContainer
+            ->setData($leagueStats)
+            ->orderByProperty('points', 'desc');
+        $leagueStats = $dataContainer->getData();
 
         // template
         $this->view
-            ->setMeta(array(
-                'title' => $division->getName() . ' doubles merit'
-            ))
+            ->setDataKey('metaTitle', $division->name . ' doubles merit')
+            ->setDataKey('yearSingle', $entityYear)
             ->setDataKey('division', $division)
             ->setDataKey('tableName', 'doubles merit')
-            ->setDataKey('teams', $modelTennisTeam->getData())
-            ->setDataKey('leagueStats', $modelTennisFixture->getData())
-            ->getTemplate('division/league');
-    }
-
-
-    /**
-     * @return object OriginalAppName\\OriginalAppName\Site\Elttl\Entity\Tennis\Division
-     */
-    public function getDivision()
-    {
-        return $this->division;
-    }
-    
-    
-    /**
-     * @param object $year OriginalAppName\\OriginalAppName\Site\Elttl\Entity\Tennis\Division
-     */
-    public function setDivision($division)
-    {
-        $this->division = $division;
-        return $this;
+            ->setDataKey('teams', $modelTeam->getData())
+            ->setDataKey('leagueStats', $leagueStats);
+        return new \OriginalAppName\Response($this->view->getTemplate('division/league'));
     }
 }

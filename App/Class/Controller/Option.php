@@ -40,7 +40,7 @@ class Option extends \OriginalAppName\Controller
         $this
             ->storeYearId()
             ->view
-            ->setDataKey('option', $serviceOption->getData());
+            ->setDataKey('option', $options);
     }
 
 

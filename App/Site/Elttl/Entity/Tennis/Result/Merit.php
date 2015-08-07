@@ -17,5 +17,8 @@ class Merit extends \OriginalAppName\Entity
     public $played;
 
 
+    public $encounter;
+
+
     public $average;
 }

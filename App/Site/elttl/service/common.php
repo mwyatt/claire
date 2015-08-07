@@ -35,12 +35,26 @@ class Common extends \OriginalAppName\Service
 
         // template
         return [
+            'socials' => [
+                'twitter' => 'https://twitter.com/eastlancstt',
+                'facebook' => 'https://www.facebook.com/pages/East-Lancashire-Table-Tennis-League/118206128284149'
+            ],
             'googleAnalyticsTrackingId' => 'UA-35261063-1',
             'divisions' => $modelTennisDivision->getData(),
             'menuPrimary' => $menuPrimary,
             'menuSecondary' => $menuSecondary,
             'campaign' => new \OriginalAppName\Google\Analytics\Campaign,
+            'year' => $this->getYear(),
             'menuTertiary' => $menuTertiary
         ];
+    }
+
+
+    public function getYear()
+    {
+        $registry = \OriginalAppName\Registry::getInstance();
+        $modelYear = new \OriginalAppName\Site\Elttl\Model\Tennis\Year;
+        $modelYear->readId([$registry->get('database/options/yearId')]);
+        return $modelYear->getDataFirst();
     }
 }

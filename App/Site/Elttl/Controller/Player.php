@@ -62,6 +62,7 @@ class Player extends \OriginalAppName\Site\Elttl\Controller\Front
         $fixtureIds = $modPersonalEncounters->getDataProperty('fixtureId');
         $modFixture = new \OriginalAppName\Site\Elttl\Model\Tennis\Fixture;
         $modFixture->readYearId($entityYear->id, $fixtureIds);
+        $modFixture->orderByProperty('timeFulfilled', 'desc');
         $fixtures = $modFixture->getData();
 
         // players within fixtures
@@ -89,6 +90,7 @@ class Player extends \OriginalAppName\Site\Elttl\Controller\Front
             ->setMeta(array(
                 'title' => 'Player ' . $player->getNameFull()
             ))
+            ->setDataKey('yearSingle', $entityYear)
             ->setDataKey('meritRows', $meritRows)
             ->setDataKey('division', $modDivision->getDataFirst())
             ->setDataKey('player', $player)

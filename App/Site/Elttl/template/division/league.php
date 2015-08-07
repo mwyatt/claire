@@ -24,7 +24,7 @@
 
 		<tr class="elttl-table-row">
 			<td class="elttl-table-cell is-name">
-				<a href="<?php echo $this->url->generate('team/single', ['yearName' => $year->name, 'teamSlug' => $team->slug]) ?>"><?php echo $team->name ?></a>
+				<a href="<?php echo $this->url->generate('team/single', ['yearName' => $yearSingle->name, 'teamSlug' => $team->slug]) ?>"><?php echo $team->name ?></a>
 			</td>
 			<td class="elttl-table-cell is-won"><?php echo $leagueStat->won ?></td>
 			<td class="elttl-table-cell is-draw"><?php echo $leagueStat->draw ?></td>

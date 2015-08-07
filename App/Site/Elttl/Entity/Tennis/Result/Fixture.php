@@ -21,4 +21,7 @@ class Fixture extends \OriginalAppName\Entity
 
 
     public $scoreRight;
+
+
+    public $timeFulfilled;
 }

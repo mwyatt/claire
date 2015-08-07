@@ -228,52 +228,51 @@ class View extends \OriginalAppName\Data
 
 
     /**
-     * modifies the data array to ensure the metas are filled with custom stuff
-     * or fall back to defaults
+     * always run before a template is output
+     * fills data with the db defaults
+     * then overrides with controller custom sets
+     * then injects the site title in front of title
      */
     public function setMeta()
     {
         $data = $this->getData();
-
-        // set defaults to remove output errors
-        $this
-            ->setDataKey('metaTitle', '')
-            ->setDataKey('metaDescription', '')
-            ->setDataKey('metaKeywords', '');
-
-        // validate options
-        if (! isset($data['option'])) {
-            return $this;
-        }
-        if (! isset($data['option']['meta_title'])) {
-            return $this;
-        }
-        if (! isset($data['option']['meta_description'])) {
-            return $this;
+        $metas = [
+            'meta_title' => 'metaTitle',
+            'meta_description' => 'metaDescription',
+            'meta_keywords' => 'metaKeywords'
+        ];
+        foreach ($metas as $key) {
+            $$key = '';
         }
 
-        // title
-        if (isset($data['metaTitle'])) {
-            $data['metaTitle'] = $data['option']['meta_title']->getValue() . ' - ' . $data['metaTitle'];
-        } else {
-            if (isset($data['option']['meta_title'])) {
-                $data['metaTitle'] = $data['option']['meta_title']->getValue();
+        // set database defaults
+        if (!empty($data['option'])) {
+            foreach ($metas as $keyLegacy => $key) {
+                if (!empty($data['option'][$keyLegacy])) {
+                    $$key = $data['option'][$keyLegacy]->getValue();
+                }
             }
         }
 
-        // description
-        if (! isset($data['metaDescription'])) {
-            $data['metaDescription'] = $data['option']['meta_description']->getValue();
+        // ovveride with controller sets
+        foreach ($metas as $keyLegacy => $key) {
+            if (!empty($data[$key])) {
+                $$key = $data[$key];
+            }
         }
 
-        // keywords
-        // needed?
-        if (! isset($data['metaKeywords'])) {
-            $data['metaKeywords'] = $data['option']['meta_keywords']->getValue();
+        // set to template
+        foreach ($metas as $key) {
+            $this->setDataKey($key, $$key);
         }
 
-        // commit data
-        $this->setData($data);
+        // inject site title to the meta title
+        // added bonus!
+        if (!empty($metaTitle) && !empty($data['option']['site_title'])) {
+            $this->setDataKey('metaTitle',  implode(' -- ', [$data['option']['site_title']->getValue(), $metaTitle]));
+        }
+
+        // chain
         return $this;
     }
 
