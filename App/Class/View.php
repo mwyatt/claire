@@ -269,7 +269,7 @@ class View extends \OriginalAppName\Data
         // inject site title to the meta title
         // added bonus!
         if (!empty($metaTitle) && !empty($data['option']['site_title'])) {
-            $this->setDataKey('metaTitle',  implode(' -- ', [$data['option']['site_title']->getValue(), $metaTitle]));
+            $this->setDataKey('metaTitle', implode(' -- ', [$data['option']['site_title']->getValue(), $metaTitle]));
         }
 
         // chain

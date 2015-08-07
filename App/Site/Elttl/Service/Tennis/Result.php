@@ -136,7 +136,6 @@ class Result extends \OriginalAppName\Service
         $collection = [];
         foreach ($entEncounters as $entEncounter) {
             foreach (array('Left', 'Right') as $side) {
-
                 // create object entry for player if not exist
                 $playerId = $entEncounter->{'playerId' . $side};
                 if (empty($collection[$playerId])) {

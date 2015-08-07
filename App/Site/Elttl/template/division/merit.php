@@ -23,7 +23,7 @@
 	<?php foreach ($meritStats as $playerId => $meritStat) : ?>
 		<?php if (!empty($players[$playerId])) : ?>
 			<?php $player = $players[$playerId] ?>
-			<?php if (!empty($teams[$player->teamId])): ?>
+			<?php if (!empty($teams[$player->teamId])) : ?>
 				<?php $team = $teams[$player->teamId] ?>
 
 		<tr class="elttl-table-row">
@@ -40,7 +40,8 @@
 			<td class="elttl-table-cell is-encounter"><?php echo $meritStat->encounter ?></td>
 		</tr>
 
-			<?php endif ?>
+			<?php
+endif ?>
 		<?php
 endif ?>
 	<?php

@@ -56,8 +56,8 @@ endif ?>
 		<h2 class="team-single-secondary-title">Registered players</h2>
 		<table class="elttl-table is-general">
 		
-	<?php if (!empty($meritStats)): ?>
-		<?php foreach ($meritStats as $playerId => $meritStat): ?>
+	<?php if (!empty($meritStats)) : ?>
+		<?php foreach ($meritStats as $playerId => $meritStat) : ?>
 			<?php if (!empty($players[$playerId])) : ?>
 				<?php $player = $players[$playerId] ?>
 
@@ -72,9 +72,12 @@ endif ?>
 				<td class="elttl-table-cell is-encounter"><?php echo $meritStat->encounter ?></td>
 			</tr>
 
-			<?php endif ?>
-		<?php endforeach ?>
-	<?php endif ?>
+			<?php
+endif ?>
+		<?php
+endforeach ?>
+	<?php
+endif ?>
 
 		</table>
 	</div>
