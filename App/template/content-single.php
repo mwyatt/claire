@@ -2,8 +2,8 @@
 
 <div class="page page-content-single">
 
-<?php if ($contents): ?>
-	<?php foreach ($contents as $content): ?>
+<?php if ($contents) : ?>
+	<?php foreach ($contents as $content) : ?>
 		
 <div class="content-single content-single is-type-<?php echo $content->getType() ?> clearfix" data-id="<?php echo $content->getId() ?>">
 	<div class="content-date"><?php echo date('jS', $content->getTimePublished()) . ' of ' . date('F o', $content->getTimePublished()) ?></div>
@@ -12,7 +12,8 @@
 	<div class="content-date"><?php echo date('jS', $content->getTimePublished()) . ' of ' . date('F o', $content->getTimePublished()) ?></div>
 </div>
 
-	<?php endforeach ?>
+	<?php
+endforeach ?>
 <?php endif ?>
 
 </div>

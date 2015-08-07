@@ -33,7 +33,7 @@ class Common extends \OriginalAppName\Service
         $registry = \OriginalAppName\Registry::getInstance();
         $modelTennisDivision->readColumn('yearId', $registry->get('database/options/yearId'));
 
-        // 
+        //
         $year = $this->getYear();
 
         // template
