@@ -7,7 +7,7 @@
 	<?php foreach ($teams as $teamRight) : ?>
 		
 		<th class="elttl-table-cell elttl-table-heading" title="<?php echo $teamRight->name ?>">
-			<a href="<?php echo $this->url->generate('team/single', ['yearName' => $year->name, 'teamSlug' => $teamRight->slug]) ?>"><?php echo $teamRight->name ?></a>
+			<a class="link-primary" href="<?php echo $this->url->generate('team/single', ['yearName' => $year->name, 'teamSlug' => $teamRight->slug]) ?>"><?php echo $teamRight->name ?></a>
 		</th>
 
 	<?php
@@ -19,7 +19,7 @@ endforeach ?>
 		
 	<tr class="elttl-table-row">
 		<th class="elttl-table-cell elttl-table-heading" title="<?php echo $teamLeft->name ?>">
-			<a href="<?php echo $this->url->generate('team/single', ['yearName' => $year->name, 'teamSlug' => $teamLeft->slug]) ?>"><?php echo $teamLeft->name ?></a>
+			<a class="link-primary" href="<?php echo $this->url->generate('team/single', ['yearName' => $year->name, 'teamSlug' => $teamLeft->slug]) ?>"><?php echo $teamLeft->name ?></a>
 		</th>
 		
 		<?php foreach ($teams as $teamRight) : ?>

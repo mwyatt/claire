@@ -114,24 +114,10 @@ html.lt-ie9 {
 
 .container-footer-inner,
 .page {
-  max-width: 1280px;
+  max-width: 1024px;
   margin: 0 auto;
+  padding: 64px 20px 20px; /*44+20*/
 }
-
-@media only screen and (max-width: 699px) {
-  
-  .page {
-    padding-top: 44px; /*clears header bar*/
-  }
-}
-
-@media only screen and (min-width: 700px) {
-  
-  .page {
-    padding: 64px 20px 20px; /*44+20*/
-  }
-}
-
 
 @mixin clearfix .container-header-inner;
 
@@ -165,20 +151,26 @@ html.lt-ie9 {
   margin-top: 3em;
 }
 
-@mixin clearfix .menu-tables-option;
-
-.menu-tables-option {
-  margin: 1em 0;
-  display: block;
-  text-align: center;
+.menu-tables-option-container {
+  padding-bottom: $grid-gutter;
 }
 
-@media (min-width: 500px) {
+@media only screen and (min-width: 550px) {
   
-  .menu-tables-option {
+  .menu-tables-option-container {
     float: left;
-    margin-right: 1em;
+    padding-left: $grid-gutter;
+    width: 33.3%;
   }
+
+  .menu-tables-option-container:first-child {
+    padding-left: 0;
+  }
+}
+
+.menu-tables-option {
+  display: block;
+  text-align: center;
 }
 
 .header-sticker-beta {
@@ -189,7 +181,7 @@ html.lt-ie9 {
   color: #fff;
   line-height: 1;
   padding: 0.3em;
-  border-radius: 2px;
+  border-radius: $border-radius;
   position: relative;
   top: 16px;
   left: 6px;
@@ -206,4 +198,9 @@ html.lt-ie9 {
 .team-single-secondary-title,
 .player-single-secondary-title {
   /*@extend .h2;*/
+}
+
+.page-secondary-title {
+  font-size: 18px;
+  margin: 1em 0 0.5em;
 }

@@ -28,8 +28,7 @@ $selector: .container-footer .form-search;
 @mixin clearfix .footer-socials;
 
 .footer-socials {
-  margin: 1em 0;
-  margin-top: 0;
+  margin: $grid-gutter 0;
 }
 
 .footer-main {
@@ -37,8 +36,8 @@ $selector: .container-footer .form-search;
 }
 
 .menu-secondary {
-  margin-bottom: 2em;
-  border-radius: 2px;
+  margin: $grid-gutter 0;
+  border-radius: $border-radius;
   overflow: hidden;
 }
 
@@ -74,10 +73,9 @@ $selector: .container-footer .form-search;
 }
 
 .footer-address {
-  margin-bottom: 2em;
+  margin-bottom: $grid-gutter;
   line-height: 1.5;
   color: #fff;
-
 }
 
 @media (min-width: 650px) {
@@ -108,7 +106,7 @@ $selector: .container-footer .form-search;
   text-align: center;
   padding: 1em;
   overflow: hidden;
-  border-radius: 2px;
+  border-radius: $border-radius;
 
 }
 

@@ -1,66 +1,59 @@
 @mixin clearfix .advertisements;
 
-.advertisements {
-margin: 1em 0;
-}
-
 .advertisement {
   display: block;
   background-color: $color-primary-0;
   height: 12em;
   padding: 1em;
-  border-radius: 2px;
+  border-radius: $border-radius;
   background-image: url('table-lip.png');
   background-repeat: no-repeat;
   background-position: bottom right;
-  margin: 1em 0;
   color: #fff;
 }
 
-.advertisement:nth-child(2n) {
+.advertisement-container:nth-child(2n) .advertisement {
   background-color: $color-secondary-1-0;
 }
 
-@media (min-width: 400px) {
+.advertisement-container {
+  padding-top: $grid-gutter;
+}
 
-  .advertisement {
+@media only screen and (min-width: 400px) {
+
+  .advertisement-container {
     float: left;
+    padding-right: $grid-gutter;  
   }
 }
 
-@media (min-width: 400px) and (max-width: 699px) {
-
-  .advertisement {  
-    width: 47%;
-    margin-right: 2%;
-    height: 17em;
+@media only screen and (min-width: 400px) and (max-width: 699px) {
+  
+  .advertisement-container {
+    width: 50%;
   }
 
-  .advertisement:nth-child(2n) {
-    float: right;
-    margin-right: 0;
+  .advertisement-container:nth-child(2n) {
+    padding-right: 0;
   }
 }
 
-@media (min-width: 700px) {
-
-  .advertisement {
-    width: 30%;
-    margin-right: 5%;
-    height: 17em;
-    padding: 1em;    
+@media only screen and (min-width: 700px) {
+  
+  .advertisement-container {
+    width: 33.3%;
   }
 
-  .advertisement:nth-child(3n) {
-    float: right;
-    margin-right: 0;
+  .advertisement-container:nth-child(3n) {
+    padding-right: 0;
   }
 }
 
-@media (min-width: 900px) {
+@media only screen and (min-width: 900px) {
   
   .advertisement {
-    height: 14em;
+    height: 250px;
   }
 }
 

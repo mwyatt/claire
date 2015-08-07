@@ -43,7 +43,7 @@ class Json extends \OriginalAppName\Data
 	 * @return string      
 	 */
 	public function getPath($key) {
-		return APP_PATH . ($this->getUsePath() ? $this->path : '') . SITE . US . $key . $this->extension;
+		return SITE_PATH . ($this->getUsePath() ? $this->path : '') . $key . $this->extension;
 	}
 
 

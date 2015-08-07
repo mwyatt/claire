@@ -1,5 +1,13 @@
 @mixin clearfix .banner-and-press;
 @mixin clearfix .home-heading;
+@mixin clearfix .gallery-container;
+
+@media only screen and (max-width: 699px) {
+  
+  .home.page {
+    padding: 44px 0 0 0; /*clears header bar*/
+  }
+}
 
 .home-button-all-posts {
   float: right;
@@ -17,51 +25,54 @@
     padding-right: $grid-gutter;
   }
 }
-  
-@media (min-width: 700px) {
-  
-  .home-press {
-    width: 50%;
-    float: right;
-  }
-}
 
 @media only screen and (max-width: 699px) {
   
+  .home .advertisements,
+  .home-gallery-container,
   .home-divisions,
   .home-press {
-    margin: 0 $grid-gutter;
+    padding: 0 $grid-gutter;
   }
 }
 
-.gallery {
-  margin: 1em 0;
+.home .advertisements,
+.home-gallery-container,
+.home-divisions,
+.home-press {
+  padding-top: $grid-gutter;
 }
 
 .gallery-link {
-  transition: all 300ms ease;
-  transform: rotate(-2deg);
-  border-radius: 2px;
-  display: block;
-  margin: 1em auto;
+  transition: all 200ms ease;
   overflow: hidden;
-  box-shadow: 0 1px 3px rgba(#000, .5);
-  width: 12em;
-  height: 8.7em;
+  width: 100px;
+  height: 100px;
+  background-size: cover;
+  float: left;
 }
 
-.gallery-link:hover {
-  transform: rotate(1deg);
+@media only screen and (max-width: 499px) {
+  
+  .gallery-link {
+    width: 33.3%;
+  }
 }
 
-.gallery-link:hover .gallery-image {
-  transform: scale(1.2);
+@media only screen and (min-width: 500px) and (max-width: 899px) {
+  
+  .gallery-link {
+    width: 25%;
+    height: 140px;
+  }
 }
 
-.gallery-image {
-  transition: all 5s ease;
-  max-width: 100%;
-  height: auto;
+@media only screen and (min-width: 900px) {
+  
+  .gallery-link {
+    width: 20%;
+    height: 160px;
+  }
 }
 
 .home .division-container {
@@ -128,4 +139,33 @@
 .home .division-name {
   font-size: 18px;
   color: $color-primary-0;
+}
+
+.gallery-container {
+  padding-top: $grid-gutter;
+}
+
+.home-button-all-posts {
+  position: relative;
+  top: 10px;
+}
+
+@media (min-width: 700px) {
+  
+  .home-press {
+    padding-top: 0;
+    width: 50%;
+    float: right;
+  }
+}
+
+.advertisement-title {
+  font-size: 26px;
+  line-height: 1.2;
+}
+
+.advertisement-description {
+  line-height: 1.5;
+  margin: 1em 0;
+  opacity: .8;
 }

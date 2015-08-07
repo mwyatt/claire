@@ -3,7 +3,7 @@
 <div class="page team-single js-page-team-single">
 	<h1 class="page-primary-title"><?php echo $team->name ?></h1>
 	<div class="block-margins">
-		<h2 class="team-single-secondary-title">General information</h2>
+		<h2 class="page-secondary-title">General information</h2>
 		<table class="elttl-table is-general">
 			<tr class="elttl-table-row">
 				<th class="elttl-table-cell elttl-table-heading">Division</th>
@@ -24,7 +24,7 @@
 				<th class="elttl-table-cell elttl-table-heading">Secretary</th>
 				<td class="elttl-table-cell">
 					<div class="team-single-secretary">
-						<a class="team-single-secretary-name" href="<?php echo $this->url->generate('player/single', ['yearName' => $yearSingle->name, 'playerSlug' => $secretary->slug]) ?>"><?php echo $secretary->getNameFull() ?></a>
+						<a class="link-primary team-single-secretary-name" href="<?php echo $this->url->generate('player/single', ['yearName' => $yearSingle->name, 'playerSlug' => $secretary->slug]) ?>"><?php echo $secretary->getNameFull() ?></a>
 
 	<?php if ($secretary->phoneLandline) : ?>
 
@@ -53,7 +53,7 @@ endif ?>
 <?php if ($players) : ?>
 
 	<div class="block-margins">
-		<h2 class="team-single-secondary-title">Registered players</h2>
+		<h2 class="page-secondary-title">Registered players</h2>
 		<table class="elttl-table is-general">
 		
 	<?php if (!empty($meritStats)) : ?>
@@ -63,7 +63,7 @@ endif ?>
 
 			<tr class="elttl-table-row">
 				<td class="elttl-table-cell is-name">
-					<a href="<?php echo $this->url->generate('player/single', ['yearName' => $yearSingle->name, 'playerSlug' => $player->slug]) ?>"><?php echo $player->getNameFull() ?></a>
+					<a class="link-primary" href="<?php echo $this->url->generate('player/single', ['yearName' => $yearSingle->name, 'playerSlug' => $player->slug]) ?>"><?php echo $player->getNameFull() ?></a>
 				</td>
 				<td class="elttl-table-cell is-rank"><?php echo $player->rank ?></td>
 				<td class="elttl-table-cell is-won"><?php echo $meritStat->won ?></td>
@@ -86,7 +86,7 @@ endif ?>
 <?php if ($fixtures && $fixtureResults && $teams) : ?>
 	
 	<div class="block-margins">
-		<h2 class="team-single-secondary-title">Fixtures</h2>
+		<h2 class="page-secondary-title">Fixtures</h2>
 
 	<?php include $this->getTemplatePath('_fixtures') ?>
 

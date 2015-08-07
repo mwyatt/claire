@@ -4,12 +4,19 @@
   display: block;
   background-color: $color-primary-0;
   padding: 1em;
-  border-radius: 2px;
+  border-radius: $border-radius;
   background-image: url('glow.png');
   background-repeat: no-repeat;
   background-position: center center;
   position: relative;
   min-height: 260px;
+}
+
+@media only screen and (min-width: 700px) {
+  
+  .cover {
+    min-height: 285px;
+  }
 }
 
 .owl-item:nth-child(2n) .cover {
@@ -33,10 +40,6 @@
   color: rgba(255, 255, 255, 0.8);
   margin: 1em 0;
   line-height: 1.5;
-}
-
-.banner-primary {
-  margin-bottom: 1em;
 }
 
 .cover-button {

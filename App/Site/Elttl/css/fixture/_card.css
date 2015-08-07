@@ -19,7 +19,7 @@ $selector: .page.team-single .fixture;
   margin: 1em 0;
   display: block;
   padding: .6em;
-  border-radius: 2px;
+  border-radius: $border-radius;
 }
 
 @media (min-width: 400px) {

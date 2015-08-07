@@ -2,7 +2,6 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 140px;
   height: 44px;
 }
 
@@ -24,9 +23,21 @@
   display: none;
 }
 
+@media (max-width: 779px) {
+
+  .header-logo {
+    width: 140px;
+  }
+}
+
 @media (min-width: 780px) {
 
+  .header-logo {
+    width: 430px;
+  }
+
   .header-logo-text-full {
+    width: 380px;
     display: block;
     font-size: 1.3em;
     font-weight: 600;
@@ -210,22 +221,22 @@ svg {
   .menu-primary-level-1-link {
     display: block;
     float: right;
-    padding: 13px 1em;
-    padding-right: 50px;
+    padding: 11px 14px;
+    padding-right: 42px;
     position: relative;
-    border-left: 1px solid $color-secondary-1-0;
-    border-bottom: none;
-    font-weight: 600;
+    border-left: 1px solid #eee;
+    color: $color-primary-0;
   }
 }
 
 .menu-primary-level-1-link-image {
-  transition: all 200ms ease;
   width: 0.7em;
   height: 0.7em;
   position: absolute;
   top: 19px;
   right: 18px;
+  top: 12px;
+  right: 15px;
 }
 
 .menu-primary-reduced-trigger-image {
@@ -234,11 +245,11 @@ svg {
 }
 
 .menu-primary-reduced-trigger {
-  padding: 0.8em .8em;
-  width: 3.8em;
-  height: 3em;
   display: block;
   border-left: 1px solid #eee;
+  padding: 12px;
+  width: 50px;
+  height: 44px;
 }
 
 @media (min-width: 450px) {
@@ -253,7 +264,7 @@ svg {
   display: none;
   transition: all 200ms ease;
   position: absolute;
-  top: 3em;
+  top: 44px;
   left: 0;
   background-color: #fff;
   right: 0;
@@ -286,6 +297,7 @@ svg {
 
 .is-active .menu-primary-level-1-link-image {
   transform: rotate(180deg);
+  top: 22px;
 }
 
 .menu-primary-level-2-link {
@@ -293,6 +305,7 @@ svg {
   padding: 1em;
   border-top: 1px solid #eee;
   border-bottom: none;
+  color: $color-primary-0;
 }
 
 @media (min-width: 450px) {

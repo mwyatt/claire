@@ -2,8 +2,8 @@
 	
 <nav class="menu-primary menu-primary-league js-menu-primary-container">
 	<span class="menu-primary-reduced-trigger js-menu-primary-toggle">
-		<img class="menu-primary-reduced-trigger-image" src="<?php echo $this->getAssetPath('menu.svg') ?>" onerror="this.src=''; this.onerror=null;">
-		<img class="menu-primary-reduced-trigger-image menu-primary-reduced-trigger-cross-image" src="<?php echo $this->getAssetPath('cross.svg') ?>" onerror="this.src=''; this.onerror=null;">
+		<span class="menu-primary-reduced-trigger-image"><?php include $this->getAssetPath('menu.svg') ?></span>
+		<span class="menu-primary-reduced-trigger-image menu-primary-reduced-trigger-cross-image"><?php include $this->getAssetPath('cross.svg') ?></span>
 	</span>
 
 	<?php foreach ($menu as $menuItem) : ?>
@@ -13,7 +13,7 @@
 
 		<?php echo $menuItem->name ?>
 
-			<img class="menu-primary-level-1-link-image" src="<?php echo $this->getAssetPath('arrow-down.svg') ?>" onerror="this.src=''; this.onerror=null;">
+			<span class="menu-primary-level-1-link-image"><?php include $this->getAssetPath('arrow-down.svg') ?></span>
 		</a>
 
 		<?php if ($menuItem->children) : ?>

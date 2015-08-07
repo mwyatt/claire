@@ -18,22 +18,24 @@
 }
 
 .elttl-table-cell {
+	line-height: 1.5;
+	padding: 10px;
+	overflow: hidden;
   padding: 0.4em;
   border: 1px solid rgba(0, 0, 0, 0.03);
-  
 }
 
 @media (min-width: 400px) {
 
 	.elttl-table-cell {
-		padding: .6em;
+		padding: 14px;
 	}
 }
 
 @media (min-width: 600px) {
 
 	.elttl-table-cell {
-		padding: 1em;
+		padding: 16px;
 	}
 }
 
@@ -110,7 +112,7 @@
 }
 
 .is-encounter .encounter-rank-change {
-  border-radius: 2px;
+  border-radius: $border-radius;
   background: $color-secondary-1-1;
   color: #fff;
   line-height: 1.9;

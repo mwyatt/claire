@@ -92,7 +92,7 @@ class Data extends \OriginalAppName\System
     public function getDataProperty($property)
     {
         if (! $data = $this->getData()) {
-            return;
+            return [];
         }
         $collection = [];
         foreach ($data as $entity) {

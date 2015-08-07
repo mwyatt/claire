@@ -38,7 +38,7 @@ endforeach ?>
 
 		<div class="home-press">
 			<h1 class="home-heading">
-				<a href="<?php echo $this->url->generate() ?>press/" class="home-button-all-posts">View all</a>
+				<a href="<?php echo $this->url->generate() ?>press/" class="link-secondary home-button-all-posts">View all</a>
 				<span class="home-heading-text">Press releases</span>
 			</h1>
 		
@@ -52,15 +52,15 @@ endforeach ?>
 
 <?php if (!empty($galleryPaths)) : ?>
 
-	<div class="gallery">
+	<div class="home-gallery-container">
 		<h1 class="home-heading">
 			<span class="home-heading-text">Gallery</span>
 		</h1>
-		<div class="js-gallery">
+		<div class="gallery-container">
 			
 	<?php foreach ($galleryPaths as $key => $path) : ?>
 	
-			<a class="gallery-link js-magnific-gallery" href="<?php echo $this->url->generate() . $path ?>"><img class="gallery-image" src="<?php echo $path ?>" alt=""></a>
+			<a class="gallery-link js-magnific-gallery" href="<?php echo $this->getUrlAsset($path) ?>" style="background-image: url(<?php echo $this->getUrlAsset($path) ?>);"></a>
 
 	<?php
 endforeach ?>

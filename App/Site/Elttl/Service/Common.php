@@ -33,6 +33,9 @@ class Common extends \OriginalAppName\Service
         $registry = \OriginalAppName\Registry::getInstance();
         $modelTennisDivision->readColumn('yearId', $registry->get('database/options/yearId'));
 
+        // 
+        $year = $this->getYear();
+
         // template
         return [
             'socials' => [
@@ -44,7 +47,8 @@ class Common extends \OriginalAppName\Service
             'menuPrimary' => $menuPrimary,
             'menuSecondary' => $menuSecondary,
             'campaign' => new \OriginalAppName\Google\Analytics\Campaign,
-            'year' => $this->getYear(),
+            'year' => $year,
+            'years' => $this->getYears($year),
             'menuTertiary' => $menuTertiary
         ];
     }
@@ -56,5 +60,13 @@ class Common extends \OriginalAppName\Service
         $modelYear = new \OriginalAppName\Site\Elttl\Model\Tennis\Year;
         $modelYear->readId([$registry->get('database/options/yearId')]);
         return $modelYear->getDataFirst();
+    }
+
+
+    public function getYears()
+    {
+        $modelYear = new \OriginalAppName\Site\Elttl\Model\Tennis\Year;
+        $modelYear->read();
+        return $modelYear->getData();
     }
 }

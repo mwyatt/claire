@@ -1,9 +1,35 @@
+<?php if (!empty($years)): ?>
+	
+	<form method="post">
+		<select name="year" class="js-select-year" class="select-years">
+		
+	<?php foreach ($years as $yearUnique): ?>
+		
+			<option value="<?php echo $yearUnique->id ?>" <?php echo empty($year) ? '' : ($year->id == $yearUnique->id ? 'selected' : '') ?>>Season <strong><?php echo $yearUnique->getNameFull() ?></strong></option>
+
+	<?php endforeach ?>
+
+		</select>
+	</form>
+
+<?php endif ?>
 <?php if (isset($division)) : ?>
+	<?php $menu = [
+		'league' => 'League',
+		'merit-doubles' => 'Doubles Merit',
+		'merit' => 'Merit'
+	] ?>
 
 <div class="block-clear menu-tables">
-	<a href="<?php echo $this->url->generate('result/year/division/league', ['yearName' => $yearSingle->name, 'divisionName' => strtolower($division->name)]) ?>" class="menu-tables-option button-primary">League</a>
-	<a href="<?php echo $this->url->generate('result/year/division/merit-doubles', ['yearName' => $yearSingle->name, 'divisionName' => strtolower($division->name)]) ?>" class="menu-tables-option button-primary">Doubles Merit</a>
-	<a href="<?php echo $this->url->generate('result/year/division/merit', ['yearName' => $yearSingle->name, 'divisionName' => strtolower($division->name)]) ?>" class="menu-tables-option button-primary">Merit</a>
+
+<?php foreach ($menu as $slug => $name): ?>
+
+	<div class="menu-tables-option-container">
+		<a href="<?php echo $this->url->generate('result/year/division/' . $slug, ['yearName' => $yearSingle->name, 'divisionName' => strtolower($division->name)]) ?>" class="menu-tables-option button-primary"><?php echo $name ?></a>
+	</div>
+
+<?php endforeach ?>
+
 </div>
 
 <?php endif ?>

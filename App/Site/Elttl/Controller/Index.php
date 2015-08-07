@@ -14,7 +14,7 @@ class Index extends \OriginalAppName\Site\Elttl\Controller\Front
     public function home()
     {
         $modelAd = new \OriginalAppName\Model\Ad;
-        $modelAd->readColumn('groupKey', 'small');
+        $modelAd->readColumn('groupKey', 'small-primary');
         $this->view->setDataKey('ads', $modelAd->getData());
         $modelAd->readColumn('groupKey', 'home-primary');
         $this->view->setDataKey('covers', $modelAd->getData());
@@ -28,10 +28,10 @@ class Index extends \OriginalAppName\Site\Elttl\Controller\Front
             ->limitData([0, 3]);
 
         // gallery
-        $folder = glob(SITE_PATH . 'asset' . DS . 'media' . DS . 'thumb' . DS . '*');
+        $folder = glob(SITE_PATH . DS . 'media' . DS . 'thumb' . DS . '*');
         $files = [];
         foreach ($folder as $filePath) {
-            $filePath = str_replace(BASE_PATH, '', $filePath);
+            $filePath = str_replace(SITE_PATH . DS . 'media' . DS, '', $filePath);
             $files[] = str_replace(DS, US, $filePath);
         }
 

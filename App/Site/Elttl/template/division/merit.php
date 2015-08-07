@@ -28,10 +28,10 @@
 
 		<tr class="elttl-table-row">
 			<td class="elttl-table-cell is-name">
-				<a href="<?php echo $this->url->generate('player/single', ['yearName' => $yearSingle->name, 'playerSlug' => $player->slug]) ?>"><?php echo $player->getNameFull() ?></a>
+				<a class="link-primary" href="<?php echo $this->url->generate('player/single', ['yearName' => $yearSingle->name, 'playerSlug' => $player->slug]) ?>"><?php echo $player->getNameFull() ?></a>
 			</td>
 			<td class="elttl-table-cell is-team">
-				<a href="<?php echo $this->url->generate('team/single', ['yearName' => $yearSingle->name, 'teamSlug' => $team->slug]) ?>"><?php echo $team->name ?></a>
+				<a class="link-primary" href="<?php echo $this->url->generate('team/single', ['yearName' => $yearSingle->name, 'teamSlug' => $team->slug]) ?>"><?php echo $team->name ?></a>
 			</td>
 			<td class="elttl-table-cell is-rank"><?php echo $player->rank ?></td>
 			<td class="elttl-table-cell is-won"><?php echo $meritStat->won ?></td>
