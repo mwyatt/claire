@@ -1,68 +1,19 @@
-$selector: .page.player-single .fixtures;
-@mixin clearfix $selector;
-$selector: .page.team-single .fixtures;
-@mixin clearfix $selector;
+@mixin clearfix .fixtures;
+@mixin clearfix .fixture;
 
-.page.player-single .fixtures,
-.page.team-single .fixtures {
-    margin: 1em 0;
-}
-
-$selector: .page.player-single .fixture;
-@mixin clearfix $selector;
-$selector: .page.team-single .fixture;
-@mixin clearfix $selector;
-
-.page.player-single .fixture,
-.page.team-single .fixture {
-  border: 1px solid;
+.fixtures {
   margin: 1em 0;
+}
+
+.fixture {
+  border: 1px solid;
   display: block;
-  padding: .6em;
+  padding: 1em;
   border-radius: $border-radius;
+  color: $color-primary-0;
 }
 
-@media (min-width: 400px) {
-
-  .page.player-single .fixture,
-  .page.team-single .fixture {
-    float: left;
-  }
-}
-
-@media (min-width: 400px) and (max-width: 699px) {
-
-  .page.player-single .fixture,
-  .page.team-single .fixture {
-    width: 47%;
-    margin-right: 2%;
-  }
-
-  .page.player-single .fixture:nth-child(2n),
-  .page.team-single .fixture:nth-child(2n) {
-    float: right;
-    margin-right: 0;
-  }
-}
-
-@media (min-width: 700px) {
-
-  .page.player-single .fixture,
-  .page.team-single .fixture {
-    width: 30%;
-    margin-right: 5%;
-    padding: 1em;
-  }
-
-  .page.player-single .fixture:nth-child(3n),
-  .page.team-single .fixture:nth-child(3n) {
-    float: right;
-    margin-right: 0;
-  }
-}
-
-.page.player-single .fixture-score-left,
-.page.team-single .fixture-score-left {
+.fixture-score-left {
   clear: left;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -70,23 +21,65 @@ $selector: .page.team-single .fixture;
   width: 80%;
 }
 
-.page.player-single .fixture [class^="fixture-"],
-.page.team-single .fixture [class^="fixture-"] {
+.fixture [class^="fixture-"] {
   float: left;
 }
 
-.page.player-single .fixture [class^="fixture-score"],
-.page.team-single .fixture [class^="fixture-score"] {
+.fixture [class^="fixture-score"] {
   width: 20%;
   text-align: right;
   float: right;
 }
 
-.page.player-single .fixture [class^="fixture-team"],
-.page.team-single .fixture [class^="fixture-team"] {
+.fixture [class^="fixture-team"] {
   clear: left;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   width: 80%;
+}
+
+.fixture-container {
+  padding-top: $grid-gutter;
+}
+
+@media only screen and (min-width: 500px) {
+
+  .fixture-container {
+    float: left;
+    padding-right: $grid-gutter;  
+  }
+}
+
+@media only screen and (min-width: 500px) and (max-width: 799px) {
+  
+  .fixture-container {
+    width: 50%;
+  }
+
+  .fixture-container:nth-child(2n) {
+    padding-right: 0;
+  }
+}
+
+@media only screen and (min-width: 800px) and (max-width: 1023px) {
+  
+  .fixture-container {
+    width: 33.3%;
+  }
+
+  .fixture-container:nth-child(3n) {
+    padding-right: 0;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  
+  .fixture-container {
+    width: 25%;
+  }
+
+  .fixture-container:nth-child(4n) {
+    padding-right: 0;
+  }
 }
