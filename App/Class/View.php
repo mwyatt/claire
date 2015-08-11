@@ -132,7 +132,7 @@ class View extends \OriginalAppName\Data
         }
 
         // 404
-        return $path
+        return $path;
     }
 
 
