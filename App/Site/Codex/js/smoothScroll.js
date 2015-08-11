@@ -51,6 +51,9 @@ Smooth_Scroll.prototype.init = function(options) {
  * @param  {string} target
  */
 Smooth_Scroll.prototype.scrollTo = function(event, target) {
+	if (! $(target).length) {
+		return;
+	};
 	var timer = 0;
 	var destination = 0;
 	if ($(target).offset().top > $(document).height() - $(window).height()) {

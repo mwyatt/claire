@@ -2,8 +2,10 @@
     </div>
 	<footer class="container-footer">
 		<div class="container-footer-inner">
-			<div class="footer-address">
-				<a href="<?php echo $this->url->generate() ?>page/contact-us/">&copy; East Lancashire Table Tennis League <?php echo date('Y') ?></a><br>Hyndburn Sports Centre<br>Henry Street<br>Church<br>Accrington<br><b>Telephone:</b> 01254 385945
+            <div class="footer-container-address-socials">
+                
+            <div class="footer-address">
+                <a href="<?php echo $this->url->generate() ?>page/contact-us/">&copy; East Lancashire Table Tennis League <?php echo date('Y') ?></a><br>Hyndburn Sports Centre<br>Henry Street<br>Church<br>Accrington<br><b>Telephone:</b> 01254 385945
             </div>
 
 <?php if (!empty($socials)) : ?>
@@ -19,13 +21,18 @@
 endforeach ?>
 
             </div>
+            </div>
 
 <?php endif ?>
+
+            <div class="menu-secondaries-container">
+    
 <?php $menu = $menuSecondary; ?>
 <?php include($this->getTemplatePath('_menu-secondary')) ?>
 <?php $menu = $menuTertiary; ?>
 <?php include($this->getTemplatePath('_menu-secondary')) ?>
 
+            </div>
 			<a href="http://tabletennisengland.co.uk/" target="_blank" class="logo-table-tennis-england"><img class="logo-table-tennis-england-image" src="<?php echo $this->getUrlAsset('logo-table-tennis-england.gif') ?>" alt="Table Tennis England Logo"></a>
         </div>
     </footer>

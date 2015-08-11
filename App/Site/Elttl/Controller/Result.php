@@ -32,10 +32,17 @@ class Result extends \OriginalAppName\Controller\Front
      */
     public function yearSingle($yearName)
     {
+
+        // year
         $serviceYear = new \OriginalAppName\Site\Elttl\Service\Tennis\Year;
         if (!$entityYear = $serviceYear->readName($yearName)) {
             return new \OriginalAppName\Response('', 404);
         }
+
+        // am i in an archive?
+        $registry = \OriginalAppName\Registry::getInstance();
+        ;
+        $this->view->setDataKey('isArchive', $registry->get('database/options/yearId') != $entityYear->id);
 
         // division
         $modelDivision = new \OriginalAppName\Site\Elttl\Model\Tennis\Division;
@@ -62,6 +69,11 @@ class Result extends \OriginalAppName\Controller\Front
             return new \OriginalAppName\Response('', 404);
         }
 
+        // am i in an archive?
+        $registry = \OriginalAppName\Registry::getInstance();
+        ;
+        $this->view->setDataKey('isArchive', $registry->get('database/options/yearId') != $entityYear->id);
+
         // division
         $modelDivision = new \OriginalAppName\Site\Elttl\Model\Tennis\Division;
         $modelDivision->readYearColumn($entityYear->id, 'name', $divisionName);
@@ -75,6 +87,7 @@ class Result extends \OriginalAppName\Controller\Front
 
         // single division view
         $this->view
+            ->appendAsset('css', 'division-single')
             ->setDataKey('metaTitle', $entityDivision->name . ' division overview')
             ->setDataKey('fixtureResults', $summaryTableParts['fixtureResults'])
             ->setDataKey('teams', $summaryTableParts['entTeams'])
@@ -94,6 +107,11 @@ class Result extends \OriginalAppName\Controller\Front
         if (!$entityYear = $serviceYear->readName($yearName)) {
             return new \OriginalAppName\Response('', 404);
         }
+
+        // am i in an archive?
+        $registry = \OriginalAppName\Registry::getInstance();
+        ;
+        $this->view->setDataKey('isArchive', $registry->get('database/options/yearId') != $entityYear->id);
 
         // division
         $modelDivision = new \OriginalAppName\Site\Elttl\Model\Tennis\Division;
@@ -142,6 +160,11 @@ class Result extends \OriginalAppName\Controller\Front
         if (!$entityYear = $serviceYear->readName($yearName)) {
             return new \OriginalAppName\Response('', 404);
         }
+
+        // am i in an archive?
+        $registry = \OriginalAppName\Registry::getInstance();
+        ;
+        $this->view->setDataKey('isArchive', $registry->get('database/options/yearId') != $entityYear->id);
 
         // division
         $modelDivision = new \OriginalAppName\Site\Elttl\Model\Tennis\Division;
@@ -198,6 +221,11 @@ class Result extends \OriginalAppName\Controller\Front
         if (!$entityYear = $serviceYear->readName($yearName)) {
             return new \OriginalAppName\Response('', 404);
         }
+
+        // am i in an archive?
+        $registry = \OriginalAppName\Registry::getInstance();
+        ;
+        $this->view->setDataKey('isArchive', $registry->get('database/options/yearId') != $entityYear->id);
 
         // division
         $modelDivision = new \OriginalAppName\Site\Elttl\Model\Tennis\Division;

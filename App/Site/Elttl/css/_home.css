@@ -75,13 +75,13 @@
   }
 }
 
-.home .division-container {
+.division-container {
   padding-top: $grid-gutter;
 }
 
 @media only screen and (min-width: 350px) {
 
-  .home .division-container {
+  .division-container {
     float: left;
     padding-right: $grid-gutter;  
   }
@@ -89,33 +89,33 @@
 
 @media only screen and (min-width: 350px) and (max-width: 649px) {
   
-  .home .division-container {
+  .division-container {
     width: 50%;
   }
 
-  .home .division-container:nth-child(2n) {
+  .division-container:nth-child(2n) {
     padding-right: 0;
   }
 }
 
 @media only screen and (min-width: 650px) and (max-width: 949px) {
   
-  .home .division-container {
+  .division-container {
     width: 33.3%;
   }
 
-  .home .division-container:nth-child(3n) {
+  .division-container:nth-child(3n) {
     padding-right: 0;
   }
 }
 
 @media only screen and (min-width: 950px) {
   
-  .home .division-container {
+  .division-container {
     width: 25%;
   }
 
-  .home .division-container:nth-child(4n) {
+  .division-container:nth-child(4n) {
     padding-right: 0;
   }
 }

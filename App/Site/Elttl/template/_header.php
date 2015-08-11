@@ -8,7 +8,9 @@
 <?php include($this->getTemplatePath('header/_meta')) ?>
 
     <link rel="icon" type="image/png" href="<?php echo $this->getUrlAsset('favicon.png') ?>">
-    <link href="<?php echo $this->getUrlAsset('common.css') ?>" media="screen, projection, print" rel="stylesheet" type="text/css" />
+
+<?php include $this->getTemplatePath('header/_css') ?>
+
     <link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800" rel="stylesheet" type="text/css">
     <script>var urlBase = '<?php echo $this->url->generate() ?>';</script>
     <script src="<?php echo $this->getUrlAsset('vendor/modernizr.js') ?>"></script>
@@ -29,15 +31,22 @@
         <header class="container-header row js-container-header clearfix js-fixed-bar">
             <div class="container-header-inner">
 
-        <?php include($this->getTemplatePath('header/_logo')) ?>
+<?php include($this->getTemplatePath('header/_logo')) ?>
 
                 <!-- <a href="mailto:martin.wyatt@gmail.com" class="header-sticker-beta" title="This website is still actively under development. If you notice any bugs or have any improvements please email me: martin.wyatt@gmail.com">Beta</a> -->
 
-        <?php $menu = $menuPrimary; ?>
-        <?php include($this->getTemplatePath('_menu-primary')) ?>
-        <?php include($this->getTemplatePath('_menu-division')) ?>
-        <?php // include $this->getTemplatePath('header/_year') ?>
+<?php $menu = $menuPrimary; ?>
+<?php include($this->getTemplatePath('_menu-primary')) ?>
+<?php include($this->getTemplatePath('_menu-division')) ?>
+<?php // include $this->getTemplatePath('header/_year') ?>
 
             </div>
+
+<?php if (!empty($isArchive)): ?>
+    
+            <div class="header-is-archive-container">You are inside an archive.</div>
+
+<?php endif ?>
+
         </header>
         

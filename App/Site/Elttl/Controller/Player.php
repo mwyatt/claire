@@ -90,6 +90,7 @@ class Player extends \OriginalAppName\Site\Elttl\Controller\Front
             ->setMeta(array(
                 'title' => 'Player ' . $player->getNameFull()
             ))
+            ->appendAsset('css', 'fixture-card')
             ->setDataKey('yearSingle', $entityYear)
             ->setDataKey('meritRows', $meritRows)
             ->setDataKey('division', $modDivision->getDataFirst())

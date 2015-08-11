@@ -86,6 +86,12 @@ class View extends \OriginalAppName\Data
     }
 
 
+    /**
+     * use a mustache template within php
+     * will this get used?
+     * @param  string $templatePath 
+     * @return ?
+     */
     public function getTemplateMustache($templatePath)
     {
         
@@ -98,12 +104,10 @@ class View extends \OriginalAppName\Data
             // 'partials_loader' => new Mustache_Loader_FilesystemLoader(dirname(__FILE__).'/views/partials'),
         ]);
         return $mustacheEngine->render($templatePath, $data);
-
         $m = new Mustache_Engine(array(
             'loader'          => new Mustache_Loader_FilesystemLoader(dirname(__FILE__).'/views'),
             'partials_loader' => new Mustache_Loader_FilesystemLoader(dirname(__FILE__).'/views/partials'),
         ));
-
     }
 
 
@@ -131,7 +135,7 @@ class View extends \OriginalAppName\Data
             return $path;
         }
 
-        // 404
+        // 500
         return $path;
     }
 
@@ -139,22 +143,14 @@ class View extends \OriginalAppName\Data
     /**
      * find the asset path for a particular path
      * used with includes
+     * all assets come from only asset/
      * @param  string $append foo/bar.svg
      * @return string
      */
     public function getAssetPath($append)
     {
         $end = 'asset' . DS . $append;
-        $path = SITE_PATH . $end;
-        if (file_exists($path)) {
-            return $path;
-        }
         $path = BASE_PATH . $end;
-        if (file_exists($path)) {
-            return $path;
-        }
-
-        // 404
         return $path;
     }
 

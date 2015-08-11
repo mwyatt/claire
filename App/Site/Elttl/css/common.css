@@ -15,7 +15,6 @@
 /* site-specific */
 @import "_elttl-table.css";
 @import "division/_overview.css";
-@import "fixture/_card.css";
 @import "year/_all.css";
 @import "home/_cover.css";
 @import "_header.css";
@@ -112,7 +111,6 @@ html.lt-ie9 {
 
 @mixin clearfix .page;
 
-.container-footer-inner,
 .page {
   max-width: 1024px;
   margin: 0 auto;
@@ -203,4 +201,15 @@ html.lt-ie9 {
 .page-secondary-title {
   font-size: 18px;
   margin: 1em 0 0.5em;
+}
+
+.header-is-archive-container {
+  position: absolute;
+  top: 44px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  padding: 5px;
+  background-color: #eee;
+  font-size: 14px;
 }

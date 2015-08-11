@@ -78,6 +78,7 @@ class Team extends \OriginalAppName\Site\Elttl\Controller\Front
             ->setMeta(array(
                 'title' => $team->name
             ))
+            ->appendAsset('css', 'fixture-card')
             ->setDataKey('yearSingle', $entityYear)
             ->setDataKey('team', $team)
             ->setDataKey('teams', $teams)

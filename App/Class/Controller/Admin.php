@@ -38,6 +38,7 @@ class Admin extends \OriginalAppName\Admin\Controller\Feedback
             ->view
             ->appendAsset('mustache', 'admin/feedback')
             ->appendAsset('js', 'vendor/jquery.min')
+            ->appendAsset('js', 'vendor/jquery.magnific-popup.min.js')
             ->appendAsset('js', 'vendor/tinymce/tinymce')
             ->appendAsset('js', 'admin/common')
             ->appendAsset('css', 'admin/common');
