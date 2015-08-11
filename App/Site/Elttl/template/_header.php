@@ -42,7 +42,7 @@
 
             </div>
 
-<?php if (!empty($isArchive)): ?>
+<?php if (!empty($isArchive)) : ?>
     
             <div class="header-is-archive-container">You are inside an archive.</div>
 

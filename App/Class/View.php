@@ -89,7 +89,7 @@ class View extends \OriginalAppName\Data
     /**
      * use a mustache template within php
      * will this get used?
-     * @param  string $templatePath 
+     * @param  string $templatePath
      * @return ?
      */
     public function getTemplateMustache($templatePath)
