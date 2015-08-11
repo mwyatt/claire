@@ -1,11 +1,5 @@
 
 
-/**
- * dependencies
- */
-var $ = require('jquery');
-
-
 /** 
  * scrolls the page smoothly when a target is clicked
  * @param {object} options 

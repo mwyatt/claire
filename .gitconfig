@@ -1,0 +1,7 @@
+[color "status"]
+  added = green
+  changed = red bold
+  untracked = pink
+
+[color "branch"]
+  remote = yellow
