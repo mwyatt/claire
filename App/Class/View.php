@@ -131,8 +131,8 @@ class View extends \OriginalAppName\Data
             return $path;
         }
 
-        // problem
-        exit('view::getTemplatePath - ' . $path);
+        // 404
+        return $path
     }
 
 
@@ -153,7 +153,9 @@ class View extends \OriginalAppName\Data
         if (file_exists($path)) {
             return $path;
         }
-        exit('view::getAssetPath - ' . $path);
+
+        // 404
+        return $path;
     }
 
 

@@ -1,5 +1,5 @@
 {
-  "site": "elttl",
+  "site": "codex",
   "description": "multisite implementation of many sites",
   "license": "PHP License 3.01",
   "repository": {
@@ -16,6 +16,7 @@
     "glob": "^5.0.14",
     "gulp": "^3.8.11",
     "gulp-clean": "^0.3.1",
+    "gulp-imagemin": "^2.3.0",
     "gulp-postcss": "^5.1.8",
     "gulp-sass": "^2.0.4",
     "gulp-uglify": "^1.2.0",
