@@ -7,6 +7,20 @@ var source = require('vinyl-source-stream');
 var eventStream = require('event-stream');
 var glob = require('glob');
 var runSequence = require('run-sequence');
+ 
+gulp.task('jscs-check', function () {
+  return gulp.src('js/common.bundle.js')
+    .pipe(gulpPlugin.jscs({
+      "preset": "google"
+    }));
+});
+
+gulp.task('csscomb', function() {
+  return gulp.src('app/site/codex/css/_alert.css')
+    .pipe(gulpPlugin.csscomb())
+    .pipe(gulp.dest('done-it/'));
+});
+
 
 // js
 var actionJs = {
