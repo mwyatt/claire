@@ -169,6 +169,45 @@ $routes[] = [
     'mux/options' => []
 ];
 
+// content/post
+$class = 'OriginalAppName\\Admin\\Controller\\Content';
+$routes['admin/post/create'] = [
+    'mux/type' => 'get',
+    'mux/path' => '/admin/post/create/',
+    'mux/controller/method' => [$class, 'single'],
+    'mux/options' => []
+];
+$routes[] = [
+    'mux/type' => 'post',
+    'mux/path' => '/admin/post/create/',
+    'mux/controller/method' => [$class, 'create'],
+    'mux/options' => []
+];
+$routes['admin/post/all'] = [
+    'mux/type' => 'get',
+    'mux/path' => '/admin/post/',
+    'mux/controller/method' => [$class, 'all'],
+    'mux/options' => []
+];
+$routes['admin/post/single'] = [
+    'mux/type' => 'get',
+    'mux/path' => '/admin/post/:id/',
+    'mux/controller/method' => [$class, 'single'],
+    'mux/options' => []
+];
+$routes[] = [
+    'mux/type' => 'post',
+    'mux/path' => '/admin/post/:id/',
+    'mux/controller/method' => [$class, 'update'],
+    'mux/options' => []
+];
+$routes['admin/post/delete'] = [
+    'mux/type' => 'get',
+    'mux/path' => '/admin/content/delete/:id/',
+    'mux/controller/method' => [$class, 'delete'],
+    'mux/options' => []
+];
+
 // crud content
 // must be lower down because it will match things it shouldnt
 $class = 'OriginalAppName\\Admin\\Controller\\Content';
