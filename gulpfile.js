@@ -91,7 +91,7 @@ gulp.task('css/copy/site', function() {
 
 gulp.task('css/copy/site/admin', function() {
   return gulp.src('app/site/' + pkg.site + '/admin/css/**/**.css')
-    .pipe(gulp.dest('temporary'));
+    .pipe(gulp.dest('temporary/admin'));
 });
 
 gulp.task('css/copy/codex', function() {
@@ -144,6 +144,7 @@ gulp.task('css', function() {
     'css/copy/codex',
     'css/copy/admin',
     'css/copy/site',
+    'css/copy/site/admin',
     'css/global'
   );
 });

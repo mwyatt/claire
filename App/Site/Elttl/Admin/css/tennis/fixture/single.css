@@ -1,5 +1,5 @@
-@import "../../../../../../admin/css/_settings.css";
-@import "../../../../../codex/css/_dependencies.css";
+@import "../../_settings.css";
+@import "../../../_dependencies.css";
 
 @mixin clearfix .fixture-single-section;
 

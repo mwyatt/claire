@@ -1,12 +1,4 @@
-
-
-/**
- * @param   string
- * @return {string}        
- */
-function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-}
+var underscore = require('underscore');
 
 
 /**
@@ -77,7 +69,7 @@ AdminTennisFixtureSingle.prototype.formFill = function(data) {
 		side = sides[a];
 		for (var b = teams.length - 1; b >= 0; b--) {
 			team = teams[b];
-			if (fixture['team_id_' + side] == team.id) {
+			if (fixture['teamId' + side.ucfirst()] == team.id) {
 				$('.js-fixture-single-team[data-side="' + side + '"]').html(data.getOption(team.name, team.id));
 			};
 		};
@@ -108,7 +100,7 @@ AdminTennisFixtureSingle.prototype.formFill = function(data) {
 			encounterStructureRow = encounterStructure[position - 1];
 			encounterStructurePart = encounterStructureRow[side == 'left' ? 0 : 1];
 			encounter = encounters[position - 1];
-			playerId = encounter['playerId' + capitalizeFirstLetter(side)];
+			playerId = encounter['playerId' + side.ucfirst()];
 			options = $('.js-fixture-single-player[data-side="' + side + '"][data-position="' + encounterStructurePart + '"]').find('option');
 			for (var o = options.length - 1; o >= 0; o--) {
 				joption = $(options[o]);
@@ -120,10 +112,29 @@ AdminTennisFixtureSingle.prototype.formFill = function(data) {
 		};
 	};
 
+
+	// do it like this
+
+	underscore.each(encounter, function(encounter) {
+		mailQId = $(mail).data('mail-queue-id');
+		if (mailQId) {
+			mailQIds.push(mailQId);
+		};
+	});
+
+
+
+	for (var e = encounters.length - 1; e >= 0; e--) {
+		console.log(e, encounters[e]);
+	};
+	for (var e = players.length - 1; e >= 0; e--) {
+		console.log(e, players[e]);
+	};
+
 	// fill encounters
 	for (var e = encounters.length - 1; e >= 0; e--) {
 		encounter = encounters[e];
-
+		console.log(encounter);
 		// excludes
 		if (encounter.status == 'exclude') {
 			data.encounterExclude(data, $('.js-fixture-single-score-row-exclude-checkbox[data-row="' + e + '"]'));
@@ -132,7 +143,8 @@ AdminTennisFixtureSingle.prototype.formFill = function(data) {
 		// scores
 		for (var s = sides.length - 1; s >= 0; s--) {
 			side = sides[s];
-			$('.js-fixture-single-encounter-input[data-side="' + side + '"][data-row="' + e + '"]').val(encounter['score' + capitalizeFirstLetter(side)]);
+			$('.js-fixture-single-encounter-input[data-side="' + side + '"][data-row="' + e + '"]').val(encounter['score' + side.ucfirst()]);
+			console.log(encounter, encounter['score' + side.ucfirst()]);
 		};
 	};
 };
@@ -457,6 +469,11 @@ AdminTennisFixtureSingle.prototype.setIsFilled = function(isFilled) {
 	this.isFilled = isFilled;
 	return this;
 };
+
+
+String.prototype.ucfirst = function() {
+  return this.charAt(0).toUpperCase() + this.slice(1);
+}
 
 
 var makeItSo = new AdminTennisFixtureSingle;
