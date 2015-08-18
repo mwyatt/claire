@@ -113,17 +113,17 @@ AdminTennisFixtureSingle.prototype.formFill = function(data) {
 	};
 
 	// assign encounter scores to rows
-	underscore.each(encounters, function(encounter) {
+	underscore.each(encounters, function(encounter, key) {
 
 		// excludes
 		if (encounter.status == 'exclude') {
-			data.encounterExclude(data, $('.js-fixture-single-score-row-exclude-checkbox[data-row="' + encounter.id + '"]'));
+			data.encounterExclude(data, $('.js-fixture-single-score-row-exclude-checkbox[data-row="' + key + '"]'));
 		};
 
 		// scores
 		for (var s = sides.length - 1; s >= 0; s--) {
 			side = sides[s];
-			$('.js-fixture-single-encounter-input[data-side="' + side + '"][data-row="' + encounter.id + '"]').val(encounter['score' + side.ucfirst()]);
+			$('.js-fixture-single-encounter-input[data-side="' + side + '"][data-row="' + key + '"]').val(encounter['score' + side.ucfirst()]);
 			console.log(encounter, encounter['score' + side.ucfirst()]);
 		};
 	});
