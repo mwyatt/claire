@@ -60,6 +60,7 @@ class Controller
     /**
      * redirects the user to another url and terminates
      * utilising the generator from symfony
+     * could this be a static function?
      * @param  string $key      routeKey
      * @param  array $config if required
      * @return null

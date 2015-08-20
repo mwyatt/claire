@@ -95,6 +95,9 @@ class Fulfill extends \OriginalAppName\Site\Elttl\Model\Tennis
 
         // debug
         $this->outputDebugBlock('finished fixture fulfillment procedure');
+        if ($this->isDebug()) {
+            exit;
+        }
     }
 
 
@@ -224,7 +227,9 @@ class Fulfill extends \OriginalAppName\Site\Elttl\Model\Tennis
             $modelFixture->updateYear(null, [$fixture]);
         }
         $sessionFeedback->setMessage('fixture fulfilled sucessfully', 'positive');
-        $this->controller->redirect('admin/tennis/fixture/single', ['id' => $fixture->id]);
+        if (!$this->isDebug()) {
+            $this->controller->redirect('admin/tennis/fixture/single', ['id' => $fixture->id]);
+        }
     }
 
 
@@ -319,11 +324,6 @@ class Fulfill extends \OriginalAppName\Site\Elttl\Model\Tennis
         // teams
         $modelTeam = new \OriginalAppName\Site\Elttl\Model\Tennis\Team;
         $modelTeam->readYearId(null, [$_REQUEST['team']['left'], $_REQUEST['team']['right']]);
-        echo '<pre>';
-        print_r($modelTeam);
-        echo '</pre>';
-        exit;
-        
         if (count($modelTeam->getData()) != 2) {
             return;
         }
@@ -380,7 +380,6 @@ class Fulfill extends \OriginalAppName\Site\Elttl\Model\Tennis
             'encounter'
         );
         if (!\OriginalAppName\Helper::arrayKeyExists($required, $_REQUEST)) {
-            $this->session->set('feedback', 'Please fill all required fields');
             return false;
         }
         return true;

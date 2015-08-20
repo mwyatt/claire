@@ -19,7 +19,7 @@ class Fixture extends \OriginalAppName\Service
     {
         $registry = \OriginalAppName\Registry::getInstance();
         $yearId = $registry->get('database/options/yearId');
-        $divisions = [];
+        $modelFixture = new \OriginalAppName\Site\Elttl\Model\Tennis\Fixture;
 
         // delete all fixtures, encounters from year
         foreach (['fixture', 'encounter'] as $thing) {
@@ -37,6 +37,7 @@ class Fixture extends \OriginalAppName\Service
             ->keyDataByProperty('id');
 
         // bind teams with divisions
+        $divisions = [];
         foreach ($modelTeam->getData() as $team) {
             if (empty($divisions[$team->divisionId])) {
                 $divisions[$team->divisionId] = [];
@@ -44,44 +45,22 @@ class Fixture extends \OriginalAppName\Service
             $divisions[$team->divisionId][$team->id] = $team;
         }
 
-
-// here
-// here
-// here
-// here
-// here
-
-
-        // prepare insert
-        $sth = $this->database->dbh->prepare("
-			insert into
-				tennisFixture
-				(
-					yearId,
-					teamIdLeft,
-					teamIdRight
-				)
-			values
-				(
-					$yearId,
-					:teamIdLeft,
-					:teamIdRight
-				)
-		");
-                
         // loop to set team vs team fixtures
+        $entities = [];
         foreach ($divisions as $teams) {
             foreach ($teams as $homeTeam) {
                 foreach ($teams as $awayTeam) {
                     if ($homeTeam->id !== $awayTeam->id) {
-                        $sth->execute(array(
-                            ':teamIdLeft' => $homeTeam->id,
-                            ':teamIdRight' => $awayTeam->id
-                        ));
+                        $entity = new \OriginalAppName\Site\Elttl\Entity\Tennis\Fixture;
+                        $entity->yearId = $yearId;
+                        $entity->teamIdLeft = $homeTeam->id;
+                        $entity->teamIdRight = $awayTeam->id;
+                        $entities[] = $entity;
                     }
                 }
             }
         }
-        return true;
+        $modelFixture->create($entities);
+        return $modelFixture->getLastInsertIds();
     }
 }
