@@ -23,11 +23,11 @@ class Fixture extends \OriginalAppName\Service
 
         // delete all fixtures, encounters from year
         foreach (['fixture', 'encounter'] as $thing) {
-        	$class = "\\OriginalAppName\\Site\\Elttl\\Model\\Tennis\\" . ucfirst($thing);
-        	$model = new $class;
-	        $model->readColumn('yearId', $yearId);
-	        $ids = $model->getDataProperty('id');
-	        $model->delete($ids);
+            $class = "\\OriginalAppName\\Site\\Elttl\\Model\\Tennis\\" . ucfirst($thing);
+            $model = new $class;
+            $model->readColumn('yearId', $yearId);
+            $ids = $model->getDataProperty('id');
+            $model->delete($ids);
         }
 
         // select all teams

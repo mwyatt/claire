@@ -2,7 +2,6 @@
 
 namespace OriginalAppName\Site\Elttl\Model\Tennis;
 
-
 /**
  * @author Martin Wyatt <martin.wyatt@gmail.com>
  * @version     0.1
