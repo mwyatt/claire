@@ -2,9 +2,6 @@
 
 namespace OriginalAppName\Site\Elttl\Model\Tennis;
 
-use \PDO;
-use OriginalAppName\Registry;
-use OriginalAppName\Site\Elttl\Model\Tennis as ModelTennis;
 
 /**
  * @author Martin Wyatt <martin.wyatt@gmail.com>
@@ -80,88 +77,5 @@ class Fixture extends \OriginalAppName\Site\Elttl\Model\Tennis
         });
         $this->setData($data);
         return $this;
-    }
-
-
-    /**
-     * generates each fixture seperated by division
-     * teams must not change division beyond this point
-     * @return null
-     */
-    public function generate()
-    {
-        $registry = Registry::getInstance();
-        $yearId = $registry->get('database/options/yearId');
-        $divisions = [];
-
-        // delete all fixtures
-        $sth = $this->database->dbh->query("	
-			delete from
-				tennisFixture
-			where id != 0 and yearId = $yearId
-		");
-
-        // delete all encounters
-        $sth = $this->database->dbh->query("	
-			delete from
-				tennisEncounter
-			where id != 0 and yearId = $yearId
-		");
-
-        // select all divisions
-        $modelDivision = new ModelTennis\Division;
-        $modelDivision
-            ->readColumn('yearId', $yearId)
-            ->keyDataByProperty('id');
-
-        // select all teams
-        $modelTeam = new ModelTennis\Team;
-        $modelTeam
-            ->readColumn('yearId', $yearId)
-            ->keyDataByProperty('id');
-
-        // bind teams with divisions
-        foreach ($modelDivision->getData() as $division) {
-            if (empty($divisions[$division->id])) {
-                $divisions[$division->id] = [];
-            }
-            foreach ($modelTeam->getData() as $team) {
-                if ($team->divisionId == $division->id) {
-                    $divisions[$division->id][$team->id] = $team;
-                }
-            }
-        }
-
-        // prepare insert
-        $sth = $this->database->dbh->prepare("
-			insert into
-				tennisFixture
-				(
-					yearId,
-					teamIdLeft,
-					teamIdRight
-				)
-			values
-				(
-					$yearId,
-					:teamIdLeft,
-					:teamIdRight
-				)
-		");
-                
-        // loop to set team vs team fixtures
-        foreach ($divisions as $teams) {
-            foreach ($teams as $homeTeam) {
-                foreach ($teams as $awayTeam) {
-                    if ($homeTeam->id !== $awayTeam->id) {
-                        $sth->execute(array(
-                            ':teamIdLeft' => $homeTeam->id,
-                            ':teamIdRight' => $awayTeam->id
-                        ));
-                    }
-                }
-            }
-        }
-        return true;
     }
 }
