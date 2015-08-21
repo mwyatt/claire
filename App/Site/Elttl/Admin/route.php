@@ -54,3 +54,47 @@ $routes['admin/system/tennis'] = [
     'mux/controller/method' => ['OriginalAppName\\Site\\Elttl\\Admin\\Controller\\System\\Tennis', 'all'],
     'mux/options' => []
 ];
+
+// content/types
+$pairs = [
+    'page' => 'OriginalAppName\\Admin\\Controller\\Content\\Page',
+    'press' => 'OriginalAppName\\Admin\\Controller\\Content\\Press'
+];
+foreach ($pairs as $slug => $class) {
+    $routes["admin/$slug/create"] = [
+        'mux/type' => 'get',
+        'mux/path' => "/admin/$slug/create/",
+        'mux/controller/method' => [$class, 'single'],
+        'mux/options' => []
+    ];
+    $routes[] = [
+        'mux/type' => 'post',
+        'mux/path' => "/admin/$slug/create/",
+        'mux/controller/method' => [$class, 'create'],
+        'mux/options' => []
+    ];
+    $routes["admin/$slug/all"] = [
+        'mux/type' => 'get',
+        'mux/path' => "/admin/$slug/",
+        'mux/controller/method' => [$class, 'all'],
+        'mux/options' => []
+    ];
+    $routes["admin/$slug/single"] = [
+        'mux/type' => 'get',
+        'mux/path' => "/admin/$slug/:id/",
+        'mux/controller/method' => [$class, 'single'],
+        'mux/options' => []
+    ];
+    $routes[] = [
+        'mux/type' => 'post',
+        'mux/path' => "/admin/$slug/:id/",
+        'mux/controller/method' => [$class, 'update'],
+        'mux/options' => []
+    ];
+    $routes["admin/$slug/delete"] = [
+        'mux/type' => 'get',
+        'mux/path' => '/admin/content/delete/:id/',
+        'mux/controller/method' => [$class, 'delete'],
+        'mux/options' => []
+    ];
+}

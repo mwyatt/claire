@@ -21,7 +21,10 @@ class Content extends \OriginalAppName\Controller\Admin
 {
 
 
-	public function create($type)
+	public $type;
+
+
+	public function create()
 	{
 		
 		// resource
@@ -31,7 +34,7 @@ class Content extends \OriginalAppName\Controller\Admin
 
 		// create new content
 		$entityContent
-			->setType($type)
+			->setType($this->type)
 			->setTimePublished(time())
 			->setUserId($sessionUser->get('id'));
 		$modelContent->create([$entityContent]);
@@ -45,24 +48,24 @@ class Content extends \OriginalAppName\Controller\Admin
 	 * content list
 	 * @return object Response
 	 */
-	public function all($type) {
+	public function all() {
 		
 		// resource
 		$modelContent = new Model\Content;
 		$modelContent
-			->readColumn('type', $type)
+			->readColumn('type', $this->type)
 			->orderByProperty('timePublished', 'desc');
 
 		// render
 		$this
 			->view
 			->setDataKey('contents', $modelContent->getData())
-			->setDataKey('contentType', $type);
+			->setDataKey('contentType', $this->type);
 		return new Response($this->view->getTemplate('admin/content/all'));
 	}
 
 
-	public function single($type, $id = 0)
+	public function single($id = 0)
 	{
 
 		// resource
@@ -76,7 +79,7 @@ class Content extends \OriginalAppName\Controller\Admin
 		// render
 		$this
 			->view
-			->setDataKey('contentType', $type)
+			->setDataKey('contentType', $this->type)
 			->appendAsset('mustache', 'admin/content/meta/all')
 			->setDataKey('content', $entityContent ? $entityContent : new Entity\Content);
 		return new Response($this->view->getTemplate('admin/content/single'));

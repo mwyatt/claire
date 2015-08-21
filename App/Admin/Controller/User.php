@@ -55,6 +55,9 @@ class User extends \OriginalAppName\Controller\Admin
 
         // resource
         $modelUser = new \OriginalAppName\Model\User;
+        $adminUser = $this->getUser();
+        $adminRoutes = [];
+        $modelPermission = new \OriginalAppName\Model\User\Permission;
 
         // read single
         $entityUser = $modelUser
@@ -62,12 +65,13 @@ class User extends \OriginalAppName\Controller\Admin
             ->getDataFirst();
 
         // permissions
-        $modelPermission = new \OriginalAppName\Model\User\Permission;
-        $servicePermission = new \OriginalAppName\Admin\Service\User\Permission;
-        $modelPermission
-            ->readColumn('userId', $id)
-            ->keyDataByProperty('name');
-        $adminRoutes = $servicePermission->getAdminRoutes();
+        if ($adminUser->email == 'martin.wyatt@gmail.com') {
+            $servicePermission = new \OriginalAppName\Admin\Service\User\Permission;
+            $modelPermission
+                ->readColumn('userId', $id)
+                ->keyDataByProperty('name');
+            $adminRoutes = $servicePermission->getAdminRoutes();
+        }
 
         // render
         $this

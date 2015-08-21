@@ -281,7 +281,7 @@ class Fulfill extends \OriginalAppName\Site\Elttl\Model\Tennis
         
         // encounter
         $modelEncounter = new \OriginalAppName\Site\Elttl\Model\Tennis\Encounter;
-        $modelEncounter->readYearId(null, [$fixture->id]);
+        $modelEncounter->readYearColumn(null, 'fixtureId', $fixture->id);
         
         // no encounters means fixture with date fulfilled only
         if (!$modelEncounter->getData()) {
@@ -308,6 +308,7 @@ class Fulfill extends \OriginalAppName\Site\Elttl\Model\Tennis
 
         // delete encounters
         $modelEncounter->deleteYear(null, $modelEncounter->getDataProperty('id'));
+        $modelEncounter->readYearColumn(null, 'fixtureId', $fixture->id);
 
         // clear fixture date
         $this->outputDebugBlock('existing fixture cleared');

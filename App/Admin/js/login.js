@@ -1,4 +1,3 @@
-var serializeObject = require('jquery-serialize-object/jquery.serialize-object');
 var magnificPopup = require('magnific-popup/dist/jquery.magnific-popup');
 var feedbackStream = require('admin/feedbackStream');
 var url = require('utility/url');
@@ -22,7 +21,7 @@ $('.js-magnific-inline').magnificPopup({
 						url: url.getUrlBase('admin/ajax/user/forgot-password/'),
 						type: 'get',
 						dataType: 'json',
-						data: $(this).closest('form').serializeObject(),
+						data: {email: $('#login-email').val()},
 						success: function(result) {
 							feedbackStream.createMessage(result);
 							if (result.type == 'positive') {

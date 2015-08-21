@@ -23,8 +23,12 @@
     },
     "autoload": {
         "psr-4": {
-            "OriginalAppName\\": ["App/Class/", "App/Site/Todone/"],
-            "OriginalAppName\\Admin\\": "App/Admin/"
+            "OriginalAppName\\": [
+                "App/Class/",
+                "App/Site/Elttl/"
+            ],
+            "OriginalAppName\\Admin\\": "App/Admin/",
+            "OriginalAppName\\Site\\": "App/Site/"
         }
     }
 }

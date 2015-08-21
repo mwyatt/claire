@@ -38,7 +38,7 @@ class Admin extends \OriginalAppName\Admin\Controller\Feedback
             ->view
             ->appendAsset('mustache', 'admin/feedback')
             ->appendAsset('js', 'vendor/jquery.min')
-            ->appendAsset('js', 'vendor/jquery.magnific-popup.min.js')
+            ->appendAsset('js', 'vendor/jquery.magnific-popup.min')
             ->appendAsset('js', 'vendor/tinymce/tinymce')
             ->appendAsset('js', 'admin/common')
             ->appendAsset('css', 'admin/common');
@@ -64,7 +64,7 @@ class Admin extends \OriginalAppName\Admin\Controller\Feedback
         $entityUser = $this->getUser();
 
         // always allow /admin/ and unkeyed
-        if ($currentRoute == 'admin' || ($currentRoute + 0) > 0 || $entityUser->email == 'martin.wyatt@gmail.com') {
+        if ($currentRoute == 'admin' || ($currentRoute + 0) > 0 /*|| $entityUser->email == 'martin.wyatt@gmail.com'*/) {
             return;
         }
 

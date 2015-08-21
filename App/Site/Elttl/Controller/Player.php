@@ -49,7 +49,8 @@ class Player extends \OriginalAppName\Site\Elttl\Controller\Front
         $modEncounter->readYearId($entityYear->id, [$player->id], 'playerIdRight');
         $modEncounter->setData(array_merge($encounters, $modEncounter->getData()));
         $modEncounter->filterStatus(['doubles', 'exclude']);
-        $modPersonalEncounters = $modEncounter->orderByProperty('id');
+        $modPersonalEncounters = clone $modEncounter;
+        $modPersonalEncounters->orderByProperty('id');
 
         // merit
         $meritRows = $serviceResult->getMerit($modEncounter->getData());
