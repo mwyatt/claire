@@ -11,138 +11,138 @@ use OriginalAppName\View;
 use OriginalAppName\Service;
 use OriginalAppName\Response;
 
-
 /**
- * @author Martin Wyatt <martin.wyatt@gmail.com> 
- * @version	0.1
+ * @author Martin Wyatt <martin.wyatt@gmail.com>
+ * @version     0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
 class Content extends \OriginalAppName\Controller\Admin
 {
 
 
-	public $type;
+    public $type;
 
 
-	public function create()
-	{
-		
-		// resource
-		$entityContent = new Entity\Content;
-		$modelContent = new Model\Content;
-		$sessionUser = new AdminSession\User;
+    public function create()
+    {
+        
+        // resource
+        $entityContent = new Entity\Content;
+        $modelContent = new Model\Content;
+        $sessionUser = new AdminSession\User;
 
-		// create new content
-		$entityContent
-			->setType($this->type)
-			->setTimePublished(time())
-			->setUserId($sessionUser->get('id'));
-		$modelContent->create([$entityContent]);
+        // create new content
+        $entityContent
+            ->setType($this->type)
+            ->setTimePublished(time())
+            ->setUserId($sessionUser->get('id'));
+        $modelContent->create([$entityContent]);
 
-		// update
-		$this->update(current($modelContent->getLastInsertIds()));
-	}
-
-
-	/**
-	 * content list
-	 * @return object Response
-	 */
-	public function all() {
-		
-		// resource
-		$modelContent = new Model\Content;
-		$modelContent
-			->readColumn('type', $this->type)
-			->orderByProperty('timePublished', 'desc');
-
-		// render
-		$this
-			->view
-			->setDataKey('contents', $modelContent->getData())
-			->setDataKey('contentType', $this->type);
-		return new Response($this->view->getTemplate('admin/content/all'));
-	}
+        // update
+        $this->update(current($modelContent->getLastInsertIds()));
+    }
 
 
-	public function single($id = 0)
-	{
+    /**
+     * content list
+     * @return object Response
+     */
+    public function all()
+    {
+        
+        // resource
+        $modelContent = new Model\Content;
+        $modelContent
+            ->readColumn('type', $this->type)
+            ->orderByProperty('timePublished', 'desc');
 
-		// resource
-		$modelContent = new Model\Content;
-
-		// read single
-		$entityContent = $modelContent
-			->readId([$id])
-			->getDataFirst();
-
-		// render
-		$this
-			->view
-			->setDataKey('contentType', $this->type)
-			->appendAsset('mustache', 'admin/content/meta/all')
-			->setDataKey('content', $entityContent ? $entityContent : new Entity\Content);
-		return new Response($this->view->getTemplate('admin/content/single'));
-	}
-
-
-	public function update($id)
-	{
-
-		// resources
-		$sessionFeedback = new Session\Feedback;
-		$modelContent = new Model\Content;
-
-		// load 1
-		$entityContent = $modelContent
-			->readId([$id])
-			->getDataFirst();
-
-		// does not exist
-		if (! $entityContent) {
-			$this->redirect('admin/content/all');
-		}
-
-		// merge
-		$entityContent->consumeArray($_POST['content']);
-
-		// update
-		$modelContent->update($entityContent, ['id' => $id]);
-
-		// feedback
-		$sessionFeedback->setMessage(implode(' ', [$entityContent->getType(), $entityContent->getTitle(), 'saved']), 'positive');
-
-		// redirect
-		$this->redirect('admin/content/single', ['type' => $entityContent->getType(), 'id' => $id]);
-	}
+        // render
+        $this
+            ->view
+            ->setDataKey('contents', $modelContent->getData())
+            ->setDataKey('contentType', $this->type);
+        return new Response($this->view->getTemplate('admin/content/all'));
+    }
 
 
-	public function delete($id)
-	{
+    public function single($id = 0)
+    {
 
-		// resources
-		$modelContent = new Model\Content;
-		$sessionFeedback = new Session\Feedback;
+        // resource
+        $modelContent = new Model\Content;
 
-		// load 1
-		$entityContent = $modelContent
-			->readId([$id])
-			->getDataFirst();
+        // read single
+        $entityContent = $modelContent
+            ->readId([$id])
+            ->getDataFirst();
 
-		// does not exist
-		if (! $entityContent) {
-			$this->redirect('admin/content/all');
-		}
+        // render
+        $this
+            ->view
+            ->setDataKey('contentType', $this->type)
+            ->appendAsset('mustache', 'admin/content/meta/all')
+            ->setDataKey('content', $entityContent ? $entityContent : new Entity\Content);
+        return new Response($this->view->getTemplate('admin/content/single'));
+    }
 
-		// delete it
-		$modelContent->delete([$id]);
 
-		// prove it
-		if ($modelContent->getRowCount()) {
-			$sessionFeedback->setMessage($entityContent->getType() . " $id deleted");
-			$this->redirect('admin/content/all', ['type' => $entityContent->getType()]);
-		} else {
-			$sessionFeedback->setMessage("unable to delete $id");
-		}
-	}
+    public function update($id)
+    {
+
+        // resources
+        $sessionFeedback = new Session\Feedback;
+        $modelContent = new Model\Content;
+
+        // load 1
+        $entityContent = $modelContent
+            ->readId([$id])
+            ->getDataFirst();
+
+        // does not exist
+        if (! $entityContent) {
+            $this->redirect('admin/content/all');
+        }
+
+        // merge
+        $entityContent->consumeArray($_POST['content']);
+
+        // update
+        $modelContent->update($entityContent, ['id' => $id]);
+
+        // feedback
+        $sessionFeedback->setMessage(implode(' ', [$entityContent->getType(), $entityContent->getTitle(), 'saved']), 'positive');
+
+        // redirect
+        $this->redirect('admin/content/single', ['type' => $entityContent->getType(), 'id' => $id]);
+    }
+
+
+    public function delete($id)
+    {
+
+        // resources
+        $modelContent = new Model\Content;
+        $sessionFeedback = new Session\Feedback;
+
+        // load 1
+        $entityContent = $modelContent
+            ->readId([$id])
+            ->getDataFirst();
+
+        // does not exist
+        if (! $entityContent) {
+            $this->redirect('admin/content/all');
+        }
+
+        // delete it
+        $modelContent->delete([$id]);
+
+        // prove it
+        if ($modelContent->getRowCount()) {
+            $sessionFeedback->setMessage($entityContent->getType() . " $id deleted");
+            $this->redirect('admin/content/all', ['type' => $entityContent->getType()]);
+        } else {
+            $sessionFeedback->setMessage("unable to delete $id");
+        }
+    }
 }
