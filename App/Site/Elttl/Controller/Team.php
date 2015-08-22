@@ -28,7 +28,9 @@ class Team extends \OriginalAppName\Site\Elttl\Controller\Front
 
         // players
         $modelTennisPlayer = new \OriginalAppName\Site\Elttl\Model\Tennis\Player;
-        $modelTennisPlayer->readYearId($entityYear->id, $modelTennisTeam->getDataProperty('id'), 'teamId');
+        $modelTennisPlayer
+            ->readYearId($entityYear->id, $modelTennisTeam->getDataProperty('id'), 'teamId')
+            ->keyDataByProperty('id');
         if (!$players = $modelTennisPlayer->getData()) {
             return new \OriginalAppName\Response('', 404);
         }
@@ -72,6 +74,10 @@ class Team extends \OriginalAppName\Site\Elttl\Controller\Front
 
         // team members merit
         $meritStats = $serviceResult->getMerit($modelTennisEncounter->getData());
+echo '<pre>';
+print_r($fixtures);
+echo '</pre>';
+exit;
 
         // template
         $this->view

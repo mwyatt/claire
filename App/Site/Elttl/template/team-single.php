@@ -57,6 +57,16 @@ endif ?>
 		<table class="elttl-table is-general">
 		
 	<?php if (!empty($meritStats)) : ?>
+	
+			<tr class="elttl-table-row">
+				<th class="elttl-table-cell elttl-table-heading is-name">Name</th>
+				<th class="elttl-table-cell elttl-table-heading is-rank">Rank</th>
+				<th class="elttl-table-cell elttl-table-heading is-won">Won</th>
+				<th class="elttl-table-cell elttl-table-heading is-played">Played</th>
+				<th class="elttl-table-cell elttl-table-heading is-average">Average</th>
+				<th class="elttl-table-cell elttl-table-heading is-encounter">Encounters</th>
+			</tr>
+
 		<?php foreach ($meritStats as $playerId => $meritStat) : ?>
 			<?php if (!empty($players[$playerId])) : ?>
 				<?php $player = $players[$playerId] ?>
