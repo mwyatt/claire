@@ -65,6 +65,7 @@ class Tennis extends \OriginalAppName\Model
      */
     public function readYearId($yearId, $ids, $column = 'id')
     {
+        $this->setData([]);
         if ($yearId) {
             $this->yearId = $yearId;
         }
@@ -107,6 +108,7 @@ class Tennis extends \OriginalAppName\Model
      */
     public function readYearColumn($yearId, $column, $value)
     {
+        $this->setData([]);
         if ($yearId) {
             $this->yearId = $yearId;
         }

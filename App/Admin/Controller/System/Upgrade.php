@@ -19,7 +19,7 @@ class Upgrade extends \OriginalAppName\Controller\Admin
         if (!empty($_GET['update'])) {
             $this->update();
         }
-        $serviceUpgrade = new \OriginalAppName\Service\System\Upgrade;
+        $serviceUpgrade = new \OriginalAppName\Admin\Service\System\Upgrade;
         $serviceUpgrade->getVersionsPossible();
         $this->view->setDataKey('versionsPossible', $serviceUpgrade->getData());
         $serviceUpgrade->getVersionsUnpatched($serviceUpgrade->getData());
@@ -32,7 +32,7 @@ class Upgrade extends \OriginalAppName\Controller\Admin
     {
         $feedback = new \OriginalAppName\Session\Feedback;
         $user = new \OriginalAppName\Admin\Session\User;
-        $serviceUpgrade = new \OriginalAppName\Service\System\Upgrade;
+        $serviceUpgrade = new \OriginalAppName\Admin\Service\System\Upgrade;
         $serviceUpgrade->getVersionsPossible();
         $serviceUpgrade->getVersionsUnpatched($serviceUpgrade->getData());
         foreach ($serviceUpgrade->getData() as $patch) {
