@@ -74,10 +74,10 @@ class Team extends \OriginalAppName\Site\Elttl\Controller\Front
 
         // team members merit
         $meritStats = $serviceResult->getMerit($modelTennisEncounter->getData());
-echo '<pre>';
-print_r($fixtures);
-echo '</pre>';
-exit;
+        echo '<pre>';
+        print_r($fixtures);
+        echo '</pre>';
+        exit;
 
         // template
         $this->view
