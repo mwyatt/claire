@@ -27,15 +27,17 @@ else : ?>
 			<?php
 endif ?>
 	
-		<?php if ($playerLeft->id): ?>
+		<?php if ($playerLeft->id) : ?>
 			
 		<a class="link-primary" href="<?php echo $this->url->generate('player/single', ['yearName' => $yearSingle->name, 'playerSlug' => $playerLeft->slug]) ?>"><?php echo $playerLeft->getNameFull() ?></a>
 
-		<?php else: ?>
+		<?php
+else : ?>
 	
 			Absent
 
-		<?php endif ?>
+		<?php
+endif ?>
 
 		<?php
 endif ?>
@@ -52,15 +54,17 @@ endif ?>
 		<?php
 endif ?>
 		
-		<?php if ($playerRight->id): ?>
+		<?php if ($playerRight->id) : ?>
 
 		<a class="link-primary" href="<?php echo $this->url->generate('player/single', ['yearName' => $yearSingle->name, 'playerSlug' => $playerRight->slug]) ?>"><?php echo $playerRight->getNameFull() ?></a>
 		
-		<?php else: ?>
+		<?php
+else : ?>
 
 			Absent
 
-		<?php endif ?>
+		<?php
+endif ?>
 
 	</td>
 </tr>
