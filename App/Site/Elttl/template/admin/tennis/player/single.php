@@ -32,19 +32,19 @@
 	    </div>
 	    <div class="block-margins">
         	<label class="form-label block" for="form-phoneLandline">Phone landline</label>
-        	<input id="form-phoneLandline" class="form-input w100" type="text" name="entity[phoneLandline]" value="<?php echo $$nameSingular->phoneLandline ?>" required>
+        	<input id="form-phoneLandline" class="form-input w100" type="text" name="entity[phoneLandline]" value="<?php echo $$nameSingular->phoneLandline ?>">
 	    </div>
 	    <div class="block-margins">
         	<label class="form-label block" for="form-phoneMobile">Phone mobile</label>
-        	<input id="form-phoneMobile" class="form-input w100" type="text" name="entity[phoneMobile]" value="<?php echo $$nameSingular->phoneMobile ?>" required>
+        	<input id="form-phoneMobile" class="form-input w100" type="text" name="entity[phoneMobile]" value="<?php echo $$nameSingular->phoneMobile ?>">
 	    </div>
 	    <div class="block-margins">
-        	<label class="form-label block" for="form-ettaLicenseNumber">Phone mobile</label>
-        	<input id="form-ettaLicenseNumber" class="form-input w100" type="text" name="entity[ettaLicenseNumber]" value="<?php echo $$nameSingular->ettaLicenseNumber ?>" required>
+        	<label class="form-label block" for="form-ettaLicenseNumber">ETTA License Number</label>
+        	<input id="form-ettaLicenseNumber" class="form-input w100" type="text" name="entity[ettaLicenseNumber]" value="<?php echo $$nameSingular->ettaLicenseNumber ?>">
 	    </div>
 	    <div class="block-margins">
-        	<label class="form-label block" for="form-team">team</label>
-			<select id="form-team" name="entity[teamId]">
+        	<label class="form-label block" for="form-team">Team</label>
+			<select id="form-team" name="entity[teamId]" required>
 
 <?php foreach ($teams as $team) : ?>
 		
