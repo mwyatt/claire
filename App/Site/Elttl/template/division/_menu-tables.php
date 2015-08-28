@@ -6,7 +6,8 @@
 	
 		<option value="<?php echo $yearUnique->name ?>" <?php echo empty($year) ? '' : ($year->id == $yearUnique->id ? 'selected' : '') ?>>Season <strong><?php echo $yearUnique->getNameFull() ?></strong></option>
 
-	<?php endforeach ?>
+	<?php
+endforeach ?>
 
 	</select>
 
