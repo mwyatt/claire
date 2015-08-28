@@ -1,17 +1,14 @@
 <?php if (!empty($years)) : ?>
 	
-	<form method="post">
-		<select name="year" class="js-select-year" class="select-years">
-		
+	<select name="year" class="js-select-year" class="select-years">
+	
 	<?php foreach ($years as $yearUnique) : ?>
-		
-			<option value="<?php echo $yearUnique->id ?>" <?php echo empty($year) ? '' : ($year->id == $yearUnique->id ? 'selected' : '') ?>>Season <strong><?php echo $yearUnique->getNameFull() ?></strong></option>
+	
+		<option value="<?php echo $yearUnique->name ?>" <?php echo empty($year) ? '' : ($year->id == $yearUnique->id ? 'selected' : '') ?>>Season <strong><?php echo $yearUnique->getNameFull() ?></strong></option>
 
-	<?php
-endforeach ?>
+	<?php endforeach ?>
 
-		</select>
-	</form>
+	</select>
 
 <?php endif ?>
 <?php if (isset($division)) : ?>

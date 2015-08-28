@@ -1,3 +1,4 @@
+var url = require('utility/url');
 var buttonToTop = require('buttonToTop');
 var smoothScroll = require('smoothScroll');
 var scrollDirection = require('scrollDirection');
@@ -9,8 +10,10 @@ require('owlcarousel/owl-carousel/owl.carousel.min');
 
 $(document).ready(function() {  
 
-	// tell me your there
-	console.log('main.js -> document ready'); 
+	// change year
+	$('html').on('change', '.js-select-year', function() {
+		url.redirect('result/' + $(this).val() + '/');
+	});
 
 	// scroll direction
 	scrollDirection.init({
