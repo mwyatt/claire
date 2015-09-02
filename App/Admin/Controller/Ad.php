@@ -95,7 +95,7 @@ class Ad extends \OriginalAppName\Controller\Admin
         $entityAd->status = $_POST['ad']['status'];
 
         // save
-        $modelAd->update($entityAd, ['id' => $entityAd->getId()]);
+        $modelAd->update([$entityAd]);
 
         // feedback / route
         $sessionFeedback->setMessage("ad $id saved", 'positive');
@@ -121,7 +121,7 @@ class Ad extends \OriginalAppName\Controller\Admin
         }
 
         // delete it
-        $modelAd->delete(['id' => $id]);
+        $modelAd->delete([$entityAd]);
 
         // prove it
         if ($modelAd->getRowCount()) {

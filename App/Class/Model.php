@@ -2,11 +2,6 @@
 
 namespace OriginalAppName;
 
-use \PDO;
-use OriginalAppName\Registry;
-use OriginalAppName\Database;
-use OriginalAppName\Entity;
-
 /**
  * @author Martin Wyatt <martin.wyatt@gmail.com>
  * @version     0.1
@@ -52,11 +47,11 @@ abstract class Model extends \OriginalAppName\Data
      */
     public function __construct()
     {
-        $registry = Registry::getInstance();
+        $registry = \OriginalAppName\Registry::getInstance();
 
         // if not in registry connect + create
         if (! $database = $registry->get('database')) {
-            $database = new Database(include SITE_PATH . 'credentials' . EXT);
+            $database = new \OriginalAppName\Database(include SITE_PATH . 'credentials' . EXT);
             $registry->set('database', $database);
         }
         $this->setDatabase($database);
@@ -119,11 +114,11 @@ abstract class Model extends \OriginalAppName\Data
         $entity = $this->getEntity();
 
         // mode
-        $sth->setFetchMode(PDO::FETCH_CLASS, $this->getEntity());
+        $sth->setFetchMode(\PDO::FETCH_CLASS, $this->getEntity());
 
         // loop prepared statement
         foreach ($ids as $id) {
-            $sth->bindValue(':id', $id, PDO::PARAM_INT);
+            $sth->bindValue(':id', $id, \PDO::PARAM_INT);
             $sth->execute();
             while ($result = $sth->fetch()) {
                 $this->appendData($result);
@@ -151,7 +146,7 @@ abstract class Model extends \OriginalAppName\Data
 		");
 
         // mode
-        $sth->setFetchMode(PDO::FETCH_CLASS, $this->getEntity());
+        $sth->setFetchMode(\PDO::FETCH_CLASS, $this->getEntity());
         $this->bindValue($sth, ':value', $value);
         $sth->execute();
         $this->setData($sth->fetchAll());
@@ -165,7 +160,7 @@ abstract class Model extends \OriginalAppName\Data
      * @param  array $entities
      * @return array    of insert ids
      */
-    public function create($entities)
+    public function create(Array $entities)
     {
 
         // statement
@@ -208,7 +203,7 @@ abstract class Model extends \OriginalAppName\Data
 		");
 
         // mode
-        $sth->setFetchMode(PDO::FETCH_CLASS, $this->getEntity());
+        $sth->setFetchMode(\PDO::FETCH_CLASS, $this->getEntity());
 
         // execute
         $sth->execute();
@@ -222,13 +217,28 @@ abstract class Model extends \OriginalAppName\Data
 
 
     /**
+     * polyfill for bad update requests
+     * @param  array|object $entities
+     * @return array
+     */
+    public function updateTranslate($entities)
+    {
+        if (is_array($entities)) {
+            return $entities;
+        }
+        return [$entities];
+    }
+
+
+    /**
      * uses the passed properties to build named prepared statement
+     * maintiaining this: public function update($mold, $where = [])
      * @todo how to return a value which can mark success?
      * @param  array  $molds
      * @param  string $by    defines the column to update by
      * @return int
      */
-    public function update($mold, $where = [])
+    public function update(Array $entities, $column = 'id')
     {
 
         // statement
@@ -264,7 +274,7 @@ abstract class Model extends \OriginalAppName\Data
         }
 
         // mode
-        $sth->setFetchMode(PDO::FETCH_CLASS, $this->getEntity());
+        $sth->setFetchMode(\PDO::FETCH_CLASS, $this->getEntity());
 
         // execute
         $sth->execute();
@@ -276,26 +286,54 @@ abstract class Model extends \OriginalAppName\Data
 
 
     /**
+     * polyfill
+     * either finds out that they are ids and converts them to
+     * basic objects with property of id
+     * or just passes back the entities
+     * @param  array $entities
+     * @return array
+     */
+    public function deleteTranslate(Array $entities)
+    {
+        $entity = current($entities);
+        if (is_object($entity)) {
+            return $entities;
+        }
+        $ids = $entities;
+        $entities = [];
+        foreach ($ids as $id) {
+            $entities[] = (object) ['id' => $id];
+        }
+        return $entities;
+    }
+
+
+    /**
      * uses where property to build delete statement
+     * improved to allow entities to be passed
      * @param  array  $properties
      * @return int
      */
-    public function delete($ids)
+    public function delete(Array $entities, $column = 'id')
     {
+
+        // handle depreciated [ids]
+        // remove asap
+        $entities = $this->deleteTranslate($entities);
 
         // build
         $rowCount = 0;
         $statement = [];
         $statement[] = 'delete from';
         $statement[] = $this->getTableName();
-        $statement[] = 'where id = ?';
+        $statement[] = "where $column = ?";
 
         // prepare
         $sth = $this->database->dbh->prepare(implode(' ', $statement));
 
         // bind
-        foreach ($ids as $id) {
-            $sth->bindValue(1, $id, PDO::PARAM_INT);
+        foreach ($entities as $entity) {
+            $this->bindValue($sth, 1, $entity->$column);
             $sth->execute();
             $rowCount += $sth->rowCount();
         }
@@ -630,13 +668,13 @@ abstract class Model extends \OriginalAppName\Data
     public function bindValue($sth, $key, $value)
     {
         if (is_int($value)) {
-            $sth->bindValue($key, $value, PDO::PARAM_INT);
+            $sth->bindValue($key, $value, \PDO::PARAM_INT);
         } elseif (is_bool($value)) {
-            $sth->bindValue($key, $value, PDO::PARAM_BOOL);
+            $sth->bindValue($key, $value, \PDO::PARAM_BOOL);
         } elseif (is_null($value)) {
-            $sth->bindValue($key, $value, PDO::PARAM_NULL);
+            $sth->bindValue($key, $value, \PDO::PARAM_NULL);
         } elseif (is_string($value)) {
-            $sth->bindValue($key, $value, PDO::PARAM_STR);
+            $sth->bindValue($key, $value, \PDO::PARAM_STR);
         }
     }
 

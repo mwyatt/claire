@@ -135,7 +135,7 @@ class Content extends \OriginalAppName\Controller\Admin
         }
 
         // delete it
-        $modelContent->delete([$id]);
+        $modelContent->delete([$entityContent]);
 
         // prove it
         if ($modelContent->getRowCount()) {

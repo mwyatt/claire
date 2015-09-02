@@ -102,7 +102,7 @@ class Tennis extends \OriginalAppName\Controller\Admin
         $modelOption->readColumn('name', 'year_id');
         $entity = $modelOption->getDataFirst();
         $entity->value = $entityYearNew->id;
-        $modelOption->update($entity, ['id' => $entity->id]);
+        $modelOption->update([$entity]);
         $thingsImploded = implode(', ', $things);
         $feedback->setMessage("new season '{$entityYearNew->name}' created, $thingsImploded copied over", 'positive');
         $this->redirect('admin/system/tennis');

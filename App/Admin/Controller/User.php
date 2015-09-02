@@ -130,7 +130,7 @@ class User extends \OriginalAppName\Controller\Admin
         }
 
         // save
-        $modelUser->update($entityUser, ['id' => $entityUser->getId()]);
+        $modelUser->update([$entityUser]);
 
         // feedback / route
         $sessionFeedback->setMessage("user $id saved", 'positive');
@@ -156,7 +156,7 @@ class User extends \OriginalAppName\Controller\Admin
         }
 
         // delete it
-        $modelUser->delete(['id' => $id]);
+        $modelUser->delete([$entityUser]);
 
         // prove it
         if ($modelUser->getRowCount()) {
