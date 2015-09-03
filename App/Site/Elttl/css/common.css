@@ -213,3 +213,7 @@ html.lt-ie9 {
   background-color: #eee;
   font-size: 14px;
 }
+
+.header-select-year {
+  float: right;
+}
