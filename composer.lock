@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "81020d984459aff26c5e2e9e319fad59",
+    "hash": "7cc0ef3da66cc3cfd9063a48c50c9e92",
     "packages": [
         {
             "name": "corneltek/pux",
@@ -163,7 +163,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Intervention/image/zipball/156f9d6f8a186c68b92f0c50084718f02dae1b5f",
+                "url": "https://api.github.com/repos/Intervention/image/zipball/44c9a6bb292e50cf8a1e4b5030c7954c2709c089",
                 "reference": "156f9d6f8a186c68b92f0c50084718f02dae1b5f",
                 "shasum": ""
             },
