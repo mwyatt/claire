@@ -2,14 +2,12 @@
 
 namespace OriginalAppName;
 
-use \PDO;
-
 /**
  * @author Martin Wyatt <martin.wyatt@gmail.com>
  * @version     0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
-class Database
+class Database implements \OriginalAppName\DatabaseInterface
 {
 
 
@@ -17,14 +15,14 @@ class Database
      * PDO object once connected
      * @var object
      */
-    public $dbh;
+    private $dbh;
 
     
     /**
      * connection credentials
      * @var array
      */
-    public $credentials;
+    private $credentials;
 
 
     /**
@@ -38,17 +36,17 @@ class Database
     }
     
 
-    public function validateCredentials()
+    private function validateCredentials()
     {
-        $expected = array(
+        $expected = [
             'host',
             'port',
             'basename',
             'username',
             'password'
-        );
+        ];
         if (! \OriginalAppName\Helper::arrayKeyExists($expected, $this->getCredentials())) {
-            exit('database validate -> Credentials failed');
+            throw new Exception('database credentials invalid', 3123890);
         }
     }
 
@@ -56,7 +54,7 @@ class Database
     /**
      * @return array
      */
-    public function getCredentials()
+    private function getCredentials()
     {
         return $this->credentials;
     }
@@ -65,44 +63,44 @@ class Database
     /**
      * @param array $credentials
      */
-    public function setCredentials($credentials)
+    private function setCredentials($credentials)
     {
         $this->credentials = $credentials;
         return $this;
     }
     
     
-    /**
-     * attempt connection to the database
-     * @return null
-     */
     public function connect()
     {
         $credentials = $this->getCredentials();
         try {
             // set data source name
-            $dataSourceName = 'mysql:host=' . $credentials['host']
-                 . ';dbname=' . $credentials['basename'] . ';charset=utf8';
+            $dataSourceName = [
+                'mysql:host' => $credentials['host'],
+                'dbname' => $credentials['basename'],
+                'charset' => 'utf8'
+            ];
+            foreach ($dataSourceName as $key => $value) {
+                $dataSourceNameStrings[] = $key . '=' . $value;
+            }
+            $dataSourceName = implode(';', $dataSourceNameStrings);
             
             // connect
-            $this->dbh = new PDO(
+            $this->dbh = new \PDO(
                 $dataSourceName,
                 $credentials['username'],
                 $credentials['password']
             );
         
             // set error mode
-            $this->dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $this->dbh->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $error) {
-            exit('unable to connect to database');
+            return false;
         }
+        return $this->dbh;
     }
 
 
-    /**
-     * returns the latest insert id from the database
-     * @return int|bool
-     */
     public function getLastInsertId()
     {
         return $this->dbh->lastInsertId();
