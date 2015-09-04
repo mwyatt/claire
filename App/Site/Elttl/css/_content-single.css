@@ -11,10 +11,6 @@
   float: left;
 }
 
-.content-single .content-date {
-  color: $color-primary-4;
-}
-
 .content-single-title-two {
   font-size: 1.2em;
 }
@@ -26,4 +22,10 @@
 
 .is-type-page .content-date {
   display: none;
+}
+
+
+.content-single .content-date {
+
+    margin: 1em 0;
 }

@@ -20,6 +20,3 @@ if (module.hasClass('login')) {
 if (module.hasClass('option-all')) {
   require('admin/option/all');
 };
-if (module.hasClass('content-single')) {
-  require('admin/content/single');
-};

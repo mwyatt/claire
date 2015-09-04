@@ -6,10 +6,16 @@
 
 <?php $year = $yearSingle ?>
 <?php if (!empty($divisions)) : ?>
+
+	<div class="home">
+		
 	<?php include $this->getTemplatePath('_divisions') ?>
+
+	</div>
+	
 <?php else : ?>
 	
-	<p>No divisions, not good!</p>
+	<div class="blankslate">This is an old archive.</div>
 
 <?php endif ?>
 <?php include $this->getTemplatePath('_footer') ?>

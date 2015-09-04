@@ -14,9 +14,13 @@ class Index extends \OriginalAppName\Site\Elttl\Controller\Front
     public function home()
     {
         $modelAd = new \OriginalAppName\Model\Ad;
-        $modelAd->readColumn('groupKey', 'small-primary');
+        $modelAd
+            ->readColumn('groupKey', 'small-primary')
+            ->filterData('status', 1);
         $this->view->setDataKey('ads', $modelAd->getData());
-        $modelAd->readColumn('groupKey', 'home-primary');
+        $modelAd
+            ->readColumn('groupKey', 'home-primary')
+            ->filterData('status', 1);
         $this->view->setDataKey('covers', $modelAd->getData());
 
         // content

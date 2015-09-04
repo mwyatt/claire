@@ -19,7 +19,7 @@
 
 		<?php if (!empty($ad->image)) : ?>
 		
-					<img class="cover-image" src="<?php echo $this->getAssetPath($ad->image) ?>" alt="<?php echo $ad->title ?>">
+					<img class="cover-image" src="<?php echo $this->getUrlAsset($ad->image) ?>" alt="<?php echo $ad->title ?>">
 				
 		<?php
 endif ?>

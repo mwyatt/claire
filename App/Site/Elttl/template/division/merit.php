@@ -20,9 +20,9 @@
 			<th class="elttl-table-cell elttl-table-heading is-encounter">Encounters</th>
 		</tr>
 
-	<?php foreach ($meritStats as $playerId => $meritStat) : ?>
-		<?php if (!empty($players[$playerId])) : ?>
-			<?php $player = $players[$playerId] ?>
+	<?php foreach ($meritStats as $meritStat) : ?>
+		<?php if (!empty($players[$meritStat->playerId])) : ?>
+			<?php $player = $players[$meritStat->playerId] ?>
 			<?php if (!empty($teams[$player->teamId])) : ?>
 				<?php $team = $teams[$player->teamId] ?>
 
@@ -51,7 +51,7 @@ endforeach ?>
 
 <?php else : ?>
 	
-	<p>No fixtures have been fulfilled yet.</p>
+	<div class="blankslate">No fixtures have been fulfilled yet.</div>
 
 <?php endif ?>
 <?php include $this->getTemplatePath('_footer') ?>

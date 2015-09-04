@@ -1,4 +1,5 @@
 @mixin clearfix .footer-container-address-socials;
+@mixin clearfix .menu-secondaries-container;
 
 .container-footer .form-search-query {
   width: 58%;
@@ -20,9 +21,14 @@ $selector: .container-footer .form-search;
 .footer-social {
   width: 44px;
   height: 44px;
-  fill: #666;
+  fill: #fff;
   margin-left: 7px;
+}
+
+@media only screen and (max-width: 849px) {
+.footer-social {
   float: left;
+  }
 }
 
 .footer-social:first-child {
@@ -33,20 +39,8 @@ $selector: .container-footer .form-search;
   opacity: .5;
 }
 
-@media only screen and (max-width: 549px) {
-  
-  .footer-socials {
-    margin: $grid-gutter 0;
-  }
-}
-
-@media only screen and (min-width: 550px) {
-  
-  .footer-socials {
-    float: right;
-    width: auto;
-    margin: 0;
-  }
+.footer-socials {
+  margin-bottom: $grid-gutter
 }
 
 .footer-main {
@@ -54,7 +48,14 @@ $selector: .container-footer .form-search;
 }
 
 .menu-secondary-container {
-  padding: $grid-gutter 0;
+  padding-bottom: $grid-gutter;
+}
+
+@media only screen and (max-width: 649px) {
+  
+  .menu-secondary-container {
+    padding-top: $grid-gutter;
+  }
 }
 
 @media (min-width: 450px) {
@@ -73,19 +74,20 @@ $selector: .container-footer .form-search;
 .menu-secondary {
   border-radius: $border-radius;
   overflow: hidden;
-  border: 1px solid #666;
 }
 
 .menu-secondary-item {
   transition: background-color 200ms ease;
   display: block;
-  border-top: 1px solid #666;
+  background-color: rgba(255,255,255,.1);
+  border-top: 1px solid;
+  border-color: rgba(255,255,255,.2);
   padding: 1em;
-  color: $color-primary-0;
+  color: #ebd8cf;
 }
 
 .menu-secondary-item:hover {
-  background-color: #fff;
+  background-color: rgba(255,255,255,.2);
 }
 
 .menu-secondary-item:first-child {
@@ -95,26 +97,11 @@ $selector: .container-footer .form-search;
 .footer-address {
   margin-bottom: $grid-gutter;
   line-height: 1.5;
-  color: #666;
-}
-
-@media (min-width: 550px) {
-
-  .footer-address {
-    float: left;
-    width: 50%;
-  }
-}
-
-@media (min-width: 950px) {
-
-  .footer-address {
-    width: 20%;
-  }
+  color: #fff;
 }
 
 .footer-address a {
-  color: #666;
+  color: #fff;
   font-weight: 600;
 }
 
@@ -125,29 +112,26 @@ $selector: .container-footer .form-search;
   padding: 1em;
   overflow: hidden;
   border-radius: $border-radius;
-
+  width: 140px;
+      height: 127px;
 }
 
-@media (min-width: 650px) {
-
-  .logo-table-tennis-england {
-    float: left;
-    width: 30%;
-  }
-}
-
-@media (min-width: 950px) {
-
-  .logo-table-tennis-england {
-    width: 20%;
-    margin: 0;
-    float: right;
-  }
+@media only screen and (min-width: 850px) {
+.logo-table-tennis-england {
+  float: right;}
 }
 
 .logo-table-tennis-england-image {
   max-width: 100%;
   height: auto;
+}
+
+@media only screen and (min-width: 850px) {
+  
+  .logo-table-tennis-england-image {float: right;}
+  .footer-social {
+    float: right;
+  }
 }
 
 @mixin clearfix .container-footer-inner;
@@ -159,5 +143,36 @@ $selector: .container-footer .form-search;
 }
 
 .container-footer {
-  background-color: #eee;
+  background-color: #5E412F;
+}
+
+@media only screen and (min-width: 650px) {
+  
+  .menu-secondaries-container {
+      float: left;
+      width: 75%;
+  }
+
+  .footer-container-address-socials {
+      float: left;
+      width: 25%;
+      padding-right: $grid-gutter;
+  }
+}
+
+@media only screen and (min-width: 850px) {
+  
+  .footer-socials-and-ttengland {
+      float: left;
+      width: 25%;
+  }
+
+  .menu-secondaries-container {
+      padding-right: $grid-gutter;
+      width: 52%;
+  }
+
+  .footer-container-address-socials {
+      width: 23%;
+  }
 }

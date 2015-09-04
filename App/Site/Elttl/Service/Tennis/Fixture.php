@@ -26,8 +26,7 @@ class Fixture extends \OriginalAppName\Service
             $class = "\\OriginalAppName\\Site\\Elttl\\Model\\Tennis\\" . ucfirst($thing);
             $model = new $class;
             $model->readColumn('yearId', $yearId);
-            $ids = $model->getDataProperty('id');
-            $model->delete($ids);
+            $model->deleteYear(null, $model->getDataProperty('id'));
         }
 
         // select all teams

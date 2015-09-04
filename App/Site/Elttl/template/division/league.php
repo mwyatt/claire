@@ -42,7 +42,7 @@ endforeach ?>
 
 <?php else : ?>
 	
-	<p>No fixtures have been fulfilled yet.</p>
+	<div class="blankslate">No fixtures have been fulfilled yet.</div>
 
 <?php endif ?>
 <?php include $this->getTemplatePath('_footer') ?>

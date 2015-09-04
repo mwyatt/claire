@@ -1,4 +1,4 @@
-var underscore = require('underscore');
+var _ = require('underscore/underscore');
 
 
 /**
@@ -113,7 +113,8 @@ AdminTennisFixtureSingle.prototype.formFill = function(data) {
 	};
 
 	// assign encounter scores to rows
-	underscore.each(encounters, function(encounter, key) {
+	console.log(encounters);
+	_.each(encounters, function(encounter, key) {
 
 		// excludes
 		if (encounter.status == 'exclude') {
@@ -124,7 +125,6 @@ AdminTennisFixtureSingle.prototype.formFill = function(data) {
 		for (var s = sides.length - 1; s >= 0; s--) {
 			side = sides[s];
 			$('.js-fixture-single-encounter-input[data-side="' + side + '"][data-row="' + key + '"]').val(encounter['score' + side.ucfirst()]);
-			console.log(encounter, encounter['score' + side.ucfirst()]);
 		};
 	});
 };

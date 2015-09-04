@@ -16,11 +16,11 @@
 		</div>
 	    <div class="block-margins">
         	<label class="form-label block" for="form-name">Name</label>
-        	<input id="form-name" class="form-input w100" type="text" name="entity[name]" maxlength="75" value="<?php echo $$nameSingular->name ?>" autofocus="autofocus" required>
+        	<input id="form-name" class="form-input w100 js-input-title" type="text" name="entity[name]" maxlength="75" value="<?php echo $$nameSingular->name ?>" autofocus="autofocus" required>
 	    </div>
 	    <div class="block-margins">
         	<label class="form-label block" for="form-slug">Slug</label>
-        	<input id="form-slug" class="form-input w100" type="text" name="entity[slug]" maxlength="75" value="<?php echo $$nameSingular->slug ?>" required>
+        	<input id="form-slug" class="form-input w100 js-input-slug" type="text" name="entity[slug]" maxlength="75" value="<?php echo $$nameSingular->slug ?>" required>
 	    </div>
 	    <div class="block-margins">
         	<label class="form-label block" for="form-home-weekday">Home night</label>

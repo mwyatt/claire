@@ -28,7 +28,6 @@
 		<td><?php echo $ad->groupKey ?></td>
 		<td>
 			<a class="button-edit" href="<?php echo $urlEdit ?>">Edit</a>
-			<a class="button-delete js-tennis-delete-single" href="<?php echo $this->url->generate('admin/ad/all', ['delete' => $ad->id]) ?>">Delete</a>
 		</td>
 	</tr>
 

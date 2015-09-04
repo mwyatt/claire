@@ -37,7 +37,7 @@
 	}
 
 	.header-logo {
-		float: none;
+		float: right;
 		display: block;
 		width: 100px;
 		height: 100px;
@@ -62,4 +62,14 @@
 	.page-primary-title {
 		margin: .3em 0;
 	}
+
+  .menu-tables-option,
+  .header-sticker-beta,
+  .container-footer,
+  .menu-primary,
+  .menu-tables-option,
+  .header-sticker-beta,
+  .dont-print {
+    display: none !important;
+  }
 }

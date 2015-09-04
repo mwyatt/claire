@@ -119,7 +119,7 @@ abstract class Crud extends \OriginalAppName\Controller\Admin
     public function single($id = 0)
     {
         $entity = $this->model
-            ->readId([$id])
+            ->readYearId(null, [$id])
             ->getDataFirst();
 
         // render

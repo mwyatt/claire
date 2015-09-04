@@ -25,7 +25,7 @@
 <?php if ($divisions) : ?>
 
 		<section class="fixture-single-section">
-			<select id="division_id" name="division_id" class="fixture-single-select fixture-single-division js-fixture-single-division">
+			<select id="division_id" name="division_id" class="fixture-single-select fixture-single-division js-fixture-single-division" required>
 				<option value="0"></option>
 				 
 	<?php foreach ($divisions as $division) : ?>
@@ -44,7 +44,7 @@ endforeach ?>
 
 <?php foreach ($sides as $side) : ?>
 	
-			<select id="team_<?php echo $side ?>" name="team[<?php echo $side ?>]" class="fixture-single-select fixture-single-team js-fixture-single-team" data-side="<?php echo $side ?>">
+			<select id="team_<?php echo $side ?>" name="team[<?php echo $side ?>]" class="fixture-single-select fixture-single-team js-fixture-single-team" data-side="<?php echo $side ?>" required>
 				<option value="0"><?php echo ucfirst($side) ?> team</option>
 			</select>
 
@@ -58,7 +58,7 @@ endforeach ?>
 	
 			<div class="fixture-single-player-row is-<?php echo $side ?>">
 				<span class="fixture-single-button-play-up fixture-single-button-play-up-<?php echo $side ?> js-fixture-single-button-play-up" data-side="<?php echo $side ?>" data-position="<?php echo $playerPosition ?>">Play up</span>
-				<select class="fixture-single-select fixture-single-player js-fixture-single-player fixture-single-player-<?php echo $side ?>" name="player[<?php echo $side ?>][<?php echo $playerPosition ?>]" data-side="<?php echo $side ?>" data-position="<?php echo $playerPosition ?>">
+				<select class="fixture-single-select fixture-single-player js-fixture-single-player fixture-single-player-<?php echo $side ?>" name="player[<?php echo $side ?>][<?php echo $playerPosition ?>]" data-side="<?php echo $side ?>" data-position="<?php echo $playerPosition ?>" required>
 					<option value="0"><?php echo ucfirst($side) ?> Player <?php echo $playerPosition ?></option>
 				</select>
 			</div>
@@ -95,7 +95,7 @@ endif ?>
 			<?php $playerPosition = $playerPositions[$side == 'left' ? 0 : 1] ?>
 
 				<label for="encounter_<?php echo $row ?>_<?php echo $side ?>" class="fixture-single-score-row-encounter-label js-fixture-single-score-row-encounter-label fixture-single-score-row-encounter-label-<?php echo $side ?>" data-position="<?php echo $playerPosition ?>" data-side="<?php echo $side ?>"></label>
-				<input id="encounter_<?php echo $row ?>_<?php echo $side ?>" name="encounter[<?php echo $row ?>][<?php echo $side ?>]" class="fixture-single-encounter-input js-fixture-single-encounter-input" type="text" size="1" maxlength="1" value="" data-row="<?php echo $row ?>" data-side="<?php echo $side ?>">
+				<input id="encounter_<?php echo $row ?>_<?php echo $side ?>" name="encounter[<?php echo $row ?>][<?php echo $side ?>]" class="fixture-single-encounter-input js-fixture-single-encounter-input" type="text" size="1" maxlength="1" value="" data-row="<?php echo $row ?>" data-side="<?php echo $side ?>" required>
 			
 		<?php
 endforeach ?>

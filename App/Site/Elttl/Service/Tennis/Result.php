@@ -141,6 +141,7 @@ class Result extends \OriginalAppName\Service
                 if (empty($collection[$playerId])) {
                     $collection[$playerId] = new \OriginalAppName\Site\Elttl\Entity\Tennis\Result\Merit;
                     $collection[$playerId]->encounter = 0;
+                    $collection[$playerId]->playerId = $playerId;
                 }
 
                 // get scores

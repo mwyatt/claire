@@ -35,16 +35,17 @@
 
                 <!-- <a href="mailto:martin.wyatt@gmail.com" class="header-sticker-beta" title="This website is still actively under development. If you notice any bugs or have any improvements please email me: martin.wyatt@gmail.com">Beta</a> -->
 
+                    
 <?php $menu = $menuPrimary; ?>
 <?php include($this->getTemplatePath('_menu-primary')) ?>
 <?php include($this->getTemplatePath('_menu-division')) ?>
 <?php if (!empty($years)) : ?>
     
-    <select name="year" class="header-select-year js-select-year" class="select-years">
+    <select name="year" class="header-select-year js-select-year dont-print" class="select-years">
     
     <?php foreach ($years as $yearUnique) : ?>
     
-        <option value="<?php echo $yearUnique->name ?>" <?php echo empty($yearSingle) ? '' : ($yearSingle->id == $yearUnique->id ? 'selected' : '') ?>>Season <strong><?php echo $yearUnique->getNameFull() ?></strong></option>
+        <option value="<?php echo $yearUnique->name ?>" <?php echo empty($yearSingle) ? empty($year) ? '' : $year->id == $yearUnique->id ? 'selected' : '' : ($yearSingle->id == $yearUnique->id ? 'selected' : '') ?>>Season <strong><?php echo $yearUnique->getNameFull() ?></strong></option>
 
     <?php
 endforeach ?>
@@ -59,7 +60,7 @@ endforeach ?>
 
 <?php if (!empty($isArchive)) : ?>
     
-            <div class="header-is-archive-container">You are inside an archive.</div>
+            <!-- <div class="header-is-archive-container">You are inside an archive.</div> -->
 
 <?php endif ?>
 

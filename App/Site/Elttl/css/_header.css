@@ -23,14 +23,14 @@
   display: none;
 }
 
-@media (max-width: 779px) {
+@media (max-width: 869px) {
 
   .header-logo {
     width: 140px;
   }
 }
 
-@media (min-width: 780px) {
+@media (min-width: 870px) {
 
   .header-logo {
     width: 430px;
@@ -51,7 +51,7 @@
   position: absolute;
   top: 1px;
   left: 39px;
-  color: $color-primary-0;
+  color: $color-primary-2;
 }
 
 .header-logo-text-short {
@@ -60,7 +60,7 @@
   font-size: 28px;
 }
 
-@media (min-width: 780px) {
+@media (min-width: 870px) {
   
   .header-logo-text-short {
     display: none;

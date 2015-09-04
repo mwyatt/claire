@@ -15,7 +15,7 @@ class Database implements \OriginalAppName\DatabaseInterface
      * PDO object once connected
      * @var object
      */
-    private $dbh;
+    public $dbh;
 
     
     /**

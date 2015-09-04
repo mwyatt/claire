@@ -227,7 +227,7 @@ gulp.task('js', function() {
   );
 });
 
-gulp.task('image/copy', function () {
+gulp.task('copy', function () {
   return gulp.src('app/site/' + pkg.site + '/media/**')
     .pipe(gulp.dest('asset'));
 });

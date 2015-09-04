@@ -168,14 +168,13 @@ class Data extends \OriginalAppName\System
         if (! $data = $this->getData()) {
             return $this;
         }
-        $method = 'get' . ucfirst($column);
         $dataSample = current($data);
-        if (! method_exists($dataSample, $method)) {
+        if (! property_exists($dataSample, $column)) {
             return;
         }
         $dataFiltered = array();
         foreach ($data as $entity) {
-            if ($entity->$method() == $value) {
+            if ($entity->$column == $value) {
                 $dataFiltered[] = $entity;
             }
         }
@@ -217,21 +216,25 @@ class Data extends \OriginalAppName\System
         $type = 'integer';
         if (is_string($sampleValue)) {
             $type = 'string';
-        }
-        if (is_int($sampleValue)) {
+        } elseif (is_float($sampleValue)) {
+            $type = 'float';
+        } elseif (is_int($sampleValue)) {
             $type = 'integer';
         }
 
         // sort
         uasort($data, function ($a, $b) use ($property, $type, $order) {
+            if ($type == 'float') {
+                $a->$property += 0;
+                $b->$property += 0;
+            }
             if ($type == 'string') {
                 if ($order == 'asc') {
                     return strcasecmp($a->$property, $b->$property);
                 } else {
                     return strcasecmp($b->$property, $a->$property);
                 }
-            }
-            if ($type == 'integer') {
+            } elseif ($type == 'integer' || $type == 'float') {
                 if ($order == 'asc') {
                     if ($a->$property == $b->$property) {
                         return 0;

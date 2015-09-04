@@ -45,13 +45,19 @@ abstract class Model extends \OriginalAppName\Data
     /**
      * inject dependencies
      */
-    public function __construct()
+    public function __construct($database = null)
     {
+
+        // already added
+        if ($database) {
+            return $this->setDatabase($database);
+        }
         $registry = \OriginalAppName\Registry::getInstance();
+        $pathStart = SITE_PATH;
 
         // if not in registry connect + create
         if (! $database = $registry->get('database')) {
-            $database = new \OriginalAppName\Database(include SITE_PATH . 'credentials' . EXT);
+            $database = new \OriginalAppName\Database(include $pathStart . 'credentials' . EXT);
             $registry->set('database', $database);
         }
         $this->setDatabase($database);
@@ -217,20 +223,6 @@ abstract class Model extends \OriginalAppName\Data
 
 
     /**
-     * polyfill for bad update requests
-     * @param  array|object $entities
-     * @return array
-     */
-    public function updateTranslate($entities)
-    {
-        if (is_array($entities)) {
-            return $entities;
-        }
-        return [$entities];
-    }
-
-
-    /**
      * uses the passed properties to build named prepared statement
      * maintiaining this: public function update($mold, $where = [])
      * @todo how to return a value which can mark success?
@@ -240,6 +232,7 @@ abstract class Model extends \OriginalAppName\Data
      */
     public function update(Array $entities, $column = 'id')
     {
+        $updatedCount = 0;
 
         // statement
         $statement = [];
@@ -256,31 +249,22 @@ abstract class Model extends \OriginalAppName\Data
             $named[] = $field . ' = :' . $field;
         }
         $statement[] = implode(', ', $named);
-        if ($where) {
-            $statement[] = $this->getSqlWhere($where);
-        }
+        $statement[] = "where $column = :column";
 
         // prepare
         $sth = $this->database->dbh->prepare(implode(' ', $statement));
 
-        // bind
-        if ($where) {
-            foreach ($where as $key => $value) {
-                $this->bindValue($sth, 'where' . ucfirst($key), $value);
-            }
-        }
-        foreach ($this->getSthExecuteNamedWriteable($mold) as $key => $value) {
-            $this->bindValue($sth, $key, $value);
-        }
-
-        // mode
-        $sth->setFetchMode(\PDO::FETCH_CLASS, $this->getEntity());
-
         // execute
-        $sth->execute();
-
-        // return
-        $this->setRowCount($sth->rowCount());
+        foreach ($entities as $entity) {
+            foreach ($this->getSthExecuteNamedWriteable($entity) as $key => $value) {
+                $this->bindValue($sth, $key, $value);
+            }
+            $this->bindValue($sth, 'column', $entity->$column);
+            $sth->setFetchMode(\PDO::FETCH_CLASS, $this->getEntity());
+            $sth->execute();
+            $updatedCount += $sth->rowCount();
+        }
+        $this->setRowCount($updatedCount);
         return $this;
     }
 
@@ -316,10 +300,6 @@ abstract class Model extends \OriginalAppName\Data
      */
     public function delete(Array $entities, $column = 'id')
     {
-
-        // handle depreciated [ids]
-        // remove asap
-        $entities = $this->deleteTranslate($entities);
 
         // build
         $rowCount = 0;

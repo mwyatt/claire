@@ -55,6 +55,9 @@ class Fixture extends \OriginalAppName\Site\Elttl\Admin\Controller\Tennis\Crud
         $modelTennisEncounter->readYearColumn(null, 'fixtureId', $id);
         if ($modelTennisEncounter->getData()) {
             $modelTennisEncounter->orderByProperty('id');
+
+            // reset keys because json encode orders them back again
+            $modelTennisEncounter->setData(array_values($modelTennisEncounter->getData()));
             $isFilled = true;
         }
 
@@ -76,15 +79,9 @@ class Fixture extends \OriginalAppName\Site\Elttl\Admin\Controller\Tennis\Crud
 
         // player
         $modelTennisPlayer = new \OriginalAppName\Site\Elttl\Model\Tennis\Player;
-        if ($isFilled) {
-            $modelTennisPlayer
-                ->readYearId(null, $modelTennisTeam->getDataProperty('id'), 'teamId')
-                ->orderByProperty('rank');
-        } else {
-            $modelTennisPlayer
-                ->readColumn('yearId', $this->yearId)
-                ->orderByProperty('nameLast', 'desc');
-        }
+        $modelTennisPlayer
+            ->readColumn('yearId', $this->yearId)
+            ->orderByProperty('nameLast', 'desc');
 
         // reindex array, needed?
         $modelTennisPlayer->setData(array_values($modelTennisPlayer->getData()));

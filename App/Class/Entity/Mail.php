@@ -17,42 +17,42 @@ class Mail extends \OriginalAppName\Entity
      * @Id @GeneratedValue @Column(type="integer")
 	 * @var int
 	 */
-	protected $id;
+	public $id;
 
 
 	/**
      * @Column(type="string")
 	 * @var string
 	 */
-	protected $to;
+	public $to;
 
 
 	/**
      * @Column(type="string")
 	 * @var string
 	 */
-	protected $from;
+	public $from;
 
 
 	/**
      * @Column(type="string")
 	 * @var string
 	 */
-	protected $subject;
+	public $subject;
 
 
 	/**
      * @Column(type="text")
 	 * @var string
 	 */
-	protected $body;
+	public $body;
 
 
 	/**
      * @Column(type="integer")
 	 * @var int
 	 */
-	protected $timeSent;
+	public $timeSent;
 
 
 	/**

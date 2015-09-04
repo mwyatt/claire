@@ -24,7 +24,6 @@
 @import "_content-single.css";
 @import "_pagination.css";
 @import "_footer.css";
-@import "_print.css";
 
 .button-primary,
 .button-secondary {
@@ -32,21 +31,8 @@
   border-radius: $border-radius;
 }
 
-@media print {
-
-  .menu-tables-option,
-  .header-sticker-beta,
-  .container-footer,
-  .menu-primary,
-  .menu-tables-option,
-  .header-sticker-beta,
-  .dont-print {
-    display: none !important;
-  }
-}
-
 html {
-  background-color: $color-primary-4;
+  background-color: #5E412F;
 }
 
 html.lt-ie9 {
@@ -199,7 +185,7 @@ html.lt-ie9 {
 }
 
 .page-secondary-title {
-  font-size: 18px;
+  font-size: 22px;
   margin: 1em 0 0.5em;
 }
 
@@ -216,4 +202,18 @@ html.lt-ie9 {
 
 .header-select-year {
   float: right;
+  margin: 8px 10px;
 }
+
+@media only screen and (max-width: 599px) {
+  
+  .header-select-year {display: none;}
+}
+
+.fixture-time-fulfilled {
+    margin-top: 6px;
+    color: $color-primary-1;
+    font-size: 12px;
+}
+
+@import "_print.css";

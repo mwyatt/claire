@@ -51,3 +51,8 @@ a.tag {
   font-size: 0.9em;
   float: right;
 }
+
+ .content-date {
+
+    color: #ccc;
+}

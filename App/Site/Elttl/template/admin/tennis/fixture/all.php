@@ -2,11 +2,13 @@
 
 <div class="page">
 	<h1 class="page-primary-title">Fixtures</h1>
+
+<?php if (! empty($fixtures)) : ?>
+	
 	<div class="page-actions">
 		<a class="page-action button-primary right" href="<?php echo $urlCreate ?>" title="Create a new <?php echo ucwords($nameSingular) ?>">Fulfill Scorecard</a>
 	</div>
 
-<?php if (! empty($fixtures)) : ?>
 	<?php foreach ($divisions as $division) : ?>
 
 	<h2 class="h2"><?php echo $division->name ?> division</h2>

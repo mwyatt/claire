@@ -36,6 +36,7 @@ class Content extends \OriginalAppName\Controller\Admin
             ->setType($this->type)
             ->setTimePublished(time())
             ->setUserId($sessionUser->get('id'));
+        $entityContent->title = '';
         $modelContent->create([$entityContent]);
 
         // update
@@ -80,6 +81,7 @@ class Content extends \OriginalAppName\Controller\Admin
         $this
             ->view
             ->setDataKey('contentType', $this->type)
+            ->appendAsset('js', 'admin/content/single')
             ->appendAsset('mustache', 'admin/content/meta/all')
             ->setDataKey('content', $entityContent ? $entityContent : new Entity\Content);
         return new Response($this->view->getTemplate('admin/content/single'));
@@ -107,7 +109,7 @@ class Content extends \OriginalAppName\Controller\Admin
         $entityContent->consumeArray($_POST['content']);
 
         // update
-        $modelContent->update($entityContent, ['id' => $id]);
+        $modelContent->update([$entityContent]);
 
         // feedback
         $sessionFeedback->setMessage(implode(' ', [$entityContent->getType(), $entityContent->getTitle(), 'saved']), 'positive');

@@ -196,9 +196,23 @@ class Result extends \OriginalAppName\Controller\Front
         // league table
         $fixtureResults = $serviceResult->getFixture($modelTennisFixture->getData(), $modelTennisEncounter->getData());
         $meritStats = $serviceResult->getMerit($encounters);
+
+        // order averages properly
+        $averages = [];
+        foreach ($meritStats as $key => $meritStat) {
+            $averages[$key] = $meritStat->average;
+        }
+        asort($averages);
+        $meritStatsSorted = [];
+        foreach ($averages as $key => $value) {
+            $meritStatsSorted[] = $meritStats[$key];
+        }
+        $meritStats = array_reverse($meritStatsSorted);
+        
+        // sort($meritStats)
         $dataContainer
             ->setData($meritStats)
-            ->orderByProperty('average', 'desc');
+            ->getDataProperty('average');
         $meritStats = $dataContainer->getData();
 
         // template

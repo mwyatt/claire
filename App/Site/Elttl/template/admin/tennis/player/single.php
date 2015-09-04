@@ -16,15 +16,15 @@
 		</div>
 	    <div class="block-margins">
         	<label class="form-label block" for="form-name-first">First name</label>
-        	<input id="form-name-first" class="form-input w100" type="text" name="entity[nameFirst]" maxlength="75" value="<?php echo $$nameSingular->nameFirst ?>" autofocus="autofocus" required>
+        	<input id="form-name-first" class="form-input w100 js-input-title-segment" type="text" name="entity[nameFirst]" maxlength="75" value="<?php echo $$nameSingular->nameFirst ?>" autofocus="autofocus" required>
 	    </div>
 	    <div class="block-margins">
         	<label class="form-label block" for="form-name-last">Last name</label>
-        	<input id="form-name-last" class="form-input w100" type="text" name="entity[nameLast]" maxlength="75" value="<?php echo $$nameSingular->nameLast ?>" autofocus="autofocus" required>
+        	<input id="form-name-last" class="form-input w100 js-input-title-segment" type="text" name="entity[nameLast]" maxlength="75" value="<?php echo $$nameSingular->nameLast ?>" autofocus="autofocus" required>
 	    </div>
 	    <div class="block-margins">
         	<label class="form-label block" for="form-slug">Slug</label>
-        	<input id="form-slug" class="form-input w100" type="text" name="entity[slug]" value="<?php echo $$nameSingular->slug ?>" required>
+        	<input id="form-slug" class="form-input w100 js-input-slug" type="text" name="entity[slug]" value="<?php echo $$nameSingular->slug ?>" required>
 	    </div>
 	    <div class="block-margins">
         	<label class="form-label block" for="form-rank">Rank</label>

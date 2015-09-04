@@ -21,11 +21,11 @@
 		<h1 class="page-primary-title"><?php echo $content->getId() ? 'Edit' : 'Create' ?> <?php echo ucfirst($contentType) ?></h1>
 	    <div class="block-margins">
         	<label class="form-label block" for="form-content-title">Title</label>
-        	<input id="form-content-title" class="form-input w100 required js-slugify-title" type="text" name="content[title]" maxlength="75" value="<?php echo $content->getTitle() ?>" autofocus="autofocus">
+        	<input id="form-content-title" class="form-input w100 required js-input-title" type="text" name="content[title]" maxlength="75" value="<?php echo $content->getTitle() ?>" autofocus="autofocus">
 	    </div>
 	    <div class="block-margins">
         	<label class="form-label block" for="form-content-slug">Slug</label>
-        	<input id="form-content-slug" class="form-input w100 required js-slugify-slug" type="text" name="content[slug]" maxlength="75" value="<?php echo $content->getSlug() ?>">
+        	<input id="form-content-slug" class="form-input w100 required js-input-slug" type="text" name="content[slug]" maxlength="75" value="<?php echo $content->getSlug() ?>">
 	    </div>
 	    <div class="block-margins">
         	<label class="form-label block" for="form-content-html">Html</label>
