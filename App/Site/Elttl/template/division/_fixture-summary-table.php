@@ -54,7 +54,7 @@ endforeach ?>
 
 </table>
 
-<?php else: ?>
+<?php else : ?>
 
 	<div class="blankslate">No fixtures have been fulfilled yet.</div>
 

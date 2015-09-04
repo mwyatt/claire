@@ -11,7 +11,7 @@ class Merit extends \OriginalAppName\Entity
 {
 
 
-	public $playerId;
+    public $playerId;
 
 
     public $won;
