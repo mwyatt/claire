@@ -27,7 +27,7 @@
 <div id="top"></div>
 <div class="container container-site">
     <div class="container-site-inner">
-        <a href="#top" class="to-top js-smooth-scroll"><img class="to-top-image" src="<?php echo $this->getUrlAsset('arrow-up.svg') ?>" onerror="this.src=''; this.onerror=null;"></a>
+        <a href="#top" class="to-top js-smooth-scroll"><span class="to-top-image"><?php include $this->getAssetPath('arrow-up.svg') ?></span></a>
         <header class="container-header row js-container-header clearfix js-fixed-bar">
             <div class="container-header-inner">
 
