@@ -1,7 +1,7 @@
 <?php
 
 return [
-	'baseUrl' => '',
+    'baseUrl' => '',
     'googleAppPassword' => '',
     'errorReporting' => false
 ];

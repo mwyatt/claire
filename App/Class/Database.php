@@ -75,7 +75,6 @@ class Database implements \OriginalAppName\DatabaseInterface
     {
         $credentials = $this->getCredentials();
         try {
-            
             // set data source name
             $dataSourceName = [
                 'mysql:host' => $credentials['host'],
