@@ -2,13 +2,6 @@
 
 namespace OriginalAppName;
 
-use OriginalAppName\Registry;
-use OriginalAppName\Controller;
-use OriginalAppName\Session;
-use OriginalAppName\Response;
-use Pux;
-use Pux\Executor;
-use \Exception;
 
 
 /**
@@ -54,10 +47,10 @@ class Route extends \OriginalAppName\System
 	{
 	
 		// resource
-		$registry = Registry::getInstance();
-		$mux = new Pux\Mux;
+		$registry = \OriginalAppName\Registry::getInstance();
+		$mux = new \Pux\Mux;
 		$url = $registry->get('url');
-		$controller = new Controller;
+		$controller = new \OriginalAppName\Controller;
 
 		// build route tree
 		$routes = $this->getRoutes();
@@ -83,8 +76,8 @@ class Route extends \OriginalAppName\System
 		try {
 
 			// attempt execution of route
-		    $response = Executor::execute($route);
-		} catch (Exception $exception) {
+		    $response = \Pux\Executor::execute($route);
+		} catch (\Exception $exception) {
 			$controller = new Controller;
 			$response = $controller->error500($exception);
 		}
@@ -124,7 +117,7 @@ class Route extends \OriginalAppName\System
 	public function readRoutes()
 	{
 
-		$registry = Registry::getInstance();
+		$registry = \OriginalAppName\Registry::getInstance();
 		$url = $registry->get('url');
 
 		// store all routes here

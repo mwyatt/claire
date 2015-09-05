@@ -4,6 +4,10 @@ namespace OriginalAppName;
 
 
 /**
+ * 200 - OK - Returns data or status string
+ * 400 - Bad request - Server didn't recognise the request
+ * 401 - Not authorised - API token missing or did not authenticate
+ * 500 - Server Error - Message attached will provide details
  * @author Martin Wyatt <martin.wyatt@gmail.com> 
  * @version	0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01

@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'doctrine/devMode' => (bool),
-    'googleAppPassword' => (string),
-    'errorReporting' => (bool)
+	'baseUrl' => '',
+    'googleAppPassword' => '',
+    'errorReporting' => false
 ];
