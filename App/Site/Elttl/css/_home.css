@@ -32,7 +32,7 @@
   .home-gallery-container,
   .home-divisions,
   .home-press {
-    padding: 0 $grid-gutter;
+    padding: 0 $grid-gutter $grid-gutter;
   }
 }
 

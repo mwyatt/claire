@@ -15,7 +15,7 @@
 	
 <?php else : ?>
 	
-	<div class="blankslate">This is an old archive.</div>
+	<div class="blankslate mt1">This is an old archive.</div>
 
 <?php endif ?>
 <?php include $this->getTemplatePath('_footer') ?>

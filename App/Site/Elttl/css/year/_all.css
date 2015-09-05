@@ -10,7 +10,7 @@
 .year {
   display: block;
   padding: 1em 0;
-  border-top: 1px solid $color-secondary-1-0;
+  border-top: 1px solid #ccc;
   border-bottom: none;
 }
 
