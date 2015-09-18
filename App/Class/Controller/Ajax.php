@@ -38,7 +38,7 @@ class Ajax extends \OriginalAppName\Controller
      * @param   $data
      * @return object
      */
-    public function getResponse($data)
+    public function getResponse($data, $code = 200)
     {
         $response = [
             'status' => $this->status

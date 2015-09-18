@@ -2,21 +2,16 @@
 
 namespace OriginalAppName;
 
-
 /**
- * Error handling
- *
- * PHP version 5
- *
- * @todo build a log file if required and add lines of errors
- * @author Martin Wyatt <martin.wyatt@gmail.com> 
- * @version	0.1
+ * build a log file if required and add lines of errors
+ * @author Martin Wyatt <martin.wyatt@gmail.com>
+ * @version     0.1
  * @license http://www.php.net/license/3_01.txt PHP License 3.01
  */
 class Error extends \OriginalAppName\System
 {
 
-	
+    
     /**
      * @var boolean
      */
@@ -28,20 +23,22 @@ class Error extends \OriginalAppName\System
         $this->setReporting($report);
         $this->initialise();
     }
-	
+    
 
     /**
-     * @return bool 
+     * @return bool
      */
-    public function getReporting() {
+    public function getReporting()
+    {
         return $this->reporting;
     }
     
     
     /**
-     * @param bool $reporting 
+     * @param bool $reporting
      */
-    public function setReporting($reporting) {
+    public function setReporting($reporting)
+    {
         $this->reporting = $reporting;
         return $this;
     }
@@ -58,7 +55,7 @@ class Error extends \OriginalAppName\System
             error_reporting(E_ALL);
             ini_set('display_errors', '1');
             ini_set('log_errors', '0');
-            ini_set('display_startup_errors',1);
+            ini_set('display_startup_errors', 1);
             ini_set('error_log', './');
             set_error_handler(array($this, 'handle'));
         }
@@ -84,13 +81,13 @@ class Error extends \OriginalAppName\System
             echo '</pre>';
             exit;
 
-			// display error(s)
-			echo '[Type ' . $errorType . '] ' . $errorString . ' | ' . $errorFile . ' [Line ' . $errorLine . ']' . "\n";
+            // display error(s)
+            echo '[Type ' . $errorType . '] ' . $errorString . ' | ' . $errorFile . ' [Line ' . $errorLine . ']' . "\n";
 
-			// trying this out
-			echo '<pre>';
-			print_r(debug_print_backtrace());
-			echo '</pre>';
+            // trying this out
+            echo '<pre>';
+            print_r(debug_print_backtrace());
+            echo '</pre>';
             exit;
         }
         

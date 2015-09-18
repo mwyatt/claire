@@ -1,16 +1,5 @@
 <?php
 
-namespace OriginalAppName;
-
-use OriginalAppName;
-
-
-/**
- * @author 	Martin Wyatt <martin.wyatt@gmail.com> 
- * @version	0.1
- * @license http://www.php.net/license/3_01.txt PHP License 3.01
- */ 
-
 
 /**
  * boot session
@@ -21,20 +10,18 @@ session_start();
 /**
  * setup registry
  */
-$registry = OriginalAppName\Registry::getInstance();
-$registry->set('system', new OriginalAppName\System);
+$registry = \OriginalAppName\Registry::getInstance();
+$registry->set('system', new \OriginalAppName\System);
 $registry->set('configApp', $configApp);
-$url = new OriginalAppName\Url;
+$url = new \OriginalAppName\Url;
 $registry->set('url', $url);
-
-
 
 
 /**
  * find all possible routes
- * @var OriginalAppName
+ * @var \OriginalAppName
  */
-$route = new OriginalAppName\Route;
+$route = new \OriginalAppName\Route;
 $route->readRoutes();
 
 
@@ -43,13 +30,6 @@ $route->readRoutes();
  */
 $url->setRoutes($route->getRoutes());
 $registry->set('url', $url);
-
-
-/**
- * unit tests
- */
-// $test = new OriginalAppName\Test();
-// $test->mail();
 
 
 /**

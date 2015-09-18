@@ -514,11 +514,6 @@ abstract class Model extends \OriginalAppName\Data
         if ($this->tableName) {
             return $this->tableName;
         }
-
-        // attempt guess
-        // tricky because of namespacing
-        // $name = get_class($this);
-     //    return $this->tableName;
     }
     
     
@@ -530,95 +525,6 @@ abstract class Model extends \OriginalAppName\Data
         $this->tableName = $tableName;
         return $this;
     }
-
-
-
-
-
-    // public function orderByPropertyStringAsc($property)
-    // {
-    // 	$data = $this->getData();
-
-    // 	// fail silent
-    // 	$dataSample = current($data);
-    // 	if (! property_exists($dataSample, $property)) {
-    // 		return;
-    // 	}
-
-    // 	// sort
-    // 	uasort($data, function($a, $b) use ($property) {
-    // 		return strcasecmp($a->$property, $b->$property);
-    // 	});
-    // 	$this->setData($data);
-    // 	return $this;
-    // }
-
-
-    // public function orderByPropertyStringDesc($property)
-    // {
-    // 	$data = $this->getData();
-
-    // 	// fail silent
-    // 	$dataSample = current($data);
-    // 	if (! property_exists($dataSample, $property)) {
-    // 		return;
-    // 	}
-
-    // 	// sort
-    // 	uasort($data, function($a, $b) use ($property) {
-    // 		return strcasecmp($b->$property, $a->$property);
-    // 	});
-    // 	$this->setData($data);
-    // 	return $this;
-    // }
-
-
-    // public function orderByPropertyIntAsc($property)
-    // {
-    // 	if (! $data = $this->getData()) {
-    // 		return $this;
-    // 	}
-
-    // 	// fail silent
-    // 	$dataSample = current($data);
-    // 	if (! property_exists($dataSample, $property)) {
-    // 		return $this;
-    // 	}
-
-    // 	// sort
-    // 	uasort($data, function($a, $b) use ($property) {
-    // 		if ($a->$property == $b->$property) {
-    // 			return 0;
-    // 		}
-    // 		return $a->$property < $b->$property ? -1 : 1;
-    // 	});
-    // 	$this->setData($data);
-    // 	return $this;
-    // }
-
-
-    // public function orderByPropertyIntDesc($property)
-    // {
-    // 	if (! $data = $this->getData()) {
-    // 		return $this;
-    // 	}
-
-    // 	// fail silent
-    // 	$dataSample = current($data);
-    // 	if (! property_exists($dataSample, $property)) {
-    // 		return $this;
-    // 	}
-
-    // 	// sort
-    // 	uasort($data, function($a, $b) use ($property) {
-    // 		if ($a->$property == $b->$property) {
-    // 			return 0;
-    // 		}
-    // 		return $a->$property > $b->$property ? -1 : 1;
-    // 	});
-    // 	$this->setData($data);
-    // 	return $this;
-    // }
 
 
     /**

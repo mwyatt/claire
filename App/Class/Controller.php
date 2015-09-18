@@ -2,11 +2,6 @@
 
 namespace OriginalAppName;
 
-use OriginalAppName\View;
-use OriginalAppName\Service;
-use OriginalAppName\Registry;
-use OriginalAppName\Response;
-
 /**
  * @author Martin Wyatt <martin.wyatt@gmail.com>
  * @version     0.1
@@ -24,17 +19,17 @@ class Controller
 
     public function __construct()
     {
-        $registry = Registry::getInstance();
+        $registry = \OriginalAppName\Registry::getInstance();
         $this
             ->setUrl($registry->get('url'))
-            ->setView(new View);
+            ->setView(new \OriginalAppName\View);
     }
 
 
     public function error500($exception)
     {
         $this->view->setDataKey('exceptionMessage', $exception->getMessage());
-        return new Response($this->view->getTemplate('500'), 500);
+        return new \OriginalAppName\Response($this->view->getTemplate('500'), 500);
     }
 
 
@@ -69,7 +64,7 @@ class Controller
     {
 
         // get url from registry and generate string
-        $registry = Registry::getInstance();
+        $registry = \OriginalAppName\Registry::getInstance();
         $url = $registry->get('url');
         $url = $url->generate($key, $config);
 
