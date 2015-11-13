@@ -67,11 +67,17 @@ class Content extends \OriginalAppName\Controller\Front
 		if (! $serviceContent->getData()) {
 			return new Response('', 404);
 		}
-		$entityContent = current($serviceContent->getData());
-		if (! $entityContent->getType() == $type) {
-			return new Response('', 404);
+
+		// validate
+		$entities = [];
+		foreach ($serviceContent->getData() as $entityContent) {
+			if ($entityContent->getType() == $type && $entityContent->getStatus() == \OriginalAppName\Entity\Content::STATUS_PUBLISHED) {
+				$entities[] = $entityContent;
+			}
 		}
-		if (! $entityContent->getStatus() == 'visible') {
+
+		// any?
+		if (!$entities) {
 			return new Response('', 404);
 		}
 
@@ -79,7 +85,7 @@ class Content extends \OriginalAppName\Controller\Front
 		$this
 			->view
 			->setDataKey('metaTitle', $entityContent->getTitle())
-			->setDataKey('contents', $serviceContent->getData());
+			->setDataKey('contents', $entities);
 		return new Response($this->view->getTemplate('content-single'));
 	}
 }
