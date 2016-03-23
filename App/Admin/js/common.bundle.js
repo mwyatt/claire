@@ -18,5 +18,5 @@ if (module.hasClass('login')) {
   require('admin/login');
 };
 if (module.hasClass('option-all')) {
-  require('admin/option/all');
+  // require('admin/option/all');
 };

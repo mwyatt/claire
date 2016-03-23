@@ -16,7 +16,7 @@ gulp.task('jscs-check', function () {
 });
 
 gulp.task('csscomb', function() {
-  return gulp.src('app/site/codex/css/_alert.css')
+  return gulp.src('App/Site/Codex/css/_alert.css')
     .pipe(gulpPlugin.csscomb())
     .pipe(gulp.dest('done-it/'));
 });
@@ -80,22 +80,22 @@ gulp.task('css/copy/global', function() {
 });
 
 gulp.task('css/copy/admin', function() {
-  return gulp.src('app/admin/css/**/**.css')
+  return gulp.src('App/Admin/css/**/**.css')
     .pipe(gulp.dest('temporary/admin'));
 });
 
 gulp.task('css/copy/site', function() {
-  return gulp.src('app/site/' + pkg.site + '/css/**/**.css')
+  return gulp.src('App/Site/' + pkg.site + '/css/**/**.css')
     .pipe(gulp.dest('temporary'));
 });
 
 gulp.task('css/copy/site/admin', function() {
-  return gulp.src('app/site/' + pkg.site + '/admin/css/**/**.css')
+  return gulp.src('App/Site/' + pkg.site + '/admin/css/**/**.css')
     .pipe(gulp.dest('temporary/admin'));
 });
 
 gulp.task('css/copy/codex', function() {
-  return gulp.src('app/site/codex/css/**/**.css')
+  return gulp.src('App/Site/Codex/css/**/**.css')
     .pipe(gulp.dest('temporary'));
 });
 
@@ -166,22 +166,22 @@ gulp.task('js/copy/unsorted', function() {
 });
 
 gulp.task('js/copy/admin', function() {
-  return gulp.src('app/admin/js/**/**.js')
+  return gulp.src('App/Admin/js/**/**.js')
     .pipe(gulp.dest('temporary/admin'));
 });
 
 gulp.task('js/copy/codex', function() {
-  return gulp.src('app/site/codex/js/**/**.js')
+  return gulp.src('App/Site/Codex/js/**/**.js')
     .pipe(gulp.dest('temporary'));
 });
 
 gulp.task('js/copy/site', function() {
-  return gulp.src('app/site/' + pkg.site + '/js/**/**.js')
+  return gulp.src('App/Site/' + pkg.site + '/js/**/**.js')
     .pipe(gulp.dest('temporary'));
 });
 
 gulp.task('js/copy/site/admin', function() {
-  return gulp.src('app/site/' + pkg.site + '/admin/js/**/**.js')
+  return gulp.src('App/Site/' + pkg.site + '/Admin/js/**/**.js')
     .pipe(gulp.dest('temporary/admin'));
 });
 
@@ -228,6 +228,6 @@ gulp.task('js', function() {
 });
 
 gulp.task('copy', function () {
-  return gulp.src('app/site/' + pkg.site + '/media/**')
+  return gulp.src('App/Site/' + pkg.site + '/media/**')
     .pipe(gulp.dest('asset'));
 });

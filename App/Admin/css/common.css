@@ -1,7 +1,7 @@
 @import "../_dependencies.css";
 @import "_settings.css";
-@import "../../bower_components/normalize-css/normalize.css";
-@import "../../bower_components/magnific-popup/dist/magnific-popup.css";
+@import "normalize-css/normalize.css";
+/*@import "../../bower_components/magnific-popup/dist/magnific-popup.css";*/
 @import "../_reset.css";
 @import "../_reusable.css";
 @import "../_keyframe.css";
