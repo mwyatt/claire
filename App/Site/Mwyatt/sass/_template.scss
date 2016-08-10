@@ -1,9 +1,0 @@
-%site-boundary {
-    max-width: 1000px;
-    margin: 0 auto;
-
-    @media only screen and (min-width: 1000px) {
-        width: 1000px;
-        padding: 0;
-    }
-}
