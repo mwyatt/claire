@@ -1,34 +1,20 @@
 {
-    "name": "mwyatt/mvc",
-    "type": "project",
     "authors": [
         {
             "name": "Martin Wyatt",
             "email": "martin.wyatt@gmail.com"
         }
     ],
-    "require-dev": {
-        "squizlabs/php_codesniffer": "^2.3",
-        "phpunit/phpunit": "^4.7"
-    },
-    "scripts": {
-        "post-install-cmd": [
-            "bash contrib/setup.sh"
-        ]
-    },
     "require": {
-        "intervention/image": "dev-master",
-        "corneltek/pux": "~1.5",
-        "swiftmailer/swiftmailer": "5.3.*@dev"
+        "mwyatt/core": "2.1.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^4.8",
+        "squizlabs/php_codesniffer": "^2.3"
     },
     "autoload": {
         "psr-4": {
-            "OriginalAppName\\": [
-                "App/Class/",
-                "App/Site/Elttl/"
-            ],
-            "OriginalAppName\\Admin\\": "App/Admin/",
-            "OriginalAppName\\Site\\": "App/Site/"
+            "Mwyatt\\Claire\\": ["src", "test"]
         }
     }
 }
