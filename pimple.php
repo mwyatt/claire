@@ -43,7 +43,7 @@ $pimple['Markdown'] = function ($pimple) {
 };
 
 $pimple['Post'] = function ($pimple) {
-    return new \Mwyatt\Portfolio\Service\Post($pimple['MapperFactory'], $pimple['ModelFactory']);
+    return new \Mwyatt\Claire\Service\Post($pimple['MapperFactory'], $pimple['ModelFactory']);
 };
 
 $pimple['Database'] = function ($pimple) {
@@ -60,12 +60,12 @@ $pimple['Database'] = function ($pimple) {
 
 $pimple['ModelFactory'] = function ($pimple) {
     $modelFactory = new \Mwyatt\Core\ModelFactory;
-    $modelFactory->setDefaultNamespace('\\Mwyatt\\Portfolio\\Model\\');
+    $modelFactory->setDefaultNamespace('\\Mwyatt\\Claire\\Model\\');
     return $modelFactory;
 };
 
 $pimple['MapperFactory'] = function ($pimple) {
     $mapperFactory = new \Mwyatt\Core\MapperFactory($pimple['Database'], $pimple['ModelFactory']);
-    $mapperFactory->setDefaultNamespace('\\Mwyatt\\Portfolio\\Mapper\\');
+    $mapperFactory->setDefaultNamespace('\\Mwyatt\\Claire\\Mapper\\');
     return $mapperFactory;
 };

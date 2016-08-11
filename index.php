@@ -4,8 +4,12 @@ define('PATH_BASE', (string) (__DIR__ . '/'));
 
 include PATH_BASE . 'vendor/autoload.php';
 
-$error = new \Mwyatt\Core\Error(PATH_BASE . 'error.txt');
-set_error_handler(array($error, 'handle'));
+try {
+    $error = new \Mwyatt\Core\Error(PATH_BASE . 'error.txt');
+    set_error_handler(array($error, 'handle'));
+} catch (Exception $e) {
+    exit($e->getMessage());
+}
 
 include PATH_BASE . 'pimple.php';
 
@@ -23,7 +27,7 @@ $urlPath = $url->getPath();
 $view = $pimple['View'];
 $request = $pimple['Request'];
 
-$controllerDefault = new \Mwyatt\Portfolio\Controller($pimple, $view);
+$controllerDefault = new \Mwyatt\Claire\Controller($pimple, $view);
 
 // divert attempted route if not logged in
 $urlAdminBase = 'admin/';

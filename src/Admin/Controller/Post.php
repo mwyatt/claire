@@ -1,6 +1,6 @@
 <?php
 
-namespace Mwyatt\Portfolio\Admin\Controller;
+namespace Mwyatt\Claire\Admin\Controller;
 
 class Post extends \Mwyatt\Core\Controller
 {

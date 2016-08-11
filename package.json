@@ -1,29 +1,6 @@
 {
-  "author": "Martin Wyatt <martin.wyatt@gmail.com>",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/mwyatt/portfolio.git"
-  },
-  "license": "ISC",
-  "browserify": {
-    "transform": [
-    ]
-  },
-  "browserify-shim": {
-    "jquery": "global:$",
-    "mustache": "global:Mustache"
-  },
-  "dependencies": {
-    "jquery": "1.11.2",
-    "modernizr": "3.3.1",
-    "mustache": "2.2.1"
-  },
   "devDependencies": {
-    "anchor-scroll": "^2.0.0",
     "mwyatt-codex": "2.0.3",
-    "mwyatt-dialogue": "0.2.8",
-    "mwyatt-feedback-queue": "0.0.1",
-    "mwyatt-url": "0.0.2",
     "autoprefixer": "6.0.3",
     "gulp": "3.9.0",
     "gulp-postcss": "6.1.0",
@@ -35,8 +12,6 @@
     "postcss-csscomb": "0.0.0",
     "anchor-scroll": "2.0.0",
     "browserify": "11.2.0",
-    "browserify-shim": "3.8.12",
-    "es6-promise": "3.1.2",
     "gulp-buffer": "0.0.2",
     "gulp-concat": "2.6.0",
     "gulp-cssmin": "0.1.7",

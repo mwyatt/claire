@@ -1,8 +1,8 @@
 <?php
 
-namespace Mwyatt\Portfolio\Controller;
+namespace Mwyatt\Claire\Controller;
 
-class Post extends \Mwyatt\Portfolio\Controller
+class Post extends \Mwyatt\Claire\Controller
 {
 
 

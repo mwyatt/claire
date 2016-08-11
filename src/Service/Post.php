@@ -1,6 +1,6 @@
 <?php
 
-namespace Mwyatt\Portfolio\Service;
+namespace Mwyatt\Claire\Service;
 
 class Post extends \Mwyatt\Core\ServiceAbstract
 {

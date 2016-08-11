@@ -1,6 +1,6 @@
 <?php
 
-namespace Mwyatt\Portfolio\Model;
+namespace Mwyatt\Claire\Model;
 
 class Post extends \Mwyatt\Core\ModelAbstract
 {

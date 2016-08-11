@@ -1,14 +1,12 @@
 <?php
 
-namespace Mwyatt\Portfolio;
+namespace Mwyatt\Claire;
 
 class Controller extends \Mwyatt\Core\Controller
 {
 
 
 	public function home() {
-		$projects = json_decode(file_get_contents(PATH_BASE . 'json/projects.json'));
-		$skills = json_decode(file_get_contents(PATH_BASE . 'json/skills.json'));
 		$url = $this->get('Url');
 
 		// menu primary
@@ -41,8 +39,6 @@ class Controller extends \Mwyatt\Core\Controller
 
 		$this->view->data->offsetSet('timeExperience', (date('Y', time()) - date('Y', 1265014800)) + 1); // Mon, 01 Feb 2010 09:00:00 GMT;
 		$this->view->data->offsetSet('googleAnalyticsTrackingId', 1);
-		$this->view->data->offsetSet('projects', $projects);
-		$this->view->data->offsetSet('skills', $skills);
 		$this->view->data->offsetSet('menuPrimary', $menuPrimary);
 		$this->view->data->offsetSet('siteTitle', 'Martin Wyatt');;
 		$this->view->data->offsetSet('metaTitle', 'Martin Wyatt - Web Developer Lancashire');

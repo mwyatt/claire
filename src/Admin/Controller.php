@@ -1,6 +1,6 @@
 <?php
 
-namespace Mwyatt\Portfolio\Admin;
+namespace Mwyatt\Claire\Admin;
 
 class Controller extends \Mwyatt\Core\Controller
 {

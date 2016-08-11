@@ -1,6 +1,6 @@
 <?php
 
-namespace Mwyatt\Portfolio\Mapper;
+namespace Mwyatt\Claire\Mapper;
 
 class Post extends \Mwyatt\Core\MapperAbstract implements \Mwyatt\Core\MapperInterface
 {
@@ -8,7 +8,7 @@ class Post extends \Mwyatt\Core\MapperAbstract implements \Mwyatt\Core\MapperInt
 
     public function getModel()
     {
-        return '\\Mwyatt\\Portfolio\\Model\\Post';
+        return '\\Mwyatt\\Claire\\Model\\Post';
     }
 
 
@@ -17,7 +17,7 @@ class Post extends \Mwyatt\Core\MapperAbstract implements \Mwyatt\Core\MapperInt
         $sql = ['select', '*', 'from', $this->table, 'where', 'slug', '=', '?'];
         $this->database->prepare(implode(' ', $sql));
         $this->database->execute([$slug]);
-        return $this->getIterator($this->database->fetchAll($this->fetchType, '\\Mwyatt\\Portfolio\\Model\\Post'));
+        return $this->getIterator($this->database->fetchAll($this->fetchType, '\\Mwyatt\\Claire\\Model\\Post'));
     }
 
 
@@ -30,7 +30,7 @@ class Post extends \Mwyatt\Core\MapperAbstract implements \Mwyatt\Core\MapperInt
         $sql[] = 'and status = ' . $post->getStatusPublished();
         $this->database->prepare(implode(' ', $sql));
         $this->database->execute([$slug]);
-        return $this->getIterator($this->database->fetchAll($this->fetchType, '\\Mwyatt\\Portfolio\\Model\\Post'));
+        return $this->getIterator($this->database->fetchAll($this->fetchType, '\\Mwyatt\\Claire\\Model\\Post'));
     }
 
 
@@ -39,7 +39,7 @@ class Post extends \Mwyatt\Core\MapperAbstract implements \Mwyatt\Core\MapperInt
         $sql = ['select', '*', 'from', $this->table];
         $this->database->prepare(implode(' ', $sql));
         $this->database->execute();
-        return $this->getIterator($this->database->fetchAll($this->fetchType, '\\Mwyatt\\Portfolio\\Model\\Post'));
+        return $this->getIterator($this->database->fetchAll($this->fetchType, '\\Mwyatt\\Claire\\Model\\Post'));
     }
 
 

@@ -3,40 +3,40 @@
 return [
     [
         'get', '/',
-        '\\Mwyatt\\Portfolio\\Controller', 'home',
+        '\\Mwyatt\\Claire\\Controller', 'home',
         ['id' => 'home']
     ],
     [
         'get', '/admin/',
-        '\\Mwyatt\\Portfolio\\Admin\\Controller', 'home',
+        '\\Mwyatt\\Claire\\Admin\\Controller', 'home',
         ['id' => 'admin.home']
     ],
     [
         'get', '/:slug/',
-        '\\Mwyatt\\Portfolio\\Controller\\Post', 'single',
+        '\\Mwyatt\\Claire\\Controller\\Post', 'single',
         ['id' => 'post.single']
     ],
     [
         'get', '/admin/logout/',
-        '\\Mwyatt\\Portfolio\\Admin\\Controller', 'logout',
+        '\\Mwyatt\\Claire\\Admin\\Controller', 'logout',
         ['id' => 'admin.logout']
     ],
     [
         'post', '/admin/',
-        '\\Mwyatt\\Portfolio\\Admin\\Controller', 'login'
+        '\\Mwyatt\\Claire\\Admin\\Controller', 'login'
     ],
     [
         'get', '/admin/:slug/',
-        '\\Mwyatt\\Portfolio\\Admin\\Controller\\Post', 'single',
+        '\\Mwyatt\\Claire\\Admin\\Controller\\Post', 'single',
         ['id' => 'admin.post.single']
     ],
     [
         'post', '/admin/:slug/',
-        '\\Mwyatt\\Portfolio\\Admin\\Controller\\Post', 'persist'
+        '\\Mwyatt\\Claire\\Admin\\Controller\\Post', 'persist'
     ],
     [
         'get', '/cv/:name/',
-        '\\Mwyatt\\Portfolio\\Controller\\Cv', 'single',
+        '\\Mwyatt\\Claire\\Controller\\Cv', 'single',
         ['id' => 'cv.single']
     ]
 ];
