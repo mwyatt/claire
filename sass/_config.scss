@@ -1,6 +1,13 @@
 @charset "utf-8";
-@import "vendor/bourbon/bourbon";
+$font-family: 'Open Sans', 'Sans-serif';
+$heading-font-family: $font-family;
+$heading-font-weight: 600;
+@import "palette";
+@import "../../../../sass/vendor/normalize";
+@import "../../../../sass/vendor/magnific-popup";
+@import "../../../../sass/vendor/bourbon/bourbon";
+@import "../../../../sass/mixin/grid";
 @import "mixin";
-@import "mixin/grid";
 @import "reusable";
 @import "typography";
+@import "form";

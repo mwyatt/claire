@@ -1,9 +1,0 @@
-{{#metas}}
-
-<div class="content-meta js-content-meta" data-id="{{id}}">
-	<span class="content-meta-name"><input type="text" class="js-content-meta-input-name" value="{{name}}"></span>
-	<span class="content-meta-value"><input type="text" class="js-content-meta-input-value" value="{{value}}"></span>
-	<span class="content-meta-button-delete js-content-meta-delete">Delete</span>
-</div>
-
-{{/metas}}
