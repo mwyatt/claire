@@ -40,7 +40,7 @@ class Controller extends \Mwyatt\Core\Controller
 		$this->view->data->offsetSet('timeExperience', (date('Y', time()) - date('Y', 1265014800)) + 1); // Mon, 01 Feb 2010 09:00:00 GMT;
 		$this->view->data->offsetSet('googleAnalyticsTrackingId', 1);
 		$this->view->data->offsetSet('menuPrimary', $menuPrimary);
-		$this->view->data->offsetSet('siteTitle', 'Martin Wyatt');;
+		$this->view->data->offsetSet('siteTitle', 'Martin Wyatt');
 		$this->view->data->offsetSet('metaTitle', 'Martin Wyatt - Web Developer Lancashire');
 		$this->view->data->offsetSet('metaDescription', 'I work at AV Distribution as a Web Developer. I spend my days designing and implementing web interfaces. I am very dedicated to my craft with 7 years experience.');
 
