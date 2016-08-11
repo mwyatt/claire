@@ -1,13 +1,5 @@
-error.txt
 /vendor/
-node_modules/
-/App/config.php
-/App/cache/
-config.json
-credentials.php
-config.json
-npm-debug.log*
-bower_components
-/temporary/
+/node_modules/
+/config.php
 /asset/
-*.php.rej
+/error.txt
