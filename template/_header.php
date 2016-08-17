@@ -22,27 +22,27 @@
 <div id="top"></div>
 <div class="container container-site">
     <div class="header-page-container">
-        <a href="#top" class="to-top js-smooth-scroll"><?php include $this->getAssetPath('arrow-up.svg') ?></a>
+        <a href="#top" class="to-top js-smooth-scroll"><?php include $this->getPathBase('asset/arrow-up.svg') ?></a>
         <div class="header-container">
             <div class="profile-container">
                 <div class="profile-image-container">
-                    <img src="<?php echo $this->getUrlAsset('portrait-138.jpg') ?>" alt="Claire Ruths portrait" class="profile-img">
+                    <img src="<?php echo $url->generate() ?>asset/portrait-138.jpg" alt="Claire Ruths portrait" class="profile-img">
                 </div>
                 <p class="portrait-description">Language and literature enthusiast based in the North West of England.</p>
             </div>
             <div class="logo-container">
 
-<?php include $this->getTemplatePath('_logo') ?>
+<?php include $this->getPathTemplate('_logo') ?>
                 
             </div>
             <div class="header-menu-primary-container">
                 
-<?php include $this->getTemplatePath('_menu-primary') ?>
+<?php include $this->getPathTemplate('_menu-primary') ?>
 
             </div>
             <div class="header-socials-container">
                 <a href="http://www.pinterest.com/clmruth26/" class="header-social">
-                    <span class="header-social-icon"><?php include $this->getAssetPath('pinterest.svg') ?></span>
+                    <span class="header-social-icon"><?php include $this->getPathBase('asset/pinterest.svg') ?></span>
                     <span class="header-social-title">Pinterest</span>
                 </a>
             </div>

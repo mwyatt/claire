@@ -28,14 +28,15 @@
   --font-weight-heading: 600;
   --border-radius: 3px;
   --animation-duration: 250ms; /*needed?*/
+  --color-senary: #ebd7de;
+  --color-pinterest-primary: #bd081c;
 }
 
 /*
-$color-quaternary: #80CE36;
-$color-quinary: #AC8E98;
-$color-senary: #EBD7DE;
-$color-text: #745E56;
-$color-twitter: #00adef;
-$color-facebook: #3b5998;
-$color-whathifi-primary: #d82329;
-$color-pinterest-primary: #bd081c;*/
+var(--color-quaternary: #80CE36);
+var(--color-quinary: #AC8E98);
+var(--color-text: #745E56);
+var(--color-twitter: #00adef);
+var(--color-facebook: #3b5998);
+var(--color-whathifi-primary: #d82329);
+*/

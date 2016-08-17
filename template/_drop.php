@@ -2,7 +2,7 @@
 	<div class="drop js-drop">
 		<div class="drop-inner js-drop-inner">
 			
-<?php include($this->getTemplatePath($dropTemplate)) ?>
+<?php include($this->getPathTemplate($dropTemplate)) ?>
 
 		</div>
 	</div>

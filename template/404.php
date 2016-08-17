@@ -1,4 +1,4 @@
-<?php require_once($this->getTemplatePath('_header')) ?>
+<?php require_once($this->getPathTemplate('_header')) ?>
 
 <div class="content content-404">
 	<h1 class="content-404-title">404 Not Found</h1>
@@ -6,4 +6,4 @@
 	<a href="<?php echo $this->url->generate() ?>" class="button primary home">Home</a>
 </div>
 
-<?php require_once($this->getTemplatePath('_footer')) ?>
+<?php require_once($this->getPathTemplate('_footer')) ?>

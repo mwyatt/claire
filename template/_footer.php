@@ -5,7 +5,7 @@
 				<div class="footer-copy">Claire &copy; <?php echo date('Y') ?></div>
 				<div id="menu">
 
-<?php include($this->getTemplatePath('_menu-primary')) ?>
+<?php include($this->getPathTemplate('_menu-primary')) ?>
 
 				</div>
 			</div>

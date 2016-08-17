@@ -3,7 +3,7 @@
 <div class="page content coming-soon text-center clearfix">
 	<div class="coming-soon-container">
 
-<?php require_once($this->getTemplatePath('_logo')) ?>
+<?php require_once($this->getPathTemplate('_logo')) ?>
 
 		<p class="description"><?php echo $option['site_title']->getValue() ?> is close to completion. Please check back soon!</p>
 	</div>
