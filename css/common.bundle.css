@@ -1,14 +1,9 @@
-@import "_settings.css";
-@import "../../codex/css/_dependencies.css";
-@import "../../../../vendor/bower/normalize-css/normalize.css";
-@import "../../codex/css/_reset.css";
-@import "../../codex/css/_reusable.css";
-@import "../../codex/css/_form.css";
-@import "../../codex/css/_typography.css";
-@import "../../codex/css/_alert.css";
-@import "../../codex/css/_blankslate.css";
+@charset 'utf-8';
+@import '_settings';
+@import 'mwyatt-codex';
+@import 'mwyatt-codex/css/keyframe';
+@import 'mwyatt-codex/css/link';
 
-/* site-specific */
 @import "_content-single.css";
 @import "_content.css";
 @import "_footer.css";
