@@ -7,33 +7,14 @@ class Controller extends \Mwyatt\Core\Controller
 
 
 	public function home() {
-		$url = $this->get('Url');
-
-		// menu primary
 		$menuPrimary = [
 			(object) [
 				'name' => 'Home',
-				'url' => $url->generate('home') . '#top'
+				'url' => ''
 			],
 			(object) [
 				'name' => 'About me',
-				'url' => $url->generate('home') . '#about-me'
-			],
-			(object) [
-				'name' => 'View CV',
-				'url' => $url->generate('home') . 'cv/martin/'
-			],
-			(object) [
-				'name' => 'Projects',
-				'url' => $url->generate('home') . '#projects'
-			],
-			(object) [
-				'name' => 'Skills',
-				'url' => $url->generate('home') . '#skills'
-			],
-			(object) [
-				'name' => 'Contact',
-				'url' => $url->generate('home') . '#contact'
+				'url' => 'page/about-me/'
 			]
 		];
 
