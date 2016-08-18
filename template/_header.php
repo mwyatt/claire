@@ -37,7 +37,7 @@
             </div>
             <div class="header-menu-primary-container">
                 
-<?php include $this->getPathTemplate('_menu-primary') ?>
+<?php include $this->getPathTemplate('_menu') ?>
 
             </div>
             <div class="header-socials-container">

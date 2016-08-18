@@ -5,14 +5,12 @@
 				<div class="footer-copy">Claire &copy; <?php echo date('Y') ?></div>
 				<div id="menu">
 
-<?php include($this->getPathTemplate('_menu-primary')) ?>
+<?php include($this->getPathTemplate('_menu')) ?>
 
 				</div>
 			</div>
 		</footer>
 
 		</div> <!-- .container -->
-        <script src="<?php echo $this->getUrlAsset('vendor/jquery.js') ?>"></script>
-        <script src="<?php echo $this->getUrlAsset('main.js') ?>"></script>
     </body>
 </html>

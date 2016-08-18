@@ -29,6 +29,23 @@ $request = $pimple['Request'];
 
 $controllerDefault = new \Mwyatt\Claire\Controller($pimple, $view);
 
+$menuPrimary = [
+    (object) [
+        'name' => 'Home',
+        'url' => ''
+    ],
+    (object) [
+        'name' => 'About me',
+        'url' => 'page/about-me/'
+    ]
+];
+
+$view->data->offsetSet('googleAnalyticsTrackingId', 'UA-43311305-1');
+$view->data->offsetSet('menu', $menuPrimary);
+$view->data->offsetSet('siteTitle', 'Claire Ruth');
+$view->data->offsetSet('metaTitle', 'Claire\'s Blog');
+$view->data->offsetSet('metaDescription', 'Bonjour. Je m’appelle Claire Louise Ruth. J’ai vingt ans. J’habite dans le nord-ouest de l’Angleterre. J’étudie le français et l’anglais à l’université à Warwick. J’aime la musique. J’aime les romans. J’aime les films. J’aime mes amis. J’aime ma famille.');
+
 // divert attempted route if not logged in
 $urlAdminBase = 'admin/';
 if (strpos($urlPath, $urlAdminBase) === 0) {

@@ -9,7 +9,7 @@ class Post extends \Mwyatt\Core\ModelAbstract
     protected $id;
     protected $title;
     protected $slug;
-    protected $content;
+    protected $html;
     protected $timeCreated;
     protected $timePublished;
     protected $status = self::STATUS_HIDDEN;

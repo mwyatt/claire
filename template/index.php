@@ -3,7 +3,7 @@
 <div class="page home js-page-home">
 	<div class="panel">
 
-<?php include $this->getPathTemplate('_projects') ?>
+<?php include $this->getPathTemplate('_contents') ?>
 
 	</div>
 	<div class="about-contact-container">
