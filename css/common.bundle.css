@@ -11,10 +11,14 @@
 @import "_home.css";
 @import "_pagination.css";
 
-body {
+html {
   background-color: #eee;
   background-image: url('bordeaux-pont-de-pierre.gif');
   background-size: cover;
+}
+
+body {
+  background-color: rgba(#fff, .8);
 }
 
 .to-top {
@@ -51,56 +55,6 @@ body {
   margin-bottom: 1em;
 }
 
-@media (max-width: 649px) {
-
-  .page {
-    padding: 5%;
-  }
-}
-
-@media (min-width: 650px) {
-  
-  .page {
-    float: right;
-  }
-
-  .header-page-container {
-    margin: 0 auto;
-  }
-}
-
-@media (min-width: 650px) and (max-width: 749px) {
-  
-  .page {
-    width: 425px;
-  }
-
-  .header-page-container {
-    width: 650px;
-  }
-}
-
-@media (min-width: 750px) and (max-width: 849px) {
-  
-  .page {
-    width: 525px;
-  }
-
-  .header-page-container {
-    width: 750px;
-  }
-}
-
-@media (min-width: 850px) {
-  
-  .page {
-    width: 625px;
-  }
-
-  .header-page-container {
-    width: 850px;
-  }
-}
 
 .container-footer-inner,
 .container-header-inner,
@@ -109,7 +63,7 @@ body {
   margin: 0 auto;
 }
 
-@mixin clearfix .container-header-inner;
+
 
 svg {
   max-width: 100%;
@@ -138,7 +92,7 @@ svg {
   background-color: color(#fff a(80%));
 }
 
-@mixin clearfix .header-page-container;
+
 
 .header-social-icon {
   position: absolute;
@@ -148,12 +102,22 @@ svg {
   height: 30px;
 }
 
+.menu-item {
+  border-radius: var(--border-radius);
+    padding: 10px;
+    flex: 1;
+    background: var(--color-primary-0);
+    color: #fff;
+    font-weight: 600;
+    margin: 10px;
+    text-align: center;
+}
+
 .header-social {
   display: block;
   position: relative;
-  padding: 10px 10px 10px 45px;
+  padding-left: 45px;
   background-color: var(--color-pinterest-primary);
-  border-radius: var(--border-radius);
 }
 
 .header-social-icon svg {
@@ -178,3 +142,90 @@ svg {
 .page-about-me .content-date {
   display: none;
 }
+
+.profile-container {
+    display: none;
+}
+
+.logo {
+  fill: var(--color-primary-0);
+    margin: 0 auto;
+}
+
+.header-container {
+    background: #fff;
+}
+
+.logo-container {
+    margin: 0;
+}
+
+.content {
+    flex: 1;
+    flex-basis: 250px;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 0;
+    border: 0;
+    box-shadow: none;
+}
+
+.post-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin: -10px;
+}
+
+.content.home .home-all-posts {
+  display: block;
+}
+
+.post-single-title {
+    font-size: 36px;
+    margin: 0 0 0.5em;
+    line-height: 1.3;
+    color: var(--color-secondary-1-0);
+}
+
+.post-single-date {
+    text-align: right;
+    display: block;
+}
+
+.content-html-snippet-more {
+    display: none;
+}
+
+.menu {
+    display: flex;
+    margin: -10px;
+}
+
+.header-container-inner {
+    max-width: 850px;
+    padding: 20px;
+    margin: 0 auto;
+}
+
+.header-menu-primary-container {
+    margin-top: 20px;
+}
+
+.container-footer {
+
+}
+
+.header-page-container {
+    min-height: 100%;
+    position: relative;
+}
+
+  .page {
+    padding: 20px;
+    padding-bottom: 44px;
+  }
+
+
+  .home .content-html-snippet {
+    margin: 1em 0 0;
+  }

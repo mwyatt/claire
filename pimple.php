@@ -38,10 +38,6 @@ $pimple['Url'] = function ($pimple) {
     return $url;
 };
 
-$pimple['Markdown'] = function ($pimple) {
-    return new \Michelf\Markdown;
-};
-
 $pimple['Post'] = function ($pimple) {
     return new \Mwyatt\Claire\Service\Post($pimple['MapperFactory'], $pimple['ModelFactory']);
 };

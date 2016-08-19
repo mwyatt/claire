@@ -5,4 +5,4 @@
     <p><?php echo $message ?></p>
 </div>
 
-<?php include $this->getPathTemplate('_header') ?>
+<?php include $this->getPathTemplate('_footer') ?>

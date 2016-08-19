@@ -10,6 +10,10 @@ class Controller extends \Mwyatt\Core\Controller
 		$servicePost = $this->get('Post');
 		$posts = $servicePost->findAll();
 
+		$posts->uasort(function($a, $b) {
+			return $a->get('timePublished') < $b->get('timePublished');
+		});
+
 		$this->view->data->offsetSet('posts', $posts);
 		return $this->response($this->view->getTemplate('home'));
 	}
