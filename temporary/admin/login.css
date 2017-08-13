@@ -1,0 +1,58 @@
+@import "_settings.css";
+@import "../_dependencies.css";
+
+.page {
+	margin: 0 auto;
+	padding: 5em 0;
+  width: 15em;
+}
+
+.logo {
+  display: block;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  fill: $color-primary-0;
+  margin-bottom: 2em;
+  width: 60%;
+}
+
+svg {
+	width: 100%;
+}
+
+.logo img {
+  width: 100%;
+}
+
+.link-forgot-password {
+  position: relative;
+  top: 17px;
+}
+
+.button-login {
+	float: right;
+  position: relative;
+  top: 17px;
+}
+
+.magnific-forgot-password .mfp-content {
+  max-width: 320px;
+  background-color: #fff;
+  padding: 1em;
+}
+
+.lightbox-forgot-password-heading {
+  margin-top: 0;
+}
+
+.button-password-reset {
+	float: right;
+	margin-top: 1em;
+}
+
+@mixin clearfix .form-forgot-password;
+
+.login-form-input {
+  margin-bottom: 14px;
+}

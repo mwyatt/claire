@@ -1,0 +1,12 @@
+.content.home .home-all-posts {
+  display: block;
+}
+
+@mixin clearfix .page.home;
+
+@media (min-width: 650px) {
+  
+  .page.home {
+    padding: 1em;
+  }
+}

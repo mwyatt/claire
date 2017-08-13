@@ -1,0 +1,186 @@
+@import "_settings.css";
+@import "../../codex/css/_dependencies.css";
+@import "../../../../vendor/bower/normalize-css/normalize.css";
+@import "../../codex/css/_reset.css";
+@import "../../codex/css/_reusable.css";
+@import "../../codex/css/_form.css";
+@import "../../codex/css/_typography.css";
+@import "../../codex/css/_alert.css";
+@import "../../codex/css/_blankslate.css";
+
+/* site-specific */
+@import "_content-single.css";
+@import "_content.css";
+@import "_footer.css";
+@import "_header.css";
+@import "_home.css";
+@import "_pagination.css";
+
+body {
+  background-color: #eee;
+  background-image: url('bordeaux-pont-de-pierre.gif');
+  background-size: cover;
+}
+
+.to-top {
+  transition: all 200ms ease;
+  position: fixed;
+  bottom: 1em;
+  z-index: 1;
+  fill: #fff;
+  right: -4em;
+  padding: 0.5em;
+  background-color: $color-primary-0;
+  border-radius: 100%;
+  width: 44px;
+  height: 44px;
+}
+
+.to-top:active {
+  bottom: .5em;
+  opacity: .8;
+}
+
+.to-top.is-active {
+  display: block;
+  right: 1em;
+}
+
+.core-h1 {
+  text-shadow: 1px 1px $color-text;
+  text-align: center;
+  padding: 0.3em;
+  background-color: $color-primary-0;
+  color: #fff;
+  border-bottom: 1px solid $color-secondary-1-0;
+  font-size: 1.4em;
+  margin-bottom: 1em;
+}
+
+@media (max-width: 649px) {
+
+  .page {
+    padding: 5%;
+  }
+}
+
+@media (min-width: 650px) {
+  
+  .page {
+    float: right;
+  }
+
+  .header-page-container {
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 650px) and (max-width: 749px) {
+  
+  .page {
+    width: 425px;
+  }
+
+  .header-page-container {
+    width: 650px;
+  }
+}
+
+@media (min-width: 750px) and (max-width: 849px) {
+  
+  .page {
+    width: 525px;
+  }
+
+  .header-page-container {
+    width: 750px;
+  }
+}
+
+@media (min-width: 850px) {
+  
+  .page {
+    width: 625px;
+  }
+
+  .header-page-container {
+    width: 850px;
+  }
+}
+
+.container-footer-inner,
+.container-header-inner,
+.page {
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+@mixin clearfix .container-header-inner;
+
+svg {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.profile-img {
+  max-width: 100%;
+  max-height: 100%;
+  display: none;
+}
+
+.profile-image-container {
+  background-image: url('portrait-138.jpg');
+  height: 140px;
+  background-position: center center;
+  background-size: cover;
+  border-radius: $border-radius;
+}
+
+.profile-container {
+  padding: 1em;
+  border: 1px dotted #fff;
+  border-radius: $border-radius;
+  margin-bottom: 1em;
+  background-color: color(#fff a(80%));
+}
+
+@mixin clearfix .header-page-container;
+
+.header-social-icon {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  width: 30px;
+  height: 30px;
+}
+
+.header-social {
+  display: block;
+  position: relative;
+  padding: 10px 10px 10px 45px;
+  background-color: $color-pinterest-primary;
+  border-radius: $border-radius;
+}
+
+.header-social-icon svg {
+  width: 100%;
+  height: 100%;
+  fill: #fff;
+}
+
+.header-social-title {
+  font-weight: 600;
+  color: #fff;
+}
+
+.page.post-all {
+  padding: 1em;
+}
+
+.page.not-found {
+  padding: 3em;
+}
+
+.page-about-me .content-date {
+  display: none;
+}
