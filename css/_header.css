@@ -63,24 +63,24 @@
   float: left;
   border: 0;
   border-radius: 0;
-  background-color: color($color-primary-0 tint(10%));
+  background-color: color(var(--color-primary-0) tint(10%));
   color: #fff;
 }
 
 .form-search-query::-webkit-input-placeholder {
-  color: color($color-primary-0 tint(20%));
+  color: color(var(--color-primary-0) tint(20%));
 }
 
 .form-search-query:-moz-placeholder { /* Firefox 18- */
-  color: color($color-primary-0 tint(20%));
+  color: color(var(--color-primary-0) tint(20%));
 }
 
 .form-search-query::-moz-placeholder {  /* Firefox 19+ */
-  color: color($color-primary-0 tint(20%));
+  color: color(var(--color-primary-0) tint(20%));
 } 
 
 .form-search-query:-ms-input-placeholder {  
-  color: color($color-primary-0 tint(20%));
+  color: color(var(--color-primary-0) tint(20%));
 }
 
 .form-search-submit {
@@ -95,8 +95,8 @@
   padding: 0;
   margin: 0 0 0 1em;
   padding: 6px 13px;
-  background-color: color($color-primary-0 tint(10%));
-  color: color($color-primary-0 tint(30%));
+  background-color: color(var(--color-primary-0) tint(10%));
+  color: color(var(--color-primary-0) tint(30%));
   cursor: pointer;
 }
 
@@ -111,7 +111,7 @@
 
 .header-button-mobile {
   padding: 17px 23px 17px;
-  border-left: 1px solid $color-primary-0;
+  border-left: 1px solid var(--color-primary-0);
   cursor: pointer;
   display: block;
   float: right;
@@ -150,23 +150,20 @@
   }
 }
 
-$selector: .header-container .menu-primary-container;
-@mixin clearfix $selector;
-
 .header-container .menu-primary {
   margin: 1em 0;
-  border-radius: $border-radius;
-  border: 1px solid $color-primary-0;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--color-primary-0);
   overflow: hidden;
 }
 
 .header-container .menu-primary-level-1-link {
   display: block;
   padding: 1em;
-  color: $color-primary-0;
+  color: var(--color-primary-0);
   border-width: 1px;
   border-top-style: solid;
-  border-color: $color-primary-0;
+  border-color: var(--color-primary-0);
   background-color: color(#fff a(80%));
 }
 

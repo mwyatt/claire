@@ -1,5 +1,3 @@
-require('es6-promise').polyfill(); // required to fix postcss-import?
-
 var settings = {
   isLocal: true,
   assetDest: 'asset/',

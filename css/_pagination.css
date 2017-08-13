@@ -10,7 +10,7 @@
 
 .pagination a.pagination-page {
   display: none;
-  border: 1px solid $color-primary-0;
+  border: 1px solid var(--color-primary-0);
   margin-right: 0.6em;
   margin-bottom: 0.6em;
   font-family: Arial, sans-serif;
@@ -23,8 +23,8 @@
 
 .pagination a.is-current {
   cursor: default;
-  color: $color-secondary-1-0;
-  border-color: $color-secondary-1-0;
+  color: var(--color-secondary-1-0);
+  border-color: var(--color-secondary-1-0);
   background: transparent;
 }
 
@@ -32,7 +32,7 @@ a.pagination-next,
 a.pagination-previous {
   width: 2.5em;
   height: 2.5em;
-  fill: $color-secondary-1-0;
+  fill: var(--color-secondary-1-0);
 }
 
 a.pagination-next.is-disabled,
@@ -45,7 +45,7 @@ a.pagination-previous.is-disabled {
 }
 
 .pagination-text {
-  color: $color-primary-0;
+  color: var(--color-primary-0);
 }
 
 .pagination-next {

@@ -39,7 +39,7 @@
 
   .content-single {
     padding: 1em;
-    border-radius: $border-radius;
+    border-radius: var(--border-radius);
   }
 
   .page-content-single {

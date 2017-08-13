@@ -1,14 +1,9 @@
-@import "_settings.css";
-@import "../../codex/css/_dependencies.css";
-@import "../../../../vendor/bower/normalize-css/normalize.css";
-@import "../../codex/css/_reset.css";
-@import "../../codex/css/_reusable.css";
-@import "../../codex/css/_form.css";
-@import "../../codex/css/_typography.css";
-@import "../../codex/css/_alert.css";
-@import "../../codex/css/_blankslate.css";
+@charset 'utf-8';
+@import '_settings';
+@import 'mwyatt-codex';
+@import 'mwyatt-codex/css/keyframe';
+@import 'mwyatt-codex/css/link';
 
-/* site-specific */
 @import "_content-single.css";
 @import "_content.css";
 @import "_footer.css";
@@ -30,7 +25,7 @@ body {
   fill: #fff;
   right: -4em;
   padding: 0.5em;
-  background-color: $color-primary-0;
+  background-color: var(--color-primary-0);
   border-radius: 100%;
   width: 44px;
   height: 44px;
@@ -47,12 +42,11 @@ body {
 }
 
 .core-h1 {
-  text-shadow: 1px 1px $color-text;
   text-align: center;
   padding: 0.3em;
-  background-color: $color-primary-0;
+  background-color: var(--color-primary-0);
   color: #fff;
-  border-bottom: 1px solid $color-secondary-1-0;
+  border-bottom: 1px solid var(--color-secondary-1-0);
   font-size: 1.4em;
   margin-bottom: 1em;
 }
@@ -133,13 +127,13 @@ svg {
   height: 140px;
   background-position: center center;
   background-size: cover;
-  border-radius: $border-radius;
+  border-radius: var(--border-radius);
 }
 
 .profile-container {
   padding: 1em;
   border: 1px dotted #fff;
-  border-radius: $border-radius;
+  border-radius: var(--border-radius);
   margin-bottom: 1em;
   background-color: color(#fff a(80%));
 }
@@ -158,8 +152,8 @@ svg {
   display: block;
   position: relative;
   padding: 10px 10px 10px 45px;
-  background-color: $color-pinterest-primary;
-  border-radius: $border-radius;
+  background-color: var(--color-pinterest-primary);
+  border-radius: var(--border-radius);
 }
 
 .header-social-icon svg {

@@ -14,7 +14,7 @@ class Post extends \Mwyatt\Core\MapperAbstract implements \Mwyatt\Core\MapperInt
 
     public function findBySlug($slug)
     {
-        $sql = ['select', '*', 'from', $this->table, 'where', 'slug', '=', '?'];
+        $sql = ['select', '*', 'from', '`content`', 'where', 'slug', '=', '?'];
         $this->database->prepare(implode(' ', $sql));
         $this->database->execute([$slug]);
         return $this->getIterator($this->database->fetchAll($this->fetchType, '\\Mwyatt\\Claire\\Model\\Post'));
@@ -26,7 +26,7 @@ class Post extends \Mwyatt\Core\MapperAbstract implements \Mwyatt\Core\MapperInt
         $className = $this->getModel();
         $post = new $className;
 
-        $sql = ['select', '*', 'from', $this->table, 'where', 'slug', '=', '?'];
+        $sql = ['select', '*', 'from', '`content`', 'where', 'slug', '=', '?'];
         $sql[] = 'and status = ' . $post->getStatusPublished();
         $this->database->prepare(implode(' ', $sql));
         $this->database->execute([$slug]);
@@ -36,7 +36,7 @@ class Post extends \Mwyatt\Core\MapperAbstract implements \Mwyatt\Core\MapperInt
 
     public function findAll()
     {
-        $sql = ['select', '*', 'from', $this->table];
+        $sql = ['select', '*', 'from', '`content`'];
         $this->database->prepare(implode(' ', $sql));
         $this->database->execute();
         return $this->getIterator($this->database->fetchAll($this->fetchType, '\\Mwyatt\\Claire\\Model\\Post'));
@@ -45,7 +45,7 @@ class Post extends \Mwyatt\Core\MapperAbstract implements \Mwyatt\Core\MapperInt
 
     public function insert(\Mwyatt\Core\Model\Post $post)
     {
-        $sql = ['insert', 'into', $this->table, '('];
+        $sql = ['insert', 'into', '`content`', '('];
         $sql[] = implode(', ', [
             '`title`',
             '`slug`',
@@ -77,7 +77,7 @@ class Post extends \Mwyatt\Core\MapperAbstract implements \Mwyatt\Core\MapperInt
         $results = [];
         $sqlParams = [];
 
-        $sql = ['select', '*', 'from', $this->table, 'where', $column, '='];
+        $sql = ['select', '*', 'from', '`content`', 'where', $column, '='];
 
         foreach ($values as $value) {
             $sqlParams[] = '?';
@@ -121,7 +121,7 @@ class Post extends \Mwyatt\Core\MapperAbstract implements \Mwyatt\Core\MapperInt
 
     public function deleteById($id)
     {
-        $sql = ['delete', 'from', $this->table, 'where id = ?'];
+        $sql = ['delete', 'from', '`content`', 'where id = ?'];
 
         $this->database->prepare(implode(' ', $sql));
         $this->database->execute([$id]);

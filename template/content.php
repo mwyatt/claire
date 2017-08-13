@@ -1,11 +1,11 @@
-<?php include $this->getTemplatePath('_header') ?>
+<?php include $this->getPathTemplate('_header') ?>
 
 <div class="page <?php echo $contentSingle->getType() ?>-all">
 
-<?php include($this->getTemplatePath('_pagination')) ?>
-<?php include($this->getTemplatePath('_contents')) ?>
-<?php include($this->getTemplatePath('_pagination')) ?>
+<?php include($this->getPathTemplate('_pagination')) ?>
+<?php include($this->getPathTemplate('_contents')) ?>
+<?php include($this->getPathTemplate('_pagination')) ?>
 
 </div>
 
-<?php include $this->getTemplatePath('_footer') ?>
+<?php include $this->getPathTemplate('_footer') ?>

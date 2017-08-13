@@ -4,7 +4,7 @@
 		<h3 class="months-title">Months:</h3>
 
 	<?php foreach ($rowMonths as $keyMonth => $rowMonth): ?>
-		<?php require($this->getTemplatePath('_month')) ?>
+		<?php require($this->getPathTemplate('_month')) ?>
 	<?php endforeach ?>
 		
 	</ul>
